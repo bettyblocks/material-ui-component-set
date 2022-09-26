@@ -54,11 +54,11 @@ import {
 import { styles } from './structures/ListItem/options/styles';
 
 const attrs = {
-  name: 'Page with homepage layout',
+  name: 'A Page with homepage layout',
   icon: Icon.ContainerIcon,
   type: 'page',
   isPublicPage: false,
-  description: 'TThis is a page with a static Homepage-layout.',
+  description: 'This is a page with a static Homepage-layout.',
   detail:
     'his page has a static homepage to spark your interest and show what things are possible with the pagebuilder.',
   previewUrl: 'https://preview.betty.app/homepage',
@@ -283,93 +283,313 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                       },
                     },
                     [
-                      AppBar(
+                      Column(
                         {
                           options: {
-                            ...appBarOptions,
-                            urlFileSource: variable('Source', {
-                              value: [
-                                'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
-                              ],
-                              configuration: {
-                                placeholder: 'Starts with https:// or http://',
-                                as: 'MULTILINE',
-                                condition: showIf('type', 'EQ', 'url'),
-                              },
-                            }),
-                            title: variable('Title', {
-                              value: [],
+                            ...columnOptions,
+                            innerSpacing: sizes('Inner space', {
+                              value: ['0rem', '0rem', '0rem', '0rem'],
                             }),
                           },
                         },
                         [
-                          OpenPageButton(
+                          prefabBox(
                             {
-                              style: {
-                                overwrite: {
-                                  backgroundColor: {
-                                    type: 'STATIC',
-                                    value: 'transparent',
-                                  },
-                                  boxShadow: 'none',
-                                  color: {
-                                    type: 'THEME_COLOR',
-                                    value: 'white',
-                                  },
-                                  fontFamily: 'Roboto',
-                                  fontSize: '0.875rem',
-                                  fontStyle: 'none',
-                                  fontWeight: '400',
-                                  padding: ['0rem', '0rem'],
-                                  textDecoration: 'none',
-                                  textTransform: 'none',
-                                },
-                              },
                               options: {
-                                ...openPageButtonOptions,
-                                buttonText: variable('Button text', {
-                                  value: ['Menu 1'],
+                                ...boxOptions,
+                                innerSpacing: sizes('Inner space', {
+                                  value: ['0rem', '0rem', '0rem', '0rem'],
                                 }),
-                                outerSpacing: sizes('Outer space', {
-                                  value: ['0rem', 'M', '0rem', 'M'],
+                                backgroundColor: color('Background color', {
+                                  value: ThemeColor.PRIMARY,
                                 }),
                               },
                             },
-                            [],
-                          ),
-                          OpenPageButton(
-                            {
-                              style: {
-                                overwrite: {
-                                  backgroundColor: {
-                                    type: 'STATIC',
-                                    value: 'transparent',
+                            [
+                              Row(
+                                {
+                                  options: {
+                                    ...rowOptions,
                                   },
-                                  boxShadow: 'none',
-                                  color: {
-                                    type: 'THEME_COLOR',
-                                    value: 'white',
-                                  },
-                                  fontFamily: 'Roboto',
-                                  fontSize: '0.875rem',
-                                  fontStyle: 'none',
-                                  fontWeight: '400',
-                                  padding: ['0rem', '0rem'],
-                                  textDecoration: 'none',
-                                  textTransform: 'none',
                                 },
-                              },
-                              options: {
-                                ...openPageButtonOptions,
-                                buttonText: variable('Button text', {
-                                  value: ['Menu 2'],
-                                }),
-                                outerSpacing: sizes('Outer space', {
-                                  value: ['0rem', 'M', '0rem', '0rem'],
-                                }),
-                              },
-                            },
-                            [],
+                                [
+                                  Column(
+                                    {
+                                      options: {
+                                        ...columnOptions,
+                                        innerSpacing: sizes('Inner space', {
+                                          value: [
+                                            '0rem',
+                                            '0rem',
+                                            '0rem',
+                                            '0rem',
+                                          ],
+                                        }),
+                                      },
+                                    },
+                                    [
+                                      AppBar(
+                                        {
+                                          options: {
+                                            ...appBarOptions,
+                                            urlFileSource: variable('Source', {
+                                              value: [
+                                                'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
+                                              ],
+                                              configuration: {
+                                                placeholder:
+                                                  'Starts with https:// or http://',
+                                                as: 'MULTILINE',
+                                                condition: showIf(
+                                                  'type',
+                                                  'EQ',
+                                                  'url',
+                                                ),
+                                              },
+                                            }),
+                                            title: variable('Title', {
+                                              value: [],
+                                            }),
+                                          },
+                                        },
+                                        [
+                                          OpenPageButton(
+                                            {
+                                              style: {
+                                                overwrite: {
+                                                  backgroundColor: {
+                                                    type: 'STATIC',
+                                                    value: 'transparent',
+                                                  },
+                                                  boxShadow: 'none',
+                                                  color: {
+                                                    type: 'THEME_COLOR',
+                                                    value: 'white',
+                                                  },
+                                                  fontFamily: 'Roboto',
+                                                  fontSize: '0.875rem',
+                                                  fontStyle: 'none',
+                                                  fontWeight: '500',
+                                                  padding: ['0rem', '0rem'],
+                                                  textDecoration: 'none',
+                                                  textTransform: 'none',
+                                                  borderWidth: ['0rem'],
+                                                },
+                                              },
+                                              options: {
+                                                ...openPageButtonOptions,
+                                                buttonText: variable(
+                                                  'Button text',
+                                                  {
+                                                    value: ['About'],
+                                                  },
+                                                ),
+                                                outerSpacing: sizes(
+                                                  'Outer space',
+                                                  {
+                                                    value: [
+                                                      '0rem',
+                                                      'M',
+                                                      '0rem',
+                                                      'M',
+                                                    ],
+                                                  },
+                                                ),
+                                              },
+                                            },
+                                            [],
+                                          ),
+                                          OpenPageButton(
+                                            {
+                                              style: {
+                                                overwrite: {
+                                                  backgroundColor: {
+                                                    type: 'STATIC',
+                                                    value: 'transparent',
+                                                  },
+                                                  boxShadow: 'none',
+                                                  color: {
+                                                    type: 'THEME_COLOR',
+                                                    value: 'white',
+                                                  },
+                                                  fontFamily: 'Roboto',
+                                                  fontSize: '0.875rem',
+                                                  fontStyle: 'none',
+                                                  fontWeight: '500',
+                                                  padding: ['0rem', '0rem'],
+                                                  textDecoration: 'none',
+                                                  textTransform: 'none',
+                                                  borderWidth: ['0rem'],
+                                                },
+                                              },
+                                              options: {
+                                                ...openPageButtonOptions,
+                                                buttonText: variable(
+                                                  'Button text',
+                                                  {
+                                                    value: ['Services'],
+                                                  },
+                                                ),
+                                                outerSpacing: sizes(
+                                                  'Outer space',
+                                                  {
+                                                    value: [
+                                                      '0rem',
+                                                      'M',
+                                                      '0rem',
+                                                      'M',
+                                                    ],
+                                                  },
+                                                ),
+                                              },
+                                            },
+                                            [],
+                                          ),
+                                          OpenPageButton(
+                                            {
+                                              style: {
+                                                overwrite: {
+                                                  backgroundColor: {
+                                                    type: 'STATIC',
+                                                    value: 'transparent',
+                                                  },
+                                                  boxShadow: 'none',
+                                                  color: {
+                                                    type: 'THEME_COLOR',
+                                                    value: 'white',
+                                                  },
+                                                  fontFamily: 'Roboto',
+                                                  fontSize: '0.875rem',
+                                                  fontStyle: 'none',
+                                                  fontWeight: '500',
+                                                  padding: ['0rem', '0rem'],
+                                                  textDecoration: 'none',
+                                                  textTransform: 'none',
+                                                  borderWidth: ['0rem'],
+                                                },
+                                              },
+                                              options: {
+                                                ...openPageButtonOptions,
+                                                buttonText: variable(
+                                                  'Button text',
+                                                  {
+                                                    value: ['Cases'],
+                                                  },
+                                                ),
+                                                outerSpacing: sizes(
+                                                  'Outer space',
+                                                  {
+                                                    value: [
+                                                      '0rem',
+                                                      'M',
+                                                      '0rem',
+                                                      'M',
+                                                    ],
+                                                  },
+                                                ),
+                                              },
+                                            },
+                                            [],
+                                          ),
+                                          OpenPageButton(
+                                            {
+                                              style: {
+                                                overwrite: {
+                                                  backgroundColor: {
+                                                    type: 'STATIC',
+                                                    value: 'transparent',
+                                                  },
+                                                  boxShadow: 'none',
+                                                  color: {
+                                                    type: 'THEME_COLOR',
+                                                    value: 'white',
+                                                  },
+                                                  fontFamily: 'Roboto',
+                                                  fontSize: '0.875rem',
+                                                  fontStyle: 'none',
+                                                  fontWeight: '500',
+                                                  padding: ['0rem', '0rem'],
+                                                  textDecoration: 'none',
+                                                  textTransform: 'none',
+                                                  borderWidth: ['0rem'],
+                                                },
+                                              },
+                                              options: {
+                                                ...openPageButtonOptions,
+                                                buttonText: variable(
+                                                  'Button text',
+                                                  {
+                                                    value: ['Jobs'],
+                                                  },
+                                                ),
+                                                outerSpacing: sizes(
+                                                  'Outer space',
+                                                  {
+                                                    value: [
+                                                      '0rem',
+                                                      'M',
+                                                      '0rem',
+                                                      'M',
+                                                    ],
+                                                  },
+                                                ),
+                                              },
+                                            },
+                                            [],
+                                          ),
+                                          OpenPageButton(
+                                            {
+                                              style: {
+                                                overwrite: {
+                                                  backgroundColor: {
+                                                    type: 'STATIC',
+                                                    value: 'transparent',
+                                                  },
+                                                  boxShadow: 'none',
+                                                  color: {
+                                                    type: 'THEME_COLOR',
+                                                    value: 'white',
+                                                  },
+                                                  fontFamily: 'Roboto',
+                                                  fontSize: '0.875rem',
+                                                  fontStyle: 'none',
+                                                  fontWeight: '500',
+                                                  padding: ['0rem', '0rem'],
+                                                  textDecoration: 'none',
+                                                  textTransform: 'none',
+                                                  borderWidth: ['0rem'],
+                                                },
+                                              },
+                                              options: {
+                                                ...openPageButtonOptions,
+                                                buttonText: variable(
+                                                  'Button text',
+                                                  {
+                                                    value: ['Contact'],
+                                                  },
+                                                ),
+                                                outerSpacing: sizes(
+                                                  'Outer space',
+                                                  {
+                                                    value: [
+                                                      '0rem',
+                                                      'M',
+                                                      '0rem',
+                                                      'M',
+                                                    ],
+                                                  },
+                                                ),
+                                              },
+                                            },
+                                            [],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -607,7 +827,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                 }),
                                 horizontalAlignment: option('CUSTOM', {
                                   label: 'Horizontal Alignment',
-                                  value: 'left',
+                                  value: 'flex-start',
                                   configuration: {
                                     as: 'BUTTONGROUP',
                                     dataType: 'string',
@@ -669,7 +889,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                     }),
                                     type: font('Font', { value: ['Title5'] }),
                                     outerSpacing: sizes('Outer space', {
-                                      value: ['M', '0rem', 'XL', 'orem'],
+                                      value: ['M', '0rem', 'XL', '0rem'],
                                     }),
                                     textColor: color('Text color', {
                                       value: ThemeColor.WHITE,
@@ -711,9 +931,6 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                     ...openPageButtonOptions,
                                     buttonText: variable('Button text', {
                                       value: ['See our cases'],
-                                    }),
-                                    outerSpacing: sizes('Outer space', {
-                                      value: ['0rem', 'M', '0rem', 'M'],
                                     }),
                                   },
                                 },
@@ -885,6 +1102,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                         backgroundColorAlpha: option('NUMBER', {
                           label: 'Background color opacity',
                           value: 20,
+                        }),
+                        innerSpacing: sizes('Inner space', {
+                          value: ['0rem', '0rem', '0rem', '0rem'],
                         }),
                       },
                     },
@@ -1224,7 +1444,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                     {
                                       options: {
                                         ...columnOptions,
-                                        olumnWidth: option('CUSTOM', {
+                                        columnWidth: option('CUSTOM', {
                                           label: 'Column width',
                                           value: '4',
                                           configuration: {
@@ -1558,7 +1778,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                     {
                                       options: {
                                         ...columnOptions,
-                                        olumnWidth: option('CUSTOM', {
+                                        columnWidth: option('CUSTOM', {
                                           label: 'Column width',
                                           value: '4',
                                           configuration: {
@@ -1892,7 +2112,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                     {
                                       options: {
                                         ...columnOptions,
-                                        olumnWidth: option('CUSTOM', {
+                                        columnWidth: option('CUSTOM', {
                                           label: 'Column width',
                                           value: '4',
                                           configuration: {
@@ -2390,7 +2610,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                   },
                                 }),
                                 innerSpacing: sizes('Inner space', {
-                                  value: ['s', 's', 's', 's'],
+                                  value: ['S', 'S', 'S', 'S'],
                                 }),
                               },
                             },
@@ -2473,6 +2693,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       configuration: { as: 'MULTILINE' },
                                     }),
                                     type: font('Font', { value: ['Body1'] }),
+                                    textColor: color('Text color', {
+                                      value: ThemeColor.DARK,
+                                    }),
                                   },
                                 },
                                 [],
@@ -2610,7 +2833,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                   },
                                 }),
                                 innerSpacing: sizes('Inner space', {
-                                  value: ['s', 's', 's', 's'],
+                                  value: ['S', 'S', 'S', 'S'],
                                 }),
                               },
                             },
@@ -2693,6 +2916,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       configuration: { as: 'MULTILINE' },
                                     }),
                                     type: font('Font', { value: ['Body1'] }),
+                                    textColor: color('Text color', {
+                                      value: ThemeColor.DARK,
+                                    }),
                                   },
                                 },
                                 [],
@@ -2830,7 +3056,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                   },
                                 }),
                                 innerSpacing: sizes('Inner space', {
-                                  value: ['s', 's', 's', 's'],
+                                  value: ['S', 'S', 'S', 'S'],
                                 }),
                               },
                             },
@@ -2913,6 +3139,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       configuration: { as: 'MULTILINE' },
                                     }),
                                     type: font('Font', { value: ['Body1'] }),
+                                    textColor: color('Text color', {
+                                      value: ThemeColor.DARK,
+                                    }),
                                   },
                                 },
                                 [],
@@ -3050,7 +3279,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                   },
                                 }),
                                 innerSpacing: sizes('Inner space', {
-                                  value: ['s', 's', 's', 's'],
+                                  value: ['S', 'S', 'S', 'S'],
                                 }),
                               },
                             },
@@ -3133,6 +3362,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       configuration: { as: 'MULTILINE' },
                                     }),
                                     type: font('Font', { value: ['Body1'] }),
+                                    textColor: color('Text color', {
+                                      value: ThemeColor.DARK,
+                                    }),
                                   },
                                 },
                                 [],
@@ -3804,6 +4036,13 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                         type: font('Font', {
                                                           value: ['Body1'],
                                                         }),
+                                                        textColor: color(
+                                                          'Text color',
+                                                          {
+                                                            value:
+                                                              ThemeColor.DARK,
+                                                          },
+                                                        ),
                                                       },
                                                     },
                                                     [],
@@ -4446,6 +4685,13 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                         type: font('Font', {
                                                           value: ['Body1'],
                                                         }),
+                                                        textColor: color(
+                                                          'Text color',
+                                                          {
+                                                            value:
+                                                              ThemeColor.DARK,
+                                                          },
+                                                        ),
                                                       },
                                                     },
                                                     [],
@@ -5086,6 +5332,13 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                         type: font('Font', {
                                                           value: ['Body1'],
                                                         }),
+                                                        textColor: color(
+                                                          'Text color',
+                                                          {
+                                                            value:
+                                                              ThemeColor.DARK,
+                                                          },
+                                                        ),
                                                       },
                                                     },
                                                     [],
@@ -5728,6 +5981,13 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                         type: font('Font', {
                                                           value: ['Body1'],
                                                         }),
+                                                        textColor: color(
+                                                          'Text color',
+                                                          {
+                                                            value:
+                                                              ThemeColor.DARK,
+                                                          },
+                                                        ),
                                                       },
                                                     },
                                                     [],

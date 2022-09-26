@@ -82,7 +82,7 @@ export const openPageButtonOptions = {
       condition: showIf('variant', 'EQ', 'icon'),
     },
   }),
-  icon: icon('Icon', { value: 'none' }),
+  icon: icon('Icon', { value: 'None' }),
   size: option('CUSTOM', {
     value: 'small',
     label: 'Icon size',

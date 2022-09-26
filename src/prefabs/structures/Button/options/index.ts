@@ -38,7 +38,7 @@ export const buttonOptions = {
   }),
   buttonText: variable('Button text', { value: ['Button'] }),
   fullWidth: toggle('Full width', { value: false }),
-  icon: icon('Icon', { value: 'none' }),
+  icon: icon('Icon', { value: 'None' }),
   size: option('CUSTOM', {
     value: 'small',
     label: 'Icon size',

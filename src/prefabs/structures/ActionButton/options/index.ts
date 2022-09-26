@@ -59,7 +59,7 @@ export const actionButtonOptions = {
   }),
   // #endregion
   fullWidth: toggle('Full width', { value: false }),
-  icon: icon('Icon', { value: 'none' }),
+  icon: icon('Icon', { value: 'None' }),
   size: option('CUSTOM', {
     value: 'small',
     label: 'Icon size',
