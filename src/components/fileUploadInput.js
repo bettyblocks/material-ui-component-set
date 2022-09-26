@@ -210,18 +210,17 @@
                 className={classes.image}
               />
             )}
-            <Typography variant="body1" noWrap className={classes.span}>
-              {isDev ? 'File name' : fileName}
-            </Typography>
-            <div className={classes.fileDetailList}>
+            <div>
+              <Typography variant="body1" noWrap className={classes.span}>
+                {isDev ? 'File name' : fileName}
+              </Typography>
               <p className={classes.fileDetail}>{isDev ? 'Size' : fileSize}</p>
 
               <div className={classes.divider} />
 
               <p className={classes.fileDetail}>{isDev ? 'Type' : fileType}</p>
-
-              {!isDev && <DeleteButton />}
             </div>
+            {!isDev && <DeleteButton />}
           </div>
         </div>
       );
