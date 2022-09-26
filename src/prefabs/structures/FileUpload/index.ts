@@ -6,6 +6,7 @@ import { updateOption } from '../../../utils';
 
 interface Configuration {
   supportImages?: boolean;
+  label?: string;
 }
 
 export const FileUpload = (config: Configuration = {}) => {
@@ -17,7 +18,7 @@ export const FileUpload = (config: Configuration = {}) => {
     });
   }
 
-  return component('FileUploadInput', { options }, [
+  return component('FileUploadInput', { options, label: config.label }, [
     Button({
       label: 'upload',
       options: {
