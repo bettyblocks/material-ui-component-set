@@ -50,5 +50,5 @@ const attr = {
 };
 
 export default prefab('Image Upload Beta', attr, beforeCreate, [
-  FileUpload({ supportImages: true }),
+  FileUpload({ supportImages: true, label: 'Image Upload Beta' }),
 ]);
