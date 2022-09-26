@@ -53,6 +53,7 @@
       validationValueMissing = [''],
       value: valueRaw,
       variant,
+      take,
     } = options;
     const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
 
@@ -401,7 +402,7 @@
     } = useAllQuery(
       modelId,
       {
-        take: 20,
+        take: take || 20,
         rawFilter: mergeFilters(filter, resolvedExternalFiltersObject),
         variables: {
           sort,

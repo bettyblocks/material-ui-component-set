@@ -3,6 +3,7 @@ import {
   showIf,
   toggle,
   variable,
+  number,
 } from '@betty-blocks/component-sdk';
 import { showOn } from '../../../../utils';
 
@@ -23,6 +24,10 @@ export const advanced = {
   }),
   dataComponentAttribute: variable('Test attribute', {
     value: [],
+    ...showOn('advancedSettings'),
+  }),
+  take: number('take', {
+    value: 20,
     ...showOn('advancedSettings'),
   }),
 };

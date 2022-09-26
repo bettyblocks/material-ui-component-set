@@ -25,6 +25,7 @@
       size,
       validationValueMissing = [''],
       value: prefabValue,
+      take,
     } = options;
     const { env, getProperty, useText, useAllQuery } = B;
     const {
@@ -140,7 +141,7 @@
       referenceModelId || modelId,
       {
         filter: completeFilter,
-        take: 50,
+        take: take || 50,
         variables: {
           ...(orderBy.id ? { sort: { relation: sort } } : {}),
         },
