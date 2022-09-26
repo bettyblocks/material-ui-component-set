@@ -352,6 +352,7 @@ const beforeCreate = ({
             'PRICE_EXPRESSION',
             'TIME',
           ];
+
           if (inheritFormatKinds.includes(property.kind)) {
             newProperty = {
               ...property,
@@ -359,37 +360,72 @@ const beforeCreate = ({
             };
           }
 
-          const dataTableColumnStructure = cloneStructure('Datatable Column');
-          if (dataTableColumnStructure.type !== 'COMPONENT') {
-            throw new Error(
-              `expected component prefab, found ${dataTableColumnStructure.type}`,
+          const makeDetail = (prop: any) => {
+            const mediaColumn = cloneStructure('Datatable Column');
+
+            if (mediaColumn.type !== 'COMPONENT') {
+              throw new Error(
+                `expected component prefab, found ${mediaColumn.type}`,
+              );
+            }
+
+            setOption(
+              mediaColumn,
+              'property',
+              (originalOption: PrefabComponentOption) => {
+                return {
+                  ...originalOption,
+                  value: prop,
+                };
+              },
             );
-          }
 
-          // Set property of data table
-          setOption(
-            dataTableColumnStructure,
-            'property',
-            (originalOption: PrefabComponentOption) => {
-              return {
-                ...originalOption,
-                value: newProperty,
-              };
-            },
-          );
+            const mediaComponent = cloneStructure('Media');
+            if (mediaComponent.type === 'COMPONENT') {
+              setOption(
+                mediaComponent,
+                'type',
+                (opt: PrefabComponentOption) => ({
+                  ...opt,
+                  value: 'url',
+                }),
+              );
+              setOption(
+                mediaComponent,
+                'urlFileSource',
+                (opt: PrefabComponentOption) => ({
+                  ...opt,
+                  value: [{ ...prop }],
+                }),
+              );
+            }
 
-          // Set type of data table
-          setOption(
-            dataTableColumnStructure,
-            'type',
-            (originalOption: PrefabComponentOption) => {
-              return {
-                ...originalOption,
-                value: 'Body1',
-              };
-            },
-          );
-          dataTableComp.descendants.push(dataTableColumnStructure);
+            mediaColumn.descendants.push(mediaComponent);
+
+            const dataTableColumnStructure = cloneStructure('Datatable Column');
+            if (dataTableColumnStructure.type !== 'COMPONENT') {
+              throw new Error(
+                `expected component prefab, found ${dataTableColumnStructure.type}`,
+              );
+            }
+
+            setOption(
+              dataTableColumnStructure,
+              'property',
+              (originalOption: PrefabComponentOption) => {
+                return {
+                  ...originalOption,
+                  value: newProperty,
+                };
+              },
+            );
+
+            return prop.kind === 'IMAGE'
+              ? mediaColumn
+              : dataTableColumnStructure;
+          };
+
+          dataTableComp.descendants.push(makeDetail(newProperty));
         },
       );
 
@@ -662,12 +698,6 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                           { name: 'Horizontal', value: 'row' },
                           { name: 'Vertical', value: 'column' },
                         ],
-                      },
-                    }),
-                    height: size('Height', {
-                      value: '100%',
-                      configuration: {
-                        as: 'UNIT',
                       },
                     }),
                     wrap: option('CUSTOM', {
