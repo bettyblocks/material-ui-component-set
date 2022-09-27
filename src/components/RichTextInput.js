@@ -261,6 +261,21 @@
     const fragment = deserialize(parsed.body);
 
     const onKeyDownHandler = (event) => {
+      if (event.key === 'Tab') {
+        event.preventDefault();
+        const isList = isBlockActive(editor, 'bulleted-list', 'type');
+        if (isList) {
+          Transforms.setNodes(editor, {
+            type: 'list-item',
+            children: [{ text: '' }],
+          });
+          Transforms.wrapNodes(editor, {
+            type: 'bulleted-list',
+            children: [],
+          });
+        }
+      }
+
       if (IS_MAC) {
         if (!event.metaKey) {
           return;
