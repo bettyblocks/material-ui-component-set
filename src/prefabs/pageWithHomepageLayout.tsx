@@ -986,6 +986,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                     ],
                                   },
                                 }),
+                                innerSpacing: sizes('Inner space', {
+                                  value: ['0rem', '0rem', '0rem', '0rem'],
+                                }),
                               },
                             },
                             [
@@ -1049,7 +1052,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       },
                                     }),
                                     outerSpacing: sizes('Outer space', {
-                                      value: ['0rem', '0rem', 'XL', '0rem'],
+                                      value: ['0rem', 'M', 'XL', 'M'],
                                     }),
                                   },
                                 },
@@ -1123,6 +1126,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                             {
                               options: {
                                 ...columnOptions,
+                                innerSpacing: sizes('Inner space', {
+                                  value: ['0rem', '0rem', '0rem', '0rem'],
+                                }),
                                 columnWidth: option('CUSTOM', {
                                   label: 'Column width',
                                   value: '12',
@@ -1303,6 +1309,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                             {
                               options: {
                                 ...columnOptions,
+                                innerSpacing: sizes('Inner space', {
+                                  value: ['0rem', '0rem', '0rem', '0rem'],
+                                }),
                                 columnWidth: option('CUSTOM', {
                                   label: 'Column width',
                                   value: '12',
@@ -1612,6 +1621,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                   },
                                                 ],
                                               },
+                                            }),
+                                            square: toggle('Square', {
+                                              value: true,
                                             }),
                                           },
                                         },
@@ -2466,6 +2478,12 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                             condition: showIf('backgroundOptions', 'EQ', true),
                           },
                         }),
+                        width: size('Width', {
+                          value: '100%',
+                          configuration: {
+                            as: 'UNIT',
+                          },
+                        }),
                       },
                     },
                     [
@@ -3302,7 +3320,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       },
                                     }),
                                     icon: icon('ThumbUp', {
-                                      value: 'People',
+                                      value: 'ThumbUp',
                                       configuration: {
                                         condition: showIf('type', 'EQ', 'icon'),
                                       },
@@ -3342,7 +3360,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                   options: {
                                     ...textOptions,
                                     content: variable('Content', {
-                                      value: ['9.1'],
+                                      value: ['9,1'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
                                     type: font('Font', { value: ['Title5'] }),
