@@ -288,9 +288,7 @@ const beforeCreate = ({
   const [properties, setProperties] = React.useState<Properties[]>([]);
   const [showPropertiesValidation, setShowPropertiesValidation] =
     React.useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [permissions, setPermissions] =
-    React.useState<PermissionType>('public');
+  const permissions: PermissionType = 'public';
   const componentId = createUuid();
 
   useModelQuery({

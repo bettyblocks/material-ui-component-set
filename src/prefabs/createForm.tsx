@@ -6,6 +6,7 @@ import {
   PrefabInteraction,
 } from '@betty-blocks/component-sdk';
 import { Form } from './structures/ActionJSForm';
+import { PermissionType } from './types/types';
 
 const beforeCreate = ({
   close,
@@ -38,8 +39,7 @@ const beforeCreate = ({
   const [model, setModel] = React.useState(null);
   const [idProperty, setIdProperty] = React.useState(null);
   const [properties, setProperties] = React.useState([]);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [permissions, setPermissions] = React.useState('private');
+  const permissions: PermissionType = 'inherit';
 
   const [validationMessage, setValidationMessage] = React.useState('');
   const componentId = createUuid();

@@ -71,9 +71,7 @@ const beforeCreate = ({
   const [properties, setProperties] = React.useState([]);
   const [modelBased, setmodelBased] = React.useState(true);
   const [actionName, setActionName] = React.useState('');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [permissions, setPermissions] =
-    React.useState<PermissionType>('private');
+  const permissions: PermissionType = 'inherit';
   const pageAuthenticationProfileId = getPageAuthenticationProfileId();
 
   const [validationMessage, setValidationMessage] = React.useState('');

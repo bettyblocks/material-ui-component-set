@@ -38,14 +38,11 @@ const beforeCreate = ({
   const [authProfileId, setAuthProfileId] = React.useState('');
   const [authProfile, setAuthProfile] = React.useState(null);
   const [authProfileInvalid, setAuthProfileInvalid] = React.useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [permissions, setPermissions] =
-    React.useState<PermissionType>('public');
-
   const [endpoint, setEndpoint] = React.useState(null);
   const [endpointInvalid, setEndpointInvalid] = React.useState(false);
-
   const [model, setModel] = React.useState(null);
+
+  const permissions: PermissionType = 'public';
 
   const isEmptyEndpoint = (value): boolean =>
     !value || Object.keys(value).length === 0 || value.id === '';

@@ -76,9 +76,7 @@ const beforeCreate = ({
   });
   const [buttonGroupValue, setButtonGroupValue] = React.useState('anotherPage');
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [permissions, setPermissions] =
-    React.useState<PermissionType>('private');
+  const permissions: PermissionType = 'inherit';
   const [validationMessage, setValidationMessage] = React.useState('');
   const [anotherPageState, setAnotherPageState] = React.useState({
     modelId: '',

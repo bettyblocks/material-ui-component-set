@@ -3451,9 +3451,7 @@ const beforeCreate = ({
   const [stepNumber, setStepNumber] = React.useState(1);
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [permissions, setPermissions] =
-    React.useState<PermissionType>('private');
+  const permissions: PermissionType = 'inherit';
   const pageAuthenticationProfileId = getPageAuthenticationProfileId();
 
   const createFormId = createUuid();
@@ -4009,7 +4007,6 @@ const beforeCreate = ({
         if (!createForm) throw new Error('No create form found');
         createForm.id = createFormId;
 
-        setPermissions('private');
         const result = await prepareAction(
           createFormId,
           idProperty,
