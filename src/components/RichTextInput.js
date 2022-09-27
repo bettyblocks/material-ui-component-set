@@ -13,7 +13,7 @@
     } = window.MaterialUI;
     const { FormHelperText } = window.MaterialUI.Core;
     const { Editable, withReact, Slate, useSlate } = SlateReact;
-    const { createEditor, Editor, Text } = SlateP;
+    const { createEditor, Editor, Text, Element, Transforms } = SlateP;
     const { jsx } = SlateHyperscript;
     const { withHistory } = SlateHistory;
     const { useText, env } = B;
@@ -40,6 +40,61 @@
     const isMarkActive = (editor, format) => {
       const marks = Editor.marks(editor);
       return marks ? marks[format] === true : false;
+    };
+
+    const isBlockActive = (editor, format, blockType = 'type') => {
+      const { selection } = editor;
+      if (!selection) return false;
+
+      const [match] = Array.from(
+        Editor.nodes(editor, {
+          at: Editor.unhangRange(editor, selection),
+          match: (n) =>
+            !Editor.isEditor(n) &&
+            Element.isElement(n) &&
+            n[blockType] === format,
+        }),
+      );
+
+      return !!match;
+    };
+
+    const LIST_TYPES = ['numbered-list', 'bulleted-list'];
+    const TEXT_ALIGN_TYPES = ['left', 'center', 'right', 'justify'];
+
+    const toggleBlock = (editor, format) => {
+      const isActive = isBlockActive(
+        editor,
+        format,
+        TEXT_ALIGN_TYPES.includes(format) ? 'align' : 'type',
+      );
+      const isList = LIST_TYPES.includes(format);
+
+      Transforms.unwrapNodes(editor, {
+        match: (n) =>
+          !Editor.isEditor(n) &&
+          Element.isElement(n) &&
+          LIST_TYPES.includes(n.type) &&
+          !TEXT_ALIGN_TYPES.includes(format),
+        split: true,
+      });
+      let newProperties;
+      if (TEXT_ALIGN_TYPES.includes(format)) {
+        newProperties = {
+          align: isActive ? undefined : format,
+        };
+      } else {
+        newProperties = {
+          // eslint-disable-next-line no-nested-ternary
+          type: isActive ? 'paragraph' : isList ? 'list-item' : format,
+        };
+      }
+      Transforms.setNodes(editor, newProperties);
+
+      if (!isActive && isList) {
+        const block = { type: format, children: [] };
+        Transforms.wrapNodes(editor, block);
+      }
     };
 
     const toggleMark = (editor, format) => {
@@ -252,10 +307,28 @@
       return <p {...attributes}>{children}</p>;
     }
 
+    function NumberedListElement({ attributes, children }) {
+      return <ol {...attributes}>{children}</ol>;
+    }
+
+    function BulletedListElement({ attributes, children }) {
+      return <ul {...attributes}>{children}</ul>;
+    }
+
+    function ListItemElement({ attributes, children }) {
+      return <li {...attributes}>{children}</li>;
+    }
+
     const renderElement = useCallback((props) => {
       switch (props.element.type) {
         case 'code':
           return CodeElement(props);
+        case 'numbered-list':
+          return NumberedListElement(props);
+        case 'bulleted-list':
+          return BulletedListElement(props);
+        case 'list-item':
+          return ListItemElement(props);
         case 'paragraph':
         default:
           return DefaultElement(props);
@@ -272,6 +345,24 @@
         />
       );
     });
+
+    function BlockButton({ format, icon }) {
+      const ownEditor = useSlate();
+      return (
+        <Button
+          active={isBlockActive(
+            ownEditor,
+            format,
+            TEXT_ALIGN_TYPES.includes(format) ? 'align' : 'type',
+          )}
+          onMouseDown={(event) => {
+            event.preventDefault();
+            toggleBlock(ownEditor, format);
+          }}
+          icon={icon}
+        />
+      );
+    }
 
     function MarkButton({ format, icon }) {
       const ownEditor = useSlate();
@@ -330,6 +421,8 @@
                 {showStrikethrough && (
                   <MarkButton format="strikethrough" icon="StrikethroughS" />
                 )}
+                <BlockButton format="numbered-list" icon="FormatListNumbered" />
+                <BlockButton format="bulleted-list" icon="FormatListBulleted" />
               </div>
               <div className={classes.toolbarGroup}>
                 <HistoryButton action="undo" icon="Undo" />
