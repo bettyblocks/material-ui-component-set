@@ -242,7 +242,6 @@ const beforeCreate = ({
                 setSerachProperty(selectedSearchProperty);
               }}
               value={searchProperty}
-              disabled={!modelId}
             />
           </Field>
         </>
@@ -328,6 +327,108 @@ const beforeCreate = ({
           type: 'Custom',
         } as PrefabInteraction);
       }
+
+      const dataLabel = data.model.label;
+
+      const titleText = treeSearch('#titleText', newPrefab.structure);
+      if (!titleText) throw new Error('Title component not found');
+      setOption(
+        titleText,
+        'content',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
+          value: [`${dataLabel}s Dashboard`],
+        }),
+      );
+
+      const modelText = treeSearch('#modelText', newPrefab.structure);
+      if (!modelText) throw new Error('Title text component not found');
+      setOption(
+        modelText,
+        'content',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
+          value: [`${dataLabel}s`],
+        }),
+      );
+
+      const totalText = treeSearch('#totalText', newPrefab.structure);
+      if (!totalText) throw new Error('Total text component not found');
+      setOption(
+        totalText,
+        'content',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
+          value: [`${dataLabel}s in total`],
+        }),
+      );
+
+      const doneText = treeSearch('#doneText', newPrefab.structure);
+      if (!doneText) throw new Error('Done text component not found');
+      setOption(
+        doneText,
+        'content',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
+          value: [`${dataLabel}s done`],
+        }),
+      );
+
+      const inProgressText = treeSearch('#inProgressText', newPrefab.structure);
+      if (!inProgressText)
+        throw new Error('In progress text component not found');
+      setOption(
+        inProgressText,
+        'content',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
+          value: [`${dataLabel}s in progress`],
+        }),
+      );
+
+      const blockedText = treeSearch('#blockedText', newPrefab.structure);
+      if (!blockedText) throw new Error('Blocked text component not found');
+      setOption(
+        blockedText,
+        'content',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
+          value: [`${dataLabel}s blocked`],
+        }),
+      );
+
+      const openText = treeSearch('#openText', newPrefab.structure);
+      if (!openText) throw new Error('open text component not found');
+      setOption(
+        openText,
+        'content',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
+          value: [`${dataLabel}s open`],
+        }),
+      );
+
+      const listText = treeSearch('#listText', newPrefab.structure);
+      if (!listText) throw new Error('List text component not found');
+      setOption(
+        listText,
+        'content',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
+          value: [`${dataLabel}s list`],
+        }),
+      );
+
+      const buttonText = treeSearch('#buttonText', newPrefab.structure);
+      if (!buttonText) throw new Error('Button text component not found');
+      setOption(
+        buttonText,
+        'buttonText',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
+          value: [`New ${dataLabel}`],
+        }),
+      );
 
       properties.forEach(
         (property: {
@@ -1216,10 +1317,13 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                   },
                                   [
                                     TextPrefab({
+                                      ref: {
+                                        id: '#titleText',
+                                      },
                                       options: {
                                         ...textOptions,
                                         content: variable('Content', {
-                                          value: ['Projects Dashboard'],
+                                          value: ['Dashboard'],
                                           configuration: { as: 'MULTILINE' },
                                         }),
                                         type: font('Font', {
@@ -1427,10 +1531,13 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                       },
                                       [
                                         TextPrefab({
+                                          ref: {
+                                            id: '#modelText',
+                                          },
                                           options: {
                                             ...textOptions,
                                             content: variable('Content', {
-                                              value: ['Projects'],
+                                              value: ['Tasks'],
                                               configuration: {
                                                 as: 'MULTILINE',
                                               },
@@ -1570,10 +1677,13 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                               },
                                             }),
                                             TextPrefab({
+                                              ref: {
+                                                id: '#totalText',
+                                              },
                                               options: {
                                                 ...textOptions,
                                                 content: variable('Content', {
-                                                  value: ['Projects in total'],
+                                                  value: ['Tasks in total'],
                                                   configuration: {
                                                     as: 'MULTILINE',
                                                   },
@@ -2324,14 +2434,15 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                   },
                                                 }),
                                                 TextPrefab({
+                                                  ref: {
+                                                    id: '#openText',
+                                                  },
                                                   options: {
                                                     ...textOptions,
                                                     content: variable(
                                                       'Content',
                                                       {
-                                                        value: [
-                                                          'Projects open',
-                                                        ],
+                                                        value: ['Tasks open'],
                                                         configuration: {
                                                           as: 'MULTILINE',
                                                         },
@@ -2950,14 +3061,15 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                   },
                                                 }),
                                                 TextPrefab({
+                                                  ref: {
+                                                    id: '#doneText',
+                                                  },
                                                   options: {
                                                     ...textOptions,
                                                     content: variable(
                                                       'Content',
                                                       {
-                                                        value: [
-                                                          'Projects done',
-                                                        ],
+                                                        value: ['Tasks done'],
                                                         configuration: {
                                                           as: 'MULTILINE',
                                                         },
@@ -3577,13 +3689,16 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                   },
                                                 }),
                                                 TextPrefab({
+                                                  ref: {
+                                                    id: '#inProgressText',
+                                                  },
                                                   options: {
                                                     ...textOptions,
                                                     content: variable(
                                                       'Content',
                                                       {
                                                         value: [
-                                                          'Projects in progress',
+                                                          'Tasks in progress',
                                                         ],
                                                         configuration: {
                                                           as: 'MULTILINE',
@@ -4204,13 +4319,16 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                   },
                                                 }),
                                                 TextPrefab({
+                                                  ref: {
+                                                    id: '#blockedText',
+                                                  },
                                                   options: {
                                                     ...textOptions,
                                                     content: variable(
                                                       'Content',
                                                       {
                                                         value: [
-                                                          'Projects blocked',
+                                                          'Tasks blocked',
                                                         ],
                                                         configuration: {
                                                           as: 'MULTILINE',
@@ -4497,10 +4615,13 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                         },
                                         [
                                           TextPrefab({
+                                            ref: {
+                                              id: '#listText',
+                                            },
                                             options: {
                                               ...textOptions,
                                               content: variable('Content', {
-                                                value: ['Projects list'],
+                                                value: ['Tasks list'],
                                                 configuration: {
                                                   as: 'MULTILINE',
                                                 },
@@ -4628,6 +4749,9 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                               ),
                                               ButtonPrefab(
                                                 {
+                                                  ref: {
+                                                    id: '#buttonText',
+                                                  },
                                                   options: {
                                                     ...buttonOptions,
                                                     icon: icon('Icon', {
@@ -4636,7 +4760,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                     buttonText: variable(
                                                       'Button text',
                                                       {
-                                                        value: ['New Project'],
+                                                        value: ['New Task'],
                                                       },
                                                     ),
                                                     size: option('CUSTOM', {
