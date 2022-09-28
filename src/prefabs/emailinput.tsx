@@ -49,5 +49,6 @@ export default prefab('Email Beta', attributes, beforeCreate, [
     type: 'email',
     pattern,
     adornmentIcon: 'Email',
+    dataComponentAttribute: 'EmailInput',
   }),
 ]);

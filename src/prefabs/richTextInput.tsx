@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
-import { TextInput } from './structures/TextInput';
+import { RichTextInput } from './structures/RichTextInput';
 
 const beforeCreate = ({
   close,
@@ -9,22 +9,18 @@ const beforeCreate = ({
   save,
 }: BeforeCreateArgs) => {
   const structure = originalPrefab.structure[0];
-
   if (structure.type !== 'COMPONENT')
     return <div>expected component prefab, found {structure.type}</div>;
 
+  // TODO: remove this code
   const actionVariableOption = structure.options.find(
     (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
   );
 
-  if (!actionVariableOption) {
-    return <div>Prefab is missing the actionVariable component option</div>;
-  }
-
   return (
     <CreateFormInputWizard
-      supportedKinds={['PASSWORD']}
-      actionVariableOption={actionVariableOption.key}
+      supportedKinds={['RICHTEXT']}
+      actionVariableOption={actionVariableOption?.key || null}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
       close={close}
@@ -36,16 +32,14 @@ const beforeCreate = ({
 
 const attributes = {
   category: 'FORMV2',
-  icon: Icon.PasswordInputIcon,
-  keywords: ['Form', 'input'],
+  icon: Icon.TextareaIcon,
+  keywords: ['Form', 'input', 'rich text', 'rich', 'text', 'editor'],
 };
 
-export default prefab('Password Beta', attributes, beforeCreate, [
-  TextInput({
-    label: 'Password field Beta',
-    inputLabel: 'Password',
-    type: 'password',
-    adornmentIcon: 'VisibilityOff',
-    dataComponentAttribute: 'PasswordInput',
+export default prefab('Rich text editor', attributes, beforeCreate, [
+  RichTextInput({
+    label: 'Rich text editor',
+    inputLabel: 'Rich text editor',
+    type: 'text',
   }),
 ]);

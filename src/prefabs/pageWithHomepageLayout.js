@@ -147,7 +147,7 @@
             {
               value: [imageUrl],
               label: 'Source',
-              key: 'imageSource',
+              key: 'urlFileSourcece',
               type: 'VARIABLE',
               configuration: {
                 condition: {

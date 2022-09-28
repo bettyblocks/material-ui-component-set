@@ -40,6 +40,15 @@ export const TextInput = (
     });
   }
 
+  if (config.dataComponentAttribute) {
+    options.dataComponentAttribute = updateOption(
+      options.dataComponentAttribute,
+      {
+        value: [config.dataComponentAttribute],
+      },
+    );
+  }
+
   return component(
     'TextInput',
     { label: config.label, options, ref },
