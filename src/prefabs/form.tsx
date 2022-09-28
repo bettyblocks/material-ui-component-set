@@ -6,6 +6,7 @@ import {
   PrefabInteraction,
 } from '@betty-blocks/component-sdk';
 import { Form } from './structures/ActionJSForm';
+import { PermissionType } from './types/types';
 
 const beforeCreate = ({
   close,
@@ -35,6 +36,7 @@ const beforeCreate = ({
     createUuid,
     makeBettyInput,
     prepareAction,
+    getPageAuthenticationProfileId,
     setOption,
     useModelQuery,
   } = helpers;
@@ -68,6 +70,8 @@ const beforeCreate = ({
   const [properties, setProperties] = React.useState([]);
   const [modelBased, setmodelBased] = React.useState(true);
   const [actionName, setActionName] = React.useState('');
+  const permissions: PermissionType = 'inherit';
+  const pageAuthenticationProfileId = getPageAuthenticationProfileId();
 
   const [validationMessage, setValidationMessage] = React.useState('');
   const componentId = createUuid();
@@ -201,6 +205,8 @@ const beforeCreate = ({
             modelBased ? 'empty' : 'custom',
             null,
             actionName,
+            permissions,
+            pageAuthenticationProfileId,
           );
           const structure = originalPrefab.structure[0];
           if (modelBased) {

@@ -72,6 +72,7 @@ import {
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
 import { IdPropertyProps, ModelProps, ModelQuery, Properties } from './types';
+import { PermissionType } from './types/types';
 
 const interactions: PrefabInteraction[] = [
   {
@@ -3050,6 +3051,7 @@ const beforeCreate = ({
   helpers: {
     useModelQuery,
     prepareAction,
+    getPageAuthenticationProfileId,
     cloneStructure,
     setOption,
     createUuid,
@@ -3075,6 +3077,8 @@ const beforeCreate = ({
   const [stepNumber, setStepNumber] = React.useState(1);
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
+  const permissions: PermissionType = 'inherit';
+  const pageAuthenticationProfileId = getPageAuthenticationProfileId();
 
   const createFormId = createUuid();
   const editFormId = createUuid();
@@ -3638,6 +3642,10 @@ const beforeCreate = ({
           idProperty,
           filteredproperties,
           'create',
+          undefined,
+          undefined,
+          permissions,
+          pageAuthenticationProfileId,
         );
 
         Object.values(result.variables).forEach(
@@ -3860,6 +3868,10 @@ const beforeCreate = ({
           idProperty,
           filteredproperties,
           'update',
+          undefined,
+          undefined,
+          permissions,
+          pageAuthenticationProfileId,
         );
         setOption(editForm, 'actionId', (opts: PrefabComponentOption) => ({
           ...opts,
@@ -4083,6 +4095,10 @@ const beforeCreate = ({
           idProperty,
           undefined,
           'delete',
+          undefined,
+          undefined,
+          permissions,
+          pageAuthenticationProfileId,
         );
 
         setOption(deleteForm, 'actionId', (opts: PrefabComponentOption) => ({
