@@ -1,0 +1,7 @@
+{
+  "components": ["textinput.js"],
+  "prefabsTs": ["textinput.tsx"],
+  "prefabs": [],
+  "partials": [],
+  "interactions": []
+}
