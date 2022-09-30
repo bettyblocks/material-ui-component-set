@@ -217,6 +217,7 @@ const beforeCreate = ({
                       property,
                       variable,
                       result.relatedIdProperties,
+                      result.relatedModelIds,
                     ),
                   );
                   break;

@@ -1,5 +1,4 @@
 import {
-  option,
   showIf,
   variable,
   toggle,
@@ -25,10 +24,5 @@ export const advanced = {
   dataComponentAttribute: variable('Test attribute', {
     value: [],
     ...showOn('advancedSettings'),
-  }),
-  actionVariableId: option('ACTION_JS_VARIABLE', {
-    label: 'Action input variable',
-    value: '',
-    configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
   }),
 };

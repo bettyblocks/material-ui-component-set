@@ -1,10 +1,7 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
-import { deleteActionVariable } from '../../hooks/deleteActionVariable';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
-
-const $afterDelete = [deleteActionVariable];
 
 export const MultiAutocomplete = (
   config: Configuration,
@@ -19,6 +16,10 @@ export const MultiAutocomplete = (
     options.type = updateOption(options.type, { value: config.type });
   }
 
+  if (config.inputLabel) {
+    options.label = updateOption(options.label, { value: [config.inputLabel] });
+  }
+
   if (config.adornmentIcon) {
     options.adornmentIcon = updateOption(options.adornmentIcon, {
       value: config.adornmentIcon,
@@ -27,7 +28,7 @@ export const MultiAutocomplete = (
 
   return component(
     'Multi Autocomplete Beta',
-    { options, $afterDelete, style, ref, label },
+    { options, style, ref, label },
     descendants,
   );
 };
