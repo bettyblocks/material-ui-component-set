@@ -127,7 +127,6 @@
 
       const children =
         node.children && node.children.map((n) => serialize(n)).join('');
-      console.log({ node });
       switch (node.type) {
         case 'heading-one':
           return `<h1>${children}</h1>`;
@@ -270,7 +269,6 @@
       useText(valueProp),
       'text/html',
     );
-    console.log({ parsed });
     const fragment = deserialize(parsed.body);
 
     const handleListdepth = (listKind, key, event) => {
