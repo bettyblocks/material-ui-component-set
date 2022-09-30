@@ -13,7 +13,7 @@
     } = window.MaterialUI;
     const { FormHelperText } = window.MaterialUI.Core;
     const { Editable, withReact, Slate, useSlate } = SlateReact;
-    const { createEditor, Editor, Text, Element, Transforms } = SlateP;
+    const { createEditor, Editor, Text, Element, Transforms, Node } = SlateP;
     const { jsx } = SlateHyperscript;
     const { withHistory } = SlateHistory;
     const { useText, env } = B;
@@ -244,7 +244,7 @@
     }
 
     const onChangeHandler = (value) => {
-      setCurrentValue(value.map((row) => serialize(row)).join(''));
+      setCurrentValue(value[0].children.map((row) => serialize(row)).join(''));
       B.triggerEvent('onChange', currentValue);
     };
 
@@ -260,20 +260,65 @@
     );
     const fragment = deserialize(parsed.body);
 
-    const onKeyDownHandler = (event) => {
-      if (event.key === 'Tab') {
-        event.preventDefault();
-        const isList = isBlockActive(editor, 'bulleted-list', 'type');
-        if (isList) {
+    const handleListdepth = (listKind, key, event) => {
+      const isList = isBlockActive(editor, listKind, 'type');
+      if (isList) {
+        const lastNode = Node.last(editor, editor.selection.focus.path);
+        if (
+          key === 'shiftTab' ||
+          (key === 'enter' && lastNode[0].text === '')
+        ) {
+          if (key === 'enter') event.preventDefault();
+          Transforms.unwrapNodes(editor, {
+            match: (n) =>
+              !Editor.isEditor(n) &&
+              Element.isElement(n) &&
+              LIST_TYPES.includes(n.type),
+            split: true,
+          });
+          const parentNode = Node.parent(
+            editor,
+            editor.selection.focus.path.slice(0, -1),
+          );
+          if (LIST_TYPES.includes(parentNode.type)) {
+            Transforms.setNodes(editor, { type: 'list-item' });
+          } else {
+            Transforms.setNodes(editor, { type: 'paragraph' });
+          }
+        }
+        if (key === 'tab') {
           Transforms.setNodes(editor, {
             type: 'list-item',
             children: [{ text: '' }],
           });
           Transforms.wrapNodes(editor, {
-            type: 'bulleted-list',
+            type: listKind,
             children: [],
           });
         }
+      }
+    };
+
+    const onKeyDownHandler = (event) => {
+      if (event.shiftKey && event.key === 'Tab') {
+        event.preventDefault();
+        handleListdepth('bulleted-list', 'shiftTab');
+        handleListdepth('numbered-list', 'shiftTab');
+        return;
+      }
+
+      if (event.key === 'Enter') {
+        handleListdepth('bulleted-list', 'enter', event);
+        handleListdepth('numbered-list', 'enter', event);
+
+        return;
+      }
+
+      if (event.key === 'Tab') {
+        event.preventDefault();
+        handleListdepth('bulleted-list', 'tab');
+        handleListdepth('numbered-list', 'tab');
+        return;
       }
 
       if (IS_MAC) {
