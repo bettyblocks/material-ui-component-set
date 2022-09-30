@@ -127,8 +127,20 @@
 
       const children =
         node.children && node.children.map((n) => serialize(n)).join('');
-
+      console.log({ node });
       switch (node.type) {
+        case 'heading-one':
+          return `<h1>${children}</h1>`;
+        case 'heading-two':
+          return `<h2>${children}</h2>`;
+        case 'heading-three':
+          return `<h3>${children}</h3>`;
+        case 'heading-four':
+          return `<h4>${children}</h4>`;
+        case 'heading-five':
+          return `<h5>${children}</h5>`;
+        case 'heading-six':
+          return `<h6>${children}</h6>`;
         case 'paragraph':
           return `<p>${children}</p>`;
         default:
@@ -244,6 +256,7 @@
     }
 
     const onChangeHandler = (value) => {
+      console.log({ value });
       setCurrentValue(value.map((row) => serialize(row)).join(''));
       B.triggerEvent('onChange', currentValue);
     };
@@ -258,6 +271,7 @@
       useText(valueProp),
       'text/html',
     );
+    console.log({ parsed });
     const fragment = deserialize(parsed.body);
 
     const onKeyDownHandler = (event) => {
@@ -334,6 +348,25 @@
       return <li {...attributes}>{children}</li>;
     }
 
+    function HeadingOneElement({ attributes, children }) {
+      return <h1 {...attributes}>{children}</h1>;
+    }
+    function HeadingTwoElement({ attributes, children }) {
+      return <h2 {...attributes}>{children}</h2>;
+    }
+    function HeadingThreeElement({ attributes, children }) {
+      return <h3 {...attributes}>{children}</h3>;
+    }
+    function HeadingFourElement({ attributes, children }) {
+      return <h4 {...attributes}>{children}</h4>;
+    }
+    function HeadingFiveElement({ attributes, children }) {
+      return <h5 {...attributes}>{children}</h5>;
+    }
+    function HeadingSixElement({ attributes, children }) {
+      return <h6 {...attributes}>{children}</h6>;
+    }
+
     const renderElement = useCallback((props) => {
       switch (props.element.type) {
         case 'code':
@@ -344,6 +377,18 @@
           return BulletedListElement(props);
         case 'list-item':
           return ListItemElement(props);
+        case 'heading-one':
+          return HeadingOneElement(props);
+        case 'heading-two':
+          return HeadingTwoElement(props);
+        case 'heading-three':
+          return HeadingThreeElement(props);
+        case 'heading-four':
+          return HeadingFourElement(props);
+        case 'heading-five':
+          return HeadingFiveElement(props);
+        case 'heading-six':
+          return HeadingSixElement(props);
         case 'paragraph':
         default:
           return DefaultElement(props);
@@ -438,6 +483,12 @@
                 )}
                 <BlockButton format="numbered-list" icon="FormatListNumbered" />
                 <BlockButton format="bulleted-list" icon="FormatListBulleted" />
+                <BlockButton format="heading-one" icon="Title" />
+                <BlockButton format="heading-two" icon="Title" />
+                <BlockButton format="heading-three" icon="Title" />
+                <BlockButton format="heading-four" icon="Title" />
+                <BlockButton format="heading-five" icon="Title" />
+                <BlockButton format="heading-six" icon="Title" />
               </div>
               <div className={classes.toolbarGroup}>
                 <HistoryButton action="undo" icon="Undo" />
@@ -525,6 +576,9 @@
       editor: {
         padding: '0.5px 14px',
         color: isDev && 'rgb(0, 0, 0)',
+        // '& h1': {
+        //   fontSize: style.getFontSize('Title1'),
+        // },
       },
       helper: {
         color: ({ options: { helperColor } }) => [
