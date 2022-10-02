@@ -340,6 +340,46 @@
         return;
       }
 
+      if (event.altKey) {
+        switch (event.keyCode) {
+          case 49:
+            event.preventDefault();
+            toggleBlock(editor, 'heading-one');
+            break;
+          case 50:
+            event.preventDefault();
+            toggleBlock(editor, 'heading-two');
+            break;
+          case 51:
+            event.preventDefault();
+            toggleBlock(editor, 'heading-three');
+            break;
+          case 52:
+            event.preventDefault();
+            toggleBlock(editor, 'heading-four');
+            break;
+          case 53:
+            event.preventDefault();
+            toggleBlock(editor, 'heading-five');
+            break;
+          case 54:
+            event.preventDefault();
+            toggleBlock(editor, 'heading-six');
+            break;
+          case 55:
+            event.preventDefault();
+            toggleBlock(editor, 'paragraph');
+            break;
+          case 56:
+            event.preventDefault();
+            toggleBlock(editor, 'paragraph');
+            break;
+          default:
+            break;
+        }
+        return;
+      }
+
       if (event.shiftKey && event.key === 's') {
         event.preventDefault();
         if (showStrikethrough) toggleMark(editor, 'strikethrough');
