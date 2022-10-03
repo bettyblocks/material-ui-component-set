@@ -142,6 +142,12 @@
           return `<h6>${children}</h6>`;
         case 'paragraph':
           return `<p>${children}</p>`;
+        case 'numbered-list':
+          return `<ol>${children}</ol>`;
+        case 'bulleted-list':
+          return `<ul>${children}</ul>`;
+        case 'list-item':
+          return `<li>${children}</li>`;
         default:
           return children;
       }
