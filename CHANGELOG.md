@@ -1,3 +1,22 @@
+# [2.58.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.57.0...v2.58.0) (2022-09-30)
+
+
+### Bug Fixes
+
+* accept content type when image ([d1ba13d](https://github.com/bettyblocks/material-ui-component-set/commit/d1ba13d38b6616d9d1b858a064bbd8cdceca64d8))
+* create form disabled kinds ([139f02b](https://github.com/bettyblocks/material-ui-component-set/commit/139f02b0cae4b94e258a726c23ddb07e20f4ba7f))
+* reduce horizontal space taken by image upload ([3516820](https://github.com/bettyblocks/material-ui-component-set/commit/35168208dec95ab183b49a7aaab92f32b373a56c))
+* update SDK ([88a798e](https://github.com/bettyblocks/material-ui-component-set/commit/88a798eadbd60d348587258c2cea798240682907))
+
+
+### Features
+
+* change labels ([9d3e3ae](https://github.com/bettyblocks/material-ui-component-set/commit/9d3e3ae77556e8f9f2378a6cd67bb4ab622bc123))
+* contain file name length within input ([0d4509f](https://github.com/bettyblocks/material-ui-component-set/commit/0d4509fc95c114abf664095a7011b5787bb2b4eb))
+* do not show preview for stub file values ([a669f6f](https://github.com/bettyblocks/material-ui-component-set/commit/a669f6f743e2456de2abfa505421f780e694cce9))
+* image upload beta ([59c1055](https://github.com/bettyblocks/material-ui-component-set/commit/59c1055287a9484a4cee6aef4e59a14ad6d305cc))
+* stack file details ([48a02bf](https://github.com/bettyblocks/material-ui-component-set/commit/48a02bff97c4417d41934e44c1bca85cd1c05624))
+
 # [2.57.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.56.0...v2.57.0) (2022-09-23)
 
 

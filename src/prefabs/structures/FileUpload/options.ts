@@ -5,13 +5,26 @@ import {
   property,
   showIf,
   showIfTrue,
+  size,
   text,
   ThemeColor,
   toggle,
   variable,
 } from '@betty-blocks/component-sdk';
 
-export const options = {
+const imageOptions = {
+  showImagePreview: toggle('Show Image preview', { value: true }),
+  imagePreviewWidth: size('Image preview width', {
+    value: '200px',
+    configuration: { as: 'UNIT', condition: showIfTrue('showImagePreview') },
+  }),
+  imagePreviewHeight: size('Image preview height', {
+    value: '112px',
+    configuration: { as: 'UNIT', condition: showIfTrue('showImagePreview') },
+  }),
+};
+
+export const options = (supportImages?: boolean) => ({
   actionProperty: option('ACTION_JS_PROPERTY', {
     label: 'Property',
     value: '',
@@ -26,6 +39,7 @@ export const options = {
   disabled: toggle('Disabled', { value: false }),
   helperText: variable('Helper text', { value: [] }),
   fullWidth: toggle('Full width', { value: true }),
+  ...(supportImages ? imageOptions : {}),
   accept: variable('Accept files', { value: ['*'] }),
   margin: buttongroup(
     'Margin',
@@ -69,4 +83,4 @@ export const options = {
     value: '',
     configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
   }),
-};
+});
