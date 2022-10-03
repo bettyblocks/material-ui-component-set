@@ -428,25 +428,48 @@
       );
     }
 
-    function DefaultElement({ attributes, children }) {
-      return <p {...attributes}>{children}</p>;
+    function DefaultElement({ attributes, children, element: { align } }) {
+      return (
+        <p style={{ textAlign: align }} {...attributes}>
+          {children}
+        </p>
+      );
     }
 
-    function NumberedListElement({ attributes, children }) {
-      return <ol {...attributes}>{children}</ol>;
+    function NumberedListElement({ attributes, children, element: { align } }) {
+      return (
+        <ol style={{ textAlign: align }} {...attributes}>
+          {children}
+        </ol>
+      );
     }
 
-    function BulletedListElement({ attributes, children }) {
-      return <ul {...attributes}>{children}</ul>;
+    function BulletedListElement({ attributes, children, element: { align } }) {
+      return (
+        <ul style={{ textAlign: align }} {...attributes}>
+          {children}
+        </ul>
+      );
     }
 
-    function ListItemElement({ attributes, children }) {
-      return <li {...attributes}>{children}</li>;
+    function ListItemElement({ attributes, children, element: { align } }) {
+      return (
+        <li style={{ textAlign: align }} {...attributes}>
+          {children}
+        </li>
+      );
     }
 
-    function HeadingElement({ attributes, children }, type) {
+    function HeadingElement(
+      { attributes, children, element: { align } },
+      type,
+    ) {
       const HeadingType = type;
-      return <HeadingType {...attributes}>{children}</HeadingType>;
+      return (
+        <HeadingType style={{ textAlign: align }} {...attributes}>
+          {children}
+        </HeadingType>
+      );
     }
 
     const renderElement = useCallback((props) => {
@@ -575,6 +598,10 @@
                     icon="FormatListBulleted"
                   />
                 )}
+                <BlockButton format="left" icon="FormatAlignLeft" />
+                <BlockButton format="center" icon="FormatAlignCenter" />
+                <BlockButton format="right" icon="FormatAlignRight" />
+                <BlockButton format="justify" icon="FormatAlignJustify" />
                 <BlockButton format="heading-one" icon="Title" />
                 <BlockButton format="heading-two" icon="Title" />
                 <BlockButton format="heading-three" icon="Title" />
