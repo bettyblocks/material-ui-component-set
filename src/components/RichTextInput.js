@@ -591,7 +591,9 @@
               className={classes.editor}
               renderLeaf={renderLeaf}
               renderElement={renderElement}
-              placeholder={placeholder}
+              placeholder={
+                <span className={classes.placeholderText}>{placeholder}</span>
+              }
               readOnly={isDev || disabled}
               onKeyDown={(event) => {
                 onKeyDownHandler(event);
@@ -719,12 +721,17 @@
           ],
         },
         '&:focus-within': {
-          borderColor: ({ options: { borderFocusColor } }) => [
-            style.getColor(borderFocusColor),
+          boxShadow: ({ options: { borderFocusColor } }) => [
+            `0 0 0 1px ${style.getColor(borderFocusColor)}`,
           ],
         },
         backgroundColor: ({ options: { backgroundColor } }) => [
           style.getColor(backgroundColor),
+        ],
+      },
+      placeholderText: {
+        color: ({ options: { placeholderColor } }) => [
+          style.getColor(placeholderColor),
         ],
       },
     };
