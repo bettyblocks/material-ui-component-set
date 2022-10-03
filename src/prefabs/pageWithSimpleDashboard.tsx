@@ -61,7 +61,7 @@ const attrs = {
     'View your content in a data table with cards containing counters.',
   detail:
     'This dashboard has a configurable data table and some cards containing static data. This to spark your interest and show what things are possible with the Page builder.',
-  previewUrl: 'https://preview.betty.app/crud-with-dialogs',
+  previewUrl: 'https://preview.betty.app/simple-dashboard',
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Simple_Dashboard.jpg',
   category: 'DATA',
@@ -91,7 +91,6 @@ const beforeCreate = ({
   const [footerPartialId, setFooterPartialId] = React.useState('');
   const [modelId, setModelId] = React.useState('');
   const [searchProperty, setSerachProperty] = React.useState<any>('');
-  // const [model, setModel] = React.useState<any>(null);
   const [properties, setProperties] = React.useState<any>([]);
   const [modelValidation, setModelValidation] = React.useState(false);
   const [propertiesValidation, setPropertiesValidation] = React.useState(false);
@@ -288,44 +287,45 @@ const beforeCreate = ({
         ...opts,
         value: modelId,
       }));
-
-      // Get search property label
       if (!data) throw new Error('');
-      const propertyLabel = data.model.properties.find(
-        (prop: Property) => prop.id === searchProperty.id[0],
-      ).name;
 
       // Set search field placeholder with label
       const searchFieldComp = treeSearch('#searchField', newPrefab.structure);
       if (!searchFieldComp) throw new Error('');
-      setOption(
-        searchFieldComp,
-        'placeholder',
-        (originalOption: PrefabComponentOption) => ({
-          ...originalOption,
-          value: [`Search on ${propertyLabel}`],
-        }),
-      );
+      if (searchProperty) {
+        // Get search property label
+        const propertyLabel = data.model.properties.find(
+          (prop: Property) => prop.id === searchProperty.id[0],
+        ).name;
 
-      // Set search interaction
-      if (newPrefab.interactions) {
-        newPrefab.interactions.push({
-          name: 'Filter',
-          sourceEvent: 'onChange',
-          parameters: [
-            {
-              parameter: 'property',
-              operator: 'matches',
-              resolveValue: false,
-              id: [...searchProperty.id],
+        setOption(
+          searchFieldComp,
+          'placeholder',
+          (originalOption: PrefabComponentOption) => ({
+            ...originalOption,
+            value: [`Search on ${propertyLabel}`],
+          }),
+        );
+        // Set search interaction
+        if (newPrefab.interactions) {
+          newPrefab.interactions.push({
+            name: 'Filter',
+            sourceEvent: 'onChange',
+            parameters: [
+              {
+                parameter: 'property',
+                operator: 'matches',
+                resolveValue: false,
+                id: [...searchProperty.id],
+              },
+            ],
+            ref: {
+              targetComponentId: '#dataTable',
+              sourceComponentId: '#searchField',
             },
-          ],
-          ref: {
-            targetComponentId: '#dataTable',
-            sourceComponentId: '#searchField',
-          },
-          type: 'Custom',
-        } as PrefabInteraction);
+            type: 'Custom',
+          } as PrefabInteraction);
+        }
       }
 
       const dataLabel = data.model.label;
