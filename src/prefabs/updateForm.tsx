@@ -33,7 +33,6 @@ const beforeCreate = ({
     'DATE_EXPRESSION',
     'DATE_TIME_EXPRESSION',
     'DECIMAL_EXPRESSION',
-    'IMAGE',
     'INTEGER_EXPRESSION',
     'LOGIN_TOKEN',
     'MINUTES_EXPRESSION',
@@ -389,6 +388,7 @@ const beforeCreate = ({
                     property,
                     variable,
                     result.relatedIdProperties,
+                    result.relatedModelIds,
                   ),
                 );
                 break;
@@ -460,6 +460,16 @@ const beforeCreate = ({
                 structure.descendants.push(
                   makeBettyUpdateInput(
                     BettyPrefabs.FILE,
+                    model,
+                    property,
+                    variable,
+                  ),
+                );
+                break;
+              case PropertyKind.IMAGE:
+                structure.descendants.push(
+                  makeBettyUpdateInput(
+                    BettyPrefabs.IMAGE,
                     model,
                     property,
                     variable,

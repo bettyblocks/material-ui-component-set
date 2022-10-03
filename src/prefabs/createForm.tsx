@@ -22,6 +22,29 @@ const beforeCreate = ({
   save,
   helpers,
 }: any) => {
+  const disabledKinds = [
+    'AUTO_INCREMENT',
+    'BOOLEAN_EXPRESSION',
+    'COUNT',
+    'DATE_EXPRESSION',
+    'DATE_TIME_EXPRESSION',
+    'DECIMAL_EXPRESSION',
+    'INTEGER_EXPRESSION',
+    'LOGIN_TOKEN',
+    'MINUTES_EXPRESSION',
+    'MULTI_FILE',
+    'MULTI_IMAGE',
+    'PDF',
+    'PRICE_EXPRESSION',
+    'RICH_TEXT',
+    'SERIAL',
+    'SIGNED_PDF',
+    'STRING_EXPRESSION',
+    'SUM',
+    'TEXT_EXPRESSION',
+    'ZIPCODE',
+  ];
+
   const {
     BettyPrefabs,
     PropertyKind,
@@ -82,7 +105,7 @@ const beforeCreate = ({
         <Field label="Select properties">
           <PropertiesSelector
             allowRelations
-            disabledKinds={[]}
+            disabledKinds={disabledKinds}
             disabledNames={['created_at', 'id', 'updated_at']}
             modelId={modelId}
             onChange={setProperties}
@@ -117,6 +140,7 @@ const beforeCreate = ({
                     property,
                     variable,
                     result.relatedIdProperties,
+                    result.relatedModelIds,
                   ),
                 );
                 break;
@@ -177,6 +201,11 @@ const beforeCreate = ({
               case PropertyKind.FILE:
                 structure.descendants.push(
                   makeBettyInput(BettyPrefabs.FILE, model, property, variable),
+                );
+                break;
+              case PropertyKind.IMAGE:
+                structure.descendants.push(
+                  makeBettyInput(BettyPrefabs.IMAGE, model, property, variable),
                 );
                 break;
               case PropertyKind.IBAN:

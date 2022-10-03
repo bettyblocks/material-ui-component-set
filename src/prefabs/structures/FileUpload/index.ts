@@ -1,10 +1,24 @@
 import { component, toggle, variable } from '@betty-blocks/component-sdk';
 import { Button } from '../Button';
-import { options } from './options';
+import { options as defaultOptions } from './options';
 import { buttonOptions } from '..';
+import { updateOption } from '../../../utils';
 
-export const FileUpload = () =>
-  component('FileUploadInput', { options }, [
+interface Configuration {
+  supportImages?: boolean;
+  label?: string;
+}
+
+export const FileUpload = (config: Configuration = {}) => {
+  const options = defaultOptions(config.supportImages);
+
+  if (config.supportImages) {
+    options.accept = updateOption(options.accept, {
+      value: ['image/*'],
+    });
+  }
+
+  return component('FileUploadInput', { options, label: config.label }, [
     Button({
       label: 'upload',
       options: {
@@ -14,3 +28,4 @@ export const FileUpload = () =>
       },
     }),
   ]);
+};

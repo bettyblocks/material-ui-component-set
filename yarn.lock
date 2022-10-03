@@ -198,7 +198,7 @@
     typescript "^3.5.3"
     webhead "^1.1.3"
 
-"@betty-blocks/component-sdk@^1.29.0":
+"@betty-blocks/component-sdk@^1.30.0":
   version "1.30.0"
   resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.30.0.tgz#d71083e47233294ce9270bbb1fe0d25e29ee9a8d"
   integrity sha512-jejujR7vMC/uygkifj3Hyw4A9Op1AYQpV+v5TQEsSkkTh+7SsyMUDy7Y1No66z7cES9uRs3tOx/mlnJB31lxcw==
