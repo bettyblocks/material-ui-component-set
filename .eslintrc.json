@@ -50,7 +50,7 @@
       }
     },
     {
-      "files": ["src/prefabs/*.ts", "src/prefabs/*.tsx", "src/index.js"],
+      "files": ["src/styles/*.ts", "src/prefabs/*.ts", "src/prefabs/*.tsx", "src/index.js"],
       "rules": {
         "import/no-default-export": "off",
         "import/prefer-default-export": "error"

@@ -1,0 +1,280 @@
+// import { dropdown } from "@betty-blocks/component-sdk";
+
+// export interface StyleCategory {
+//   label: string;
+//   expanded: boolean;
+//   members: string[];
+// }
+
+// type BaseOption = {
+//   label?: string;
+//   index: number;
+// };
+
+// export interface ColorType extends BaseOption {
+//   type: 'color';
+// }
+
+// export interface FontStyleType extends BaseOption {
+//   type: 'fontStyle';
+// }
+
+// export type OptionType = ColorType | FontStyleType;
+
+// type Content<StyleStates extends Key, StateContent> = Record<
+//   StyleStates | BaseState,
+//   StateContent
+// >;
+
+// type Styles<
+//   StyleNames extends Key,
+//   StyleStates extends Key,
+//   CssKeys extends Key,
+// > = Record<StyleNames, Partial<Content<StyleStates, Style<CssKeys>>>>;
+
+// export type StyleBlueprint<
+//   Type extends string,
+//   StyleName extends Key,
+//   StyleStates extends Key,
+//   CssKeys extends Key,
+// > = {
+//   type: Type;
+//   identifier: string;
+//   categories: StyleCategory[];
+//   options: Record<CssKeys, OptionType>;
+//   styles: Styles<StyleName, StyleStates, CssKeys>;
+// };
+
+// const cssColorProperty = (props: {
+//   label?: string;
+//   index: number;
+// }): ColorType => {
+//   return {
+//     ...props,
+//     type: 'color',
+//   };
+// };
+
+// // TODO fix the any what css value props do we have?
+// type StyleValue<CssKeys extends Key> = { [K in CssKeys]?: any };
+// type BaseStyleValue<CssKeys extends Key> = { [K in CssKeys]: any };
+
+// type Style<CssKeys extends Key> = {
+//   identifier: string;
+//   name: string;
+//   value: StyleValue<CssKeys>;
+// };
+
+// const setIdentifier = <T>(style: T): T & { identifier: string } => {
+//   const hash = ''; // HASHIFY(style) here;
+//   return { ...style, identifier: hash };
+// };
+
+// type Key = string | number | symbol;
+// type StyleContent<StyleStates extends Key, StyleCssKeys extends Key> = Partial<
+//   Record<StyleStates, StyleValue<StyleCssKeys>>
+// > &
+//   Record<BaseState, BaseStyleValue<StyleCssKeys>>;
+
+// type StylesInput<
+//   StyleNames extends Key,
+//   StyleCssKeys extends Key,
+//   StyleStates extends Key,
+// > = Record<StyleNames, StyleContent<StyleStates, StyleCssKeys>>;
+
+// const deCamelize = (str: string): string =>
+//   str[0].toUpperCase() +
+//   str
+//     .slice(1, str.length)
+//     .replace(/[A-Z]/g, (letter: string) => ` ${letter.toLowerCase()}`);
+
+// const makeStyles = <
+//   StyleNames extends Key,
+//   StyleStates extends Key,
+//   StyleCssKeys extends Key,
+// >(
+//   input: StylesInput<StyleNames, StyleCssKeys, StyleStates>,
+// ) => {
+//   const result = {};
+
+//   return Object.entries<StyleContent<StyleStates, StyleCssKeys>>(input).reduce(
+//     (acc, [styleName, content]) => {
+//       return {
+//         ...acc,
+//         [styleName]: setIdentifier<Omit<Style<StyleCssKeys>, 'identifier'>>({
+//           value: content,
+//           name: deCamelize(styleName),
+//         }),
+//       };
+//     },
+//     result,
+//   ) as any;
+// };
+
+// type ThemeRef = { type: 'THEME_COLOR'; value: string };
+
+// const themeColorReference = ({
+//   reference,
+//   shade = 300,
+// }: {
+//   reference: string;
+//   shade?: number;
+// }): ThemeRef => ({
+//   type: 'THEME_COLOR',
+//   value: `${reference}${shade}`,
+// });
+
+// type BlueprintInput<Blueprint> = Omit<
+//   Blueprint,
+//   'type' | 'styles' | 'identifier'
+// >;
+
+// type BaseState = 'basis';
+
+// const makeStyleType = <
+//   StyleType extends string,
+//   StyleNames extends Key,
+//   StyleStates extends Key,
+//   StyleCssKeys extends Key,
+// >(
+//   type: StyleType,
+//   blueprintInput: BlueprintInput<
+//     StyleBlueprint<StyleType, StyleNames, StyleStates & BaseState, StyleCssKeys>
+//   >,
+//   stylesInput: StylesInput<StyleNames, StyleCssKeys, StyleStates & BaseState>,
+// ): StyleBlueprint<
+//   StyleType,
+//   StyleNames,
+//   StyleStates & BaseState,
+//   StyleCssKeys
+// > => ({
+//   ...blueprintInput,
+//   identifier: '',
+//   type,
+//   styles: makeStyles<StyleNames, StyleStates & BaseState, StyleCssKeys>(
+//     stylesInput,
+//   ),
+// });
+// /// above stuff is sdk related!
+
+// /// all below here is componentSet related
+// type CssKeys = 'backgroundColor' | 'borderColor'; // | 'fontStyle';
+// type StyleNames = 'filled' | 'niceOutline' | 'text';
+// type StyleStates = 'hover' | 'selected'; // optional
+// type StyleType = 'BUTTON';
+// export type ButtonStyleBlueprint = StyleBlueprint<
+//   StyleType,
+//   StyleNames,
+//   StyleStates,
+//   CssKeys
+// >;
+
+// // when one would like to use multiple styletypes on a component extend the styleType
+// // export default styleType('BUTTONSPECIAL', attrs); // extends type BUTTON
+// export const buttonComponentStyle =
+//   (componentSetTheme: any) => (B: any) => (style: Content<StyleStates, Style<CssKeys>>) => {
+//     // const { styling } = B
+//     // const styles = new styling();
+//     `var(--bc)`
+//     return {
+//       color: style.basis.value.borderColor || componentSetTheme.borderColor,
+//       //styles.getColor(style.basis.value.borderColor, componentSetTheme.borderColor),
+//     };
+//   };
+
+// const baseStyle = {
+//   backgroundColor: '#BAA',
+//   borderColor: '#BAA',
+// };
+
+// const styles = {
+//   filled: {
+//     basis: {
+//       ...baseStyle,
+//       backgroundColor: '#F00',
+//       borderColor: themeColorReference({ reference: 'Pink' }), // defaults to the default theme scheme
+//     },
+//     hover: { backgroundColor: '#F00' },
+//     selected: { backgroundColor: '#F00' },
+//   },
+//   niceOutline: {
+//     basis: {
+//       ...baseStyle,
+//       backgroundColor: {
+//         type: 'THEME_COLOR',
+//         value: 'primary',
+//       },
+//       borderColor: themeColorReference({ reference: 'Pink' }), // defaults to the default theme scheme
+//     },
+//   },
+//   text: {
+//     basis: {
+//       backgroundColor: '#000',
+//       borderColor: themeColorReference({ reference: 'primary', shade: 100 }),
+//     },
+//   },
+// };
+
+// const styleTypeBlueprint: BlueprintInput<ButtonStyleBlueprint> = {
+//   // pass the componentTheme as a value to the styles curry so it can be used as a fallback.
+//   // componentStyles: buttonComponentStyle(componentTheme),
+//   categories: [
+//     {
+//       label: 'color',
+//       expanded: false,
+//       members: ['backgroundColor', 'borderColor'],
+//     },
+//     // ...
+//   ],
+//   options: {
+//     backgroundColor: {
+//       label: 'background color',
+//       index: 0, // position of the style option in the styleEditor
+//       type: 'color', // input type used to render in the styleEditor
+//     },
+//     borderColor: cssColorProperty({
+//       label: 'border color',
+//       index: 1,
+//     }),
+//   },
+// };
+
+
+// export const buttonStyleType = makeStyleType<
+//   StyleType,
+//   StyleNames,
+//   StyleStates,
+//   CssKeys
+// >('BUTTON', styleTypeBlueprint, styles);
+
+
+// Page1
+// Componentset1
+
+// identifier: 1
+// type: BUTTON1
+// version: v1
+
+
+// drop component on canvas
+
+// creates styleType with id BUTTON1
+
+
+// changed to Componentset2
+
+// identifier: 2
+// type: BUTTON2
+
+// drop component on canvas
+
+// styleTypeExist but hash does not match so we create a new one.
+
+// changed to Componentset1 (updates made)
+
+// identifier: 1
+// //procoder type: 'BUTTON'
+// type: `BUTTON1` // after compile
+// version: 1 // update the styletype when this one is bumped
+
+// if version is higher than the blueprint do an update.
