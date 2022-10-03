@@ -23,6 +23,7 @@
       maxFileSize,
       maxFileSizeMessage: maxFileSizeMessageRaw,
       showImagePreview,
+      required,
     } = options;
 
     const isDev = env === 'dev';
@@ -34,6 +35,7 @@
     const initialValue = useProperty(!isDev && valueRaw);
     const [value, setValue] = useState(initialValue);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
+    const requiredText = required ? '*' : '';
 
     const { modelProperty } = actionProperty;
 
@@ -149,17 +151,28 @@
 
     function UploadComponent() {
       const isDirty = !!fileReference;
+
+      const filesArray = files ? Array.from(files) : [];
+      const hasUploads =
+        filesArray &&
+        !loading && // TODO: show only files form the html element
+        filesArray.length > 0;
+
       // Renders the button and the files you select
       return (
-        <div data-component={dataComponentAttributeValue}>
+        <div
+          data-component={dataComponentAttributeValue}
+          className={classes.fileUpload}
+        >
+          {children}
           <input
             accept={acceptedValue}
             className={classes.input}
             type="file"
             onChange={handleChange}
             ref={inputRef}
+            required={hasUploads ? false : required}
           />
-          {children}
           {isDirty && ( // TODO: change to showing only what is from the html element
             <input type="hidden" name={name} value={fileReference} />
           )}
@@ -265,10 +278,11 @@
           fullWidth={fullWidth}
           error={!!validationMessage}
           disabled={disabled}
+          required={required}
           margin={margin}
         >
           <Label className={classes.label}>
-            {hideLabel ? '' : `${labelText}`}
+            {hideLabel ? '' : `${labelText} ${requiredText}`}
             <UploadComponent />
           </Label>
           <FormHelperText classes={{ root: classes.helper }}>
@@ -336,8 +350,17 @@
           ],
         },
       },
+      fileUpload: {
+        position: 'relative',
+      },
       input: {
-        display: 'none',
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        left: 0,
+        top: 0,
+        opacity: 0,
+        zIndex: -1,
       },
       fullwidth: {
         display: 'flex',

@@ -37,6 +37,7 @@ export const options = (supportImages?: boolean) => ({
   }),
   hideDefaultError: toggle('Hide default error', { value: false }),
   disabled: toggle('Disabled', { value: false }),
+  required: toggle('Required', { value: false }),
   helperText: variable('Helper text', { value: [] }),
   fullWidth: toggle('Full width', { value: true }),
   ...(supportImages ? imageOptions : {}),
