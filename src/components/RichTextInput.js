@@ -325,8 +325,14 @@
       }
 
       if (event.key === 'Enter') {
-        handleListdepth('bulleted-list', 'enter', event);
-        handleListdepth('numbered-list', 'enter', event);
+        if (isBlockActive(editor, 'bulleted-list', 'type')) {
+          handleListdepth('bulleted-list', 'enter', event);
+        } else if (isBlockActive(editor, 'numbered-list', 'type')) {
+          handleListdepth('numbered-list', 'enter', event);
+        } else if (event.shiftKey) {
+          event.preventDefault();
+          editor.insertText('\n');
+        }
 
         return;
       }
@@ -436,23 +442,9 @@
       return <li {...attributes}>{children}</li>;
     }
 
-    function HeadingOneElement({ attributes, children }) {
-      return <h1 {...attributes}>{children}</h1>;
-    }
-    function HeadingTwoElement({ attributes, children }) {
-      return <h2 {...attributes}>{children}</h2>;
-    }
-    function HeadingThreeElement({ attributes, children }) {
-      return <h3 {...attributes}>{children}</h3>;
-    }
-    function HeadingFourElement({ attributes, children }) {
-      return <h4 {...attributes}>{children}</h4>;
-    }
-    function HeadingFiveElement({ attributes, children }) {
-      return <h5 {...attributes}>{children}</h5>;
-    }
-    function HeadingSixElement({ attributes, children }) {
-      return <h6 {...attributes}>{children}</h6>;
+    function HeadingElement({ attributes, children }, type) {
+      const HeadingType = type;
+      return <HeadingType {...attributes}>{children}</HeadingType>;
     }
 
     const renderElement = useCallback((props) => {
@@ -466,17 +458,17 @@
         case 'list-item':
           return ListItemElement(props);
         case 'heading-one':
-          return HeadingOneElement(props);
+          return HeadingElement(props, 'h1');
         case 'heading-two':
-          return HeadingTwoElement(props);
+          return HeadingElement(props, 'h2');
         case 'heading-three':
-          return HeadingThreeElement(props);
+          return HeadingElement(props, 'h3');
         case 'heading-four':
-          return HeadingFourElement(props);
+          return HeadingElement(props, 'h4');
         case 'heading-five':
-          return HeadingFiveElement(props);
+          return HeadingElement(props, 'h5');
         case 'heading-six':
-          return HeadingSixElement(props);
+          return HeadingElement(props, 'h6');
         case 'paragraph':
         default:
           return DefaultElement(props);
