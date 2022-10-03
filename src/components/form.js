@@ -31,7 +31,6 @@
           loadingText,
           dataComponentAttribute,
         } = options;
-        const formRef = React.createRef();
         const parsedLoadingText = useText(loadingText);
         const displayError = showError === 'built-in';
         const displaySuccess = showSuccess === 'built-in';
@@ -58,20 +57,6 @@
         const [, setOptions] = useOptions();
 
         useEffect(() => {
-          B.defineFunction('Submit', () => {
-            if (formRef.current) {
-              if (typeof formRef.current.requestSubmit === 'function') {
-                formRef.current.requestSubmit();
-              } else {
-                formRef.current.dispatchEvent(
-                  new Event('submit', { cancelable: true }),
-                );
-              }
-            }
-          });
-        }, [formRef]);
-
-        useEffect(() => {
           mounted.current = true;
 
           B.defineFunction('setCurrentRecord', (value) => {
@@ -82,48 +67,10 @@
             }
           });
 
-          B.triggerEvent('onComponentRendered');
           return () => {
             mounted.current = false;
           };
         }, []);
-
-        const handleSubmit = (evt, callAction, item) => {
-          evt.preventDefault();
-          B.triggerEvent('onSubmit');
-          const formDataValues = new FormData(formRef.current);
-          const values = Array.from(formDataValues).reduce(
-            (acc, [key, value]) => {
-              if (!acc[key]) return { ...acc, [key]: value };
-              acc[key] = `${acc[key]},${value}`;
-              return acc;
-            },
-            {},
-          );
-          const postValues =
-            item && item.id ? { id: item.id, ...values } : values;
-          const postObjValues = item && item.id ? { variable_id: item.id } : {};
-          let variables = { variables: { input: postValues } };
-          if (formVariable && formVariable.name) {
-            let inputVariables = {
-              [formVariable.name]: postValues,
-            };
-            if (objectVariableId) {
-              const objectVariable = getActionInput(objectVariableId);
-              inputVariables = {
-                ...inputVariables,
-                [objectVariable.name]: postObjValues,
-              };
-            }
-
-            variables = {
-              variables: {
-                input: inputVariables,
-              },
-            };
-          }
-          callAction(variables);
-        };
 
         const trigger = (data, loading, error) => {
           if (data || error) {
@@ -159,6 +106,7 @@
 
         function FormElement() {
           B.defineFunction('Refetch', () => {});
+          B.defineFunction('Submit', () => {});
           return (
             <form
               className={classNames || undefined}
@@ -173,6 +121,61 @@
         }
 
         function FormCmp({ item, refetch }) {
+          const formRef = React.createRef();
+          const handleSubmit = (evt, callAction, newItem) => {
+            evt.preventDefault();
+            B.triggerEvent('onSubmit');
+            const formDataValues = new FormData(formRef.current);
+            const values = Array.from(formDataValues).reduce(
+              (acc, [key, value]) => {
+                if (!acc[key]) return { ...acc, [key]: value };
+                acc[key] = `${acc[key]},${value}`;
+                return acc;
+              },
+              {},
+            );
+            const postValues =
+              newItem && newItem.id ? { id: newItem.id, ...values } : values;
+            const postObjValues =
+              newItem && newItem.id ? { variable_id: newItem.id } : {};
+            let variables = { variables: { input: postValues } };
+            if (formVariable && formVariable.name) {
+              let inputVariables = {
+                [formVariable.name]: postValues,
+              };
+              if (objectVariableId) {
+                const objectVariable = getActionInput(objectVariableId);
+                inputVariables = {
+                  ...inputVariables,
+                  [objectVariable.name]: postObjValues,
+                };
+              }
+
+              variables = {
+                variables: {
+                  input: inputVariables,
+                },
+              };
+            }
+            callAction(variables);
+          };
+
+          useEffect(() => {
+            B.defineFunction('Submit', () => {
+              if (formRef.current) {
+                if (typeof formRef.current.requestSubmit === 'function') {
+                  formRef.current.requestSubmit();
+                } else {
+                  formRef.current.dispatchEvent(
+                    new Event('submit', { cancelable: true }),
+                  );
+                }
+              }
+            });
+
+            B.triggerEvent('onComponentRendered');
+          }, []);
+
           const [isInvalid, setIsInvalid] = useState(false);
           const handleInvalid = () => {
             if (!isInvalid) {
