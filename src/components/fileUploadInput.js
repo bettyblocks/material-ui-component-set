@@ -23,17 +23,9 @@
       maxFileSize,
       maxFileSizeMessage: maxFileSizeMessageRaw,
       showImagePreview,
-      type,
     } = options;
 
     const isDev = env === 'dev';
-    const [uploads, setUploads] = useState({
-      // is updated by the html element and mutations
-      files: [], // html element
-      data: [], // mutation
-      failureMessage: [],
-    });
-    const [, setUploadedFileArray] = useState([]); // is updated only by the file html element
     const helper = useText(helperText);
     const labelText = useText(label);
     const [validationMessage, setValidationMessage] = React.useState('');
@@ -138,15 +130,11 @@
     };
 
     const handleChange = (e) => {
-      setUploadedFileArray((prev) => [...prev, ...e.target.files]);
-      setUploads({
-        ...uploads,
-        files: e.target.files,
-      });
-
-      const isValidFile = validateFiles(e.target.files);
-      if (isValidFile) setValidationMessage('');
       const file = e.target.files[0];
+      setValue(file);
+
+      const isValidFile = validateFiles([file]);
+      if (isValidFile) setValidationMessage('');
 
       if (isValidFile) {
         upload(file.type, file);
@@ -155,56 +143,9 @@
 
     const clearFiles = (e) => {
       if (e && e.preventDefault) e.preventDefault();
-      setUploads({
-        files: [],
-        data: [],
-        failureMessage: [],
-      });
       setValue(null);
       setValidationMessage('');
     };
-
-    const { files } = uploads;
-
-    const removeFileFromList = () => {
-      setUploads({
-        files: [],
-        data: [],
-        failureMessage: [],
-      });
-      setValidationMessage('');
-    };
-
-    function InitialFileDetails({ currentFile }) {
-      if (!currentFile) return <div>no file</div>;
-
-      const { name: fileName } = currentFile;
-
-      return (
-        <div className={classes.fileDetails}>
-          <Hr />
-          <div className={classes.listView}>
-            <Typography variant="body1" noWrap className={classes.span}>
-              {fileName}
-            </Typography>
-
-            <IconButton
-              size="small"
-              className={classes.remove}
-              onClick={() => {
-                setValue(null);
-              }}
-            >
-              <Icon
-                name="Delete"
-                className={classes.deleteIcon}
-                fontSize="small"
-              />
-            </IconButton>
-          </div>
-        </div>
-      );
-    }
 
     function UploadComponent() {
       const isDirty = !!fileReference;
@@ -226,21 +167,15 @@
       );
     }
 
-    function Hr() {
-      return <hr className={classes.hr} />;
-    }
-
-    function DeleteButton({ file }) {
+    function DeleteButton() {
       return (
-        <div className={classes.deleteButtonWrapper}>
+        <div>
           <IconButton
             size="small"
             className={classes.remove}
             onClick={() => {
-              if (file) {
-                removeFileFromList(file.url);
-                B.triggerEvent('onFileRemove');
-              }
+              setValue(null);
+              B.triggerEvent('onFileRemove');
             }}
           >
             <Icon
@@ -253,155 +188,78 @@
       );
     }
 
-    function FileDetails({ fileName, fileType, fileSize }) {
+    function FileDetails({ file }) {
+      const fileName = file && file.name;
+      const fileSize = file && file.size && formatBytes(file.size);
+      const fileType = file && file.type && file.type.replace('image/', '.');
+      const fileUrl =
+        file &&
+        (file instanceof File ? window.URL.createObjectURL(file) : file.url);
+
+      // mitigation of issue DT-1856
+      if (!isDev && !fileName) return null;
+
       return (
-        <div className={classes.fileDetails}>
-          <Typography variant="body1" noWrap className={classes.span}>
-            {fileName || 'File name'}
-          </Typography>
+        <div className={classes.listView}>
           <div className={classes.fileDetailList}>
-            <p className={classes.fileDetail}>
-              {isDev ? 'Size' : formatBytes(fileSize)}
-            </p>
-            <div className={classes.divider} />
-            <p className={classes.fileDetail}>
-              {isDev ? 'Type' : fileType.replace('image/', '.')}
-            </p>
+            {showImagePreview && fileUrl && (
+              <div
+                style={{
+                  backgroundImage: `url("${fileUrl}")`,
+                }}
+                className={classes.image}
+              />
+            )}
+            <div>
+              <Typography variant="body1" noWrap className={classes.fileName}>
+                {isDev ? 'File name' : fileName}
+              </Typography>
+              <p className={classes.fileDetail}>{isDev ? 'Size' : fileSize}</p>
+
+              <div className={classes.divider} />
+
+              <p className={classes.fileDetail}>{isDev ? 'Type' : fileType}</p>
+            </div>
+            {!isDev && <DeleteButton />}
           </div>
         </div>
       );
     }
 
     function DevUploadedFile() {
-      switch (type) {
-        case 'grid':
-          return (
-            <div className={classes.gridView}>
-              <div className={classes.gridItem}>
-                {showImagePreview && <div className={classes.gridDevImage} />}
-                <div className={classes.gridItemDetails}>
-                  <FileDetails />
-                  <DeleteButton />
-                </div>
-              </div>
-            </div>
-          );
-        case 'list':
-        default:
-          return (
-            <>
-              <Hr />
-              <div className={classes.listView}>
-                <div className={classes.fileDetailList}>
-                  {showImagePreview && <div className={classes.devImage} />}
-                  <FileDetails />
-                </div>
-                <DeleteButton />
-              </div>
-            </>
-          );
-      }
-    }
+      return (
+        <>
+          <div className={classes.listView}>
+            <div className={classes.fileDetailList}>
+              {showImagePreview && <div className={classes.devImage} />}
 
-    function UploadedFile({ file }) {
-      switch (type) {
-        case 'grid':
-          return (
-            <div className={classes.gridView}>
-              <div className={classes.gridItem}>
-                {showImagePreview && (
-                  <div
-                    style={{
-                      backgroundImage: `url("${file.url}")`,
-                    }}
-                    className={classes.gridImage}
-                  />
-                )}
-                <div className={classes.gridItemDetails}>
-                  <FileDetails
-                    fileName={file.name}
-                    fileType={file.type}
-                    fileSize={file.size}
-                  />
-                  <DeleteButton file={file} />
-                </div>
-              </div>
+              <FileDetails />
             </div>
-          );
-        case 'list':
-        default:
-          return (
-            <>
-              <Hr />
-              <div className={classes.listView}>
-                <div className={classes.fileDetailList}>
-                  {showImagePreview && (
-                    <div
-                      style={{
-                        backgroundImage: `url("${file.url}")`,
-                      }}
-                      className={classes.image}
-                    />
-                  )}
-                  <FileDetails
-                    fileName={file.name}
-                    fileType={file.type}
-                    fileSize={file.size}
-                  />
-                </div>
-                <DeleteButton file={file} />
-              </div>
-            </>
-          );
-      }
+          </div>
+        </>
+      );
     }
 
     function UploadingFile() {
-      switch (type) {
-        case 'grid':
-          return (
-            <div className={classes.gridView}>
-              <div className={classes.gridItem}>
-                {showImagePreview && (
-                  <div className={classes.gridUploadingImage}>
-                    <Icon name="CloudUpload" />
-                  </div>
-                )}
-                <div className={classes.gridItemDetails}>
-                  <span>Uploading</span>
-                </div>
+      return (
+        <>
+          <div className={classes.listView}>
+            {showImagePreview && (
+              <div className={classes.uploadingImage}>
+                <Icon name="CloudUpload" />
               </div>
+            )}
+            <div className={classes.fileDetails}>
+              <span>Uploading</span>
             </div>
-          );
-        case 'list':
-        default:
-          return (
-            <>
-              <Hr />
-              <div className={classes.listView}>
-                {showImagePreview && (
-                  <div className={classes.uploadingImage}>
-                    <Icon name="CloudUpload" />
-                  </div>
-                )}
-                <div className={classes.fileDetails}>
-                  <span>Uploading</span>
-                </div>
-              </div>
-            </>
-          );
-      }
+          </div>
+        </>
+      );
     }
 
     const Label = isDev ? 'div' : 'label';
 
     function Control() {
-      const filesArray = files ? Array.from(files) : [];
-      const hasUploads =
-        filesArray &&
-        !loading && // TODO: show only files form the html element
-        filesArray.length > 0;
-      const hideInitialFileDetail = hasUploads || loading || isDev;
       return (
         <FormControl
           fullWidth={fullWidth}
@@ -417,13 +275,7 @@
             {validationMessage || helperValue}
           </FormHelperText>
           <div className={classes.messageContainer}>
-            {hasUploads &&
-              filesArray.map((file) => (
-                <UploadedFile key={file.name} file={file} />
-              ))}
-            {value && !hideInitialFileDetail && (
-              <InitialFileDetails currentFile={value} />
-            )}
+            {!isDev && !loading && value && <FileDetails file={value} />}
             {loading && <UploadingFile />}
           </div>
         </FormControl>
@@ -491,7 +343,8 @@
         display: 'flex',
         width: '100%',
       },
-      span: {
+      fileName: {
+        maxWidth: '10rem',
         flex: 1,
         textAlign: 'start',
         marginBottom: '0.1875rem!important',
@@ -499,7 +352,6 @@
       },
       messageContainer: {
         flexWrap: 'wrap',
-        paddingTop: '1.25rem',
         display: ({ options: { type } }) =>
           type === 'grid' ? 'flex' : 'block',
         color: ({ options: { textColor } }) => [
@@ -629,9 +481,6 @@
         margin: 0,
         border: 'none',
         backgroundColor: t.colors.light,
-      },
-      deleteButtonWrapper: {
-        margin: ({ options: { type } }) => (type === 'grid' ? 0 : '1rem'),
       },
       remove: {
         height: '1.875rem',

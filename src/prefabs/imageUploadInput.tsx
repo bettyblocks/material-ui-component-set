@@ -24,7 +24,7 @@ const beforeCreate = ({
 
   return (
     <CreateFormInputWizard
-      supportedKinds={['FILE']}
+      supportedKinds={['IMAGE']}
       actionVariableOption={actionVariableOption.key}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
@@ -36,11 +36,19 @@ const beforeCreate = ({
 };
 
 const attr = {
-  icon: Icon.FileInputIcon,
+  icon: Icon.ImageInputIcon,
   category: 'FORMV2',
-  keywords: ['Form', 'input', 'file', 'upload', 'fileupload'],
+  keywords: [
+    'Form',
+    'input',
+    'image',
+    'thumbnail',
+    'file',
+    'upload',
+    'fileupload',
+  ],
 };
 
-export default prefab('File Upload Beta', attr, beforeCreate, [
-  FileUpload({ label: 'File Upload Beta' }),
+export default prefab('Image Upload Beta', attr, beforeCreate, [
+  FileUpload({ supportImages: true, label: 'Image Upload Beta' }),
 ]);
