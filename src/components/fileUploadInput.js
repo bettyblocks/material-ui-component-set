@@ -68,8 +68,8 @@
         if (Array.isArray(error) && error.length === 0) {
           return;
         }
-
         B.triggerEvent('onError', error);
+        setValidationMessage(`An error occured: ${error}`);
       }
     }, [error]);
 
