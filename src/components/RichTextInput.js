@@ -29,6 +29,8 @@
       showItalic,
       showUnderlined,
       showStrikethrough,
+      showNumberedList,
+      showBulletedList,
     } = options;
     const isDev = env === 'dev';
 
@@ -561,8 +563,18 @@
                 {showStrikethrough && (
                   <MarkButton format="strikethrough" icon="StrikethroughS" />
                 )}
-                <BlockButton format="numbered-list" icon="FormatListNumbered" />
-                <BlockButton format="bulleted-list" icon="FormatListBulleted" />
+                {showNumberedList && (
+                  <BlockButton
+                    format="numbered-list"
+                    icon="FormatListNumbered"
+                  />
+                )}
+                {showBulletedList && (
+                  <BlockButton
+                    format="bulleted-list"
+                    icon="FormatListBulleted"
+                  />
+                )}
                 <BlockButton format="heading-one" icon="Title" />
                 <BlockButton format="heading-two" icon="Title" />
                 <BlockButton format="heading-three" icon="Title" />
