@@ -151,12 +151,7 @@
 
     function UploadComponent() {
       const isDirty = !!fileReference;
-
-      const filesArray = files ? Array.from(files) : [];
-      const hasUploads =
-        filesArray &&
-        !loading && // TODO: show only files form the html element
-        filesArray.length > 0;
+      const hasUploads = value && !loading;
 
       // Renders the button and the files you select
       return (
