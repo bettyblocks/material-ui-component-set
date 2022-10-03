@@ -1299,24 +1299,30 @@ const beforeCreate = ({
       const deleteSubmitButton = cloneStructure('Submit Button');
       deleteSubmitButton.ref = { id: '#submitDeleteDialogButton' };
       deleteSubmitButton.style = {
-        overwrite: {
-          backgroundColor: {
-            type: 'STATIC',
-            value: 'red',
+        name: 'Filled',
+        overwrite: [
+          {
+            name: 'basis',
+            cssObject: {
+              backgroundColor: {
+                type: 'STATIC',
+                value: 'red',
+              },
+              boxShadow: 'none',
+              color: {
+                type: 'THEME_COLOR',
+                value: 'white',
+              },
+              fontFamily: 'Roboto',
+              fontSize: '0.875rem',
+              fontStyle: 'none',
+              fontWeight: '400',
+              padding: ['0.6875rem', '1.375rem'],
+              textDecoration: 'none',
+              textTransform: 'none',
+            },
           },
-          boxShadow: 'none',
-          color: {
-            type: 'THEME_COLOR',
-            value: 'white',
-          },
-          fontFamily: 'Roboto',
-          fontSize: '0.875rem',
-          fontStyle: 'none',
-          fontWeight: '400',
-          padding: ['0.6875rem', '1.375rem'],
-          textDecoration: 'none',
-          textTransform: 'none',
-        },
+        ],
       };
       setOption(deleteSubmitButton, 'buttonText', (options: any) => ({
         ...options,
@@ -1699,24 +1705,30 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                         OpenPageButton(
                                           {
                                             style: {
-                                              overwrite: {
-                                                backgroundColor: {
-                                                  type: 'STATIC',
-                                                  value: 'transparent',
+                                              name: 'Filled',
+                                              overwrite: [
+                                                {
+                                                  name: 'basis',
+                                                  cssObject: {
+                                                    backgroundColor: {
+                                                      type: 'STATIC',
+                                                      value: 'transparent',
+                                                    },
+                                                    boxShadow: 'none',
+                                                    color: {
+                                                      type: 'THEME_COLOR',
+                                                      value: 'white',
+                                                    },
+                                                    fontFamily: 'Roboto',
+                                                    fontSize: '0.875rem',
+                                                    fontStyle: 'none',
+                                                    fontWeight: '400',
+                                                    padding: ['0rem', '0rem'],
+                                                    textDecoration: 'none',
+                                                    textTransform: 'none',
+                                                  },
                                                 },
-                                                boxShadow: 'none',
-                                                color: {
-                                                  type: 'THEME_COLOR',
-                                                  value: 'white',
-                                                },
-                                                fontFamily: 'Roboto',
-                                                fontSize: '0.875rem',
-                                                fontStyle: 'none',
-                                                fontWeight: '400',
-                                                padding: ['0rem', '0rem'],
-                                                textDecoration: 'none',
-                                                textTransform: 'none',
-                                              },
+                                              ],
                                             },
                                             options: {
                                               ...openPageButtonOptions,
@@ -1742,24 +1754,30 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                         OpenPageButton(
                                           {
                                             style: {
-                                              overwrite: {
-                                                backgroundColor: {
-                                                  type: 'STATIC',
-                                                  value: 'transparent',
+                                              name: 'Filled',
+                                              overwrite: [
+                                                {
+                                                  name: 'basis',
+                                                  cssObject: {
+                                                    backgroundColor: {
+                                                      type: 'STATIC',
+                                                      value: 'transparent',
+                                                    },
+                                                    boxShadow: 'none',
+                                                    color: {
+                                                      type: 'THEME_COLOR',
+                                                      value: 'white',
+                                                    },
+                                                    fontFamily: 'Roboto',
+                                                    fontSize: '0.875rem',
+                                                    fontStyle: 'none',
+                                                    fontWeight: '400',
+                                                    padding: ['0rem', '0rem'],
+                                                    textDecoration: 'none',
+                                                    textTransform: 'none',
+                                                  },
                                                 },
-                                                boxShadow: 'none',
-                                                color: {
-                                                  type: 'THEME_COLOR',
-                                                  value: 'white',
-                                                },
-                                                fontFamily: 'Roboto',
-                                                fontSize: '0.875rem',
-                                                fontStyle: 'none',
-                                                fontWeight: '400',
-                                                padding: ['0rem', '0rem'],
-                                                textDecoration: 'none',
-                                                textTransform: 'none',
-                                              },
+                                              ],
                                             },
                                             options: {
                                               ...openPageButtonOptions,
@@ -2144,24 +2162,33 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                       {
                                         ref: { id: '#newRecordButton' },
                                         style: {
-                                          overwrite: {
-                                            backgroundColor: {
-                                              type: 'THEME_COLOR',
-                                              value: 'primary',
+                                          name: 'Filled',
+                                          overwrite: [
+                                            {
+                                              name: 'basis',
+                                              cssObject: {
+                                                backgroundColor: {
+                                                  type: 'THEME_COLOR',
+                                                  value: 'primary',
+                                                },
+                                                boxShadow: 'none',
+                                                color: {
+                                                  type: 'THEME_COLOR',
+                                                  value: 'white',
+                                                },
+                                                fontFamily: 'Roboto',
+                                                fontSize: '0.875rem',
+                                                fontStyle: 'none',
+                                                fontWeight: '400',
+                                                padding: [
+                                                  '0.6875rem',
+                                                  '1.375rem',
+                                                ],
+                                                textDecoration: 'none',
+                                                textTransform: 'none',
+                                              },
                                             },
-                                            boxShadow: 'none',
-                                            color: {
-                                              type: 'THEME_COLOR',
-                                              value: 'white',
-                                            },
-                                            fontFamily: 'Roboto',
-                                            fontSize: '0.875rem',
-                                            fontStyle: 'none',
-                                            fontWeight: '400',
-                                            padding: ['0.6875rem', '1.375rem'],
-                                            textDecoration: 'none',
-                                            textTransform: 'none',
-                                          },
+                                          ],
                                         },
                                         options: {
                                           ...buttonOptions,
@@ -2557,27 +2584,33 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                   id: '#dataTableColumnDetailsButton',
                                                 },
                                                 style: {
-                                                  overwrite: {
-                                                    backgroundColor: {
-                                                      type: 'STATIC',
-                                                      value: 'transparent',
+                                                  name: 'Filled',
+                                                  overwrite: [
+                                                    {
+                                                      name: 'basis',
+                                                      cssObject: {
+                                                        backgroundColor: {
+                                                          type: 'STATIC',
+                                                          value: 'transparent',
+                                                        },
+                                                        boxShadow: 'none',
+                                                        color: {
+                                                          type: 'THEME_COLOR',
+                                                          value: 'secondary',
+                                                        },
+                                                        fontFamily: 'Roboto',
+                                                        fontSize: '0.875rem',
+                                                        fontStyle: 'none',
+                                                        fontWeight: '400',
+                                                        padding: [
+                                                          '0.6875rem',
+                                                          '0.6875rem',
+                                                        ],
+                                                        textDecoration: 'none',
+                                                        textTransform: 'none',
+                                                      },
                                                     },
-                                                    boxShadow: 'none',
-                                                    color: {
-                                                      type: 'THEME_COLOR',
-                                                      value: 'secondary',
-                                                    },
-                                                    fontFamily: 'Roboto',
-                                                    fontSize: '0.875rem',
-                                                    fontStyle: 'none',
-                                                    fontWeight: '400',
-                                                    padding: [
-                                                      '0.6875rem',
-                                                      '0.6875rem',
-                                                    ],
-                                                    textDecoration: 'none',
-                                                    textTransform: 'none',
-                                                  },
+                                                  ],
                                                 },
 
                                                 options: {
@@ -2599,27 +2632,33 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                   id: '#dataTableColumnUpdateButton',
                                                 },
                                                 style: {
-                                                  overwrite: {
-                                                    backgroundColor: {
-                                                      type: 'STATIC',
-                                                      value: 'transparent',
+                                                  name: 'Filled',
+                                                  overwrite: [
+                                                    {
+                                                      name: 'basis',
+                                                      cssObject: {
+                                                        backgroundColor: {
+                                                          type: 'STATIC',
+                                                          value: 'transparent',
+                                                        },
+                                                        boxShadow: 'none',
+                                                        color: {
+                                                          type: 'THEME_COLOR',
+                                                          value: 'primary',
+                                                        },
+                                                        fontFamily: 'Roboto',
+                                                        fontSize: '0.875rem',
+                                                        fontStyle: 'none',
+                                                        fontWeight: '400',
+                                                        padding: [
+                                                          '0.6875rem',
+                                                          '0.6875rem',
+                                                        ],
+                                                        textDecoration: 'none',
+                                                        textTransform: 'none',
+                                                      },
                                                     },
-                                                    boxShadow: 'none',
-                                                    color: {
-                                                      type: 'THEME_COLOR',
-                                                      value: 'primary',
-                                                    },
-                                                    fontFamily: 'Roboto',
-                                                    fontSize: '0.875rem',
-                                                    fontStyle: 'none',
-                                                    fontWeight: '400',
-                                                    padding: [
-                                                      '0.6875rem',
-                                                      '0.6875rem',
-                                                    ],
-                                                    textDecoration: 'none',
-                                                    textTransform: 'none',
-                                                  },
+                                                  ],
                                                 },
                                                 options: {
                                                   ...buttonOptions,
@@ -2640,27 +2679,33 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                   id: '#dataTableColumnDeleteButton',
                                                 },
                                                 style: {
-                                                  overwrite: {
-                                                    backgroundColor: {
-                                                      type: 'STATIC',
-                                                      value: 'transparent',
+                                                  name: 'Filled',
+                                                  overwrite: [
+                                                    {
+                                                      name: 'basis',
+                                                      cssObject: {
+                                                        backgroundColor: {
+                                                          type: 'STATIC',
+                                                          value: 'transparent',
+                                                        },
+                                                        boxShadow: 'none',
+                                                        color: {
+                                                          type: 'THEME_COLOR',
+                                                          value: 'danger',
+                                                        },
+                                                        fontFamily: 'Roboto',
+                                                        fontSize: '0.875rem',
+                                                        fontStyle: 'none',
+                                                        fontWeight: '400',
+                                                        padding: [
+                                                          '0.6875rem',
+                                                          '0.6875rem',
+                                                        ],
+                                                        textDecoration: 'none',
+                                                        textTransform: 'none',
+                                                      },
                                                     },
-                                                    boxShadow: 'none',
-                                                    color: {
-                                                      type: 'THEME_COLOR',
-                                                      value: 'danger',
-                                                    },
-                                                    fontFamily: 'Roboto',
-                                                    fontSize: '0.875rem',
-                                                    fontStyle: 'none',
-                                                    fontWeight: '400',
-                                                    padding: [
-                                                      '0.6875rem',
-                                                      '0.6875rem',
-                                                    ],
-                                                    textDecoration: 'none',
-                                                    textTransform: 'none',
-                                                  },
+                                                  ],
                                                 },
                                                 options: {
                                                   ...buttonOptions,
@@ -2885,24 +2930,30 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                 id: '#closeCreateDialogButton',
                                                               },
                                                               style: {
-                                                                overwrite: {
-                                                                  backgroundColor:
-                                                                    {
-                                                                      type: 'STATIC',
-                                                                      value:
-                                                                        'Transparent',
+                                                                name: 'Filled',
+                                                                overwrite: [
+                                                                  {
+                                                                    name: 'basis',
+                                                                    cssObject: {
+                                                                      backgroundColor:
+                                                                        {
+                                                                          type: 'STATIC',
+                                                                          value:
+                                                                            'Transparent',
+                                                                        },
+                                                                      boxShadow:
+                                                                        'none',
+                                                                      color: {
+                                                                        type: 'THEME_COLOR',
+                                                                        value:
+                                                                          'light',
+                                                                      },
+                                                                      padding: [
+                                                                        '0rem',
+                                                                      ],
                                                                     },
-                                                                  boxShadow:
-                                                                    'none',
-                                                                  color: {
-                                                                    type: 'THEME_COLOR',
-                                                                    value:
-                                                                      'light',
                                                                   },
-                                                                  padding: [
-                                                                    '0rem',
-                                                                  ],
-                                                                },
+                                                                ],
                                                               },
                                                               options: {
                                                                 ...buttonOptions,
@@ -3039,12 +3090,17 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                               },
                                                               style: {
                                                                 name: 'outline',
-                                                                overwrite: {
-                                                                  fontWeight:
-                                                                    '400',
-                                                                  textTransform:
-                                                                    'none',
-                                                                },
+                                                                overwrite: [
+                                                                  {
+                                                                    name: 'basis',
+                                                                    cssObject: {
+                                                                      fontWeight:
+                                                                        '400',
+                                                                      textTransform:
+                                                                        'none',
+                                                                    },
+                                                                  },
+                                                                ],
                                                               },
                                                               options: {
                                                                 ...buttonOptions,
@@ -3067,37 +3123,43 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                 id: '#submitCreateDialogButton',
                                                               },
                                                               style: {
-                                                                overwrite: {
-                                                                  backgroundColor:
-                                                                    {
-                                                                      type: 'THEME_COLOR',
-                                                                      value:
-                                                                        'primary',
+                                                                name: 'Filled',
+                                                                overwrite: [
+                                                                  {
+                                                                    name: 'basis',
+                                                                    cssObject: {
+                                                                      backgroundColor:
+                                                                        {
+                                                                          type: 'THEME_COLOR',
+                                                                          value:
+                                                                            'primary',
+                                                                        },
+                                                                      boxShadow:
+                                                                        'none',
+                                                                      color: {
+                                                                        type: 'THEME_COLOR',
+                                                                        value:
+                                                                          'white',
+                                                                      },
+                                                                      fontFamily:
+                                                                        'Roboto',
+                                                                      fontSize:
+                                                                        '0.875rem',
+                                                                      fontStyle:
+                                                                        'none',
+                                                                      fontWeight:
+                                                                        '400',
+                                                                      padding: [
+                                                                        '0.6875rem',
+                                                                        '1.375rem',
+                                                                      ],
+                                                                      textDecoration:
+                                                                        'none',
+                                                                      textTransform:
+                                                                        'none',
                                                                     },
-                                                                  boxShadow:
-                                                                    'none',
-                                                                  color: {
-                                                                    type: 'THEME_COLOR',
-                                                                    value:
-                                                                      'white',
                                                                   },
-                                                                  fontFamily:
-                                                                    'Roboto',
-                                                                  fontSize:
-                                                                    '0.875rem',
-                                                                  fontStyle:
-                                                                    'none',
-                                                                  fontWeight:
-                                                                    '400',
-                                                                  padding: [
-                                                                    '0.6875rem',
-                                                                    '1.375rem',
-                                                                  ],
-                                                                  textDecoration:
-                                                                    'none',
-                                                                  textTransform:
-                                                                    'none',
-                                                                },
+                                                                ],
                                                               },
                                                               options: {
                                                                 ...buttonOptions,
@@ -3234,24 +3296,30 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                 id: '#closeUpdateDialogButton',
                                                               },
                                                               style: {
-                                                                overwrite: {
-                                                                  backgroundColor:
-                                                                    {
-                                                                      type: 'STATIC',
-                                                                      value:
-                                                                        'Transparent',
+                                                                name: 'Filled',
+                                                                overwrite: [
+                                                                  {
+                                                                    name: 'basis',
+                                                                    cssObject: {
+                                                                      backgroundColor:
+                                                                        {
+                                                                          type: 'STATIC',
+                                                                          value:
+                                                                            'Transparent',
+                                                                        },
+                                                                      boxShadow:
+                                                                        'none',
+                                                                      color: {
+                                                                        type: 'THEME_COLOR',
+                                                                        value:
+                                                                          'light',
+                                                                      },
+                                                                      padding: [
+                                                                        '0rem',
+                                                                      ],
                                                                     },
-                                                                  boxShadow:
-                                                                    'none',
-                                                                  color: {
-                                                                    type: 'THEME_COLOR',
-                                                                    value:
-                                                                      'light',
                                                                   },
-                                                                  padding: [
-                                                                    '0rem',
-                                                                  ],
-                                                                },
+                                                                ],
                                                               },
                                                               options: {
                                                                 ...buttonOptions,
@@ -3388,12 +3456,17 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                               },
                                                               style: {
                                                                 name: 'outline',
-                                                                overwrite: {
-                                                                  fontWeight:
-                                                                    '400',
-                                                                  textTransform:
-                                                                    'none',
-                                                                },
+                                                                overwrite: [
+                                                                  {
+                                                                    name: 'basis',
+                                                                    cssObject: {
+                                                                      fontWeight:
+                                                                        '400',
+                                                                      textTransform:
+                                                                        'none',
+                                                                    },
+                                                                  },
+                                                                ],
                                                               },
                                                               options: {
                                                                 ...buttonOptions,
@@ -3436,23 +3509,30 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                   },
                                                                   style: {
                                                                     name: 'outline',
-                                                                    overwrite: {
-                                                                      borderColor:
-                                                                        {
-                                                                          type: 'THEME_COLOR',
-                                                                          value:
-                                                                            'danger',
-                                                                        },
-                                                                      color: {
-                                                                        type: 'THEME_COLOR',
-                                                                        value:
-                                                                          'danger',
+                                                                    overwrite: [
+                                                                      {
+                                                                        name: 'basis',
+                                                                        cssObject:
+                                                                          {
+                                                                            borderColor:
+                                                                              {
+                                                                                type: 'THEME_COLOR',
+                                                                                value:
+                                                                                  'danger',
+                                                                              },
+                                                                            color:
+                                                                              {
+                                                                                type: 'THEME_COLOR',
+                                                                                value:
+                                                                                  'danger',
+                                                                              },
+                                                                            fontWeight:
+                                                                              '400',
+                                                                            textTransform:
+                                                                              'none',
+                                                                          },
                                                                       },
-                                                                      fontWeight:
-                                                                        '400',
-                                                                      textTransform:
-                                                                        'none',
-                                                                    },
+                                                                    ],
                                                                   },
                                                                   options: {
                                                                     ...buttonOptions,
@@ -3496,37 +3576,46 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                     id: '#submitUpdateDialogButton',
                                                                   },
                                                                   style: {
-                                                                    overwrite: {
-                                                                      backgroundColor:
-                                                                        {
-                                                                          type: 'THEME_COLOR',
-                                                                          value:
-                                                                            'primary',
-                                                                        },
-                                                                      boxShadow:
-                                                                        'none',
-                                                                      color: {
-                                                                        type: 'THEME_COLOR',
-                                                                        value:
-                                                                          'white',
+                                                                    name: 'Filled',
+                                                                    overwrite: [
+                                                                      {
+                                                                        name: 'basis',
+                                                                        cssObject:
+                                                                          {
+                                                                            backgroundColor:
+                                                                              {
+                                                                                type: 'THEME_COLOR',
+                                                                                value:
+                                                                                  'primary',
+                                                                              },
+                                                                            boxShadow:
+                                                                              'none',
+                                                                            color:
+                                                                              {
+                                                                                type: 'THEME_COLOR',
+                                                                                value:
+                                                                                  'white',
+                                                                              },
+                                                                            fontFamily:
+                                                                              'Roboto',
+                                                                            fontSize:
+                                                                              '0.875rem',
+                                                                            fontStyle:
+                                                                              'none',
+                                                                            fontWeight:
+                                                                              '400',
+                                                                            padding:
+                                                                              [
+                                                                                '0.6875rem',
+                                                                                '1.375rem',
+                                                                              ],
+                                                                            textDecoration:
+                                                                              'none',
+                                                                            textTransform:
+                                                                              'none',
+                                                                          },
                                                                       },
-                                                                      fontFamily:
-                                                                        'Roboto',
-                                                                      fontSize:
-                                                                        '0.875rem',
-                                                                      fontStyle:
-                                                                        'none',
-                                                                      fontWeight:
-                                                                        '400',
-                                                                      padding: [
-                                                                        '0.6875rem',
-                                                                        '1.375rem',
-                                                                      ],
-                                                                      textDecoration:
-                                                                        'none',
-                                                                      textTransform:
-                                                                        'none',
-                                                                    },
+                                                                    ],
                                                                   },
                                                                   options: {
                                                                     ...buttonOptions,
@@ -3668,24 +3757,30 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                 id: '#closeDetailsDialogButton',
                                                               },
                                                               style: {
-                                                                overwrite: {
-                                                                  backgroundColor:
-                                                                    {
-                                                                      type: 'STATIC',
-                                                                      value:
-                                                                        'Transparent',
+                                                                name: 'Filled',
+                                                                overwrite: [
+                                                                  {
+                                                                    name: 'basis',
+                                                                    cssObject: {
+                                                                      backgroundColor:
+                                                                        {
+                                                                          type: 'STATIC',
+                                                                          value:
+                                                                            'Transparent',
+                                                                        },
+                                                                      boxShadow:
+                                                                        'none',
+                                                                      color: {
+                                                                        type: 'THEME_COLOR',
+                                                                        value:
+                                                                          'light',
+                                                                      },
+                                                                      padding: [
+                                                                        '0rem',
+                                                                      ],
                                                                     },
-                                                                  boxShadow:
-                                                                    'none',
-                                                                  color: {
-                                                                    type: 'THEME_COLOR',
-                                                                    value:
-                                                                      'light',
                                                                   },
-                                                                  padding: [
-                                                                    '0rem',
-                                                                  ],
-                                                                },
+                                                                ],
                                                               },
                                                               options: {
                                                                 ...buttonOptions,
@@ -3819,12 +3914,17 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                               },
                                                               style: {
                                                                 name: 'outline',
-                                                                overwrite: {
-                                                                  fontWeight:
-                                                                    '400',
-                                                                  textTransform:
-                                                                    'none',
-                                                                },
+                                                                overwrite: [
+                                                                  {
+                                                                    name: 'basis',
+                                                                    cssObject: {
+                                                                      fontWeight:
+                                                                        '400',
+                                                                      textTransform:
+                                                                        'none',
+                                                                    },
+                                                                  },
+                                                                ],
                                                               },
                                                               options: {
                                                                 ...buttonOptions,
@@ -3867,23 +3967,30 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                   },
                                                                   style: {
                                                                     name: 'outline',
-                                                                    overwrite: {
-                                                                      borderColor:
-                                                                        {
-                                                                          type: 'THEME_COLOR',
-                                                                          value:
-                                                                            'danger',
-                                                                        },
-                                                                      color: {
-                                                                        type: 'THEME_COLOR',
-                                                                        value:
-                                                                          'danger',
+                                                                    overwrite: [
+                                                                      {
+                                                                        name: 'basis',
+                                                                        cssObject:
+                                                                          {
+                                                                            borderColor:
+                                                                              {
+                                                                                type: 'THEME_COLOR',
+                                                                                value:
+                                                                                  'danger',
+                                                                              },
+                                                                            color:
+                                                                              {
+                                                                                type: 'THEME_COLOR',
+                                                                                value:
+                                                                                  'danger',
+                                                                              },
+                                                                            fontWeight:
+                                                                              '400',
+                                                                            textTransform:
+                                                                              'none',
+                                                                          },
                                                                       },
-                                                                      fontWeight:
-                                                                        '400',
-                                                                      textTransform:
-                                                                        'none',
-                                                                    },
+                                                                    ],
                                                                   },
                                                                   options: {
                                                                     ...buttonOptions,
@@ -3927,37 +4034,46 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                     id: '#editDetailsDialogButton',
                                                                   },
                                                                   style: {
-                                                                    overwrite: {
-                                                                      backgroundColor:
-                                                                        {
-                                                                          type: 'THEME_COLOR',
-                                                                          value:
-                                                                            'primary',
-                                                                        },
-                                                                      boxShadow:
-                                                                        'none',
-                                                                      color: {
-                                                                        type: 'THEME_COLOR',
-                                                                        value:
-                                                                          'white',
+                                                                    name: 'Filled',
+                                                                    overwrite: [
+                                                                      {
+                                                                        name: 'basis',
+                                                                        cssObject:
+                                                                          {
+                                                                            backgroundColor:
+                                                                              {
+                                                                                type: 'THEME_COLOR',
+                                                                                value:
+                                                                                  'primary',
+                                                                              },
+                                                                            boxShadow:
+                                                                              'none',
+                                                                            color:
+                                                                              {
+                                                                                type: 'THEME_COLOR',
+                                                                                value:
+                                                                                  'white',
+                                                                              },
+                                                                            fontFamily:
+                                                                              'Roboto',
+                                                                            fontSize:
+                                                                              '0.875rem',
+                                                                            fontStyle:
+                                                                              'none',
+                                                                            fontWeight:
+                                                                              '400',
+                                                                            padding:
+                                                                              [
+                                                                                '0.6875rem',
+                                                                                '1.375rem',
+                                                                              ],
+                                                                            textDecoration:
+                                                                              'none',
+                                                                            textTransform:
+                                                                              'none',
+                                                                          },
                                                                       },
-                                                                      fontFamily:
-                                                                        'Roboto',
-                                                                      fontSize:
-                                                                        '0.875rem',
-                                                                      fontStyle:
-                                                                        'none',
-                                                                      fontWeight:
-                                                                        '400',
-                                                                      padding: [
-                                                                        '0.6875rem',
-                                                                        '1.375rem',
-                                                                      ],
-                                                                      textDecoration:
-                                                                        'none',
-                                                                      textTransform:
-                                                                        'none',
-                                                                    },
+                                                                    ],
                                                                   },
                                                                   options: {
                                                                     ...buttonOptions,
@@ -4102,24 +4218,30 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                 id: '#closeDeleteDialogButton',
                                                               },
                                                               style: {
-                                                                overwrite: {
-                                                                  backgroundColor:
-                                                                    {
-                                                                      type: 'STATIC',
-                                                                      value:
-                                                                        'Transparent',
+                                                                name: 'Filled',
+                                                                overwrite: [
+                                                                  {
+                                                                    name: 'basis',
+                                                                    cssObject: {
+                                                                      backgroundColor:
+                                                                        {
+                                                                          type: 'STATIC',
+                                                                          value:
+                                                                            'Transparent',
+                                                                        },
+                                                                      boxShadow:
+                                                                        'none',
+                                                                      color: {
+                                                                        type: 'THEME_COLOR',
+                                                                        value:
+                                                                          'light',
+                                                                      },
+                                                                      padding: [
+                                                                        '0rem',
+                                                                      ],
                                                                     },
-                                                                  boxShadow:
-                                                                    'none',
-                                                                  color: {
-                                                                    type: 'THEME_COLOR',
-                                                                    value:
-                                                                      'light',
                                                                   },
-                                                                  padding: [
-                                                                    '0rem',
-                                                                  ],
-                                                                },
+                                                                ],
                                                               },
                                                               options: {
                                                                 ...buttonOptions,
@@ -4253,12 +4375,17 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                               },
                                                               style: {
                                                                 name: 'outline',
-                                                                overwrite: {
-                                                                  fontWeight:
-                                                                    '400',
-                                                                  textTransform:
-                                                                    'none',
-                                                                },
+                                                                overwrite: [
+                                                                  {
+                                                                    name: 'basis',
+                                                                    cssObject: {
+                                                                      fontWeight:
+                                                                        '400',
+                                                                      textTransform:
+                                                                        'none',
+                                                                    },
+                                                                  },
+                                                                ],
                                                               },
                                                               options: {
                                                                 ...buttonOptions,

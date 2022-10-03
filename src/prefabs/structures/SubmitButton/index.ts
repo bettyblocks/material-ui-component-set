@@ -7,8 +7,8 @@ export const SubmitButton = (
   descendants: PrefabReference[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
-  const style = { ...config.style };
+  const style = config.style ? { style: config.style } : {};
   const ref = config.ref ? { ...config.ref } : undefined;
   const label = config.label ? config.label : undefined;
-  return component('Button', { options, style, ref, label }, descendants);
+  return component('Button', { options, ...style, ref, label }, descendants);
 };

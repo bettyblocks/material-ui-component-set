@@ -18,7 +18,7 @@ export const DetailViewChild = (
   descendants: PrefabComponent[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
-  const style = { ...config.style };
+  const style = config.style ? { style: config.style } : {};
   const ref = config.ref ? { ...config.ref } : undefined;
-  return component('DetailViewChild', { options, style, ref }, descendants);
+  return component('DetailViewChild', { options, ...style, ref }, descendants);
 };

@@ -15,11 +15,17 @@ export default prefab('Navigation Bar', attr, undefined, [
         buttonText: variable('Button text', { value: ['Menu 1'] }),
       },
       style: {
-        overwrite: {
-          boxShadow: 'none',
-          textTransform: 'none',
-          fontWeight: '400',
-        },
+        name: 'Filled',
+        overwrite: [
+          {
+            name: 'basis',
+            cssObject: {
+              boxShadow: 'none',
+              textTransform: 'none',
+              fontWeight: '400',
+            },
+          },
+        ],
       },
     }),
     OpenPageButton({
@@ -28,11 +34,17 @@ export default prefab('Navigation Bar', attr, undefined, [
         buttonText: variable('Button text', { value: ['Menu 2'] }),
       },
       style: {
-        overwrite: {
-          boxShadow: 'none',
-          textTransform: 'none',
-          fontWeight: '400',
-        },
+        name: 'Filled',
+        overwrite: [
+          {
+            name: 'basis',
+            cssObject: {
+              boxShadow: 'none',
+              textTransform: 'none',
+              fontWeight: '400',
+            },
+          },
+        ],
       },
     }),
   ]),

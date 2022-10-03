@@ -16,7 +16,7 @@ export const Text = (
 
   return component(
     'Text',
-    { options, style, ref, label, optionCategories },
+    { options, ...style, ref, label, optionCategories },
     descendants,
   );
 };

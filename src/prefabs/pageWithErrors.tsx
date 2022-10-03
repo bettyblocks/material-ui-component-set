@@ -236,12 +236,18 @@ const beforeCreate = ({
       const redirectButton = cloneStructure('Open Page');
       if (redirectButton.type === 'COMPONENT') {
         redirectButton.style = {
-          overwrite: {
-            boxShadow: 'none',
-            padding: ['0.6875rem', '1.375rem'],
-            fontWeight: '400',
-            textTransform: 'none',
-          },
+          name: 'Filled',
+          overwrite: [
+            {
+              name: 'basis',
+              cssObject: {
+                boxShadow: 'none',
+                padding: ['0.6875rem', '1.375rem'],
+                fontWeight: '400',
+                textTransform: 'none',
+              },
+            },
+          ],
         };
         setOption(
           redirectButton,
@@ -402,12 +408,18 @@ const beforeCreate = ({
       const redirectButton = cloneStructure('Open Page');
       if (redirectButton.type === 'COMPONENT') {
         redirectButton.style = {
-          overwrite: {
-            boxShadow: 'none',
-            padding: ['0.6875rem', '1.375rem'],
-            fontWeight: '400',
-            textTransform: 'none',
-          },
+          name: 'Filled',
+          overwrite: [
+            {
+              name: 'basis',
+              cssObject: {
+                boxShadow: 'none',
+                padding: ['0.6875rem', '1.375rem'],
+                fontWeight: '400',
+                textTransform: 'none',
+              },
+            },
+          ],
         };
         setOption(
           redirectButton,

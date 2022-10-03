@@ -1,21 +1,14 @@
+import { style, themeColor, staticColor } from '@betty-blocks/component-sdk';
+
 export const basis = {
-  backgroundColor: {
-    type: 'THEME_COLOR',
-    value: 'primary',
-  },
-  borderColor: {
-    type: 'THEME_COLOR',
-    value: 'primary',
-  },
+  backgroundColor: themeColor('primary'),
+  borderColor: themeColor('primary'),
   borderRadius: ['0.25rem'],
   borderStyle: 'none',
   borderWidth: ['0rem'],
   boxShadow:
     '0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12)',
-  color: {
-    type: 'THEME_COLOR',
-    value: 'white',
-  },
+  color: themeColor('white'),
   fontFamily: 'Roboto',
   fontSize: '0.875rem',
   fontStyle: 'normal',
@@ -27,21 +20,15 @@ export const basis = {
   textTransform: 'uppercase',
 };
 
-export const states = [
-  {
-    name: 'disabled',
-    cssObject: {
-      backgroundColor: {
-        type: 'THEME_COLOR',
-        value: 'secondary',
-      },
-    },
+export const states = {
+  disabled: {
+    backgroundColor: themeColor('secondary'),
+    color: staticColor('#ff00ff'),
   },
-];
+};
 
-export default {
-  type: 'BUTTON',
-  name: 'MyCustomStylo',
+export default style('Button', {
+  name: 'outline',
   basis,
   states,
-};
+});

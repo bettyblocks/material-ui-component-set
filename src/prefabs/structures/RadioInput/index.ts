@@ -7,9 +7,9 @@ export const RadioInput = (
   children: PrefabReference[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
-  const style = { ...config.style };
+  const style = config.style ? { style: config.style } : {};
   const ref = config.ref ? { ...config.ref } : undefined;
   const label = config.label ? config.label : undefined;
 
-  return component('RadioInput', { options, style, ref, label }, children);
+  return component('RadioInput', { options, ...style, ref, label }, children);
 };

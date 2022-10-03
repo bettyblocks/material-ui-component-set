@@ -10,13 +10,13 @@ export const ActionJSButton = (
   descendants: PrefabReference[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
-  const style = { ...config.style };
+  const style = config.style ? { style: config.style } : {};
   const ref = config.ref ? { ...config.ref } : undefined;
   const label = config.label ? config.label : undefined;
 
   return component(
     'Action Button Beta',
-    { options, $afterCreate, style, ref, label },
+    { options, ...style, $afterCreate, ref, label },
     descendants,
   );
 };
