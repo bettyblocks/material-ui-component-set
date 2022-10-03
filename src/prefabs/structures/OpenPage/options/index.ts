@@ -94,7 +94,7 @@ export const openPageButtonOptions = {
         { name: 'Medium', value: 'medium' },
         { name: 'Small', value: 'small' },
       ],
-      condition: hideIf('icon', 'EQ', 'none'),
+      condition: hideIf('icon', 'EQ', 'None'),
     },
   }),
   iconPosition: option('CUSTOM', {
