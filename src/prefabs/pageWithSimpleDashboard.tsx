@@ -61,7 +61,7 @@ const attrs = {
     'View your content in a data table with cards containing counters.',
   detail:
     'This dashboard has a configurable data table and some cards containing static data. This to spark your interest and show what things are possible with the Page builder.',
-  previewUrl: 'https://preview.betty.app/crud-with-dialogs',
+  previewUrl: 'https://preview.betty.app/simple-dashboard',
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Simple_Dashboard.jpg',
   category: 'DATA',
@@ -91,7 +91,6 @@ const beforeCreate = ({
   const [footerPartialId, setFooterPartialId] = React.useState('');
   const [modelId, setModelId] = React.useState('');
   const [searchProperty, setSerachProperty] = React.useState<any>('');
-  // const [model, setModel] = React.useState<any>(null);
   const [properties, setProperties] = React.useState<any>([]);
   const [modelValidation, setModelValidation] = React.useState(false);
   const [propertiesValidation, setPropertiesValidation] = React.useState(false);
@@ -194,7 +193,7 @@ const beforeCreate = ({
             />
           </Field>
           <Field
-            label="Properties used in Create, Edit and View functionalities"
+            label="Columns in the data table"
             error={
               propertiesValidation && (
                 <Text color="#e82600">Selecting a property is required</Text>
@@ -227,7 +226,6 @@ const beforeCreate = ({
                 'TEXT_EXPRESSION',
                 'MINUTES',
                 'ZIPCODE',
-                'IMAGE',
                 'FILE',
               ]}
               onChange={(selectedFieldProperty: string) => {
@@ -243,7 +241,6 @@ const beforeCreate = ({
                 setSerachProperty(selectedSearchProperty);
               }}
               value={searchProperty}
-              disabled={!modelId}
             />
           </Field>
         </>
@@ -290,45 +287,148 @@ const beforeCreate = ({
         ...opts,
         value: modelId,
       }));
-
-      // Get search property label
       if (!data) throw new Error('');
-      const propertyLabel = data.model.properties.find(
-        (prop: Property) => prop.id === searchProperty.id[0],
-      ).name;
 
       // Set search field placeholder with label
       const searchFieldComp = treeSearch('#searchField', newPrefab.structure);
       if (!searchFieldComp) throw new Error('');
+      if (searchProperty) {
+        // Get search property label
+        const propertyLabel = data.model.properties.find(
+          (prop: Property) => prop.id === searchProperty.id[0],
+        ).name;
+
+        setOption(
+          searchFieldComp,
+          'placeholder',
+          (originalOption: PrefabComponentOption) => ({
+            ...originalOption,
+            value: [`Search on ${propertyLabel}`],
+          }),
+        );
+        // Set search interaction
+        if (newPrefab.interactions) {
+          newPrefab.interactions.push({
+            name: 'Filter',
+            sourceEvent: 'onChange',
+            parameters: [
+              {
+                parameter: 'property',
+                operator: 'matches',
+                resolveValue: false,
+                id: [...searchProperty.id],
+              },
+            ],
+            ref: {
+              targetComponentId: '#dataTable',
+              sourceComponentId: '#searchField',
+            },
+            type: 'Custom',
+          } as PrefabInteraction);
+        }
+      }
+
+      const dataLabel = data.model.label;
+
+      const titleText = treeSearch('#titleText', newPrefab.structure);
+      if (!titleText) throw new Error('Title component not found');
       setOption(
-        searchFieldComp,
-        'placeholder',
+        titleText,
+        'content',
         (originalOption: PrefabComponentOption) => ({
           ...originalOption,
-          value: [`Search on ${propertyLabel}`],
+          value: [`${dataLabel}s Dashboard`],
         }),
       );
 
-      // Set search interaction
-      if (newPrefab.interactions) {
-        newPrefab.interactions.push({
-          name: 'Filter',
-          sourceEvent: 'onChange',
-          parameters: [
-            {
-              parameter: 'property',
-              operator: 'matches',
-              resolveValue: false,
-              id: [...searchProperty.id],
-            },
-          ],
-          ref: {
-            targetComponentId: '#dataTable',
-            sourceComponentId: '#searchField',
-          },
-          type: 'Custom',
-        } as PrefabInteraction);
-      }
+      const modelText = treeSearch('#modelText', newPrefab.structure);
+      if (!modelText) throw new Error('Title text component not found');
+      setOption(
+        modelText,
+        'content',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
+          value: [`${dataLabel}s`],
+        }),
+      );
+
+      const totalText = treeSearch('#totalText', newPrefab.structure);
+      if (!totalText) throw new Error('Total text component not found');
+      setOption(
+        totalText,
+        'content',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
+          value: [`${dataLabel}s in total`],
+        }),
+      );
+
+      const doneText = treeSearch('#doneText', newPrefab.structure);
+      if (!doneText) throw new Error('Done text component not found');
+      setOption(
+        doneText,
+        'content',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
+          value: [`${dataLabel}s done`],
+        }),
+      );
+
+      const inProgressText = treeSearch('#inProgressText', newPrefab.structure);
+      if (!inProgressText)
+        throw new Error('In progress text component not found');
+      setOption(
+        inProgressText,
+        'content',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
+          value: [`${dataLabel}s in progress`],
+        }),
+      );
+
+      const blockedText = treeSearch('#blockedText', newPrefab.structure);
+      if (!blockedText) throw new Error('Blocked text component not found');
+      setOption(
+        blockedText,
+        'content',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
+          value: [`${dataLabel}s blocked`],
+        }),
+      );
+
+      const openText = treeSearch('#openText', newPrefab.structure);
+      if (!openText) throw new Error('open text component not found');
+      setOption(
+        openText,
+        'content',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
+          value: [`${dataLabel}s open`],
+        }),
+      );
+
+      const listText = treeSearch('#listText', newPrefab.structure);
+      if (!listText) throw new Error('List text component not found');
+      setOption(
+        listText,
+        'content',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
+          value: [`${dataLabel}s list`],
+        }),
+      );
+
+      const buttonText = treeSearch('#buttonText', newPrefab.structure);
+      if (!buttonText) throw new Error('Button text component not found');
+      setOption(
+        buttonText,
+        'buttonText',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
+          value: [`New ${dataLabel}`],
+        }),
+      );
 
       properties.forEach(
         (property: {
@@ -353,6 +453,7 @@ const beforeCreate = ({
             'PRICE_EXPRESSION',
             'TIME',
           ];
+
           if (inheritFormatKinds.includes(property.kind)) {
             newProperty = {
               ...property,
@@ -360,37 +461,72 @@ const beforeCreate = ({
             };
           }
 
-          const dataTableColumnStructure = cloneStructure('Datatable Column');
-          if (dataTableColumnStructure.type !== 'COMPONENT') {
-            throw new Error(
-              `expected component prefab, found ${dataTableColumnStructure.type}`,
+          const makeDetail = (prop: any) => {
+            const mediaColumn = cloneStructure('Datatable Column');
+
+            if (mediaColumn.type !== 'COMPONENT') {
+              throw new Error(
+                `expected component prefab, found ${mediaColumn.type}`,
+              );
+            }
+
+            setOption(
+              mediaColumn,
+              'property',
+              (originalOption: PrefabComponentOption) => {
+                return {
+                  ...originalOption,
+                  value: prop,
+                };
+              },
             );
-          }
 
-          // Set property of data table
-          setOption(
-            dataTableColumnStructure,
-            'property',
-            (originalOption: PrefabComponentOption) => {
-              return {
-                ...originalOption,
-                value: newProperty,
-              };
-            },
-          );
+            const mediaComponent = cloneStructure('Media');
+            if (mediaComponent.type === 'COMPONENT') {
+              setOption(
+                mediaComponent,
+                'type',
+                (opt: PrefabComponentOption) => ({
+                  ...opt,
+                  value: 'url',
+                }),
+              );
+              setOption(
+                mediaComponent,
+                'urlFileSource',
+                (opt: PrefabComponentOption) => ({
+                  ...opt,
+                  value: [{ ...prop }],
+                }),
+              );
+            }
 
-          // Set type of data table
-          setOption(
-            dataTableColumnStructure,
-            'type',
-            (originalOption: PrefabComponentOption) => {
-              return {
-                ...originalOption,
-                value: 'Body1',
-              };
-            },
-          );
-          dataTableComp.descendants.push(dataTableColumnStructure);
+            mediaColumn.descendants.push(mediaComponent);
+
+            const dataTableColumnStructure = cloneStructure('Datatable Column');
+            if (dataTableColumnStructure.type !== 'COMPONENT') {
+              throw new Error(
+                `expected component prefab, found ${dataTableColumnStructure.type}`,
+              );
+            }
+
+            setOption(
+              dataTableColumnStructure,
+              'property',
+              (originalOption: PrefabComponentOption) => {
+                return {
+                  ...originalOption,
+                  value: newProperty,
+                };
+              },
+            );
+
+            return prop.kind === 'IMAGE'
+              ? mediaColumn
+              : dataTableColumnStructure;
+          };
+
+          dataTableComp.descendants.push(makeDetail(newProperty));
         },
       );
 
@@ -665,12 +801,6 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                         ],
                       },
                     }),
-                    height: size('Height', {
-                      value: '100%',
-                      configuration: {
-                        as: 'UNIT',
-                      },
-                    }),
                     wrap: option('CUSTOM', {
                       value: 'nowrap',
                       label: 'Wrap',
@@ -880,6 +1010,9 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                         }),
                         innerSpacing: sizes('Inner space', {
                           value: ['0rem', '0rem', '0rem', '0rem'],
+                        }),
+                        stretch: toggle('Stretch (when in flex container)', {
+                          value: true,
                         }),
                       },
                     },
@@ -1184,10 +1317,13 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                   },
                                   [
                                     TextPrefab({
+                                      ref: {
+                                        id: '#titleText',
+                                      },
                                       options: {
                                         ...textOptions,
                                         content: variable('Content', {
-                                          value: ['Projects Dashboard'],
+                                          value: ['Dashboard'],
                                           configuration: { as: 'MULTILINE' },
                                         }),
                                         type: font('Font', {
@@ -1395,10 +1531,13 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                       },
                                       [
                                         TextPrefab({
+                                          ref: {
+                                            id: '#modelText',
+                                          },
                                           options: {
                                             ...textOptions,
                                             content: variable('Content', {
-                                              value: ['Projects'],
+                                              value: ['Tasks'],
                                               configuration: {
                                                 as: 'MULTILINE',
                                               },
@@ -1538,10 +1677,13 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                               },
                                             }),
                                             TextPrefab({
+                                              ref: {
+                                                id: '#totalText',
+                                              },
                                               options: {
                                                 ...textOptions,
                                                 content: variable('Content', {
-                                                  value: ['Projects in total'],
+                                                  value: ['Tasks in total'],
                                                   configuration: {
                                                     as: 'MULTILINE',
                                                   },
@@ -2292,14 +2434,15 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                   },
                                                 }),
                                                 TextPrefab({
+                                                  ref: {
+                                                    id: '#openText',
+                                                  },
                                                   options: {
                                                     ...textOptions,
                                                     content: variable(
                                                       'Content',
                                                       {
-                                                        value: [
-                                                          'Projects open',
-                                                        ],
+                                                        value: ['Tasks open'],
                                                         configuration: {
                                                           as: 'MULTILINE',
                                                         },
@@ -2918,14 +3061,15 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                   },
                                                 }),
                                                 TextPrefab({
+                                                  ref: {
+                                                    id: '#doneText',
+                                                  },
                                                   options: {
                                                     ...textOptions,
                                                     content: variable(
                                                       'Content',
                                                       {
-                                                        value: [
-                                                          'Projects done',
-                                                        ],
+                                                        value: ['Tasks done'],
                                                         configuration: {
                                                           as: 'MULTILINE',
                                                         },
@@ -3545,13 +3689,16 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                   },
                                                 }),
                                                 TextPrefab({
+                                                  ref: {
+                                                    id: '#inProgressText',
+                                                  },
                                                   options: {
                                                     ...textOptions,
                                                     content: variable(
                                                       'Content',
                                                       {
                                                         value: [
-                                                          'Projects in progress',
+                                                          'Tasks in progress',
                                                         ],
                                                         configuration: {
                                                           as: 'MULTILINE',
@@ -4172,13 +4319,16 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                   },
                                                 }),
                                                 TextPrefab({
+                                                  ref: {
+                                                    id: '#blockedText',
+                                                  },
                                                   options: {
                                                     ...textOptions,
                                                     content: variable(
                                                       'Content',
                                                       {
                                                         value: [
-                                                          'Projects blocked',
+                                                          'Tasks blocked',
                                                         ],
                                                         configuration: {
                                                           as: 'MULTILINE',
@@ -4465,10 +4615,13 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                         },
                                         [
                                           TextPrefab({
+                                            ref: {
+                                              id: '#listText',
+                                            },
                                             options: {
                                               ...textOptions,
                                               content: variable('Content', {
-                                                value: ['Projects list'],
+                                                value: ['Tasks list'],
                                                 configuration: {
                                                   as: 'MULTILINE',
                                                 },
@@ -4596,6 +4749,9 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                               ),
                                               ButtonPrefab(
                                                 {
+                                                  ref: {
+                                                    id: '#buttonText',
+                                                  },
                                                   options: {
                                                     ...buttonOptions,
                                                     icon: icon('Icon', {
@@ -4604,7 +4760,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                     buttonText: variable(
                                                       'Button text',
                                                       {
-                                                        value: ['New Project'],
+                                                        value: ['New Task'],
                                                       },
                                                     ),
                                                     size: option('CUSTOM', {
@@ -4842,9 +4998,6 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                         backgroundColorAlpha: option('NUMBER', {
                           label: 'Background color opacity',
                           value: 20,
-                        }),
-                        stretch: toggle('Stretch (when in flex container)', {
-                          value: true,
                         }),
                         innerSpacing: sizes('Inner space', {
                           value: ['0rem', '0rem', '0rem', '0rem'],
