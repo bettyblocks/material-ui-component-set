@@ -151,7 +151,8 @@
 
     function UploadComponent() {
       const isDirty = !!fileReference;
-      const hasUploads = value && !loading;
+      const hasValidUploads =
+        value && value.type && validateFiles([value]) && !loading;
 
       // Renders the button and the files you select
       return (
@@ -166,7 +167,7 @@
             type="file"
             onChange={handleChange}
             ref={inputRef}
-            required={hasUploads ? false : required}
+            required={hasValidUploads ? false : required}
           />
           {isDirty && ( // TODO: change to showing only what is from the html element
             <input type="hidden" name={name} value={fileReference} />
