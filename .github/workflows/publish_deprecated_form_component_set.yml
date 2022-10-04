@@ -19,8 +19,18 @@ jobs:
       - name: bundle
         run: yarn bundle
 
-      - name: upload
+      - name: upload edge
         env:
           AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_EDGE }}
           AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_EDGE }}
+        run: yarn upload:deprecated
+      - name: upload acceptance
+        env:
+          AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_ACCEPTANCE }}
+          AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_ACCEPTANCE }}
+        run: yarn upload:deprecated
+      - name: upload nl3
+        env:
+          AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_NL3 }}
+          AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_NL3 }}
         run: yarn upload:deprecated
