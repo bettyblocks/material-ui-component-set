@@ -67,7 +67,9 @@
     const inputRef = React.useRef();
 
     const errorHelpers = hideDefaultError ? '' : error && error.message;
-    const helperValue = errorHelpers || validationMessage || helper;
+
+    const helperValue =
+      errorHelpers || (!hideDefaultError ? validationMessage : '') || helper;
 
     React.useEffect(() => {
       firstRender.current = false;
@@ -79,7 +81,7 @@
         if (Array.isArray(error) && error.length === 0) {
           return;
         }
-        B.triggerEvent('onError');
+        B.triggerEvent('onError', error);
         if (errorHelpers) setValidationMessage(`An error occured: ${error}`);
       }
     }, [error]);
@@ -114,6 +116,7 @@
       });
       if (isFileSizeExceeded) {
         setValidationMessage(maxFileSizeMessage);
+        B.triggerEvent('onError', maxFileSizeMessage);
         return false;
       }
 
@@ -129,6 +132,10 @@
 
       if (isInvalidMimeType) {
         setValidationMessage(
+          `invalid file type. Only ${acceptedValue} are allowed`,
+        );
+        B.triggerEvent(
+          'onError',
           `invalid file type. Only ${acceptedValue} are allowed`,
         );
         return false;
@@ -414,7 +421,7 @@
             <UploadComponent />
           </Label>
           <FormHelperText classes={{ root: classes.helper }}>
-            {validationMessage || helperValue}
+            {!hideDefaultError ? validationMessage || helperValue : ''}
           </FormHelperText>
           <div className={classes.messageContainer}>
             {hasUploads &&
