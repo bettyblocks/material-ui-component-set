@@ -60,6 +60,9 @@
 
     const inputRef = React.useRef();
 
+    const errorHelpers = hideDefaultError ? '' : error && error.message;
+    const helperValue = errorHelpers || validationMessage || helper;
+
     React.useEffect(() => {
       firstRender.current = false;
     }, []);
@@ -70,8 +73,8 @@
         if (Array.isArray(error) && error.length === 0) {
           return;
         }
-        B.triggerEvent('onError', error);
-        setValidationMessage(`An error occured: ${error}`);
+        B.triggerEvent('onError');
+        if (errorHelpers) setValidationMessage(`An error occured: ${error}`);
       }
     }, [error]);
 
@@ -88,9 +91,6 @@
         }
       }
     }, [loading, fileReference]);
-
-    const errorHelpers = !hideDefaultError ? error && error.message : '';
-    const helperValue = errorHelpers || validationMessage || helper;
 
     const formatBytes = (bytes) => {
       if (bytes === 0) return '0 Bytes';
