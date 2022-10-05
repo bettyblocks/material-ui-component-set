@@ -457,24 +457,30 @@ const drawerContainer = DrawerContainer(
                                   OpenPageButton(
                                     {
                                       style: {
-                                        overwrite: {
-                                          backgroundColor: {
-                                            type: 'STATIC',
-                                            value: 'transparent',
+                                        name: 'Filled',
+                                        overwrite: [
+                                          {
+                                            name: 'basis',
+                                            cssObject: {
+                                              backgroundColor: {
+                                                type: 'STATIC',
+                                                value: 'transparent',
+                                              },
+                                              boxShadow: 'none',
+                                              color: {
+                                                type: 'THEME_COLOR',
+                                                value: 'white',
+                                              },
+                                              fontFamily: 'Roboto',
+                                              fontSize: '0.875rem',
+                                              fontStyle: 'none',
+                                              fontWeight: '400',
+                                              padding: ['0rem', '0rem'],
+                                              textDecoration: 'none',
+                                              textTransform: 'none',
+                                            },
                                           },
-                                          boxShadow: 'none',
-                                          color: {
-                                            type: 'THEME_COLOR',
-                                            value: 'white',
-                                          },
-                                          fontFamily: 'Roboto',
-                                          fontSize: '0.875rem',
-                                          fontStyle: 'none',
-                                          fontWeight: '400',
-                                          padding: ['0rem', '0rem'],
-                                          textDecoration: 'none',
-                                          textTransform: 'none',
-                                        },
+                                        ],
                                       },
                                       options: {
                                         ...openPageButtonOptions,
@@ -491,24 +497,30 @@ const drawerContainer = DrawerContainer(
                                   OpenPageButton(
                                     {
                                       style: {
-                                        overwrite: {
-                                          backgroundColor: {
-                                            type: 'STATIC',
-                                            value: 'transparent',
+                                        name: 'Filled',
+                                        overwrite: [
+                                          {
+                                            name: 'basis',
+                                            cssObject: {
+                                              backgroundColor: {
+                                                type: 'STATIC',
+                                                value: 'transparent',
+                                              },
+                                              boxShadow: 'none',
+                                              color: {
+                                                type: 'THEME_COLOR',
+                                                value: 'white',
+                                              },
+                                              fontFamily: 'Roboto',
+                                              fontSize: '0.875rem',
+                                              fontStyle: 'none',
+                                              fontWeight: '400',
+                                              padding: ['0rem', '0rem'],
+                                              textDecoration: 'none',
+                                              textTransform: 'none',
+                                            },
                                           },
-                                          boxShadow: 'none',
-                                          color: {
-                                            type: 'THEME_COLOR',
-                                            value: 'white',
-                                          },
-                                          fontFamily: 'Roboto',
-                                          fontSize: '0.875rem',
-                                          fontStyle: 'none',
-                                          fontWeight: '400',
-                                          padding: ['0rem', '0rem'],
-                                          textDecoration: 'none',
-                                          textTransform: 'none',
-                                        },
+                                        ],
                                       },
                                       options: {
                                         ...openPageButtonOptions,
@@ -1030,31 +1042,43 @@ const drawerContainer = DrawerContainer(
                                                           id: '#createButton',
                                                         },
                                                         style: {
-                                                          overwrite: {
-                                                            backgroundColor: {
-                                                              type: 'THEME_COLOR',
-                                                              value: 'primary',
+                                                          name: 'Filled',
+                                                          overwrite: [
+                                                            {
+                                                              name: 'basis',
+                                                              cssObject: {
+                                                                backgroundColor:
+                                                                  {
+                                                                    type: 'THEME_COLOR',
+                                                                    value:
+                                                                      'primary',
+                                                                  },
+                                                                boxShadow:
+                                                                  'none',
+                                                                color: {
+                                                                  type: 'THEME_COLOR',
+                                                                  value:
+                                                                    'white',
+                                                                },
+                                                                fontFamily:
+                                                                  'Roboto',
+                                                                fontSize:
+                                                                  '0.875rem',
+                                                                fontStyle:
+                                                                  'none',
+                                                                fontWeight:
+                                                                  '400',
+                                                                padding: [
+                                                                  '0.6875rem',
+                                                                  '1.375rem',
+                                                                ],
+                                                                textDecoration:
+                                                                  'none',
+                                                                textTransform:
+                                                                  'none',
+                                                              },
                                                             },
-                                                            boxShadow: 'none',
-                                                            color: {
-                                                              type: 'THEME_COLOR',
-                                                              value: 'white',
-                                                            },
-                                                            fontFamily:
-                                                              'Roboto',
-                                                            fontSize:
-                                                              '0.875rem',
-                                                            fontStyle: 'none',
-                                                            fontWeight: '400',
-                                                            padding: [
-                                                              '0.6875rem',
-                                                              '1.375rem',
-                                                            ],
-                                                            textDecoration:
-                                                              'none',
-                                                            textTransform:
-                                                              'none',
-                                                          },
+                                                          ],
                                                         },
                                                       },
                                                       [],
@@ -1148,27 +1172,36 @@ const drawerContainer = DrawerContainer(
                                                               ),
                                                               Button({
                                                                 style: {
-                                                                  overwrite: {
-                                                                    backgroundColor:
-                                                                      {
-                                                                        type: 'STATIC',
-                                                                        value:
-                                                                          'transparent',
-                                                                      },
-                                                                    boxShadow:
-                                                                      'none',
-                                                                    color: {
-                                                                      type: 'THEME_COLOR',
-                                                                      value:
-                                                                        'light',
+                                                                  name: 'Filled',
+                                                                  overwrite: [
+                                                                    {
+                                                                      name: 'basis',
+                                                                      cssObject:
+                                                                        {
+                                                                          backgroundColor:
+                                                                            {
+                                                                              type: 'STATIC',
+                                                                              value:
+                                                                                'transparent',
+                                                                            },
+                                                                          boxShadow:
+                                                                            'none',
+                                                                          color:
+                                                                            {
+                                                                              type: 'THEME_COLOR',
+                                                                              value:
+                                                                                'light',
+                                                                            },
+                                                                          padding:
+                                                                            [
+                                                                              '0rem',
+                                                                              '0.6875rem',
+                                                                              '0.6875rem',
+                                                                              '0.6875rem',
+                                                                            ],
+                                                                        },
                                                                     },
-                                                                    padding: [
-                                                                      '0rem',
-                                                                      '0.6875rem',
-                                                                      '0.6875rem',
-                                                                      '0.6875rem',
-                                                                    ],
-                                                                  },
+                                                                  ],
                                                                 },
                                                                 options: {
                                                                   ...buttonOptions,
@@ -1354,53 +1387,62 @@ const drawerContainer = DrawerContainer(
                                                                       ),
                                                                   },
                                                                   style: {
-                                                                    overwrite: {
-                                                                      backgroundColor:
-                                                                        {
-                                                                          type: 'STATIC',
-                                                                          value:
-                                                                            'transparent',
-                                                                        },
-                                                                      borderColor:
-                                                                        {
-                                                                          type: 'THEME_COLOR',
-                                                                          value:
-                                                                            'primary',
-                                                                        },
-                                                                      borderRadius:
-                                                                        [
-                                                                          '0.25rem',
-                                                                        ],
-                                                                      borderStyle:
-                                                                        'solid',
-                                                                      borderWidth:
-                                                                        [
-                                                                          '0.0625rem',
-                                                                        ],
-                                                                      boxShadow:
-                                                                        'none',
-                                                                      color: {
-                                                                        type: 'THEME_COLOR',
-                                                                        value:
-                                                                          'primary',
+                                                                    name: 'Filled',
+                                                                    overwrite: [
+                                                                      {
+                                                                        name: 'basis',
+                                                                        cssObject:
+                                                                          {
+                                                                            backgroundColor:
+                                                                              {
+                                                                                type: 'STATIC',
+                                                                                value:
+                                                                                  'transparent',
+                                                                              },
+                                                                            borderColor:
+                                                                              {
+                                                                                type: 'THEME_COLOR',
+                                                                                value:
+                                                                                  'primary',
+                                                                              },
+                                                                            borderRadius:
+                                                                              [
+                                                                                '0.25rem',
+                                                                              ],
+                                                                            borderStyle:
+                                                                              'solid',
+                                                                            borderWidth:
+                                                                              [
+                                                                                '0.0625rem',
+                                                                              ],
+                                                                            boxShadow:
+                                                                              'none',
+                                                                            color:
+                                                                              {
+                                                                                type: 'THEME_COLOR',
+                                                                                value:
+                                                                                  'primary',
+                                                                              },
+                                                                            fontFamily:
+                                                                              'Roboto',
+                                                                            fontSize:
+                                                                              '0.875rem',
+                                                                            fontStyle:
+                                                                              'none',
+                                                                            fontWeight:
+                                                                              '400',
+                                                                            padding:
+                                                                              [
+                                                                                '0.625rem',
+                                                                                '1.3125rem',
+                                                                              ],
+                                                                            textDecoration:
+                                                                              'none',
+                                                                            textTransform:
+                                                                              'none',
+                                                                          },
                                                                       },
-                                                                      fontFamily:
-                                                                        'Roboto',
-                                                                      fontSize:
-                                                                        '0.875rem',
-                                                                      fontStyle:
-                                                                        'none',
-                                                                      fontWeight:
-                                                                        '400',
-                                                                      padding: [
-                                                                        '0.625rem',
-                                                                        '1.3125rem',
-                                                                      ],
-                                                                      textDecoration:
-                                                                        'none',
-                                                                      textTransform:
-                                                                        'none',
-                                                                    },
+                                                                    ],
                                                                   },
                                                                 },
                                                                 [],
@@ -2214,18 +2256,24 @@ const drawerBar = DrawerBar(
                                 },
                                 ref: { id: '#closeCreateTabBtn' },
                                 style: {
-                                  overwrite: {
-                                    backgroundColor: {
-                                      type: 'STATIC',
-                                      value: 'Transparent',
+                                  name: 'Filled',
+                                  overwrite: [
+                                    {
+                                      name: 'basis',
+                                      cssObject: {
+                                        backgroundColor: {
+                                          type: 'STATIC',
+                                          value: 'Transparent',
+                                        },
+                                        boxShadow: 'none',
+                                        color: {
+                                          type: 'THEME_COLOR',
+                                          value: 'white',
+                                        },
+                                        padding: ['0rem'],
+                                      },
                                     },
-                                    boxShadow: 'none',
-                                    color: {
-                                      type: 'THEME_COLOR',
-                                      value: 'white',
-                                    },
-                                    padding: ['0rem'],
-                                  },
+                                  ],
                                 },
                               },
                               [],
@@ -2304,31 +2352,37 @@ const drawerBar = DrawerBar(
                                 },
                                 ref: { id: '#createCancelButton' },
                                 style: {
-                                  overwrite: {
-                                    backgroundColor: {
-                                      type: 'STATIC',
-                                      value: 'transparent',
+                                  name: 'Filled',
+                                  overwrite: [
+                                    {
+                                      name: 'basis',
+                                      cssObject: {
+                                        backgroundColor: {
+                                          type: 'STATIC',
+                                          value: 'transparent',
+                                        },
+                                        borderColor: {
+                                          type: 'THEME_COLOR',
+                                          value: 'primary',
+                                        },
+                                        borderRadius: ['0.25rem'],
+                                        borderStyle: 'solid',
+                                        borderWidth: ['0.0625rem'],
+                                        boxShadow: 'none',
+                                        color: {
+                                          type: 'THEME_COLOR',
+                                          value: 'primary',
+                                        },
+                                        fontFamily: 'Roboto',
+                                        fontSize: '0.875rem',
+                                        fontStyle: 'none',
+                                        fontWeight: '400',
+                                        padding: ['0.625rem', '1.3125rem'],
+                                        textDecoration: 'none',
+                                        textTransform: 'none',
+                                      },
                                     },
-                                    borderColor: {
-                                      type: 'THEME_COLOR',
-                                      value: 'primary',
-                                    },
-                                    borderRadius: ['0.25rem'],
-                                    borderStyle: 'solid',
-                                    borderWidth: ['0.0625rem'],
-                                    boxShadow: 'none',
-                                    color: {
-                                      type: 'THEME_COLOR',
-                                      value: 'primary',
-                                    },
-                                    fontFamily: 'Roboto',
-                                    fontSize: '0.875rem',
-                                    fontStyle: 'none',
-                                    fontWeight: '400',
-                                    padding: ['0.625rem', '1.3125rem'],
-                                    textDecoration: 'none',
-                                    textTransform: 'none',
-                                  },
+                                  ],
                                 },
                               },
                               [],
@@ -2344,24 +2398,30 @@ const drawerBar = DrawerBar(
                                 },
                                 ref: { id: '#createSubmitButton' },
                                 style: {
-                                  overwrite: {
-                                    backgroundColor: {
-                                      type: 'THEME_COLOR',
-                                      value: 'primary',
+                                  name: 'Filled',
+                                  overwrite: [
+                                    {
+                                      name: 'basis',
+                                      cssObject: {
+                                        backgroundColor: {
+                                          type: 'THEME_COLOR',
+                                          value: 'primary',
+                                        },
+                                        boxShadow: 'none',
+                                        color: {
+                                          type: 'THEME_COLOR',
+                                          value: 'white',
+                                        },
+                                        fontFamily: 'Roboto',
+                                        fontSize: '0.875rem',
+                                        fontStyle: 'none',
+                                        fontWeight: '400',
+                                        padding: ['0.6875rem', '1.375rem'],
+                                        textDecoration: 'none',
+                                        textTransform: 'none',
+                                      },
                                     },
-                                    boxShadow: 'none',
-                                    color: {
-                                      type: 'THEME_COLOR',
-                                      value: 'white',
-                                    },
-                                    fontFamily: 'Roboto',
-                                    fontSize: '0.875rem',
-                                    fontStyle: 'none',
-                                    fontWeight: '400',
-                                    padding: ['0.6875rem', '1.375rem'],
-                                    textDecoration: 'none',
-                                    textTransform: 'none',
-                                  },
+                                  ],
                                 },
                               },
                               [],
@@ -2522,18 +2582,24 @@ const drawerBar = DrawerBar(
                                 },
                                 ref: { id: '#closeDetailsTabBtn' },
                                 style: {
-                                  overwrite: {
-                                    backgroundColor: {
-                                      type: 'STATIC',
-                                      value: 'Transparent',
+                                  name: 'Filled',
+                                  overwrite: [
+                                    {
+                                      name: 'basis',
+                                      cssObject: {
+                                        backgroundColor: {
+                                          type: 'STATIC',
+                                          value: 'Transparent',
+                                        },
+                                        boxShadow: 'none',
+                                        color: {
+                                          type: 'THEME_COLOR',
+                                          value: 'white',
+                                        },
+                                        padding: ['0rem'],
+                                      },
                                     },
-                                    boxShadow: 'none',
-                                    color: {
-                                      type: 'THEME_COLOR',
-                                      value: 'white',
-                                    },
-                                    padding: ['0rem'],
-                                  },
+                                  ],
                                 },
                               },
                               [],
@@ -2600,31 +2666,37 @@ const drawerBar = DrawerBar(
                                 },
                                 ref: { id: '#detailCancelButton' },
                                 style: {
-                                  overwrite: {
-                                    backgroundColor: {
-                                      type: 'STATIC',
-                                      value: 'transparent',
+                                  name: 'Filled',
+                                  overwrite: [
+                                    {
+                                      name: 'basis',
+                                      cssObject: {
+                                        backgroundColor: {
+                                          type: 'STATIC',
+                                          value: 'transparent',
+                                        },
+                                        borderColor: {
+                                          type: 'THEME_COLOR',
+                                          value: 'primary',
+                                        },
+                                        borderRadius: ['0.25rem'],
+                                        borderStyle: 'solid',
+                                        borderWidth: ['0.0625rem'],
+                                        boxShadow: 'none',
+                                        color: {
+                                          type: 'THEME_COLOR',
+                                          value: 'primary',
+                                        },
+                                        fontFamily: 'Roboto',
+                                        fontSize: '0.875rem',
+                                        fontStyle: 'none',
+                                        fontWeight: '400',
+                                        padding: ['0.625rem', '1.3125rem'],
+                                        textDecoration: 'none',
+                                        textTransform: 'none',
+                                      },
                                     },
-                                    borderColor: {
-                                      type: 'THEME_COLOR',
-                                      value: 'primary',
-                                    },
-                                    borderRadius: ['0.25rem'],
-                                    borderStyle: 'solid',
-                                    borderWidth: ['0.0625rem'],
-                                    boxShadow: 'none',
-                                    color: {
-                                      type: 'THEME_COLOR',
-                                      value: 'primary',
-                                    },
-                                    fontFamily: 'Roboto',
-                                    fontSize: '0.875rem',
-                                    fontStyle: 'none',
-                                    fontWeight: '400',
-                                    padding: ['0.625rem', '1.3125rem'],
-                                    textDecoration: 'none',
-                                    textTransform: 'none',
-                                  },
+                                  ],
                                 },
                               },
                               [],
@@ -2640,24 +2712,30 @@ const drawerBar = DrawerBar(
                                 },
                                 ref: { id: '#editButtonFromDetails' },
                                 style: {
-                                  overwrite: {
-                                    backgroundColor: {
-                                      type: 'THEME_COLOR',
-                                      value: 'primary',
+                                  name: 'Filled',
+                                  overwrite: [
+                                    {
+                                      name: 'basis',
+                                      cssObject: {
+                                        backgroundColor: {
+                                          type: 'THEME_COLOR',
+                                          value: 'primary',
+                                        },
+                                        boxShadow: 'none',
+                                        color: {
+                                          type: 'THEME_COLOR',
+                                          value: 'white',
+                                        },
+                                        fontFamily: 'Roboto',
+                                        fontSize: '0.875rem',
+                                        fontStyle: 'none',
+                                        fontWeight: '400',
+                                        padding: ['0.6875rem', '1.375rem'],
+                                        textDecoration: 'none',
+                                        textTransform: 'none',
+                                      },
                                     },
-                                    boxShadow: 'none',
-                                    color: {
-                                      type: 'THEME_COLOR',
-                                      value: 'white',
-                                    },
-                                    fontFamily: 'Roboto',
-                                    fontSize: '0.875rem',
-                                    fontStyle: 'none',
-                                    fontWeight: '400',
-                                    padding: ['0.6875rem', '1.375rem'],
-                                    textDecoration: 'none',
-                                    textTransform: 'none',
-                                  },
+                                  ],
                                 },
                               },
                               [],
@@ -2816,18 +2894,24 @@ const drawerBar = DrawerBar(
                                 },
                                 ref: { id: '#closeEditTabBtn' },
                                 style: {
-                                  overwrite: {
-                                    backgroundColor: {
-                                      type: 'STATIC',
-                                      value: 'Transparent',
+                                  name: 'Filled',
+                                  overwrite: [
+                                    {
+                                      name: 'basis',
+                                      cssObject: {
+                                        backgroundColor: {
+                                          type: 'STATIC',
+                                          value: 'Transparent',
+                                        },
+                                        boxShadow: 'none',
+                                        color: {
+                                          type: 'THEME_COLOR',
+                                          value: 'white',
+                                        },
+                                        padding: ['0rem'],
+                                      },
                                     },
-                                    boxShadow: 'none',
-                                    color: {
-                                      type: 'THEME_COLOR',
-                                      value: 'white',
-                                    },
-                                    padding: ['0rem'],
-                                  },
+                                  ],
                                 },
                               },
                               [],
@@ -2905,31 +2989,37 @@ const drawerBar = DrawerBar(
                                 },
                                 ref: { id: '#editCancelButton' },
                                 style: {
-                                  overwrite: {
-                                    backgroundColor: {
-                                      type: 'STATIC',
-                                      value: 'transparent',
+                                  name: 'Filled',
+                                  overwrite: [
+                                    {
+                                      name: 'basis',
+                                      cssObject: {
+                                        backgroundColor: {
+                                          type: 'STATIC',
+                                          value: 'transparent',
+                                        },
+                                        borderColor: {
+                                          type: 'THEME_COLOR',
+                                          value: 'primary',
+                                        },
+                                        borderRadius: ['0.25rem'],
+                                        borderStyle: 'solid',
+                                        borderWidth: ['0.0625rem'],
+                                        boxShadow: 'none',
+                                        color: {
+                                          type: 'THEME_COLOR',
+                                          value: 'primary',
+                                        },
+                                        fontFamily: 'Roboto',
+                                        fontSize: '0.875rem',
+                                        fontStyle: 'none',
+                                        fontWeight: '400',
+                                        padding: ['0.625rem', '1.3125rem'],
+                                        textDecoration: 'none',
+                                        textTransform: 'none',
+                                      },
                                     },
-                                    borderColor: {
-                                      type: 'THEME_COLOR',
-                                      value: 'primary',
-                                    },
-                                    borderRadius: ['0.25rem'],
-                                    borderStyle: 'solid',
-                                    borderWidth: ['0.0625rem'],
-                                    boxShadow: 'none',
-                                    color: {
-                                      type: 'THEME_COLOR',
-                                      value: 'primary',
-                                    },
-                                    fontFamily: 'Roboto',
-                                    fontSize: '0.875rem',
-                                    fontStyle: 'none',
-                                    fontWeight: '400',
-                                    padding: ['0.625rem', '1.3125rem'],
-                                    textDecoration: 'none',
-                                    textTransform: 'none',
-                                  },
+                                  ],
                                 },
                               },
                               [],
@@ -2945,24 +3035,30 @@ const drawerBar = DrawerBar(
                                 },
                                 ref: { id: '#editSubmitButton' },
                                 style: {
-                                  overwrite: {
-                                    backgroundColor: {
-                                      type: 'THEME_COLOR',
-                                      value: 'primary',
+                                  name: 'Filled',
+                                  overwrite: [
+                                    {
+                                      name: 'basis',
+                                      cssObject: {
+                                        backgroundColor: {
+                                          type: 'THEME_COLOR',
+                                          value: 'primary',
+                                        },
+                                        boxShadow: 'none',
+                                        color: {
+                                          type: 'THEME_COLOR',
+                                          value: 'white',
+                                        },
+                                        fontFamily: 'Roboto',
+                                        fontSize: '0.875rem',
+                                        fontStyle: 'none',
+                                        fontWeight: '400',
+                                        padding: ['0.6875rem', '1.375rem'],
+                                        textDecoration: 'none',
+                                        textTransform: 'none',
+                                      },
                                     },
-                                    boxShadow: 'none',
-                                    color: {
-                                      type: 'THEME_COLOR',
-                                      value: 'white',
-                                    },
-                                    fontFamily: 'Roboto',
-                                    fontSize: '0.875rem',
-                                    fontStyle: 'none',
-                                    fontWeight: '400',
-                                    padding: ['0.6875rem', '1.375rem'],
-                                    textDecoration: 'none',
-                                    textTransform: 'none',
-                                  },
+                                  ],
                                 },
                               },
                               [],
@@ -3497,24 +3593,30 @@ const beforeCreate = ({
       if (detailButton.type === 'COMPONENT') {
         detailButton.ref = { id: '#detailButton' };
         detailButton.style = {
-          overwrite: {
-            backgroundColor: {
-              type: 'STATIC',
-              value: 'transparent',
+          name: 'Filled',
+          overwrite: [
+            {
+              name: 'basis',
+              cssObject: {
+                backgroundColor: {
+                  type: 'STATIC',
+                  value: 'transparent',
+                },
+                boxShadow: 'none',
+                color: {
+                  type: 'THEME_COLOR',
+                  value: 'accent2',
+                },
+                fontFamily: 'Roboto',
+                fontSize: '0.875rem',
+                fontStyle: 'none',
+                fontWeight: '400',
+                padding: ['0.6875rem', '0.6875rem'],
+                textDecoration: 'none',
+                textTransform: 'none',
+              },
             },
-            boxShadow: 'none',
-            color: {
-              type: 'THEME_COLOR',
-              value: 'accent2',
-            },
-            fontFamily: 'Roboto',
-            fontSize: '0.875rem',
-            fontStyle: 'none',
-            fontWeight: '400',
-            padding: ['0.6875rem', '0.6875rem'],
-            textDecoration: 'none',
-            textTransform: 'none',
-          },
+          ],
         };
         setOption(
           detailButton,
@@ -3533,24 +3635,30 @@ const beforeCreate = ({
       const editButton = cloneStructure('Button');
       if (editButton.type === 'COMPONENT') {
         editButton.style = {
-          overwrite: {
-            backgroundColor: {
-              type: 'STATIC',
-              value: 'transparent',
+          name: 'Filled',
+          overwrite: [
+            {
+              name: 'basis',
+              cssObject: {
+                backgroundColor: {
+                  type: 'STATIC',
+                  value: 'transparent',
+                },
+                boxShadow: 'none',
+                color: {
+                  type: 'THEME_COLOR',
+                  value: 'primary',
+                },
+                fontFamily: 'Roboto',
+                fontSize: '0.875rem',
+                fontStyle: 'none',
+                fontWeight: '400',
+                padding: ['0.6875rem', '0.6875rem'],
+                textDecoration: 'none',
+                textTransform: 'none',
+              },
             },
-            boxShadow: 'none',
-            color: {
-              type: 'THEME_COLOR',
-              value: 'primary',
-            },
-            fontFamily: 'Roboto',
-            fontSize: '0.875rem',
-            fontStyle: 'none',
-            fontWeight: '400',
-            padding: ['0.6875rem', '0.6875rem'],
-            textDecoration: 'none',
-            textTransform: 'none',
-          },
+          ],
         };
         editButton.ref = { id: '#editButton' };
         setOption(editButton, 'buttonText', (opts: PrefabComponentOption) => ({
@@ -3569,24 +3677,30 @@ const beforeCreate = ({
           id: '#deleteButton',
         };
         deleteButton.style = {
-          overwrite: {
-            backgroundColor: {
-              type: 'STATIC',
-              value: 'transparent',
+          name: 'Filled',
+          overwrite: [
+            {
+              name: 'basis',
+              cssObject: {
+                backgroundColor: {
+                  type: 'STATIC',
+                  value: 'transparent',
+                },
+                boxShadow: 'none',
+                color: {
+                  type: 'STATIC',
+                  value: 'red',
+                },
+                fontFamily: 'Roboto',
+                fontSize: '0.875rem',
+                fontStyle: 'none',
+                fontWeight: '400',
+                padding: ['0.6875rem', '0.6875rem'],
+                textDecoration: 'none',
+                textTransform: 'none',
+              },
             },
-            boxShadow: 'none',
-            color: {
-              type: 'STATIC',
-              value: 'red',
-            },
-            fontFamily: 'Roboto',
-            fontSize: '0.875rem',
-            fontStyle: 'none',
-            fontWeight: '400',
-            padding: ['0.6875rem', '0.6875rem'],
-            textDecoration: 'none',
-            textTransform: 'none',
-          },
+          ],
         };
 
         setOption(
@@ -4101,24 +4215,30 @@ const beforeCreate = ({
         const deleteSubmitButton = cloneStructure('Submit Button');
         if (deleteSubmitButton.type === 'COMPONENT') {
           deleteSubmitButton.style = {
-            overwrite: {
-              backgroundColor: {
-                type: 'STATIC',
-                value: 'red',
+            name: 'Filled',
+            overwrite: [
+              {
+                name: 'basis',
+                cssObject: {
+                  backgroundColor: {
+                    type: 'STATIC',
+                    value: 'red',
+                  },
+                  boxShadow: 'none',
+                  color: {
+                    type: 'THEME_COLOR',
+                    value: 'white',
+                  },
+                  fontFamily: 'Roboto',
+                  fontSize: '0.875rem',
+                  fontStyle: 'none',
+                  fontWeight: '400',
+                  padding: ['0.6875rem', '1.375rem'],
+                  textDecoration: 'none',
+                  textTransform: 'none',
+                },
               },
-              boxShadow: 'none',
-              color: {
-                type: 'THEME_COLOR',
-                value: 'white',
-              },
-              fontFamily: 'Roboto',
-              fontSize: '0.875rem',
-              fontStyle: 'none',
-              fontWeight: '400',
-              padding: ['0.6875rem', '1.375rem'],
-              textDecoration: 'none',
-              textTransform: 'none',
-            },
+            ],
           };
           setOption(
             deleteSubmitButton,

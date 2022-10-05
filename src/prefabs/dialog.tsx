@@ -238,18 +238,24 @@ export default prefab('Dialog', attr, undefined, [
                     {
                       ref: { id: '#closeBtn' },
                       style: {
-                        overwrite: {
-                          backgroundColor: {
-                            type: 'STATIC',
-                            value: 'Transparent',
+                        name: 'Filled',
+                        overwrite: [
+                          {
+                            name: 'basis',
+                            cssObject: {
+                              backgroundColor: {
+                                type: 'STATIC',
+                                value: 'Transparent',
+                              },
+                              boxShadow: 'none',
+                              color: {
+                                type: 'THEME_COLOR',
+                                value: 'light',
+                              },
+                              padding: ['0rem'],
+                            },
                           },
-                          boxShadow: 'none',
-                          color: {
-                            type: 'THEME_COLOR',
-                            value: 'light',
-                          },
-                          padding: ['0rem'],
-                        },
+                        ],
                       },
                       options: {
                         ...buttonOptions,

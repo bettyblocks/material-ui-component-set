@@ -7,7 +7,7 @@ export const AppBar = (
   descendants: PrefabReference[] = [],
 ) => {
   const options = { ...(config.options || appBarOptions) };
-  const style = { ...config.style };
+  const style = config.style ? { style: config.style } : {};
   const ref = config.ref ? { ...config.ref } : undefined;
   const label = config.label ? config.label : undefined;
   const optionCategories = config.optionCategories
@@ -16,7 +16,7 @@ export const AppBar = (
 
   return component(
     'AppBar',
-    { options, style, ref, label, optionCategories },
+    { options, ...style, ref, label, optionCategories },
     descendants,
   );
 };

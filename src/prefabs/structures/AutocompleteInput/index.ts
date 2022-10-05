@@ -28,7 +28,7 @@ export const AutocompleteInput = (
 
   return component(
     'AutocompleteInput',
-    { options, style, ref, label },
+    { options, ...style, ref, label },
     descendants,
   );
 };

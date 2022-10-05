@@ -8,7 +8,7 @@ export const MultiAutocomplete = (
   descendants: PrefabReference[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
-  const style = { ...config.style };
+  const style = config.style ? { style: config.style } : {};
   const ref = config.ref ? { ...config.ref } : undefined;
   const label = config.label ? config.label : undefined;
 
@@ -28,7 +28,7 @@ export const MultiAutocomplete = (
 
   return component(
     'Multi Autocomplete Beta',
-    { options, style, ref, label },
+    { options, ...style, ref, label },
     descendants,
   );
 };

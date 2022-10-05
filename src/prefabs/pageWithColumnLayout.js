@@ -2554,24 +2554,30 @@
                                     {
                                       name: 'Button',
                                       style: {
-                                        overwrite: {
-                                          backgroundColor: {
-                                            type: 'STATIC',
-                                            value: 'transparent',
+                                        name: 'Filled',
+                                        overwrite: [
+                                          {
+                                            name: 'basis',
+                                            cssObject: {
+                                              backgroundColor: {
+                                                type: 'STATIC',
+                                                value: 'transparent',
+                                              },
+                                              boxShadow: 'none',
+                                              color: {
+                                                type: 'THEME_COLOR',
+                                                value: 'white',
+                                              },
+                                              fontFamily: 'Roboto',
+                                              fontSize: '0.875rem',
+                                              fontStyle: 'none',
+                                              fontWeight: '400',
+                                              padding: ['0rem', '0rem'],
+                                              textDecoration: 'none',
+                                              textTransform: 'none',
+                                            },
                                           },
-                                          boxShadow: 'none',
-                                          color: {
-                                            type: 'THEME_COLOR',
-                                            value: 'white',
-                                          },
-                                          fontFamily: 'Roboto',
-                                          fontSize: '0.875rem',
-                                          fontStyle: 'none',
-                                          fontWeight: '400',
-                                          padding: ['0rem', '0rem'],
-                                          textDecoration: 'none',
-                                          textTransform: 'none',
-                                        },
+                                        ],
                                       },
                                       options: [
                                         {
@@ -2924,24 +2930,30 @@
                                     {
                                       name: 'Button',
                                       style: {
-                                        overwrite: {
-                                          backgroundColor: {
-                                            type: 'STATIC',
-                                            value: 'transparent',
+                                        name: 'Filled',
+                                        overwrite: [
+                                          {
+                                            name: 'basis',
+                                            cssObject: {
+                                              backgroundColor: {
+                                                type: 'STATIC',
+                                                value: 'transparent',
+                                              },
+                                              boxShadow: 'none',
+                                              color: {
+                                                type: 'THEME_COLOR',
+                                                value: 'white',
+                                              },
+                                              fontFamily: 'Roboto',
+                                              fontSize: '0.875rem',
+                                              fontStyle: 'none',
+                                              fontWeight: '400',
+                                              padding: ['0rem', '0rem'],
+                                              textDecoration: 'none',
+                                              textTransform: 'none',
+                                            },
                                           },
-                                          boxShadow: 'none',
-                                          color: {
-                                            type: 'THEME_COLOR',
-                                            value: 'white',
-                                          },
-                                          fontFamily: 'Roboto',
-                                          fontSize: '0.875rem',
-                                          fontStyle: 'none',
-                                          fontWeight: '400',
-                                          padding: ['0rem', '0rem'],
-                                          textDecoration: 'none',
-                                          textTransform: 'none',
-                                        },
+                                        ],
                                       },
                                       options: [
                                         {

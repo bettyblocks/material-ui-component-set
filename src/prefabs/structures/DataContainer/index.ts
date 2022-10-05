@@ -10,7 +10,7 @@ export const DataContainer = (
   descendants: PrefabComponent[] = [],
 ) => {
   const options = { ...(config.options || dataContainerOptions) };
-  const style = { ...config.style };
+  const style = config.style ? { style: config.style } : {};
   const ref = config.ref ? { ...config.ref } : undefined;
   const label = config.label ? config.label : undefined;
   const optionCategories = config.optionCategories
@@ -19,7 +19,7 @@ export const DataContainer = (
 
   return component(
     'DataContainer',
-    { options, style, ref, label, optionCategories },
+    { options, ...style, ref, label, optionCategories },
     descendants,
   );
 };
