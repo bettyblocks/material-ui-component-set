@@ -19,7 +19,7 @@ export default prefab('Navigation Bar', attr, undefined, [
         overwrite: [
           {
             name: 'basis',
-            cssObject: {
+            content: {
               boxShadow: 'none',
               textTransform: 'none',
               fontWeight: '400',
@@ -38,7 +38,7 @@ export default prefab('Navigation Bar', attr, undefined, [
         overwrite: [
           {
             name: 'basis',
-            cssObject: {
+            content: {
               boxShadow: 'none',
               textTransform: 'none',
               fontWeight: '400',

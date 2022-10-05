@@ -408,7 +408,7 @@ const prefabStructure = [
                                               overwrite: [
                                                 {
                                                   name: 'basis',
-                                                  cssObject: {
+                                                  content: {
                                                     backgroundColor: {
                                                       type: 'STATIC',
                                                       value: 'transparent',
@@ -459,7 +459,7 @@ const prefabStructure = [
                                               overwrite: [
                                                 {
                                                   name: 'basis',
-                                                  cssObject: {
+                                                  content: {
                                                     backgroundColor: {
                                                       type: 'STATIC',
                                                       value: 'transparent',
@@ -751,7 +751,7 @@ const prefabStructure = [
                                                       overwrite: [
                                                         {
                                                           name: 'basis',
-                                                          cssObject: {
+                                                          content: {
                                                             backgroundColor: {
                                                               type: 'STATIC',
                                                               value:
@@ -829,7 +829,7 @@ const prefabStructure = [
                                                       overwrite: [
                                                         {
                                                           name: 'basis',
-                                                          cssObject: {
+                                                          content: {
                                                             backgroundColor: {
                                                               type: 'STATIC',
                                                               value:

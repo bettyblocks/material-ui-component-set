@@ -708,7 +708,7 @@ export default makePrefab('Card view', attrs, beforeCreate, [
                                               overwrite: [
                                                 {
                                                   name: 'basis',
-                                                  cssObject: {
+                                                  content: {
                                                     backgroundColor: {
                                                       type: 'STATIC',
                                                       value: 'transparent',
@@ -757,7 +757,7 @@ export default makePrefab('Card view', attrs, beforeCreate, [
                                               overwrite: [
                                                 {
                                                   name: 'basis',
-                                                  cssObject: {
+                                                  content: {
                                                     backgroundColor: {
                                                       type: 'STATIC',
                                                       value: 'transparent',
@@ -1306,7 +1306,7 @@ export default makePrefab('Card view', attrs, beforeCreate, [
                                                 overwrite: [
                                                   {
                                                     name: 'basis',
-                                                    cssObject: {
+                                                    content: {
                                                       backgroundColor: {
                                                         type: 'STATIC',
                                                         value: 'transparent',

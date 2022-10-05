@@ -32,7 +32,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // export const states = [
 //   {
 //     name: 'disabled',
-//     cssObject: {
+//     content: {
 //       backgroundColor: {
 //         type: 'THEME_COLOR',
 //         value: 'secondary',

@@ -6421,7 +6421,7 @@
                                                               overwrite: [
                                                                 {
                                                                   name: 'basis',
-                                                                  cssObject: {
+                                                                  content: {
                                                                     backgroundColor:
                                                                       {
                                                                         type: 'STATIC',
@@ -6953,7 +6953,7 @@
                                                           overwrite: [
                                                             {
                                                               name: 'basis',
-                                                              cssObject: {
+                                                              content: {
                                                                 backgroundColor:
                                                                   {
                                                                     type: 'THEME_COLOR',
@@ -7654,7 +7654,7 @@
                                                           overwrite: [
                                                             {
                                                               name: 'basis',
-                                                              cssObject: {
+                                                              content: {
                                                                 backgroundColor:
                                                                   {
                                                                     type: 'THEME_COLOR',

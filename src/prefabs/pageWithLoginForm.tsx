@@ -771,7 +771,7 @@ const prefabStructure: PrefabComponent[] = [
                                                           overwrite: [
                                                             {
                                                               name: 'basis',
-                                                              cssObject: {
+                                                              content: {
                                                                 backgroundColor:
                                                                   {
                                                                     type: 'THEME_COLOR',
@@ -879,7 +879,7 @@ const prefabStructure: PrefabComponent[] = [
                                                               overwrite: [
                                                                 {
                                                                   name: 'basis',
-                                                                  cssObject: {
+                                                                  content: {
                                                                     backgroundColor:
                                                                       {
                                                                         type: 'STATIC',
@@ -937,7 +937,7 @@ const prefabStructure: PrefabComponent[] = [
                                                               overwrite: [
                                                                 {
                                                                   name: 'basis',
-                                                                  cssObject: {
+                                                                  content: {
                                                                     backgroundColor:
                                                                       {
                                                                         type: 'STATIC',

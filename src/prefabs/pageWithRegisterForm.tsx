@@ -1392,7 +1392,7 @@ export default makePrefab('Register form', attrs, beforeCreate, [
                                                   overwrite: [
                                                     {
                                                       name: 'basis',
-                                                      cssObject: {
+                                                      content: {
                                                         backgroundColor: {
                                                           type: 'STATIC',
                                                           value: 'transparent',
@@ -1582,7 +1582,7 @@ export default makePrefab('Register form', attrs, beforeCreate, [
                                                       overwrite: [
                                                         {
                                                           name: 'basis',
-                                                          cssObject: {
+                                                          content: {
                                                             backgroundColor: {
                                                               type: 'THEME_COLOR',
                                                               value: 'primary',

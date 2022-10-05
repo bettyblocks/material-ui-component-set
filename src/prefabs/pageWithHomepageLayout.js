@@ -591,7 +591,7 @@
                 overwrite: [
                   {
                     name: 'basis',
-                    cssObject: {
+                    content: {
                       backgroundColor: {
                         type: 'THEME_COLOR',
                         value: 'transparent',
@@ -6272,7 +6272,7 @@
                               overwrite: [
                                 {
                                   name: 'basis',
-                                  cssObject: {
+                                  content: {
                                     backgroundColor: {
                                       type: 'STATIC',
                                       value: 'transparent',
@@ -7662,7 +7662,7 @@
                               overwrite: [
                                 {
                                   name: 'basis',
-                                  cssObject: {
+                                  content: {
                                     backgroundColor: {
                                       type: 'THEME_COLOR',
                                       value: 'primary',
@@ -13370,7 +13370,7 @@
                               overwrite: [
                                 {
                                   name: 'basis',
-                                  cssObject: {
+                                  content: {
                                     backgroundColor: {
                                       type: 'THEME_COLOR',
                                       value: 'primary',
@@ -20807,7 +20807,7 @@
                             overwrite: [
                               {
                                 name: 'basis',
-                                cssObject: {
+                                content: {
                                   backgroundColor: {
                                     type: 'STATIC',
                                     value: 'transparent',
@@ -21142,7 +21142,7 @@
                             overwrite: [
                               {
                                 name: 'basis',
-                                cssObject: {
+                                content: {
                                   backgroundColor: {
                                     type: 'STATIC',
                                     value: 'transparent',
@@ -21477,7 +21477,7 @@
                             overwrite: [
                               {
                                 name: 'basis',
-                                cssObject: {
+                                content: {
                                   backgroundColor: {
                                     type: 'STATIC',
                                     value: 'transparent',
@@ -21812,7 +21812,7 @@
                             overwrite: [
                               {
                                 name: 'basis',
-                                cssObject: {
+                                content: {
                                   backgroundColor: {
                                     type: 'STATIC',
                                     value: 'transparent',
@@ -22147,7 +22147,7 @@
                             overwrite: [
                               {
                                 name: 'basis',
-                                cssObject: {
+                                content: {
                                   backgroundColor: {
                                     type: 'STATIC',
                                     value: 'transparent',

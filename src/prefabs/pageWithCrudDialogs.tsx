@@ -1303,7 +1303,7 @@ const beforeCreate = ({
         overwrite: [
           {
             name: 'basis',
-            cssObject: {
+            content: {
               backgroundColor: {
                 type: 'STATIC',
                 value: 'red',
@@ -1709,7 +1709,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                               overwrite: [
                                                 {
                                                   name: 'basis',
-                                                  cssObject: {
+                                                  content: {
                                                     backgroundColor: {
                                                       type: 'STATIC',
                                                       value: 'transparent',
@@ -1758,7 +1758,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                               overwrite: [
                                                 {
                                                   name: 'basis',
-                                                  cssObject: {
+                                                  content: {
                                                     backgroundColor: {
                                                       type: 'STATIC',
                                                       value: 'transparent',
@@ -2166,7 +2166,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                           overwrite: [
                                             {
                                               name: 'basis',
-                                              cssObject: {
+                                              content: {
                                                 backgroundColor: {
                                                   type: 'THEME_COLOR',
                                                   value: 'primary',
@@ -2588,7 +2588,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                   overwrite: [
                                                     {
                                                       name: 'basis',
-                                                      cssObject: {
+                                                      content: {
                                                         backgroundColor: {
                                                           type: 'STATIC',
                                                           value: 'transparent',
@@ -2636,7 +2636,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                   overwrite: [
                                                     {
                                                       name: 'basis',
-                                                      cssObject: {
+                                                      content: {
                                                         backgroundColor: {
                                                           type: 'STATIC',
                                                           value: 'transparent',
@@ -2683,7 +2683,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                   overwrite: [
                                                     {
                                                       name: 'basis',
-                                                      cssObject: {
+                                                      content: {
                                                         backgroundColor: {
                                                           type: 'STATIC',
                                                           value: 'transparent',
@@ -2934,7 +2934,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                 overwrite: [
                                                                   {
                                                                     name: 'basis',
-                                                                    cssObject: {
+                                                                    content: {
                                                                       backgroundColor:
                                                                         {
                                                                           type: 'STATIC',
@@ -3093,7 +3093,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                 overwrite: [
                                                                   {
                                                                     name: 'basis',
-                                                                    cssObject: {
+                                                                    content: {
                                                                       fontWeight:
                                                                         '400',
                                                                       textTransform:
@@ -3127,7 +3127,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                 overwrite: [
                                                                   {
                                                                     name: 'basis',
-                                                                    cssObject: {
+                                                                    content: {
                                                                       backgroundColor:
                                                                         {
                                                                           type: 'THEME_COLOR',
@@ -3300,7 +3300,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                 overwrite: [
                                                                   {
                                                                     name: 'basis',
-                                                                    cssObject: {
+                                                                    content: {
                                                                       backgroundColor:
                                                                         {
                                                                           type: 'STATIC',
@@ -3459,7 +3459,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                 overwrite: [
                                                                   {
                                                                     name: 'basis',
-                                                                    cssObject: {
+                                                                    content: {
                                                                       fontWeight:
                                                                         '400',
                                                                       textTransform:
@@ -3512,7 +3512,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                     overwrite: [
                                                                       {
                                                                         name: 'basis',
-                                                                        cssObject:
+                                                                        content:
                                                                           {
                                                                             borderColor:
                                                                               {
@@ -3580,7 +3580,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                     overwrite: [
                                                                       {
                                                                         name: 'basis',
-                                                                        cssObject:
+                                                                        content:
                                                                           {
                                                                             backgroundColor:
                                                                               {
@@ -3761,7 +3761,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                 overwrite: [
                                                                   {
                                                                     name: 'basis',
-                                                                    cssObject: {
+                                                                    content: {
                                                                       backgroundColor:
                                                                         {
                                                                           type: 'STATIC',
@@ -3917,7 +3917,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                 overwrite: [
                                                                   {
                                                                     name: 'basis',
-                                                                    cssObject: {
+                                                                    content: {
                                                                       fontWeight:
                                                                         '400',
                                                                       textTransform:
@@ -3970,7 +3970,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                     overwrite: [
                                                                       {
                                                                         name: 'basis',
-                                                                        cssObject:
+                                                                        content:
                                                                           {
                                                                             borderColor:
                                                                               {
@@ -4038,7 +4038,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                     overwrite: [
                                                                       {
                                                                         name: 'basis',
-                                                                        cssObject:
+                                                                        content:
                                                                           {
                                                                             backgroundColor:
                                                                               {
@@ -4222,7 +4222,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                 overwrite: [
                                                                   {
                                                                     name: 'basis',
-                                                                    cssObject: {
+                                                                    content: {
                                                                       backgroundColor:
                                                                         {
                                                                           type: 'STATIC',
@@ -4378,7 +4378,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                 overwrite: [
                                                                   {
                                                                     name: 'basis',
-                                                                    cssObject: {
+                                                                    content: {
                                                                       fontWeight:
                                                                         '400',
                                                                       textTransform:

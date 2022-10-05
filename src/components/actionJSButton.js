@@ -3,7 +3,7 @@
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'VERTICAL',
-  styleType: 'BUTTON',
+  styleType: 'Button',
   jsx: (() => {
     const { CircularProgress, Tooltip, Link } = window.MaterialUI.Core;
     const {

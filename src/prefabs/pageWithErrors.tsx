@@ -240,7 +240,7 @@ const beforeCreate = ({
           overwrite: [
             {
               name: 'basis',
-              cssObject: {
+              content: {
                 boxShadow: 'none',
                 padding: ['0.6875rem', '1.375rem'],
                 fontWeight: '400',
@@ -412,7 +412,7 @@ const beforeCreate = ({
           overwrite: [
             {
               name: 'basis',
-              cssObject: {
+              content: {
                 boxShadow: 'none',
                 padding: ['0.6875rem', '1.375rem'],
                 fontWeight: '400',

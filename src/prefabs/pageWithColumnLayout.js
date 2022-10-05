@@ -2558,7 +2558,7 @@
                                         overwrite: [
                                           {
                                             name: 'basis',
-                                            cssObject: {
+                                            content: {
                                               backgroundColor: {
                                                 type: 'STATIC',
                                                 value: 'transparent',
@@ -2934,7 +2934,7 @@
                                         overwrite: [
                                           {
                                             name: 'basis',
-                                            cssObject: {
+                                            content: {
                                               backgroundColor: {
                                                 type: 'STATIC',
                                                 value: 'transparent',

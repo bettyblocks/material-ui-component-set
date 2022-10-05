@@ -930,7 +930,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                               overwrite: [
                                                 {
                                                   name: 'basis',
-                                                  cssObject: {
+                                                  content: {
                                                     backgroundColor: {
                                                       type: 'STATIC',
                                                       value: 'transparent',
@@ -979,7 +979,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                               overwrite: [
                                                 {
                                                   name: 'basis',
-                                                  cssObject: {
+                                                  content: {
                                                     backgroundColor: {
                                                       type: 'STATIC',
                                                       value: 'transparent',
@@ -3512,7 +3512,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                                 overwrite: [
                                                   {
                                                     name: 'basis',
-                                                    cssObject: {
+                                                    content: {
                                                       backgroundColor: {
                                                         type: 'THEME_COLOR',
                                                         value: 'primary',

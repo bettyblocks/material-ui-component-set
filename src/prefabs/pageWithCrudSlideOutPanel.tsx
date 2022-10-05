@@ -461,7 +461,7 @@ const drawerContainer = DrawerContainer(
                                         overwrite: [
                                           {
                                             name: 'basis',
-                                            cssObject: {
+                                            content: {
                                               backgroundColor: {
                                                 type: 'STATIC',
                                                 value: 'transparent',
@@ -501,7 +501,7 @@ const drawerContainer = DrawerContainer(
                                         overwrite: [
                                           {
                                             name: 'basis',
-                                            cssObject: {
+                                            content: {
                                               backgroundColor: {
                                                 type: 'STATIC',
                                                 value: 'transparent',
@@ -1046,7 +1046,7 @@ const drawerContainer = DrawerContainer(
                                                           overwrite: [
                                                             {
                                                               name: 'basis',
-                                                              cssObject: {
+                                                              content: {
                                                                 backgroundColor:
                                                                   {
                                                                     type: 'THEME_COLOR',
@@ -1176,30 +1176,28 @@ const drawerContainer = DrawerContainer(
                                                                   overwrite: [
                                                                     {
                                                                       name: 'basis',
-                                                                      cssObject:
-                                                                        {
-                                                                          backgroundColor:
-                                                                            {
-                                                                              type: 'STATIC',
-                                                                              value:
-                                                                                'transparent',
-                                                                            },
-                                                                          boxShadow:
-                                                                            'none',
-                                                                          color:
-                                                                            {
-                                                                              type: 'THEME_COLOR',
-                                                                              value:
-                                                                                'light',
-                                                                            },
-                                                                          padding:
-                                                                            [
-                                                                              '0rem',
-                                                                              '0.6875rem',
-                                                                              '0.6875rem',
-                                                                              '0.6875rem',
-                                                                            ],
+                                                                      content: {
+                                                                        backgroundColor:
+                                                                          {
+                                                                            type: 'STATIC',
+                                                                            value:
+                                                                              'transparent',
+                                                                          },
+                                                                        boxShadow:
+                                                                          'none',
+                                                                        color: {
+                                                                          type: 'THEME_COLOR',
+                                                                          value:
+                                                                            'light',
                                                                         },
+                                                                        padding:
+                                                                          [
+                                                                            '0rem',
+                                                                            '0.6875rem',
+                                                                            '0.6875rem',
+                                                                            '0.6875rem',
+                                                                          ],
+                                                                      },
                                                                     },
                                                                   ],
                                                                 },
@@ -1391,7 +1389,7 @@ const drawerContainer = DrawerContainer(
                                                                     overwrite: [
                                                                       {
                                                                         name: 'basis',
-                                                                        cssObject:
+                                                                        content:
                                                                           {
                                                                             backgroundColor:
                                                                               {
@@ -2260,7 +2258,7 @@ const drawerBar = DrawerBar(
                                   overwrite: [
                                     {
                                       name: 'basis',
-                                      cssObject: {
+                                      content: {
                                         backgroundColor: {
                                           type: 'STATIC',
                                           value: 'Transparent',
@@ -2356,7 +2354,7 @@ const drawerBar = DrawerBar(
                                   overwrite: [
                                     {
                                       name: 'basis',
-                                      cssObject: {
+                                      content: {
                                         backgroundColor: {
                                           type: 'STATIC',
                                           value: 'transparent',
@@ -2402,7 +2400,7 @@ const drawerBar = DrawerBar(
                                   overwrite: [
                                     {
                                       name: 'basis',
-                                      cssObject: {
+                                      content: {
                                         backgroundColor: {
                                           type: 'THEME_COLOR',
                                           value: 'primary',
@@ -2586,7 +2584,7 @@ const drawerBar = DrawerBar(
                                   overwrite: [
                                     {
                                       name: 'basis',
-                                      cssObject: {
+                                      content: {
                                         backgroundColor: {
                                           type: 'STATIC',
                                           value: 'Transparent',
@@ -2670,7 +2668,7 @@ const drawerBar = DrawerBar(
                                   overwrite: [
                                     {
                                       name: 'basis',
-                                      cssObject: {
+                                      content: {
                                         backgroundColor: {
                                           type: 'STATIC',
                                           value: 'transparent',
@@ -2716,7 +2714,7 @@ const drawerBar = DrawerBar(
                                   overwrite: [
                                     {
                                       name: 'basis',
-                                      cssObject: {
+                                      content: {
                                         backgroundColor: {
                                           type: 'THEME_COLOR',
                                           value: 'primary',
@@ -2898,7 +2896,7 @@ const drawerBar = DrawerBar(
                                   overwrite: [
                                     {
                                       name: 'basis',
-                                      cssObject: {
+                                      content: {
                                         backgroundColor: {
                                           type: 'STATIC',
                                           value: 'Transparent',
@@ -2993,7 +2991,7 @@ const drawerBar = DrawerBar(
                                   overwrite: [
                                     {
                                       name: 'basis',
-                                      cssObject: {
+                                      content: {
                                         backgroundColor: {
                                           type: 'STATIC',
                                           value: 'transparent',
@@ -3039,7 +3037,7 @@ const drawerBar = DrawerBar(
                                   overwrite: [
                                     {
                                       name: 'basis',
-                                      cssObject: {
+                                      content: {
                                         backgroundColor: {
                                           type: 'THEME_COLOR',
                                           value: 'primary',
@@ -3597,7 +3595,7 @@ const beforeCreate = ({
           overwrite: [
             {
               name: 'basis',
-              cssObject: {
+              content: {
                 backgroundColor: {
                   type: 'STATIC',
                   value: 'transparent',
@@ -3639,7 +3637,7 @@ const beforeCreate = ({
           overwrite: [
             {
               name: 'basis',
-              cssObject: {
+              content: {
                 backgroundColor: {
                   type: 'STATIC',
                   value: 'transparent',
@@ -3681,7 +3679,7 @@ const beforeCreate = ({
           overwrite: [
             {
               name: 'basis',
-              cssObject: {
+              content: {
                 backgroundColor: {
                   type: 'STATIC',
                   value: 'transparent',
@@ -4219,7 +4217,7 @@ const beforeCreate = ({
             overwrite: [
               {
                 name: 'basis',
-                cssObject: {
+                content: {
                   backgroundColor: {
                     type: 'STATIC',
                     value: 'red',

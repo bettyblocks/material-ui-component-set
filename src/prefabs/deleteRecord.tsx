@@ -432,7 +432,7 @@ export default makePrefab('Delete Record', attr, beforeCreate, [
                             overwrite: [
                               {
                                 name: 'basis',
-                                cssObject: {
+                                content: {
                                   backgroundColor: {
                                     type: 'STATIC',
                                     value: 'Transparent',

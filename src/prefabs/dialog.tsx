@@ -242,7 +242,7 @@ export default prefab('Dialog', attr, undefined, [
                         overwrite: [
                           {
                             name: 'basis',
-                            cssObject: {
+                            content: {
                               backgroundColor: {
                                 type: 'STATIC',
                                 value: 'Transparent',
