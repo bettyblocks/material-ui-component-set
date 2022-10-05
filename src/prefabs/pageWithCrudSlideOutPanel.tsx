@@ -593,8 +593,8 @@ const drawerContainer = DrawerContainer(
                                 configuration: {
                                   as: 'BUTTONGROUP',
                                   allowedInput: [
-                                    { name: 'Overview', value: false },
-                                    { name: 'Record view', value: true },
+                                    { name: 'Overview', value: 'false' },
+                                    { name: 'Record view', value: 'true' },
                                   ],
                                 },
                               }),

@@ -536,8 +536,8 @@ const drawerContainer = DrawerContainer(
               as: 'BUTTONGROUP',
               dataType: 'boolean',
               allowedInput: [
-                { name: 'Overview', value: false },
-                { name: 'Record view', value: true },
+                { name: 'Overview', value: 'false' },
+                { name: 'Record view', value: 'true' },
               ],
             },
             value: {
