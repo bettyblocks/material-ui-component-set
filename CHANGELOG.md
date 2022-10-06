@@ -1,3 +1,10 @@
+# [2.59.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.58.1...v2.59.0) (2022-10-06)
+
+
+### Features
+
+* refactor homepage template to tsx ([e2a0edc](https://github.com/bettyblocks/material-ui-component-set/commit/e2a0edc129b59ca56931f42ccf78d989090d4b51))
+
 ## [2.58.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.58.0...v2.58.1) (2022-10-06)
 
 
