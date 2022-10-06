@@ -4011,6 +4011,12 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                         ],
                                                       },
                                                     ),
+                                                    backgroundColor: color(
+                                                      'Background color',
+                                                      {
+                                                        value: ThemeColor.WHITE,
+                                                      },
+                                                    ),
                                                   },
                                                 },
                                                 [
@@ -4658,6 +4664,12 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                           '0rem',
                                                           'M',
                                                         ],
+                                                      },
+                                                    ),
+                                                    backgroundColor: color(
+                                                      'Background color',
+                                                      {
+                                                        value: ThemeColor.WHITE,
                                                       },
                                                     ),
                                                   },
@@ -5309,6 +5321,12 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                         ],
                                                       },
                                                     ),
+                                                    backgroundColor: color(
+                                                      'Background color',
+                                                      {
+                                                        value: ThemeColor.WHITE,
+                                                      },
+                                                    ),
                                                   },
                                                 },
                                                 [
@@ -5954,6 +5972,12 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                           '0rem',
                                                           'M',
                                                         ],
+                                                      },
+                                                    ),
+                                                    backgroundColor: color(
+                                                      'Background color',
+                                                      {
+                                                        value: ThemeColor.WHITE,
                                                       },
                                                     ),
                                                   },
