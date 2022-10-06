@@ -51,32 +51,27 @@
     const [, setOptions] = useOptions();
     const [isDisabled, setIsDisabled] = useState(disabled);
 
-    const [callActionJs] = useActionJs(actionId);
-
     const prop = !isDev && property && getProperty(property);
     const propValue = !isDev && property && useProperty(property.id);
 
-    const actionCallback = () => {
-      setIsLoading(true);
-      callActionJs({
+    const [actionCallback, { loading }] = useActionJs(actionId, {
+      variables: {
+        id: actionId,
         ...(prop
           ? {
-              variables: {
-                input: {
-                  [prop.name]: propValue,
-                },
+              input: {
+                [prop.name]: propValue,
               },
             }
           : {}),
-      })
-        .then((response) => {
-          B.triggerEvent('onActionSuccess', response.data.action.results);
-        })
-        .catch((error) => {
-          B.triggerEvent('onActionError', error);
-        })
-        .finally(() => setIsLoading(false));
-    };
+      },
+      onCompleted(response) {
+        B.triggerEvent('onActionSuccess', response.action.results);
+      },
+      onError(error) {
+        B.triggerEvent('onActionError', error);
+      },
+    });
 
     useEffect(() => {
       setIsVisible(visible);
@@ -99,10 +94,10 @@
       B.defineFunction('Enable', () => setIsDisabled(false));
       B.defineFunction('Disable', () => setIsDisabled(true));
 
-      if (isLoading) {
-        B.triggerEvent('onActionLoad', isLoading);
+      if (loading) {
+        B.triggerEvent('onActionLoad', loading);
       }
-    }, [isLoading]);
+    }, [loading]);
 
     const getExternalHref = (config) => {
       if (config.disabled) {
@@ -124,7 +119,7 @@
       return undefined;
     };
 
-    const showIndicator = isLoading;
+    const showIndicator = isLoading || loading;
 
     const emptySpace = () => {
       if (icon === 'None') {
@@ -134,7 +129,7 @@
     };
 
     const buttonProps = {
-      disabled: disabled || isLoading,
+      disabled: disabled || isLoading || loading,
       tabIndex: isDev ? -1 : undefined,
       onClick: (event) => {
         event.stopPropagation();
