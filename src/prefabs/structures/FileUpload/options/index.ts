@@ -8,30 +8,6 @@ import { validation } from './validation';
 import { styles } from './styles';
 import { advanced } from './advanced';
 
-export const categories = [
-  {
-    label: 'Validation',
-    expanded: false,
-    members: [
-      'required',
-      'hideDefaultError',
-      'accept',
-      'maxFileSize',
-      'maxFileSizeMessage',
-    ],
-  },
-  {
-    label: 'Styling',
-    expanded: false,
-    members: ['hideLabel', 'labelColor', 'helperColor', 'errorColor'],
-  },
-  {
-    label: 'Advanced settings',
-    expanded: false,
-    members: ['nameAttribute', 'dataComponentAttribute', 'actionVariableId'],
-  },
-];
-
 export const options = (supportImages?: boolean) => {
   const style = styles(supportImages);
 
