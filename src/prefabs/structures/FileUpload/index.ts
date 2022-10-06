@@ -1,6 +1,6 @@
 import { component, toggle, variable } from '@betty-blocks/component-sdk';
 import { Button } from '../Button';
-import { options as defaultOptions } from './options';
+import { options as defaults, categories } from './options/index';
 import { buttonOptions } from '..';
 import { updateOption } from '../../../utils';
 
@@ -10,7 +10,7 @@ interface Configuration {
 }
 
 export const FileUpload = (config: Configuration = {}) => {
-  const options = defaultOptions(config.supportImages);
+  const options = defaults(config.supportImages);
 
   if (config.supportImages) {
     options.accept = updateOption(options.accept, {
@@ -18,14 +18,18 @@ export const FileUpload = (config: Configuration = {}) => {
     });
   }
 
-  return component('FileUploadInput', { options, label: config.label }, [
-    Button({
-      label: 'upload',
-      options: {
-        ...buttonOptions,
-        buttonText: variable('Button text', { value: ['Upload'] }),
-        fullWidth: toggle('Full width', { value: true }),
-      },
-    }),
-  ]);
+  return component(
+    'FileUploadInput',
+    { options, label: config.label, optionCategories: categories },
+    [
+      Button({
+        label: 'upload',
+        options: {
+          ...buttonOptions,
+          buttonText: variable('Button text', { value: ['Upload'] }),
+          fullWidth: toggle('Full width', { value: true }),
+        },
+      }),
+    ],
+  );
 };
