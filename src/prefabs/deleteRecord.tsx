@@ -14,6 +14,7 @@ import {
   PrefabReference,
   PrefabVariable,
   sizes,
+  styleReference,
   variable,
 } from '@betty-blocks/component-sdk';
 import {
@@ -427,26 +428,22 @@ export default makePrefab('Delete Record', attr, beforeCreate, [
                       Button(
                         {
                           ref: { id: '#closeBtn' },
-                          style: {
-                            name: 'Filled',
-                            overwrite: [
-                              {
-                                name: 'basis',
-                                content: {
-                                  backgroundColor: {
-                                    type: 'STATIC',
-                                    value: 'Transparent',
-                                  },
-                                  boxShadow: 'none',
-                                  color: {
-                                    type: 'THEME_COLOR',
-                                    value: 'light',
-                                  },
-                                  padding: ['0rem'],
+                          style: styleReference('Filled', {
+                            overwrite: {
+                              basis: {
+                                backgroundColor: {
+                                  type: 'STATIC',
+                                  value: 'Transparent',
                                 },
+                                boxShadow: 'none',
+                                color: {
+                                  type: 'THEME_COLOR',
+                                  value: 'light',
+                                },
+                                padding: ['0rem'],
                               },
-                            ],
-                          },
+                            },
+                          }),
                           options: {
                             ...buttonOptions,
                             buttonText: variable('Button text', {
@@ -513,9 +510,7 @@ export default makePrefab('Delete Record', attr, beforeCreate, [
                       Button(
                         {
                           ref: { id: '#cancelBtn' },
-                          style: {
-                            name: 'outline',
-                          },
+                          style: styleReference('outline', {}),
                           options: {
                             ...buttonOptions,
                             buttonText: variable('Button text', {

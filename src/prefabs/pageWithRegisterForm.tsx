@@ -24,6 +24,7 @@ import {
   linked,
   BeforeCreateArgs,
   PrefabComponent,
+  styleReference,
 } from '@betty-blocks/component-sdk';
 import {
   Box as BoxComponent,
@@ -1387,12 +1388,11 @@ export default makePrefab('Register form', attrs, beforeCreate, [
                                           [
                                             OpenPageButton(
                                               {
-                                                style: {
-                                                  name: 'Filled',
-                                                  overwrite: [
-                                                    {
-                                                      name: 'basis',
-                                                      content: {
+                                                style: styleReference(
+                                                  'Filled',
+                                                  {
+                                                    overwrite: {
+                                                      basis: {
                                                         backgroundColor: {
                                                           type: 'STATIC',
                                                           value: 'transparent',
@@ -1416,8 +1416,8 @@ export default makePrefab('Register form', attrs, beforeCreate, [
                                                         textTransform: 'none',
                                                       },
                                                     },
-                                                  ],
-                                                },
+                                                  },
+                                                ),
                                                 options: {
                                                   ...openPageButtonOptions,
                                                   buttonText: variable(
@@ -1577,12 +1577,11 @@ export default makePrefab('Register form', attrs, beforeCreate, [
                                                         },
                                                       ),
                                                     },
-                                                    style: {
-                                                      name: 'Filled',
-                                                      overwrite: [
-                                                        {
-                                                          name: 'basis',
-                                                          content: {
+                                                    style: styleReference(
+                                                      'Filled',
+                                                      {
+                                                        overwrite: {
+                                                          basis: {
                                                             backgroundColor: {
                                                               type: 'THEME_COLOR',
                                                               value: 'primary',
@@ -1608,8 +1607,8 @@ export default makePrefab('Register form', attrs, beforeCreate, [
                                                               'none',
                                                           },
                                                         },
-                                                      ],
-                                                    },
+                                                      },
+                                                    ),
                                                   },
                                                   [],
                                                 ),

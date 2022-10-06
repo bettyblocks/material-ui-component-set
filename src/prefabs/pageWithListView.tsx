@@ -24,6 +24,7 @@ import {
   PrefabComponentOption,
   linked,
   wrapper,
+  styleReference,
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
@@ -704,32 +705,28 @@ export default makePrefab('List view', attrs, beforeCreate, [
                                       [
                                         OpenPageButton(
                                           {
-                                            style: {
-                                              name: 'Filled',
-                                              overwrite: [
-                                                {
-                                                  name: 'basis',
-                                                  content: {
-                                                    backgroundColor: {
-                                                      type: 'STATIC',
-                                                      value: 'transparent',
-                                                    },
-                                                    boxShadow: 'none',
-                                                    color: {
-                                                      type: 'THEME_COLOR',
-                                                      value: 'white',
-                                                    },
-                                                    fontFamily: 'Roboto',
-                                                    fontSize: '0.875rem',
-                                                    fontStyle: 'none',
-                                                    fontWeight: '400',
-                                                    padding: ['0rem', '0rem'],
-                                                    textDecoration: 'none',
-                                                    textTransform: 'none',
+                                            style: styleReference('Filled', {
+                                              overwrite: {
+                                                basis: {
+                                                  backgroundColor: {
+                                                    type: 'STATIC',
+                                                    value: 'transparent',
                                                   },
+                                                  boxShadow: 'none',
+                                                  color: {
+                                                    type: 'THEME_COLOR',
+                                                    value: 'white',
+                                                  },
+                                                  fontFamily: 'Roboto',
+                                                  fontSize: '0.875rem',
+                                                  fontStyle: 'none',
+                                                  fontWeight: '400',
+                                                  padding: ['0rem', '0rem'],
+                                                  textDecoration: 'none',
+                                                  textTransform: 'none',
                                                 },
-                                              ],
-                                            },
+                                              },
+                                            }),
                                             options: {
                                               ...openPageButtonOptions,
                                               buttonText: variable(
@@ -753,32 +750,28 @@ export default makePrefab('List view', attrs, beforeCreate, [
                                         ),
                                         OpenPageButton(
                                           {
-                                            style: {
-                                              name: 'Filled',
-                                              overwrite: [
-                                                {
-                                                  name: 'basis',
-                                                  content: {
-                                                    backgroundColor: {
-                                                      type: 'STATIC',
-                                                      value: 'transparent',
-                                                    },
-                                                    boxShadow: 'none',
-                                                    color: {
-                                                      type: 'THEME_COLOR',
-                                                      value: 'white',
-                                                    },
-                                                    fontFamily: 'Roboto',
-                                                    fontSize: '0.875rem',
-                                                    fontStyle: 'none',
-                                                    fontWeight: '400',
-                                                    padding: ['0rem', '0rem'],
-                                                    textDecoration: 'none',
-                                                    textTransform: 'none',
+                                            style: styleReference('Filled', {
+                                              overwrite: {
+                                                basis: {
+                                                  backgroundColor: {
+                                                    type: 'STATIC',
+                                                    value: 'transparent',
                                                   },
+                                                  boxShadow: 'none',
+                                                  color: {
+                                                    type: 'THEME_COLOR',
+                                                    value: 'white',
+                                                  },
+                                                  fontFamily: 'Roboto',
+                                                  fontSize: '0.875rem',
+                                                  fontStyle: 'none',
+                                                  fontWeight: '400',
+                                                  padding: ['0rem', '0rem'],
+                                                  textDecoration: 'none',
+                                                  textTransform: 'none',
                                                 },
-                                              ],
-                                            },
+                                              },
+                                            }),
                                             options: {
                                               ...openPageButtonOptions,
                                               buttonText: variable(
@@ -2229,49 +2222,49 @@ export default makePrefab('List view', attrs, beforeCreate, [
                                                                   [
                                                                     ButtonPrefab(
                                                                       {
-                                                                        style: {
-                                                                          name: 'Filled',
-                                                                          overwrite:
-                                                                            [
-                                                                              {
-                                                                                name: 'basis',
-                                                                                content:
-                                                                                  {
-                                                                                    backgroundColor:
-                                                                                      {
-                                                                                        type: 'STATIC',
-                                                                                        value:
-                                                                                          'transparent',
-                                                                                      },
-                                                                                    boxShadow:
-                                                                                      'none',
-                                                                                    color:
-                                                                                      {
-                                                                                        type: 'THEME_COLOR',
-                                                                                        value:
-                                                                                          'primary',
-                                                                                      },
-                                                                                    fontFamily:
-                                                                                      'Roboto',
-                                                                                    fontSize:
-                                                                                      '0.875rem',
-                                                                                    fontStyle:
-                                                                                      'none',
-                                                                                    fontWeight:
-                                                                                      '400',
-                                                                                    padding:
-                                                                                      [
-                                                                                        '0.6875rem',
-                                                                                        '0.6875rem',
-                                                                                      ],
-                                                                                    textDecoration:
-                                                                                      'none',
-                                                                                    textTransform:
-                                                                                      'none',
-                                                                                  },
-                                                                              },
-                                                                            ],
-                                                                        },
+                                                                        style:
+                                                                          styleReference(
+                                                                            'Filled',
+                                                                            {
+                                                                              overwrite:
+                                                                                {
+                                                                                  basis:
+                                                                                    {
+                                                                                      backgroundColor:
+                                                                                        {
+                                                                                          type: 'STATIC',
+                                                                                          value:
+                                                                                            'transparent',
+                                                                                        },
+                                                                                      boxShadow:
+                                                                                        'none',
+                                                                                      color:
+                                                                                        {
+                                                                                          type: 'THEME_COLOR',
+                                                                                          value:
+                                                                                            'primary',
+                                                                                        },
+                                                                                      fontFamily:
+                                                                                        'Roboto',
+                                                                                      fontSize:
+                                                                                        '0.875rem',
+                                                                                      fontStyle:
+                                                                                        'none',
+                                                                                      fontWeight:
+                                                                                        '400',
+                                                                                      padding:
+                                                                                        [
+                                                                                          '0.6875rem',
+                                                                                          '0.6875rem',
+                                                                                        ],
+                                                                                      textDecoration:
+                                                                                        'none',
+                                                                                      textTransform:
+                                                                                        'none',
+                                                                                    },
+                                                                                },
+                                                                            },
+                                                                          ),
 
                                                                         options:
                                                                           {

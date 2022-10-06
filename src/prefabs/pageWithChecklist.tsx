@@ -23,6 +23,7 @@ import {
   PrefabComponent,
   PrefabComponentOption,
   text,
+  styleReference,
 } from '@betty-blocks/component-sdk';
 
 import {
@@ -403,32 +404,28 @@ const prefabStructure = [
                                       [
                                         OpenPageButton(
                                           {
-                                            style: {
-                                              name: 'Filled',
-                                              overwrite: [
-                                                {
-                                                  name: 'basis',
-                                                  content: {
-                                                    backgroundColor: {
-                                                      type: 'STATIC',
-                                                      value: 'transparent',
-                                                    },
-                                                    boxShadow: 'none',
-                                                    color: {
-                                                      type: 'THEME_COLOR',
-                                                      value: 'white',
-                                                    },
-                                                    fontFamily: 'Roboto',
-                                                    fontSize: '0.875rem',
-                                                    fontStyle: 'none',
-                                                    fontWeight: '400',
-                                                    padding: ['0rem', '0rem'],
-                                                    textDecoration: 'none',
-                                                    textTransform: 'none',
+                                            style: styleReference('Filled', {
+                                              overwrite: {
+                                                basis: {
+                                                  backgroundColor: {
+                                                    type: 'STATIC',
+                                                    value: 'transparent',
                                                   },
+                                                  boxShadow: 'none',
+                                                  color: {
+                                                    type: 'THEME_COLOR',
+                                                    value: 'white',
+                                                  },
+                                                  fontFamily: 'Roboto',
+                                                  fontSize: '0.875rem',
+                                                  fontStyle: 'none',
+                                                  fontWeight: '400',
+                                                  padding: ['0rem', '0rem'],
+                                                  textDecoration: 'none',
+                                                  textTransform: 'none',
                                                 },
-                                              ],
-                                            },
+                                              },
+                                            }),
                                             options: {
                                               ...openPageButtonOptions,
                                               buttonText: variable(
@@ -454,32 +451,28 @@ const prefabStructure = [
                                         ),
                                         OpenPageButton(
                                           {
-                                            style: {
-                                              name: 'Filled',
-                                              overwrite: [
-                                                {
-                                                  name: 'basis',
-                                                  content: {
-                                                    backgroundColor: {
-                                                      type: 'STATIC',
-                                                      value: 'transparent',
-                                                    },
-                                                    boxShadow: 'none',
-                                                    color: {
-                                                      type: 'THEME_COLOR',
-                                                      value: 'white',
-                                                    },
-                                                    fontFamily: 'Roboto',
-                                                    fontSize: '0.875rem',
-                                                    fontStyle: 'none',
-                                                    fontWeight: '400',
-                                                    padding: ['0rem', '0rem'],
-                                                    textDecoration: 'none',
-                                                    textTransform: 'none',
+                                            style: styleReference('Filled', {
+                                              overwrite: {
+                                                basis: {
+                                                  backgroundColor: {
+                                                    type: 'STATIC',
+                                                    value: 'transparent',
                                                   },
+                                                  boxShadow: 'none',
+                                                  color: {
+                                                    type: 'THEME_COLOR',
+                                                    value: 'white',
+                                                  },
+                                                  fontFamily: 'Roboto',
+                                                  fontSize: '0.875rem',
+                                                  fontStyle: 'none',
+                                                  fontWeight: '400',
+                                                  padding: ['0rem', '0rem'],
+                                                  textDecoration: 'none',
+                                                  textTransform: 'none',
                                                 },
-                                              ],
-                                            },
+                                              },
+                                            }),
                                             options: {
                                               ...openPageButtonOptions,
                                               buttonText: variable(
@@ -746,12 +739,11 @@ const prefabStructure = [
                                                     ref: {
                                                       id: '#DropdownButton',
                                                     },
-                                                    style: {
-                                                      name: 'Filled',
-                                                      overwrite: [
-                                                        {
-                                                          name: 'basis',
-                                                          content: {
+                                                    style: styleReference(
+                                                      'Filled',
+                                                      {
+                                                        overwrite: {
+                                                          basis: {
                                                             backgroundColor: {
                                                               type: 'STATIC',
                                                               value:
@@ -778,8 +770,8 @@ const prefabStructure = [
                                                               'none',
                                                           },
                                                         },
-                                                      ],
-                                                    },
+                                                      },
+                                                    ),
                                                     options: {
                                                       ...buttonOptions,
                                                       buttonText: variable(
@@ -824,12 +816,11 @@ const prefabStructure = [
                                                 Button(
                                                   {
                                                     ref: { id: '#UpButton' },
-                                                    style: {
-                                                      name: 'Filled',
-                                                      overwrite: [
-                                                        {
-                                                          name: 'basis',
-                                                          content: {
+                                                    style: styleReference(
+                                                      'Filled',
+                                                      {
+                                                        overwrite: {
+                                                          basis: {
                                                             backgroundColor: {
                                                               type: 'STATIC',
                                                               value:
@@ -856,8 +847,8 @@ const prefabStructure = [
                                                               'none',
                                                           },
                                                         },
-                                                      ],
-                                                    },
+                                                      },
+                                                    ),
                                                     options: {
                                                       ...buttonOptions,
                                                       visible: toggle(

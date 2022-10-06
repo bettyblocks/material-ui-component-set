@@ -26,6 +26,7 @@ import {
   PrefabComponent,
   wrapper,
   linked,
+  styleReference,
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
@@ -828,32 +829,28 @@ export default makePrefab('Card and list view', attrs, beforeCreate, [
                                       [
                                         OpenPageButton(
                                           {
-                                            style: {
-                                              name: 'Filled',
-                                              overwrite: [
-                                                {
-                                                  name: 'basis',
-                                                  content: {
-                                                    backgroundColor: {
-                                                      type: 'STATIC',
-                                                      value: 'transparent',
-                                                    },
-                                                    boxShadow: 'none',
-                                                    color: {
-                                                      type: 'THEME_COLOR',
-                                                      value: 'white',
-                                                    },
-                                                    fontFamily: 'Roboto',
-                                                    fontSize: '0.875rem',
-                                                    fontStyle: 'none',
-                                                    fontWeight: '400',
-                                                    padding: ['0rem', '0rem'],
-                                                    textDecoration: 'none',
-                                                    textTransform: 'none',
+                                            style: styleReference('Filled', {
+                                              overwrite: {
+                                                basis: {
+                                                  backgroundColor: {
+                                                    type: 'STATIC',
+                                                    value: 'transparent',
                                                   },
+                                                  boxShadow: 'none',
+                                                  color: {
+                                                    type: 'THEME_COLOR',
+                                                    value: 'white',
+                                                  },
+                                                  fontFamily: 'Roboto',
+                                                  fontSize: '0.875rem',
+                                                  fontStyle: 'none',
+                                                  fontWeight: '400',
+                                                  padding: ['0rem', '0rem'],
+                                                  textDecoration: 'none',
+                                                  textTransform: 'none',
                                                 },
-                                              ],
-                                            },
+                                              },
+                                            }),
                                             options: {
                                               ...openPageButtonOptions,
                                               buttonText: variable(
@@ -877,32 +874,28 @@ export default makePrefab('Card and list view', attrs, beforeCreate, [
                                         ),
                                         OpenPageButton(
                                           {
-                                            style: {
-                                              name: 'Filled',
-                                              overwrite: [
-                                                {
-                                                  name: 'basis',
-                                                  content: {
-                                                    backgroundColor: {
-                                                      type: 'STATIC',
-                                                      value: 'transparent',
-                                                    },
-                                                    boxShadow: 'none',
-                                                    color: {
-                                                      type: 'THEME_COLOR',
-                                                      value: 'white',
-                                                    },
-                                                    fontFamily: 'Roboto',
-                                                    fontSize: '0.875rem',
-                                                    fontStyle: 'none',
-                                                    fontWeight: '400',
-                                                    padding: ['0rem', '0rem'],
-                                                    textDecoration: 'none',
-                                                    textTransform: 'none',
+                                            style: styleReference('Filled', {
+                                              overwrite: {
+                                                basis: {
+                                                  backgroundColor: {
+                                                    type: 'STATIC',
+                                                    value: 'transparent',
                                                   },
+                                                  boxShadow: 'none',
+                                                  color: {
+                                                    type: 'THEME_COLOR',
+                                                    value: 'white',
+                                                  },
+                                                  fontFamily: 'Roboto',
+                                                  fontSize: '0.875rem',
+                                                  fontStyle: 'none',
+                                                  fontWeight: '400',
+                                                  padding: ['0rem', '0rem'],
+                                                  textDecoration: 'none',
+                                                  textTransform: 'none',
                                                 },
-                                              ],
-                                            },
+                                              },
+                                            }),
                                             options: {
                                               ...openPageButtonOptions,
                                               buttonText: variable(
@@ -1201,42 +1194,38 @@ export default makePrefab('Card and list view', attrs, beforeCreate, [
                                         ButtonPrefab(
                                           {
                                             ref: { id: '#listBtnId' },
-                                            style: {
-                                              name: 'Filled',
-                                              overwrite: [
-                                                {
-                                                  name: 'basis',
-                                                  content: {
-                                                    backgroundColor: {
-                                                      type: 'THEME_COLOR',
-                                                      value: 'primary',
-                                                    },
-                                                    borderColor: {
-                                                      type: 'THEME_COLOR',
-                                                      value: 'primary',
-                                                    },
-                                                    borderRadius: ['0.25rem'],
-                                                    borderStyle: 'solid',
-                                                    borderWidth: ['0.0625rem'],
-                                                    boxShadow: 'none',
-                                                    color: {
-                                                      type: 'THEME_COLOR',
-                                                      value: 'white',
-                                                    },
-                                                    fontFamily: 'Roboto',
-                                                    fontSize: '0.875rem',
-                                                    fontStyle: 'none',
-                                                    fontWeight: '400',
-                                                    padding: [
-                                                      '0.625rem',
-                                                      '1.3125rem',
-                                                    ],
-                                                    textDecoration: 'none',
-                                                    textTransform: 'none',
+                                            style: styleReference('Filled', {
+                                              overwrite: {
+                                                basis: {
+                                                  backgroundColor: {
+                                                    type: 'THEME_COLOR',
+                                                    value: 'primary',
                                                   },
+                                                  borderColor: {
+                                                    type: 'THEME_COLOR',
+                                                    value: 'primary',
+                                                  },
+                                                  borderRadius: ['0.25rem'],
+                                                  borderStyle: 'solid',
+                                                  borderWidth: ['0.0625rem'],
+                                                  boxShadow: 'none',
+                                                  color: {
+                                                    type: 'THEME_COLOR',
+                                                    value: 'white',
+                                                  },
+                                                  fontFamily: 'Roboto',
+                                                  fontSize: '0.875rem',
+                                                  fontStyle: 'none',
+                                                  fontWeight: '400',
+                                                  padding: [
+                                                    '0.625rem',
+                                                    '1.3125rem',
+                                                  ],
+                                                  textDecoration: 'none',
+                                                  textTransform: 'none',
                                                 },
-                                              ],
-                                            },
+                                              },
+                                            }),
                                             options: {
                                               ...buttonOptions,
                                               buttonText: variable(
@@ -1266,42 +1255,38 @@ export default makePrefab('Card and list view', attrs, beforeCreate, [
                                         ButtonPrefab(
                                           {
                                             ref: { id: '#gridBtnId' },
-                                            style: {
-                                              name: 'Filled',
-                                              overwrite: [
-                                                {
-                                                  name: 'basis',
-                                                  content: {
-                                                    backgroundColor: {
-                                                      type: 'THEME_COLOR',
-                                                      value: 'primary',
-                                                    },
-                                                    borderColor: {
-                                                      type: 'THEME_COLOR',
-                                                      value: 'primary',
-                                                    },
-                                                    borderRadius: ['0.25rem'],
-                                                    borderStyle: 'solid',
-                                                    borderWidth: ['0.0625rem'],
-                                                    boxShadow: 'none',
-                                                    color: {
-                                                      type: 'THEME_COLOR',
-                                                      value: 'white',
-                                                    },
-                                                    fontFamily: 'Roboto',
-                                                    fontSize: '0.875rem',
-                                                    fontStyle: 'none',
-                                                    fontWeight: '400',
-                                                    padding: [
-                                                      '0.625rem',
-                                                      '1.3125rem',
-                                                    ],
-                                                    textDecoration: 'none',
-                                                    textTransform: 'none',
+                                            style: styleReference('Filled', {
+                                              overwrite: {
+                                                basis: {
+                                                  backgroundColor: {
+                                                    type: 'THEME_COLOR',
+                                                    value: 'primary',
                                                   },
+                                                  borderColor: {
+                                                    type: 'THEME_COLOR',
+                                                    value: 'primary',
+                                                  },
+                                                  borderRadius: ['0.25rem'],
+                                                  borderStyle: 'solid',
+                                                  borderWidth: ['0.0625rem'],
+                                                  boxShadow: 'none',
+                                                  color: {
+                                                    type: 'THEME_COLOR',
+                                                    value: 'white',
+                                                  },
+                                                  fontFamily: 'Roboto',
+                                                  fontSize: '0.875rem',
+                                                  fontStyle: 'none',
+                                                  fontWeight: '400',
+                                                  padding: [
+                                                    '0.625rem',
+                                                    '1.3125rem',
+                                                  ],
+                                                  textDecoration: 'none',
+                                                  textTransform: 'none',
                                                 },
-                                              ],
-                                            },
+                                              },
+                                            }),
                                             options: {
                                               ...buttonOptions,
                                               buttonText: variable(
@@ -1710,12 +1695,11 @@ export default makePrefab('Card and list view', attrs, beforeCreate, [
                                                 CardActions({}, [
                                                   ButtonPrefab(
                                                     {
-                                                      style: {
-                                                        name: 'Filled',
-                                                        overwrite: [
-                                                          {
-                                                            name: 'basis',
-                                                            content: {
+                                                      style: styleReference(
+                                                        'Filled',
+                                                        {
+                                                          overwrite: {
+                                                            basis: {
                                                               backgroundColor: {
                                                                 type: 'STATIC',
                                                                 value:
@@ -1743,8 +1727,8 @@ export default makePrefab('Card and list view', attrs, beforeCreate, [
                                                                 'none',
                                                             },
                                                           },
-                                                        ],
-                                                      },
+                                                        },
+                                                      ),
                                                       options: {
                                                         ...buttonOptions,
                                                         buttonText: variable(
@@ -3229,13 +3213,12 @@ export default makePrefab('Card and list view', attrs, beforeCreate, [
                                                                             ButtonPrefab(
                                                                               {
                                                                                 style:
-                                                                                  {
-                                                                                    name: 'Filled',
-                                                                                    overwrite:
-                                                                                      [
+                                                                                  styleReference(
+                                                                                    'Filled',
+                                                                                    {
+                                                                                      overwrite:
                                                                                         {
-                                                                                          name: 'basis',
-                                                                                          content:
+                                                                                          basis:
                                                                                             {
                                                                                               backgroundColor:
                                                                                                 {
@@ -3270,8 +3253,8 @@ export default makePrefab('Card and list view', attrs, beforeCreate, [
                                                                                                 'none',
                                                                                             },
                                                                                         },
-                                                                                      ],
-                                                                                  },
+                                                                                    },
+                                                                                  ),
 
                                                                                 options:
                                                                                   {

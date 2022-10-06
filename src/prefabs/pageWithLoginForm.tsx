@@ -22,6 +22,7 @@ import {
   wrapper,
   linked,
   BeforeCreateArgs,
+  styleReference,
 } from '@betty-blocks/component-sdk';
 import { options as defaults } from './structures/ActionJSForm/options';
 import {
@@ -766,12 +767,11 @@ const prefabStructure: PrefabComponent[] = [
                                                             },
                                                           ),
                                                         },
-                                                        style: {
-                                                          name: 'Filled',
-                                                          overwrite: [
-                                                            {
-                                                              name: 'basis',
-                                                              content: {
+                                                        style: styleReference(
+                                                          'Filled',
+                                                          {
+                                                            overwrite: {
+                                                              basis: {
                                                                 backgroundColor:
                                                                   {
                                                                     type: 'THEME_COLOR',
@@ -803,8 +803,8 @@ const prefabStructure: PrefabComponent[] = [
                                                                   'none',
                                                               },
                                                             },
-                                                          ],
-                                                        },
+                                                          },
+                                                        ),
                                                       },
                                                       [],
                                                     ),
@@ -874,47 +874,47 @@ const prefabStructure: PrefabComponent[] = [
                                                                   },
                                                                 ),
                                                             },
-                                                            style: {
-                                                              name: 'Filled',
-                                                              overwrite: [
+                                                            style:
+                                                              styleReference(
+                                                                'Filled',
                                                                 {
-                                                                  name: 'basis',
-                                                                  content: {
-                                                                    backgroundColor:
-                                                                      {
-                                                                        type: 'STATIC',
+                                                                  overwrite: {
+                                                                    basis: {
+                                                                      backgroundColor:
+                                                                        {
+                                                                          type: 'STATIC',
+                                                                          value:
+                                                                            'transparent',
+                                                                        },
+                                                                      boxShadow:
+                                                                        'none',
+                                                                      color: {
+                                                                        type: 'THEME_COLOR',
                                                                         value:
-                                                                          'transparent',
+                                                                          'dark',
                                                                       },
-                                                                    boxShadow:
-                                                                      'none',
-                                                                    color: {
-                                                                      type: 'THEME_COLOR',
-                                                                      value:
-                                                                        'dark',
+                                                                      fontFamily:
+                                                                        'Roboto',
+                                                                      fontSize:
+                                                                        '0.875rem',
+                                                                      fontStyle:
+                                                                        'none',
+                                                                      fontWeight:
+                                                                        '500',
+                                                                      padding: [
+                                                                        '0.6875rem',
+                                                                        '1.375rem',
+                                                                        '0.6875rem',
+                                                                        '0rem',
+                                                                      ],
+                                                                      textDecoration:
+                                                                        'none',
+                                                                      textTransform:
+                                                                        'none',
                                                                     },
-                                                                    fontFamily:
-                                                                      'Roboto',
-                                                                    fontSize:
-                                                                      '0.875rem',
-                                                                    fontStyle:
-                                                                      'none',
-                                                                    fontWeight:
-                                                                      '500',
-                                                                    padding: [
-                                                                      '0.6875rem',
-                                                                      '1.375rem',
-                                                                      '0.6875rem',
-                                                                      '0rem',
-                                                                    ],
-                                                                    textDecoration:
-                                                                      'none',
-                                                                    textTransform:
-                                                                      'none',
                                                                   },
                                                                 },
-                                                              ],
-                                                            },
+                                                              ),
                                                           },
                                                           [],
                                                         ),
@@ -932,47 +932,47 @@ const prefabStructure: PrefabComponent[] = [
                                                                   },
                                                                 ),
                                                             },
-                                                            style: {
-                                                              name: 'Filled',
-                                                              overwrite: [
+                                                            style:
+                                                              styleReference(
+                                                                'Filled',
                                                                 {
-                                                                  name: 'basis',
-                                                                  content: {
-                                                                    backgroundColor:
-                                                                      {
-                                                                        type: 'STATIC',
+                                                                  overwrite: {
+                                                                    basis: {
+                                                                      backgroundColor:
+                                                                        {
+                                                                          type: 'STATIC',
+                                                                          value:
+                                                                            'transparent',
+                                                                        },
+                                                                      boxShadow:
+                                                                        'none',
+                                                                      color: {
+                                                                        type: 'THEME_COLOR',
                                                                         value:
-                                                                          'transparent',
+                                                                          'dark',
                                                                       },
-                                                                    boxShadow:
-                                                                      'none',
-                                                                    color: {
-                                                                      type: 'THEME_COLOR',
-                                                                      value:
-                                                                        'dark',
+                                                                      fontFamily:
+                                                                        'Roboto',
+                                                                      fontSize:
+                                                                        '0.875rem',
+                                                                      fontStyle:
+                                                                        'none',
+                                                                      fontWeight:
+                                                                        '500',
+                                                                      padding: [
+                                                                        '0.6875rem',
+                                                                        '1.375rem',
+                                                                        '0.6875rem',
+                                                                        '0rem',
+                                                                      ],
+                                                                      textDecoration:
+                                                                        'none',
+                                                                      textTransform:
+                                                                        'none',
                                                                     },
-                                                                    fontFamily:
-                                                                      'Roboto',
-                                                                    fontSize:
-                                                                      '0.875rem',
-                                                                    fontStyle:
-                                                                      'none',
-                                                                    fontWeight:
-                                                                      '500',
-                                                                    padding: [
-                                                                      '0.6875rem',
-                                                                      '1.375rem',
-                                                                      '0.6875rem',
-                                                                      '0rem',
-                                                                    ],
-                                                                    textDecoration:
-                                                                      'none',
-                                                                    textTransform:
-                                                                      'none',
                                                                   },
                                                                 },
-                                                              ],
-                                                            },
+                                                              ),
                                                           },
                                                           [],
                                                         ),

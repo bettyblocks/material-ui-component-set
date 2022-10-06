@@ -28,6 +28,7 @@ import {
   linked,
   childSelector,
   number,
+  styleReference,
 } from '@betty-blocks/component-sdk';
 
 import { Property } from '@betty-blocks/component-sdk/build/prefabs/types/property';
@@ -456,32 +457,28 @@ const drawerContainer = DrawerContainer(
                                 [
                                   OpenPageButton(
                                     {
-                                      style: {
-                                        name: 'Filled',
-                                        overwrite: [
-                                          {
-                                            name: 'basis',
-                                            content: {
-                                              backgroundColor: {
-                                                type: 'STATIC',
-                                                value: 'transparent',
-                                              },
-                                              boxShadow: 'none',
-                                              color: {
-                                                type: 'THEME_COLOR',
-                                                value: 'white',
-                                              },
-                                              fontFamily: 'Roboto',
-                                              fontSize: '0.875rem',
-                                              fontStyle: 'none',
-                                              fontWeight: '400',
-                                              padding: ['0rem', '0rem'],
-                                              textDecoration: 'none',
-                                              textTransform: 'none',
+                                      style: styleReference('Filled', {
+                                        overwrite: {
+                                          basis: {
+                                            backgroundColor: {
+                                              type: 'STATIC',
+                                              value: 'transparent',
                                             },
+                                            boxShadow: 'none',
+                                            color: {
+                                              type: 'THEME_COLOR',
+                                              value: 'white',
+                                            },
+                                            fontFamily: 'Roboto',
+                                            fontSize: '0.875rem',
+                                            fontStyle: 'none',
+                                            fontWeight: '400',
+                                            padding: ['0rem', '0rem'],
+                                            textDecoration: 'none',
+                                            textTransform: 'none',
                                           },
-                                        ],
-                                      },
+                                        },
+                                      }),
                                       options: {
                                         ...openPageButtonOptions,
                                         buttonText: variable('Button text', {
@@ -496,32 +493,28 @@ const drawerContainer = DrawerContainer(
                                   ),
                                   OpenPageButton(
                                     {
-                                      style: {
-                                        name: 'Filled',
-                                        overwrite: [
-                                          {
-                                            name: 'basis',
-                                            content: {
-                                              backgroundColor: {
-                                                type: 'STATIC',
-                                                value: 'transparent',
-                                              },
-                                              boxShadow: 'none',
-                                              color: {
-                                                type: 'THEME_COLOR',
-                                                value: 'white',
-                                              },
-                                              fontFamily: 'Roboto',
-                                              fontSize: '0.875rem',
-                                              fontStyle: 'none',
-                                              fontWeight: '400',
-                                              padding: ['0rem', '0rem'],
-                                              textDecoration: 'none',
-                                              textTransform: 'none',
+                                      style: styleReference('Filled', {
+                                        overwrite: {
+                                          basis: {
+                                            backgroundColor: {
+                                              type: 'STATIC',
+                                              value: 'transparent',
                                             },
+                                            boxShadow: 'none',
+                                            color: {
+                                              type: 'THEME_COLOR',
+                                              value: 'white',
+                                            },
+                                            fontFamily: 'Roboto',
+                                            fontSize: '0.875rem',
+                                            fontStyle: 'none',
+                                            fontWeight: '400',
+                                            padding: ['0rem', '0rem'],
+                                            textDecoration: 'none',
+                                            textTransform: 'none',
                                           },
-                                        ],
-                                      },
+                                        },
+                                      }),
                                       options: {
                                         ...openPageButtonOptions,
                                         buttonText: variable('Button text', {
@@ -1041,12 +1034,11 @@ const drawerContainer = DrawerContainer(
                                                         ref: {
                                                           id: '#createButton',
                                                         },
-                                                        style: {
-                                                          name: 'Filled',
-                                                          overwrite: [
-                                                            {
-                                                              name: 'basis',
-                                                              content: {
+                                                        style: styleReference(
+                                                          'Filled',
+                                                          {
+                                                            overwrite: {
+                                                              basis: {
                                                                 backgroundColor:
                                                                   {
                                                                     type: 'THEME_COLOR',
@@ -1078,8 +1070,8 @@ const drawerContainer = DrawerContainer(
                                                                   'none',
                                                               },
                                                             },
-                                                          ],
-                                                        },
+                                                          },
+                                                        ),
                                                       },
                                                       [],
                                                     ),
@@ -1171,36 +1163,39 @@ const drawerContainer = DrawerContainer(
                                                                 [],
                                                               ),
                                                               Button({
-                                                                style: {
-                                                                  name: 'Filled',
-                                                                  overwrite: [
+                                                                style:
+                                                                  styleReference(
+                                                                    'Filled',
                                                                     {
-                                                                      name: 'basis',
-                                                                      content: {
-                                                                        backgroundColor:
-                                                                          {
-                                                                            type: 'STATIC',
-                                                                            value:
-                                                                              'transparent',
-                                                                          },
-                                                                        boxShadow:
-                                                                          'none',
-                                                                        color: {
-                                                                          type: 'THEME_COLOR',
-                                                                          value:
-                                                                            'light',
+                                                                      overwrite:
+                                                                        {
+                                                                          basis:
+                                                                            {
+                                                                              backgroundColor:
+                                                                                {
+                                                                                  type: 'STATIC',
+                                                                                  value:
+                                                                                    'transparent',
+                                                                                },
+                                                                              boxShadow:
+                                                                                'none',
+                                                                              color:
+                                                                                {
+                                                                                  type: 'THEME_COLOR',
+                                                                                  value:
+                                                                                    'light',
+                                                                                },
+                                                                              padding:
+                                                                                [
+                                                                                  '0rem',
+                                                                                  '0.6875rem',
+                                                                                  '0.6875rem',
+                                                                                  '0.6875rem',
+                                                                                ],
+                                                                            },
                                                                         },
-                                                                        padding:
-                                                                          [
-                                                                            '0rem',
-                                                                            '0.6875rem',
-                                                                            '0.6875rem',
-                                                                            '0.6875rem',
-                                                                          ],
-                                                                      },
                                                                     },
-                                                                  ],
-                                                                },
+                                                                  ),
                                                                 options: {
                                                                   ...buttonOptions,
                                                                   icon: icon(
@@ -1384,64 +1379,65 @@ const drawerContainer = DrawerContainer(
                                                                         },
                                                                       ),
                                                                   },
-                                                                  style: {
-                                                                    name: 'Filled',
-                                                                    overwrite: [
+                                                                  style:
+                                                                    styleReference(
+                                                                      'Filled',
                                                                       {
-                                                                        name: 'basis',
-                                                                        content:
+                                                                        overwrite:
                                                                           {
-                                                                            backgroundColor:
+                                                                            basis:
                                                                               {
-                                                                                type: 'STATIC',
-                                                                                value:
-                                                                                  'transparent',
+                                                                                backgroundColor:
+                                                                                  {
+                                                                                    type: 'STATIC',
+                                                                                    value:
+                                                                                      'transparent',
+                                                                                  },
+                                                                                borderColor:
+                                                                                  {
+                                                                                    type: 'THEME_COLOR',
+                                                                                    value:
+                                                                                      'primary',
+                                                                                  },
+                                                                                borderRadius:
+                                                                                  [
+                                                                                    '0.25rem',
+                                                                                  ],
+                                                                                borderStyle:
+                                                                                  'solid',
+                                                                                borderWidth:
+                                                                                  [
+                                                                                    '0.0625rem',
+                                                                                  ],
+                                                                                boxShadow:
+                                                                                  'none',
+                                                                                color:
+                                                                                  {
+                                                                                    type: 'THEME_COLOR',
+                                                                                    value:
+                                                                                      'primary',
+                                                                                  },
+                                                                                fontFamily:
+                                                                                  'Roboto',
+                                                                                fontSize:
+                                                                                  '0.875rem',
+                                                                                fontStyle:
+                                                                                  'none',
+                                                                                fontWeight:
+                                                                                  '400',
+                                                                                padding:
+                                                                                  [
+                                                                                    '0.625rem',
+                                                                                    '1.3125rem',
+                                                                                  ],
+                                                                                textDecoration:
+                                                                                  'none',
+                                                                                textTransform:
+                                                                                  'none',
                                                                               },
-                                                                            borderColor:
-                                                                              {
-                                                                                type: 'THEME_COLOR',
-                                                                                value:
-                                                                                  'primary',
-                                                                              },
-                                                                            borderRadius:
-                                                                              [
-                                                                                '0.25rem',
-                                                                              ],
-                                                                            borderStyle:
-                                                                              'solid',
-                                                                            borderWidth:
-                                                                              [
-                                                                                '0.0625rem',
-                                                                              ],
-                                                                            boxShadow:
-                                                                              'none',
-                                                                            color:
-                                                                              {
-                                                                                type: 'THEME_COLOR',
-                                                                                value:
-                                                                                  'primary',
-                                                                              },
-                                                                            fontFamily:
-                                                                              'Roboto',
-                                                                            fontSize:
-                                                                              '0.875rem',
-                                                                            fontStyle:
-                                                                              'none',
-                                                                            fontWeight:
-                                                                              '400',
-                                                                            padding:
-                                                                              [
-                                                                                '0.625rem',
-                                                                                '1.3125rem',
-                                                                              ],
-                                                                            textDecoration:
-                                                                              'none',
-                                                                            textTransform:
-                                                                              'none',
                                                                           },
                                                                       },
-                                                                    ],
-                                                                  },
+                                                                    ),
                                                                 },
                                                                 [],
                                                               ),
@@ -2253,26 +2249,22 @@ const drawerBar = DrawerBar(
                                   }),
                                 },
                                 ref: { id: '#closeCreateTabBtn' },
-                                style: {
-                                  name: 'Filled',
-                                  overwrite: [
-                                    {
-                                      name: 'basis',
-                                      content: {
-                                        backgroundColor: {
-                                          type: 'STATIC',
-                                          value: 'Transparent',
-                                        },
-                                        boxShadow: 'none',
-                                        color: {
-                                          type: 'THEME_COLOR',
-                                          value: 'white',
-                                        },
-                                        padding: ['0rem'],
+                                style: styleReference('Filled', {
+                                  overwrite: {
+                                    basis: {
+                                      backgroundColor: {
+                                        type: 'STATIC',
+                                        value: 'Transparent',
                                       },
+                                      boxShadow: 'none',
+                                      color: {
+                                        type: 'THEME_COLOR',
+                                        value: 'white',
+                                      },
+                                      padding: ['0rem'],
                                     },
-                                  ],
-                                },
+                                  },
+                                }),
                               },
                               [],
                             ),
@@ -2349,39 +2341,35 @@ const drawerBar = DrawerBar(
                                   }),
                                 },
                                 ref: { id: '#createCancelButton' },
-                                style: {
-                                  name: 'Filled',
-                                  overwrite: [
-                                    {
-                                      name: 'basis',
-                                      content: {
-                                        backgroundColor: {
-                                          type: 'STATIC',
-                                          value: 'transparent',
-                                        },
-                                        borderColor: {
-                                          type: 'THEME_COLOR',
-                                          value: 'primary',
-                                        },
-                                        borderRadius: ['0.25rem'],
-                                        borderStyle: 'solid',
-                                        borderWidth: ['0.0625rem'],
-                                        boxShadow: 'none',
-                                        color: {
-                                          type: 'THEME_COLOR',
-                                          value: 'primary',
-                                        },
-                                        fontFamily: 'Roboto',
-                                        fontSize: '0.875rem',
-                                        fontStyle: 'none',
-                                        fontWeight: '400',
-                                        padding: ['0.625rem', '1.3125rem'],
-                                        textDecoration: 'none',
-                                        textTransform: 'none',
+                                style: styleReference('Filled', {
+                                  overwrite: {
+                                    basis: {
+                                      backgroundColor: {
+                                        type: 'STATIC',
+                                        value: 'transparent',
                                       },
+                                      borderColor: {
+                                        type: 'THEME_COLOR',
+                                        value: 'primary',
+                                      },
+                                      borderRadius: ['0.25rem'],
+                                      borderStyle: 'solid',
+                                      borderWidth: ['0.0625rem'],
+                                      boxShadow: 'none',
+                                      color: {
+                                        type: 'THEME_COLOR',
+                                        value: 'primary',
+                                      },
+                                      fontFamily: 'Roboto',
+                                      fontSize: '0.875rem',
+                                      fontStyle: 'none',
+                                      fontWeight: '400',
+                                      padding: ['0.625rem', '1.3125rem'],
+                                      textDecoration: 'none',
+                                      textTransform: 'none',
                                     },
-                                  ],
-                                },
+                                  },
+                                }),
                               },
                               [],
                             ),
@@ -2395,32 +2383,28 @@ const drawerBar = DrawerBar(
                                   icon: icon('Icon', { value: 'Save' }),
                                 },
                                 ref: { id: '#createSubmitButton' },
-                                style: {
-                                  name: 'Filled',
-                                  overwrite: [
-                                    {
-                                      name: 'basis',
-                                      content: {
-                                        backgroundColor: {
-                                          type: 'THEME_COLOR',
-                                          value: 'primary',
-                                        },
-                                        boxShadow: 'none',
-                                        color: {
-                                          type: 'THEME_COLOR',
-                                          value: 'white',
-                                        },
-                                        fontFamily: 'Roboto',
-                                        fontSize: '0.875rem',
-                                        fontStyle: 'none',
-                                        fontWeight: '400',
-                                        padding: ['0.6875rem', '1.375rem'],
-                                        textDecoration: 'none',
-                                        textTransform: 'none',
+                                style: styleReference('Filled', {
+                                  overwrite: {
+                                    basis: {
+                                      backgroundColor: {
+                                        type: 'THEME_COLOR',
+                                        value: 'primary',
                                       },
+                                      boxShadow: 'none',
+                                      color: {
+                                        type: 'THEME_COLOR',
+                                        value: 'white',
+                                      },
+                                      fontFamily: 'Roboto',
+                                      fontSize: '0.875rem',
+                                      fontStyle: 'none',
+                                      fontWeight: '400',
+                                      padding: ['0.6875rem', '1.375rem'],
+                                      textDecoration: 'none',
+                                      textTransform: 'none',
                                     },
-                                  ],
-                                },
+                                  },
+                                }),
                               },
                               [],
                             ),
@@ -2579,26 +2563,22 @@ const drawerBar = DrawerBar(
                                   }),
                                 },
                                 ref: { id: '#closeDetailsTabBtn' },
-                                style: {
-                                  name: 'Filled',
-                                  overwrite: [
-                                    {
-                                      name: 'basis',
-                                      content: {
-                                        backgroundColor: {
-                                          type: 'STATIC',
-                                          value: 'Transparent',
-                                        },
-                                        boxShadow: 'none',
-                                        color: {
-                                          type: 'THEME_COLOR',
-                                          value: 'white',
-                                        },
-                                        padding: ['0rem'],
+                                style: styleReference('Filled', {
+                                  overwrite: {
+                                    basis: {
+                                      backgroundColor: {
+                                        type: 'STATIC',
+                                        value: 'Transparent',
                                       },
+                                      boxShadow: 'none',
+                                      color: {
+                                        type: 'THEME_COLOR',
+                                        value: 'white',
+                                      },
+                                      padding: ['0rem'],
                                     },
-                                  ],
-                                },
+                                  },
+                                }),
                               },
                               [],
                             ),
@@ -2663,39 +2643,35 @@ const drawerBar = DrawerBar(
                                   }),
                                 },
                                 ref: { id: '#detailCancelButton' },
-                                style: {
-                                  name: 'Filled',
-                                  overwrite: [
-                                    {
-                                      name: 'basis',
-                                      content: {
-                                        backgroundColor: {
-                                          type: 'STATIC',
-                                          value: 'transparent',
-                                        },
-                                        borderColor: {
-                                          type: 'THEME_COLOR',
-                                          value: 'primary',
-                                        },
-                                        borderRadius: ['0.25rem'],
-                                        borderStyle: 'solid',
-                                        borderWidth: ['0.0625rem'],
-                                        boxShadow: 'none',
-                                        color: {
-                                          type: 'THEME_COLOR',
-                                          value: 'primary',
-                                        },
-                                        fontFamily: 'Roboto',
-                                        fontSize: '0.875rem',
-                                        fontStyle: 'none',
-                                        fontWeight: '400',
-                                        padding: ['0.625rem', '1.3125rem'],
-                                        textDecoration: 'none',
-                                        textTransform: 'none',
+                                style: styleReference('Filled', {
+                                  overwrite: {
+                                    basis: {
+                                      backgroundColor: {
+                                        type: 'STATIC',
+                                        value: 'transparent',
                                       },
+                                      borderColor: {
+                                        type: 'THEME_COLOR',
+                                        value: 'primary',
+                                      },
+                                      borderRadius: ['0.25rem'],
+                                      borderStyle: 'solid',
+                                      borderWidth: ['0.0625rem'],
+                                      boxShadow: 'none',
+                                      color: {
+                                        type: 'THEME_COLOR',
+                                        value: 'primary',
+                                      },
+                                      fontFamily: 'Roboto',
+                                      fontSize: '0.875rem',
+                                      fontStyle: 'none',
+                                      fontWeight: '400',
+                                      padding: ['0.625rem', '1.3125rem'],
+                                      textDecoration: 'none',
+                                      textTransform: 'none',
                                     },
-                                  ],
-                                },
+                                  },
+                                }),
                               },
                               [],
                             ),
@@ -2709,32 +2685,28 @@ const drawerBar = DrawerBar(
                                   icon: icon('Icon', { value: 'Edit' }),
                                 },
                                 ref: { id: '#editButtonFromDetails' },
-                                style: {
-                                  name: 'Filled',
-                                  overwrite: [
-                                    {
-                                      name: 'basis',
-                                      content: {
-                                        backgroundColor: {
-                                          type: 'THEME_COLOR',
-                                          value: 'primary',
-                                        },
-                                        boxShadow: 'none',
-                                        color: {
-                                          type: 'THEME_COLOR',
-                                          value: 'white',
-                                        },
-                                        fontFamily: 'Roboto',
-                                        fontSize: '0.875rem',
-                                        fontStyle: 'none',
-                                        fontWeight: '400',
-                                        padding: ['0.6875rem', '1.375rem'],
-                                        textDecoration: 'none',
-                                        textTransform: 'none',
+                                style: styleReference('Filled', {
+                                  overwrite: {
+                                    basis: {
+                                      backgroundColor: {
+                                        type: 'THEME_COLOR',
+                                        value: 'primary',
                                       },
+                                      boxShadow: 'none',
+                                      color: {
+                                        type: 'THEME_COLOR',
+                                        value: 'white',
+                                      },
+                                      fontFamily: 'Roboto',
+                                      fontSize: '0.875rem',
+                                      fontStyle: 'none',
+                                      fontWeight: '400',
+                                      padding: ['0.6875rem', '1.375rem'],
+                                      textDecoration: 'none',
+                                      textTransform: 'none',
                                     },
-                                  ],
-                                },
+                                  },
+                                }),
                               },
                               [],
                             ),
@@ -2891,26 +2863,22 @@ const drawerBar = DrawerBar(
                                   }),
                                 },
                                 ref: { id: '#closeEditTabBtn' },
-                                style: {
-                                  name: 'Filled',
-                                  overwrite: [
-                                    {
-                                      name: 'basis',
-                                      content: {
-                                        backgroundColor: {
-                                          type: 'STATIC',
-                                          value: 'Transparent',
-                                        },
-                                        boxShadow: 'none',
-                                        color: {
-                                          type: 'THEME_COLOR',
-                                          value: 'white',
-                                        },
-                                        padding: ['0rem'],
+                                style: styleReference('Filled', {
+                                  overwrite: {
+                                    basis: {
+                                      backgroundColor: {
+                                        type: 'STATIC',
+                                        value: 'Transparent',
                                       },
+                                      boxShadow: 'none',
+                                      color: {
+                                        type: 'THEME_COLOR',
+                                        value: 'white',
+                                      },
+                                      padding: ['0rem'],
                                     },
-                                  ],
-                                },
+                                  },
+                                }),
                               },
                               [],
                             ),
@@ -2986,39 +2954,35 @@ const drawerBar = DrawerBar(
                                   }),
                                 },
                                 ref: { id: '#editCancelButton' },
-                                style: {
-                                  name: 'Filled',
-                                  overwrite: [
-                                    {
-                                      name: 'basis',
-                                      content: {
-                                        backgroundColor: {
-                                          type: 'STATIC',
-                                          value: 'transparent',
-                                        },
-                                        borderColor: {
-                                          type: 'THEME_COLOR',
-                                          value: 'primary',
-                                        },
-                                        borderRadius: ['0.25rem'],
-                                        borderStyle: 'solid',
-                                        borderWidth: ['0.0625rem'],
-                                        boxShadow: 'none',
-                                        color: {
-                                          type: 'THEME_COLOR',
-                                          value: 'primary',
-                                        },
-                                        fontFamily: 'Roboto',
-                                        fontSize: '0.875rem',
-                                        fontStyle: 'none',
-                                        fontWeight: '400',
-                                        padding: ['0.625rem', '1.3125rem'],
-                                        textDecoration: 'none',
-                                        textTransform: 'none',
+                                style: styleReference('Filled', {
+                                  overwrite: {
+                                    basis: {
+                                      backgroundColor: {
+                                        type: 'STATIC',
+                                        value: 'transparent',
                                       },
+                                      borderColor: {
+                                        type: 'THEME_COLOR',
+                                        value: 'primary',
+                                      },
+                                      borderRadius: ['0.25rem'],
+                                      borderStyle: 'solid',
+                                      borderWidth: ['0.0625rem'],
+                                      boxShadow: 'none',
+                                      color: {
+                                        type: 'THEME_COLOR',
+                                        value: 'primary',
+                                      },
+                                      fontFamily: 'Roboto',
+                                      fontSize: '0.875rem',
+                                      fontStyle: 'none',
+                                      fontWeight: '400',
+                                      padding: ['0.625rem', '1.3125rem'],
+                                      textDecoration: 'none',
+                                      textTransform: 'none',
                                     },
-                                  ],
-                                },
+                                  },
+                                }),
                               },
                               [],
                             ),
@@ -3032,32 +2996,28 @@ const drawerBar = DrawerBar(
                                   icon: icon('Icon', { value: 'Save' }),
                                 },
                                 ref: { id: '#editSubmitButton' },
-                                style: {
-                                  name: 'Filled',
-                                  overwrite: [
-                                    {
-                                      name: 'basis',
-                                      content: {
-                                        backgroundColor: {
-                                          type: 'THEME_COLOR',
-                                          value: 'primary',
-                                        },
-                                        boxShadow: 'none',
-                                        color: {
-                                          type: 'THEME_COLOR',
-                                          value: 'white',
-                                        },
-                                        fontFamily: 'Roboto',
-                                        fontSize: '0.875rem',
-                                        fontStyle: 'none',
-                                        fontWeight: '400',
-                                        padding: ['0.6875rem', '1.375rem'],
-                                        textDecoration: 'none',
-                                        textTransform: 'none',
+                                style: styleReference('Filled', {
+                                  overwrite: {
+                                    basis: {
+                                      backgroundColor: {
+                                        type: 'THEME_COLOR',
+                                        value: 'primary',
                                       },
+                                      boxShadow: 'none',
+                                      color: {
+                                        type: 'THEME_COLOR',
+                                        value: 'white',
+                                      },
+                                      fontFamily: 'Roboto',
+                                      fontSize: '0.875rem',
+                                      fontStyle: 'none',
+                                      fontWeight: '400',
+                                      padding: ['0.6875rem', '1.375rem'],
+                                      textDecoration: 'none',
+                                      textTransform: 'none',
                                     },
-                                  ],
-                                },
+                                  },
+                                }),
                               },
                               [],
                             ),
