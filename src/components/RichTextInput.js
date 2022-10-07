@@ -42,6 +42,8 @@
       useText(valueProp, { rawValue: true }),
     );
     const labelText = useText(label);
+    const [showDropdown, setShowDropdown] = useState(false);
+    const [activeStyleName, setActiveStyleName] = useState('Body 1');
 
     const isMarkActive = (editor, format) => {
       const marks = Editor.marks(editor);
@@ -566,6 +568,86 @@
       },
     );
 
+    function DropdownItem({ format, text, tag }) {
+      const ownEditor = useSlate();
+      const Tag = tag;
+      if (isBlockActive(ownEditor, format, 'type')) {
+        if (activeStyleName !== text) setActiveStyleName(text);
+      }
+      return (
+        <li
+          className={`${classes.dropdownItem} ${
+            isBlockActive(ownEditor, format, 'type') ? 'active' : ''
+          }`}
+          onClick={() => {
+            toggleBlock(ownEditor, format);
+            setShowDropdown(false);
+          }}
+          aria-hidden="true"
+        >
+          <div>
+            <Tag className={classes.dropdownItemTag}>{text}</Tag>
+          </div>
+        </li>
+      );
+    }
+
+    function Dropdown() {
+      return (
+        <ul className={`${classes.dropdown} ${showDropdown ? 'show' : ''}`}>
+          <DropdownItem format="paragraph" text="Body 1" tag="p" />
+          <DropdownItem format="heading-one" text="Title 1" tag="h1" />
+          <DropdownItem format="heading-two" text="Title 2" tag="h2" />
+          <DropdownItem format="heading-three" text="Title 3" tag="h3" />
+          <DropdownItem format="heading-four" text="Title 4" tag="h4" />
+          <DropdownItem format="heading-five" text="Title 5" tag="h5" />
+          <DropdownItem format="heading-six" text="Title 6" tag="h6" />
+        </ul>
+      );
+    }
+
+    function TextStyleSelector() {
+      const styleSelectorRef = useRef();
+      useEffect(() => {
+        const handler = (event) => {
+          if (
+            showDropdown &&
+            styleSelectorRef.current &&
+            !styleSelectorRef.current.contains(event.target)
+          ) {
+            setShowDropdown(false);
+          }
+        };
+        document.addEventListener('mousedown', handler);
+        document.addEventListener('touchstart', handler);
+        return () => {
+          // Cleanup the event listener
+          document.removeEventListener('mousedown', handler);
+          document.removeEventListener('touchstart', handler);
+        };
+      }, [showDropdown]);
+      const ArrowDown = Icons.KeyboardArrowDown;
+      return (
+        <div className={classes.toolbarDropdown} ref={styleSelectorRef}>
+          <button
+            type="button"
+            aria-haspopup="true"
+            aria-label="Text styles"
+            onClick={() => setShowDropdown((prev) => !prev)}
+            className={classes.dropdownButton}
+          >
+            <span className={classes.dropdownButtonText}>
+              {activeStyleName}
+            </span>
+            {/* <span> */}
+            <ArrowDown className={classes.dropdownButtonIcon} />
+            {/* </span> */}
+          </button>
+          <Dropdown />
+        </div>
+      );
+    }
+
     return (
       <div className={classes.root}>
         {labelText && !hideLabel && (
@@ -581,40 +663,47 @@
           >
             <div className={classes.toolbar}>
               <div className={classes.toolbarGroup}>
-                {showBold && <MarkButton format="bold" icon="FormatBold" />}
-                {showItalic && (
-                  <MarkButton format="italic" icon="FormatItalic" />
-                )}
-                {showUnderlined && (
-                  <MarkButton format="underline" icon="FormatUnderlined" />
-                )}
-                {showStrikethrough && (
-                  <MarkButton format="strikethrough" icon="StrikethroughS" />
-                )}
-                {showNumberedList && (
-                  <BlockButton
-                    format="numbered-list"
-                    icon="FormatListNumbered"
-                  />
-                )}
-                {showBulletedList && (
-                  <BlockButton
-                    format="bulleted-list"
-                    icon="FormatListBulleted"
-                  />
-                )}
-                {showLeftAlign && (
-                  <BlockButton format="left" icon="FormatAlignLeft" />
-                )}
-                {showCenterAlign && (
-                  <BlockButton format="center" icon="FormatAlignCenter" />
-                )}
-                {showRightAlign && (
-                  <BlockButton format="right" icon="FormatAlignRight" />
-                )}
-                {showJustifyAlign && (
-                  <BlockButton format="justify" icon="FormatAlignJustify" />
-                )}
+                <TextStyleSelector />
+                <div className={classes.toolbarSubGroup}>
+                  {showBold && <MarkButton format="bold" icon="FormatBold" />}
+                  {showItalic && (
+                    <MarkButton format="italic" icon="FormatItalic" />
+                  )}
+                  {showUnderlined && (
+                    <MarkButton format="underline" icon="FormatUnderlined" />
+                  )}
+                  {showStrikethrough && (
+                    <MarkButton format="strikethrough" icon="StrikethroughS" />
+                  )}
+                </div>
+                <div className={classes.toolbarSubGroup}>
+                  {showNumberedList && (
+                    <BlockButton
+                      format="numbered-list"
+                      icon="FormatListNumbered"
+                    />
+                  )}
+                  {showBulletedList && (
+                    <BlockButton
+                      format="bulleted-list"
+                      icon="FormatListBulleted"
+                    />
+                  )}
+                </div>
+                <div className={classes.toolbarSubGroup}>
+                  {showLeftAlign && (
+                    <BlockButton format="left" icon="FormatAlignLeft" />
+                  )}
+                  {showCenterAlign && (
+                    <BlockButton format="center" icon="FormatAlignCenter" />
+                  )}
+                  {showRightAlign && (
+                    <BlockButton format="right" icon="FormatAlignRight" />
+                  )}
+                  {showJustifyAlign && (
+                    <BlockButton format="justify" icon="FormatAlignJustify" />
+                  )}
+                </div>
               </div>
               <div className={classes.toolbarGroup}>
                 <HistoryButton action="undo" icon="Undo" />
@@ -724,7 +813,9 @@
         display: 'flex',
         justifyContent: 'space-between',
       },
-      toolbarGroup: {},
+      toolbarGroup: {
+        display: 'flex',
+      },
       toolbarButton: {
         color: ({ options: { buttonColor } }) => [style.getColor(buttonColor)],
         padding: '0px 8px',
@@ -739,6 +830,58 @@
             style.getColor(buttonActiveColor),
           ],
         },
+      },
+      toolbarDropdown: {
+        position: 'relative',
+      },
+      dropdown: {
+        position: 'absolute',
+        left: 'auto',
+        zIndex: 9999,
+        minWidth: '8rem',
+        padding: '0.5rem 0',
+        listStyle: 'none',
+        backgroundColor: '#fff',
+        borderRadius: '0.5rem',
+        display: 'none',
+        boxShadow:
+          'rgb(9 30 66 / 25%) 0px 4px 8px -2px, rgb(9 30 66 / 31%) 0px 0px 1px',
+        '&.show': {
+          display: 'block',
+        },
+      },
+      dropdownButton: {
+        display: 'inline-flex',
+        maxWitdh: '100%',
+        cursor: 'pointer',
+        backgroundColor: 'transparent',
+        padding: '4px',
+        border: '0',
+        borderRadius: '5px',
+        alignItems: 'center',
+        '&:hover': {
+          backgroundColor: '#f4f5f7',
+        },
+      },
+      dropdownButtonText: {
+        minWidth: '50px',
+      },
+      dropdownButtonIcon: {
+        fontSize: '1rem !important',
+      },
+      dropdownItem: {
+        padding: '8px 16px',
+        cursor: 'pointer',
+        '&:hover': {
+          backgroundColor: '#f4f5f7',
+        },
+        '&.active': {
+          backgroundColor: '#6c798f',
+          color: '#ffffff',
+        },
+      },
+      dropdownItemTag: {
+        margin: '0px',
       },
       editorWrapper: {
         border: '1px solid',
