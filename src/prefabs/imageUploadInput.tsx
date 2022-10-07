@@ -1,7 +1,6 @@
 import * as React from 'react';
-// @typescript-eslint/no-shadow
 import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
-import { RadioInput } from './structures/RadioInput';
+import { FileUpload } from './structures/FileUpload';
 
 const beforeCreate = ({
   close,
@@ -10,18 +9,23 @@ const beforeCreate = ({
   save,
 }: BeforeCreateArgs) => {
   const structure = originalPrefab.structure[0];
-
   if (structure.type !== 'COMPONENT')
     return <div>expected component prefab, found {structure.type}</div>;
 
+  // TODO: remove this code
   const actionVariableOption = structure.options.find(
     (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
   );
 
+  // TODO: remove this code
+  if (!actionVariableOption) {
+    return <div>Prefab is missing the actionVariable component option</div>;
+  }
+
   return (
     <CreateFormInputWizard
-      supportedKinds={['LIST', 'BELONGS_TO']}
-      actionVariableOption={actionVariableOption?.key || null}
+      supportedKinds={['IMAGE']}
+      actionVariableOption={actionVariableOption.key}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
       close={close}
@@ -31,14 +35,20 @@ const beforeCreate = ({
   );
 };
 
-const attributes = {
+const attr = {
+  icon: Icon.ImageInputIcon,
   category: 'FORMV2',
-  icon: Icon.RadioButtonIcon,
-  keywords: ['Form', 'input'],
+  keywords: [
+    'Form',
+    'input',
+    'image',
+    'thumbnail',
+    'file',
+    'upload',
+    'fileupload',
+  ],
 };
 
-export default prefab('Radio Beta', attributes, beforeCreate, [
-  RadioInput({
-    label: 'Radio',
-  }),
+export default prefab('Image Upload Beta', attr, beforeCreate, [
+  FileUpload({ supportImages: true, label: 'Image Upload Beta' }),
 ]);

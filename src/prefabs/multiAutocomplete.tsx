@@ -17,15 +17,10 @@ const beforeCreate = ({
     (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
   );
 
-  // TODO: remove this code
-  if (!actionVariableOption) {
-    return <div>Prefab is missing the actionVariable component option</div>;
-  }
-
   return (
     <CreateFormInputWizard
       supportedKinds={['HAS_AND_BELONGS_TO_MANY', 'HAS_MANY']}
-      actionVariableOption={actionVariableOption.key}
+      actionVariableOption={actionVariableOption?.key || null}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
       close={close}
@@ -42,5 +37,9 @@ const attributes = {
 };
 
 export default prefab('Multi Autocomplete Beta', attributes, beforeCreate, [
-  MultiAutocomplete({ label: 'Autocomplete', type: 'text' }),
+  MultiAutocomplete({
+    label: 'Autocomplete',
+    inputLabel: 'Multi Autocomplete',
+    type: 'text',
+  }),
 ]);

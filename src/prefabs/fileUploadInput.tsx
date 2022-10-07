@@ -41,4 +41,6 @@ const attr = {
   keywords: ['Form', 'input', 'file', 'upload', 'fileupload'],
 };
 
-export default prefab('File Upload Beta', attr, beforeCreate, [FileUpload()]);
+export default prefab('File Upload Beta', attr, beforeCreate, [
+  FileUpload({ label: 'File Upload Beta' }),
+]);
