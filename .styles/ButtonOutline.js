@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.states = exports.basis = void 0;
 const component_sdk_1 = require("@betty-blocks/component-sdk");
 exports.basis = {
     backgroundColor: component_sdk_1.themeColor('primary'),
