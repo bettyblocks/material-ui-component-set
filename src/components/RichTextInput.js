@@ -67,6 +67,30 @@
       return !!match;
     };
 
+    const isHeadingActive = (editor) => {
+      const { selection } = editor;
+      if (!selection) return false;
+
+      const [match] = Array.from(
+        Editor.nodes(editor, {
+          at: Editor.unhangRange(editor, selection),
+          match: (n) =>
+            !Editor.isEditor(n) &&
+            Element.isElement(n) &&
+            [
+              'heading-one',
+              'heading-two',
+              'heading-three',
+              'heading-four',
+              'heading-five',
+              'heading-six',
+            ].includes(n.type),
+        }),
+      );
+
+      return !!match;
+    };
+
     const LIST_TYPES = ['numbered-list', 'bulleted-list'];
     const TEXT_ALIGN_TYPES = ['left', 'center', 'right', 'justify'];
 
@@ -338,6 +362,12 @@
           handleListdepth('bulleted-list', 'enter', event);
         } else if (isBlockActive(editor, 'numbered-list', 'type')) {
           handleListdepth('numbered-list', 'enter', event);
+        } else if (isHeadingActive(editor)) {
+          event.preventDefault();
+          Transforms.insertNodes(editor, {
+            children: [{ text: '' }],
+            type: 'paragraph',
+          });
         } else if (event.shiftKey) {
           event.preventDefault();
           editor.insertText('\n');
