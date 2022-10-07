@@ -13,6 +13,10 @@ export const categories = [
       'showStrikethrough',
       'showNumberedList',
       'showBulletedList',
+      'showLeftAlign',
+      'showCenterAlign',
+      'showRightAlign',
+      'showJustifyAlign',
     ],
   },
   {
