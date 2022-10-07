@@ -31,6 +31,10 @@
       showStrikethrough,
       showNumberedList,
       showBulletedList,
+      showLeftAlign,
+      showCenterAlign,
+      showRightAlign,
+      showJustifyAlign,
     } = options;
     const isDev = env === 'dev';
 
@@ -129,27 +133,28 @@
 
       const children =
         node.children && node.children.map((n) => serialize(n)).join('');
+      const align = node.align ? `align="${node.align}"` : '';
       switch (node.type) {
         case 'heading-one':
-          return `<h1>${children}</h1>`;
+          return `<h1 ${align}>${children}</h1>`;
         case 'heading-two':
-          return `<h2>${children}</h2>`;
+          return `<h2 ${align}>${children}</h2>`;
         case 'heading-three':
-          return `<h3>${children}</h3>`;
+          return `<h3 ${align}>${children}</h3>`;
         case 'heading-four':
-          return `<h4>${children}</h4>`;
+          return `<h4 ${align}>${children}</h4>`;
         case 'heading-five':
-          return `<h5>${children}</h5>`;
+          return `<h5 ${align}>${children}</h5>`;
         case 'heading-six':
-          return `<h6>${children}</h6>`;
+          return `<h6 ${align}>${children}</h6>`;
         case 'paragraph':
-          return `<p>${children}</p>`;
+          return `<p ${align}>${children}</p>`;
         case 'numbered-list':
-          return `<ol>${children}</ol>`;
+          return `<ol ${align}>${children}</ol>`;
         case 'bulleted-list':
-          return `<ul>${children}</ul>`;
+          return `<ul ${align}>${children}</ul>`;
         case 'list-item':
-          return `<li>${children}</li>`;
+          return `<li ${align}>${children}</li>`;
         default:
           return children;
       }
@@ -158,18 +163,18 @@
     const ELEMENT_TAGS = {
       A: (el) => ({ type: 'link', url: el.getAttribute('href') }),
       BLOCKQUOTE: () => ({ type: 'quote' }),
-      H1: () => ({ type: 'heading-one' }),
-      H2: () => ({ type: 'heading-two' }),
-      H3: () => ({ type: 'heading-three' }),
-      H4: () => ({ type: 'heading-four' }),
-      H5: () => ({ type: 'heading-five' }),
-      H6: () => ({ type: 'heading-six' }),
+      H1: (el) => ({ type: 'heading-one', align: el.getAttribute('align') }),
+      H2: (el) => ({ type: 'heading-two', align: el.getAttribute('align') }),
+      H3: (el) => ({ type: 'heading-three', align: el.getAttribute('align') }),
+      H4: (el) => ({ type: 'heading-four', align: el.getAttribute('align') }),
+      H5: (el) => ({ type: 'heading-five', align: el.getAttribute('align') }),
+      H6: (el) => ({ type: 'heading-six', align: el.getAttribute('align') }),
       IMG: (el) => ({ type: 'image', url: el.getAttribute('src') }),
-      LI: () => ({ type: 'list-item' }),
-      OL: () => ({ type: 'numbered-list' }),
-      P: () => ({ type: 'paragraph' }),
+      LI: (el) => ({ type: 'list-item', align: el.getAttribute('align') }),
+      OL: (el) => ({ type: 'numbered-list', align: el.getAttribute('align') }),
+      P: (el) => ({ type: 'paragraph', align: el.getAttribute('align') }),
       PRE: () => ({ type: 'code' }),
-      UL: () => ({ type: 'bulleted-list' }),
+      UL: (el) => ({ type: 'bulleted-list', align: el.getAttribute('align') }),
     };
 
     // COMPAT: `B` is omitted here because Google Docs uses `<b>` in weird ways.
@@ -598,16 +603,18 @@
                     icon="FormatListBulleted"
                   />
                 )}
-                <BlockButton format="left" icon="FormatAlignLeft" />
-                <BlockButton format="center" icon="FormatAlignCenter" />
-                <BlockButton format="right" icon="FormatAlignRight" />
-                <BlockButton format="justify" icon="FormatAlignJustify" />
-                <BlockButton format="heading-one" icon="Title" />
-                <BlockButton format="heading-two" icon="Title" />
-                <BlockButton format="heading-three" icon="Title" />
-                <BlockButton format="heading-four" icon="Title" />
-                <BlockButton format="heading-five" icon="Title" />
-                <BlockButton format="heading-six" icon="Title" />
+                {showLeftAlign && (
+                  <BlockButton format="left" icon="FormatAlignLeft" />
+                )}
+                {showCenterAlign && (
+                  <BlockButton format="center" icon="FormatAlignCenter" />
+                )}
+                {showRightAlign && (
+                  <BlockButton format="right" icon="FormatAlignRight" />
+                )}
+                {showJustifyAlign && (
+                  <BlockButton format="justify" icon="FormatAlignJustify" />
+                )}
               </div>
               <div className={classes.toolbarGroup}>
                 <HistoryButton action="undo" icon="Undo" />
@@ -684,7 +691,6 @@
             getSpacing(outerSpacing[3], 'Desktop'),
         },
         width: ({ options: { width } }) => width,
-        height: ({ options: { height } }) => height,
       },
       label: {
         color: ({ options: { labelColor } }) => [
@@ -697,9 +703,8 @@
       editor: {
         padding: '0.5px 14px',
         color: isDev && 'rgb(0, 0, 0)',
-        // '& h1': {
-        //   fontSize: style.getFontSize('Title1'),
-        // },
+        height: ({ options: { height } }) => height,
+        overflow: 'overlay',
       },
       helper: {
         color: ({ options: { helperColor } }) => [

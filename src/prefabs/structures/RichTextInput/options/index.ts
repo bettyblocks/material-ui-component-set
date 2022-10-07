@@ -55,6 +55,10 @@ export const richTextOptions = {
   showStrikethrough: toggle('Strikethrough', { value: true }),
   showNumberedList: toggle('NumberedList', { value: true }),
   showBulletedList: toggle('BulletedList', { value: true }),
+  showLeftAlign: toggle('Left alignment', { value: true }),
+  showCenterAlign: toggle('Center alignment', { value: true }),
+  showRightAlign: toggle('Right alignment', { value: true }),
+  showJustifyAlign: toggle('Justify alignment', { value: true }),
 
   ...validation,
   ...styles,
