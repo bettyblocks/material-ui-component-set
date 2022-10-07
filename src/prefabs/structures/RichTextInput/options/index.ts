@@ -6,7 +6,14 @@ export const categories = [
   {
     label: 'Toolbar options',
     expanded: false,
-    members: ['showBold', 'showItalic', 'showUnderlined', 'showStrikethrough'],
+    members: [
+      'showBold',
+      'showItalic',
+      'showUnderlined',
+      'showStrikethrough',
+      'showNumberedList',
+      'showBulletedList',
+    ],
   },
   {
     label: 'Styling',
@@ -46,6 +53,12 @@ export const richTextOptions = {
   showItalic: toggle('Italic', { value: true }),
   showUnderlined: toggle('Underlined', { value: true }),
   showStrikethrough: toggle('Strikethrough', { value: true }),
+  showNumberedList: toggle('NumberedList', { value: true }),
+  showBulletedList: toggle('BulletedList', { value: true }),
+  showLeftAlign: toggle('Left alignment', { value: true }),
+  showCenterAlign: toggle('Center alignment', { value: true }),
+  showRightAlign: toggle('Right alignment', { value: true }),
+  showJustifyAlign: toggle('Justify alignment', { value: true }),
 
   ...validation,
   ...styles,

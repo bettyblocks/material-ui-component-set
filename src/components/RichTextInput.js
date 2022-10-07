@@ -13,7 +13,7 @@
     } = window.MaterialUI;
     const { FormHelperText } = window.MaterialUI.Core;
     const { Editable, withReact, Slate, useSlate } = SlateReact;
-    const { createEditor, Editor, Text } = SlateP;
+    const { createEditor, Editor, Text, Element, Transforms, Node } = SlateP;
     const { jsx } = SlateHyperscript;
     const { withHistory } = SlateHistory;
     const { useText, env } = B;
@@ -29,6 +29,12 @@
       showItalic,
       showUnderlined,
       showStrikethrough,
+      showNumberedList,
+      showBulletedList,
+      showLeftAlign,
+      showCenterAlign,
+      showRightAlign,
+      showJustifyAlign,
     } = options;
     const isDev = env === 'dev';
 
@@ -40,6 +46,61 @@
     const isMarkActive = (editor, format) => {
       const marks = Editor.marks(editor);
       return marks ? marks[format] === true : false;
+    };
+
+    const isBlockActive = (editor, format, blockType = 'type') => {
+      const { selection } = editor;
+      if (!selection) return false;
+
+      const [match] = Array.from(
+        Editor.nodes(editor, {
+          at: Editor.unhangRange(editor, selection),
+          match: (n) =>
+            !Editor.isEditor(n) &&
+            Element.isElement(n) &&
+            n[blockType] === format,
+        }),
+      );
+
+      return !!match;
+    };
+
+    const LIST_TYPES = ['numbered-list', 'bulleted-list'];
+    const TEXT_ALIGN_TYPES = ['left', 'center', 'right', 'justify'];
+
+    const toggleBlock = (editor, format) => {
+      const isActive = isBlockActive(
+        editor,
+        format,
+        TEXT_ALIGN_TYPES.includes(format) ? 'align' : 'type',
+      );
+      const isList = LIST_TYPES.includes(format);
+
+      Transforms.unwrapNodes(editor, {
+        match: (n) =>
+          !Editor.isEditor(n) &&
+          Element.isElement(n) &&
+          LIST_TYPES.includes(n.type) &&
+          !TEXT_ALIGN_TYPES.includes(format),
+        split: true,
+      });
+      let newProperties;
+      if (TEXT_ALIGN_TYPES.includes(format)) {
+        newProperties = {
+          align: isActive ? undefined : format,
+        };
+      } else {
+        newProperties = {
+          // eslint-disable-next-line no-nested-ternary
+          type: isActive ? 'paragraph' : isList ? 'list-item' : format,
+        };
+      }
+      Transforms.setNodes(editor, newProperties);
+
+      if (!isActive && isList) {
+        const block = { type: format, children: [] };
+        Transforms.wrapNodes(editor, block);
+      }
     };
 
     const toggleMark = (editor, format) => {
@@ -72,10 +133,28 @@
 
       const children =
         node.children && node.children.map((n) => serialize(n)).join('');
-
+      const align = node.align ? `align="${node.align}"` : '';
       switch (node.type) {
+        case 'heading-one':
+          return `<h1 ${align}>${children}</h1>`;
+        case 'heading-two':
+          return `<h2 ${align}>${children}</h2>`;
+        case 'heading-three':
+          return `<h3 ${align}>${children}</h3>`;
+        case 'heading-four':
+          return `<h4 ${align}>${children}</h4>`;
+        case 'heading-five':
+          return `<h5 ${align}>${children}</h5>`;
+        case 'heading-six':
+          return `<h6 ${align}>${children}</h6>`;
         case 'paragraph':
-          return `<p>${children}</p>`;
+          return `<p ${align}>${children}</p>`;
+        case 'numbered-list':
+          return `<ol ${align}>${children}</ol>`;
+        case 'bulleted-list':
+          return `<ul ${align}>${children}</ul>`;
+        case 'list-item':
+          return `<li ${align}>${children}</li>`;
         default:
           return children;
       }
@@ -84,18 +163,18 @@
     const ELEMENT_TAGS = {
       A: (el) => ({ type: 'link', url: el.getAttribute('href') }),
       BLOCKQUOTE: () => ({ type: 'quote' }),
-      H1: () => ({ type: 'heading-one' }),
-      H2: () => ({ type: 'heading-two' }),
-      H3: () => ({ type: 'heading-three' }),
-      H4: () => ({ type: 'heading-four' }),
-      H5: () => ({ type: 'heading-five' }),
-      H6: () => ({ type: 'heading-six' }),
+      H1: (el) => ({ type: 'heading-one', align: el.getAttribute('align') }),
+      H2: (el) => ({ type: 'heading-two', align: el.getAttribute('align') }),
+      H3: (el) => ({ type: 'heading-three', align: el.getAttribute('align') }),
+      H4: (el) => ({ type: 'heading-four', align: el.getAttribute('align') }),
+      H5: (el) => ({ type: 'heading-five', align: el.getAttribute('align') }),
+      H6: (el) => ({ type: 'heading-six', align: el.getAttribute('align') }),
       IMG: (el) => ({ type: 'image', url: el.getAttribute('src') }),
-      LI: () => ({ type: 'list-item' }),
-      OL: () => ({ type: 'numbered-list' }),
-      P: () => ({ type: 'paragraph' }),
+      LI: (el) => ({ type: 'list-item', align: el.getAttribute('align') }),
+      OL: (el) => ({ type: 'numbered-list', align: el.getAttribute('align') }),
+      P: (el) => ({ type: 'paragraph', align: el.getAttribute('align') }),
       PRE: () => ({ type: 'code' }),
-      UL: () => ({ type: 'bulleted-list' }),
+      UL: (el) => ({ type: 'bulleted-list', align: el.getAttribute('align') }),
     };
 
     // COMPAT: `B` is omitted here because Google Docs uses `<b>` in weird ways.
@@ -189,7 +268,7 @@
     }
 
     const onChangeHandler = (value) => {
-      setCurrentValue(value.map((row) => serialize(row)).join(''));
+      setCurrentValue(value[0].children.map((row) => serialize(row)).join(''));
       B.triggerEvent('onChange', currentValue);
     };
 
@@ -205,12 +284,118 @@
     );
     const fragment = deserialize(parsed.body);
 
+    const handleListdepth = (listKind, key, event) => {
+      const isList = isBlockActive(editor, listKind, 'type');
+      if (isList) {
+        const lastNode = Node.last(editor, editor.selection.focus.path);
+        if (
+          key === 'shiftTab' ||
+          (key === 'enter' && lastNode[0].text === '')
+        ) {
+          if (key === 'enter') event.preventDefault();
+          Transforms.unwrapNodes(editor, {
+            match: (n) =>
+              !Editor.isEditor(n) &&
+              Element.isElement(n) &&
+              LIST_TYPES.includes(n.type),
+            split: true,
+          });
+          const parentNode = Node.parent(
+            editor,
+            editor.selection.focus.path.slice(0, -1),
+          );
+          if (LIST_TYPES.includes(parentNode.type)) {
+            Transforms.setNodes(editor, { type: 'list-item' });
+          } else {
+            Transforms.setNodes(editor, { type: 'paragraph' });
+          }
+        }
+        if (key === 'tab') {
+          Transforms.setNodes(editor, {
+            type: 'list-item',
+            children: [{ text: '' }],
+          });
+          Transforms.wrapNodes(editor, {
+            type: listKind,
+            children: [],
+          });
+        }
+      }
+    };
+
     const onKeyDownHandler = (event) => {
+      if (event.shiftKey && event.key === 'Tab') {
+        event.preventDefault();
+        handleListdepth('bulleted-list', 'shiftTab');
+        handleListdepth('numbered-list', 'shiftTab');
+        return;
+      }
+
+      if (event.key === 'Enter') {
+        if (isBlockActive(editor, 'bulleted-list', 'type')) {
+          handleListdepth('bulleted-list', 'enter', event);
+        } else if (isBlockActive(editor, 'numbered-list', 'type')) {
+          handleListdepth('numbered-list', 'enter', event);
+        } else if (event.shiftKey) {
+          event.preventDefault();
+          editor.insertText('\n');
+        }
+
+        return;
+      }
+
+      if (event.key === 'Tab') {
+        event.preventDefault();
+        handleListdepth('bulleted-list', 'tab');
+        handleListdepth('numbered-list', 'tab');
+        return;
+      }
+
       if (IS_MAC) {
         if (!event.metaKey) {
           return;
         }
       } else if (!event.ctrlKey) {
+        return;
+      }
+
+      if (event.altKey) {
+        switch (event.keyCode) {
+          case 49:
+            event.preventDefault();
+            toggleBlock(editor, 'heading-one');
+            break;
+          case 50:
+            event.preventDefault();
+            toggleBlock(editor, 'heading-two');
+            break;
+          case 51:
+            event.preventDefault();
+            toggleBlock(editor, 'heading-three');
+            break;
+          case 52:
+            event.preventDefault();
+            toggleBlock(editor, 'heading-four');
+            break;
+          case 53:
+            event.preventDefault();
+            toggleBlock(editor, 'heading-five');
+            break;
+          case 54:
+            event.preventDefault();
+            toggleBlock(editor, 'heading-six');
+            break;
+          case 55:
+            event.preventDefault();
+            toggleBlock(editor, 'paragraph');
+            break;
+          case 56:
+            event.preventDefault();
+            toggleBlock(editor, 'paragraph');
+            break;
+          default:
+            break;
+        }
         return;
       }
 
@@ -248,14 +433,72 @@
       );
     }
 
-    function DefaultElement({ attributes, children }) {
-      return <p {...attributes}>{children}</p>;
+    function DefaultElement({ attributes, children, element: { align } }) {
+      return (
+        <p style={{ textAlign: align }} {...attributes}>
+          {children}
+        </p>
+      );
+    }
+
+    function NumberedListElement({ attributes, children, element: { align } }) {
+      return (
+        <ol style={{ textAlign: align }} {...attributes}>
+          {children}
+        </ol>
+      );
+    }
+
+    function BulletedListElement({ attributes, children, element: { align } }) {
+      return (
+        <ul style={{ textAlign: align }} {...attributes}>
+          {children}
+        </ul>
+      );
+    }
+
+    function ListItemElement({ attributes, children, element: { align } }) {
+      return (
+        <li style={{ textAlign: align }} {...attributes}>
+          {children}
+        </li>
+      );
+    }
+
+    function HeadingElement(
+      { attributes, children, element: { align } },
+      type,
+    ) {
+      const HeadingType = type;
+      return (
+        <HeadingType style={{ textAlign: align }} {...attributes}>
+          {children}
+        </HeadingType>
+      );
     }
 
     const renderElement = useCallback((props) => {
       switch (props.element.type) {
         case 'code':
           return CodeElement(props);
+        case 'numbered-list':
+          return NumberedListElement(props);
+        case 'bulleted-list':
+          return BulletedListElement(props);
+        case 'list-item':
+          return ListItemElement(props);
+        case 'heading-one':
+          return HeadingElement(props, 'h1');
+        case 'heading-two':
+          return HeadingElement(props, 'h2');
+        case 'heading-three':
+          return HeadingElement(props, 'h3');
+        case 'heading-four':
+          return HeadingElement(props, 'h4');
+        case 'heading-five':
+          return HeadingElement(props, 'h5');
+        case 'heading-six':
+          return HeadingElement(props, 'h6');
         case 'paragraph':
         default:
           return DefaultElement(props);
@@ -272,6 +515,24 @@
         />
       );
     });
+
+    function BlockButton({ format, icon }) {
+      const ownEditor = useSlate();
+      return (
+        <Button
+          active={isBlockActive(
+            ownEditor,
+            format,
+            TEXT_ALIGN_TYPES.includes(format) ? 'align' : 'type',
+          )}
+          onMouseDown={(event) => {
+            event.preventDefault();
+            toggleBlock(ownEditor, format);
+          }}
+          icon={icon}
+        />
+      );
+    }
 
     function MarkButton({ format, icon }) {
       const ownEditor = useSlate();
@@ -330,6 +591,30 @@
                 {showStrikethrough && (
                   <MarkButton format="strikethrough" icon="StrikethroughS" />
                 )}
+                {showNumberedList && (
+                  <BlockButton
+                    format="numbered-list"
+                    icon="FormatListNumbered"
+                  />
+                )}
+                {showBulletedList && (
+                  <BlockButton
+                    format="bulleted-list"
+                    icon="FormatListBulleted"
+                  />
+                )}
+                {showLeftAlign && (
+                  <BlockButton format="left" icon="FormatAlignLeft" />
+                )}
+                {showCenterAlign && (
+                  <BlockButton format="center" icon="FormatAlignCenter" />
+                )}
+                {showRightAlign && (
+                  <BlockButton format="right" icon="FormatAlignRight" />
+                )}
+                {showJustifyAlign && (
+                  <BlockButton format="justify" icon="FormatAlignJustify" />
+                )}
               </div>
               <div className={classes.toolbarGroup}>
                 <HistoryButton action="undo" icon="Undo" />
@@ -340,7 +625,9 @@
               className={classes.editor}
               renderLeaf={renderLeaf}
               renderElement={renderElement}
-              placeholder={placeholder}
+              placeholder={
+                <span className={classes.placeholderText}>{placeholder}</span>
+              }
               readOnly={isDev || disabled}
               onKeyDown={(event) => {
                 onKeyDownHandler(event);
@@ -404,7 +691,6 @@
             getSpacing(outerSpacing[3], 'Desktop'),
         },
         width: ({ options: { width } }) => width,
-        height: ({ options: { height } }) => height,
       },
       label: {
         color: ({ options: { labelColor } }) => [
@@ -417,6 +703,8 @@
       editor: {
         padding: '0.5px 14px',
         color: isDev && 'rgb(0, 0, 0)',
+        height: ({ options: { height } }) => height,
+        overflow: 'overlay',
       },
       helper: {
         color: ({ options: { helperColor } }) => [
@@ -465,12 +753,17 @@
           ],
         },
         '&:focus-within': {
-          borderColor: ({ options: { borderFocusColor } }) => [
-            style.getColor(borderFocusColor),
+          boxShadow: ({ options: { borderFocusColor } }) => [
+            `0 0 0 1px ${style.getColor(borderFocusColor)}`,
           ],
         },
         backgroundColor: ({ options: { backgroundColor } }) => [
           style.getColor(backgroundColor),
+        ],
+      },
+      placeholderText: {
+        color: ({ options: { placeholderColor } }) => [
+          style.getColor(placeholderColor),
         ],
       },
     };
