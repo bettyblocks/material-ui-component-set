@@ -1,3 +1,10 @@
+# [2.60.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.59.0...v2.60.0) (2022-10-07)
+
+
+### Features
+
+* refactor simple dashboard to tsx ([7f4239d](https://github.com/bettyblocks/material-ui-component-set/commit/7f4239d933796c45ac33430abc22df1ace9a1426))
+
 # [2.59.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.58.1...v2.59.0) (2022-10-06)
 
 
