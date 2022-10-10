@@ -129,7 +129,7 @@
     };
 
     const buttonProps = {
-      disabled: disabled || isLoading || loading,
+      disabled: disabled || showIndicator,
       tabIndex: isDev ? -1 : undefined,
       onClick: (event) => {
         event.stopPropagation();
