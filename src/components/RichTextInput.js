@@ -29,6 +29,7 @@
       showItalic,
       showUnderlined,
       showStrikethrough,
+      showCode,
       showNumberedList,
       showBulletedList,
       showLeftAlign,
@@ -181,6 +182,8 @@
           return `<ul ${align}>${children}</ul>`;
         case 'list-item':
           return `<li ${align}>${children}</li>`;
+        case 'code':
+          return `<pre ${align}><code>${children}</code></pre>`;
         default:
           return children;
       }
@@ -199,7 +202,7 @@
       LI: (el) => ({ type: 'list-item', align: el.getAttribute('align') }),
       OL: (el) => ({ type: 'numbered-list', align: el.getAttribute('align') }),
       P: (el) => ({ type: 'paragraph', align: el.getAttribute('align') }),
-      PRE: () => ({ type: 'code' }),
+      PRE: (el) => ({ type: 'code', align: el.getAttribute('align') }),
       UL: (el) => ({ type: 'bulleted-list', align: el.getAttribute('align') }),
     };
 
@@ -598,6 +601,31 @@
       },
     );
 
+    const CodeButton = React.forwardRef(({ ...props }, ref) => {
+      const IconButton = Icons.Code;
+      const activeMark = isMarkActive(editor, 'code');
+      const activeBlock = isBlockActive(editor, 'code');
+
+      return (
+        <IconButton
+          {...props}
+          ref={ref}
+          className={`${classes.toolbarButton} ${
+            activeMark || activeBlock ? 'active' : ''
+          }`}
+          onMouseDown={() => {
+            // event.preventDefault();
+            // const lastNode = Node.last(editor, editor.selection.focus.path);
+            // if (activeBlock || lastNode[0].text === '') {
+            //   toggleBlock(editor, 'code');
+            //   return;
+            // }
+            // toggleMark(editor, 'code');
+          }}
+        />
+      );
+    });
+
     function DropdownItem({ format, text, tag }) {
       const ownEditor = useSlate();
       const Tag = tag;
@@ -705,6 +733,7 @@
                   {showStrikethrough && (
                     <MarkButton format="strikethrough" icon="StrikethroughS" />
                   )}
+                  {showCode && <CodeButton />}
                 </div>
                 <div className={classes.toolbarSubGroup}>
                   {showNumberedList && (
