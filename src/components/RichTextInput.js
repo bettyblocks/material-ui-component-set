@@ -251,7 +251,7 @@
       }
 
       if (el.nodeName === 'BODY') {
-        return [jsx('element', { type: 'paragraph' }, children)];
+        return jsx('element', {}, children);
       }
 
       if (ELEMENT_TAGS[nodeName]) {
@@ -297,7 +297,7 @@
     }
 
     const onChangeHandler = (value) => {
-      setCurrentValue(value[0].children.map((row) => serialize(row)).join(''));
+      setCurrentValue(value.map((row) => serialize(row)).join(''));
       B.triggerEvent('onChange', currentValue);
     };
 
