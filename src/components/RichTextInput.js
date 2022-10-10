@@ -29,6 +29,7 @@
       showItalic,
       showUnderlined,
       showStrikethrough,
+      showCode,
       showNumberedList,
       showBulletedList,
       showLeftAlign,
@@ -42,6 +43,8 @@
       useText(valueProp, { rawValue: true }),
     );
     const labelText = useText(label);
+    const [showDropdown, setShowDropdown] = useState(false);
+    const [activeStyleName, setActiveStyleName] = useState('Body 1');
 
     const isMarkActive = (editor, format) => {
       const marks = Editor.marks(editor);
@@ -59,6 +62,30 @@
             !Editor.isEditor(n) &&
             Element.isElement(n) &&
             n[blockType] === format,
+        }),
+      );
+
+      return !!match;
+    };
+
+    const isHeadingActive = (editor) => {
+      const { selection } = editor;
+      if (!selection) return false;
+
+      const [match] = Array.from(
+        Editor.nodes(editor, {
+          at: Editor.unhangRange(editor, selection),
+          match: (n) =>
+            !Editor.isEditor(n) &&
+            Element.isElement(n) &&
+            [
+              'heading-one',
+              'heading-two',
+              'heading-three',
+              'heading-four',
+              'heading-five',
+              'heading-six',
+            ].includes(n.type),
         }),
       );
 
@@ -155,6 +182,8 @@
           return `<ul ${align}>${children}</ul>`;
         case 'list-item':
           return `<li ${align}>${children}</li>`;
+        case 'code':
+          return `<pre ${align}><code>${children}</code></pre>`;
         default:
           return children;
       }
@@ -173,7 +202,7 @@
       LI: (el) => ({ type: 'list-item', align: el.getAttribute('align') }),
       OL: (el) => ({ type: 'numbered-list', align: el.getAttribute('align') }),
       P: (el) => ({ type: 'paragraph', align: el.getAttribute('align') }),
-      PRE: () => ({ type: 'code' }),
+      PRE: (el) => ({ type: 'code', align: el.getAttribute('align') }),
       UL: (el) => ({ type: 'bulleted-list', align: el.getAttribute('align') }),
     };
 
@@ -336,6 +365,12 @@
           handleListdepth('bulleted-list', 'enter', event);
         } else if (isBlockActive(editor, 'numbered-list', 'type')) {
           handleListdepth('numbered-list', 'enter', event);
+        } else if (isHeadingActive(editor)) {
+          event.preventDefault();
+          Transforms.insertNodes(editor, {
+            children: [{ text: '' }],
+            type: 'paragraph',
+          });
         } else if (event.shiftKey) {
           event.preventDefault();
           editor.insertText('\n');
@@ -566,6 +601,111 @@
       },
     );
 
+    const CodeButton = React.forwardRef(({ ...props }, ref) => {
+      const IconButton = Icons.Code;
+      const activeMark = isMarkActive(editor, 'code');
+      const activeBlock = isBlockActive(editor, 'code');
+
+      return (
+        <IconButton
+          {...props}
+          ref={ref}
+          className={`${classes.toolbarButton} ${
+            activeMark || activeBlock ? 'active' : ''
+          }`}
+          onMouseDown={() => {
+            // event.preventDefault();
+            // const lastNode = Node.last(editor, editor.selection.focus.path);
+            // if (activeBlock || lastNode[0].text === '') {
+            //   toggleBlock(editor, 'code');
+            //   return;
+            // }
+            // toggleMark(editor, 'code');
+          }}
+        />
+      );
+    });
+
+    function DropdownItem({ format, text, tag }) {
+      const ownEditor = useSlate();
+      const Tag = tag;
+      if (isBlockActive(ownEditor, format, 'type')) {
+        if (activeStyleName !== text) setActiveStyleName(text);
+      }
+      return (
+        <li
+          className={`${classes.dropdownItem} ${
+            isBlockActive(ownEditor, format, 'type') ? 'active' : ''
+          }`}
+          onClick={() => {
+            toggleBlock(ownEditor, format);
+            setShowDropdown(false);
+          }}
+          aria-hidden="true"
+        >
+          <div>
+            <Tag className={classes.dropdownItemTag}>{text}</Tag>
+          </div>
+        </li>
+      );
+    }
+
+    function Dropdown() {
+      return (
+        <ul className={`${classes.dropdown} ${showDropdown ? 'show' : ''}`}>
+          <DropdownItem format="paragraph" text="Body 1" tag="p" />
+          <DropdownItem format="heading-one" text="Title 1" tag="h1" />
+          <DropdownItem format="heading-two" text="Title 2" tag="h2" />
+          <DropdownItem format="heading-three" text="Title 3" tag="h3" />
+          <DropdownItem format="heading-four" text="Title 4" tag="h4" />
+          <DropdownItem format="heading-five" text="Title 5" tag="h5" />
+          <DropdownItem format="heading-six" text="Title 6" tag="h6" />
+        </ul>
+      );
+    }
+
+    function TextStyleSelector() {
+      const styleSelectorRef = useRef();
+      useEffect(() => {
+        const handler = (event) => {
+          if (
+            showDropdown &&
+            styleSelectorRef.current &&
+            !styleSelectorRef.current.contains(event.target)
+          ) {
+            setShowDropdown(false);
+          }
+        };
+        document.addEventListener('mousedown', handler);
+        document.addEventListener('touchstart', handler);
+        return () => {
+          // Cleanup the event listener
+          document.removeEventListener('mousedown', handler);
+          document.removeEventListener('touchstart', handler);
+        };
+      }, [showDropdown]);
+      const ArrowDown = Icons.KeyboardArrowDown;
+      return (
+        <div className={classes.toolbarDropdown} ref={styleSelectorRef}>
+          <button
+            type="button"
+            aria-haspopup="true"
+            aria-label="Text styles"
+            onClick={() => setShowDropdown((prev) => !prev)}
+            className={classes.dropdownButton}
+          >
+            <span className={classes.dropdownButtonText}>
+              {activeStyleName}
+            </span>
+            {/* <span> */}
+            <ArrowDown className={classes.dropdownButtonIcon} />
+            {/* </span> */}
+          </button>
+          <Dropdown />
+        </div>
+      );
+    }
+
     return (
       <div className={classes.root}>
         {labelText && !hideLabel && (
@@ -581,40 +721,48 @@
           >
             <div className={classes.toolbar}>
               <div className={classes.toolbarGroup}>
-                {showBold && <MarkButton format="bold" icon="FormatBold" />}
-                {showItalic && (
-                  <MarkButton format="italic" icon="FormatItalic" />
-                )}
-                {showUnderlined && (
-                  <MarkButton format="underline" icon="FormatUnderlined" />
-                )}
-                {showStrikethrough && (
-                  <MarkButton format="strikethrough" icon="StrikethroughS" />
-                )}
-                {showNumberedList && (
-                  <BlockButton
-                    format="numbered-list"
-                    icon="FormatListNumbered"
-                  />
-                )}
-                {showBulletedList && (
-                  <BlockButton
-                    format="bulleted-list"
-                    icon="FormatListBulleted"
-                  />
-                )}
-                {showLeftAlign && (
-                  <BlockButton format="left" icon="FormatAlignLeft" />
-                )}
-                {showCenterAlign && (
-                  <BlockButton format="center" icon="FormatAlignCenter" />
-                )}
-                {showRightAlign && (
-                  <BlockButton format="right" icon="FormatAlignRight" />
-                )}
-                {showJustifyAlign && (
-                  <BlockButton format="justify" icon="FormatAlignJustify" />
-                )}
+                <TextStyleSelector />
+                <div className={classes.toolbarSubGroup}>
+                  {showBold && <MarkButton format="bold" icon="FormatBold" />}
+                  {showItalic && (
+                    <MarkButton format="italic" icon="FormatItalic" />
+                  )}
+                  {showUnderlined && (
+                    <MarkButton format="underline" icon="FormatUnderlined" />
+                  )}
+                  {showStrikethrough && (
+                    <MarkButton format="strikethrough" icon="StrikethroughS" />
+                  )}
+                  {showCode && <CodeButton />}
+                </div>
+                <div className={classes.toolbarSubGroup}>
+                  {showNumberedList && (
+                    <BlockButton
+                      format="numbered-list"
+                      icon="FormatListNumbered"
+                    />
+                  )}
+                  {showBulletedList && (
+                    <BlockButton
+                      format="bulleted-list"
+                      icon="FormatListBulleted"
+                    />
+                  )}
+                </div>
+                <div className={classes.toolbarSubGroup}>
+                  {showLeftAlign && (
+                    <BlockButton format="left" icon="FormatAlignLeft" />
+                  )}
+                  {showCenterAlign && (
+                    <BlockButton format="center" icon="FormatAlignCenter" />
+                  )}
+                  {showRightAlign && (
+                    <BlockButton format="right" icon="FormatAlignRight" />
+                  )}
+                  {showJustifyAlign && (
+                    <BlockButton format="justify" icon="FormatAlignJustify" />
+                  )}
+                </div>
               </div>
               <div className={classes.toolbarGroup}>
                 <HistoryButton action="undo" icon="Undo" />
@@ -724,7 +872,9 @@
         display: 'flex',
         justifyContent: 'space-between',
       },
-      toolbarGroup: {},
+      toolbarGroup: {
+        display: 'flex',
+      },
       toolbarButton: {
         color: ({ options: { buttonColor } }) => [style.getColor(buttonColor)],
         padding: '0px 8px',
@@ -739,6 +889,58 @@
             style.getColor(buttonActiveColor),
           ],
         },
+      },
+      toolbarDropdown: {
+        position: 'relative',
+      },
+      dropdown: {
+        position: 'absolute',
+        left: 'auto',
+        zIndex: 9999,
+        minWidth: '8rem',
+        padding: '0.5rem 0',
+        listStyle: 'none',
+        backgroundColor: '#fff',
+        borderRadius: '0.5rem',
+        display: 'none',
+        boxShadow:
+          'rgb(9 30 66 / 25%) 0px 4px 8px -2px, rgb(9 30 66 / 31%) 0px 0px 1px',
+        '&.show': {
+          display: 'block',
+        },
+      },
+      dropdownButton: {
+        display: 'inline-flex',
+        maxWitdh: '100%',
+        cursor: 'pointer',
+        backgroundColor: 'transparent',
+        padding: '4px',
+        border: '0',
+        borderRadius: '5px',
+        alignItems: 'center',
+        '&:hover': {
+          backgroundColor: '#f4f5f7',
+        },
+      },
+      dropdownButtonText: {
+        minWidth: '50px',
+      },
+      dropdownButtonIcon: {
+        fontSize: '1rem !important',
+      },
+      dropdownItem: {
+        padding: '8px 16px',
+        cursor: 'pointer',
+        '&:hover': {
+          backgroundColor: '#f4f5f7',
+        },
+        '&.active': {
+          backgroundColor: '#6c798f',
+          color: '#ffffff',
+        },
+      },
+      dropdownItemTag: {
+        margin: '0px',
       },
       editorWrapper: {
         border: '1px solid',
