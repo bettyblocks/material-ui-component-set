@@ -59,7 +59,7 @@ export const actionButtonOptions = {
   }),
   // #endregion
   fullWidth: toggle('Full width', { value: false }),
-  icon: icon('Icon', { value: 'none' }),
+  icon: icon('Icon', { value: 'None' }),
   size: option('CUSTOM', {
     value: 'small',
     label: 'Icon size',
@@ -71,7 +71,7 @@ export const actionButtonOptions = {
         { name: 'Medium', value: 'medium' },
         { name: 'Large', value: 'large' },
       ],
-      condition: hideIf('icon', 'EQ', 'none'),
+      condition: hideIf('icon', 'EQ', 'None'),
     },
   }),
   iconPosition: option('CUSTOM', {

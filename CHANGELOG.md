@@ -1,3 +1,26 @@
+# [2.60.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.59.0...v2.60.0) (2022-10-07)
+
+
+### Features
+
+* refactor simple dashboard to tsx ([7f4239d](https://github.com/bettyblocks/material-ui-component-set/commit/7f4239d933796c45ac33430abc22df1ace9a1426))
+
+# [2.59.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.58.1...v2.59.0) (2022-10-06)
+
+
+### Features
+
+* refactor homepage template to tsx ([e2a0edc](https://github.com/bettyblocks/material-ui-component-set/commit/e2a0edc129b59ca56931f42ccf78d989090d4b51))
+
+## [2.58.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.58.0...v2.58.1) (2022-10-06)
+
+
+### Bug Fixes
+
+* show message when error occurs ([9674331](https://github.com/bettyblocks/material-ui-component-set/commit/96743310c8c2fcae3103d6d5238f946c03191e37))
+* show onerror interaction ([07f5664](https://github.com/bettyblocks/material-ui-component-set/commit/07f5664ec666f47deee1926525f6691e990f9c4e))
+* show onerror interaction and hide default error on checkbox ([606085c](https://github.com/bettyblocks/material-ui-component-set/commit/606085c13d41af913f5301e72c4546712fe67831))
+
 # [2.58.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.57.0...v2.58.0) (2022-09-30)
 
 
