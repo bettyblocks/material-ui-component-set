@@ -1,3 +1,17 @@
+## [2.61.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.61.0...v2.61.1) (2022-10-10)
+
+
+### Bug Fixes
+
+* add required option to fileUploadInput ([1ee1bd3](https://github.com/bettyblocks/material-ui-component-set/commit/1ee1bd3483b92c5706ec1865e4182f3469dc2bb6))
+* better action loading description ([661dad0](https://github.com/bettyblocks/material-ui-component-set/commit/661dad091d543efc5877c7bd6c8310604f006e4d))
+* check for uploaded value ([bc3b319](https://github.com/bettyblocks/material-ui-component-set/commit/bc3b3191320db023e37df930f012946cb2b283d9))
+* check if files are valid ([e6318a3](https://github.com/bettyblocks/material-ui-component-set/commit/e6318a35042c19b19fd32f7d739756349f7c8e99))
+* dropwdown categories for fileupload options ([b31d64c](https://github.com/bettyblocks/material-ui-component-set/commit/b31d64c222b778e9797daf9d350fcbc8a60373e2))
+* remove unnessary export of categories ([90b9bc4](https://github.com/bettyblocks/material-ui-component-set/commit/90b9bc4ab6d68bfb3fbc9195a92e7dcc34af9d85))
+* show alerts on action completed or on error ([83eaaa9](https://github.com/bettyblocks/material-ui-component-set/commit/83eaaa91f83108e6dd8ca456f55467a74fd96688))
+* use showinidicator to disable button ([a062360](https://github.com/bettyblocks/material-ui-component-set/commit/a0623607c00406f74013195969dd4391f9905aaf))
+
 # [2.61.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.60.0...v2.61.0) (2022-10-10)
 
 
