@@ -1,3 +1,10 @@
+# [2.61.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.60.0...v2.61.0) (2022-10-10)
+
+
+### Features
+
+* refactor login and register template to tsx ([1b191bf](https://github.com/bettyblocks/material-ui-component-set/commit/1b191bfd666cae7a51a09eb23450bf14bd927365))
+
 # [2.60.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.59.0...v2.60.0) (2022-10-07)
 
 
