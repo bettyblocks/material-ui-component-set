@@ -329,7 +329,7 @@
 
         filter._or.push({
           [suggestionsProp.name]: {
-            [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
+            [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
               ? parseInt(debouncedInputValue, 10)
               : debouncedInputValue,
           },
