@@ -251,7 +251,7 @@
       }
 
       if (el.nodeName === 'BODY') {
-        return [jsx('element', { type: 'paragraph' }, children)];
+        return jsx('fragment', {}, children);
       }
 
       if (ELEMENT_TAGS[nodeName]) {
@@ -297,7 +297,7 @@
     }
 
     const onChangeHandler = (value) => {
-      setCurrentValue(value[0].children.map((row) => serialize(row)).join(''));
+      setCurrentValue(value.map((row) => serialize(row)).join(''));
       B.triggerEvent('onChange', currentValue);
     };
 
@@ -307,10 +307,11 @@
       [],
     );
 
-    const parsed = new DOMParser().parseFromString(
-      useText(valueProp),
-      'text/html',
-    );
+    const devValue = isDev
+      ? `<p>${useText(valueProp)}</p>`
+      : useText(valueProp);
+
+    const parsed = new DOMParser().parseFromString(devValue, 'text/html');
     const fragment = deserialize(parsed.body);
 
     const handleListdepth = (listKind, key, event) => {
