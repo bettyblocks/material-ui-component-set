@@ -304,7 +304,7 @@
       filter._or = [
         {
           [suggestionsProp.name]: {
-            [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
+            [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
               ? parseInt(debouncedInputValue, 10)
               : debouncedInputValue,
           },
@@ -319,7 +319,7 @@
       ];
     } else if (debouncedInputValue) {
       filter[suggestionsProp.name] = {
-        [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
+        [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
           ? parseInt(debouncedInputValue, 10)
           : debouncedInputValue,
       };
