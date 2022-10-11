@@ -3077,7 +3077,7 @@ const beforeCreate = ({
   const [stepNumber, setStepNumber] = React.useState(1);
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
-  const permissions: PermissionType = 'inherit';
+  const permissions: PermissionType = 'private';
   const pageAuthenticationProfileId = getPageAuthenticationProfileId();
 
   const createFormId = createUuid();
