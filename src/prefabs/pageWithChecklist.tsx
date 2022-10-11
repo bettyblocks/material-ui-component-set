@@ -1088,7 +1088,7 @@ const beforeCreate = ({
   const [footerPartialId, setFooterPartialId] = React.useState('');
   const formId = createUuid();
   const datalistId = createUuid();
-  const permissions: PermissionType = 'inherit';
+  const permissions: PermissionType = 'private';
 
   const pageAuthenticationProfileId = getPageAuthenticationProfileId();
 
