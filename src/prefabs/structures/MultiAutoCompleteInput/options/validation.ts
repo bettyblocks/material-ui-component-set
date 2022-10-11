@@ -1,33 +1,34 @@
-import { showIf, text, variable, toggle } from '@betty-blocks/component-sdk';
-
-import { showOn } from '../../../../utils';
+import {
+  showIf,
+  text,
+  variable,
+  toggle,
+  showIfTrue,
+} from '@betty-blocks/component-sdk';
 
 export const validation = {
   required: toggle('Required', { value: false }),
-  validationOptions: toggle('Validation options'),
-  pattern: text('Validation pattern', {
-    value: '',
-    ...showOn('validationOptions'),
-  }),
-
-  minLength: variable('Min length', {
-    value: [''],
-    ...showOn('validationOptions'),
-  }),
-
-  maxLength: variable('Max length', {
-    value: [''],
-    ...showOn('validationOptions'),
-  }),
 
   validationValueMissing: variable('Value required message', {
     value: ['This field is required'],
-    ...showOn('required'),
+    configuration: {
+      condition: showIfTrue('required'),
+    },
   }),
-
+  pattern: text('Validation pattern', {
+    value: '',
+  }),
+  minLength: variable('Min length', {
+    value: [''],
+  }),
   validationTooShort: variable('Value too short message', {
     value: ['This value is too short'],
-    ...showOn('validationOptions'),
+  }),
+  maxLength: variable('Max length', {
+    value: [''],
+  }),
+  validationTooLong: variable('Value too long message', {
+    value: ['This value is too long'],
   }),
 
   closeOnSelect: toggle('Close dropdown after select', { value: true }),
