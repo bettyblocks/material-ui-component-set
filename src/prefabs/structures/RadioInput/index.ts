@@ -11,5 +11,35 @@ export const RadioInput = (
   const ref = config.ref ? { ...config.ref } : undefined;
   const label = config.label ? config.label : undefined;
 
-  return component('RadioInput', { options, style, ref, label }, children);
+  const categories = [
+    {
+      label: 'Validation',
+      expanded: false,
+      members: ['required', 'validationValueMissing'],
+    },
+    {
+      label: 'Styling',
+      expanded: false,
+      members: [
+        'hideLabel',
+        'radioColor',
+        'radioColorChecked',
+        'labelColor',
+        'textColor',
+        'helperColor',
+        'errorColor',
+      ],
+    },
+    {
+      label: 'Advanced settings',
+      expanded: false,
+      members: ['dataComponentAttribute'],
+    },
+  ];
+
+  return component(
+    'RadioInput',
+    { options, style, ref, label, optionCategories: categories },
+    children,
+  );
 };

@@ -4,7 +4,6 @@ import {
   ThemeColor,
   toggle,
 } from '@betty-blocks/component-sdk';
-import { showOn } from '../../../../utils';
 
 export const styles = {
   labelPosition: buttongroup(
@@ -40,37 +39,29 @@ export const styles = {
     { value: 'normal' },
   ),
 
-  styles: toggle('Styles'),
-
   radioColor: color('Radio color', {
     value: ThemeColor.ACCENT_3,
-    ...showOn('styles'),
   }),
 
   radioColorChecked: color('Radio color checked', {
     value: ThemeColor.PRIMARY,
-    ...showOn('styles'),
   }),
 
-  hideLabel: toggle('Hide label', showOn('styles')),
+  hideLabel: toggle('Hide label'),
 
   labelColor: color('Label color', {
     value: ThemeColor.ACCENT_3,
-    ...showOn('styles'),
   }),
 
   textColor: color('Text color', {
     value: ThemeColor.BLACK,
-    ...showOn('styles'),
   }),
 
   helperColor: color('Helper color', {
     value: ThemeColor.ACCENT_2,
-    ...showOn('styles'),
   }),
 
   errorColor: color('Error color', {
     value: ThemeColor.DANGER,
-    ...showOn('styles'),
   }),
 };
