@@ -54,24 +54,27 @@
     const prop = !isDev && property && getProperty(property);
     const propValue = !isDev && property && useProperty(property.id);
 
-    const [actionCallback, { loading }] = useActionJs(actionId, {
-      variables: {
-        id: actionId,
-        ...(prop
-          ? {
-              input: {
-                [prop.name]: propValue,
-              },
-            }
-          : {}),
+    const [actionCallback, { loading: isLoadingAction }] = useActionJs(
+      actionId,
+      {
+        variables: {
+          id: actionId,
+          ...(prop
+            ? {
+                input: {
+                  [prop.name]: propValue,
+                },
+              }
+            : {}),
+        },
+        onCompleted(response) {
+          B.triggerEvent('onActionSuccess', response.action.results);
+        },
+        onError(error) {
+          B.triggerEvent('onActionError', error);
+        },
       },
-      onCompleted(response) {
-        B.triggerEvent('onActionSuccess', response.action.results);
-      },
-      onError(error) {
-        B.triggerEvent('onActionError', error);
-      },
-    });
+    );
 
     useEffect(() => {
       setIsVisible(visible);
@@ -94,10 +97,10 @@
       B.defineFunction('Enable', () => setIsDisabled(false));
       B.defineFunction('Disable', () => setIsDisabled(true));
 
-      if (loading) {
-        B.triggerEvent('onActionLoad', loading);
+      if (isLoadingAction) {
+        B.triggerEvent('onActionLoad', isLoadingAction);
       }
-    }, [loading]);
+    }, [isLoadingAction]);
 
     const getExternalHref = (config) => {
       if (config.disabled) {
@@ -119,7 +122,7 @@
       return undefined;
     };
 
-    const showIndicator = isLoading || loading;
+    const showIndicator = isLoading || isLoadingAction;
 
     const emptySpace = () => {
       if (icon === 'None') {
@@ -129,7 +132,7 @@
     };
 
     const buttonProps = {
-      disabled: disabled || isLoading || loading,
+      disabled: disabled || showIndicator,
       tabIndex: isDev ? -1 : undefined,
       onClick: (event) => {
         event.stopPropagation();
