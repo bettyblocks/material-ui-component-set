@@ -307,11 +307,13 @@
       [],
     );
 
-    const devValue = isDev
-      ? `<p>${useText(valueProp)}</p>`
-      : useText(valueProp);
+    const devValue = `<p>${useText(valueProp)}</p>`;
+    const isEmpty = useText(valueProp) === '' ? '<p></p>' : useText(valueProp);
 
-    const parsed = new DOMParser().parseFromString(devValue, 'text/html');
+    const parsed = new DOMParser().parseFromString(
+      isDev ? devValue : isEmpty,
+      'text/html',
+    );
     const fragment = deserialize(parsed.body);
 
     const handleListdepth = (listKind, key, event) => {
