@@ -129,7 +129,7 @@ const beforeCreate = ({
     skip: !modelId,
   });
 
-  const permissions: PermissionType = 'inherit';
+  const permissions: PermissionType = 'private';
   const pageAuthenticationProfileId = getPageAuthenticationProfileId();
 
   const enrichVarObj = (obj: any) => {
