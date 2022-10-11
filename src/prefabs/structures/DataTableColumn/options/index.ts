@@ -17,7 +17,7 @@ export const categories = [
     members: ['horizontalAlignment', 'width', 'background', 'borderColor'],
   },
   {
-    label: 'Advanced settings',
+    label: 'Advanced Options',
     expanded: false,
     members: ['dataComponentAttribute'],
   },

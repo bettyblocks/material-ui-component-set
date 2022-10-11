@@ -14,7 +14,7 @@ export const AutocompleteInput = (
 
   const categories = [
     {
-      label: 'Validation',
+      label: 'Validation Options',
       expanded: false,
       members: ['required', 'validationValueMissing'],
     },
@@ -37,7 +37,7 @@ export const AutocompleteInput = (
       ],
     },
     {
-      label: 'Advanced settings',
+      label: 'Advanced Options',
       expanded: false,
       members: ['errorType', 'nameAttribute', 'dataComponentAttribute'],
     },

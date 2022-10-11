@@ -28,7 +28,7 @@ export const categories = [
     members: ['disabled'],
   },
   {
-    label: 'Advanced settings',
+    label: 'Advanced Options',
     expanded: false,
     members: ['dataComponentAttribute'],
   },

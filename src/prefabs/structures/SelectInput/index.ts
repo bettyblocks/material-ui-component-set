@@ -13,7 +13,7 @@ export const SelectInput = (
 
   const categories = [
     {
-      label: 'Validation',
+      label: 'Validation Options',
       expanded: false,
       members: ['required', 'validationValueMissing'],
     },
@@ -33,7 +33,7 @@ export const SelectInput = (
       ],
     },
     {
-      label: 'Advanced settings',
+      label: 'Advanced Options',
       expanded: false,
       members: ['blanco', 'dataComponentAttribute'],
     },
