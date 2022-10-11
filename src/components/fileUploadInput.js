@@ -23,6 +23,7 @@
       maxFileSize,
       maxFileSizeMessage: maxFileSizeMessageRaw,
       showImagePreview,
+      required,
     } = options;
 
     const isDev = env === 'dev';
@@ -34,6 +35,7 @@
     const initialValue = useProperty(!isDev && valueRaw);
     const [value, setValue] = useState(initialValue);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
+    const requiredText = required ? '*' : '';
 
     const { modelProperty } = actionProperty;
 
@@ -58,6 +60,11 @@
 
     const inputRef = React.useRef();
 
+    const errorHelpers = hideDefaultError ? '' : error && error.message;
+
+    const helperValue =
+      errorHelpers || (!hideDefaultError ? validationMessage : '') || helper;
+
     React.useEffect(() => {
       firstRender.current = false;
     }, []);
@@ -68,8 +75,8 @@
         if (Array.isArray(error) && error.length === 0) {
           return;
         }
-
         B.triggerEvent('onError', error);
+        if (errorHelpers) setValidationMessage(`An error occured: ${error}`);
       }
     }, [error]);
 
@@ -87,9 +94,6 @@
       }
     }, [loading, fileReference]);
 
-    const errorHelpers = !hideDefaultError ? error && error.message : '';
-    const helperValue = errorHelpers || validationMessage || helper;
-
     const formatBytes = (bytes) => {
       if (bytes === 0) return '0 Bytes';
       const k = 1024;
@@ -106,6 +110,7 @@
       });
       if (isFileSizeExceeded) {
         setValidationMessage(maxFileSizeMessage);
+        B.triggerEvent('onError', maxFileSizeMessage);
         return false;
       }
 
@@ -121,6 +126,10 @@
 
       if (isInvalidMimeType) {
         setValidationMessage(
+          `invalid file type. Only ${acceptedValue} are allowed`,
+        );
+        B.triggerEvent(
+          'onError',
           `invalid file type. Only ${acceptedValue} are allowed`,
         );
         return false;
@@ -149,17 +158,24 @@
 
     function UploadComponent() {
       const isDirty = !!fileReference;
+      const hasValidUploads =
+        value && value.type && validateFiles([value]) && !loading;
+
       // Renders the button and the files you select
       return (
-        <div data-component={dataComponentAttributeValue}>
+        <div
+          data-component={dataComponentAttributeValue}
+          className={classes.fileUpload}
+        >
+          {children}
           <input
             accept={acceptedValue}
             className={classes.input}
             type="file"
             onChange={handleChange}
             ref={inputRef}
+            required={hasValidUploads ? false : required}
           />
-          {children}
           {isDirty && ( // TODO: change to showing only what is from the html element
             <input type="hidden" name={name} value={fileReference} />
           )}
@@ -265,14 +281,15 @@
           fullWidth={fullWidth}
           error={!!validationMessage}
           disabled={disabled}
+          required={required}
           margin={margin}
         >
           <Label className={classes.label}>
-            {hideLabel ? '' : `${labelText}`}
+            {hideLabel ? '' : `${labelText} ${requiredText}`}
             <UploadComponent />
           </Label>
           <FormHelperText classes={{ root: classes.helper }}>
-            {validationMessage || helperValue}
+            {!hideDefaultError ? validationMessage || helperValue : ''}
           </FormHelperText>
           <div className={classes.messageContainer}>
             {!isDev && !loading && value && <FileDetails file={value} />}
@@ -336,8 +353,17 @@
           ],
         },
       },
+      fileUpload: {
+        position: 'relative',
+      },
       input: {
-        display: 'none',
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        left: 0,
+        top: 0,
+        opacity: 0,
+        zIndex: -1,
       },
       fullwidth: {
         display: 'flex',

@@ -79,7 +79,7 @@
             : { opacity }
         }
       >
-        {isEmpty ? 'Box' : children}
+        {isPristine ? 'Box' : children}
       </Box>
     );
 
