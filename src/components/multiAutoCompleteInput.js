@@ -61,6 +61,7 @@
       validationTypeMismatch = [''],
       validationValueMissing = [''],
       variant,
+      value: valueRaw,
     } = options;
     const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
     /*
@@ -130,6 +131,17 @@
         idProperty;
 
     const valueProperty = isListProperty ? modelProperty : idProperty;
+    const defaultValue = useText(valueRaw, { rawValue: true });
+    let initialValue = defaultValue.replace(/\n/g, '');
+
+    if (defaultValue.trim() === '') {
+      initialValue = [];
+    } else {
+      initialValue = defaultValue
+        .trim()
+        .split(',')
+        .map((x) => x.trim());
+    }
 
     const validationMessage = (validityObject) => {
       if (!validityObject) {
@@ -188,7 +200,6 @@
     const label = useText(labelRaw);
 
     // eslint-disable-next-line no-underscore-dangle
-    const initialValue = [];
 
     /*
      * Selected value of the autocomplete.
