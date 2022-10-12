@@ -215,10 +215,8 @@
     let MediaComponent = PlaceholderComponent;
 
     if (isImage && !variableDev && hasLink) {
-      console.log('ik ben een link comp');
       MediaComponent = LinkComponent;
     } else if (isImage && !variableDev) {
-      console.log('Ik ben een image component');
       MediaComponent = ImageComponent;
     } else if (isVideo) {
       MediaComponent = VideoComponent;
