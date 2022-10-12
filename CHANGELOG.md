@@ -1,3 +1,10 @@
+## [2.61.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.61.1...v2.61.2) (2022-10-12)
+
+
+### Bug Fixes
+
+* using matches in filter ([fffef11](https://github.com/bettyblocks/material-ui-component-set/commit/fffef11d7d158d6cc2cb5f487753fde0740b2010))
+
 ## [2.61.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.61.0...v2.61.1) (2022-10-10)
 
 
