@@ -155,6 +155,11 @@
           title={titleText || variable || imgName}
           alt={imgAlt || imgName}
           data-component={useText(dataComponentAttribute) || 'Media'}
+          role="presentation"
+          onClick={(event) => {
+            event.stopPropagation();
+            B.triggerEvent('onClick', event);
+          }}
         />
       );
     }
@@ -210,8 +215,10 @@
     let MediaComponent = PlaceholderComponent;
 
     if (isImage && !variableDev && hasLink) {
+      console.log('ik ben een link comp');
       MediaComponent = LinkComponent;
     } else if (isImage && !variableDev) {
+      console.log('Ik ben een image component');
       MediaComponent = ImageComponent;
     } else if (isVideo) {
       MediaComponent = VideoComponent;
