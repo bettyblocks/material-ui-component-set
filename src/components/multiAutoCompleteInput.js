@@ -377,7 +377,7 @@
         }
         filter._or.push({
           [searchProp.name]: {
-            [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
+            [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
               ? parseInt(debouncedInputValue, 10)
               : debouncedInputValue,
           },
