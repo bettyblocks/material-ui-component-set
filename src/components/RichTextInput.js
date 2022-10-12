@@ -160,30 +160,30 @@
 
       const children =
         node.children && node.children.map((n) => serialize(n)).join('');
-      const align = node.align ? `align="${node.align}"` : '';
+      const align = node.align ? ` align="${node.align}"` : '';
       switch (node.type) {
         case 'heading-one':
-          return `<h1 ${align}>${children}</h1>`;
+          return `<h1${align}>${children}</h1>`;
         case 'heading-two':
-          return `<h2 ${align}>${children}</h2>`;
+          return `<h2${align}>${children}</h2>`;
         case 'heading-three':
-          return `<h3 ${align}>${children}</h3>`;
+          return `<h3${align}>${children}</h3>`;
         case 'heading-four':
-          return `<h4 ${align}>${children}</h4>`;
+          return `<h4${align}>${children}</h4>`;
         case 'heading-five':
-          return `<h5 ${align}>${children}</h5>`;
+          return `<h5${align}>${children}</h5>`;
         case 'heading-six':
-          return `<h6 ${align}>${children}</h6>`;
+          return `<h6${align}>${children}</h6>`;
         case 'paragraph':
-          return `<p ${align}>${children}</p>`;
+          return `<p${align}>${children}</p>`;
         case 'numbered-list':
-          return `<ol ${align}>${children}</ol>`;
+          return `<ol${align}>${children}</ol>`;
         case 'bulleted-list':
-          return `<ul ${align}>${children}</ul>`;
+          return `<ul${align}>${children}</ul>`;
         case 'list-item':
-          return `<li ${align}>${children}</li>`;
+          return `<li${align}>${children}</li>`;
         case 'code':
-          return `<pre ${align}><code>${children}</code></pre>`;
+          return `<pre${align}><code>${children}</code></pre>`;
         default:
           return children;
       }
