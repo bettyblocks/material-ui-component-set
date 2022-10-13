@@ -381,7 +381,7 @@
         },
         {
           value: false,
-          label: 'Advanced Options',
+          label: 'Advanced settings',
           key: 'advancedSettings',
           type: 'TOGGLE',
         },
@@ -552,7 +552,7 @@
             },
             {
               value: false,
-              label: 'Advanced Options',
+              label: 'Advanced settings',
               key: 'advancedSettings',
               type: 'TOGGLE',
             },

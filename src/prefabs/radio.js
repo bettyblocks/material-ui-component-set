@@ -367,7 +367,7 @@
         },
         {
           value: false,
-          label: 'Advanced Options',
+          label: 'Advanced settings',
           key: 'advancedSettings',
           type: 'TOGGLE',
         },
