@@ -1,7 +1,7 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
 import { Configuration } from '../Configuration';
-import { options as defaults } from './options';
+import { options as defaults } from './options/index';
 
 export const TextInput = (
   config: Configuration,
@@ -9,6 +9,44 @@ export const TextInput = (
 ) => {
   const options = { ...(config.options || defaults) };
   const ref = config.ref ? { ...config.ref } : undefined;
+
+  const categories = [
+    {
+      label: 'Validation Options',
+      expanded: false,
+      members: [
+        'required',
+        'validationValueMissing',
+        'pattern',
+        'validationPatternMismatch',
+        'minLength',
+        'validationTooShort',
+        'maxLength',
+        'validationTooLong',
+      ],
+    },
+    {
+      label: 'Styling',
+      expanded: false,
+      members: [
+        'hideLabel',
+        'backgroundColor',
+        'borderColor',
+        'borderHoverColor',
+        'borderFocusColor',
+        'labelColor',
+        'textColor',
+        'placeholderColor',
+        'helperColor',
+        'errorColor',
+      ],
+    },
+    {
+      label: 'Advanced Options',
+      expanded: false,
+      members: ['dataComponentAttribute'],
+    },
+  ];
 
   if (config.type) {
     options.type = updateOption(options.type, { value: config.type });
@@ -51,7 +89,7 @@ export const TextInput = (
 
   return component(
     'TextInput',
-    { label: config.label, options, ref },
+    { label: config.label, options, ref, optionCategories: categories },
     children,
   );
 };
