@@ -1,3 +1,10 @@
+## [2.61.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.61.2...v2.61.3) (2022-10-13)
+
+
+### Bug Fixes
+
+* click trigger not working in media component ([aa337af](https://github.com/bettyblocks/material-ui-component-set/commit/aa337af4925386ff1a4a4ee041b7712da59ab1de))
+
 ## [2.61.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.61.1...v2.61.2) (2022-10-12)
 
 
