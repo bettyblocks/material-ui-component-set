@@ -140,6 +140,17 @@
       }
     };
 
+    function isEditorFocussed(editor) {
+      return editor.selection !== null;
+    }
+
+    function focusEditor(editor) {
+      Transforms.select(editor, {
+        anchor: Editor.start(editor, []),
+        focus: Editor.end(editor, []),
+      });
+    }
+
     const serialize = (node) => {
       if (Text.isText(node)) {
         let string = node.text;
@@ -154,6 +165,9 @@
         }
         if (node.strikethrough) {
           string = `<s>${string}</s>`;
+        }
+        if (node.code) {
+          string = `<code>${string}</code>`;
         }
         return string;
       }
@@ -377,8 +391,13 @@
         } else if (event.shiftKey) {
           event.preventDefault();
           editor.insertText('\n');
+        } else if (isBlockActive(editor, 'code')) {
+          event.preventDefault();
+          Transforms.insertNodes(editor, {
+            children: [{ text: '' }],
+            type: 'paragraph',
+          });
         }
-
         return;
       }
 
@@ -606,8 +625,9 @@
 
     const CodeButton = React.forwardRef(({ ...props }, ref) => {
       const IconButton = Icons.Code;
-      const activeMark = isMarkActive(editor, 'code');
-      const activeBlock = isBlockActive(editor, 'code');
+      const ownEditor = useSlate();
+      const activeMark = isMarkActive(ownEditor, 'code');
+      const activeBlock = isBlockActive(ownEditor, 'code');
 
       return (
         <IconButton
@@ -616,14 +636,22 @@
           className={`${classes.toolbarButton} ${
             activeMark || activeBlock ? 'active' : ''
           }`}
-          onMouseDown={() => {
-            // event.preventDefault();
-            // const lastNode = Node.last(editor, editor.selection.focus.path);
-            // if (activeBlock || lastNode[0].text === '') {
-            //   toggleBlock(editor, 'code');
-            //   return;
-            // }
-            // toggleMark(editor, 'code');
+          onMouseDown={(event) => {
+            event.preventDefault();
+            if (!isEditorFocussed(ownEditor)) {
+              focusEditor(ownEditor);
+            }
+            if (editor.selection.focus !== null) {
+              const lastNode = Node.last(
+                ownEditor,
+                editor.selection.focus.path,
+              );
+              if (activeBlock || lastNode[0].text === '') {
+                toggleBlock(ownEditor, 'code');
+                return;
+              }
+              toggleMark(ownEditor, 'code');
+            }
           }}
         />
       );
@@ -856,6 +884,17 @@
         color: isDev && 'rgb(0, 0, 0)',
         height: ({ options: { height } }) => height,
         overflow: 'overlay',
+        '& pre': {
+          backgroundColor: '#eee',
+          padding: '10px',
+          '& code': {
+            padding: '0',
+          },
+        },
+        '& code': {
+          backgroundColor: '#eee',
+          padding: '3px',
+        },
       },
       helper: {
         color: ({ options: { helperColor } }) => [
