@@ -25,6 +25,8 @@ import {
   component,
   model,
   filter,
+  childSelector,
+  buttongroup,
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
@@ -54,6 +56,8 @@ import {
   alertOptions,
   SubmitButton,
   submitButtonOptions,
+  TextInput,
+  textInputOptions,
 } from './structures';
 import {
   AuthenticationProfile,
@@ -163,15 +167,15 @@ const interactions: PrefabInteraction[] = [
     },
     type: InteractionType.Custom,
   },
-  // {
-  //   name: 'Refetch',
-  //   sourceEvent: 'onActionSuccess',
-  //   ref: {
-  //     targetComponentId: '#authenticationDataContainer',
-  //     sourceComponentId: '#editProfileDetailsForm',
-  //   },
-  //   type: InteractionType.Custom,
-  // },
+  {
+    name: 'Refetch',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#dataContainer',
+      sourceComponentId: '#editProfileDetailsForm',
+    },
+    type: InteractionType.Custom,
+  },
   {
     name: 'Show',
     sourceEvent: 'onActionError',
@@ -217,60 +221,60 @@ const interactions: PrefabInteraction[] = [
     },
     type: InteractionType.Custom,
   },
-  // {
-  //   name: 'Show',
-  //   sourceEvent: 'onActionSuccess',
-  //   ref: {
-  //     targetComponentId: '#passwordSuccessAlert',
-  //     sourceComponentId: '#updatePasswordForm',
-  //   },
-  //   type: InteractionType.Custom,
-  // },
-  // {
-  //   name: 'Show',
-  //   sourceEvent: 'onActionError',
-  //   ref: {
-  //     targetComponentId: '#passwordErrorAlert',
-  //     sourceComponentId: '#updatePasswordForm',
-  //   },
-  //   type: InteractionType.Custom,
-  // },
-  // {
-  //   name: 'Hide',
-  //   sourceEvent: 'onSubmit',
-  //   ref: {
-  //     targetComponentId: '#passwordSuccessAlert',
-  //     sourceComponentId: '#updatePasswordForm',
-  //   },
-  //   type: InteractionType.Custom,
-  // },
-  // {
-  //   name: 'Hide',
-  //   sourceEvent: 'onSubmit',
-  //   ref: {
-  //     targetComponentId: '#passwordErrorAlert',
-  //     sourceComponentId: '#updatePasswordForm',
-  //   },
-  //   type: InteractionType.Custom,
-  // },
-  // {
-  //   name: 'Toggle loading state',
-  //   sourceEvent: 'onSubmit',
-  //   ref: {
-  //     targetComponentId: '#savePasswordButton',
-  //     sourceComponentId: '#updatePasswordForm',
-  //   },
-  //   type: InteractionType.Custom,
-  // },
-  // {
-  //   name: 'Toggle loading state',
-  //   sourceEvent: 'onActionDone',
-  //   ref: {
-  //     targetComponentId: '#savePasswordButton',
-  //     sourceComponentId: '#updatePasswordForm',
-  //   },
-  //   type: InteractionType.Custom,
-  // },
+  {
+    name: 'Show',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#passwordSuccessAlert',
+      sourceComponentId: '#updatePasswordForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'onActionError',
+    ref: {
+      targetComponentId: '#passwordErrorAlert',
+      sourceComponentId: '#updatePasswordForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'onSubmit',
+    ref: {
+      targetComponentId: '#passwordSuccessAlert',
+      sourceComponentId: '#updatePasswordForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'onSubmit',
+    ref: {
+      targetComponentId: '#passwordErrorAlert',
+      sourceComponentId: '#updatePasswordForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onSubmit',
+    ref: {
+      targetComponentId: '#savePasswordButton',
+      sourceComponentId: '#updatePasswordForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionDone',
+    ref: {
+      targetComponentId: '#savePasswordButton',
+      sourceComponentId: '#updatePasswordForm',
+    },
+    type: InteractionType.Custom,
+  },
 ];
 
 const attrs = {
@@ -318,16 +322,16 @@ const beforeCreate = ({
     createUuid,
     BettyPrefabs,
     PropertyKind,
-
     cloneStructure,
     makeBettyUpdateInput,
   },
 }: BeforeCreateArgs) => {
-  const componentId = createUuid();
+  const passwordFormId = createUuid();
+  const updateFormId = createUuid();
   const [authProfileId, setAuthProfileId] = React.useState('');
-  // const [authProfile, setAuthProfile] = React.useState<AuthenticationProfile>();
-  // const [authProfileInvalid, setAuthProfileInvalid] = React.useState(false);
-  // const [showModelValidation, setShowModelValidation] = React.useState(false);
+  const [authProfile, setAuthProfile] = React.useState<AuthenticationProfile>();
+  const [, setAuthProfileInvalid] = React.useState(false);
+  const [, setShowModelValidation] = React.useState(false);
   const [profileProperties, setProfileProperties] = React.useState([]);
   const [profilePropertiesValidation, setProfilePropertiesValidation] =
     React.useState(false);
@@ -338,10 +342,6 @@ const beforeCreate = ({
   const [modelProp, setModel] = React.useState<ModelProps>();
   const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
   const [properties, setProperties] = React.useState<Properties[]>([]);
-
-  // const [loggedInUserState, setLoggedInUserState] = React.useState({
-  //   authenticationProfile: null,
-  // });
   const [hasProfilePictureProperty, setHasProfilePictureProperty] =
     React.useState(false);
   const [profilePictureProperty, setProfilePictureProperty] =
@@ -349,12 +349,12 @@ const beforeCreate = ({
   const [hasProfileNameProperty, setHasProfileNameProperty] =
     React.useState(false);
   const [profileNameProperty, setProfileNameProperty] = React.useState('');
-  // const [authValidationMessage, setAuthValidationMessage] = React.useState('');
+  const [authValidationMessage] = React.useState('');
   const [modelId, setModelId] = React.useState('');
-  // const { data } = useModelQuery({
-  //   variables: { id: modelId },
-  //   skip: !modelId,
-  // });
+  const { data } = useModelQuery({
+    variables: { id: modelId },
+    skip: !modelId,
+  });
   useModelQuery({
     skip: !modelId,
     variables: { id: modelId },
@@ -374,18 +374,21 @@ const beforeCreate = ({
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
 
-  // const enrichVarObj = (obj: any) => {
-  //   const returnObject = obj;
-  //   if (data && data.model) {
-  //     const property = data.model.properties.find(
-  //       (prop: any) => prop.id === obj.id[0],
-  //     );
-  //     if (property) {
-  //       returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
-  //     }
-  //   }
-  //   return returnObject;
-  // };
+  const enrichVarObj = (obj: any, authProp = false) => {
+    const returnObj = obj;
+    if (data && data.model) {
+      const property = data.model.properties.find(
+        (prop: { id: any }) => prop.id === obj.id[0],
+      );
+      if (property) {
+        returnObj.name = `{{ ${data.model.name}.${property.name} }}`;
+        if (authProp) {
+          returnObj.type = 'ME_PROPERTY';
+        }
+      }
+    }
+    return returnObj;
+  };
 
   function treeSearch(
     dirName: string,
@@ -596,7 +599,7 @@ const beforeCreate = ({
             'innerSpacing',
             (originalOption: PrefabComponentOption) => ({
               ...originalOption,
-              value: ['M', '0rem', '0rem', '0rem'],
+              value: ['0rem', '0rem', '0rem', '0rem'],
             }),
           );
           const textPrefab = cloneStructure('Text');
@@ -631,32 +634,122 @@ const beforeCreate = ({
         }
         return boxPrefab;
       };
-      const passwordform = treeSearch(
+      const passwordForm = treeSearch(
         '#updatePasswordForm',
         newPrefab.structure,
       );
-      if (!passwordform) throw new Error('password form could not be found');
-      passwordform.id = componentId;
+      const passwordBox = treeSearch('#updatePasswordBox', newPrefab.structure);
+      if (!passwordBox) throw new Error('password box could not be found');
 
-      const resultpass = await prepareAction(
-        componentId,
+      if (!passwordForm) throw new Error('password form could not be found');
+      passwordForm.id = passwordFormId;
+
+      if (!authProfile) throw new Error('auth profile could not be found');
+      if (!authProfile.properties)
+        throw new Error('auth profile pass could not be found');
+
+      const authPassword = authProfile.properties.find(
+        (p) => p.kind === 'PASSWORD',
+      );
+
+      const resultPass = await prepareAction(
+        passwordFormId,
         // @ts-ignore
         idProperty,
-        // Dit moet je authProfile.properties worden. maar de types komen niet overeen
-        properties,
+        [authPassword],
         'update',
+      );
+      if (!modelProp) throw new Error('medel property could not be found');
+      if (!idProperty) throw new Error('Property id could not be found');
+      if (!data) throw new Error('data could not be found');
+      Object.values(resultPass.variables).forEach(
+        ([prop, inputVariable]): void => {
+          const generateInputPrefabs = () => {
+            switch (prop.kind) {
+              case PropertyKind.PASSWORD:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.PASSWORD,
+                    data.model,
+                    prop,
+                    inputVariable,
+                    resultPass.relatedIdProperties,
+                  ),
+                );
+              default:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.STRING,
+                    data.model,
+                    prop,
+                    inputVariable,
+                    resultPass.relatedIdProperties,
+                  ),
+                );
+            }
+          };
+          const editFormInput = generateInputPrefabs();
+          if (
+            editFormInput.type === 'COMPONENT' &&
+            editFormInput.descendants[1].type === 'COMPONENT'
+          ) {
+            setOption(
+              editFormInput.descendants[1],
+              'margin',
+              (opts: PrefabComponentOption) => ({
+                ...opts,
+                value: 'none',
+              }),
+            );
+            setOption(
+              editFormInput.descendants[1],
+              'hideLabel',
+              (opts: PrefabComponentOption) => ({
+                ...opts,
+                value: true,
+              }),
+            );
+          }
+          setOption(
+            passwordForm,
+            'filter',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: {
+                _and: [
+                  {
+                    [idProperty.id]: {
+                      eq: {
+                        id: [idProperty.id],
+                        type: 'ME_PROPERTY',
+                      },
+                    },
+                  },
+                ],
+              },
+            }),
+          );
+
+          passwordBox.descendants.push(editFormInput);
+          if (!prop.kind) {
+            // eslint-disable-next-line no-console
+            console.warn('PropertyKind not found');
+          }
+        },
       );
 
       setOption(
-        passwordform,
+        passwordForm,
         'actionId',
         (originalOption: PrefabComponentOption) => ({
           ...originalOption,
-          value: resultpass.action.actionId,
+          value: resultPass.action.actionId,
         }),
       );
       setOption(
-        passwordform,
+        passwordForm,
         'model',
         (originalOption: PrefabComponentOption) => ({
           ...originalOption,
@@ -664,15 +757,12 @@ const beforeCreate = ({
         }),
       );
 
-      if (!modelProp) throw new Error('medel property could not be found');
-      if (!idProperty) throw new Error('Property id could not be found');
-
-      passwordform.descendants.push(
+      passwordForm.descendants.push(
         makeBettyUpdateInput(
           BettyPrefabs.HIDDEN,
           modelProp,
           idProperty,
-          resultpass.recordInputVariable,
+          resultPass.recordInputVariable,
         ),
       );
 
@@ -681,10 +771,10 @@ const beforeCreate = ({
         newPrefab.structure,
       );
       if (!formObject) throw new Error('Form could not be found');
-      formObject.id = componentId;
+      formObject.id = updateFormId;
 
       const result = await prepareAction(
-        componentId,
+        updateFormId,
         // @ts-ignore
         idProperty,
         properties,
@@ -704,6 +794,25 @@ const beforeCreate = ({
         (originalOption: PrefabComponentOption) => ({
           ...originalOption,
           value: modelId,
+        }),
+      );
+      setOption(
+        formObject,
+        'filter',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
+          value: {
+            _and: [
+              {
+                [idProperty.id]: {
+                  eq: {
+                    id: [idProperty.id],
+                    type: 'ME_PROPERTY',
+                  },
+                },
+              },
+            ],
+          },
         }),
       );
       formObject.descendants.push(
@@ -842,9 +951,10 @@ const beforeCreate = ({
               );
           }
         };
-
-        const newInputPrefabs = newInput();
-        inputBox.descendants.push(newInputPrefabs);
+        if (inputBox) {
+          const newInputPrefabs = newInput();
+          inputBox.descendants.push(newInputPrefabs);
+        }
       });
 
       if (!modelId) {
@@ -853,14 +963,14 @@ const beforeCreate = ({
       }
 
       if (modelId) {
-        const dataList = treeSearch('#dataContainer', newPrefab.structure);
-        if (!dataList) throw new Error('No datalist found');
+        const dataContainer = treeSearch('#dataContainer', newPrefab.structure);
+        if (!dataContainer) throw new Error('No datalist found');
         setOption(
-          dataList,
-          'model',
+          dataContainer,
+          'authProfile',
           (originalOption: PrefabComponentOption) => ({
             ...originalOption,
-            value: modelId,
+            value: authProfileId,
           }),
         );
         const prefabFooter = treeSearch('#Footer', newPrefab.structure);
@@ -877,6 +987,40 @@ const beforeCreate = ({
             { type: 'PARTIAL', partialId: footerPartialId },
           ];
         }
+        const profilePicturePropertyid = treeSearch(
+          '#profilePictureProperty',
+          newPrefab.structure,
+        );
+        if (!profilePicturePropertyid)
+          throw new Error('No profileNameProperty id found');
+        setOption(
+          profilePicturePropertyid,
+          'imgUrl',
+          (originalOption: PrefabComponentOption) => ({
+            ...originalOption,
+            value: hasProfilePictureProperty
+              ? [enrichVarObj(profilePictureProperty, true)]
+              : [
+                  'https://assets.bettyblocks.com/4d7d80cf57a241899297fa9a768079f6_assets/files/user_default.png',
+                ],
+          }),
+        );
+        const profileNamePropertyid = treeSearch(
+          '#profileNameProperty',
+          newPrefab.structure,
+        );
+        if (!profileNamePropertyid)
+          throw new Error('No profileNameProperty id found');
+        setOption(
+          profileNamePropertyid,
+          'content',
+          (originalOption: PrefabComponentOption) => ({
+            ...originalOption,
+            value: hasProfileNameProperty
+              ? [enrichVarObj(profileNameProperty, true)]
+              : ['Profile name'],
+          }),
+        );
         save(newPrefab);
       }
     },
@@ -937,7 +1081,7 @@ const beforeCreate = ({
   };
   return (
     <>
-      <Header onClose={close} title="A Profile details" />
+      <Header onClose={close} title="Profile details" />
       {stepper.progressBar()}
       <Content>{stepper.setStep(stepNumber)}</Content>
       {stepper.buttons()}
@@ -1233,56 +1377,32 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                             condition: showIf('backgroundOptions', 'EQ', true),
                           },
                         }),
+                        stretch: toggle('Stretch (when in flex container)', {
+                          value: true,
+                        }),
                       },
                     },
                     [
                       wrapper(
                         {
                           label: 'my account',
-                          optionCategories: [
-                            {
-                              label: 'my account',
-                              expanded: true,
-                              members: ['detailsTab', 'PasswordTab'],
-                              condition: {
-                                type: 'SHOW',
-                                option: 'dialogVisibility',
-                                comparator: 'EQ',
-                                value: true,
-                              },
-                            },
-                          ],
                           options: {
-                            detailsTab: linked({
-                              label: 'Visibility',
-                              value: {
-                                ref: {
-                                  componentId: '#detailsTab',
-                                  optionId: '#detailsTabOption',
-                                },
-                              },
-                              configuration: {
-                                as: 'BUTTONGROUP',
-                                allowedInput: [
-                                  { name: 'Overview', value: false },
-                                  { name: 'Dialog', value: true },
-                                ],
-                              },
-                            }),
-                            PasswordTab: linked({
+                            pageTitle: linked({
                               label: 'Page title',
                               value: {
                                 ref: {
-                                  componentId: '#PasswordTab',
-                                  optionId: '#PasswordTabOption',
+                                  componentId: '#pageTitle',
+                                  optionId: '#pageTitleContent',
                                 },
                               },
-                              configuration: {
-                                condition: showIf(
-                                  'dialogVisibility',
-                                  'EQ',
-                                  false,
-                                ),
+                            }),
+                            shownTab: linked({
+                              label: 'Show design tab',
+                              value: {
+                                ref: {
+                                  componentId: '#DetailsTab',
+                                  optionId: '#formTabsSelectedDesignTabIndex',
+                                },
                               },
                             }),
                           },
@@ -1293,37 +1413,10 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                               {
                                 options: {
                                   ...columnOptions,
-                                  columnWidth: option('CUSTOM', {
-                                    label: 'Column width',
-                                    value: '12',
-                                    configuration: {
-                                      as: 'DROPDOWN',
-                                      dataType: 'string',
-                                      allowedInput: [
-                                        {
-                                          name: 'Fit content',
-                                          value: 'fitContent',
-                                        },
-                                        { name: 'Flexible', value: 'flexible' },
-                                        { name: 'Hidden', value: 'hidden' },
-                                        { name: '1', value: '1' },
-                                        { name: '2', value: '2' },
-                                        { name: '3', value: '3' },
-                                        { name: '4', value: '4' },
-                                        { name: '5', value: '5' },
-                                        { name: '6', value: '6' },
-                                        { name: '7', value: '7' },
-                                        { name: '8', value: '8' },
-                                        { name: '9', value: '9' },
-                                        { name: '10', value: '10' },
-                                        { name: '11', value: '11' },
-                                        { name: '12', value: '12' },
-                                      ],
-                                    },
-                                  }),
+
                                   columnWidthTabletLandscape: option('CUSTOM', {
                                     label: 'Column width (tablet landscape)',
-                                    value: '12',
+                                    value: 'flexible',
                                     configuration: {
                                       as: 'DROPDOWN',
                                       dataType: 'string',
@@ -1350,7 +1443,7 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                     },
                                   }),
                                   columnWidthTabletPortrait: option('CUSTOM', {
-                                    value: '12',
+                                    value: 'flexible',
                                     label: 'Column width (tablet portrait)',
                                     configuration: {
                                       as: 'DROPDOWN',
@@ -1378,7 +1471,7 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                     },
                                   }),
                                   columnWidthMobile: option('CUSTOM', {
-                                    value: '12',
+                                    value: 'flexible',
                                     label: 'Column width (mobile)',
                                     configuration: {
                                       as: 'DROPDOWN',
@@ -1406,18 +1499,22 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                     },
                                   }),
                                   innerSpacing: sizes('Inner space', {
-                                    value: ['L', 'L', 'L', 'L'],
+                                    value: ['M', 'M', 'M', 'M'],
                                   }),
                                 },
                               },
                               [
                                 TextPrefab(
                                   {
+                                    ref: { id: '#pageTitle' },
                                     options: {
                                       ...textOptions,
                                       content: variable('Content', {
                                         value: ['My account'],
                                         configuration: { as: 'MULTILINE' },
+                                        ref: {
+                                          id: '#pageTitleContent',
+                                        },
                                       }),
                                       type: font('Font', { value: ['Title4'] }),
                                       outerSpacing: sizes('Outer space', {
@@ -1757,14 +1854,15 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                   [
                                                     Avatar(
                                                       {
+                                                        ref: {
+                                                          id: '#profilePictureProperty',
+                                                        },
                                                         options: {
                                                           ...avatarOptions,
                                                           imgUrl: variable(
                                                             'Image url',
                                                             {
-                                                              value: [
-                                                                'https://assets.bettyblocks.com/4d7d80cf57a241899297fa9a768079f6_assets/files/user_default.png',
-                                                              ],
+                                                              value: [],
                                                               configuration: {
                                                                 condition:
                                                                   showIf(
@@ -1812,14 +1910,15 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                     ),
                                                     TextPrefab(
                                                       {
+                                                        ref: {
+                                                          id: '#profileNameProperty',
+                                                        },
                                                         options: {
                                                           ...textOptions,
                                                           content: variable(
                                                             'Content',
                                                             {
-                                                              value: [
-                                                                'Profile name',
-                                                              ],
+                                                              value: [],
                                                               configuration: {
                                                                 as: 'MULTILINE',
                                                               },
@@ -2319,17 +2418,31 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                               [
                                                 Tabs(
                                                   {
+                                                    ref: {
+                                                      id: '#DetailsTab',
+                                                    },
                                                     options: {
                                                       ...tabsOptions,
                                                       hideTabs: toggle(
                                                         'Hide visual tabs',
                                                         { value: true },
                                                       ),
+                                                      selectedDesignTabIndex:
+                                                        childSelector(
+                                                          'Selected tab (design)',
+                                                          {
+                                                            value: 1,
+                                                            ref: {
+                                                              id: '#formTabsSelectedDesignTabIndex',
+                                                            },
+                                                          },
+                                                        ),
                                                     },
                                                   },
                                                   [
                                                     Tab(
                                                       {
+                                                        label: 'detials',
                                                         ref: {
                                                           id: '#personalDetailsTab',
                                                         },
@@ -2462,7 +2575,7 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                                 value: [
                                                                   'M',
                                                                   '0rem',
-                                                                  'orem',
+                                                                  '0rem',
                                                                   '0rem',
                                                                 ],
                                                               },
@@ -2529,7 +2642,7 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                                 value: [
                                                                   'M',
                                                                   '0rem',
-                                                                  'orem',
+                                                                  '0rem',
                                                                   '0rem',
                                                                 ],
                                                               },
@@ -2561,6 +2674,30 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
 
                                                                 options: {
                                                                   ...boxOptions,
+                                                                  outerSpacing:
+                                                                    sizes(
+                                                                      'Outer space',
+                                                                      {
+                                                                        value: [
+                                                                          'M',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                        ],
+                                                                      },
+                                                                    ),
+                                                                  innerSpacing:
+                                                                    sizes(
+                                                                      'Inner space',
+                                                                      {
+                                                                        value: [
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                        ],
+                                                                      },
+                                                                    ),
                                                                 },
                                                               },
                                                               [],
@@ -2569,6 +2706,53 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                               {
                                                                 options: {
                                                                   ...boxOptions,
+                                                                  alignment:
+                                                                    buttongroup(
+                                                                      'Alignment',
+                                                                      [
+                                                                        [
+                                                                          'None',
+                                                                          'none',
+                                                                        ],
+                                                                        [
+                                                                          'Left',
+                                                                          'flex-start',
+                                                                        ],
+                                                                        [
+                                                                          'Center',
+                                                                          'center',
+                                                                        ],
+                                                                        [
+                                                                          'Right',
+                                                                          'flex-end',
+                                                                        ],
+                                                                        [
+                                                                          'Justified',
+                                                                          'space-between',
+                                                                        ],
+                                                                      ],
+                                                                      {
+                                                                        value:
+                                                                          'flex-end',
+                                                                        configuration:
+                                                                          {
+                                                                            dataType:
+                                                                              'string',
+                                                                          },
+                                                                      },
+                                                                    ),
+                                                                  innerSpacing:
+                                                                    sizes(
+                                                                      'Inner space',
+                                                                      {
+                                                                        value: [
+                                                                          'M',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                        ],
+                                                                      },
+                                                                    ),
                                                                 },
                                                               },
                                                               [
@@ -2637,6 +2821,7 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                     ),
                                                     Tab(
                                                       {
+                                                        label: 'password',
                                                         ref: {
                                                           id: '#changePasswordTab',
                                                         },
@@ -2709,9 +2894,9 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                           [],
                                                         ),
                                                         Alert({
-                                                          // ref: {
-                                                          //   id: '#passwordSuccessAlert',
-                                                          // },
+                                                          ref: {
+                                                            id: '#passwordSuccessAlert',
+                                                          },
                                                           options: {
                                                             ...alertOptions,
                                                             icon: icon('Icon', {
@@ -2762,7 +2947,7 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                                 value: [
                                                                   'M',
                                                                   '0rem',
-                                                                  'orem',
+                                                                  '0rem',
                                                                   '0rem',
                                                                 ],
                                                               },
@@ -2770,9 +2955,9 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                           },
                                                         }),
                                                         Alert({
-                                                          // ref: {
-                                                          //   id: '#passwordErrorAlert',
-                                                          // },
+                                                          ref: {
+                                                            id: '#passwordErrorAlert',
+                                                          },
                                                           options: {
                                                             ...alertOptions,
                                                             icon: icon('Icon', {
@@ -2822,7 +3007,7 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                                 value: [
                                                                   'M',
                                                                   '0rem',
-                                                                  'orem',
+                                                                  '0rem',
                                                                   '0rem',
                                                                 ],
                                                               },
@@ -2850,6 +3035,18 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                               {
                                                                 options: {
                                                                   ...boxOptions,
+                                                                  innerSpacing:
+                                                                    sizes(
+                                                                      'Inner space',
+                                                                      {
+                                                                        value: [
+                                                                          'M',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                        ],
+                                                                      },
+                                                                    ),
                                                                 },
                                                               },
                                                               [
@@ -2857,6 +3054,29 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                                   {
                                                                     options: {
                                                                       ...textOptions,
+                                                                      content:
+                                                                        variable(
+                                                                          'Content',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                'Current password',
+                                                                              ],
+                                                                            configuration:
+                                                                              {
+                                                                                as: 'MULTILINE',
+                                                                              },
+                                                                          },
+                                                                        ),
+                                                                      type: font(
+                                                                        'Font',
+                                                                        {
+                                                                          value:
+                                                                            [
+                                                                              'Body1',
+                                                                            ],
+                                                                        },
+                                                                      ),
                                                                       outerSpacing:
                                                                         sizes(
                                                                           'Outer space',
@@ -2874,17 +3094,215 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                                   },
                                                                   [],
                                                                 ),
+                                                                TextInput(
+                                                                  {
+                                                                    options: {
+                                                                      ...textInputOptions,
+                                                                      margin:
+                                                                        buttongroup(
+                                                                          'Margin',
+                                                                          [
+                                                                            [
+                                                                              'None',
+                                                                              'none',
+                                                                            ],
+                                                                            [
+                                                                              'Dense',
+                                                                              'dense',
+                                                                            ],
+                                                                            [
+                                                                              'Normal',
+                                                                              'normal',
+                                                                            ],
+                                                                          ],
+                                                                          {
+                                                                            value:
+                                                                              'none',
+                                                                          },
+                                                                        ),
+                                                                    },
+                                                                  },
+                                                                  [],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            prefabBox(
+                                                              {
+                                                                ref: {
+                                                                  id: '#updatePasswordBox',
+                                                                },
+                                                                options: {
+                                                                  ...boxOptions,
+                                                                  innerSpacing:
+                                                                    sizes(
+                                                                      'Inner space',
+                                                                      {
+                                                                        value: [
+                                                                          'M',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                        ],
+                                                                      },
+                                                                    ),
+                                                                },
+                                                              },
+                                                              [],
+                                                            ),
+                                                            prefabBox(
+                                                              {
+                                                                options: {
+                                                                  ...boxOptions,
+                                                                  innerSpacing:
+                                                                    sizes(
+                                                                      'Inner space',
+                                                                      {
+                                                                        value: [
+                                                                          'M',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                        ],
+                                                                      },
+                                                                    ),
+                                                                },
+                                                              },
+                                                              [
+                                                                TextPrefab(
+                                                                  {
+                                                                    options: {
+                                                                      ...textOptions,
+                                                                      content:
+                                                                        variable(
+                                                                          'Content',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                'Confirm password',
+                                                                              ],
+                                                                            configuration:
+                                                                              {
+                                                                                as: 'MULTILINE',
+                                                                              },
+                                                                          },
+                                                                        ),
+                                                                      type: font(
+                                                                        'Font',
+                                                                        {
+                                                                          value:
+                                                                            [
+                                                                              'Body1',
+                                                                            ],
+                                                                        },
+                                                                      ),
+                                                                      outerSpacing:
+                                                                        sizes(
+                                                                          'Outer space',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                '0rem',
+                                                                                '0rem',
+                                                                                'S',
+                                                                                '0rem',
+                                                                              ],
+                                                                          },
+                                                                        ),
+                                                                    },
+                                                                  },
+                                                                  [],
+                                                                ),
+                                                                TextInput(
+                                                                  {
+                                                                    options: {
+                                                                      ...textInputOptions,
+                                                                      margin:
+                                                                        buttongroup(
+                                                                          'Margin',
+                                                                          [
+                                                                            [
+                                                                              'None',
+                                                                              'none',
+                                                                            ],
+                                                                            [
+                                                                              'Dense',
+                                                                              'dense',
+                                                                            ],
+                                                                            [
+                                                                              'Normal',
+                                                                              'normal',
+                                                                            ],
+                                                                          ],
+                                                                          {
+                                                                            value:
+                                                                              'none',
+                                                                          },
+                                                                        ),
+                                                                    },
+                                                                  },
+                                                                  [],
+                                                                ),
                                                               ],
                                                             ),
                                                             prefabBox(
                                                               {
                                                                 options: {
                                                                   ...boxOptions,
+                                                                  alignment:
+                                                                    buttongroup(
+                                                                      'Alignment',
+                                                                      [
+                                                                        [
+                                                                          'None',
+                                                                          'none',
+                                                                        ],
+                                                                        [
+                                                                          'Left',
+                                                                          'flex-start',
+                                                                        ],
+                                                                        [
+                                                                          'Center',
+                                                                          'center',
+                                                                        ],
+                                                                        [
+                                                                          'Right',
+                                                                          'flex-end',
+                                                                        ],
+                                                                        [
+                                                                          'Justified',
+                                                                          'space-between',
+                                                                        ],
+                                                                      ],
+                                                                      {
+                                                                        value:
+                                                                          'flex-end',
+                                                                        configuration:
+                                                                          {
+                                                                            dataType:
+                                                                              'string',
+                                                                          },
+                                                                      },
+                                                                    ),
+                                                                  innerSpacing:
+                                                                    sizes(
+                                                                      'Inner space',
+                                                                      {
+                                                                        value: [
+                                                                          'M',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                        ],
+                                                                      },
+                                                                    ),
                                                                 },
                                                               },
                                                               [
                                                                 SubmitButton(
                                                                   {
+                                                                    ref: {
+                                                                      id: '#savePasswordButton',
+                                                                    },
                                                                     options: {
                                                                       ...submitButtonOptions,
 
@@ -2894,7 +3312,7 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                                           {
                                                                             value:
                                                                               [
-                                                                                'Save changes',
+                                                                                'Update password',
                                                                               ],
                                                                           },
                                                                         ),
@@ -2948,6 +3366,75 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                 ),
                                               ],
                                             ),
+                                            Alert({
+                                              options: {
+                                                ...alertOptions,
+                                                verticalAlignment: buttongroup(
+                                                  'Vertical Alignment',
+                                                  [
+                                                    ['Top', 'flex-start'],
+                                                    ['Center', 'center'],
+                                                    ['Bottom', 'flex-end'],
+                                                    ['Justified', 'stretch'],
+                                                  ],
+                                                  {
+                                                    value: 'stretch',
+                                                    configuration: {
+                                                      dataType: 'stretch',
+                                                    },
+                                                  },
+                                                ),
+                                                visible: toggle(
+                                                  'Toggle visibility',
+                                                  {
+                                                    value: false,
+                                                    configuration: {
+                                                      as: 'VISIBILITY',
+                                                    },
+                                                  },
+                                                ),
+                                                icon: icon('Icon', {
+                                                  value: 'Info',
+                                                }),
+                                                titleText: variable(
+                                                  'Title text',
+                                                  {
+                                                    value: ['Reminder'],
+                                                  },
+                                                ),
+                                                bodyText: variable(
+                                                  'Body text',
+                                                  {
+                                                    value: [
+                                                      'The user needs to add conditional checks to see if the current password is the current password and if the new and confirm-password fields match.',
+                                                    ],
+                                                  },
+                                                ),
+                                                textColor: color('Text color', {
+                                                  value: ThemeColor.WHITE,
+                                                }),
+                                                iconColor: color('Icon color', {
+                                                  value: ThemeColor.WHITE,
+                                                }),
+                                                background: color(
+                                                  'Background color',
+                                                  {
+                                                    value: ThemeColor.INFO,
+                                                  },
+                                                ),
+                                                outerSpacing: sizes(
+                                                  'Outer space',
+                                                  {
+                                                    value: [
+                                                      'M',
+                                                      '0rem',
+                                                      'M',
+                                                      '0rem',
+                                                    ],
+                                                  },
+                                                ),
+                                              },
+                                            }),
                                           ],
                                         ),
                                       ],
