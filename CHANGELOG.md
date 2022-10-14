@@ -1,3 +1,73 @@
+## [2.61.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.61.1...v2.61.2) (2022-10-12)
+
+
+### Bug Fixes
+
+* using matches in filter ([fffef11](https://github.com/bettyblocks/material-ui-component-set/commit/fffef11d7d158d6cc2cb5f487753fde0740b2010))
+
+## [2.61.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.61.0...v2.61.1) (2022-10-10)
+
+
+### Bug Fixes
+
+* add required option to fileUploadInput ([1ee1bd3](https://github.com/bettyblocks/material-ui-component-set/commit/1ee1bd3483b92c5706ec1865e4182f3469dc2bb6))
+* better action loading description ([661dad0](https://github.com/bettyblocks/material-ui-component-set/commit/661dad091d543efc5877c7bd6c8310604f006e4d))
+* check for uploaded value ([bc3b319](https://github.com/bettyblocks/material-ui-component-set/commit/bc3b3191320db023e37df930f012946cb2b283d9))
+* check if files are valid ([e6318a3](https://github.com/bettyblocks/material-ui-component-set/commit/e6318a35042c19b19fd32f7d739756349f7c8e99))
+* dropwdown categories for fileupload options ([b31d64c](https://github.com/bettyblocks/material-ui-component-set/commit/b31d64c222b778e9797daf9d350fcbc8a60373e2))
+* remove unnessary export of categories ([90b9bc4](https://github.com/bettyblocks/material-ui-component-set/commit/90b9bc4ab6d68bfb3fbc9195a92e7dcc34af9d85))
+* show alerts on action completed or on error ([83eaaa9](https://github.com/bettyblocks/material-ui-component-set/commit/83eaaa91f83108e6dd8ca456f55467a74fd96688))
+* use showinidicator to disable button ([a062360](https://github.com/bettyblocks/material-ui-component-set/commit/a0623607c00406f74013195969dd4391f9905aaf))
+
+# [2.61.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.60.0...v2.61.0) (2022-10-10)
+
+
+### Features
+
+* refactor login and register template to tsx ([1b191bf](https://github.com/bettyblocks/material-ui-component-set/commit/1b191bfd666cae7a51a09eb23450bf14bd927365))
+
+# [2.60.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.59.0...v2.60.0) (2022-10-07)
+
+
+### Features
+
+* refactor simple dashboard to tsx ([7f4239d](https://github.com/bettyblocks/material-ui-component-set/commit/7f4239d933796c45ac33430abc22df1ace9a1426))
+
+# [2.59.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.58.1...v2.59.0) (2022-10-06)
+
+
+### Features
+
+* refactor homepage template to tsx ([e2a0edc](https://github.com/bettyblocks/material-ui-component-set/commit/e2a0edc129b59ca56931f42ccf78d989090d4b51))
+
+## [2.58.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.58.0...v2.58.1) (2022-10-06)
+
+
+### Bug Fixes
+
+* show message when error occurs ([9674331](https://github.com/bettyblocks/material-ui-component-set/commit/96743310c8c2fcae3103d6d5238f946c03191e37))
+* show onerror interaction ([07f5664](https://github.com/bettyblocks/material-ui-component-set/commit/07f5664ec666f47deee1926525f6691e990f9c4e))
+* show onerror interaction and hide default error on checkbox ([606085c](https://github.com/bettyblocks/material-ui-component-set/commit/606085c13d41af913f5301e72c4546712fe67831))
+
+# [2.58.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.57.0...v2.58.0) (2022-09-30)
+
+
+### Bug Fixes
+
+* accept content type when image ([d1ba13d](https://github.com/bettyblocks/material-ui-component-set/commit/d1ba13d38b6616d9d1b858a064bbd8cdceca64d8))
+* create form disabled kinds ([139f02b](https://github.com/bettyblocks/material-ui-component-set/commit/139f02b0cae4b94e258a726c23ddb07e20f4ba7f))
+* reduce horizontal space taken by image upload ([3516820](https://github.com/bettyblocks/material-ui-component-set/commit/35168208dec95ab183b49a7aaab92f32b373a56c))
+* update SDK ([88a798e](https://github.com/bettyblocks/material-ui-component-set/commit/88a798eadbd60d348587258c2cea798240682907))
+
+
+### Features
+
+* change labels ([9d3e3ae](https://github.com/bettyblocks/material-ui-component-set/commit/9d3e3ae77556e8f9f2378a6cd67bb4ab622bc123))
+* contain file name length within input ([0d4509f](https://github.com/bettyblocks/material-ui-component-set/commit/0d4509fc95c114abf664095a7011b5787bb2b4eb))
+* do not show preview for stub file values ([a669f6f](https://github.com/bettyblocks/material-ui-component-set/commit/a669f6f743e2456de2abfa505421f780e694cce9))
+* image upload beta ([59c1055](https://github.com/bettyblocks/material-ui-component-set/commit/59c1055287a9484a4cee6aef4e59a14ad6d305cc))
+* stack file details ([48a02bf](https://github.com/bettyblocks/material-ui-component-set/commit/48a02bff97c4417d41934e44c1bca85cd1c05624))
+
 # [2.57.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.56.0...v2.57.0) (2022-09-23)
 
 
