@@ -32,12 +32,13 @@
       vertical: anchorOriginSplit[1],
     };
 
+    const badgePresent = addBadge && !hideBadge;
     const IconWithoutLink = (
       // eslint-disable-next-line
       <span onClick={() => B.defineFunction('Click')}>
         <Icon
           name={icon}
-          className={classes.root}
+          className={`${classes.root} ${!badgePresent && classes.outerSpace}`}
           data-component={useText(dataComponentAttribute) || 'DataTableColumn'}
         />
       </span>
@@ -55,7 +56,7 @@
       >
         <Icon
           name={icon}
-          className={classes.root}
+          className={`${classes.root} ${!badgePresent && classes.outerSpace}`}
           data-component={useText(dataComponentAttribute) || 'DataTableColumn'}
         />
       </Link>
@@ -66,6 +67,7 @@
     const BadgeComponent = (
       <Badge
         classes={{ root: classes.badge }}
+        className={classes.outerSpace}
         badgeContent={contentText}
         anchorOrigin={anchorOriginObj}
         variant={variant}
@@ -89,8 +91,6 @@
   styles: (B) => (t) => {
     const { mediaMinWidth, Styling } = B;
     const style = new Styling(t);
-    const convertSizes = (sizes) =>
-      sizes.map((size) => style.getSpacing(size)).join(' ');
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
 
@@ -102,48 +102,49 @@
         '&.MuiSvgIcon-root': {
           fontSize: ({ options: { size } }) => style.getIconSize(size),
           color: ({ options: { color } }) => style.getColor(color),
-          marginTop: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[0]),
-          marginRight: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[1]),
-          marginBottom: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[2]),
-          marginLeft: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[3]),
-          [`@media ${mediaMinWidth(600)}`]: {
-            marginTop: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[0], 'Portrait'),
-            marginRight: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[1], 'Portrait'),
-            marginBottom: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[2], 'Portrait'),
-            marginLeft: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[3], 'Portrait'),
-          },
-          [`@media ${mediaMinWidth(960)}`]: {
-            marginTop: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[0], 'Landscape'),
-            marginRight: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[1], 'Landscape'),
-            marginBottom: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[2], 'Landscape'),
-            marginLeft: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[3], 'Landscape'),
-          },
-          [`@media ${mediaMinWidth(1280)}`]: {
-            marginTop: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[0], 'Desktop'),
-            marginRight: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[1], 'Desktop'),
-            marginBottom: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[2], 'Desktop'),
-            marginLeft: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[3], 'Desktop'),
-          },
+        },
+      },
+      outerSpace: {
+        marginInlineTop: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[0]),
+        marginInlineRight: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[1]),
+        marginInlineBottom: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[2]),
+        marginInlineLeft: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[3]),
+        [`@media ${mediaMinWidth(600)}`]: {
+          marginInlineTop: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[0], 'Portrait'),
+          marginInlineRight: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[1], 'Portrait'),
+          marginInlineBottom: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[2], 'Portrait'),
+          marginInlineLeft: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[3], 'Portrait'),
+        },
+        [`@media ${mediaMinWidth(960)}`]: {
+          marginInlineTop: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[0], 'Landscape'),
+          marginInlineRight: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[1], 'Landscape'),
+          marginInlineBottom: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[2], 'Landscape'),
+          marginInlineLeft: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[3], 'Landscape'),
+        },
+        [`@media ${mediaMinWidth(1280)}`]: {
+          marginInlineTop: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[0], 'Desktop'),
+          marginInlineRight: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[1], 'Desktop'),
+          marginInlineBottom: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[2], 'Desktop'),
+          marginInlineLeft: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[3], 'Desktop'),
         },
       },
       badge: {
-        margin: ({ options: { margin } }) => convertSizes(margin),
         display: 'inline-flex',
         justifyContent: 'center',
         verticalAlign: 'middle',
