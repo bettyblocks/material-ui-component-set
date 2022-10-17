@@ -7,6 +7,6 @@ const attributes = {
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Action Button Beta', attributes, undefined, [
+export default prefab('Action Button', attributes, undefined, [
   ActionJSButton({}),
 ]);
