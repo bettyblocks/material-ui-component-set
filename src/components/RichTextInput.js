@@ -264,10 +264,6 @@
         children = [{ text: '' }];
       }
 
-      if (el.nodeName === 'BODY') {
-        return jsx('fragment', {}, children);
-      }
-
       if (ELEMENT_TAGS[nodeName]) {
         const attrs = ELEMENT_TAGS[nodeName](el);
         return jsx('element', attrs, children);
@@ -276,6 +272,15 @@
       if (TEXT_TAGS[nodeName]) {
         const attrs = TEXT_TAGS[nodeName](el);
         return children.map((child) => jsx('text', attrs, child));
+      }
+
+      if (!Element.isElementList(children)) {
+        const attrs = ELEMENT_TAGS.P(el);
+        children = jsx('element', attrs, children);
+      }
+
+      if (el.nodeName === 'BODY') {
+        return jsx('fragment', {}, children);
       }
 
       return children;
@@ -320,12 +325,8 @@
       () => withHistory(withReact(createEditor())),
       [],
     );
-
-    const devValue = `<p>${useText(valueProp)}</p>`;
-    const isEmpty = useText(valueProp) === '' ? '<p></p>' : useText(valueProp);
-
     const parsed = new DOMParser().parseFromString(
-      isDev ? devValue : isEmpty,
+      useText(valueProp),
       'text/html',
     );
     const fragment = deserialize(parsed.body);
