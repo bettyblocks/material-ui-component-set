@@ -106,7 +106,6 @@
     const { modelId: propertyModelId } = modelProperty;
     const modelId =
       modelProperty.referenceModelId || propertyModelId || model || '';
-    console.log('modelID', modelId);
     const propertyModel = getModel(modelId);
     const defaultLabelProperty =
       getProperty(
