@@ -36,14 +36,14 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.AutoCompleteIcon,
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Autocomplete Beta', attributes, beforeCreate, [
+export default prefab('Autocomplete', attributes, beforeCreate, [
   AutocompleteInput({
-    label: 'Autocomplete Beta',
+    label: 'Autocomplete',
     inputLabel: 'Autocomplete',
     type: 'text',
   }),

@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Multi Autocomplete Beta',
+  name: 'Multi Autocomplete',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',

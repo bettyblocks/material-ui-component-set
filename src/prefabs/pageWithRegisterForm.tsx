@@ -47,7 +47,7 @@ import {
   Conditional,
   conditionalOptions,
 } from './structures';
-import { options as betaFormOptions } from './structures/ActionJSForm/options';
+import { options as formOptions } from './structures/ActionJSForm/options';
 import { Alert } from './structures/Alert/index';
 import { IdPropertyProps, ModelProps, ModelQuery, Properties } from './types';
 import { PermissionType } from './types/types';
@@ -1110,7 +1110,7 @@ export default makePrefab('Register form', attrs, beforeCreate, [
                                                         'Content',
                                                         {
                                                           value: [
-                                                            'You need to configure the permissions of the "Form Beta" actions in order to use this template.',
+                                                            'You need to configure the permissions of the "Form" actions in order to use this template.',
                                                           ],
                                                           configuration: {
                                                             as: 'MULTILINE',
@@ -1462,9 +1462,9 @@ export default makePrefab('Register form', attrs, beforeCreate, [
                                           ],
                                         ),
                                         component(
-                                          'Form Beta',
+                                          'Form',
                                           {
-                                            options: betaFormOptions,
+                                            options: formOptions,
                                             ref: { id: '#formId' },
                                           },
                                           [

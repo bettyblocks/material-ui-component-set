@@ -35,14 +35,14 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.PasswordInputIcon,
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Password Beta', attributes, beforeCreate, [
+export default prefab('Password', attributes, beforeCreate, [
   TextInput({
-    label: 'Password field Beta',
+    label: 'Password field',
     inputLabel: 'Password',
     type: 'password',
     adornmentIcon: 'VisibilityOff',

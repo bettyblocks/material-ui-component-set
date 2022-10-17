@@ -35,14 +35,14 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.NumberInputIcon,
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Number Beta', attributes, beforeCreate, [
+export default prefab('Number', attributes, beforeCreate, [
   TextInput({
-    label: 'Number field Beta',
+    label: 'Number field',
     inputLabel: 'Number',
     type: 'number',
     pattern: '^[0-9]*$',

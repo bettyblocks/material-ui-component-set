@@ -302,7 +302,7 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.UpdateFormIcon,
   type: 'page',
   description:
@@ -939,9 +939,9 @@ const drawerContainer = DrawerContainer(
                                       },
                                       [
                                         component(
-                                          'Form Beta',
+                                          'Form',
                                           {
-                                            label: 'Create Form Beta',
+                                            label: 'Create Form',
                                             options: defaults,
                                             ref: { id: '#createForm' },
                                           },
@@ -1648,9 +1648,9 @@ const drawerContainer = DrawerContainer(
                                       },
                                       [
                                         component(
-                                          'Form Beta',
+                                          'Form',
                                           {
-                                            label: 'Update Form Beta',
+                                            label: 'Update Form',
                                             options: defaults,
                                             ref: { id: '#editForm' },
                                           },
@@ -3162,10 +3162,10 @@ const drawerContainer = DrawerContainer(
                                                                         [],
                                                                       ),
                                                                       component(
-                                                                        'Form Beta',
+                                                                        'Form',
                                                                         {
                                                                           label:
-                                                                            'Delete Form Beta',
+                                                                            'Delete Form',
                                                                           options:
                                                                             defaults,
                                                                           ref: {

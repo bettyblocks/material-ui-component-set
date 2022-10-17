@@ -67,7 +67,7 @@ export const MultiAutocomplete = (
   }
 
   return component(
-    'Multi Autocomplete Beta',
+    'Multi Autocomplete',
     { options, style, ref, label, optionCategories: categories },
     descendants,
   );

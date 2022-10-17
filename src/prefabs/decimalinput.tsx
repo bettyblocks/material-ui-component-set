@@ -35,14 +35,14 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.DecimalInputIcon,
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Decimal Beta', attributes, beforeCreate, [
+export default prefab('Decimal', attributes, beforeCreate, [
   TextInput({
-    label: 'Decimal field Beta',
+    label: 'Decimal field',
     inputLabel: 'Decimal',
     type: 'decimal',
     pattern: '^\\d+(\\.\\d{1,2})?$',

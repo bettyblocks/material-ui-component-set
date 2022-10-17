@@ -697,7 +697,7 @@ const prefabStructure: PrefabComponent[] = [
                                           },
                                           [
                                             component(
-                                              'Form Beta',
+                                              'Form',
                                               {
                                                 options: defaults,
                                                 ref: { id: '#formId' },
