@@ -478,6 +478,10 @@
           if (showUnderlined) toggleMark(editor, 'underline');
           break;
         }
+        case 'Backspace': {
+          event.preventDefault();
+          break;
+        }
         default:
           break;
       }
