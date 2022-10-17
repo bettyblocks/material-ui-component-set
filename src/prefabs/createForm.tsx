@@ -126,7 +126,6 @@ const beforeCreate = ({
             properties,
             'create',
           );
-          console.log('resulst', result);
 
           const structure = originalPrefab.structure[0];
 
