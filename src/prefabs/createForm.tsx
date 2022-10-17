@@ -126,6 +126,8 @@ const beforeCreate = ({
             properties,
             'create',
           );
+          console.log('resulst', result);
+
           const structure = originalPrefab.structure[0];
 
           Object.values(result.variables).map(([property, variable]) => {
@@ -368,11 +370,11 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.CreateFormIcon,
   interactions,
 };
 
-export default prefab('Create Form Beta', attributes, beforeCreate, [
-  Form('Create Form Beta', true),
+export default prefab('Create Form', attributes, beforeCreate, [
+  Form('Create Form', true),
 ]);

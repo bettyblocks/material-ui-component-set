@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Multi Autocomplete Beta',
+  name: 'Multi Autocomplete',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
@@ -106,6 +106,7 @@
     const { modelId: propertyModelId } = modelProperty;
     const modelId =
       modelProperty.referenceModelId || propertyModelId || model || '';
+    console.log('modelID', modelId);
     const propertyModel = getModel(modelId);
     const defaultLabelProperty =
       getProperty(

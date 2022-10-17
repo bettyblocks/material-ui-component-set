@@ -255,11 +255,11 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.LoginFormIcon,
   interactions,
 };
 
-export default prefab('Login Form Beta', attributes, beforeCreate, [
-  Form('Login Form Beta'),
+export default prefab('Login Form', attributes, beforeCreate, [
+  Form('Login Form'),
 ]);

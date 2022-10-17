@@ -44,7 +44,7 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.CheckboxIcon,
 };
 
@@ -146,6 +146,6 @@ const options = {
   }),
 };
 
-export default prefab('Checkbox Beta', attributes, beforeCreate, [
-  component('CheckboxInput', { label: 'Checkbox input Beta', options }, []),
+export default prefab('Checkbox', attributes, beforeCreate, [
+  component('CheckboxInput', { label: 'Checkbox input', options }, []),
 ]);

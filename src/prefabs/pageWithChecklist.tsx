@@ -601,9 +601,9 @@ const prefabStructure = [
                               },
                               [
                                 component(
-                                  'Form Beta',
+                                  'Form',
                                   {
-                                    label: 'Update Form Beta',
+                                    label: 'Update Form',
                                     options: defaults,
                                     ref: { id: '#formId' },
                                   },

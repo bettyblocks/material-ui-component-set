@@ -658,12 +658,12 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.UpdateFormIcon,
   interactions,
   variables: [],
 };
 
-export default prefab('Update Form Beta', attributes, beforeCreate, [
-  Form('Update Form Beta', true),
+export default prefab('Update Form', attributes, beforeCreate, [
+  Form('Update Form', true),
 ]);

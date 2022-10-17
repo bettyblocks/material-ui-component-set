@@ -45,7 +45,7 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.HiddenInputIcon,
 };
 
@@ -59,6 +59,6 @@ const options = {
 
 const hooks = {};
 
-export default prefab('Hidden Beta', attributes, beforeCreate, [
-  component('Hidden Input Beta', { options, ...hooks }, []),
+export default prefab('Hidden', attributes, beforeCreate, [
+  component('Hidden Input', { options, ...hooks }, []),
 ]);
