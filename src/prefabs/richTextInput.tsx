@@ -31,7 +31,7 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.TextareaIcon,
   keywords: ['Form', 'input', 'rich text', 'rich', 'text', 'editor'],
 };
