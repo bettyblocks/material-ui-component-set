@@ -105,8 +105,8 @@
 
     const labelProperty = getProperty(labelPropertyId) || {};
     const { modelId: propertyModelId } = modelProperty;
-    const modelId =
-      modelProperty.referenceModelId || propertyModelId || model || '';
+    const modelId = propertyModelId || model || '';
+
     const propertyModel = getModel(modelId);
     const defaultLabelProperty =
       getProperty(
@@ -198,8 +198,6 @@
     };
 
     const label = useText(labelRaw);
-
-    // eslint-disable-next-line no-underscore-dangle
 
     /*
      * Selected value of the autocomplete.
@@ -321,7 +319,7 @@
     }
 
     useAllQuery(
-      modelId,
+      modelProperty.referenceModelId,
       {
         take: 20,
         rawFilter: valueFilter,
@@ -361,14 +359,8 @@
 
     const optionFilter = useFilter(filterRaw || {});
 
-    // Adds the default values to the filter
-    const defaultValuesFilterArray = initialValue.reduce((acc, next) => {
-      return [...acc, { [valueProp.name]: { eq: next } }];
-    }, []);
-
     // We need to do this, because options.filter is not immutable
     const filter = {
-      ...(initialValue.length > 0 && { _or: defaultValuesFilterArray }),
       ...optionFilter,
     };
 
@@ -388,7 +380,7 @@
         }
         filter._or.push({
           [searchProp.name]: {
-            [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
+            [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
               ? parseInt(debouncedInputValue, 10)
               : debouncedInputValue,
           },
@@ -471,7 +463,7 @@
       data: { results } = {},
       refetch,
     } = useAllQuery(
-      modelId,
+      actionProperty ? modelProperty.referenceModelId : modelId,
       {
         take: 20,
         rawFilter: mergeFilters(filter, resolvedExternalFiltersObject),
