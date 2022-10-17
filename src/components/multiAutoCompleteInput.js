@@ -61,6 +61,7 @@
       validationTypeMismatch = [''],
       validationValueMissing = [''],
       variant,
+      value: valueRaw,
     } = options;
     const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
     /*
@@ -104,8 +105,8 @@
 
     const labelProperty = getProperty(labelPropertyId) || {};
     const { modelId: propertyModelId } = modelProperty;
-    const modelId =
-      modelProperty.referenceModelId || propertyModelId || model || '';
+    const modelId = propertyModelId || model || '';
+
     const propertyModel = getModel(modelId);
     const defaultLabelProperty =
       getProperty(
@@ -130,6 +131,17 @@
         idProperty;
 
     const valueProperty = isListProperty ? modelProperty : idProperty;
+    const defaultValue = useText(valueRaw, { rawValue: true });
+    let initialValue = defaultValue.replace(/\n/g, '');
+
+    if (defaultValue.trim() === '') {
+      initialValue = [];
+    } else {
+      initialValue = defaultValue
+        .trim()
+        .split(',')
+        .map((x) => x.trim());
+    }
 
     const validationMessage = (validityObject) => {
       if (!validityObject) {
@@ -186,9 +198,6 @@
     };
 
     const label = useText(labelRaw);
-
-    // eslint-disable-next-line no-underscore-dangle
-    const initialValue = [];
 
     /*
      * Selected value of the autocomplete.
@@ -310,7 +319,7 @@
     }
 
     useAllQuery(
-      modelId,
+      modelProperty.referenceModelId,
       {
         take: 20,
         rawFilter: valueFilter,
@@ -350,14 +359,8 @@
 
     const optionFilter = useFilter(filterRaw || {});
 
-    // Adds the default values to the filter
-    const defaultValuesFilterArray = initialValue.reduce((acc, next) => {
-      return [...acc, { [valueProp.name]: { eq: next } }];
-    }, []);
-
     // We need to do this, because options.filter is not immutable
     const filter = {
-      ...(initialValue.length > 0 && { _or: defaultValuesFilterArray }),
       ...optionFilter,
     };
 
@@ -460,7 +463,7 @@
       data: { results } = {},
       refetch,
     } = useAllQuery(
-      modelId,
+      actionProperty ? modelProperty.referenceModelId : modelId,
       {
         take: 20,
         rawFilter: mergeFilters(filter, resolvedExternalFiltersObject),
