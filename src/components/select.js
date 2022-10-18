@@ -11,7 +11,7 @@
       fullWidth,
       margin,
       helperText = [''],
-      selectOptions = '',
+      selectOptions = [''],
       model,
       filter,
       optionType,
@@ -45,6 +45,7 @@
     const [interactionFilter, setInteractionFilter] = useState({});
     const mounted = useRef(false);
     const blancoText = useText(blanco);
+    const staticOptions = useText(selectOptions);
 
     const { kind, values = [] } = getProperty(property) || {};
 
@@ -280,11 +281,22 @@
         ));
       }
       if (optionType === 'static') {
-        return selectOptions.split('\n').map((option) => (
-          <MenuItem key={option} value={option}>
-            {option}
-          </MenuItem>
-        ));
+        return staticOptions.split('\n').map((option) => {
+          try {
+            const json = JSON.parse(option);
+            return (
+              <MenuItem key={json.value} value={json.value || ''}>
+                {json.label || ''}
+              </MenuItem>
+            );
+          } catch (e) {
+            return (
+              <MenuItem key={option} value={option}>
+                {option}
+              </MenuItem>
+            );
+          }
+        });
       }
       if (loading) return <span>Loading...</span>;
       if (error && displayError) return <span>{error.message}</span>;

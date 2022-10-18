@@ -164,10 +164,10 @@
           },
         },
         {
-          type: 'TEXT',
+          type: 'VARIABLE',
           label: 'Options',
           key: 'selectOptions',
-          value: 'a\nb\nc',
+          value: ['{"label": "Example", "value": 1}'],
           configuration: {
             as: 'MULTILINE',
             condition: {
