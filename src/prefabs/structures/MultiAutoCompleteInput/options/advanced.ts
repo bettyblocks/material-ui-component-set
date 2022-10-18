@@ -1,9 +1,8 @@
 import {
-  option,
-  showIf,
-  variable,
-  toggle,
   buttongroup,
+  showIf,
+  toggle,
+  variable,
 } from '@betty-blocks/component-sdk';
 import { showOn } from '../../../../utils';
 
@@ -25,10 +24,5 @@ export const advanced = {
   dataComponentAttribute: variable('Test attribute', {
     value: [],
     ...showOn('advancedSettings'),
-  }),
-  actionVariableId: option('ACTION_JS_VARIABLE', {
-    label: 'Action input variable',
-    value: '',
-    configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
   }),
 };

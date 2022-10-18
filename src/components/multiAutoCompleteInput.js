@@ -32,35 +32,35 @@
       dataComponentAttribute: dataComponentAttributeRaw,
       disabled,
       errorType,
-      label: labelRaw,
-      labelProperty: labelPropertyId = '',
       filter: filterRaw,
       fullWidth,
       helperText: helperTextRaw,
       hideLabel,
+      label: labelRaw,
+      labelProperty: labelPropertyId = '',
       margin,
-      model: modelId,
-      required,
+      maxlength,
+      minlength,
+      minvalue,
+      model,
       nameAttribute: nameAttributeRaw,
       optionType,
       order,
       orderBy,
+      pattern,
       placeholder: placeholderRaw,
       renderCheckboxes,
+      required,
       showError,
       size,
-      variant,
+      type,
       validationBelowMinimum = [''],
       validationPatternMismatch = [''],
       validationTooLong = [''],
       validationTooShort = [''],
       validationTypeMismatch = [''],
       validationValueMissing = [''],
-      maxlength,
-      minlength,
-      pattern,
-      minvalue,
-      type,
+      variant,
     } = options;
     const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
     /*
@@ -100,12 +100,19 @@
     const belowMinimumMessage = useText(validationBelowMinimum);
     const helperTextResolved = useText(helperTextRaw);
 
-    const modelProperty = getProperty(actionProperty.modelProperty) || {};
+    const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
 
     const labelProperty = getProperty(labelPropertyId) || {};
-
-    const model = getModel(modelId);
-    const defaultLabelProperty = getProperty(model.labelPropertyId || '') || {};
+    const { modelId: propertyModelId } = modelProperty;
+    const modelId =
+      modelProperty.referenceModelId || propertyModelId || model || '';
+    const propertyModel = getModel(modelId);
+    const defaultLabelProperty =
+      getProperty(
+        propertyModel && propertyModel.labelPropertyId
+          ? propertyModel.labelPropertyId
+          : '',
+      ) || {};
     const idProperty = getIdProperty(modelId || '') || {};
 
     const isListProperty =
@@ -227,7 +234,7 @@
     const hasSearch = searchProp && searchProp.id;
     const hasValue = !!(valueProp && valueProp.id);
 
-    let valid = false;
+    let valid = true;
     let message = '';
 
     /*
@@ -257,64 +264,50 @@
     /*
      * We do some validations that checks if all required options are set. We do this in one place to prevent clutter further on
      */
-    switch (optionType) {
-      case 'model': {
-        if (!model) {
-          message = 'No model selected';
-          break;
-        }
-        if (!hasSearch && !hasValue) {
-          message = 'No property selected';
-          break;
-        }
-        if (!hasValue) {
-          message = 'No value property selected';
-          break;
-        }
-        if (!hasSearch) {
-          message = 'No label property selected';
-          break;
-        }
-
-        valid = true;
-        break;
+    if (!isListProperty && !isDev) {
+      if (!hasSearch && !hasValue) {
+        message = 'No property selected';
+        valid = false;
       }
-      case 'property': {
-        if (!isListProperty) {
-          message = 'No property of type "List" selected';
-          break;
-        }
-
-        valid = true;
-        break;
+      if (!hasValue) {
+        message = 'No value property selected';
+        valid = false;
       }
-      default: {
-        message = 'Invalid value for optionType option';
-        break;
+      if (!hasSearch) {
+        message = 'No label property selected';
+        valid = false;
+      }
+      if (!modelId) {
+        message = 'No model selected';
+        valid = false;
       }
     }
 
-    const parentIdProperty = getIdProperty(modelProperty.modelId).id;
+    const parentProperty = getIdProperty(modelId);
+    const parentIdProperty = parentProperty ? parentProperty.id : '';
     const parentIdValue = B.useProperty(parentIdProperty);
     const queryWasResolvable = !!parentIdValue;
 
+    let valuesFilter = {};
+    let valueFilter;
     // this should be merged into the final filter
-    const valuesFilter = {
-      _and: [
-        {
-          [modelProperty.inverseAssociationId]: {
-            [parentIdProperty]: {
-              eq: {
-                id: [parentIdProperty],
-                type: 'PROPERTY',
+    if (modelProperty.id) {
+      valuesFilter = {
+        _and: [
+          {
+            [modelProperty.inverseAssociationId]: {
+              [parentIdProperty]: {
+                eq: {
+                  id: [parentIdProperty],
+                  type: 'PROPERTY',
+                },
               },
             },
           },
-        },
-      ],
-    };
-
-    const valueFilter = useFilter(valuesFilter);
+        ],
+      };
+      valueFilter = useFilter(valuesFilter);
+    }
 
     useAllQuery(
       modelId,
@@ -340,7 +333,7 @@
     useEffect(() => {
       let debounceInput;
 
-      if (optionType === 'model') {
+      if (optionType === 'model' || optionType === 'variable') {
         if (inputValue !== debouncedInputValue) {
           debounceInput = setTimeout(() => {
             setDebouncedInputValue(inputValue);
@@ -349,7 +342,7 @@
       }
 
       return () => {
-        if (optionType === 'model') {
+        if (optionType === 'model' || optionType === 'variable') {
           clearTimeout(debounceInput);
         }
       };
@@ -384,7 +377,7 @@
         }
         filter._or.push({
           [searchProp.name]: {
-            [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
+            [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
               ? parseInt(debouncedInputValue, 10)
               : debouncedInputValue,
           },
@@ -594,7 +587,7 @@
         return modelProperty.values.map((propertyValue) => propertyValue.value);
       }
 
-      if (optionType === 'model') {
+      if (optionType === 'model' || optionType === 'variable') {
         if (!results) {
           return [];
         }
@@ -687,7 +680,7 @@
         <Autocomplete
           disableCloseOnSelect={!closeOnSelect}
           disabled={disabled}
-          {...(optionType === 'model' && {
+          {...((optionType === 'model' || optionType === 'variable') && {
             getOptionLabel: renderLabel,
           })}
           inputValue={inputValue}
@@ -698,7 +691,7 @@
 
             let triggerEventValue;
 
-            if (optionType === 'model') {
+            if (optionType === 'model' || optionType === 'variable') {
               setDebouncedInputValue('');
               triggerEventValue =
                 newValue.length === 0
@@ -742,7 +735,7 @@
           options={currentOptions}
           renderInput={(params) => (
             <>
-              {optionType === 'model' && (
+              {(optionType === 'model' || optionType === 'variable') && (
                 <input
                   type="hidden"
                   key={value[valueProp.name] ? 'hasValue' : 'isEmpty'}

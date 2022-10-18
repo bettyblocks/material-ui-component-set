@@ -197,13 +197,15 @@
             {file ? file.name : 'File name'}
           </Typography>
           <div className={classes.fileDetailList}>
-            <p className={classes.fileDetail}>
-              {isDev ? 'Size' : formatBytes(fileSize)}
-            </p>
-            <div className={classes.divider} />
-            <p className={classes.fileDetail}>
-              {isDev ? 'Type' : fileType.replace('image/', '.')}
-            </p>
+            <div>
+              <p className={classes.fileDetail}>
+                {isDev ? 'Size' : formatBytes(fileSize)}
+              </p>
+              <div className={classes.divider} />
+              <p className={classes.fileDetail}>
+                {isDev ? 'Type' : fileType.replace('image/', '.')}
+              </p>
+            </div>
           </div>
         </div>
       );

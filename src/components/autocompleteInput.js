@@ -23,7 +23,6 @@
       actionProperty,
       actionVariableId: name,
       closeOnSelect,
-      required: defaultRequired,
       dataComponentAttribute: dataComponentAttributeRaw,
       disabled: initialDisabled,
       errorType,
@@ -34,24 +33,26 @@
       label: labelRaw,
       labelProperty: labelPropertyId = '',
       margin,
+      maxlength,
+      minlength,
+      minvalue,
+      model,
       nameAttribute: nameAttributeRaw,
       order,
       orderBy,
+      pattern,
       placeholder: placeholderRaw,
+      required: defaultRequired,
       size,
-      value: valueRaw,
+      type,
       validationBelowMinimum = [''],
       validationPatternMismatch = [''],
       validationTooLong = [''],
       validationTooShort = [''],
       validationTypeMismatch = [''],
       validationValueMissing = [''],
+      value: valueRaw,
       variant,
-      maxlength,
-      minlength,
-      pattern,
-      minvalue,
-      type,
     } = options;
     const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
 
@@ -96,16 +97,19 @@
     const tooShortMessage = useText(validationTooShort);
     const belowMinimumMessage = useText(validationBelowMinimum);
     const helperTextResolved = useText(helperTextRaw);
-
-    const modelProperty = getProperty(actionProperty.modelProperty) || {};
+    const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
     const labelProperty = getProperty(labelPropertyId) || {};
 
     const { modelId: propertyModelId } = modelProperty;
-
-    const modelId = modelProperty.referenceModelId || propertyModelId;
-
-    const model = getModel(modelId);
-    const defaultLabelProperty = getProperty(model.labelPropertyId || '') || {};
+    const modelId =
+      modelProperty.referenceModelId || propertyModelId || model || '';
+    const propertyModel = getModel(modelId);
+    const defaultLabelProperty =
+      getProperty(
+        propertyModel && propertyModel.labelPropertyId
+          ? propertyModel.labelPropertyId
+          : '',
+      ) || {};
     const idProperty = getIdProperty(modelId) || {};
     const isListProperty =
       modelProperty.kind === 'LIST' || modelProperty.kind === 'list';
@@ -223,20 +227,20 @@
     let message = '';
 
     if (!isListProperty && !isDev) {
-      if (!modelId) {
-        message = 'No model selected';
-        valid = false;
-      }
       if (!hasSearch && !hasValue) {
         message = 'No property selected';
         valid = false;
       }
       if (!hasValue) {
-        message = 'No value propery selected';
+        message = 'No value property selected';
         valid = false;
       }
       if (!hasSearch) {
         message = 'No label property selected';
+        valid = false;
+      }
+      if (!modelId) {
+        message = 'No model selected';
         valid = false;
       }
     }
@@ -283,7 +287,7 @@
       filter._or = [
         {
           [searchProp.name]: {
-            [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
+            [searchPropIsNumber ? 'eq' : 'match']: searchPropIsNumber
               ? parseInt(debouncedInputValue, 10)
               : debouncedInputValue,
           },
@@ -298,7 +302,7 @@
       ];
     } else if (debouncedInputValue) {
       filter[searchProp.name] = {
-        [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
+        [searchPropIsNumber ? 'eq' : 'match']: searchPropIsNumber
           ? parseInt(debouncedInputValue, 10)
           : debouncedInputValue,
       };
@@ -306,7 +310,7 @@
       filter._or = [
         {
           [valueProp.name]: {
-            [valuePropIsNumber ? 'eq' : 'regex']:
+            [valuePropIsNumber ? 'eq' : 'match']:
               typeof value === 'string' ? value : value[valueProp.name],
           },
         },
