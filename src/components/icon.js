@@ -105,42 +105,42 @@
         },
       },
       outerSpace: {
-        marginInlineTop: ({ options: { outerSpacing } }) =>
+        marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
-        marginInlineRight: ({ options: { outerSpacing } }) =>
+        marginRight: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[1]),
-        marginInlineBottom: ({ options: { outerSpacing } }) =>
+        marginBottom: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[2]),
-        marginInlineLeft: ({ options: { outerSpacing } }) =>
+        marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
         [`@media ${mediaMinWidth(600)}`]: {
-          marginInlineTop: ({ options: { outerSpacing } }) =>
+          marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
-          marginInlineRight: ({ options: { outerSpacing } }) =>
+          marginRight: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[1], 'Portrait'),
-          marginInlineBottom: ({ options: { outerSpacing } }) =>
+          marginBottom: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[2], 'Portrait'),
-          marginInlineLeft: ({ options: { outerSpacing } }) =>
+          marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Portrait'),
         },
         [`@media ${mediaMinWidth(960)}`]: {
-          marginInlineTop: ({ options: { outerSpacing } }) =>
+          marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
-          marginInlineRight: ({ options: { outerSpacing } }) =>
+          marginRight: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[1], 'Landscape'),
-          marginInlineBottom: ({ options: { outerSpacing } }) =>
+          marginBottom: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[2], 'Landscape'),
-          marginInlineLeft: ({ options: { outerSpacing } }) =>
+          marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Landscape'),
         },
         [`@media ${mediaMinWidth(1280)}`]: {
-          marginInlineTop: ({ options: { outerSpacing } }) =>
+          marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),
-          marginInlineRight: ({ options: { outerSpacing } }) =>
+          marginRight: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[1], 'Desktop'),
-          marginInlineBottom: ({ options: { outerSpacing } }) =>
+          marginBottom: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[2], 'Desktop'),
-          marginInlineLeft: ({ options: { outerSpacing } }) =>
+          marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Desktop'),
         },
       },
