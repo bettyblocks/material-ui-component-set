@@ -1,3 +1,11 @@
+## [2.61.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.61.3...v2.61.4) (2022-10-19)
+
+
+### Bug Fixes
+
+* fix icon badge outerspace ([3b2c894](https://github.com/bettyblocks/material-ui-component-set/commit/3b2c89407acf66c697a5ab7176daea7169ecccb6))
+* margin was not set correctly ([50462b5](https://github.com/bettyblocks/material-ui-component-set/commit/50462b50ee50bac8f8e43fb41bb9f03fcdff6540))
+
 ## [2.61.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.61.2...v2.61.3) (2022-10-13)
 
 
