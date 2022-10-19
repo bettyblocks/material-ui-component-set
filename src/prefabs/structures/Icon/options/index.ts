@@ -24,7 +24,6 @@ export const categories = [
       'badgeTextColor',
       'anchorOrigin',
       'variant',
-      'margin',
     ],
   },
   {
@@ -120,9 +119,5 @@ export const iconOptions = {
       ],
     },
   }),
-  margin: sizes('Outer Space', {
-    value: ['S', 'S', 'S', 'S'],
-  }),
-
   ...advanced('Icon'),
 };
