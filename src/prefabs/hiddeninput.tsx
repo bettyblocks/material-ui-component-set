@@ -48,6 +48,7 @@ const beforeCreate = ({
 const attributes = {
   category: 'FORM',
   icon: Icon.HiddenInputIcon,
+  keywords: ['Form', 'input', 'hidden'],
 };
 
 const options = {
