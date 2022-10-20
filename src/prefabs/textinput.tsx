@@ -212,18 +212,12 @@ const beforeCreate = ({
           }
 
           const variableName = variableInput || name;
-          console.log('actionId', actionId);
-          console.log('variableName', variableName);
-          console.log('kind', kind);
-          console.log('propertyKind', propertyKind);
           const result = await prepareInput(
             actionId,
             variableName,
             kind,
             propertyKind,
           );
-
-          console.log('result prepareInput', result);
 
           const newPrefab = { ...originalPrefab };
           setOption(newPrefab.structure[0], actionVariableOption, (option) => ({
