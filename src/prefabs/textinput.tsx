@@ -1,32 +1,340 @@
 import * as React from 'react';
-import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
+import { Icon, prefab } from '@betty-blocks/component-sdk';
 import { TextInput } from './structures/TextInput';
+
+export enum DynamicTypeEnum {
+  Variable = 'VARIABLE',
+  Property = 'PROPERTY',
+  MeProperty = 'ME_PROPERTY',
+  Translation = 'TRANSLATION',
+}
 
 const beforeCreate = ({
   close,
-  components: { CreateFormInputWizard },
+  components: {
+    Content,
+    Field,
+    Footer,
+    Header,
+    FormField,
+    Toggle,
+    PropertySelector,
+    Label,
+    TextInput: Text,
+    CircleQuestion,
+    BBTooltip,
+  },
   prefab: originalPrefab,
   save,
-}: BeforeCreateArgs) => {
+  helpers,
+}: any) => {
+  const {
+    BettyPrefabs,
+    prepareInput,
+    useModelIdSelector,
+    useActionIdSelector,
+    usePrefabSelector,
+    usePropertyQuery,
+    setOption,
+    createUuid,
+    useModelQuery,
+    createBlacklist,
+  } = helpers;
+
+  const unsupportedKinds = createBlacklist(['TEXT', 'URL', 'IBAN', 'STRING']);
+
+  const [propertyPath, setProperty] = React.useState<any>('');
+  const [variableInput, setVariableInput] = React.useState(null);
+  const modelId = useModelIdSelector();
+  const actionId = useActionIdSelector();
+  const selectedPrefab = usePrefabSelector();
+  const [model, setModel] = React.useState<any>(null);
+  const [propertyBased, setPropertyBased] = React.useState(!!modelId);
+  const [prefabSaved, setPrefabSaved] = React.useState(false);
+
+  const [validationMessage, setValidationMessage] = React.useState('');
+
+  const modelRequest = useModelQuery({
+    variables: { id: modelId },
+    onCompleted: (result) => {
+      setModel(result.model);
+    },
+  });
+
+  const validate = () => {
+    if (modelRequest.loading) {
+      setValidationMessage(
+        'Model details are still loading, please try submitting again.',
+      );
+      return false;
+    }
+
+    return true;
+  };
+
+  let name: string | undefined;
+  let propertyKind;
+  let propertyModelId;
+  const componentId = createUuid();
+
+  function isProperty(path: string) {
+    return (
+      typeof path !== 'string' &&
+      typeof path === 'object' &&
+      !Array.isArray(path)
+    );
+  }
+
+  let propertyId: string;
+  if (isProperty(propertyPath)) {
+    const { id } = propertyPath;
+    propertyId = Array.isArray(id) ? id[id.length - 1] : id;
+  } else {
+    propertyId = propertyPath;
+  }
+
+  const propertyResponse = usePropertyQuery(propertyId);
+
+  if (!(propertyResponse.loading || propertyResponse.error)) {
+    if (propertyResponse.data) {
+      name = propertyResponse.data.property.label;
+      propertyKind = propertyResponse.data.property.kind;
+      propertyModelId = propertyResponse.data.property.referenceModel?.id;
+    }
+  }
+
   const structure = originalPrefab.structure[0];
   if (structure.type !== 'COMPONENT')
     return <div>expected component prefab, found {structure.type}</div>;
 
-  // TODO: remove this code
-  const actionVariableOption = structure.options.find(
+  const handlePropertyChange = (propertyOrId): void => {
+    setProperty(propertyOrId);
+  };
+
+  if (!actionId && !prefabSaved) {
+    setPrefabSaved(true);
+    save(originalPrefab);
+  }
+  const actionVariableOptionType = structure.options.find(
     (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
   );
+  const actionVariableOption = actionVariableOptionType?.key || null;
+  const labelOptionKey = 'label';
+  const nameOptionKey = 'actionVariableId';
 
   return (
-    <CreateFormInputWizard
-      supportedKinds={['TEXT', 'URL', 'IBAN', 'STRING']}
-      actionVariableOption={actionVariableOption?.key || null}
-      labelOptionKey="label"
-      nameOptionKey="actionVariableId"
-      close={close}
-      prefab={originalPrefab}
-      save={save}
-    />
+    <>
+      <Header onClose={close} title="Configure form input field" />
+      <Content>
+        {modelId && (
+          <Field label="Property based input">
+            <FormField onClick={(): void => setPropertyBased(!propertyBased)}>
+              <Toggle
+                color="purple"
+                checked={propertyBased}
+                onChange={(): void => {}}
+              />
+            </FormField>
+          </Field>
+        )}
+        {propertyBased ? (
+          <Field
+            label="Property"
+            error={
+              validationMessage && (
+                <Text color="#e82600">{validationMessage}</Text>
+              )
+            }
+          >
+            <PropertySelector
+              allowRelations
+              disabledNames={['created_at', 'updated_at']}
+              disabledKinds={unsupportedKinds}
+              showFormat={false}
+              size="large"
+              onChange={handlePropertyChange}
+              value={propertyPath}
+              modelId={modelId}
+            />
+          </Field>
+        ) : (
+          <Field>
+            <Label>
+              Action input variable
+              <CircleQuestion
+                color="grey500"
+                size="medium"
+                data-tip="You can use this action input variable in the action itself."
+                data-for="variable-tooltip"
+              />
+            </Label>
+            <BBTooltip
+              id="variable-tooltip"
+              place="top"
+              type="dark"
+              effect="solid"
+            />
+            <Text
+              onChange={(e): void => setVariableInput(e.target.value)}
+              color="orange"
+            />
+          </Field>
+        )}
+      </Content>
+      <Footer
+        onClose={close}
+        canSave={(propertyPath && !!name) || variableInput}
+        onSave={async (): Promise<void> => {
+          // eslint-disable-next-line no-param-reassign
+          originalPrefab.structure[0].id = componentId;
+
+          let kind = propertyKind || 'STRING';
+          const isListProperty = kind === ('LIST' || 'list');
+
+          const arrayKind = 'HAS_MANY';
+          const integerKind = 'BELONGS_TO';
+
+          if (
+            originalPrefab.name === BettyPrefabs.MULTI_AUTO_COMPLETE &&
+            !propertyBased
+          ) {
+            kind = arrayKind;
+          }
+
+          if (
+            (originalPrefab.name === BettyPrefabs.SELECT ||
+              originalPrefab.name === BettyPrefabs.RADIO ||
+              originalPrefab.name === BettyPrefabs.AUTO_COMPLETE) &&
+            !propertyBased &&
+            !isListProperty
+          ) {
+            kind = integerKind;
+          }
+
+          const variableName = variableInput || name;
+          console.log('actionId', actionId);
+          console.log('variableName', variableName);
+          console.log('kind', kind);
+          console.log('propertyKind', propertyKind);
+          const result = await prepareInput(
+            actionId,
+            variableName,
+            kind,
+            propertyKind,
+          );
+
+          console.log('result prepareInput', result);
+
+          const newPrefab = { ...originalPrefab };
+          setOption(newPrefab.structure[0], actionVariableOption, (option) => ({
+            ...option,
+            value: variableName,
+            configuration: {
+              condition: {
+                type: 'SHOW',
+                option: 'actionProperty',
+                comparator: 'EQ',
+                value: '',
+              },
+            },
+          }));
+          setOption(newPrefab.structure[0], labelOptionKey, (option) => ({
+            ...option,
+            value: [variableName],
+          }));
+
+          if (
+            originalPrefab.name === BettyPrefabs.SELECT ||
+            originalPrefab.name === BettyPrefabs.RADIO
+          ) {
+            setOption(newPrefab.structure[0], 'property', (option) => ({
+              ...option,
+              value: {
+                id: propertyId,
+                type: DynamicTypeEnum.Property,
+                componentId: selectedPrefab.id,
+              },
+            }));
+          }
+
+          if (
+            (originalPrefab.name === BettyPrefabs.AUTO_COMPLETE ||
+              originalPrefab.name === BettyPrefabs.SELECT ||
+              originalPrefab.name === BettyPrefabs.RADIO ||
+              originalPrefab.name === BettyPrefabs.MULTI_AUTO_COMPLETE) &&
+            propertyBased
+          ) {
+            setOption(newPrefab.structure[0], 'optionType', (option) => ({
+              ...option,
+              value: result.isRelational ? 'model' : 'property',
+            }));
+          }
+
+          if (
+            (originalPrefab.name === BettyPrefabs.AUTO_COMPLETE ||
+              originalPrefab.name === BettyPrefabs.MULTI_AUTO_COMPLETE ||
+              originalPrefab.name === BettyPrefabs.SELECT ||
+              originalPrefab.name === BettyPrefabs.RADIO) &&
+            propertyModelId &&
+            !isListProperty
+          ) {
+            setOption(newPrefab.structure[0], 'model', (option) => ({
+              ...option,
+              value: propertyModelId,
+            }));
+          }
+
+          setOption(newPrefab.structure[0], nameOptionKey, (option) => ({
+            ...option,
+            value: result.variable.variableId,
+          }));
+          if (propertyBased) {
+            setOption(newPrefab.structure[0], 'actionProperty', (option) => ({
+              ...option,
+              value: {
+                modelProperty: propertyPath,
+                actionVariableId: result.variable.variableId,
+              },
+              configuration: {
+                condition: {
+                  type: 'HIDE',
+                  option: 'actionProperty',
+                  comparator: 'EQ',
+                  value: '',
+                },
+              },
+            }));
+          }
+          if (validate()) {
+            if (
+              (selectedPrefab.name === BettyPrefabs.UPDATE_FORM ||
+                ((selectedPrefab.name === BettyPrefabs.CREATE_FORM ||
+                  selectedPrefab.name === BettyPrefabs.FORM ||
+                  selectedPrefab.name === BettyPrefabs.LOGIN_FORM) &&
+                  originalPrefab.name === BettyPrefabs.HIDDEN)) &&
+              propertyId
+            ) {
+              const valueOptions = [
+                {
+                  id: propertyId,
+                  type: DynamicTypeEnum.Property,
+                  name: `{{ ${model?.name}.${name} }}`,
+                },
+              ];
+
+              setOption(newPrefab.structure[0], 'value', (option) => ({
+                ...option,
+                value:
+                  option.type === 'VARIABLE'
+                    ? valueOptions
+                    : (propertyId as any),
+              }));
+            }
+          }
+          save({ ...originalPrefab, structure: [newPrefab.structure[0]] });
+        }}
+      />
+    </>
   );
 };
 
