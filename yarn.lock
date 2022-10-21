@@ -198,10 +198,10 @@
     typescript "^3.5.3"
     webhead "^1.1.3"
 
-"@betty-blocks/component-sdk@^1.29.0":
-  version "1.33.1"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.33.1.tgz#c242dc8945dd7d4fbfc8e63e098533312c70fac5"
-  integrity sha512-T+P5uXqWOaPirYuhvCF/V09SHW19O0A7iQKwVVgvL1oPQy99KfnCalvkRX+yPd3zfSP8hpKvBxb8u/QSrkUVGA==
+"@betty-blocks/component-sdk@^1.30.0":
+  version "1.36.0"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.36.0.tgz#1a4ea237f7661e462e113a2d5838fb0b7719c90c"
+  integrity sha512-zgfQgrDkcKu4gzLg5kwX6UiVERoSIuc+AAx21KURR/Hrcr591I03eJIuqKC/LR94GVkfjfqUOq2SWZRxpaCN3w==
 
 "@colors/colors@1.5.0":
   version "1.5.0"
@@ -5789,7 +5789,7 @@ redeyed@~2.1.0:
 
 regenerator-runtime@^0.13.4:
   version "0.13.9"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.9.tgz#8925742a98ffd90814988,d7566ad30ca3b263b52"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.9.tgz#8925742a98ffd90814988d7566ad30ca3b263b52"
   integrity sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==
 
 regexp.prototype.flags@^1.4.1, regexp.prototype.flags@^1.4.3:
