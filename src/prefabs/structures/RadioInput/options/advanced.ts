@@ -1,10 +1,7 @@
-import { variable, toggle } from '@betty-blocks/component-sdk';
-import { showOn } from '../../../../utils';
+import { variable } from '@betty-blocks/component-sdk';
 
 export const advanced = {
-  advancedSettings: toggle('Advanced settings', { value: false }),
   dataComponentAttribute: variable('Test attribute', {
     value: [],
-    ...showOn('advancedSettings'),
   }),
 };
