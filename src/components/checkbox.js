@@ -80,6 +80,8 @@
       B.defineFunction('Enable', () => setIsDisabled(false));
       B.defineFunction('Disable', () => setIsDisabled(true));
       B.defineFunction('Reset', () => setChecked(componentChecked === 'true'));
+      B.defineFunction('Check', () => setChecked(true));
+      B.defineFunction('Uncheck', () => setChecked(false));
     }, [componentChecked]);
 
     useEffect(() => {
