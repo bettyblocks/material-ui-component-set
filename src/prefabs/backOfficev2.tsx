@@ -1,4 +1,4 @@
-import * as React from 'react';
+// import * as React from 'react';
 
 import {
   prefab,
@@ -27,7 +27,7 @@ import {
   DrawerBar,
   drawerBarOptions,
   DrawerContainer,
-  drawerContainerOptions,
+  // drawerContainerOptions,
   drawerOptions,
   Grid,
   gridOptions,
@@ -37,8 +37,8 @@ import {
   Text,
   textOptions,
 } from './structures';
-import { options as defaults } from './structures/ActionJSForm/options';
-import { Properties, IdPropertyProps, ModelProps, ModelQuery } from './types';
+// import { options as defaults } from './structures/ActionJSForm/options';
+// import { Properties, IdPropertyProps, ModelProps, ModelQuery } from './types';
 
 const attributes = {
   category: 'FORMV2',
