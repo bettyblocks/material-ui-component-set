@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Icon, prefab } from '@betty-blocks/component-sdk';
+import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
 import { SelectInput } from './structures/SelectInput';
 
 export enum DynamicTypeEnum {
@@ -27,7 +27,7 @@ const beforeCreate = ({
   prefab: originalPrefab,
   save,
   helpers,
-}: any) => {
+}: BeforeCreateArgs) => {
   const {
     BettyPrefabs,
     prepareInput,
@@ -189,7 +189,7 @@ const beforeCreate = ({
         canSave={(propertyPath && !!name) || variableInput}
         onSave={async (): Promise<void> => {
           // eslint-disable-next-line no-param-reassign
-          originalPrefab.structure[0].id = componentId;
+          structure.id = componentId;
 
           let kind = propertyKind || 'STRING';
           const isListProperty = kind === ('LIST' || 'list');
@@ -224,6 +224,9 @@ const beforeCreate = ({
           );
 
           const newPrefab = { ...originalPrefab };
+          if (newPrefab.structure[0].type !== 'COMPONENT') {
+            throw new Error('expected Component');
+          }
           setOption(newPrefab.structure[0], actionVariableOption, (option) => ({
             ...option,
             value: variableName,
@@ -250,7 +253,7 @@ const beforeCreate = ({
               value: {
                 id: propertyId,
                 type: DynamicTypeEnum.Property,
-                componentId: selectedPrefab.id,
+                componentId: selectedPrefab?.id,
               },
             }));
           }
@@ -305,10 +308,10 @@ const beforeCreate = ({
           }
           if (validate()) {
             if (
-              (selectedPrefab.name === BettyPrefabs.UPDATE_FORM ||
-                ((selectedPrefab.name === BettyPrefabs.CREATE_FORM ||
-                  selectedPrefab.name === BettyPrefabs.FORM ||
-                  selectedPrefab.name === BettyPrefabs.LOGIN_FORM) &&
+              (selectedPrefab?.name === BettyPrefabs.UPDATE_FORM ||
+                ((selectedPrefab?.name === BettyPrefabs.CREATE_FORM ||
+                  selectedPrefab?.name === BettyPrefabs.FORM ||
+                  selectedPrefab?.name === BettyPrefabs.LOGIN_FORM) &&
                   originalPrefab.name === BettyPrefabs.HIDDEN)) &&
               propertyId
             ) {
