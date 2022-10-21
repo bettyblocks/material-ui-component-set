@@ -2,13 +2,6 @@ import * as React from 'react';
 import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
 import { TextInput } from './structures/TextInput';
 
-export enum DynamicTypeEnum {
-  Variable = 'VARIABLE',
-  Property = 'PROPERTY',
-  MeProperty = 'ME_PROPERTY',
-  Translation = 'TRANSLATION',
-}
-
 const beforeCreate = ({
   close,
   components: {
@@ -249,7 +242,7 @@ const beforeCreate = ({
               ...option,
               value: {
                 id: propertyId,
-                type: DynamicTypeEnum.Property,
+                type: 'PROPERTY',
                 componentId: selectedPrefab?.id,
               },
             }));
@@ -315,7 +308,7 @@ const beforeCreate = ({
               const valueOptions = [
                 {
                   id: propertyId,
-                  type: DynamicTypeEnum.Property,
+                  type: 'PROPERTY',
                   name: `{{ ${model?.name}.${name} }}`,
                 },
               ];
