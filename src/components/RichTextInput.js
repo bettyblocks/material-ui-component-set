@@ -29,7 +29,8 @@
       showItalic,
       showUnderlined,
       showStrikethrough,
-      showCode,
+      showCodeInline,
+      showCodeBlock,
       showNumberedList,
       showBulletedList,
       showLeftAlign,
@@ -139,17 +140,6 @@
         Editor.addMark(editor, format, true);
       }
     };
-
-    function isEditorFocussed(editor) {
-      return editor.selection !== null;
-    }
-
-    function focusEditor(editor) {
-      Transforms.select(editor, {
-        anchor: Editor.start(editor, []),
-        focus: Editor.end(editor, []),
-      });
-    }
 
     const serialize = (node) => {
       if (Text.isText(node)) {
@@ -457,9 +447,14 @@
         return;
       }
 
-      if (event.shiftKey && event.key === 's') {
-        event.preventDefault();
-        if (showStrikethrough) toggleMark(editor, 'strikethrough');
+      if (event.shiftKey) {
+        if (event.key === 's') {
+          event.preventDefault();
+          if (showStrikethrough) toggleMark(editor, 'strikethrough');
+        } else if (event.key === 'c') {
+          event.preventDefault();
+          if (showCodeInline) toggleMark(editor, 'code');
+        }
       }
 
       switch (event.key) {
@@ -628,40 +623,6 @@
       },
     );
 
-    const CodeButton = React.forwardRef(({ ...props }, ref) => {
-      const IconButton = Icons.Code;
-      const ownEditor = useSlate();
-      const activeMark = isMarkActive(ownEditor, 'code');
-      const activeBlock = isBlockActive(ownEditor, 'code');
-
-      return (
-        <IconButton
-          {...props}
-          ref={ref}
-          className={`${classes.toolbarButton} ${
-            activeMark || activeBlock ? 'active' : ''
-          }`}
-          onMouseDown={(event) => {
-            event.preventDefault();
-            if (!isEditorFocussed(ownEditor)) {
-              focusEditor(ownEditor);
-            }
-            if (editor.selection.focus !== null) {
-              const lastNode = Node.last(
-                ownEditor,
-                editor.selection.focus.path,
-              );
-              if (activeBlock || lastNode[0].text === '') {
-                toggleBlock(ownEditor, 'code');
-                return;
-              }
-              toggleMark(ownEditor, 'code');
-            }
-          }}
-        />
-      );
-    });
-
     function DropdownItem({ format, text, tag }) {
       const ownEditor = useSlate();
       const Tag = tag;
@@ -769,8 +730,15 @@
                   {showStrikethrough && (
                     <MarkButton format="strikethrough" icon="StrikethroughS" />
                   )}
-                  {showCode && <CodeButton />}
                 </div>
+                {(showCodeInline || showCodeBlock) && (
+                  <div className={classes.toolbarSubGroup}>
+                    {showCodeInline && <MarkButton format="code" icon="Code" />}
+                    {showCodeBlock && (
+                      <BlockButton format="code" icon="DeveloperMode" />
+                    )}
+                  </div>
+                )}
                 <div className={classes.toolbarSubGroup}>
                   {showNumberedList && (
                     <BlockButton
