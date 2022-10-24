@@ -1,6 +1,6 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { Configuration } from '../Configuration';
-import { options as defaults } from './options';
+import { options as defaults } from './options/index';
 
 export const SelectInput = (
   config: Configuration,
@@ -11,5 +11,37 @@ export const SelectInput = (
   const ref = config.ref ? { ...config.ref } : undefined;
   const label = config.label ? config.label : undefined;
 
-  return component('SelectInput', { options, style, ref, label }, children);
+  const categories = [
+    {
+      label: 'Validation Options',
+      expanded: false,
+      members: ['required', 'validationValueMissing'],
+    },
+    {
+      label: 'Styling',
+      expanded: false,
+      members: [
+        'hideLabel',
+        'backgroundColor',
+        'borderColor',
+        'borderHoverColor',
+        'borderFocusColor',
+        'labelColor',
+        'textColor',
+        'helperColor',
+        'errorColor',
+      ],
+    },
+    {
+      label: 'Advanced Options',
+      expanded: false,
+      members: ['blanco', 'dataComponentAttribute'],
+    },
+  ];
+
+  return component(
+    'SelectInput',
+    { options, style, ref, label, optionCategories: categories },
+    children,
+  );
 };

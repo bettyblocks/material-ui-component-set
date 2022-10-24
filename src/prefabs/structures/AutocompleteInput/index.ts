@@ -1,7 +1,7 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
 import { Configuration } from '../Configuration';
-import { options as defaults } from './options';
+import { options as defaults } from './options/index';
 
 export const AutocompleteInput = (
   config: Configuration,
@@ -11,6 +11,37 @@ export const AutocompleteInput = (
   const style = { ...config.style };
   const ref = config.ref ? { ...config.ref } : undefined;
   const label = config.label ? config.label : undefined;
+
+  const categories = [
+    {
+      label: 'Validation Options',
+      expanded: false,
+      members: ['required', 'validationValueMissing'],
+    },
+    {
+      label: 'Styling',
+      expanded: false,
+      members: [
+        'hideLabel',
+        'backgroundColor',
+        'backgroundColorChip',
+        'borderColor',
+        'borderHoverColor',
+        'borderFocusColor',
+        'labelColor',
+        'textColor',
+        'textColorChip',
+        'placeHolderColor',
+        'helperColor',
+        'errorColor',
+      ],
+    },
+    {
+      label: 'Advanced Options',
+      expanded: false,
+      members: ['errorType', 'nameAttribute', 'dataComponentAttribute'],
+    },
+  ];
 
   if (config.type) {
     options.type = updateOption(options.type, { value: config.type });
@@ -28,7 +59,7 @@ export const AutocompleteInput = (
 
   return component(
     'AutocompleteInput',
-    { options, style, ref, label },
+    { options, style, ref, label, optionCategories: categories },
     descendants,
   );
 };
