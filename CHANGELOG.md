@@ -1,3 +1,16 @@
+# [2.63.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.62.0...v2.63.0) (2022-10-24)
+
+
+### Bug Fixes
+
+* Change boolean to string for allowed_input. ([a4ca130](https://github.com/bettyblocks/material-ui-component-set/commit/a4ca130bc14cad3f71e6c89977313a1b364b6d49))
+* Set Page Template permissions for actions to private for now. ([03fa217](https://github.com/bettyblocks/material-ui-component-set/commit/03fa2173a624e48bab09f433c5655f31206f628e))
+
+
+### Features
+
+* **PAGE-2238:** Add permission & authProfId args to prepareAction fn. ([932a92c](https://github.com/bettyblocks/material-ui-component-set/commit/932a92c2bbc665559c83f8972bd38c1db9bcce7d))
+
 # [2.62.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.61.4...v2.62.0) (2022-10-21)
 
 
