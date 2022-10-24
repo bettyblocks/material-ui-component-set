@@ -1,3 +1,12 @@
+## [2.63.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.63.0...v2.63.1) (2022-10-24)
+
+
+### Bug Fixes
+
+* add initial value to multiautocompleteinput ([3c26856](https://github.com/bettyblocks/material-ui-component-set/commit/3c268562aa7ce5f1134dfed2a06381cede8704d6))
+* put back the defaultvalues filter ([8dad211](https://github.com/bettyblocks/material-ui-component-set/commit/8dad211e2bbef743ebbf28cb3e1b0c8422fcce77))
+* use actionproperty model if present ([718c21b](https://github.com/bettyblocks/material-ui-component-set/commit/718c21b8dd7c452772145328449aa5691c13ff0f))
+
 # [2.63.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.62.0...v2.63.0) (2022-10-24)
 
 
