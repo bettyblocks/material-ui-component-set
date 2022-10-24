@@ -52,6 +52,7 @@ import {
   ModelQuery,
   PropertyStateProps,
 } from './types';
+import { PermissionType } from './types/types';
 
 const interactions = [
   {
@@ -1056,6 +1057,7 @@ const beforeCreate = ({
   helpers: {
     useModelQuery,
     prepareAction,
+    getPageAuthenticationProfileId,
     setOption,
     makeBettyUpdateInput,
     createUuid,
@@ -1086,6 +1088,9 @@ const beforeCreate = ({
   const [footerPartialId, setFooterPartialId] = React.useState('');
   const formId = createUuid();
   const datalistId = createUuid();
+  const permissions: PermissionType = 'private';
+
+  const pageAuthenticationProfileId = getPageAuthenticationProfileId();
 
   const { data } = useModelQuery({
     variables: { id: modelId },
@@ -1378,6 +1383,10 @@ const beforeCreate = ({
           idProperty,
           [...transformProp(checkboxProperty)],
           'update',
+          undefined,
+          undefined,
+          permissions,
+          pageAuthenticationProfileId,
         );
         setOption(editForm, 'actionId', (opts: PrefabComponentOption) => ({
           ...opts,

@@ -1,3 +1,25 @@
+## [2.63.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.63.0...v2.63.1) (2022-10-24)
+
+
+### Bug Fixes
+
+* add initial value to multiautocompleteinput ([3c26856](https://github.com/bettyblocks/material-ui-component-set/commit/3c268562aa7ce5f1134dfed2a06381cede8704d6))
+* put back the defaultvalues filter ([8dad211](https://github.com/bettyblocks/material-ui-component-set/commit/8dad211e2bbef743ebbf28cb3e1b0c8422fcce77))
+* use actionproperty model if present ([718c21b](https://github.com/bettyblocks/material-ui-component-set/commit/718c21b8dd7c452772145328449aa5691c13ff0f))
+
+# [2.63.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.62.0...v2.63.0) (2022-10-24)
+
+
+### Bug Fixes
+
+* Change boolean to string for allowed_input. ([a4ca130](https://github.com/bettyblocks/material-ui-component-set/commit/a4ca130bc14cad3f71e6c89977313a1b364b6d49))
+* Set Page Template permissions for actions to private for now. ([03fa217](https://github.com/bettyblocks/material-ui-component-set/commit/03fa2173a624e48bab09f433c5655f31206f628e))
+
+
+### Features
+
+* **PAGE-2238:** Add permission & authProfId args to prepareAction fn. ([932a92c](https://github.com/bettyblocks/material-ui-component-set/commit/932a92c2bbc665559c83f8972bd38c1db9bcce7d))
+
 # [2.62.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.61.4...v2.62.0) (2022-10-21)
 
 
