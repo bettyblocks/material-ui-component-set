@@ -155,6 +155,11 @@
           title={titleText || variable || imgName}
           alt={imgAlt || imgName}
           data-component={useText(dataComponentAttribute) || 'Media'}
+          role="presentation"
+          onClick={(event) => {
+            event.stopPropagation();
+            B.triggerEvent('onClick', event);
+          }}
         />
       );
     }

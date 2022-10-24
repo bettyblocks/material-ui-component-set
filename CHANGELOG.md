@@ -1,3 +1,40 @@
+# [2.62.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.61.4...v2.62.0) (2022-10-21)
+
+
+### Bug Fixes
+
+* change label for multi autocomplete ([306d017](https://github.com/bettyblocks/material-ui-component-set/commit/306d0175db54d1cafc14897fd5f65c06d04a08c5))
+* remove styles for button ([73ac2d9](https://github.com/bettyblocks/material-ui-component-set/commit/73ac2d93b876abc192e5484fbe81ceb16552c6ef))
+* remove-double-options ([89d72e1](https://github.com/bettyblocks/material-ui-component-set/commit/89d72e187abcf0fef608dc5a5a73035f4dc99452))
+* rename advanced settings to advanced options ([34bc20e](https://github.com/bettyblocks/material-ui-component-set/commit/34bc20e9889421c5d54f739ea1b5418d19cdbfad))
+* use old advanced label for deprecated prefabs ([5079065](https://github.com/bettyblocks/material-ui-component-set/commit/5079065e239684f6b58202c3739c097af8efa100))
+
+
+### Features
+
+* add categories autocompleteinput ([1b6b85c](https://github.com/bettyblocks/material-ui-component-set/commit/1b6b85c8babbd19b261af068b72a9607066bf1c7))
+* add categories to multiautcompleteinput ([c826a41](https://github.com/bettyblocks/material-ui-component-set/commit/c826a41c09a8669db56755b410e2b1fa348d3553))
+* add categories to radioinput ([382240e](https://github.com/bettyblocks/material-ui-component-set/commit/382240ee839eda0c6ea9bfd533c1cd93b1cbb5a1))
+* add-categories-checkboxinput ([e61cffa](https://github.com/bettyblocks/material-ui-component-set/commit/e61cffa53cce69e457cf6ad5d7a9eb3e6d823636))
+* add-categories-datetimepicker ([dfa61f8](https://github.com/bettyblocks/material-ui-component-set/commit/dfa61f864cdc990972df0d884173afc12e467f89))
+* add-categories-selectinput ([ce347c4](https://github.com/bettyblocks/material-ui-component-set/commit/ce347c430029b2f510e90dded9069befdc393792))
+* add-categories-textinput ([4a7ad5d](https://github.com/bettyblocks/material-ui-component-set/commit/4a7ad5d497d475b97afc44d9d4b99a1ff8d944f0))
+
+## [2.61.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.61.3...v2.61.4) (2022-10-19)
+
+
+### Bug Fixes
+
+* fix icon badge outerspace ([3b2c894](https://github.com/bettyblocks/material-ui-component-set/commit/3b2c89407acf66c697a5ab7176daea7169ecccb6))
+* margin was not set correctly ([50462b5](https://github.com/bettyblocks/material-ui-component-set/commit/50462b50ee50bac8f8e43fb41bb9f03fcdff6540))
+
+## [2.61.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.61.2...v2.61.3) (2022-10-13)
+
+
+### Bug Fixes
+
+* click trigger not working in media component ([aa337af](https://github.com/bettyblocks/material-ui-component-set/commit/aa337af4925386ff1a4a4ee041b7712da59ab1de))
+
 ## [2.61.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.61.1...v2.61.2) (2022-10-12)
 
 

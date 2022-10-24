@@ -1,20 +1,6 @@
 import * as React from 'react';
-import {
-  BeforeCreateArgs,
-  buttongroup,
-  color,
-  component,
-  option,
-  prefab,
-  showIf,
-  showIfTrue,
-  text,
-  toggle,
-  variable,
-  Icon,
-  ThemeColor,
-  hideIf,
-} from '@betty-blocks/component-sdk';
+import { BeforeCreateArgs, prefab, Icon } from '@betty-blocks/component-sdk';
+import { CheckboxInput } from './structures/CheckboxInput';
 
 const beforeCreate = ({
   close,
@@ -48,104 +34,6 @@ const attributes = {
   icon: Icon.CheckboxIcon,
 };
 
-const position = buttongroup(
-  'Label Position',
-  [
-    ['Start', 'start'],
-    ['End', 'end'],
-    ['Top', 'top'],
-    ['Bottom', 'bottom'],
-  ],
-  {
-    value: 'end',
-  },
-);
-
-const size = buttongroup(
-  'Size',
-  [
-    ['Medium', 'medium'],
-    ['Small', 'small'],
-  ],
-  {
-    value: 'medium',
-  },
-);
-
-const validationConfiguration = {
-  configuration: { condition: showIfTrue('validationOptions') },
-};
-
-const validationOptions = {
-  validationOptions: toggle('Validation options'),
-  required: toggle('Required', validationConfiguration),
-  validationValueMissing: variable('Value required message', {
-    value: ['This field is required'],
-    ...validationConfiguration,
-  }),
-};
-
-const stylesConfiguration = {
-  configuration: { condition: showIfTrue('styles') },
-};
-
-const stylesOptions = {
-  styles: toggle('Styles'),
-  checkboxColor: color('Checkbox color', {
-    ...stylesConfiguration,
-    value: ThemeColor.ACCENT_3,
-  }),
-  checkboxColorChecked: color('Checkbox color checked', {
-    ...stylesConfiguration,
-    value: ThemeColor.PRIMARY,
-  }),
-  textColor: color('Text color', {
-    ...stylesConfiguration,
-    value: ThemeColor.BLACK,
-  }),
-  helperColor: color('Helper color', {
-    ...stylesConfiguration,
-    value: ThemeColor.ACCENT_2,
-  }),
-  errorColor: color('Error color', {
-    ...stylesConfiguration,
-    value: ThemeColor.DANGER,
-  }),
-};
-
-const advancedSettingsOptions = {
-  advancedSettings: toggle('Advanced settings'),
-  dataComponentAttribute: variable('Test attribute', {
-    value: ['Checkbox'],
-    configuration: { condition: showIfTrue('advancedSettings') },
-  }),
-};
-
-const options = {
-  actionVariableId: option('ACTION_JS_VARIABLE', {
-    label: 'Action input variable',
-    value: '',
-  }),
-  actionProperty: option('ACTION_JS_PROPERTY', {
-    label: 'Property',
-    value: '',
-    configuration: { condition: hideIf('actionProperty', 'EQ', '') },
-  }),
-  label: variable('Label', { value: ['Checkbox'] }),
-  value: variable('Value', { value: [] }),
-  ...validationOptions,
-  disabled: toggle('Disabled'),
-  helperText: variable('Helper text'),
-  position,
-  size,
-  ...stylesOptions,
-  ...advancedSettingsOptions,
-  type: text('Type', {
-    value: 'checkbox',
-    configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
-  }),
-};
-
 export default prefab('Checkbox', attributes, beforeCreate, [
-  component('CheckboxInput', { label: 'Checkbox input', options }, []),
+  CheckboxInput({ label: 'Checkbox input' }),
 ]);

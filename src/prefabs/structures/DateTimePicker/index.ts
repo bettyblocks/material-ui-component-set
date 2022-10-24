@@ -18,6 +18,36 @@ export const DateTimePicker = (
   const ref = config.ref ? { ...config.ref } : undefined;
   const label = config.label ? config.label : undefined;
 
+  const categories = [
+    {
+      label: 'Validation Options',
+      expanded: false,
+      members: ['required', 'validationValueMissing'],
+    },
+    {
+      label: 'Styling',
+      expanded: false,
+      members: [
+        'hideLabel',
+        'backgroundColor',
+        'backgroundColorPopup',
+        'borderColor',
+        'borderHoverColor',
+        'borderFocusColor',
+        'labelColor',
+        'textColor',
+        'placeholderColor',
+        'helperColor',
+        'errorColor',
+      ],
+    },
+    {
+      label: 'Advanced Options',
+      expanded: false,
+      members: ['dataComponentAttribute'],
+    },
+  ];
+
   if (config.inputType) {
     let format;
     switch (config.inputType) {
@@ -65,7 +95,7 @@ export const DateTimePicker = (
 
   return component(
     'DateTimePickerInput',
-    { options, style, ref, label },
+    { options, style, ref, label, optionCategories: categories },
     descendants,
   );
 };

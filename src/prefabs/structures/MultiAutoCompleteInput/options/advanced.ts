@@ -1,28 +1,19 @@
-import {
-  buttongroup,
-  showIf,
-  toggle,
-  variable,
-} from '@betty-blocks/component-sdk';
-import { showOn } from '../../../../utils';
+import { buttongroup, showIf, variable } from '@betty-blocks/component-sdk';
 
 export const advanced = {
-  advancedSettings: toggle('Advanced Settings', { value: false }),
   errorType: buttongroup(
     'Error message',
     [
       ['Built in', 'built-in'],
       ['Interaction', 'interaction'],
     ],
-    { value: 'built-in', ...showOn('advancedSettings') },
+    { value: 'built-in' },
   ),
   nameAttribute: variable('name attribute', {
     value: [],
-    ...showOn('advancedSettings'),
     configuration: { condition: showIf('nameAttribute', 'EQ', 'never') },
   }),
   dataComponentAttribute: variable('Test attribute', {
     value: [],
-    ...showOn('advancedSettings'),
   }),
 };

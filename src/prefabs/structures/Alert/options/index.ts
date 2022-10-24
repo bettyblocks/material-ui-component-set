@@ -27,7 +27,7 @@ export const categories = [
     members: ['outerSpacing'],
   },
   {
-    label: 'Advanced settings',
+    label: 'Advanced Options',
     expanded: false,
     members: ['dataComponentAttribute'],
   },
