@@ -1407,10 +1407,10 @@ const drawerContainer = DrawerContainer(
                                                                 [],
                                                               ),
                                                               component(
-                                                                'Form Beta',
+                                                                'Form',
                                                                 {
                                                                   label:
-                                                                    'Delete Form Beta',
+                                                                    'Delete Form',
                                                                   options:
                                                                     defaults,
                                                                   ref: {
@@ -2248,9 +2248,9 @@ const drawerBar = DrawerBar(
                           },
                           [
                             component(
-                              'Form Beta',
+                              'Form',
                               {
-                                label: 'Create Form Beta',
+                                label: 'Create Form',
                                 options: defaults,
                                 ref: { id: '#createForm' },
                               },
@@ -2849,9 +2849,9 @@ const drawerBar = DrawerBar(
                           },
                           [
                             component(
-                              'Form Beta',
+                              'Form',
                               {
-                                label: 'Update Form Beta',
+                                label: 'Update Form',
                                 options: defaults,
                                 ref: { id: '#editForm' },
                               },

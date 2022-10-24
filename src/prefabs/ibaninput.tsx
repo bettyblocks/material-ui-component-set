@@ -35,7 +35,7 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.IbanInputIcon,
   keywords: ['Form', 'input'],
 };
@@ -43,9 +43,9 @@ const attributes = {
 const pattern =
   '^([A-Z]{2}[ \\-]?[0-9]{2})(?=(?:[ \\-]?[A-Z0-9]){9,30}$)((?:[ \\-]?[A-Z0-9]{3,5}){2,7})([ \\-]?[A-Z0-9]{1,3})?$';
 
-export default prefab('IBAN Beta', attributes, beforeCreate, [
+export default prefab('IBAN', attributes, beforeCreate, [
   TextInput({
-    label: 'IBAN input Beta',
+    label: 'IBAN input',
     inputLabel: 'IBAN',
     type: 'text',
     pattern,

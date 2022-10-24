@@ -1,3 +1,17 @@
+# [2.64.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.63.1...v2.64.0) (2022-10-24)
+
+
+### Bug Fixes
+
+* add keywords to hidden input ([e6c7b6f](https://github.com/bettyblocks/material-ui-component-set/commit/e6c7b6f85a380e505f07f4497b93126f66451baa))
+* trigger pipelines ([899603b](https://github.com/bettyblocks/material-ui-component-set/commit/899603b1b513046fb45d19dce7d07592a9078b85))
+
+
+### Features
+
+* remove old prefabs and set beta forms as default ([e87ebce](https://github.com/bettyblocks/material-ui-component-set/commit/e87ebcee3702ce911a44d4c94f8e8ab5741ecddc))
+* replace action button with the new action button ([67bf3b0](https://github.com/bettyblocks/material-ui-component-set/commit/67bf3b0523241d3ab40f516196146d1156fe20e2))
+
 ## [2.63.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.63.0...v2.63.1) (2022-10-24)
 
 

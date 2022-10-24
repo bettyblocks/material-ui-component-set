@@ -30,10 +30,10 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.CheckboxIcon,
 };
 
-export default prefab('Checkbox Beta', attributes, beforeCreate, [
-  CheckboxInput({ label: 'Checkbox input Beta' }),
+export default prefab('Checkbox', attributes, beforeCreate, [
+  CheckboxInput({ label: 'Checkbox input' }),
 ]);

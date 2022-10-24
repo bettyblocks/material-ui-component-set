@@ -36,14 +36,14 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.UrlInputIcon,
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Url Beta', attributes, beforeCreate, [
+export default prefab('Url', attributes, beforeCreate, [
   TextInput({
-    label: 'Url input Beta',
+    label: 'Url input',
     inputLabel: 'url',
     type: 'url',
   }),

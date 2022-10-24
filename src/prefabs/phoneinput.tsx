@@ -36,14 +36,14 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.PhoneInputIcon,
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Phone Beta', attributes, beforeCreate, [
+export default prefab('Phone', attributes, beforeCreate, [
   TextInput({
-    label: 'Phone field Beta',
+    label: 'Phone field',
     inputLabel: 'Phone',
     type: 'tel',
   }),
