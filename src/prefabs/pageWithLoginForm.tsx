@@ -44,6 +44,7 @@ import {
   openPageButtonOptions,
 } from './structures';
 import { AuthenticationProfile, Endpoint } from './types';
+import { PermissionType } from './types/types';
 
 const interactions: PrefabInteraction[] = [
   {
@@ -1007,6 +1008,7 @@ const beforeCreate = ({
   const [authProfileId, setAuthProfileId] = React.useState('');
   const [authProfile, setAuthProfile] = React.useState<AuthenticationProfile>();
   const [authProfileInvalid, setAuthProfileInvalid] = React.useState(false);
+  const permissions: PermissionType = 'public';
 
   const [endpoint, setEndpoint] = React.useState<Endpoint>();
   const [endpointInvalid, setEndpointInvalid] = React.useState(false);
@@ -1178,6 +1180,8 @@ const beforeCreate = ({
             null,
             'login',
             authProfile,
+            undefined,
+            permissions,
           );
           if (authProfile) {
             if (authProfile.properties) {

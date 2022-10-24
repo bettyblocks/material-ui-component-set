@@ -24,11 +24,10 @@ export const categories = [
       'badgeTextColor',
       'anchorOrigin',
       'variant',
-      'margin',
     ],
   },
   {
-    label: 'Advanced settings',
+    label: 'Advanced Options',
     expanded: false,
     members: ['dataComponentAttribute'],
   },
@@ -120,9 +119,5 @@ export const iconOptions = {
       ],
     },
   }),
-  margin: sizes('Outer Space', {
-    value: ['S', 'S', 'S', 'S'],
-  }),
-
   ...advanced('Icon'),
 };

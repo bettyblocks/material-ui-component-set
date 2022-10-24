@@ -4347,7 +4347,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                               },
                                               {
                                                 value: false,
-                                                label: 'Advanced settings',
+                                                label: 'Advanced Options',
                                                 key: 'advancedSettings',
                                                 type: 'TOGGLE',
                                               },
@@ -5002,7 +5002,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                               },
                                               {
                                                 value: false,
-                                                label: 'Advanced settings',
+                                                label: 'Advanced Options',
                                                 key: 'advancedSettings',
                                                 type: 'TOGGLE',
                                               },
@@ -5655,7 +5655,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                               },
                                               {
                                                 value: false,
-                                                label: 'Advanced settings',
+                                                label: 'Advanced Options',
                                                 key: 'advancedSettings',
                                                 type: 'TOGGLE',
                                               },
@@ -6310,7 +6310,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                               },
                                               {
                                                 value: false,
-                                                label: 'Advanced settings',
+                                                label: 'Advanced Options',
                                                 key: 'advancedSettings',
                                                 type: 'TOGGLE',
                                               },
