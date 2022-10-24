@@ -32,16 +32,16 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.PriceInputIcon,
   keywords: ['Form', 'input'],
 };
 
 const pattern = '[0-9]+(\\.[0-9][0-9]?)?';
 
-export default prefab('Price Beta', attributes, beforeCreate, [
+export default prefab('Price', attributes, beforeCreate, [
   PriceInput({
-    label: 'Price field Beta',
+    label: 'Price field',
     inputLabel: 'Price',
     type: 'decimal',
     pattern,

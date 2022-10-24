@@ -2986,7 +2986,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                         },
                                                         [
                                                           component(
-                                                            'Form Beta',
+                                                            'Form',
                                                             {
                                                               ref: {
                                                                 id: '#createTabFormId',
@@ -3335,7 +3335,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                         },
                                                         [
                                                           component(
-                                                            'Form Beta',
+                                                            'Form',
                                                             {
                                                               ref: {
                                                                 id: '#updateTabFormId',
@@ -4301,7 +4301,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                             [],
                                                           ),
                                                           component(
-                                                            'Form Beta',
+                                                            'Form',
                                                             {
                                                               ref: {
                                                                 id: '#deleteFormId',

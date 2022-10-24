@@ -32,12 +32,12 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.RadioButtonIcon,
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Radio Beta', attributes, beforeCreate, [
+export default prefab('Radio', attributes, beforeCreate, [
   RadioInput({
     label: 'Radio',
   }),

@@ -1499,7 +1499,7 @@ export default makePrefab('Header and footer', attrs, beforeCreate, [
                                                           'Content',
                                                           {
                                                             value: [
-                                                              'You need to configure the permissions of the "Form Beta" actions in order to use this template.',
+                                                              'You need to configure the permissions of the "Form" actions in order to use this template.',
                                                             ],
                                                             configuration: {
                                                               as: 'MULTILINE',
@@ -1789,7 +1789,7 @@ export default makePrefab('Header and footer', attrs, beforeCreate, [
                                                 },
                                                 [
                                                   component(
-                                                    'Form Beta',
+                                                    'Form',
                                                     {
                                                       options: defaults,
                                                       ref: { id: '#formId' },
@@ -2037,7 +2037,7 @@ export default makePrefab('Header and footer', attrs, beforeCreate, [
                                                 },
                                                 [
                                                   component(
-                                                    'Form Beta',
+                                                    'Form',
                                                     {
                                                       options: defaults,
                                                       ref: {
