@@ -23,7 +23,7 @@ export const categories = [
     members: ['margin'],
   },
   {
-    label: 'Advanced settings',
+    label: 'Advanced Options',
     expanded: false,
     members: ['dataComponentAttribute'],
   },

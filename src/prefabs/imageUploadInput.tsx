@@ -37,7 +37,7 @@ const beforeCreate = ({
 
 const attr = {
   icon: Icon.ImageInputIcon,
-  category: 'FORMV2',
+  category: 'FORM',
   keywords: [
     'Form',
     'input',
@@ -49,6 +49,6 @@ const attr = {
   ],
 };
 
-export default prefab('Image Upload Beta', attr, beforeCreate, [
-  FileUpload({ supportImages: true, label: 'Image Upload Beta' }),
+export default prefab('Image Upload', attr, beforeCreate, [
+  FileUpload({ supportImages: true, label: 'Image Upload' }),
 ]);

@@ -15,7 +15,7 @@ export const ActionJSButton = (
   const label = config.label ? config.label : undefined;
 
   return component(
-    'Action Button Beta',
+    'Action Button',
     { options, $afterCreate, style, ref, label },
     descendants,
   );

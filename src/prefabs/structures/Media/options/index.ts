@@ -25,7 +25,7 @@ export const categories = [
     members: ['title', 'imgAlt'],
   },
   {
-    label: 'Advanced settings',
+    label: 'Advanced Options',
     expanded: false,
     members: ['dataComponentAttribute'],
   },
