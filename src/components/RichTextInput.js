@@ -562,18 +562,22 @@
       }
     });
 
-    const Button = React.forwardRef(({ active, icon, ...props }, ref) => {
-      const IconButton = Icons[icon];
-      return (
-        <IconButton
-          {...props}
-          ref={ref}
-          className={`${classes.toolbarButton} ${active ? 'active' : ''}`}
-        />
-      );
-    });
+    const Button = React.forwardRef(
+      ({ active, disable, icon, ...props }, ref) => {
+        const IconButton = Icons[icon];
+        return (
+          <IconButton
+            {...props}
+            ref={ref}
+            className={`${classes.toolbarButton} ${disable ? 'disabled' : ''} ${
+              active ? 'active' : ''
+            }`}
+          />
+        );
+      },
+    );
 
-    function BlockButton({ format, icon }) {
+    function BlockButton({ format, icon, disable }) {
       const ownEditor = useSlate();
       return (
         <Button
@@ -582,22 +586,26 @@
             format,
             TEXT_ALIGN_TYPES.includes(format) ? 'align' : 'type',
           )}
-          onMouseDown={(event) => {
+          onClick={(event) => {
             event.preventDefault();
+            if (disable) return;
             toggleBlock(ownEditor, format);
           }}
           icon={icon}
+          disable={disable}
         />
       );
     }
 
-    function MarkButton({ format, icon }) {
+    function MarkButton({ format, icon, disable }) {
       const ownEditor = useSlate();
       return (
         <Button
+          disable={disable}
           active={isMarkActive(ownEditor, format)}
-          onMouseDown={(event) => {
+          onClick={(event) => {
             event.preventDefault();
+            if (disable) return;
             toggleMark(ownEditor, format);
           }}
           icon={icon}
@@ -744,12 +752,14 @@
                     <BlockButton
                       format="numbered-list"
                       icon="FormatListNumbered"
+                      disable={isBlockActive(editor, 'bulleted-list')}
                     />
                   )}
                   {showBulletedList && (
                     <BlockButton
                       format="bulleted-list"
                       icon="FormatListBulleted"
+                      disable={isBlockActive(editor, 'numbered-list')}
                     />
                   )}
                 </div>
@@ -904,6 +914,11 @@
             style.getColor(buttonActiveColor),
           ],
         },
+        '&.disabled': {
+          color: ({ options: { buttonDisabledColor } }) => [
+            style.getColor(buttonDisabledColor),
+          ],
+        },
       },
       toolbarDropdown: {
         position: 'relative',
@@ -923,6 +938,8 @@
         '&.show': {
           display: 'block',
         },
+        overflow: 'overlay',
+        height: ({ options: { dropdownHeight } }) => dropdownHeight,
       },
       dropdownButton: {
         display: 'inline-flex',

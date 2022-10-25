@@ -33,6 +33,7 @@ export const categories = [
       'buttonColor',
       'buttonHoverColor',
       'buttonActiveColor',
+      'buttonDisabledColor',
       'labelColor',
       'placeholderColor',
       'helperColor',
