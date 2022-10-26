@@ -353,12 +353,12 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.SelectIcon,
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Select Beta', attributes, beforeCreate, [
+export default prefab('Select', attributes, beforeCreate, [
   SelectInput({
     label: 'Select',
     inputLabel: 'Select',

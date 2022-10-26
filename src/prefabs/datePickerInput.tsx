@@ -37,14 +37,14 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.DatePickerIcon,
   keywords: ['Form', 'input'],
 };
 
-export default makePrefab('DatePicker Beta', attributes, beforeCreate, [
+export default makePrefab('Date Picker', attributes, beforeCreate, [
   DateTimePicker({
-    label: 'Date picker Beta',
+    label: 'Date picker',
     inputLabel: 'Date',
     dataComponentAttribute: 'Date Input',
     inputType: 'date',

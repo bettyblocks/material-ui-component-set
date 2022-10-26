@@ -37,10 +37,10 @@ const beforeCreate = ({
 
 const attr = {
   icon: Icon.FileInputIcon,
-  category: 'FORMV2',
+  category: 'FORM',
   keywords: ['Form', 'input', 'file', 'upload', 'fileupload'],
 };
 
-export default prefab('File Upload Beta', attr, beforeCreate, [
-  FileUpload({ label: 'File Upload Beta' }),
+export default prefab('File Upload', attr, beforeCreate, [
+  FileUpload({ label: 'File Upload' }),
 ]);

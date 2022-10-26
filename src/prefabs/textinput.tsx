@@ -350,14 +350,14 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.TextInputIcon,
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Text Field Beta', attributes, beforeCreate, [
+export default prefab('Text Field', attributes, beforeCreate, [
   TextInput({
-    label: 'Text field Beta',
+    label: 'Text field',
     inputLabel: 'Textfield',
     type: 'text',
   }),

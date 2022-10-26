@@ -32,14 +32,14 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.TextareaIcon,
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Text Area Beta', attributes, beforeCreate, [
+export default prefab('Text Area', attributes, beforeCreate, [
   TextArea({
-    label: 'Multiline text field Beta',
+    label: 'Multiline text field',
     inputLabel: 'Textarea',
     type: 'text',
   }),

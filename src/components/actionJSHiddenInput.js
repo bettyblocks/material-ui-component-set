@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Hidden Input Beta',
+  name: 'Hidden Input',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
