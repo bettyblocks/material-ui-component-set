@@ -198,10 +198,10 @@
     typescript "^3.5.3"
     webhead "^1.1.3"
 
-"@betty-blocks/component-sdk@^1.30.0":
-  version "1.36.0"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.36.0.tgz#1a4ea237f7661e462e113a2d5838fb0b7719c90c"
-  integrity sha512-zgfQgrDkcKu4gzLg5kwX6UiVERoSIuc+AAx21KURR/Hrcr591I03eJIuqKC/LR94GVkfjfqUOq2SWZRxpaCN3w==
+"@betty-blocks/component-sdk@^1.35.4":
+  version "1.38.0"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.38.0.tgz#0cec442f9b0aae75bcab4caad7198c1566e756e8"
+  integrity sha512-NPcC4D1EwjpJroWN+B9qiom4TOj1+0+TMxbSdhVi2Vm8NF19suTkIi0oCEo5OJgiaOVGyoluvG4v+bWHX5DS7A==
 
 "@colors/colors@1.5.0":
   version "1.5.0"
@@ -6217,10 +6217,10 @@ slate-hyperscript@^0.77.0:
   dependencies:
     is-plain-object "^5.0.0"
 
-slate-react@^0.82.2:
-  version "0.82.2"
-  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.82.2.tgz#4344ef392e3e51e5cd7c3272d3e5d61483c41823"
-  integrity sha512-lNmSqqNOKQJG1i3Wx4MkggWr6dLhQ43n4exPf5NLmKVBHPBuQSRNaWhAAKm6HOEC36Q6xBfkVONIQWi3GSyIEQ==
+slate-react@^0.83.2:
+  version "0.83.2"
+  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.83.2.tgz#7099db1607b79c95cc2a41e2df1e04982b7e26a5"
+  integrity sha512-V5qtPsCOiDVCMU3ovj/CWndxx9/as5/wGJxnbJDRVzuazSh+NVw/YuGTlus1fCt+Nlt6UHOhFvM7C9pXYaftPA==
   dependencies:
     "@types/is-hotkey" "^0.1.1"
     "@types/lodash" "^4.14.149"
@@ -6231,10 +6231,10 @@ slate-react@^0.82.2:
     scroll-into-view-if-needed "^2.2.20"
     tiny-invariant "1.0.6"
 
-slate@^0.82.1:
-  version "0.82.1"
-  resolved "https://registry.yarnpkg.com/slate/-/slate-0.82.1.tgz#cf43cb828c980734dab01c9bbb517fd4d20892f7"
-  integrity sha512-3mdRdq7U3jSEoyFrGvbeb28hgrvrr4NdFCtJX+IjaNvSFozY0VZd/CGHF0zf/JDx7aEov864xd5uj0HQxxEWTQ==
+slate@^0.84.0:
+  version "0.84.0"
+  resolved "https://registry.yarnpkg.com/slate/-/slate-0.84.0.tgz#dae3d86f16a4b97dbcd32c55acfcb78a57f8ed01"
+  integrity sha512-jAxK10V9nAtAFr6PpCfLdLi+VYNmAOMKC/PIaOWH2HGTrmZEY2XxJt4kbnRNVEbUHkQ1dqaBImVLsVzdoUL8/w==
   dependencies:
     immer "^9.0.6"
     is-plain-object "^5.0.0"
