@@ -314,10 +314,6 @@ const beforeCreate = ({
 
       if (!authProfile) throw new Error("Can't find auth profile");
 
-      if (!endpoint) {
-        throw new Error('There was no redirected page selected');
-      }
-
       return (
         <Field
           label="Input fields in the register form"
@@ -452,6 +448,9 @@ const beforeCreate = ({
         idProperty,
         properties,
         'create',
+        undefined,
+        undefined,
+        'public',
       );
 
       const resultAuth = await prepareAction(
@@ -683,30 +682,6 @@ const beforeCreate = ({
               parameters: serializeParameters(endpoint.params),
             },
           ];
-        } else {
-          throw new Error(
-            'Could not modify the interaction because one of the following items could not be found: Interaction, Interaction parameters, Endpoint, Endpoint parameters',
-          );
-        }
-
-        if (
-          newPrefab.interactions &&
-          endpoint &&
-          endpoint.params &&
-          'parameters' in newPrefab.interactions[0]
-        ) {
-          newPrefab.interactions[0].parameters = [
-            {
-              parameter: 'redirectTo',
-              pageId: endpoint.pageId,
-              endpointId: endpoint.id,
-              parameters: serializeParameters(endpoint.params),
-            },
-          ];
-        } else {
-          throw new Error(
-            'Could not modify the interaction because one of the following items could not be found: Interaction, Interaction parameters, Endpoint, Endpoint parameters',
-          );
         }
 
         setOption(formObject, 'actionId', (options: PrefabComponentOption) => ({
