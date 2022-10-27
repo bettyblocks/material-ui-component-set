@@ -319,7 +319,11 @@
           </>
         );
       }
-      if (totalCount > 50 && optionType === 'model') {
+      if (
+        totalCount > 50 &&
+        optionType === 'model' &&
+        totalCount !== totalData.length
+      ) {
         return (
           <>
             <MenuItem onClick={handleClick}>Load more...</MenuItem>
