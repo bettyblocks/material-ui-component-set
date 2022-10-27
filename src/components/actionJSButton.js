@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Action Button Beta',
+  name: 'Action Button',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'VERTICAL',

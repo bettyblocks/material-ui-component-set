@@ -6,9 +6,9 @@ import {
   toggle,
   variable,
 } from '@betty-blocks/component-sdk';
-import { showOn } from '../../../../utils';
 import { advanced } from './advanced';
 import { styles } from './styles';
+import { validation } from './validation';
 
 export const options = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
@@ -25,13 +25,6 @@ export const options = {
   label: variable('Label', { value: [''] }),
   value: variable('Value', { value: [''] }),
 
-  required: toggle('Required'),
-
-  validationValueMissing: variable('Value required message', {
-    value: ['This field is required'],
-    ...showOn('required'),
-  }),
-
   type: text('Type', {
     value: 'datetime',
     configuration: {
@@ -40,11 +33,8 @@ export const options = {
   }),
 
   autoComplete: toggle('Autocomplete', { value: true }),
-
   disabled: toggle('Disabled', { value: false }),
-
   placeholder: variable('Placeholder', { value: [] }),
-
   helperText: variable('Helper text', { value: [] }),
 
   timeFormat: text('Format', {
@@ -71,11 +61,10 @@ export const options = {
   }),
 
   use24HourClockTime: toggle('Use 24-hour format', { value: true }),
-
   disablePastDates: toggle('Disable past dates', { value: false }),
-
   closeOnSelect: toggle('Close picker after select', { value: true }),
 
+  ...validation,
   ...styles,
   ...advanced,
 };

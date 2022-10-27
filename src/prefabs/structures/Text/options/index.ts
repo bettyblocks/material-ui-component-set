@@ -19,7 +19,7 @@ export const categories = [
     members: ['textColor', 'fontWeight'],
   },
   {
-    label: 'Advanced settings',
+    label: 'Advanced Options',
     expanded: false,
     members: ['dataComponentAttribute'],
   },

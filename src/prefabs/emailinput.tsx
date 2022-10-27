@@ -35,16 +35,16 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.EmailInputIcon,
   keywords: ['Form', 'input'],
 };
 
 const pattern = '[a-z0-9._%+-]+@[a-z0-9.-]+[\\.][a-z]{2,4}$';
 
-export default prefab('Email Beta', attributes, beforeCreate, [
+export default prefab('Email', attributes, beforeCreate, [
   TextInput({
-    label: 'Email field Beta',
+    label: 'Email field',
     inputLabel: 'email',
     type: 'email',
     pattern,

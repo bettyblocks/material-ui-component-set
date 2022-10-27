@@ -36,14 +36,14 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.TimePickerIcon,
   keywords: ['Form', 'input'],
 };
 
-export default makePrefab('TimePicker Beta', attributes, beforeCreate, [
+export default makePrefab('Time Picker', attributes, beforeCreate, [
   DateTimePicker({
-    label: 'Time picker Beta',
+    label: 'Time picker',
     inputLabel: 'Time',
     dataComponentAttribute: 'Time Input',
     inputType: 'time',

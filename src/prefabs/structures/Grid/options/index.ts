@@ -30,7 +30,7 @@ export const categories = [
     members: ['xsWidth', 'smWidth', 'mdWidth', 'lgWidth', 'xlWidth'],
   },
   {
-    label: 'Advanced settings',
+    label: 'Advanced Options',
     expanded: false,
     members: ['zeroMinWidth', 'dataComponentAttribute'],
   },
