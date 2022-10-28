@@ -9,6 +9,7 @@
     const formRef = React.createRef();
     const [interactionFilter, setInteractionFilter] = useState({});
     const [, setOptions] = useOptions();
+    const mounted = useRef(false);
 
     const isDev = B.env === 'dev';
 
@@ -79,6 +80,15 @@
         });
       }
     });
+
+    useEffect(() => {
+      mounted.current = true;
+
+      B.triggerEvent('onComponentRendered');
+      return () => {
+        mounted.current = false;
+      };
+    }, []);
 
     /**
      * @name Filter
