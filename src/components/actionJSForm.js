@@ -84,7 +84,7 @@
     useEffect(() => {
       mounted.current = true;
 
-      B.triggerEvent('onComponentRendered');
+      B.triggerEvent('onRender');
       return () => {
         mounted.current = false;
       };
