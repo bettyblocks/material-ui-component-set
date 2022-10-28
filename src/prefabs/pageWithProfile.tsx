@@ -292,7 +292,7 @@ const attrs = {
   interactions,
 };
 
-const betaFormOptions = {
+const formOptions = {
   actionId: option('ACTION_JS', { label: 'Action', value: '' }),
   model: model('Model'),
   filter: filter('Filter', { configuration: { dependsOn: 'model' } }),
@@ -2047,13 +2047,12 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                       [],
                                                     ),
                                                     component(
-                                                      'Form Beta',
+                                                      'Form',
                                                       {
                                                         ref: {
                                                           id: '#updateImgForm',
                                                         },
-                                                        options:
-                                                          betaFormOptions,
+                                                        options: formOptions,
                                                       },
                                                       [
                                                         Grid(
@@ -2843,10 +2842,10 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                           },
                                                         }),
                                                         component(
-                                                          'Form Beta',
+                                                          'Form',
                                                           {
                                                             options:
-                                                              betaFormOptions,
+                                                              formOptions,
                                                             ref: {
                                                               id: '#editProfileDetailsForm',
                                                             },
@@ -3208,10 +3207,10 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                           },
                                                         }),
                                                         component(
-                                                          'Form Beta',
+                                                          'Form',
                                                           {
                                                             options:
-                                                              betaFormOptions,
+                                                              formOptions,
                                                             ref: {
                                                               id: '#updatePasswordForm',
                                                             },
@@ -3283,7 +3282,7 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                                 TextInput(
                                                                   {
                                                                     label:
-                                                                      'Password field Beta',
+                                                                      'Password field',
                                                                     inputLabel:
                                                                       'Password',
                                                                     type: 'password',
@@ -3408,7 +3407,7 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                                 TextInput(
                                                                   {
                                                                     label:
-                                                                      'Password field Beta',
+                                                                      'Password field',
                                                                     inputLabel:
                                                                       'Password',
                                                                     type: 'password',
