@@ -72,6 +72,7 @@ import {
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
 import { IdPropertyProps, ModelProps, ModelQuery, Properties } from './types';
+import { PermissionType } from './types/types';
 
 const interactions: PrefabInteraction[] = [
   {
@@ -1406,10 +1407,10 @@ const drawerContainer = DrawerContainer(
                                                                 [],
                                                               ),
                                                               component(
-                                                                'Form Beta',
+                                                                'Form',
                                                                 {
                                                                   label:
-                                                                    'Delete Form Beta',
+                                                                    'Delete Form',
                                                                   options:
                                                                     defaults,
                                                                   ref: {
@@ -2247,9 +2248,9 @@ const drawerBar = DrawerBar(
                           },
                           [
                             component(
-                              'Form Beta',
+                              'Form',
                               {
-                                label: 'Create Form Beta',
+                                label: 'Create Form',
                                 options: defaults,
                                 ref: { id: '#createForm' },
                               },
@@ -2848,9 +2849,9 @@ const drawerBar = DrawerBar(
                           },
                           [
                             component(
-                              'Form Beta',
+                              'Form',
                               {
-                                label: 'Update Form Beta',
+                                label: 'Update Form',
                                 options: defaults,
                                 ref: { id: '#editForm' },
                               },
@@ -3050,6 +3051,7 @@ const beforeCreate = ({
   helpers: {
     useModelQuery,
     prepareAction,
+    getPageAuthenticationProfileId,
     cloneStructure,
     setOption,
     createUuid,
@@ -3075,6 +3077,8 @@ const beforeCreate = ({
   const [stepNumber, setStepNumber] = React.useState(1);
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
+  const permissions: PermissionType = 'private';
+  const pageAuthenticationProfileId = getPageAuthenticationProfileId();
 
   const createFormId = createUuid();
   const editFormId = createUuid();
@@ -3638,6 +3642,10 @@ const beforeCreate = ({
           idProperty,
           filteredproperties,
           'create',
+          undefined,
+          undefined,
+          permissions,
+          pageAuthenticationProfileId,
         );
 
         Object.values(result.variables).forEach(
@@ -3860,6 +3868,10 @@ const beforeCreate = ({
           idProperty,
           filteredproperties,
           'update',
+          undefined,
+          undefined,
+          permissions,
+          pageAuthenticationProfileId,
         );
         setOption(editForm, 'actionId', (opts: PrefabComponentOption) => ({
           ...opts,
@@ -4083,6 +4095,10 @@ const beforeCreate = ({
           idProperty,
           undefined,
           'delete',
+          undefined,
+          undefined,
+          permissions,
+          pageAuthenticationProfileId,
         );
 
         setOption(deleteForm, 'actionId', (opts: PrefabComponentOption) => ({

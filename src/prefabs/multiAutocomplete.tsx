@@ -31,14 +31,14 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.AutoCompleteIcon,
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Multi Autocomplete Beta', attributes, beforeCreate, [
+export default prefab('Multi Autocomplete', attributes, beforeCreate, [
   MultiAutocomplete({
-    label: 'Autocomplete',
+    label: 'Multi Autocomplete beta',
     inputLabel: 'Multi Autocomplete',
     type: 'text',
   }),

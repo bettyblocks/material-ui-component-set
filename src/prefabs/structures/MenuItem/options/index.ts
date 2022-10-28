@@ -23,7 +23,7 @@ export const categories = [
     members: ['backgroundColor', 'textColor', 'dense', 'divider'],
   },
   {
-    label: 'Advanced settings',
+    label: 'Advanced Options',
     expanded: false,
     members: ['dataComponentAttribute'],
   },

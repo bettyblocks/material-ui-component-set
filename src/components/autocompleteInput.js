@@ -287,7 +287,7 @@
       filter._or = [
         {
           [searchProp.name]: {
-            [searchPropIsNumber ? 'eq' : 'match']: searchPropIsNumber
+            [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
               ? parseInt(debouncedInputValue, 10)
               : debouncedInputValue,
           },
@@ -302,7 +302,7 @@
       ];
     } else if (debouncedInputValue) {
       filter[searchProp.name] = {
-        [searchPropIsNumber ? 'eq' : 'match']: searchPropIsNumber
+        [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
           ? parseInt(debouncedInputValue, 10)
           : debouncedInputValue,
       };
@@ -310,7 +310,7 @@
       filter._or = [
         {
           [valueProp.name]: {
-            [valuePropIsNumber ? 'eq' : 'match']:
+            [valuePropIsNumber ? 'eq' : 'matches']:
               typeof value === 'string' ? value : value[valueProp.name],
           },
         },
