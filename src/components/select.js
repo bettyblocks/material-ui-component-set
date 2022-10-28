@@ -44,6 +44,7 @@
     const [helper, setHelper] = useState(useText(helperText));
     const [interactionFilter, setInteractionFilter] = useState({});
     const mounted = useRef(false);
+    const [skipValue, setSkipValue] = React.useState(0);
     const blancoText = useText(blanco);
 
     const { kind, values = [] } = getProperty(property) || {};
@@ -149,7 +150,7 @@
       clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
 
     const completeFilter = deepMerge(filter, interactionFilters);
-
+    const [totalData, setTotalData] = React.useState([]);
     const {
       loading: queryLoading,
       error,
@@ -160,6 +161,7 @@
       {
         filter: completeFilter,
         take: 50,
+        skip: skipValue,
         variables: {
           ...(orderBy ? { sort: { relation: sort } } : {}),
         },
@@ -167,6 +169,9 @@
           const hasResult = res && res.results && res.results.length > 0;
           if (hasResult) {
             B.triggerEvent('onSuccess', res.results);
+            setTotalData((prevData) => {
+              return [...prevData, ...res.results];
+            });
           } else {
             B.triggerEvent('onNoResults');
           }
@@ -212,7 +217,7 @@
       setCurrentValue(defaultValueText);
     }, [defaultValueText]);
 
-    const { results } = data || {};
+    const { totalCount } = data || {};
 
     useEffect(() => {
       B.defineFunction('Refetch', () => refetch());
@@ -286,9 +291,10 @@
           </MenuItem>
         ));
       }
-      if (loading) return <span>Loading...</span>;
+      if (loading && skipValue === 0) return <MenuItem>Loading...</MenuItem>;
       if (error && displayError) return <span>{error.message}</span>;
-      return (results || []).map(
+
+      return (totalData || []).map(
         (item) =>
           propName &&
           labelName && (
@@ -297,6 +303,34 @@
             </MenuItem>
           ),
       );
+    };
+
+    const handleClick = () => {
+      setSkipValue((prevSkipValue) => {
+        return prevSkipValue + 50;
+      });
+    };
+
+    const buttonskip = () => {
+      if (skipValue >= 50 && loading) {
+        return (
+          <>
+            <MenuItem>Loading...</MenuItem>
+          </>
+        );
+      }
+      if (
+        totalCount > 50 &&
+        optionType === 'model' &&
+        totalCount !== totalData.length
+      ) {
+        return (
+          <>
+            <MenuItem onClick={handleClick}>Load more...</MenuItem>
+          </>
+        );
+      }
+      return null;
     };
 
     const SelectCmp = (
@@ -325,6 +359,7 @@
         >
           {blancoText && <MenuItem value="">{blancoText}</MenuItem>}
           {renderOptions()}
+          {buttonskip()}
         </TextField>
         <input
           className={classes.validationInput}
