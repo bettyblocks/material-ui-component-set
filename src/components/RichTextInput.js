@@ -940,9 +940,7 @@
         },
         overflow: 'overlay',
         height: 'min-content',
-        maxHeight: ({ options: { height } }) => {
-          return `calc(${height} - 44px)`;
-        },
+        maxHeight: ({ options: { height } }) => `calc(${height} - 44px)`,
       },
       dropdownButton: {
         display: 'inline-flex',
