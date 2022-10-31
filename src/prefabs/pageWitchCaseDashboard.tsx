@@ -787,6 +787,7 @@ export default makePrefab('Case dashboard', attrs, undefined, [
                             style: {
                               overwrite: {
                                 textTransform: 'none',
+                                boxShadow: 'none',
                               },
                             },
                           }),
