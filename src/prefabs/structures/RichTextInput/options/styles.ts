@@ -13,12 +13,6 @@ export const styles = {
       as: 'UNIT',
     },
   }),
-  dropdownHeight: size('Dropdown height', {
-    value: '150px',
-    configuration: {
-      as: 'UNIT',
-    },
-  }),
   width: size('Width', {
     value: '',
     configuration: {

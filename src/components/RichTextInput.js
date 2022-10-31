@@ -939,7 +939,10 @@
           display: 'block',
         },
         overflow: 'overlay',
-        height: ({ options: { dropdownHeight } }) => dropdownHeight,
+        height: 'min-content',
+        maxHeight: ({ options: { height } }) => {
+          return `calc(${height} - 44px)`;
+        },
       },
       dropdownButton: {
         display: 'inline-flex',
