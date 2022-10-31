@@ -5,6 +5,7 @@ import {
   option,
   hideIf,
   sizes,
+  pageCreation,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 import { tooltip } from './tooltip';
@@ -36,6 +37,7 @@ export const buttonOptions = {
       as: 'VISIBILITY',
     },
   }),
+  pageCreation: pageCreation('Page Creation', { value: '' }),
   buttonText: variable('Button text', { value: ['Button'] }),
   fullWidth: toggle('Full width', { value: false }),
   icon: icon('Icon', { value: 'None' }),
