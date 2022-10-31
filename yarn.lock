@@ -157,10 +157,10 @@
     "@babel/helper-validator-identifier" "^7.18.6"
     to-fast-properties "^2.0.0"
 
-"@betty-blocks/cli@^25.43.1":
-  version "25.43.1"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.43.1.tgz#a47f9dfadfc128de4b835dbcdacc8aac5f8f6ce2"
-  integrity sha512-pd8UBnQyWbZo1MR8hwo3EWUQq2MlczJpXVLkb8cpdbyOF5Wh3r6TY6beF0O8eLJeQgu/9qw3Z//G6P/4Z5MdsQ==
+"@betty-blocks/cli@^25.45.2":
+  version "25.50.0"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.50.0.tgz#5f5e8b596f0fd7270de6e66cdf932a88f95bd2e3"
+  integrity sha512-yhtdalC42u8XLEyxUUV/RVYBAoI9CTpSOoFC73YOqQxLpka319X8Nk035Q8PwAqAN00ehOdQjSPHKdk0iGuz0g==
   dependencies:
     "@azure/ms-rest-js" "^2.0.4"
     "@azure/storage-blob" "^10.3.0"
@@ -180,7 +180,6 @@
     form-data "^4.0.0"
     fs-extra "^8.1.0"
     glob "^7.2.0"
-    isolated-vm "^4.0.0"
     joi "^17.2.1"
     jsdoc-api "^7.1.0"
     jsonschema "^1.4.0"
@@ -197,6 +196,8 @@
     tsconfig-paths "^3.9.0"
     typescript "^3.5.3"
     webhead "^1.1.3"
+  optionalDependencies:
+    isolated-vm "^4.0.0"
 
 "@betty-blocks/component-sdk@^1.29.0":
   version "1.29.0"

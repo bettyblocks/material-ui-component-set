@@ -64,6 +64,7 @@
     "index": "readonly",
     "parent": "readonly",
     "options": "readonly",
+    "dependencies": "readonly",
     "React": "readonly",
     "state": "readonly",
     "setState": "readonly",
