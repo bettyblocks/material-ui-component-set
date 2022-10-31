@@ -32,6 +32,7 @@ const beforeCreate = ({
     createUuid,
     useModelQuery,
     createBlacklist,
+    useModelRelationQuery,
   } = helpers;
 
   const unsupportedKinds = createBlacklist(['TEXT', 'URL', 'IBAN', 'STRING']);
@@ -93,6 +94,19 @@ const beforeCreate = ({
       name = propertyResponse.data.property.label;
       propertyKind = propertyResponse.data.property.kind;
       propertyModelId = propertyResponse.data.property.referenceModel?.id;
+    }
+  }
+
+  const modelRelationResponse = useModelRelationQuery(propertyModelId);
+
+  let relationalProperties;
+  let modelProperty;
+  if (!(modelRelationResponse.loading || modelRelationResponse.error)) {
+    if (modelRelationResponse.data) {
+      relationalProperties = modelRelationResponse.data.model.properties;
+      modelProperty = relationalProperties.find(
+        (property) => property.name === 'id',
+      );
     }
   }
 
@@ -307,9 +321,15 @@ const beforeCreate = ({
             ) {
               const valueOptions = [
                 {
-                  id: propertyId,
+                  id:
+                    result.isRelational && !result.isMultiRelational
+                      ? [propertyId, modelProperty.id]
+                      : propertyId,
                   type: 'PROPERTY',
-                  name: `{{ ${model?.name}.${name} }}`,
+                  name:
+                    result.isRelational && !result.isMultiRelational
+                      ? `{{ ${model?.name}.${name}.id }}`
+                      : `{{ ${model?.name}.${name} }}`,
                 },
               ];
 
