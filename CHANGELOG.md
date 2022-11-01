@@ -1,3 +1,24 @@
+## [2.65.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.0...v2.65.1) (2022-10-31)
+
+
+### Bug Fixes
+
+* cleaned up login and register page ([b4dcc6f](https://github.com/bettyblocks/material-ui-component-set/commit/b4dcc6fdcda920d9c4e587c28013014520343b5b))
+* login and register redirect error & set action to public ([4b1ff0e](https://github.com/bettyblocks/material-ui-component-set/commit/4b1ff0ef522b013d75ed3750e175d517fd09f7f4))
+
+# [2.65.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.64.1...v2.65.0) (2022-10-28)
+
+
+### Bug Fixes
+
+* change interaction name to onRender ([0ef55a2](https://github.com/bettyblocks/material-ui-component-set/commit/0ef55a260f8f4824c7d688b264484e24fe197a57))
+* trigger pipelines ([1f0e78e](https://github.com/bettyblocks/material-ui-component-set/commit/1f0e78edf795cf32c001d9984c345dda9b35e768))
+
+
+### Features
+
+* add onComponentRendered to actionjs form ([8d1c04d](https://github.com/bettyblocks/material-ui-component-set/commit/8d1c04db9cda7e5ee2e83d9a4defa9d01bdfc2f6))
+
 ## [2.64.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.64.0...v2.64.1) (2022-10-24)
 
 
