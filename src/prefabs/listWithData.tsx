@@ -28,7 +28,6 @@ const beforeCreate = ({
 
   const { data } = useModelQuery({
     variables: { id: modelId },
-    skip: !modelId,
   });
 
   const enrichVarObj = (obj: any) => {
