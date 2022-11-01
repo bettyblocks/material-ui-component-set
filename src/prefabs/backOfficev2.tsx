@@ -22,6 +22,8 @@ import {
   PrefabComponent,
   BeforeCreateArgs,
   PrefabComponentOption,
+  InteractionType,
+  PrefabInteraction,
 } from '@betty-blocks/component-sdk';
 
 import {
@@ -56,7 +58,61 @@ import {
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
 import { DataTableColumn } from './structures/DataTableColumn/index';
-import { IdPropertyProps, ModelProps, ModelQuery, Properties } from './types';
+import {
+  IdPropertyProps,
+  ModelProps,
+  ModelQuery,
+  Properties,
+  PropertyStateProps,
+} from './types';
+
+const interactions: PrefabInteraction[] = [
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#createRecord',
+      sourceComponentId: '#newButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#tinyDrawer',
+      sourceComponentId: '#openDrawer',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#drawerSidebar',
+      sourceComponentId: '#openDrawer',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#tinyDrawer',
+      sourceComponentId: '#closeButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#drawerSidebar',
+      sourceComponentId: '#closeButton',
+    },
+    type: InteractionType.Custom,
+  },
+];
 
 const attributes = {
   category: 'FORMV2',
@@ -67,6 +123,7 @@ const attributes = {
   previewUrl: 'https://preview.betty.app/back-office',
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Back_Office.jpg',
+  interactions,
 };
 
 const beforeCreate = ({
@@ -76,7 +133,7 @@ const beforeCreate = ({
   components: {
     Header,
     Content,
-    PartialSelector,
+    PropertySelector,
     PropertiesSelector,
     ModelRelationSelector,
     Footer,
@@ -103,9 +160,11 @@ const beforeCreate = ({
   const [propertiesValidation, setPropertiesValidation] = React.useState(false);
   const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
   const [stepNumber, setStepNumber] = React.useState(1);
+  const [searchProp, setSearchProp] = React.useState<PropertyStateProps>({
+    id: '',
+  });
 
   const createFormId = createUuid();
-  const [headerImage, setHeaderImage] = React.useState('');
 
   function treeSearch(
     dirName: string,
@@ -140,30 +199,22 @@ const beforeCreate = ({
       if (step === 1) {
         return (
           <BoxComp pad={{ bottom: '15px' }}>
-            <BoxComp>
-              <TextComp size="medium" weight="bolder">
-                Select partials
-              </TextComp>
-            </BoxComp>
-            <BoxComp pad={{ bottom: '15px' }}>
-              <TextComp color="grey700">
-                The menu contains a logo. You can select one here and it will be
-                embedded within the partial
-              </TextComp>
-            </BoxComp>
-            <Field label="TOP MENU IMAGE">
-              <PartialSelector
-                label="Select a partial"
-                onChange={(imageValue: string) => {
-                  setHeaderImage(imageValue);
+            <Field
+              label="Model"
+              error={
+                modelValidation && (
+                  <TextComp color="#e82600">
+                    Selecting a model is required
+                  </TextComp>
+                )
+              }
+            >
+              <ModelRelationSelector
+                onChange={(value: string) => {
+                  setModelValidation(false);
+                  setModelId(value);
                 }}
-                preSelected="Top menu"
-                value={headerImage}
-                allowedTypes={[
-                  'BODY_COMPONENT',
-                  'CONTAINER_COMPONENT',
-                  'CONTENT_COMPONENT',
-                ]}
+                value={modelId}
               />
             </Field>
           </BoxComp>
@@ -182,77 +233,64 @@ const beforeCreate = ({
               can define which properties will show in the datatable.
             </TextComp>
           </BoxComp>
-          {/* <Field>
-            {
-              {
-                // this is where the header image boolean is gonna be at
-              }
-            }
-          </Field> */}
-          <Field
-            label="Model"
-            error={
-              modelValidation && (
-                <TextComp color="#e82600">
-                  Selecting a model is required
-                </TextComp>
-              )
-            }
-          >
-            <ModelRelationSelector
-              onChange={(value: string) => {
-                setModelValidation(false);
-                setModelId(value);
-              }}
-              value={modelId}
-            />
-          </Field>
           {modelId !== '' && (
-            <Field
-              label="Properties used in Backoffice "
-              error={
-                propertiesValidation && (
-                  <TextComp color="#e82600">
-                    Selecting a property is required
-                  </TextComp>
-                )
-              }
-            >
-              <PropertiesSelector
-                modelId={modelId}
-                value={properties}
-                disabledKinds={[
-                  'BELONGS_TO',
-                  'HAS_AND_BELONGS_TO_MANY',
-                  'HAS_MANY',
-                  'MULTI_FILE',
-                  'AUTO_INCREMENT',
-                  'COUNT',
-                  'MULTI_IMAGE',
-                  'PDF',
-                  'RICH_TEXT',
-                  'SIGNED_PDF',
-                  'SUM',
-                  'BOOLEAN_EXPRESSION',
-                  'DATE_EXPRESSION',
-                  'DATE_TIME_EXPRESSION',
-                  'DECIMAL_EXPRESSION',
-                  'INTEGER_EXPRESSION',
-                  'MINUTES_EXPRESSION',
-                  'PRICE_EXPRESSION',
-                  'STRING_EXPRESSION',
-                  'TEXT_EXPRESSION',
-                  'MINUTES',
-                  'ZIPCODE',
-                  'IMAGE',
-                  'FILE',
-                ]}
-                onChange={(value: Properties[]) => {
-                  setProperties(value);
-                  setPropertiesValidation(false);
-                }}
-              />
-            </Field>
+            <>
+              <Field label="Property used for the search field">
+                <PropertySelector
+                  modelId={modelId}
+                  onChange={(value: any) => {
+                    setSearchProp(value);
+                  }}
+                  value={searchProp}
+                  disabled={!modelId}
+                />
+              </Field>
+              <Field
+                label="Properties used in Backoffice "
+                error={
+                  propertiesValidation && (
+                    <TextComp color="#e82600">
+                      Selecting a property is required
+                    </TextComp>
+                  )
+                }
+              >
+                <PropertiesSelector
+                  modelId={modelId}
+                  value={properties}
+                  disabledKinds={[
+                    'BELONGS_TO',
+                    'HAS_AND_BELONGS_TO_MANY',
+                    'HAS_MANY',
+                    'MULTI_FILE',
+                    'AUTO_INCREMENT',
+                    'COUNT',
+                    'MULTI_IMAGE',
+                    'PDF',
+                    'RICH_TEXT',
+                    'SIGNED_PDF',
+                    'SUM',
+                    'BOOLEAN_EXPRESSION',
+                    'DATE_EXPRESSION',
+                    'DATE_TIME_EXPRESSION',
+                    'DECIMAL_EXPRESSION',
+                    'INTEGER_EXPRESSION',
+                    'MINUTES_EXPRESSION',
+                    'PRICE_EXPRESSION',
+                    'STRING_EXPRESSION',
+                    'TEXT_EXPRESSION',
+                    'MINUTES',
+                    'ZIPCODE',
+                    'IMAGE',
+                    'FILE',
+                  ]}
+                  onChange={(value: Properties[]) => {
+                    setProperties(value);
+                    setPropertiesValidation(false);
+                  }}
+                />
+              </Field>
+            </>
           )}
         </>
       );
@@ -662,9 +700,69 @@ const beforeCreate = ({
           'urlFileSource',
           (opt: PrefabComponentOption) => ({
             ...opt,
-            value: [headerImage],
+            value: [
+              'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_B.svg',
+            ],
           }),
         );
+      }
+
+      if (searchProp.id && searchProp.id !== '') {
+        if (newPrefab.interactions) {
+          newPrefab.interactions.push({
+            name: 'Filter',
+            sourceEvent: 'onChange',
+            parameters: [
+              {
+                id: [...searchProp.id],
+                operator: 'regex',
+                parameter: 'property',
+                resolveValue: false,
+              },
+            ],
+            ref: {
+              targetComponentId: '#DataTable',
+              sourceComponentId: '#searchField',
+            },
+            type: 'Custom',
+          } as PrefabInteraction);
+          newPrefab.interactions.push({
+            name: 'Show',
+            sourceEvent: 'onChange',
+            ref: {
+              targetComponentId: '#clearButton',
+              sourceComponentId: '#searchField',
+            },
+            type: 'Custom',
+          } as PrefabInteraction);
+          newPrefab.interactions.push({
+            name: 'Clear',
+            sourceEvent: 'Click',
+            ref: {
+              targetComponentId: '#searchField',
+              sourceComponentId: '#clearButton',
+            },
+            type: 'Custom',
+          } as PrefabInteraction);
+          newPrefab.interactions.push({
+            name: 'ResetFilter',
+            sourceEvent: 'Click',
+            ref: {
+              targetComponentId: '#searchField',
+              sourceComponentId: '#clearButton',
+            },
+            type: 'Custom',
+          } as PrefabInteraction);
+          newPrefab.interactions.push({
+            name: 'Hide',
+            sourceEvent: 'Click',
+            ref: {
+              targetComponentId: '#clearButton',
+              sourceComponentId: '#clearButton',
+            },
+            type: 'Custom',
+          } as PrefabInteraction);
+        }
       }
       // #endregion
 
@@ -690,7 +788,7 @@ const beforeCreate = ({
           <ButtonComp
             label="Next"
             size="large"
-            disabled={stepNumber === stepper.stepAmount}
+            disabled={stepNumber === stepper.stepAmount || modelId === ''}
             onClick={() => {
               const newStepnumber = stepNumber + 1;
               setStepNumber(newStepnumber);
@@ -1019,6 +1117,7 @@ const passiveSubItem = Box(
 
 const drawerSidebar = DrawerBar(
   {
+    ref: { id: '#drawerSidebar' },
     options: {
       ...drawerBarOptions,
       innerSpacing: sizes('Inner space', {
@@ -1847,6 +1946,7 @@ const drawerSidebar = DrawerBar(
                 textTransform: 'none',
               },
             },
+            ref: { id: '#closeButton' },
             options: {
               ...buttonOptions,
               outerSpacing: sizes('Outer space', {
@@ -1912,6 +2012,7 @@ const drawerContainer = DrawerContainer(
             Grid(
               {
                 label: 'Tiny Drawer',
+                ref: { id: '#tinyDrawer' },
                 options: {
                   ...gridOptions,
                   direction: option('CUSTOM', {
@@ -1979,6 +2080,7 @@ const drawerContainer = DrawerContainer(
                       },
                     },
                     label: 'Open drawer',
+                    ref: { id: '#openDrawer' },
                     options: {
                       ...buttonOptions,
                       buttonText: variable('Button text', { value: [] }),
@@ -2206,6 +2308,7 @@ const drawerContainer = DrawerContainer(
                         ),
                         Button(
                           {
+                            ref: { id: '#newButton' },
                             style: {
                               overwrite: {
                                 boxShadow: 'none',
@@ -2323,6 +2426,7 @@ const drawerContainer = DrawerContainer(
                                     label: 'Text field Beta',
                                     inputLabel: 'Searchfield',
                                     type: 'text',
+                                    ref: { id: '#searchField' },
                                     options: {
                                       ...textInputOptions,
                                       placeholder: variable('Placeholder', {
@@ -2391,6 +2495,7 @@ const drawerContainer = DrawerContainer(
                                   [
                                     Button(
                                       {
+                                        ref: { id: '#clearButton' },
                                         style: {
                                           overwrite: {
                                             borderRadius: ['3.125rem'],
@@ -2621,6 +2726,7 @@ const prefabStructure = [
       Column(
         {
           label: 'Create record',
+          ref: { id: '#createRecord' },
           options: {
             ...columnOptions,
             columnWidth: option('CUSTOM', {
@@ -3153,6 +3259,7 @@ const prefabStructure = [
                                   [
                                     Button(
                                       {
+                                        ref: { id: '#createRecordCancel' },
                                         style: {
                                           overwrite: {
                                             backgroundColor: {
@@ -3213,6 +3320,7 @@ const prefabStructure = [
                                             value: ['Save and create'],
                                           }),
                                         },
+                                        ref: { id: '#createFormSubmit' },
                                       },
                                       [],
                                     ),
