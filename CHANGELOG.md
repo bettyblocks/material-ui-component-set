@@ -1,3 +1,10 @@
+## [2.65.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.1...v2.65.2) (2022-11-02)
+
+
+### Bug Fixes
+
+* remove file by sending empty string ([5cef638](https://github.com/bettyblocks/material-ui-component-set/commit/5cef638769865bf0a675988b640431d24c7d0aed))
+
 ## [2.65.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.0...v2.65.1) (2022-10-31)
 
 
