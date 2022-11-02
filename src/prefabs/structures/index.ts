@@ -29,6 +29,7 @@ import { Dialog } from './Dialog';
 import { Divider } from './Divider';
 import { Drawer } from './Drawer';
 import { DrawerBar } from './DrawerBar';
+import { Subview } from './Subview';
 import { DrawerContainer } from './DrawerContainer';
 import { ExpansionPanel } from './ExpansionPanel';
 import { Grid } from './Grid';
@@ -117,6 +118,7 @@ import { tabsOptions } from './Tabs/options';
 import { textOptions } from './Text/options';
 import { options as textAreaOptions } from './TextArea/options';
 import { options as textInputOptions } from './TextInput/options';
+import { SubviewItem } from './SubviewItem';
 
 export {
   ActionJSButton,
@@ -179,6 +181,8 @@ export {
   Text,
   TextArea,
   TextInput,
+  Subview,
+  SubviewItem,
   actionJSButtonOptions,
   alertOptions,
   appBarOptions,

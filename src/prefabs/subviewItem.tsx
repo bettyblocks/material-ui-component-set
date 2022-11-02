@@ -1,0 +1,100 @@
+import * as React from 'react';
+import {
+  prefab as makePrefab,
+  Icon,
+  BeforeCreateArgs,
+} from '@betty-blocks/component-sdk';
+
+import { SubviewItem } from './structures';
+
+const attr = {
+  icon: Icon.ListItemIcon,
+  category: 'LIST',
+  keywords: ['List', 'item', 'listitem'],
+};
+
+const beforeCreate = ({
+  save,
+  close,
+  prefab,
+  components: {
+    Header,
+    Content,
+    PropertySelector,
+    EndpointSelector,
+    Footer,
+    Field,
+    Box,
+    Text,
+  },
+  helpers: { setOption },
+}: BeforeCreateArgs) => {
+  const [propertyId, setPropertyId] = React.useState('');
+  const [errorMessage, setErrorMessage] = React.useState('');
+  const [endpoint, setEndpoint] = React.useState('');
+
+  return (
+    <>
+      <Header onClose={close} title="Configure header and footer" />
+
+      <Content>
+        <Box pad={{ bottom: '15px' }}>
+          <Field label="Select property">
+            <PropertySelector
+              onChange={(value: string) => {
+                setPropertyId(value);
+              }}
+              value={propertyId}
+            />
+          </Field>
+          <Field label="Select page">
+            <EndpointSelector
+              value={endpoint || ''}
+              size="large"
+              onChange={(value: any): void => {
+                setEndpoint(value);
+              }}
+            />
+          </Field>
+        </Box>
+      </Content>
+      <Footer
+        onClick={close}
+        onSave={() => {
+          const newPrefab = { ...prefab };
+          const structure = newPrefab.structure[0];
+
+          if (structure.type !== 'COMPONENT') {
+            setErrorMessage(
+              `expected component prefab, found ${structure.type}`,
+            );
+            throw new Error(errorMessage);
+          }
+
+          setOption(structure, 'prop', (originalOption) => {
+            return {
+              ...originalOption,
+              value: propertyId,
+            };
+          });
+
+          setOption(structure, 'linkTo', (originalOption) => {
+            return {
+              ...originalOption,
+              value: endpoint,
+            };
+          });
+          save(newPrefab);
+        }}
+        onSkip={() => {
+          const newPrefab = { ...prefab };
+          save(newPrefab);
+        }}
+      />
+    </>
+  );
+};
+
+export default makePrefab('Subview item', attr, beforeCreate, [
+  SubviewItem({}, []),
+]);
