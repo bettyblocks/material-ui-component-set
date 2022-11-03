@@ -1,3 +1,10 @@
+## [2.65.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.2...v2.65.3) (2022-11-03)
+
+
+### Bug Fixes
+
+* the menu component wil now be inline with the rest of the items ([ed311d2](https://github.com/bettyblocks/material-ui-component-set/commit/ed311d2dd0235b965b0c628edf74716ed4f1e2ea))
+
 ## [2.65.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.1...v2.65.2) (2022-11-02)
 
 
