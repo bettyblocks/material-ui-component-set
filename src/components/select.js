@@ -44,7 +44,7 @@
     const [helper, setHelper] = useState(useText(helperText));
     const [interactionFilter, setInteractionFilter] = useState({});
     const mounted = useRef(false);
-    const [skipValue, setSkipValue] = React.useState(0);
+    const [skipValue, setSkipValue] = useState(0);
     const blancoText = useText(blanco);
 
     const { kind, values = [] } = getProperty(property) || {};
@@ -150,7 +150,7 @@
       clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
 
     const completeFilter = deepMerge(filter, interactionFilters);
-    const [totalData, setTotalData] = React.useState([]);
+    const [totalData, setTotalData] = useState([]);
     const {
       loading: queryLoading,
       error,
@@ -371,7 +371,6 @@
         />
       </>
     );
-
     return isDev ? <div className={classes.root}>{SelectCmp}</div> : SelectCmp;
   })(),
   styles: (B) => (t) => {
