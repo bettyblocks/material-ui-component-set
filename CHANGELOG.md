@@ -1,3 +1,10 @@
+## [2.65.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.3...v2.65.4) (2022-11-03)
+
+
+### Bug Fixes
+
+* list item not showing Property name in list with data prefab ([f66943a](https://github.com/bettyblocks/material-ui-component-set/commit/f66943ab37eaa40c6a9f2411c2848408a72d991f))
+
 ## [2.65.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.2...v2.65.3) (2022-11-03)
 
 
