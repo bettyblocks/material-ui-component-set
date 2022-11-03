@@ -201,23 +201,9 @@ const beforeCreate = ({
           let kind = propertyKind || 'STRING';
           const isListProperty = kind === ('LIST' || 'list');
 
-          const arrayKind = 'HAS_MANY';
           const integerKind = 'BELONGS_TO';
 
-          if (
-            originalPrefab.name === BettyPrefabs.MULTI_AUTO_COMPLETE &&
-            !propertyBased
-          ) {
-            kind = arrayKind;
-          }
-
-          if (
-            (originalPrefab.name === BettyPrefabs.SELECT ||
-              originalPrefab.name === BettyPrefabs.RADIO ||
-              originalPrefab.name === BettyPrefabs.AUTO_COMPLETE) &&
-            !propertyBased &&
-            !isListProperty
-          ) {
+          if (!propertyBased && !isListProperty) {
             kind = integerKind;
           }
 
@@ -250,42 +236,16 @@ const beforeCreate = ({
             ...option,
             value: [variableName],
           }));
+          setOption(newPrefab.structure[0], 'property', (option) => ({
+            ...option,
+            value: {
+              id: propertyId,
+              type: 'PROPERTY',
+              componentId: selectedPrefab?.id,
+            },
+          }));
 
-          if (
-            originalPrefab.name === BettyPrefabs.SELECT ||
-            originalPrefab.name === BettyPrefabs.RADIO
-          ) {
-            setOption(newPrefab.structure[0], 'property', (option) => ({
-              ...option,
-              value: {
-                id: propertyId,
-                type: 'PROPERTY',
-                componentId: selectedPrefab?.id,
-              },
-            }));
-          }
-
-          if (
-            (originalPrefab.name === BettyPrefabs.AUTO_COMPLETE ||
-              originalPrefab.name === BettyPrefabs.SELECT ||
-              originalPrefab.name === BettyPrefabs.RADIO ||
-              originalPrefab.name === BettyPrefabs.MULTI_AUTO_COMPLETE) &&
-            propertyBased
-          ) {
-            setOption(newPrefab.structure[0], 'optionType', (option) => ({
-              ...option,
-              value: result.isRelational ? 'model' : 'property',
-            }));
-          }
-
-          if (
-            (originalPrefab.name === BettyPrefabs.AUTO_COMPLETE ||
-              originalPrefab.name === BettyPrefabs.MULTI_AUTO_COMPLETE ||
-              originalPrefab.name === BettyPrefabs.SELECT ||
-              originalPrefab.name === BettyPrefabs.RADIO) &&
-            propertyModelId &&
-            !isListProperty
-          ) {
+          if (propertyModelId && !isListProperty) {
             setOption(newPrefab.structure[0], 'model', (option) => ({
               ...option,
               value: propertyModelId,
@@ -297,6 +257,11 @@ const beforeCreate = ({
             value: result.variable.variableId,
           }));
           if (propertyBased) {
+            setOption(newPrefab.structure[0], 'optionType', (option) => ({
+              ...option,
+              value: result.isRelational ? 'model' : 'property',
+            }));
+
             setOption(newPrefab.structure[0], 'actionProperty', (option) => ({
               ...option,
               value: {
