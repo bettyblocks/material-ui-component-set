@@ -186,7 +186,7 @@
     B.defineFunction('setValue', (data) => setCurrentValue(data));
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
-    B.defineFunction('Reset', () => setCurrentValue(''));
+    B.defineFunction('Reset', () => setCurrentValue(useText(value)));
 
     const handleClickShowPassword = () => {
       togglePassword(!showPassword);
