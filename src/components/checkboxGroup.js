@@ -17,7 +17,6 @@
       labelProperty: labelPropertyId = '',
       margin,
       model,
-      nameAttribute: nameAttributeRaw,
       order,
       orderBy,
       position,
@@ -32,6 +31,7 @@
     const {
       env,
       getIdProperty,
+      getModel,
       getProperty,
       useAllQuery,
       useRelation,
@@ -46,7 +46,6 @@
 
     const labelProperty = getProperty(labelPropertyId) || {};
     const labelText = useText(labelRaw);
-    const nameAttributeValue = useText(nameAttributeRaw);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const validationValueMissingText = useText(validationValueMissing);
     const helperTextResolved = useText(helperText);
@@ -54,16 +53,33 @@
 
     const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
     const { modelId: propertyModelId } = modelProperty;
-    const modelId = propertyModelId || model || '';
+    const modelId =
+      modelProperty.referenceModelId || propertyModelId || model || '';
     const idProperty = getIdProperty(modelId || '') || {};
     const isListProperty =
       modelProperty.kind === 'LIST' || modelProperty.kind === 'list';
     const valueProperty = isListProperty ? modelProperty : idProperty;
-    // console.log({ modelProperty });
-    // console.log({ modelId });
-    // console.log({ idProperty });
-    // console.log({ isListProperty });
-    // console.log({ valueProperty });
+
+    // TODO: implement error message
+    // let valid = true;
+    // let message = '';
+
+    // if (!isListProperty && !isDev) {
+    //   if (!modelId) {
+    //     message = 'No model selected';
+    //     valid = false;
+    //   }
+    // }
+
+    const propertyModel = getModel(modelId);
+
+    const defaultLabelProperty =
+      getProperty(
+        propertyModel && propertyModel.labelPropertyId
+          ? propertyModel.labelPropertyId
+          : '',
+      ) || {};
+
     const listValues = valueProperty.values;
 
     const getValues = () => {
@@ -193,7 +209,6 @@
           checked={values.includes(checkboxValue)}
           onChange={handleChange}
           disabled={isDisabled}
-          name={nameAttributeValue || name}
           value={checkboxValue}
           onInvalid={invalidHandler}
         />
@@ -208,7 +223,12 @@
       if (loading) return <span>Loading...</span>;
       if (err && displayError) return <span>{err.message}</span>;
       return results.map((item) =>
-        renderCheckbox(item[labelProperty.name], `${item[valueProperty.name]}`),
+        renderCheckbox(
+          labelProperty
+            ? item[labelProperty.name]
+            : item[defaultLabelProperty.name],
+          `${item[valueProperty.name]}`,
+        ),
       );
     };
 
@@ -235,6 +255,7 @@
         )}
         <FormGroup row={row} data-component={dataComponentAttributeValue}>
           {renderCheckBoxes()}
+          <input type="hidden" name={name} value={values} />
         </FormGroup>
         {helper && <FormHelperText>{helper}</FormHelperText>}
       </FormControl>

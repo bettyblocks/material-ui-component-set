@@ -7,6 +7,7 @@ import {
   hideIf,
   buttongroup,
   model,
+  property,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 import { styles } from './styles';
@@ -22,23 +23,10 @@ export const checkboxGroupInputOptions = {
     value: '',
     configuration: { condition: hideIf('actionProperty', 'EQ', '') },
   }),
-
   label: variable('Label', { value: ['CheckboxGroup'] }),
   value: variable('Value', { value: [] }),
-  disabled: toggle('Disabled'),
-  helperText: variable('Helper text'),
-  position: buttongroup(
-    'Label Position',
-    [
-      ['Start', 'start'],
-      ['End', 'end'],
-      ['Top', 'top'],
-      ['Bottom', 'bottom'],
-    ],
-    { value: 'end' },
-  ),
   optionType: buttongroup(
-    'Label Position',
+    'Option type',
     [
       ['Model', 'model'],
       ['Property', 'property'],
@@ -51,14 +39,44 @@ export const checkboxGroupInputOptions = {
       },
     },
   ),
-  row: toggle('Row', { value: true }),
-  fullWidth: toggle('Full Width', { value: true }),
   model: model('Model', {
     value: '',
     configuration: {
       condition: showIf('optionType', 'EQ', 'variable'),
     },
   }),
+  filter: option('FILTER', {
+    label: 'Filter for options',
+    value: {},
+    configuration: {
+      dependsOn: 'model',
+      condition: hideIf('optionType', 'EQ', 'property'),
+    },
+  }),
+  orderBy: property('Order by for options', {
+    value: '',
+    configuration: { condition: hideIf('optionType', 'EQ', 'property') },
+  }),
+  labelProperty: property('Label for options', {
+    value: '',
+    configuration: {
+      condition: hideIf('optionType', 'EQ', 'property'),
+    },
+  }),
+  disabled: toggle('Disabled'),
+  helperText: variable('Helper text'),
+  position: buttongroup(
+    'Label Position',
+    [
+      ['Start', 'start'],
+      ['End', 'end'],
+      ['Top', 'top'],
+      ['Bottom', 'bottom'],
+    ],
+    { value: 'end' },
+  ),
+  row: toggle('Row', { value: true }),
+  fullWidth: toggle('Full Width', { value: true }),
   type: text('Type', {
     value: 'checkbox',
     configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },

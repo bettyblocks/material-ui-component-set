@@ -18,7 +18,7 @@ const beforeCreate = ({
 
   return (
     <CreateFormInputWizard
-      supportedKinds={['LIST']}
+      supportedKinds={['LIST', 'HAS_AND_BELONGS_TO_MANY', 'HAS_MANY']}
       actionVariableOption={actionVariableOption?.key || null}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
@@ -32,6 +32,7 @@ const beforeCreate = ({
 const attributes = {
   category: 'FORM',
   icon: Icon.CheckboxGroupIcon,
+  keywords: ['Form', 'input'],
 };
 
 export default prefab('Checkbox Group', attributes, beforeCreate, [

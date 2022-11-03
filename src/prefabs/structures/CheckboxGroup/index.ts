@@ -33,7 +33,7 @@ export const CheckboxGroup = (
     {
       label: 'Advanced Options',
       expanded: false,
-      members: ['nameAttribute', 'dataComponentAttribute'],
+      members: ['dataComponentAttribute'],
     },
   ];
 
