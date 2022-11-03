@@ -103,7 +103,6 @@ export default makePrefab('Case dashboard', attrs, undefined, [
       },
     },
     [
-      // Desktop design
       Column(
         {
           label: 'Desktop',
@@ -393,7 +392,6 @@ export default makePrefab('Case dashboard', attrs, undefined, [
                           },
                         },
                         [
-                          // Home
                           boxPrefab(
                             {
                               options: {
@@ -439,7 +437,6 @@ export default makePrefab('Case dashboard', attrs, undefined, [
                               }),
                             ],
                           ),
-                          // Case
                           boxPrefab(
                             {
                               options: {
@@ -485,7 +482,6 @@ export default makePrefab('Case dashboard', attrs, undefined, [
                               }),
                             ],
                           ),
-                          // Users
                           boxPrefab(
                             {
                               options: {
@@ -531,7 +527,6 @@ export default makePrefab('Case dashboard', attrs, undefined, [
                               }),
                             ],
                           ),
-                          // Case types
                           boxPrefab(
                             {
                               options: {
@@ -1017,7 +1012,6 @@ export default makePrefab('Case dashboard', attrs, undefined, [
           ),
         ],
       ),
-      // Mobile design
       Column(
         {
           label: 'Mobile',
