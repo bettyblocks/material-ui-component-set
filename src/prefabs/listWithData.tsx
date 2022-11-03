@@ -21,9 +21,27 @@ const beforeCreate = ({
   prefab,
   save,
   close,
+  helpers: { useModelQuery },
 }: BeforeCreateArgs) => {
   const [modelId, setModelId] = React.useState('');
-  const [property, setProperty] = React.useState('');
+  const [primaryProperty, setPrimaryProperty] = React.useState('');
+
+  const { data } = useModelQuery({
+    variables: { id: modelId },
+  });
+
+  const enrichVarObj = (obj: any) => {
+    const returnObject = obj;
+    if (data && data.model) {
+      const property = data.model.properties.find(
+        (prop: any) => prop.id === obj.id[0],
+      );
+      if (property) {
+        returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
+      }
+    }
+    return returnObject;
+  };
 
   // TODO: find out why structure: PrefabReference[] isn't allowed..
   const reduceStructure = (refValue: string, structure: any) =>
@@ -53,10 +71,10 @@ const beforeCreate = ({
         <Field label="Property">
           <PropertySelector
             onChange={(value: string) => {
-              setProperty(value);
+              setPrimaryProperty(value);
             }}
             modelId={modelId}
-            value={property}
+            value={primaryProperty}
           />
         </Field>
       </Content>
@@ -76,7 +94,7 @@ const beforeCreate = ({
             type: 'VARIABLE',
             label: 'Primary text',
             key: 'primaryText',
-            value: [property],
+            value: [enrichVarObj(primaryProperty)],
           };
           save(newPrefab);
         }}
