@@ -5,33 +5,33 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
+      actionProperty,
+      actionVariableId: name,
+      dataComponentAttribute = ['CheckboxGroup'],
       disabled,
-      position,
-      size,
-      helperText = [''],
-      row,
-      checkboxOptions,
-      model,
-      optionType,
-      labelProp,
-      valueProp,
-      margin,
       filter,
       fullWidth,
-      showError,
+      helperText = [''],
       hideLabel,
-      customModelAttribute: customModelAttributeObj,
-      property,
-      nameAttribute,
+      label: labelRaw,
+      labelProperty: labelPropertyId = '',
+      margin,
+      model,
+      nameAttribute: nameAttributeRaw,
       order,
       orderBy,
+      position,
+      required,
+      row,
+      showError,
+      size,
       validationValueMissing = [''],
-      dataComponentAttribute = ['CheckboxGroup'],
+      value: valueRaw,
     } = options;
 
     const {
       env,
-      getCustomModelAttribute,
+      getIdProperty,
       getProperty,
       useAllQuery,
       useRelation,
@@ -44,29 +44,27 @@
     const [helper, setHelper] = useState(useText(helperText));
     const [isDisabled, setIsDisabled] = useState(disabled);
 
-    const { kind, values: listValues = [] } = getProperty(property) || {};
-    const labelProperty = getProperty(labelProp);
-    const valueProperty = getProperty(valueProp);
-    const {
-      id: customModelAttributeId,
-      label = [],
-      value: defaultValue,
-      required: defaultRequired = false,
-    } = customModelAttributeObj;
-    const customModelAttribute = getCustomModelAttribute(
-      customModelAttributeId,
-    );
-    const {
-      name: customModelAttributeName,
-      validations: { required: attributeRequired } = {},
-    } = customModelAttribute || {};
-    const required = customModelAttribute ? attributeRequired : defaultRequired;
-    const labelText = useText(label);
-    const nameAttributeValue = useText(nameAttribute);
+    const labelProperty = getProperty(labelPropertyId) || {};
+    const labelText = useText(labelRaw);
+    const nameAttributeValue = useText(nameAttributeRaw);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const validationValueMissingText = useText(validationValueMissing);
     const helperTextResolved = useText(helperText);
-    const defaultValueText = useText(defaultValue);
+    const defaultValueText = useText(valueRaw);
+
+    const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
+    const { modelId: propertyModelId } = modelProperty;
+    const modelId = propertyModelId || model || '';
+    const idProperty = getIdProperty(modelId || '') || {};
+    const isListProperty =
+      modelProperty.kind === 'LIST' || modelProperty.kind === 'list';
+    const valueProperty = isListProperty ? modelProperty : idProperty;
+    // console.log({ modelProperty });
+    // console.log({ modelId });
+    // console.log({ idProperty });
+    // console.log({ isListProperty });
+    // console.log({ valueProperty });
+    const listValues = valueProperty.values;
 
     const getValues = () => {
       const value = defaultValueText || [];
@@ -180,34 +178,31 @@
     const isValid = required ? values.join() !== '' : true;
     const hasError = errorState || !isValid;
 
-    const renderCheckbox = (checkboxLabel, checkboxValue) => (
-      <FormControlLabel
-        control={
-          <MUICheckbox
-            required={required && !isValid}
-            tabIndex={isDev ? -1 : undefined}
-            size={size}
-          />
-        }
-        label={checkboxLabel}
-        labelPlacement={position}
-        checked={values.includes(checkboxValue)}
-        onChange={handleChange}
-        disabled={isDisabled}
-        name={nameAttributeValue || customModelAttributeName}
-        value={checkboxValue}
-        onInvalid={invalidHandler}
-      />
-    );
+    const renderCheckbox = (checkboxLabel, checkboxValue) => {
+      return (
+        <FormControlLabel
+          control={
+            <MUICheckbox
+              required={required && !isValid}
+              tabIndex={isDev ? -1 : undefined}
+              size={size}
+            />
+          }
+          label={checkboxLabel}
+          labelPlacement={position}
+          checked={values.includes(checkboxValue)}
+          onChange={handleChange}
+          disabled={isDisabled}
+          name={nameAttributeValue || name}
+          value={checkboxValue}
+          onInvalid={invalidHandler}
+        />
+      );
+    };
 
     const renderCheckBoxes = () => {
-      if (kind === 'list' || kind === 'LIST') {
+      if (isListProperty) {
         return listValues.map(({ value: v }) => renderCheckbox(v, v));
-      }
-      if (optionType === 'static') {
-        return (checkboxOptions || '')
-          .split('\n')
-          .map((opt) => renderCheckbox(opt, opt));
       }
       if (isDev) return renderCheckbox('Placeholder', false);
       if (loading) return <span>Loading...</span>;
