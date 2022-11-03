@@ -1390,416 +1390,433 @@ const beforeCreate = ({
             return prop.kind === 'IMAGE' ? mediaComponent : detailComponent;
           };
 
-          // const detailFactory = (name: string, prop: any) => {
-          //   debugger;
-          //   if (detailContainer && detailContainer.descendants) {
-          //     const RowColumnColumn = cloneStructure('2 Columns');
-          //     const Text1 = cloneStructure('Text');
-          //     const Text2 = cloneStructure('Text');
+          const detailFactory = (name: string, prop: any) => {
+            debugger;
+            if (detailContainer && detailContainer.descendants) {
+              const RowColumnColumn = cloneStructure('2 Columns');
+              const Text1 = cloneStructure('Text');
+              const Text2 = cloneStructure('Text');
 
-          //     if (RowColumnColumn.type === 'COMPONENT') {
-          //       setOption(
-          //         RowColumnColumn,
-          //         'maxRowWidth',
-          //         (opt: PrefabComponentOption) => ({
-          //           ...opt,
-          //           value: 'Full',
-          //         }),
-          //       );
-          //     }
-          //     if (
-          //       RowColumnColumn.type === 'COMPONENT' &&
-          //       RowColumnColumn.descendants[0].type === 'COMPONENT'
-          //     ) {
-          //       setOption(
-          //         RowColumnColumn.descendants[0],
-          //         'columnWidth',
-          //         (opt: PrefabComponentOption) => ({
-          //           ...opt,
-          //           value: '4',
-          //           configuration: {
-          //             as: 'DROPDOWN',
-          //             dataType: 'string',
-          //             allowedInput: [
-          //               {
-          //                 name: 'Fit content',
-          //                 value: 'fitContent',
-          //               },
-          //               {
-          //                 name: 'Flexible',
-          //                 value: 'flexible',
-          //               },
-          //               {
-          //                 name: 'Hidden',
-          //                 value: 'hidden',
-          //               },
-          //               { name: '1', value: '1' },
-          //               { name: '2', value: '2' },
-          //               { name: '3', value: '3' },
-          //               { name: '4', value: '4' },
-          //               { name: '5', value: '5' },
-          //               { name: '6', value: '6' },
-          //               { name: '7', value: '7' },
-          //               { name: '8', value: '8' },
-          //               { name: '9', value: '9' },
-          //               { name: '10', value: '10' },
-          //               { name: '11', value: '11' },
-          //               { name: '12', value: '12' },
-          //             ],
-          //           },
-          //         }),
-          //       );
-          //       setOption(
-          //         RowColumnColumn.descendants[0],
-          //         'columnWidthTabletLandscape',
-          //         (opt: PrefabComponentOption) => ({
-          //           ...opt,
-          //           value: '6',
-          //           configuration: {
-          //             as: 'DROPDOWN',
-          //             dataType: 'string',
-          //             allowedInput: [
-          //               {
-          //                 name: 'Fit content',
-          //                 value: 'fitContent',
-          //               },
-          //               {
-          //                 name: 'Flexible',
-          //                 value: 'flexible',
-          //               },
-          //               {
-          //                 name: 'Hidden',
-          //                 value: 'hidden',
-          //               },
-          //               { name: '1', value: '1' },
-          //               { name: '2', value: '2' },
-          //               { name: '3', value: '3' },
-          //               { name: '4', value: '4' },
-          //               { name: '5', value: '5' },
-          //               { name: '6', value: '6' },
-          //               { name: '7', value: '7' },
-          //               { name: '8', value: '8' },
-          //               { name: '9', value: '9' },
-          //               { name: '10', value: '10' },
-          //               { name: '11', value: '11' },
-          //               { name: '12', value: '12' },
-          //             ],
-          //           },
-          //         }),
-          //       );
-          //       setOption(
-          //         RowColumnColumn.descendants[0],
-          //         'columnWidthTabletPortrait',
-          //         (opt: PrefabComponentOption) => ({
-          //           ...opt,
-          //           value: '12',
-          //           configuration: {
-          //             as: 'DROPDOWN',
-          //             dataType: 'string',
-          //             allowedInput: [
-          //               {
-          //                 name: 'Fit content',
-          //                 value: 'fitContent',
-          //               },
-          //               {
-          //                 name: 'Flexible',
-          //                 value: 'flexible',
-          //               },
-          //               {
-          //                 name: 'Hidden',
-          //                 value: 'hidden',
-          //               },
-          //               { name: '1', value: '1' },
-          //               { name: '2', value: '2' },
-          //               { name: '3', value: '3' },
-          //               { name: '4', value: '4' },
-          //               { name: '5', value: '5' },
-          //               { name: '6', value: '6' },
-          //               { name: '7', value: '7' },
-          //               { name: '8', value: '8' },
-          //               { name: '9', value: '9' },
-          //               { name: '10', value: '10' },
-          //               { name: '11', value: '11' },
-          //               { name: '12', value: '12' },
-          //             ],
-          //           },
-          //         }),
-          //       );
-          //       setOption(
-          //         RowColumnColumn.descendants[0],
-          //         'columnWidthMobile',
-          //         (opt: PrefabComponentOption) => ({
-          //           ...opt,
-          //           value: '12',
-          //           configuration: {
-          //             as: 'DROPDOWN',
-          //             dataType: 'string',
-          //             allowedInput: [
-          //               {
-          //                 name: 'Fit content',
-          //                 value: 'fitContent',
-          //               },
-          //               {
-          //                 name: 'Flexible',
-          //                 value: 'flexible',
-          //               },
-          //               {
-          //                 name: 'Hidden',
-          //                 value: 'hidden',
-          //               },
-          //               { name: '1', value: '1' },
-          //               { name: '2', value: '2' },
-          //               { name: '3', value: '3' },
-          //               { name: '4', value: '4' },
-          //               { name: '5', value: '5' },
-          //               { name: '6', value: '6' },
-          //               { name: '7', value: '7' },
-          //               { name: '8', value: '8' },
-          //               { name: '9', value: '9' },
-          //               { name: '10', value: '10' },
-          //               { name: '11', value: '11' },
-          //               { name: '12', value: '12' },
-          //             ],
-          //           },
-          //         }),
-          //       );
-          //       setOption(
-          //         RowColumnColumn.descendants[0],
-          //         'innerSpacing',
-          //         (opt: PrefabComponentOption) => ({
-          //           ...opt,
-          //           value: ['0rem', 'L', 'L', 'L'],
-          //         }),
-          //       );
-          //     }
-          //     if (Text1.type === 'COMPONENT') {
-          //       setOption(Text1, 'content', (opt: PrefabComponentOption) => ({
-          //         ...opt,
-          //         value: [name],
-          //       }));
-          //       setOption(Text1, 'type', (opt: PrefabComponentOption) => ({
-          //         ...opt,
-          //         value: ['Body2'],
-          //       }));
-          //       setOption(
-          //         Text1,
-          //         'fontWeight',
-          //         (opt: PrefabComponentOption) => ({
-          //           ...opt,
-          //           value: '500',
-          //           configuration: {
-          //             as: 'DROPDOWN',
-          //             dataType: 'string',
-          //             allowedInput: [
-          //               { name: '100', value: '100' },
-          //               { name: '200', value: '200' },
-          //               { name: '300', value: '300' },
-          //               { name: '400', value: '400' },
-          //               { name: '500', value: '500' },
-          //               { name: '600', value: '600' },
-          //               { name: '700', value: '700' },
-          //               { name: '800', value: '800' },
-          //               { name: '900', value: '900' },
-          //             ],
-          //           },
-          //         }),
-          //       );
-          //     }
-          //     if (
-          //       RowColumnColumn.type === 'COMPONENT' &&
-          //       RowColumnColumn.descendants[1].type === 'COMPONENT'
-          //     ) {
-          //       setOption(
-          //         RowColumnColumn.descendants[1],
-          //         'columnWidth',
-          //         (opt: PrefabComponentOption) => ({
-          //           ...opt,
-          //           value: '8',
-          //           configuration: {
-          //             as: 'DROPDOWN',
-          //             dataType: 'string',
-          //             allowedInput: [
-          //               {
-          //                 name: 'Fit content',
-          //                 value: 'fitContent',
-          //               },
-          //               {
-          //                 name: 'Flexible',
-          //                 value: 'flexible',
-          //               },
-          //               {
-          //                 name: 'Hidden',
-          //                 value: 'hidden',
-          //               },
-          //               { name: '1', value: '1' },
-          //               { name: '2', value: '2' },
-          //               { name: '3', value: '3' },
-          //               { name: '4', value: '4' },
-          //               { name: '5', value: '5' },
-          //               { name: '6', value: '6' },
-          //               { name: '7', value: '7' },
-          //               { name: '8', value: '8' },
-          //               { name: '9', value: '9' },
-          //               { name: '10', value: '10' },
-          //               { name: '11', value: '11' },
-          //               { name: '12', value: '12' },
-          //             ],
-          //           },
-          //         }),
-          //       );
-          //       setOption(
-          //         RowColumnColumn.descendants[1],
-          //         'columnWidthTabletLandscape',
-          //         (opt: PrefabComponentOption) => ({
-          //           ...opt,
-          //           value: '6',
-          //           configuration: {
-          //             as: 'DROPDOWN',
-          //             dataType: 'string',
-          //             allowedInput: [
-          //               {
-          //                 name: 'Fit content',
-          //                 value: 'fitContent',
-          //               },
-          //               {
-          //                 name: 'Flexible',
-          //                 value: 'flexible',
-          //               },
-          //               {
-          //                 name: 'Hidden',
-          //                 value: 'hidden',
-          //               },
-          //               { name: '1', value: '1' },
-          //               { name: '2', value: '2' },
-          //               { name: '3', value: '3' },
-          //               { name: '4', value: '4' },
-          //               { name: '5', value: '5' },
-          //               { name: '6', value: '6' },
-          //               { name: '7', value: '7' },
-          //               { name: '8', value: '8' },
-          //               { name: '9', value: '9' },
-          //               { name: '10', value: '10' },
-          //               { name: '11', value: '11' },
-          //               { name: '12', value: '12' },
-          //             ],
-          //           },
-          //         }),
-          //       );
-          //       setOption(
-          //         RowColumnColumn.descendants[1],
-          //         'columnWidthTabletPortrait',
-          //         (opt: PrefabComponentOption) => ({
-          //           ...opt,
-          //           value: '12',
-          //           configuration: {
-          //             as: 'DROPDOWN',
-          //             dataType: 'string',
-          //             allowedInput: [
-          //               {
-          //                 name: 'Fit content',
-          //                 value: 'fitContent',
-          //               },
-          //               {
-          //                 name: 'Flexible',
-          //                 value: 'flexible',
-          //               },
-          //               {
-          //                 name: 'Hidden',
-          //                 value: 'hidden',
-          //               },
-          //               { name: '1', value: '1' },
-          //               { name: '2', value: '2' },
-          //               { name: '3', value: '3' },
-          //               { name: '4', value: '4' },
-          //               { name: '5', value: '5' },
-          //               { name: '6', value: '6' },
-          //               { name: '7', value: '7' },
-          //               { name: '8', value: '8' },
-          //               { name: '9', value: '9' },
-          //               { name: '10', value: '10' },
-          //               { name: '11', value: '11' },
-          //               { name: '12', value: '12' },
-          //             ],
-          //           },
-          //         }),
-          //       );
-          //       setOption(
-          //         RowColumnColumn.descendants[1],
-          //         'columnWidthMobile',
-          //         (opt: PrefabComponentOption) => ({
-          //           ...opt,
-          //           value: '12',
-          //           configuration: {
-          //             as: 'DROPDOWN',
-          //             dataType: 'string',
-          //             allowedInput: [
-          //               {
-          //                 name: 'Fit content',
-          //                 value: 'fitContent',
-          //               },
-          //               {
-          //                 name: 'Flexible',
-          //                 value: 'flexible',
-          //               },
-          //               {
-          //                 name: 'Hidden',
-          //                 value: 'hidden',
-          //               },
-          //               { name: '1', value: '1' },
-          //               { name: '2', value: '2' },
-          //               { name: '3', value: '3' },
-          //               { name: '4', value: '4' },
-          //               { name: '5', value: '5' },
-          //               { name: '6', value: '6' },
-          //               { name: '7', value: '7' },
-          //               { name: '8', value: '8' },
-          //               { name: '9', value: '9' },
-          //               { name: '10', value: '10' },
-          //               { name: '11', value: '11' },
-          //               { name: '12', value: '12' },
-          //             ],
-          //           },
-          //         }),
-          //       );
-          //       setOption(
-          //         RowColumnColumn.descendants[1],
-          //         'innerSpacing',
-          //         (opt: PrefabComponentOption) => ({
-          //           ...opt,
-          //           value: ['0rem', 'L', 'L', 'L'],
-          //         }),
-          //       );
-          //     }
-          //     if (Text2.type === 'COMPONENT') {
-          //       setOption(Text2, 'content', (opt: PrefabComponentOption) => ({
-          //         ...opt,
-          //         value: [{ ...prop }],
-          //         configuration: { as: 'MULTILINE' },
-          //       }));
-          //       setOption(Text2, 'type', (opt: PrefabComponentOption) => ({
-          //         ...opt,
-          //         value: ['Body1'],
-          //       }));
-          //     }
+              if (RowColumnColumn.type === 'COMPONENT') {
+                setOption(
+                  RowColumnColumn,
+                  'maxRowWidth',
+                  (opt: PrefabComponentOption) => ({
+                    ...opt,
+                    value: 'Full',
+                  }),
+                );
+              }
+              if (
+                RowColumnColumn.type === 'COMPONENT' &&
+                RowColumnColumn.descendants[0].type === 'COMPONENT'
+              ) {
+                setOption(
+                  RowColumnColumn.descendants[0],
+                  'columnWidth',
+                  (opt: PrefabComponentOption) => ({
+                    ...opt,
+                    value: '4',
+                    configuration: {
+                      as: 'DROPDOWN',
+                      dataType: 'string',
+                      allowedInput: [
+                        {
+                          name: 'Fit content',
+                          value: 'fitContent',
+                        },
+                        {
+                          name: 'Flexible',
+                          value: 'flexible',
+                        },
+                        {
+                          name: 'Hidden',
+                          value: 'hidden',
+                        },
+                        { name: '1', value: '1' },
+                        { name: '2', value: '2' },
+                        { name: '3', value: '3' },
+                        { name: '4', value: '4' },
+                        { name: '5', value: '5' },
+                        { name: '6', value: '6' },
+                        { name: '7', value: '7' },
+                        { name: '8', value: '8' },
+                        { name: '9', value: '9' },
+                        { name: '10', value: '10' },
+                        { name: '11', value: '11' },
+                        { name: '12', value: '12' },
+                      ],
+                    },
+                  }),
+                );
+                setOption(
+                  RowColumnColumn.descendants[0],
+                  'columnWidthTabletLandscape',
+                  (opt: PrefabComponentOption) => ({
+                    ...opt,
+                    value: '6',
+                    configuration: {
+                      as: 'DROPDOWN',
+                      dataType: 'string',
+                      allowedInput: [
+                        {
+                          name: 'Fit content',
+                          value: 'fitContent',
+                        },
+                        {
+                          name: 'Flexible',
+                          value: 'flexible',
+                        },
+                        {
+                          name: 'Hidden',
+                          value: 'hidden',
+                        },
+                        { name: '1', value: '1' },
+                        { name: '2', value: '2' },
+                        { name: '3', value: '3' },
+                        { name: '4', value: '4' },
+                        { name: '5', value: '5' },
+                        { name: '6', value: '6' },
+                        { name: '7', value: '7' },
+                        { name: '8', value: '8' },
+                        { name: '9', value: '9' },
+                        { name: '10', value: '10' },
+                        { name: '11', value: '11' },
+                        { name: '12', value: '12' },
+                      ],
+                    },
+                  }),
+                );
+                setOption(
+                  RowColumnColumn.descendants[0],
+                  'columnWidthTabletPortrait',
+                  (opt: PrefabComponentOption) => ({
+                    ...opt,
+                    value: '12',
+                    configuration: {
+                      as: 'DROPDOWN',
+                      dataType: 'string',
+                      allowedInput: [
+                        {
+                          name: 'Fit content',
+                          value: 'fitContent',
+                        },
+                        {
+                          name: 'Flexible',
+                          value: 'flexible',
+                        },
+                        {
+                          name: 'Hidden',
+                          value: 'hidden',
+                        },
+                        { name: '1', value: '1' },
+                        { name: '2', value: '2' },
+                        { name: '3', value: '3' },
+                        { name: '4', value: '4' },
+                        { name: '5', value: '5' },
+                        { name: '6', value: '6' },
+                        { name: '7', value: '7' },
+                        { name: '8', value: '8' },
+                        { name: '9', value: '9' },
+                        { name: '10', value: '10' },
+                        { name: '11', value: '11' },
+                        { name: '12', value: '12' },
+                      ],
+                    },
+                  }),
+                );
+                setOption(
+                  RowColumnColumn.descendants[0],
+                  'columnWidthMobile',
+                  (opt: PrefabComponentOption) => ({
+                    ...opt,
+                    value: '12',
+                    configuration: {
+                      as: 'DROPDOWN',
+                      dataType: 'string',
+                      allowedInput: [
+                        {
+                          name: 'Fit content',
+                          value: 'fitContent',
+                        },
+                        {
+                          name: 'Flexible',
+                          value: 'flexible',
+                        },
+                        {
+                          name: 'Hidden',
+                          value: 'hidden',
+                        },
+                        { name: '1', value: '1' },
+                        { name: '2', value: '2' },
+                        { name: '3', value: '3' },
+                        { name: '4', value: '4' },
+                        { name: '5', value: '5' },
+                        { name: '6', value: '6' },
+                        { name: '7', value: '7' },
+                        { name: '8', value: '8' },
+                        { name: '9', value: '9' },
+                        { name: '10', value: '10' },
+                        { name: '11', value: '11' },
+                        { name: '12', value: '12' },
+                      ],
+                    },
+                  }),
+                );
+                setOption(
+                  RowColumnColumn.descendants[0],
+                  'innerSpacing',
+                  (opt: PrefabComponentOption) => ({
+                    ...opt,
+                    value: ['0rem', 'L', 'L', 'L'],
+                  }),
+                );
+              }
+              if (Text1.type === 'COMPONENT') {
+                setOption(Text1, 'content', (opt: PrefabComponentOption) => ({
+                  ...opt,
+                  value: [name],
+                }));
+                setOption(Text1, 'type', (opt: PrefabComponentOption) => ({
+                  ...opt,
+                  value: ['Body2'],
+                }));
+                setOption(
+                  Text1,
+                  'fontWeight',
+                  (opt: PrefabComponentOption) => ({
+                    ...opt,
+                    value: '500',
+                    configuration: {
+                      as: 'DROPDOWN',
+                      dataType: 'string',
+                      allowedInput: [
+                        { name: '100', value: '100' },
+                        { name: '200', value: '200' },
+                        { name: '300', value: '300' },
+                        { name: '400', value: '400' },
+                        { name: '500', value: '500' },
+                        { name: '600', value: '600' },
+                        { name: '700', value: '700' },
+                        { name: '800', value: '800' },
+                        { name: '900', value: '900' },
+                      ],
+                    },
+                  }),
+                );
+              }
+              if (
+                RowColumnColumn.type === 'COMPONENT' &&
+                RowColumnColumn.descendants[1].type === 'COMPONENT'
+              ) {
+                setOption(
+                  RowColumnColumn.descendants[1],
+                  'columnWidth',
+                  (opt: PrefabComponentOption) => ({
+                    ...opt,
+                    value: '8',
+                    configuration: {
+                      as: 'DROPDOWN',
+                      dataType: 'string',
+                      allowedInput: [
+                        {
+                          name: 'Fit content',
+                          value: 'fitContent',
+                        },
+                        {
+                          name: 'Flexible',
+                          value: 'flexible',
+                        },
+                        {
+                          name: 'Hidden',
+                          value: 'hidden',
+                        },
+                        { name: '1', value: '1' },
+                        { name: '2', value: '2' },
+                        { name: '3', value: '3' },
+                        { name: '4', value: '4' },
+                        { name: '5', value: '5' },
+                        { name: '6', value: '6' },
+                        { name: '7', value: '7' },
+                        { name: '8', value: '8' },
+                        { name: '9', value: '9' },
+                        { name: '10', value: '10' },
+                        { name: '11', value: '11' },
+                        { name: '12', value: '12' },
+                      ],
+                    },
+                  }),
+                );
+                setOption(
+                  RowColumnColumn.descendants[1],
+                  'columnWidthTabletLandscape',
+                  (opt: PrefabComponentOption) => ({
+                    ...opt,
+                    value: '6',
+                    configuration: {
+                      as: 'DROPDOWN',
+                      dataType: 'string',
+                      allowedInput: [
+                        {
+                          name: 'Fit content',
+                          value: 'fitContent',
+                        },
+                        {
+                          name: 'Flexible',
+                          value: 'flexible',
+                        },
+                        {
+                          name: 'Hidden',
+                          value: 'hidden',
+                        },
+                        { name: '1', value: '1' },
+                        { name: '2', value: '2' },
+                        { name: '3', value: '3' },
+                        { name: '4', value: '4' },
+                        { name: '5', value: '5' },
+                        { name: '6', value: '6' },
+                        { name: '7', value: '7' },
+                        { name: '8', value: '8' },
+                        { name: '9', value: '9' },
+                        { name: '10', value: '10' },
+                        { name: '11', value: '11' },
+                        { name: '12', value: '12' },
+                      ],
+                    },
+                  }),
+                );
+                setOption(
+                  RowColumnColumn.descendants[1],
+                  'columnWidthTabletPortrait',
+                  (opt: PrefabComponentOption) => ({
+                    ...opt,
+                    value: '12',
+                    configuration: {
+                      as: 'DROPDOWN',
+                      dataType: 'string',
+                      allowedInput: [
+                        {
+                          name: 'Fit content',
+                          value: 'fitContent',
+                        },
+                        {
+                          name: 'Flexible',
+                          value: 'flexible',
+                        },
+                        {
+                          name: 'Hidden',
+                          value: 'hidden',
+                        },
+                        { name: '1', value: '1' },
+                        { name: '2', value: '2' },
+                        { name: '3', value: '3' },
+                        { name: '4', value: '4' },
+                        { name: '5', value: '5' },
+                        { name: '6', value: '6' },
+                        { name: '7', value: '7' },
+                        { name: '8', value: '8' },
+                        { name: '9', value: '9' },
+                        { name: '10', value: '10' },
+                        { name: '11', value: '11' },
+                        { name: '12', value: '12' },
+                      ],
+                    },
+                  }),
+                );
+                setOption(
+                  RowColumnColumn.descendants[1],
+                  'columnWidthMobile',
+                  (opt: PrefabComponentOption) => ({
+                    ...opt,
+                    value: '12',
+                    configuration: {
+                      as: 'DROPDOWN',
+                      dataType: 'string',
+                      allowedInput: [
+                        {
+                          name: 'Fit content',
+                          value: 'fitContent',
+                        },
+                        {
+                          name: 'Flexible',
+                          value: 'flexible',
+                        },
+                        {
+                          name: 'Hidden',
+                          value: 'hidden',
+                        },
+                        { name: '1', value: '1' },
+                        { name: '2', value: '2' },
+                        { name: '3', value: '3' },
+                        { name: '4', value: '4' },
+                        { name: '5', value: '5' },
+                        { name: '6', value: '6' },
+                        { name: '7', value: '7' },
+                        { name: '8', value: '8' },
+                        { name: '9', value: '9' },
+                        { name: '10', value: '10' },
+                        { name: '11', value: '11' },
+                        { name: '12', value: '12' },
+                      ],
+                    },
+                  }),
+                );
+                setOption(
+                  RowColumnColumn.descendants[1],
+                  'innerSpacing',
+                  (opt: PrefabComponentOption) => ({
+                    ...opt,
+                    value: ['0rem', 'L', 'L', 'L'],
+                  }),
+                );
+              }
+              if (Text2.type === 'COMPONENT') {
+                setOption(Text2, 'content', (opt: PrefabComponentOption) => ({
+                  ...opt,
+                  value: [{ ...prop }],
+                  configuration: { as: 'MULTILINE' },
+                }));
+                setOption(Text2, 'type', (opt: PrefabComponentOption) => ({
+                  ...opt,
+                  value: ['Body1'],
+                }));
+              }
 
-          //     if (
-          //       Text2.type === 'COMPONENT' &&
-          //       Text1.type === 'COMPONENT' &&
-          //       RowColumnColumn.type === 'COMPONENT' &&
-          //       RowColumnColumn.descendants[0].type === 'COMPONENT' &&
-          //       RowColumnColumn.descendants[1].type === 'COMPONENT'
-          //     ) {
-          //       RowColumnColumn.descendants[0].descendants = [Text1];
-          //       RowColumnColumn.descendants[1].descendants = [Text2];
+              if (
+                Text2.type === 'COMPONENT' &&
+                Text1.type === 'COMPONENT' &&
+                RowColumnColumn.type === 'COMPONENT' &&
+                RowColumnColumn.descendants[0].type === 'COMPONENT' &&
+                RowColumnColumn.descendants[1].type === 'COMPONENT'
+              ) {
+                RowColumnColumn.descendants[0].descendants = [Text1];
+                RowColumnColumn.descendants[1].descendants = [Text2];
 
-          //       detailContainer.descendants.push(RowColumnColumn);
-          //     }
-          //   }
-          // };
+                detailContainer.descendants.push(RowColumnColumn);
+              }
+            }
+          };
+          // // console.log(model?.properties);
+          const transformProperty = (prop) => {
+            const outputProp = prop;
+            delete outputProp.modelId;
+            delete outputProp.name;
+            delete outputProp.unique;
+            // eslint-disable-next-line no-underscore-dangle
+            outputProp.type = 'PROPERTY';
+            // eslint-disable-next-line no-underscore-dangle
+            delete outputProp.__typename;
+            outputProp.defaultValue = null;
+
+            return outputProp;
+          };
           // console.log(model?.properties);
           model?.properties.forEach((property: any) => {
+            console.log(transformProperty(property));
             if (detailContainer)
-              detailContainer.descendants.push(makeDetail(property));
+              detailContainer.descendants.push(
+                makeDetail(transformProperty(property)),
+              );
           });
 
           // console.log(model);
