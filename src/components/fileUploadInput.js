@@ -176,8 +176,8 @@
             ref={inputRef}
             required={hasValidUploads ? false : required}
           />
-          {isDirty && ( // TODO: change to showing only what is from the html element
-            <input type="hidden" name={name} value={fileReference} />
+          {(isDirty || value === '') && ( // TODO: change to showing only what is from the html element
+            <input type="hidden" name={name} value={fileReference || value} />
           )}
         </div>
       );
@@ -190,7 +190,7 @@
             size="small"
             className={classes.remove}
             onClick={() => {
-              setValue(null);
+              setValue('');
               B.triggerEvent('onFileRemove');
             }}
           >
