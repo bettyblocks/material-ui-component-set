@@ -1,3 +1,10 @@
+## [2.65.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.4...v2.65.5) (2022-11-03)
+
+
+### Bug Fixes
+
+* reset on text input resets to default value ([0c74128](https://github.com/bettyblocks/material-ui-component-set/commit/0c74128535051feef4f164e0cc75a445e7236039))
+
 ## [2.65.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.3...v2.65.4) (2022-11-03)
 
 
