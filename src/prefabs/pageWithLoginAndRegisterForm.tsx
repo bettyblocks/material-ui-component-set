@@ -49,8 +49,6 @@ import {
   SubmitButton,
   Alert,
   alertOptions,
-  Conditional,
-  conditionalOptions,
 } from './structures';
 import {
   AuthenticationProfile,
@@ -314,10 +312,6 @@ const beforeCreate = ({
 
       if (!authProfile) throw new Error("Can't find auth profile");
 
-      if (!endpoint) {
-        throw new Error('There was no redirected page selected');
-      }
-
       return (
         <Field
           label="Input fields in the register form"
@@ -452,6 +446,9 @@ const beforeCreate = ({
         idProperty,
         properties,
         'create',
+        undefined,
+        undefined,
+        'public',
       );
 
       const resultAuth = await prepareAction(
@@ -482,23 +479,6 @@ const beforeCreate = ({
           );
           if (!registerFormBox)
             throw new Error('Register box could not be found');
-
-          setOption(
-            registerFormBox,
-            'actionId',
-            (originalOption: PrefabComponentOption) => ({
-              ...originalOption,
-              value: result.action.actionId,
-            }),
-          );
-          setOption(
-            registerFormBox,
-            'model',
-            (originalOption: PrefabComponentOption) => ({
-              ...originalOption,
-              value: modelId,
-            }),
-          );
 
           Object.values(result.variables).forEach(
             ([prop, inputVariable]): void => {
@@ -640,27 +620,6 @@ const beforeCreate = ({
               }
             };
             const formInputPrefabs = inputPrefabs();
-            if (
-              formInputPrefabs.type === 'COMPONENT' &&
-              formInputPrefabs.descendants[1].type === 'COMPONENT'
-            ) {
-              setOption(
-                formInputPrefabs,
-                'actionId',
-                (originalOption: PrefabComponentOption) => ({
-                  ...originalOption,
-                  value: resultAuth.action.actionId,
-                }),
-              );
-              setOption(
-                formInputPrefabs,
-                'model',
-                (originalOption: PrefabComponentOption) => ({
-                  ...originalOption,
-                  value: modelId,
-                }),
-              );
-            }
             loginFormBox.descendants.push(formInputPrefabs);
 
             if (!kind) {
@@ -683,30 +642,6 @@ const beforeCreate = ({
               parameters: serializeParameters(endpoint.params),
             },
           ];
-        } else {
-          throw new Error(
-            'Could not modify the interaction because one of the following items could not be found: Interaction, Interaction parameters, Endpoint, Endpoint parameters',
-          );
-        }
-
-        if (
-          newPrefab.interactions &&
-          endpoint &&
-          endpoint.params &&
-          'parameters' in newPrefab.interactions[0]
-        ) {
-          newPrefab.interactions[0].parameters = [
-            {
-              parameter: 'redirectTo',
-              pageId: endpoint.pageId,
-              endpointId: endpoint.id,
-              parameters: serializeParameters(endpoint.params),
-            },
-          ];
-        } else {
-          throw new Error(
-            'Could not modify the interaction because one of the following items could not be found: Interaction, Interaction parameters, Endpoint, Endpoint parameters',
-          );
         }
 
         setOption(formObject, 'actionId', (options: PrefabComponentOption) => ({
@@ -1353,330 +1288,6 @@ export default makePrefab('Header and footer', attrs, beforeCreate, [
                                           },
                                         },
                                         [
-                                          Conditional(
-                                            {
-                                              options: {
-                                                ...conditionalOptions,
-                                                visible: toggle(
-                                                  'Initial visibility',
-                                                  {
-                                                    value: false,
-                                                    configuration: {
-                                                      as: 'VISIBILITY',
-                                                    },
-                                                  },
-                                                ),
-                                              },
-                                            },
-                                            [
-                                              BoxPrefab(
-                                                {
-                                                  options: {
-                                                    ...boxOptions,
-                                                    outerSpacing: sizes(
-                                                      'Outer space',
-                                                      {
-                                                        value: [
-                                                          '0rem',
-                                                          '0rem',
-                                                          'XL',
-                                                          '0rem',
-                                                        ],
-                                                      },
-                                                    ),
-                                                    backgroundColor: color(
-                                                      'Background color',
-                                                      {
-                                                        value:
-                                                          ThemeColor.DANGER,
-                                                      },
-                                                    ),
-                                                    borderRadius: size(
-                                                      'Border radius',
-                                                      {
-                                                        value: '5px',
-                                                      },
-                                                    ),
-                                                  },
-                                                },
-                                                [
-                                                  TextComponent(
-                                                    {
-                                                      options: {
-                                                        ...textOptions,
-                                                        content: variable(
-                                                          'Content',
-                                                          {
-                                                            value: [
-                                                              'Attention: This template is using next generation actions!',
-                                                            ],
-                                                            configuration: {
-                                                              as: 'MULTILINE',
-                                                            },
-                                                          },
-                                                        ),
-                                                        type: font('Font', {
-                                                          value: ['Body1'],
-                                                        }),
-                                                        outerSpacing: sizes(
-                                                          'Outer space',
-                                                          {
-                                                            value: [
-                                                              '0rem',
-                                                              '0rem',
-                                                              '0rem',
-                                                              'S',
-                                                            ],
-                                                          },
-                                                        ),
-                                                        textColor: color(
-                                                          'Text color',
-                                                          {
-                                                            value:
-                                                              ThemeColor.WHITE,
-                                                          },
-                                                        ),
-                                                        fontWeight: option(
-                                                          'CUSTOM',
-                                                          {
-                                                            label:
-                                                              'Font weight',
-                                                            value: '500',
-                                                            configuration: {
-                                                              as: 'DROPDOWN',
-                                                              dataType:
-                                                                'string',
-                                                              allowedInput: [
-                                                                {
-                                                                  name: '100',
-                                                                  value: '100',
-                                                                },
-                                                                {
-                                                                  name: '200',
-                                                                  value: '200',
-                                                                },
-                                                                {
-                                                                  name: '300',
-                                                                  value: '300',
-                                                                },
-                                                                {
-                                                                  name: '400',
-                                                                  value: '400',
-                                                                },
-                                                                {
-                                                                  name: '500',
-                                                                  value: '500',
-                                                                },
-                                                                {
-                                                                  name: '600',
-                                                                  value: '600',
-                                                                },
-                                                                {
-                                                                  name: '700',
-                                                                  value: '700',
-                                                                },
-                                                                {
-                                                                  name: '800',
-                                                                  value: '800',
-                                                                },
-                                                                {
-                                                                  name: '900',
-                                                                  value: '900',
-                                                                },
-                                                              ],
-                                                            },
-                                                          },
-                                                        ),
-                                                      },
-                                                    },
-                                                    [],
-                                                  ),
-                                                  TextComponent(
-                                                    {
-                                                      options: {
-                                                        ...textOptions,
-                                                        content: variable(
-                                                          'Content',
-                                                          {
-                                                            value: [
-                                                              'You need to configure the permissions of the "Form" actions in order to use this template.',
-                                                            ],
-                                                            configuration: {
-                                                              as: 'MULTILINE',
-                                                            },
-                                                          },
-                                                        ),
-                                                        type: font('Font', {
-                                                          value: ['Body1'],
-                                                        }),
-                                                        outerSpacing: sizes(
-                                                          'Outer space',
-                                                          {
-                                                            value: [
-                                                              '0rem',
-                                                              '0rem',
-                                                              '0rem',
-                                                              'S',
-                                                            ],
-                                                          },
-                                                        ),
-                                                        textColor: color(
-                                                          'Text color',
-                                                          {
-                                                            value:
-                                                              ThemeColor.WHITE,
-                                                          },
-                                                        ),
-                                                        fontWeight: option(
-                                                          'CUSTOM',
-                                                          {
-                                                            label:
-                                                              'Font weight',
-                                                            value: '500',
-                                                            configuration: {
-                                                              as: 'DROPDOWN',
-                                                              dataType:
-                                                                'string',
-                                                              allowedInput: [
-                                                                {
-                                                                  name: '100',
-                                                                  value: '100',
-                                                                },
-                                                                {
-                                                                  name: '200',
-                                                                  value: '200',
-                                                                },
-                                                                {
-                                                                  name: '300',
-                                                                  value: '300',
-                                                                },
-                                                                {
-                                                                  name: '400',
-                                                                  value: '400',
-                                                                },
-                                                                {
-                                                                  name: '500',
-                                                                  value: '500',
-                                                                },
-                                                                {
-                                                                  name: '600',
-                                                                  value: '600',
-                                                                },
-                                                                {
-                                                                  name: '700',
-                                                                  value: '700',
-                                                                },
-                                                                {
-                                                                  name: '800',
-                                                                  value: '800',
-                                                                },
-                                                                {
-                                                                  name: '900',
-                                                                  value: '900',
-                                                                },
-                                                              ],
-                                                            },
-                                                          },
-                                                        ),
-                                                      },
-                                                    },
-                                                    [],
-                                                  ),
-                                                  TextComponent(
-                                                    {
-                                                      options: {
-                                                        ...textOptions,
-                                                        content: variable(
-                                                          'Content',
-                                                          {
-                                                            value: [
-                                                              'This message is not visible in your app',
-                                                            ],
-                                                            configuration: {
-                                                              as: 'MULTILINE',
-                                                            },
-                                                          },
-                                                        ),
-                                                        type: font('Font', {
-                                                          value: ['Body1'],
-                                                        }),
-                                                        outerSpacing: sizes(
-                                                          'Outer space',
-                                                          {
-                                                            value: [
-                                                              '0rem',
-                                                              '0rem',
-                                                              '0rem',
-                                                              'S',
-                                                            ],
-                                                          },
-                                                        ),
-                                                        textColor: color(
-                                                          'Text color',
-                                                          {
-                                                            value:
-                                                              ThemeColor.WHITE,
-                                                          },
-                                                        ),
-                                                        fontWeight: option(
-                                                          'CUSTOM',
-                                                          {
-                                                            label:
-                                                              'Font weight',
-                                                            value: '500',
-                                                            configuration: {
-                                                              as: 'DROPDOWN',
-                                                              dataType:
-                                                                'string',
-                                                              allowedInput: [
-                                                                {
-                                                                  name: '100',
-                                                                  value: '100',
-                                                                },
-                                                                {
-                                                                  name: '200',
-                                                                  value: '200',
-                                                                },
-                                                                {
-                                                                  name: '300',
-                                                                  value: '300',
-                                                                },
-                                                                {
-                                                                  name: '400',
-                                                                  value: '400',
-                                                                },
-                                                                {
-                                                                  name: '500',
-                                                                  value: '500',
-                                                                },
-                                                                {
-                                                                  name: '600',
-                                                                  value: '600',
-                                                                },
-                                                                {
-                                                                  name: '700',
-                                                                  value: '700',
-                                                                },
-                                                                {
-                                                                  name: '800',
-                                                                  value: '800',
-                                                                },
-                                                                {
-                                                                  name: '900',
-                                                                  value: '900',
-                                                                },
-                                                              ],
-                                                            },
-                                                          },
-                                                        ),
-                                                      },
-                                                    },
-                                                    [],
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
                                           TextComponent(
                                             {
                                               ref: { id: '#titleTextPrefab' },
