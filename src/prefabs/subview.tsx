@@ -5,7 +5,6 @@ import {
   BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
 import { Subview } from './structures';
-import { Properties } from './types';
 
 const attr = {
   icon: Icon.OrderedListIcon,
@@ -20,34 +19,83 @@ const beforeCreate = ({
   components: {
     Header,
     Content,
-    PropertiesSelector,
+    PropertySelector,
     EndpointSelector,
     Footer,
     Field,
     Box,
+    Text,
   },
   helpers: { setOption, cloneStructure },
 }: BeforeCreateArgs) => {
-  const [properties, setProperties] = React.useState<Properties[]>([]);
+  const [property, setProperty] = React.useState('');
   const [errorMessage, setErrorMessage] = React.useState('');
   const [endpoint, setEndpoint] = React.useState('');
 
   return (
     <>
-      <Header onClose={close} title="Configure header and footer" />
-
+      <Header onClose={close} title="Configure subview" />
       <Content>
         <Box pad={{ bottom: '15px' }}>
-          <Field label="Select property">
-            <PropertiesSelector
+          <Box pad={{ bottom: '15px' }}>
+            <Text color="grey700">
+              You can add more items by adding the subview item component to the
+              subview
+            </Text>
+          </Box>
+          <Field label="Select relation">
+            <PropertySelector
               allowRelations
-              onChange={(value: Properties[]) => {
-                setProperties(value);
+              onChange={(value: string) => {
+                setProperty(value);
               }}
-              value={properties}
+              value={property}
+              disabledKinds={[
+                'AUTO_INCREMENT',
+                'BOOLEAN_EXPRESSION',
+                'COUNT',
+                'DATE',
+                'DATE_EXPRESSION',
+                'DATE_TIME',
+                'DATE_TIME_EXPRESSION',
+                'DECIMAL',
+                'DECIMAL_EXPRESSION',
+                'EMAIL',
+                'EMAIL_ADDRESS',
+                'ENUM',
+                'FILE',
+                'FLOAT',
+                'IBAN',
+                'IMAGE',
+                'INTEGER',
+                'INTEGER_EXPRESSION',
+                'LIST',
+                'MINUTES',
+                'MINUTES_EXPRESSION',
+                'MULTI_FILE',
+                'MULTI_IMAGE',
+                'PASSWORD',
+                'PDF',
+                'PERIODIC_COUNT',
+                'PHONE_NUMBER',
+                'PRICE',
+                'PRICE_EXPRESSION',
+                'RICH_TEXT',
+                'SERIAL',
+                'SIGNED_PDF',
+                'STRING',
+                'STRING_EXPRESSION',
+                'SUM',
+                'TEXT',
+                'TEXT_EXPRESSION',
+                'TIME',
+                'URL',
+                'ZIPCODE',
+                'BOOLEAN',
+              ]}
             />
           </Field>
-          <Field label="Select page">
+          <Field label="Select subview page">
             <EndpointSelector
               value={endpoint || ''}
               size="large"
@@ -70,19 +118,17 @@ const beforeCreate = ({
             throw new Error(errorMessage);
           }
 
-          properties.forEach((prop) => {
-            const subviewItem = cloneStructure('Subview item');
-            if (subviewItem.type === 'COMPONENT') {
-              setOption(subviewItem, 'prop', (originalOption) => {
-                return {
-                  ...originalOption,
-                  value: prop.id,
-                };
-              });
-            }
-            if (newPrefab.structure[0].type === 'COMPONENT')
-              newPrefab.structure[0].descendants.push(subviewItem);
-          });
+          const subviewItem = cloneStructure('Subview item');
+          if (subviewItem.type === 'COMPONENT' && property) {
+            setOption(subviewItem, 'prop', (originalOption) => {
+              return {
+                ...originalOption,
+                value: property,
+              };
+            });
+          }
+          if (newPrefab.structure[0].type === 'COMPONENT')
+            newPrefab.structure[0].descendants.push(subviewItem);
 
           save(newPrefab);
         }}

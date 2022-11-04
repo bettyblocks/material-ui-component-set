@@ -4,24 +4,18 @@
   allowedTypes: ['CONTENT_COMPONENT', 'CONTAINER_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const {
-      ListItem,
-      ListItemText,
-      ListItemIcon,
-      ListItemSecondaryAction,
-      IconButton,
-      Chip,
-    } = window.MaterialUI.Core;
+    const { ListItem, ListItemText, ListItemIcon, Chip } =
+      window.MaterialUI.Core;
     const {
       recordCount,
       alignItems,
+      content,
       disabled,
       disableGutters,
       divider,
       selected,
       prop,
-      iconLeft,
-      iconRight,
+      icon,
       linkTo,
       dense,
       dataComponentAttribute = ['Subview item'],
@@ -35,26 +29,18 @@
 
     const dataComponentAttributeValue = useText(dataComponentAttribute);
 
-    const IconLeftComponent = iconLeft !== 'None' && (
-      <ListItemIcon>
-        <Icon name={iconLeft} />
+    const IconLeftComponent = icon !== 'None' && (
+      <ListItemIcon style={{ minWidth: '40px' }}>
+        <Icon name={icon} />
       </ListItemIcon>
     );
-    const IconRightComponent = iconRight !== 'None' && (
-      <ListItemSecondaryAction>
-        <IconButton>
-          <Icon name={iconRight} />
-        </IconButton>
-      </ListItemSecondaryAction>
-    );
-
     const isEmpty =
-      propObj === null &&
-      iconLeft === 'None' &&
-      iconRight === 'None' &&
-      children.length === 0;
-
-    const itemText = propObj && propObj.label ? propObj.label : 'Empty Content';
+      propObj === null && icon === 'None' && children.length === 0;
+    const contentText = useText(content);
+    let itemText = propObj && propObj.label ? propObj.label : 'Empty Content';
+    if (contentText) {
+      itemText = contentText;
+    }
     let linkComponent = 'li';
     if (hasLink && !isDev) linkComponent = Link;
 
@@ -91,13 +77,18 @@
         dense={dense}
         data-component={dataComponentAttributeValue}
       >
-        {iconLeft !== '' && IconLeftComponent}
+        {icon !== '' && IconLeftComponent}
         <ListItemText
           className={isEmpty && isDev && classes.placeholder}
           primary={itemText}
         />
-        {recordAmount != null && <Chip label={recordAmount} />}
-        {iconRight !== '' && IconRightComponent}
+        {recordAmount != null && (
+          <Chip
+            label={recordAmount}
+            style={{ cursor: hasLink && !isDev ? 'pointer' : 'default' }}
+          />
+        )}
+        <Icon name="KeyboardArrowRight" />
       </ListItem>
     );
   })(),

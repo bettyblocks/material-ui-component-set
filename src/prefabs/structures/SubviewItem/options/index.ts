@@ -6,6 +6,7 @@ import {
   icon,
   toggle,
   property,
+  variable,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 import { styles } from './styles';
@@ -40,6 +41,7 @@ export const categories = [
 
 export const subviewItemOptions = {
   prop: property('Property'),
+  content: variable('Label', { value: [''] }),
   backgroundColor: color('Background color', { value: ThemeColor.TRANSPARENT }),
   linkTo: endpoint('Page', {
     value: '',
@@ -57,11 +59,8 @@ export const subviewItemOptions = {
       ],
     },
   }),
-  iconLeft: icon('Icon Left', {
+  icon: icon('Icon', {
     value: '',
-  }),
-  iconRight: icon('Icon Right', {
-    value: 'KeyboardArrowRight',
   }),
   iconColor: color('Icon color', {
     value: ThemeColor.BLACK,

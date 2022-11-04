@@ -34,7 +34,7 @@ const beforeCreate = ({
 
   return (
     <>
-      <Header onClose={close} title="Configure header and footer" />
+      <Header onClose={close} title="Configure subview item" />
 
       <Content>
         <Box pad={{ bottom: '15px' }}>
@@ -45,6 +45,49 @@ const beforeCreate = ({
                 setPropertyId(value);
               }}
               value={propertyId}
+              disabledKinds={[
+                'AUTO_INCREMENT',
+                'BOOLEAN_EXPRESSION',
+                'COUNT',
+                'DATE',
+                'DATE_EXPRESSION',
+                'DATE_TIME',
+                'DATE_TIME_EXPRESSION',
+                'DECIMAL',
+                'DECIMAL_EXPRESSION',
+                'EMAIL',
+                'EMAIL_ADDRESS',
+                'ENUM',
+                'FILE',
+                'FLOAT',
+                'IBAN',
+                'IMAGE',
+                'INTEGER',
+                'INTEGER_EXPRESSION',
+                'LIST',
+                'MINUTES',
+                'MINUTES_EXPRESSION',
+                'MULTI_FILE',
+                'MULTI_IMAGE',
+                'PASSWORD',
+                'PDF',
+                'PERIODIC_COUNT',
+                'PHONE_NUMBER',
+                'PRICE',
+                'PRICE_EXPRESSION',
+                'RICH_TEXT',
+                'SERIAL',
+                'SIGNED_PDF',
+                'STRING',
+                'STRING_EXPRESSION',
+                'SUM',
+                'TEXT',
+                'TEXT_EXPRESSION',
+                'TIME',
+                'URL',
+                'ZIPCODE',
+                'BOOLEAN',
+              ]}
             />
           </Field>
           <Field label="Select page">
