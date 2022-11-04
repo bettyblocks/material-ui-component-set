@@ -1,3 +1,38 @@
+## [2.65.6](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.5...v2.65.6) (2022-11-03)
+
+
+### Bug Fixes
+
+* remove beta from label ([6d9198c](https://github.com/bettyblocks/material-ui-component-set/commit/6d9198c6aafa1cf125ad72b0d4779b957d4817ff))
+
+## [2.65.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.4...v2.65.5) (2022-11-03)
+
+
+### Bug Fixes
+
+* reset on text input resets to default value ([0c74128](https://github.com/bettyblocks/material-ui-component-set/commit/0c74128535051feef4f164e0cc75a445e7236039))
+
+## [2.65.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.3...v2.65.4) (2022-11-03)
+
+
+### Bug Fixes
+
+* list item not showing Property name in list with data prefab ([f66943a](https://github.com/bettyblocks/material-ui-component-set/commit/f66943ab37eaa40c6a9f2411c2848408a72d991f))
+
+## [2.65.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.2...v2.65.3) (2022-11-03)
+
+
+### Bug Fixes
+
+* the menu component wil now be inline with the rest of the items ([ed311d2](https://github.com/bettyblocks/material-ui-component-set/commit/ed311d2dd0235b965b0c628edf74716ed4f1e2ea))
+
+## [2.65.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.1...v2.65.2) (2022-11-02)
+
+
+### Bug Fixes
+
+* remove file by sending empty string ([5cef638](https://github.com/bettyblocks/material-ui-component-set/commit/5cef638769865bf0a675988b640431d24c7d0aed))
+
 ## [2.65.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.0...v2.65.1) (2022-10-31)
 
 
