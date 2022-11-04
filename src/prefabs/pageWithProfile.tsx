@@ -65,6 +65,7 @@ import {
   ModelProps,
   ModelQuery,
   Properties,
+  PermissionType,
 } from './types';
 
 const interactions: PrefabInteraction[] = [
@@ -187,7 +188,7 @@ const interactions: PrefabInteraction[] = [
   },
   {
     name: 'Hide',
-    sourceEvent: 'onSubmit',
+    sourceEvent: 'onActionLoad',
     ref: {
       targetComponentId: '#personalDetailsSuccessAlert',
       sourceComponentId: '#editProfileDetailsForm',
@@ -196,7 +197,7 @@ const interactions: PrefabInteraction[] = [
   },
   {
     name: 'Hide',
-    sourceEvent: 'onSubmit',
+    sourceEvent: 'onActionLoad',
     ref: {
       targetComponentId: '#personalDetailsErrorAlert',
       sourceComponentId: '#editProfileDetailsForm',
@@ -205,7 +206,7 @@ const interactions: PrefabInteraction[] = [
   },
   {
     name: 'Toggle loading state',
-    sourceEvent: 'onSubmit',
+    sourceEvent: 'onActionLoad',
     ref: {
       targetComponentId: '#saveProfileDetailsButton',
       sourceComponentId: '#editProfileDetailsForm',
@@ -214,7 +215,16 @@ const interactions: PrefabInteraction[] = [
   },
   {
     name: 'Toggle loading state',
-    sourceEvent: 'onActionDone',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#saveProfileDetailsButton',
+      sourceComponentId: '#editProfileDetailsForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionError',
     ref: {
       targetComponentId: '#saveProfileDetailsButton',
       sourceComponentId: '#editProfileDetailsForm',
@@ -241,7 +251,7 @@ const interactions: PrefabInteraction[] = [
   },
   {
     name: 'Hide',
-    sourceEvent: 'onSubmit',
+    sourceEvent: 'onActionLoad',
     ref: {
       targetComponentId: '#passwordSuccessAlert',
       sourceComponentId: '#updatePasswordForm',
@@ -250,7 +260,7 @@ const interactions: PrefabInteraction[] = [
   },
   {
     name: 'Hide',
-    sourceEvent: 'onSubmit',
+    sourceEvent: 'onActionLoad',
     ref: {
       targetComponentId: '#passwordErrorAlert',
       sourceComponentId: '#updatePasswordForm',
@@ -259,7 +269,7 @@ const interactions: PrefabInteraction[] = [
   },
   {
     name: 'Toggle loading state',
-    sourceEvent: 'onSubmit',
+    sourceEvent: 'onActionLoad',
     ref: {
       targetComponentId: '#savePasswordButton',
       sourceComponentId: '#updatePasswordForm',
@@ -268,7 +278,16 @@ const interactions: PrefabInteraction[] = [
   },
   {
     name: 'Toggle loading state',
-    sourceEvent: 'onActionDone',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#savePasswordButton',
+      sourceComponentId: '#updatePasswordForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionError',
     ref: {
       targetComponentId: '#savePasswordButton',
       sourceComponentId: '#updatePasswordForm',
@@ -281,6 +300,60 @@ const interactions: PrefabInteraction[] = [
     ref: {
       targetComponentId: '#uploadSubmitButton',
       sourceComponentId: '#uploadInput',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#uploadSubmitButton',
+      sourceComponentId: '#updateImgForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionError',
+    ref: {
+      targetComponentId: '#uploadSubmitButton',
+      sourceComponentId: '#updateImgForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#uploadSubmitButton',
+      sourceComponentId: '#updateImgForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Refetch',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#dataContainer',
+      sourceComponentId: '#updateImgForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#updateImgAlert',
+      sourceComponentId: '#updateImgForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'onActionError',
+    ref: {
+      targetComponentId: '#updateImgAlert',
+      sourceComponentId: '#updateImgForm',
     },
     type: InteractionType.Custom,
   },
@@ -381,6 +454,8 @@ const beforeCreate = ({
   const [stepNumber, setStepNumber] = React.useState(1);
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
+
+  const permissions: PermissionType = 'public';
 
   const enrichVarObj = (obj: any, authProp = false) => {
     const returnObj = obj;
@@ -621,7 +696,7 @@ const beforeCreate = ({
             'innerSpacing',
             (opt: PrefabComponentOption) => ({
               ...opt,
-              value: ['0rem', '0rem', '0rem', '0rem'],
+              value: ['M', '0rem', '0rem', '0rem'],
             }),
           );
           const textPrefab = cloneStructure('Text');
@@ -672,6 +747,10 @@ const beforeCreate = ({
         idProperty,
         [authPassword],
         'update',
+        undefined,
+        undefined,
+        permissions,
+        authProfileId,
       );
       if (!modelProp) throw new Error('Model property could not be found');
       if (!idProperty) throw new Error('Property id could not be found');
@@ -683,7 +762,7 @@ const beforeCreate = ({
             switch (prop.kind) {
               case PropertyKind.PASSWORD:
                 return inputStructure(
-                  prop.label,
+                  'New password',
                   makeBettyUpdateInput(
                     BettyPrefabs.PASSWORD,
                     data.model,
@@ -694,7 +773,7 @@ const beforeCreate = ({
                 );
               default:
                 return inputStructure(
-                  prop.label,
+                  'New password',
                   makeBettyUpdateInput(
                     BettyPrefabs.STRING,
                     data.model,
@@ -724,6 +803,14 @@ const beforeCreate = ({
               (opt: PrefabComponentOption) => ({
                 ...opt,
                 value: true,
+              }),
+            );
+            setOption(
+              editFormInput.descendants[1],
+              'value',
+              (opt: PrefabComponentOption) => ({
+                ...opt,
+                value: [''],
               }),
             );
           }
@@ -781,6 +868,10 @@ const beforeCreate = ({
         idProperty,
         properties,
         'update',
+        undefined,
+        undefined,
+        permissions,
+        authProfileId,
       );
       setOption(
         editProfileFormObject,
@@ -838,6 +929,10 @@ const beforeCreate = ({
           idProperty,
           [...transformProp(profilePictureProperty)],
           'update',
+          undefined,
+          undefined,
+          permissions,
+          authProfileId,
         );
         Object.values(imageObjectResult.variables).forEach(
           ([prop, inputVariable]): void => {
@@ -2140,6 +2235,71 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                         },
                                                       },
                                                       [
+                                                        Alert(
+                                                          {
+                                                            ref: {
+                                                              id: '#updateImgAlert',
+                                                            },
+                                                            options: {
+                                                              ...alertOptions,
+                                                              visible: toggle(
+                                                                'Toggle visibility',
+                                                                {
+                                                                  value: false,
+                                                                  configuration:
+                                                                    {
+                                                                      as: 'VISIBILITY',
+                                                                    },
+                                                                },
+                                                              ),
+                                                              bodyText:
+                                                                variable(
+                                                                  'Body text',
+                                                                  {
+                                                                    value: [
+                                                                      'Something went wrong',
+                                                                    ],
+                                                                  },
+                                                                ),
+                                                              allowTextServerResponse:
+                                                                toggle(
+                                                                  'Allow to overwrite by the server response',
+                                                                  {
+                                                                    value: true,
+                                                                  },
+                                                                ),
+                                                              textColor: color(
+                                                                'Text color',
+                                                                {
+                                                                  value:
+                                                                    ThemeColor.WHITE,
+                                                                },
+                                                              ),
+                                                              iconColor: color(
+                                                                'Icon color',
+                                                                {
+                                                                  value:
+                                                                    ThemeColor.WHITE,
+                                                                },
+                                                              ),
+                                                              background: color(
+                                                                'Background color',
+                                                                {
+                                                                  value:
+                                                                    ThemeColor.DANGER,
+                                                                },
+                                                              ),
+                                                              icon: icon(
+                                                                'Icon',
+                                                                {
+                                                                  value:
+                                                                    'Warning',
+                                                                },
+                                                              ),
+                                                            },
+                                                          },
+                                                          [],
+                                                        ),
                                                         component(
                                                           'Form',
                                                           {
@@ -2975,7 +3135,7 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                                       'Outer space',
                                                                       {
                                                                         value: [
-                                                                          'M',
+                                                                          '0rem',
                                                                           '0rem',
                                                                           '0rem',
                                                                           '0rem',
@@ -3395,12 +3555,20 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                                     label:
                                                                       'Password field',
                                                                     inputLabel:
-                                                                      'Password',
+                                                                      'Current password',
                                                                     type: 'password',
                                                                     adornmentIcon:
                                                                       'VisibilityOff',
                                                                     options: {
                                                                       ...textInputOptions,
+                                                                      hideLabel:
+                                                                        toggle(
+                                                                          'Hide label',
+                                                                          {
+                                                                            value:
+                                                                              true,
+                                                                          },
+                                                                        ),
                                                                       margin:
                                                                         buttongroup(
                                                                           'Margin',
@@ -3441,7 +3609,7 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                                       'Inner space',
                                                                       {
                                                                         value: [
-                                                                          'M',
+                                                                          '0rem',
                                                                           '0rem',
                                                                           '0rem',
                                                                           '0rem',
@@ -3520,12 +3688,20 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                                     label:
                                                                       'Password field',
                                                                     inputLabel:
-                                                                      'Password',
+                                                                      'Confirm password',
                                                                     type: 'password',
                                                                     adornmentIcon:
                                                                       'VisibilityOff',
                                                                     options: {
                                                                       ...textInputOptions,
+                                                                      hideLabel:
+                                                                        toggle(
+                                                                          'Hide label',
+                                                                          {
+                                                                            value:
+                                                                              true,
+                                                                          },
+                                                                        ),
                                                                       margin:
                                                                         buttongroup(
                                                                           'Margin',
