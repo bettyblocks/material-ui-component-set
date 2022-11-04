@@ -455,7 +455,7 @@ const beforeCreate = ({
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
 
-  const permissions: PermissionType = 'public';
+  const permissions: PermissionType = 'inherit';
 
   const enrichVarObj = (obj: any, authProp = false) => {
     const returnObj = obj;
@@ -740,20 +740,21 @@ const beforeCreate = ({
       const authPassword = authProfile.properties.find(
         (p) => p.kind === 'PASSWORD',
       );
+      if (!idProperty) throw new Error('Property id could not be found');
+      if (!authPassword)
+        throw new Error('Auth password property could not be found');
 
       const resultPass = await prepareAction(
         passwordFormId,
-        // @ts-ignore
         idProperty,
         [authPassword],
         'update',
         undefined,
         undefined,
         permissions,
-        authProfileId,
       );
+
       if (!modelProp) throw new Error('Model property could not be found');
-      if (!idProperty) throw new Error('Property id could not be found');
       if (!data) throw new Error('data could not be found');
 
       Object.values(resultPass.variables).forEach(
@@ -871,7 +872,6 @@ const beforeCreate = ({
         undefined,
         undefined,
         permissions,
-        authProfileId,
       );
       setOption(
         editProfileFormObject,
@@ -932,7 +932,6 @@ const beforeCreate = ({
           undefined,
           undefined,
           permissions,
-          authProfileId,
         );
         Object.values(imageObjectResult.variables).forEach(
           ([prop, inputVariable]): void => {
