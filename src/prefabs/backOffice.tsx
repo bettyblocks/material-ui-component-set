@@ -142,7 +142,7 @@ const interactions: PrefabInteraction[] = [
     sourceEvent: 'onActionSuccess',
     ref: {
       targetComponentId: '#dataTable',
-      sourceComponentId: '#editForm',
+      sourceComponentId: '#updateForm',
     },
     type: InteractionType.Custom,
   },
@@ -151,7 +151,7 @@ const interactions: PrefabInteraction[] = [
     sourceEvent: 'onActionSuccess',
     ref: {
       targetComponentId: '#drawerSidebar',
-      sourceComponentId: '#editForm',
+      sourceComponentId: '#updateForm',
     },
     type: InteractionType.Custom,
   },
@@ -160,7 +160,7 @@ const interactions: PrefabInteraction[] = [
     sourceEvent: 'onSubmit',
     ref: {
       targetComponentId: '#editErrorAlert',
-      sourceComponentId: '#editForm',
+      sourceComponentId: '#updateForm',
     },
     type: InteractionType.Custom,
   },
@@ -294,7 +294,7 @@ const interactions: PrefabInteraction[] = [
     name: 'Submit',
     sourceEvent: 'Click',
     ref: {
-      targetComponentId: '#editForm',
+      targetComponentId: '#updateForm',
       sourceComponentId: '#editSubmitButton',
     },
     type: InteractionType.Custom,
@@ -518,9 +518,31 @@ const drawerContainer = DrawerContainer(
             },
           },
           {
+            label: 'Action',
+            expanded: true,
+            members: ['deleteFormAction'],
+            condition: {
+              type: 'SHOW',
+              option: 'visibility',
+              comparator: 'EQ',
+              value: false,
+            },
+          },
+          {
             label: 'Tab title',
             expanded: true,
             members: ['detailsTabTitle', 'updateTabTitle', 'createTabTitle'],
+            condition: {
+              type: 'SHOW',
+              option: 'visibility',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+          {
+            label: 'Action',
+            expanded: true,
+            members: ['createFormAction', 'updateFormAction'],
             condition: {
               type: 'SHOW',
               option: 'visibility',
@@ -573,12 +595,46 @@ const drawerContainer = DrawerContainer(
               },
             },
           }),
+          deleteFormAction: linked({
+            label: 'Delete action',
+            value: {
+              ref: {
+                componentId: '#deleteForm',
+                optionId: '#deleteFormAction',
+              },
+            },
+            configuration: {
+              condition: {
+                type: 'SHOW',
+                option: 'visibility',
+                comparator: 'EQ',
+                value: false,
+              },
+            },
+          }),
           createTabTitle: linked({
             label: 'Create tab title',
             value: {
               ref: {
                 componentId: '#createTabTitle',
                 optionId: '#createTabTitleContent',
+              },
+            },
+            configuration: {
+              condition: {
+                type: 'SHOW',
+                option: 'shownTab',
+                comparator: 'EQ',
+                value: 1,
+              },
+            },
+          }),
+          createFormAction: linked({
+            label: 'Create action',
+            value: {
+              ref: {
+                componentId: '#createForm',
+                optionId: '#createFormAction',
               },
             },
             configuration: {
@@ -613,6 +669,23 @@ const drawerContainer = DrawerContainer(
               ref: {
                 componentId: '#updateTabTitle',
                 optionId: '#updateTabTitleContent',
+              },
+            },
+            configuration: {
+              condition: {
+                type: 'SHOW',
+                option: 'shownTab',
+                comparator: 'EQ',
+                value: 3,
+              },
+            },
+          }),
+          updateFormAction: linked({
+            label: 'Update action',
+            value: {
+              ref: {
+                componentId: '#updateForm',
+                optionId: '#updateFormAction',
               },
             },
             configuration: {
@@ -1652,7 +1725,7 @@ const drawerContainer = DrawerContainer(
                                           {
                                             label: 'Update Form',
                                             options: defaults,
-                                            ref: { id: '#editForm' },
+                                            ref: { id: '#updateForm' },
                                           },
                                           [
                                             FormErrorAlert({
@@ -3455,7 +3528,7 @@ const beforeCreate = ({
   const permissions: PermissionType = 'private';
 
   const createFormId = createUuid();
-  const editFormId = createUuid();
+  const updateFormId = createUuid();
   const deleteButtonId = createUuid();
   function treeSearch(
     dirName: string,
@@ -4013,7 +4086,7 @@ const beforeCreate = ({
           filteredproperties,
           'create',
           undefined,
-          undefined,
+          `Back office - Create ${data?.model.label}`,
           permissions,
           pageAuthenticationProfileId,
         );
@@ -4198,6 +4271,9 @@ const beforeCreate = ({
           ...opts,
           value: result.action.actionId,
           configuration: { disabled: true },
+          ref: {
+            id: '#createFormAction',
+          },
         }));
 
         setOption(createForm, 'model', (opts: PrefabComponentOption) => ({
@@ -4229,26 +4305,29 @@ const beforeCreate = ({
       );
 
       // set edit form
-      const editForm = treeSearch('#editForm', newPrefab.structure);
-      if (!editForm) throw new Error('No edit form found');
-      editForm.id = editFormId;
+      const updateForm = treeSearch('#updateForm', newPrefab.structure);
+      if (!updateForm) throw new Error('No edit form found');
+      updateForm.id = updateFormId;
       if (idProperty && model) {
         const result = await prepareAction(
-          editFormId,
+          updateFormId,
           idProperty,
           filteredproperties,
           'update',
           undefined,
-          undefined,
+          `Back office - Update ${data?.model.label}`,
           permissions,
           pageAuthenticationProfileId,
         );
-        setOption(editForm, 'actionId', (opts: PrefabComponentOption) => ({
+        setOption(updateForm, 'actionId', (opts: PrefabComponentOption) => ({
           ...opts,
           value: result.action.actionId,
           configuration: { disabled: true },
+          ref: {
+            id: '#updateFormAction',
+          },
         }));
-        setOption(editForm, 'model', (opts: PrefabComponentOption) => ({
+        setOption(updateForm, 'model', (opts: PrefabComponentOption) => ({
           ...opts,
           value: modelId,
           configuration: {
@@ -4416,13 +4495,13 @@ const beforeCreate = ({
                   );
               }
             };
-            const editFormInput = generateInputPrefabs();
+            const updateFormInput = generateInputPrefabs();
             if (
-              editFormInput.type === 'COMPONENT' &&
-              editFormInput.descendants[1].type === 'COMPONENT'
+              updateFormInput.type === 'COMPONENT' &&
+              updateFormInput.descendants[1].type === 'COMPONENT'
             ) {
               setOption(
-                editFormInput.descendants[1],
+                updateFormInput.descendants[1],
                 'margin',
                 (opts: PrefabComponentOption) => ({
                   ...opts,
@@ -4430,7 +4509,7 @@ const beforeCreate = ({
                 }),
               );
               setOption(
-                editFormInput.descendants[1],
+                updateFormInput.descendants[1],
                 'hideLabel',
                 (opts: PrefabComponentOption) => ({
                   ...opts,
@@ -4438,7 +4517,7 @@ const beforeCreate = ({
                 }),
               );
             }
-            editForm.descendants.push(editFormInput);
+            updateForm.descendants.push(updateFormInput);
             if (!prop.kind) {
               // eslint-disable-next-line no-console
               console.warn('PropertyKind not found');
@@ -4446,7 +4525,7 @@ const beforeCreate = ({
           },
         );
 
-        editForm.descendants.push(
+        updateForm.descendants.push(
           makeBettyUpdateInput(
             BettyPrefabs.HIDDEN,
             model,
@@ -4468,7 +4547,7 @@ const beforeCreate = ({
           undefined,
           'delete',
           undefined,
-          undefined,
+          `Back office - Delete ${data?.model.label}`,
           permissions,
           pageAuthenticationProfileId,
         );
@@ -4476,6 +4555,9 @@ const beforeCreate = ({
           ...opts,
           value: result.action.actionId,
           configuration: { disabled: true },
+          ref: {
+            id: '#deleteFormAction',
+          },
         }));
 
         setOption(deleteForm, 'model', (opts: PrefabComponentOption) => ({
@@ -4574,7 +4656,7 @@ const beforeCreate = ({
             ],
             ref: {
               sourceComponentId: '#detailButton',
-              targetComponentId: '#editForm',
+              targetComponentId: '#updateForm',
             },
             type: 'Global',
           } as PrefabInteraction,
@@ -4590,7 +4672,7 @@ const beforeCreate = ({
             ],
             ref: {
               sourceComponentId: '#editButton',
-              targetComponentId: '#editForm',
+              targetComponentId: '#updateForm',
             },
             type: 'Global',
           } as PrefabInteraction,
