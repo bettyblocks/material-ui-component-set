@@ -1,6 +1,6 @@
 (() => ({
   name: 'SubviewItem',
-  type: 'CONTENT_COMPONENT',
+  type: 'SUBVIEWITEM_COMPONENT',
   allowedTypes: ['CONTENT_COMPONENT', 'CONTAINER_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
@@ -10,8 +10,10 @@
       ListItemIcon,
       ListItemSecondaryAction,
       IconButton,
+      Chip,
     } = window.MaterialUI.Core;
     const {
+      recordCount,
       alignItems,
       disabled,
       disableGutters,
@@ -24,8 +26,9 @@
       dense,
       dataComponentAttribute = ['Subview item'],
     } = options;
-    const { env, useText, Link, Icon, getProperty } = B;
+    const { env, useText, Link, Icon, getProperty, useAllQuery } = B;
     const isDev = env === 'dev';
+    const [recordAmount, setRecordAmount] = useState(null);
 
     const hasLink = linkTo && linkTo.id !== '';
     const propObj = getProperty(prop);
@@ -39,12 +42,7 @@
     );
     const IconRightComponent = iconRight !== 'None' && (
       <ListItemSecondaryAction>
-        <IconButton
-          onClick={(e) => {
-            e.preventDefault();
-            console.log('test1234');
-          }}
-        >
+        <IconButton>
           <Icon name={iconRight} />
         </IconButton>
       </ListItemSecondaryAction>
@@ -60,13 +58,27 @@
     let linkComponent = 'li';
     if (hasLink && !isDev) linkComponent = Link;
 
+    if (!isDev && prop && recordCount) {
+      useAllQuery(
+        propObj.referenceModelId ? propObj.referenceModelId : propObj.modelId,
+        {
+          onCompleted(res) {
+            const hasResult = res && res.results && res.results.length > 0;
+            if (hasResult) {
+              B.triggerEvent('onSuccess', res.results);
+              setRecordAmount(res.totalCount);
+            } else {
+              B.triggerEvent('onNoResults');
+            }
+          },
+        },
+        !propObj.modelId,
+      );
+    }
+
     return (
       <ListItem
-        onClick={(e) => {
-          e.preventDefault();
-          B.triggerEvent('onClick');
-          alert('listitemclick');
-        }}
+        onClick={() => B.triggerEvent('onClick')}
         button={hasLink}
         component={linkComponent}
         endpoint={hasLink && !isDev ? linkTo : undefined}
@@ -84,6 +96,7 @@
           className={isEmpty && isDev && classes.placeholder}
           primary={itemText}
         />
+        {recordAmount != null && <Chip label={recordAmount} />}
         {iconRight !== '' && IconRightComponent}
       </ListItem>
     );

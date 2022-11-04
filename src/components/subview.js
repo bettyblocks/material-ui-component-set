@@ -1,19 +1,14 @@
 (() => ({
   name: 'Subview',
   type: 'CONTAINER_COMPONENT',
-  allowedTypes: ['CONTENT_COMPONENT', 'CONTAINER_COMPONENT'],
+  allowedTypes: ['SUBVIEWITEM_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const {
-      dense,
-      dataComponentAttribute = ['Subview'],
-      borderColor,
-    } = options;
+    const { dense, dataComponentAttribute = ['Subview'] } = options;
     const { List } = window.MaterialUI.Core;
     const { env, useText } = B;
     const isDev = env === 'dev';
     const isEmpty = isDev && children.length === 0;
-    // const hasBorderColor = borderColor !== 'Transparent';
     const isPristine = isEmpty;
 
     const dataComponentAttributeValue = useText(dataComponentAttribute);

@@ -1,14 +1,11 @@
 import {
-  variable,
   color,
   ThemeColor,
   option,
   endpoint,
-  showIf,
   icon,
   toggle,
   property,
-  model,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 import { styles } from './styles';
@@ -47,6 +44,7 @@ export const subviewItemOptions = {
   linkTo: endpoint('Page', {
     value: '',
   }),
+  recordCount: toggle('Record Count', { value: 'false' }),
   alignItems: option('CUSTOM', {
     label: 'Align items',
     value: 'center',

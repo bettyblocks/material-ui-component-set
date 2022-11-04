@@ -25,7 +25,6 @@ const beforeCreate = ({
     Footer,
     Field,
     Box,
-    Text,
   },
   helpers: { setOption },
 }: BeforeCreateArgs) => {
@@ -41,6 +40,7 @@ const beforeCreate = ({
         <Box pad={{ bottom: '15px' }}>
           <Field label="Select property">
             <PropertySelector
+              allowRelations
               onChange={(value: string) => {
                 setPropertyId(value);
               }}
