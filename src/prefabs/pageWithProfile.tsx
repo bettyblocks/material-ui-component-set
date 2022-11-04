@@ -752,6 +752,7 @@ const beforeCreate = ({
         undefined,
         undefined,
         permissions,
+        authProfileId,
       );
 
       if (!modelProp) throw new Error('Model property could not be found');
@@ -872,6 +873,7 @@ const beforeCreate = ({
         undefined,
         undefined,
         permissions,
+        authProfileId,
       );
       setOption(
         editProfileFormObject,
@@ -932,6 +934,7 @@ const beforeCreate = ({
           undefined,
           undefined,
           permissions,
+          authProfileId,
         );
         Object.values(imageObjectResult.variables).forEach(
           ([prop, inputVariable]): void => {
