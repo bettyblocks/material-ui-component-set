@@ -1,3 +1,10 @@
+## [2.65.6](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.5...v2.65.6) (2022-11-03)
+
+
+### Bug Fixes
+
+* remove beta from label ([6d9198c](https://github.com/bettyblocks/material-ui-component-set/commit/6d9198c6aafa1cf125ad72b0d4779b957d4817ff))
+
 ## [2.65.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.4...v2.65.5) (2022-11-03)
 
 
