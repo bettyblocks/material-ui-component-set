@@ -275,6 +275,15 @@ const interactions: PrefabInteraction[] = [
     },
     type: InteractionType.Custom,
   },
+  {
+    name: 'Show',
+    sourceEvent: 'onSuccess',
+    ref: {
+      targetComponentId: '#uploadSubmitButton',
+      sourceComponentId: '#uploadInput',
+    },
+    type: InteractionType.Custom,
+  },
 ];
 
 const attrs = {
@@ -841,6 +850,9 @@ const beforeCreate = ({
                 imageObjectResult.relatedIdProperties,
               );
               if (imageUploadComponent.type === 'COMPONENT') {
+                imageUploadComponent.ref = {
+                  id: '#uploadInput',
+                };
                 setOption(
                   imageUploadComponent,
                   'showImagePreview',
@@ -849,6 +861,37 @@ const beforeCreate = ({
                     value: false,
                   }),
                 );
+                const uploadButton = imageUploadComponent.descendants[0];
+                if (uploadButton.type === 'COMPONENT') {
+                  uploadButton.style = {
+                    overwrite: {
+                      backgroundColor: {
+                        type: 'THEME_COLOR',
+                        value: 'primary',
+                      },
+                      boxShadow: 'none',
+                      color: {
+                        type: 'THEME_COLOR',
+                        value: 'white',
+                      },
+                      fontFamily: 'Roboto',
+                      fontSize: '0.875rem',
+                      fontStyle: 'none',
+                      fontWeight: '400',
+                      padding: ['0.6875rem', '1.375rem'],
+                      textDecoration: 'none',
+                      textTransform: 'none',
+                    },
+                  };
+                  setOption(
+                    uploadButton,
+                    'icon',
+                    (opt: PrefabComponentOption) => ({
+                      ...opt,
+                      value: 'CloudUpload',
+                    }),
+                  );
+                }
               }
               switch (prop.kind) {
                 case PropertyKind.IMAGE:
@@ -904,7 +947,7 @@ const beforeCreate = ({
               },
             }));
 
-            imageObject.descendants.push(imgFormInput);
+            imageObject.descendants.unshift(imgFormInput);
             if (!prop.kind) {
               // eslint-disable-next-line no-console
               console.warn('PropertyKind not found');
@@ -2030,42 +2073,110 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                         },
                                                         options: {
                                                           ...textOptions,
-                                                          content: variable(
-                                                            'Content',
-                                                            {
-                                                              value: [],
-                                                              configuration: {
-                                                                as: 'MULTILINE',
-                                                              },
-                                                            },
-                                                          ),
                                                           type: font('Font', {
                                                             value: ['Title5'],
                                                           }),
+                                                          textAlignment: option(
+                                                            'CUSTOM',
+                                                            {
+                                                              label:
+                                                                'Text Alignment',
+                                                              value: 'center',
+                                                              configuration: {
+                                                                as: 'BUTTONGROUP',
+                                                                dataType:
+                                                                  'string',
+                                                                allowedInput: [
+                                                                  {
+                                                                    name: 'Left',
+                                                                    value:
+                                                                      'left',
+                                                                  },
+                                                                  {
+                                                                    name: 'Center',
+                                                                    value:
+                                                                      'center',
+                                                                  },
+                                                                  {
+                                                                    name: 'Right',
+                                                                    value:
+                                                                      'right',
+                                                                  },
+                                                                ],
+                                                              },
+                                                            },
+                                                          ),
                                                         },
                                                       },
                                                       [],
                                                     ),
-                                                    component(
-                                                      'Form',
+                                                    prefabBox(
                                                       {
-                                                        ref: {
-                                                          id: '#updateImgForm',
+                                                        options: {
+                                                          ...boxOptions,
+                                                          stretch: toggle(
+                                                            'Stretch (when in flex container)',
+                                                            {
+                                                              value: true,
+                                                            },
+                                                          ),
+                                                          width: size('Width', {
+                                                            value: '100%',
+                                                            configuration: {
+                                                              as: 'UNIT',
+                                                            },
+                                                          }),
+                                                          innerSpacing: sizes(
+                                                            'Inner space',
+                                                            {
+                                                              value: [
+                                                                '0rem',
+                                                                '0rem',
+                                                                '0rem',
+                                                                '0rem',
+                                                              ],
+                                                            },
+                                                          ),
                                                         },
-                                                        options: formOptions,
                                                       },
                                                       [
-                                                        Grid(
+                                                        component(
+                                                          'Form',
                                                           {
-                                                            options: {
-                                                              ...gridOptions,
+                                                            ref: {
+                                                              id: '#updateImgForm',
                                                             },
+                                                            options:
+                                                              formOptions,
                                                           },
                                                           [
                                                             SubmitButton(
                                                               {
+                                                                ref: {
+                                                                  id: '#uploadSubmitButton',
+                                                                },
                                                                 options: {
                                                                   ...submitButtonOptions,
+                                                                  visible:
+                                                                    toggle(
+                                                                      'Toggle visibility',
+                                                                      {
+                                                                        value:
+                                                                          false,
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'VISIBILITY',
+                                                                          },
+                                                                      },
+                                                                    ),
+                                                                  fullWidth:
+                                                                    toggle(
+                                                                      'Full width',
+                                                                      {
+                                                                        value:
+                                                                          true,
+                                                                      },
+                                                                    ),
                                                                   buttonText:
                                                                     variable(
                                                                       'Button text',
