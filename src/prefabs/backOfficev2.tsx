@@ -80,6 +80,78 @@ const interactions: PrefabInteraction[] = [
     name: 'Hide',
     sourceEvent: 'Click',
     ref: {
+      targetComponentId: '#backofficeOverview',
+      sourceComponentId: '#newButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#backofficeOverview',
+      sourceComponentId: '#cancelTopButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#createRecord',
+      sourceComponentId: '#cancelTopButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#backofficeOverview',
+      sourceComponentId: '#cancelBottomButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#createRecord',
+      sourceComponentId: '#cancelBottomButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show/Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchColumn',
+      sourceComponentId: '#searchButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#backofficeOverview',
+      sourceComponentId: '#backToOverview',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#createRecord',
+      sourceComponentId: '#backToOverview',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
       targetComponentId: '#tinyDrawer',
       sourceComponentId: '#openDrawer',
     },
@@ -109,6 +181,15 @@ const interactions: PrefabInteraction[] = [
     ref: {
       targetComponentId: '#drawerSidebar',
       sourceComponentId: '#closeButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Refetch',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#DataTable',
+      sourceComponentId: '#refreshButton',
     },
     type: InteractionType.Custom,
   },
@@ -439,6 +520,13 @@ const beforeCreate = ({
       };
 
       const dataTablePrefab = treeSearch('#DataTable', newPrefab.structure);
+      setOption(dataTablePrefab, 'model', (opt: PrefabComponentOption) => ({
+        ...opt,
+        value: modelId,
+        configuration: {
+          disabled: true,
+        },
+      }));
       const dataTableDetailsColumn = dataTablePrefab?.descendants.pop();
       properties.forEach((property) => {
         let newProperty = property;
@@ -479,6 +567,7 @@ const beforeCreate = ({
             };
           },
         );
+
         setOption(
           dataTableColumnStructure,
           'sortable',
@@ -2015,6 +2104,12 @@ const drawerContainer = DrawerContainer(
                 ref: { id: '#tinyDrawer' },
                 options: {
                   ...gridOptions,
+                  visibility: toggle('Toggle visibility', {
+                    value: false,
+                    configuration: {
+                      as: 'VISIBILITY',
+                    },
+                  }),
                   direction: option('CUSTOM', {
                     value: 'column',
                     label: 'Direction',
@@ -2238,6 +2333,7 @@ const drawerContainer = DrawerContainer(
                       [
                         Button(
                           {
+                            ref: { id: '#refreshButton' },
                             style: {
                               overwrite: {
                                 backgroundColor: {
@@ -2273,6 +2369,7 @@ const drawerContainer = DrawerContainer(
                         ),
                         Button(
                           {
+                            ref: { id: '#searchButton' },
                             style: {
                               overwrite: {
                                 backgroundColor: {
@@ -2342,35 +2439,45 @@ const drawerContainer = DrawerContainer(
                     ),
                   ],
                 ),
-                Box(
+                Column(
                   {
+                    label: 'Search Column',
+                    ref: { id: '#searchColumn' },
                     options: {
-                      ...boxOptions,
-                      // NOTE: adding this valignment will no longer make the search bar full width.
-                      // valignment: buttongroup(
-                      //   'Vertical alignment',
-                      //   [
-                      //     ['None', 'none'],
-                      //     ['Top', 'flex-start'],
-                      //     ['Center', 'center'],
-                      //     ['Bottom', 'flex-end'],
-                      //   ],
-                      //   {
-                      //     value: 'center',
-                      //     configuration: {
-                      //       dataType: 'string',
-                      //     },
-                      //   },
-                      // ),
-                      innerSpacing: sizes('Inner space', {
-                        value: ['0rem', '0rem', '0rem', '0rem'],
+                      ...columnOptions,
+                      visible: toggle('Toggle visibility', {
+                        value: false,
+                        configuration: {
+                          as: 'VISIBILITY',
+                        },
                       }),
                     },
                   },
                   [
-                    DataContainer(
+                    Box(
                       {
-                        label: 'Search datacontainer',
+                        options: {
+                          ...boxOptions,
+                          // NOTE: adding this valignment will no longer make the search bar full width.
+                          // valignment: buttongroup(
+                          //   'Vertical alignment',
+                          //   [
+                          //     ['None', 'none'],
+                          //     ['Top', 'flex-start'],
+                          //     ['Center', 'center'],
+                          //     ['Bottom', 'flex-end'],
+                          //   ],
+                          //   {
+                          //     value: 'center',
+                          //     configuration: {
+                          //       dataType: 'string',
+                          //     },
+                          //   },
+                          // ),
+                          innerSpacing: sizes('Inner space', {
+                            value: ['0rem', '0rem', '0rem', '0rem'],
+                          }),
+                        },
                       },
                       [
                         Box(
@@ -2429,6 +2536,9 @@ const drawerContainer = DrawerContainer(
                                     ref: { id: '#searchField' },
                                     options: {
                                       ...textInputOptions,
+                                      autoComplete: toggle('Autocomplete', {
+                                        value: true,
+                                      }),
                                       placeholder: variable('Placeholder', {
                                         value: ['Search'],
                                       }),
@@ -2517,6 +2627,14 @@ const drawerContainer = DrawerContainer(
                                           ...buttonOptions,
                                           buttonText: variable('Button text', {
                                             value: [],
+                                          }),
+                                          outerSpacing: sizes('Outer space', {
+                                            value: [
+                                              'S',
+                                              '0rem',
+                                              '0rem',
+                                              '0rem',
+                                            ],
                                           }),
                                           icon: icon('Icon', {
                                             value: 'Close',
@@ -2697,6 +2815,7 @@ const prefabStructure = [
     [
       Column(
         {
+          ref: { id: '#backofficeOverview' },
           label: 'Backoffice  overview',
           options: {
             ...columnOptions,
@@ -2729,6 +2848,12 @@ const prefabStructure = [
           ref: { id: '#createRecord' },
           options: {
             ...columnOptions,
+            visible: toggle('Toggle visibility', {
+              value: false,
+              configuration: {
+                as: 'VISIBILITY',
+              },
+            }),
             columnWidth: option('CUSTOM', {
               label: 'Column width',
               value: '12',
@@ -3007,6 +3132,9 @@ const prefabStructure = [
                             [
                               Button(
                                 {
+                                  ref: {
+                                    id: '#backToOverview',
+                                  },
                                   style: {
                                     overwrite: {
                                       backgroundColor: {
@@ -3053,6 +3181,7 @@ const prefabStructure = [
                             [
                               Button(
                                 {
+                                  ref: { id: '#cancelTopButton' },
                                   style: {
                                     overwrite: {
                                       backgroundColor: {
@@ -3259,7 +3388,7 @@ const prefabStructure = [
                                   [
                                     Button(
                                       {
-                                        ref: { id: '#createRecordCancel' },
+                                        ref: { id: '#cancelBottomButton' },
                                         style: {
                                           overwrite: {
                                             backgroundColor: {
