@@ -2189,7 +2189,7 @@ const beforeCreate = ({
               }));
               setOption(Text1, 'type', (opt: PrefabComponentOption) => ({
                 ...opt,
-                value: ['Body2'],
+                value: ['Body1'],
               }));
               setOption(Text1, 'fontWeight', (opt: PrefabComponentOption) => ({
                 ...opt,
