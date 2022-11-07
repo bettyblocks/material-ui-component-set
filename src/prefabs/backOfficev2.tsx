@@ -211,10 +211,91 @@ const interactions: PrefabInteraction[] = [
     type: InteractionType.Custom,
   },
   {
-    name: 'onActionError',
-    sourceEvent: 'Show',
+    name: 'Show',
+    sourceEvent: 'onActionError',
     ref: {
       targetComponentId: '#createAlertErrorId',
+      sourceComponentId: '#createForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#saveTopButton',
+      sourceComponentId: '#createForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionError',
+    ref: {
+      targetComponentId: '#saveTopButton',
+      sourceComponentId: '#createForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#saveTopButton',
+      sourceComponentId: '#createForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#saveBottomButton',
+      sourceComponentId: '#createForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionError',
+    ref: {
+      targetComponentId: '#saveBottomButton',
+      sourceComponentId: '#createForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#saveBottomButton',
+      sourceComponentId: '#createForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#backofficeOverview',
+      sourceComponentId: '#createForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#createRecord',
+      sourceComponentId: '#createForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Refetch',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#DataTable',
       sourceComponentId: '#createForm',
     },
     type: InteractionType.Custom,
@@ -2452,9 +2533,9 @@ const drawerContainer = DrawerContainer(
                                 fontSize: '0.875rem',
                                 fontStyle: 'none',
                                 fontWeight: '400',
-                                padding: ['0.6875rem', '0.6875rem'],
                                 textDecoration: 'none',
                                 textTransform: 'none',
+                                padding: ['0.6875rem', '1rem'],
                               },
                             },
                             options: {
@@ -2485,6 +2566,9 @@ const drawerContainer = DrawerContainer(
                         configuration: {
                           as: 'VISIBILITY',
                         },
+                      }),
+                      innerSpacing: sizes('Inner space', {
+                        value: ['0rem', '0rem', '0rem', '0rem'],
                       }),
                     },
                   },
@@ -2653,7 +2737,7 @@ const drawerContainer = DrawerContainer(
                                             fontSize: '0.875rem',
                                             fontStyle: 'none',
                                             fontWeight: '400',
-                                            padding: ['0.0375rem', '0.0375rem'],
+                                            padding: ['0.375rem', '0.375rem'],
                                             textDecoration: 'none',
                                             textTransform: 'none',
                                           },
@@ -2665,7 +2749,7 @@ const drawerContainer = DrawerContainer(
                                           }),
                                           outerSpacing: sizes('Outer space', {
                                             value: [
-                                              'S',
+                                              '0rem',
                                               '0rem',
                                               '0rem',
                                               '0rem',
