@@ -46,7 +46,6 @@ export const subviewItemOptions = {
   linkTo: endpoint('Page', {
     value: '',
   }),
-  recordCount: toggle('Record Count', { value: 'false' }),
   alignItems: option('CUSTOM', {
     label: 'Align items',
     value: 'center',
