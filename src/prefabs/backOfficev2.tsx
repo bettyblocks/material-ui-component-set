@@ -33,7 +33,6 @@ import {
   buttonOptions,
   Column,
   columnOptions,
-  DataContainer,
   DataTable,
   dataTableColumnOptions,
   dataTableOptions,
@@ -190,6 +189,33 @@ const interactions: PrefabInteraction[] = [
     ref: {
       targetComponentId: '#DataTable',
       sourceComponentId: '#refreshButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Submit',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#createForm',
+      sourceComponentId: '#saveBottomButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Submit',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#createForm',
+      sourceComponentId: '#saveTopButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'onActionError',
+    sourceEvent: 'Show',
+    ref: {
+      targetComponentId: '#createAlertErrorId',
+      sourceComponentId: '#createForm',
     },
     type: InteractionType.Custom,
   },
@@ -378,6 +404,10 @@ const beforeCreate = ({
     },
     onSave: async () => {
       const newPrefab = { ...prefab };
+      const capitalizeFirstLetter = (string: string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      };
+
       const formInputStructure = (
         textValue: string,
         BetaInputField: PrefabReference,
@@ -391,7 +421,7 @@ const beforeCreate = ({
           );
         setOption(textStructure, 'content', (opt: PrefabComponentOption) => ({
           ...opt,
-          value: [textValue],
+          value: [capitalizeFirstLetter(textValue)],
         }));
 
         if (rowColumnStructure.type !== 'COMPONENT')
@@ -508,6 +538,26 @@ const beforeCreate = ({
         );
         // #endregion
 
+        if (BetaInputField.type !== 'COMPONENT')
+          throw new Error(
+            `The BetaInputField component type is not a COMPONENT, but a ${BetaInputField.type}`,
+          );
+        setOption(
+          BetaInputField,
+          'margin',
+          (options: PrefabComponentOption) => ({
+            ...options,
+            value: 'none',
+          }),
+        );
+        setOption(
+          BetaInputField,
+          'hideLabel',
+          (opts: PrefabComponentOption) => ({
+            ...opts,
+            value: true,
+          }),
+        );
         const returnStructure = rowColumnStructure;
         if (
           returnStructure.descendants[0].type === 'COMPONENT' &&
@@ -520,6 +570,7 @@ const beforeCreate = ({
       };
 
       const dataTablePrefab = treeSearch('#DataTable', newPrefab.structure);
+      if (!dataTablePrefab) throw new Error('No detail data container found');
       setOption(dataTablePrefab, 'model', (opt: PrefabComponentOption) => ({
         ...opt,
         value: modelId,
@@ -588,14 +639,22 @@ const beforeCreate = ({
       if (dataTablePrefab && dataTableDetailsColumn)
         dataTablePrefab.descendants.push(dataTableDetailsColumn);
 
+      const filteredproperties = properties.filter(
+        (prop: Properties) =>
+          prop.label !== 'Created at' &&
+          prop.label !== 'Updated at' &&
+          prop.label !== 'Id',
+      );
+
       if (idProperty && model) {
         const createForm = treeSearch('#createForm', newPrefab.structure);
         if (!createForm) throw new Error('No create form found');
         createForm.id = createFormId;
+
         const result = await prepareAction(
           createFormId,
           idProperty,
-          properties,
+          filteredproperties,
           'create',
         );
 
@@ -736,30 +795,6 @@ const beforeCreate = ({
               }
             };
             const createFormInputs = generateInputPrefabs();
-            // NOTE: this is not possible, because I have to check the text field type, which does not have a type option.
-            // if (
-            //   createFormInputs.type === 'COMPONENT' &&
-            //   createFormInputs.descendants[1].type === 'COMPONENT' &&
-            //   createFormInputs.descendants[1].descendants[0].type
-            //   // I can't check this type, because it does not have any.
-            // ) {
-            //   setOption(
-            //     createFormInputs.descendants[1].descendants[0],
-            //     'margin',
-            //     (options: PrefabComponentOption) => ({
-            //       ...options,
-            //       value: 'none',
-            //     }),
-            //   );
-            //   setOption(
-            //     createFormInputs.descendants[1].descendants[0],
-            //     'hideLabel',
-            //     (opts: PrefabComponentOption) => ({
-            //       ...opts,
-            //       value: true,
-            //     }),
-            //   );
-            // }
 
             const createFormFooter = createForm.descendants.pop();
             createForm.descendants.push(createFormInputs);
@@ -3220,6 +3255,7 @@ const prefabStructure = [
                               ),
                               Button(
                                 {
+                                  ref: { id: '#saveTopButton' },
                                   style: {
                                     overwrite: {
                                       boxShadow: 'none',
@@ -3351,9 +3387,9 @@ const prefabStructure = [
                             ],
                           ),
                           component(
-                            'Form Beta',
+                            'Form',
                             {
-                              label: 'Create Form Beta',
+                              label: 'Create Form',
                               options: defaults,
                               ref: { id: '#createForm' },
                             },
@@ -3427,6 +3463,7 @@ const prefabStructure = [
                                     ),
                                     Button(
                                       {
+                                        ref: { id: '#saveBottomButton' },
                                         style: {
                                           overwrite: {
                                             boxShadow: 'none',
@@ -3449,7 +3486,6 @@ const prefabStructure = [
                                             value: ['Save and create'],
                                           }),
                                         },
-                                        ref: { id: '#createFormSubmit' },
                                       },
                                       [],
                                     ),

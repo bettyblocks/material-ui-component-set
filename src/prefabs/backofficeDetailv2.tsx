@@ -14,7 +14,6 @@ import {
   size,
   buttongroup,
   font,
-  hideIf,
   PrefabComponentOption,
   PrefabComponent,
   PrefabReference,
@@ -1985,10 +1984,16 @@ const beforeCreate = ({
           }));
 
           const enrichVarObj = (obj: any) => {
-            const returnObject = obj;
+            const returnObject = {
+              id: [obj.id],
+              kind: obj.kind,
+              label: obj.label,
+              name: '',
+              type: 'PROPERTY',
+            };
             if (data && data.model) {
               const property = data.model.properties.find(
-                (prop: any) => prop.id === obj.id[0],
+                (prop: any) => prop.id === returnObject.id[0],
               );
               if (property) {
                 returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
@@ -2373,10 +2378,9 @@ const beforeCreate = ({
             }
 
             if (Text2.type === 'COMPONENT') {
-              console.log(enrichVarObj({ ...prop }));
-              setOption(Text2, 'content', (opt: PrefabComponentOption) => ({
+              setOption(Text2, 'content', (opt: any) => ({
                 ...opt,
-                value: [`${enrichVarObj({ ...prop })}`],
+                value: [enrichVarObj({ ...prop })],
                 configuration: { as: 'MULTILINE' },
               }));
               setOption(Text2, 'type', (opt: PrefabComponentOption) => ({
