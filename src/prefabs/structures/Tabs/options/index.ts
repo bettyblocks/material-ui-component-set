@@ -16,7 +16,7 @@ export const categories = [
     members: ['height', 'width', 'appBarColor', 'textColor', 'indicatorColor'],
   },
   {
-    label: 'Advanced settings',
+    label: 'Advanced Options',
     expanded: false,
     members: ['preLoadTabs', 'dataComponentAttribute'],
   },

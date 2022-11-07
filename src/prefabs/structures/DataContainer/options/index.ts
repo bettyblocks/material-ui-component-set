@@ -17,7 +17,7 @@ export const categories = [
     members: ['showError', 'loadingType', 'loadingText'],
   },
   {
-    label: 'Advanced settings',
+    label: 'Advanced Options',
     expanded: false,
     members: ['dataComponentAttribute'],
   },

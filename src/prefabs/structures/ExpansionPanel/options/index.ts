@@ -15,7 +15,7 @@ export const categories = [
     members: ['titleType', 'titleTextColor', 'titleFontWeight', 'titleSpacing'],
   },
   {
-    label: 'Advanced settings',
+    label: 'Advanced Options',
     expanded: false,
     members: ['preloadData', 'dataComponentAttribute'],
   },
