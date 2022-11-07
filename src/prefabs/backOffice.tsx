@@ -612,6 +612,23 @@ const drawerContainer = DrawerContainer(
               },
             },
           }),
+          drawerWidth: linked({
+            label: 'Sidebar width',
+            value: {
+              ref: {
+                componentId: '#contentContainer',
+                optionId: '#contentContainerDrawerWidth',
+              },
+            },
+            configuration: {
+              condition: {
+                type: 'SHOW',
+                option: 'visibility',
+                comparator: 'EQ',
+                value: true,
+              },
+            },
+          }),
           createTabTitle: linked({
             label: 'Create tab title',
             value: {
@@ -747,6 +764,9 @@ const drawerContainer = DrawerContainer(
                 value: '480px',
                 configuration: {
                   as: 'UNIT',
+                },
+                ref: {
+                  id: '#contentContainerDrawerWidth',
                 },
               }),
             },
@@ -1371,6 +1391,12 @@ const drawerContainer = DrawerContainer(
                                               value: true,
                                             },
                                           ),
+                                          width: size('Width', {
+                                            value: '100%',
+                                            configuration: {
+                                              as: 'UNIT',
+                                            },
+                                          }),
                                         },
                                         ref: { id: '#detailBox' },
                                       },
@@ -3564,27 +3590,6 @@ const beforeCreate = ({
   };
 
   const makeDetail = (prop: any) => {
-    const mediaComponent = cloneStructure('Media');
-    if (mediaComponent.type === 'COMPONENT') {
-      setOption(
-        mediaComponent,
-        'imageSource',
-        (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: [{ ...prop }],
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Image', value: 'img' },
-              { name: 'Video', value: 'video' },
-              { name: 'I-frame', value: 'iframe' },
-            ],
-          },
-        }),
-      );
-    }
-
     const detailComponent = cloneStructure('Box');
     if (detailComponent.type === 'COMPONENT') {
       setOption(
@@ -3614,34 +3619,78 @@ const beforeCreate = ({
 
       const labelText = cloneStructure('Text');
       if (labelText.type === 'COMPONENT') {
-        setOption(labelText, 'content', (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: [`${[prop.label]}:`],
-          configuration: { as: 'MULTILINE' },
-        }));
-        setOption(labelText, 'type', (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: 'Body1',
-        }));
-        setOption(labelText, 'fontWeight', (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: '500',
-          configuration: {
-            as: 'DROPDOWN',
-            dataType: 'string',
-            allowedInput: [
-              { name: '100', value: '100' },
-              { name: '200', value: '200' },
-              { name: '300', value: '300' },
-              { name: '400', value: '400' },
-              { name: '500', value: '500' },
-              { name: '600', value: '600' },
-              { name: '700', value: '700' },
-              { name: '800', value: '800' },
-              { name: '900', value: '900' },
-            ],
-          },
-        }));
+        setOption(
+          labelText,
+          'content',
+          (originalOption: PrefabComponentOption) => ({
+            ...originalOption,
+            value: [`${[prop.label]}:`],
+            configuration: { as: 'MULTILINE' },
+          }),
+        );
+        setOption(
+          labelText,
+          'type',
+          (originalOption: PrefabComponentOption) => ({
+            ...originalOption,
+            value: 'Body1',
+          }),
+        );
+        setOption(
+          labelText,
+          'fontWeight',
+          (originalOption: PrefabComponentOption) => ({
+            ...originalOption,
+            value: '500',
+            configuration: {
+              as: 'DROPDOWN',
+              dataType: 'string',
+              allowedInput: [
+                { name: '100', value: '100' },
+                { name: '200', value: '200' },
+                { name: '300', value: '300' },
+                { name: '400', value: '400' },
+                { name: '500', value: '500' },
+                { name: '600', value: '600' },
+                { name: '700', value: '700' },
+                { name: '800', value: '800' },
+                { name: '900', value: '900' },
+              ],
+            },
+          }),
+        );
+      }
+
+      if (prop.kind === 'IMAGE') {
+        const mediaComponent = cloneStructure('Media');
+        if (mediaComponent.type === 'COMPONENT') {
+          setOption(
+            mediaComponent,
+            'type',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: 'url',
+            }),
+          );
+          setOption(
+            mediaComponent,
+            'urlFileSource',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [{ ...prop }],
+            }),
+          );
+          setOption(
+            mediaComponent,
+            'width',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: '100%',
+            }),
+          );
+        }
+        detailComponent.descendants = [labelText, mediaComponent];
+        return detailComponent;
       }
       const valueText = cloneStructure('Text');
       if (valueText.type === 'COMPONENT') {
@@ -3650,10 +3699,28 @@ const beforeCreate = ({
           value: [enrichVarObj({ ...prop })],
           configuration: { as: 'MULTILINE' },
         }));
+        // if (prop.kind === 'FILE') {
+        //   setOption(
+        //     valueText,
+        //     'linkType',
+        //     (originalOption: PrefabComponentOption) => ({
+        //       ...originalOption,
+        //       value: 'external',
+        //     }),
+        //   );
+        //   setOption(
+        //     valueText,
+        //     'linkToExternal',
+        //     (originalOption: PrefabComponentOption) => ({
+        //       ...originalOption,
+        //       value: [prop],
+        //     }),
+        //   );
+        // }
       }
       detailComponent.descendants = [labelText, valueText];
     }
-    return prop.kind === 'IMAGE' ? mediaComponent : detailComponent;
+    return detailComponent;
   };
 
   useModelQuery({
@@ -3775,8 +3842,6 @@ const beforeCreate = ({
                 'TEXT_EXPRESSION',
                 'MINUTES',
                 'ZIPCODE',
-                'IMAGE',
-                'FILE',
               ]}
               onChange={(value: Properties[]) => {
                 setProperties(value);
