@@ -8,6 +8,4 @@ export const validation = {
       condition: showIfTrue('required'),
     },
   }),
-  disabled: toggle('Disabled'),
-  helperText: variable('Helper text'),
 };

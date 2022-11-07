@@ -1,5 +1,4 @@
 // Import all prefabs here
-import { ActionButton } from './ActionButton';
 import { ActionJSButton } from './ActionJSButton';
 import { Alert, FormSuccessAlert, FormErrorAlert } from './Alert';
 import { AppBar } from './Appbar';
@@ -60,7 +59,6 @@ import { TextArea } from './TextArea';
 import { TextInput } from './TextInput';
 
 // Import all prefab options here
-import { actionButtonOptions } from './ActionButton/options';
 import { options as actionJSButtonOptions } from './ActionJSButton/options';
 import { alertOptions } from './Alert/options';
 import { appBarOptions } from './Appbar/options';
@@ -122,7 +120,6 @@ import { options as textInputOptions } from './TextInput/options';
 
 export {
   ActionJSButton,
-  ActionButton,
   Alert,
   AppBar,
   AutocompleteInput,
@@ -183,7 +180,6 @@ export {
   TextArea,
   TextInput,
   actionJSButtonOptions,
-  actionButtonOptions,
   alertOptions,
   appBarOptions,
   autocompleteInputOptions,

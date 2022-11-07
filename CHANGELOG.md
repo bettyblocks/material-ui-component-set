@@ -1,3 +1,153 @@
+# [2.66.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.8...v2.66.0) (2022-11-07)
+
+
+### Bug Fixes
+
+* update sdk in lock file ([af6e4e7](https://github.com/bettyblocks/material-ui-component-set/commit/af6e4e7eab5f1be50046834071f7fae23a1def9c))
+
+
+### Features
+
+* create input wizard added to text and select ([0223893](https://github.com/bettyblocks/material-ui-component-set/commit/02238931d49a6cec0b9c03ae92f4fee7cf3bd703))
+* removed old wizard from all inputs ([3c26f13](https://github.com/bettyblocks/material-ui-component-set/commit/3c26f13462a1a488c723ece8036e8161c0cab670))
+* removed unused checks ([e78f7fd](https://github.com/bettyblocks/material-ui-component-set/commit/e78f7fd48868ddc9a2002969854498b84ea47c6f))
+* update for relation inputs in forms ([71f83e7](https://github.com/bettyblocks/material-ui-component-set/commit/71f83e75fa0fee5dd6210178fd78e40c9dfcd331))
+
+## [2.65.8](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.7...v2.65.8) (2022-11-04)
+
+
+### Bug Fixes
+
+* remove partial component ([3cc86f9](https://github.com/bettyblocks/material-ui-component-set/commit/3cc86f948d34ce03a0afcc72a268e1ce4b9526e4))
+
+## [2.65.7](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.6...v2.65.7) (2022-11-04)
+
+
+### Bug Fixes
+
+* add action to backoffice wrapper ([d7f9a32](https://github.com/bettyblocks/material-ui-component-set/commit/d7f9a328aa30f82a8d0b2a3e59467adb67c192b7))
+
+## [2.65.6](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.5...v2.65.6) (2022-11-03)
+
+
+### Bug Fixes
+
+* remove beta from label ([6d9198c](https://github.com/bettyblocks/material-ui-component-set/commit/6d9198c6aafa1cf125ad72b0d4779b957d4817ff))
+
+## [2.65.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.4...v2.65.5) (2022-11-03)
+
+
+### Bug Fixes
+
+* reset on text input resets to default value ([0c74128](https://github.com/bettyblocks/material-ui-component-set/commit/0c74128535051feef4f164e0cc75a445e7236039))
+
+## [2.65.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.3...v2.65.4) (2022-11-03)
+
+
+### Bug Fixes
+
+* list item not showing Property name in list with data prefab ([f66943a](https://github.com/bettyblocks/material-ui-component-set/commit/f66943ab37eaa40c6a9f2411c2848408a72d991f))
+
+## [2.65.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.2...v2.65.3) (2022-11-03)
+
+
+### Bug Fixes
+
+* the menu component wil now be inline with the rest of the items ([ed311d2](https://github.com/bettyblocks/material-ui-component-set/commit/ed311d2dd0235b965b0c628edf74716ed4f1e2ea))
+
+## [2.65.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.1...v2.65.2) (2022-11-02)
+
+
+### Bug Fixes
+
+* remove file by sending empty string ([5cef638](https://github.com/bettyblocks/material-ui-component-set/commit/5cef638769865bf0a675988b640431d24c7d0aed))
+
+## [2.65.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.0...v2.65.1) (2022-10-31)
+
+
+### Bug Fixes
+
+* cleaned up login and register page ([b4dcc6f](https://github.com/bettyblocks/material-ui-component-set/commit/b4dcc6fdcda920d9c4e587c28013014520343b5b))
+* login and register redirect error & set action to public ([4b1ff0e](https://github.com/bettyblocks/material-ui-component-set/commit/4b1ff0ef522b013d75ed3750e175d517fd09f7f4))
+
+# [2.65.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.64.1...v2.65.0) (2022-10-28)
+
+
+### Bug Fixes
+
+* change interaction name to onRender ([0ef55a2](https://github.com/bettyblocks/material-ui-component-set/commit/0ef55a260f8f4824c7d688b264484e24fe197a57))
+* trigger pipelines ([1f0e78e](https://github.com/bettyblocks/material-ui-component-set/commit/1f0e78edf795cf32c001d9984c345dda9b35e768))
+
+
+### Features
+
+* add onComponentRendered to actionjs form ([8d1c04d](https://github.com/bettyblocks/material-ui-component-set/commit/8d1c04db9cda7e5ee2e83d9a4defa9d01bdfc2f6))
+
+## [2.64.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.64.0...v2.64.1) (2022-10-24)
+
+
+### Bug Fixes
+
+* use matches filtering for autocompleteinput ([7da4d9f](https://github.com/bettyblocks/material-ui-component-set/commit/7da4d9f5481da52a74c439e23d53351ab60c5d4d))
+
+# [2.64.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.63.1...v2.64.0) (2022-10-24)
+
+
+### Bug Fixes
+
+* add keywords to hidden input ([e6c7b6f](https://github.com/bettyblocks/material-ui-component-set/commit/e6c7b6f85a380e505f07f4497b93126f66451baa))
+* trigger pipelines ([899603b](https://github.com/bettyblocks/material-ui-component-set/commit/899603b1b513046fb45d19dce7d07592a9078b85))
+
+
+### Features
+
+* remove old prefabs and set beta forms as default ([e87ebce](https://github.com/bettyblocks/material-ui-component-set/commit/e87ebcee3702ce911a44d4c94f8e8ab5741ecddc))
+* replace action button with the new action button ([67bf3b0](https://github.com/bettyblocks/material-ui-component-set/commit/67bf3b0523241d3ab40f516196146d1156fe20e2))
+
+## [2.63.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.63.0...v2.63.1) (2022-10-24)
+
+
+### Bug Fixes
+
+* add initial value to multiautocompleteinput ([3c26856](https://github.com/bettyblocks/material-ui-component-set/commit/3c268562aa7ce5f1134dfed2a06381cede8704d6))
+* put back the defaultvalues filter ([8dad211](https://github.com/bettyblocks/material-ui-component-set/commit/8dad211e2bbef743ebbf28cb3e1b0c8422fcce77))
+* use actionproperty model if present ([718c21b](https://github.com/bettyblocks/material-ui-component-set/commit/718c21b8dd7c452772145328449aa5691c13ff0f))
+
+# [2.63.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.62.0...v2.63.0) (2022-10-24)
+
+
+### Bug Fixes
+
+* Change boolean to string for allowed_input. ([a4ca130](https://github.com/bettyblocks/material-ui-component-set/commit/a4ca130bc14cad3f71e6c89977313a1b364b6d49))
+* Set Page Template permissions for actions to private for now. ([03fa217](https://github.com/bettyblocks/material-ui-component-set/commit/03fa2173a624e48bab09f433c5655f31206f628e))
+
+
+### Features
+
+* **PAGE-2238:** Add permission & authProfId args to prepareAction fn. ([932a92c](https://github.com/bettyblocks/material-ui-component-set/commit/932a92c2bbc665559c83f8972bd38c1db9bcce7d))
+
+# [2.62.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.61.4...v2.62.0) (2022-10-21)
+
+
+### Bug Fixes
+
+* change label for multi autocomplete ([306d017](https://github.com/bettyblocks/material-ui-component-set/commit/306d0175db54d1cafc14897fd5f65c06d04a08c5))
+* remove styles for button ([73ac2d9](https://github.com/bettyblocks/material-ui-component-set/commit/73ac2d93b876abc192e5484fbe81ceb16552c6ef))
+* remove-double-options ([89d72e1](https://github.com/bettyblocks/material-ui-component-set/commit/89d72e187abcf0fef608dc5a5a73035f4dc99452))
+* rename advanced settings to advanced options ([34bc20e](https://github.com/bettyblocks/material-ui-component-set/commit/34bc20e9889421c5d54f739ea1b5418d19cdbfad))
+* use old advanced label for deprecated prefabs ([5079065](https://github.com/bettyblocks/material-ui-component-set/commit/5079065e239684f6b58202c3739c097af8efa100))
+
+
+### Features
+
+* add categories autocompleteinput ([1b6b85c](https://github.com/bettyblocks/material-ui-component-set/commit/1b6b85c8babbd19b261af068b72a9607066bf1c7))
+* add categories to multiautcompleteinput ([c826a41](https://github.com/bettyblocks/material-ui-component-set/commit/c826a41c09a8669db56755b410e2b1fa348d3553))
+* add categories to radioinput ([382240e](https://github.com/bettyblocks/material-ui-component-set/commit/382240ee839eda0c6ea9bfd533c1cd93b1cbb5a1))
+* add-categories-checkboxinput ([e61cffa](https://github.com/bettyblocks/material-ui-component-set/commit/e61cffa53cce69e457cf6ad5d7a9eb3e6d823636))
+* add-categories-datetimepicker ([dfa61f8](https://github.com/bettyblocks/material-ui-component-set/commit/dfa61f864cdc990972df0d884173afc12e467f89))
+* add-categories-selectinput ([ce347c4](https://github.com/bettyblocks/material-ui-component-set/commit/ce347c430029b2f510e90dded9069befdc393792))
+* add-categories-textinput ([4a7ad5d](https://github.com/bettyblocks/material-ui-component-set/commit/4a7ad5d497d475b97afc44d9d4b99a1ff8d944f0))
+
 ## [2.61.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.61.3...v2.61.4) (2022-10-19)
 
 

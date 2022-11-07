@@ -186,7 +186,10 @@
     );
 
     const MenuComp = (
-      <div data-component={useText(dataComponentAttribute) || 'Menu'}>
+      <div
+        style={{ display: 'inline-block' }}
+        data-component={useText(dataComponentAttribute) || 'Menu'}
+      >
         {ButtonComponent}
         {!isDev ? (
           <Popper

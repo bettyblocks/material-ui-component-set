@@ -1,12 +1,18 @@
-import { showIf, text, variable, toggle } from '@betty-blocks/component-sdk';
-
-import { showOn } from '../../../../utils';
+import {
+  showIf,
+  text,
+  variable,
+  toggle,
+  showIfTrue,
+} from '@betty-blocks/component-sdk';
 
 export const validation = {
   required: toggle('Required', { value: false }),
   validationValueMissing: variable('Value required message', {
     value: ['This field is required'],
-    ...showOn('required'),
+    configuration: {
+      condition: showIfTrue('required'),
+    },
   }),
   closeOnSelect: toggle('Close dropdown after select', { value: true }),
   disabled: toggle('Disabled', { value: false }),
