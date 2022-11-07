@@ -1,3 +1,18 @@
+# [2.66.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.8...v2.66.0) (2022-11-07)
+
+
+### Bug Fixes
+
+* update sdk in lock file ([af6e4e7](https://github.com/bettyblocks/material-ui-component-set/commit/af6e4e7eab5f1be50046834071f7fae23a1def9c))
+
+
+### Features
+
+* create input wizard added to text and select ([0223893](https://github.com/bettyblocks/material-ui-component-set/commit/02238931d49a6cec0b9c03ae92f4fee7cf3bd703))
+* removed old wizard from all inputs ([3c26f13](https://github.com/bettyblocks/material-ui-component-set/commit/3c26f13462a1a488c723ece8036e8161c0cab670))
+* removed unused checks ([e78f7fd](https://github.com/bettyblocks/material-ui-component-set/commit/e78f7fd48868ddc9a2002969854498b84ea47c6f))
+* update for relation inputs in forms ([71f83e7](https://github.com/bettyblocks/material-ui-component-set/commit/71f83e75fa0fee5dd6210178fd78e40c9dfcd331))
+
 ## [2.65.8](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.7...v2.65.8) (2022-11-04)
 
 
