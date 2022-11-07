@@ -306,6 +306,7 @@
         '& > *': {
           pointerEvents: 'none',
         },
+        width: ({ options: { fullWidth } }) => (fullWidth ? '100%' : 'auto'),
       },
       linkComponent: {
         '&, &.MuiTypography-root': {
