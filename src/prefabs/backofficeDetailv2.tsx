@@ -1465,7 +1465,7 @@ const drawerContainer = DrawerContainer(
                                   boxShadow: 'none',
                                   color: {
                                     type: 'THEME_COLOR',
-                                    value: 'PRIMARY',
+                                    value: 'primary',
                                   },
                                   fontFamily: 'Roboto',
                                   fontSize: '0.875rem',
@@ -1495,8 +1495,8 @@ const drawerContainer = DrawerContainer(
                                 name: 'filled',
                                 overwrite: {
                                   backgroundColor: {
-                                    type: 'STATIC',
-                                    value: 'blue',
+                                    type: 'THEME_COLOR',
+                                    value: 'primary',
                                   },
                                   boxShadow: 'none',
                                   color: {
@@ -1529,7 +1529,7 @@ const drawerContainer = DrawerContainer(
                                 overwrite: {
                                   backgroundColor: {
                                     type: 'THEME_COLOR',
-                                    value: 'red',
+                                    value: 'danger',
                                   },
                                   boxShadow: 'none',
                                   color: {
@@ -1540,7 +1540,7 @@ const drawerContainer = DrawerContainer(
                                   fontSize: '0.875rem',
                                   fontStyle: 'none',
                                   fontWeight: '400',
-                                  padding: ['0.6875rem', '0.6875rem'], // 1 zo'n dingetje is 0.0625rem
+                                  padding: ['0.6875rem', '0.6875rem'],
                                   textDecoration: 'none',
                                   textTransform: 'none',
                                 },
