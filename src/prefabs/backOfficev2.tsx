@@ -121,11 +121,56 @@ const interactions: PrefabInteraction[] = [
     type: InteractionType.Custom,
   },
   {
-    name: 'Show/Hide',
+    name: 'Show',
     sourceEvent: 'Click',
     ref: {
       targetComponentId: '#searchColumn',
       sourceComponentId: '#searchButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchActiveButton',
+      sourceComponentId: '#searchButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchButton',
+      sourceComponentId: '#searchActiveButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchButton',
+      sourceComponentId: '#searchButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchColumn',
+      sourceComponentId: '#searchActiveButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchActiveButton',
+      sourceComponentId: '#searchActiveButton',
     },
     type: InteractionType.Custom,
   },
@@ -894,6 +939,30 @@ const beforeCreate = ({
             disabled: true,
           },
         }));
+
+        const backOfficeTitle = treeSearch(
+          '#backOfficeTitle',
+          newPrefab.structure,
+        );
+        if (!backOfficeTitle) throw new Error('No back office title found');
+        setOption(backOfficeTitle, 'content', (opt: PrefabComponentOption) => ({
+          ...opt,
+          value: [`${model.label}s`],
+        }));
+
+        const menuButton = treeSearch('#menuButton', newPrefab.structure);
+        if (!menuButton) throw new Error('No menu button found');
+        setOption(menuButton, 'buttonText', (opt: PrefabComponentOption) => ({
+          ...opt,
+          value: [`${model.label} info`],
+        }));
+
+        const createTitle = treeSearch('#createTitle', newPrefab.structure);
+        if (!createTitle) throw new Error('No create title found');
+        setOption(createTitle, 'content', (opt: PrefabComponentOption) => ({
+          ...opt,
+          value: [`Create ${model.label} record`],
+        }));
       }
 
       // #region Configure Header Image
@@ -1625,10 +1694,11 @@ const drawerSidebar = DrawerBar(
                       },
                       [
                         Button({
+                          ref: { id: '#menuButton' },
                           options: {
                             ...buttonOptions,
                             buttonText: variable('Button text', {
-                              value: ['Client info'],
+                              value: ['Model info'],
                             }),
                           },
                           style: {
@@ -1709,7 +1779,7 @@ const drawerSidebar = DrawerBar(
                 fontSize: '0.875rem',
                 fontStyle: 'none',
                 fontWeight: '400',
-                padding: ['0.6875rem', '0.6875rem'],
+                padding: ['0rem', '0rem'],
                 textDecoration: 'none',
                 textTransform: 'none',
               },
@@ -1848,7 +1918,7 @@ const drawerContainer = DrawerContainer(
                         fontSize: '0.875rem',
                         fontStyle: 'none',
                         fontWeight: '400',
-                        padding: ['0.6875rem', '0.6875rem'],
+                        padding: ['0rem', '0rem'],
                         textDecoration: 'none',
                         textTransform: 'none',
                       },
@@ -1986,10 +2056,11 @@ const drawerContainer = DrawerContainer(
                   [
                     Text(
                       {
+                        ref: { id: '#backOfficeTitle' },
                         options: {
                           ...textOptions,
                           content: variable('Content', {
-                            value: ['Clients'],
+                            value: ['Title'],
                             configuration: { as: 'MULTILINE' },
                           }),
                           type: font('Font', { value: ['Title5'] }),
@@ -2028,7 +2099,7 @@ const drawerContainer = DrawerContainer(
                                 fontSize: '0.875rem',
                                 fontStyle: 'none',
                                 fontWeight: '400',
-                                padding: ['0.6875rem', '0.6875rem'],
+                                padding: ['0.3125rem', '0rem'],
                                 textDecoration: 'none',
                                 textTransform: 'none',
                               },
@@ -2041,6 +2112,49 @@ const drawerContainer = DrawerContainer(
                               icon: icon('Icon', { value: 'Refresh' }),
                               outerSpacing: sizes('Outer space', {
                                 value: ['0rem', 'XL', '0rem', '0rem'],
+                              }),
+                            },
+                          },
+                          [],
+                        ),
+                        Button(
+                          {
+                            ref: { id: '#searchActiveButton' },
+                            style: {
+                              overwrite: {
+                                backgroundColor: {
+                                  type: 'THEME_COLOR',
+                                  value: 'white',
+                                },
+                                boxShadow: 'none',
+                                color: {
+                                  type: 'THEME_COLOR',
+                                  value: 'primary',
+                                },
+                                borderRadius: ['0.25rem'],
+                                fontFamily: 'Roboto',
+                                fontSize: '0.875rem',
+                                fontStyle: 'none',
+                                fontWeight: '400',
+                                padding: ['0.5rem', '0.625rem'],
+                                textDecoration: 'none',
+                                textTransform: 'none',
+                              },
+                            },
+                            options: {
+                              ...buttonOptions,
+                              buttonText: variable('Button text', {
+                                value: ['Search'],
+                              }),
+                              icon: icon('Icon', { value: 'Search' }),
+                              outerSpacing: sizes('Outer space', {
+                                value: ['0rem', 'XL', '0rem', '0rem'],
+                              }),
+                              visible: toggle('Toggle visibility', {
+                                value: false,
+                                configuration: {
+                                  as: 'VISIBILITY',
+                                },
                               }),
                             },
                           },
@@ -2064,7 +2178,7 @@ const drawerContainer = DrawerContainer(
                                 fontSize: '0.875rem',
                                 fontStyle: 'none',
                                 fontWeight: '400',
-                                padding: ['0.6875rem', '0.6875rem'],
+                                padding: ['0.3125rem', '0.625rem'],
                                 textDecoration: 'none',
                                 textTransform: 'none',
                               },
@@ -2107,9 +2221,6 @@ const drawerContainer = DrawerContainer(
                                 value: ['New'],
                               }),
                               icon: icon('Icon', { value: 'Add' }),
-                              outerSpacing: sizes('Outer space', {
-                                value: ['0rem', 'XL', '0rem', '0rem'],
-                              }),
                             },
                           },
                           [],
@@ -2886,7 +2997,7 @@ const prefabStructure = [
                                       fontSize: '0.875rem',
                                       fontStyle: 'none',
                                       fontWeight: '400',
-                                      padding: ['0.625rem', '1.3125rem'],
+                                      padding: ['0.625rem', '0.9375rem'],
                                       textDecoration: 'none',
                                       textTransform: 'none',
                                     },
@@ -2914,7 +3025,7 @@ const prefabStructure = [
                                       fontSize: '0.875rem',
                                       fontStyle: 'none',
                                       fontWeight: '400',
-                                      padding: ['0.6875rem', '0.6875rem'],
+                                      padding: ['0.6875rem', '1rem'],
                                       textDecoration: 'none',
                                       textTransform: 'none',
                                     },
@@ -2934,6 +3045,26 @@ const prefabStructure = [
                             ],
                           ),
                         ],
+                      ),
+                      Box(
+                        {
+                          options: {
+                            ...boxOptions,
+                            innerSpacing: sizes('Inner space', {
+                              value: ['0rem', '0rem', '0rem', '0rem'],
+                            }),
+                            height: size('Height', {
+                              value: '1px',
+                              configuration: {
+                                as: 'UNIT',
+                              },
+                            }),
+                            backgroundColor: color('Background color', {
+                              value: ThemeColor.LIGHT,
+                            }),
+                          },
+                        },
+                        [],
                       ),
                     ],
                   ),
@@ -2986,6 +3117,7 @@ const prefabStructure = [
                                 [
                                   Text(
                                     {
+                                      ref: { id: '#createTitle' },
                                       options: {
                                         ...textOptions,
                                         content: variable('Content', {
@@ -3094,7 +3226,7 @@ const prefabStructure = [
                                             fontSize: '0.875rem',
                                             fontStyle: 'none',
                                             fontWeight: '400',
-                                            padding: ['0.625rem', '1.3125rem'],
+                                            padding: ['0.625rem', '0.9375rem'],
                                             textDecoration: 'none',
                                             textTransform: 'none',
                                           },
@@ -3122,7 +3254,7 @@ const prefabStructure = [
                                             fontSize: '0.875rem',
                                             fontStyle: 'none',
                                             fontWeight: '400',
-                                            padding: ['0.6875rem', '0.6875rem'],
+                                            padding: ['0.6875rem', '1rem'],
                                             textDecoration: 'none',
                                             textTransform: 'none',
                                           },
