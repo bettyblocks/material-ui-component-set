@@ -1,17 +1,14 @@
 import {
   buttongroup,
-  color,
-  dropdown,
   hideIf,
   icon,
   option,
   property,
-  showIfTrue,
   sizes,
-  ThemeColor,
   toggle,
   variable,
 } from '@betty-blocks/component-sdk';
+import { tooltip } from './tooltip';
 import { advanced } from './advanced';
 
 export const options = {
@@ -29,7 +26,7 @@ export const options = {
   }),
 
   property: property('Pass value to action'),
-  buttonText: variable('Button text', { value: ['Button'] }),
+  buttonText: variable('Button text', { value: ['Action button'] }),
   fullWidth: toggle('Full width'),
   icon: icon('Icon', { value: 'None' }),
   size: buttongroup(
@@ -62,44 +59,7 @@ export const options = {
   }),
 
   disabled: toggle('Disabled'),
-  addTooltip: toggle('Add Tooltip'),
 
-  hasVisibileTooltip: toggle('Toggle tooltip visibility', {
-    value: true,
-    configuration: { as: 'VISIBILITY', condition: showIfTrue('addTooltip') },
-  }),
-
-  tooltipContent: variable('Tooltip Content', {
-    value: ['Tips'],
-    configuration: {
-      condition: showIfTrue('addTooltip'),
-    },
-  }),
-
-  tooltipPlacement: dropdown(
-    'Tooltip Placement',
-    [
-      ['Top Start', 'top-start'],
-      ['Top', 'top'],
-      ['Top End', 'top-end'],
-      ['Right', 'right'],
-      ['Left', 'left'],
-      ['Bottom Start', 'bottom-start'],
-      ['Bottom', 'bottom'],
-      ['Bottom End', 'bottom-end'],
-    ],
-    { value: 'bottom', configuration: { condition: showIfTrue('addTooltip') } },
-  ),
-
-  tooltipBackground: color('Tooltip Background', {
-    value: ThemeColor.MEDIUM,
-    configuration: { condition: showIfTrue('addTooltip') },
-  }),
-
-  tooltipText: color('Tooltip Text', {
-    value: ThemeColor.BLACK,
-    configuration: { condition: showIfTrue('addTooltip') },
-  }),
-
+  ...tooltip,
   ...advanced,
 };
