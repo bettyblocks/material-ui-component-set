@@ -373,9 +373,12 @@
       }
 
       if (event.key === 'Enter') {
-        if (isBlockActive(editor, 'bulleted-list', 'type')) {
+        if (isBlockActive(editor, 'bulleted-list', 'type') && !event.shiftKey) {
           handleListdepth('bulleted-list', 'enter', event);
-        } else if (isBlockActive(editor, 'numbered-list', 'type')) {
+        } else if (
+          isBlockActive(editor, 'numbered-list', 'type') &&
+          !event.shiftKey
+        ) {
           handleListdepth('numbered-list', 'enter', event);
         } else if (isHeadingActive(editor)) {
           event.preventDefault();
