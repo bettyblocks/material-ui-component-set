@@ -12,7 +12,7 @@ export const TextInput = (
 
   const categories = [
     {
-      label: 'Validation Options',
+      label: 'Validations',
       expanded: false,
       members: [
         'required',
@@ -42,9 +42,9 @@ export const TextInput = (
       ],
     },
     {
-      label: 'Advanced Options',
+      label: 'Advanced',
       expanded: false,
-      members: ['dataComponentAttribute'],
+      members: ['dataComponentAttribute', 'searchParam'],
     },
   ];
 
