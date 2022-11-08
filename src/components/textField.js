@@ -378,6 +378,7 @@
         '& > *': {
           pointerEvents: 'none',
         },
+        width: ({ options: { fullWidth } }) => (fullWidth ? '100%' : 'auto'),
       },
       label: {
         color: ({ options: { labelColor } }) => [
