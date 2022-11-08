@@ -55,7 +55,7 @@ import {
   FormErrorAlert,
   Divider,
 } from './structures';
-import { ModelProps, ModelQuery, IdPropertyProps, Properties } from './types';
+import { ModelProps, ModelQuery, IdPropertyProps } from './types';
 import { options as defaults } from './structures/ActionJSForm/options';
 
 const interactions: PrefabInteraction[] = [
@@ -1565,23 +1565,18 @@ const beforeCreate = ({
   const { useModelQuery, cloneStructure, setOption } = helpers;
   const [modelId, setModelId] = React.useState('');
   const [model, setModel] = React.useState<ModelProps>();
-  const [properties] = React.useState<Properties[]>([]);
   const [modelValidation, setModelValidation] = React.useState(false);
   const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
-  const { data } = useModelQuery({
-    variables: { id: modelId },
-    skip: !modelId,
-  });
-
-  const updateFormId = createUuid();
-
   useModelQuery({
     variables: { id: modelId },
     onCompleted: ({ model: dataModel }: ModelQuery) => {
       setModel(dataModel);
       setIdProperty(dataModel.properties.find(({ name }) => name === 'id'));
     },
+    skip: !modelId,
   });
+
+  const updateFormId = createUuid();
 
   function treeSearch(
     dirName: string,
@@ -1660,12 +1655,12 @@ const beforeCreate = ({
               name: '',
               type: 'PROPERTY',
             };
-            if (data && data.model) {
-              const property = data.model.properties.find(
+            if (model) {
+              const property = model.properties.find(
                 (prop: any) => prop.id === returnObject.id[0],
               );
               if (property) {
-                returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
+                returnObject.name = `{{ ${model.name}.${property.name} }}`;
               }
             }
             return returnObject;
@@ -2063,29 +2058,33 @@ const beforeCreate = ({
               RowColumnColumn.descendants[0].type !== 'COMPONENT' ||
               RowColumnColumn.descendants[1].type !== 'COMPONENT'
             ) {
-              throw new Error('Test');
+              throw new Error('RowColumnColumn is not a component');
             }
             RowColumnColumn.descendants[0].descendants = [Text1];
             RowColumnColumn.descendants[1].descendants = [Text2];
             return RowColumnColumn;
           };
 
-          const filteredproperties = properties.filter(
-            (prop: Properties) =>
-              prop.label !== 'Created at' &&
-              prop.label !== 'Updated at' &&
-              prop.label !== 'Id',
-          );
+          model?.properties.forEach((property) => {
+            detailContainer.descendants.push(makeDetail(property));
+          });
 
           if (idProperty && model) {
             const updateForm = treeSearch('#createForm', newPrefab.structure);
             if (!updateForm) throw new Error('No create form found');
             updateForm.id = updateFormId;
 
+            const normalizeProperties = model.properties.map((prop): any => ({
+              id: [prop.id],
+              label: prop.label,
+              type: 'PROPERTY',
+              kind: prop.kind,
+            }));
+
             const result = await prepareAction(
               updateFormId,
               idProperty,
-              filteredproperties,
+              normalizeProperties,
               'update',
             );
 
@@ -2258,6 +2257,8 @@ const beforeCreate = ({
               return returnStructure;
             };
 
+            const updateFormFooter = updateForm.descendants.pop();
+
             Object.values(result.variables).forEach(
               ([prop, inputVariable]): void => {
                 const generateInputPrefabs = () => {
@@ -2395,13 +2396,11 @@ const beforeCreate = ({
                   }
                 };
                 const updateFormInputs = generateInputPrefabs();
-
-                const updateFormFooter = updateForm.descendants.pop();
                 updateForm.descendants.push(updateFormInputs);
-                if (updateFormFooter)
-                  updateForm.descendants.push(updateFormInputs);
               },
             );
+            if (updateFormFooter) updateForm.descendants.push(updateFormFooter);
+
             setOption(updateForm, 'actionId', (opt: PrefabComponentOption) => ({
               ...opt,
               value: result.action.actionId,
@@ -2415,11 +2414,6 @@ const beforeCreate = ({
               },
             }));
           }
-
-          model?.properties.forEach((property) => {
-            if (detailContainer)
-              detailContainer.descendants.push(makeDetail(property));
-          });
 
           save(newPrefab);
         }}
@@ -2676,30 +2670,12 @@ const prefabStructure = [
                             ['Sticky', 'sticky'],
                           ],
                           {
-                            value: 'sticky',
+                            value: 'static',
                             configuration: {
                               dataType: 'string',
                             },
                           },
                         ),
-                        top: size('Top position', {
-                          value: '0px',
-                          configuration: {
-                            as: 'UNIT',
-                          },
-                        }),
-                        right: size('Right position', {
-                          value: '0px',
-                          configuration: {
-                            as: 'UNIT',
-                          },
-                        }),
-                        left: size('Left position', {
-                          value: '0px',
-                          configuration: {
-                            as: 'UNIT',
-                          },
-                        }),
                         backgroundColor: color('Background color', {
                           value: ThemeColor.WHITE,
                         }),

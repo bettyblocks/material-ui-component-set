@@ -2822,30 +2822,12 @@ const prefabStructure = [
                             ['Sticky', 'sticky'],
                           ],
                           {
-                            value: 'sticky',
+                            value: 'static',
                             configuration: {
                               dataType: 'string',
                             },
                           },
                         ),
-                        top: size('Top position', {
-                          value: '0px',
-                          configuration: {
-                            as: 'UNIT',
-                          },
-                        }),
-                        right: size('Right position', {
-                          value: '0px',
-                          configuration: {
-                            as: 'UNIT',
-                          },
-                        }),
-                        left: size('Left position', {
-                          value: '0px',
-                          configuration: {
-                            as: 'UNIT',
-                          },
-                        }),
                         backgroundColor: color('Background color', {
                           value: ThemeColor.WHITE,
                         }),
