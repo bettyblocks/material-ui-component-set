@@ -44,7 +44,6 @@
     const [helper, setHelper] = useState(useText(helperText));
     const [isDisabled, setIsDisabled] = useState(disabled);
 
-    const labelProperty = getProperty(labelPropertyId) || {};
     const labelText = useText(labelRaw);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const validationValueMissingText = useText(validationValueMissing);
@@ -52,24 +51,13 @@
     const defaultValueText = useText(valueRaw);
 
     const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
-    const { modelId: propertyModelId } = modelProperty;
-    const modelId =
-      modelProperty.referenceModelId || propertyModelId || model || '';
+    const { modelId: propertyModelId, referenceModelId } = modelProperty;
+    const modelId = referenceModelId || propertyModelId || model || '';
+
     const idProperty = getIdProperty(modelId || '') || {};
     const isListProperty =
       modelProperty.kind === 'LIST' || modelProperty.kind === 'list';
     const valueProperty = isListProperty ? modelProperty : idProperty;
-
-    // TODO: implement error message
-    // let valid = true;
-    // let message = '';
-
-    // if (!isListProperty && !isDev) {
-    //   if (!modelId) {
-    //     message = 'No model selected';
-    //     valid = false;
-    //   }
-    // }
 
     const propertyModel = getModel(modelId);
 
@@ -79,6 +67,8 @@
           ? propertyModel.labelPropertyId
           : '',
       ) || {};
+
+    const labelProperty = getProperty(labelPropertyId) || defaultLabelProperty;
 
     const listValues = valueProperty.values;
 
@@ -223,12 +213,7 @@
       if (loading) return <span>Loading...</span>;
       if (err && displayError) return <span>{err.message}</span>;
       return results.map((item) =>
-        renderCheckbox(
-          labelProperty
-            ? item[labelProperty.name]
-            : item[defaultLabelProperty.name],
-          `${item[valueProperty.name]}`,
-        ),
+        renderCheckbox(item[labelProperty.name], `${item[valueProperty.name]}`),
       );
     };
 
