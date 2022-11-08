@@ -23,16 +23,16 @@ const beforeCreate = ({
 }: BeforeCreateArgs) => {
   const {
     BettyPrefabs,
+    createBlacklist,
+    createUuid,
     prepareInput,
-    useModelIdSelector,
+    setOption,
     useActionIdSelector,
+    useModelIdSelector,
+    useModelQuery,
+    useModelRelationQuery,
     usePrefabSelector,
     usePropertyQuery,
-    setOption,
-    createUuid,
-    useModelQuery,
-    createBlacklist,
-    useModelRelationQuery,
   } = helpers;
 
   const [propertyPath, setProperty] = React.useState<any>('');
