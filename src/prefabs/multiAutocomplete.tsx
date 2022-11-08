@@ -5,17 +5,17 @@ import { MultiAutocomplete } from './structures/MultiAutoCompleteInput';
 const beforeCreate = ({
   close,
   components: {
+    BBTooltip,
+    CircleQuestion,
     Content,
     Field,
     Footer,
-    Header,
     FormField,
-    Toggle,
-    PropertySelector,
+    Header,
     Label,
+    PropertySelector,
     TextInput: Text,
-    CircleQuestion,
-    BBTooltip,
+    Toggle,
   },
   prefab: originalPrefab,
   save,
@@ -144,7 +144,7 @@ const beforeCreate = ({
               <Toggle
                 color="purple"
                 checked={propertyBased}
-                onChange={(): void => {}}
+                onChange={(): void => { }}
               />
             </FormField>
           </Field>

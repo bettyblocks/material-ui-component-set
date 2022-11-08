@@ -48,7 +48,7 @@
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const validationValueMissingText = useText(validationValueMissing);
     const helperTextResolved = useText(helperText);
-    const defaultValueText = useText(valueRaw);
+    const defaultValueText = useText(valueRaw, { rawValue: true });
 
     const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
     const { modelId: propertyModelId, referenceModelId } = modelProperty;
@@ -71,6 +71,16 @@
     const labelProperty = getProperty(labelPropertyId) || defaultLabelProperty;
 
     const listValues = valueProperty.values;
+
+    let valid = true;
+    let validMessage = '';
+
+    if (!isListProperty && !isDev) {
+      if (!modelId) {
+        validMessage = 'No model selected';
+        valid = false;
+      }
+    }
 
     const getValues = () => {
       const value = defaultValueText || [];
@@ -239,7 +249,7 @@
           <FormLabel component="legend">{labelText}</FormLabel>
         )}
         <FormGroup row={row} data-component={dataComponentAttributeValue}>
-          {renderCheckBoxes()}
+          {valid ? renderCheckBoxes() : validMessage}
           <input type="hidden" name={name} value={values} />
         </FormGroup>
         {helper && <FormHelperText>{helper}</FormHelperText>}
