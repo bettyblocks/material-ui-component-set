@@ -22,6 +22,7 @@ import {
   text,
   InteractionType,
   PrefabInteraction,
+  hideIf,
 } from '@betty-blocks/component-sdk';
 
 import {
@@ -59,6 +60,78 @@ import { ModelProps, ModelQuery, IdPropertyProps } from './types';
 import { options as defaults } from './structures/ActionJSForm/options';
 
 const interactions: PrefabInteraction[] = [
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#deleteDialog',
+      sourceComponentId: '#deleteButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#deleteDialog',
+      sourceComponentId: '#closeBtn',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#deleteDialog',
+      sourceComponentId: '#cancelButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#deleteDialog',
+      sourceComponentId: '#deleteForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Refetch',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#dataContainer',
+      sourceComponentId: '#deleteForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#deleteFormSubmitButton',
+      sourceComponentId: '#deleteForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionError',
+    ref: {
+      targetComponentId: '#deleteFormSubmitButton',
+      sourceComponentId: '#deleteForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#deleteFormSubmitButton',
+      sourceComponentId: '#deleteForm',
+    },
+    type: InteractionType.Custom,
+  },
   {
     name: 'Show',
     sourceEvent: 'Click',
@@ -746,10 +819,11 @@ const drawerSidebar = DrawerBar(
                       },
                       [
                         Button({
+                          ref: { id: '#menuButton' },
                           options: {
                             ...buttonOptions,
                             buttonText: variable('Button text', {
-                              value: ['Client info'],
+                              value: ['Model info'],
                             }),
                           },
                           style: {
@@ -1173,6 +1247,7 @@ const drawerContainer = DrawerContainer(
                           ),
                           Button(
                             {
+                              ref: { id: '#deleteButton' },
                               options: {
                                 ...buttonOptions,
                                 buttonText: variable('Button text', {
@@ -1256,10 +1331,11 @@ const drawerContainer = DrawerContainer(
                         [
                           BreadcrumbItem(
                             {
+                              ref: { id: '#breadcrumbTitle' },
                               options: {
                                 ...breadcrumbItemOptions,
                                 breadcrumbContent: variable('Content', {
-                                  value: ['Clients'],
+                                  value: ['Models'],
                                 }),
                                 textColor: color('Text Color', {
                                   value: ThemeColor.MEDIUM,
@@ -1490,10 +1566,11 @@ const drawerContainer = DrawerContainer(
                                     [
                                       Text(
                                         {
+                                          ref: { id: '#detailsTitle' },
                                           options: {
                                             ...textOptions,
                                             content: variable('Content', {
-                                              value: ['Client'],
+                                              value: ['Model'],
                                               configuration: {
                                                 as: 'MULTILINE',
                                               },
@@ -1521,17 +1598,217 @@ const drawerContainer = DrawerContainer(
                   ),
                 ],
               ),
-              Dialog({ label: 'Dialog' }, [
-                Paper({}, [
-                  Row({}, [
-                    Column({}, [
-                      Box({}, [Text({}, []), Button({}, [])]),
-                      Box({}, [Text({}, [])]),
-                      Box({}, [Button({}, []), Button({}, [])]),
+              Dialog(
+                {
+                  ref: {
+                    id: '#deleteDialog',
+                  },
+                },
+                [
+                  Paper({}, [
+                    Row({}, [
+                      Column({}, [
+                        Box(
+                          {
+                            options: {
+                              ...boxOptions,
+                              alignment: buttongroup(
+                                'Alignment',
+                                [
+                                  ['None', 'none'],
+                                  ['Left', 'flex-start'],
+                                  ['Center', 'center'],
+                                  ['Right', 'flex-end'],
+                                  ['Justified', 'space-between'],
+                                ],
+                                {
+                                  value: 'space-between',
+                                  configuration: {
+                                    dataType: 'string',
+                                  },
+                                },
+                              ),
+                            },
+                          },
+                          [
+                            Text(
+                              {
+                                options: {
+                                  ...textOptions,
+                                  content: variable('Content', {
+                                    value: ['Delete record'],
+                                    configuration: {
+                                      as: 'MULTILINE',
+                                    },
+                                  }),
+                                  type: font('Font', {
+                                    value: ['Title4'],
+                                  }),
+                                },
+                              },
+                              [],
+                            ),
+                            Button({
+                              style: {
+                                overwrite: {
+                                  backgroundColor: {
+                                    type: 'STATIC',
+                                    value: 'transparent',
+                                  },
+                                  boxShadow: 'none',
+                                  color: {
+                                    type: 'THEME_COLOR',
+                                    value: 'light',
+                                  },
+                                  padding: ['0rem'],
+                                },
+                              },
+                              options: {
+                                ...buttonOptions,
+                                icon: icon('Icon', {
+                                  value: 'Close',
+                                }),
+                                buttonText: variable('Button text', {
+                                  value: [''],
+                                }),
+                                size: option('CUSTOM', {
+                                  value: 'medium',
+                                  label: 'Icon size',
+                                  configuration: {
+                                    as: 'BUTTONGROUP',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      {
+                                        name: 'Small',
+                                        value: 'small',
+                                      },
+                                      {
+                                        name: 'Medium',
+                                        value: 'medium',
+                                      },
+                                      {
+                                        name: 'Large',
+                                        value: 'large',
+                                      },
+                                    ],
+                                    condition: hideIf('icon', 'EQ', 'none'),
+                                  },
+                                }),
+                              },
+                              ref: {
+                                id: '#closeBtn',
+                              },
+                            }),
+                          ],
+                        ),
+                        Row({}, [
+                          Column({}, [
+                            Text(
+                              {
+                                options: {
+                                  ...textOptions,
+                                  content: variable('Content', {
+                                    value: [
+                                      "Are you sure you want to delete this record? You can't undo this action.",
+                                    ],
+                                    configuration: {
+                                      as: 'MULTILINE',
+                                    },
+                                  }),
+                                  type: font('Font', {
+                                    value: ['Body1'],
+                                  }),
+                                },
+                              },
+                              [],
+                            ),
+                          ]),
+                        ]),
+                        Box(
+                          {
+                            options: {
+                              ...boxOptions,
+                              alignment: buttongroup(
+                                'Alignment',
+                                [
+                                  ['None', 'none'],
+                                  ['Left', 'flex-start'],
+                                  ['Center', 'center'],
+                                  ['Right', 'flex-end'],
+                                  ['Justified', 'space-between'],
+                                ],
+                                {
+                                  value: 'flex-end',
+                                  configuration: {
+                                    dataType: 'string',
+                                  },
+                                },
+                              ),
+                            },
+                          },
+                          [
+                            Button(
+                              {
+                                ref: {
+                                  id: '#cancelButton',
+                                },
+                                options: {
+                                  ...buttonOptions,
+                                  buttonText: variable('Button text', {
+                                    value: ['Cancel'],
+                                  }),
+                                  outerSpacing: sizes('Outer space', {
+                                    value: ['0rem', 'M', '0rem', '0rem'],
+                                  }),
+                                },
+                                style: {
+                                  overwrite: {
+                                    backgroundColor: {
+                                      type: 'STATIC',
+                                      value: 'transparent',
+                                    },
+                                    borderColor: {
+                                      type: 'THEME_COLOR',
+                                      value: 'primary',
+                                    },
+                                    borderRadius: ['0.25rem'],
+                                    borderStyle: 'solid',
+                                    borderWidth: ['0.0625rem'],
+                                    boxShadow: 'none',
+                                    color: {
+                                      type: 'THEME_COLOR',
+                                      value: 'primary',
+                                    },
+                                    fontFamily: 'Roboto',
+                                    fontSize: '0.875rem',
+                                    fontStyle: 'none',
+                                    fontWeight: '400',
+                                    padding: ['0.625rem', '1.3125rem'],
+                                    textDecoration: 'none',
+                                    textTransform: 'none',
+                                  },
+                                },
+                              },
+                              [],
+                            ),
+                            component(
+                              'Form',
+                              {
+                                label: 'Delete Form',
+                                options: defaults,
+                                ref: {
+                                  id: '#deleteForm',
+                                },
+                              },
+                              [],
+                            ),
+                          ],
+                        ),
+                      ]),
                     ]),
                   ]),
-                ]),
-              ]),
+                ],
+              ),
             ]),
           ],
         ),
@@ -1558,7 +1835,7 @@ const beforeCreate = ({
     prepareAction,
     createUuid,
     PropertyKind,
-    makeBettyInput,
+    makeBettyUpdateInput,
     BettyPrefabs,
   },
 }: BeforeCreateArgs) => {
@@ -1577,6 +1854,7 @@ const beforeCreate = ({
   });
 
   const updateFormId = createUuid();
+  const deleteButtonId = createUuid();
 
   function treeSearch(
     dirName: string,
@@ -2069,9 +2347,14 @@ const beforeCreate = ({
             detailContainer.descendants.push(makeDetail(property));
           });
 
+          const deleteForm = treeSearch('#deleteForm', newPrefab.structure);
+          if (!deleteForm) throw new Error('No delete form found');
+          deleteForm.id = deleteButtonId;
+
           if (idProperty && model) {
-            const updateForm = treeSearch('#createForm', newPrefab.structure);
-            if (!updateForm) throw new Error('No create form found');
+            // set update form
+            const updateForm = treeSearch('#updateForm', newPrefab.structure);
+            if (!updateForm) throw new Error('No update form found');
             updateForm.id = updateFormId;
 
             const normalizeProperties = model.properties.map((prop): any => ({
@@ -2081,10 +2364,17 @@ const beforeCreate = ({
               kind: prop.kind,
             }));
 
+            const filteredproperties = normalizeProperties.filter(
+              (prop) =>
+                prop.label !== 'Created at' &&
+                prop.label !== 'Updated at' &&
+                prop.label !== 'Id',
+            );
+
             const result = await prepareAction(
               updateFormId,
               idProperty,
-              normalizeProperties,
+              filteredproperties,
               'update',
             );
 
@@ -2266,7 +2556,7 @@ const beforeCreate = ({
                     case PropertyKind.INTEGER:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.INTEGER,
                           model,
                           prop,
@@ -2276,7 +2566,7 @@ const beforeCreate = ({
                     case PropertyKind.EMAIL_ADDRESS:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.EMAIL_ADDRESS,
                           model,
                           prop,
@@ -2286,7 +2576,7 @@ const beforeCreate = ({
                     case PropertyKind.DECIMAL:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.DECIMAL,
                           model,
                           prop,
@@ -2296,7 +2586,7 @@ const beforeCreate = ({
                     case PropertyKind.TEXT:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.TEXT,
                           model,
                           prop,
@@ -2306,7 +2596,7 @@ const beforeCreate = ({
                     case PropertyKind.PRICE:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.PRICE,
                           model,
                           prop,
@@ -2316,7 +2606,7 @@ const beforeCreate = ({
                     case PropertyKind.PASSWORD:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.PASSWORD,
                           model,
                           prop,
@@ -2326,7 +2616,7 @@ const beforeCreate = ({
                     case PropertyKind.DATE:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.DATE,
                           model,
                           prop,
@@ -2336,7 +2626,7 @@ const beforeCreate = ({
                     case PropertyKind.DATE_TIME:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.DATE_TIME,
                           model,
                           prop,
@@ -2346,7 +2636,7 @@ const beforeCreate = ({
                     case PropertyKind.TIME:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.TIME,
                           model,
                           prop,
@@ -2356,7 +2646,7 @@ const beforeCreate = ({
                     case PropertyKind.FILE:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.FILE,
                           model,
                           prop,
@@ -2366,7 +2656,7 @@ const beforeCreate = ({
                     case PropertyKind.BOOLEAN:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.BOOLEAN,
                           model,
                           prop,
@@ -2376,7 +2666,7 @@ const beforeCreate = ({
                     case PropertyKind.LIST:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.LIST,
                           model,
                           prop,
@@ -2386,7 +2676,7 @@ const beforeCreate = ({
                     default:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.STRING,
                           model,
                           prop,
@@ -2413,6 +2703,163 @@ const beforeCreate = ({
                 disabled: true,
               },
             }));
+
+            // set delete action
+            const deleteResult = await prepareAction(
+              deleteButtonId,
+              idProperty,
+              undefined,
+              'delete',
+              undefined,
+            );
+            setOption(
+              deleteForm,
+              'actionId',
+              (opts: PrefabComponentOption) => ({
+                ...opts,
+                value: deleteResult.action.actionId,
+                configuration: { disabled: true },
+                ref: {
+                  id: '#deleteFormAction',
+                },
+              }),
+            );
+
+            setOption(deleteForm, 'model', (opts: PrefabComponentOption) => ({
+              ...opts,
+              value: modelId,
+              configuration: {
+                disabled: true,
+              },
+            }));
+
+            const deleteSubmitButton = cloneStructure('Submit Button');
+            if (deleteSubmitButton.type === 'COMPONENT') {
+              deleteSubmitButton.style = {
+                overwrite: {
+                  backgroundColor: {
+                    type: 'STATIC',
+                    value: 'red',
+                  },
+                  boxShadow: 'none',
+                  color: {
+                    type: 'THEME_COLOR',
+                    value: 'white',
+                  },
+                  fontFamily: 'Roboto',
+                  fontSize: '0.875rem',
+                  fontStyle: 'none',
+                  fontWeight: '400',
+                  padding: ['0.6875rem', '1.375rem'],
+                  textDecoration: 'none',
+                  textTransform: 'none',
+                },
+              };
+              deleteSubmitButton.ref = {
+                id: '#deleteFormSubmitButton',
+              };
+              setOption(
+                deleteSubmitButton,
+                'buttonText',
+                (opts: PrefabComponentOption) => ({
+                  ...opts,
+                  value: ['Delete'],
+                }),
+              );
+            }
+            deleteForm.descendants.push(deleteSubmitButton);
+
+            deleteForm.descendants.push(
+              makeBettyUpdateInput(
+                BettyPrefabs.HIDDEN,
+                model,
+                idProperty,
+                result.recordInputVariable,
+              ),
+            );
+
+            if (idProperty && newPrefab.interactions) {
+              newPrefab.interactions.push(
+                {
+                  name: 'setCurrentRecord',
+                  sourceEvent: 'Click',
+                  targetOptionName: 'currentRecord',
+                  parameters: [
+                    {
+                      id: [idProperty.id],
+                      parameter: 'argument',
+                    },
+                  ],
+                  ref: {
+                    sourceComponentId: '#deleteButton',
+                    targetComponentId: '#deleteForm',
+                  },
+                  type: 'Global',
+                } as PrefabInteraction,
+                {
+                  name: 'setCurrentRecord',
+                  sourceEvent: 'Click',
+                  targetOptionName: 'currentRecord',
+                  parameters: [
+                    {
+                      id: [idProperty.id],
+                      parameter: 'argument',
+                    },
+                  ],
+                  ref: {
+                    sourceComponentId: '#editFormButton',
+                    targetComponentId: '#updateForm',
+                  },
+                  type: 'Global',
+                } as PrefabInteraction,
+              );
+            }
+
+            const menuButton = treeSearch('#menuButton', newPrefab.structure);
+            if (!menuButton) throw new Error('No menu button found');
+            setOption(
+              menuButton,
+              'buttonText',
+              (opt: PrefabComponentOption) => ({
+                ...opt,
+                value: [`${model.label} info`],
+              }),
+            );
+
+            const updateTitle = treeSearch('#updateTitle', newPrefab.structure);
+            if (!updateTitle) throw new Error('No create title found');
+            setOption(updateTitle, 'content', (opt: PrefabComponentOption) => ({
+              ...opt,
+              value: [`Update ${model.label} record`],
+            }));
+
+            const detailsTitle = treeSearch(
+              '#detailsTitle',
+              newPrefab.structure,
+            );
+            if (!detailsTitle) throw new Error('No details title found');
+            setOption(
+              detailsTitle,
+              'content',
+              (opt: PrefabComponentOption) => ({
+                ...opt,
+                value: [`${model.label}`],
+              }),
+            );
+
+            const breadcrumbTitle = treeSearch(
+              '#breadcrumbTitle',
+              newPrefab.structure,
+            );
+            if (!breadcrumbTitle) throw new Error('No breadcrumb title found');
+            setOption(
+              breadcrumbTitle,
+              'breadcrumbContent',
+              (opt: PrefabComponentOption) => ({
+                ...opt,
+                value: [`${model.label}s`],
+              }),
+            );
           }
 
           save(newPrefab);
@@ -2927,10 +3374,11 @@ const prefabStructure = [
                                 [
                                   Text(
                                     {
+                                      ref: { id: '#updateTitle' },
                                       options: {
                                         ...textOptions,
                                         content: variable('Content', {
-                                          value: ['Create client record'],
+                                          value: ['Create record'],
                                           configuration: { as: 'MULTILINE' },
                                         }),
                                         type: font('Font', {
@@ -2977,9 +3425,9 @@ const prefabStructure = [
                           component(
                             'Form',
                             {
-                              label: 'Create Form',
+                              label: 'Update Form',
                               options: defaults,
-                              ref: { id: '#createForm' },
+                              ref: { id: '#updateForm' },
                             },
                             [
                               Box({}, [
