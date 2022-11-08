@@ -347,7 +347,11 @@
             Transforms.setNodes(editor, { type: 'paragraph' });
           }
         }
-        if (key === 'tab') {
+        if (
+          key === 'tab' &&
+          lastNode[1].length > 2 &&
+          lastNode[1][lastNode[1].length - 2] !== 0
+        ) {
           Transforms.setNodes(editor, {
             type: 'list-item',
             children: [{ text: '' }],
