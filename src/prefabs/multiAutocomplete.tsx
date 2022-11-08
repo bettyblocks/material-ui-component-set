@@ -144,7 +144,7 @@ const beforeCreate = ({
               <Toggle
                 color="purple"
                 checked={propertyBased}
-                onChange={(): void => { }}
+                onChange={(): void => {}}
               />
             </FormField>
           </Field>
