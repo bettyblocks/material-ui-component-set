@@ -111,6 +111,7 @@ const beforeCreate = ({
   const unsupportedKinds = createBlacklist([
     'HAS_AND_BELONGS_TO_MANY',
     'HAS_MANY',
+    'LIST',
   ]);
 
   const structure = originalPrefab.structure[0];
@@ -200,10 +201,8 @@ const beforeCreate = ({
           // eslint-disable-next-line no-param-reassign
           structure.id = componentId;
 
-          let kind = propertyKind || 'STRING';
+          const kind = propertyKind || 'HAS_MANY';
           const isListProperty = kind === ('LIST' || 'list');
-
-          kind = 'HAS_MANY';
 
           const variableName = variableInput || name;
           const result = await prepareInput(

@@ -57,6 +57,19 @@ export const checkboxGroupInputOptions = {
     value: '',
     configuration: { condition: hideIf('optionType', 'EQ', 'property') },
   }),
+  order: buttongroup(
+    'Sort order',
+    [
+      ['Ascending', 'asc'],
+      ['Descending', 'desc'],
+    ],
+    {
+      value: 'asc',
+      configuration: {
+        condition: hideIf('orderBy', 'EQ', ''),
+      },
+    },
+  ),
   labelProperty: property('Label for options', {
     value: '',
     configuration: {

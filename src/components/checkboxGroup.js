@@ -17,6 +17,7 @@
       labelProperty: labelPropertyId = '',
       margin,
       model,
+      optionType,
       order,
       orderBy,
       position,
@@ -34,6 +35,7 @@
       getModel,
       getProperty,
       useAllQuery,
+      useFilter,
       useRelation,
       useText,
     } = B;
@@ -138,6 +140,57 @@
         },
       },
       !model,
+    );
+
+    const parentProperty = getIdProperty(propertyModelId);
+    const parentIdProperty = parentProperty ? parentProperty.id : '';
+    const parentIdValue = B.useProperty(parentIdProperty);
+    const queryWasResolvable = !!parentIdValue;
+
+    let valuesFilter = {};
+    let valueFilter;
+    // this should be merged into the final filter
+    if (modelProperty.id && !isListProperty) {
+      valuesFilter = {
+        _and: [
+          {
+            [modelProperty.inverseAssociationId]: {
+              [parentIdProperty]: {
+                eq: {
+                  id: [parentIdProperty],
+                  type: 'PROPERTY',
+                },
+              },
+            },
+          },
+        ],
+      };
+      valueFilter = useFilter(valuesFilter);
+    }
+
+    useAllQuery(
+      modelProperty.referenceModelId,
+      {
+        take: 20,
+        rawFilter: valueFilter,
+        variables: {},
+        onCompleted(res) {
+          const hasResult = res && res.results && res.results.length > 0;
+          if (hasResult) {
+            const ids = res.results.map(({ id }) => id.toString());
+            setValues(ids);
+          }
+        },
+        onError(resp) {
+          if (!displayError) {
+            B.triggerEvent('onError', resp);
+          }
+        },
+      },
+      optionType === 'property' ||
+        !valid ||
+        !queryWasResolvable ||
+        isListProperty,
     );
 
     const { hasResults, data: relationData } = useRelation(
