@@ -63,14 +63,14 @@
 
     const propertyModel = getModel(modelId);
 
-    const defaultLabelProperty =
-      getProperty(
-        propertyModel && propertyModel.labelPropertyId
-          ? propertyModel.labelPropertyId
-          : '',
-      ) || {};
+    const defaultLabelProperty = getProperty(
+      propertyModel && propertyModel.labelPropertyId
+        ? propertyModel.labelPropertyId
+        : '',
+    );
 
-    const labelProperty = getProperty(labelPropertyId) || defaultLabelProperty;
+    const labelProperty =
+      getProperty(labelPropertyId) || defaultLabelProperty || idProperty;
 
     const listValues = valueProperty.values;
 
