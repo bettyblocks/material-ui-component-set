@@ -26,7 +26,7 @@
       value: prefabValue,
       variant,
     } = options;
-    const { env, getProperty, useText, useAllQuery } = B;
+    const { env, getProperty, useText, useAllQuery, useRelation } = B;
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const [errorState, setErrorState] = useState(false);
@@ -124,7 +124,11 @@
 
     const completeFilter = deepMerge(filter, interactionFilters);
 
-    const { data, loading, refetch } = useAllQuery(
+    const {
+      data: queryData,
+      loading: queryLoading,
+      refetch,
+    } = useAllQuery(
       referenceModelId || modelId,
       {
         filter: completeFilter,
@@ -135,6 +139,15 @@
       },
       !modelId,
     );
+
+    const { hasResults, data: relationData } = useRelation(
+      model,
+      {},
+      typeof model === 'string' || !model,
+    );
+
+    const data = hasResults ? relationData : queryData;
+    const loading = hasResults ? false : queryLoading;
 
     useEffect(() => {
       B.defineFunction('Refetch', () => refetch());
