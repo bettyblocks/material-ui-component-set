@@ -54,6 +54,7 @@ const beforeCreate = ({
     makeBettyInput,
     prepareAction,
     getPageAuthenticationProfileId,
+    getPageName,
     setOption,
     useModelQuery,
   } = helpers;
@@ -68,6 +69,7 @@ const beforeCreate = ({
   const componentId = createUuid();
 
   const pageAuthenticationProfileId = getPageAuthenticationProfileId();
+  const pageName = getPageName();
 
   const modelRequest = useModelQuery({
     variables: { id: modelId },
@@ -134,6 +136,7 @@ const beforeCreate = ({
             undefined,
             permissions,
             pageAuthenticationProfileId,
+            pageName,
           );
 
           const structure = originalPrefab.structure[0];
