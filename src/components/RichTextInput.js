@@ -372,6 +372,27 @@
         return;
       }
 
+      if (
+        event.key === 'Backspace' &&
+        (isBlockActive(editor, 'numbered-list', 'type') ||
+          isBlockActive(editor, 'bulleted-list', 'type'))
+      ) {
+        const lastNode = Node.last(editor, editor.selection.focus.path);
+        if (
+          window.getSelection().toString().split('\n')[0] !==
+            lastNode[0].text &&
+          (lastNode[0].text !== '' || lastNode[1].length !== 3)
+        )
+          return;
+        Transforms.setNodes(editor, { type: 'none' });
+        if (isBlockActive(editor, 'numbered-list', 'type')) {
+          toggleBlock(editor, 'numbered-list');
+          return;
+        }
+        toggleBlock(editor, 'bulleted-list');
+        return;
+      }
+
       if (event.key === 'Enter') {
         if (isBlockActive(editor, 'bulleted-list', 'type') && !event.shiftKey) {
           handleListdepth('bulleted-list', 'enter', event);
