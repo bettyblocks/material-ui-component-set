@@ -363,11 +363,13 @@ const attributes = {
   category: 'FORMV2',
   icon: Icon.UpdateFormIcon,
   type: 'page',
-  description: 'Discription',
-  detail: 'detail',
+  description:
+    'This page contains a detail view and all you need to update a record.',
+  detail:
+    'In this ready to use back office detail view, it is possible to display (read) and update a record.',
   previewUrl: 'https://preview-dev.app/back-office-details',
   previewImage:
-    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Back_Office.jpg',
+    'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/f1a4017ab78f41f38d1882f6b6cef37a',
   interactions,
 };
 
@@ -1251,7 +1253,7 @@ const drawerContainer = DrawerContainer(
                     options: {
                       ...boxOptions,
                       outerSpacing: sizes('Outer space', {
-                        value: ['0rem', 'M', 'M', 'M'],
+                        value: ['M', 'M', '0rem', 'M'],
                       }),
                       innerSpacing: sizes('Inner space', {
                         value: ['0rem', '0rem', '0rem', '0rem'],
@@ -1541,7 +1543,7 @@ const drawerContainer = DrawerContainer(
                     options: {
                       ...boxOptions,
                       outerSpacing: sizes('Outer space', {
-                        value: ['M', 'M', 'M', '0rem'],
+                        value: ['M', 'M', '0rem', 'M'],
                       }),
                       innerSpacing: sizes('Inner space', {
                         value: ['0rem', '0rem', '0rem', '0rem'],
