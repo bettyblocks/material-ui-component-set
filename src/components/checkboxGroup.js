@@ -101,9 +101,11 @@
       B.triggerEvent('onChange', values);
     }, [values]);
 
-    const orderByArray = [orderBy].flat();
+    const orderBySanitized = orderBy.id === '' ? undefined : orderBy;
+
+    const orderByArray = [orderBySanitized].flat();
     const sort =
-      !isDev && orderBy
+      !isDev && orderBySanitized
         ? orderByArray.reduceRight((acc, orderByProperty, index) => {
             const prop = getProperty(orderByProperty);
             return index === orderByArray.length - 1
@@ -123,7 +125,7 @@
         filter,
         take: 50,
         variables: {
-          ...(orderBy ? { sort: { relation: sort } } : {}),
+          ...(orderBySanitized ? { sort: { relation: sort } } : {}),
         },
         onCompleted(res) {
           const hasResult = res && res.result && res.result.length > 0;
