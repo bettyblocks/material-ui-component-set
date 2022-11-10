@@ -309,6 +309,7 @@
         '& > *': {
           pointerEvents: 'none',
         },
+        width: ({ options: { fullWidth } }) => (fullWidth ? '100%' : 'auto'),
       },
       validationInput: {
         height: 0,

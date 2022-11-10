@@ -845,6 +845,7 @@
         '& > *': {
           pointerEvents: 'none',
         },
+        width: ({ options: { fullWidth } }) => (fullWidth ? '100%' : 'auto'),
       },
       checkbox: {
         color: ({ options: { checkboxColor } }) => [
