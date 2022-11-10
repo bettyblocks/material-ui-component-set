@@ -8,6 +8,7 @@
     const { CircularProgress, TextField, FormControl, FormHelperText } =
       window.MaterialUI.Core;
     const {
+      Icon,
       InteractionScope,
       ModelProvider,
       env,
@@ -16,8 +17,8 @@
       getProperty,
       useAllQuery,
       useFilter,
+      useRelation,
       useText,
-      Icon,
     } = B;
     const {
       actionProperty,
@@ -100,9 +101,10 @@
     const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
     const labelProperty = getProperty(labelPropertyId) || {};
 
-    const { modelId: propertyModelId } = modelProperty;
+    const { modelId: propertyModelId, referenceModelId } = modelProperty;
+    const { contextModelId } = model;
     const modelId =
-      modelProperty.referenceModelId || propertyModelId || model || '';
+      contextModelId || referenceModelId || propertyModelId || model || '';
     const propertyModel = getModel(modelId);
     const defaultLabelProperty =
       getProperty(
@@ -394,9 +396,9 @@
     }
 
     const {
-      loading,
+      loading: queryLoading,
       error,
-      data: { results } = {},
+      data: queryData,
       refetch,
     } = useAllQuery(
       modelId,
@@ -422,8 +424,20 @@
           }
         },
       },
-      isListProperty || !valid,
+      !!contextModelId || isListProperty || !valid,
     );
+
+    const { hasResults, data: relationData } = useRelation(
+      model,
+      {},
+      typeof model === 'string' || !model,
+    );
+
+    const queryDataResults = queryData && queryData.results;
+    const relationDataResults = relationData && relationData.results;
+
+    const results = hasResults ? relationDataResults : queryDataResults;
+    const loading = hasResults ? false : queryLoading;
 
     if (loading) {
       B.triggerEvent('onLoad', loading);

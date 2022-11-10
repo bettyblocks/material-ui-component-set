@@ -5,7 +5,7 @@ import {
   property,
   hideIf,
   showIf,
-  model,
+  modelAndRelation,
 } from '@betty-blocks/component-sdk';
 
 import { advanced } from './advanced';
@@ -41,7 +41,7 @@ export const options = {
       },
     },
   ),
-  model: model('Model', {
+  model: modelAndRelation('Model', {
     value: '',
     configuration: {
       condition: showIf('optionType', 'EQ', 'variable'),

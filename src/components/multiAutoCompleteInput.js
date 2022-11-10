@@ -506,11 +506,6 @@
     const results = hasResults ? relationDataResults : queryDataResults;
     const loading = hasResults ? false : queryLoading;
 
-    // set default values with relation data
-    useEffect(() => {
-      if (relationDataResults) setValue(results);
-    }, []);
-
     if (loading) {
       B.triggerEvent('onLoad', loading);
     }
