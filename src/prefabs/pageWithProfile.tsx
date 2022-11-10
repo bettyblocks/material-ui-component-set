@@ -114,6 +114,7 @@ const interactions: PrefabInteraction[] = [
     },
     type: InteractionType.Custom,
   },
+
   {
     name: 'Hide',
     sourceEvent: 'Click',
@@ -159,6 +160,7 @@ const interactions: PrefabInteraction[] = [
     },
     type: InteractionType.Custom,
   },
+
   {
     name: 'Show',
     sourceEvent: 'onActionSuccess',
@@ -204,6 +206,7 @@ const interactions: PrefabInteraction[] = [
     },
     type: InteractionType.Custom,
   },
+
   {
     name: 'Toggle loading state',
     sourceEvent: 'onActionLoad',
@@ -249,6 +252,7 @@ const interactions: PrefabInteraction[] = [
     },
     type: InteractionType.Custom,
   },
+
   {
     name: 'Hide',
     sourceEvent: 'onActionLoad',
@@ -291,69 +295,6 @@ const interactions: PrefabInteraction[] = [
     ref: {
       targetComponentId: '#savePasswordButton',
       sourceComponentId: '#updatePasswordForm',
-    },
-    type: InteractionType.Custom,
-  },
-  {
-    name: 'Show',
-    sourceEvent: 'onSuccess',
-    ref: {
-      targetComponentId: '#uploadSubmitButton',
-      sourceComponentId: '#uploadInput',
-    },
-    type: InteractionType.Custom,
-  },
-  {
-    name: 'Toggle loading state',
-    sourceEvent: 'onActionSuccess',
-    ref: {
-      targetComponentId: '#uploadSubmitButton',
-      sourceComponentId: '#updateImgForm',
-    },
-    type: InteractionType.Custom,
-  },
-  {
-    name: 'Toggle loading state',
-    sourceEvent: 'onActionError',
-    ref: {
-      targetComponentId: '#uploadSubmitButton',
-      sourceComponentId: '#updateImgForm',
-    },
-    type: InteractionType.Custom,
-  },
-  {
-    name: 'Toggle loading state',
-    sourceEvent: 'onActionLoad',
-    ref: {
-      targetComponentId: '#uploadSubmitButton',
-      sourceComponentId: '#updateImgForm',
-    },
-    type: InteractionType.Custom,
-  },
-  {
-    name: 'Refetch',
-    sourceEvent: 'onActionSuccess',
-    ref: {
-      targetComponentId: '#dataContainer',
-      sourceComponentId: '#updateImgForm',
-    },
-    type: InteractionType.Custom,
-  },
-  {
-    name: 'Hide',
-    sourceEvent: 'onActionLoad',
-    ref: {
-      targetComponentId: '#updateImgAlert',
-      sourceComponentId: '#updateImgForm',
-    },
-    type: InteractionType.Custom,
-  },
-  {
-    name: 'Show',
-    sourceEvent: 'onActionError',
-    ref: {
-      targetComponentId: '#updateImgAlert',
-      sourceComponentId: '#updateImgForm',
     },
     type: InteractionType.Custom,
   },
@@ -416,6 +357,16 @@ const beforeCreate = ({
   const [profileProperties, setProfileProperties] = React.useState([]);
   const [profilePropertiesValidation, setProfilePropertiesValidation] =
     React.useState(false);
+  const [namePropertiesValidation, setNamePropertiesValidation] =
+    React.useState(false);
+  const [
+    profilePicturePropertiesValidation,
+    setProfilePicturePropertiesValidation,
+  ] = React.useState(false);
+  const [
+    authenticationProfilePropertiesValidation,
+    setAuthenticationProfilePropertiesValidation,
+  ] = React.useState(false);
   const [profileNameValidationMessage, setProfileNameValidationMessage] =
     React.useState('');
   const [profilePictureValidationMessage, setProfilePictureValidationMessage] =
@@ -587,10 +538,17 @@ const beforeCreate = ({
                   setAuthProfileId(id);
                   setAuthProfile(authProfileObject);
                   setModelId(authProfileObject.loginModel);
+                  setAuthenticationProfilePropertiesValidation(false);
                 }
               }}
               value={authProfileId}
             />
+
+            {authenticationProfilePropertiesValidation && (
+              <Text color="#e82600">
+                Selecting a authentication profile is required
+              </Text>
+            )}
           </Field>
           <Field
             label="Profile picture"
@@ -607,19 +565,68 @@ const beforeCreate = ({
                 onChange={() => {
                   setHasProfilePictureProperty(!hasProfilePictureProperty);
                   setProfilePictureValidationMessage('');
+                  setProfilePicturePropertiesValidation(false);
                 }}
               />
               {hasProfilePictureProperty && (
                 <PropertySelector
                   modelId={modelId}
+                  disabledKinds={[
+                    'AUTO_INCREMENT',
+                    'BOOLEAN_EXPRESSION',
+                    'COUNT',
+                    'DATE',
+                    'DATE_EXPRESSION',
+                    'DATE_TIME',
+                    'DATE_TIME_EXPRESSION',
+                    'DECIMAL',
+                    'DECIMAL_EXPRESSION',
+                    'EMAIL',
+                    'EMAIL_ADDRESS',
+                    'ENUM',
+                    'FILE',
+                    'FLOAT',
+                    'HAS_AND_BELONGS_TO_MANY',
+                    'HAS_MANY',
+                    'IBAN',
+                    'INTEGER',
+                    'INTEGER_EXPRESSION',
+                    'LIST',
+                    'MINUTES',
+                    'MINUTES_EXPRESSION',
+                    'MULTI_FILE',
+                    'MULTI_IMAGE',
+                    'PASSWORD',
+                    'PDF',
+                    'PERIODIC_COUNT',
+                    'PHONE_NUMBER',
+                    'PRICE',
+                    'PRICE_EXPRESSION',
+                    'RICH_TEXT',
+                    'SERIAL',
+                    'SIGNED_PDF',
+                    'STRING',
+                    'STRING_EXPRESSION',
+                    'SUM',
+                    'TEXT',
+                    'TEXT_EXPRESSION',
+                    'TIME',
+                    'URL',
+                    'ZIPCODE',
+                  ]}
                   onChange={(value: any) => {
                     setProfilePictureProperty(value);
                     setProfilePictureValidationMessage('');
+                    setProfilePicturePropertiesValidation(false);
                   }}
                   value={profilePictureProperty}
                   disabled={!modelId && !hasProfilePictureProperty}
                 />
               )}
+              {profilePicturePropertiesValidation &&
+                hasProfilePictureProperty && (
+                  <Text color="#e82600">Selecting a property is required</Text>
+                )}
             </Box>
           </Field>
           <Field
@@ -637,17 +644,63 @@ const beforeCreate = ({
                 onChange={() => {
                   setHasProfileNameProperty(!hasProfileNameProperty);
                   setProfileNameValidationMessage('');
+                  setNamePropertiesValidation(false);
                 }}
               />
               {hasProfileNameProperty && (
                 <PropertySelector
                   modelId={modelId}
+                  disabledKinds={[
+                    'AUTO_INCREMENT',
+                    'BOOLEAN_EXPRESSION',
+                    'COUNT',
+                    'DATE',
+                    'DATE_EXPRESSION',
+                    'DATE_TIME',
+                    'DATE_TIME_EXPRESSION',
+                    'DECIMAL',
+                    'DECIMAL_EXPRESSION',
+                    'EMAIL',
+                    'EMAIL_ADDRESS',
+                    'ENUM',
+                    'FILE',
+                    'FLOAT',
+                    'HAS_AND_BELONGS_TO_MANY',
+                    'HAS_MANY',
+                    'IBAN',
+                    'IMAGE',
+                    'INTEGER',
+                    'INTEGER_EXPRESSION',
+                    'LIST',
+                    'MINUTES',
+                    'MINUTES_EXPRESSION',
+                    'MULTI_FILE',
+                    'MULTI_IMAGE',
+                    'PASSWORD',
+                    'PDF',
+                    'PERIODIC_COUNT',
+                    'PHONE_NUMBER',
+                    'PRICE',
+                    'PRICE_EXPRESSION',
+                    'RICH_TEXT',
+                    'SERIAL',
+                    'SIGNED_PDF',
+                    'SUM',
+                    'TIME',
+                    'URL',
+                    'ZIPCODE',
+                  ]}
                   onChange={(value: any) => {
                     setProfileNameProperty(value);
+                    setProfileNameValidationMessage('');
+                    setNamePropertiesValidation(false);
                   }}
                   value={profileNameProperty}
                   disabled={!modelId && !hasProfileNameProperty}
                 />
+              )}
+              {namePropertiesValidation && hasProfileNameProperty && (
+                <Text color="#e82600">Selecting a property is required</Text>
               )}
             </Box>
           </Field>
@@ -663,7 +716,11 @@ const beforeCreate = ({
               modelId={modelId}
               value={profileProperties}
               disabledNames={['created_at', 'updated_at', 'id']}
-              disabledKinds={['PASSWORD']}
+              disabledKinds={[
+                'PASSWORD',
+                'HAS_AND_BELONGS_TO_MANY',
+                'HAS_MANY',
+              ]}
               onChange={(value: any) => {
                 setProfilePropertiesValidation(!value.length);
                 setProfileProperties(value);
@@ -681,338 +738,141 @@ const beforeCreate = ({
         </>
       );
     },
+
     onSave: async () => {
-      const newPrefab = { ...prefab };
-      const inputBox = treeSearch('#formInputBox', newPrefab.structure);
+      if (profilePictureProperty === '' && hasProfilePictureProperty) {
+        setProfilePicturePropertiesValidation(true);
+      }
+      if (profileNameProperty === '' && hasProfileNameProperty) {
+        setNamePropertiesValidation(true);
+      }
+      if (authProfile === undefined) {
+        setAuthenticationProfilePropertiesValidation(true);
+      }
+      if (
+        profilePicturePropertiesValidation === false &&
+        namePropertiesValidation === false &&
+        authenticationProfilePropertiesValidation === false
+      ) {
+        const newPrefab = { ...prefab };
+        const inputBox = treeSearch('#formInputBox', newPrefab.structure);
 
-      const inputStructure = (
-        textValue: string,
-        inputPrefab: PrefabReference,
-      ): PrefabReference => {
-        const boxPrefab = cloneStructure('Box');
-        if (boxPrefab.type === 'COMPONENT') {
-          setOption(
-            boxPrefab,
-            'innerSpacing',
-            (opt: PrefabComponentOption) => ({
-              ...opt,
-              value: ['M', '0rem', '0rem', '0rem'],
-            }),
-          );
-          const textPrefab = cloneStructure('Text');
-          if (textPrefab.type === 'COMPONENT') {
-            setOption(textPrefab, 'content', (opt: PrefabComponentOption) => ({
-              ...opt,
-              value: [textValue],
-            }));
-            setOption(textPrefab, 'type', (opt: PrefabComponentOption) => ({
-              ...opt,
-              value: ['Body1'],
-            }));
+        const inputStructure = (
+          textValue: string,
+          inputPrefab: PrefabReference,
+        ): PrefabReference => {
+          const boxPrefab = cloneStructure('Box');
+          if (boxPrefab.type === 'COMPONENT') {
             setOption(
-              textPrefab,
-              'outerSpacing',
+              boxPrefab,
+              'innerSpacing',
               (opt: PrefabComponentOption) => ({
                 ...opt,
-                value: ['0rem', '0rem', 'S', '0rem'],
+                value: ['M', '0rem', '0rem', '0rem'],
               }),
             );
-          }
-          boxPrefab.descendants.push(textPrefab);
-          boxPrefab.descendants.push(inputPrefab);
-        }
-        return boxPrefab;
-      };
-      const passwordForm = treeSearch(
-        '#updatePasswordForm',
-        newPrefab.structure,
-      );
-      const passwordBox = treeSearch('#updatePasswordBox', newPrefab.structure);
-      if (!passwordBox) throw new Error('Password box could not be found');
-
-      if (!passwordForm) throw new Error('Password form could not be found');
-      passwordForm.id = passwordFormId;
-
-      if (!authProfile) throw new Error('Auth profile could not be found');
-      if (!authProfile.properties)
-        throw new Error('Auth profile does not have any properties');
-
-      const authPassword = authProfile.properties.find(
-        (p) => p.kind === 'PASSWORD',
-      );
-      if (!idProperty) throw new Error('Property id could not be found');
-      if (!authPassword)
-        throw new Error('Auth password property could not be found');
-
-      const resultPass = await prepareAction(
-        passwordFormId,
-        idProperty,
-        [authPassword],
-        'update',
-        undefined,
-        undefined,
-        permissions,
-        authProfileId,
-      );
-
-      if (!modelProp) throw new Error('Model property could not be found');
-      if (!data) throw new Error('data could not be found');
-
-      Object.values(resultPass.variables).forEach(
-        ([prop, inputVariable]): void => {
-          const generateInputPrefabs = () => {
-            switch (prop.kind) {
-              case PropertyKind.PASSWORD:
-                return inputStructure(
-                  'New password',
-                  makeBettyUpdateInput(
-                    BettyPrefabs.PASSWORD,
-                    data.model,
-                    prop,
-                    inputVariable,
-                    resultPass.relatedIdProperties,
-                  ),
-                );
-              default:
-                return inputStructure(
-                  'New password',
-                  makeBettyUpdateInput(
-                    BettyPrefabs.STRING,
-                    data.model,
-                    prop,
-                    inputVariable,
-                    resultPass.relatedIdProperties,
-                  ),
-                );
+            const textPrefab = cloneStructure('Text');
+            if (textPrefab.type === 'COMPONENT') {
+              setOption(
+                textPrefab,
+                'content',
+                (opt: PrefabComponentOption) => ({
+                  ...opt,
+                  value: [textValue],
+                }),
+              );
+              setOption(textPrefab, 'type', (opt: PrefabComponentOption) => ({
+                ...opt,
+                value: ['Body1'],
+              }));
+              setOption(
+                textPrefab,
+                'outerSpacing',
+                (opt: PrefabComponentOption) => ({
+                  ...opt,
+                  value: ['0rem', '0rem', 'S', '0rem'],
+                }),
+              );
             }
-          };
-          const editFormInput = generateInputPrefabs();
-          if (
-            editFormInput.type === 'COMPONENT' &&
-            editFormInput.descendants[1].type === 'COMPONENT'
-          ) {
-            setOption(
-              editFormInput.descendants[1],
-              'margin',
-              (opt: PrefabComponentOption) => ({
-                ...opt,
-                value: 'none',
-              }),
-            );
-            setOption(
-              editFormInput.descendants[1],
-              'hideLabel',
-              (opt: PrefabComponentOption) => ({
-                ...opt,
-                value: true,
-              }),
-            );
-            setOption(
-              editFormInput.descendants[1],
-              'value',
-              (opt: PrefabComponentOption) => ({
-                ...opt,
-                value: [''],
-              }),
-            );
+            boxPrefab.descendants.push(textPrefab);
+            boxPrefab.descendants.push(inputPrefab);
           }
-          setOption(passwordForm, 'filter', (opt: PrefabComponentOption) => ({
-            ...opt,
-            value: {
-              _and: [
-                {
-                  [idProperty.id]: {
-                    eq: {
-                      id: [idProperty.id],
-                      type: 'ME_PROPERTY',
-                    },
-                  },
-                },
-              ],
-            },
-          }));
+          return boxPrefab;
+        };
+        const passwordForm = treeSearch(
+          '#updatePasswordForm',
+          newPrefab.structure,
+        );
+        const passwordBox = treeSearch(
+          '#updatePasswordBox',
+          newPrefab.structure,
+        );
 
-          passwordBox.descendants.push(editFormInput);
-          if (!prop.kind) {
-            // eslint-disable-next-line no-console
-            console.warn('PropertyKind not found');
-          }
-        },
-      );
+        if (!passwordBox) throw new Error('Password box could not be found');
 
-      setOption(passwordForm, 'actionId', (opt: PrefabComponentOption) => ({
-        ...opt,
-        value: resultPass.action.actionId,
-      }));
-      setOption(passwordForm, 'model', (opt: PrefabComponentOption) => ({
-        ...opt,
-        value: modelId,
-      }));
+        if (!passwordForm) throw new Error('Password form could not be found');
+        passwordForm.id = passwordFormId;
 
-      passwordForm.descendants.push(
-        makeBettyUpdateInput(
-          BettyPrefabs.HIDDEN,
-          modelProp,
+        if (!authProfile) throw new Error('Auth profile could not be found');
+        if (!authProfile.properties)
+          throw new Error('Auth profile does not have any properties');
+
+        const authPassword = authProfile.properties.find(
+          (p) => p.kind === 'PASSWORD',
+        );
+        if (!idProperty) throw new Error('Property id could not be found');
+        if (!authPassword)
+          throw new Error('Auth password property could not be found');
+
+        const resultPass = await prepareAction(
+          passwordFormId,
           idProperty,
-          resultPass.recordInputVariable,
-        ),
-      );
-
-      const editProfileFormObject = treeSearch(
-        '#editProfileDetailsForm',
-        newPrefab.structure,
-      );
-      if (!editProfileFormObject) throw new Error('Form could not be found');
-      editProfileFormObject.id = updateFormId;
-
-      const result = await prepareAction(
-        updateFormId,
-        idProperty,
-        properties,
-        'update',
-        undefined,
-        undefined,
-        permissions,
-        authProfileId,
-      );
-      setOption(
-        editProfileFormObject,
-        'actionId',
-        (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: result.action.actionId,
-        }),
-      );
-      setOption(
-        editProfileFormObject,
-        'model',
-        (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: modelId,
-        }),
-      );
-      setOption(
-        editProfileFormObject,
-        'filter',
-        (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: {
-            _and: [
-              {
-                [idProperty.id]: {
-                  eq: {
-                    id: [idProperty.id],
-                    type: 'ME_PROPERTY',
-                  },
-                },
-              },
-            ],
-          },
-        }),
-      );
-      editProfileFormObject.descendants.push(
-        makeBettyUpdateInput(
-          BettyPrefabs.HIDDEN,
-          modelProp,
-          idProperty,
-          result.recordInputVariable,
-        ),
-      );
-      if (hasProfilePictureProperty) {
-        const imageObject = treeSearch('#updateImgForm', newPrefab.structure);
-        if (!imageObject) throw new Error('Img Form could not be found');
-        if (!profilePictureProperty) {
-          throw new Error('No image property was selected.');
-        }
-        imageObject.id = imageUpdateFormId;
-
-        const imageObjectResult = await prepareAction(
-          imageUpdateFormId,
-          idProperty,
-          [...transformProp(profilePictureProperty)],
+          [authPassword],
           'update',
           undefined,
           undefined,
           permissions,
           authProfileId,
         );
-        Object.values(imageObjectResult.variables).forEach(
+
+        if (!modelProp) throw new Error('Model property could not be found');
+        if (!data) throw new Error('data could not be found');
+
+        Object.values(resultPass.variables).forEach(
           ([prop, inputVariable]): void => {
             const generateInputPrefabs = () => {
-              const imageUploadComponent = makeBettyUpdateInput(
-                BettyPrefabs.IMAGE,
-                data.model,
-                prop,
-                inputVariable,
-                imageObjectResult.relatedIdProperties,
-              );
-              if (imageUploadComponent.type === 'COMPONENT') {
-                imageUploadComponent.ref = {
-                  id: '#uploadInput',
-                };
-                setOption(
-                  imageUploadComponent,
-                  'showImagePreview',
-                  (opt: PrefabComponentOption) => ({
-                    ...opt,
-                    value: false,
-                  }),
-                );
-                const uploadButton = imageUploadComponent.descendants[0];
-                if (uploadButton.type === 'COMPONENT') {
-                  uploadButton.style = {
-                    overwrite: {
-                      backgroundColor: {
-                        type: 'THEME_COLOR',
-                        value: 'primary',
-                      },
-                      boxShadow: 'none',
-                      color: {
-                        type: 'THEME_COLOR',
-                        value: 'white',
-                      },
-                      fontFamily: 'Roboto',
-                      fontSize: '0.875rem',
-                      fontStyle: 'none',
-                      fontWeight: '400',
-                      padding: ['0.6875rem', '1.375rem'],
-                      textDecoration: 'none',
-                      textTransform: 'none',
-                    },
-                  };
-                  setOption(
-                    uploadButton,
-                    'icon',
-                    (opt: PrefabComponentOption) => ({
-                      ...opt,
-                      value: 'CloudUpload',
-                    }),
-                  );
-                }
-              }
               switch (prop.kind) {
-                case PropertyKind.IMAGE:
-                  return inputStructure(prop.label, imageUploadComponent);
+                case PropertyKind.PASSWORD:
+                  return inputStructure(
+                    'New password',
+                    makeBettyUpdateInput(
+                      BettyPrefabs.PASSWORD,
+                      data.model,
+                      prop,
+                      inputVariable,
+                      resultPass.relatedIdProperties,
+                    ),
+                  );
                 default:
                   return inputStructure(
-                    prop.label,
+                    'New password',
                     makeBettyUpdateInput(
                       BettyPrefabs.STRING,
                       data.model,
                       prop,
                       inputVariable,
-                      imageObjectResult.relatedIdProperties,
+                      resultPass.relatedIdProperties,
                     ),
                   );
               }
             };
-            const imgFormInput = generateInputPrefabs();
+            const editFormInput = generateInputPrefabs();
             if (
-              imgFormInput.type === 'COMPONENT' &&
-              imgFormInput.descendants[1].type === 'COMPONENT'
+              editFormInput.type === 'COMPONENT' &&
+              editFormInput.descendants[1].type === 'COMPONENT'
             ) {
               setOption(
-                imgFormInput.descendants[1],
+                editFormInput.descendants[1],
                 'margin',
                 (opt: PrefabComponentOption) => ({
                   ...opt,
@@ -1020,15 +880,23 @@ const beforeCreate = ({
                 }),
               );
               setOption(
-                imgFormInput.descendants[1],
+                editFormInput.descendants[1],
                 'hideLabel',
                 (opt: PrefabComponentOption) => ({
                   ...opt,
                   value: true,
                 }),
               );
+              setOption(
+                editFormInput.descendants[1],
+                'value',
+                (opt: PrefabComponentOption) => ({
+                  ...opt,
+                  value: [''],
+                }),
+              );
             }
-            setOption(imageObject, 'filter', (opt: PrefabComponentOption) => ({
+            setOption(passwordForm, 'filter', (opt: PrefabComponentOption) => ({
               ...opt,
               value: {
                 _and: [
@@ -1044,242 +912,567 @@ const beforeCreate = ({
               },
             }));
 
-            imageObject.descendants.unshift(imgFormInput);
+            passwordBox.descendants.push(editFormInput);
             if (!prop.kind) {
               // eslint-disable-next-line no-console
               console.warn('PropertyKind not found');
             }
           },
         );
-        setOption(imageObject, 'actionId', (opt: PrefabComponentOption) => ({
+
+        setOption(passwordForm, 'actionId', (opt: PrefabComponentOption) => ({
           ...opt,
-          value: imageObjectResult.action.actionId,
+          value: resultPass.action.actionId,
         }));
-        setOption(imageObject, 'model', (opt: PrefabComponentOption) => ({
+        setOption(passwordForm, 'model', (opt: PrefabComponentOption) => ({
           ...opt,
           value: modelId,
         }));
-        setOption(imageObject, 'filter', (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: {
-            _and: [
-              {
-                [idProperty.id]: {
-                  eq: {
-                    id: [idProperty.id],
-                    type: 'ME_PROPERTY',
-                  },
-                },
-              },
-            ],
-          },
-        }));
-        imageObject.descendants.push(
+
+        passwordForm.descendants.push(
           makeBettyUpdateInput(
             BettyPrefabs.HIDDEN,
             modelProp,
             idProperty,
-            imageObjectResult.recordInputVariable,
+            resultPass.recordInputVariable,
           ),
         );
-      } else {
-        const avatarGrid = treeSearch('#AvatarGrid', newPrefab.structure);
-        if (!avatarGrid) throw new Error('Img Form could not be found');
-        avatarGrid.descendants.pop();
-      }
-      const profilePicturePropertyId = treeSearch(
-        '#profilePictureProperty',
-        newPrefab.structure,
-      );
-      if (!profilePicturePropertyId)
-        throw new Error('No profileNameProperty id found');
-      setOption(
-        profilePicturePropertyId,
-        'imgUrl',
-        (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: hasProfilePictureProperty
-            ? [enrichVarObj(profilePictureProperty, true)]
-            : [
-                'https://assets.bettyblocks.com/4d7d80cf57a241899297fa9a768079f6_assets/files/user_default.png',
-              ],
-        }),
-      );
-      const profileNamePropertyId = treeSearch(
-        '#profileNameProperty',
-        newPrefab.structure,
-      );
-      if (!profileNamePropertyId)
-        throw new Error('No profileNameProperty id found');
-      setOption(
-        profileNamePropertyId,
-        'content',
-        (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: hasProfileNameProperty
-            ? [enrichVarObj(profileNameProperty, true)]
-            : ['Profile name'],
-        }),
-      );
-      Object.values(result.variables).forEach(([prop, inputVariable]): void => {
-        const { kind } = prop;
-        if (!kind) {
-          // eslint-disable-next-line no-console
-          console.warn('PropertyKind not found');
-        }
 
-        const newInput = () => {
-          const bettyInput = (prefabName: string): PrefabReference => {
-            const inputPrefab = makeBettyUpdateInput(
-              prefabName,
-              modelProp,
-              prop,
-              inputVariable,
-            );
-            if (inputPrefab.type === 'COMPONENT') {
-              setOption(
-                inputPrefab,
-                'hideLabel',
-                (opt: PrefabComponentOption) => ({
-                  ...opt,
-                  value: true,
-                }),
-              );
-              setOption(
-                inputPrefab,
-                'dataComponentAttribute',
-                (opt: PrefabComponentOption) => ({
-                  ...opt,
-                  value: [],
-                }),
-              );
+        const editProfileFormObject = treeSearch(
+          '#editProfileDetailsForm',
+          newPrefab.structure,
+        );
+        if (!editProfileFormObject) throw new Error('Form could not be found');
+        editProfileFormObject.id = updateFormId;
 
-              setOption(
-                inputPrefab,
-                'margin',
-                (opt: PrefabComponentOption) => ({
-                  ...opt,
-                  value: 'none',
-                }),
-              );
-              setOption(
-                inputPrefab,
-                'required',
-                (opt: PrefabComponentOption) => ({
-                  ...opt,
-                  value: true,
-                }),
-              );
-            }
-            return inputPrefab;
-          };
-
-          switch (kind) {
-            case PropertyKind.STRING:
-              return inputStructure(
-                prop.label,
-                bettyInput(BettyPrefabs.STRING),
-              );
-            case PropertyKind.PASSWORD:
-              return inputStructure(
-                prop.label,
-                bettyInput(BettyPrefabs.PASSWORD),
-              );
-            case PropertyKind.BELONGS_TO:
-              return inputStructure(
-                prop.label,
-                bettyInput(BettyPrefabs.AUTO_COMPLETE),
-              );
-            case PropertyKind.HAS_MANY:
-              return inputStructure(
-                prop.label,
-                bettyInput(BettyPrefabs.MULTI_AUTO_COMPLETE),
-              );
-            case PropertyKind.DATE_TIME:
-              return inputStructure(
-                prop.label,
-                bettyInput(BettyPrefabs.DATE_TIME),
-              );
-            case PropertyKind.DATE:
-              return inputStructure(prop.label, bettyInput(BettyPrefabs.DATE));
-            case PropertyKind.TIME:
-              return inputStructure(prop.label, bettyInput(BettyPrefabs.TIME));
-            case PropertyKind.DECIMAL:
-              return inputStructure(
-                prop.label,
-                bettyInput(BettyPrefabs.DECIMAL),
-              );
-            case PropertyKind.EMAIL_ADDRESS:
-              return inputStructure(
-                prop.label,
-                bettyInput(BettyPrefabs.EMAIL_ADDRESS),
-              );
-            case PropertyKind.FILE:
-              return inputStructure(prop.label, bettyInput(BettyPrefabs.FILE));
-            case PropertyKind.IBAN:
-              return inputStructure(prop.label, bettyInput(BettyPrefabs.IBAN));
-            case PropertyKind.LIST:
-              return inputStructure(prop.label, bettyInput(BettyPrefabs.FILE));
-            case PropertyKind.PHONE_NUMBER:
-              return inputStructure(
-                prop.label,
-                bettyInput(BettyPrefabs.PHONE_NUMBER),
-              );
-            case PropertyKind.PRICE:
-              return inputStructure(prop.label, bettyInput(BettyPrefabs.PRICE));
-            case PropertyKind.URL:
-              return inputStructure(prop.label, bettyInput(BettyPrefabs.URL));
-            case PropertyKind.TEXT:
-              return inputStructure(prop.label, bettyInput(BettyPrefabs.TEXT));
-            case PropertyKind.INTEGER:
-              return inputStructure(
-                prop.label,
-                bettyInput(BettyPrefabs.INTEGER),
-              );
-            case PropertyKind.BOOLEAN:
-              return inputStructure(
-                prop.label,
-                bettyInput(BettyPrefabs.BOOLEAN),
-              );
-            default:
-              return inputStructure(
-                prop.label,
-                bettyInput(BettyPrefabs.STRING),
-              );
-          }
-        };
-        if (inputBox) {
-          const newInputPrefabs = newInput();
-          inputBox.descendants.push(newInputPrefabs);
-        }
-      });
-
-      if (modelId) {
-        const dataContainer = treeSearch('#dataContainer', newPrefab.structure);
-        if (!dataContainer) throw new Error('No datalist found');
+        const result = await prepareAction(
+          updateFormId,
+          idProperty,
+          properties,
+          'update',
+          undefined,
+          undefined,
+          permissions,
+          authProfileId,
+        );
         setOption(
-          dataContainer,
-          'authProfile',
+          editProfileFormObject,
+          'actionId',
           (opt: PrefabComponentOption) => ({
             ...opt,
-            value: authProfileId,
+            value: result.action.actionId,
           }),
         );
-        const prefabFooter = treeSearch('#Footer', newPrefab.structure);
-        const prefabHeader = treeSearch('#Header', newPrefab.structure);
+        setOption(
+          editProfileFormObject,
+          'model',
+          (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: modelId,
+          }),
+        );
+        setOption(
+          editProfileFormObject,
+          'filter',
+          (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: {
+              _and: [
+                {
+                  [idProperty.id]: {
+                    eq: {
+                      id: [idProperty.id],
+                      type: 'ME_PROPERTY',
+                    },
+                  },
+                },
+              ],
+            },
+          }),
+        );
+        editProfileFormObject.descendants.push(
+          makeBettyUpdateInput(
+            BettyPrefabs.HIDDEN,
+            modelProp,
+            idProperty,
+            result.recordInputVariable,
+          ),
+        );
 
-        if (headerPartialId && prefabHeader) {
-          prefabHeader.descendants = [
-            { type: 'PARTIAL', partialId: headerPartialId },
-          ];
+        if (hasProfilePictureProperty) {
+          const imageObject = treeSearch('#updateImgForm', newPrefab.structure);
+          if (!newPrefab.interactions)
+            throw new Error('newPrefab interactions not be found');
+          newPrefab.interactions.push(
+            {
+              name: 'Show',
+              sourceEvent: 'onSuccess',
+              ref: {
+                targetComponentId: '#uploadSubmitButton',
+                sourceComponentId: '#uploadInput',
+              },
+              type: 'Custom',
+            } as PrefabInteraction,
+            {
+              name: 'Toggle loading state',
+              sourceEvent: 'onActionSuccess',
+              ref: {
+                targetComponentId: '#uploadSubmitButton',
+                sourceComponentId: '#updateImgForm',
+              },
+              type: 'Custom',
+            } as PrefabInteraction,
+            {
+              name: 'Toggle loading state',
+              sourceEvent: 'onActionError',
+              ref: {
+                targetComponentId: '#uploadSubmitButton',
+                sourceComponentId: '#updateImgForm',
+              },
+              type: 'Custom',
+            } as PrefabInteraction,
+            {
+              name: 'Toggle loading state',
+              sourceEvent: 'onActionLoad',
+              ref: {
+                targetComponentId: '#uploadSubmitButton',
+                sourceComponentId: '#updateImgForm',
+              },
+              type: 'Custom',
+            } as PrefabInteraction,
+            {
+              name: 'Refetch',
+              sourceEvent: 'onActionSuccess',
+              ref: {
+                targetComponentId: '#dataContainer',
+                sourceComponentId: '#updateImgForm',
+              },
+              type: 'Custom',
+            } as PrefabInteraction,
+            {
+              name: 'Hide',
+              sourceEvent: 'onActionLoad',
+              ref: {
+                targetComponentId: '#updateImgAlert',
+                sourceComponentId: '#updateImgForm',
+              },
+              type: 'Custom',
+            } as PrefabInteraction,
+            {
+              name: 'Show',
+              sourceEvent: 'onActionError',
+              ref: {
+                targetComponentId: '#updateImgAlert',
+                sourceComponentId: '#updateImgForm',
+              },
+              type: 'Custom',
+            } as PrefabInteraction,
+          );
+          if (!imageObject) throw new Error('Img Form could not be found');
+          if (!profilePictureProperty) {
+            throw new Error('No image property was selected.');
+          }
+          imageObject.id = imageUpdateFormId;
+
+          const imageObjectResult = await prepareAction(
+            imageUpdateFormId,
+            idProperty,
+            [...transformProp(profilePictureProperty)],
+            'update',
+            undefined,
+            undefined,
+            permissions,
+            authProfileId,
+          );
+          Object.values(imageObjectResult.variables).forEach(
+            ([prop, inputVariable]): void => {
+              const generateInputPrefabs = () => {
+                const imageUploadComponent = makeBettyUpdateInput(
+                  BettyPrefabs.IMAGE,
+                  data.model,
+                  prop,
+                  inputVariable,
+                  imageObjectResult.relatedIdProperties,
+                );
+                if (imageUploadComponent.type === 'COMPONENT') {
+                  imageUploadComponent.ref = {
+                    id: '#uploadInput',
+                  };
+                  setOption(
+                    imageUploadComponent,
+                    'showImagePreview',
+                    (opt: PrefabComponentOption) => ({
+                      ...opt,
+                      value: false,
+                    }),
+                  );
+                  const uploadButton = imageUploadComponent.descendants[0];
+                  if (uploadButton.type === 'COMPONENT') {
+                    uploadButton.style = {
+                      overwrite: {
+                        backgroundColor: {
+                          type: 'THEME_COLOR',
+                          value: 'primary',
+                        },
+                        boxShadow: 'none',
+                        color: {
+                          type: 'THEME_COLOR',
+                          value: 'white',
+                        },
+                        fontFamily: 'Roboto',
+                        fontSize: '0.875rem',
+                        fontStyle: 'none',
+                        fontWeight: '400',
+                        padding: ['0.6875rem', '1.375rem'],
+                        textDecoration: 'none',
+                        textTransform: 'none',
+                      },
+                    };
+                    setOption(
+                      uploadButton,
+                      'icon',
+                      (opt: PrefabComponentOption) => ({
+                        ...opt,
+                        value: 'CloudUpload',
+                      }),
+                    );
+                  }
+                }
+                switch (prop.kind) {
+                  case PropertyKind.IMAGE:
+                    return inputStructure(prop.label, imageUploadComponent);
+                  default:
+                    return inputStructure(
+                      prop.label,
+                      makeBettyUpdateInput(
+                        BettyPrefabs.STRING,
+                        data.model,
+                        prop,
+                        inputVariable,
+                        imageObjectResult.relatedIdProperties,
+                      ),
+                    );
+                }
+              };
+              const imgFormInput = generateInputPrefabs();
+              if (
+                imgFormInput.type === 'COMPONENT' &&
+                imgFormInput.descendants[1].type === 'COMPONENT'
+              ) {
+                setOption(
+                  imgFormInput.descendants[1],
+                  'margin',
+                  (opt: PrefabComponentOption) => ({
+                    ...opt,
+                    value: 'none',
+                  }),
+                );
+                setOption(
+                  imgFormInput.descendants[1],
+                  'hideLabel',
+                  (opt: PrefabComponentOption) => ({
+                    ...opt,
+                    value: true,
+                  }),
+                );
+              }
+              setOption(
+                imageObject,
+                'filter',
+                (opt: PrefabComponentOption) => ({
+                  ...opt,
+                  value: {
+                    _and: [
+                      {
+                        [idProperty.id]: {
+                          eq: {
+                            id: [idProperty.id],
+                            type: 'ME_PROPERTY',
+                          },
+                        },
+                      },
+                    ],
+                  },
+                }),
+              );
+
+              imageObject.descendants.unshift(imgFormInput);
+              if (!prop.kind) {
+                // eslint-disable-next-line no-console
+                console.warn('PropertyKind not found');
+              }
+            },
+          );
+          setOption(imageObject, 'actionId', (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: imageObjectResult.action.actionId,
+          }));
+          setOption(imageObject, 'model', (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: modelId,
+          }));
+          setOption(imageObject, 'filter', (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: {
+              _and: [
+                {
+                  [idProperty.id]: {
+                    eq: {
+                      id: [idProperty.id],
+                      type: 'ME_PROPERTY',
+                    },
+                  },
+                },
+              ],
+            },
+          }));
+          imageObject.descendants.push(
+            makeBettyUpdateInput(
+              BettyPrefabs.HIDDEN,
+              modelProp,
+              idProperty,
+              imageObjectResult.recordInputVariable,
+            ),
+          );
+        } else {
+          const avatarGrid = treeSearch('#AvatarGrid', newPrefab.structure);
+
+          if (!avatarGrid) throw new Error('Img Form could not be found');
+
+          avatarGrid.descendants.pop();
         }
 
-        if (footerPartialId && prefabFooter) {
-          prefabFooter.descendants = [
-            { type: 'PARTIAL', partialId: footerPartialId },
-          ];
+        const profilePicturePropertyId = treeSearch(
+          '#profilePictureProperty',
+          newPrefab.structure,
+        );
+        if (!profilePicturePropertyId)
+          throw new Error('No profileNameProperty id found');
+        setOption(
+          profilePicturePropertyId,
+          'imgUrl',
+          (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: hasProfilePictureProperty
+              ? [enrichVarObj(profilePictureProperty, true)]
+              : [
+                  'https://assets.bettyblocks.com/4d7d80cf57a241899297fa9a768079f6_assets/files/user_default.png',
+                ],
+          }),
+        );
+
+        const profileNamePropertyId = treeSearch(
+          '#profileNameProperty',
+          newPrefab.structure,
+        );
+        if (!profileNamePropertyId)
+          throw new Error('No profileNameProperty id found');
+        setOption(
+          profileNamePropertyId,
+          'content',
+          (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: hasProfileNameProperty
+              ? [enrichVarObj(profileNameProperty, true)]
+              : ['Profile name'],
+          }),
+        );
+
+        Object.values(result.variables).forEach(
+          ([prop, inputVariable]): void => {
+            const { kind } = prop;
+            if (!kind) {
+              // eslint-disable-next-line no-console
+              console.warn('PropertyKind not found');
+            }
+
+            const newInput = () => {
+              const bettyInput = (prefabName: string): PrefabReference => {
+                const inputPrefab = makeBettyUpdateInput(
+                  prefabName,
+                  modelProp,
+                  prop,
+                  inputVariable,
+                );
+                if (inputPrefab.type === 'COMPONENT') {
+                  setOption(
+                    inputPrefab,
+                    'hideLabel',
+                    (opt: PrefabComponentOption) => ({
+                      ...opt,
+                      value: true,
+                    }),
+                  );
+                  setOption(
+                    inputPrefab,
+                    'dataComponentAttribute',
+                    (opt: PrefabComponentOption) => ({
+                      ...opt,
+                      value: [],
+                    }),
+                  );
+
+                  setOption(
+                    inputPrefab,
+                    'margin',
+                    (opt: PrefabComponentOption) => ({
+                      ...opt,
+                      value: 'none',
+                    }),
+                  );
+                  setOption(
+                    inputPrefab,
+                    'required',
+                    (opt: PrefabComponentOption) => ({
+                      ...opt,
+                      value: true,
+                    }),
+                  );
+                }
+                return inputPrefab;
+              };
+
+              switch (kind) {
+                case PropertyKind.STRING:
+                  return inputStructure(
+                    prop.label,
+                    bettyInput(BettyPrefabs.STRING),
+                  );
+                case PropertyKind.PASSWORD:
+                  return inputStructure(
+                    prop.label,
+                    bettyInput(BettyPrefabs.PASSWORD),
+                  );
+                case PropertyKind.BELONGS_TO:
+                  return inputStructure(
+                    prop.label,
+                    bettyInput(BettyPrefabs.AUTO_COMPLETE),
+                  );
+                case PropertyKind.HAS_MANY:
+                  return inputStructure(
+                    prop.label,
+                    bettyInput(BettyPrefabs.MULTI_AUTO_COMPLETE),
+                  );
+                case PropertyKind.DATE_TIME:
+                  return inputStructure(
+                    prop.label,
+                    bettyInput(BettyPrefabs.DATE_TIME),
+                  );
+                case PropertyKind.DATE:
+                  return inputStructure(
+                    prop.label,
+                    bettyInput(BettyPrefabs.DATE),
+                  );
+                case PropertyKind.TIME:
+                  return inputStructure(
+                    prop.label,
+                    bettyInput(BettyPrefabs.TIME),
+                  );
+                case PropertyKind.DECIMAL:
+                  return inputStructure(
+                    prop.label,
+                    bettyInput(BettyPrefabs.DECIMAL),
+                  );
+                case PropertyKind.EMAIL_ADDRESS:
+                  return inputStructure(
+                    prop.label,
+                    bettyInput(BettyPrefabs.EMAIL_ADDRESS),
+                  );
+                case PropertyKind.FILE:
+                  return inputStructure(
+                    prop.label,
+                    bettyInput(BettyPrefabs.FILE),
+                  );
+                case PropertyKind.IBAN:
+                  return inputStructure(
+                    prop.label,
+                    bettyInput(BettyPrefabs.IBAN),
+                  );
+                case PropertyKind.LIST:
+                  return inputStructure(
+                    prop.label,
+                    bettyInput(BettyPrefabs.LIST),
+                  );
+                case PropertyKind.PHONE_NUMBER:
+                  return inputStructure(
+                    prop.label,
+                    bettyInput(BettyPrefabs.PHONE_NUMBER),
+                  );
+                case PropertyKind.PRICE:
+                  return inputStructure(
+                    prop.label,
+                    bettyInput(BettyPrefabs.PRICE),
+                  );
+                case PropertyKind.URL:
+                  return inputStructure(
+                    prop.label,
+                    bettyInput(BettyPrefabs.URL),
+                  );
+                case PropertyKind.TEXT:
+                  return inputStructure(
+                    prop.label,
+                    bettyInput(BettyPrefabs.TEXT),
+                  );
+                case PropertyKind.IMAGE:
+                  return inputStructure(
+                    prop.label,
+                    bettyInput(BettyPrefabs.IMAGE),
+                  );
+                case PropertyKind.INTEGER:
+                  return inputStructure(
+                    prop.label,
+                    bettyInput(BettyPrefabs.INTEGER),
+                  );
+                case PropertyKind.BOOLEAN:
+                  return inputStructure(
+                    prop.label,
+                    bettyInput(BettyPrefabs.BOOLEAN),
+                  );
+                default:
+                  return inputStructure(
+                    prop.label,
+                    bettyInput(BettyPrefabs.STRING),
+                  );
+              }
+            };
+            if (inputBox) {
+              const newInputPrefabs = newInput();
+              inputBox.descendants.push(newInputPrefabs);
+            }
+          },
+        );
+
+        if (modelId) {
+          const dataContainer = treeSearch(
+            '#dataContainer',
+            newPrefab.structure,
+          );
+          if (!dataContainer) throw new Error('No datalist found');
+          setOption(
+            dataContainer,
+            'authProfile',
+            (opt: PrefabComponentOption) => ({
+              ...opt,
+              value: authProfileId,
+            }),
+          );
+          const prefabFooter = treeSearch('#Footer', newPrefab.structure);
+          const prefabHeader = treeSearch('#Header', newPrefab.structure);
+
+          if (headerPartialId && prefabHeader) {
+            prefabHeader.descendants = [
+              { type: 'PARTIAL', partialId: headerPartialId },
+            ];
+          }
+
+          if (footerPartialId && prefabFooter) {
+            prefabFooter.descendants = [
+              { type: 'PARTIAL', partialId: footerPartialId },
+            ];
+          }
+
+          save(newPrefab);
         }
-        save(newPrefab);
       }
     },
     buttons: () => (
