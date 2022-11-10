@@ -3164,128 +3164,130 @@ const beforeCreate = ({
   };
 
   const makeDetail = (prop: any) => {
-    const detailComponent = cloneStructure('Box');
-    if (detailComponent.type === 'COMPONENT') {
+    const noEmptyValueConditional = cloneStructure('Conditional');
+    if (noEmptyValueConditional.type === 'COMPONENT') {
       setOption(
-        detailComponent,
-        'outerSpacing',
-        (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: ['0rem', '0rem', 'M', '0rem'],
+        noEmptyValueConditional,
+        'left',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
+          value: [enrichVarObj({ ...prop })],
         }),
       );
       setOption(
-        detailComponent,
-        'backgroundColor',
-        (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: 'Accent1',
-        }),
-      );
-      setOption(
-        detailComponent,
-        'backgroundColorAlpha',
-        (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: '20',
+        noEmptyValueConditional,
+        'compare',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
+          value: 'neq',
         }),
       );
 
-      const labelText = cloneStructure('Text');
-      if (labelText.type === 'COMPONENT') {
+      const detailComponent = cloneStructure('Box');
+      if (detailComponent.type === 'COMPONENT') {
         setOption(
-          labelText,
-          'content',
-          (originalOption: PrefabComponentOption) => ({
-            ...originalOption,
-            value: [`${[prop.label]}:`],
-            configuration: { as: 'MULTILINE' },
+          detailComponent,
+          'outerSpacing',
+          (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: ['0rem', '0rem', 'M', '0rem'],
           }),
         );
         setOption(
-          labelText,
-          'type',
-          (originalOption: PrefabComponentOption) => ({
-            ...originalOption,
-            value: 'Body1',
+          detailComponent,
+          'backgroundColor',
+          (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: 'Accent1',
           }),
         );
         setOption(
-          labelText,
-          'fontWeight',
-          (originalOption: PrefabComponentOption) => ({
-            ...originalOption,
-            value: '500',
-            configuration: {
-              as: 'DROPDOWN',
-              dataType: 'string',
-              allowedInput: [
-                { name: '100', value: '100' },
-                { name: '200', value: '200' },
-                { name: '300', value: '300' },
-                { name: '400', value: '400' },
-                { name: '500', value: '500' },
-                { name: '600', value: '600' },
-                { name: '700', value: '700' },
-                { name: '800', value: '800' },
-                { name: '900', value: '900' },
-              ],
-            },
+          detailComponent,
+          'backgroundColorAlpha',
+          (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: '20',
           }),
         );
-      }
 
-      if (prop.kind === 'IMAGE') {
-        const mediaComponent = cloneStructure('Media');
-        if (mediaComponent.type === 'COMPONENT') {
+        const labelText = cloneStructure('Text');
+        if (labelText.type === 'COMPONENT') {
           setOption(
-            mediaComponent,
+            labelText,
+            'content',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [`${[prop.label]}:`],
+              configuration: { as: 'MULTILINE' },
+            }),
+          );
+          setOption(
+            labelText,
             'type',
             (originalOption: PrefabComponentOption) => ({
               ...originalOption,
-              value: 'url',
+              value: 'Body1',
             }),
           );
           setOption(
-            mediaComponent,
-            'urlFileSource',
+            labelText,
+            'fontWeight',
             (originalOption: PrefabComponentOption) => ({
               ...originalOption,
-              value: [{ ...prop }],
-            }),
-          );
-          setOption(
-            mediaComponent,
-            'width',
-            (originalOption: PrefabComponentOption) => ({
-              ...originalOption,
-              value: '100%',
+              value: '500',
+              configuration: {
+                as: 'DROPDOWN',
+                dataType: 'string',
+                allowedInput: [
+                  { name: '100', value: '100' },
+                  { name: '200', value: '200' },
+                  { name: '300', value: '300' },
+                  { name: '400', value: '400' },
+                  { name: '500', value: '500' },
+                  { name: '600', value: '600' },
+                  { name: '700', value: '700' },
+                  { name: '800', value: '800' },
+                  { name: '900', value: '900' },
+                ],
+              },
             }),
           );
         }
-        detailComponent.descendants = [labelText, mediaComponent];
-        return detailComponent;
-      }
 
-      if (prop.kind === 'FILE') {
-        const hasFileConditional = cloneStructure('Conditional');
-        if (hasFileConditional.type === 'COMPONENT') {
-          setOption(
-            hasFileConditional,
-            'left',
-            (originalOption: PrefabComponentOption) => ({
-              ...originalOption,
-              value: [enrichVarObj({ ...prop })],
-            }),
-          );
-          setOption(
-            hasFileConditional,
-            'compare',
-            (originalOption: PrefabComponentOption) => ({
-              ...originalOption,
-              value: 'neq',
-            }),
-          );
+        if (prop.kind === 'IMAGE') {
+          const mediaComponent = cloneStructure('Media');
+          if (mediaComponent.type === 'COMPONENT') {
+            setOption(
+              mediaComponent,
+              'type',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: 'url',
+              }),
+            );
+            setOption(
+              mediaComponent,
+              'urlFileSource',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: [{ ...prop }],
+              }),
+            );
+            setOption(
+              mediaComponent,
+              'width',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: '100%',
+              }),
+            );
+          }
+          detailComponent.descendants = [labelText, mediaComponent];
+          noEmptyValueConditional.descendants = [detailComponent];
+          return noEmptyValueConditional;
+        }
+
+        if (prop.kind === 'FILE') {
           const fileButton = cloneStructure('Open Page');
           if (fileButton.type === 'COMPONENT') {
             fileButton.style = {
@@ -3341,70 +3343,28 @@ const beforeCreate = ({
               }),
             );
           }
-          hasFileConditional.descendants = [fileButton];
+
+          detailComponent.descendants = [labelText, fileButton];
+          noEmptyValueConditional.descendants = [detailComponent];
+          return noEmptyValueConditional;
         }
-        const hasNoFileConditional = cloneStructure('Conditional');
-        if (hasNoFileConditional.type === 'COMPONENT') {
+
+        const valueText = cloneStructure('Text');
+        if (valueText.type === 'COMPONENT') {
           setOption(
-            hasNoFileConditional,
-            'left',
+            valueText,
+            'content',
             (originalOption: PrefabComponentOption) => ({
               ...originalOption,
               value: [enrichVarObj({ ...prop })],
             }),
           );
-          const noFileButton = cloneStructure('Open Page');
-          if (noFileButton.type === 'COMPONENT') {
-            noFileButton.style = {
-              overwrite: {
-                backgroundColor: {
-                  type: 'THEME_COLOR',
-                  value: 'primary',
-                },
-                boxShadow: 'none',
-                color: {
-                  type: 'THEME_COLOR',
-                  value: 'white',
-                },
-                fontFamily: 'Roboto',
-                fontSize: '0.875rem',
-                fontStyle: 'none',
-                fontWeight: '400',
-                padding: ['0.6875rem', '1.375rem'],
-                textDecoration: 'none',
-                textTransform: 'none',
-              },
-            };
-            setOption(
-              noFileButton,
-              'buttonText',
-              (originalOption: PrefabComponentOption) => ({
-                ...originalOption,
-                value: ['No file attached'],
-              }),
-            );
-          }
-          hasNoFileConditional.descendants = [noFileButton];
         }
-        detailComponent.descendants = [
-          labelText,
-          hasFileConditional,
-          hasNoFileConditional,
-        ];
-        return detailComponent;
+        detailComponent.descendants = [labelText, valueText];
+        noEmptyValueConditional.descendants = [detailComponent];
       }
-
-      const valueText = cloneStructure('Text');
-      if (valueText.type === 'COMPONENT') {
-        setOption(valueText, 'content', (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: [enrichVarObj({ ...prop })],
-          configuration: { as: 'MULTILINE' },
-        }));
-      }
-      detailComponent.descendants = [labelText, valueText];
     }
-    return detailComponent;
+    return noEmptyValueConditional;
   };
 
   useModelQuery({
