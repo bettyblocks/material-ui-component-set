@@ -3268,54 +3268,129 @@ const beforeCreate = ({
       }
 
       if (prop.kind === 'FILE') {
-        const fileButton = cloneStructure('Open Page');
-        if (fileButton.type === 'COMPONENT') {
-          fileButton.style = {
-            overwrite: {
-              backgroundColor: {
-                type: 'THEME_COLOR',
-                value: 'primary',
-              },
-              boxShadow: 'none',
-              color: {
-                type: 'THEME_COLOR',
-                value: 'white',
-              },
-              fontFamily: 'Roboto',
-              fontSize: '0.875rem',
-              fontStyle: 'none',
-              fontWeight: '400',
-              padding: ['0.6875rem', '1.375rem'],
-              textDecoration: 'none',
-              textTransform: 'none',
-            },
-          };
+        const hasFileConditional = cloneStructure('Conditional');
+        if (hasFileConditional.type === 'COMPONENT') {
           setOption(
-            fileButton,
-            'buttonText',
-            (originalOption: PrefabComponentOption) => ({
-              ...originalOption,
-              value: 'View file',
-            }),
-          );
-          setOption(
-            fileButton,
-            'linkToExternal',
+            hasFileConditional,
+            'left',
             (originalOption: PrefabComponentOption) => ({
               ...originalOption,
               value: [enrichVarObj({ ...prop })],
             }),
           );
           setOption(
-            fileButton,
-            'linkType',
+            hasFileConditional,
+            'compare',
             (originalOption: PrefabComponentOption) => ({
               ...originalOption,
-              value: 'external',
+              value: 'neq',
             }),
           );
+          const fileButton = cloneStructure('Open Page');
+          if (fileButton.type === 'COMPONENT') {
+            fileButton.style = {
+              overwrite: {
+                backgroundColor: {
+                  type: 'THEME_COLOR',
+                  value: 'primary',
+                },
+                boxShadow: 'none',
+                color: {
+                  type: 'THEME_COLOR',
+                  value: 'white',
+                },
+                fontFamily: 'Roboto',
+                fontSize: '0.875rem',
+                fontStyle: 'none',
+                fontWeight: '400',
+                padding: ['0.6875rem', '1.375rem'],
+                textDecoration: 'none',
+                textTransform: 'none',
+              },
+            };
+            setOption(
+              fileButton,
+              'buttonText',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: ['View file'],
+              }),
+            );
+            setOption(
+              fileButton,
+              'linkToExternal',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: [enrichVarObj({ ...prop })],
+              }),
+            );
+            setOption(
+              fileButton,
+              'linkType',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: 'external',
+              }),
+            );
+            setOption(
+              fileButton,
+              'linkTarget',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: '_blank',
+              }),
+            );
+          }
+          hasFileConditional.descendants = [fileButton];
         }
-        detailComponent.descendants = [labelText, fileButton];
+        const hasNoFileConditional = cloneStructure('Conditional');
+        if (hasNoFileConditional.type === 'COMPONENT') {
+          setOption(
+            hasNoFileConditional,
+            'left',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [enrichVarObj({ ...prop })],
+            }),
+          );
+          const noFileButton = cloneStructure('Open Page');
+          if (noFileButton.type === 'COMPONENT') {
+            noFileButton.style = {
+              overwrite: {
+                backgroundColor: {
+                  type: 'THEME_COLOR',
+                  value: 'primary',
+                },
+                boxShadow: 'none',
+                color: {
+                  type: 'THEME_COLOR',
+                  value: 'white',
+                },
+                fontFamily: 'Roboto',
+                fontSize: '0.875rem',
+                fontStyle: 'none',
+                fontWeight: '400',
+                padding: ['0.6875rem', '1.375rem'],
+                textDecoration: 'none',
+                textTransform: 'none',
+              },
+            };
+            setOption(
+              noFileButton,
+              'buttonText',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: ['No file attached'],
+              }),
+            );
+          }
+          hasNoFileConditional.descendants = [noFileButton];
+        }
+        detailComponent.descendants = [
+          labelText,
+          hasFileConditional,
+          hasNoFileConditional,
+        ];
         return detailComponent;
       }
 
