@@ -4,18 +4,28 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { Typography, Box } = window.MaterialUI.Core;
     const { env, useText } = B;
     const isDev = env === 'dev';
-    const { switchCase, compare, dataComponentAttribute } = options;
-    const { value, showAllCases, variable } = parent;
+    const { switchCase, compare, defaultCase, dataComponentAttribute } =
+      options;
+    const {
+      index,
+      value,
+      showAllCases,
+      defaultActive,
+      evalShowDefault,
+      variable,
+    } = parent;
 
-    // eslint-disable-next-line no-debugger
-    debugger;
     const leftValue = !isDev && useText(variable);
     const rightValue = !isDev && useText(switchCase);
+    const evalDev = () => showAllCases || value === index;
 
     const evalCondition = () => {
+      if (defaultCase) {
+        return defaultActive;
+      }
+
       const leftAsNumber = parseFloat(leftValue);
       const rightAsNumber = parseFloat(rightValue);
 
@@ -43,34 +53,34 @@
       }
     };
 
-    const isActive = isDev ? showAllCases || value === index : evalCondition();
+    const isActive = isDev ? evalDev() : evalCondition();
+
+    useEffect(() => {
+      if (!isDev) {
+        evalShowDefault({
+          index,
+          isActive: defaultCase ? false : isActive,
+          defaultCase,
+        });
+      }
+    });
 
     function EmptyBox() {
-      if (!isDev) return null;
+      if (!isDev) {
+        return null;
+      }
 
-      return (
-        <Box className={classes.empty} p={3}>
-          Case
-        </Box>
-      );
+      return <div className={classes.empty}>Case</div>;
     }
 
-    const CasePanel = (isActive || !isDev) && (
-      <Typography
-        component="div"
-        role="tabpanel"
-        hidden={!isActive}
-        aria-labelledby="tabs"
-        classes={{ root: classes.root }}
-        data-component={useText(dataComponentAttribute) || 'Case'}
-      >
-        {children.length > 0 && isActive ? children : <EmptyBox />}
-      </Typography>
-    );
+    const CasePanel =
+      (isActive || !isDev) &&
+      (children.length > 0 && isActive ? <>{children}</> : <EmptyBox />);
 
     return isDev ? (
       <div
         className={[classes.root, !isActive ? classes.hidden : ''].join(' ')}
+        data-component={useText(dataComponentAttribute) || 'Case'}
       >
         {CasePanel}
       </div>
@@ -83,10 +93,6 @@
     const isDev = env === 'dev';
 
     return {
-      wrapper: {
-        height: ({ options: { height } }) => height,
-        width: ({ options: { width } }) => width,
-      },
       hidden: {
         display: 'none',
       },

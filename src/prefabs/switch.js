@@ -8,6 +8,13 @@
       type: 'COMPONENT',
       name: 'switch',
       label: 'Switch',
+      optionCategories: [
+        {
+          label: 'Advanced',
+          expanded: false,
+          members: ['dataComponentAttribute'],
+        },
+      ],
       options: [
         {
           type: 'CHILD_SELECTOR',
@@ -60,13 +67,46 @@
           type: 'COMPONENT',
           name: 'switchCase',
           label: 'Case',
+          optionCategories: [
+            {
+              label: 'Advanced',
+              expanded: false,
+              members: ['dataComponentAttribute'],
+            },
+          ],
           options: [
+            {
+              type: 'CUSTOM',
+              label: 'Type',
+              key: 'defaultCase',
+              value: false,
+              configuration: {
+                as: 'BUTTONGROUP',
+                dataType: 'boolean',
+                allowedInput: [
+                  {
+                    name: 'Case',
+                    value: false,
+                  },
+                  {
+                    name: 'Default',
+                    value: true,
+                  },
+                ],
+              },
+            },
             {
               type: 'CUSTOM',
               key: 'compare',
               label: 'Switch variable',
               value: 'eq',
               configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'defaultCase',
+                  comparator: 'EQ',
+                  value: false,
+                },
                 as: 'DROPDOWN',
                 dataType: 'string',
                 allowedInput: [
@@ -111,6 +151,12 @@
               key: 'switchCase',
               value: ['default'],
               configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'defaultCase',
+                  comparator: 'EQ',
+                  value: false,
+                },
                 dependsOn: 'model',
               },
             },

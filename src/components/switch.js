@@ -12,17 +12,35 @@
       dataComponentAttribute,
     } = options;
 
-    // eslint-disable-next-line no-debugger
-    debugger;
-
     const isDev = env === 'dev';
     const currentCase = isDev ? activeDesignIndex : variable;
     const [value, setValue] = useState(parseInt(currentCase - 1, 10) || 0);
+    const [defaultActive, setDefaultActive] = useState(false);
+
     useEffect(() => {
       if (isDev) {
         setValue(parseInt(currentCase - 1, 10));
       }
     }, [isDev, currentCase]);
+
+    let cases = [];
+    const casesContain = (prop) =>
+      cases.findIndex((item) => item && item[prop] === true) !== -1;
+
+    const evalShowDefault = ({ index, isActive, defaultCase }) => {
+      const caseIndex = cases.findIndex((item) => item && item.index === index);
+      if (caseIndex === -1) {
+        cases = [...cases, { index, isActive, defaultCase }];
+      } else {
+        cases[caseIndex] = { index, isActive, defaultCase };
+      }
+
+      const hasDefault = casesContain('defaultCase');
+      const casesMatchChildren = cases.length === children.length;
+      const hasActive = casesMatchChildren && casesContain('isActive');
+
+      setDefaultActive(hasDefault && !hasActive);
+    };
 
     const Switch = (
       <div
@@ -39,6 +57,8 @@
                 value={value}
                 variable={variable}
                 showAllCases={showAllCases}
+                defaultActive={defaultActive}
+                evalShowDefault={evalShowDefault}
               >
                 {React.cloneElement(child, { ...childOptions })}
               </Children>
@@ -74,8 +94,6 @@
         },
       },
       cases: {
-        display: 'flex',
-        flexDirection: 'column',
         height: ({ options: { height } }) => (isDev ? '100%' : height),
         width: ({ options: { width } }) => (isDev ? '100%' : width),
       },
