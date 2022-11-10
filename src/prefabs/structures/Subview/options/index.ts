@@ -16,7 +16,7 @@ export const categories = [
   },
 ];
 
-export const subViewOptions = {
+export const subviewOptions = {
   backgroundColor: color('Background color', { value: ThemeColor.TRANSPARENT }),
   outerSpacing: sizes('Outer space', {
     value: ['0rem', '0rem', '0rem', '0rem'],
