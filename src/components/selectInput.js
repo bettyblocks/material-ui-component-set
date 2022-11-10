@@ -138,7 +138,7 @@
           ...(orderBy.id ? { sort: { relation: sort } } : {}),
         },
       },
-      !modelId,
+      !!contextModelId || !modelId,
     );
 
     const { hasResults, data: relationData } = useRelation(
