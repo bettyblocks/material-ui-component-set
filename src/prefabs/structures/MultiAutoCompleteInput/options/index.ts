@@ -1,7 +1,7 @@
 import {
   buttongroup,
   hideIf,
-  model,
+  modelAndRelation,
   option,
   property,
   showIf,
@@ -42,7 +42,7 @@ export const options = {
       },
     },
   ),
-  model: model('Model', {
+  model: modelAndRelation('Model', {
     value: '',
     configuration: {
       condition: showIf('optionType', 'EQ', 'variable'),

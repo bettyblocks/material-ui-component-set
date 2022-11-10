@@ -43,10 +43,11 @@
     const helperTextResolved = useText(helperText);
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
+    const { contextModelId } = model;
 
     const {
       referenceModelId,
-      modelId = model,
+      modelId = contextModelId || model,
       kind,
       values = [],
     } = modelProperty;
