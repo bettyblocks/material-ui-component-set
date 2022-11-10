@@ -319,6 +319,5 @@ export default prefab('Email', attributes, beforeCreate, [
     type: 'email',
     pattern,
     adornmentIcon: 'Email',
-    dataComponentAttribute: 'EmailInput',
   }),
 ]);

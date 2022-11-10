@@ -13,7 +13,7 @@ export const CheckboxInput = (
 
   const categories = [
     {
-      label: 'Validations',
+      label: 'Validation Options',
       expanded: false,
       members: ['required', 'validationValueMissing'],
     },
@@ -29,7 +29,7 @@ export const CheckboxInput = (
       ],
     },
     {
-      label: 'Advanced',
+      label: 'Advanced Options',
       expanded: false,
       members: ['dataComponentAttribute'],
     },

@@ -14,7 +14,7 @@ export const FileUpload = (config: Configuration = {}) => {
 
   const categories = [
     {
-      label: 'Validations',
+      label: 'Validation',
       expanded: false,
       members: [
         'required',
@@ -30,7 +30,7 @@ export const FileUpload = (config: Configuration = {}) => {
       members: ['hideLabel', 'labelColor', 'helperColor', 'errorColor'],
     },
     {
-      label: 'Advanced',
+      label: 'Advanced settings',
       expanded: false,
       members: ['nameAttribute', 'dataComponentAttribute', 'actionVariableId'],
     },

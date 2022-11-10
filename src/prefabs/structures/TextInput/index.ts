@@ -12,7 +12,7 @@ export const TextInput = (
 
   const categories = [
     {
-      label: 'Validations',
+      label: 'Validation Options',
       expanded: false,
       members: [
         'required',
@@ -42,9 +42,9 @@ export const TextInput = (
       ],
     },
     {
-      label: 'Advanced',
+      label: 'Advanced Options',
       expanded: false,
-      members: ['dataComponentAttribute', 'searchParam'],
+      members: ['dataComponentAttribute'],
     },
   ];
 
@@ -76,15 +76,6 @@ export const TextInput = (
     options.adornmentIcon = updateOption(options.adornmentIcon, {
       value: config.adornmentIcon,
     });
-  }
-
-  if (config.dataComponentAttribute) {
-    options.dataComponentAttribute = updateOption(
-      options.dataComponentAttribute,
-      {
-        value: [config.dataComponentAttribute],
-      },
-    );
   }
 
   return component(

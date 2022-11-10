@@ -300,7 +300,6 @@
         '& > *': {
           pointerEvents: 'none',
         },
-        width: ({ options: { fullWidth } }) => (fullWidth ? '100%' : 'auto'),
       },
       dialog: {
         '& .MuiPickersToolbar-toolbar, & .MuiPickersDay-daySelected': {

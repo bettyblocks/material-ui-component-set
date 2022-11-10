@@ -7,7 +7,6 @@ import {
   Icon,
   BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
-import { deleteActionVariable } from './hooks/deleteActionVariable';
 
 const beforeCreate = ({
   close,
@@ -333,9 +332,7 @@ const options = {
   value: variable('Value'),
 };
 
-const hooks = {
-  $afterDelete: [deleteActionVariable],
-};
+const hooks = {};
 
 export default prefab('Hidden', attributes, beforeCreate, [
   component('Hidden Input', { options, ...hooks }, []),

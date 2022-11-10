@@ -76,20 +76,14 @@
       return [errorTitle, errorMessage];
     };
 
-    const cleanUpMessage = (message) => {
-      const clean =
-        message &&
-        JSON.stringify(message.map((m) => m.replace(/\.$/, '')))
-          .replace(/[{}[\]_"]/g, ' ')
-          .replace(/[ ]+/g, ' ')
-          .replace(/ :/g, ':')
-          .replace(/ ,/g, ',')
-          .trim();
-
-      if (clean) return `${clean}.`;
-
-      return '';
-    };
+    const cleanUpMessage = (message) =>
+      message &&
+      JSON.stringify(message)
+        .replace(/[{}[\]_"]/g, ' ')
+        .replace(/[ ]+/g, ' ')
+        .replace(/ :/g, ':')
+        .replace(/ ,/g, ',')
+        .trim();
 
     useEffect(() => {
       B.defineFunction('Show', (showMessage) => {

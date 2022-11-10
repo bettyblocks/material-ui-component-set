@@ -14,29 +14,9 @@ export const ActionJSButton = (
   const ref = config.ref ? { ...config.ref } : undefined;
   const label = config.label ? config.label : undefined;
 
-  const optionCategories = [
-    {
-      label: 'Tooltip',
-      expanded: false,
-      members: [
-        'addTooltip',
-        'hasVisibleTooltip',
-        'tooltipContent',
-        'tooltipPlacement',
-        'tooltipBackground',
-        'tooltipText',
-      ],
-    },
-    {
-      label: 'Advanced',
-      expanded: false,
-      members: ['dataComponentAttribute'],
-    },
-  ];
-
   return component(
     'Action Button',
-    { options, $afterCreate, style, ref, label, optionCategories },
+    { options, $afterCreate, style, ref, label },
     descendants,
   );
 };

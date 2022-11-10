@@ -1,15 +1,14 @@
 (() => ({
-  name: 'TextInput',
+  name: 'TextField',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      actionVariableId: name,
       autoComplete,
       disabled,
+      spellCheck,
       error,
-      label,
       multiline,
       rows,
       placeholder = [''],
@@ -23,8 +22,8 @@
       adornmentIcon,
       adornmentPosition,
       pattern,
-      minLength,
-      maxLength,
+      minlength,
+      maxlength,
       minvalue,
       maxvalue,
       validationTypeMismatch = [''],
@@ -34,10 +33,11 @@
       validationTooShort = [''],
       validationBelowMinimum = [''],
       validationAboveMaximum = [''],
-      value,
       hideLabel,
+      customModelAttribute: customModelAttributeObj,
+      nameAttribute,
       dataComponentAttribute = ['TextField'],
-      required,
+      separator,
     } = options;
 
     const {
@@ -51,7 +51,7 @@
       IconButton,
     } = window.MaterialUI.Core;
 
-    const { env, useText, Icon } = B;
+    const { env, getCustomModelAttribute, useText, Icon } = B;
     const isDev = env === 'dev';
     const isNumberType = type === 'number';
     const isPasswordType = type === 'password';
@@ -60,13 +60,39 @@
     const [errorState, setErrorState] = useState(error);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
-    const [currentValue, setCurrentValue] = useState(useText(value));
-    const parsedLabel = useText(label);
-    const labelText = parsedLabel || name;
+    const {
+      id: customModelAttributeId,
+      label = [],
+      value: defaultValue = [],
+      required: defaultRequired = false,
+    } = customModelAttributeObj;
+
+    const textValue = useText(defaultValue, { rawValue: true });
+
+    const [currentValue, setCurrentValue] = useState(textValue);
+
+    useEffect(() => {
+      if (!isDev) {
+        setCurrentValue(textValue);
+      }
+    }, [isDev, textValue]);
+
+    const labelText = useText(label);
+    const customModelAttribute = getCustomModelAttribute(
+      customModelAttributeId,
+    );
+
+    const {
+      name: customModelAttributeName,
+      validations: { required: attributeRequired } = {},
+    } = customModelAttribute || {};
+
+    const required = customModelAttribute ? attributeRequired : defaultRequired;
+    const nameAttributeValue = useText(nameAttribute);
 
     const validPattern = pattern || null;
-    const validMinlength = minLength || null;
-    const validMaxlength = maxLength || null;
+    const validMinlength = minlength || null;
+    const validMaxlength = maxlength || null;
     const validMinvalue = minvalue || null;
     const validMaxvalue = maxvalue || null;
 
@@ -79,6 +105,8 @@
     const aboveMaximumMessage = useText(validationAboveMaximum);
     const placeholderText = useText(placeholder);
     const helperTextResolved = useText(helperText);
+    const defaultValueRawText = useText(defaultValue, { rawValue: true });
+    const defaultValueText = useText(defaultValue);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
 
     const validationMessage = (validityObject) => {
@@ -122,6 +150,12 @@
       if (isNumberType && (event.key === '.' || event.key === ',')) {
         event.preventDefault();
       }
+      if (type === 'decimal' && separator === 'dot' && event.key === ',') {
+        event.preventDefault();
+      }
+      if (type === 'decimal' && separator === 'comma' && event.key === '.') {
+        event.preventDefault();
+      }
     };
 
     const customPatternValidation = (target) => {
@@ -153,9 +187,9 @@
       if (afterFirstInvalidation) {
         handleValidation(validation);
       }
-      const newValue = isNumberType ? numberValue : eventValue;
-      setCurrentValue(newValue);
-      B.triggerEvent('onChange', newValue);
+      const value = isNumberType ? numberValue : eventValue;
+      setCurrentValue(value);
+      B.triggerEvent('onChange', value);
     };
 
     const blurHandler = (event) => {
@@ -168,6 +202,8 @@
 
       setAfterFirstInvalidation(!validation.valid);
       handleValidation(validation);
+      const { value } = target;
+      B.triggerEvent('onBlur', value);
     };
 
     const invalidHandler = (event) => {
@@ -182,10 +218,12 @@
       handleValidation(validity);
     };
 
-    B.defineFunction('Clear', () => setCurrentValue(''));
-    B.defineFunction('Enable', () => setIsDisabled(false));
-    B.defineFunction('Disable', () => setIsDisabled(true));
-    B.defineFunction('Reset', () => setCurrentValue(useText(value)));
+    useEffect(() => {
+      B.defineFunction('Clear', () => setCurrentValue(''));
+      B.defineFunction('Enable', () => setIsDisabled(false));
+      B.defineFunction('Disable', () => setIsDisabled(true));
+      B.defineFunction('Reset', () => setCurrentValue(defaultValueRawText));
+    }, [defaultValueRawText]);
 
     const handleClickShowPassword = () => {
       togglePassword(!showPassword);
@@ -204,8 +242,10 @@
 
     const passwordIcon = showPassword ? 'Visibility' : 'VisibilityOff';
     const inputIcon = isPasswordType ? passwordIcon : adornmentIcon;
-    const hasIcon = inputIcon && inputIcon !== 'None';
-    const hasAdornment = hasIcon || adornment;
+    const hasIcon = inputIcon && inputIcon !== 'none';
+    const hasAdornment = isPasswordType
+      ? adornment && hasIcon
+      : adornment || hasIcon;
 
     const IconCmp = hasIcon && <Icon name={inputIcon} fontSize={size} />;
 
@@ -218,18 +258,24 @@
       iconButtonOptions.onClick = handleClickShowPassword;
       iconButtonOptions.onMouseDown = handleMouseDownPassword;
     }
+    const decimalHandler = (val) => {
+      if (!isDev) {
+        if (separator === 'comma') {
+          return val.replaceAll('.', ',').replace(/[^0-9.|,]/g, '');
+        }
+        if (separator === 'dot') {
+          return val.replace(/[^0-9.|,]/g, '');
+        }
+      }
 
+      return val;
+    };
     useEffect(() => {
       if (isDev) {
-        setCurrentValue(useText(value));
+        setCurrentValue(defaultValueText);
         setHelper(helperTextResolved);
       }
-    }, [isDev, helperTextResolved, value]);
-
-    let inputType = type;
-    if (type === 'number' && isDev) {
-      inputType = 'text';
-    }
+    }, [isDev, defaultValueText, helperTextResolved]);
 
     const TextFieldCmp = (
       <FormControl
@@ -242,13 +288,28 @@
         margin={margin}
         error={errorState}
       >
+        {type === 'decimal' && (
+          <input
+            type="hidden"
+            id={nameAttributeValue || customModelAttributeName}
+            name={nameAttributeValue || customModelAttributeName}
+            value={currentValue.replaceAll(',', '.')}
+          />
+        )}
+
         {labelText && !hideLabel && (
           <InputLabel classes={{ root: classes.label }}>{labelText}</InputLabel>
         )}
         <InputCmp
-          name={name}
-          value={currentValue}
-          type={showPassword ? 'text' : inputType}
+          name={
+            type !== 'decimal'
+              ? nameAttributeValue || customModelAttributeName
+              : null
+          }
+          value={
+            type !== 'decimal' ? currentValue : decimalHandler(currentValue)
+          }
+          type={(isDev && type === 'number') || showPassword ? 'text' : type}
           multiline={multiline}
           autoComplete={autoComplete ? 'on' : 'off'}
           rows={rows}
@@ -289,6 +350,7 @@
             min: validMinvalue,
             max: validMaxvalue,
             tabIndex: isDev ? -1 : undefined,
+            spellCheck,
           }}
           data-component={dataComponentAttributeValue}
         />

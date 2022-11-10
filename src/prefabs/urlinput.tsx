@@ -300,6 +300,5 @@ export default prefab('Url', attributes, beforeCreate, [
     label: 'Url input',
     inputLabel: 'url',
     type: 'url',
-    dataComponentAttribute: 'UrlInput',
   }),
 ]);

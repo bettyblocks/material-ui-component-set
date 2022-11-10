@@ -1,10 +1,3 @@
-## [2.66.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.66.0...v2.66.1) (2022-11-08)
-
-
-### Bug Fixes
-
-* allow components to properly span full screen in dev time ([4ebc6ec](https://github.com/bettyblocks/material-ui-component-set/commit/4ebc6ec4071582806f51789daad62dbf9e6bfe0a))
-
 # [2.66.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.8...v2.66.0) (2022-11-07)
 
 

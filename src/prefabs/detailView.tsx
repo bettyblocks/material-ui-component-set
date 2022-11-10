@@ -473,13 +473,13 @@ const beforeCreate = ({
                                       {
                                         label: 'Media type',
                                         key: 'type',
-                                        value: 'url',
+                                        value: 'img',
                                         type: 'CUSTOM',
                                         configuration: {
                                           as: 'BUTTONGROUP',
                                           dataType: 'string',
                                           allowedInput: [
-                                            { name: 'Image', value: 'url' },
+                                            { name: 'Image', value: 'img' },
                                             { name: 'Video', value: 'video' },
                                             {
                                               name: 'I-frame',
@@ -491,21 +491,21 @@ const beforeCreate = ({
                                       {
                                         value: [property],
                                         label: 'Source',
-                                        key: 'urlFileSource',
+                                        key: 'imageSource',
                                         type: 'VARIABLE',
                                         configuration: {
                                           condition: {
                                             type: 'SHOW',
                                             option: 'type',
                                             comparator: 'EQ',
-                                            value: 'url',
+                                            value: 'img',
                                           },
                                         },
                                       },
                                       {
                                         value: [],
                                         label: 'Source',
-                                        key: 'videoFileSource',
+                                        key: 'videoSource',
                                         type: 'VARIABLE',
                                         configuration: {
                                           condition: {

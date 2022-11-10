@@ -1,59 +1,81 @@
 (() => ({
-  name: 'SelectInput',
+  name: 'Select',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      actionProperty,
-      actionVariableId,
-      blanco,
-      dataComponentAttribute = ['Select'],
-      disabled: initialIsDisabled,
-      filter,
+      disabled,
+      variant,
+      size,
       fullWidth,
-      helperText = [''],
-      hideLabel,
-      label,
-      labelProperty,
       margin,
+      helperText = [''],
+      selectOptions = '',
       model,
+      filter,
+      optionType,
+      labelProperty: labelProp,
+      valueProperty: valueProp,
+      showError,
+      hideLabel,
+      customModelAttribute: customModelAttributeObj,
+      property,
+      validationValueMissing = [''],
+      nameAttribute,
       order,
       orderBy,
-      required,
-      size,
-      validationValueMissing = [''],
-      value: prefabValue,
-      variant,
+      blanco,
+      dataComponentAttribute = ['Select'],
     } = options;
-    const { env, getProperty, useText, useAllQuery } = B;
+    const {
+      env,
+      getCustomModelAttribute,
+      getProperty,
+      useAllQuery,
+      useRelation,
+      useText,
+    } = B;
     const { TextField, MenuItem } = window.MaterialUI.Core;
+    const displayError = showError === 'built-in';
     const isDev = env === 'dev';
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
     const [interactionFilter, setInteractionFilter] = useState({});
-    const [disabled, setIsDisabled] = useState(initialIsDisabled);
     const mounted = useRef(false);
     const blancoText = useText(blanco);
-    const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
-    const [currentValue, setCurrentValue] = useState(useText(prefabValue));
+
+    const { kind, values = [] } = getProperty(property) || {};
+
+    const {
+      id: customModelAttributeId,
+      label = [],
+      value: defaultValue = [],
+      required: defaultRequired = false,
+    } = customModelAttributeObj;
+
+    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const labelText = useText(label);
-    const defaultValueText = useText(prefabValue);
+    const nameAttributeValue = useText(nameAttribute);
+
+    const customModelAttribute = getCustomModelAttribute(
+      customModelAttributeId,
+    );
+    const {
+      name: customModelAttributeName,
+      validations: { required: attributeRequired } = {},
+    } = customModelAttribute || {};
+    const required = customModelAttribute ? attributeRequired : defaultRequired;
+    const value = currentValue;
+
+    const { name: labelName } = getProperty(labelProp) || {};
+    const { name: propName } = getProperty(valueProp) || {};
+
+    const defaultValueText = useText(defaultValue);
     const helperTextResolved = useText(helperText);
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
-
-    const {
-      referenceModelId,
-      modelId = model,
-      kind,
-      values = [],
-    } = modelProperty;
-
-    B.defineFunction('Clear', () => setCurrentValue(''));
-    B.defineFunction('Enable', () => setIsDisabled(false));
-    B.defineFunction('Disable', () => setIsDisabled(true));
 
     const transformValue = (arg) => {
       if (arg instanceof Date) {
@@ -84,9 +106,13 @@
       }, {});
     };
 
+    useEffect(() => {
+      B.defineFunction('Reset', () => setCurrentValue(defaultValueText));
+    }, []);
+
     const orderByArray = [orderBy].flat();
     const sort =
-      !isDev && orderBy.id
+      !isDev && orderBy
         ? orderByArray.reduceRight((acc, orderByProperty, index) => {
             const prop = getProperty(orderByProperty);
             return index === orderByArray.length - 1
@@ -124,17 +150,69 @@
 
     const completeFilter = deepMerge(filter, interactionFilters);
 
-    const { data, loading, refetch } = useAllQuery(
-      referenceModelId || modelId,
+    const {
+      loading: queryLoading,
+      error,
+      data: queryData,
+      refetch,
+    } = useAllQuery(
+      model,
       {
         filter: completeFilter,
         take: 50,
         variables: {
-          ...(orderBy.id ? { sort: { relation: sort } } : {}),
+          ...(orderBy ? { sort: { relation: sort } } : {}),
+        },
+        onCompleted(res) {
+          const hasResult = res && res.results && res.results.length > 0;
+          if (hasResult) {
+            B.triggerEvent('onSuccess', res.results);
+          } else {
+            B.triggerEvent('onNoResults');
+          }
+        },
+        onError(resp) {
+          if (!displayError) {
+            B.triggerEvent('onError', resp);
+          }
         },
       },
-      !modelId,
+      !model,
     );
+
+    const { hasResults, data: relationData } = useRelation(
+      model,
+      {},
+      typeof model === 'string' || !model,
+    );
+
+    const data = hasResults ? relationData : queryData;
+    const loading = hasResults ? false : queryLoading;
+
+    useEffect(() => {
+      if (mounted.current) {
+        B.triggerEvent('onChange', currentValue);
+      }
+    }, [currentValue]);
+
+    useEffect(() => {
+      if (mounted.current && loading) {
+        B.triggerEvent('onLoad', loading);
+      }
+    }, [loading]);
+
+    useEffect(() => {
+      mounted.current = true;
+      return () => {
+        mounted.current = false;
+      };
+    }, []);
+
+    useEffect(() => {
+      setCurrentValue(defaultValueText);
+    }, [defaultValueText]);
+
+    const { results } = data || {};
 
     useEffect(() => {
       B.defineFunction('Refetch', () => refetch());
@@ -162,25 +240,8 @@
       });
     }, []);
 
-    useEffect(() => {
-      B.defineFunction('Reset', () => setCurrentValue(defaultValueText));
-    }, []);
-
-    useEffect(() => {
-      if (mounted.current) {
-        B.triggerEvent('onChange', currentValue);
-      }
-    }, [currentValue]);
-
-    useEffect(() => {
-      mounted.current = true;
-      return () => {
-        mounted.current = false;
-      };
-    }, []);
-
     const handleValidation = () => {
-      const hasError = required && !currentValue;
+      const hasError = required && !value;
       setErrorState(hasError);
       const message = hasError ? validationMessageText : helperTextResolved;
       setHelper(message);
@@ -199,7 +260,7 @@
     };
 
     const validationHandler = () => {
-      const hasError = required && !currentValue;
+      const hasError = required && !value;
       setAfterFirstInvalidation(hasError);
       handleValidation();
     };
@@ -210,61 +271,40 @@
       }
     }, [isDev, defaultValueText]);
 
-    let valid = true;
-    let message = '';
-    const isListProperty = kind === 'list' || kind === 'LIST';
-
-    if (!isListProperty && !isDev) {
-      if (!modelId) {
-        message = 'No model selected';
-        valid = false;
-      }
-    }
-
     const renderOptions = () => {
-      if (isListProperty) {
+      if (kind === 'list' || kind === 'LIST') {
         return values.map(({ value: v }) => (
           <MenuItem key={v} value={v}>
             {v}
           </MenuItem>
         ));
       }
-
-      if (!loading && !isDev) {
-        let labelKey = 'id';
-        if (labelProperty) {
-          labelKey = B.getProperty(labelProperty).name;
-        } else {
-          const modelReference = B.getModel(referenceModelId || modelId);
-          if (modelReference.labelPropertyId)
-            labelKey = B.getProperty(modelReference.labelPropertyId).name;
-        }
-
-        const rows = data ? data.results : [];
-        return rows.map((row) => {
-          const itemLabel = row[labelKey];
-          return (
-            <MenuItem key={row.id} value={row.id}>
-              {itemLabel}
+      if (optionType === 'static') {
+        return selectOptions.split('\n').map((option) => (
+          <MenuItem key={option} value={option}>
+            {option}
+          </MenuItem>
+        ));
+      }
+      if (loading) return <span>Loading...</span>;
+      if (error && displayError) return <span>{error.message}</span>;
+      return (results || []).map(
+        (item) =>
+          propName &&
+          labelName && (
+            <MenuItem key={item.id} value={item[propName]}>
+              {item[labelName]}
             </MenuItem>
-          );
-        });
-      }
-
-      if (!loading && !data) {
-        return <span>unable to fetch data</span>;
-      }
-
-      return <span>loading...</span>;
+          ),
+      );
     };
 
     const SelectCmp = (
       <>
         <TextField
-          id={actionVariableId}
           select={!disabled}
-          defaultValue={currentValue}
-          value={currentValue}
+          defaultValue={value}
+          value={value}
           size={size}
           classes={{ root: classes.formControl }}
           variant={variant}
@@ -272,27 +312,27 @@
           onChange={handleChange}
           onBlur={validationHandler}
           inputProps={{
+            name: nameAttributeValue || customModelAttributeName,
             tabIndex: isDev ? -1 : 0,
             'data-component': dataComponentAttributeValue,
           }}
           required={required}
-          disabled={disabled || !valid}
-          label={!valid ? message : !hideLabel && labelText}
+          disabled={disabled}
+          label={!hideLabel && labelText}
           error={errorState}
           margin={margin}
           helperText={helper}
         >
           {blancoText && <MenuItem value="">{blancoText}</MenuItem>}
-          {valid && renderOptions()}
+          {renderOptions()}
         </TextField>
         <input
-          id={actionVariableId}
           className={classes.validationInput}
           onInvalid={validationHandler}
           type="text"
           tabIndex="-1"
           required={required}
-          value={currentValue}
+          value={value}
         />
       </>
     );

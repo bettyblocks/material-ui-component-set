@@ -302,6 +302,5 @@ export default prefab('Number', attributes, beforeCreate, [
     inputLabel: 'Number',
     type: 'number',
     pattern: '^[0-9]*$',
-    dataComponentAttribute: 'NumberInput',
   }),
 ]);

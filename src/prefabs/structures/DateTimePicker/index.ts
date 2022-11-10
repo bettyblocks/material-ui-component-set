@@ -20,7 +20,7 @@ export const DateTimePicker = (
 
   const categories = [
     {
-      label: 'Validations',
+      label: 'Validation Options',
       expanded: false,
       members: ['required', 'validationValueMissing'],
     },
@@ -42,7 +42,7 @@ export const DateTimePicker = (
       ],
     },
     {
-      label: 'Advanced',
+      label: 'Advanced Options',
       expanded: false,
       members: ['dataComponentAttribute'],
     },

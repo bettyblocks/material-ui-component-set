@@ -19,7 +19,6 @@
       visible,
       actionId,
       buttonText,
-      buttonValue,
       actionModels,
       addTooltip,
       hasVisibleTooltip,
@@ -46,7 +45,6 @@
     const hasInteralLink =
       linkType === 'internal' && linkTo && linkTo.id !== '';
     const buttonContent = useText(buttonText);
-    const buttonContentValue = (buttonValue && useText(buttonValue)) || '';
     const tooltipText = useText(tooltipContent);
     const [isVisible, setIsVisible] = useState(visible);
     const [isLoading, setIsLoading] = useState(false);
@@ -226,8 +224,6 @@
 
     const handleClick = (e) => {
       e.stopPropagation();
-
-      B.triggerEvent('OnSetRowsPerPage', buttonContentValue);
     };
 
     const LinkComponent =
@@ -306,7 +302,6 @@
         '& > *': {
           pointerEvents: 'none',
         },
-        width: ({ options: { fullWidth } }) => (fullWidth ? '100%' : 'auto'),
       },
       linkComponent: {
         '&, &.MuiTypography-root': {

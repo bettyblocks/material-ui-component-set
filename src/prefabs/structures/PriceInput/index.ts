@@ -12,12 +12,6 @@ export const PriceInput = (
   options.adornmentPosition = updateOption(options.adornmentPosition, {
     value: 'start',
   });
-  options.dataComponentAttribute = updateOption(
-    options.dataComponentAttribute,
-    {
-      value: ['PriceInput'],
-    },
-  );
 
   return TextInput({ ...config, options, label }, descendants);
 };
