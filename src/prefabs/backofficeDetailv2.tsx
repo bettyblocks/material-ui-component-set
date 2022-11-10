@@ -365,7 +365,7 @@ const attributes = {
   type: 'page',
   description: 'Discription',
   detail: 'detail',
-  previewUrl: 'https://preview.betty.app/back-office',
+  previewUrl: 'https://preview-dev.app/back-office-details',
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Back_Office.jpg',
   interactions,
@@ -1251,7 +1251,7 @@ const drawerContainer = DrawerContainer(
                     options: {
                       ...boxOptions,
                       outerSpacing: sizes('Outer space', {
-                        value: ['M', 'M', 'M', '0rem'],
+                        value: ['0rem', 'M', 'M', 'M'],
                       }),
                       innerSpacing: sizes('Inner space', {
                         value: ['0rem', '0rem', '0rem', '0rem'],
@@ -1292,7 +1292,7 @@ const drawerContainer = DrawerContainer(
                             options: {
                               ...boxOptions,
                               innerSpacing: sizes('Inner space', {
-                                value: ['M', 'M', 'M', 'M'],
+                                value: ['0rem', '0rem', '0rem', '0rem'],
                               }),
                               alignment: buttongroup(
                                 'Alignment',
@@ -1343,6 +1343,7 @@ const drawerContainer = DrawerContainer(
                                 style: {
                                   name: 'text',
                                   overwrite: {
+                                    padding: '0rem',
                                     color: {
                                       type: 'THEME_COLOR',
                                       value: 'primary',
@@ -2137,7 +2138,15 @@ const beforeCreate = ({
 
   return (
     <>
-      <Header onClose={close} title="Configure header and footer" />
+      <Header onClose={close} title="Configure back office details" />
+      <BoxComp
+        justify="center"
+        margin={{ left: '2rem', top: '-1rem', bottom: '-1rem' }}
+      >
+        <TextComp size="medium" weight="bold">
+          Step: 2/2
+        </TextComp>
+      </BoxComp>
       <Content>
         <BoxComp pad={{ bottom: '15px' }}>
           <Field
@@ -2682,7 +2691,7 @@ const beforeCreate = ({
                 }));
                 setOption(media, 'urlFileSource', (originalOption: any) => ({
                   ...originalOption,
-                  value: [enrichVarObj({ ...prop })],
+                  value: [{ ...enrichVarObj({ ...prop }), useKey: 'url' }],
                 }));
               }
 
@@ -3295,10 +3304,6 @@ const beforeCreate = ({
             );
           }
 
-          save(newPrefab);
-        }}
-        onSkip={() => {
-          const newPrefab = { ...prefab };
           save(newPrefab);
         }}
       />
