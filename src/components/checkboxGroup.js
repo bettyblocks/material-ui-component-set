@@ -54,7 +54,10 @@
 
     const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
     const { modelId: propertyModelId, referenceModelId } = modelProperty;
-    const modelId = referenceModelId || propertyModelId || model || '';
+    const { contextModelId } = model;
+
+    const modelId =
+      contextModelId || referenceModelId || propertyModelId || model || '';
 
     const idProperty = getIdProperty(modelId || '') || {};
     const isListProperty =
@@ -141,7 +144,7 @@
           }
         },
       },
-      !model,
+      !!contextModelId || optionType === 'property' || !valid,
     );
 
     const parentProperty = getIdProperty(propertyModelId);
