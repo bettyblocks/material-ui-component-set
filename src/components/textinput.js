@@ -183,6 +183,7 @@
     };
 
     B.defineFunction('Clear', () => setCurrentValue(''));
+    B.defineFunction('setValue', (data) => setCurrentValue(data));
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
     B.defineFunction('Reset', () => setCurrentValue(useText(value)));
@@ -316,6 +317,7 @@
         '& > *': {
           pointerEvents: 'none',
         },
+        width: ({ options: { fullWidth } }) => (fullWidth ? '100%' : 'auto'),
       },
       label: {
         color: ({ options: { labelColor } }) => [
