@@ -1,13 +1,12 @@
 (() => ({
-  name: 'switchCase',
+  name: 'SwitchCase',
   type: 'CASE_COMPONENT',
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'VERTICAL',
   jsx: (() => {
     const { env, useText } = B;
     const isDev = env === 'dev';
-    const { switchCase, compare, defaultCase, dataComponentAttribute } =
-      options;
+    const { switchCase, compare, caseType, dataComponentAttribute } = options;
     const {
       index,
       value,
@@ -17,6 +16,7 @@
       variable,
     } = parent;
 
+    const defaultCase = caseType === 'default';
     const leftValue = !isDev && useText(variable);
     const rightValue = !isDev && useText(switchCase);
     const evalDev = () => showAllCases || value === index;

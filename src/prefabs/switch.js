@@ -6,7 +6,7 @@
   structure: [
     {
       type: 'COMPONENT',
-      name: 'switch',
+      name: 'Switch',
       label: 'Switch',
       optionCategories: [
         {
@@ -32,7 +32,7 @@
           type: 'VARIABLE',
           label: 'Variable',
           key: 'variable',
-          value: ['default'],
+          value: [''],
           configuration: {
             dependsOn: 'model',
           },
@@ -65,7 +65,7 @@
       descendants: [
         {
           type: 'COMPONENT',
-          name: 'switchCase',
+          name: 'SwitchCase',
           label: 'Case',
           optionCategories: [
             {
@@ -78,19 +78,19 @@
             {
               type: 'CUSTOM',
               label: 'Type',
-              key: 'defaultCase',
-              value: false,
+              key: 'caseType',
+              value: 'case',
               configuration: {
                 as: 'BUTTONGROUP',
-                dataType: 'boolean',
+                dataType: 'string',
                 allowedInput: [
                   {
                     name: 'Case',
-                    value: false,
+                    value: 'case',
                   },
                   {
                     name: 'Default',
-                    value: true,
+                    value: 'default',
                   },
                 ],
               },
@@ -103,9 +103,9 @@
               configuration: {
                 condition: {
                   type: 'SHOW',
-                  option: 'defaultCase',
+                  option: 'caseType',
                   comparator: 'EQ',
-                  value: false,
+                  value: 'case',
                 },
                 as: 'DROPDOWN',
                 dataType: 'string',
@@ -149,13 +149,13 @@
               type: 'VARIABLE',
               label: 'Case',
               key: 'switchCase',
-              value: ['default'],
+              value: [''],
               configuration: {
                 condition: {
                   type: 'SHOW',
-                  option: 'defaultCase',
+                  option: 'caseType',
                   comparator: 'EQ',
-                  value: false,
+                  value: 'case',
                 },
                 dependsOn: 'model',
               },

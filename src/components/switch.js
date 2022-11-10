@@ -1,5 +1,5 @@
 (() => ({
-  name: 'switch',
+  name: 'Switch',
   type: 'CONTENT_COMPONENT',
   allowedTypes: ['CASE_COMPONENT'],
   orientation: 'HORIZONTAL',
