@@ -29,7 +29,8 @@
       showItalic,
       showUnderlined,
       showStrikethrough,
-      showCode,
+      showCodeInline,
+      showCodeBlock,
       showNumberedList,
       showBulletedList,
       showLeftAlign,
@@ -139,17 +140,6 @@
         Editor.addMark(editor, format, true);
       }
     };
-
-    function isEditorFocussed(editor) {
-      return editor.selection !== null;
-    }
-
-    function focusEditor(editor) {
-      Transforms.select(editor, {
-        anchor: Editor.start(editor, []),
-        focus: Editor.end(editor, []),
-      });
-    }
 
     const serialize = (node) => {
       if (Text.isText(node)) {
@@ -357,7 +347,11 @@
             Transforms.setNodes(editor, { type: 'paragraph' });
           }
         }
-        if (key === 'tab') {
+        if (
+          key === 'tab' &&
+          lastNode[1].length > 2 &&
+          lastNode[1][lastNode[1].length - 2] !== 0
+        ) {
           Transforms.setNodes(editor, {
             type: 'list-item',
             children: [{ text: '' }],
@@ -378,10 +372,34 @@
         return;
       }
 
+      if (
+        event.key === 'Backspace' &&
+        (isBlockActive(editor, 'numbered-list', 'type') ||
+          isBlockActive(editor, 'bulleted-list', 'type'))
+      ) {
+        const lastNode = Node.last(editor, editor.selection.focus.path);
+        if (
+          window.getSelection().toString().split('\n')[0] !==
+            lastNode[0].text &&
+          (lastNode[0].text !== '' || lastNode[1].length !== 3)
+        )
+          return;
+        Transforms.setNodes(editor, { type: 'none' });
+        if (isBlockActive(editor, 'numbered-list', 'type')) {
+          toggleBlock(editor, 'numbered-list');
+          return;
+        }
+        toggleBlock(editor, 'bulleted-list');
+        return;
+      }
+
       if (event.key === 'Enter') {
-        if (isBlockActive(editor, 'bulleted-list', 'type')) {
+        if (isBlockActive(editor, 'bulleted-list', 'type') && !event.shiftKey) {
           handleListdepth('bulleted-list', 'enter', event);
-        } else if (isBlockActive(editor, 'numbered-list', 'type')) {
+        } else if (
+          isBlockActive(editor, 'numbered-list', 'type') &&
+          !event.shiftKey
+        ) {
           handleListdepth('numbered-list', 'enter', event);
         } else if (isHeadingActive(editor)) {
           event.preventDefault();
@@ -457,9 +475,14 @@
         return;
       }
 
-      if (event.shiftKey && event.key === 's') {
-        event.preventDefault();
-        if (showStrikethrough) toggleMark(editor, 'strikethrough');
+      if (event.shiftKey) {
+        if (event.key === 's') {
+          event.preventDefault();
+          if (showStrikethrough) toggleMark(editor, 'strikethrough');
+        } else if (event.key === 'c') {
+          event.preventDefault();
+          if (showCodeInline) toggleMark(editor, 'code');
+        }
       }
 
       switch (event.key) {
@@ -567,18 +590,22 @@
       }
     });
 
-    const Button = React.forwardRef(({ active, icon, ...props }, ref) => {
-      const IconButton = Icons[icon];
-      return (
-        <IconButton
-          {...props}
-          ref={ref}
-          className={`${classes.toolbarButton} ${active ? 'active' : ''}`}
-        />
-      );
-    });
+    const Button = React.forwardRef(
+      ({ active, disable, icon, ...props }, ref) => {
+        const IconButton = Icons[icon];
+        return (
+          <IconButton
+            {...props}
+            ref={ref}
+            className={`${classes.toolbarButton} ${disable ? 'disabled' : ''} ${
+              active ? 'active' : ''
+            }`}
+          />
+        );
+      },
+    );
 
-    function BlockButton({ format, icon }) {
+    function BlockButton({ format, icon, disable }) {
       const ownEditor = useSlate();
       return (
         <Button
@@ -587,22 +614,26 @@
             format,
             TEXT_ALIGN_TYPES.includes(format) ? 'align' : 'type',
           )}
-          onMouseDown={(event) => {
+          onClick={(event) => {
             event.preventDefault();
+            if (disable) return;
             toggleBlock(ownEditor, format);
           }}
           icon={icon}
+          disable={disable}
         />
       );
     }
 
-    function MarkButton({ format, icon }) {
+    function MarkButton({ format, icon, disable }) {
       const ownEditor = useSlate();
       return (
         <Button
+          disable={disable}
           active={isMarkActive(ownEditor, format)}
-          onMouseDown={(event) => {
+          onClick={(event) => {
             event.preventDefault();
+            if (disable) return;
             toggleMark(ownEditor, format);
           }}
           icon={icon}
@@ -627,40 +658,6 @@
         );
       },
     );
-
-    const CodeButton = React.forwardRef(({ ...props }, ref) => {
-      const IconButton = Icons.Code;
-      const ownEditor = useSlate();
-      const activeMark = isMarkActive(ownEditor, 'code');
-      const activeBlock = isBlockActive(ownEditor, 'code');
-
-      return (
-        <IconButton
-          {...props}
-          ref={ref}
-          className={`${classes.toolbarButton} ${
-            activeMark || activeBlock ? 'active' : ''
-          }`}
-          onMouseDown={(event) => {
-            event.preventDefault();
-            if (!isEditorFocussed(ownEditor)) {
-              focusEditor(ownEditor);
-            }
-            if (editor.selection.focus !== null) {
-              const lastNode = Node.last(
-                ownEditor,
-                editor.selection.focus.path,
-              );
-              if (activeBlock || lastNode[0].text === '') {
-                toggleBlock(ownEditor, 'code');
-                return;
-              }
-              toggleMark(ownEditor, 'code');
-            }
-          }}
-        />
-      );
-    });
 
     function DropdownItem({ format, text, tag }) {
       const ownEditor = useSlate();
@@ -769,19 +766,28 @@
                   {showStrikethrough && (
                     <MarkButton format="strikethrough" icon="StrikethroughS" />
                   )}
-                  {showCode && <CodeButton />}
                 </div>
+                {(showCodeInline || showCodeBlock) && (
+                  <div className={classes.toolbarSubGroup}>
+                    {showCodeInline && <MarkButton format="code" icon="Code" />}
+                    {showCodeBlock && (
+                      <BlockButton format="code" icon="DeveloperMode" />
+                    )}
+                  </div>
+                )}
                 <div className={classes.toolbarSubGroup}>
                   {showNumberedList && (
                     <BlockButton
                       format="numbered-list"
                       icon="FormatListNumbered"
+                      disable={isBlockActive(editor, 'bulleted-list')}
                     />
                   )}
                   {showBulletedList && (
                     <BlockButton
                       format="bulleted-list"
                       icon="FormatListBulleted"
+                      disable={isBlockActive(editor, 'numbered-list')}
                     />
                   )}
                 </div>
@@ -936,6 +942,11 @@
             style.getColor(buttonActiveColor),
           ],
         },
+        '&.disabled': {
+          color: ({ options: { buttonDisabledColor } }) => [
+            style.getColor(buttonDisabledColor),
+          ],
+        },
       },
       toolbarDropdown: {
         position: 'relative',
@@ -955,6 +966,9 @@
         '&.show': {
           display: 'block',
         },
+        overflow: 'overlay',
+        height: 'min-content',
+        maxHeight: ({ options: { height } }) => `calc(${height} - 44px)`,
       },
       dropdownButton: {
         display: 'inline-flex',
