@@ -8778,7 +8778,7 @@
             }
             newPrefab.variables[0].options.modelId = modelId;
             const dataTable = getDescendantByRef('#dataTable', prefabStructure);
-            dataTable.options[0].value = modelId;
+            dataTable.options[1].value = modelId;
             newPrefab.variables[1].options.modelId = modelId;
             properties.filter((property) => property.kind !== 'SERIAL');
             properties.forEach((property) => {
