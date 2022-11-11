@@ -7866,7 +7866,7 @@
               '#editDataTable',
               prefabStructure,
             );
-            dataTable.options[1].value = modelId;
+            dataTable.options[0].value = modelId;
             properties.filter((property) => property.kind !== 'SERIAL');
             properties.forEach((property) => {
               dataTable.descendants.push({
