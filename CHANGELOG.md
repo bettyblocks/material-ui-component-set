@@ -1,3 +1,10 @@
+# [2.67.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.66.1...v2.67.0) (2022-11-10)
+
+
+### Features
+
+* add subview component TMPLT-1757 ([2dc34af](https://github.com/bettyblocks/material-ui-component-set/commit/2dc34afd104fd654f9e1a528517f4ec9f990613f))
+
 ## [2.66.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.66.0...v2.66.1) (2022-11-08)
 
 
