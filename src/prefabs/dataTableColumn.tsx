@@ -12,6 +12,7 @@ const beforeCreate = ({
   prefab,
   save,
   close,
+  modelId,
 }: BeforeCreateArgs) => {
   const [property, setProperty] = React.useState('');
   const [errorMessage, setErrorMessage] = React.useState('');
@@ -30,6 +31,7 @@ const beforeCreate = ({
               setProperty(value);
             }}
             value={property}
+            modelId={modelId}
           />
         </Field>
       </Content>
