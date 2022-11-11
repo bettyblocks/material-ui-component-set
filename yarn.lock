@@ -157,7 +157,7 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
-"@betty-blocks/cli@^25.52.0":
+"@betty-blocks/cli@^25.54.0":
   version "25.54.0"
   resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.54.0.tgz#ab16ada725c20d640a460fc1551b0018b1efc516"
   integrity sha512-d3J334JaaXTANyOmrSNLzoewKX4SFKHC7wytVWoeJ8ehuIUrKBWuMlgAPCDxcpKP6iotm6zr4RoCnLbgjmg5aA==
@@ -199,7 +199,7 @@
   optionalDependencies:
     isolated-vm "^4.0.0"
 
-"@betty-blocks/component-sdk@^1.39.0":
+"@betty-blocks/component-sdk@^1.43.0":
   version "1.43.0"
   resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.43.0.tgz#3f6b4f197711cf17f6b7b684c1efe3fea24b6f41"
   integrity sha512-/4Mw7u3o6CcBNrTuv+ZxpCeeijfnZ7xOlVoYOuTXXG5DWPt4yzqfUq+v24wJTuSKiCdtkQGwO7rKQ7oLIbaE5w==

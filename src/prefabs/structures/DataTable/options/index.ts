@@ -16,6 +16,7 @@ import {
   sizes,
   modelAndRelation,
   reconfigure,
+  reconfigurev2,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -70,6 +71,7 @@ export const categories = [
 
 export const dataTableOptions = {
   reconfigure: reconfigure('Reconfigure', { value: '' }),
+  reconfigurev2: reconfigurev2('ReconfigureV2', { value: '' }),
   model: modelAndRelation('Model', { value: '' }),
   filter: filter('Filter', {
     value: {},
