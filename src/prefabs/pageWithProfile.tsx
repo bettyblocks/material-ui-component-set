@@ -613,6 +613,7 @@ const beforeCreate = ({
                     'TIME',
                     'URL',
                     'ZIPCODE',
+                    'BOOLEAN',
                   ]}
                   onChange={(value: any) => {
                     setProfilePictureProperty(value);
@@ -651,6 +652,7 @@ const beforeCreate = ({
                 <PropertySelector
                   modelId={modelId}
                   disabledKinds={[
+                    'BOOLEAN',
                     'AUTO_INCREMENT',
                     'BOOLEAN_EXPRESSION',
                     'COUNT',
@@ -722,7 +724,7 @@ const beforeCreate = ({
                 'HAS_MANY',
               ]}
               onChange={(value: any) => {
-                setProfilePropertiesValidation(!value.length);
+                setProfilePropertiesValidation(false);
                 setProfileProperties(value);
                 setProperties(value);
               }}
@@ -749,10 +751,14 @@ const beforeCreate = ({
       if (authProfile === undefined) {
         setAuthenticationProfilePropertiesValidation(true);
       }
+      if (profileProperties.length === 0) {
+        setProfilePropertiesValidation(true);
+      }
       if (
         profilePicturePropertiesValidation === false &&
         namePropertiesValidation === false &&
-        authenticationProfilePropertiesValidation === false
+        authenticationProfilePropertiesValidation === false &&
+        profilePropertiesValidation === false
       ) {
         const newPrefab = { ...prefab };
         const inputBox = treeSearch('#formInputBox', newPrefab.structure);
@@ -1833,6 +1839,23 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                       wrapper(
                         {
                           label: 'My account',
+                          optionCategories: [
+                            {
+                              label: 'Action',
+                              expanded: true,
+                              members: [
+                                'updateProfileAction',
+                                'updatePasswordAction',
+                                'updateImgAction',
+                              ],
+                              condition: {
+                                type: 'SHOW',
+                                option: 'visibility',
+                                comparator: 'EQ',
+                                value: true,
+                              },
+                            },
+                          ],
                           options: {
                             pageTitle: linked({
                               label: 'Page title',
@@ -1849,6 +1872,49 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                 ref: {
                                   componentId: '#DetailsTab',
                                   optionId: '#formTabsSelectedDesignTabIndex',
+                                },
+                              },
+                            }),
+                            updateProfileAction: linked({
+                              label: 'Update profile action',
+                              value: {
+                                ref: {
+                                  componentId: '#editProfileDetailsForm',
+                                  optionId: '#editProfileDetailsAction',
+                                },
+                              },
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'shownTab',
+                                  comparator: 'EQ',
+                                  value: 1,
+                                },
+                              },
+                            }),
+                            updatePasswordAction: linked({
+                              label: 'Update password action',
+                              value: {
+                                ref: {
+                                  componentId: '#updatePasswordForm',
+                                  optionId: '#updatePasswordAction',
+                                },
+                              },
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'shownTab',
+                                  comparator: 'EQ',
+                                  value: 2,
+                                },
+                              },
+                            }),
+                            updateImgAction: linked({
+                              label: 'Update profile image action',
+                              value: {
+                                ref: {
+                                  componentId: '#updateImgForm',
+                                  optionId: '#updateImgAction',
                                 },
                               },
                             }),
@@ -2501,8 +2567,20 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                             ref: {
                                                               id: '#updateImgForm',
                                                             },
-                                                            options:
-                                                              formOptions,
+                                                            options: {
+                                                              ...formOptions,
+                                                              actionId: option(
+                                                                'ACTION_JS',
+                                                                {
+                                                                  label:
+                                                                    'Action',
+                                                                  value: '',
+                                                                  ref: {
+                                                                    id: '#updateImgAction',
+                                                                  },
+                                                                },
+                                                              ),
+                                                            },
                                                           },
                                                           [
                                                             SubmitButton(
@@ -3310,8 +3388,20 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                         component(
                                                           'Form',
                                                           {
-                                                            options:
-                                                              formOptions,
+                                                            options: {
+                                                              ...formOptions,
+                                                              actionId: option(
+                                                                'ACTION_JS',
+                                                                {
+                                                                  label:
+                                                                    'Action',
+                                                                  value: '',
+                                                                  ref: {
+                                                                    id: '#editProfileDetailsAction',
+                                                                  },
+                                                                },
+                                                              ),
+                                                            },
                                                             ref: {
                                                               id: '#editProfileDetailsForm',
                                                             },
@@ -3675,8 +3765,20 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                         component(
                                                           'Form',
                                                           {
-                                                            options:
-                                                              formOptions,
+                                                            options: {
+                                                              ...formOptions,
+                                                              actionId: option(
+                                                                'ACTION_JS',
+                                                                {
+                                                                  label:
+                                                                    'Action',
+                                                                  value: '',
+                                                                  ref: {
+                                                                    id: '#updatePasswordAction',
+                                                                  },
+                                                                },
+                                                              ),
+                                                            },
                                                             ref: {
                                                               id: '#updatePasswordForm',
                                                             },
