@@ -28,6 +28,7 @@
       Toolbar,
       TextField,
       InputAdornment,
+      Checkbox,
     } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const {
@@ -54,6 +55,7 @@
       autoLoadOnScroll,
       autoLoadTakeAmount,
       dataComponentAttribute,
+      checkboxSelection = true,
     } = options;
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
@@ -97,6 +99,7 @@
     });
     const [results, setResults] = useState([]);
     const [totalCount, setTotalCount] = useState(0);
+    const [selected, setSelected] = useState([]);
     const [previousSearchTerm, setPreviousSearchTerm] = useState('');
     const [newSearch, setNewSearch] = useState(false);
     const fetchingNextSet = useRef(false);
@@ -440,13 +443,51 @@
     };
 
     const handleRowClick = (endpoint, context) => {
-      if (isDev) return;
       B.triggerEvent('OnRowClick', endpoint, context);
 
       if (hasLink) {
         history.push(endpoint);
       }
     };
+
+    const updateSelected = (selectedRows) => {
+      B.triggerEvent('onRowsSelect', selectedRows);
+      setSelected(selectedRows);
+    };
+
+    const handleRowSelect = (value) => {
+      if (selected.includes(value)) {
+        const selectedCopy = [...selected];
+        selectedCopy.splice(selected.indexOf(value), 1);
+        updateSelected(selectedCopy);
+      } else {
+        updateSelected([...selected, value]);
+      }
+    };
+
+    const handleSelectAllClick = (event) => {
+      if (event.target.checked) {
+        updateSelected(results.map((n) => n.id));
+        return;
+      }
+      updateSelected([]);
+    };
+
+    const isSelected = (value) => selected.indexOf(value) !== -1;
+    const allSelected = () =>
+      results.length > 0 && selected.length === results.length;
+
+    const renderCheckBox = ({ checked, handleCheckbox }) => (
+      <TableCell component="div" padding="checkbox">
+        <Checkbox
+          classname={isDev ? classes.checkbox : ''}
+          // indeterminate={numSelected > 0 && numSelected < rowCount}
+          checked={checked}
+          onChange={handleCheckbox}
+          inputProps={{ 'aria-label': 'select all rows' }}
+        />
+      </TableCell>
+    );
 
     const renderTableHead = () => {
       if ((loading && !loadOnScroll) || error) {
@@ -460,6 +501,11 @@
       }
       return (
         <Children headerOnly handleSort={handleSort} orderBy={orderBy}>
+          {checkboxSelection &&
+            renderCheckBox({
+              checked: allSelected(),
+              handleCheckbox: handleSelectAllClick,
+            })}
           {children}
         </Children>
       );
@@ -487,6 +533,11 @@
                 classes={{ root: classes.bodyRow }}
                 data-id={value.id}
               >
+                {checkboxSelection &&
+                  renderCheckBox({
+                    checked: isSelected(value.id),
+                    handleCheckbox: () => handleRowSelect(value.id),
+                  })}
                 <Children
                   linkTo={linkTo}
                   handleRowClick={handleRowClick}
@@ -504,7 +555,14 @@
     const renderTableContent = () => {
       if (isDev) {
         return (
-          <TableRow classes={{ root: classes.bodyRow }}>{children}</TableRow>
+          <TableRow classes={{ root: classes.bodyRow }}>
+            {checkboxSelection &&
+              renderCheckBox({
+                checked: false,
+                handleCheckbox: () => undefined,
+              })}
+            {children}
+          </TableRow>
         );
       }
 
@@ -514,6 +572,11 @@
 
       return Array.from(Array(amountOfRows).keys()).map((idx) => (
         <TableRow key={idx} classes={{ root: classes.bodyRow }}>
+          {checkboxSelection &&
+            renderCheckBox({
+              checked: false,
+              handleCheckbox: () => undefined,
+            })}
           {children}
         </TableRow>
       ));
@@ -809,6 +872,11 @@
             hideTextOverflow ? 'hidden' : 'visible',
           whiteSpace: ({ options: { hideTextOverflow } }) =>
             hideTextOverflow ? 'nowrap' : 'normal',
+        },
+      },
+      checkbox: {
+        '& > *': {
+          pointerEvents: 'none',
         },
       },
       searchField: {
