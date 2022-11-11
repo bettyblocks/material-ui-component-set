@@ -1,3 +1,32 @@
+# [2.67.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.66.1...v2.67.0) (2022-11-10)
+
+
+### Features
+
+* add subview component TMPLT-1757 ([2dc34af](https://github.com/bettyblocks/material-ui-component-set/commit/2dc34afd104fd654f9e1a528517f4ec9f990613f))
+
+## [2.66.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.66.0...v2.66.1) (2022-11-08)
+
+
+### Bug Fixes
+
+* allow components to properly span full screen in dev time ([4ebc6ec](https://github.com/bettyblocks/material-ui-component-set/commit/4ebc6ec4071582806f51789daad62dbf9e6bfe0a))
+
+# [2.66.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.8...v2.66.0) (2022-11-07)
+
+
+### Bug Fixes
+
+* update sdk in lock file ([af6e4e7](https://github.com/bettyblocks/material-ui-component-set/commit/af6e4e7eab5f1be50046834071f7fae23a1def9c))
+
+
+### Features
+
+* create input wizard added to text and select ([0223893](https://github.com/bettyblocks/material-ui-component-set/commit/02238931d49a6cec0b9c03ae92f4fee7cf3bd703))
+* removed old wizard from all inputs ([3c26f13](https://github.com/bettyblocks/material-ui-component-set/commit/3c26f13462a1a488c723ece8036e8161c0cab670))
+* removed unused checks ([e78f7fd](https://github.com/bettyblocks/material-ui-component-set/commit/e78f7fd48868ddc9a2002969854498b84ea47c6f))
+* update for relation inputs in forms ([71f83e7](https://github.com/bettyblocks/material-ui-component-set/commit/71f83e75fa0fee5dd6210178fd78e40c9dfcd331))
+
 ## [2.65.8](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.7...v2.65.8) (2022-11-04)
 
 
