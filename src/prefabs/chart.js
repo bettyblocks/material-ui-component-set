@@ -1,11 +1,11 @@
 (() => ({
-  name: 'Chart',
+  name: 'Rechart',
   icon: 'CheckboxIcon',
-  category: 'Content',
+  category: 'Dependencies',
   keywords: ['chart'],
   structure: [
     {
-      name: 'Chart',
+      name: 'Rechart',
       options: [
         {
           label: 'Chart type',

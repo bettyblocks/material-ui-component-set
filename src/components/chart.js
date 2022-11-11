@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Chart',
+  name: 'Rechart',
   type: 'CONTAINER_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
