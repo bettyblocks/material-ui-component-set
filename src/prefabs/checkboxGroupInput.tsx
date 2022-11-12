@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
-import { MultiAutocomplete } from './structures/MultiAutoCompleteInput';
+import { BeforeCreateArgs, prefab, Icon } from '@betty-blocks/component-sdk';
+import { CheckboxGroup } from './structures/CheckboxGroup';
 
 const beforeCreate = ({
   close,
@@ -23,16 +23,16 @@ const beforeCreate = ({
 }: BeforeCreateArgs) => {
   const {
     BettyPrefabs,
+    createBlacklist,
+    createUuid,
     prepareInput,
-    useModelIdSelector,
+    setOption,
     useActionIdSelector,
+    useModelIdSelector,
+    useModelQuery,
+    useModelRelationQuery,
     usePrefabSelector,
     usePropertyQuery,
-    setOption,
-    createUuid,
-    useModelQuery,
-    createBlacklist,
-    useModelRelationQuery,
   } = helpers;
 
   const [propertyPath, setProperty] = React.useState<any>('');
@@ -111,6 +111,7 @@ const beforeCreate = ({
   const unsupportedKinds = createBlacklist([
     'HAS_AND_BELONGS_TO_MANY',
     'HAS_MANY',
+    'LIST',
   ]);
 
   const structure = originalPrefab.structure[0];
@@ -200,10 +201,8 @@ const beforeCreate = ({
           // eslint-disable-next-line no-param-reassign
           structure.id = componentId;
 
-          let kind = propertyKind || 'STRING';
+          const kind = propertyKind || 'HAS_MANY';
           const isListProperty = kind === ('LIST' || 'list');
-
-          kind = 'HAS_MANY';
 
           const variableName = variableInput || name;
           const result = await prepareInput(
@@ -310,14 +309,10 @@ const beforeCreate = ({
 
 const attributes = {
   category: 'FORM',
-  icon: Icon.AutoCompleteIcon,
+  icon: Icon.CheckboxGroupIcon,
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Multi Autocomplete', attributes, beforeCreate, [
-  MultiAutocomplete({
-    label: 'Multi Autocomplete',
-    inputLabel: 'Multi Autocomplete',
-    type: 'text',
-  }),
+export default prefab('Checkbox Group', attributes, beforeCreate, [
+  CheckboxGroup({ label: 'Checkbox Group' }),
 ]);
