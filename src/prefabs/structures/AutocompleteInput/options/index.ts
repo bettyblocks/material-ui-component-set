@@ -57,7 +57,10 @@ export const options = {
   }),
   orderBy: property('Order by for options', {
     value: '',
-    configuration: { condition: hideIf('optionType', 'EQ', 'property') },
+    configuration: {
+      dependsOn: 'model',
+      condition: hideIf('optionType', 'EQ', 'property'),
+    },
   }),
   labelProperty: property('Label for options', {
     value: '',

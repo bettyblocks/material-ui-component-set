@@ -55,7 +55,10 @@ export const checkboxGroupInputOptions = {
   }),
   orderBy: property('Order by for options', {
     value: '',
-    configuration: { condition: hideIf('optionType', 'EQ', 'property') },
+    configuration: {
+      dependsOn: 'model',
+      condition: hideIf('optionType', 'EQ', 'property'),
+    },
   }),
   order: buttongroup(
     'Sort order',
