@@ -500,15 +500,14 @@
       typeof model === 'string' || !model,
     );
 
-    const queryDataResults = queryData && queryData.results;
-    const relationDataResults = relationData && relationData.results;
-
-    const results = hasResults ? relationDataResults : queryDataResults;
+    const data = hasResults ? relationData : queryData;
     const loading = hasResults ? false : queryLoading;
 
     if (loading) {
       B.triggerEvent('onLoad', loading);
     }
+
+    const { results } = data || {};
 
     if (error && displayError) {
       valid = false;
