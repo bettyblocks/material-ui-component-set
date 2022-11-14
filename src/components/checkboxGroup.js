@@ -78,9 +78,6 @@
 
     const listValues = valueProperty.values;
 
-    // console.log('idprop', idProperty);
-    // console.log('defaultLabelProperty', defaultLabelProperty);
-    // console.log('labelProperty', labelProperty);
     let valid = true;
     let validMessage = '';
 
@@ -208,15 +205,14 @@
       typeof model === 'string' || !model,
     );
 
-    const queryDataResults = queryData && queryData.results;
-    const relationDataResults = relationData && relationData.results;
-
-    const results = hasResults ? relationDataResults : queryDataResults;
+    const data = hasResults ? relationData : queryData;
     const loading = hasResults ? false : queryLoading;
 
     if (loading) {
       B.triggerEvent('onLoad', loading);
     }
+
+    const { results } = data || {};
 
     B.defineFunction('Refetch', () => refetch());
     B.defineFunction('Reset', () => setValues(defaultValueText || []));
@@ -258,7 +254,6 @@
     const hasError = errorState || !isValid;
 
     const renderCheckbox = (checkboxLabel, checkboxValue) => {
-      console.log('haha', checkboxLabel, checkboxValue);
       return (
         <FormControlLabel
           control={
@@ -288,10 +283,6 @@
       if (err && displayError) return <span>{err.message}</span>;
       if (!loading && results) {
         return results.map((item) => {
-          // console.log('valueProperty', valueProperty);
-          // console.log('item', item);
-          // console.log('item[labelProperty.name]', item[labelProperty.name]);
-          // console.log('item[valueProperty.id]', `${item[valueProperty.id]}`);
           return renderCheckbox(item[labelProperty.name], `${item.id}`);
         });
       }
