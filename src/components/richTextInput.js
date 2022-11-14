@@ -34,12 +34,6 @@
   ],
   jsx: (() => {
     const { Icons } = window.MaterialUI;
-    // const {
-    //   Slate: SlateP,
-    //   SlateReact,
-    //   SlateHistory,
-    //   SlateHyperscript,
-    // } = window.MaterialUI;
     const { SlateP, SlateReact, SlateHistory, SlateHyperscript } = dependencies;
     const { FormHelperText } = window.MaterialUI.Core;
     const { Editable, withReact, Slate, useSlate } = SlateReact;
@@ -47,24 +41,6 @@
     const { jsx } = SlateHyperscript;
     const { withHistory } = SlateHistory;
     const { useText, env } = B;
-
-    console.log('SlateReact', SlateReact);
-    console.log('SlateP', SlateP);
-    console.log('SlateHyperscript', SlateHyperscript);
-    console.log('SlateHistory', SlateHistory);
-
-    console.log('van SlateReact', Editable, withReact, Slate, useSlate);
-    console.log(
-      'van SlateP',
-      createEditor,
-      Editor,
-      Text,
-      Element,
-      Transforms,
-      Node,
-    );
-    console.log('van SlateHyperscript', jsx);
-    console.log('van SlateHistory', withHistory);
 
     const {
       actionVariableId: name,
@@ -87,25 +63,6 @@
       showJustifyAlign,
     } = options;
     const isDev = env === 'dev';
-
-    // const initialValue = [
-    //   {
-    //     type: 'paragraph',
-    //     children: [
-    //       { text: 'This is editable plain text, just like a <textarea>!' },
-    //     ],
-    //   },
-    // ];
-
-    // const editor = React.useMemo(
-    //   () => withHistory(withReact(createEditor())),
-    //   [],
-    // );
-    // return (
-    //   <Slate editor={editor} value={initialValue}>
-    //     <Editable placeholder="Enter some plain text..." />
-    //   </Slate>
-    // );
 
     const [currentValue, setCurrentValue] = useState(
       useText(valueProp, { rawValue: true }),
@@ -809,7 +766,7 @@
         </div>
       );
     }
-    console.log('about to return stuff...', editor);
+
     return (
       <div className={classes.root}>
         {labelText && !hideLabel && (

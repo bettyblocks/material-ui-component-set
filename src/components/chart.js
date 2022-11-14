@@ -21,33 +21,22 @@
   ],
   jsx: (() => {
     const { env } = B;
-    const { Recharts } = dependencies;
+    const {
+      Recharts: {
+        BarChart,
+        Bar,
+        LineChart,
+        Line,
+        XAxis,
+        YAxis,
+        CartesianGrid,
+        Tooltip,
+        Legend,
+        ResponsiveContainer,
+      },
+    } = dependencies;
     const isDev = env === 'dev';
     const { chartType } = options;
-
-    console.log('heb ik een bundle?', Recharts);
-
-    // if (!Recharts) {
-    //   return (
-    //     <div>
-    //       <div style={{ border: '3px solid red' }}>Loading dependencies</div>
-    //     </div>
-    //   );
-    // }
-
-    const {
-      BarChart,
-      Bar,
-      LineChart,
-      Line,
-      XAxis,
-      YAxis,
-      CartesianGrid,
-      Tooltip,
-      Legend,
-      ResponsiveContainer,
-    } = Recharts;
-
     const data = [
       {
         name: 'Page A',
