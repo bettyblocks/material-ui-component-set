@@ -66,17 +66,21 @@
 
     const propertyModel = getModel(modelId);
 
-    const defaultLabelProperty = getProperty(
-      propertyModel && propertyModel.labelPropertyId
-        ? propertyModel.labelPropertyId
-        : '',
-    );
+    const defaultLabelProperty =
+      getProperty(
+        propertyModel && propertyModel.labelPropertyId
+          ? propertyModel.labelPropertyId
+          : '',
+      ) || {};
 
     const labelProperty =
       getProperty(labelPropertyId) || defaultLabelProperty || idProperty;
 
     const listValues = valueProperty.values;
 
+    // console.log('idprop', idProperty);
+    // console.log('defaultLabelProperty', defaultLabelProperty);
+    // console.log('labelProperty', labelProperty);
     let valid = true;
     let validMessage = '';
 
@@ -204,14 +208,15 @@
       typeof model === 'string' || !model,
     );
 
-    const data = hasResults ? relationData : queryData;
+    const queryDataResults = queryData && queryData.results;
+    const relationDataResults = relationData && relationData.results;
+
+    const results = hasResults ? relationDataResults : queryDataResults;
     const loading = hasResults ? false : queryLoading;
 
     if (loading) {
       B.triggerEvent('onLoad', loading);
     }
-
-    const { results } = data || {};
 
     B.defineFunction('Refetch', () => refetch());
     B.defineFunction('Reset', () => setValues(defaultValueText || []));
@@ -253,6 +258,7 @@
     const hasError = errorState || !isValid;
 
     const renderCheckbox = (checkboxLabel, checkboxValue) => {
+      console.log('haha', checkboxLabel, checkboxValue);
       return (
         <FormControlLabel
           control={
@@ -280,9 +286,16 @@
       if (isDev) return renderCheckbox('Placeholder', false);
       if (loading) return <span>Loading...</span>;
       if (err && displayError) return <span>{err.message}</span>;
-      return results.map((item) =>
-        renderCheckbox(item[labelProperty.name], `${item[valueProperty.name]}`),
-      );
+      if (!loading && results) {
+        return results.map((item) => {
+          // console.log('valueProperty', valueProperty);
+          // console.log('item', item);
+          // console.log('item[labelProperty.name]', item[labelProperty.name]);
+          // console.log('item[valueProperty.id]', `${item[valueProperty.id]}`);
+          return renderCheckbox(item[labelProperty.name], `${item.id}`);
+        });
+      }
+      return <span>No results</span>;
     };
 
     useEffect(() => {
