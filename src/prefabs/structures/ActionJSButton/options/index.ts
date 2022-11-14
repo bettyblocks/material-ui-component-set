@@ -25,6 +25,11 @@ export const options = {
     },
   }),
 
+  actionVariableId: option('ACTION_JS_VARIABLE', {
+    label: 'Action input variable',
+    value: '',
+  }),
+
   property: property('Pass value to action'),
   buttonText: variable('Button text', { value: ['Action button'] }),
   fullWidth: toggle('Full width'),

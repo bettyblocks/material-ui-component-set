@@ -25,16 +25,9 @@
       tooltipPlacement,
       dataComponentAttribute,
       property,
+      actionVariableId,
     } = options;
-    const {
-      env,
-      useText,
-      useActionJs,
-      getProperty,
-      useProperty,
-      useEndpoint,
-      Icon,
-    } = B;
+    const { env, useText, useActionJs, useProperty, useEndpoint, Icon } = B;
     const isDev = env === 'dev';
     const isAction = linkType === 'action' || !!actionId;
     const linkToExternalVariable =
@@ -45,27 +38,23 @@
       linkType === 'internal' && linkTo && linkTo.id !== '';
     const buttonContent = useText(buttonText);
     const tooltipText = useText(tooltipContent);
+    const propValue = !isDev && property && useProperty(property.id);
+
+    const [value, setValue] = useState(propValue);
     const [isVisible, setIsVisible] = useState(visible);
     const [isLoading, setIsLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(hasVisibleTooltip);
     const [, setOptions] = useOptions();
     const [isDisabled, setIsDisabled] = useState(disabled);
 
-    const prop = !isDev && property && getProperty(property);
-    const propValue = !isDev && property && useProperty(property.id);
-
     const [actionCallback, { loading: isLoadingAction }] = useActionJs(
       actionId,
       {
         variables: {
           id: actionId,
-          ...(prop
-            ? {
-                input: {
-                  [prop.name]: propValue,
-                },
-              }
-            : {}),
+          input: {
+            [actionVariableId]: value,
+          },
         },
         onCompleted(response) {
           B.triggerEvent('onActionSuccess', response.action.results);
@@ -96,6 +85,7 @@
       B.defineFunction('Toggle loading state', () => setIsLoading((s) => !s));
       B.defineFunction('Enable', () => setIsDisabled(false));
       B.defineFunction('Disable', () => setIsDisabled(true));
+      B.defineFunction('setValue', (v) => setValue(v));
 
       if (isLoadingAction) {
         B.triggerEvent('onActionLoad', isLoadingAction);
