@@ -55,7 +55,8 @@
       autoLoadOnScroll,
       autoLoadTakeAmount,
       dataComponentAttribute,
-      checkboxSelection = true,
+      checkboxSelection,
+      checkboxPosition,
     } = options;
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
@@ -475,19 +476,24 @@
 
     const isSelected = (value) => selected.indexOf(value) !== -1;
     const allSelected = () =>
-      results.length > 0 && selected.length === results.length;
+      !isDev && results.length > 0 && selected.length === results.length;
 
-    const renderCheckBox = ({ checked, handleCheckbox }) => (
-      <TableCell component="div" padding="checkbox">
-        <Checkbox
-          classname={isDev ? classes.checkbox : ''}
-          // indeterminate={numSelected > 0 && numSelected < rowCount}
-          checked={checked}
-          onChange={handleCheckbox}
-          inputProps={{ 'aria-label': 'select all rows' }}
-        />
-      </TableCell>
-    );
+    const renderCheckBox = ({ checked, handleCheckbox }) => {
+      if (!checkboxSelection) {
+        return false;
+      }
+
+      return (
+        <TableCell component="div" padding="checkbox">
+          <Checkbox
+            classname={isDev ? classes.checkbox : ''}
+            checked={checked}
+            onChange={handleCheckbox}
+            inputProps={{ 'aria-label': 'select all rows' }}
+          />
+        </TableCell>
+      );
+    };
 
     const renderTableHead = () => {
       if ((loading && !loadOnScroll) || error) {
@@ -499,15 +505,43 @@
           </TableCell>
         ));
       }
+
+      const renderHeadCheckbox = () =>
+        renderCheckBox({
+          checked: allSelected(),
+          handleCheckbox: handleSelectAllClick,
+        });
+
       return (
-        <Children headerOnly handleSort={handleSort} orderBy={orderBy}>
-          {checkboxSelection &&
-            renderCheckBox({
-              checked: allSelected(),
-              handleCheckbox: handleSelectAllClick,
-            })}
-          {children}
-        </Children>
+        <>
+          {checkboxPosition === 'start' && renderHeadCheckbox()}
+          <Children headerOnly handleSort={handleSort} orderBy={orderBy}>
+            {children}
+          </Children>
+          {checkboxPosition === 'end' && renderHeadCheckbox()}
+        </>
+      );
+    };
+
+    const renderRowChildren = ({ context, value }) => {
+      const renderRowCheckbox = () =>
+        renderCheckBox({
+          checked: isSelected(value.id),
+          handleCheckbox: () => handleRowSelect(value.id),
+        });
+
+      return (
+        <>
+          {checkboxPosition === 'start' && renderRowCheckbox()}
+          <Children
+            linkTo={linkTo}
+            handleRowClick={handleRowClick}
+            context={context}
+          >
+            {children}
+          </Children>
+          {checkboxPosition === 'end' && renderRowCheckbox()}
+        </>
       );
     };
 
@@ -533,18 +567,7 @@
                 classes={{ root: classes.bodyRow }}
                 data-id={value.id}
               >
-                {checkboxSelection &&
-                  renderCheckBox({
-                    checked: isSelected(value.id),
-                    handleCheckbox: () => handleRowSelect(value.id),
-                  })}
-                <Children
-                  linkTo={linkTo}
-                  handleRowClick={handleRowClick}
-                  context={context}
-                >
-                  {children}
-                </Children>
+                {renderRowChildren({ context, value })}
               </TableRow>
             )}
           </InteractionScope>
@@ -556,12 +579,9 @@
       if (isDev) {
         return (
           <TableRow classes={{ root: classes.bodyRow }}>
-            {checkboxSelection &&
-              renderCheckBox({
-                checked: false,
-                handleCheckbox: () => undefined,
-              })}
-            {children}
+            {checkboxPosition === 'end' && children}
+            {renderCheckBox({ checked: false })}
+            {checkboxPosition === 'start' && children}
           </TableRow>
         );
       }
@@ -572,12 +592,9 @@
 
       return Array.from(Array(amountOfRows).keys()).map((idx) => (
         <TableRow key={idx} classes={{ root: classes.bodyRow }}>
-          {checkboxSelection &&
-            renderCheckBox({
-              checked: false,
-              handleCheckbox: () => undefined,
-            })}
-          {children}
+          {checkboxPosition === 'end' && children}
+          {renderCheckBox({ checked: false })}
+          {checkboxPosition === 'start' && children}
         </TableRow>
       ));
     };
