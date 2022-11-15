@@ -728,7 +728,7 @@ export default makePrefab('Case dashboard', attrs, undefined, [
                                 options: {
                                   ...avatarOptions,
                                   margin: sizes('Outer Space', {
-                                    value: ['S', 'S', 'S', 'S'],
+                                    value: ['S', 'M', 'S', 'S'],
                                   }),
                                 },
                               }),
@@ -900,7 +900,7 @@ export default makePrefab('Case dashboard', attrs, undefined, [
                       options: {
                         ...boxOptions,
                         innerSpacing: sizes('Inner space', {
-                          value: ['0rem', 'M', '0rem', 'M'],
+                          value: ['S', 'M', 'S', 'M'],
                         }),
                         alignment: buttongroup(
                           'Alignment',
@@ -965,7 +965,7 @@ export default makePrefab('Case dashboard', attrs, undefined, [
                               ['Dense', 'dense'],
                               ['Normal', 'normal'],
                             ],
-                            { value: 'none' },
+                            { value: 'dense' },
                           ),
                         },
                       }),
