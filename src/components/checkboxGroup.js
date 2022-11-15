@@ -54,7 +54,10 @@
 
     const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
     const { modelId: propertyModelId, referenceModelId } = modelProperty;
-    const modelId = referenceModelId || propertyModelId || model || '';
+    const { contextModelId } = model;
+
+    const modelId =
+      contextModelId || referenceModelId || propertyModelId || model || '';
 
     const idProperty = getIdProperty(modelId || '') || {};
     const isListProperty =
@@ -63,11 +66,12 @@
 
     const propertyModel = getModel(modelId);
 
-    const defaultLabelProperty = getProperty(
-      propertyModel && propertyModel.labelPropertyId
-        ? propertyModel.labelPropertyId
-        : '',
-    );
+    const defaultLabelProperty =
+      getProperty(
+        propertyModel && propertyModel.labelPropertyId
+          ? propertyModel.labelPropertyId
+          : '',
+      ) || {};
 
     const labelProperty =
       getProperty(labelPropertyId) || defaultLabelProperty || idProperty;
@@ -141,7 +145,7 @@
           }
         },
       },
-      !model,
+      !!contextModelId || optionType === 'property' || !valid,
     );
 
     const parentProperty = getIdProperty(propertyModelId);
@@ -277,9 +281,12 @@
       if (isDev) return renderCheckbox('Placeholder', false);
       if (loading) return <span>Loading...</span>;
       if (err && displayError) return <span>{err.message}</span>;
-      return results.map((item) =>
-        renderCheckbox(item[labelProperty.name], `${item[valueProperty.name]}`),
-      );
+      if (!loading && results) {
+        return results.map((item) => {
+          return renderCheckbox(item[labelProperty.name], `${item.id}`);
+        });
+      }
+      return <span>No results</span>;
     };
 
     useEffect(() => {
