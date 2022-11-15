@@ -393,17 +393,29 @@
           isBlockActive(editor, 'bulleted-list', 'type'))
       ) {
         const lastNode = Node.last(editor, editor.selection.focus.path);
+
+        if (lastNode[0].text !== '') {
+          if (isBlockActive(editor, 'numbered-list', 'type')) {
+            toggleBlock(editor, 'numbered-list');
+            return;
+          }
+          toggleBlock(editor, 'bulleted-list');
+          return;
+        }
+
         if (
           window.getSelection().toString().split('\n')[0] !==
             lastNode[0].text &&
           (lastNode[0].text !== '' || lastNode[1].length !== 3)
         )
           return;
+
         Transforms.setNodes(editor, { type: 'none' });
         if (isBlockActive(editor, 'numbered-list', 'type')) {
           toggleBlock(editor, 'numbered-list');
           return;
         }
+
         toggleBlock(editor, 'bulleted-list');
         return;
       }
