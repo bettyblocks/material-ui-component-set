@@ -157,7 +157,7 @@
     "@babel/helper-validator-identifier" "^7.18.6"
     to-fast-properties "^2.0.0"
 
-"@betty-blocks/cli@^25.55.0":
+"@betty-blocks/cli@^25.56.0":
   version "25.56.0"
   resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.56.0.tgz#cd97c022fd572a7b37021d35d74699939ac90023"
   integrity sha512-FK20nsIBotyRY87yXHSYrLFtyxIAtISX174GusWu+clRVa5xh5eMwf4wQLbbaIEPraXObXCmZFQoZgOrYuEL4g==
