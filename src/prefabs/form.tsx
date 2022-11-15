@@ -37,6 +37,7 @@ const beforeCreate = ({
     makeBettyInput,
     prepareAction,
     getPageAuthenticationProfileId,
+    getPageName,
     setOption,
     useModelQuery,
   } = helpers;
@@ -72,6 +73,7 @@ const beforeCreate = ({
   const [actionName, setActionName] = React.useState('');
   const permissions: PermissionType = 'inherit';
   const pageAuthenticationProfileId = getPageAuthenticationProfileId();
+  const pageName = getPageName();
 
   const [validationMessage, setValidationMessage] = React.useState('');
   const componentId = createUuid();
@@ -207,6 +209,7 @@ const beforeCreate = ({
             actionName,
             permissions,
             pageAuthenticationProfileId,
+            pageName,
           );
           const structure = originalPrefab.structure[0];
           if (modelBased) {

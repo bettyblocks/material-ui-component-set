@@ -157,10 +157,10 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
-"@betty-blocks/cli@^25.54.0":
-  version "25.54.0"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.54.0.tgz#ab16ada725c20d640a460fc1551b0018b1efc516"
-  integrity sha512-d3J334JaaXTANyOmrSNLzoewKX4SFKHC7wytVWoeJ8ehuIUrKBWuMlgAPCDxcpKP6iotm6zr4RoCnLbgjmg5aA==
+"@betty-blocks/cli@^25.56.0":
+  version "25.56.0"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.56.0.tgz#cd97c022fd572a7b37021d35d74699939ac90023"
+  integrity sha512-FK20nsIBotyRY87yXHSYrLFtyxIAtISX174GusWu+clRVa5xh5eMwf4wQLbbaIEPraXObXCmZFQoZgOrYuEL4g==
   dependencies:
     "@azure/ms-rest-js" "^2.0.4"
     "@azure/storage-blob" "^10.3.0"
@@ -199,10 +199,17 @@
   optionalDependencies:
     isolated-vm "^4.0.0"
 
+<<<<<<< HEAD
 "@betty-blocks/component-sdk@^1.43.0":
   version "1.43.0"
   resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.43.0.tgz#3f6b4f197711cf17f6b7b684c1efe3fea24b6f41"
   integrity sha512-/4Mw7u3o6CcBNrTuv+ZxpCeeijfnZ7xOlVoYOuTXXG5DWPt4yzqfUq+v24wJTuSKiCdtkQGwO7rKQ7oLIbaE5w==
+=======
+"@betty-blocks/component-sdk@^1.45.0":
+  version "1.46.0"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.46.0.tgz#653c71ed49f70f7af3be7c244ed894558d064332"
+  integrity sha512-0yNoWAsZoli/PnLoI/CogZEZSJHXYmSPJxGn0hk+aYwfI1PQl4C+Y8xeG2KC48jlNf51RLaU+NXrTeyy1a1Gbg==
+>>>>>>> @{-1}
 
 "@colors/colors@1.5.0":
   version "1.5.0"
@@ -491,7 +498,22 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+<<<<<<< HEAD
 "@jridgewell/trace-mapping@^0.3.14", "@jridgewell/trace-mapping@^0.3.9":
+  version "0.3.17"
+  resolved "https://registry.yarnpkg.com/@jridgewell/trace-mapping/-/trace-mapping-0.3.17.tgz#793041277af9073b0951a7fe0f0d8c4c98c36985"
+  integrity sha512-MCNzAp77qzKca9+W/+I0+sEpaUnZoeasnghNeVc41VZCEKaCH73Vq3BZZ/SzWIgrqE4H4ceI+p+b6C0mHf9T4g==
+=======
+"@jridgewell/trace-mapping@^0.3.14":
+  version "0.3.15"
+  resolved "https://registry.yarnpkg.com/@jridgewell/trace-mapping/-/trace-mapping-0.3.15.tgz#aba35c48a38d3fd84b37e66c9c0423f9744f9774"
+  integrity sha512-oWZNOULl+UbhsgB51uuZzglikfIKSUBO/M9W2OfEjn7cmqoAiCgmv9lyACTUacZwBz0ITnJ2NqjU8Tx0DHL88g==
+>>>>>>> @{-1}
+  dependencies:
+    "@jridgewell/resolve-uri" "3.1.0"
+    "@jridgewell/sourcemap-codec" "1.4.14"
+
+"@jridgewell/trace-mapping@^0.3.9":
   version "0.3.17"
   resolved "https://registry.yarnpkg.com/@jridgewell/trace-mapping/-/trace-mapping-0.3.17.tgz#793041277af9073b0951a7fe0f0d8c4c98c36985"
   integrity sha512-MCNzAp77qzKca9+W/+I0+sEpaUnZoeasnghNeVc41VZCEKaCH73Vq3BZZ/SzWIgrqE4H4ceI+p+b6C0mHf9T4g==
@@ -1116,10 +1138,22 @@
   resolved "https://registry.yarnpkg.com/@types/minimist/-/minimist-1.2.2.tgz#ee771e2ba4b3dc5b372935d549fd9617bf345b8c"
   integrity sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==
 
+<<<<<<< HEAD
 "@types/node@*", "@types/node@>=12":
   version "18.11.9"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.9.tgz#02d013de7058cea16d36168ef2fc653464cfbad4"
   integrity sha512-CRpX21/kGdzjOpFsZSkcrXMGIBWMGNIHXXBVFSH+ggkftxg+XYP20TESbh+zFvFj3EQOl5byk0HTRn1IL6hbqg==
+=======
+"@types/node@*":
+  version "18.11.9"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.9.tgz#02d013de7058cea16d36168ef2fc653464cfbad4"
+  integrity sha512-CRpX21/kGdzjOpFsZSkcrXMGIBWMGNIHXXBVFSH+ggkftxg+XYP20TESbh+zFvFj3EQOl5byk0HTRn1IL6hbqg==
+
+"@types/node@>=12":
+  version "18.7.18"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.7.18.tgz#633184f55c322e4fb08612307c274ee6d5ed3154"
+  integrity sha512-m+6nTEOadJZuTPkKR/SYK3A2d7FZrgElol9UP1Kae90VVU4a6mxnPuLiIW1m4Cq4gZ/nWb9GrdVXJCoCazDAbg==
+>>>>>>> @{-1}
 
 "@types/node@^17.0.10":
   version "17.0.45"
@@ -4660,7 +4694,11 @@ minimatch@3.0.4:
   dependencies:
     brace-expansion "^1.1.7"
 
+<<<<<<< HEAD
 minimatch@3.1.2, minimatch@^3.0.5, minimatch@^3.1.1, minimatch@^3.1.2:
+=======
+minimatch@3.1.2, minimatch@^3.0.4, minimatch@^3.1.1, minimatch@^3.1.2:
+>>>>>>> @{-1}
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.1.2.tgz#19cd194bfd3e428f049a70817c038d89ab4be35b"
   integrity sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==
