@@ -82,7 +82,6 @@
     const [interactionFilter, setInteractionFilter] = useState({});
     const perPageLabel = useText(labelRowsPerPage);
     const numOfPagesLabel = useText(labelNumberOfPages);
-
     const { label: searchPropertyLabel = '{property}', kind } =
       getProperty(searchProperty) || {};
     let orderPropertyPath = null;
@@ -438,13 +437,22 @@
       setSearch(event.target.value);
       setPage(0);
     };
-
+    const isBO = 'backoffice';
     const handleRowClick = (endpoint, context) => {
       if (isDev) return;
       B.triggerEvent('OnRowClick', endpoint, context);
-
       if (hasLink) {
-        history.push(endpoint);
+        let stateReturn = '';
+        if (history.location.state) {
+          stateReturn =
+            history.location.state.stateReturn + window.location.pathname;
+        } else {
+          stateReturn = window.location.pathname;
+        }
+        history.push({
+          pathname: endpoint,
+          state: { stateReturn, key: isBO },
+        });
       }
     };
 
@@ -628,7 +636,6 @@
         setStylesProps(null);
       }
     }, [showPagination, hasToolbar]);
-
     return (
       <div
         className={classes.root}

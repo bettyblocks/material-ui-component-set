@@ -6,7 +6,7 @@
   jsx: (() => {
     const { env, useText, Icon } = B;
     const isDev = env === 'dev';
-    const { Breadcrumbs } = window.MaterialUI.Core;
+    const { Breadcrumbs, Link } = window.MaterialUI.Core;
     const {
       separatorType,
       separatorText,
@@ -42,6 +42,28 @@
     if (!isDev && maxItems !== '0') {
       breadcrumbsOptions.maxItems = parseInt(maxItems, 10);
     }
+    if (!isDev) {
+      const historyObj = useHistory();
+      console.log('ho', historyObj);
+    }
+
+    const NewBreadcrumbs = () => {
+      const historyObj = useHistory();
+
+      const pathName =
+        historyObj.location.state.stateReturn + historyObj.location.pathname;
+
+      console.log(pathName);
+      const breadcrumbArray = pathName.split('/');
+      console.log(breadcrumbArray);
+      const output = breadcrumbArray.map((crumb) => (
+        <Link key={crumb} href={crumb}>
+          {crumb}
+        </Link>
+      ));
+
+      return output;
+    };
 
     const breadcrumbs =
       children.length > 0 ? (
@@ -51,7 +73,11 @@
       ) : (
         PlaceHolder
       );
-    return isDev ? <div>{breadcrumbs}</div> : breadcrumbs;
+    return isDev ? (
+      <div>{breadcrumbs}</div>
+    ) : (
+      <Breadcrumbs {...breadcrumbsOptions}>{NewBreadcrumbs()}</Breadcrumbs>
+    );
   })(),
   styles: () => () => ({
     empty: {
