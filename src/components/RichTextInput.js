@@ -321,6 +321,21 @@
     );
     const fragment = deserialize(parsed.body);
 
+    if (isDev) {
+      useEffect(() => {
+        Transforms.delete(editor, {
+          at: {
+            anchor: Editor.start(editor, []),
+            focus: Editor.end(editor, []),
+          },
+        });
+        Transforms.insertNodes(editor, deserialize(parsed.body));
+        Transforms.delete(editor, {
+          at: Editor.start(editor, [0]),
+        });
+      }, [valueProp]);
+    }
+
     const handleListdepth = (listKind, key, event) => {
       const isList = isBlockActive(editor, listKind, 'type');
       if (isList) {
