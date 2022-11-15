@@ -4,7 +4,7 @@ import {
   prefab as makePrefab,
   BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
-import { DataTable } from './structures';
+import { DataTable, DataTableColumn } from './structures';
 
 const attrs = {
   icon: Icon.DataTable,
@@ -62,7 +62,7 @@ const beforeCreate = ({
             );
             throw new Error(errorMessage);
           }
-          structure.options[1] = {
+          structure.options[2] = {
             value: modelId,
             label: 'Model',
             key: 'model',
@@ -128,4 +128,14 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('Datatable', attrs, beforeCreate, [DataTable({})]);
+const reconfigure = {
+  children: [DataTableColumn({})],
+};
+
+export default makePrefab(
+  'Datatable',
+  attrs,
+  beforeCreate,
+  [DataTable({})],
+  reconfigure,
+);
