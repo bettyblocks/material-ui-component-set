@@ -415,8 +415,7 @@
           isBlockActive(editor, 'bulleted-list', 'type'))
       ) {
         const lastNode = Node.last(editor, editor.selection.focus.path);
-
-        if (lastNode[0].text !== '') {
+        if (lastNode[0].text !== '' && editor.selection.focus.offset === 0) {
           if (isBlockActive(editor, 'numbered-list', 'type')) {
             toggleBlock(editor, 'numbered-list');
             return;
@@ -663,7 +662,7 @@
             format,
             TEXT_ALIGN_TYPES.includes(format) ? 'align' : 'type',
           )}
-          onClick={(event) => {
+          onMouseDown={(event) => {
             event.preventDefault();
             if (disable) return;
             toggleBlock(ownEditor, format);
@@ -680,7 +679,7 @@
         <Button
           disable={disable}
           active={isMarkActive(ownEditor, format)}
-          onClick={(event) => {
+          onMouseDown={(event) => {
             event.preventDefault();
             if (disable) return;
             toggleMark(ownEditor, format);
@@ -719,7 +718,8 @@
           className={`${classes.dropdownItem} ${
             isBlockActive(ownEditor, format, 'type') ? 'active' : ''
           }`}
-          onClick={() => {
+          onMouseDown={(event) => {
+            event.preventDefault();
             toggleBlock(ownEditor, format);
             setShowDropdown(false);
           }}
@@ -773,7 +773,10 @@
             type="button"
             aria-haspopup="true"
             aria-label="Text styles"
-            onClick={() => setShowDropdown((prev) => !prev)}
+            onMouseDown={(event) => {
+              event.preventDefault();
+              setShowDropdown((prev) => !prev);
+            }}
             className={classes.dropdownButton}
           >
             <span className={classes.dropdownButtonText}>
