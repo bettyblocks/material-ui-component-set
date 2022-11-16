@@ -1,3 +1,37 @@
+# [2.69.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.68.0...v2.69.0) (2022-11-15)
+
+
+### Features
+
+* options renaming ([995b436](https://github.com/bettyblocks/material-ui-component-set/commit/995b4368bedf7cacdeb44a72d11ae0884a145569))
+* reconfigurev2 in datatable ([4c36829](https://github.com/bettyblocks/material-ui-component-set/commit/4c36829ecceb3975dbc9ae9a196751e29526745f))
+
+# [2.68.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.67.0...v2.68.0) (2022-11-11)
+
+
+### Bug Fixes
+
+* add default label ([c9f7a68](https://github.com/bettyblocks/material-ui-component-set/commit/c9f7a681a8b208bfd77663dea80f62d3789d3e95))
+* add defaultvalues query ([4af938b](https://github.com/bettyblocks/material-ui-component-set/commit/4af938b4e8ea1809dfdd079f8f90a919c9e62105))
+* add validation if no model ([e16ce9f](https://github.com/bettyblocks/material-ui-component-set/commit/e16ce9f49f983ac675fc8842639e46eb942fdd55))
+* lint errors ([f3b7d19](https://github.com/bettyblocks/material-ui-component-set/commit/f3b7d1921879a9d9f5250a9f7123b04f474dbc31))
+* orderBy won't crash when removing the option ([48daa1a](https://github.com/bettyblocks/material-ui-component-set/commit/48daa1aad1ea7fc79f0647b10fdaf0d8dbce0f5c))
+* sort lines ([2953b03](https://github.com/bettyblocks/material-ui-component-set/commit/2953b0389d8abbe91b15ea15462efe62f7fcae4d))
+* use hidden input for values ([9afdfb8](https://github.com/bettyblocks/material-ui-component-set/commit/9afdfb8b2af1d2dfbd9a11122ba8e65b81a21f36))
+* use idProperty as label fallback ([3cb64ab](https://github.com/bettyblocks/material-ui-component-set/commit/3cb64abc2e883aca3a40ae22dce8eec191250c3c))
+
+
+### Features
+
+* added wip checkbox group ([b55aee9](https://github.com/bettyblocks/material-ui-component-set/commit/b55aee9d675e94ac1c60052f5707874e95274dd9))
+
+# [2.67.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.66.1...v2.67.0) (2022-11-10)
+
+
+### Features
+
+* add subview component TMPLT-1757 ([2dc34af](https://github.com/bettyblocks/material-ui-component-set/commit/2dc34afd104fd654f9e1a528517f4ec9f990613f))
+
 ## [2.66.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.66.0...v2.66.1) (2022-11-08)
 
 

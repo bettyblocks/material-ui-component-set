@@ -9,21 +9,22 @@
       Checkbox,
       Chip,
       CircularProgress,
-      TextField,
       FormControl,
       FormHelperText,
+      TextField,
     } = window.MaterialUI.Core;
     const {
+      Icon,
       InteractionScope,
       ModelProvider,
       env,
+      getIdProperty,
+      getModel,
       getProperty,
       useAllQuery,
       useFilter,
+      useRelation,
       useText,
-      Icon,
-      getModel,
-      getIdProperty,
     } = B;
     const {
       actionProperty,
@@ -60,8 +61,8 @@
       validationTooShort = [''],
       validationTypeMismatch = [''],
       validationValueMissing = [''],
-      variant,
       value: valueRaw,
+      variant,
     } = options;
     const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
     /*
@@ -102,10 +103,10 @@
     const helperTextResolved = useText(helperTextRaw);
 
     const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
-
+    const { contextModelId } = model;
     const labelProperty = getProperty(labelPropertyId) || {};
     const { modelId: propertyModelId } = modelProperty;
-    const modelId = propertyModelId || model || '';
+    const modelId = contextModelId || propertyModelId || model || '';
 
     const propertyModel = getModel(modelId);
     const defaultLabelProperty =
@@ -464,9 +465,9 @@
     }
 
     const {
-      loading,
+      loading: queryLoading,
       error,
-      data: { results } = {},
+      data: queryData,
       refetch,
     } = useAllQuery(
       actionProperty ? modelProperty.referenceModelId : modelId,
@@ -490,12 +491,23 @@
           }
         },
       },
-      optionType === 'property' || !valid,
+      !!contextModelId || optionType === 'property' || !valid,
     );
+
+    const { hasResults, data: relationData } = useRelation(
+      model,
+      {},
+      typeof model === 'string' || !model,
+    );
+
+    const data = hasResults ? relationData : queryData;
+    const loading = hasResults ? false : queryLoading;
 
     if (loading) {
       B.triggerEvent('onLoad', loading);
     }
+
+    const { results } = data || {};
 
     if (error && displayError) {
       valid = false;

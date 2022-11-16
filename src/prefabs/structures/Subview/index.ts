@@ -1,12 +1,12 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { Configuration } from '../Configuration';
-import { subViewOptions, categories as defaultCategories } from './options';
+import { subviewOptions, categories as defaultCategories } from './options';
 
 export const Subview = (
   config: Configuration,
   descendants: PrefabReference[] = [],
 ) => {
-  const options = { ...(config.options || subViewOptions) };
+  const options = { ...(config.options || subviewOptions) };
   const style = { ...config.style };
   const ref = config.ref ? { ...config.ref } : undefined;
   const label = config.label ? config.label : undefined;

@@ -8,7 +8,7 @@ import {
 
 export const styles = {
   height: size('Height', {
-    value: '',
+    value: '200px',
     configuration: {
       as: 'UNIT',
     },
@@ -51,6 +51,10 @@ export const styles = {
 
   buttonActiveColor: color('Button color (active)', {
     value: ThemeColor.PRIMARY,
+  }),
+
+  buttonDisabledColor: color('Button color (disabled)', {
+    value: ThemeColor.ACCENT_3,
   }),
 
   labelColor: color('Label color', {

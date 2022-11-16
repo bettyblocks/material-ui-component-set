@@ -29,7 +29,6 @@ import { Dialog } from './Dialog';
 import { Divider } from './Divider';
 import { Drawer } from './Drawer';
 import { DrawerBar } from './DrawerBar';
-import { Subview } from './Subview';
 import { DrawerContainer } from './DrawerContainer';
 import { ExpansionPanel } from './ExpansionPanel';
 import { Grid } from './Grid';
@@ -54,6 +53,8 @@ import { Snackbar } from './Snackbar';
 import { Step } from './Step';
 import { Stepper } from './Stepper';
 import { SubmitButton } from './SubmitButton';
+import { Subview } from './Subview';
+import { SubviewItem } from './SubviewItem';
 import { Tab } from './Tab';
 import { Tabs } from './Tabs';
 import { Text } from './Text';
@@ -115,12 +116,13 @@ import { snackbarOptions } from './Snackbar/options';
 import { stepOptions } from './Step/options';
 import { stepperOptions } from './Stepper/options';
 import { options as submitButtonOptions } from './SubmitButton/options';
+import { subviewOptions } from './Subview/options';
+import { subviewItemOptions } from './SubviewItem/options';
 import { tabOptions } from './Tab/options';
 import { tabsOptions } from './Tabs/options';
 import { textOptions } from './Text/options';
 import { options as textAreaOptions } from './TextArea/options';
 import { options as textInputOptions } from './TextInput/options';
-import { SubviewItem } from './SubviewItem';
 
 export {
   ActionJSButton,
@@ -179,13 +181,13 @@ export {
   Step,
   Stepper,
   SubmitButton,
+  Subview,
+  SubviewItem,
   Tab,
   Tabs,
   Text,
   TextArea,
   TextInput,
-  Subview,
-  SubviewItem,
   actionJSButtonOptions,
   alertOptions,
   appBarOptions,
@@ -240,6 +242,8 @@ export {
   stepOptions,
   stepperOptions,
   submitButtonOptions,
+  subviewOptions,
+  subviewItemOptions,
   tabOptions,
   tabsOptions,
   textOptions,

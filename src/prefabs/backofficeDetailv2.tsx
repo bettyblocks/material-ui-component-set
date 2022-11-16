@@ -22,6 +22,7 @@ import {
   text,
   InteractionType,
   PrefabInteraction,
+  hideIf,
 } from '@betty-blocks/component-sdk';
 
 import {
@@ -54,11 +55,84 @@ import {
   textOptions,
   FormErrorAlert,
   Divider,
+  dataContainerOptions,
 } from './structures';
 import { ModelProps, ModelQuery, IdPropertyProps } from './types';
 import { options as defaults } from './structures/ActionJSForm/options';
 
 const interactions: PrefabInteraction[] = [
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#deleteDialog',
+      sourceComponentId: '#deleteButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#deleteDialog',
+      sourceComponentId: '#closeBtn',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#deleteDialog',
+      sourceComponentId: '#cancelButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#deleteDialog',
+      sourceComponentId: '#deleteForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Refetch',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#dataContainer',
+      sourceComponentId: '#deleteForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#deleteFormSubmitButton',
+      sourceComponentId: '#deleteForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionError',
+    ref: {
+      targetComponentId: '#deleteFormSubmitButton',
+      sourceComponentId: '#deleteForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#deleteFormSubmitButton',
+      sourceComponentId: '#deleteForm',
+    },
+    type: InteractionType.Custom,
+  },
   {
     name: 'Show',
     sourceEvent: 'Click',
@@ -140,17 +214,163 @@ const interactions: PrefabInteraction[] = [
     },
     type: InteractionType.Custom,
   },
+  {
+    name: 'Submit',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#updateForm',
+      sourceComponentId: '#saveBottomButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Submit',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#updateForm',
+      sourceComponentId: '#saveTopButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'onActionError',
+    ref: {
+      targetComponentId: '#updateAlertErrorId',
+      sourceComponentId: '#updateForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#saveTopButton',
+      sourceComponentId: '#updateForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionError',
+    ref: {
+      targetComponentId: '#saveTopButton',
+      sourceComponentId: '#updateForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#saveTopButton',
+      sourceComponentId: '#updateForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#saveBottomButton',
+      sourceComponentId: '#updateForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionError',
+    ref: {
+      targetComponentId: '#saveBottomButton',
+      sourceComponentId: '#updateForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#saveBottomButton',
+      sourceComponentId: '#updateForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#backofficeDetailview',
+      sourceComponentId: '#updateForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#updateRecord',
+      sourceComponentId: '#updateForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Refetch',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#dataContainer',
+      sourceComponentId: '#updateForm',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#tinyDrawer',
+      sourceComponentId: '#openDrawer',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#drawerSidebar',
+      sourceComponentId: '#openDrawer',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#tinyDrawer',
+      sourceComponentId: '#closeButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#drawerSidebar',
+      sourceComponentId: '#closeButton',
+    },
+    type: InteractionType.Custom,
+  },
 ];
 
 const attributes = {
   category: 'FORMV2',
   icon: Icon.UpdateFormIcon,
   type: 'page',
-  description: 'Discription',
-  detail: 'detail',
-  previewUrl: 'https://preview.betty.app/back-office',
+  description:
+    'This page contains a detail view and all you need to update a record.',
+  detail:
+    'In this ready to use back office detail view, it is possible to display (read) and update a record.',
+  previewUrl: 'https://preview-dev.app/back-office-details',
   previewImage:
-    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Back_Office.jpg',
+    'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/f1a4017ab78f41f38d1882f6b6cef37a',
   interactions,
 };
 
@@ -167,7 +387,7 @@ const drawerSidebar = DrawerBar(
   [
     Box(
       {
-        label: 'Logo',
+        label: 'Logobox',
         options: {
           ...boxOptions,
           position: buttongroup(
@@ -235,6 +455,7 @@ const drawerSidebar = DrawerBar(
           [
             Media(
               {
+                label: 'Logo',
                 ref: { id: '#MediaImage' },
 
                 options: {
@@ -537,121 +758,7 @@ const drawerSidebar = DrawerBar(
               }),
             },
           },
-          [
-            Row({}, [
-              Column(
-                {
-                  options: {
-                    ...columnOptions,
-                    columnWidth: option('CUSTOM', {
-                      label: 'Column width',
-                      value: 'hidden',
-                      configuration: {
-                        as: 'DROPDOWN',
-                        dataType: 'string',
-                        allowedInput: [
-                          { name: 'Fit content', value: 'fitContent' },
-                          { name: 'Flexible', value: 'flexible' },
-                          { name: 'Hidden', value: 'hidden' },
-                          { name: '1', value: '1' },
-                          { name: '2', value: '2' },
-                          { name: '3', value: '3' },
-                          { name: '4', value: '4' },
-                          { name: '5', value: '5' },
-                          { name: '6', value: '6' },
-                          { name: '7', value: '7' },
-                          { name: '8', value: '8' },
-                          { name: '9', value: '9' },
-                          { name: '10', value: '10' },
-                          { name: '11', value: '11' },
-                          { name: '12', value: '12' },
-                        ],
-                      },
-                    }),
-                    columnWidthTabletLandscape: option('CUSTOM', {
-                      label: 'Column width (tablet landscape)',
-                      value: 'hidden',
-                      configuration: {
-                        as: 'DROPDOWN',
-                        dataType: 'string',
-                        allowedInput: [
-                          { name: 'Fit content', value: 'fitContent' },
-                          { name: 'Flexible', value: 'flexible' },
-                          { name: 'Hidden', value: 'hidden' },
-                          { name: '1', value: '1' },
-                          { name: '2', value: '2' },
-                          { name: '3', value: '3' },
-                          { name: '4', value: '4' },
-                          { name: '5', value: '5' },
-                          { name: '6', value: '6' },
-                          { name: '7', value: '7' },
-                          { name: '8', value: '8' },
-                          { name: '9', value: '9' },
-                          { name: '10', value: '10' },
-                          { name: '11', value: '11' },
-                          { name: '12', value: '12' },
-                        ],
-                      },
-                    }),
-                    columnWidthTabletPortrait: option('CUSTOM', {
-                      value: 'hidden',
-                      label: 'Column width (tablet portrait)',
-                      configuration: {
-                        as: 'DROPDOWN',
-                        dataType: 'string',
-                        allowedInput: [
-                          { name: 'Fit content', value: 'fitContent' },
-                          { name: 'Flexible', value: 'flexible' },
-                          { name: 'Hidden', value: 'hidden' },
-                          { name: '1', value: '1' },
-                          { name: '2', value: '2' },
-                          { name: '3', value: '3' },
-                          { name: '4', value: '4' },
-                          { name: '5', value: '5' },
-                          { name: '6', value: '6' },
-                          { name: '7', value: '7' },
-                          { name: '8', value: '8' },
-                          { name: '9', value: '9' },
-                          { name: '10', value: '10' },
-                          { name: '11', value: '11' },
-                          { name: '12', value: '12' },
-                        ],
-                      },
-                    }),
-                    columnWidthMobile: option('CUSTOM', {
-                      value: 'hidden',
-                      label: 'Column width (mobile)',
-                      configuration: {
-                        as: 'DROPDOWN',
-                        dataType: 'string',
-                        allowedInput: [
-                          { name: 'Fit content', value: 'fitContent' },
-                          { name: 'Flexible', value: 'flexible' },
-                          { name: 'Hidden', value: 'hidden' },
-                          { name: '1', value: '1' },
-                          { name: '2', value: '2' },
-                          { name: '3', value: '3' },
-                          { name: '4', value: '4' },
-                          { name: '5', value: '5' },
-                          { name: '6', value: '6' },
-                          { name: '7', value: '7' },
-                          { name: '8', value: '8' },
-                          { name: '9', value: '9' },
-                          { name: '10', value: '10' },
-                          { name: '11', value: '11' },
-                          { name: '12', value: '12' },
-                        ],
-                      },
-                    }),
-                    innerSpacing: sizes('Inner space', {
-                      value: ['0rem', '0rem', '0rem', '0rem'],
-                    }),
-                  },
-                },
-                [],
-              ),
-            ]),
-          ],
+          [],
         ),
 
         Box(
@@ -667,114 +774,101 @@ const drawerSidebar = DrawerBar(
           [
             Box(
               {
-                label: 'Full Item',
+                label: 'Selected Item',
                 options: {
                   ...boxOptions,
                   innerSpacing: sizes('Inner space', {
                     value: ['0rem', '0rem', '0rem', '0rem'],
+                  }),
+                  alignment: buttongroup(
+                    'Alignment',
+                    [
+                      ['None', 'none'],
+                      ['Left', 'flex-start'],
+                      ['Center', 'center'],
+                      ['Right', 'flex-end'],
+                      ['Justified', 'space-between'],
+                    ],
+                    {
+                      value: 'flex-start',
+                      configuration: {
+                        dataType: 'string',
+                      },
+                    },
+                  ),
+                  valignment: buttongroup(
+                    'Vertical alignment',
+                    [
+                      ['None', 'none'],
+                      ['Top', 'flex-start'],
+                      ['Center', 'center'],
+                      ['Bottom', 'flex-end'],
+                    ],
+                    {
+                      value: 'center',
+                      configuration: {
+                        dataType: 'string',
+                      },
+                    },
+                  ),
+                  width: size('Width', {
+                    value: '100%',
+                    configuration: {
+                      as: 'UNIT',
+                    },
+                  }),
+                  backgroundColor: color('Background color', {
+                    value: ThemeColor.BLACK,
+                  }),
+                  backgroundColorAlpha: option('NUMBER', {
+                    label: 'Background color opacity',
+                    value: 20,
                   }),
                 },
               },
               [
                 Box(
                   {
-                    label: 'Main Items',
                     options: {
                       ...boxOptions,
+                      stretch: toggle('Stretch (when in flex container)', {
+                        value: true,
+                      }),
                       innerSpacing: sizes('Inner space', {
                         value: ['0rem', '0rem', '0rem', '0rem'],
-                      }),
-                      alignment: buttongroup(
-                        'Alignment',
-                        [
-                          ['None', 'none'],
-                          ['Left', 'flex-start'],
-                          ['Center', 'center'],
-                          ['Right', 'flex-end'],
-                          ['Justified', 'space-between'],
-                        ],
-                        {
-                          value: 'flex-start',
-                          configuration: {
-                            dataType: 'string',
-                          },
-                        },
-                      ),
-                      valignment: buttongroup(
-                        'Vertical alignment',
-                        [
-                          ['None', 'none'],
-                          ['Top', 'flex-start'],
-                          ['Center', 'center'],
-                          ['Bottom', 'flex-end'],
-                        ],
-                        {
-                          value: 'center',
-                          configuration: {
-                            dataType: 'string',
-                          },
-                        },
-                      ),
-                      width: size('Width', {
-                        value: '100%',
-                        configuration: {
-                          as: 'UNIT',
-                        },
-                      }),
-                      backgroundColor: color('Background color', {
-                        value: ThemeColor.BLACK,
-                      }),
-                      backgroundColorAlpha: option('NUMBER', {
-                        label: 'Background color opacity',
-                        value: 20,
                       }),
                     },
                   },
                   [
-                    Box(
-                      {
-                        label: 'Item text',
-                        options: {
-                          ...boxOptions,
-                          stretch: toggle('Stretch (when in flex container)', {
-                            value: true,
-                          }),
-                          innerSpacing: sizes('Inner space', {
-                            value: ['0rem', '0rem', '0rem', '0rem'],
-                          }),
+                    Button({
+                      ref: { id: '#menuButton' },
+                      options: {
+                        ...buttonOptions,
+                        buttonText: variable('Button text', {
+                          value: ['Model info'],
+                        }),
+                      },
+                      style: {
+                        overwrite: {
+                          backgroundColor: {
+                            type: 'STATIC',
+                            value: 'transparent',
+                          },
+                          boxShadow: 'none',
+                          color: {
+                            type: 'THEME_COLOR',
+                            value: 'white',
+                          },
+                          fontFamily: 'Roboto',
+                          fontSize: '0.875rem',
+                          fontStyle: 'none',
+                          fontWeight: '400',
+                          padding: ['0.6875rem', '0.6875rem'],
+                          textDecoration: 'none',
+                          textTransform: 'none',
                         },
                       },
-                      [
-                        Button({
-                          options: {
-                            ...buttonOptions,
-                            buttonText: variable('Button text', {
-                              value: ['Client info'],
-                            }),
-                          },
-                          style: {
-                            overwrite: {
-                              backgroundColor: {
-                                type: 'STATIC',
-                                value: 'transparent',
-                              },
-                              boxShadow: 'none',
-                              color: {
-                                type: 'THEME_COLOR',
-                                value: 'white',
-                              },
-                              fontFamily: 'Roboto',
-                              fontSize: '0.875rem',
-                              fontStyle: 'none',
-                              fontWeight: '400',
-                              padding: ['0.6875rem', '0.6875rem'],
-                              textDecoration: 'none',
-                              textTransform: 'none',
-                            },
-                          },
-                        }),
-                      ],
-                    ),
+                    }),
                   ],
                 ),
               ],
@@ -830,7 +924,7 @@ const drawerSidebar = DrawerBar(
                 fontSize: '0.875rem',
                 fontStyle: 'none',
                 fontWeight: '400',
-                padding: ['0.6875rem', '0.6875rem'],
+                padding: ['0rem', '0rem'],
                 textDecoration: 'none',
                 textTransform: 'none',
               },
@@ -867,96 +961,191 @@ const drawerContainer = DrawerContainer(
     },
   },
   [
-    Box(
+    DataContainer(
       {
-        label: 'Box1',
+        ref: { id: '#dataContainer' },
         options: {
-          ...boxOptions,
-          alignment: buttongroup(
-            'Alignment',
-            [
-              ['None', 'none'],
-              ['Left', 'flex-start'],
-              ['Center', 'center'],
-              ['Right', 'flex-end'],
-              ['Justified', 'space-between'],
-            ],
-            {
-              value: 'flex-start',
-              configuration: {
-                dataType: 'string',
-              },
+          ...dataContainerOptions,
+          loadingType: option('CUSTOM', {
+            value: 'showChildren',
+            label: 'Show on load',
+            configuration: {
+              as: 'BUTTONGROUP',
+              dataType: 'string',
+              allowedInput: [
+                { name: 'Message', value: 'default' },
+                { name: 'Content', value: 'showChildren' },
+              ],
             },
-          ),
-          innerSpacing: sizes('Inner space', {
-            value: ['0rem', '0rem', '0rem', '0rem'],
           }),
         },
       },
       [
         Box(
           {
-            label: 'Box3',
+            label: 'Box1',
             options: {
               ...boxOptions,
-              stretch: toggle('Stretch (when in flex container)', {
-                value: true,
-              }),
+              alignment: buttongroup(
+                'Alignment',
+                [
+                  ['None', 'none'],
+                  ['Left', 'flex-start'],
+                  ['Center', 'center'],
+                  ['Right', 'flex-end'],
+                  ['Justified', 'space-between'],
+                ],
+                {
+                  value: 'flex-start',
+                  configuration: {
+                    dataType: 'string',
+                  },
+                },
+              ),
               innerSpacing: sizes('Inner space', {
                 value: ['0rem', '0rem', '0rem', '0rem'],
-              }),
-              height: size('Height', {
-                value: '100vh',
-                configuration: {
-                  as: 'UNIT',
-                },
-              }),
-              backgroundColor: color('Background color', {
-                value: ThemeColor.LIGHT,
-              }),
-              backgroundColorAlpha: option('NUMBER', {
-                label: 'Background color opacity',
-                value: 20,
               }),
             },
           },
           [
-            Box({ label: 'Box4' }, [
-              Box(
-                {
-                  label: 'Box5',
-                  options: {
-                    ...boxOptions,
-                    outerSpacing: sizes('Outer space', {
-                      value: ['M', 'M', 'M', '0rem'],
-                    }),
-                    innerSpacing: sizes('Inner space', {
-                      value: ['0rem', '0rem', '0rem', '0rem'],
-                    }),
-                  },
+            Box(
+              {
+                options: {
+                  ...boxOptions,
+                  innerSpacing: sizes('Inner space', {
+                    value: ['0rem', '0rem', '0rem', '0rem'],
+                  }),
                 },
-                [
+              },
+              [
+                Grid(
+                  {
+                    label: 'Tiny Drawer',
+                    ref: { id: '#tinyDrawer' },
+                    options: {
+                      ...gridOptions,
+                      visibility: toggle('Toggle visibility', {
+                        value: false,
+                        configuration: {
+                          as: 'VISIBILITY',
+                        },
+                      }),
+                      direction: option('CUSTOM', {
+                        value: 'column',
+                        label: 'Direction',
+                        configuration: {
+                          as: 'BUTTONGROUP',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'Horizontal', value: 'row' },
+                            { name: 'Vertical', value: 'column' },
+                          ],
+                          condition: showIf('type', 'EQ', 'container'),
+                        },
+                      }),
+                      height: size('Height', {
+                        value: '100%',
+                        configuration: {
+                          as: 'UNIT',
+                        },
+                      }),
+                      justify: option('CUSTOM', {
+                        value: 'flex-end',
+                        label: 'Justify',
+                        configuration: {
+                          as: 'DROPDOWN',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'Start', value: 'flex-start' },
+                            { name: 'Center', value: 'center' },
+                            { name: 'End', value: 'flex-end' },
+                            { name: 'Space between', value: 'space-between' },
+                            { name: 'Space around', value: 'space-around' },
+                            { name: 'Space evenly', value: 'space-evenly' },
+                          ],
+                          condition: showIf('type', 'EQ', 'container'),
+                        },
+                      }),
+                      backgroundColor: color('Background color', {
+                        value: ThemeColor.PRIMARY,
+                      }),
+                    },
+                  },
+                  [
+                    Button(
+                      {
+                        style: {
+                          overwrite: {
+                            backgroundColor: {
+                              type: 'STATIC',
+                              value: 'transparent',
+                            },
+                            boxShadow: 'none',
+                            color: {
+                              type: 'THEME_COLOR',
+                              value: 'white',
+                            },
+                            fontFamily: 'Roboto',
+                            fontSize: '0.875rem',
+                            fontStyle: 'none',
+                            fontWeight: '400',
+                            padding: ['0rem', '0rem'],
+                            textDecoration: 'none',
+                            textTransform: 'none',
+                          },
+                        },
+                        label: 'Open drawer',
+                        ref: { id: '#openDrawer' },
+                        options: {
+                          ...buttonOptions,
+                          buttonText: variable('Button text', { value: [] }),
+
+                          outerSpacing: sizes('Outer space', {
+                            value: ['M', 'M', 'L', 'M'],
+                          }),
+                          icon: icon('Icon', { value: 'ArrowForwardIos' }),
+                        },
+                      },
+                      [],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Box(
+              {
+                options: {
+                  ...boxOptions,
+                  stretch: toggle('Stretch (when in flex container)', {
+                    value: true,
+                  }),
+                  innerSpacing: sizes('Inner space', {
+                    value: ['0rem', '0rem', '0rem', '0rem'],
+                  }),
+                  height: size('Height', {
+                    value: '100vh',
+                    configuration: {
+                      as: 'UNIT',
+                    },
+                  }),
+                  backgroundColor: color('Background color', {
+                    value: ThemeColor.LIGHT,
+                  }),
+                  backgroundColorAlpha: option('NUMBER', {
+                    label: 'Background color opacity',
+                    value: 20,
+                  }),
+                },
+              },
+              [
+                Box({}, [
                   Box(
                     {
-                      label: 'Box6',
                       options: {
                         ...boxOptions,
-                        alignment: buttongroup(
-                          'Alignment',
-                          [
-                            ['None', 'none'],
-                            ['Left', 'flex-start'],
-                            ['Center', 'center'],
-                            ['Right', 'flex-end'],
-                            ['Justified', 'space-between'],
-                          ],
-                          {
-                            value: 'space-between',
-                            configuration: {
-                              dataType: 'string',
-                            },
-                          },
-                        ),
+                        outerSpacing: sizes('Outer space', {
+                          value: ['M', 'M', '0rem', 'M'],
+                        }),
                         innerSpacing: sizes('Inner space', {
                           value: ['0rem', '0rem', '0rem', '0rem'],
                         }),
@@ -965,98 +1154,6 @@ const drawerContainer = DrawerContainer(
                     [
                       Box(
                         {
-                          label: 'Box7',
-                          options: {
-                            ...boxOptions,
-                            innerSpacing: sizes('Inner space', {
-                              value: ['M', 'M', 'M', 'M'],
-                            }),
-                            alignment: buttongroup(
-                              'Alignment',
-                              [
-                                ['None', 'none'],
-                                ['Left', 'flex-start'],
-                                ['Center', 'center'],
-                                ['Right', 'flex-end'],
-                                ['Justified', 'space-between'],
-                              ],
-                              {
-                                value: 'flex-start',
-                                configuration: {
-                                  dataType: 'string',
-                                },
-                              },
-                            ),
-                            valignment: buttongroup(
-                              'Vertical alignment',
-                              [
-                                ['None', 'none'],
-                                ['Top', 'flex-start'],
-                                ['Center', 'center'],
-                                ['Bottom', 'flex-end'],
-                              ],
-                              {
-                                value: 'center',
-                                configuration: {
-                                  dataType: 'string',
-                                },
-                              },
-                            ),
-                          },
-                        },
-                        [
-                          Button(
-                            {
-                              options: {
-                                ...buttonOptions,
-                                buttonText: variable('Button text', {
-                                  value: [''],
-                                }),
-                                icon: icon('Icon', { value: 'ArrowBackIos' }),
-                                outerSpacing: sizes('Outer space', {
-                                  value: ['0rem', 'M', '0rem', '0rem'],
-                                }),
-                              },
-                              style: {
-                                name: 'text',
-                                overwrite: {
-                                  color: {
-                                    type: 'THEME_COLOR',
-                                    value: 'primary',
-                                  },
-                                  backgroundColor: {
-                                    type: 'STATIC',
-                                    value: 'transparent',
-                                  },
-                                },
-                              },
-                            },
-                            [],
-                          ),
-                          Text(
-                            {
-                              options: {
-                                ...textOptions,
-                                content: variable('Content', {
-                                  value: ['Details'],
-                                  configuration: { as: 'MULTILINE' },
-                                }),
-                                outerSpacing: sizes('Outer space', {
-                                  value: ['0rem', 'L', '0rem', '0rem'],
-                                }),
-                                textColor: color('Text color', {
-                                  value: ThemeColor.PRIMARY,
-                                }),
-                                type: font('Font', { value: ['Title5'] }),
-                              },
-                            },
-                            [],
-                          ),
-                        ],
-                      ),
-                      Box(
-                        {
-                          label: 'Box8',
                           options: {
                             ...boxOptions,
                             alignment: buttongroup(
@@ -1069,22 +1166,7 @@ const drawerContainer = DrawerContainer(
                                 ['Justified', 'space-between'],
                               ],
                               {
-                                value: 'flex-start',
-                                configuration: {
-                                  dataType: 'string',
-                                },
-                              },
-                            ),
-                            valignment: buttongroup(
-                              'Vertical alignment',
-                              [
-                                ['None', 'none'],
-                                ['Top', 'flex-start'],
-                                ['Center', 'center'],
-                                ['Bottom', 'flex-end'],
-                              ],
-                              {
-                                value: 'center',
+                                value: 'space-between',
                                 configuration: {
                                   dataType: 'string',
                                 },
@@ -1096,338 +1178,6 @@ const drawerContainer = DrawerContainer(
                           },
                         },
                         [
-                          Button(
-                            {
-                              ref: { id: '#refreshButton' },
-                              options: {
-                                ...buttonOptions,
-                                buttonText: variable('Button text', {
-                                  value: ['Refresh'],
-                                }),
-                                icon: icon('Icon', { value: 'Refresh' }),
-                                outerSpacing: sizes('Outer space', {
-                                  value: ['0rem', 'L', '0rem', '0rem'],
-                                }),
-                              },
-                              style: {
-                                name: 'outline',
-                                overwrite: {
-                                  backgroundColor: {
-                                    type: 'STATIC',
-                                    value: 'transparent',
-                                  },
-
-                                  boxShadow: 'none',
-                                  color: {
-                                    type: 'THEME_COLOR',
-                                    value: 'primary',
-                                  },
-                                  fontFamily: 'Roboto',
-                                  fontSize: '0.875rem',
-                                  fontStyle: 'none',
-                                  fontWeight: '400',
-                                  padding: ['0.6875rem', '0.6875rem'], // 1 zo'n dingetje is 0.0625rem
-                                  textDecoration: 'none',
-                                  textTransform: 'none',
-                                },
-                              },
-                            },
-                            [],
-                          ),
-                          Button(
-                            {
-                              ref: { id: '#editFormButton' },
-                              options: {
-                                ...buttonOptions,
-                                buttonText: variable('Button text', {
-                                  value: ['Edit'],
-                                }),
-                                icon: icon('Icon', { value: 'Edit' }),
-                                outerSpacing: sizes('Outer space', {
-                                  value: ['0rem', 'L', '0rem', '0rem'],
-                                }),
-                              },
-                              style: {
-                                name: 'filled',
-                                overwrite: {
-                                  backgroundColor: {
-                                    type: 'THEME_COLOR',
-                                    value: 'primary',
-                                  },
-                                  boxShadow: 'none',
-                                  color: {
-                                    type: 'THEME_COLOR',
-                                    value: 'white',
-                                  },
-                                  fontFamily: 'Roboto',
-                                  fontSize: '0.875rem',
-                                  fontStyle: 'none',
-                                  fontWeight: '400',
-                                  padding: ['0.6875rem', '0.6875rem'], // 1 zo'n dingetje is 0.0625rem
-                                  textDecoration: 'none',
-                                  textTransform: 'none',
-                                },
-                              },
-                            },
-                            [],
-                          ),
-                          Button(
-                            {
-                              options: {
-                                ...buttonOptions,
-                                buttonText: variable('Button text', {
-                                  value: ['Delete'],
-                                }),
-                                icon: icon('Icon', { value: 'Delete' }),
-                              },
-                              style: {
-                                name: 'filled',
-                                overwrite: {
-                                  backgroundColor: {
-                                    type: 'THEME_COLOR',
-                                    value: 'danger',
-                                  },
-                                  boxShadow: 'none',
-                                  color: {
-                                    type: 'THEME_COLOR',
-                                    value: 'white',
-                                  },
-                                  fontFamily: 'Roboto',
-                                  fontSize: '0.875rem',
-                                  fontStyle: 'none',
-                                  fontWeight: '400',
-                                  padding: ['0.6875rem', '0.6875rem'],
-                                  textDecoration: 'none',
-                                  textTransform: 'none',
-                                },
-                              },
-                            },
-                            [],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Box(
-                {
-                  label: 'Box9',
-                  options: {
-                    ...boxOptions,
-                    outerSpacing: sizes('Outer space', {
-                      value: ['M', 'M', 'M', '0rem'],
-                    }),
-                    innerSpacing: sizes('Inner space', {
-                      value: ['0rem', '0rem', '0rem', '0rem'],
-                    }),
-                  },
-                },
-                [
-                  Box(
-                    {
-                      label: 'Box10',
-                      options: {
-                        ...boxOptions,
-                        innerSpacing: sizes('Inner space', {
-                          value: ['0rem', '0rem', '0rem', '0rem'],
-                        }),
-                      },
-                    },
-                    [
-                      Breadcrumbs(
-                        {
-                          options: {
-                            ...breadcrumbsOptions,
-                            separatorType: option('CUSTOM', {
-                              label: 'Separator Type',
-                              value: 'icon',
-                              configuration: {
-                                as: 'BUTTONGROUP',
-                                dataType: 'string',
-                                allowedInput: [
-                                  { name: 'Text', value: 'text' },
-                                  { name: 'Icon', value: 'icon' },
-                                ],
-                              },
-                            }),
-                          },
-                        },
-                        [
-                          BreadcrumbItem(
-                            {
-                              options: {
-                                ...breadcrumbItemOptions,
-                                breadcrumbContent: variable('Content', {
-                                  value: ['Clients'],
-                                }),
-                                textColor: color('Text Color', {
-                                  value: ThemeColor.MEDIUM,
-                                }),
-                              },
-                            },
-                            [],
-                          ),
-                          BreadcrumbItem(
-                            {
-                              options: {
-                                ...breadcrumbItemOptions,
-                                breadcrumbContent: variable('Content', {
-                                  value: ['details'],
-                                }),
-                              },
-                            },
-                            [],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Box(
-                {
-                  label: 'Box11',
-                  options: {
-                    ...boxOptions,
-                    innerSpacing: sizes('Inner space', {
-                      value: ['0rem', '0rem', '0rem', '0rem'],
-                    }),
-                    outerSpacing: sizes('Outer space', {
-                      value: ['0rem', 'S', '0rem', '0rem'],
-                    }),
-                  },
-                },
-                [
-                  Row(
-                    {
-                      options: {
-                        ...rowOptions,
-                        maxRowWidth: option('CUSTOM', {
-                          label: 'Width',
-                          value: 'Full',
-                          configuration: {
-                            as: 'BUTTONGROUP',
-                            dataType: 'string',
-                            allowedInput: [
-                              { name: 'S', value: 'S' },
-                              { name: 'M', value: 'M' },
-                              { name: 'L', value: 'L' },
-                              { name: 'XL', value: 'XL' },
-                              { name: 'Full', value: 'Full' },
-                            ],
-                          },
-                        }),
-                      },
-                    },
-                    [
-                      Column(
-                        {
-                          options: {
-                            ...columnOptions,
-                            columnWidth: option('CUSTOM', {
-                              label: 'Column width',
-                              value: '8',
-                              configuration: {
-                                as: 'DROPDOWN',
-                                dataType: 'string',
-                                allowedInput: [
-                                  { name: 'Fit content', value: 'fitContent' },
-                                  { name: 'Flexible', value: 'flexible' },
-                                  { name: 'Hidden', value: 'hidden' },
-                                  { name: '1', value: '1' },
-                                  { name: '2', value: '2' },
-                                  { name: '3', value: '3' },
-                                  { name: '4', value: '4' },
-                                  { name: '5', value: '5' },
-                                  { name: '6', value: '6' },
-                                  { name: '7', value: '7' },
-                                  { name: '8', value: '8' },
-                                  { name: '9', value: '9' },
-                                  { name: '10', value: '10' },
-                                  { name: '11', value: '11' },
-                                  { name: '12', value: '12' },
-                                ],
-                              },
-                            }),
-                            columnWidthTabletLandscape: option('CUSTOM', {
-                              label: 'Column width (tablet landscape)',
-                              value: '8',
-                              configuration: {
-                                as: 'DROPDOWN',
-                                dataType: 'string',
-                                allowedInput: [
-                                  { name: 'Fit content', value: 'fitContent' },
-                                  { name: 'Flexible', value: 'flexible' },
-                                  { name: 'Hidden', value: 'hidden' },
-                                  { name: '1', value: '1' },
-                                  { name: '2', value: '2' },
-                                  { name: '3', value: '3' },
-                                  { name: '4', value: '4' },
-                                  { name: '5', value: '5' },
-                                  { name: '6', value: '6' },
-                                  { name: '7', value: '7' },
-                                  { name: '8', value: '8' },
-                                  { name: '9', value: '9' },
-                                  { name: '10', value: '10' },
-                                  { name: '11', value: '11' },
-                                  { name: '12', value: '12' },
-                                ],
-                              },
-                            }),
-                            columnWidthTabletPortrait: option('CUSTOM', {
-                              value: '12',
-                              label: 'Column width (tablet portrait)',
-                              configuration: {
-                                as: 'DROPDOWN',
-                                dataType: 'string',
-                                allowedInput: [
-                                  { name: 'Fit content', value: 'fitContent' },
-                                  { name: 'Flexible', value: 'flexible' },
-                                  { name: 'Hidden', value: 'hidden' },
-                                  { name: '1', value: '1' },
-                                  { name: '2', value: '2' },
-                                  { name: '3', value: '3' },
-                                  { name: '4', value: '4' },
-                                  { name: '5', value: '5' },
-                                  { name: '6', value: '6' },
-                                  { name: '7', value: '7' },
-                                  { name: '8', value: '8' },
-                                  { name: '9', value: '9' },
-                                  { name: '10', value: '10' },
-                                  { name: '11', value: '11' },
-                                  { name: '12', value: '12' },
-                                ],
-                              },
-                            }),
-                            columnWidthMobile: option('CUSTOM', {
-                              value: '12',
-                              label: 'Column width (mobile)',
-                              configuration: {
-                                as: 'DROPDOWN',
-                                dataType: 'string',
-                                allowedInput: [
-                                  { name: 'Fit content', value: 'fitContent' },
-                                  { name: 'Flexible', value: 'flexible' },
-                                  { name: 'Hidden', value: 'hidden' },
-                                  { name: '1', value: '1' },
-                                  { name: '2', value: '2' },
-                                  { name: '3', value: '3' },
-                                  { name: '4', value: '4' },
-                                  { name: '5', value: '5' },
-                                  { name: '6', value: '6' },
-                                  { name: '7', value: '7' },
-                                  { name: '8', value: '8' },
-                                  { name: '9', value: '9' },
-                                  { name: '10', value: '10' },
-                                  { name: '11', value: '11' },
-                                  { name: '12', value: '12' },
-                                ],
-                              },
-                            }),
-                          },
-                        },
-                        [
                           Box(
                             {
                               options: {
@@ -1435,82 +1185,240 @@ const drawerContainer = DrawerContainer(
                                 innerSpacing: sizes('Inner space', {
                                   value: ['0rem', '0rem', '0rem', '0rem'],
                                 }),
-                                backgroundColor: color('Background color', {
-                                  value: ThemeColor.WHITE,
-                                }),
-                                borderColor: color('Border color', {
-                                  value: ThemeColor.LIGHT,
-                                }),
-                                borderWidth: size('Border thickness', {
-                                  value: '1px',
-                                  configuration: {
-                                    as: 'UNIT',
+                                alignment: buttongroup(
+                                  'Alignment',
+                                  [
+                                    ['None', 'none'],
+                                    ['Left', 'flex-start'],
+                                    ['Center', 'center'],
+                                    ['Right', 'flex-end'],
+                                    ['Justified', 'space-between'],
+                                  ],
+                                  {
+                                    value: 'flex-start',
+                                    configuration: {
+                                      dataType: 'string',
+                                    },
                                   },
-                                }),
-                                borderRadius: size('Border radius', {
-                                  value: '4px',
-                                  configuration: {
-                                    as: 'UNIT',
+                                ),
+                                valignment: buttongroup(
+                                  'Vertical alignment',
+                                  [
+                                    ['None', 'none'],
+                                    ['Top', 'flex-start'],
+                                    ['Center', 'center'],
+                                    ['Bottom', 'flex-end'],
+                                  ],
+                                  {
+                                    value: 'center',
+                                    configuration: {
+                                      dataType: 'string',
+                                    },
                                   },
+                                ),
+                              },
+                            },
+                            [
+                              Button(
+                                {
+                                  options: {
+                                    ...buttonOptions,
+                                    buttonText: variable('Button text', {
+                                      value: [''],
+                                    }),
+                                    icon: icon('Icon', {
+                                      value: 'ArrowBackIos',
+                                    }),
+                                    outerSpacing: sizes('Outer space', {
+                                      value: ['0rem', 'M', '0rem', '0rem'],
+                                    }),
+                                  },
+                                  style: {
+                                    name: 'text',
+                                    overwrite: {
+                                      padding: '0rem',
+                                      color: {
+                                        type: 'THEME_COLOR',
+                                        value: 'primary',
+                                      },
+                                      backgroundColor: {
+                                        type: 'STATIC',
+                                        value: 'transparent',
+                                      },
+                                    },
+                                  },
+                                },
+                                [],
+                              ),
+                              Text(
+                                {
+                                  options: {
+                                    ...textOptions,
+                                    content: variable('Content', {
+                                      value: ['Details'],
+                                      configuration: { as: 'MULTILINE' },
+                                    }),
+                                    outerSpacing: sizes('Outer space', {
+                                      value: ['0rem', 'L', '0rem', '0rem'],
+                                    }),
+                                    textColor: color('Text color', {
+                                      value: ThemeColor.PRIMARY,
+                                    }),
+                                    type: font('Font', { value: ['Title5'] }),
+                                  },
+                                },
+                                [],
+                              ),
+                            ],
+                          ),
+                          Box(
+                            {
+                              options: {
+                                ...boxOptions,
+                                alignment: buttongroup(
+                                  'Alignment',
+                                  [
+                                    ['None', 'none'],
+                                    ['Left', 'flex-start'],
+                                    ['Center', 'center'],
+                                    ['Right', 'flex-end'],
+                                    ['Justified', 'space-between'],
+                                  ],
+                                  {
+                                    value: 'flex-start',
+                                    configuration: {
+                                      dataType: 'string',
+                                    },
+                                  },
+                                ),
+                                valignment: buttongroup(
+                                  'Vertical alignment',
+                                  [
+                                    ['None', 'none'],
+                                    ['Top', 'flex-start'],
+                                    ['Center', 'center'],
+                                    ['Bottom', 'flex-end'],
+                                  ],
+                                  {
+                                    value: 'center',
+                                    configuration: {
+                                      dataType: 'string',
+                                    },
+                                  },
+                                ),
+                                innerSpacing: sizes('Inner space', {
+                                  value: ['0rem', '0rem', '0rem', '0rem'],
                                 }),
                               },
                             },
                             [
-                              Row(
+                              Button(
                                 {
+                                  ref: { id: '#refreshButton' },
                                   options: {
-                                    ...rowOptions,
-                                    maxRowWidth: option('CUSTOM', {
-                                      label: 'Width',
-                                      value: 'Full',
-                                      configuration: {
-                                        as: 'BUTTONGROUP',
-                                        dataType: 'string',
-                                        allowedInput: [
-                                          { name: 'S', value: 'S' },
-                                          { name: 'M', value: 'M' },
-                                          { name: 'L', value: 'L' },
-                                          { name: 'XL', value: 'XL' },
-                                          { name: 'Full', value: 'Full' },
-                                        ],
-                                      },
+                                    ...buttonOptions,
+                                    buttonText: variable('Button text', {
+                                      value: ['Refresh'],
+                                    }),
+                                    icon: icon('Icon', { value: 'Refresh' }),
+                                    outerSpacing: sizes('Outer space', {
+                                      value: ['0rem', 'L', '0rem', '0rem'],
                                     }),
                                   },
-                                },
-                                [
-                                  Column(
-                                    {
-                                      options: {
-                                        ...columnOptions,
-                                        innerSpacing: sizes('Inner space', {
-                                          value: ['L', 'L', 'L', 'L'],
-                                        }),
+                                  style: {
+                                    name: 'outline',
+                                    overwrite: {
+                                      backgroundColor: {
+                                        type: 'STATIC',
+                                        value: 'transparent',
                                       },
+
+                                      boxShadow: 'none',
+                                      color: {
+                                        type: 'THEME_COLOR',
+                                        value: 'primary',
+                                      },
+                                      fontFamily: 'Roboto',
+                                      fontSize: '0.875rem',
+                                      fontStyle: 'none',
+                                      fontWeight: '400',
+                                      padding: ['0.6875rem', '0.6875rem'],
+                                      textDecoration: 'none',
+                                      textTransform: 'none',
                                     },
-                                    [
-                                      Text(
-                                        {
-                                          options: {
-                                            ...textOptions,
-                                            content: variable('Content', {
-                                              value: ['Client'],
-                                              configuration: {
-                                                as: 'MULTILINE',
-                                              },
-                                            }),
-                                            type: font('Font', {
-                                              value: ['Title5'],
-                                            }),
-                                          },
-                                        },
-                                        [],
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                  },
+                                },
+                                [],
                               ),
-                              DataContainer(
-                                { ref: { id: '#dataContainer' } },
+                              Button(
+                                {
+                                  ref: { id: '#editFormButton' },
+                                  options: {
+                                    ...buttonOptions,
+                                    buttonText: variable('Button text', {
+                                      value: ['Edit'],
+                                    }),
+                                    icon: icon('Icon', { value: 'Edit' }),
+                                    outerSpacing: sizes('Outer space', {
+                                      value: ['0rem', 'L', '0rem', '0rem'],
+                                    }),
+                                  },
+                                  style: {
+                                    name: 'filled',
+                                    overwrite: {
+                                      backgroundColor: {
+                                        type: 'THEME_COLOR',
+                                        value: 'primary',
+                                      },
+                                      boxShadow: 'none',
+                                      color: {
+                                        type: 'THEME_COLOR',
+                                        value: 'white',
+                                      },
+                                      fontFamily: 'Roboto',
+                                      fontSize: '0.875rem',
+                                      fontStyle: 'none',
+                                      fontWeight: '400',
+                                      padding: ['0.6875rem', '0.6875rem'],
+                                      textDecoration: 'none',
+                                      textTransform: 'none',
+                                    },
+                                  },
+                                },
+                                [],
+                              ),
+                              Button(
+                                {
+                                  ref: { id: '#deleteButton' },
+                                  options: {
+                                    ...buttonOptions,
+                                    buttonText: variable('Button text', {
+                                      value: ['Delete'],
+                                    }),
+                                    icon: icon('Icon', { value: 'Delete' }),
+                                  },
+                                  style: {
+                                    name: 'filled',
+                                    overwrite: {
+                                      backgroundColor: {
+                                        type: 'THEME_COLOR',
+                                        value: 'danger',
+                                      },
+                                      boxShadow: 'none',
+                                      color: {
+                                        type: 'THEME_COLOR',
+                                        value: 'white',
+                                      },
+                                      fontFamily: 'Roboto',
+                                      fontSize: '0.875rem',
+                                      fontStyle: 'none',
+                                      fontWeight: '400',
+                                      padding: ['0.6875rem', '0.6875rem'],
+                                      textDecoration: 'none',
+                                      textTransform: 'none',
+                                    },
+                                  },
+                                },
                                 [],
                               ),
                             ],
@@ -1519,20 +1427,539 @@ const drawerContainer = DrawerContainer(
                       ),
                     ],
                   ),
-                ],
-              ),
-              Dialog({ label: 'Dialog' }, [
-                Paper({}, [
-                  Row({}, [
-                    Column({}, [
-                      Box({}, [Text({}, []), Button({}, [])]),
-                      Box({}, [Text({}, [])]),
-                      Box({}, [Button({}, []), Button({}, [])]),
-                    ]),
-                  ]),
+                  Box(
+                    {
+                      options: {
+                        ...boxOptions,
+                        outerSpacing: sizes('Outer space', {
+                          value: ['M', 'M', '0rem', 'M'],
+                        }),
+                        innerSpacing: sizes('Inner space', {
+                          value: ['0rem', '0rem', '0rem', '0rem'],
+                        }),
+                      },
+                    },
+                    [
+                      Box(
+                        {
+                          options: {
+                            ...boxOptions,
+                            innerSpacing: sizes('Inner space', {
+                              value: ['0rem', '0rem', '0rem', '0rem'],
+                            }),
+                          },
+                        },
+                        [
+                          Breadcrumbs(
+                            {
+                              options: {
+                                ...breadcrumbsOptions,
+                                separatorType: option('CUSTOM', {
+                                  label: 'Separator Type',
+                                  value: 'icon',
+                                  configuration: {
+                                    as: 'BUTTONGROUP',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      { name: 'Text', value: 'text' },
+                                      { name: 'Icon', value: 'icon' },
+                                    ],
+                                  },
+                                }),
+                              },
+                            },
+                            [
+                              BreadcrumbItem(
+                                {
+                                  ref: { id: '#breadcrumbTitle' },
+                                  options: {
+                                    ...breadcrumbItemOptions,
+                                    breadcrumbContent: variable('Content', {
+                                      value: ['Models'],
+                                    }),
+                                    textColor: color('Text Color', {
+                                      value: ThemeColor.MEDIUM,
+                                    }),
+                                  },
+                                },
+                                [],
+                              ),
+                              BreadcrumbItem(
+                                {
+                                  options: {
+                                    ...breadcrumbItemOptions,
+                                    breadcrumbContent: variable('Content', {
+                                      value: ['details'],
+                                    }),
+                                  },
+                                },
+                                [],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Box(
+                    {
+                      options: {
+                        ...boxOptions,
+                        innerSpacing: sizes('Inner space', {
+                          value: ['0rem', '0rem', '0rem', '0rem'],
+                        }),
+                        outerSpacing: sizes('Outer space', {
+                          value: ['0rem', 'S', '0rem', '0rem'],
+                        }),
+                      },
+                    },
+                    [
+                      Row(
+                        {
+                          options: {
+                            ...rowOptions,
+                            maxRowWidth: option('CUSTOM', {
+                              label: 'Width',
+                              value: 'Full',
+                              configuration: {
+                                as: 'BUTTONGROUP',
+                                dataType: 'string',
+                                allowedInput: [
+                                  { name: 'S', value: 'S' },
+                                  { name: 'M', value: 'M' },
+                                  { name: 'L', value: 'L' },
+                                  { name: 'XL', value: 'XL' },
+                                  { name: 'Full', value: 'Full' },
+                                ],
+                              },
+                            }),
+                          },
+                        },
+                        [
+                          Column(
+                            {
+                              options: {
+                                ...columnOptions,
+                                columnWidth: option('CUSTOM', {
+                                  label: 'Column width',
+                                  value: '8',
+                                  configuration: {
+                                    as: 'DROPDOWN',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      {
+                                        name: 'Fit content',
+                                        value: 'fitContent',
+                                      },
+                                      { name: 'Flexible', value: 'flexible' },
+                                      { name: 'Hidden', value: 'hidden' },
+                                      { name: '1', value: '1' },
+                                      { name: '2', value: '2' },
+                                      { name: '3', value: '3' },
+                                      { name: '4', value: '4' },
+                                      { name: '5', value: '5' },
+                                      { name: '6', value: '6' },
+                                      { name: '7', value: '7' },
+                                      { name: '8', value: '8' },
+                                      { name: '9', value: '9' },
+                                      { name: '10', value: '10' },
+                                      { name: '11', value: '11' },
+                                      { name: '12', value: '12' },
+                                    ],
+                                  },
+                                }),
+                                columnWidthTabletLandscape: option('CUSTOM', {
+                                  label: 'Column width (tablet landscape)',
+                                  value: '8',
+                                  configuration: {
+                                    as: 'DROPDOWN',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      {
+                                        name: 'Fit content',
+                                        value: 'fitContent',
+                                      },
+                                      { name: 'Flexible', value: 'flexible' },
+                                      { name: 'Hidden', value: 'hidden' },
+                                      { name: '1', value: '1' },
+                                      { name: '2', value: '2' },
+                                      { name: '3', value: '3' },
+                                      { name: '4', value: '4' },
+                                      { name: '5', value: '5' },
+                                      { name: '6', value: '6' },
+                                      { name: '7', value: '7' },
+                                      { name: '8', value: '8' },
+                                      { name: '9', value: '9' },
+                                      { name: '10', value: '10' },
+                                      { name: '11', value: '11' },
+                                      { name: '12', value: '12' },
+                                    ],
+                                  },
+                                }),
+                                columnWidthTabletPortrait: option('CUSTOM', {
+                                  value: '12',
+                                  label: 'Column width (tablet portrait)',
+                                  configuration: {
+                                    as: 'DROPDOWN',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      {
+                                        name: 'Fit content',
+                                        value: 'fitContent',
+                                      },
+                                      { name: 'Flexible', value: 'flexible' },
+                                      { name: 'Hidden', value: 'hidden' },
+                                      { name: '1', value: '1' },
+                                      { name: '2', value: '2' },
+                                      { name: '3', value: '3' },
+                                      { name: '4', value: '4' },
+                                      { name: '5', value: '5' },
+                                      { name: '6', value: '6' },
+                                      { name: '7', value: '7' },
+                                      { name: '8', value: '8' },
+                                      { name: '9', value: '9' },
+                                      { name: '10', value: '10' },
+                                      { name: '11', value: '11' },
+                                      { name: '12', value: '12' },
+                                    ],
+                                  },
+                                }),
+                                columnWidthMobile: option('CUSTOM', {
+                                  value: '12',
+                                  label: 'Column width (mobile)',
+                                  configuration: {
+                                    as: 'DROPDOWN',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      {
+                                        name: 'Fit content',
+                                        value: 'fitContent',
+                                      },
+                                      { name: 'Flexible', value: 'flexible' },
+                                      { name: 'Hidden', value: 'hidden' },
+                                      { name: '1', value: '1' },
+                                      { name: '2', value: '2' },
+                                      { name: '3', value: '3' },
+                                      { name: '4', value: '4' },
+                                      { name: '5', value: '5' },
+                                      { name: '6', value: '6' },
+                                      { name: '7', value: '7' },
+                                      { name: '8', value: '8' },
+                                      { name: '9', value: '9' },
+                                      { name: '10', value: '10' },
+                                      { name: '11', value: '11' },
+                                      { name: '12', value: '12' },
+                                    ],
+                                  },
+                                }),
+                              },
+                            },
+                            [
+                              Box(
+                                {
+                                  ref: { id: '#detailsBox' },
+                                  options: {
+                                    ...boxOptions,
+                                    innerSpacing: sizes('Inner space', {
+                                      value: ['0rem', '0rem', '0rem', '0rem'],
+                                    }),
+                                    backgroundColor: color('Background color', {
+                                      value: ThemeColor.WHITE,
+                                    }),
+                                    borderColor: color('Border color', {
+                                      value: ThemeColor.LIGHT,
+                                    }),
+                                    borderWidth: size('Border thickness', {
+                                      value: '1px',
+                                      configuration: {
+                                        as: 'UNIT',
+                                      },
+                                    }),
+                                    borderRadius: size('Border radius', {
+                                      value: '4px',
+                                      configuration: {
+                                        as: 'UNIT',
+                                      },
+                                    }),
+                                  },
+                                },
+                                [
+                                  Row(
+                                    {
+                                      options: {
+                                        ...rowOptions,
+                                        maxRowWidth: option('CUSTOM', {
+                                          label: 'Width',
+                                          value: 'Full',
+                                          configuration: {
+                                            as: 'BUTTONGROUP',
+                                            dataType: 'string',
+                                            allowedInput: [
+                                              { name: 'S', value: 'S' },
+                                              { name: 'M', value: 'M' },
+                                              { name: 'L', value: 'L' },
+                                              { name: 'XL', value: 'XL' },
+                                              { name: 'Full', value: 'Full' },
+                                            ],
+                                          },
+                                        }),
+                                      },
+                                    },
+                                    [
+                                      Column(
+                                        {
+                                          options: {
+                                            ...columnOptions,
+                                            innerSpacing: sizes('Inner space', {
+                                              value: ['L', 'L', 'L', 'L'],
+                                            }),
+                                          },
+                                        },
+                                        [
+                                          Text(
+                                            {
+                                              ref: { id: '#detailsTitle' },
+                                              options: {
+                                                ...textOptions,
+                                                content: variable('Content', {
+                                                  value: ['Model'],
+                                                  configuration: {
+                                                    as: 'MULTILINE',
+                                                  },
+                                                }),
+                                                type: font('Font', {
+                                                  value: ['Title5'],
+                                                }),
+                                              },
+                                            },
+                                            [],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Dialog(
+                    {
+                      ref: {
+                        id: '#deleteDialog',
+                      },
+                    },
+                    [
+                      Paper({}, [
+                        Row({}, [
+                          Column({}, [
+                            Box(
+                              {
+                                options: {
+                                  ...boxOptions,
+                                  alignment: buttongroup(
+                                    'Alignment',
+                                    [
+                                      ['None', 'none'],
+                                      ['Left', 'flex-start'],
+                                      ['Center', 'center'],
+                                      ['Right', 'flex-end'],
+                                      ['Justified', 'space-between'],
+                                    ],
+                                    {
+                                      value: 'space-between',
+                                      configuration: {
+                                        dataType: 'string',
+                                      },
+                                    },
+                                  ),
+                                },
+                              },
+                              [
+                                Text(
+                                  {
+                                    options: {
+                                      ...textOptions,
+                                      content: variable('Content', {
+                                        value: ['Delete record'],
+                                        configuration: {
+                                          as: 'MULTILINE',
+                                        },
+                                      }),
+                                      type: font('Font', {
+                                        value: ['Title4'],
+                                      }),
+                                    },
+                                  },
+                                  [],
+                                ),
+                                Button({
+                                  style: {
+                                    overwrite: {
+                                      backgroundColor: {
+                                        type: 'STATIC',
+                                        value: 'transparent',
+                                      },
+                                      boxShadow: 'none',
+                                      color: {
+                                        type: 'THEME_COLOR',
+                                        value: 'light',
+                                      },
+                                      padding: ['0rem'],
+                                    },
+                                  },
+                                  options: {
+                                    ...buttonOptions,
+                                    icon: icon('Icon', {
+                                      value: 'Close',
+                                    }),
+                                    buttonText: variable('Button text', {
+                                      value: [''],
+                                    }),
+                                    size: option('CUSTOM', {
+                                      value: 'medium',
+                                      label: 'Icon size',
+                                      configuration: {
+                                        as: 'BUTTONGROUP',
+                                        dataType: 'string',
+                                        allowedInput: [
+                                          {
+                                            name: 'Small',
+                                            value: 'small',
+                                          },
+                                          {
+                                            name: 'Medium',
+                                            value: 'medium',
+                                          },
+                                          {
+                                            name: 'Large',
+                                            value: 'large',
+                                          },
+                                        ],
+                                        condition: hideIf('icon', 'EQ', 'none'),
+                                      },
+                                    }),
+                                  },
+                                  ref: {
+                                    id: '#closeBtn',
+                                  },
+                                }),
+                              ],
+                            ),
+                            Row({}, [
+                              Column({}, [
+                                Text(
+                                  {
+                                    options: {
+                                      ...textOptions,
+                                      content: variable('Content', {
+                                        value: [
+                                          "Are you sure you want to delete this record? You can't undo this action.",
+                                        ],
+                                        configuration: {
+                                          as: 'MULTILINE',
+                                        },
+                                      }),
+                                      type: font('Font', {
+                                        value: ['Body1'],
+                                      }),
+                                    },
+                                  },
+                                  [],
+                                ),
+                              ]),
+                            ]),
+                            Box(
+                              {
+                                options: {
+                                  ...boxOptions,
+                                  alignment: buttongroup(
+                                    'Alignment',
+                                    [
+                                      ['None', 'none'],
+                                      ['Left', 'flex-start'],
+                                      ['Center', 'center'],
+                                      ['Right', 'flex-end'],
+                                      ['Justified', 'space-between'],
+                                    ],
+                                    {
+                                      value: 'flex-end',
+                                      configuration: {
+                                        dataType: 'string',
+                                      },
+                                    },
+                                  ),
+                                },
+                              },
+                              [
+                                Button(
+                                  {
+                                    ref: {
+                                      id: '#cancelButton',
+                                    },
+                                    options: {
+                                      ...buttonOptions,
+                                      buttonText: variable('Button text', {
+                                        value: ['Cancel'],
+                                      }),
+                                      outerSpacing: sizes('Outer space', {
+                                        value: ['0rem', 'M', '0rem', '0rem'],
+                                      }),
+                                    },
+                                    style: {
+                                      overwrite: {
+                                        backgroundColor: {
+                                          type: 'STATIC',
+                                          value: 'transparent',
+                                        },
+                                        borderColor: {
+                                          type: 'THEME_COLOR',
+                                          value: 'primary',
+                                        },
+                                        borderRadius: ['0.25rem'],
+                                        borderStyle: 'solid',
+                                        borderWidth: ['0.0625rem'],
+                                        boxShadow: 'none',
+                                        color: {
+                                          type: 'THEME_COLOR',
+                                          value: 'primary',
+                                        },
+                                        fontFamily: 'Roboto',
+                                        fontSize: '0.875rem',
+                                        fontStyle: 'none',
+                                        fontWeight: '400',
+                                        padding: ['0.625rem', '1.3125rem'],
+                                        textDecoration: 'none',
+                                        textTransform: 'none',
+                                      },
+                                    },
+                                  },
+                                  [],
+                                ),
+                                component(
+                                  'Form',
+                                  {
+                                    label: 'Delete Form',
+                                    options: defaults,
+                                    ref: {
+                                      id: '#deleteForm',
+                                    },
+                                  },
+                                  [],
+                                ),
+                              ],
+                            ),
+                          ]),
+                        ]),
+                      ]),
+                    ],
+                  ),
                 ]),
-              ]),
-            ]),
+              ],
+            ),
           ],
         ),
       ],
@@ -1558,7 +1985,7 @@ const beforeCreate = ({
     prepareAction,
     createUuid,
     PropertyKind,
-    makeBettyInput,
+    makeBettyUpdateInput,
     BettyPrefabs,
   },
 }: BeforeCreateArgs) => {
@@ -1577,6 +2004,7 @@ const beforeCreate = ({
   });
 
   const updateFormId = createUuid();
+  const deleteButtonId = createUuid();
 
   function treeSearch(
     dirName: string,
@@ -1600,7 +2028,15 @@ const beforeCreate = ({
 
   return (
     <>
-      <Header onClose={close} title="Configure header and footer" />
+      <Header onClose={close} title="Configure back office details" />
+      <BoxComp
+        justify="center"
+        margin={{ left: '2rem', top: '-1rem', bottom: '-1rem' }}
+      >
+        <TextComp size="medium" weight="bold">
+          Step: 2/2
+        </TextComp>
+      </BoxComp>
       <Content>
         <BoxComp pad={{ bottom: '15px' }}>
           <Field
@@ -1647,6 +2083,25 @@ const beforeCreate = ({
             },
           }));
 
+          const enrichFileObj = (obj: any) => {
+            const returnObject = {
+              // componentId: obj,
+              id: obj.id,
+              name: '',
+              type: 'PROPERTY',
+              useKey: 'url',
+            };
+            if (model) {
+              const property = model.properties.find(
+                (prop: any) => prop.id === returnObject.id[0],
+              );
+              if (property) {
+                returnObject.name = `{{ ${model.name}.${property.name} }}`;
+              }
+            }
+            return returnObject;
+          };
+
           const enrichVarObj = (obj: any) => {
             const returnObject = {
               id: [obj.id],
@@ -1671,388 +2126,6 @@ const beforeCreate = ({
             const Text1 = cloneStructure('Text');
             const Text2 = cloneStructure('Text');
 
-            if (RowColumnColumn.type === 'COMPONENT') {
-              setOption(
-                RowColumnColumn,
-                'maxRowWidth',
-                (opt: PrefabComponentOption) => ({
-                  ...opt,
-                  value: 'Full',
-                }),
-              );
-            }
-            if (
-              RowColumnColumn.type === 'COMPONENT' &&
-              RowColumnColumn.descendants[0].type === 'COMPONENT'
-            ) {
-              setOption(
-                RowColumnColumn.descendants[0],
-                'columnWidth',
-                (opt: PrefabComponentOption) => ({
-                  ...opt,
-                  value: '4',
-                  configuration: {
-                    as: 'DROPDOWN',
-                    dataType: 'string',
-                    allowedInput: [
-                      {
-                        name: 'Fit content',
-                        value: 'fitContent',
-                      },
-                      {
-                        name: 'Flexible',
-                        value: 'flexible',
-                      },
-                      {
-                        name: 'Hidden',
-                        value: 'hidden',
-                      },
-                      { name: '1', value: '1' },
-                      { name: '2', value: '2' },
-                      { name: '3', value: '3' },
-                      { name: '4', value: '4' },
-                      { name: '5', value: '5' },
-                      { name: '6', value: '6' },
-                      { name: '7', value: '7' },
-                      { name: '8', value: '8' },
-                      { name: '9', value: '9' },
-                      { name: '10', value: '10' },
-                      { name: '11', value: '11' },
-                      { name: '12', value: '12' },
-                    ],
-                  },
-                }),
-              );
-              setOption(
-                RowColumnColumn.descendants[0],
-                'columnWidthTabletLandscape',
-                (opt: PrefabComponentOption) => ({
-                  ...opt,
-                  value: '6',
-                  configuration: {
-                    as: 'DROPDOWN',
-                    dataType: 'string',
-                    allowedInput: [
-                      {
-                        name: 'Fit content',
-                        value: 'fitContent',
-                      },
-                      {
-                        name: 'Flexible',
-                        value: 'flexible',
-                      },
-                      {
-                        name: 'Hidden',
-                        value: 'hidden',
-                      },
-                      { name: '1', value: '1' },
-                      { name: '2', value: '2' },
-                      { name: '3', value: '3' },
-                      { name: '4', value: '4' },
-                      { name: '5', value: '5' },
-                      { name: '6', value: '6' },
-                      { name: '7', value: '7' },
-                      { name: '8', value: '8' },
-                      { name: '9', value: '9' },
-                      { name: '10', value: '10' },
-                      { name: '11', value: '11' },
-                      { name: '12', value: '12' },
-                    ],
-                  },
-                }),
-              );
-              setOption(
-                RowColumnColumn.descendants[0],
-                'columnWidthTabletPortrait',
-                (opt: PrefabComponentOption) => ({
-                  ...opt,
-                  value: '12',
-                  configuration: {
-                    as: 'DROPDOWN',
-                    dataType: 'string',
-                    allowedInput: [
-                      {
-                        name: 'Fit content',
-                        value: 'fitContent',
-                      },
-                      {
-                        name: 'Flexible',
-                        value: 'flexible',
-                      },
-                      {
-                        name: 'Hidden',
-                        value: 'hidden',
-                      },
-                      { name: '1', value: '1' },
-                      { name: '2', value: '2' },
-                      { name: '3', value: '3' },
-                      { name: '4', value: '4' },
-                      { name: '5', value: '5' },
-                      { name: '6', value: '6' },
-                      { name: '7', value: '7' },
-                      { name: '8', value: '8' },
-                      { name: '9', value: '9' },
-                      { name: '10', value: '10' },
-                      { name: '11', value: '11' },
-                      { name: '12', value: '12' },
-                    ],
-                  },
-                }),
-              );
-              setOption(
-                RowColumnColumn.descendants[0],
-                'columnWidthMobile',
-                (opt: PrefabComponentOption) => ({
-                  ...opt,
-                  value: '12',
-                  configuration: {
-                    as: 'DROPDOWN',
-                    dataType: 'string',
-                    allowedInput: [
-                      {
-                        name: 'Fit content',
-                        value: 'fitContent',
-                      },
-                      {
-                        name: 'Flexible',
-                        value: 'flexible',
-                      },
-                      {
-                        name: 'Hidden',
-                        value: 'hidden',
-                      },
-                      { name: '1', value: '1' },
-                      { name: '2', value: '2' },
-                      { name: '3', value: '3' },
-                      { name: '4', value: '4' },
-                      { name: '5', value: '5' },
-                      { name: '6', value: '6' },
-                      { name: '7', value: '7' },
-                      { name: '8', value: '8' },
-                      { name: '9', value: '9' },
-                      { name: '10', value: '10' },
-                      { name: '11', value: '11' },
-                      { name: '12', value: '12' },
-                    ],
-                  },
-                }),
-              );
-              setOption(
-                RowColumnColumn.descendants[0],
-                'innerSpacing',
-                (opt: PrefabComponentOption) => ({
-                  ...opt,
-                  value: ['0rem', 'L', 'L', 'L'],
-                }),
-              );
-            }
-            if (Text1.type === 'COMPONENT') {
-              setOption(Text1, 'content', (opt: PrefabComponentOption) => ({
-                ...opt,
-                value: [`${[prop.label]}:`],
-              }));
-              setOption(Text1, 'type', (opt: PrefabComponentOption) => ({
-                ...opt,
-                value: ['Body1'],
-              }));
-              setOption(Text1, 'fontWeight', (opt: PrefabComponentOption) => ({
-                ...opt,
-                value: '500',
-                configuration: {
-                  as: 'DROPDOWN',
-                  dataType: 'string',
-                  allowedInput: [
-                    { name: '100', value: '100' },
-                    { name: '200', value: '200' },
-                    { name: '300', value: '300' },
-                    { name: '400', value: '400' },
-                    { name: '500', value: '500' },
-                    { name: '600', value: '600' },
-                    { name: '700', value: '700' },
-                    { name: '800', value: '800' },
-                    { name: '900', value: '900' },
-                  ],
-                },
-              }));
-            }
-            if (
-              RowColumnColumn.type === 'COMPONENT' &&
-              RowColumnColumn.descendants[1].type === 'COMPONENT'
-            ) {
-              setOption(
-                RowColumnColumn.descendants[1],
-                'columnWidth',
-                (opt: PrefabComponentOption) => ({
-                  ...opt,
-                  value: '8',
-                  configuration: {
-                    as: 'DROPDOWN',
-                    dataType: 'string',
-                    allowedInput: [
-                      {
-                        name: 'Fit content',
-                        value: 'fitContent',
-                      },
-                      {
-                        name: 'Flexible',
-                        value: 'flexible',
-                      },
-                      {
-                        name: 'Hidden',
-                        value: 'hidden',
-                      },
-                      { name: '1', value: '1' },
-                      { name: '2', value: '2' },
-                      { name: '3', value: '3' },
-                      { name: '4', value: '4' },
-                      { name: '5', value: '5' },
-                      { name: '6', value: '6' },
-                      { name: '7', value: '7' },
-                      { name: '8', value: '8' },
-                      { name: '9', value: '9' },
-                      { name: '10', value: '10' },
-                      { name: '11', value: '11' },
-                      { name: '12', value: '12' },
-                    ],
-                  },
-                }),
-              );
-              setOption(
-                RowColumnColumn.descendants[1],
-                'columnWidthTabletLandscape',
-                (opt: PrefabComponentOption) => ({
-                  ...opt,
-                  value: '6',
-                  configuration: {
-                    as: 'DROPDOWN',
-                    dataType: 'string',
-                    allowedInput: [
-                      {
-                        name: 'Fit content',
-                        value: 'fitContent',
-                      },
-                      {
-                        name: 'Flexible',
-                        value: 'flexible',
-                      },
-                      {
-                        name: 'Hidden',
-                        value: 'hidden',
-                      },
-                      { name: '1', value: '1' },
-                      { name: '2', value: '2' },
-                      { name: '3', value: '3' },
-                      { name: '4', value: '4' },
-                      { name: '5', value: '5' },
-                      { name: '6', value: '6' },
-                      { name: '7', value: '7' },
-                      { name: '8', value: '8' },
-                      { name: '9', value: '9' },
-                      { name: '10', value: '10' },
-                      { name: '11', value: '11' },
-                      { name: '12', value: '12' },
-                    ],
-                  },
-                }),
-              );
-              setOption(
-                RowColumnColumn.descendants[1],
-                'columnWidthTabletPortrait',
-                (opt: PrefabComponentOption) => ({
-                  ...opt,
-                  value: '12',
-                  configuration: {
-                    as: 'DROPDOWN',
-                    dataType: 'string',
-                    allowedInput: [
-                      {
-                        name: 'Fit content',
-                        value: 'fitContent',
-                      },
-                      {
-                        name: 'Flexible',
-                        value: 'flexible',
-                      },
-                      {
-                        name: 'Hidden',
-                        value: 'hidden',
-                      },
-                      { name: '1', value: '1' },
-                      { name: '2', value: '2' },
-                      { name: '3', value: '3' },
-                      { name: '4', value: '4' },
-                      { name: '5', value: '5' },
-                      { name: '6', value: '6' },
-                      { name: '7', value: '7' },
-                      { name: '8', value: '8' },
-                      { name: '9', value: '9' },
-                      { name: '10', value: '10' },
-                      { name: '11', value: '11' },
-                      { name: '12', value: '12' },
-                    ],
-                  },
-                }),
-              );
-              setOption(
-                RowColumnColumn.descendants[1],
-                'columnWidthMobile',
-                (opt: PrefabComponentOption) => ({
-                  ...opt,
-                  value: '12',
-                  configuration: {
-                    as: 'DROPDOWN',
-                    dataType: 'string',
-                    allowedInput: [
-                      {
-                        name: 'Fit content',
-                        value: 'fitContent',
-                      },
-                      {
-                        name: 'Flexible',
-                        value: 'flexible',
-                      },
-                      {
-                        name: 'Hidden',
-                        value: 'hidden',
-                      },
-                      { name: '1', value: '1' },
-                      { name: '2', value: '2' },
-                      { name: '3', value: '3' },
-                      { name: '4', value: '4' },
-                      { name: '5', value: '5' },
-                      { name: '6', value: '6' },
-                      { name: '7', value: '7' },
-                      { name: '8', value: '8' },
-                      { name: '9', value: '9' },
-                      { name: '10', value: '10' },
-                      { name: '11', value: '11' },
-                      { name: '12', value: '12' },
-                    ],
-                  },
-                }),
-              );
-              setOption(
-                RowColumnColumn.descendants[1],
-                'innerSpacing',
-                (opt: PrefabComponentOption) => ({
-                  ...opt,
-                  value: ['0rem', 'L', 'L', 'L'],
-                }),
-              );
-            }
-
-            if (Text2.type === 'COMPONENT') {
-              setOption(Text2, 'content', (opt: any) => ({
-                ...opt,
-                value: [enrichVarObj({ ...prop })],
-                configuration: { as: 'MULTILINE' },
-              }));
-              setOption(Text2, 'type', (opt: PrefabComponentOption) => ({
-                ...opt,
-                value: ['Body1'],
-              }));
-            }
-
             if (
               RowColumnColumn.type !== 'COMPONENT' ||
               RowColumnColumn.descendants[0].type !== 'COMPONENT' ||
@@ -2060,18 +2133,519 @@ const beforeCreate = ({
             ) {
               throw new Error('RowColumnColumn is not a component');
             }
+
+            if (Text1.type !== 'COMPONENT')
+              throw new Error('Text1 is not a component');
+
+            if (Text2.type !== 'COMPONENT')
+              throw new Error('Text2 is not a component');
+            setOption(
+              RowColumnColumn,
+              'maxRowWidth',
+              (opt: PrefabComponentOption) => ({
+                ...opt,
+                value: 'Full',
+              }),
+            );
+
+            // set column 1 options
+            setOption(
+              RowColumnColumn.descendants[0],
+              'columnWidth',
+              (opt: PrefabComponentOption) => ({
+                ...opt,
+                value: '4',
+                configuration: {
+                  as: 'DROPDOWN',
+                  dataType: 'string',
+                  allowedInput: [
+                    {
+                      name: 'Fit content',
+                      value: 'fitContent',
+                    },
+                    {
+                      name: 'Flexible',
+                      value: 'flexible',
+                    },
+                    {
+                      name: 'Hidden',
+                      value: 'hidden',
+                    },
+                    { name: '1', value: '1' },
+                    { name: '2', value: '2' },
+                    { name: '3', value: '3' },
+                    { name: '4', value: '4' },
+                    { name: '5', value: '5' },
+                    { name: '6', value: '6' },
+                    { name: '7', value: '7' },
+                    { name: '8', value: '8' },
+                    { name: '9', value: '9' },
+                    { name: '10', value: '10' },
+                    { name: '11', value: '11' },
+                    { name: '12', value: '12' },
+                  ],
+                },
+              }),
+            );
+            setOption(
+              RowColumnColumn.descendants[0],
+              'columnWidthTabletLandscape',
+              (opt: PrefabComponentOption) => ({
+                ...opt,
+                value: '6',
+                configuration: {
+                  as: 'DROPDOWN',
+                  dataType: 'string',
+                  allowedInput: [
+                    {
+                      name: 'Fit content',
+                      value: 'fitContent',
+                    },
+                    {
+                      name: 'Flexible',
+                      value: 'flexible',
+                    },
+                    {
+                      name: 'Hidden',
+                      value: 'hidden',
+                    },
+                    { name: '1', value: '1' },
+                    { name: '2', value: '2' },
+                    { name: '3', value: '3' },
+                    { name: '4', value: '4' },
+                    { name: '5', value: '5' },
+                    { name: '6', value: '6' },
+                    { name: '7', value: '7' },
+                    { name: '8', value: '8' },
+                    { name: '9', value: '9' },
+                    { name: '10', value: '10' },
+                    { name: '11', value: '11' },
+                    { name: '12', value: '12' },
+                  ],
+                },
+              }),
+            );
+            setOption(
+              RowColumnColumn.descendants[0],
+              'columnWidthTabletPortrait',
+              (opt: PrefabComponentOption) => ({
+                ...opt,
+                value: '12',
+                configuration: {
+                  as: 'DROPDOWN',
+                  dataType: 'string',
+                  allowedInput: [
+                    {
+                      name: 'Fit content',
+                      value: 'fitContent',
+                    },
+                    {
+                      name: 'Flexible',
+                      value: 'flexible',
+                    },
+                    {
+                      name: 'Hidden',
+                      value: 'hidden',
+                    },
+                    { name: '1', value: '1' },
+                    { name: '2', value: '2' },
+                    { name: '3', value: '3' },
+                    { name: '4', value: '4' },
+                    { name: '5', value: '5' },
+                    { name: '6', value: '6' },
+                    { name: '7', value: '7' },
+                    { name: '8', value: '8' },
+                    { name: '9', value: '9' },
+                    { name: '10', value: '10' },
+                    { name: '11', value: '11' },
+                    { name: '12', value: '12' },
+                  ],
+                },
+              }),
+            );
+            setOption(
+              RowColumnColumn.descendants[0],
+              'columnWidthMobile',
+              (opt: PrefabComponentOption) => ({
+                ...opt,
+                value: '12',
+                configuration: {
+                  as: 'DROPDOWN',
+                  dataType: 'string',
+                  allowedInput: [
+                    {
+                      name: 'Fit content',
+                      value: 'fitContent',
+                    },
+                    {
+                      name: 'Flexible',
+                      value: 'flexible',
+                    },
+                    {
+                      name: 'Hidden',
+                      value: 'hidden',
+                    },
+                    { name: '1', value: '1' },
+                    { name: '2', value: '2' },
+                    { name: '3', value: '3' },
+                    { name: '4', value: '4' },
+                    { name: '5', value: '5' },
+                    { name: '6', value: '6' },
+                    { name: '7', value: '7' },
+                    { name: '8', value: '8' },
+                    { name: '9', value: '9' },
+                    { name: '10', value: '10' },
+                    { name: '11', value: '11' },
+                    { name: '12', value: '12' },
+                  ],
+                },
+              }),
+            );
+            setOption(
+              RowColumnColumn.descendants[0],
+              'innerSpacing',
+              (opt: PrefabComponentOption) => ({
+                ...opt,
+                value: ['0rem', 'L', 'L', 'L'],
+              }),
+            );
+
+            // set column 2 options
+            setOption(
+              RowColumnColumn.descendants[1],
+              'columnWidth',
+              (opt: PrefabComponentOption) => ({
+                ...opt,
+                value: '8',
+                configuration: {
+                  as: 'DROPDOWN',
+                  dataType: 'string',
+                  allowedInput: [
+                    {
+                      name: 'Fit content',
+                      value: 'fitContent',
+                    },
+                    {
+                      name: 'Flexible',
+                      value: 'flexible',
+                    },
+                    {
+                      name: 'Hidden',
+                      value: 'hidden',
+                    },
+                    { name: '1', value: '1' },
+                    { name: '2', value: '2' },
+                    { name: '3', value: '3' },
+                    { name: '4', value: '4' },
+                    { name: '5', value: '5' },
+                    { name: '6', value: '6' },
+                    { name: '7', value: '7' },
+                    { name: '8', value: '8' },
+                    { name: '9', value: '9' },
+                    { name: '10', value: '10' },
+                    { name: '11', value: '11' },
+                    { name: '12', value: '12' },
+                  ],
+                },
+              }),
+            );
+            setOption(
+              RowColumnColumn.descendants[1],
+              'columnWidthTabletLandscape',
+              (opt: PrefabComponentOption) => ({
+                ...opt,
+                value: '6',
+                configuration: {
+                  as: 'DROPDOWN',
+                  dataType: 'string',
+                  allowedInput: [
+                    {
+                      name: 'Fit content',
+                      value: 'fitContent',
+                    },
+                    {
+                      name: 'Flexible',
+                      value: 'flexible',
+                    },
+                    {
+                      name: 'Hidden',
+                      value: 'hidden',
+                    },
+                    { name: '1', value: '1' },
+                    { name: '2', value: '2' },
+                    { name: '3', value: '3' },
+                    { name: '4', value: '4' },
+                    { name: '5', value: '5' },
+                    { name: '6', value: '6' },
+                    { name: '7', value: '7' },
+                    { name: '8', value: '8' },
+                    { name: '9', value: '9' },
+                    { name: '10', value: '10' },
+                    { name: '11', value: '11' },
+                    { name: '12', value: '12' },
+                  ],
+                },
+              }),
+            );
+            setOption(
+              RowColumnColumn.descendants[1],
+              'columnWidthTabletPortrait',
+              (opt: PrefabComponentOption) => ({
+                ...opt,
+                value: '12',
+                configuration: {
+                  as: 'DROPDOWN',
+                  dataType: 'string',
+                  allowedInput: [
+                    {
+                      name: 'Fit content',
+                      value: 'fitContent',
+                    },
+                    {
+                      name: 'Flexible',
+                      value: 'flexible',
+                    },
+                    {
+                      name: 'Hidden',
+                      value: 'hidden',
+                    },
+                    { name: '1', value: '1' },
+                    { name: '2', value: '2' },
+                    { name: '3', value: '3' },
+                    { name: '4', value: '4' },
+                    { name: '5', value: '5' },
+                    { name: '6', value: '6' },
+                    { name: '7', value: '7' },
+                    { name: '8', value: '8' },
+                    { name: '9', value: '9' },
+                    { name: '10', value: '10' },
+                    { name: '11', value: '11' },
+                    { name: '12', value: '12' },
+                  ],
+                },
+              }),
+            );
+            setOption(
+              RowColumnColumn.descendants[1],
+              'columnWidthMobile',
+              (opt: PrefabComponentOption) => ({
+                ...opt,
+                value: '12',
+                configuration: {
+                  as: 'DROPDOWN',
+                  dataType: 'string',
+                  allowedInput: [
+                    {
+                      name: 'Fit content',
+                      value: 'fitContent',
+                    },
+                    {
+                      name: 'Flexible',
+                      value: 'flexible',
+                    },
+                    {
+                      name: 'Hidden',
+                      value: 'hidden',
+                    },
+                    { name: '1', value: '1' },
+                    { name: '2', value: '2' },
+                    { name: '3', value: '3' },
+                    { name: '4', value: '4' },
+                    { name: '5', value: '5' },
+                    { name: '6', value: '6' },
+                    { name: '7', value: '7' },
+                    { name: '8', value: '8' },
+                    { name: '9', value: '9' },
+                    { name: '10', value: '10' },
+                    { name: '11', value: '11' },
+                    { name: '12', value: '12' },
+                  ],
+                },
+              }),
+            );
+            setOption(
+              RowColumnColumn.descendants[1],
+              'innerSpacing',
+              (opt: PrefabComponentOption) => ({
+                ...opt,
+                value: ['0rem', 'L', 'L', 'L'],
+              }),
+            );
+
+            setOption(Text1, 'content', (opt: PrefabComponentOption) => ({
+              ...opt,
+              value: [`${[prop.label]}:`],
+            }));
+            setOption(Text1, 'type', (opt: PrefabComponentOption) => ({
+              ...opt,
+              value: ['Body1'],
+            }));
+            setOption(Text1, 'fontWeight', (opt: PrefabComponentOption) => ({
+              ...opt,
+              value: '500',
+              configuration: {
+                as: 'DROPDOWN',
+                dataType: 'string',
+                allowedInput: [
+                  { name: '100', value: '100' },
+                  { name: '200', value: '200' },
+                  { name: '300', value: '300' },
+                  { name: '400', value: '400' },
+                  { name: '500', value: '500' },
+                  { name: '600', value: '600' },
+                  { name: '700', value: '700' },
+                  { name: '800', value: '800' },
+                  { name: '900', value: '900' },
+                ],
+              },
+            }));
+
             RowColumnColumn.descendants[0].descendants = [Text1];
+
+            const hasFileConditional = cloneStructure('Conditional');
+            if (hasFileConditional.type !== 'COMPONENT')
+              throw new Error(
+                `The Conditional component type is not a COMPONENT, but a ${hasFileConditional.type}`,
+              );
+
+            if (hasFileConditional.type === 'COMPONENT') {
+              setOption(hasFileConditional, 'left', (originalOption: any) => ({
+                ...originalOption,
+                value: [enrichVarObj({ ...prop })],
+              }));
+              setOption(
+                hasFileConditional,
+                'compare',
+                (originalOption: PrefabComponentOption) => ({
+                  ...originalOption,
+                  value: 'neq',
+                }),
+              );
+            }
+
+            if (prop.kind === 'FILE') {
+              const fileButton = cloneStructure('Open Page');
+
+              if (fileButton.type === 'COMPONENT') {
+                fileButton.style = {
+                  overwrite: {
+                    backgroundColor: {
+                      type: 'THEME_COLOR',
+                      value: 'primary',
+                    },
+                    boxShadow: 'none',
+                    color: {
+                      type: 'THEME_COLOR',
+                      value: 'white',
+                    },
+                    fontFamily: 'Roboto',
+                    fontSize: '0.875rem',
+                    fontStyle: 'none',
+                    fontWeight: '400',
+                    padding: ['0.6875rem', '1.375rem'],
+                    textDecoration: 'none',
+                    textTransform: 'none',
+                  },
+                };
+                setOption(
+                  fileButton,
+                  'buttonText',
+                  (originalOption: PrefabComponentOption) => ({
+                    ...originalOption,
+                    value: ['View file'],
+                  }),
+                );
+                setOption(
+                  fileButton,
+                  'linkToExternal',
+                  (originalOption: any) => ({
+                    ...originalOption,
+                    value: [enrichFileObj({ ...prop })],
+                  }),
+                );
+                setOption(
+                  fileButton,
+                  'linkType',
+                  (originalOption: PrefabComponentOption) => ({
+                    ...originalOption,
+                    value: 'external',
+                  }),
+                );
+                setOption(
+                  fileButton,
+                  'linkTarget',
+                  (originalOption: PrefabComponentOption) => ({
+                    ...originalOption,
+                    value: '_blank',
+                  }),
+                );
+              }
+
+              RowColumnColumn.descendants[1].descendants = [fileButton];
+              hasFileConditional.descendants = [RowColumnColumn];
+              return hasFileConditional;
+            }
+
+            if (prop.kind === 'IMAGE') {
+              const media = cloneStructure('Media');
+
+              if (media.type === 'COMPONENT') {
+                setOption(
+                  media,
+                  'height',
+                  (originalOption: PrefabComponentOption) => ({
+                    ...originalOption,
+                    value: '100%',
+                  }),
+                );
+                setOption(
+                  media,
+                  'type',
+                  (originalOption: PrefabComponentOption) => ({
+                    ...originalOption,
+                    value: 'url',
+                  }),
+                );
+                setOption(media, 'urlFileSource', (originalOption: any) => ({
+                  ...originalOption,
+                  value: [{ ...enrichVarObj({ ...prop }), useKey: 'url' }],
+                }));
+              }
+
+              RowColumnColumn.descendants[1].descendants = [media];
+              hasFileConditional.descendants = [RowColumnColumn];
+              return hasFileConditional;
+            }
+
+            setOption(Text2, 'content', (opt: any) => ({
+              ...opt,
+              value: [enrichVarObj({ ...prop })],
+              configuration: { as: 'MULTILINE' },
+            }));
+            setOption(Text2, 'type', (opt: PrefabComponentOption) => ({
+              ...opt,
+              value: ['Body1'],
+            }));
             RowColumnColumn.descendants[1].descendants = [Text2];
+
             return RowColumnColumn;
           };
 
+          const detailsBox = treeSearch('#detailsBox', newPrefab.structure);
+          if (!detailsBox) throw new Error('detailsBox not found');
+
           model?.properties.forEach((property) => {
-            detailContainer.descendants.push(makeDetail(property));
+            detailsBox.descendants.push(makeDetail(property));
           });
 
+          const deleteForm = treeSearch('#deleteForm', newPrefab.structure);
+          if (!deleteForm) throw new Error('No delete form found');
+          deleteForm.id = deleteButtonId;
+
           if (idProperty && model) {
-            const updateForm = treeSearch('#createForm', newPrefab.structure);
-            if (!updateForm) throw new Error('No create form found');
+            // set update form
+            const updateForm = treeSearch('#updateForm', newPrefab.structure);
+            if (!updateForm) throw new Error('No update form found');
             updateForm.id = updateFormId;
 
             const normalizeProperties = model.properties.map((prop): any => ({
@@ -2081,10 +2655,17 @@ const beforeCreate = ({
               kind: prop.kind,
             }));
 
+            const filteredproperties = normalizeProperties.filter(
+              (prop) =>
+                prop.label !== 'Created at' &&
+                prop.label !== 'Updated at' &&
+                prop.label !== 'Id',
+            );
+
             const result = await prepareAction(
               updateFormId,
               idProperty,
-              normalizeProperties,
+              filteredproperties,
               'update',
             );
 
@@ -2262,11 +2843,15 @@ const beforeCreate = ({
             Object.values(result.variables).forEach(
               ([prop, inputVariable]): void => {
                 const generateInputPrefabs = () => {
+                  let fileUpload;
+                  let fileUploadButton;
+                  let imageUpload;
+                  let imageUploadButton;
                   switch (prop.kind) {
                     case PropertyKind.INTEGER:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.INTEGER,
                           model,
                           prop,
@@ -2276,7 +2861,7 @@ const beforeCreate = ({
                     case PropertyKind.EMAIL_ADDRESS:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.EMAIL_ADDRESS,
                           model,
                           prop,
@@ -2286,7 +2871,7 @@ const beforeCreate = ({
                     case PropertyKind.DECIMAL:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.DECIMAL,
                           model,
                           prop,
@@ -2296,7 +2881,7 @@ const beforeCreate = ({
                     case PropertyKind.TEXT:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.TEXT,
                           model,
                           prop,
@@ -2306,7 +2891,7 @@ const beforeCreate = ({
                     case PropertyKind.PRICE:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.PRICE,
                           model,
                           prop,
@@ -2314,19 +2899,11 @@ const beforeCreate = ({
                         ),
                       );
                     case PropertyKind.PASSWORD:
-                      return formInputStructure(
-                        prop.label,
-                        makeBettyInput(
-                          BettyPrefabs.PASSWORD,
-                          model,
-                          prop,
-                          inputVariable,
-                        ),
-                      );
+                      return null;
                     case PropertyKind.DATE:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.DATE,
                           model,
                           prop,
@@ -2336,7 +2913,7 @@ const beforeCreate = ({
                     case PropertyKind.DATE_TIME:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.DATE_TIME,
                           model,
                           prop,
@@ -2346,7 +2923,7 @@ const beforeCreate = ({
                     case PropertyKind.TIME:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.TIME,
                           model,
                           prop,
@@ -2354,19 +2931,75 @@ const beforeCreate = ({
                         ),
                       );
                     case PropertyKind.FILE:
-                      return formInputStructure(
-                        prop.label,
-                        makeBettyInput(
-                          BettyPrefabs.FILE,
-                          model,
-                          prop,
-                          inputVariable,
-                        ),
+                      fileUpload = makeBettyUpdateInput(
+                        BettyPrefabs.FILE,
+                        model,
+                        prop,
+                        inputVariable,
                       );
+                      if (fileUpload.type === 'COMPONENT') {
+                        [fileUploadButton] = fileUpload.descendants;
+                        if (fileUploadButton.type === 'COMPONENT') {
+                          fileUploadButton.style = {
+                            overwrite: {
+                              backgroundColor: {
+                                type: 'THEME_COLOR',
+                                value: 'primary',
+                              },
+                              boxShadow: 'none',
+                              color: {
+                                type: 'THEME_COLOR',
+                                value: 'white',
+                              },
+                              fontFamily: 'Roboto',
+                              fontSize: '0.875rem',
+                              fontStyle: 'none',
+                              fontWeight: '400',
+                              padding: ['0.6875rem', '1.375rem'],
+                              textDecoration: 'none',
+                              textTransform: 'none',
+                            },
+                          };
+                        }
+                      }
+                      return formInputStructure(prop.label, fileUpload);
+                    case PropertyKind.IMAGE:
+                      imageUpload = makeBettyUpdateInput(
+                        BettyPrefabs.IMAGE,
+                        model,
+                        prop,
+                        inputVariable,
+                      );
+                      if (imageUpload.type === 'COMPONENT') {
+                        [imageUploadButton] = imageUpload.descendants;
+                        if (imageUploadButton.type === 'COMPONENT') {
+                          imageUploadButton.style = {
+                            overwrite: {
+                              backgroundColor: {
+                                type: 'THEME_COLOR',
+                                value: 'primary',
+                              },
+                              boxShadow: 'none',
+                              color: {
+                                type: 'THEME_COLOR',
+                                value: 'white',
+                              },
+                              fontFamily: 'Roboto',
+                              fontSize: '0.875rem',
+                              fontStyle: 'none',
+                              fontWeight: '400',
+                              padding: ['0.6875rem', '1.375rem'],
+                              textDecoration: 'none',
+                              textTransform: 'none',
+                            },
+                          };
+                        }
+                      }
+                      return formInputStructure(prop.label, imageUpload);
                     case PropertyKind.BOOLEAN:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.BOOLEAN,
                           model,
                           prop,
@@ -2376,7 +3009,7 @@ const beforeCreate = ({
                     case PropertyKind.LIST:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.LIST,
                           model,
                           prop,
@@ -2386,7 +3019,7 @@ const beforeCreate = ({
                     default:
                       return formInputStructure(
                         prop.label,
-                        makeBettyInput(
+                        makeBettyUpdateInput(
                           BettyPrefabs.STRING,
                           model,
                           prop,
@@ -2396,8 +3029,20 @@ const beforeCreate = ({
                   }
                 };
                 const updateFormInputs = generateInputPrefabs();
+                if (!updateForm)
+                  throw new Error('the updateForm could not be found');
+                if (!updateFormInputs)
+                  throw new Error('There were no updateFormInputs selected');
                 updateForm.descendants.push(updateFormInputs);
               },
+            );
+            updateForm.descendants.push(
+              makeBettyUpdateInput(
+                BettyPrefabs.HIDDEN,
+                model,
+                idProperty,
+                result.recordInputVariable,
+              ),
             );
             if (updateFormFooter) updateForm.descendants.push(updateFormFooter);
 
@@ -2413,12 +3058,165 @@ const beforeCreate = ({
                 disabled: true,
               },
             }));
+
+            // set delete action
+            const deleteResult = await prepareAction(
+              deleteButtonId,
+              idProperty,
+              undefined,
+              'delete',
+              undefined,
+            );
+            setOption(
+              deleteForm,
+              'actionId',
+              (opts: PrefabComponentOption) => ({
+                ...opts,
+                value: deleteResult.action.actionId,
+                configuration: { disabled: true },
+                ref: {
+                  id: '#deleteFormAction',
+                },
+              }),
+            );
+
+            setOption(deleteForm, 'model', (opts: PrefabComponentOption) => ({
+              ...opts,
+              value: modelId,
+              configuration: {
+                disabled: true,
+              },
+            }));
+
+            const deleteSubmitButton = cloneStructure('Submit Button');
+            if (deleteSubmitButton.type === 'COMPONENT') {
+              deleteSubmitButton.style = {
+                overwrite: {
+                  backgroundColor: {
+                    type: 'STATIC',
+                    value: 'red',
+                  },
+                  boxShadow: 'none',
+                  color: {
+                    type: 'THEME_COLOR',
+                    value: 'white',
+                  },
+                  fontFamily: 'Roboto',
+                  fontSize: '0.875rem',
+                  fontStyle: 'none',
+                  fontWeight: '400',
+                  padding: ['0.6875rem', '1.375rem'],
+                  textDecoration: 'none',
+                  textTransform: 'none',
+                },
+              };
+              deleteSubmitButton.ref = {
+                id: '#deleteFormSubmitButton',
+              };
+              setOption(
+                deleteSubmitButton,
+                'buttonText',
+                (opts: PrefabComponentOption) => ({
+                  ...opts,
+                  value: ['Delete'],
+                }),
+              );
+            }
+            deleteForm.descendants.push(deleteSubmitButton);
+
+            deleteForm.descendants.push(
+              makeBettyUpdateInput(
+                BettyPrefabs.HIDDEN,
+                model,
+                idProperty,
+                deleteResult.recordInputVariable,
+              ),
+            );
+
+            if (idProperty && newPrefab.interactions) {
+              newPrefab.interactions.push(
+                {
+                  name: 'setCurrentRecord',
+                  sourceEvent: 'Click',
+                  targetOptionName: 'currentRecord',
+                  parameters: [
+                    {
+                      id: [idProperty.id],
+                      parameter: 'argument',
+                    },
+                  ],
+                  ref: {
+                    sourceComponentId: '#deleteButton',
+                    targetComponentId: '#deleteForm',
+                  },
+                  type: 'Global',
+                } as PrefabInteraction,
+                {
+                  name: 'setCurrentRecord',
+                  sourceEvent: 'Click',
+                  targetOptionName: 'currentRecord',
+                  parameters: [
+                    {
+                      id: [idProperty.id],
+                      parameter: 'argument',
+                    },
+                  ],
+                  ref: {
+                    sourceComponentId: '#editFormButton',
+                    targetComponentId: '#updateForm',
+                  },
+                  type: 'Global',
+                } as PrefabInteraction,
+              );
+            }
+
+            const menuButton = treeSearch('#menuButton', newPrefab.structure);
+            if (!menuButton) throw new Error('No menu button found');
+            setOption(
+              menuButton,
+              'buttonText',
+              (opt: PrefabComponentOption) => ({
+                ...opt,
+                value: [`${model.label} info`],
+              }),
+            );
+
+            const updateTitle = treeSearch('#updateTitle', newPrefab.structure);
+            if (!updateTitle) throw new Error('No create title found');
+            setOption(updateTitle, 'content', (opt: PrefabComponentOption) => ({
+              ...opt,
+              value: [`Update ${model.label} record`],
+            }));
+
+            const detailsTitle = treeSearch(
+              '#detailsTitle',
+              newPrefab.structure,
+            );
+            if (!detailsTitle) throw new Error('No details title found');
+            setOption(
+              detailsTitle,
+              'content',
+              (opt: PrefabComponentOption) => ({
+                ...opt,
+                value: [`${model.label}`],
+              }),
+            );
+
+            const breadcrumbTitle = treeSearch(
+              '#breadcrumbTitle',
+              newPrefab.structure,
+            );
+            if (!breadcrumbTitle) throw new Error('No breadcrumb title found');
+            setOption(
+              breadcrumbTitle,
+              'breadcrumbContent',
+              (opt: PrefabComponentOption) => ({
+                ...opt,
+                value: [`${model.label}s`],
+              }),
+            );
           }
 
-          save(newPrefab);
-        }}
-        onSkip={() => {
-          const newPrefab = { ...prefab };
           save(newPrefab);
         }}
       />
@@ -2927,10 +3725,11 @@ const prefabStructure = [
                                 [
                                   Text(
                                     {
+                                      ref: { id: '#updateTitle' },
                                       options: {
                                         ...textOptions,
                                         content: variable('Content', {
-                                          value: ['Create client record'],
+                                          value: ['Create record'],
                                           configuration: { as: 'MULTILINE' },
                                         }),
                                         type: font('Font', {
@@ -2967,7 +3766,7 @@ const prefabStructure = [
                                   ),
                                   FormErrorAlert({
                                     ref: {
-                                      id: '#createAlertErrorId',
+                                      id: '#updateAlertErrorId',
                                     },
                                   }),
                                 ],
@@ -2977,9 +3776,9 @@ const prefabStructure = [
                           component(
                             'Form',
                             {
-                              label: 'Create Form',
+                              label: 'Update Form',
                               options: defaults,
-                              ref: { id: '#createForm' },
+                              ref: { id: '#updateForm' },
                             },
                             [
                               Box({}, [
@@ -3093,20 +3892,6 @@ const prefabStructure = [
         ],
       ),
     ],
-  ),
-  Drawer(
-    {
-      options: {
-        ...drawerOptions,
-        drawerWidth: size('Drawer Width', {
-          value: '236px',
-          configuration: {
-            as: 'UNIT',
-          },
-        }),
-      },
-    },
-    [drawerSidebar, drawerContainer],
   ),
 ];
 
