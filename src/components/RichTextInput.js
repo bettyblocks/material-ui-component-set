@@ -641,7 +641,7 @@
             format,
             TEXT_ALIGN_TYPES.includes(format) ? 'align' : 'type',
           )}
-          onClick={(event) => {
+          onMouseDown={(event) => {
             event.preventDefault();
             if (disable) return;
             toggleBlock(ownEditor, format);
@@ -658,7 +658,7 @@
         <Button
           disable={disable}
           active={isMarkActive(ownEditor, format)}
-          onClick={(event) => {
+          onMouseDown={(event) => {
             event.preventDefault();
             if (disable) return;
             toggleMark(ownEditor, format);
@@ -697,7 +697,8 @@
           className={`${classes.dropdownItem} ${
             isBlockActive(ownEditor, format, 'type') ? 'active' : ''
           }`}
-          onClick={() => {
+          onMouseDown={(event) => {
+            event.preventDefault();
             toggleBlock(ownEditor, format);
             setShowDropdown(false);
           }}
@@ -751,7 +752,10 @@
             type="button"
             aria-haspopup="true"
             aria-label="Text styles"
-            onClick={() => setShowDropdown((prev) => !prev)}
+            onMouseDown={(event) => {
+              event.preventDefault();
+              setShowDropdown((prev) => !prev);
+            }}
             className={classes.dropdownButton}
           >
             <span className={classes.dropdownButtonText}>
