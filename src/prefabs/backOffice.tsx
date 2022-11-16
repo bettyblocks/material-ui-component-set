@@ -301,7 +301,7 @@ const interactions: PrefabInteraction[] = [
   },
   {
     type: InteractionType.Custom,
-    name: 'Toggle loading state',
+    name: 'Disable',
     sourceEvent: 'onActionLoad',
     ref: {
       targetComponentId: '#createSubmitButton',
@@ -310,7 +310,7 @@ const interactions: PrefabInteraction[] = [
   },
   {
     type: InteractionType.Custom,
-    name: 'Toggle loading state',
+    name: 'Enable',
     sourceEvent: 'onActionSuccess',
     ref: {
       targetComponentId: '#createSubmitButton',
@@ -319,16 +319,7 @@ const interactions: PrefabInteraction[] = [
   },
   {
     type: InteractionType.Custom,
-    name: 'Toggle loading state',
-    sourceEvent: 'onActionError',
-    ref: {
-      targetComponentId: '#createSubmitButton',
-      sourceComponentId: '#createForm',
-    },
-  },
-  {
-    type: InteractionType.Custom,
-    name: 'Toggle loading state',
+    name: 'Disable',
     sourceEvent: 'onActionLoad',
     ref: {
       targetComponentId: '#editSubmitButton',
@@ -337,16 +328,7 @@ const interactions: PrefabInteraction[] = [
   },
   {
     type: InteractionType.Custom,
-    name: 'Toggle loading state',
-    sourceEvent: 'onActionError',
-    ref: {
-      targetComponentId: '#editSubmitButton',
-      sourceComponentId: '#updateForm',
-    },
-  },
-  {
-    type: InteractionType.Custom,
-    name: 'Toggle loading state',
+    name: 'Enable',
     sourceEvent: 'onActionSuccess',
     ref: {
       targetComponentId: '#editSubmitButton',
