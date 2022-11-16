@@ -321,6 +321,21 @@
     );
     const fragment = deserialize(parsed.body);
 
+    if (isDev) {
+      useEffect(() => {
+        Transforms.delete(editor, {
+          at: {
+            anchor: Editor.start(editor, []),
+            focus: Editor.end(editor, []),
+          },
+        });
+        Transforms.insertNodes(editor, deserialize(parsed.body));
+        Transforms.delete(editor, {
+          at: Editor.start(editor, [0]),
+        });
+      }, [valueProp]);
+    }
+
     const handleListdepth = (listKind, key, event) => {
       const isList = isBlockActive(editor, listKind, 'type');
       if (isList) {
@@ -378,17 +393,29 @@
           isBlockActive(editor, 'bulleted-list', 'type'))
       ) {
         const lastNode = Node.last(editor, editor.selection.focus.path);
+
+        if (lastNode[0].text !== '') {
+          if (isBlockActive(editor, 'numbered-list', 'type')) {
+            toggleBlock(editor, 'numbered-list');
+            return;
+          }
+          toggleBlock(editor, 'bulleted-list');
+          return;
+        }
+
         if (
           window.getSelection().toString().split('\n')[0] !==
             lastNode[0].text &&
           (lastNode[0].text !== '' || lastNode[1].length !== 3)
         )
           return;
+
         Transforms.setNodes(editor, { type: 'none' });
         if (isBlockActive(editor, 'numbered-list', 'type')) {
           toggleBlock(editor, 'numbered-list');
           return;
         }
+
         toggleBlock(editor, 'bulleted-list');
         return;
       }
