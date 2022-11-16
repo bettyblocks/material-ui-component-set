@@ -3,14 +3,36 @@
   type: 'BODY_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
+  dependencies: [
+    {
+      label: 'Slate',
+      package: 'npm:slate@0.82.1',
+      imports: ['*'],
+    },
+    {
+      label: 'SlateHistory',
+      package: 'npm:slate-history@0.66.0',
+      imports: ['*'],
+    },
+    {
+      label: 'SlateReact',
+      package: 'npm:slate-react@0.82.1',
+      imports: ['*'],
+    },
+    {
+      label: 'SlateHyperscript',
+      package: 'npm:slate-hyperscript@0.77.0',
+      imports: ['*'],
+    },
+  ],
   jsx: (() => {
     const {
       Slate: SlateP,
       SlateReact,
       SlateHistory,
       SlateHyperscript,
-      Icons,
-    } = window.MaterialUI;
+    } = dependencies;
+    const { Icons } = window.MaterialUI;
     const { FormHelperText } = window.MaterialUI.Core;
     const { Editable, withReact, Slate, useSlate } = SlateReact;
     const { createEditor, Editor, Text, Element, Transforms, Node } = SlateP;
