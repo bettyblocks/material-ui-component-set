@@ -29,6 +29,7 @@
       TextField,
       InputAdornment,
       IconButton,
+      Checkbox,
     } = window.MaterialUI.Core;
     const { FirstPage, LastPage, KeyboardArrowLeft, KeyboardArrowRight } =
       window.MaterialUI.Icons;
@@ -59,6 +60,8 @@
       autoLoadTakeAmount,
       dataComponentAttribute,
       enableFirstLastPageNavigation,
+      checkboxSelection,
+      checkboxPosition,
     } = options;
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
@@ -102,6 +105,7 @@
     });
     const [results, setResults] = useState([]);
     const [totalCount, setTotalCount] = useState(0);
+    const [selected, setSelected] = useState([]);
     const [previousSearchTerm, setPreviousSearchTerm] = useState('');
     const [newSearch, setNewSearch] = useState(false);
     const fetchingNextSet = useRef(false);
@@ -457,12 +461,59 @@
     };
 
     const handleRowClick = (endpoint, context) => {
-      if (isDev) return;
       B.triggerEvent('OnRowClick', endpoint, context);
 
       if (hasLink) {
         history.push(endpoint);
       }
+    };
+
+    const updateSelected = (selectedRows) => {
+      B.triggerEvent('onRowsSelect', selectedRows);
+      setSelected(selectedRows);
+    };
+
+    const handleRowSelect = (value) => {
+      if (selected.includes(value)) {
+        const selectedCopy = [...selected];
+        selectedCopy.splice(selected.indexOf(value), 1);
+        updateSelected(selectedCopy);
+      } else {
+        updateSelected([...selected, value]);
+      }
+    };
+
+    const handleSelectAllClick = (event) => {
+      if (event.target.checked) {
+        updateSelected(results.map((n) => n.id));
+        return;
+      }
+      updateSelected([]);
+    };
+
+    const isSelected = (value) => selected.indexOf(value) !== -1;
+    const allSelected = () =>
+      !isDev && results.length > 0 && selected.length === results.length;
+
+    const renderCheckBox = ({ checked, handleCheckbox }) => {
+      if (!checkboxSelection) {
+        return false;
+      }
+
+      return (
+        <TableCell
+          component={isDev && 'div'}
+          className={classes.checkboxRoot}
+          padding="checkbox"
+        >
+          <Checkbox
+            className={classes.checkbox}
+            size={size}
+            checked={checked}
+            onChange={handleCheckbox}
+          />
+        </TableCell>
+      );
     };
 
     const renderTableHead = () => {
@@ -475,10 +526,43 @@
           </TableCell>
         ));
       }
+
+      const renderHeadCheckbox = () =>
+        renderCheckBox({
+          checked: allSelected(),
+          handleCheckbox: handleSelectAllClick,
+        });
+
       return (
-        <Children headerOnly handleSort={handleSort} orderBy={orderBy}>
-          {children}
-        </Children>
+        <>
+          {checkboxPosition === 'start' && renderHeadCheckbox()}
+          <Children headerOnly handleSort={handleSort} orderBy={orderBy}>
+            {children}
+          </Children>
+          {checkboxPosition === 'end' && renderHeadCheckbox()}
+        </>
+      );
+    };
+
+    const renderRowChildren = ({ context, value }) => {
+      const renderRowCheckbox = () =>
+        renderCheckBox({
+          checked: isSelected(value.id),
+          handleCheckbox: () => handleRowSelect(value.id),
+        });
+
+      return (
+        <>
+          {checkboxPosition === 'start' && renderRowCheckbox()}
+          <Children
+            linkTo={linkTo}
+            handleRowClick={handleRowClick}
+            context={context}
+          >
+            {children}
+          </Children>
+          {checkboxPosition === 'end' && renderRowCheckbox()}
+        </>
       );
     };
 
@@ -560,13 +644,7 @@
                 classes={{ root: classes.bodyRow }}
                 data-id={value.id}
               >
-                <Children
-                  linkTo={linkTo}
-                  handleRowClick={handleRowClick}
-                  context={context}
-                >
-                  {children}
-                </Children>
+                {renderRowChildren({ context, value })}
               </TableRow>
             )}
           </InteractionScope>
@@ -577,7 +655,11 @@
     const renderTableContent = () => {
       if (isDev) {
         return (
-          <TableRow classes={{ root: classes.bodyRow }}>{children}</TableRow>
+          <TableRow classes={{ root: classes.bodyRow }}>
+            {checkboxPosition === 'end' && children}
+            {renderCheckBox({ checked: false })}
+            {checkboxPosition === 'start' && children}
+          </TableRow>
         );
       }
 
@@ -587,7 +669,9 @@
 
       return Array.from(Array(amountOfRows).keys()).map((idx) => (
         <TableRow key={idx} classes={{ root: classes.bodyRow }}>
-          {children}
+          {checkboxPosition === 'end' && children}
+          {renderCheckBox({ checked: false })}
+          {checkboxPosition === 'start' && children}
         </TableRow>
       ));
     };
@@ -778,11 +862,12 @@
     );
   })(),
   styles: (B) => (theme) => {
-    const { env, mediaMinWidth, Styling } = B;
+    const { env, mediaMinWidth, Styling, color: colorFunc } = B;
     const style = new Styling(theme);
     const isDev = env === 'dev';
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
+    const getOpacColor = (col, val) => colorFunc.alpha(col, val);
 
     return {
       root: {
@@ -798,10 +883,12 @@
           autoLoadOnScroll && !height ? '375px' : height,
       },
       paper: {
-        backgroundColor: ({ options: { background } }) => [
+        '&&': {
+          backgroundColor: ({ options: { background } }) =>
+            style.getColor(background),
+        },
+        backgroundColor: ({ options: { background } }) =>
           style.getColor(background),
-          '!important',
-        ],
         height: '100%',
       },
       container: {
@@ -811,8 +898,10 @@
         tableLayout: 'fixed',
       },
       toolbar: {
-        paddingLeft: ['1rem', '!important'],
-        paddingRight: ['1rem', '!important'],
+        '&&': {
+          paddingLeft: '1rem',
+          paddingRight: '1rem',
+        },
       },
       title: {
         color: ({ options: { titleType } }) => style.getFontColor(titleType),
@@ -840,21 +929,18 @@
         },
       },
       headerRow: {
-        backgroundColor: ({ options: { backgroundHeader } }) => [
-          style.getColor(backgroundHeader),
-          '!important',
-        ],
+        '&&': {
+          backgroundColor: ({ options: { backgroundHeader } }) =>
+            style.getColor(backgroundHeader),
+          '& th, & div[role="columnheader"]': {
+            borderBottom: `${isDev ? 0 : '0.0625rem solid #cccccc'}`,
+            backgroundColor: ({ options: { backgroundHeader } }) =>
+              style.getColor(backgroundHeader),
+          },
+        },
         '& div': {
           borderBottom: `${isDev ? '0.0625rem solid #cccccc' : 0}`,
         },
-        '& th, & div[role="columnheader"]': {
-          borderBottom: `${isDev ? 0 : '0.0625rem solid #cccccc!important'}`,
-          backgroundColor: ({ options: { backgroundHeader } }) => [
-            style.getColor(backgroundHeader),
-            '!important',
-          ],
-        },
-
         '& > div > .MuiTableCell-head, & > .MuiTableCell-head': {
           textOverflow: ({ options: { hideTextOverflow } }) =>
             hideTextOverflow ? 'ellipsis' : 'clip',
@@ -867,9 +953,10 @@
       bodyRow: {
         cursor: ({ options: { linkTo } }) =>
           linkTo && linkTo.id !== '' && 'pointer',
-        '&:hover td': {
-          backgroundColor: ({ options: { linkTo, backgroundRowHover } }) =>
-            linkTo && [style.getColor(backgroundRowHover), '!important'],
+        '&&:hover td': {
+          backgroundColor: ({ options: { backgroundRowHover } }) => [
+            style.getColor(backgroundRowHover),
+          ],
         },
         '&:nth-child(odd)': {
           backgroundColor: ({ options: { striped, stripeColor } }) => [
@@ -885,17 +972,43 @@
             hideTextOverflow ? 'nowrap' : 'normal',
         },
       },
+      checkboxRoot: {
+        '&&&': {
+          borderBottom: isDev && '0.0625rem solid #cccccc ',
+          borderColor: ({ options: { checkboxCellborderColor } }) =>
+            style.getColor(checkboxCellborderColor),
+        },
+      },
+      checkbox: {
+        pointerEvents: isDev && 'none',
+        '&&': {
+          color: ({ options: { checkboxColor } }) =>
+            style.getColor(checkboxColor),
+          '&:hover': {
+            backgroundColor: ({ options: { checkboxColor } }) =>
+              getOpacColor(style.getColor(checkboxColor), 0.04),
+          },
+          '&.Mui-checked': {
+            color: ({ options: { checkedColor } }) =>
+              style.getColor(checkedColor),
+            '&:hover': {
+              backgroundColor: ({ options: { checkedColor } }) =>
+                getOpacColor(style.getColor(checkedColor), 0.04),
+            },
+          },
+        },
+      },
       searchField: {
-        marginLeft: ['auto', '!important'],
+        marginLeft: 'auto',
         pointerEvents: isDev && 'none',
       },
       pagination: {
         borderRadius: '0.1875rem',
         pointerEvents: isDev && 'none',
-        backgroundColor: ({ options: { background } }) => [
-          style.getColor(background),
-          '!important',
-        ],
+        '&&': {
+          backgroundColor: ({ options: { background } }) =>
+            style.getColor(background),
+        },
       },
       paginationActions: {
         flexShrink: 0,
@@ -903,11 +1016,9 @@
       },
       autoRepeat: {
         opacity: 0.5,
-        '& .striped': {
-          background: ({ options: { striped, stripeColor } }) => [
+        '&& .striped': {
+          background: ({ options: { striped, stripeColor } }) =>
             striped ? style.getColor(stripeColor) : 'transparent',
-            '!important',
-          ],
         },
       },
       skeleton: {

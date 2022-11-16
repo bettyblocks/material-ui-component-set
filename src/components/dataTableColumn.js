@@ -187,14 +187,12 @@
       root: {
         display: isDev && ['block', '!important'],
         width: ({ options: { width } }) => width || 'auto',
-        backgroundColor: ({ options: { background } }) => [
-          style.getColor(background),
-          '!important',
-        ],
-        borderColor: ({ options: { borderColor } }) => [
-          style.getColor(borderColor),
-          '!important',
-        ],
+        '&&': {
+          backgroundColor: ({ options: { background } }) =>
+            style.getColor(background),
+          borderColor: ({ options: { borderColor } }) =>
+            style.getColor(borderColor),
+        },
       },
       columnHeader: {
         color: ({ options: { type } }) => style.getFontColor(type),

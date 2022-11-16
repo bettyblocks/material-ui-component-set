@@ -1,4 +1,4 @@
-import { buttongroup, variable } from '@betty-blocks/component-sdk';
+import { variable, buttongroup } from '@betty-blocks/component-sdk';
 
 export const advanced = (value: string) => {
   return {
