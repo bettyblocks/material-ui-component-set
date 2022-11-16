@@ -81,7 +81,7 @@ export const categories = [
   {
     label: 'Advanced Options',
     expanded: false,
-    members: ['dataComponentAttribute'],
+    members: ['dataComponentAttribute', 'showError'],
   },
 ];
 
@@ -287,21 +287,6 @@ export const dataTableOptions = {
     value: ThemeColor.TRANSPARENT,
   }),
   outerSpacing: sizes('Outer space', { value: ['0rem', '0rem', 'M', '0rem'] }),
-  showError: option('CUSTOM', {
-    value: 'built-in',
-    label: 'Error message',
-    configuration: {
-      dependsOn: 'model',
-      as: 'BUTTONGROUP',
-      dataType: 'string',
-      allowedInput: [
-        { name: 'Built in', value: 'built-in' },
-        { name: 'Interaction', value: 'interaction' },
-      ],
-    },
-  }),
-
-  ...advanced('DataTable'),
   checkboxSelection: toggle('ROW SELECT', {
     value: false,
   }),
@@ -341,4 +326,5 @@ export const dataTableOptions = {
       condition: hideIf('checkboxSelection', 'EQ', false),
     },
   }),
+  ...advanced('DataTable'),
 };
