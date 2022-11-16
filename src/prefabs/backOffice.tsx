@@ -60,6 +60,7 @@ import {
   rowOptions,
   SubmitButton,
   submitButtonOptions,
+  Subview,
   Tab,
   tabOptions,
   Tabs,
@@ -876,7 +877,7 @@ const drawerContainer = DrawerContainer(
                 },
               }),
               drawerWidth: size('Drawer Width', {
-                value: '480px',
+                value: '900px',
                 configuration: {
                   as: 'UNIT',
                 },
@@ -1516,12 +1517,19 @@ const drawerContainer = DrawerContainer(
                                         ref: { id: '#detailBox' },
                                       },
                                       [
-                                        DataContainer(
-                                          {
-                                            ref: { id: '#detailDatacontainer' },
-                                          },
-                                          [],
-                                        ),
+                                        Row({}, [
+                                          Column({}, [
+                                            DataContainer(
+                                              {
+                                                ref: {
+                                                  id: '#detailDatacontainer',
+                                                },
+                                              },
+                                              [],
+                                            ),
+                                          ]),
+                                          Column({}, [Subview({}, [])]),
+                                        ]),
                                       ],
                                     ),
                                     Box(
