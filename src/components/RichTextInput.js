@@ -393,8 +393,7 @@
           isBlockActive(editor, 'bulleted-list', 'type'))
       ) {
         const lastNode = Node.last(editor, editor.selection.focus.path);
-
-        if (lastNode[0].text !== '') {
+        if (lastNode[0].text !== '' && editor.selection.focus.offset === 0) {
           if (isBlockActive(editor, 'numbered-list', 'type')) {
             toggleBlock(editor, 'numbered-list');
             return;
