@@ -17,6 +17,7 @@ import {
   modelAndRelation,
   reconfigure,
   addChild,
+  buttongroup,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -36,10 +37,23 @@ export const categories = [
     expanded: false,
     members: [
       'pagination',
+      'autoLoadOnScroll',
       'labelNumberOfPages',
       'labelRowsPerPage',
       'take',
       'placeholderTake',
+    ],
+  },
+  {
+    label: 'Row Selection',
+    expanded: false,
+    members: [
+      'checkboxSelection',
+      'checkboxPosition',
+      'checkboxColor',
+      'checkedColor',
+      'checkboxCellborderColor',
+      'linkTo',
     ],
   },
   {
@@ -51,8 +65,10 @@ export const categories = [
       'size',
       'background',
       'backgroundHeader',
+      'backgroundRowHover',
       'square',
       'striped',
+      'stripeColor',
       'variant',
       'elevation',
     ],
@@ -65,11 +81,7 @@ export const categories = [
   {
     label: 'Advanced Options',
     expanded: false,
-    members: [
-      'dataComponentAttribute',
-      'checkboxSelection',
-      'checkboxPosition',
-    ],
+    members: ['dataComponentAttribute'],
   },
 ];
 
@@ -270,12 +282,9 @@ export const dataTableOptions = {
       condition: showIf('variant', 'EQ', 'elevation'),
     },
   }),
-  linkTo: endpoint('Row click', { value: '' }),
+  linkTo: endpoint('Row click navigate', { value: '' }),
   backgroundRowHover: color('Row hover color', {
     value: ThemeColor.TRANSPARENT,
-    configuration: {
-      condition: hideIf('linkTo', 'EQ', ''),
-    },
   }),
   outerSpacing: sizes('Outer space', { value: ['0rem', '0rem', 'M', '0rem'] }),
   showError: option('CUSTOM', {
@@ -293,4 +302,43 @@ export const dataTableOptions = {
   }),
 
   ...advanced('DataTable'),
+  checkboxSelection: toggle('ROW SELECT', {
+    value: false,
+  }),
+  checkboxPosition: buttongroup(
+    'Position',
+    [
+      ['Start', 'start'],
+      ['End', 'end'],
+    ],
+    {
+      value: 'start',
+      configuration: {
+        condition: {
+          type: 'HIDE',
+          option: 'checkboxSelection',
+          comparator: 'EQ',
+          value: false,
+        },
+      },
+    },
+  ),
+  checkboxColor: color('Color', {
+    value: ThemeColor.DARK,
+    configuration: {
+      condition: hideIf('checkboxSelection', 'EQ', false),
+    },
+  }),
+  checkedColor: color('Checked color', {
+    value: ThemeColor.PRIMARY,
+    configuration: {
+      condition: hideIf('checkboxSelection', 'EQ', false),
+    },
+  }),
+  checkboxCellborderColor: color('Cell border color', {
+    value: ThemeColor.LIGHT,
+    configuration: {
+      condition: hideIf('checkboxSelection', 'EQ', false),
+    },
+  }),
 };
