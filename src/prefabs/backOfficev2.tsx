@@ -48,12 +48,18 @@ import {
   gridOptions,
   Media,
   mediaOptions,
+  OpenPageButton,
   Row,
   rowOptions,
   Text,
   TextInput,
   textInputOptions,
   textOptions,
+  openPageButtonOptions,
+  List,
+  ListItem,
+  listItemOptions,
+  listOptions,
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
 import { DataTableColumn } from './structures/DataTableColumn/index';
@@ -952,7 +958,7 @@ const beforeCreate = ({
 
         const menuButton = treeSearch('#menuButton', newPrefab.structure);
         if (!menuButton) throw new Error('No menu button found');
-        setOption(menuButton, 'buttonText', (opt: PrefabComponentOption) => ({
+        setOption(menuButton, 'primaryText', (opt: PrefabComponentOption) => ({
           ...opt,
           value: [`${model.label} info`],
         }));
@@ -1613,118 +1619,28 @@ const drawerSidebar = DrawerBar(
             },
           },
           [
-            Box(
+            List(
               {
-                label: 'Full Item',
                 options: {
-                  ...boxOptions,
-                  innerSpacing: sizes('Inner space', {
-                    value: ['0rem', '0rem', '0rem', '0rem'],
-                  }),
+                  ...listOptions,
+                  dense: toggle('Dense', { value: true }),
                 },
               },
               [
-                Box(
+                ListItem(
                   {
-                    label: 'Main Items',
+                    ref: { id: '#menuButton' },
                     options: {
-                      ...boxOptions,
-                      innerSpacing: sizes('Inner space', {
-                        value: ['0rem', '0rem', '0rem', '0rem'],
+                      ...listItemOptions,
+                      primaryText: variable('Primary text', {
+                        value: ['Model info'],
                       }),
-                      alignment: buttongroup(
-                        'Alignment',
-                        [
-                          ['None', 'none'],
-                          ['Left', 'flex-start'],
-                          ['Center', 'center'],
-                          ['Right', 'flex-end'],
-                          ['Justified', 'space-between'],
-                        ],
-                        {
-                          value: 'flex-start',
-                          configuration: {
-                            dataType: 'string',
-                          },
-                        },
-                      ),
-                      valignment: buttongroup(
-                        'Vertical alignment',
-                        [
-                          ['None', 'none'],
-                          ['Top', 'flex-start'],
-                          ['Center', 'center'],
-                          ['Bottom', 'flex-end'],
-                        ],
-                        {
-                          value: 'center',
-                          configuration: {
-                            dataType: 'string',
-                          },
-                        },
-                      ),
-                      width: size('Width', {
-                        value: '100%',
-                        configuration: {
-                          as: 'UNIT',
-                        },
-                      }),
-                      backgroundColor: color('Background color', {
-                        value: ThemeColor.BLACK,
-                      }),
-                      backgroundColorAlpha: option('NUMBER', {
-                        label: 'Background color opacity',
-                        value: 20,
+                      titleColor: color('Title color', {
+                        value: ThemeColor.WHITE,
                       }),
                     },
                   },
-                  [
-                    Box(
-                      {
-                        label: 'Item text',
-                        options: {
-                          ...boxOptions,
-                          stretch: toggle('Stretch (when in flex container)', {
-                            value: true,
-                          }),
-                          innerSpacing: sizes('Inner space', {
-                            value: ['0rem', '0rem', '0rem', '0rem'],
-                          }),
-                        },
-                      },
-                      [
-                        Button({
-                          ref: { id: '#menuButton' },
-                          options: {
-                            ...buttonOptions,
-                            buttonText: variable('Button text', {
-                              value: ['Model info'],
-                            }),
-                          },
-                          style: {
-                            overwrite: {
-                              backgroundColor: {
-                                type: 'STATIC',
-                                value: 'transparent',
-                              },
-                              boxShadow: 'none',
-                              color: {
-                                type: 'THEME_COLOR',
-                                value: 'white',
-                              },
-                              fontFamily: 'Roboto',
-                              fontSize: '0.875rem',
-                              fontStyle: 'none',
-                              fontWeight: '400',
-                              padding: ['0.6875rem', '0.6875rem'],
-                              textDecoration: 'none',
-                              textTransform: 'none',
-                            },
-                          },
-                        }),
-                      ],
-                    ),
-                  ],
+                  [],
                 ),
               ],
             ),
@@ -2123,8 +2039,8 @@ const drawerContainer = DrawerContainer(
                             style: {
                               overwrite: {
                                 backgroundColor: {
-                                  type: 'THEME_COLOR',
-                                  value: 'white',
+                                  type: 'STATIC',
+                                  value: 'transparent',
                                 },
                                 boxShadow: 'none',
                                 color: {
@@ -2528,7 +2444,7 @@ const drawerContainer = DrawerContainer(
                             },
                           },
                           [
-                            Button(
+                            OpenPageButton(
                               {
                                 style: {
                                   overwrite: {
@@ -2551,7 +2467,7 @@ const drawerContainer = DrawerContainer(
                                   },
                                 },
                                 options: {
-                                  ...buttonOptions,
+                                  ...openPageButtonOptions,
                                   buttonText: variable('Button text', {
                                     value: [],
                                   }),
