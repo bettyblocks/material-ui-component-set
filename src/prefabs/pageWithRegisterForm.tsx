@@ -22,6 +22,8 @@ import {
   PrefabComponentOption,
   wrapper,
   linked,
+  BeforeCreateArgs,
+  PrefabComponent,
 } from '@betty-blocks/component-sdk';
 import {
   Box as BoxComponent,
@@ -45,15 +47,10 @@ import {
   Conditional,
   conditionalOptions,
 } from './structures';
-import { options as defaults } from './structures/ActionJSForm/options';
+import { options as formOptions } from './structures/ActionJSForm/options';
 import { Alert } from './structures/Alert/index';
-
-interface ActionResultsProps {
-  variables: Record<string, any>;
-  action: any;
-  IdProperties: any;
-  recordInputVariable: any;
-}
+import { IdPropertyProps, ModelProps, ModelQuery, Properties } from './types';
+import { PermissionType } from './types/types';
 
 const interactions: PrefabInteraction[] = [
   {
@@ -283,49 +280,51 @@ const beforeCreate = ({
     setOption,
     cloneStructure,
   },
-}: any) => {
+}: BeforeCreateArgs) => {
   const [modelId, setModelId] = React.useState('');
-  const [model, setModel] = React.useState(null);
-  const [idProperty, setIdProperty] = React.useState(null);
+  const [model, setModel] = React.useState<ModelProps>();
+  const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
   const [showModelValidation, setShowModelValidation] = React.useState(false);
-  const [properties, setProperties] = React.useState([]);
+  const [properties, setProperties] = React.useState<Properties[]>([]);
   const [showPropertiesValidation, setShowPropertiesValidation] =
     React.useState(false);
+  const permissions: PermissionType = 'public';
   const componentId = createUuid();
 
   useModelQuery({
     variables: { id: modelId },
-    onCompleted: (result: any) => {
-      setModel(result.model);
+    onCompleted: ({ model: dataModel }: ModelQuery) => {
+      setModel(dataModel);
       setIdProperty(
-        result.model.properties.find(
+        dataModel.properties.find(
           ({ name }: { name: string }) => name === 'id',
         ),
       );
     },
   });
 
-  const getDescendantByRef = (refValue: string, structure: any) =>
-    structure.reduce((acc: string, comp: PrefabReference) => {
-      if (acc) return acc;
-      if (
-        comp.type === 'COMPONENT' &&
-        // eslint-disable-next-line no-prototype-builtins
-        comp.ref
-          ? Object.values(comp.ref).indexOf(refValue) > -1
-          : undefined
-      ) {
-        return comp;
+  function treeSearch(
+    dirName: string,
+    array: PrefabReference[],
+  ): PrefabComponent | undefined {
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < array.length; i++) {
+      const q = array[i];
+      if (q.type === 'COMPONENT') {
+        if (q.ref && q.ref.id === dirName) {
+          return q;
+        }
       }
-      if (comp.type === 'PARTIAL') {
-        return acc;
+      if (q.type !== 'PARTIAL' && q.descendants && q.descendants.length) {
+        const result = treeSearch(dirName, q.descendants);
+        if (result) return result;
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      return getDescendantByRef(refValue, comp.descendants);
-    }, null);
+    }
+    return undefined;
+  }
 
-  const isEmpty = (value: any) =>
-    !value || Object.keys(value).length === 0 || value.id === '';
+  const isEmpty = (value: Properties[]) =>
+    !value || Object.keys(value).length === 0;
 
   return (
     <>
@@ -375,7 +374,7 @@ const beforeCreate = ({
           <PropertiesSelector
             modelId={modelId}
             value={properties}
-            onChange={(value: any) => {
+            onChange={(value: Properties[]) => {
               setProperties(value);
               setShowPropertiesValidation(isEmpty(value));
             }}
@@ -420,83 +419,126 @@ const beforeCreate = ({
             return;
           }
           const newPrefab = { ...prefab };
-          if (modelId) {
-            const formPrefab = getDescendantByRef(
-              '#formId',
-              newPrefab.structure,
-            );
-            const inputBox = getDescendantByRef(
-              '#formInputBox',
-              newPrefab.structure,
-            );
+          if (idProperty && model) {
+            const inputBox = treeSearch('#formInputBox', newPrefab.structure);
+            if (!inputBox) throw new Error('No inputBox found');
             const inputStructure = (
               textValue: string,
               inputPrefab: PrefabReference,
             ): PrefabReference => {
               const boxPrefab = cloneStructure('Box');
-              setOption(
-                boxPrefab,
-                'innerSpacing',
-                (options: PrefabComponentOption[]) => ({
-                  ...options,
-                  value: ['M', '0rem', '0rem', '0rem'],
-                }),
-              );
-              const textPrefab = cloneStructure('Text');
-              setOption(
-                textPrefab,
-                'content',
-                (options: PrefabComponentOption[]) => ({
-                  ...options,
-                  value: [textValue],
-                  configuration: { as: 'MULTILINE' },
-                }),
-              );
-              setOption(
-                textPrefab,
-                'type',
-                (options: PrefabComponentOption[]) => ({
-                  ...options,
-                  value: ['Body1'],
-                }),
-              );
-              setOption(
-                textPrefab,
-                'outerSpacing',
-                (options: PrefabComponentOption[]) => ({
-                  ...options,
-                  value: ['0rem', '0rem', 'S', '0rem'],
-                }),
-              );
-              boxPrefab.descendants.push(textPrefab);
-              boxPrefab.descendants.push(inputPrefab);
+              if (boxPrefab.type === 'COMPONENT') {
+                setOption(
+                  boxPrefab,
+                  'innerSpacing',
+                  (originalOption: PrefabComponentOption) => ({
+                    ...originalOption,
+                    value: ['M', '0rem', '0rem', '0rem'],
+                  }),
+                );
+                const textPrefab = cloneStructure('Text');
+                if (textPrefab.type === 'COMPONENT') {
+                  setOption(
+                    textPrefab,
+                    'content',
+                    (originalOption: PrefabComponentOption) => ({
+                      ...originalOption,
+                      value: [textValue],
+                    }),
+                  );
+                  setOption(
+                    textPrefab,
+                    'type',
+                    (originalOption: PrefabComponentOption) => ({
+                      ...originalOption,
+                      value: ['Body1'],
+                    }),
+                  );
+                  setOption(
+                    textPrefab,
+                    'outerSpacing',
+                    (originalOption: PrefabComponentOption) => ({
+                      ...originalOption,
+                      value: ['0rem', '0rem', 'S', '0rem'],
+                    }),
+                  );
+                }
+                boxPrefab.descendants.push(textPrefab);
+                boxPrefab.descendants.push(inputPrefab);
+              }
               return boxPrefab;
             };
-            formPrefab.options[0].value = modelId;
-            formPrefab.options[1].value = modelId;
+            const formPrefab = treeSearch('#formId', newPrefab.structure);
+            if (!formPrefab) throw new Error('No register form found');
             formPrefab.id = componentId;
-            const result: ActionResultsProps = await prepareAction(
+            const result = await prepareAction(
               componentId,
               idProperty,
               properties,
               'create',
+              undefined,
+              undefined,
+              permissions,
             );
+            setOption(
+              formPrefab,
+              'actionId',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: result.action.actionId,
+              }),
+            );
+            setOption(
+              formPrefab,
+              'model',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: modelId,
+              }),
+            );
+
             Object.values(result.variables).forEach(
               ([prop, inputVariable]): void => {
                 const { kind } = prop;
+                if (!kind) {
+                  // eslint-disable-next-line no-console
+                  console.warn('PropertyKind not found');
+                }
 
                 const newInput = () => {
-                  const bettyInput = (prefabName: String): PrefabReference => {
+                  const bettyInput = (prefabName: string): PrefabReference => {
                     const inputPrefab = makeBettyInput(
                       prefabName,
                       model,
                       prop,
                       inputVariable,
                     );
-                    setOption(inputPrefab, 'hideLabel', (options: any) => ({
-                      ...options,
-                      value: true,
-                    }));
+                    if (inputPrefab.type === 'COMPONENT') {
+                      setOption(
+                        inputPrefab,
+                        'hideLabel',
+                        (originalOption: PrefabComponentOption) => ({
+                          ...originalOption,
+                          value: true,
+                        }),
+                      );
+                      setOption(
+                        inputPrefab,
+                        'margin',
+                        (originalOption: PrefabComponentOption) => ({
+                          ...originalOption,
+                          value: 'none',
+                        }),
+                      );
+                      setOption(
+                        inputPrefab,
+                        'required',
+                        (originalOption: PrefabComponentOption) => ({
+                          ...originalOption,
+                          value: true,
+                        }),
+                      );
+                    }
                     return inputPrefab;
                   };
                   switch (kind) {
@@ -519,44 +561,26 @@ const beforeCreate = ({
                   }
                 };
                 const newInputPrefabs = newInput();
-                if (newInputPrefabs.type === 'COMPONENT') {
-                  setOption(
-                    newInputPrefabs.descendants[1],
-                    'margin',
-                    (options: PrefabComponentOption) => ({
-                      ...options,
-                      value: 'none',
-                    }),
-                  );
-                  setOption(
-                    newInputPrefabs.descendants[1],
-                    'required',
-                    (options: PrefabComponentOption) => ({
-                      ...options,
-                      value: true,
-                    }),
-                  );
-                }
                 inputBox.descendants.push(newInputPrefabs);
-                if (!kind) {
-                  // eslint-disable-next-line no-console
-                  console.warn('PropertyKind not found');
-                }
               },
             );
-            setOption(formPrefab, 'actionId', (options: any) => ({
-              ...options,
-              value: result.action.actionId,
-              configuration: { disabled: true },
-            }));
 
-            setOption(formPrefab, 'model', (options: any) => ({
-              ...options,
-              value: modelId,
-              configuration: {
-                disabled: true,
-              },
-            }));
+            setOption(
+              formPrefab,
+              'actionId',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: result.action.actionId,
+              }),
+            );
+            setOption(
+              formPrefab,
+              'model',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: modelId,
+              }),
+            );
           }
           save(newPrefab);
         }}
@@ -1086,7 +1110,7 @@ export default makePrefab('Register form', attrs, beforeCreate, [
                                                         'Content',
                                                         {
                                                           value: [
-                                                            'You need to configure the permissions of the "Form Beta" actions in order to use this template.',
+                                                            'You need to configure the permissions of the "Form" actions in order to use this template.',
                                                           ],
                                                           configuration: {
                                                             as: 'MULTILINE',
@@ -1438,9 +1462,9 @@ export default makePrefab('Register form', attrs, beforeCreate, [
                                           ],
                                         ),
                                         component(
-                                          'Form Beta',
+                                          'Form',
                                           {
-                                            options: defaults,
+                                            options: formOptions,
                                             ref: { id: '#formId' },
                                           },
                                           [

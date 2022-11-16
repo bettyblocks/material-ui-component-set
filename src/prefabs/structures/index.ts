@@ -1,5 +1,4 @@
 // Import all prefabs here
-import { ActionButton } from './ActionButton';
 import { ActionJSButton } from './ActionJSButton';
 import { Alert, FormSuccessAlert, FormErrorAlert } from './Alert';
 import { AppBar } from './Appbar';
@@ -54,6 +53,8 @@ import { Snackbar } from './Snackbar';
 import { Step } from './Step';
 import { Stepper } from './Stepper';
 import { SubmitButton } from './SubmitButton';
+import { Subview } from './Subview';
+import { SubviewItem } from './SubviewItem';
 import { Tab } from './Tab';
 import { Tabs } from './Tabs';
 import { Text } from './Text';
@@ -61,7 +62,6 @@ import { TextArea } from './TextArea';
 import { TextInput } from './TextInput';
 
 // Import all prefab options here
-import { actionButtonOptions } from './ActionButton/options';
 import { options as actionJSButtonOptions } from './ActionJSButton/options';
 import { alertOptions } from './Alert/options';
 import { appBarOptions } from './Appbar/options';
@@ -116,6 +116,8 @@ import { snackbarOptions } from './Snackbar/options';
 import { stepOptions } from './Step/options';
 import { stepperOptions } from './Stepper/options';
 import { options as submitButtonOptions } from './SubmitButton/options';
+import { subviewOptions } from './Subview/options';
+import { subviewItemOptions } from './SubviewItem/options';
 import { tabOptions } from './Tab/options';
 import { tabsOptions } from './Tabs/options';
 import { textOptions } from './Text/options';
@@ -124,7 +126,6 @@ import { options as textInputOptions } from './TextInput/options';
 
 export {
   ActionJSButton,
-  ActionButton,
   Alert,
   AppBar,
   AutocompleteInput,
@@ -180,13 +181,14 @@ export {
   Step,
   Stepper,
   SubmitButton,
+  Subview,
+  SubviewItem,
   Tab,
   Tabs,
   Text,
   TextArea,
   TextInput,
   actionJSButtonOptions,
-  actionButtonOptions,
   alertOptions,
   appBarOptions,
   autocompleteInputOptions,
@@ -240,6 +242,8 @@ export {
   stepOptions,
   stepperOptions,
   submitButtonOptions,
+  subviewOptions,
+  subviewItemOptions,
   tabOptions,
   tabsOptions,
   textOptions,

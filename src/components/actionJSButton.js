@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Action Button Beta',
+  name: 'Action Button',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'VERTICAL',
@@ -51,32 +51,30 @@
     const [, setOptions] = useOptions();
     const [isDisabled, setIsDisabled] = useState(disabled);
 
-    const [callActionJs] = useActionJs(actionId);
-
     const prop = !isDev && property && getProperty(property);
     const propValue = !isDev && property && useProperty(property.id);
 
-    const actionCallback = () => {
-      setIsLoading(true);
-      callActionJs({
-        ...(prop
-          ? {
-              variables: {
+    const [actionCallback, { loading: isLoadingAction }] = useActionJs(
+      actionId,
+      {
+        variables: {
+          id: actionId,
+          ...(prop
+            ? {
                 input: {
                   [prop.name]: propValue,
                 },
-              },
-            }
-          : {}),
-      })
-        .then((response) => {
-          B.triggerEvent('onActionSuccess', response.data.action.results);
-        })
-        .catch((error) => {
+              }
+            : {}),
+        },
+        onCompleted(response) {
+          B.triggerEvent('onActionSuccess', response.action.results);
+        },
+        onError(error) {
           B.triggerEvent('onActionError', error);
-        })
-        .finally(() => setIsLoading(false));
-    };
+        },
+      },
+    );
 
     useEffect(() => {
       setIsVisible(visible);
@@ -99,10 +97,10 @@
       B.defineFunction('Enable', () => setIsDisabled(false));
       B.defineFunction('Disable', () => setIsDisabled(true));
 
-      if (isLoading) {
-        B.triggerEvent('onActionLoad', isLoading);
+      if (isLoadingAction) {
+        B.triggerEvent('onActionLoad', isLoadingAction);
       }
-    }, [isLoading]);
+    }, [isLoadingAction]);
 
     const getExternalHref = (config) => {
       if (config.disabled) {
@@ -124,7 +122,7 @@
       return undefined;
     };
 
-    const showIndicator = isLoading;
+    const showIndicator = isLoading || isLoadingAction;
 
     const emptySpace = () => {
       if (icon === 'None') {
@@ -134,7 +132,7 @@
     };
 
     const buttonProps = {
-      disabled: disabled || isLoading,
+      disabled: disabled || showIndicator,
       tabIndex: isDev ? -1 : undefined,
       onClick: (event) => {
         event.stopPropagation();
@@ -291,6 +289,7 @@
         '& > *': {
           pointerEvents: 'none',
         },
+        width: ({ options: { fullWidth } }) => (fullWidth ? '100%' : 'auto'),
       },
       linkComponent: {
         '&, &.MuiTypography-root': {

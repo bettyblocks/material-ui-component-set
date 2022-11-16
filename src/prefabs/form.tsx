@@ -6,6 +6,7 @@ import {
   PrefabInteraction,
 } from '@betty-blocks/component-sdk';
 import { Form } from './structures/ActionJSForm';
+import { PermissionType } from './types/types';
 
 const beforeCreate = ({
   close,
@@ -35,6 +36,7 @@ const beforeCreate = ({
     createUuid,
     makeBettyInput,
     prepareAction,
+    getPageAuthenticationProfileId,
     setOption,
     useModelQuery,
   } = helpers;
@@ -46,7 +48,6 @@ const beforeCreate = ({
     'DATE_EXPRESSION',
     'DATE_TIME_EXPRESSION',
     'DECIMAL_EXPRESSION',
-    'IMAGE',
     'INTEGER_EXPRESSION',
     'LOGIN_TOKEN',
     'MINUTES_EXPRESSION',
@@ -69,6 +70,8 @@ const beforeCreate = ({
   const [properties, setProperties] = React.useState([]);
   const [modelBased, setmodelBased] = React.useState(true);
   const [actionName, setActionName] = React.useState('');
+  const permissions: PermissionType = 'inherit';
+  const pageAuthenticationProfileId = getPageAuthenticationProfileId();
 
   const [validationMessage, setValidationMessage] = React.useState('');
   const componentId = createUuid();
@@ -202,6 +205,8 @@ const beforeCreate = ({
             modelBased ? 'empty' : 'custom',
             null,
             actionName,
+            permissions,
+            pageAuthenticationProfileId,
           );
 
           const structure = originalPrefab.structure[0];
@@ -218,6 +223,7 @@ const beforeCreate = ({
                       property,
                       variable,
                       result.relatedIdProperties,
+                      result.relatedModelIds,
                     ),
                   );
                   break;
@@ -289,6 +295,16 @@ const beforeCreate = ({
                   structure.descendants.push(
                     makeBettyInput(
                       BettyPrefabs.FILE,
+                      model,
+                      property,
+                      variable,
+                    ),
+                  );
+                  break;
+                case PropertyKind.IMAGE:
+                  structure.descendants.push(
+                    makeBettyInput(
+                      BettyPrefabs.IMAGE,
                       model,
                       property,
                       variable,
@@ -512,11 +528,9 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.FormIcon,
   interactions,
 };
 
-export default prefab('Form Beta', attributes, beforeCreate, [
-  Form('Form Beta', true),
-]);
+export default prefab('Form', attributes, beforeCreate, [Form('Form', true)]);

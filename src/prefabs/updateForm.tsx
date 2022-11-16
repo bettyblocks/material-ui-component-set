@@ -7,6 +7,7 @@ import {
   BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
 import { Form } from './structures/ActionJSForm';
+import { PermissionType } from './types/types';
 
 const beforeCreate = ({
   close,
@@ -33,7 +34,6 @@ const beforeCreate = ({
     'DATE_EXPRESSION',
     'DATE_TIME_EXPRESSION',
     'DECIMAL_EXPRESSION',
-    'IMAGE',
     'INTEGER_EXPRESSION',
     'LOGIN_TOKEN',
     'MINUTES_EXPRESSION',
@@ -56,6 +56,7 @@ const beforeCreate = ({
     createUuid,
     makeBettyUpdateInput,
     prepareAction,
+    getPageAuthenticationProfileId,
     useCurrentPartialId,
     useCurrentPageId,
     setOption,
@@ -74,6 +75,7 @@ const beforeCreate = ({
   });
   const [buttonGroupValue, setButtonGroupValue] = React.useState('anotherPage');
 
+  const permissions: PermissionType = 'inherit';
   const [validationMessage, setValidationMessage] = React.useState('');
   const [anotherPageState, setAnotherPageState] = React.useState({
     modelId: '',
@@ -81,7 +83,7 @@ const beforeCreate = ({
   const pageId = useCurrentPageId();
   const partialId = useCurrentPartialId();
   const componentId = createUuid();
-
+  const pageAuthenticationProfileId = getPageAuthenticationProfileId();
   const modelRequest = useModelQuery({
     variables: { id: modelId },
     onCompleted: (result) => {
@@ -356,6 +358,10 @@ const beforeCreate = ({
             idProperty,
             properties,
             'update',
+            undefined,
+            undefined,
+            permissions,
+            pageAuthenticationProfileId,
           );
 
           setOption(structure, 'actionId', (option) => ({
@@ -389,6 +395,7 @@ const beforeCreate = ({
                     property,
                     variable,
                     result.relatedIdProperties,
+                    result.relatedModelIds,
                   ),
                 );
                 break;
@@ -460,6 +467,16 @@ const beforeCreate = ({
                 structure.descendants.push(
                   makeBettyUpdateInput(
                     BettyPrefabs.FILE,
+                    model,
+                    property,
+                    variable,
+                  ),
+                );
+                break;
+              case PropertyKind.IMAGE:
+                structure.descendants.push(
+                  makeBettyUpdateInput(
+                    BettyPrefabs.IMAGE,
                     model,
                     property,
                     variable,
@@ -648,12 +665,12 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.UpdateFormIcon,
   interactions,
   variables: [],
 };
 
-export default prefab('Update Form Beta', attributes, beforeCreate, [
-  Form('Update Form Beta', true),
+export default prefab('Update Form', attributes, beforeCreate, [
+  Form('Update Form', true),
 ]);

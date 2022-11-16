@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Form Beta',
+  name: 'Form',
   type: 'CONTAINER_COMPONENT',
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
@@ -9,6 +9,7 @@
     const formRef = React.createRef();
     const [interactionFilter, setInteractionFilter] = useState({});
     const [, setOptions] = useOptions();
+    const mounted = useRef(false);
 
     const isDev = B.env === 'dev';
 
@@ -80,6 +81,15 @@
       }
     });
 
+    useEffect(() => {
+      mounted.current = true;
+
+      B.triggerEvent('onRender');
+      return () => {
+        mounted.current = false;
+      };
+    }, []);
+
     /**
      * @name Filter
      * @param {Property} property
@@ -149,6 +159,7 @@
 
     const completeFilter = deepMerge(selectedFilter, interactionFilters);
     const where = useFilter(completeFilter);
+    const hasFilter = where && Object.keys(where).length !== 0;
 
     function FormComponent() {
       return (
@@ -173,7 +184,7 @@
       );
     }
 
-    if (model) {
+    if (model && hasFilter) {
       return (
         <GetOne modelId={model} rawFilter={where}>
           <FormComponent />

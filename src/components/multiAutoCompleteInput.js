@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Multi Autocomplete Beta',
+  name: 'Multi Autocomplete',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
@@ -32,35 +32,36 @@
       dataComponentAttribute: dataComponentAttributeRaw,
       disabled,
       errorType,
-      label: labelRaw,
-      labelProperty: labelPropertyId = '',
       filter: filterRaw,
       fullWidth,
       helperText: helperTextRaw,
       hideLabel,
+      label: labelRaw,
+      labelProperty: labelPropertyId = '',
       margin,
-      model: modelId,
-      required,
+      maxlength,
+      minlength,
+      minvalue,
+      model,
       nameAttribute: nameAttributeRaw,
       optionType,
       order,
       orderBy,
+      pattern,
       placeholder: placeholderRaw,
       renderCheckboxes,
+      required,
       showError,
       size,
-      variant,
+      type,
       validationBelowMinimum = [''],
       validationPatternMismatch = [''],
       validationTooLong = [''],
       validationTooShort = [''],
       validationTypeMismatch = [''],
       validationValueMissing = [''],
-      maxlength,
-      minlength,
-      pattern,
-      minvalue,
-      type,
+      variant,
+      value: valueRaw,
     } = options;
     const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
     /*
@@ -100,12 +101,19 @@
     const belowMinimumMessage = useText(validationBelowMinimum);
     const helperTextResolved = useText(helperTextRaw);
 
-    const modelProperty = getProperty(actionProperty.modelProperty) || {};
+    const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
 
     const labelProperty = getProperty(labelPropertyId) || {};
+    const { modelId: propertyModelId } = modelProperty;
+    const modelId = propertyModelId || model || '';
 
-    const model = getModel(modelId);
-    const defaultLabelProperty = getProperty(model.labelPropertyId || '') || {};
+    const propertyModel = getModel(modelId);
+    const defaultLabelProperty =
+      getProperty(
+        propertyModel && propertyModel.labelPropertyId
+          ? propertyModel.labelPropertyId
+          : '',
+      ) || {};
     const idProperty = getIdProperty(modelId || '') || {};
 
     const isListProperty =
@@ -123,6 +131,17 @@
         idProperty;
 
     const valueProperty = isListProperty ? modelProperty : idProperty;
+    const defaultValue = useText(valueRaw, { rawValue: true });
+    let initialValue = defaultValue.replace(/\n/g, '');
+
+    if (defaultValue.trim() === '') {
+      initialValue = [];
+    } else {
+      initialValue = defaultValue
+        .trim()
+        .split(',')
+        .map((x) => x.trim());
+    }
 
     const validationMessage = (validityObject) => {
       if (!validityObject) {
@@ -180,9 +199,6 @@
 
     const label = useText(labelRaw);
 
-    // eslint-disable-next-line no-underscore-dangle
-    const initialValue = [];
-
     /*
      * Selected value of the autocomplete.
      *
@@ -227,7 +243,7 @@
     const hasSearch = searchProp && searchProp.id;
     const hasValue = !!(valueProp && valueProp.id);
 
-    let valid = false;
+    let valid = true;
     let message = '';
 
     /*
@@ -257,67 +273,53 @@
     /*
      * We do some validations that checks if all required options are set. We do this in one place to prevent clutter further on
      */
-    switch (optionType) {
-      case 'model': {
-        if (!model) {
-          message = 'No model selected';
-          break;
-        }
-        if (!hasSearch && !hasValue) {
-          message = 'No property selected';
-          break;
-        }
-        if (!hasValue) {
-          message = 'No value property selected';
-          break;
-        }
-        if (!hasSearch) {
-          message = 'No label property selected';
-          break;
-        }
-
-        valid = true;
-        break;
+    if (!isListProperty && !isDev) {
+      if (!hasSearch && !hasValue) {
+        message = 'No property selected';
+        valid = false;
       }
-      case 'property': {
-        if (!isListProperty) {
-          message = 'No property of type "List" selected';
-          break;
-        }
-
-        valid = true;
-        break;
+      if (!hasValue) {
+        message = 'No value property selected';
+        valid = false;
       }
-      default: {
-        message = 'Invalid value for optionType option';
-        break;
+      if (!hasSearch) {
+        message = 'No label property selected';
+        valid = false;
+      }
+      if (!modelId) {
+        message = 'No model selected';
+        valid = false;
       }
     }
 
-    const parentIdProperty = getIdProperty(modelProperty.modelId).id;
+    const parentProperty = getIdProperty(modelId);
+    const parentIdProperty = parentProperty ? parentProperty.id : '';
     const parentIdValue = B.useProperty(parentIdProperty);
     const queryWasResolvable = !!parentIdValue;
 
+    let valuesFilter = {};
+    let valueFilter;
     // this should be merged into the final filter
-    const valuesFilter = {
-      _and: [
-        {
-          [modelProperty.inverseAssociationId]: {
-            [parentIdProperty]: {
-              eq: {
-                id: [parentIdProperty],
-                type: 'PROPERTY',
+    if (modelProperty.id) {
+      valuesFilter = {
+        _and: [
+          {
+            [modelProperty.inverseAssociationId]: {
+              [parentIdProperty]: {
+                eq: {
+                  id: [parentIdProperty],
+                  type: 'PROPERTY',
+                },
               },
             },
           },
-        },
-      ],
-    };
-
-    const valueFilter = useFilter(valuesFilter);
+        ],
+      };
+      valueFilter = useFilter(valuesFilter);
+    }
 
     useAllQuery(
-      modelId,
+      modelProperty.referenceModelId,
       {
         take: 20,
         rawFilter: valueFilter,
@@ -340,7 +342,7 @@
     useEffect(() => {
       let debounceInput;
 
-      if (optionType === 'model') {
+      if (optionType === 'model' || optionType === 'variable') {
         if (inputValue !== debouncedInputValue) {
           debounceInput = setTimeout(() => {
             setDebouncedInputValue(inputValue);
@@ -349,7 +351,7 @@
       }
 
       return () => {
-        if (optionType === 'model') {
+        if (optionType === 'model' || optionType === 'variable') {
           clearTimeout(debounceInput);
         }
       };
@@ -384,7 +386,7 @@
         }
         filter._or.push({
           [searchProp.name]: {
-            [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
+            [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
               ? parseInt(debouncedInputValue, 10)
               : debouncedInputValue,
           },
@@ -467,7 +469,7 @@
       data: { results } = {},
       refetch,
     } = useAllQuery(
-      modelId,
+      actionProperty ? modelProperty.referenceModelId : modelId,
       {
         take: 20,
         rawFilter: mergeFilters(filter, resolvedExternalFiltersObject),
@@ -594,7 +596,7 @@
         return modelProperty.values.map((propertyValue) => propertyValue.value);
       }
 
-      if (optionType === 'model') {
+      if (optionType === 'model' || optionType === 'variable') {
         if (!results) {
           return [];
         }
@@ -687,7 +689,7 @@
         <Autocomplete
           disableCloseOnSelect={!closeOnSelect}
           disabled={disabled}
-          {...(optionType === 'model' && {
+          {...((optionType === 'model' || optionType === 'variable') && {
             getOptionLabel: renderLabel,
           })}
           inputValue={inputValue}
@@ -698,7 +700,7 @@
 
             let triggerEventValue;
 
-            if (optionType === 'model') {
+            if (optionType === 'model' || optionType === 'variable') {
               setDebouncedInputValue('');
               triggerEventValue =
                 newValue.length === 0
@@ -742,7 +744,7 @@
           options={currentOptions}
           renderInput={(params) => (
             <>
-              {optionType === 'model' && (
+              {(optionType === 'model' || optionType === 'variable') && (
                 <input
                   type="hidden"
                   key={value[valueProp.name] ? 'hasValue' : 'isEmpty'}
@@ -843,6 +845,7 @@
         '& > *': {
           pointerEvents: 'none',
         },
+        width: ({ options: { fullWidth } }) => (fullWidth ? '100%' : 'auto'),
       },
       checkbox: {
         color: ({ options: { checkboxColor } }) => [

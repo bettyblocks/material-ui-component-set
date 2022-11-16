@@ -261,10 +261,10 @@
     const decimalHandler = (val) => {
       if (!isDev) {
         if (separator === 'comma') {
-          return val.replaceAll('.', '').replace(/[^0-9.|,]/g, '');
+          return val.replaceAll('.', ',').replace(/[^0-9.|,]/g, '');
         }
         if (separator === 'dot') {
-          return val.replaceAll(',', '').replace(/[^0-9.|,]/g, '');
+          return val.replace(/[^0-9.|,]/g, '');
         }
       }
 
@@ -378,6 +378,7 @@
         '& > *': {
           pointerEvents: 'none',
         },
+        width: ({ options: { fullWidth } }) => (fullWidth ? '100%' : 'auto'),
       },
       label: {
         color: ({ options: { labelColor } }) => [

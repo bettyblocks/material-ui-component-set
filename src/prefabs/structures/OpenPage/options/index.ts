@@ -25,7 +25,7 @@ export const categories = [
     ],
   },
   {
-    label: 'Advanced settings',
+    label: 'Advanced Options',
     expanded: false,
     members: ['dataComponentAttribute'],
   },
@@ -82,7 +82,7 @@ export const openPageButtonOptions = {
       condition: showIf('variant', 'EQ', 'icon'),
     },
   }),
-  icon: icon('Icon', { value: 'none' }),
+  icon: icon('Icon', { value: 'None' }),
   size: option('CUSTOM', {
     value: 'small',
     label: 'Icon size',
@@ -94,7 +94,7 @@ export const openPageButtonOptions = {
         { name: 'Medium', value: 'medium' },
         { name: 'Small', value: 'small' },
       ],
-      condition: hideIf('icon', 'EQ', 'none'),
+      condition: hideIf('icon', 'EQ', 'None'),
     },
   }),
   iconPosition: option('CUSTOM', {

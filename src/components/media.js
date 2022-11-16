@@ -4,7 +4,7 @@
   allowedTypes: [],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { env, useText, usePublicFile, useProperty } = B;
+    const { env, useText, usePublicFile } = B;
     const { Link } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const {
@@ -25,8 +25,7 @@
 
     const titleText = useText(title);
     const iframeUrl = useText(iframeSource);
-    const propValue =
-      !isDev && propertyFileSource && useProperty(propertyFileSource.id);
+    const propValue = !isDev && propertyFileSource;
     const { url: imgSource = '', name: imgName = 'image' } =
       usePublicFile(imageFileSource) || {};
     const { url: videoSource = '#', name: videoName = 'video' } =
@@ -156,6 +155,11 @@
           title={titleText || variable || imgName}
           alt={imgAlt || imgName}
           data-component={useText(dataComponentAttribute) || 'Media'}
+          role="presentation"
+          onClick={(event) => {
+            event.stopPropagation();
+            B.triggerEvent('onClick', event);
+          }}
         />
       );
     }

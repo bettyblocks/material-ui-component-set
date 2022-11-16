@@ -6,6 +6,7 @@ import {
   PrefabInteraction,
 } from '@betty-blocks/component-sdk';
 import { Form } from './structures/ActionJSForm';
+import { PermissionType } from './types/types';
 
 const beforeCreate = ({
   close,
@@ -22,6 +23,29 @@ const beforeCreate = ({
   save,
   helpers,
 }: any) => {
+  const disabledKinds = [
+    'AUTO_INCREMENT',
+    'BOOLEAN_EXPRESSION',
+    'COUNT',
+    'DATE_EXPRESSION',
+    'DATE_TIME_EXPRESSION',
+    'DECIMAL_EXPRESSION',
+    'INTEGER_EXPRESSION',
+    'LOGIN_TOKEN',
+    'MINUTES_EXPRESSION',
+    'MULTI_FILE',
+    'MULTI_IMAGE',
+    'PDF',
+    'PRICE_EXPRESSION',
+    'RICH_TEXT',
+    'SERIAL',
+    'SIGNED_PDF',
+    'STRING_EXPRESSION',
+    'SUM',
+    'TEXT_EXPRESSION',
+    'ZIPCODE',
+  ];
+
   const {
     BettyPrefabs,
     PropertyKind,
@@ -29,6 +53,7 @@ const beforeCreate = ({
     createUuid,
     makeBettyInput,
     prepareAction,
+    getPageAuthenticationProfileId,
     setOption,
     useModelQuery,
   } = helpers;
@@ -37,9 +62,12 @@ const beforeCreate = ({
   const [model, setModel] = React.useState(null);
   const [idProperty, setIdProperty] = React.useState(null);
   const [properties, setProperties] = React.useState([]);
+  const permissions: PermissionType = 'inherit';
 
   const [validationMessage, setValidationMessage] = React.useState('');
   const componentId = createUuid();
+
+  const pageAuthenticationProfileId = getPageAuthenticationProfileId();
 
   const modelRequest = useModelQuery({
     variables: { id: modelId },
@@ -82,7 +110,7 @@ const beforeCreate = ({
         <Field label="Select properties">
           <PropertiesSelector
             allowRelations
-            disabledKinds={[]}
+            disabledKinds={disabledKinds}
             disabledNames={['created_at', 'id', 'updated_at']}
             modelId={modelId}
             onChange={setProperties}
@@ -102,7 +130,12 @@ const beforeCreate = ({
             idProperty,
             properties,
             'create',
+            undefined,
+            undefined,
+            permissions,
+            pageAuthenticationProfileId,
           );
+
           const structure = originalPrefab.structure[0];
 
           Object.values(result.variables).map(([property, variable]) => {
@@ -117,6 +150,7 @@ const beforeCreate = ({
                     property,
                     variable,
                     result.relatedIdProperties,
+                    result.relatedModelIds,
                   ),
                 );
                 break;
@@ -177,6 +211,11 @@ const beforeCreate = ({
               case PropertyKind.FILE:
                 structure.descendants.push(
                   makeBettyInput(BettyPrefabs.FILE, model, property, variable),
+                );
+                break;
+              case PropertyKind.IMAGE:
+                structure.descendants.push(
+                  makeBettyInput(BettyPrefabs.IMAGE, model, property, variable),
                 );
                 break;
               case PropertyKind.IBAN:
@@ -339,11 +378,11 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.CreateFormIcon,
   interactions,
 };
 
-export default prefab('Create Form Beta', attributes, beforeCreate, [
-  Form('Create Form Beta', true),
+export default prefab('Create Form', attributes, beforeCreate, [
+  Form('Create Form', true),
 ]);
