@@ -298,6 +298,8 @@
     const parentIdValue = B.useProperty(parentIdProperty);
     const queryWasResolvable = !!parentIdValue;
 
+    console.log({ value });
+
     let valuesFilter = {};
     let valueFilter;
     // this should be merged into the final filter
@@ -317,7 +319,33 @@
         ],
       };
       valueFilter = useFilter(valuesFilter);
+    } else {
+      const relationPropertyId = valueRaw[0] && valueRaw[0].id;
+      const relationProperty = getProperty(relationPropertyId || '');
+      if (relationProperty) {
+        valuesFilter = {
+          _and: [
+            {
+              [relationProperty.inverseAssociationId]: {
+                [relationProperty.modelId]: {
+                  eq: {
+                    id: [relationProperty.modelId],
+                    type: 'PROPERTY',
+                  },
+                },
+              },
+            },
+          ],
+        };
+      }
+      console.log('relationProperty', relationProperty);
+      console.log('valuesFilter', valuesFilter);
+      valueFilter = useFilter(valuesFilter);
+      console.log('valueFilter', valueFilter);
     }
+
+    console.log({ queryWasResolvable });
+    console.log({ valid });
 
     useAllQuery(
       modelProperty.referenceModelId,
@@ -337,7 +365,7 @@
           }
         },
       },
-      optionType === 'property' || !valid || !queryWasResolvable,
+      !valid || !queryWasResolvable,
     );
 
     useEffect(() => {
