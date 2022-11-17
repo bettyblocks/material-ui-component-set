@@ -1,3 +1,15 @@
+# [2.72.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.71.0...v2.72.0) (2022-11-17)
+
+
+### Bug Fixes
+
+* minor styling changes ([d937f1e](https://github.com/bettyblocks/material-ui-component-set/commit/d937f1ed30eba827621aff1b8f9662a8c367c7a3))
+
+
+### Features
+
+* profile page converted to tsx ([4f58515](https://github.com/bettyblocks/material-ui-component-set/commit/4f58515527d81989ddfd004558f99780c6edc60b))
+
 # [2.71.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.70.0...v2.71.0) (2022-11-17)
 
 
