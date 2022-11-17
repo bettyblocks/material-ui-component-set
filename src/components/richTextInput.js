@@ -24,6 +24,11 @@
       package: 'npm:slate-hyperscript@0.77.0',
       imports: ['*'],
     },
+    {
+      label: 'MuiExtraIcons',
+      package: 'npm:@material-ui/icons@4.11.2',
+      imports: ['FormatBold'],
+    },
   ],
   jsx: (() => {
     const {
@@ -31,8 +36,10 @@
       SlateReact,
       SlateHistory,
       SlateHyperscript,
+      MuiExtraIcons: { FormatBold },
     } = dependencies;
     const { Icons } = window.MaterialUI;
+    const allIcons = { ...Icons, ...FormatBold };
     const { FormHelperText } = window.MaterialUI.Core;
     const { Editable, withReact, Slate, useSlate } = SlateReact;
     const { createEditor, Editor, Text, Element, Transforms, Node } = SlateP;
@@ -640,7 +647,7 @@
 
     const Button = React.forwardRef(
       ({ active, disable, icon, ...props }, ref) => {
-        const IconButton = Icons[icon];
+        const IconButton = allIcons[icon];
         return (
           <IconButton
             {...props}
@@ -691,7 +698,7 @@
 
     const HistoryButton = React.forwardRef(
       ({ action, icon, ...props }, ref) => {
-        const IconButton = Icons[icon];
+        const IconButton = allIcons[icon];
         return (
           <IconButton
             {...props}
@@ -766,7 +773,7 @@
           document.removeEventListener('touchstart', handler);
         };
       }, [showDropdown]);
-      const ArrowDown = Icons.KeyboardArrowDown;
+      const ArrowDown = allIcons.KeyboardArrowDown;
       return (
         <div className={classes.toolbarDropdown} ref={styleSelectorRef}>
           <button
