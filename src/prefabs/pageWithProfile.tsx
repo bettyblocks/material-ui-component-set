@@ -836,7 +836,7 @@ const beforeCreate = ({
           [authPassword],
           'update',
           undefined,
-          undefined,
+          'Profile page - Update password',
           permissions,
           authProfileId,
         );
@@ -957,7 +957,7 @@ const beforeCreate = ({
           properties,
           'update',
           undefined,
-          undefined,
+          'Profile page - Update details',
           permissions,
           authProfileId,
         );
@@ -1086,7 +1086,7 @@ const beforeCreate = ({
             [...transformProp(profilePictureProperty)],
             'update',
             undefined,
-            undefined,
+            'Profile page - Update profile image',
             permissions,
             authProfileId,
           );
