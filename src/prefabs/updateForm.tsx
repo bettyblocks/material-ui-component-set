@@ -57,6 +57,7 @@ const beforeCreate = ({
     makeBettyUpdateInput,
     prepareAction,
     getPageAuthenticationProfileId,
+    getPageName,
     useCurrentPartialId,
     useCurrentPageId,
     setOption,
@@ -84,6 +85,7 @@ const beforeCreate = ({
   const partialId = useCurrentPartialId();
   const componentId = createUuid();
   const pageAuthenticationProfileId = getPageAuthenticationProfileId();
+  const pageName = getPageName();
   const modelRequest = useModelQuery({
     variables: { id: modelId },
     onCompleted: (result) => {
@@ -362,6 +364,7 @@ const beforeCreate = ({
             undefined,
             permissions,
             pageAuthenticationProfileId,
+            pageName,
           );
 
           setOption(structure, 'actionId', (option) => ({
