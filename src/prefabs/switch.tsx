@@ -1,9 +1,11 @@
 import * as React from 'react';
 import {
   BeforeCreateArgs,
+  color,
   Icon,
   prefab,
   showIf,
+  ThemeColor,
   toggle,
   variable,
 } from '@betty-blocks/component-sdk';
@@ -313,6 +315,12 @@ export default prefab('Switch', attr, beforeCreate, [
         configuration: {
           condition: showIf('isSwitch', 'EQ', 'false'),
         },
+      }),
+      checkboxColor: color('Switch color', {
+        value: ThemeColor.ACCENT_3,
+      }),
+      checkboxColorChecked: color('Switch color checked', {
+        value: ThemeColor.PRIMARY,
       }),
     },
     label: 'Switch',
