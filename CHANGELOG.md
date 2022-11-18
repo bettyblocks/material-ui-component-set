@@ -1,3 +1,10 @@
+# [2.73.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.72.1...v2.73.0) (2022-11-18)
+
+
+### Features
+
+* switch form input for next gen ([75d8046](https://github.com/bettyblocks/material-ui-component-set/commit/75d80464314b30072e72e5ef941a01f33ce81e49))
+
 ## [2.72.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.72.0...v2.72.1) (2022-11-18)
 
 
