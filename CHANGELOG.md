@@ -1,3 +1,10 @@
+## [2.72.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.72.0...v2.72.1) (2022-11-18)
+
+
+### Bug Fixes
+
+* remove unused from components ([f6c95bd](https://github.com/bettyblocks/material-ui-component-set/commit/f6c95bd7fb0f0c18b856372f1b67c61ef18d6529))
+
 # [2.72.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.71.0...v2.72.0) (2022-11-17)
 
 
