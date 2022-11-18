@@ -45,11 +45,13 @@
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
     const [isDisabled, setIsDisabled] = useState(disabled);
+
     const labelText = useText(labelRaw);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const validationValueMissingText = useText(validationValueMissing);
     const helperTextResolved = useText(helperText);
     const defaultValueText = useText(valueRaw, { rawValue: true });
+
     const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
     const { modelId: propertyModelId, referenceModelId } = modelProperty;
     const { contextModelId } = model;
@@ -191,7 +193,10 @@
           }
         },
       },
-      !valid || !queryWasResolvable || isListProperty,
+      optionType === 'property' ||
+        !valid ||
+        !queryWasResolvable ||
+        isListProperty,
     );
 
     const { hasResults, data: relationData } = useRelation(
