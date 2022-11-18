@@ -1,3 +1,105 @@
+# [2.72.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.71.0...v2.72.0) (2022-11-17)
+
+
+### Bug Fixes
+
+* minor styling changes ([d937f1e](https://github.com/bettyblocks/material-ui-component-set/commit/d937f1ed30eba827621aff1b8f9662a8c367c7a3))
+
+
+### Features
+
+* profile page converted to tsx ([4f58515](https://github.com/bettyblocks/material-ui-component-set/commit/4f58515527d81989ddfd004558f99780c6edc60b))
+
+# [2.71.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.70.0...v2.71.0) (2022-11-17)
+
+
+### Features
+
+* add invisible option to dialog ([18b3997](https://github.com/bettyblocks/material-ui-component-set/commit/18b3997bb01b7ccbba72b2b16c8789d7b569f82e))
+
+# [2.70.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.69.0...v2.70.0) (2022-11-16)
+
+
+### Bug Fixes
+
+* trigger commit_lint prehook ([ed6be8c](https://github.com/bettyblocks/material-ui-component-set/commit/ed6be8cf7993314170f2c147bce39fbd9aa9b602))
+
+
+### Features
+
+* **PAGE-2187:** Add Page-name to Action-name. ([bf935ca](https://github.com/bettyblocks/material-ui-component-set/commit/bf935ca3bc2250610fae11a8011232af29399df3))
+* **PAGE-2187:** Add pageName to form, updateForm & loginForm. ([3d226d2](https://github.com/bettyblocks/material-ui-component-set/commit/3d226d243f2c72f6925b19eedf09f6f9c844e735))
+
+# [2.69.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.68.0...v2.69.0) (2022-11-15)
+
+
+### Features
+
+* options renaming ([995b436](https://github.com/bettyblocks/material-ui-component-set/commit/995b4368bedf7cacdeb44a72d11ae0884a145569))
+* reconfigurev2 in datatable ([4c36829](https://github.com/bettyblocks/material-ui-component-set/commit/4c36829ecceb3975dbc9ae9a196751e29526745f))
+
+# [2.68.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.67.0...v2.68.0) (2022-11-11)
+
+
+### Bug Fixes
+
+* add default label ([c9f7a68](https://github.com/bettyblocks/material-ui-component-set/commit/c9f7a681a8b208bfd77663dea80f62d3789d3e95))
+* add defaultvalues query ([4af938b](https://github.com/bettyblocks/material-ui-component-set/commit/4af938b4e8ea1809dfdd079f8f90a919c9e62105))
+* add validation if no model ([e16ce9f](https://github.com/bettyblocks/material-ui-component-set/commit/e16ce9f49f983ac675fc8842639e46eb942fdd55))
+* lint errors ([f3b7d19](https://github.com/bettyblocks/material-ui-component-set/commit/f3b7d1921879a9d9f5250a9f7123b04f474dbc31))
+* orderBy won't crash when removing the option ([48daa1a](https://github.com/bettyblocks/material-ui-component-set/commit/48daa1aad1ea7fc79f0647b10fdaf0d8dbce0f5c))
+* sort lines ([2953b03](https://github.com/bettyblocks/material-ui-component-set/commit/2953b0389d8abbe91b15ea15462efe62f7fcae4d))
+* use hidden input for values ([9afdfb8](https://github.com/bettyblocks/material-ui-component-set/commit/9afdfb8b2af1d2dfbd9a11122ba8e65b81a21f36))
+* use idProperty as label fallback ([3cb64ab](https://github.com/bettyblocks/material-ui-component-set/commit/3cb64abc2e883aca3a40ae22dce8eec191250c3c))
+
+
+### Features
+
+* added wip checkbox group ([b55aee9](https://github.com/bettyblocks/material-ui-component-set/commit/b55aee9d675e94ac1c60052f5707874e95274dd9))
+
+# [2.67.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.66.1...v2.67.0) (2022-11-10)
+
+
+### Features
+
+* add subview component TMPLT-1757 ([2dc34af](https://github.com/bettyblocks/material-ui-component-set/commit/2dc34afd104fd654f9e1a528517f4ec9f990613f))
+
+## [2.66.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.66.0...v2.66.1) (2022-11-08)
+
+
+### Bug Fixes
+
+* allow components to properly span full screen in dev time ([4ebc6ec](https://github.com/bettyblocks/material-ui-component-set/commit/4ebc6ec4071582806f51789daad62dbf9e6bfe0a))
+
+# [2.66.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.8...v2.66.0) (2022-11-07)
+
+
+### Bug Fixes
+
+* update sdk in lock file ([af6e4e7](https://github.com/bettyblocks/material-ui-component-set/commit/af6e4e7eab5f1be50046834071f7fae23a1def9c))
+
+
+### Features
+
+* create input wizard added to text and select ([0223893](https://github.com/bettyblocks/material-ui-component-set/commit/02238931d49a6cec0b9c03ae92f4fee7cf3bd703))
+* removed old wizard from all inputs ([3c26f13](https://github.com/bettyblocks/material-ui-component-set/commit/3c26f13462a1a488c723ece8036e8161c0cab670))
+* removed unused checks ([e78f7fd](https://github.com/bettyblocks/material-ui-component-set/commit/e78f7fd48868ddc9a2002969854498b84ea47c6f))
+* update for relation inputs in forms ([71f83e7](https://github.com/bettyblocks/material-ui-component-set/commit/71f83e75fa0fee5dd6210178fd78e40c9dfcd331))
+
+## [2.65.8](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.7...v2.65.8) (2022-11-04)
+
+
+### Bug Fixes
+
+* remove partial component ([3cc86f9](https://github.com/bettyblocks/material-ui-component-set/commit/3cc86f948d34ce03a0afcc72a268e1ce4b9526e4))
+
+## [2.65.7](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.6...v2.65.7) (2022-11-04)
+
+
+### Bug Fixes
+
+* add action to backoffice wrapper ([d7f9a32](https://github.com/bettyblocks/material-ui-component-set/commit/d7f9a328aa30f82a8d0b2a3e59467adb67c192b7))
+
 ## [2.65.6](https://github.com/bettyblocks/material-ui-component-set/compare/v2.65.5...v2.65.6) (2022-11-03)
 
 
