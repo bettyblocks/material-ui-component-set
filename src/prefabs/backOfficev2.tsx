@@ -983,8 +983,8 @@ const beforeCreate = ({
         );
       }
 
-      if (searchProp.id && searchProp.id !== '') {
-        if (newPrefab.interactions) {
+      if (newPrefab.interactions) {
+        if (searchProp.id && searchProp.id !== '') {
           newPrefab.interactions.push({
             name: 'Filter',
             sourceEvent: 'onChange',
@@ -1002,44 +1002,45 @@ const beforeCreate = ({
             },
             type: 'Custom',
           } as PrefabInteraction);
-          newPrefab.interactions.push({
-            name: 'Show',
-            sourceEvent: 'onChange',
-            ref: {
-              targetComponentId: '#clearButton',
-              sourceComponentId: '#searchField',
-            },
-            type: 'Custom',
-          } as PrefabInteraction);
-          newPrefab.interactions.push({
-            name: 'Clear',
-            sourceEvent: 'Click',
-            ref: {
-              targetComponentId: '#searchField',
-              sourceComponentId: '#clearButton',
-            },
-            type: 'Custom',
-          } as PrefabInteraction);
-          newPrefab.interactions.push({
-            name: 'ResetFilter',
-            sourceEvent: 'Click',
-            ref: {
-              targetComponentId: '#DataTable',
-              sourceComponentId: '#clearButton',
-            },
-            type: 'Custom',
-          } as PrefabInteraction);
-          newPrefab.interactions.push({
-            name: 'Hide',
-            sourceEvent: 'Click',
-            ref: {
-              targetComponentId: '#clearButton',
-              sourceComponentId: '#clearButton',
-            },
-            type: 'Custom',
-          } as PrefabInteraction);
         }
+        newPrefab.interactions.push({
+          name: 'Show',
+          sourceEvent: 'onChange',
+          ref: {
+            targetComponentId: '#clearButton',
+            sourceComponentId: '#searchField',
+          },
+          type: 'Custom',
+        } as PrefabInteraction);
+        newPrefab.interactions.push({
+          name: 'Clear',
+          sourceEvent: 'Click',
+          ref: {
+            targetComponentId: '#searchField',
+            sourceComponentId: '#clearButton',
+          },
+          type: 'Custom',
+        } as PrefabInteraction);
+        newPrefab.interactions.push({
+          name: 'ResetFilter',
+          sourceEvent: 'Click',
+          ref: {
+            targetComponentId: '#DataTable',
+            sourceComponentId: '#clearButton',
+          },
+          type: 'Custom',
+        } as PrefabInteraction);
+        newPrefab.interactions.push({
+          name: 'Hide',
+          sourceEvent: 'Click',
+          ref: {
+            targetComponentId: '#clearButton',
+            sourceComponentId: '#clearButton',
+          },
+          type: 'Custom',
+        } as PrefabInteraction);
       }
+
       // #endregion
 
       save(newPrefab);
@@ -2112,7 +2113,7 @@ const drawerContainer = DrawerContainer(
                               overwrite: {
                                 backgroundColor: {
                                   type: 'STATIC',
-                                  value: 'transparent',
+                                  value: 'white',
                                 },
                                 boxShadow: 'none',
                                 color: {
@@ -2239,22 +2240,6 @@ const drawerContainer = DrawerContainer(
                       {
                         options: {
                           ...boxOptions,
-                          // NOTE: adding this valignment will no longer make the search bar full width.
-                          // valignment: buttongroup(
-                          //   'Vertical alignment',
-                          //   [
-                          //     ['None', 'none'],
-                          //     ['Top', 'flex-start'],
-                          //     ['Center', 'center'],
-                          //     ['Bottom', 'flex-end'],
-                          //   ],
-                          //   {
-                          //     value: 'center',
-                          //     configuration: {
-                          //       dataType: 'string',
-                          //     },
-                          //   },
-                          // ),
                           innerSpacing: sizes('Inner space', {
                             value: ['0rem', '0rem', '0rem', '0rem'],
                           }),
@@ -2408,6 +2393,12 @@ const drawerContainer = DrawerContainer(
                                           ...buttonOptions,
                                           buttonText: variable('Button text', {
                                             value: [],
+                                          }),
+                                          visible: toggle('Toggle visibility', {
+                                            value: false,
+                                            configuration: {
+                                              as: 'VISIBILITY',
+                                            },
                                           }),
                                           outerSpacing: sizes('Outer space', {
                                             value: [
