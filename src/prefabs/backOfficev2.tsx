@@ -353,11 +353,13 @@ const attributes = {
   category: 'FORMV2',
   icon: Icon.UpdateFormIcon,
   type: 'page',
-  description: 'Discription',
-  detail: 'detail',
-  previewUrl: 'https://preview.betty.app/back-office',
+  description:
+    'This page contains a datatable and all you need to manage your records.',
+  detail:
+    'In this ready to use Data Table, it is possible to create and display (read) records. These functionalities are shown in a full page.',
+  previewUrl: 'https://preview.betty.app/back-office-v2',
   previewImage:
-    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Back_Office.jpg',
+    'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/ae140409957240c881669db9739f9f6e',
   interactions,
 };
 
@@ -3249,7 +3251,7 @@ const prefabStructure = [
 ];
 
 export default makePrefab(
-  'Backoffice v2',
+  'Back office v2 - Overview',
   attributes,
   beforeCreate,
   prefabStructure,

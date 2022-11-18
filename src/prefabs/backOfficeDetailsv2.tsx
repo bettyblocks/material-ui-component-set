@@ -3896,7 +3896,7 @@ const prefabStructure = [
 ];
 
 export default makePrefab(
-  'Backoffice - Detail page',
+  'Back office v2 - Detail view',
   attributes,
   beforeCreate,
   prefabStructure,
