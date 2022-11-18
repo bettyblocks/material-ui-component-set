@@ -1556,19 +1556,26 @@ const drawerContainer = DrawerContainer(
                                         ref: { id: '#detailBox' },
                                       },
                                       [
-                                        Row({}, [
-                                          Column({}, [
-                                            DataContainer(
-                                              {
-                                                ref: {
-                                                  id: '#detailDatacontainer',
+                                        DataContainer(
+                                          {
+                                            ref: {
+                                              id: '#detailDatacontainer',
+                                            },
+                                          },
+                                          [
+                                            Row({}, [
+                                              Column(
+                                                {
+                                                  ref: {
+                                                    id: '#detailColumn',
+                                                  },
                                                 },
-                                              },
-                                              [],
-                                            ),
-                                          ]),
-                                          Column({}, [Subview({}, [])]),
-                                        ]),
+                                                [],
+                                              ),
+                                              Column({}, [Subview({}, [])]),
+                                            ]),
+                                          ],
+                                        ),
                                       ],
                                     ),
                                     Box(
@@ -1618,7 +1625,9 @@ const drawerContainer = DrawerContainer(
                                                 },
                                               ),
                                             },
-                                            ref: { id: '#detailCancelButton' },
+                                            ref: {
+                                              id: '#detailCancelButton',
+                                            },
                                             style: {
                                               overwrite: {
                                                 backgroundColor: {
@@ -4841,6 +4850,9 @@ const beforeCreate = ({
       }
 
       // set detail tab
+      const detailColumn = treeSearch('#detailColumn', newPrefab.structure);
+      if (!detailColumn) throw new Error('No detail data container found');
+
       const detailDatacontainer = treeSearch(
         '#detailDatacontainer',
         newPrefab.structure,
@@ -4855,9 +4867,7 @@ const beforeCreate = ({
           value: modelId,
         }),
       );
-      properties.map((prop) =>
-        detailDatacontainer.descendants.push(makeDetail(prop)),
-      );
+      properties.map((prop) => detailColumn.descendants.push(makeDetail(prop)));
 
       // set edit form
       const updateForm = treeSearch('#updateForm', newPrefab.structure);
