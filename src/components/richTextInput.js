@@ -27,7 +27,20 @@
     {
       label: 'MuiExtraIcons',
       package: 'npm:@material-ui/icons@4.11.2',
-      imports: ['FormatBold'],
+      imports: [
+        'FormatBold',
+        'FormatAlignCenter',
+        'FormatAlignJustify',
+        'FormatAlignLeft',
+        'FormatAlignRight',
+        'FormatItalic',
+        'FormatListBulleted',
+        'FormatListNumbered',
+        'FormatQuote',
+        'FormatUnderlined',
+        'StrikethroughS',
+        'FirstPage',
+      ],
     },
   ],
   jsx: (() => {
@@ -36,10 +49,38 @@
       SlateReact,
       SlateHistory,
       SlateHyperscript,
-      MuiExtraIcons: { FormatBold },
+      MuiExtraIcons: {
+        FormatBold,
+        FormatAlignCenter,
+        FormatAlignJustify,
+        FormatAlignLeft,
+        FormatAlginRight,
+        FormatItalic,
+        FormatListBulleted,
+        FormatListNumbered,
+        FormatQuote,
+        FormatUnderlined,
+        StrikethroughS,
+        FirstPage,
+      },
     } = dependencies;
+
     const { Icons } = window.MaterialUI;
-    const allIcons = { ...Icons, ...FormatBold };
+    const extraIcons = {
+      ...FormatBold,
+      ...FormatAlignCenter,
+      ...FormatAlignJustify,
+      ...FormatAlignLeft,
+      ...FormatAlginRight,
+      ...FormatItalic,
+      ...FormatListBulleted,
+      ...FormatListNumbered,
+      ...FormatQuote,
+      ...FormatUnderlined,
+      ...StrikethroughS,
+      ...FirstPage,
+    };
+    const allIcons = { ...Icons, ...extraIcons };
     const { FormHelperText } = window.MaterialUI.Core;
     const { Editable, withReact, Slate, useSlate } = SlateReact;
     const { createEditor, Editor, Text, Element, Transforms, Node } = SlateP;
