@@ -4235,6 +4235,8 @@ const beforeCreate = ({
                 'ZIPCODE',
                 'IMAGE',
                 'FILE',
+                'PASSWORD',
+                'SERIAL',
               ]}
               showFormat={false}
             />
