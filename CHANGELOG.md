@@ -1,3 +1,17 @@
+# [2.74.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.73.0...v2.74.0) (2022-11-18)
+
+
+### Bug Fixes
+
+* create enrichFileObj function and solve styling issues ([96742ba](https://github.com/bettyblocks/material-ui-component-set/commit/96742ba9aa3f6b96175e9de926cd6e091260b628))
+
+
+### Features
+
+* backoffice new design ([9d16154](https://github.com/bettyblocks/material-ui-component-set/commit/9d16154441d1e2514933ae77e405ab83a1c29ba1))
+* backoffice new design ([2cd7e51](https://github.com/bettyblocks/material-ui-component-set/commit/2cd7e51bb00545f699c3b6589ec4bc7b47c6c07a))
+* created backoffice v2 structure and beforecreate ([09eff54](https://github.com/bettyblocks/material-ui-component-set/commit/09eff544c707b971d9ccf88d6d074142c5b2cf4f))
+
 # [2.73.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.72.1...v2.73.0) (2022-11-18)
 
 
