@@ -353,11 +353,13 @@ const attributes = {
   category: 'FORMV2',
   icon: Icon.UpdateFormIcon,
   type: 'page',
-  description: 'Discription',
-  detail: 'detail',
-  previewUrl: 'https://preview.betty.app/back-office',
+  description:
+    'This page contains a datatable and all you need to manage your records.',
+  detail:
+    'In this ready to use Data Table, it is possible to create and display (read) records. These functionalities are shown in a full page.',
+  previewUrl: 'https://preview.betty.app/back-office-v2',
   previewImage:
-    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Back_Office.jpg',
+    'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/ae140409957240c881669db9739f9f6e',
   interactions,
 };
 
@@ -983,8 +985,8 @@ const beforeCreate = ({
         );
       }
 
-      if (searchProp.id && searchProp.id !== '') {
-        if (newPrefab.interactions) {
+      if (newPrefab.interactions) {
+        if (searchProp.id && searchProp.id !== '') {
           newPrefab.interactions.push({
             name: 'Filter',
             sourceEvent: 'onChange',
@@ -1002,44 +1004,45 @@ const beforeCreate = ({
             },
             type: 'Custom',
           } as PrefabInteraction);
-          newPrefab.interactions.push({
-            name: 'Show',
-            sourceEvent: 'onChange',
-            ref: {
-              targetComponentId: '#clearButton',
-              sourceComponentId: '#searchField',
-            },
-            type: 'Custom',
-          } as PrefabInteraction);
-          newPrefab.interactions.push({
-            name: 'Clear',
-            sourceEvent: 'Click',
-            ref: {
-              targetComponentId: '#searchField',
-              sourceComponentId: '#clearButton',
-            },
-            type: 'Custom',
-          } as PrefabInteraction);
-          newPrefab.interactions.push({
-            name: 'ResetFilter',
-            sourceEvent: 'Click',
-            ref: {
-              targetComponentId: '#DataTable',
-              sourceComponentId: '#clearButton',
-            },
-            type: 'Custom',
-          } as PrefabInteraction);
-          newPrefab.interactions.push({
-            name: 'Hide',
-            sourceEvent: 'Click',
-            ref: {
-              targetComponentId: '#clearButton',
-              sourceComponentId: '#clearButton',
-            },
-            type: 'Custom',
-          } as PrefabInteraction);
         }
+        newPrefab.interactions.push({
+          name: 'Show',
+          sourceEvent: 'onChange',
+          ref: {
+            targetComponentId: '#clearButton',
+            sourceComponentId: '#searchField',
+          },
+          type: 'Custom',
+        } as PrefabInteraction);
+        newPrefab.interactions.push({
+          name: 'Clear',
+          sourceEvent: 'Click',
+          ref: {
+            targetComponentId: '#searchField',
+            sourceComponentId: '#clearButton',
+          },
+          type: 'Custom',
+        } as PrefabInteraction);
+        newPrefab.interactions.push({
+          name: 'ResetFilter',
+          sourceEvent: 'Click',
+          ref: {
+            targetComponentId: '#DataTable',
+            sourceComponentId: '#clearButton',
+          },
+          type: 'Custom',
+        } as PrefabInteraction);
+        newPrefab.interactions.push({
+          name: 'Hide',
+          sourceEvent: 'Click',
+          ref: {
+            targetComponentId: '#clearButton',
+            sourceComponentId: '#clearButton',
+          },
+          type: 'Custom',
+        } as PrefabInteraction);
       }
+
       // #endregion
 
       save(newPrefab);
@@ -2112,7 +2115,7 @@ const drawerContainer = DrawerContainer(
                               overwrite: {
                                 backgroundColor: {
                                   type: 'STATIC',
-                                  value: 'transparent',
+                                  value: 'white',
                                 },
                                 boxShadow: 'none',
                                 color: {
@@ -2239,22 +2242,6 @@ const drawerContainer = DrawerContainer(
                       {
                         options: {
                           ...boxOptions,
-                          // NOTE: adding this valignment will no longer make the search bar full width.
-                          // valignment: buttongroup(
-                          //   'Vertical alignment',
-                          //   [
-                          //     ['None', 'none'],
-                          //     ['Top', 'flex-start'],
-                          //     ['Center', 'center'],
-                          //     ['Bottom', 'flex-end'],
-                          //   ],
-                          //   {
-                          //     value: 'center',
-                          //     configuration: {
-                          //       dataType: 'string',
-                          //     },
-                          //   },
-                          // ),
                           innerSpacing: sizes('Inner space', {
                             value: ['0rem', '0rem', '0rem', '0rem'],
                           }),
@@ -2408,6 +2395,12 @@ const drawerContainer = DrawerContainer(
                                           ...buttonOptions,
                                           buttonText: variable('Button text', {
                                             value: [],
+                                          }),
+                                          visible: toggle('Toggle visibility', {
+                                            value: false,
+                                            configuration: {
+                                              as: 'VISIBILITY',
+                                            },
                                           }),
                                           outerSpacing: sizes('Outer space', {
                                             value: [
@@ -3258,7 +3251,7 @@ const prefabStructure = [
 ];
 
 export default makePrefab(
-  'Backoffice v2',
+  'Back office v2 - Overview',
   attributes,
   beforeCreate,
   prefabStructure,
