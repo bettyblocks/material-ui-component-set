@@ -1,3 +1,15 @@
+# [2.75.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.74.0...v2.75.0) (2022-11-21)
+
+
+### Bug Fixes
+
+* set names back office v2 right ([c1484f9](https://github.com/bettyblocks/material-ui-component-set/commit/c1484f9570390651273ef65a22386ae2129498df))
+
+
+### Features
+
+* support media and file in backoffice ([66e161d](https://github.com/bettyblocks/material-ui-component-set/commit/66e161df5eb95261eb635f9e164ac75aad989277))
+
 # [2.74.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.73.0...v2.74.0) (2022-11-18)
 
 
