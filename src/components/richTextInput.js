@@ -7,22 +7,29 @@
     {
       label: 'Slate',
       package: 'npm:slate@0.82.1',
-      imports: ['*'],
+      imports: [
+        'createEditor',
+        'Editor',
+        'Text',
+        'Element',
+        'Transforms',
+        'Node',
+      ],
     },
     {
       label: 'SlateHistory',
       package: 'npm:slate-history@0.66.0',
-      imports: ['*'],
+      imports: ['withHistory'],
     },
     {
       label: 'SlateReact',
       package: 'npm:slate-react@0.82.1',
-      imports: ['*'],
+      imports: ['Editable', 'withReact', 'Slate', 'useSlate'],
     },
     {
       label: 'SlateHyperscript',
       package: 'npm:slate-hyperscript@0.77.0',
-      imports: ['*'],
+      imports: ['jsx'],
     },
     {
       label: 'MuiExtraIcons',
@@ -45,10 +52,10 @@
   ],
   jsx: (() => {
     const {
-      Slate: SlateP,
-      SlateReact,
-      SlateHistory,
-      SlateHyperscript,
+      Slate: { createEditor, Editor, Text, Element, Transforms, Node },
+      SlateReact: { Editable, withReact, Slate, useSlate },
+      SlateHistory: { withHistory },
+      SlateHyperscript: { jsx },
       MuiExtraIcons: {
         FormatBold,
         FormatAlignCenter,
@@ -82,10 +89,6 @@
     };
     const allIcons = { ...Icons, ...extraIcons };
     const { FormHelperText } = window.MaterialUI.Core;
-    const { Editable, withReact, Slate, useSlate } = SlateReact;
-    const { createEditor, Editor, Text, Element, Transforms, Node } = SlateP;
-    const { jsx } = SlateHyperscript;
-    const { withHistory } = SlateHistory;
     const { useText, env } = B;
     const {
       actionVariableId: name,
