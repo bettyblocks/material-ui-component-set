@@ -4211,6 +4211,9 @@ const beforeCreate = ({
               value={searchProp}
               disabled={!modelId}
               disabledKinds={[
+                'DATE',
+                'DATE_TIME',
+                'TIME',
                 'BELONGS_TO',
                 'HAS_AND_BELONGS_TO_MANY',
                 'HAS_MANY',
