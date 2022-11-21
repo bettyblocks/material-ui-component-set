@@ -1,21 +1,37 @@
 import * as React from 'react';
-import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
-import { MultiAutocomplete } from './structures/MultiAutoCompleteInput';
+import {
+  BeforeCreateArgs,
+  color,
+  Icon,
+  prefab,
+  showIf,
+  ThemeColor,
+  toggle,
+  variable,
+} from '@betty-blocks/component-sdk';
+import { CheckboxInput } from './structures/CheckboxInput';
+import { checkboxInputOptions } from './structures/CheckboxInput/options';
+
+const attr = {
+  icon: Icon.SwitcherIcon,
+  category: 'FORM',
+  keywords: ['Form', 'input', 'switch', 'toggle'],
+};
 
 const beforeCreate = ({
   close,
   components: {
-    BBTooltip,
-    CircleQuestion,
     Content,
     Field,
     Footer,
-    FormField,
     Header,
-    Label,
-    PropertySelector,
-    TextInput: Text,
+    FormField,
     Toggle,
+    PropertySelector,
+    Label,
+    TextInput: Text,
+    CircleQuestion,
+    BBTooltip,
   },
   prefab: originalPrefab,
   save,
@@ -108,10 +124,7 @@ const beforeCreate = ({
     }
   }
 
-  const unsupportedKinds = createBlacklist([
-    'HAS_AND_BELONGS_TO_MANY',
-    'HAS_MANY',
-  ]);
+  const unsupportedKinds = createBlacklist(['BOOLEAN']);
 
   const structure = originalPrefab.structure[0];
   if (structure.type !== 'COMPONENT')
@@ -200,10 +213,7 @@ const beforeCreate = ({
           // eslint-disable-next-line no-param-reassign
           structure.id = componentId;
 
-          let kind = propertyKind || 'STRING';
-          const isListProperty = kind === ('LIST' || 'list');
-
-          kind = 'HAS_MANY';
+          const kind = propertyKind || 'STRING';
 
           const variableName = variableInput || name;
           const result = await prepareInput(
@@ -235,24 +245,11 @@ const beforeCreate = ({
             value: [variableName],
           }));
 
-          if (propertyModelId && !isListProperty) {
-            setOption(newPrefab.structure[0], 'model', (option) => ({
-              ...option,
-              value: propertyModelId,
-            }));
-          }
-
           setOption(newPrefab.structure[0], nameOptionKey, (option) => ({
             ...option,
             value: result.variable.variableId,
           }));
-
           if (propertyBased) {
-            setOption(newPrefab.structure[0], 'optionType', (option) => ({
-              ...option,
-              value: result.isRelational ? 'model' : 'property',
-            }));
-
             setOption(newPrefab.structure[0], 'actionProperty', (option) => ({
               ...option,
               value: {
@@ -308,16 +305,24 @@ const beforeCreate = ({
   );
 };
 
-const attributes = {
-  category: 'FORM',
-  icon: Icon.AutoCompleteIcon,
-  keywords: ['Form', 'input'],
-};
-
-export default prefab('Multi Autocomplete', attributes, beforeCreate, [
-  MultiAutocomplete({
-    label: 'Multi Autocomplete',
-    inputLabel: 'Multi Autocomplete',
-    type: 'text',
+export default prefab('Switch', attr, beforeCreate, [
+  CheckboxInput({
+    options: {
+      ...checkboxInputOptions,
+      label: variable('Label', { value: ['Switch'] }),
+      isSwitch: toggle('Is switch', {
+        value: true,
+        configuration: {
+          condition: showIf('isSwitch', 'EQ', 'false'),
+        },
+      }),
+      checkboxColor: color('Switch color', {
+        value: ThemeColor.ACCENT_3,
+      }),
+      checkboxColorChecked: color('Switch color checked', {
+        value: ThemeColor.PRIMARY,
+      }),
+    },
+    label: 'Switch',
   }),
 ]);

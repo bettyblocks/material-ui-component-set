@@ -28,6 +28,7 @@ const beforeCreate = ({
     prepareAction,
     PropertyKind,
     makeBettyInput,
+    getPageName,
     BettyPrefabs,
     setOption,
     cloneStructure,
@@ -48,6 +49,7 @@ const beforeCreate = ({
     !value || Object.keys(value).length === 0 || value.id === '';
 
   const modelId = (authProfile && authProfile.loginModel) || '';
+  const pageName = getPageName();
 
   useModelQuery({
     skip: !modelId,
@@ -126,6 +128,8 @@ const beforeCreate = ({
             console.warn('Model not found');
           }
 
+          const pageAuthenticationProfileId = undefined;
+
           // eslint-disable-next-line no-param-reassign
           originalPrefab.structure[0].id = componentId;
           const result = await prepareAction(
@@ -136,6 +140,8 @@ const beforeCreate = ({
             authProfile,
             undefined,
             permissions,
+            pageAuthenticationProfileId,
+            pageName,
           );
 
           const structure = originalPrefab.structure[0];
