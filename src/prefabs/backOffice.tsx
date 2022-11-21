@@ -26,6 +26,7 @@ import {
   wrapper,
   linked,
   childSelector,
+  showIfTrue,
 } from '@betty-blocks/component-sdk';
 
 import {
@@ -35,8 +36,6 @@ import {
   buttonOptions,
   Column,
   columnOptions,
-  Conditional,
-  conditionalOptions,
   DataContainer,
   DataTable,
   dataTableOptions,
@@ -67,11 +66,13 @@ import {
   Tabs,
   tabsOptions,
   Text,
+  TextInput,
+  textInputOptions,
   textOptions,
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
 import { Properties, IdPropertyProps, ModelProps, ModelQuery } from './types';
-import { PermissionType } from './types/types';
+import { PermissionType, PropertyStateProps } from './types/types';
 
 const interactions: PrefabInteraction[] = [
   {
@@ -298,6 +299,159 @@ const interactions: PrefabInteraction[] = [
       sourceComponentId: '#editSubmitButton',
     },
     type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchColumn',
+      sourceComponentId: '#searchButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchButtonActive',
+      sourceComponentId: '#searchButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchButton',
+      sourceComponentId: '#searchButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchButtonActive',
+      sourceComponentId: '#searchButtonActive',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchColumn',
+      sourceComponentId: '#searchButtonActive',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchButton',
+      sourceComponentId: '#searchButtonActive',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Disable',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#createSubmitButton',
+      sourceComponentId: '#createForm',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Enable',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#createSubmitButton',
+      sourceComponentId: '#createForm',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Disable',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#editSubmitButton',
+      sourceComponentId: '#updateForm',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Enable',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#editSubmitButton',
+      sourceComponentId: '#updateForm',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Show',
+    sourceEvent: 'onActionError',
+    ref: {
+      targetComponentId: '#createAlertErrorId',
+      sourceComponentId: '#createForm',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Hide',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#createAlertErrorId',
+      sourceComponentId: '#createForm',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Show',
+    sourceEvent: 'onActionError',
+    ref: {
+      targetComponentId: '#editErrorAlert',
+      sourceComponentId: '#updateForm',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Hide',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#editErrorAlert',
+      sourceComponentId: '#updateForm',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#deleteSubmitButton',
+      sourceComponentId: '#deleteForm',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionError',
+    ref: {
+      targetComponentId: '#deleteSubmitButton',
+      sourceComponentId: '#deleteForm',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#deleteSubmitButton',
+      sourceComponentId: '#deleteForm',
+    },
   },
 ];
 
@@ -612,6 +766,23 @@ const drawerContainer = DrawerContainer(
               },
             },
           }),
+          drawerWidth: linked({
+            label: 'Sidebar width',
+            value: {
+              ref: {
+                componentId: '#contentContainer',
+                optionId: '#contentContainerDrawerWidth',
+              },
+            },
+            configuration: {
+              condition: {
+                type: 'SHOW',
+                option: 'visibility',
+                comparator: 'EQ',
+                value: true,
+              },
+            },
+          }),
           createTabTitle: linked({
             label: 'Create tab title',
             value: {
@@ -747,6 +918,9 @@ const drawerContainer = DrawerContainer(
                 value: '480px',
                 configuration: {
                   as: 'UNIT',
+                },
+                ref: {
+                  id: '#contentContainerDrawerWidth',
                 },
               }),
             },
@@ -1371,6 +1545,12 @@ const drawerContainer = DrawerContainer(
                                               value: true,
                                             },
                                           ),
+                                          width: size('Width', {
+                                            value: '100%',
+                                            configuration: {
+                                              as: 'UNIT',
+                                            },
+                                          }),
                                         },
                                         ref: { id: '#detailBox' },
                                       },
@@ -2301,430 +2481,6 @@ const drawerContainer = DrawerContainer(
                                                         },
                                                       },
                                                       [
-                                                        Conditional(
-                                                          {
-                                                            options: {
-                                                              ...conditionalOptions,
-                                                              visible: toggle(
-                                                                'Initial visibility',
-                                                                {
-                                                                  value: false,
-                                                                  configuration:
-                                                                    {
-                                                                      as: 'VISIBILITY',
-                                                                    },
-                                                                },
-                                                              ),
-                                                            },
-                                                          },
-                                                          [
-                                                            Box(
-                                                              {
-                                                                options: {
-                                                                  ...boxOptions,
-                                                                  outerSpacing:
-                                                                    sizes(
-                                                                      'Outer space',
-                                                                      {
-                                                                        value: [
-                                                                          '0rem',
-                                                                          '0rem',
-                                                                          'XL',
-                                                                          '0rem',
-                                                                        ],
-                                                                      },
-                                                                    ),
-                                                                  backgroundColor:
-                                                                    color(
-                                                                      'Background color',
-                                                                      {
-                                                                        value:
-                                                                          ThemeColor.DANGER,
-                                                                      },
-                                                                    ),
-                                                                  borderRadius:
-                                                                    size(
-                                                                      'Border radius',
-                                                                      {
-                                                                        value:
-                                                                          '5px',
-                                                                      },
-                                                                    ),
-                                                                },
-                                                              },
-                                                              [
-                                                                Text(
-                                                                  {
-                                                                    options: {
-                                                                      ...textOptions,
-                                                                      content:
-                                                                        variable(
-                                                                          'Content',
-                                                                          {
-                                                                            value:
-                                                                              [
-                                                                                'Attention: This template is using next generation actions!',
-                                                                              ],
-                                                                            configuration:
-                                                                              {
-                                                                                as: 'MULTILINE',
-                                                                              },
-                                                                          },
-                                                                        ),
-                                                                      type: font(
-                                                                        'Font',
-                                                                        {
-                                                                          value:
-                                                                            [
-                                                                              'Body1',
-                                                                            ],
-                                                                        },
-                                                                      ),
-                                                                      outerSpacing:
-                                                                        sizes(
-                                                                          'Outer space',
-                                                                          {
-                                                                            value:
-                                                                              [
-                                                                                '0rem',
-                                                                                '0rem',
-                                                                                '0rem',
-                                                                                'S',
-                                                                              ],
-                                                                          },
-                                                                        ),
-                                                                      textColor:
-                                                                        color(
-                                                                          'Text color',
-                                                                          {
-                                                                            value:
-                                                                              ThemeColor.WHITE,
-                                                                          },
-                                                                        ),
-                                                                      fontWeight:
-                                                                        option(
-                                                                          'CUSTOM',
-                                                                          {
-                                                                            label:
-                                                                              'Font weight',
-                                                                            value:
-                                                                              '500',
-                                                                            configuration:
-                                                                              {
-                                                                                as: 'DROPDOWN',
-                                                                                dataType:
-                                                                                  'string',
-                                                                                allowedInput:
-                                                                                  [
-                                                                                    {
-                                                                                      name: '100',
-                                                                                      value:
-                                                                                        '100',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '200',
-                                                                                      value:
-                                                                                        '200',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '300',
-                                                                                      value:
-                                                                                        '300',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '400',
-                                                                                      value:
-                                                                                        '400',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '500',
-                                                                                      value:
-                                                                                        '500',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '600',
-                                                                                      value:
-                                                                                        '600',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '700',
-                                                                                      value:
-                                                                                        '700',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '800',
-                                                                                      value:
-                                                                                        '800',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '900',
-                                                                                      value:
-                                                                                        '900',
-                                                                                    },
-                                                                                  ],
-                                                                              },
-                                                                          },
-                                                                        ),
-                                                                    },
-                                                                  },
-                                                                  [],
-                                                                ),
-                                                                Text(
-                                                                  {
-                                                                    options: {
-                                                                      ...textOptions,
-                                                                      content:
-                                                                        variable(
-                                                                          'Content',
-                                                                          {
-                                                                            value:
-                                                                              [
-                                                                                'You need to configure the permissions of the "create", "update" and "delete" actions in order to use this template.',
-                                                                              ],
-                                                                            configuration:
-                                                                              {
-                                                                                as: 'MULTILINE',
-                                                                              },
-                                                                          },
-                                                                        ),
-                                                                      type: font(
-                                                                        'Font',
-                                                                        {
-                                                                          value:
-                                                                            [
-                                                                              'Body1',
-                                                                            ],
-                                                                        },
-                                                                      ),
-                                                                      outerSpacing:
-                                                                        sizes(
-                                                                          'Outer space',
-                                                                          {
-                                                                            value:
-                                                                              [
-                                                                                '0rem',
-                                                                                '0rem',
-                                                                                '0rem',
-                                                                                'S',
-                                                                              ],
-                                                                          },
-                                                                        ),
-                                                                      textColor:
-                                                                        color(
-                                                                          'Text color',
-                                                                          {
-                                                                            value:
-                                                                              ThemeColor.WHITE,
-                                                                          },
-                                                                        ),
-                                                                      fontWeight:
-                                                                        option(
-                                                                          'CUSTOM',
-                                                                          {
-                                                                            label:
-                                                                              'Font weight',
-                                                                            value:
-                                                                              '500',
-                                                                            configuration:
-                                                                              {
-                                                                                as: 'DROPDOWN',
-                                                                                dataType:
-                                                                                  'string',
-                                                                                allowedInput:
-                                                                                  [
-                                                                                    {
-                                                                                      name: '100',
-                                                                                      value:
-                                                                                        '100',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '200',
-                                                                                      value:
-                                                                                        '200',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '300',
-                                                                                      value:
-                                                                                        '300',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '400',
-                                                                                      value:
-                                                                                        '400',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '500',
-                                                                                      value:
-                                                                                        '500',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '600',
-                                                                                      value:
-                                                                                        '600',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '700',
-                                                                                      value:
-                                                                                        '700',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '800',
-                                                                                      value:
-                                                                                        '800',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '900',
-                                                                                      value:
-                                                                                        '900',
-                                                                                    },
-                                                                                  ],
-                                                                              },
-                                                                          },
-                                                                        ),
-                                                                    },
-                                                                  },
-                                                                  [],
-                                                                ),
-                                                                Text(
-                                                                  {
-                                                                    options: {
-                                                                      ...textOptions,
-                                                                      content:
-                                                                        variable(
-                                                                          'Content',
-                                                                          {
-                                                                            value:
-                                                                              [
-                                                                                'This message is not visible in your app',
-                                                                              ],
-                                                                            configuration:
-                                                                              {
-                                                                                as: 'MULTILINE',
-                                                                              },
-                                                                          },
-                                                                        ),
-                                                                      type: font(
-                                                                        'Font',
-                                                                        {
-                                                                          value:
-                                                                            [
-                                                                              'Body1',
-                                                                            ],
-                                                                        },
-                                                                      ),
-                                                                      outerSpacing:
-                                                                        sizes(
-                                                                          'Outer space',
-                                                                          {
-                                                                            value:
-                                                                              [
-                                                                                '0rem',
-                                                                                '0rem',
-                                                                                '0rem',
-                                                                                'S',
-                                                                              ],
-                                                                          },
-                                                                        ),
-                                                                      textColor:
-                                                                        color(
-                                                                          'Text color',
-                                                                          {
-                                                                            value:
-                                                                              ThemeColor.WHITE,
-                                                                          },
-                                                                        ),
-                                                                      fontWeight:
-                                                                        option(
-                                                                          'CUSTOM',
-                                                                          {
-                                                                            label:
-                                                                              'Font weight',
-                                                                            value:
-                                                                              '500',
-                                                                            configuration:
-                                                                              {
-                                                                                as: 'DROPDOWN',
-                                                                                dataType:
-                                                                                  'string',
-                                                                                allowedInput:
-                                                                                  [
-                                                                                    {
-                                                                                      name: '100',
-                                                                                      value:
-                                                                                        '100',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '200',
-                                                                                      value:
-                                                                                        '200',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '300',
-                                                                                      value:
-                                                                                        '300',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '400',
-                                                                                      value:
-                                                                                        '400',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '500',
-                                                                                      value:
-                                                                                        '500',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '600',
-                                                                                      value:
-                                                                                        '600',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '700',
-                                                                                      value:
-                                                                                        '700',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '800',
-                                                                                      value:
-                                                                                        '800',
-                                                                                    },
-                                                                                    {
-                                                                                      name: '900',
-                                                                                      value:
-                                                                                        '900',
-                                                                                    },
-                                                                                  ],
-                                                                              },
-                                                                          },
-                                                                        ),
-                                                                    },
-                                                                  },
-                                                                  [],
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Column(
-                                                      {
-                                                        options: {
-                                                          ...columnOptions,
-                                                          innerSpacing: sizes(
-                                                            'Inner space',
-                                                            {
-                                                              value: [
-                                                                '0rem',
-                                                                '0rem',
-                                                                '0rem',
-                                                                '0rem',
-                                                              ],
-                                                            },
-                                                          ),
-                                                        },
-                                                      },
-                                                      [
                                                         Box(
                                                           {
                                                             options: {
@@ -2766,12 +2522,12 @@ const drawerContainer = DrawerContainer(
                                                                 ),
                                                               innerSpacing:
                                                                 sizes(
-                                                                  'Outer space',
+                                                                  'Inner space',
                                                                   {
                                                                     value: [
                                                                       '0rem',
                                                                       '0rem',
-                                                                      'XL',
+                                                                      '0rem',
                                                                       '0rem',
                                                                     ],
                                                                   },
@@ -2813,65 +2569,640 @@ const drawerContainer = DrawerContainer(
                                                               },
                                                               [],
                                                             ),
-                                                            Button(
+                                                            Box(
                                                               {
                                                                 options: {
-                                                                  ...buttonOptions,
-                                                                  buttonText:
-                                                                    variable(
-                                                                      'Button text',
+                                                                  ...boxOptions,
+                                                                  innerSpacing:
+                                                                    sizes(
+                                                                      'Inner space',
                                                                       {
                                                                         value: [
-                                                                          'New',
+                                                                          'M',
+                                                                          '0rem',
+                                                                          'M',
+                                                                          'M',
                                                                         ],
                                                                       },
                                                                     ),
-                                                                  icon: icon(
-                                                                    'Icon',
-                                                                    {
-                                                                      value:
-                                                                        'Add',
-                                                                    },
-                                                                  ),
-                                                                },
-                                                                ref: {
-                                                                  id: '#createButton',
-                                                                },
-                                                                style: {
-                                                                  overwrite: {
-                                                                    backgroundColor:
-                                                                      {
-                                                                        type: 'THEME_COLOR',
-                                                                        value:
-                                                                          'primary',
-                                                                      },
-                                                                    boxShadow:
-                                                                      'none',
-                                                                    color: {
-                                                                      type: 'THEME_COLOR',
-                                                                      value:
-                                                                        'white',
-                                                                    },
-                                                                    fontFamily:
-                                                                      'Roboto',
-                                                                    fontSize:
-                                                                      '0.875rem',
-                                                                    fontStyle:
-                                                                      'none',
-                                                                    fontWeight:
-                                                                      '400',
-                                                                    padding: [
-                                                                      '0.6875rem',
-                                                                      '1.375rem',
-                                                                    ],
-                                                                    textDecoration:
-                                                                      'none',
-                                                                    textTransform:
-                                                                      'none',
-                                                                  },
                                                                 },
                                                               },
-                                                              [],
+                                                              [
+                                                                Button(
+                                                                  {
+                                                                    ref: {
+                                                                      id: '#searchButtonActive',
+                                                                    },
+                                                                    label:
+                                                                      'Active search button',
+                                                                    style: {
+                                                                      overwrite:
+                                                                        {
+                                                                          backgroundColor:
+                                                                            {
+                                                                              type: 'STATIC',
+                                                                              value:
+                                                                                'white',
+                                                                            },
+                                                                          boxShadow:
+                                                                            'none',
+                                                                          color:
+                                                                            {
+                                                                              type: 'THEME_COLOR',
+                                                                              value:
+                                                                                'primary',
+                                                                            },
+                                                                          fontFamily:
+                                                                            'Roboto',
+                                                                          fontSize:
+                                                                            '0.875rem',
+                                                                          fontStyle:
+                                                                            'none',
+                                                                          fontWeight:
+                                                                            '400',
+                                                                          padding:
+                                                                            [
+                                                                              '0.5rem',
+                                                                              '0.625rem',
+                                                                            ],
+                                                                          textDecoration:
+                                                                            'none',
+                                                                          textTransform:
+                                                                            'none',
+                                                                        },
+                                                                    },
+                                                                    options: {
+                                                                      ...buttonOptions,
+                                                                      visible:
+                                                                        toggle(
+                                                                          'Toggle visibility',
+                                                                          {
+                                                                            value:
+                                                                              false,
+                                                                            configuration:
+                                                                              {
+                                                                                as: 'VISIBILITY',
+                                                                              },
+                                                                          },
+                                                                        ),
+                                                                      buttonText:
+                                                                        variable(
+                                                                          'Button text',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                'Search',
+                                                                              ],
+                                                                          },
+                                                                        ),
+                                                                      icon: icon(
+                                                                        'Icon',
+                                                                        {
+                                                                          value:
+                                                                            'Search',
+                                                                        },
+                                                                      ),
+                                                                      outerSpacing:
+                                                                        sizes(
+                                                                          'Outer space',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                '0rem',
+                                                                                'XL',
+                                                                                '0rem',
+                                                                                '0rem',
+                                                                              ],
+                                                                          },
+                                                                        ),
+                                                                    },
+                                                                  },
+                                                                  [],
+                                                                ),
+                                                                Button(
+                                                                  {
+                                                                    ref: {
+                                                                      id: '#searchButton',
+                                                                    },
+                                                                    label:
+                                                                      'Search button',
+                                                                    style: {
+                                                                      overwrite:
+                                                                        {
+                                                                          backgroundColor:
+                                                                            {
+                                                                              type: 'STATIC',
+                                                                              value:
+                                                                                'transparent',
+                                                                            },
+                                                                          boxShadow:
+                                                                            'none',
+                                                                          color:
+                                                                            {
+                                                                              type: 'THEME_COLOR',
+                                                                              value:
+                                                                                'primary',
+                                                                            },
+                                                                          fontFamily:
+                                                                            'Roboto',
+                                                                          fontSize:
+                                                                            '0.875rem',
+                                                                          fontStyle:
+                                                                            'none',
+                                                                          fontWeight:
+                                                                            '400',
+                                                                          padding:
+                                                                            [
+                                                                              '0.5rem',
+                                                                              '0.625rem',
+                                                                            ],
+                                                                          textDecoration:
+                                                                            'none',
+                                                                          textTransform:
+                                                                            'none',
+                                                                        },
+                                                                    },
+                                                                    options: {
+                                                                      ...buttonOptions,
+                                                                      buttonText:
+                                                                        variable(
+                                                                          'Button text',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                'Search',
+                                                                              ],
+                                                                          },
+                                                                        ),
+                                                                      icon: icon(
+                                                                        'Icon',
+                                                                        {
+                                                                          value:
+                                                                            'Search',
+                                                                        },
+                                                                      ),
+                                                                      outerSpacing:
+                                                                        sizes(
+                                                                          'Outer space',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                '0rem',
+                                                                                'XL',
+                                                                                '0rem',
+                                                                                '0rem',
+                                                                              ],
+                                                                          },
+                                                                        ),
+                                                                    },
+                                                                  },
+                                                                  [],
+                                                                ),
+                                                                Button(
+                                                                  {
+                                                                    options: {
+                                                                      ...buttonOptions,
+                                                                      buttonText:
+                                                                        variable(
+                                                                          'Button text',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                'New',
+                                                                              ],
+                                                                          },
+                                                                        ),
+                                                                      icon: icon(
+                                                                        'Icon',
+                                                                        {
+                                                                          value:
+                                                                            'Add',
+                                                                        },
+                                                                      ),
+                                                                    },
+                                                                    ref: {
+                                                                      id: '#createButton',
+                                                                    },
+                                                                    style: {
+                                                                      overwrite:
+                                                                        {
+                                                                          backgroundColor:
+                                                                            {
+                                                                              type: 'THEME_COLOR',
+                                                                              value:
+                                                                                'primary',
+                                                                            },
+                                                                          boxShadow:
+                                                                            'none',
+                                                                          color:
+                                                                            {
+                                                                              type: 'THEME_COLOR',
+                                                                              value:
+                                                                                'white',
+                                                                            },
+                                                                          fontFamily:
+                                                                            'Roboto',
+                                                                          fontSize:
+                                                                            '0.875rem',
+                                                                          fontStyle:
+                                                                            'none',
+                                                                          fontWeight:
+                                                                            '400',
+                                                                          padding:
+                                                                            [
+                                                                              '0.6875rem',
+                                                                              '1.375rem',
+                                                                            ],
+                                                                          textDecoration:
+                                                                            'none',
+                                                                          textTransform:
+                                                                            'none',
+                                                                        },
+                                                                    },
+                                                                  },
+                                                                  [],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Box(
+                                                          {
+                                                            options: {
+                                                              ...boxOptions,
+                                                              innerSpacing:
+                                                                sizes(
+                                                                  'Inner space',
+                                                                  {
+                                                                    value: [
+                                                                      '0rem',
+                                                                      '0rem',
+                                                                      'M',
+                                                                      '0rem',
+                                                                    ],
+                                                                  },
+                                                                ),
+                                                            },
+                                                          },
+                                                          [
+                                                            Column(
+                                                              {
+                                                                label:
+                                                                  'Search Column',
+                                                                ref: {
+                                                                  id: '#searchColumn',
+                                                                },
+                                                                options: {
+                                                                  ...columnOptions,
+                                                                  visible:
+                                                                    toggle(
+                                                                      'Toggle visibility',
+                                                                      {
+                                                                        value:
+                                                                          false,
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'VISIBILITY',
+                                                                          },
+                                                                      },
+                                                                    ),
+                                                                  innerSpacing:
+                                                                    sizes(
+                                                                      'Inner space',
+                                                                      {
+                                                                        value: [
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                        ],
+                                                                      },
+                                                                    ),
+                                                                },
+                                                              },
+                                                              [
+                                                                Box(
+                                                                  {
+                                                                    options: {
+                                                                      ...boxOptions,
+                                                                      innerSpacing:
+                                                                        sizes(
+                                                                          'Inner space',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                '0rem',
+                                                                                '0rem',
+                                                                                '0rem',
+                                                                                '0rem',
+                                                                              ],
+                                                                          },
+                                                                        ),
+                                                                      stretch:
+                                                                        toggle(
+                                                                          'Stretch (when in flex container)',
+                                                                          {
+                                                                            value:
+                                                                              true,
+                                                                          },
+                                                                        ),
+                                                                      position:
+                                                                        buttongroup(
+                                                                          'Position',
+                                                                          [
+                                                                            [
+                                                                              'Static',
+                                                                              'static',
+                                                                            ],
+                                                                            [
+                                                                              'Relative',
+                                                                              'relative',
+                                                                            ],
+                                                                            [
+                                                                              'Absolute',
+                                                                              'absolute',
+                                                                            ],
+                                                                            [
+                                                                              'Fixed',
+                                                                              'fixed',
+                                                                            ],
+                                                                            [
+                                                                              'Sticky',
+                                                                              'sticky',
+                                                                            ],
+                                                                          ],
+                                                                          {
+                                                                            value:
+                                                                              'relative',
+                                                                            configuration:
+                                                                              {
+                                                                                dataType:
+                                                                                  'string',
+                                                                              },
+                                                                          },
+                                                                        ),
+                                                                    },
+                                                                  },
+                                                                  [
+                                                                    TextInput(
+                                                                      {
+                                                                        label:
+                                                                          'Text field Beta',
+                                                                        inputLabel:
+                                                                          'Searchfield',
+                                                                        type: 'text',
+                                                                        ref: {
+                                                                          id: '#searchField',
+                                                                        },
+                                                                        options:
+                                                                          {
+                                                                            ...textInputOptions,
+                                                                            autoComplete:
+                                                                              toggle(
+                                                                                'Autocomplete',
+                                                                                {
+                                                                                  value:
+                                                                                    true,
+                                                                                },
+                                                                              ),
+                                                                            placeholder:
+                                                                              variable(
+                                                                                'Placeholder',
+                                                                                {
+                                                                                  value:
+                                                                                    [
+                                                                                      'Search',
+                                                                                    ],
+                                                                                },
+                                                                              ),
+                                                                            fullWidth:
+                                                                              toggle(
+                                                                                'Full width',
+                                                                                {
+                                                                                  value:
+                                                                                    true,
+                                                                                },
+                                                                              ),
+                                                                            styles:
+                                                                              toggle(
+                                                                                'Styles',
+                                                                                {
+                                                                                  value:
+                                                                                    true,
+                                                                                },
+                                                                              ),
+                                                                            hideLabel:
+                                                                              toggle(
+                                                                                'Hide label',
+                                                                                {
+                                                                                  value:
+                                                                                    true,
+                                                                                  configuration:
+                                                                                    {
+                                                                                      condition:
+                                                                                        showIfTrue(
+                                                                                          'styles',
+                                                                                        ),
+                                                                                    },
+                                                                                },
+                                                                              ),
+                                                                            margin:
+                                                                              buttongroup(
+                                                                                'Margin',
+                                                                                [
+                                                                                  [
+                                                                                    'None',
+                                                                                    'none',
+                                                                                  ],
+                                                                                  [
+                                                                                    'Dense',
+                                                                                    'dense',
+                                                                                  ],
+                                                                                  [
+                                                                                    'Normal',
+                                                                                    'normal',
+                                                                                  ],
+                                                                                ],
+                                                                                {
+                                                                                  value:
+                                                                                    'none',
+                                                                                },
+                                                                              ),
+                                                                          },
+                                                                      },
+                                                                      [],
+                                                                    ),
+                                                                    Box(
+                                                                      {
+                                                                        options:
+                                                                          {
+                                                                            ...boxOptions,
+                                                                            innerSpacing:
+                                                                              sizes(
+                                                                                'Inner space',
+                                                                                {
+                                                                                  value:
+                                                                                    [
+                                                                                      '0rem',
+                                                                                      '0rem',
+                                                                                      '0rem',
+                                                                                      '0rem',
+                                                                                    ],
+                                                                                },
+                                                                              ),
+                                                                            position:
+                                                                              buttongroup(
+                                                                                'Position',
+                                                                                [
+                                                                                  [
+                                                                                    'Static',
+                                                                                    'static',
+                                                                                  ],
+                                                                                  [
+                                                                                    'Relative',
+                                                                                    'relative',
+                                                                                  ],
+                                                                                  [
+                                                                                    'Absolute',
+                                                                                    'absolute',
+                                                                                  ],
+                                                                                  [
+                                                                                    'Fixed',
+                                                                                    'fixed',
+                                                                                  ],
+                                                                                  [
+                                                                                    'Sticky',
+                                                                                    'sticky',
+                                                                                  ],
+                                                                                ],
+                                                                                {
+                                                                                  value:
+                                                                                    'absolute',
+                                                                                  configuration:
+                                                                                    {
+                                                                                      dataType:
+                                                                                        'string',
+                                                                                    },
+                                                                                },
+                                                                              ),
+                                                                            top: size(
+                                                                              'Top position',
+                                                                              {
+                                                                                value:
+                                                                                  '11px',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'UNIT',
+                                                                                  },
+                                                                              },
+                                                                            ),
+                                                                            right:
+                                                                              size(
+                                                                                'Right position',
+                                                                                {
+                                                                                  value:
+                                                                                    '11px',
+                                                                                  configuration:
+                                                                                    {
+                                                                                      as: 'UNIT',
+                                                                                    },
+                                                                                },
+                                                                              ),
+                                                                          },
+                                                                      },
+                                                                      [
+                                                                        Button(
+                                                                          {
+                                                                            ref: {
+                                                                              id: '#clearButton',
+                                                                            },
+                                                                            style:
+                                                                              {
+                                                                                overwrite:
+                                                                                  {
+                                                                                    borderRadius:
+                                                                                      [
+                                                                                        '3.125rem',
+                                                                                      ],
+                                                                                    boxShadow:
+                                                                                      'none',
+                                                                                    color:
+                                                                                      {
+                                                                                        type: 'THEME_COLOR',
+                                                                                        value:
+                                                                                          'white',
+                                                                                      },
+                                                                                    fontFamily:
+                                                                                      'Roboto',
+                                                                                    fontSize:
+                                                                                      '0.875rem',
+                                                                                    fontStyle:
+                                                                                      'none',
+                                                                                    fontWeight:
+                                                                                      '400',
+                                                                                    padding:
+                                                                                      [
+                                                                                        '0.375rem',
+                                                                                        '0.375rem',
+                                                                                      ],
+                                                                                    textDecoration:
+                                                                                      'none',
+                                                                                    textTransform:
+                                                                                      'none',
+                                                                                  },
+                                                                              },
+                                                                            options:
+                                                                              {
+                                                                                ...buttonOptions,
+                                                                                visible:
+                                                                                  toggle(
+                                                                                    'Toggle visibility',
+                                                                                    {
+                                                                                      value:
+                                                                                        false,
+                                                                                      configuration:
+                                                                                        {
+                                                                                          as: 'VISIBILITY',
+                                                                                        },
+                                                                                    },
+                                                                                  ),
+                                                                                buttonText:
+                                                                                  variable(
+                                                                                    'Button text',
+                                                                                    {
+                                                                                      value:
+                                                                                        [],
+                                                                                    },
+                                                                                  ),
+                                                                                outerSpacing:
+                                                                                  sizes(
+                                                                                    'Outer space',
+                                                                                    {
+                                                                                      value:
+                                                                                        [
+                                                                                          '0rem',
+                                                                                          '0rem',
+                                                                                          '0rem',
+                                                                                          '0rem',
+                                                                                        ],
+                                                                                    },
+                                                                                  ),
+                                                                                icon: icon(
+                                                                                  'Icon',
+                                                                                  {
+                                                                                    value:
+                                                                                      'Close',
+                                                                                  },
+                                                                                ),
+                                                                              },
+                                                                          },
+                                                                          [],
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
                                                             ),
                                                           ],
                                                         ),
@@ -3487,6 +3818,7 @@ const beforeCreate = ({
     Header,
     Field,
     Footer,
+    PropertySelector,
     ModelRelationSelector,
     PropertiesSelector,
     PartialSelector,
@@ -3526,6 +3858,9 @@ const beforeCreate = ({
   const [footerPartialId, setFooterPartialId] = React.useState('');
   const pageAuthenticationProfileId = getPageAuthenticationProfileId();
   const permissions: PermissionType = 'private';
+  const [searchProp, setSearchProp] = React.useState<PropertyStateProps>({
+    id: '',
+  });
 
   const createFormId = createUuid();
   const updateFormId = createUuid();
@@ -3564,96 +3899,207 @@ const beforeCreate = ({
   };
 
   const makeDetail = (prop: any) => {
-    const mediaComponent = cloneStructure('Media');
-    if (mediaComponent.type === 'COMPONENT') {
+    const noEmptyValueConditional = cloneStructure('Conditional');
+    if (noEmptyValueConditional.type === 'COMPONENT') {
       setOption(
-        mediaComponent,
-        'imageSource',
-        (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: [{ ...prop }],
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Image', value: 'img' },
-              { name: 'Video', value: 'video' },
-              { name: 'I-frame', value: 'iframe' },
-            ],
-          },
-        }),
-      );
-    }
-
-    const detailComponent = cloneStructure('Box');
-    if (detailComponent.type === 'COMPONENT') {
-      setOption(
-        detailComponent,
-        'outerSpacing',
-        (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: ['0rem', '0rem', 'M', '0rem'],
-        }),
-      );
-      setOption(
-        detailComponent,
-        'backgroundColor',
-        (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: 'Accent1',
-        }),
-      );
-      setOption(
-        detailComponent,
-        'backgroundColorAlpha',
-        (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: '20',
-        }),
-      );
-
-      const labelText = cloneStructure('Text');
-      if (labelText.type === 'COMPONENT') {
-        setOption(labelText, 'content', (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: [`${[prop.label]}:`],
-          configuration: { as: 'MULTILINE' },
-        }));
-        setOption(labelText, 'type', (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: 'Body1',
-        }));
-        setOption(labelText, 'fontWeight', (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: '500',
-          configuration: {
-            as: 'DROPDOWN',
-            dataType: 'string',
-            allowedInput: [
-              { name: '100', value: '100' },
-              { name: '200', value: '200' },
-              { name: '300', value: '300' },
-              { name: '400', value: '400' },
-              { name: '500', value: '500' },
-              { name: '600', value: '600' },
-              { name: '700', value: '700' },
-              { name: '800', value: '800' },
-              { name: '900', value: '900' },
-            ],
-          },
-        }));
-      }
-      const valueText = cloneStructure('Text');
-      if (valueText.type === 'COMPONENT') {
-        setOption(valueText, 'content', (opt: PrefabComponentOption) => ({
-          ...opt,
+        noEmptyValueConditional,
+        'left',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
           value: [enrichVarObj({ ...prop })],
-          configuration: { as: 'MULTILINE' },
-        }));
+        }),
+      );
+      setOption(
+        noEmptyValueConditional,
+        'compare',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
+          value: 'neq',
+        }),
+      );
+
+      const detailComponent = cloneStructure('Box');
+      if (detailComponent.type === 'COMPONENT') {
+        setOption(
+          detailComponent,
+          'outerSpacing',
+          (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: ['0rem', '0rem', 'M', '0rem'],
+          }),
+        );
+        setOption(
+          detailComponent,
+          'backgroundColor',
+          (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: 'Accent1',
+          }),
+        );
+        setOption(
+          detailComponent,
+          'backgroundColorAlpha',
+          (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: '20',
+          }),
+        );
+
+        const labelText = cloneStructure('Text');
+        if (labelText.type === 'COMPONENT') {
+          setOption(
+            labelText,
+            'content',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [`${[prop.label]}:`],
+              configuration: { as: 'MULTILINE' },
+            }),
+          );
+          setOption(
+            labelText,
+            'type',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: 'Body1',
+            }),
+          );
+          setOption(
+            labelText,
+            'fontWeight',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: '500',
+              configuration: {
+                as: 'DROPDOWN',
+                dataType: 'string',
+                allowedInput: [
+                  { name: '100', value: '100' },
+                  { name: '200', value: '200' },
+                  { name: '300', value: '300' },
+                  { name: '400', value: '400' },
+                  { name: '500', value: '500' },
+                  { name: '600', value: '600' },
+                  { name: '700', value: '700' },
+                  { name: '800', value: '800' },
+                  { name: '900', value: '900' },
+                ],
+              },
+            }),
+          );
+        }
+
+        if (prop.kind === 'IMAGE') {
+          const mediaComponent = cloneStructure('Media');
+          if (mediaComponent.type === 'COMPONENT') {
+            setOption(
+              mediaComponent,
+              'type',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: 'url',
+              }),
+            );
+            setOption(
+              mediaComponent,
+              'urlFileSource',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: [{ ...prop }],
+              }),
+            );
+            setOption(
+              mediaComponent,
+              'width',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: '100%',
+              }),
+            );
+          }
+          detailComponent.descendants = [labelText, mediaComponent];
+          noEmptyValueConditional.descendants = [detailComponent];
+          return noEmptyValueConditional;
+        }
+
+        if (prop.kind === 'FILE') {
+          const fileButton = cloneStructure('Open Page');
+          if (fileButton.type === 'COMPONENT') {
+            fileButton.style = {
+              overwrite: {
+                backgroundColor: {
+                  type: 'THEME_COLOR',
+                  value: 'primary',
+                },
+                boxShadow: 'none',
+                color: {
+                  type: 'THEME_COLOR',
+                  value: 'white',
+                },
+                fontFamily: 'Roboto',
+                fontSize: '0.875rem',
+                fontStyle: 'none',
+                fontWeight: '400',
+                padding: ['0.6875rem', '1.375rem'],
+                textDecoration: 'none',
+                textTransform: 'none',
+              },
+            };
+            setOption(
+              fileButton,
+              'buttonText',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: ['View file'],
+              }),
+            );
+            setOption(
+              fileButton,
+              'linkToExternal',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: [enrichVarObj({ ...prop })],
+              }),
+            );
+            setOption(
+              fileButton,
+              'linkType',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: 'external',
+              }),
+            );
+            setOption(
+              fileButton,
+              'linkTarget',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: '_blank',
+              }),
+            );
+          }
+
+          detailComponent.descendants = [labelText, fileButton];
+          noEmptyValueConditional.descendants = [detailComponent];
+          return noEmptyValueConditional;
+        }
+
+        const valueText = cloneStructure('Text');
+        if (valueText.type === 'COMPONENT') {
+          setOption(
+            valueText,
+            'content',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [enrichVarObj({ ...prop })],
+            }),
+          );
+        }
+        detailComponent.descendants = [labelText, valueText];
+        noEmptyValueConditional.descendants = [detailComponent];
       }
-      detailComponent.descendants = [labelText, valueText];
     }
-    return prop.kind === 'IMAGE' ? mediaComponent : detailComponent;
+    return noEmptyValueConditional;
   };
 
   useModelQuery({
@@ -3739,6 +4185,48 @@ const beforeCreate = ({
               value={modelId}
             />
           </Field>
+          <Field label="Property used for the search field">
+            <PropertySelector
+              modelId={modelId}
+              onChange={(value: any) => {
+                setSearchProp(value);
+              }}
+              value={searchProp}
+              disabled={!modelId}
+              disabledKinds={[
+                'DATE',
+                'DATE_TIME',
+                'TIME',
+                'BELONGS_TO',
+                'HAS_AND_BELONGS_TO_MANY',
+                'HAS_MANY',
+                'MULTI_FILE',
+                'AUTO_INCREMENT',
+                'COUNT',
+                'MULTI_IMAGE',
+                'PDF',
+                'RICH_TEXT',
+                'SIGNED_PDF',
+                'SUM',
+                'BOOLEAN_EXPRESSION',
+                'DATE_EXPRESSION',
+                'DATE_TIME_EXPRESSION',
+                'DECIMAL_EXPRESSION',
+                'INTEGER_EXPRESSION',
+                'MINUTES_EXPRESSION',
+                'PRICE_EXPRESSION',
+                'STRING_EXPRESSION',
+                'TEXT_EXPRESSION',
+                'MINUTES',
+                'ZIPCODE',
+                'IMAGE',
+                'FILE',
+                'PASSWORD',
+                'SERIAL',
+              ]}
+              showFormat={false}
+            />
+          </Field>
           <Field
             label="Properties used in Backoffice"
             error={
@@ -3775,8 +4263,6 @@ const beforeCreate = ({
                 'TEXT_EXPRESSION',
                 'MINUTES',
                 'ZIPCODE',
-                'IMAGE',
-                'FILE',
               ]}
               onChange={(value: Properties[]) => {
                 setProperties(value);
@@ -3887,21 +4373,21 @@ const beforeCreate = ({
         value: modelId,
       }));
 
+      const inheritFormatKinds = [
+        'DATE',
+        'DATE_EXPRESSION',
+        'DATE_TIME',
+        'DATE_TIME_EXPRESSION',
+        'DECIMAL',
+        'DECIMAL_EXPRESSION',
+        'INTEGER',
+        'INTEGER_EXPRESSION',
+        'PRICE',
+        'PRICE_EXPRESSION',
+        'TIME',
+      ];
       properties.forEach((property) => {
         let newProperty = property;
-        const inheritFormatKinds = [
-          'DATE',
-          'DATE_EXPRESSION',
-          'DATE_TIME',
-          'DATE_TIME_EXPRESSION',
-          'DECIMAL',
-          'DECIMAL_EXPRESSION',
-          'INTEGER',
-          'INTEGER_EXPRESSION',
-          'PRICE',
-          'PRICE_EXPRESSION',
-          'TIME',
-        ];
         if (property.kind && inheritFormatKinds.includes(property.kind)) {
           newProperty = {
             ...property,
@@ -3916,16 +4402,32 @@ const beforeCreate = ({
           );
         }
 
-        setOption(
-          dataTableColumnStructure,
-          'property',
-          (originalOption: PrefabComponentOption) => {
-            return {
+        if (property.kind === 'FILE' || property.kind === 'IMAGE') {
+          const modifiedProperty = {
+            id: newProperty.id,
+            type: 'PROPERTY',
+            useKey: 'url',
+          };
+          setOption(
+            dataTableColumnStructure,
+            'property',
+            (originalOption: PrefabComponentOption) => ({
               ...originalOption,
-              value: newProperty.id,
-            };
-          },
-        );
+              value: modifiedProperty,
+            }),
+          );
+        } else {
+          setOption(
+            dataTableColumnStructure,
+            'property',
+            (originalOption: PrefabComponentOption) => {
+              return {
+                ...originalOption,
+                value: newProperty.id,
+              };
+            },
+          );
+        }
         setOption(
           dataTableColumnStructure,
           'type',
@@ -4080,7 +4582,7 @@ const beforeCreate = ({
         if (!createForm) throw new Error('No create form found');
         createForm.id = createFormId;
 
-        const result = await prepareAction(
+        const createAction = await prepareAction(
           createFormId,
           idProperty,
           filteredproperties,
@@ -4091,9 +4593,13 @@ const beforeCreate = ({
           pageAuthenticationProfileId,
         );
 
-        Object.values(result.variables).forEach(
+        Object.values(createAction.variables).forEach(
           ([prop, inputVariable]): void => {
             const generateInputPrefabs = () => {
+              let imageUpload;
+              let imageUploadButton;
+              let fileUpload;
+              let fileUploadButton;
               switch (prop.kind) {
                 case PropertyKind.INTEGER:
                   return inputStructure(
@@ -4186,25 +4692,71 @@ const beforeCreate = ({
                     ),
                   );
                 case PropertyKind.FILE:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyInput(
-                      BettyPrefabs.FILE,
-                      model,
-                      prop,
-                      inputVariable,
-                    ),
+                  fileUpload = makeBettyInput(
+                    BettyPrefabs.FILE,
+                    model,
+                    prop,
+                    inputVariable,
                   );
-                // case PropertyKind.IMAGE:
-                //   return inputStructure(
-                //     prop.label,
-                //     makeBettyInput(
-                //       BettyPrefabs.IMAGE,
-                //       model,
-                //       prop,
-                //       inputVariable,
-                //     ),
-                //   );
+                  if (fileUpload.type === 'COMPONENT') {
+                    [fileUploadButton] = fileUpload.descendants;
+                    if (fileUploadButton.type === 'COMPONENT') {
+                      fileUploadButton.style = {
+                        overwrite: {
+                          backgroundColor: {
+                            type: 'THEME_COLOR',
+                            value: 'primary',
+                          },
+                          boxShadow: 'none',
+                          color: {
+                            type: 'THEME_COLOR',
+                            value: 'white',
+                          },
+                          fontFamily: 'Roboto',
+                          fontSize: '0.875rem',
+                          fontStyle: 'none',
+                          fontWeight: '400',
+                          padding: ['0.6875rem', '1.375rem'],
+                          textDecoration: 'none',
+                          textTransform: 'none',
+                        },
+                      };
+                    }
+                  }
+                  return inputStructure(prop.label, fileUpload);
+                case PropertyKind.IMAGE:
+                  imageUpload = makeBettyInput(
+                    BettyPrefabs.IMAGE,
+                    model,
+                    prop,
+                    inputVariable,
+                  );
+                  if (imageUpload.type === 'COMPONENT') {
+                    [imageUploadButton] = imageUpload.descendants;
+                    if (imageUploadButton.type === 'COMPONENT') {
+                      imageUploadButton.style = {
+                        overwrite: {
+                          backgroundColor: {
+                            type: 'THEME_COLOR',
+                            value: 'primary',
+                          },
+                          boxShadow: 'none',
+                          color: {
+                            type: 'THEME_COLOR',
+                            value: 'white',
+                          },
+                          fontFamily: 'Roboto',
+                          fontSize: '0.875rem',
+                          fontStyle: 'none',
+                          fontWeight: '400',
+                          padding: ['0.6875rem', '1.375rem'],
+                          textDecoration: 'none',
+                          textTransform: 'none',
+                        },
+                      };
+                    }
+                  }
+                  return inputStructure(prop.label, imageUpload);
                 case PropertyKind.BOOLEAN:
                   return inputStructure(
                     prop.label,
@@ -4269,7 +4821,7 @@ const beforeCreate = ({
 
         setOption(createForm, 'actionId', (opts: PrefabComponentOption) => ({
           ...opts,
-          value: result.action.actionId,
+          value: createAction.action.actionId,
           configuration: { disabled: true },
           ref: {
             id: '#createFormAction',
@@ -4309,7 +4861,7 @@ const beforeCreate = ({
       if (!updateForm) throw new Error('No edit form found');
       updateForm.id = updateFormId;
       if (idProperty && model) {
-        const result = await prepareAction(
+        const updateAction = await prepareAction(
           updateFormId,
           idProperty,
           filteredproperties,
@@ -4321,7 +4873,7 @@ const beforeCreate = ({
         );
         setOption(updateForm, 'actionId', (opts: PrefabComponentOption) => ({
           ...opts,
-          value: result.action.actionId,
+          value: updateAction.action.actionId,
           configuration: { disabled: true },
           ref: {
             id: '#updateFormAction',
@@ -4335,9 +4887,13 @@ const beforeCreate = ({
           },
         }));
 
-        Object.values(result.variables).forEach(
+        Object.values(updateAction.variables).forEach(
           ([prop, inputVariable]): void => {
             const generateInputPrefabs = () => {
+              let imageUpload;
+              let imageUploadButton;
+              let fileUpload;
+              let fileUploadButton;
               switch (prop.kind) {
                 case PropertyKind.INTEGER:
                   return inputStructure(
@@ -4347,7 +4903,7 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.relatedIdProperties,
+                      updateAction.relatedIdProperties,
                     ),
                   );
                 case PropertyKind.EMAIL_ADDRESS:
@@ -4358,7 +4914,7 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.relatedIdProperties,
+                      updateAction.relatedIdProperties,
                     ),
                   );
                 case PropertyKind.DECIMAL:
@@ -4369,7 +4925,7 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.relatedIdProperties,
+                      updateAction.relatedIdProperties,
                     ),
                   );
                 case PropertyKind.TEXT:
@@ -4380,7 +4936,7 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.relatedIdProperties,
+                      updateAction.relatedIdProperties,
                     ),
                   );
                 case PropertyKind.PRICE:
@@ -4391,7 +4947,7 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.relatedIdProperties,
+                      updateAction.relatedIdProperties,
                     ),
                   );
                 case PropertyKind.PASSWORD:
@@ -4402,7 +4958,7 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.relatedIdProperties,
+                      updateAction.relatedIdProperties,
                     ),
                   );
                 case PropertyKind.DATE:
@@ -4413,7 +4969,7 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.relatedIdProperties,
+                      updateAction.relatedIdProperties,
                     ),
                   );
                 case PropertyKind.DATE_TIME:
@@ -4424,7 +4980,7 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.relatedIdProperties,
+                      updateAction.relatedIdProperties,
                     ),
                   );
                 case PropertyKind.TIME:
@@ -4435,31 +4991,77 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.relatedIdProperties,
+                      updateAction.relatedIdProperties,
                     ),
                   );
                 case PropertyKind.FILE:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.FILE,
-                      model,
-                      prop,
-                      inputVariable,
-                      result.relatedIdProperties,
-                    ),
+                  fileUpload = makeBettyUpdateInput(
+                    BettyPrefabs.FILE,
+                    model,
+                    prop,
+                    inputVariable,
+                    updateAction.relatedIdProperties,
                   );
-                // case PropertyKind.IMAGE:
-                //   return inputStructure(
-                //     prop.label,
-                //     makeBettyUpdateInput(
-                //       BettyPrefabs.IMAGE,
-                //       model,
-                //       prop,
-                //       inputVariable,
-                //       result.relatedIdProperties,
-                //     ),
-                //   );
+                  if (fileUpload.type === 'COMPONENT') {
+                    [fileUploadButton] = fileUpload.descendants;
+                    if (fileUploadButton.type === 'COMPONENT') {
+                      fileUploadButton.style = {
+                        overwrite: {
+                          backgroundColor: {
+                            type: 'THEME_COLOR',
+                            value: 'primary',
+                          },
+                          boxShadow: 'none',
+                          color: {
+                            type: 'THEME_COLOR',
+                            value: 'white',
+                          },
+                          fontFamily: 'Roboto',
+                          fontSize: '0.875rem',
+                          fontStyle: 'none',
+                          fontWeight: '400',
+                          padding: ['0.6875rem', '1.375rem'],
+                          textDecoration: 'none',
+                          textTransform: 'none',
+                        },
+                      };
+                    }
+                  }
+                  return inputStructure(prop.label, fileUpload);
+                case PropertyKind.IMAGE:
+                  imageUpload = makeBettyUpdateInput(
+                    BettyPrefabs.IMAGE,
+                    model,
+                    prop,
+                    inputVariable,
+                    updateAction.relatedIdProperties,
+                  );
+                  if (imageUpload.type === 'COMPONENT') {
+                    [imageUploadButton] = imageUpload.descendants;
+                    if (imageUploadButton.type === 'COMPONENT') {
+                      imageUploadButton.style = {
+                        overwrite: {
+                          backgroundColor: {
+                            type: 'THEME_COLOR',
+                            value: 'primary',
+                          },
+                          boxShadow: 'none',
+                          color: {
+                            type: 'THEME_COLOR',
+                            value: 'white',
+                          },
+                          fontFamily: 'Roboto',
+                          fontSize: '0.875rem',
+                          fontStyle: 'none',
+                          fontWeight: '400',
+                          padding: ['0.6875rem', '1.375rem'],
+                          textDecoration: 'none',
+                          textTransform: 'none',
+                        },
+                      };
+                    }
+                  }
+                  return inputStructure(prop.label, imageUpload);
                 case PropertyKind.BOOLEAN:
                   return inputStructure(
                     prop.label,
@@ -4468,7 +5070,7 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.relatedIdProperties,
+                      updateAction.relatedIdProperties,
                     ),
                   );
                 case PropertyKind.LIST:
@@ -4479,7 +5081,7 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.relatedIdProperties,
+                      updateAction.relatedIdProperties,
                     ),
                   );
                 default:
@@ -4490,7 +5092,7 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.relatedIdProperties,
+                      updateAction.relatedIdProperties,
                     ),
                   );
               }
@@ -4530,7 +5132,7 @@ const beforeCreate = ({
             BettyPrefabs.HIDDEN,
             model,
             idProperty,
-            result.recordInputVariable,
+            updateAction.recordInputVariable,
           ),
         );
       }
@@ -4570,6 +5172,7 @@ const beforeCreate = ({
 
         const deleteSubmitButton = cloneStructure('Submit Button');
         if (deleteSubmitButton.type === 'COMPONENT') {
+          deleteSubmitButton.ref = { id: '#deleteSubmitButton' };
           deleteSubmitButton.style = {
             overwrite: {
               backgroundColor: {
@@ -4678,6 +5281,63 @@ const beforeCreate = ({
           } as PrefabInteraction,
         );
       }
+      if (searchProp.id && searchProp.id !== '') {
+        if (newPrefab.interactions) {
+          newPrefab.interactions.push({
+            name: 'Filter',
+            sourceEvent: 'onChange',
+            parameters: [
+              {
+                id: [...searchProp.id],
+                operator: 'matches',
+                parameter: 'property',
+                resolveValue: false,
+              },
+            ],
+            ref: {
+              targetComponentId: '#dataTable',
+              sourceComponentId: '#searchField',
+            },
+            type: 'Custom',
+          } as PrefabInteraction);
+          newPrefab.interactions.push({
+            name: 'Show',
+            sourceEvent: 'onChange',
+            ref: {
+              targetComponentId: '#clearButton',
+              sourceComponentId: '#searchField',
+            },
+            type: 'Custom',
+          } as PrefabInteraction);
+          newPrefab.interactions.push({
+            name: 'Clear',
+            sourceEvent: 'Click',
+            ref: {
+              targetComponentId: '#searchField',
+              sourceComponentId: '#clearButton',
+            },
+            type: 'Custom',
+          } as PrefabInteraction);
+          newPrefab.interactions.push({
+            name: 'ResetFilter',
+            sourceEvent: 'Click',
+            ref: {
+              targetComponentId: '#dataTable',
+              sourceComponentId: '#clearButton',
+            },
+            type: 'Custom',
+          } as PrefabInteraction);
+          newPrefab.interactions.push({
+            name: 'Hide',
+            sourceEvent: 'Click',
+            ref: {
+              targetComponentId: '#clearButton',
+              sourceComponentId: '#clearButton',
+            },
+            type: 'Custom',
+          } as PrefabInteraction);
+        }
+      }
       save(newPrefab);
     },
     buttons: () => (
@@ -4711,7 +5371,9 @@ const beforeCreate = ({
         <BoxComp>
           <Footer
             onClose={close}
-            onSave={stepNumber === stepper.stepAmount && stepper.onSave}
+            onSave={stepper.onSave}
+            // ToDo: add model and properties selection requirements to canSave
+            canSave={stepNumber === stepper.stepAmount}
           />
         </BoxComp>
       </BoxComp>
