@@ -73,6 +73,7 @@
     } = dependencies;
 
     const { Icons } = window.MaterialUI;
+    // const { Icons: allIcons } = window.MaterialUI;
     const extraIcons = {
       ...FormatBold,
       ...FormatAlignCenter,
