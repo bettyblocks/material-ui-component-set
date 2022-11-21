@@ -29,6 +29,20 @@ export const checkboxInputOptions = {
     value: 'checkbox',
     configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
   }),
+  position: option('CUSTOM', {
+    value: 'end',
+    label: 'Label position',
+    configuration: {
+      as: 'BUTTONGROUP',
+      dataType: 'string',
+      allowedInput: [
+        { name: 'Start', value: 'start' },
+        { name: 'End', value: 'end' },
+        { name: 'Top', value: 'top' },
+        { name: 'Bottom', value: 'bottom' },
+      ],
+    },
+  }),
 
   ...validation,
   ...styles,
