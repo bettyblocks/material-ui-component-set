@@ -26,6 +26,7 @@ import {
   wrapper,
   linked,
   childSelector,
+  showIfTrue,
 } from '@betty-blocks/component-sdk';
 
 import {
@@ -65,11 +66,13 @@ import {
   Tabs,
   tabsOptions,
   Text,
+  TextInput,
+  textInputOptions,
   textOptions,
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
 import { Properties, IdPropertyProps, ModelProps, ModelQuery } from './types';
-import { PermissionType } from './types/types';
+import { PermissionType, PropertyStateProps } from './types/types';
 
 const interactions: PrefabInteraction[] = [
   {
@@ -294,6 +297,60 @@ const interactions: PrefabInteraction[] = [
     ref: {
       targetComponentId: '#updateForm',
       sourceComponentId: '#editSubmitButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchColumn',
+      sourceComponentId: '#searchButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchButtonActive',
+      sourceComponentId: '#searchButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchButton',
+      sourceComponentId: '#searchButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchButtonActive',
+      sourceComponentId: '#searchButtonActive',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchColumn',
+      sourceComponentId: '#searchButtonActive',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchButton',
+      sourceComponentId: '#searchButtonActive',
     },
     type: InteractionType.Custom,
   },
@@ -2465,12 +2522,12 @@ const drawerContainer = DrawerContainer(
                                                                 ),
                                                               innerSpacing:
                                                                 sizes(
-                                                                  'Outer space',
+                                                                  'Inner space',
                                                                   {
                                                                     value: [
                                                                       '0rem',
                                                                       '0rem',
-                                                                      'XL',
+                                                                      '0rem',
                                                                       '0rem',
                                                                     ],
                                                                   },
@@ -2512,65 +2569,640 @@ const drawerContainer = DrawerContainer(
                                                               },
                                                               [],
                                                             ),
-                                                            Button(
+                                                            Box(
                                                               {
                                                                 options: {
-                                                                  ...buttonOptions,
-                                                                  buttonText:
-                                                                    variable(
-                                                                      'Button text',
+                                                                  ...boxOptions,
+                                                                  innerSpacing:
+                                                                    sizes(
+                                                                      'Inner space',
                                                                       {
                                                                         value: [
-                                                                          'New',
+                                                                          'M',
+                                                                          '0rem',
+                                                                          'M',
+                                                                          'M',
                                                                         ],
                                                                       },
                                                                     ),
-                                                                  icon: icon(
-                                                                    'Icon',
-                                                                    {
-                                                                      value:
-                                                                        'Add',
-                                                                    },
-                                                                  ),
-                                                                },
-                                                                ref: {
-                                                                  id: '#createButton',
-                                                                },
-                                                                style: {
-                                                                  overwrite: {
-                                                                    backgroundColor:
-                                                                      {
-                                                                        type: 'THEME_COLOR',
-                                                                        value:
-                                                                          'primary',
-                                                                      },
-                                                                    boxShadow:
-                                                                      'none',
-                                                                    color: {
-                                                                      type: 'THEME_COLOR',
-                                                                      value:
-                                                                        'white',
-                                                                    },
-                                                                    fontFamily:
-                                                                      'Roboto',
-                                                                    fontSize:
-                                                                      '0.875rem',
-                                                                    fontStyle:
-                                                                      'none',
-                                                                    fontWeight:
-                                                                      '400',
-                                                                    padding: [
-                                                                      '0.6875rem',
-                                                                      '1.375rem',
-                                                                    ],
-                                                                    textDecoration:
-                                                                      'none',
-                                                                    textTransform:
-                                                                      'none',
-                                                                  },
                                                                 },
                                                               },
-                                                              [],
+                                                              [
+                                                                Button(
+                                                                  {
+                                                                    ref: {
+                                                                      id: '#searchButtonActive',
+                                                                    },
+                                                                    label:
+                                                                      'Active search button',
+                                                                    style: {
+                                                                      overwrite:
+                                                                        {
+                                                                          backgroundColor:
+                                                                            {
+                                                                              type: 'STATIC',
+                                                                              value:
+                                                                                'white',
+                                                                            },
+                                                                          boxShadow:
+                                                                            'none',
+                                                                          color:
+                                                                            {
+                                                                              type: 'THEME_COLOR',
+                                                                              value:
+                                                                                'primary',
+                                                                            },
+                                                                          fontFamily:
+                                                                            'Roboto',
+                                                                          fontSize:
+                                                                            '0.875rem',
+                                                                          fontStyle:
+                                                                            'none',
+                                                                          fontWeight:
+                                                                            '400',
+                                                                          padding:
+                                                                            [
+                                                                              '0.5rem',
+                                                                              '0.625rem',
+                                                                            ],
+                                                                          textDecoration:
+                                                                            'none',
+                                                                          textTransform:
+                                                                            'none',
+                                                                        },
+                                                                    },
+                                                                    options: {
+                                                                      ...buttonOptions,
+                                                                      visible:
+                                                                        toggle(
+                                                                          'Toggle visibility',
+                                                                          {
+                                                                            value:
+                                                                              false,
+                                                                            configuration:
+                                                                              {
+                                                                                as: 'VISIBILITY',
+                                                                              },
+                                                                          },
+                                                                        ),
+                                                                      buttonText:
+                                                                        variable(
+                                                                          'Button text',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                'Search',
+                                                                              ],
+                                                                          },
+                                                                        ),
+                                                                      icon: icon(
+                                                                        'Icon',
+                                                                        {
+                                                                          value:
+                                                                            'Search',
+                                                                        },
+                                                                      ),
+                                                                      outerSpacing:
+                                                                        sizes(
+                                                                          'Outer space',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                '0rem',
+                                                                                'XL',
+                                                                                '0rem',
+                                                                                '0rem',
+                                                                              ],
+                                                                          },
+                                                                        ),
+                                                                    },
+                                                                  },
+                                                                  [],
+                                                                ),
+                                                                Button(
+                                                                  {
+                                                                    ref: {
+                                                                      id: '#searchButton',
+                                                                    },
+                                                                    label:
+                                                                      'Search button',
+                                                                    style: {
+                                                                      overwrite:
+                                                                        {
+                                                                          backgroundColor:
+                                                                            {
+                                                                              type: 'STATIC',
+                                                                              value:
+                                                                                'transparent',
+                                                                            },
+                                                                          boxShadow:
+                                                                            'none',
+                                                                          color:
+                                                                            {
+                                                                              type: 'THEME_COLOR',
+                                                                              value:
+                                                                                'primary',
+                                                                            },
+                                                                          fontFamily:
+                                                                            'Roboto',
+                                                                          fontSize:
+                                                                            '0.875rem',
+                                                                          fontStyle:
+                                                                            'none',
+                                                                          fontWeight:
+                                                                            '400',
+                                                                          padding:
+                                                                            [
+                                                                              '0.5rem',
+                                                                              '0.625rem',
+                                                                            ],
+                                                                          textDecoration:
+                                                                            'none',
+                                                                          textTransform:
+                                                                            'none',
+                                                                        },
+                                                                    },
+                                                                    options: {
+                                                                      ...buttonOptions,
+                                                                      buttonText:
+                                                                        variable(
+                                                                          'Button text',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                'Search',
+                                                                              ],
+                                                                          },
+                                                                        ),
+                                                                      icon: icon(
+                                                                        'Icon',
+                                                                        {
+                                                                          value:
+                                                                            'Search',
+                                                                        },
+                                                                      ),
+                                                                      outerSpacing:
+                                                                        sizes(
+                                                                          'Outer space',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                '0rem',
+                                                                                'XL',
+                                                                                '0rem',
+                                                                                '0rem',
+                                                                              ],
+                                                                          },
+                                                                        ),
+                                                                    },
+                                                                  },
+                                                                  [],
+                                                                ),
+                                                                Button(
+                                                                  {
+                                                                    options: {
+                                                                      ...buttonOptions,
+                                                                      buttonText:
+                                                                        variable(
+                                                                          'Button text',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                'New',
+                                                                              ],
+                                                                          },
+                                                                        ),
+                                                                      icon: icon(
+                                                                        'Icon',
+                                                                        {
+                                                                          value:
+                                                                            'Add',
+                                                                        },
+                                                                      ),
+                                                                    },
+                                                                    ref: {
+                                                                      id: '#createButton',
+                                                                    },
+                                                                    style: {
+                                                                      overwrite:
+                                                                        {
+                                                                          backgroundColor:
+                                                                            {
+                                                                              type: 'THEME_COLOR',
+                                                                              value:
+                                                                                'primary',
+                                                                            },
+                                                                          boxShadow:
+                                                                            'none',
+                                                                          color:
+                                                                            {
+                                                                              type: 'THEME_COLOR',
+                                                                              value:
+                                                                                'white',
+                                                                            },
+                                                                          fontFamily:
+                                                                            'Roboto',
+                                                                          fontSize:
+                                                                            '0.875rem',
+                                                                          fontStyle:
+                                                                            'none',
+                                                                          fontWeight:
+                                                                            '400',
+                                                                          padding:
+                                                                            [
+                                                                              '0.6875rem',
+                                                                              '1.375rem',
+                                                                            ],
+                                                                          textDecoration:
+                                                                            'none',
+                                                                          textTransform:
+                                                                            'none',
+                                                                        },
+                                                                    },
+                                                                  },
+                                                                  [],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Box(
+                                                          {
+                                                            options: {
+                                                              ...boxOptions,
+                                                              innerSpacing:
+                                                                sizes(
+                                                                  'Inner space',
+                                                                  {
+                                                                    value: [
+                                                                      '0rem',
+                                                                      '0rem',
+                                                                      'M',
+                                                                      '0rem',
+                                                                    ],
+                                                                  },
+                                                                ),
+                                                            },
+                                                          },
+                                                          [
+                                                            Column(
+                                                              {
+                                                                label:
+                                                                  'Search Column',
+                                                                ref: {
+                                                                  id: '#searchColumn',
+                                                                },
+                                                                options: {
+                                                                  ...columnOptions,
+                                                                  visible:
+                                                                    toggle(
+                                                                      'Toggle visibility',
+                                                                      {
+                                                                        value:
+                                                                          false,
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'VISIBILITY',
+                                                                          },
+                                                                      },
+                                                                    ),
+                                                                  innerSpacing:
+                                                                    sizes(
+                                                                      'Inner space',
+                                                                      {
+                                                                        value: [
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                        ],
+                                                                      },
+                                                                    ),
+                                                                },
+                                                              },
+                                                              [
+                                                                Box(
+                                                                  {
+                                                                    options: {
+                                                                      ...boxOptions,
+                                                                      innerSpacing:
+                                                                        sizes(
+                                                                          'Inner space',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                '0rem',
+                                                                                '0rem',
+                                                                                '0rem',
+                                                                                '0rem',
+                                                                              ],
+                                                                          },
+                                                                        ),
+                                                                      stretch:
+                                                                        toggle(
+                                                                          'Stretch (when in flex container)',
+                                                                          {
+                                                                            value:
+                                                                              true,
+                                                                          },
+                                                                        ),
+                                                                      position:
+                                                                        buttongroup(
+                                                                          'Position',
+                                                                          [
+                                                                            [
+                                                                              'Static',
+                                                                              'static',
+                                                                            ],
+                                                                            [
+                                                                              'Relative',
+                                                                              'relative',
+                                                                            ],
+                                                                            [
+                                                                              'Absolute',
+                                                                              'absolute',
+                                                                            ],
+                                                                            [
+                                                                              'Fixed',
+                                                                              'fixed',
+                                                                            ],
+                                                                            [
+                                                                              'Sticky',
+                                                                              'sticky',
+                                                                            ],
+                                                                          ],
+                                                                          {
+                                                                            value:
+                                                                              'relative',
+                                                                            configuration:
+                                                                              {
+                                                                                dataType:
+                                                                                  'string',
+                                                                              },
+                                                                          },
+                                                                        ),
+                                                                    },
+                                                                  },
+                                                                  [
+                                                                    TextInput(
+                                                                      {
+                                                                        label:
+                                                                          'Text field Beta',
+                                                                        inputLabel:
+                                                                          'Searchfield',
+                                                                        type: 'text',
+                                                                        ref: {
+                                                                          id: '#searchField',
+                                                                        },
+                                                                        options:
+                                                                          {
+                                                                            ...textInputOptions,
+                                                                            autoComplete:
+                                                                              toggle(
+                                                                                'Autocomplete',
+                                                                                {
+                                                                                  value:
+                                                                                    true,
+                                                                                },
+                                                                              ),
+                                                                            placeholder:
+                                                                              variable(
+                                                                                'Placeholder',
+                                                                                {
+                                                                                  value:
+                                                                                    [
+                                                                                      'Search',
+                                                                                    ],
+                                                                                },
+                                                                              ),
+                                                                            fullWidth:
+                                                                              toggle(
+                                                                                'Full width',
+                                                                                {
+                                                                                  value:
+                                                                                    true,
+                                                                                },
+                                                                              ),
+                                                                            styles:
+                                                                              toggle(
+                                                                                'Styles',
+                                                                                {
+                                                                                  value:
+                                                                                    true,
+                                                                                },
+                                                                              ),
+                                                                            hideLabel:
+                                                                              toggle(
+                                                                                'Hide label',
+                                                                                {
+                                                                                  value:
+                                                                                    true,
+                                                                                  configuration:
+                                                                                    {
+                                                                                      condition:
+                                                                                        showIfTrue(
+                                                                                          'styles',
+                                                                                        ),
+                                                                                    },
+                                                                                },
+                                                                              ),
+                                                                            margin:
+                                                                              buttongroup(
+                                                                                'Margin',
+                                                                                [
+                                                                                  [
+                                                                                    'None',
+                                                                                    'none',
+                                                                                  ],
+                                                                                  [
+                                                                                    'Dense',
+                                                                                    'dense',
+                                                                                  ],
+                                                                                  [
+                                                                                    'Normal',
+                                                                                    'normal',
+                                                                                  ],
+                                                                                ],
+                                                                                {
+                                                                                  value:
+                                                                                    'none',
+                                                                                },
+                                                                              ),
+                                                                          },
+                                                                      },
+                                                                      [],
+                                                                    ),
+                                                                    Box(
+                                                                      {
+                                                                        options:
+                                                                          {
+                                                                            ...boxOptions,
+                                                                            innerSpacing:
+                                                                              sizes(
+                                                                                'Inner space',
+                                                                                {
+                                                                                  value:
+                                                                                    [
+                                                                                      '0rem',
+                                                                                      '0rem',
+                                                                                      '0rem',
+                                                                                      '0rem',
+                                                                                    ],
+                                                                                },
+                                                                              ),
+                                                                            position:
+                                                                              buttongroup(
+                                                                                'Position',
+                                                                                [
+                                                                                  [
+                                                                                    'Static',
+                                                                                    'static',
+                                                                                  ],
+                                                                                  [
+                                                                                    'Relative',
+                                                                                    'relative',
+                                                                                  ],
+                                                                                  [
+                                                                                    'Absolute',
+                                                                                    'absolute',
+                                                                                  ],
+                                                                                  [
+                                                                                    'Fixed',
+                                                                                    'fixed',
+                                                                                  ],
+                                                                                  [
+                                                                                    'Sticky',
+                                                                                    'sticky',
+                                                                                  ],
+                                                                                ],
+                                                                                {
+                                                                                  value:
+                                                                                    'absolute',
+                                                                                  configuration:
+                                                                                    {
+                                                                                      dataType:
+                                                                                        'string',
+                                                                                    },
+                                                                                },
+                                                                              ),
+                                                                            top: size(
+                                                                              'Top position',
+                                                                              {
+                                                                                value:
+                                                                                  '11px',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'UNIT',
+                                                                                  },
+                                                                              },
+                                                                            ),
+                                                                            right:
+                                                                              size(
+                                                                                'Right position',
+                                                                                {
+                                                                                  value:
+                                                                                    '11px',
+                                                                                  configuration:
+                                                                                    {
+                                                                                      as: 'UNIT',
+                                                                                    },
+                                                                                },
+                                                                              ),
+                                                                          },
+                                                                      },
+                                                                      [
+                                                                        Button(
+                                                                          {
+                                                                            ref: {
+                                                                              id: '#clearButton',
+                                                                            },
+                                                                            style:
+                                                                              {
+                                                                                overwrite:
+                                                                                  {
+                                                                                    borderRadius:
+                                                                                      [
+                                                                                        '3.125rem',
+                                                                                      ],
+                                                                                    boxShadow:
+                                                                                      'none',
+                                                                                    color:
+                                                                                      {
+                                                                                        type: 'THEME_COLOR',
+                                                                                        value:
+                                                                                          'white',
+                                                                                      },
+                                                                                    fontFamily:
+                                                                                      'Roboto',
+                                                                                    fontSize:
+                                                                                      '0.875rem',
+                                                                                    fontStyle:
+                                                                                      'none',
+                                                                                    fontWeight:
+                                                                                      '400',
+                                                                                    padding:
+                                                                                      [
+                                                                                        '0.375rem',
+                                                                                        '0.375rem',
+                                                                                      ],
+                                                                                    textDecoration:
+                                                                                      'none',
+                                                                                    textTransform:
+                                                                                      'none',
+                                                                                  },
+                                                                              },
+                                                                            options:
+                                                                              {
+                                                                                ...buttonOptions,
+                                                                                visible:
+                                                                                  toggle(
+                                                                                    'Toggle visibility',
+                                                                                    {
+                                                                                      value:
+                                                                                        false,
+                                                                                      configuration:
+                                                                                        {
+                                                                                          as: 'VISIBILITY',
+                                                                                        },
+                                                                                    },
+                                                                                  ),
+                                                                                buttonText:
+                                                                                  variable(
+                                                                                    'Button text',
+                                                                                    {
+                                                                                      value:
+                                                                                        [],
+                                                                                    },
+                                                                                  ),
+                                                                                outerSpacing:
+                                                                                  sizes(
+                                                                                    'Outer space',
+                                                                                    {
+                                                                                      value:
+                                                                                        [
+                                                                                          '0rem',
+                                                                                          '0rem',
+                                                                                          '0rem',
+                                                                                          '0rem',
+                                                                                        ],
+                                                                                    },
+                                                                                  ),
+                                                                                icon: icon(
+                                                                                  'Icon',
+                                                                                  {
+                                                                                    value:
+                                                                                      'Close',
+                                                                                  },
+                                                                                ),
+                                                                              },
+                                                                          },
+                                                                          [],
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
                                                             ),
                                                           ],
                                                         ),
@@ -3186,6 +3818,7 @@ const beforeCreate = ({
     Header,
     Field,
     Footer,
+    PropertySelector,
     ModelRelationSelector,
     PropertiesSelector,
     PartialSelector,
@@ -3225,6 +3858,9 @@ const beforeCreate = ({
   const [footerPartialId, setFooterPartialId] = React.useState('');
   const pageAuthenticationProfileId = getPageAuthenticationProfileId();
   const permissions: PermissionType = 'private';
+  const [searchProp, setSearchProp] = React.useState<PropertyStateProps>({
+    id: '',
+  });
 
   const createFormId = createUuid();
   const updateFormId = createUuid();
@@ -3547,6 +4183,48 @@ const beforeCreate = ({
                 setModelId(value);
               }}
               value={modelId}
+            />
+          </Field>
+          <Field label="Property used for the search field">
+            <PropertySelector
+              modelId={modelId}
+              onChange={(value: any) => {
+                setSearchProp(value);
+              }}
+              value={searchProp}
+              disabled={!modelId}
+              disabledKinds={[
+                'DATE',
+                'DATE_TIME',
+                'TIME',
+                'BELONGS_TO',
+                'HAS_AND_BELONGS_TO_MANY',
+                'HAS_MANY',
+                'MULTI_FILE',
+                'AUTO_INCREMENT',
+                'COUNT',
+                'MULTI_IMAGE',
+                'PDF',
+                'RICH_TEXT',
+                'SIGNED_PDF',
+                'SUM',
+                'BOOLEAN_EXPRESSION',
+                'DATE_EXPRESSION',
+                'DATE_TIME_EXPRESSION',
+                'DECIMAL_EXPRESSION',
+                'INTEGER_EXPRESSION',
+                'MINUTES_EXPRESSION',
+                'PRICE_EXPRESSION',
+                'STRING_EXPRESSION',
+                'TEXT_EXPRESSION',
+                'MINUTES',
+                'ZIPCODE',
+                'IMAGE',
+                'FILE',
+                'PASSWORD',
+                'SERIAL',
+              ]}
+              showFormat={false}
             />
           </Field>
           <Field
@@ -4602,6 +5280,63 @@ const beforeCreate = ({
             type: 'Global',
           } as PrefabInteraction,
         );
+      }
+      if (searchProp.id && searchProp.id !== '') {
+        if (newPrefab.interactions) {
+          newPrefab.interactions.push({
+            name: 'Filter',
+            sourceEvent: 'onChange',
+            parameters: [
+              {
+                id: [...searchProp.id],
+                operator: 'matches',
+                parameter: 'property',
+                resolveValue: false,
+              },
+            ],
+            ref: {
+              targetComponentId: '#dataTable',
+              sourceComponentId: '#searchField',
+            },
+            type: 'Custom',
+          } as PrefabInteraction);
+          newPrefab.interactions.push({
+            name: 'Show',
+            sourceEvent: 'onChange',
+            ref: {
+              targetComponentId: '#clearButton',
+              sourceComponentId: '#searchField',
+            },
+            type: 'Custom',
+          } as PrefabInteraction);
+          newPrefab.interactions.push({
+            name: 'Clear',
+            sourceEvent: 'Click',
+            ref: {
+              targetComponentId: '#searchField',
+              sourceComponentId: '#clearButton',
+            },
+            type: 'Custom',
+          } as PrefabInteraction);
+          newPrefab.interactions.push({
+            name: 'ResetFilter',
+            sourceEvent: 'Click',
+            ref: {
+              targetComponentId: '#dataTable',
+              sourceComponentId: '#clearButton',
+            },
+            type: 'Custom',
+          } as PrefabInteraction);
+          newPrefab.interactions.push({
+            name: 'Hide',
+            sourceEvent: 'Click',
+            ref: {
+              targetComponentId: '#clearButton',
+              sourceComponentId: '#clearButton',
+            },
+            type: 'Custom',
+          } as PrefabInteraction);
+        }
       }
       save(newPrefab);
     },
