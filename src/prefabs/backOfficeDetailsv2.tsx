@@ -1860,6 +1860,9 @@ const drawerContainer = DrawerContainer(
                                     ],
                                   },
                                 }),
+                                innerSpacing: sizes('Inner space', {
+                                  value: ['M', '0rem', 'M', 'M'],
+                                }),
                               },
                             },
                             [
@@ -2793,7 +2796,8 @@ const beforeCreate = ({
               (prop) =>
                 prop.label !== 'Created at' &&
                 prop.label !== 'Updated at' &&
-                prop.label !== 'Id',
+                prop.label !== 'Id' &&
+                prop.kind !== 'PASSWORD',
             );
 
             const result = await prepareAction(
