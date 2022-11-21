@@ -75,6 +75,7 @@
     "useRouter": "readonly",
     "useState": "readonly",
     "useHistory": "readonly",
-    "useOptions": "readonly"
+    "useOptions": "readonly",
+    "dependencies": "readonly"
   }
 }

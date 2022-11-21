@@ -3,19 +3,93 @@
   type: 'BODY_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
+  dependencies: [
+    {
+      label: 'Slate',
+      package: 'npm:slate@0.82.1',
+      imports: [
+        'createEditor',
+        'Editor',
+        'Text',
+        'Element',
+        'Transforms',
+        'Node',
+      ],
+    },
+    {
+      label: 'SlateHistory',
+      package: 'npm:slate-history@0.66.0',
+      imports: ['withHistory'],
+    },
+    {
+      label: 'SlateReact',
+      package: 'npm:slate-react@0.82.1',
+      imports: ['Editable', 'withReact', 'Slate', 'useSlate'],
+    },
+    {
+      label: 'SlateHyperscript',
+      package: 'npm:slate-hyperscript@0.77.0',
+      imports: ['jsx'],
+    },
+    {
+      label: 'MuiExtraIcons',
+      package: 'npm:@material-ui/icons@4.11.2',
+      imports: [
+        'FormatBold',
+        'FormatAlignCenter',
+        'FormatAlignJustify',
+        'FormatAlignLeft',
+        'FormatAlignRight',
+        'FormatItalic',
+        'FormatListBulleted',
+        'FormatListNumbered',
+        'FormatQuote',
+        'FormatUnderlined',
+        'StrikethroughS',
+        'FirstPage',
+      ],
+    },
+  ],
   jsx: (() => {
     const {
-      Slate: SlateP,
-      SlateReact,
-      SlateHistory,
-      SlateHyperscript,
-      Icons,
-    } = window.MaterialUI;
+      Slate: { createEditor, Editor, Text, Element, Transforms, Node },
+      SlateReact: { Editable, withReact, Slate, useSlate },
+      SlateHistory: { withHistory },
+      SlateHyperscript: { jsx },
+      MuiExtraIcons: {
+        FormatBold,
+        FormatAlignCenter,
+        FormatAlignJustify,
+        FormatAlignLeft,
+        FormatAlginRight,
+        FormatItalic,
+        FormatListBulleted,
+        FormatListNumbered,
+        FormatQuote,
+        FormatUnderlined,
+        StrikethroughS,
+        FirstPage,
+      },
+    } = dependencies;
+
+    const { Icons } = window.MaterialUI;
+    // const { Icons: allIcons } = window.MaterialUI;
+    const extraIcons = {
+      ...FormatBold,
+      ...FormatAlignCenter,
+      ...FormatAlignJustify,
+      ...FormatAlignLeft,
+      ...FormatAlginRight,
+      ...FormatItalic,
+      ...FormatListBulleted,
+      ...FormatListNumbered,
+      ...FormatQuote,
+      ...FormatUnderlined,
+      ...StrikethroughS,
+      ...FirstPage,
+    };
+    const allIcons = { ...Icons, ...extraIcons };
     const { FormHelperText } = window.MaterialUI.Core;
-    const { Editable, withReact, Slate, useSlate } = SlateReact;
-    const { createEditor, Editor, Text, Element, Transforms, Node } = SlateP;
-    const { jsx } = SlateHyperscript;
-    const { withHistory } = SlateHistory;
     const { useText, env } = B;
     const {
       actionVariableId: name,
@@ -393,8 +467,7 @@
           isBlockActive(editor, 'bulleted-list', 'type'))
       ) {
         const lastNode = Node.last(editor, editor.selection.focus.path);
-
-        if (lastNode[0].text !== '') {
+        if (lastNode[0].text !== '' && editor.selection.focus.offset === 0) {
           if (isBlockActive(editor, 'numbered-list', 'type')) {
             toggleBlock(editor, 'numbered-list');
             return;
@@ -619,7 +692,7 @@
 
     const Button = React.forwardRef(
       ({ active, disable, icon, ...props }, ref) => {
-        const IconButton = Icons[icon];
+        const IconButton = allIcons[icon];
         return (
           <IconButton
             {...props}
@@ -641,7 +714,7 @@
             format,
             TEXT_ALIGN_TYPES.includes(format) ? 'align' : 'type',
           )}
-          onClick={(event) => {
+          onMouseDown={(event) => {
             event.preventDefault();
             if (disable) return;
             toggleBlock(ownEditor, format);
@@ -658,7 +731,7 @@
         <Button
           disable={disable}
           active={isMarkActive(ownEditor, format)}
-          onClick={(event) => {
+          onMouseDown={(event) => {
             event.preventDefault();
             if (disable) return;
             toggleMark(ownEditor, format);
@@ -670,7 +743,7 @@
 
     const HistoryButton = React.forwardRef(
       ({ action, icon, ...props }, ref) => {
-        const IconButton = Icons[icon];
+        const IconButton = allIcons[icon];
         return (
           <IconButton
             {...props}
@@ -697,7 +770,8 @@
           className={`${classes.dropdownItem} ${
             isBlockActive(ownEditor, format, 'type') ? 'active' : ''
           }`}
-          onClick={() => {
+          onMouseDown={(event) => {
+            event.preventDefault();
             toggleBlock(ownEditor, format);
             setShowDropdown(false);
           }}
@@ -744,14 +818,17 @@
           document.removeEventListener('touchstart', handler);
         };
       }, [showDropdown]);
-      const ArrowDown = Icons.KeyboardArrowDown;
+      const ArrowDown = allIcons.KeyboardArrowDown;
       return (
         <div className={classes.toolbarDropdown} ref={styleSelectorRef}>
           <button
             type="button"
             aria-haspopup="true"
             aria-label="Text styles"
-            onClick={() => setShowDropdown((prev) => !prev)}
+            onMouseDown={(event) => {
+              event.preventDefault();
+              setShowDropdown((prev) => !prev);
+            }}
             className={classes.dropdownButton}
           >
             <span className={classes.dropdownButtonText}>
