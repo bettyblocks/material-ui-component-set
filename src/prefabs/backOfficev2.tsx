@@ -354,9 +354,9 @@ const attributes = {
   icon: Icon.UpdateFormIcon,
   type: 'page',
   description:
-    'This page contains a datatable and all you need to manage your records.',
+    'Show a summary of the records of a selected data model, you can easily add records too.',
   detail:
-    'In this ready to use Data Table, it is possible to create and display (read) records. These functionalities are shown in a full page.',
+    'Show a summary of the records of a selected data model, you can easily add records too. Recommended to use in combination with the Back Office v2, record view.',
   previewUrl: 'https://preview.betty.app/back-office-v2',
   previewImage:
     'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/ae140409957240c881669db9739f9f6e',
@@ -480,6 +480,38 @@ const beforeCreate = ({
                   }}
                   value={searchProp}
                   disabled={!modelId}
+                  disabledKinds={[
+                    'DATE',
+                    'DATE_TIME',
+                    'TIME',
+                    'BELONGS_TO',
+                    'HAS_AND_BELONGS_TO_MANY',
+                    'HAS_MANY',
+                    'MULTI_FILE',
+                    'AUTO_INCREMENT',
+                    'COUNT',
+                    'MULTI_IMAGE',
+                    'PDF',
+                    'RICH_TEXT',
+                    'SIGNED_PDF',
+                    'SUM',
+                    'BOOLEAN_EXPRESSION',
+                    'DATE_EXPRESSION',
+                    'DATE_TIME_EXPRESSION',
+                    'DECIMAL_EXPRESSION',
+                    'INTEGER_EXPRESSION',
+                    'MINUTES_EXPRESSION',
+                    'PRICE_EXPRESSION',
+                    'STRING_EXPRESSION',
+                    'TEXT_EXPRESSION',
+                    'MINUTES',
+                    'ZIPCODE',
+                    'IMAGE',
+                    'FILE',
+                    'PASSWORD',
+                    'SERIAL',
+                  ]}
+                  showFormat={false}
                 />
               </Field>
               <Field
@@ -786,6 +818,8 @@ const beforeCreate = ({
           idProperty,
           filteredproperties,
           'create',
+          undefined,
+          `Back office v2 - Create ${model.label}`,
         );
 
         Object.values(result.variables).forEach(
@@ -993,7 +1027,7 @@ const beforeCreate = ({
             parameters: [
               {
                 id: [...searchProp.id],
-                operator: 'regex',
+                operator: 'matches',
                 parameter: 'property',
                 resolveValue: false,
               },
@@ -3251,7 +3285,7 @@ const prefabStructure = [
 ];
 
 export default makePrefab(
-  'Back office v2 - Overview',
+  'Back office v2, overview',
   attributes,
   beforeCreate,
   prefabStructure,

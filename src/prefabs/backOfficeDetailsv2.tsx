@@ -365,9 +365,9 @@ const attributes = {
   icon: Icon.UpdateFormIcon,
   type: 'page',
   description:
-    'This page contains a detail view and all you need to update a record.',
+    'Within the detail view you can show and edit the specifications of a specific record.',
   detail:
-    'In this ready to use back office detail view, it is possible to display (read) and update a record.',
+    'Within the detail view you can show and edit the specifications of a specific record. Recommended to use in combination with the Back Office v2, overview.',
   previewUrl: 'https://preview-dev.app/back-office-details',
   previewImage:
     'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/f1a4017ab78f41f38d1882f6b6cef37a',
@@ -2667,6 +2667,8 @@ const beforeCreate = ({
               idProperty,
               filteredproperties,
               'update',
+              undefined,
+              `Back office v2 - Update ${model.label}`,
             );
 
             const formInputStructure = (
@@ -3066,6 +3068,7 @@ const beforeCreate = ({
               undefined,
               'delete',
               undefined,
+              `Back office v2 - Delete ${model.label}`,
             );
             setOption(
               deleteForm,
@@ -3896,7 +3899,7 @@ const prefabStructure = [
 ];
 
 export default makePrefab(
-  'Back office v2 - Detail view',
+  'Back office v2, record view.',
   attributes,
   beforeCreate,
   prefabStructure,
