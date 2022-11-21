@@ -133,6 +133,7 @@
     const Control = (
       <FormGroup>
         <FormControl
+          style={{ display: 'block' }}
           required={required}
           error={errorState}
           classes={{ root: classes.formControl }}
