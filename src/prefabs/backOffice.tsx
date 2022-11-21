@@ -297,6 +297,105 @@ const interactions: PrefabInteraction[] = [
     },
     type: InteractionType.Custom,
   },
+  {
+    type: InteractionType.Custom,
+    name: 'Disable',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#createSubmitButton',
+      sourceComponentId: '#createForm',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Enable',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#createSubmitButton',
+      sourceComponentId: '#createForm',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Disable',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#editSubmitButton',
+      sourceComponentId: '#updateForm',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Enable',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#editSubmitButton',
+      sourceComponentId: '#updateForm',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Show',
+    sourceEvent: 'onActionError',
+    ref: {
+      targetComponentId: '#createAlertErrorId',
+      sourceComponentId: '#createForm',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Hide',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#createAlertErrorId',
+      sourceComponentId: '#createForm',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Show',
+    sourceEvent: 'onActionError',
+    ref: {
+      targetComponentId: '#editErrorAlert',
+      sourceComponentId: '#updateForm',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Hide',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#editErrorAlert',
+      sourceComponentId: '#updateForm',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#deleteSubmitButton',
+      sourceComponentId: '#deleteForm',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionError',
+    ref: {
+      targetComponentId: '#deleteSubmitButton',
+      sourceComponentId: '#deleteForm',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#deleteSubmitButton',
+      sourceComponentId: '#deleteForm',
+    },
+  },
 ];
 
 const attributes = {
@@ -4395,6 +4494,7 @@ const beforeCreate = ({
 
         const deleteSubmitButton = cloneStructure('Submit Button');
         if (deleteSubmitButton.type === 'COMPONENT') {
+          deleteSubmitButton.ref = { id: '#deleteSubmitButton' };
           deleteSubmitButton.style = {
             overwrite: {
               backgroundColor: {
