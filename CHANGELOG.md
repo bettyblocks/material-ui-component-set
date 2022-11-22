@@ -1,3 +1,17 @@
+# [2.77.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.76.1...v2.77.0) (2022-11-21)
+
+
+### Features
+
+* made changes based on the feedback ([cc17645](https://github.com/bettyblocks/material-ui-component-set/commit/cc17645c6a5bbbf1c5cc552c8f323eeaa4975b93))
+
+## [2.76.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.76.0...v2.76.1) (2022-11-21)
+
+
+### Bug Fixes
+
+* add subview component to backoffice detail view ([59da846](https://github.com/bettyblocks/material-ui-component-set/commit/59da8467db843db006520164c7b115c45fbcc04c))
+
 # [2.76.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.75.0...v2.76.0) (2022-11-21)
 
 

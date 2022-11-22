@@ -302,6 +302,60 @@ const interactions: PrefabInteraction[] = [
     type: InteractionType.Custom,
   },
   {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchColumn',
+      sourceComponentId: '#searchButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchButtonActive',
+      sourceComponentId: '#searchButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchButton',
+      sourceComponentId: '#searchButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchButtonActive',
+      sourceComponentId: '#searchButtonActive',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchColumn',
+      sourceComponentId: '#searchButtonActive',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#searchButton',
+      sourceComponentId: '#searchButtonActive',
+    },
+    type: InteractionType.Custom,
+  },
+  {
     type: InteractionType.Custom,
     name: 'Disable',
     sourceEvent: 'onActionLoad',
