@@ -27,7 +27,12 @@ export const options = {
     },
   }),
   label: variable('Label', { value: [] }),
-  value: variable('Value', { value: [] }),
+  value: variable('Value', {
+    value: [],
+    configuration: {
+      allowRelations: true,
+    },
+  }),
   optionType: buttongroup(
     'Option type',
     [
