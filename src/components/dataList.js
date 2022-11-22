@@ -291,9 +291,7 @@
                 setShowPagination(false);
                 break;
               case 'whenNeeded':
-                if (rowsPerPage >= data.totalCount) {
-                  setShowPagination(false);
-                }
+                setShowPagination(rowsPerPage < data.totalCount);
                 break;
               case 'always':
               default:
