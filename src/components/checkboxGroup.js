@@ -232,11 +232,9 @@
           const hasResult = res && res.results && res.results.length > 0;
           if (hasResult) {
             // only add values if they are in the complete set
-            const filteredResults = results.filter((result) => {
-              return res.results.some((r) => {
-                return result.id === r.id;
-              });
-            });
+            const filteredResults = results.filter((result) =>
+              res.results.some((r) => result.id === r.id),
+            );
 
             // get the id's of the filtered results to set as values
             const ids = filteredResults.map(({ id }) => id.toString());
