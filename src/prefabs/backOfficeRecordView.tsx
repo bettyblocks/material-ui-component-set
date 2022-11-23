@@ -847,7 +847,7 @@ const drawerSidebar = DrawerBar(
                       options: {
                         ...buttonOptions,
                         buttonText: variable('Button text', {
-                          value: ['Model info'],
+                          value: ['First list item'],
                         }),
                       },
                       style: {
@@ -3310,17 +3310,6 @@ const beforeCreate = ({
                 } as PrefabInteraction,
               );
             }
-
-            const menuButton = treeSearch('#menuButton', newPrefab.structure);
-            if (!menuButton) throw new Error('No menu button found');
-            setOption(
-              menuButton,
-              'buttonText',
-              (opt: PrefabComponentOption) => ({
-                ...opt,
-                value: [`${model.label} info`],
-              }),
-            );
 
             const updateTitle = treeSearch('#updateTitle', newPrefab.structure);
             if (!updateTitle) throw new Error('No create title found');
