@@ -2707,6 +2707,9 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                         value: false,
                                         configuration: { as: 'VISIBILITY' },
                                       }),
+                                      invisible: toggle('Invisible', {
+                                        value: true,
+                                      }),
                                     },
                                   },
                                   [
