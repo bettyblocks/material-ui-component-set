@@ -230,7 +230,8 @@
         variables: {},
         onCompleted(res) {
           const hasResult = res && res.results && res.results.length > 0;
-          if (hasResult) {
+          const hasAllResults = results && results.length > 0;
+          if (hasResult && hasAllResults) {
             // only add values if they are in the complete set
             const filteredResults = results.filter((result) =>
               res.results.some((r) => result.id === r.id),
