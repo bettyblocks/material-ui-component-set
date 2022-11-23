@@ -88,6 +88,30 @@
       }
     }
 
+    /*
+     * Merges interaction filters with local filters
+     */
+    const mergeFilters = (...filters) => {
+      const isObject = (item) =>
+        item && typeof item === 'object' && !Array.isArray(item);
+
+      return filters.reduce((acc, object) => {
+        Object.entries(object).forEach(([key, filterValue]) => {
+          const accValue = acc[key];
+
+          if (Array.isArray(accValue) && Array.isArray(filterValue)) {
+            acc[key] = accValue.concat(filterValue);
+          } else if (isObject(accValue) && isObject(filterValue)) {
+            acc[key] = mergeFilters(accValue, filterValue);
+          } else {
+            acc[key] = filterValue;
+          }
+        });
+
+        return acc;
+      }, {});
+    };
+
     const getValues = () => {
       const value = defaultValueText || [];
       // split the string and trim spaces
@@ -148,10 +172,25 @@
       !!contextModelId || optionType === 'property' || !valid,
     );
 
+    const { hasResults, data: relationData } = useRelation(
+      model,
+      {},
+      typeof model === 'string' || !model,
+    );
+
+    const data = hasResults ? relationData : queryData;
+    const loading = hasResults ? false : queryLoading;
+
+    if (loading) {
+      B.triggerEvent('onLoad', loading);
+    }
+
+    const { results } = data || {};
+
     let parentIdValue;
     let valuesFilter = {};
 
-    // check if the value option has a relation with an id key
+    // check if the value option has a relation with an id property
     const relationPropertyId = valueRaw[0] && valueRaw[0].id;
     const relationProperty = getProperty(relationPropertyId || '');
 
@@ -178,20 +217,29 @@
       };
     }
 
-    const valueFilter = useFilter(valuesFilter);
+    // merge the values filter with the options filter to get the values in range of the complete set
+    const valueFilter = useFilter(mergeFilters(valuesFilter, filter));
     const queryWasResolvable = !!parentIdValue;
 
     useAllQuery(
       // use contextModelId when selecting a relation in the model option
       contextModelId || model,
       {
-        take: 20,
+        take: 50,
         rawFilter: valueFilter,
         variables: {},
         onCompleted(res) {
           const hasResult = res && res.results && res.results.length > 0;
           if (hasResult) {
-            const ids = res.results.map(({ id }) => id.toString());
+            // only add values if they are in the complete set
+            const filteredResults = results.filter((result) => {
+              return res.results.some((r) => {
+                return result.id === r.id;
+              });
+            });
+
+            // get the id's of the filtered results to set as values
+            const ids = filteredResults.map(({ id }) => id.toString());
             setValues(ids);
           }
         },
@@ -208,21 +256,6 @@
        */
       optionType === 'property' || !valid || !queryWasResolvable,
     );
-
-    const { hasResults, data: relationData } = useRelation(
-      model,
-      {},
-      typeof model === 'string' || !model,
-    );
-
-    const data = hasResults ? relationData : queryData;
-    const loading = hasResults ? false : queryLoading;
-
-    if (loading) {
-      B.triggerEvent('onLoad', loading);
-    }
-
-    const { results } = data || {};
 
     B.defineFunction('Refetch', () => refetch());
     B.defineFunction('Reset', () => setValues(defaultValueText || []));
