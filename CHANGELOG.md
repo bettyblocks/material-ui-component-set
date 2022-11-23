@@ -1,3 +1,10 @@
+## [2.77.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.77.1...v2.77.2) (2022-11-23)
+
+
+### Bug Fixes
+
+* trigger release notes and update menu items back office ([877884e](https://github.com/bettyblocks/material-ui-component-set/commit/877884e3f9134da9a5fefc8ecdaea039b2909725))
+
 ## [2.77.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.77.0...v2.77.1) (2022-11-22)
 
 
