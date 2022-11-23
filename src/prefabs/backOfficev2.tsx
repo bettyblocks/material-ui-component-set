@@ -1112,7 +1112,8 @@ const beforeCreate = ({
         <BoxComp>
           <Footer
             onClose={close}
-            onSave={stepNumber === stepper.stepAmount && stepper.onSave}
+            onSave={stepper.onSave}
+            canSave={stepNumber === stepper.stepAmount}
           />
         </BoxComp>
       </BoxComp>

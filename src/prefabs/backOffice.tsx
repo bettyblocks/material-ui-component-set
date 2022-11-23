@@ -3281,6 +3281,12 @@ const drawerContainer = DrawerContainer(
                                                           {
                                                             options: {
                                                               ...dialogOptions,
+                                                              invisible: toggle(
+                                                                'Invisible',
+                                                                {
+                                                                  value: true,
+                                                                },
+                                                              ),
                                                             },
                                                             ref: {
                                                               id: '#deleteDialog',
