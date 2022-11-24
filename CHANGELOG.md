@@ -1,3 +1,17 @@
+# [2.78.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.77.3...v2.78.0) (2022-11-24)
+
+
+### Features
+
+* add new zone ([5eed040](https://github.com/bettyblocks/material-ui-component-set/commit/5eed0406a83aa5589d381bda29d5470e8fbb91d5))
+
+## [2.77.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.77.2...v2.77.3) (2022-11-24)
+
+
+### Bug Fixes
+
+* back office record view preview url ([bac0e13](https://github.com/bettyblocks/material-ui-component-set/commit/bac0e134607e6f9f6dd4a68864fab367dec7d3a4))
+
 ## [2.77.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.77.1...v2.77.2) (2022-11-23)
 
 
