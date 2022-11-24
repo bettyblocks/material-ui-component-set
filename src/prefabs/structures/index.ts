@@ -59,9 +59,11 @@ import { Tabs } from './Tabs';
 import { Text } from './Text';
 import { TextArea } from './TextArea';
 import { TextInput } from './TextInput';
+import { FilterComponent } from './FilterComponent';
 
 // Import all prefab options here
 import { options as actionJSButtonOptions } from './ActionJSButton/options';
+import { FilterComponentOptions } from './FilterComponent/options';
 import { alertOptions } from './Alert/options';
 import { appBarOptions } from './Appbar/options';
 import { options as autocompleteInputOptions } from './AutocompleteInput/options';
@@ -185,6 +187,7 @@ export {
   Text,
   TextArea,
   TextInput,
+  FilterComponent,
   actionJSButtonOptions,
   alertOptions,
   appBarOptions,
@@ -245,4 +248,5 @@ export {
   textOptions,
   textAreaOptions,
   textInputOptions,
+  FilterComponentOptions,
 };
