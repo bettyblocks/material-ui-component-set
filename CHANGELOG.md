@@ -1,3 +1,10 @@
+# [2.78.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.77.3...v2.78.0) (2022-11-24)
+
+
+### Features
+
+* add new zone ([5eed040](https://github.com/bettyblocks/material-ui-component-set/commit/5eed0406a83aa5589d381bda29d5470e8fbb91d5))
+
 ## [2.77.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.77.2...v2.77.3) (2022-11-24)
 
 
