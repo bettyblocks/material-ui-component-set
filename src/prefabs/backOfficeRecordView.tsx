@@ -370,7 +370,7 @@ const attributes = {
     'Within the detail view you can show and edit the specifications of a specific record.',
   detail:
     'Within the detail view you can show and edit the specifications of a specific record. Recommended to use in combination with the Back Office v2, overview.',
-  previewUrl: 'https://preview-dev.app/back-office-record-view',
+  previewUrl: 'https://preview.betty.app/back-office-record-view',
   previewImage:
     'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/f1a4017ab78f41f38d1882f6b6cef37a',
   interactions,
