@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
 (() => ({
   name: 'FilterComponent',
   type: 'CONTAINER_COMPONENT',
@@ -7,70 +5,33 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { env } = B;
-    const { MenuItem, TextField } = window.MaterialUI.Core;
-    const {
-      // alignment,
-      // valignment,
-      // transparent,
-      // backgroundColor,
-      // borderColor,
-      // backgroundUrl,
-      // dataComponentAttribute,
-      modelId,
-    } = options;
+    const { MenuItem, TextField, Button, ButtonGroup } = window.MaterialUI.Core;
+    const { modelId } = options;
     const isDev = env === 'dev';
+    const makeId = (length = 16) => {
+      let result = '';
+      const characters =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      const charactersLength = characters.length;
+      for (let i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength),
+        );
+      }
+      return result;
+    };
     const [groups, setGroups] = React.useState([
       {
-        id: 0,
+        id: makeId(),
         operator: '_and',
         groups: [
           {
-            id: 1,
+            id: makeId(),
             operator: '_or',
             groups: [],
             rows: [
               {
-                index: 0,
-                propertyValue: '',
-                operator: 'eq',
-                rightValue: '',
-              },
-            ],
-          },
-          {
-            id: 2,
-            operator: '_and',
-            groups: [
-              {
-                id: 1,
-                operator: '_or',
-                groups: [],
-                rows: [
-                  {
-                    index: 0,
-                    propertyValue: '',
-                    operator: 'eq',
-                    rightValue: '',
-                  },
-                ],
-              },
-              {
-                id: 2,
-                operator: '_and',
-                groups: [],
-                rows: [
-                  {
-                    index: 0,
-                    propertyValue: '',
-                    operator: 'eq',
-                    rightValue: '',
-                  },
-                ],
-              },
-            ],
-            rows: [
-              {
-                index: 0,
+                rowId: makeId(),
                 propertyValue: '',
                 operator: 'eq',
                 rightValue: '',
@@ -80,7 +41,7 @@
         ],
         rows: [
           {
-            index: 0,
+            rowId: makeId(),
             propertyValue: '',
             operator: 'eq',
             rightValue: '',
@@ -88,7 +49,6 @@
         ],
       },
     ]);
-
     const operatorList = [
       'eq',
       'neq',
@@ -98,6 +58,10 @@
       'matches',
       'does_not_match',
     ];
+
+    useEffect(() => {
+      console.log(groups);
+    }, [groups]);
 
     const filterProps = (properties, id) => {
       return Object.values(properties).filter((props) => {
@@ -121,16 +85,220 @@
       };
     };
 
+    const updateRowProperty = (rowId, tree, propertyToUpdate, newValue) => {
+      return tree.map((group) => {
+        const foundRow = group.rows.filter((row) => row.rowId === rowId);
+        if (foundRow.length === 0) {
+          group.groups = updateRowProperty(
+            rowId,
+            group.groups,
+            propertyToUpdate,
+            newValue,
+          );
+          return group;
+        }
+        group.rows.map((row) => {
+          const newRow = row;
+          if (row.rowId === rowId) {
+            newRow[propertyToUpdate] = newValue;
+          }
+          return newRow;
+        });
+        return group;
+      });
+    };
+
+    const updateGroupProperty = (groupId, tree, propertyToUpdate, newValue) => {
+      return tree.map((group) => {
+        const foundGroup = group.groups.filter(
+          (row) => row.groupId === groupId,
+        );
+        if (foundGroup.length === 0) {
+          group.groups = updateGroupProperty(
+            groupId,
+            group.groups,
+            propertyToUpdate,
+            newValue,
+          );
+          return group;
+        }
+        group.groups.map((grp) => {
+          const newGroup = grp;
+          if (grp.groupId === groupId) {
+            newGroup[propertyToUpdate] = newValue;
+          }
+          return newGroup;
+        });
+        return group;
+      });
+    };
+
+    const filterRow = (row) => {
+      const { properties } = artifact;
+      const filteredProps = filterProps(properties, modelId);
+      return (
+        <div key={row.rowId} style={{ width: '100%', marginBottom: '10px' }}>
+          <TextField
+            value={row.propertyValue}
+            select
+            variant="outlined"
+            style={{ marginRight: '10px' }}
+            onChange={(e) => {
+              console.log('group', groups);
+              setGroups(
+                updateRowProperty(
+                  row.rowId,
+                  groups,
+                  'propertyValue',
+                  e.target.value,
+                ),
+              );
+            }}
+          >
+            {filteredProps.map((prop) => renderOption(prop.name, prop.label))}
+          </TextField>
+          <TextField
+            value={row.operator}
+            select
+            variant="outlined"
+            style={{ marginRight: '10px' }}
+            onChange={(e) => {
+              setGroups(
+                updateRowProperty(
+                  row.rowId,
+                  groups,
+                  'operator',
+                  e.target.value,
+                ),
+              );
+            }}
+          >
+            {operatorList.map((op) => {
+              return renderOption(op, op);
+            })}
+          </TextField>
+          <TextField
+            value={row.rightValue}
+            variant="outlined"
+            onChange={(e) => {
+              setGroups(
+                updateRowProperty(
+                  row.rowId,
+                  groups,
+                  'rightValue',
+                  e.target.value,
+                ),
+              );
+            }}
+          />
+        </div>
+      );
+    };
+
+    const addGroup = (tree, groupId) => {
+      const newGroup = {
+        id: makeId(),
+        operator: '_or',
+        groups: [],
+        rows: [
+          {
+            rowId: makeId(),
+            propertyValue: '',
+            operator: 'eq',
+            rightValue: '',
+          },
+        ],
+      };
+
+      return tree.map((group) => {
+        if (group.id === groupId) {
+          group.groups.push(newGroup);
+          return group;
+        }
+        group.groups = addGroup(group.groups, groupId);
+        return group;
+      });
+    };
+
+    const addGroupButton = (group) => {
+      return (
+        <button
+          type="button"
+          onClick={() => {
+            // console.log(addGroup(groups, group.id));
+            setGroups(addGroup(groups, group.id));
+          }}
+        >
+          add group
+        </button>
+      );
+    };
+
+    const addFilter = (tree, groupId) => {
+      const newRow = {
+        rowId: makeId(),
+        propertyValue: '',
+        operator: 'eq',
+        rightValue: '',
+      };
+
+      return tree.map((group) => {
+        if (group.id === groupId) {
+          group.rows.push(newRow);
+          return group;
+        }
+        group.groups = addFilter(group.groups, groupId);
+        return group;
+      });
+    };
+
+    const addFilterButton = (group) => {
+      return (
+        <button
+          type="button"
+          onClick={() => {
+            setGroups(addFilter(groups, group.id));
+          }}
+        >
+          add row
+        </button>
+      );
+    };
+
     const renderTree = (tree, count = 0) => {
       return (
         <>
           {tree.map((node) => (
-            <div key={node.id} style={{ marginLeft: `${10 * count}px` }}>
+            <div
+              key={node.id}
+              style={{
+                marginLeft: `${10 * count}px`,
+                border: '1px solid black',
+              }}
+            >
               <div>{node.operator}</div>
+              <ButtonGroup size="small">
+                <Button
+                  disableElevation
+                  variant="contained"
+                  color={node.operator === '_and' ? 'primary' : 'default'}
+                  onClick={() => {}}
+                >
+                  AND
+                </Button>
+                <Button
+                  disableElevation
+                  variant="contained"
+                  color={node.operator === '_or' ? 'primary' : 'default'}
+                >
+                  OR
+                </Button>
+              </ButtonGroup>
+              {addGroupButton(node)}
+              {addFilterButton(node)}
+
               <hr />
-              {node.rows.map((row) => {
-                return <div key={row.index}>{row.index}</div>;
-              })}
+              {node.rows.map((row) => filterRow(row, node.id))}
               {node.groups && renderTree(node.groups, count + 1)}
             </div>
           ))}
@@ -139,9 +307,6 @@
     };
 
     const filterBuilder = () => {
-      const { properties } = artifact;
-      const filteredProps = filterProps(properties, modelId);
-
       return <div>{renderTree(groups)}</div>;
     };
 
