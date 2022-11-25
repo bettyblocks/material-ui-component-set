@@ -3,93 +3,110 @@
   type: 'BODY_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
-  dependencies: [
-    {
-      label: 'Slate',
-      package: 'npm:slate@0.82.1',
-      imports: [
-        'createEditor',
-        'Editor',
-        'Text',
-        'Element',
-        'Transforms',
-        'Node',
-      ],
-    },
-    {
-      label: 'SlateHistory',
-      package: 'npm:slate-history@0.66.0',
-      imports: ['withHistory'],
-    },
-    {
-      label: 'SlateReact',
-      package: 'npm:slate-react@0.82.1',
-      imports: ['Editable', 'withReact', 'Slate', 'useSlate'],
-    },
-    {
-      label: 'SlateHyperscript',
-      package: 'npm:slate-hyperscript@0.77.0',
-      imports: ['jsx'],
-    },
-    {
-      label: 'MuiExtraIcons',
-      package: 'npm:@material-ui/icons@4.11.2',
-      imports: [
-        'FormatBold',
-        'FormatAlignCenter',
-        'FormatAlignJustify',
-        'FormatAlignLeft',
-        'FormatAlignRight',
-        'FormatItalic',
-        'FormatListBulleted',
-        'FormatListNumbered',
-        'FormatQuote',
-        'FormatUnderlined',
-        'StrikethroughS',
-        'FirstPage',
-      ],
-    },
-  ],
+  // -*-*-*- NEEDS TO BE COMMENTED TO RUN LOCAL -*-*-*-
+  // dependencies: [
+  //   {
+  //     label: 'Slate',
+  //     package: 'npm:slate@0.82.1',
+  //     imports: [
+  //       'createEditor',
+  //       'Editor',
+  //       'Text',
+  //       'Element',
+  //       'Transforms',
+  //       'Node',
+  //     ],
+  //   },
+  //   {
+  //     label: 'SlateHistory',
+  //     package: 'npm:slate-history@0.66.0',
+  //     imports: ['withHistory'],
+  //   },
+  //   {
+  //     label: 'SlateReact',
+  //     package: 'npm:slate-react@0.82.1',
+  //     imports: ['Editable', 'withReact', 'Slate', 'useSlate'],
+  //   },
+  //   {
+  //     label: 'SlateHyperscript',
+  //     package: 'npm:slate-hyperscript@0.77.0',
+  //     imports: ['jsx'],
+  //   },
+  //   {
+  //     label: 'MuiExtraIcons',
+  //     package: 'npm:@material-ui/icons@4.11.2',
+  //     imports: [
+  //       'FormatBold',
+  //       'FormatAlignCenter',
+  //       'FormatAlignJustify',
+  //       'FormatAlignLeft',
+  //       'FormatAlignRight',
+  //       'FormatItalic',
+  //       'FormatListBulleted',
+  //       'FormatListNumbered',
+  //       'FormatQuote',
+  //       'FormatUnderlined',
+  //       'StrikethroughS',
+  //       'FirstPage',
+  //     ],
+  //   },
+  // ],
   jsx: (() => {
+    // -*-*-*- NEEDS TO BE COMMENTED TO RUN LOCAL -*-*-*-
+    // const {
+    //   Slate: { createEditor, Editor, Text, Element, Transforms, Node },
+    //   SlateReact: { Editable, withReact, Slate, useSlate },
+    //   SlateHistory: { withHistory },
+    //   SlateHyperscript: { jsx },
+    //   MuiExtraIcons: {
+    //     FormatBold,
+    //     FormatAlignCenter,
+    //     FormatAlignJustify,
+    //     FormatAlignLeft,
+    //     FormatAlginRight,
+    //     FormatItalic,
+    //     FormatListBulleted,
+    //     FormatListNumbered,
+    //     FormatQuote,
+    //     FormatUnderlined,
+    //     StrikethroughS,
+    //     FirstPage,
+    //   },
+    // } = dependencies;
+    // -*-*-*- NEEDS TO BE COMMENTED TO RUN LOCAL -*-*-*-
+    // const { Icons } = window.MaterialUI;
+    // -*-*-*- NEEDS TO BE UNCOMMENTED TO RUN LOCAL -*-*-*-
+    const { Icons: allIcons } = window.MaterialUI;
+    // -*-*-*- NEEDS TO BE COMMENTED TO RUN LOCAL -*-*-*-
+    // const extraIcons = {
+    //   ...FormatBold,
+    //   ...FormatAlignCenter,
+    //   ...FormatAlignJustify,
+    //   ...FormatAlignLeft,
+    //   ...FormatAlginRight,
+    //   ...FormatItalic,
+    //   ...FormatListBulleted,
+    //   ...FormatListNumbered,
+    //   ...FormatQuote,
+    //   ...FormatUnderlined,
+    //   ...StrikethroughS,
+    //   ...FirstPage,
+    // };
+    // -*-*-*- NEEDS TO BE COMMENTED TO RUN LOCAL -*-*-*-
+    // const allIcons = { ...Icons, ...extraIcons };
+    // -*-*-*- NEEDS TO BE UNCOMMENTED TO RUN LOCAL -*-*-*-
     const {
-      Slate: { createEditor, Editor, Text, Element, Transforms, Node },
-      SlateReact: { Editable, withReact, Slate, useSlate },
-      SlateHistory: { withHistory },
-      SlateHyperscript: { jsx },
-      MuiExtraIcons: {
-        FormatBold,
-        FormatAlignCenter,
-        FormatAlignJustify,
-        FormatAlignLeft,
-        FormatAlginRight,
-        FormatItalic,
-        FormatListBulleted,
-        FormatListNumbered,
-        FormatQuote,
-        FormatUnderlined,
-        StrikethroughS,
-        FirstPage,
-      },
-    } = dependencies;
-
-    const { Icons } = window.MaterialUI;
-    // const { Icons: allIcons } = window.MaterialUI;
-    const extraIcons = {
-      ...FormatBold,
-      ...FormatAlignCenter,
-      ...FormatAlignJustify,
-      ...FormatAlignLeft,
-      ...FormatAlginRight,
-      ...FormatItalic,
-      ...FormatListBulleted,
-      ...FormatListNumbered,
-      ...FormatQuote,
-      ...FormatUnderlined,
-      ...StrikethroughS,
-      ...FirstPage,
-    };
-    const allIcons = { ...Icons, ...extraIcons };
+      Slate: SlateP,
+      SlateReact,
+      SlateHistory,
+      SlateHyperscript,
+    } = window.MaterialUI;
     const { FormHelperText } = window.MaterialUI.Core;
+    const { Editable, withReact, Slate, useSlate } = SlateReact;
+    const { createEditor, Editor, Text, Element, Transforms, Node } = SlateP;
+    const { jsx } = SlateHyperscript;
+    const { withHistory } = SlateHistory;
+    // -*-*-*- TILL HERE -*-*-*-
     const { useText, env } = B;
     const {
       actionVariableId: name,
@@ -759,20 +776,64 @@
       },
     );
 
+    const [amountOfHeadersInSelection, setAmountOfHeadersInSelection] =
+      useState(1);
+    let selectionTimeout;
+
+    document.onselectionchange = () => {
+      const whitelistedTypes = [
+        'heading-one',
+        'heading-two',
+        'heading-three',
+        'heading-four',
+        'heading-five',
+        'heading-six',
+        'paragraph',
+      ];
+      if (document.getSelection()) {
+        clearTimeout(selectionTimeout);
+        selectionTimeout = setTimeout(() => {
+          if (!document.getSelection().isCollapsed) {
+            if (editor.selection !== null && editor.selection.anchor !== null) {
+              const anchor = editor.selection.anchor.path[0];
+              const focus = editor.selection.focus.path[0];
+              if (whitelistedTypes.includes(editor.children[anchor].type)) {
+                setAmountOfHeadersInSelection(Math.abs(anchor - focus) + 1);
+              }
+            }
+          } else if (amountOfHeadersInSelection !== 1) {
+            setAmountOfHeadersInSelection(1);
+          }
+        }, 500);
+      }
+    };
+
     function DropdownItem({ format, text, tag }) {
-      const ownEditor = useSlate();
       const Tag = tag;
-      if (isBlockActive(ownEditor, format, 'type')) {
-        if (activeStyleName !== text) setActiveStyleName(text);
+      if (
+        amountOfHeadersInSelection === 1 &&
+        isBlockActive(editor, format, 'type')
+      ) {
+        if (activeStyleName !== text) {
+          setActiveStyleName(text);
+        }
+      } else if (
+        isBlockActive(editor, format, 'type') &&
+        activeStyleName !== '\u00A0'
+      ) {
+        setActiveStyleName('\u00A0');
       }
       return (
         <li
           className={`${classes.dropdownItem} ${
-            isBlockActive(ownEditor, format, 'type') ? 'active' : ''
+            isBlockActive(editor, format, 'type') &&
+            amountOfHeadersInSelection === 1
+              ? 'active'
+              : ''
           }`}
           onMouseDown={(event) => {
             event.preventDefault();
-            toggleBlock(ownEditor, format);
+            toggleBlock(editor, format);
             setShowDropdown(false);
           }}
           aria-hidden="true"
