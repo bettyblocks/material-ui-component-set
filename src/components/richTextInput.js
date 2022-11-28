@@ -6,7 +6,7 @@
   dependencies: [
     {
       label: 'Slate',
-      package: 'npm:slate@0.82.1',
+      package: 'npm:slate@0.86.0',
       imports: [
         'createEditor',
         'Editor',
@@ -23,7 +23,7 @@
     },
     {
       label: 'SlateReact',
-      package: 'npm:slate-react@0.82.1',
+      package: 'npm:slate-react@0.86.0',
       imports: ['Editable', 'withReact', 'Slate', 'useSlate'],
     },
     {
