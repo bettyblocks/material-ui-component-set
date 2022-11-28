@@ -4,109 +4,109 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   // -*-*-*- NEEDS TO BE COMMENTED TO RUN LOCAL -*-*-*-
-  // dependencies: [
-  //   {
-  //     label: 'Slate',
-  //     package: 'npm:slate@0.82.1',
-  //     imports: [
-  //       'createEditor',
-  //       'Editor',
-  //       'Text',
-  //       'Element',
-  //       'Transforms',
-  //       'Node',
-  //     ],
-  //   },
-  //   {
-  //     label: 'SlateHistory',
-  //     package: 'npm:slate-history@0.66.0',
-  //     imports: ['withHistory'],
-  //   },
-  //   {
-  //     label: 'SlateReact',
-  //     package: 'npm:slate-react@0.82.1',
-  //     imports: ['Editable', 'withReact', 'Slate', 'useSlate'],
-  //   },
-  //   {
-  //     label: 'SlateHyperscript',
-  //     package: 'npm:slate-hyperscript@0.77.0',
-  //     imports: ['jsx'],
-  //   },
-  //   {
-  //     label: 'MuiExtraIcons',
-  //     package: 'npm:@material-ui/icons@4.11.2',
-  //     imports: [
-  //       'FormatBold',
-  //       'FormatAlignCenter',
-  //       'FormatAlignJustify',
-  //       'FormatAlignLeft',
-  //       'FormatAlignRight',
-  //       'FormatItalic',
-  //       'FormatListBulleted',
-  //       'FormatListNumbered',
-  //       'FormatQuote',
-  //       'FormatUnderlined',
-  //       'StrikethroughS',
-  //       'FirstPage',
-  //     ],
-  //   },
-  // ],
+  dependencies: [
+    {
+      label: 'Slate',
+      package: 'npm:slate@0.82.1',
+      imports: [
+        'createEditor',
+        'Editor',
+        'Text',
+        'Element',
+        'Transforms',
+        'Node',
+      ],
+    },
+    {
+      label: 'SlateHistory',
+      package: 'npm:slate-history@0.66.0',
+      imports: ['withHistory'],
+    },
+    {
+      label: 'SlateReact',
+      package: 'npm:slate-react@0.82.1',
+      imports: ['Editable', 'withReact', 'Slate', 'useSlate'],
+    },
+    {
+      label: 'SlateHyperscript',
+      package: 'npm:slate-hyperscript@0.77.0',
+      imports: ['jsx'],
+    },
+    {
+      label: 'MuiExtraIcons',
+      package: 'npm:@material-ui/icons@4.11.2',
+      imports: [
+        'FormatBold',
+        'FormatAlignCenter',
+        'FormatAlignJustify',
+        'FormatAlignLeft',
+        'FormatAlignRight',
+        'FormatItalic',
+        'FormatListBulleted',
+        'FormatListNumbered',
+        'FormatQuote',
+        'FormatUnderlined',
+        'StrikethroughS',
+        'FirstPage',
+      ],
+    },
+  ],
   jsx: (() => {
     // -*-*-*- NEEDS TO BE COMMENTED TO RUN LOCAL -*-*-*-
-    // const {
-    //   Slate: { createEditor, Editor, Text, Element, Transforms, Node },
-    //   SlateReact: { Editable, withReact, Slate, useSlate },
-    //   SlateHistory: { withHistory },
-    //   SlateHyperscript: { jsx },
-    //   MuiExtraIcons: {
-    //     FormatBold,
-    //     FormatAlignCenter,
-    //     FormatAlignJustify,
-    //     FormatAlignLeft,
-    //     FormatAlginRight,
-    //     FormatItalic,
-    //     FormatListBulleted,
-    //     FormatListNumbered,
-    //     FormatQuote,
-    //     FormatUnderlined,
-    //     StrikethroughS,
-    //     FirstPage,
-    //   },
-    // } = dependencies;
-    // -*-*-*- NEEDS TO BE COMMENTED TO RUN LOCAL -*-*-*-
-    // const { Icons } = window.MaterialUI;
-    // -*-*-*- NEEDS TO BE UNCOMMENTED TO RUN LOCAL -*-*-*-
-    const { Icons: allIcons } = window.MaterialUI;
-    // -*-*-*- NEEDS TO BE COMMENTED TO RUN LOCAL -*-*-*-
-    // const extraIcons = {
-    //   ...FormatBold,
-    //   ...FormatAlignCenter,
-    //   ...FormatAlignJustify,
-    //   ...FormatAlignLeft,
-    //   ...FormatAlginRight,
-    //   ...FormatItalic,
-    //   ...FormatListBulleted,
-    //   ...FormatListNumbered,
-    //   ...FormatQuote,
-    //   ...FormatUnderlined,
-    //   ...StrikethroughS,
-    //   ...FirstPage,
-    // };
-    // -*-*-*- NEEDS TO BE COMMENTED TO RUN LOCAL -*-*-*-
-    // const allIcons = { ...Icons, ...extraIcons };
-    // -*-*-*- NEEDS TO BE UNCOMMENTED TO RUN LOCAL -*-*-*-
     const {
-      Slate: SlateP,
-      SlateReact,
-      SlateHistory,
-      SlateHyperscript,
-    } = window.MaterialUI;
-    const { FormHelperText } = window.MaterialUI.Core;
-    const { Editable, withReact, Slate, useSlate } = SlateReact;
-    const { createEditor, Editor, Text, Element, Transforms, Node } = SlateP;
-    const { jsx } = SlateHyperscript;
-    const { withHistory } = SlateHistory;
+      Slate: { createEditor, Editor, Text, Element, Transforms, Node },
+      SlateReact: { Editable, withReact, Slate, useSlate },
+      SlateHistory: { withHistory },
+      SlateHyperscript: { jsx },
+      MuiExtraIcons: {
+        FormatBold,
+        FormatAlignCenter,
+        FormatAlignJustify,
+        FormatAlignLeft,
+        FormatAlginRight,
+        FormatItalic,
+        FormatListBulleted,
+        FormatListNumbered,
+        FormatQuote,
+        FormatUnderlined,
+        StrikethroughS,
+        FirstPage,
+      },
+    } = dependencies;
+    // -*-*-*- NEEDS TO BE COMMENTED TO RUN LOCAL -*-*-*-
+    const { Icons } = window.MaterialUI;
+    // -*-*-*- NEEDS TO BE UNCOMMENTED TO RUN LOCAL -*-*-*-
+    // const { Icons: allIcons } = window.MaterialUI;
+    // -*-*-*- NEEDS TO BE COMMENTED TO RUN LOCAL -*-*-*-
+    const extraIcons = {
+      ...FormatBold,
+      ...FormatAlignCenter,
+      ...FormatAlignJustify,
+      ...FormatAlignLeft,
+      ...FormatAlginRight,
+      ...FormatItalic,
+      ...FormatListBulleted,
+      ...FormatListNumbered,
+      ...FormatQuote,
+      ...FormatUnderlined,
+      ...StrikethroughS,
+      ...FirstPage,
+    };
+    // -*-*-*- NEEDS TO BE COMMENTED TO RUN LOCAL -*-*-*-
+    const allIcons = { ...Icons, ...extraIcons };
+    // -*-*-*- NEEDS TO BE UNCOMMENTED TO RUN LOCAL -*-*-*-
+    // const {
+    //   Slate: SlateP,
+    //   SlateReact,
+    //   SlateHistory,
+    //   SlateHyperscript,
+    // } = window.MaterialUI;
+    // const { Editable, withReact, Slate, useSlate } = SlateReact;
+    // const { createEditor, Editor, Text, Element, Transforms, Node } = SlateP;
+    // const { jsx } = SlateHyperscript;
+    // const { withHistory } = SlateHistory;
     // -*-*-*- TILL HERE -*-*-*-
+    const { FormHelperText } = window.MaterialUI.Core;
     const { useText, env } = B;
     const {
       actionVariableId: name,
