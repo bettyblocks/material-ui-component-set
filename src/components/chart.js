@@ -141,7 +141,11 @@
         </ResponsiveContainer>
       </div>
     ) : (
-      <p>Hello world</p>
+      <div className={classes.root}>
+        <ResponsiveContainer width="100%" height="100%">
+          {ChartContent}
+        </ResponsiveContainer>
+      </div>
     );
   })(),
   styles: (B) => (theme) => {
