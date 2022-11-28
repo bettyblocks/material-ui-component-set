@@ -13,13 +13,14 @@
       const characters =
         'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
       const charactersLength = characters.length;
-      for (let i = 0; i < length; i++) {
+      for (let i = 0; i < length; i += 1) {
         result += characters.charAt(
           Math.floor(Math.random() * charactersLength),
         );
       }
       return result;
     };
+
     const [groups, setGroups] = React.useState([
       {
         id: makeId(),
@@ -63,9 +64,9 @@
       console.log(groups);
     }, [groups]);
 
-    const filterProps = (properties, id) => {
+    const filterProps = (properties, id, kind) => {
       return Object.values(properties).filter((props) => {
-        return props.modelId === id;
+        return props.modelId === id && props.kind === kind;
       });
     };
 
@@ -110,9 +111,12 @@
 
     const updateGroupProperty = (groupId, tree, propertyToUpdate, newValue) => {
       return tree.map((group) => {
-        const foundGroup = group.groups.filter(
-          (row) => row.groupId === groupId,
-        );
+        if (group.id === groupId) {
+          const newGroup = group;
+          newGroup[propertyToUpdate] = newValue;
+          return newGroup;
+        }
+        const foundGroup = group.groups.filter((g) => g.id === groupId);
         if (foundGroup.length === 0) {
           group.groups = updateGroupProperty(
             groupId,
@@ -124,7 +128,7 @@
         }
         group.groups.map((grp) => {
           const newGroup = grp;
-          if (grp.groupId === groupId) {
+          if (grp.id === groupId) {
             newGroup[propertyToUpdate] = newValue;
           }
           return newGroup;
@@ -133,13 +137,108 @@
       });
     };
 
+    const addGroup = (tree, groupId) => {
+      const newGroup = {
+        id: makeId(),
+        operator: '_or',
+        groups: [],
+        rows: [
+          {
+            rowId: makeId(),
+            propertyValue: '',
+            operator: 'eq',
+            rightValue: '',
+          },
+        ],
+      };
+
+      return tree.map((group) => {
+        if (group.id === groupId) {
+          group.groups.push(newGroup);
+          return group;
+        }
+        group.groups = addGroup(group.groups, groupId);
+        return group;
+      });
+    };
+
+    const addGroupButton = (group) => {
+      return (
+        <button
+          type="button"
+          onClick={() => setGroups(addGroup(groups, group.id))}
+        >
+          add group
+        </button>
+      );
+    };
+
+    const addFilter = (tree, groupId) => {
+      const newRow = {
+        rowId: makeId(),
+        propertyValue: '',
+        operator: 'eq',
+        rightValue: '',
+      };
+
+      return tree.map((group) => {
+        if (group.id === groupId) {
+          group.rows.push(newRow);
+          return group;
+        }
+        group.groups = addFilter(group.groups, groupId);
+        return group;
+      });
+    };
+
+    const addFilterButton = (group) => {
+      return (
+        <button
+          type="button"
+          onClick={() => {
+            setGroups(addFilter(groups, group.id));
+          }}
+        >
+          add row
+        </button>
+      );
+    };
+
+    const deleteFilter = (tree, rowId) => {
+      return tree.map((group) => {
+        const foundRow = group.rows.filter((row) => row.rowId === rowId);
+        if (foundRow.length === 0) {
+          group.groups = deleteFilter(group.groups, rowId);
+          return group;
+        }
+        group.rows = group.rows.filter((row) => row.rowId !== rowId);
+        return group;
+      });
+    };
+
+    const deleteGroup = (tree, groupId) => {
+      return tree.map((group) => {
+        const foundGroup = group.groups.filter((g) => g.id === groupId);
+        if (foundGroup.length === 0) {
+          group.groups = deleteGroup(group.groups, groupId);
+          return group;
+        }
+        group.groups = group.groups.filter((grp) => grp.id !== groupId);
+        return group;
+      });
+    };
+
     const filterRow = (row) => {
       const { properties } = artifact;
-      const filteredProps = filterProps(properties, modelId);
+      const filteredProps = filterProps(properties, modelId, 'string');
       return (
         <div key={row.rowId} style={{ width: '100%', marginBottom: '10px' }}>
           <TextField
-            value={row.propertyValue}
+            value={
+              row.propertyValue === ''
+                ? filteredProps[0].name
+                : row.propertyValue
+            }
             select
             variant="outlined"
             style={{ marginRight: '10px' }}
@@ -191,77 +290,15 @@
               );
             }}
           />
+          <button
+            type="button"
+            onClick={() => {
+              setGroups(deleteFilter(groups, row.rowId));
+            }}
+          >
+            Delete
+          </button>
         </div>
-      );
-    };
-
-    const addGroup = (tree, groupId) => {
-      const newGroup = {
-        id: makeId(),
-        operator: '_or',
-        groups: [],
-        rows: [
-          {
-            rowId: makeId(),
-            propertyValue: '',
-            operator: 'eq',
-            rightValue: '',
-          },
-        ],
-      };
-
-      return tree.map((group) => {
-        if (group.id === groupId) {
-          group.groups.push(newGroup);
-          return group;
-        }
-        group.groups = addGroup(group.groups, groupId);
-        return group;
-      });
-    };
-
-    const addGroupButton = (group) => {
-      return (
-        <button
-          type="button"
-          onClick={() => {
-            // console.log(addGroup(groups, group.id));
-            setGroups(addGroup(groups, group.id));
-          }}
-        >
-          add group
-        </button>
-      );
-    };
-
-    const addFilter = (tree, groupId) => {
-      const newRow = {
-        rowId: makeId(),
-        propertyValue: '',
-        operator: 'eq',
-        rightValue: '',
-      };
-
-      return tree.map((group) => {
-        if (group.id === groupId) {
-          group.rows.push(newRow);
-          return group;
-        }
-        group.groups = addFilter(group.groups, groupId);
-        return group;
-      });
-    };
-
-    const addFilterButton = (group) => {
-      return (
-        <button
-          type="button"
-          onClick={() => {
-            setGroups(addFilter(groups, group.id));
-          }}
-        >
-          add row
-        </button>
       );
     };
 
@@ -282,7 +319,11 @@
                   disableElevation
                   variant="contained"
                   color={node.operator === '_and' ? 'primary' : 'default'}
-                  onClick={() => {}}
+                  onClick={() => {
+                    setGroups(
+                      updateGroupProperty(node.id, groups, 'operator', '_and'),
+                    );
+                  }}
                 >
                   AND
                 </Button>
@@ -290,13 +331,27 @@
                   disableElevation
                   variant="contained"
                   color={node.operator === '_or' ? 'primary' : 'default'}
+                  onClick={() => {
+                    setGroups(
+                      updateGroupProperty(node.id, groups, 'operator', '_or'),
+                    );
+                  }}
                 >
                   OR
                 </Button>
               </ButtonGroup>
               {addGroupButton(node)}
               {addFilterButton(node)}
-
+              {count !== 0 && (
+                <Button
+                  type="button"
+                  onClick={() => {
+                    setGroups(deleteGroup(groups, node.id));
+                  }}
+                >
+                  Del Group
+                </Button>
+              )}
               <hr />
               {node.rows.map((row) => filterRow(row, node.id))}
               {node.groups && renderTree(node.groups, count + 1)}
