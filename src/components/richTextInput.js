@@ -3,7 +3,6 @@
   type: 'BODY_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
-  // -*-*-*- NEEDS TO BE COMMENTED TO RUN LOCAL -*-*-*-
   dependencies: [
     {
       label: 'Slate',
@@ -52,7 +51,6 @@
     },
   ],
   jsx: (() => {
-    // -*-*-*- NEEDS TO BE COMMENTED TO RUN LOCAL -*-*-*-
     const {
       Slate: { createEditor, Editor, Text, Element, Transforms, Node },
       SlateReact: { Editable, withReact, Slate, useSlate },
@@ -63,7 +61,7 @@
         FormatAlignCenter,
         FormatAlignJustify,
         FormatAlignLeft,
-        FormatAlginRight,
+        FormatAlignRight,
         FormatItalic,
         FormatListBulleted,
         FormatListNumbered,
@@ -73,39 +71,22 @@
         FirstPage,
       },
     } = dependencies;
-    // -*-*-*- NEEDS TO BE COMMENTED TO RUN LOCAL -*-*-*-
     const { Icons } = window.MaterialUI;
-    // -*-*-*- NEEDS TO BE UNCOMMENTED TO RUN LOCAL -*-*-*-
-    // const { Icons: allIcons } = window.MaterialUI;
-    // -*-*-*- NEEDS TO BE COMMENTED TO RUN LOCAL -*-*-*-
     const extraIcons = {
-      ...FormatBold,
-      ...FormatAlignCenter,
-      ...FormatAlignJustify,
-      ...FormatAlignLeft,
-      ...FormatAlginRight,
-      ...FormatItalic,
-      ...FormatListBulleted,
-      ...FormatListNumbered,
-      ...FormatQuote,
-      ...FormatUnderlined,
-      ...StrikethroughS,
-      ...FirstPage,
+      FormatBold,
+      FormatAlignCenter,
+      FormatAlignJustify,
+      FormatAlignLeft,
+      FormatAlignRight,
+      FormatItalic,
+      FormatListBulleted,
+      FormatListNumbered,
+      FormatQuote,
+      FormatUnderlined,
+      StrikethroughS,
+      FirstPage,
     };
-    // -*-*-*- NEEDS TO BE COMMENTED TO RUN LOCAL -*-*-*-
     const allIcons = { ...Icons, ...extraIcons };
-    // -*-*-*- NEEDS TO BE UNCOMMENTED TO RUN LOCAL -*-*-*-
-    // const {
-    //   Slate: SlateP,
-    //   SlateReact,
-    //   SlateHistory,
-    //   SlateHyperscript,
-    // } = window.MaterialUI;
-    // const { Editable, withReact, Slate, useSlate } = SlateReact;
-    // const { createEditor, Editor, Text, Element, Transforms, Node } = SlateP;
-    // const { jsx } = SlateHyperscript;
-    // const { withHistory } = SlateHistory;
-    // -*-*-*- TILL HERE -*-*-*-
     const { FormHelperText } = window.MaterialUI.Core;
     const { useText, env } = B;
     const {
