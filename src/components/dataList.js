@@ -57,7 +57,7 @@
 
         const builderLayout = () => (
           <div data-component={dataComponentAttributeText || 'DataList'}>
-            {searchProperty && (
+            {searchProperty && searchProperty.type && searchProperty.id !== '' && (
               <div className={classes.header}>
                 <SearchComponent label={searchPropertyLabel} />
               </div>
@@ -412,17 +412,19 @@
 
           return (
             <div data-component={dataComponentAttributeText || 'DataContainer'}>
-              {searchProperty && (
-                <div className={classes.header}>
-                  <SearchComponent
-                    label={searchPropertyLabel}
-                    onChange={handleSearch}
-                    value={search}
-                    isTyping={isTyping}
-                    setIsTyping={setIsTyping}
-                  />
-                </div>
-              )}
+              {searchProperty &&
+                searchProperty.type &&
+                searchProperty.id !== '' && (
+                  <div className={classes.header}>
+                    <SearchComponent
+                      label={searchPropertyLabel}
+                      onChange={handleSearch}
+                      value={search}
+                      isTyping={isTyping}
+                      setIsTyping={setIsTyping}
+                    />
+                  </div>
+                )}
 
               {!isGrid ? (
                 Looper(results)
