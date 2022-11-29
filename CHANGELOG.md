@@ -1,3 +1,10 @@
+# [2.80.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.79.0...v2.80.0) (2022-11-29)
+
+
+### Features
+
+* add onBlur interaction trigger on text input ([8c2fcdc](https://github.com/bettyblocks/material-ui-component-set/commit/8c2fcdc1a70dab2ef4704a781fc53c97c66c5962))
+
 # [2.79.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.78.0...v2.79.0) (2022-11-29)
 
 
