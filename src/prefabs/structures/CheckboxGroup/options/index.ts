@@ -5,28 +5,25 @@ import {
   option,
   property,
   showIf,
+  text,
   toggle,
   variable,
 } from '@betty-blocks/component-sdk';
-
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 import { styles } from './styles';
 import { validation } from './validation';
 
-export const options = {
+export const checkboxGroupInputOptions = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
-    configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
   }),
   actionProperty: option('ACTION_JS_PROPERTY', {
     label: 'Property',
     value: '',
-    configuration: {
-      condition: hideIf('actionProperty', 'EQ', ''),
-    },
+    configuration: { condition: hideIf('actionProperty', 'EQ', '') },
   }),
-  label: variable('Label', { value: [] }),
+  label: variable('Label', { value: ['CheckboxGroup'] }),
   value: variable('Value', {
     value: [],
     configuration: {
@@ -68,12 +65,6 @@ export const options = {
       condition: hideIf('optionType', 'EQ', 'property'),
     },
   }),
-  labelProperty: property('Label for options', {
-    value: '',
-    configuration: {
-      condition: hideIf('optionType', 'EQ', 'property'),
-    },
-  }),
   order: buttongroup(
     'Sort order',
     [
@@ -87,8 +78,32 @@ export const options = {
       },
     },
   ),
-  renderCheckboxes: toggle('Add checkboxes', { value: false }),
+  labelProperty: property('Label for options', {
+    value: '',
+    configuration: {
+      condition: hideIf('optionType', 'EQ', 'property'),
+    },
+  }),
+  disabled: toggle('Disabled'),
+  helperText: variable('Helper text'),
+  position: buttongroup(
+    'Label Position',
+    [
+      ['Start', 'start'],
+      ['End', 'end'],
+      ['Top', 'top'],
+      ['Bottom', 'bottom'],
+    ],
+    { value: 'end' },
+  ),
+  row: toggle('Row', { value: true }),
+  fullWidth: toggle('Full Width', { value: true }),
+  type: text('Type', {
+    value: 'checkbox',
+    configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
+  }),
+
   ...validation,
   ...styles,
-  ...advanced,
+  ...advanced('CheckboxGroup'),
 };

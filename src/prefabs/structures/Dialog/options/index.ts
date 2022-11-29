@@ -1,11 +1,11 @@
 import { toggle, option } from '@betty-blocks/component-sdk';
-import { advanced } from '../../advanced';
+import { advanced } from './advanced';
 
 export const categories = [
   {
     label: 'Advanced Options',
     expanded: false,
-    members: ['dataComponentAttribute'],
+    members: ['dataComponentAttribute', 'invisible'],
   },
 ];
 
@@ -36,5 +36,5 @@ export const dialogOptions = {
     },
   }),
 
-  ...advanced('Dialog'),
+  ...advanced,
 };

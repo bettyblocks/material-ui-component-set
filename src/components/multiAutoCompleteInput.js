@@ -9,21 +9,22 @@
       Checkbox,
       Chip,
       CircularProgress,
-      TextField,
       FormControl,
       FormHelperText,
+      TextField,
     } = window.MaterialUI.Core;
     const {
+      Icon,
       InteractionScope,
       ModelProvider,
       env,
+      getIdProperty,
+      getModel,
       getProperty,
       useAllQuery,
       useFilter,
+      useRelation,
       useText,
-      Icon,
-      getModel,
-      getIdProperty,
     } = B;
     const {
       actionProperty,
@@ -60,8 +61,8 @@
       validationTooShort = [''],
       validationTypeMismatch = [''],
       validationValueMissing = [''],
-      variant,
       value: valueRaw,
+      variant,
     } = options;
     const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
     /*
@@ -102,10 +103,10 @@
     const helperTextResolved = useText(helperTextRaw);
 
     const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
-
+    const { contextModelId } = model;
     const labelProperty = getProperty(labelPropertyId) || {};
     const { modelId: propertyModelId } = modelProperty;
-    const modelId = propertyModelId || model || '';
+    const modelId = contextModelId || propertyModelId || model || '';
 
     const propertyModel = getModel(modelId);
     const defaultLabelProperty =
@@ -292,19 +293,24 @@
       }
     }
 
-    const parentProperty = getIdProperty(modelId);
-    const parentIdProperty = parentProperty ? parentProperty.id : '';
-    const parentIdValue = B.useProperty(parentIdProperty);
-    const queryWasResolvable = !!parentIdValue;
-
+    let parentIdValue;
     let valuesFilter = {};
-    let valueFilter;
-    // this should be merged into the final filter
-    if (modelProperty.id) {
+
+    // check if the value option has a relation with an id key
+    const relationPropertyId = valueRaw[0] && valueRaw[0].id;
+    const relationProperty = getProperty(relationPropertyId || '');
+
+    // check if the value option has a relational property
+    if (relationProperty) {
+      const parentProperty = getIdProperty(relationProperty.modelId);
+      const parentIdProperty = parentProperty ? parentProperty.id : '';
+      parentIdValue = B.useProperty(parentIdProperty);
+
+      // create a filter with the relation id and the parent id-property id
       valuesFilter = {
         _and: [
           {
-            [modelProperty.inverseAssociationId]: {
+            [relationProperty.inverseAssociationId]: {
               [parentIdProperty]: {
                 eq: {
                   id: [parentIdProperty],
@@ -315,11 +321,14 @@
           },
         ],
       };
-      valueFilter = useFilter(valuesFilter);
     }
 
+    const valueFilter = useFilter(valuesFilter);
+    const queryWasResolvable = !!parentIdValue;
+
     useAllQuery(
-      modelProperty.referenceModelId,
+      // use contextModelId when selecting a relation in the model option
+      contextModelId || model,
       {
         take: 20,
         rawFilter: valueFilter,
@@ -336,6 +345,11 @@
           }
         },
       },
+      /*
+       * don't execute if the optionType is a property like a list-property
+       * don't execute if not valid (no property, no model etc)
+       * don't execute when the filter cannot use the parent id-property (queryWasResolvable)
+       */
       optionType === 'property' || !valid || !queryWasResolvable,
     );
 
@@ -464,9 +478,9 @@
     }
 
     const {
-      loading,
+      loading: queryLoading,
       error,
-      data: { results } = {},
+      data: queryData,
       refetch,
     } = useAllQuery(
       actionProperty ? modelProperty.referenceModelId : modelId,
@@ -490,12 +504,23 @@
           }
         },
       },
-      optionType === 'property' || !valid,
+      !!contextModelId || optionType === 'property' || !valid,
     );
+
+    const { hasResults, data: relationData } = useRelation(
+      model,
+      {},
+      typeof model === 'string' || !model,
+    );
+
+    const data = hasResults ? relationData : queryData;
+    const loading = hasResults ? false : queryLoading;
 
     if (loading) {
       B.triggerEvent('onLoad', loading);
     }
+
+    const { results } = data || {};
 
     if (error && displayError) {
       valid = false;
