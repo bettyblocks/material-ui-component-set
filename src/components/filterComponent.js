@@ -4,8 +4,9 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env } = B;
-    const { MenuItem, TextField, Button, ButtonGroup } = window.MaterialUI.Core;
+    const { env, Icon } = B;
+    const { MenuItem, TextField, Button, ButtonGroup, IconButton } =
+      window.MaterialUI.Core;
     const { modelId } = options;
     const isDev = env === 'dev';
     const makeId = (length = 16) => {
@@ -25,21 +26,7 @@
       {
         id: makeId(),
         operator: '_and',
-        groups: [
-          {
-            id: makeId(),
-            operator: '_or',
-            groups: [],
-            rows: [
-              {
-                rowId: makeId(),
-                propertyValue: '',
-                operator: 'eq',
-                rightValue: '',
-              },
-            ],
-          },
-        ],
+        groups: [],
         rows: [
           {
             rowId: makeId(),
@@ -50,6 +37,8 @@
         ],
       },
     ]);
+
+    const [groupsOperator, setGroupsOperator] = React.useState('_and');
     const operatorList = [
       'eq',
       'neq',
@@ -82,6 +71,24 @@
       return {
         [prop]: {
           [op]: right,
+        },
+      };
+    };
+
+    const makeFilter = (tree) => {
+      return {
+        where: {
+          [groupsOperator]: tree.map((node) => {
+            return {
+              [node.operator]: node.rows.map((subnode) => {
+                return makeFilterChild(
+                  subnode.propertyValue,
+                  subnode.operator,
+                  subnode.rightValue,
+                );
+              }),
+            };
+          }),
         },
       };
     };
@@ -136,40 +143,117 @@
         return group;
       });
     };
-
-    const addGroup = (tree, groupId) => {
-      const newGroup = {
-        id: makeId(),
-        operator: '_or',
-        groups: [],
-        rows: [
-          {
-            rowId: makeId(),
-            propertyValue: '',
-            operator: 'eq',
-            rightValue: '',
-          },
-        ],
-      };
-
+    const deleteFilter = (tree, rowId) => {
       return tree.map((group) => {
-        if (group.id === groupId) {
-          group.groups.push(newGroup);
+        const foundRow = group.rows.filter((row) => row.rowId === rowId);
+        if (foundRow.length === 0) {
+          group.groups = deleteFilter(group.groups, rowId);
           return group;
         }
-        group.groups = addGroup(group.groups, groupId);
+        group.rows = group.rows.filter((row) => row.rowId !== rowId);
         return group;
       });
     };
 
-    const addGroupButton = (group) => {
+    const filterRow = (row, deletable) => {
+      const { properties } = artifact;
+      const filteredProps = filterProps(properties, modelId, 'string');
       return (
-        <button
+        <div key={row.rowId} style={{ width: '100%', marginBottom: '10px' }}>
+          <TextField
+            value={row.propertyValue}
+            select
+            size="small"
+            variant="outlined"
+            style={{ marginRight: '10px' }}
+            onChange={(e) => {
+              setGroups(
+                updateRowProperty(
+                  row.rowId,
+                  groups,
+                  'propertyValue',
+                  e.target.value,
+                ),
+              );
+            }}
+          >
+            {filteredProps.map((prop) => renderOption(prop.name, prop.label))}
+          </TextField>
+          <TextField
+            size="small"
+            value={row.operator}
+            select
+            variant="outlined"
+            style={{ marginRight: '10px' }}
+            onChange={(e) => {
+              setGroups(
+                updateRowProperty(
+                  row.rowId,
+                  groups,
+                  'operator',
+                  e.target.value,
+                ),
+              );
+            }}
+          >
+            {operatorList.map((op) => {
+              return renderOption(op, op);
+            })}
+          </TextField>
+          <TextField
+            size="small"
+            value={row.rightValue}
+            variant="outlined"
+            onChange={(e) => {
+              setGroups(
+                updateRowProperty(
+                  row.rowId,
+                  groups,
+                  'rightValue',
+                  e.target.value,
+                ),
+              );
+            }}
+          />
+          <IconButton
+            aria-label="delete"
+            disabled={!deletable}
+            onClick={() => {
+              setGroups(deleteFilter(groups, row.rowId));
+            }}
+          >
+            <Icon name="Delete" fontSize="small" />
+          </IconButton>
+        </div>
+      );
+    };
+
+    const addGroupButton = () => {
+      return (
+        <Button
           type="button"
-          onClick={() => setGroups(addGroup(groups, group.id))}
+          style={{ textTransform: 'none' }}
+          onClick={() => {
+            setGroups([
+              ...groups,
+              {
+                id: makeId(),
+                operator: '_or',
+                groups: [],
+                rows: [
+                  {
+                    rowId: makeId(),
+                    propertyValue: '',
+                    operator: 'eq',
+                    rightValue: '',
+                  },
+                ],
+              },
+            ]);
+          }}
         >
-          add group
-        </button>
+          Add group
+        </Button>
       );
     };
 
@@ -193,170 +277,125 @@
 
     const addFilterButton = (group) => {
       return (
-        <button
+        <Button
           type="button"
+          style={{ textTransform: 'none' }}
           onClick={() => {
             setGroups(addFilter(groups, group.id));
           }}
         >
-          add row
-        </button>
+          Add row
+        </Button>
       );
-    };
-
-    const deleteFilter = (tree, rowId) => {
-      return tree.map((group) => {
-        const foundRow = group.rows.filter((row) => row.rowId === rowId);
-        if (foundRow.length === 0) {
-          group.groups = deleteFilter(group.groups, rowId);
-          return group;
-        }
-        group.rows = group.rows.filter((row) => row.rowId !== rowId);
-        return group;
-      });
     };
 
     const deleteGroup = (tree, groupId) => {
-      return tree.map((group) => {
-        const foundGroup = group.groups.filter((g) => g.id === groupId);
-        if (foundGroup.length === 0) {
-          group.groups = deleteGroup(group.groups, groupId);
-          return group;
-        }
-        group.groups = group.groups.filter((grp) => grp.id !== groupId);
-        return group;
-      });
+      const newTree = tree.slice();
+      const foundIndex = newTree.findIndex((g) => g.id === groupId);
+
+      if (foundIndex > -1) {
+        newTree.splice(foundIndex, 1);
+      }
+      return newTree;
     };
 
-    const filterRow = (row) => {
-      const { properties } = artifact;
-      const filteredProps = filterProps(properties, modelId, 'string');
+    const operatorSwitch = (node) => {
       return (
-        <div key={row.rowId} style={{ width: '100%', marginBottom: '10px' }}>
-          <TextField
-            value={
-              row.propertyValue === ''
-                ? filteredProps[0].name
-                : row.propertyValue
-            }
-            select
-            variant="outlined"
-            style={{ marginRight: '10px' }}
-            onChange={(e) => {
-              console.log('group', groups);
-              setGroups(
-                updateRowProperty(
-                  row.rowId,
-                  groups,
-                  'propertyValue',
-                  e.target.value,
-                ),
-              );
-            }}
-          >
-            {filteredProps.map((prop) => renderOption(prop.name, prop.label))}
-          </TextField>
-          <TextField
-            value={row.operator}
-            select
-            variant="outlined"
-            style={{ marginRight: '10px' }}
-            onChange={(e) => {
-              setGroups(
-                updateRowProperty(
-                  row.rowId,
-                  groups,
-                  'operator',
-                  e.target.value,
-                ),
-              );
-            }}
-          >
-            {operatorList.map((op) => {
-              return renderOption(op, op);
-            })}
-          </TextField>
-          <TextField
-            value={row.rightValue}
-            variant="outlined"
-            onChange={(e) => {
-              setGroups(
-                updateRowProperty(
-                  row.rowId,
-                  groups,
-                  'rightValue',
-                  e.target.value,
-                ),
-              );
-            }}
-          />
-          <button
-            type="button"
+        <ButtonGroup size="small" className={classes.operator}>
+          <Button
+            disableElevation
+            variant="contained"
+            color={node.operator === '_and' ? 'primary' : 'default'}
             onClick={() => {
-              setGroups(deleteFilter(groups, row.rowId));
+              setGroups(
+                updateGroupProperty(node.id, groups, 'operator', '_and'),
+              );
             }}
           >
-            Delete
-          </button>
-        </div>
+            and
+          </Button>
+          <Button
+            disableElevation
+            variant="contained"
+            color={node.operator === '_or' ? 'primary' : 'default'}
+            onClick={() => {
+              setGroups(
+                updateGroupProperty(node.id, groups, 'operator', '_or'),
+              );
+            }}
+          >
+            or
+          </Button>
+        </ButtonGroup>
       );
     };
 
-    const renderTree = (tree, count = 0) => {
+    const renderTree = (tree) => {
       return (
         <>
-          {tree.map((node) => (
-            <div
-              key={node.id}
-              style={{
-                marginLeft: `${10 * count}px`,
-                border: '1px solid black',
-              }}
-            >
-              <div>{node.operator}</div>
-              <ButtonGroup size="small">
-                <Button
-                  disableElevation
-                  variant="contained"
-                  color={node.operator === '_and' ? 'primary' : 'default'}
-                  onClick={() => {
-                    setGroups(
-                      updateGroupProperty(node.id, groups, 'operator', '_and'),
-                    );
-                  }}
-                >
-                  AND
-                </Button>
-                <Button
-                  disableElevation
-                  variant="contained"
-                  color={node.operator === '_or' ? 'primary' : 'default'}
-                  onClick={() => {
-                    setGroups(
-                      updateGroupProperty(node.id, groups, 'operator', '_or'),
-                    );
-                  }}
-                >
-                  OR
-                </Button>
-              </ButtonGroup>
-              {addGroupButton(node)}
-              {addFilterButton(node)}
-              {count !== 0 && (
-                <Button
-                  type="button"
-                  onClick={() => {
-                    setGroups(deleteGroup(groups, node.id));
-                  }}
-                >
-                  Del Group
-                </Button>
+          {tree.map((node, index) => (
+            <>
+              <div key={node.id} className={classes.filter}>
+                {operatorSwitch(node)}
+                <div className={classes.deleteGroup}>
+                  <IconButton
+                    disabled={index === 0}
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      console.log('grps', groups);
+                      const newGroups = deleteGroup(groups, node.id);
+                      console.log('nodeid', node.id);
+                      console.log('newGrps', newGroups);
+                      setGroups(newGroups);
+                    }}
+                  >
+                    <Icon name="Delete" fontSize="small" />
+                  </IconButton>
+                </div>
+                {node.rows.map((row) => filterRow(row, node.rows.length > 1))}
+                {addFilterButton(node)}
+                {/* 
+              nested groups
+              {node.groups &&
+                node.groups.length > 1 &&
+                renderTree(node.groups, count + 1)} */}
+              </div>
+              {index + 1 < tree.length && (
+                <ButtonGroup size="small">
+                  <Button
+                    disableElevation
+                    variant="contained"
+                    color={groupsOperator === '_and' ? 'primary' : 'default'}
+                    onClick={() => {
+                      setGroupsOperator('_and');
+                    }}
+                  >
+                    and
+                  </Button>
+                  <Button
+                    disableElevation
+                    variant="contained"
+                    color={groupsOperator === '_or' ? 'primary' : 'default'}
+                    onClick={() => {
+                      setGroupsOperator('_or');
+                    }}
+                  >
+                    or
+                  </Button>
+                </ButtonGroup>
               )}
-              <hr />
-              {node.rows.map((row) => filterRow(row, node.id))}
-              {node.groups && renderTree(node.groups, count + 1)}
-            </div>
+            </>
           ))}
+          {addGroupButton(groups)}
+          <Button
+            onClick={(e) => {
+              e.preventDefault();
+              console.log(makeFilter(tree));
+            }}
+          >
+            Save
+          </Button>
         </>
       );
     };
@@ -483,8 +522,27 @@
             getSpacing(innerSpacing[3], 'Desktop'),
         },
       },
-      filtercomp: {
-        marginRight: '10px',
+      filter: {
+        boxShadow:
+          'rgb(102 109 133 / 5%) 0px -0.0625rem 0.0625rem 0px, rgb(102 109 133 / 20%) 0px 0.0625rem 0.25rem 0px',
+        borderRadius: '0.25rem',
+        position: 'relative',
+        padding: '0.5rem',
+        flexShrink: '0',
+        marginBottom: '15px',
+        marginTop: '15px',
+      },
+      operator: {
+        position: 'absolute',
+        margin: '0px',
+        top: '0.5rem',
+        right: '0.5rem',
+      },
+      deleteGroup: {
+        position: 'absolute',
+        margin: '0px',
+        top: '0.2rem',
+        right: '6.5rem',
       },
       background: {
         backgroundColor: ({
