@@ -1,3 +1,10 @@
+## [2.80.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.80.0...v2.80.1) (2022-11-29)
+
+
+### Bug Fixes
+
+* search bar doesn't disappear when deselecting the search option ([ae6f3ce](https://github.com/bettyblocks/material-ui-component-set/commit/ae6f3ce0e9115064f575018dbd65984c411c1884))
+
 # [2.80.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.79.0...v2.80.0) (2022-11-29)
 
 
