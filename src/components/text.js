@@ -40,6 +40,35 @@
       (linkToExternal && useText(linkToExternal)) || '';
     let linkedContent = parsedContent;
 
+    if (isDev && !isPristine) {
+      let alteredContent = '';
+      content.forEach((value) => {
+        if (typeof value === 'string' || value instanceof String) {
+          let split = value.split('\n');
+          if (split[0] === '') {
+            split.shift();
+          }
+          split = split.join('\n');
+          alteredContent += split;
+        } else {
+          alteredContent += `<div class='${classes.flex}'>{{<div class='${
+            classes.ellipsis
+          }'>${value.name.split('{{')[1].split('}}')[0]}</div>}}</div>`;
+        }
+      });
+      linkedContent = (
+        <Tag
+          dangerouslySetInnerHTML={{
+            __html: alteredContent.replace(/^\s+|\s+$/g, ''),
+          }}
+        />
+      );
+    } else if (isDev) {
+      linkedContent = (
+        <span className={classes.placeholder}>Empty content</span>
+      );
+    }
+
     if (hasLink || hasExternalLink) {
       linkedContent = (
         <Link
@@ -50,7 +79,7 @@
           component={hasLink ? BLink : undefined}
           endpoint={hasLink ? linkTo : undefined}
         >
-          {parsedContent}
+          {linkedContent}
         </Link>
       );
     }
@@ -66,10 +95,7 @@
         className={classes.content}
         data-component={useText(dataComponentAttribute) || 'Text'}
       >
-        {!isEmpty && linkedContent}
-        {isPristine && (
-          <span className={classes.placeholder}>Empty content</span>
-        )}
+        {linkedContent}
       </Tag>
     );
   })(),
@@ -135,6 +161,14 @@
           fontSize: ({ options: { type } }) =>
             style.getFontSize(type, 'Desktop'),
         },
+      },
+      ellipsis: {
+        textOverflow: 'ellipsis',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+      },
+      flex: {
+        display: 'flex',
       },
       link: {
         textDecoration: ['none', '!important'],
