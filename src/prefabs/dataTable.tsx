@@ -130,6 +130,7 @@ const beforeCreate = ({
 
 const reconfigure = {
   children: [DataTableColumn({})],
+  wizardType: 'PropertySelector',
 };
 
 export default makePrefab(
