@@ -1,3 +1,16 @@
+# [2.81.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.80.0...v2.81.0) (2022-11-30)
+
+
+### Bug Fixes
+
+* search bar doesn't disappear when deselecting the search option ([ae6f3ce](https://github.com/bettyblocks/material-ui-component-set/commit/ae6f3ce0e9115064f575018dbd65984c411c1884))
+
+
+### Features
+
+* improved reconfigure structure with wizard type ([8738b01](https://github.com/bettyblocks/material-ui-component-set/commit/8738b0149a6b21cd7da86cdbf7a2348ae46e3114))
+* reconfigure add child with prop ([1fe9d70](https://github.com/bettyblocks/material-ui-component-set/commit/1fe9d70a40edde3a55dc713ee5a2eec6ee8d0bd0))
+
 # [2.80.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.79.0...v2.80.0) (2022-11-29)
 
 
