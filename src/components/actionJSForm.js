@@ -1,7 +1,12 @@
 (() => ({
   name: 'Form',
   type: 'CONTAINER_COMPONENT',
-  allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
+  allowedTypes: [
+    'BODY_COMPONENT',
+    'CONTAINER_COMPONENT',
+    'CONTENT_COMPONENT',
+    'FORM_COMPONENT',
+  ],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { actionId, model, currentRecord, filter = {} } = options;

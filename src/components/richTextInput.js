@@ -1,6 +1,6 @@
 (() => ({
   name: 'RichTextInput',
-  type: 'BODY_COMPONENT',
+  type: 'FORM_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   dependencies: [
