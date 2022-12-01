@@ -51,9 +51,11 @@
           split = split.join('\n');
           alteredContent += split;
         } else {
-          alteredContent += `<div class='${classes.flex}'>{{<div class='${
-            classes.ellipsis
-          }'>${value.name.split('{{')[1].split('}}')[0]}</div>}}</div>`;
+          alteredContent += `<div class='${classes.inline}'><div class='${
+            classes.flex
+          }'>{{<div class='${classes.ellipsis}'>${
+            value.name.split('{{')[1].split('}}')[0]
+          }</div>}}</div></div>`;
         }
       });
       linkedContent = (
@@ -169,6 +171,9 @@
       },
       flex: {
         display: 'flex',
+      },
+      inline: {
+        display: 'inline-block',
       },
       link: {
         textDecoration: ['none', '!important'],
