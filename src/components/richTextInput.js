@@ -771,7 +771,8 @@
                 setAmountOfHeadersInSelection(Math.abs(anchor - focus) + 1);
               }
             }
-          } else if (amountOfHeadersInSelection !== 1) {
+          } else {
+            setAmountOfHeadersInSelection(0);
             setAmountOfHeadersInSelection(1);
           }
         }, 500);
