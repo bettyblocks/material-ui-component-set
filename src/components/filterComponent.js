@@ -1,7 +1,7 @@
 (() => ({
   name: 'FilterComponent',
   type: 'CONTAINER_COMPONENT',
-  allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
+  allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { env, Icon } = B;
@@ -40,22 +40,63 @@
 
     const [groupsOperator, setGroupsOperator] = React.useState('_and');
     const operatorList = [
-      'eq',
-      'neq',
-      'starts_with',
-      'ends_with',
-      'contains',
-      'matches',
-      'does_not_match',
+      {
+        operator: 'eq',
+        label: 'Equals',
+        kinds: ['*'],
+      },
+      {
+        operator: 'neq',
+        label: 'Not equals',
+        kinds: ['*'],
+      },
+      {
+        operator: 'starts_with',
+        label: 'Starts with',
+        kinds: ['string', 'email_address', 'serial'],
+      },
+      {
+        operator: 'ends_with',
+        label: 'Ends with',
+        kinds: ['string', 'email_address', 'serial'],
+      },
+      {
+        operator: 'contains',
+        label: 'Contains',
+        kinds: ['string', 'email_address', 'serial'],
+      },
+      {
+        operator: 'matches',
+        label: 'Matches',
+        kinds: ['string', 'email_address', 'serial'],
+      },
+      {
+        operator: 'does_not_match',
+        label: 'Does not match',
+        kinds: ['string', 'email_address', 'serial'],
+      },
+      {
+        operator: 'gt',
+        label: 'Greater than',
+        kinds: ['integer'],
+      },
+      {
+        operator: 'lt',
+        label: 'Lower than',
+        kinds: ['integer'],
+      },
     ];
 
-    useEffect(() => {
-      console.log(groups);
-    }, [groups]);
-
-    const filterProps = (properties, id, kind) => {
+    const filterProps = (properties, id) => {
       return Object.values(properties).filter((props) => {
-        return props.modelId === id && props.kind === kind;
+        return props.modelId === id;
+      });
+    };
+
+    const filterOperators = (kind, operators) => {
+      if (!kind) return operators;
+      return operators.filter((op) => {
+        return op.kinds.includes(kind) || op.kinds.includes('*');
       });
     };
 
@@ -97,6 +138,7 @@
       return tree.map((group) => {
         const foundRow = group.rows.filter((row) => row.rowId === rowId);
         if (foundRow.length === 0) {
+          // eslint-disable-next-line no-param-reassign
           group.groups = updateRowProperty(
             rowId,
             group.groups,
@@ -125,6 +167,7 @@
         }
         const foundGroup = group.groups.filter((g) => g.id === groupId);
         if (foundGroup.length === 0) {
+          // eslint-disable-next-line no-param-reassign
           group.groups = updateGroupProperty(
             groupId,
             group.groups,
@@ -147,17 +190,36 @@
       return tree.map((group) => {
         const foundRow = group.rows.filter((row) => row.rowId === rowId);
         if (foundRow.length === 0) {
+          // eslint-disable-next-line no-param-reassign
           group.groups = deleteFilter(group.groups, rowId);
           return group;
         }
+        // eslint-disable-next-line no-param-reassign
         group.rows = group.rows.filter((row) => row.rowId !== rowId);
         return group;
       });
     };
 
     const filterRow = (row, deletable) => {
+      // eslint-disable-next-line no-undef
       const { properties } = artifact;
       const filteredProps = filterProps(properties, modelId, 'string');
+      // set initial dropdown value
+      if (row.propertyValue === '') {
+        setGroups(
+          updateRowProperty(
+            row.rowId,
+            groups,
+            'propertyValue',
+            filteredProps[0].id,
+          ),
+        );
+      }
+      const selectedIndex = filteredProps.findIndex(
+        (prop) => prop.id === row.propertyValue,
+      );
+      const selectedProp = filteredProps[selectedIndex];
+
       return (
         <div key={row.rowId} style={{ width: '100%', marginBottom: '10px' }}>
           <TextField
@@ -165,7 +227,7 @@
             select
             size="small"
             variant="outlined"
-            style={{ marginRight: '10px' }}
+            style={{ marginRight: '10px', width: '33%' }}
             onChange={(e) => {
               setGroups(
                 updateRowProperty(
@@ -177,7 +239,7 @@
               );
             }}
           >
-            {filteredProps.map((prop) => renderOption(prop.name, prop.label))}
+            {filteredProps.map((prop) => renderOption(prop.id, prop.label))}
           </TextField>
           <TextField
             size="small"
@@ -196,13 +258,14 @@
               );
             }}
           >
-            {operatorList.map((op) => {
-              return renderOption(op, op);
+            {filterOperators(selectedProp.kind, operatorList).map((op) => {
+              return renderOption(op.operator, op.label);
             })}
           </TextField>
           <TextField
             size="small"
             value={row.rightValue}
+            style={{ width: '33%' }}
             variant="outlined"
             onChange={(e) => {
               setGroups(
@@ -233,6 +296,8 @@
         <Button
           type="button"
           style={{ textTransform: 'none' }}
+          variant="outlined"
+          classes={{ outlined: classes.addFilterButton }}
           onClick={() => {
             setGroups([
               ...groups,
@@ -252,7 +317,8 @@
             ]);
           }}
         >
-          Add group
+          <Icon name="Add" fontSize="small" />
+          Add filter group
         </Button>
       );
     };
@@ -270,6 +336,7 @@
           group.rows.push(newRow);
           return group;
         }
+        // eslint-disable-next-line no-param-reassign
         group.groups = addFilter(group.groups, groupId);
         return group;
       });
@@ -284,7 +351,8 @@
             setGroups(addFilter(groups, group.id));
           }}
         >
-          Add row
+          <Icon name="Add" fontSize="small" />
+          Add filter row
         </Button>
       );
     };
@@ -305,6 +373,7 @@
           <Button
             disableElevation
             variant="contained"
+            classes={{ containedPrimary: classes.highlight }}
             color={node.operator === '_and' ? 'primary' : 'default'}
             onClick={() => {
               setGroups(
@@ -317,6 +386,7 @@
           <Button
             disableElevation
             variant="contained"
+            classes={{ containedPrimary: classes.highlight }}
             color={node.operator === '_or' ? 'primary' : 'default'}
             onClick={() => {
               setGroups(
@@ -343,10 +413,7 @@
                     type="button"
                     onClick={(e) => {
                       e.preventDefault();
-                      console.log('grps', groups);
                       const newGroups = deleteGroup(groups, node.id);
-                      console.log('nodeid', node.id);
-                      console.log('newGrps', newGroups);
                       setGroups(newGroups);
                     }}
                   >
@@ -355,11 +422,6 @@
                 </div>
                 {node.rows.map((row) => filterRow(row, node.rows.length > 1))}
                 {addFilterButton(node)}
-                {/* 
-              nested groups
-              {node.groups &&
-                node.groups.length > 1 &&
-                renderTree(node.groups, count + 1)} */}
               </div>
               {index + 1 < tree.length && (
                 <ButtonGroup size="small">
@@ -367,6 +429,7 @@
                     disableElevation
                     variant="contained"
                     color={groupsOperator === '_and' ? 'primary' : 'default'}
+                    classes={{ containedPrimary: classes.highlight }}
                     onClick={() => {
                       setGroupsOperator('_and');
                     }}
@@ -377,6 +440,7 @@
                     disableElevation
                     variant="contained"
                     color={groupsOperator === '_or' ? 'primary' : 'default'}
+                    classes={{ containedPrimary: classes.highlight }}
                     onClick={() => {
                       setGroupsOperator('_or');
                     }}
@@ -391,10 +455,13 @@
           <Button
             onClick={(e) => {
               e.preventDefault();
-              console.log(makeFilter(tree));
+              B.triggerEvent('onSubmit', makeFilter(tree));
             }}
+            classes={{ contained: classes.saveButton }}
+            style={{ textTransform: 'none' }}
+            variant="contained"
           >
-            Save
+            Apply filter
           </Button>
         </>
       );
@@ -404,53 +471,21 @@
       return <div>{renderTree(groups)}</div>;
     };
 
-    return isDev ? <div className={classes.wrapper}>DEV</div> : filterBuilder();
+    return isDev ? (
+      <div className={`${classes.pristine} ${classes.root}`}>Filter</div>
+    ) : (
+      <div className={classes.root}>{filterBuilder()}</div>
+    );
   })(),
   styles: (B) => (theme) => {
-    const { color: colorFunc, env, mediaMinWidth, Styling, useText } = B;
-    const style = new Styling(theme);
+    const { env, Styling, mediaMinWidth } = B;
     const isDev = env === 'dev';
-    const getColorAlpha = (col, val) => colorFunc.alpha(col, val);
+    const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
 
     return {
-      wrapper: {
-        display: 'flex',
-        flexShrink: ({ options: { stretch } }) => (stretch ? 1 : 0),
-        flexGrow: ({ options: { stretch } }) => (stretch ? 1 : 0),
-        height: ({ options: { height } }) => height,
-        minHeight: 0,
-        flexBasis: 'auto',
-        flexDirection: 'column',
-        alignContent: 'stretch',
-        boxSizing: 'border-box',
-        position: ({ options: { position } }) =>
-          position === 'fixed' && isDev ? 'absolute' : position,
-        top: ({ options: { top } }) => top,
-        right: ({ options: { right } }) => right,
-        bottom: ({ options: { bottom } }) => bottom,
-        left: ({ options: { left } }) => left,
-        width: ({ options: { width } }) => width,
-        '& > div': {
-          flexShrink: [1, '!important'],
-          flexGrow: [1, '!important'],
-        },
-      },
       root: {
-        boxSizing: 'border-box',
-        height: ({ options: { height } }) => (isDev ? '100%' : height),
-        minHeight: 0,
-        position: ({ options: { position } }) =>
-          (!isDev && position) || 'unset',
-        top: ({ options: { top } }) => !isDev && top,
-        right: ({ options: { right } }) => !isDev && right,
-        bottom: ({ options: { bottom } }) => !isDev && bottom,
-        left: ({ options: { left } }) => !isDev && left,
-        width: ({ options: { width } }) => !isDev && width,
-        flexShrink: ({ options: { stretch } }) => (stretch ? 1 : 0),
-        flexGrow: ({ options: { stretch } }) => (stretch ? 1 : 0),
-        transition: 'opacity 0.5s ease-out',
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
         marginRight: ({ options: { outerSpacing } }) =>
@@ -459,14 +494,6 @@
           getSpacing(outerSpacing[2]),
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
-        paddingTop: ({ options: { innerSpacing } }) =>
-          getSpacing(innerSpacing[0]),
-        paddingRight: ({ options: { innerSpacing } }) =>
-          getSpacing(innerSpacing[1]),
-        paddingBottom: ({ options: { innerSpacing } }) =>
-          getSpacing(innerSpacing[2]),
-        paddingLeft: ({ options: { innerSpacing } }) =>
-          getSpacing(innerSpacing[3]),
         [`@media ${mediaMinWidth(600)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
@@ -476,14 +503,6 @@
             getSpacing(outerSpacing[2], 'Portrait'),
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Portrait'),
-          paddingTop: ({ options: { innerSpacing } }) =>
-            getSpacing(innerSpacing[0], 'Portrait'),
-          paddingRight: ({ options: { innerSpacing } }) =>
-            getSpacing(innerSpacing[1], 'Portrait'),
-          paddingBottom: ({ options: { innerSpacing } }) =>
-            getSpacing(innerSpacing[2], 'Portrait'),
-          paddingLeft: ({ options: { innerSpacing } }) =>
-            getSpacing(innerSpacing[3], 'Portrait'),
         },
         [`@media ${mediaMinWidth(960)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
@@ -494,14 +513,6 @@
             getSpacing(outerSpacing[2], 'Landscape'),
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Landscape'),
-          paddingTop: ({ options: { innerSpacing } }) =>
-            getSpacing(innerSpacing[0], 'Landscape'),
-          paddingRight: ({ options: { innerSpacing } }) =>
-            getSpacing(innerSpacing[1], 'Landscape'),
-          paddingBottom: ({ options: { innerSpacing } }) =>
-            getSpacing(innerSpacing[2], 'Landscape'),
-          paddingLeft: ({ options: { innerSpacing } }) =>
-            getSpacing(innerSpacing[3], 'Landscape'),
         },
         [`@media ${mediaMinWidth(1280)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
@@ -512,70 +523,78 @@
             getSpacing(outerSpacing[2], 'Desktop'),
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Desktop'),
-          paddingTop: ({ options: { innerSpacing } }) =>
-            getSpacing(innerSpacing[0], 'Desktop'),
-          paddingRight: ({ options: { innerSpacing } }) =>
-            getSpacing(innerSpacing[1], 'Desktop'),
-          paddingBottom: ({ options: { innerSpacing } }) =>
-            getSpacing(innerSpacing[2], 'Desktop'),
-          paddingLeft: ({ options: { innerSpacing } }) =>
-            getSpacing(innerSpacing[3], 'Desktop'),
         },
+        width: ({ options: { width } }) => !isDev && width,
+        height: ({ options: { height } }) => (isDev ? '100%' : height),
+        minHeight: 0,
+        backgroundColor: ({ options: { backgroundColor } }) => [
+          style.getColor(backgroundColor),
+          '!important',
+        ],
+      },
+      saveButton: {
+        backgroundColor: ({ options: { highlightColor } }) => [
+          style.getColor(highlightColor),
+          '!important',
+        ],
+        color: ({ options: { textColor } }) => [
+          style.getColor(textColor),
+          '!important',
+        ],
+        float: 'right',
+      },
+      addFilterButton: {
+        borderColor: ({ options: { highlightColor } }) => [
+          style.getColor(highlightColor),
+          '!important',
+        ],
+        border: '1px solid',
+      },
+      highlight: {
+        backgroundColor: ({ options: { highlightColor } }) => [
+          style.getColor(highlightColor),
+          '!important',
+        ],
+      },
+      icons: {
+        color: ({ options: { highlightColor } }) => [
+          style.getColor(highlightColor),
+          '!important',
+        ],
       },
       filter: {
-        boxShadow:
-          'rgb(102 109 133 / 5%) 0px -0.0625rem 0.0625rem 0px, rgb(102 109 133 / 20%) 0px 0.0625rem 0.25rem 0px',
-        borderRadius: '0.25rem',
-        position: 'relative',
-        padding: '0.5rem',
-        flexShrink: '0',
-        marginBottom: '15px',
+        border: '1px solid',
+        borderRadius: '10px',
+        borderColor: ({ options: { borderColor } }) => [
+          style.getColor(borderColor),
+          '!important',
+        ],
+        padding: '15px',
         marginTop: '15px',
+        marginBottom: '15px',
+        position: 'relative',
+      },
+      filterInput: {
+        width: '33%',
       },
       operator: {
         position: 'absolute',
+        height: '25px',
         margin: '0px',
-        top: '0.5rem',
+        top: '1.2rem',
         right: '0.5rem',
       },
       deleteGroup: {
         position: 'absolute',
         margin: '0px',
-        top: '0.2rem',
+        top: '0.6rem',
         right: '6.5rem',
       },
-      background: {
-        backgroundColor: ({
-          options: { backgroundColor, backgroundColorAlpha },
-        }) =>
-          backgroundColor === 'Transparent'
-            ? style.getColor(backgroundColor)
-            : getColorAlpha(
-                style.getColor(backgroundColor),
-                backgroundColorAlpha / 100,
-              ),
-        backgroundImage: ({ options: { backgroundUrl } }) => {
-          // eslint-disable-next-line react-hooks/rules-of-hooks
-          const image = useText(backgroundUrl);
-          return image && `url("${image}")`;
-        },
-        backgroundSize: ({ options: { backgroundSize } }) => backgroundSize,
-        backgroundPosition: ({ options: { backgroundPosition } }) =>
-          backgroundPosition,
-        backgroundRepeat: ({ options: { backgroundRepeat } }) =>
-          backgroundRepeat,
-        backgroundAttachment: ({ options: { backgroundAttachment } }) =>
-          backgroundAttachment,
-      },
-      border: {
-        borderWidth: ({ options: { borderWidth, borderStyle, borderColor } }) =>
-          borderWidth && borderStyle && borderColor ? borderWidth : 0,
-        borderStyle: ({ options: { borderStyle } }) => borderStyle,
-        borderColor: ({ options: { borderColor } }) =>
-          style.getColor(borderColor),
-        borderRadius: ({ options: { borderRadius } }) => borderRadius,
-      },
-      empty: {
+      pristine: {
+        borderWidth: '0.0625rem',
+        borderColor: '#AFB5C8',
+        borderStyle: 'dashed',
+        backgroundColor: '#F0F1F5',
         display: ['flex', '!important'],
         justifyContent: ['center', '!important'],
         alignItems: 'center',
@@ -583,12 +602,6 @@
         fontSize: '0.75rem',
         color: '#262A3A',
         textTransform: 'uppercase',
-      },
-      pristine: {
-        borderWidth: '0.0625rem',
-        borderColor: '#AFB5C8',
-        borderStyle: 'dashed',
-        backgroundColor: '#F0F1F5',
       },
     };
   },
