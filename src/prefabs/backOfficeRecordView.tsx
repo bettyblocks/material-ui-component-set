@@ -203,7 +203,7 @@ const interactions: PrefabInteraction[] = [
     sourceEvent: 'Click',
     ref: {
       targetComponentId: '#backofficeDetailview',
-      sourceComponentId: '#backToOverview',
+      sourceComponentId: '#backToRecordView',
     },
     type: InteractionType.Custom,
   },
@@ -212,7 +212,7 @@ const interactions: PrefabInteraction[] = [
     sourceEvent: 'Click',
     ref: {
       targetComponentId: '#updateRecord',
-      sourceComponentId: '#backToOverview',
+      sourceComponentId: '#backToRecordView',
     },
     type: InteractionType.Custom,
   },
@@ -370,7 +370,7 @@ const attributes = {
     'Within the detail view you can show and edit the specifications of a specific record.',
   detail:
     'Within the detail view you can show and edit the specifications of a specific record. Recommended to use in combination with the Back Office v2, overview.',
-  previewUrl: 'https://preview-dev.app/back-office-details',
+  previewUrl: 'https://preview.betty.app/back-office-record-view',
   previewImage:
     'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/f1a4017ab78f41f38d1882f6b6cef37a',
   interactions,
@@ -847,7 +847,7 @@ const drawerSidebar = DrawerBar(
                       options: {
                         ...buttonOptions,
                         buttonText: variable('Button text', {
-                          value: ['Model info'],
+                          value: ['First list item'],
                         }),
                       },
                       style: {
@@ -1257,7 +1257,7 @@ const drawerContainer = DrawerContainer(
                                   options: {
                                     ...textOptions,
                                     content: variable('Content', {
-                                      value: ['Details'],
+                                      value: ['Record view'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
                                     outerSpacing: sizes('Outer space', {
@@ -1491,7 +1491,7 @@ const drawerContainer = DrawerContainer(
                                   options: {
                                     ...breadcrumbItemOptions,
                                     breadcrumbContent: variable('Content', {
-                                      value: ['details'],
+                                      value: ['record view'],
                                     }),
                                   },
                                 },
@@ -2165,7 +2165,7 @@ const beforeCreate = ({
 
   return (
     <>
-      <Header onClose={close} title="Configure back office details" />
+      <Header onClose={close} title="Configure back office record view" />
       <BoxComp
         justify="center"
         margin={{ left: '2rem', top: '-1rem', bottom: '-1rem' }}
@@ -3311,17 +3311,6 @@ const beforeCreate = ({
               );
             }
 
-            const menuButton = treeSearch('#menuButton', newPrefab.structure);
-            if (!menuButton) throw new Error('No menu button found');
-            setOption(
-              menuButton,
-              'buttonText',
-              (opt: PrefabComponentOption) => ({
-                ...opt,
-                value: [`${model.label} info`],
-              }),
-            );
-
             const updateTitle = treeSearch('#updateTitle', newPrefab.structure);
             if (!updateTitle) throw new Error('No create title found');
             setOption(updateTitle, 'content', (opt: PrefabComponentOption) => ({
@@ -3695,7 +3684,7 @@ const prefabStructure = [
                               Button(
                                 {
                                   ref: {
-                                    id: '#backToOverview',
+                                    id: '#backToRecordView',
                                   },
                                   style: {
                                     overwrite: {
@@ -3720,7 +3709,7 @@ const prefabStructure = [
                                   options: {
                                     ...buttonOptions,
                                     buttonText: variable('Button text', {
-                                      value: ['Back to overview'],
+                                      value: ['Back to record view'],
                                     }),
                                     icon: icon('Icon', {
                                       value: 'ChevronLeft',

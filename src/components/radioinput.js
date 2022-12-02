@@ -26,7 +26,7 @@
       validationValueMissing = [''],
       value: prefabValue,
     } = options;
-    const { env, getProperty, useText, useAllQuery } = B;
+    const { env, getProperty, useText, useAllQuery, useRelation } = B;
     const {
       FormControl: MUIFormControl,
       FormControlLabel: MUIFormControlLabel,
@@ -50,10 +50,11 @@
     const helperTextResolved = useText(helperText);
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
+    const { contextModelId } = model;
 
     const {
       referenceModelId,
-      modelId = model,
+      modelId = contextModelId || model,
       kind,
       values = [],
     } = modelProperty;
@@ -136,7 +137,11 @@
 
     const completeFilter = deepMerge(filter, interactionFilters);
 
-    const { data, loading, refetch } = useAllQuery(
+    const {
+      data: queryData,
+      loading: queryLoading,
+      refetch,
+    } = useAllQuery(
       referenceModelId || modelId,
       {
         filter: completeFilter,
@@ -145,8 +150,17 @@
           ...(orderBy.id ? { sort: { relation: sort } } : {}),
         },
       },
-      !model,
+      !!contextModelId || !model,
     );
+
+    const { hasResults, data: relationData } = useRelation(
+      model,
+      {},
+      typeof model === 'string' || !model,
+    );
+
+    const data = hasResults ? relationData : queryData;
+    const loading = hasResults ? false : queryLoading;
 
     useEffect(() => {
       B.defineFunction('Refetch', () => refetch());

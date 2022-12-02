@@ -988,13 +988,6 @@ const beforeCreate = ({
           value: [`${model.label}s`],
         }));
 
-        const menuButton = treeSearch('#menuButton', newPrefab.structure);
-        if (!menuButton) throw new Error('No menu button found');
-        setOption(menuButton, 'buttonText', (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: [`${model.label} info`],
-        }));
-
         const createTitle = treeSearch('#createTitle', newPrefab.structure);
         if (!createTitle) throw new Error('No create title found');
         setOption(createTitle, 'content', (opt: PrefabComponentOption) => ({
@@ -1112,7 +1105,8 @@ const beforeCreate = ({
         <BoxComp>
           <Footer
             onClose={close}
-            onSave={stepNumber === stepper.stepAmount && stepper.onSave}
+            onSave={stepper.onSave}
+            canSave={stepNumber === stepper.stepAmount}
           />
         </BoxComp>
       </BoxComp>
@@ -1725,7 +1719,7 @@ const drawerSidebar = DrawerBar(
                       options: {
                         ...buttonOptions,
                         buttonText: variable('Button text', {
-                          value: ['Model info'],
+                          value: ['First list item'],
                         }),
                       },
                       style: {

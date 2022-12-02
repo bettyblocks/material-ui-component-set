@@ -1,13 +1,13 @@
 import {
-  option,
-  toggle,
-  text,
-  variable,
-  showIf,
-  hideIf,
   buttongroup,
-  model,
+  hideIf,
+  modelAndRelation,
+  option,
   property,
+  showIf,
+  text,
+  toggle,
+  variable,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 import { styles } from './styles';
@@ -24,7 +24,12 @@ export const checkboxGroupInputOptions = {
     configuration: { condition: hideIf('actionProperty', 'EQ', '') },
   }),
   label: variable('Label', { value: ['CheckboxGroup'] }),
-  value: variable('Value', { value: [] }),
+  value: variable('Value', {
+    value: [],
+    configuration: {
+      allowRelations: true,
+    },
+  }),
   optionType: buttongroup(
     'Option type',
     [
@@ -39,7 +44,7 @@ export const checkboxGroupInputOptions = {
       },
     },
   ),
-  model: model('Model', {
+  model: modelAndRelation('Model', {
     value: '',
     configuration: {
       condition: showIf('optionType', 'EQ', 'variable'),
@@ -55,7 +60,10 @@ export const checkboxGroupInputOptions = {
   }),
   orderBy: property('Order by for options', {
     value: '',
-    configuration: { condition: hideIf('optionType', 'EQ', 'property') },
+    configuration: {
+      dependsOn: 'model',
+      condition: hideIf('optionType', 'EQ', 'property'),
+    },
   }),
   order: buttongroup(
     'Sort order',
