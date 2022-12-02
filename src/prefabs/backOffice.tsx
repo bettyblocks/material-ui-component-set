@@ -3868,9 +3868,15 @@ const beforeCreate = ({
   } = helpers;
   const [modelId, setModelId] = React.useState('');
   const [model, setModel] = React.useState<ModelProps>();
-  const [properties, setProperties] = React.useState<Properties[]>([]);
+  const [dataTableProperties, setDataTableProperties] = React.useState<
+    Properties[]
+  >([]);
+  const [modelProperties, setModelProperties] = React.useState<Properties[]>(
+    [],
+  );
   const [modelValidation, setModelValidation] = React.useState(false);
-  const [propertiesValidation, setPropertiesValidation] = React.useState(false);
+  const [dataTablePropertiesValidation, setDataTablePropertiesValidation] =
+    React.useState(false);
   const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
   const { data } = useModelQuery({
     variables: { id: modelId },
@@ -4130,6 +4136,11 @@ const beforeCreate = ({
     onCompleted: ({ model: dataModel }: ModelQuery) => {
       setModel(dataModel);
       setIdProperty(dataModel.properties.find(({ name }) => name === 'id'));
+      setModelProperties(
+        dataModel.properties.filter(
+          (prop: Properties) => prop.kind !== 'PASSWORD',
+        ),
+      );
     },
   });
 
@@ -4251,9 +4262,9 @@ const beforeCreate = ({
             />
           </Field>
           <Field
-            label="Properties used in Backoffice"
+            label="Properties shown in the data table"
             error={
-              propertiesValidation && (
+              dataTablePropertiesValidation && (
                 <TextComp color="#e82600">
                   Selecting a property is required
                 </TextComp>
@@ -4262,7 +4273,7 @@ const beforeCreate = ({
           >
             <PropertiesSelector
               modelId={modelId}
-              value={properties}
+              value={dataTableProperties}
               disabledKinds={[
                 'BELONGS_TO',
                 'HAS_AND_BELONGS_TO_MANY',
@@ -4288,8 +4299,8 @@ const beforeCreate = ({
                 'ZIPCODE',
               ]}
               onChange={(value: Properties[]) => {
-                setProperties(value);
-                setPropertiesValidation(false);
+                setDataTableProperties(value);
+                setDataTablePropertiesValidation(false);
               }}
             />
           </Field>
@@ -4349,8 +4360,8 @@ const beforeCreate = ({
         setModelValidation(true);
         return;
       }
-      if (!properties || properties.length < 1) {
-        setPropertiesValidation(true);
+      if (!dataTableProperties || dataTableProperties.length < 1) {
+        setDataTablePropertiesValidation(true);
         return;
       }
 
@@ -4409,7 +4420,7 @@ const beforeCreate = ({
         'PRICE_EXPRESSION',
         'TIME',
       ];
-      properties.forEach((property) => {
+      dataTableProperties.forEach((property) => {
         let newProperty = property;
         if (property.kind && inheritFormatKinds.includes(property.kind)) {
           newProperty = {
@@ -4593,7 +4604,7 @@ const beforeCreate = ({
       dataTableComp.descendants.push(buttonColumn);
 
       // set create form
-      const filteredproperties = properties.filter(
+      const filteredproperties = modelProperties.filter(
         (prop: Properties) =>
           prop.label !== 'Created at' &&
           prop.label !== 'Updated at' &&
@@ -4878,7 +4889,9 @@ const beforeCreate = ({
           value: modelId,
         }),
       );
-      properties.map((prop) => detailColumn.descendants.push(makeDetail(prop)));
+      modelProperties.map((prop) =>
+        detailColumn.descendants.push(makeDetail(prop)),
+      );
 
       // set edit form
       const updateForm = treeSearch('#updateForm', newPrefab.structure);
