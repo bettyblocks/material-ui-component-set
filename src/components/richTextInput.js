@@ -5,8 +5,8 @@
   orientation: 'HORIZONTAL',
   dependencies: [
     {
-      label: 'SlateP',
-      package: 'npm:slate@0.82.1',
+      label: 'Slate',
+      package: 'npm:slate@0.86.0',
       imports: [
         'createEditor',
         'Editor',
@@ -17,8 +17,13 @@
       ],
     },
     {
+      label: 'SlateHistory',
+      package: 'npm:slate-history@0.66.0',
+      imports: ['withHistory'],
+    },
+    {
       label: 'SlateReact',
-      package: 'npm:slate-react@0.83.2',
+      package: 'npm:slate-react@0.86.0',
       imports: ['Editable', 'withReact', 'Slate', 'useSlate'],
     },
     {
@@ -27,21 +32,63 @@
       imports: ['jsx'],
     },
     {
-      label: 'SlateHistory',
-      package: 'npm:slate-history@0.66.0',
-      imports: ['withHistory'],
+      label: 'MuiExtraIcons',
+      package: 'npm:@material-ui/icons@4.11.2',
+      imports: [
+        'FormatBold',
+        'FormatAlignCenter',
+        'FormatAlignJustify',
+        'FormatAlignLeft',
+        'FormatAlignRight',
+        'FormatItalic',
+        'FormatListBulleted',
+        'FormatListNumbered',
+        'FormatQuote',
+        'FormatUnderlined',
+        'StrikethroughS',
+        'FirstPage',
+      ],
     },
   ],
   jsx: (() => {
+    const {
+      Slate: { createEditor, Editor, Text, Element, Transforms, Node },
+      SlateReact: { Editable, withReact, Slate, useSlate },
+      SlateHistory: { withHistory },
+      SlateHyperscript: { jsx },
+      MuiExtraIcons: {
+        FormatBold,
+        FormatAlignCenter,
+        FormatAlignJustify,
+        FormatAlignLeft,
+        FormatAlignRight,
+        FormatItalic,
+        FormatListBulleted,
+        FormatListNumbered,
+        FormatQuote,
+        FormatUnderlined,
+        StrikethroughS,
+        FirstPage,
+      },
+    } = dependencies;
     const { Icons } = window.MaterialUI;
-    const { SlateP, SlateReact, SlateHistory, SlateHyperscript } = dependencies;
+    const extraIcons = {
+      FormatBold,
+      FormatAlignCenter,
+      FormatAlignJustify,
+      FormatAlignLeft,
+      FormatAlignRight,
+      FormatItalic,
+      FormatListBulleted,
+      FormatListNumbered,
+      FormatQuote,
+      FormatUnderlined,
+      StrikethroughS,
+      FirstPage,
+    };
+    const allIcons = { ...Icons, ...extraIcons };
     const { FormHelperText } = window.MaterialUI.Core;
-    const { Editable, withReact, Slate, useSlate } = SlateReact;
-    const { createEditor, Editor, Text, Element, Transforms, Node } = SlateP;
-    const { jsx } = SlateHyperscript;
-    const { withHistory } = SlateHistory;
     const { useText, env } = B;
-
     const {
       actionVariableId: name,
       value: valueProp,
@@ -54,7 +101,8 @@
       showItalic,
       showUnderlined,
       showStrikethrough,
-      showCode,
+      showCodeInline,
+      showCodeBlock,
       showNumberedList,
       showBulletedList,
       showLeftAlign,
@@ -164,17 +212,6 @@
         Editor.addMark(editor, format, true);
       }
     };
-
-    function isEditorFocussed(editor) {
-      return editor.selection !== null;
-    }
-
-    function focusEditor(editor) {
-      Transforms.select(editor, {
-        anchor: Editor.start(editor, []),
-        focus: Editor.end(editor, []),
-      });
-    }
 
     const serialize = (node) => {
       if (Text.isText(node)) {
@@ -356,6 +393,21 @@
     );
     const fragment = deserialize(parsed.body);
 
+    if (isDev) {
+      useEffect(() => {
+        Transforms.delete(editor, {
+          at: {
+            anchor: Editor.start(editor, []),
+            focus: Editor.end(editor, []),
+          },
+        });
+        Transforms.insertNodes(editor, deserialize(parsed.body));
+        Transforms.delete(editor, {
+          at: Editor.start(editor, [0]),
+        });
+      }, [valueProp]);
+    }
+
     const handleListdepth = (listKind, key, event) => {
       const isList = isBlockActive(editor, listKind, 'type');
       if (isList) {
@@ -382,7 +434,11 @@
             Transforms.setNodes(editor, { type: 'paragraph' });
           }
         }
-        if (key === 'tab') {
+        if (
+          key === 'tab' &&
+          lastNode[1].length > 2 &&
+          lastNode[1][lastNode[1].length - 2] !== 0
+        ) {
           Transforms.setNodes(editor, {
             type: 'list-item',
             children: [{ text: '' }],
@@ -403,10 +459,45 @@
         return;
       }
 
+      if (
+        event.key === 'Backspace' &&
+        (isBlockActive(editor, 'numbered-list', 'type') ||
+          isBlockActive(editor, 'bulleted-list', 'type'))
+      ) {
+        const lastNode = Node.last(editor, editor.selection.focus.path);
+        if (lastNode[0].text !== '' && editor.selection.focus.offset === 0) {
+          if (isBlockActive(editor, 'numbered-list', 'type')) {
+            toggleBlock(editor, 'numbered-list');
+            return;
+          }
+          toggleBlock(editor, 'bulleted-list');
+          return;
+        }
+
+        if (
+          window.getSelection().toString().split('\n')[0] !==
+            lastNode[0].text &&
+          (lastNode[0].text !== '' || lastNode[1].length !== 3)
+        )
+          return;
+
+        Transforms.setNodes(editor, { type: 'none' });
+        if (isBlockActive(editor, 'numbered-list', 'type')) {
+          toggleBlock(editor, 'numbered-list');
+          return;
+        }
+
+        toggleBlock(editor, 'bulleted-list');
+        return;
+      }
+
       if (event.key === 'Enter') {
-        if (isBlockActive(editor, 'bulleted-list', 'type')) {
+        if (isBlockActive(editor, 'bulleted-list', 'type') && !event.shiftKey) {
           handleListdepth('bulleted-list', 'enter', event);
-        } else if (isBlockActive(editor, 'numbered-list', 'type')) {
+        } else if (
+          isBlockActive(editor, 'numbered-list', 'type') &&
+          !event.shiftKey
+        ) {
           handleListdepth('numbered-list', 'enter', event);
         } else if (isHeadingActive(editor)) {
           event.preventDefault();
@@ -482,9 +573,14 @@
         return;
       }
 
-      if (event.shiftKey && event.key === 's') {
-        event.preventDefault();
-        if (showStrikethrough) toggleMark(editor, 'strikethrough');
+      if (event.shiftKey) {
+        if (event.key === 's') {
+          event.preventDefault();
+          if (showStrikethrough) toggleMark(editor, 'strikethrough');
+        } else if (event.key === 'c') {
+          event.preventDefault();
+          if (showCodeInline) toggleMark(editor, 'code');
+        }
       }
 
       switch (event.key) {
@@ -592,18 +688,22 @@
       }
     });
 
-    const Button = React.forwardRef(({ active, icon, ...props }, ref) => {
-      const IconButton = Icons[icon];
-      return (
-        <IconButton
-          {...props}
-          ref={ref}
-          className={`${classes.toolbarButton} ${active ? 'active' : ''}`}
-        />
-      );
-    });
+    const Button = React.forwardRef(
+      ({ active, disable, icon, ...props }, ref) => {
+        const IconButton = allIcons[icon];
+        return (
+          <IconButton
+            {...props}
+            ref={ref}
+            className={`${classes.toolbarButton} ${disable ? 'disabled' : ''} ${
+              active ? 'active' : ''
+            }`}
+          />
+        );
+      },
+    );
 
-    function BlockButton({ format, icon }) {
+    function BlockButton({ format, icon, disable }) {
       const ownEditor = useSlate();
       return (
         <Button
@@ -614,20 +714,24 @@
           )}
           onMouseDown={(event) => {
             event.preventDefault();
+            if (disable) return;
             toggleBlock(ownEditor, format);
           }}
           icon={icon}
+          disable={disable}
         />
       );
     }
 
-    function MarkButton({ format, icon }) {
+    function MarkButton({ format, icon, disable }) {
       const ownEditor = useSlate();
       return (
         <Button
+          disable={disable}
           active={isMarkActive(ownEditor, format)}
           onMouseDown={(event) => {
             event.preventDefault();
+            if (disable) return;
             toggleMark(ownEditor, format);
           }}
           icon={icon}
@@ -637,7 +741,7 @@
 
     const HistoryButton = React.forwardRef(
       ({ action, icon, ...props }, ref) => {
-        const IconButton = Icons[icon];
+        const IconButton = allIcons[icon];
         return (
           <IconButton
             {...props}
@@ -653,53 +757,64 @@
       },
     );
 
-    const CodeButton = React.forwardRef(({ ...props }, ref) => {
-      const IconButton = Icons.Code;
-      const ownEditor = useSlate();
-      const activeMark = isMarkActive(ownEditor, 'code');
-      const activeBlock = isBlockActive(ownEditor, 'code');
+    const [amountOfHeadersInSelection, setAmountOfHeadersInSelection] =
+      useState(1);
+    let selectionTimeout;
 
-      return (
-        <IconButton
-          {...props}
-          ref={ref}
-          className={`${classes.toolbarButton} ${
-            activeMark || activeBlock ? 'active' : ''
-          }`}
-          onMouseDown={(event) => {
-            event.preventDefault();
-            if (!isEditorFocussed(ownEditor)) {
-              focusEditor(ownEditor);
-            }
-            if (editor.selection.focus !== null) {
-              const lastNode = Node.last(
-                ownEditor,
-                editor.selection.focus.path,
-              );
-              if (activeBlock || lastNode[0].text === '') {
-                toggleBlock(ownEditor, 'code');
-                return;
+    document.onselectionchange = () => {
+      const whitelistedTypes = [
+        'heading-one',
+        'heading-two',
+        'heading-three',
+        'heading-four',
+        'heading-five',
+        'heading-six',
+        'paragraph',
+      ];
+      if (document.getSelection()) {
+        clearTimeout(selectionTimeout);
+        selectionTimeout = setTimeout(() => {
+          if (!document.getSelection().isCollapsed) {
+            if (editor.selection !== null && editor.selection.anchor !== null) {
+              const anchor = editor.selection.anchor.path[0];
+              const focus = editor.selection.focus.path[0];
+              if (whitelistedTypes.includes(editor.children[anchor].type)) {
+                setAmountOfHeadersInSelection(Math.abs(anchor - focus) + 1);
               }
-              toggleMark(ownEditor, 'code');
             }
-          }}
-        />
-      );
-    });
+          } else if (amountOfHeadersInSelection !== 1) {
+            setAmountOfHeadersInSelection(1);
+          }
+        }, 500);
+      }
+    };
 
     function DropdownItem({ format, text, tag }) {
-      const ownEditor = useSlate();
       const Tag = tag;
-      if (isBlockActive(ownEditor, format, 'type')) {
-        if (activeStyleName !== text) setActiveStyleName(text);
+      if (
+        amountOfHeadersInSelection === 1 &&
+        isBlockActive(editor, format, 'type')
+      ) {
+        if (activeStyleName !== text) {
+          setActiveStyleName(text);
+        }
+      } else if (
+        isBlockActive(editor, format, 'type') &&
+        activeStyleName !== '\u00A0'
+      ) {
+        setActiveStyleName('\u00A0');
       }
       return (
         <li
           className={`${classes.dropdownItem} ${
-            isBlockActive(ownEditor, format, 'type') ? 'active' : ''
+            isBlockActive(editor, format, 'type') &&
+            amountOfHeadersInSelection === 1
+              ? 'active'
+              : ''
           }`}
-          onClick={() => {
-            toggleBlock(ownEditor, format);
+          onMouseDown={(event) => {
+            event.preventDefault();
+            toggleBlock(editor, format);
             setShowDropdown(false);
           }}
           aria-hidden="true"
@@ -745,14 +860,17 @@
           document.removeEventListener('touchstart', handler);
         };
       }, [showDropdown]);
-      const ArrowDown = Icons.KeyboardArrowDown;
+      const ArrowDown = allIcons.KeyboardArrowDown;
       return (
         <div className={classes.toolbarDropdown} ref={styleSelectorRef}>
           <button
             type="button"
             aria-haspopup="true"
             aria-label="Text styles"
-            onClick={() => setShowDropdown((prev) => !prev)}
+            onMouseDown={(event) => {
+              event.preventDefault();
+              setShowDropdown((prev) => !prev);
+            }}
             className={classes.dropdownButton}
           >
             <span className={classes.dropdownButtonText}>
@@ -794,19 +912,28 @@
                   {showStrikethrough && (
                     <MarkButton format="strikethrough" icon="StrikethroughS" />
                   )}
-                  {showCode && <CodeButton />}
                 </div>
+                {(showCodeInline || showCodeBlock) && (
+                  <div className={classes.toolbarSubGroup}>
+                    {showCodeInline && <MarkButton format="code" icon="Code" />}
+                    {showCodeBlock && (
+                      <BlockButton format="code" icon="DeveloperMode" />
+                    )}
+                  </div>
+                )}
                 <div className={classes.toolbarSubGroup}>
                   {showNumberedList && (
                     <BlockButton
                       format="numbered-list"
                       icon="FormatListNumbered"
+                      disable={isBlockActive(editor, 'bulleted-list')}
                     />
                   )}
                   {showBulletedList && (
                     <BlockButton
                       format="bulleted-list"
                       icon="FormatListBulleted"
+                      disable={isBlockActive(editor, 'numbered-list')}
                     />
                   )}
                 </div>
@@ -961,6 +1088,11 @@
             style.getColor(buttonActiveColor),
           ],
         },
+        '&.disabled': {
+          color: ({ options: { buttonDisabledColor } }) => [
+            style.getColor(buttonDisabledColor),
+          ],
+        },
       },
       toolbarDropdown: {
         position: 'relative',
@@ -980,6 +1112,9 @@
         '&.show': {
           display: 'block',
         },
+        overflow: 'overlay',
+        height: 'min-content',
+        maxHeight: ({ options: { height } }) => `calc(${height} - 44px)`,
       },
       dropdownButton: {
         display: 'inline-flex',

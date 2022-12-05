@@ -11,9 +11,9 @@
     },
   ],
   jsx: (() => {
-    const { env, useText } = B;
+    const { useText } = B;
     const { GoogleMap } = dependencies;
-    const isDev = env === 'dev';
+    console.log('dependencies?', dependencies);
     const { lat, long, markerText, zoom } = options;
 
     const { default: GoogleMapReact } = GoogleMap;
@@ -51,7 +51,7 @@
       zoom: txtZoom,
     };
 
-    return isDev ? (
+    return (
       <div className={classes.root}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: '' }}
@@ -61,8 +61,6 @@
           <Marker lat={txtLat} lng={txtLong} text={txtText} />
         </GoogleMapReact>
       </div>
-    ) : (
-      <p>This should be a map, but there is no JSX yet for that</p>
     );
   })(),
   styles: () => () => {
