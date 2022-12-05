@@ -73,6 +73,7 @@
     const autoLoadTakeAmountNum = parseInt(autoLoadTakeAmount, 10);
     const [rowsPerPage, setRowsPerPage] = useState(takeNum);
     const [search, setSearch] = useState('');
+    const [filterv2, setFilterV2] = useState({});
     const [searchTerm, setSearchTerm] = useState('');
     const [interactionSearchTerm, setInteractionSearchTerm] = useState('');
     const [interactionSearchProperty, setInteractionSearchProperty] =
@@ -174,6 +175,10 @@
       return value;
     };
 
+    B.defineFunction('Filter v2', (value) => {
+      setFilterV2(value.where);
+    });
+
     /**
      * @name Filter
      * @param {Property} property
@@ -213,7 +218,6 @@
 
     const isEmptyValue = (value) =>
       !value || (Array.isArray(value) && value.length === 0);
-
     const clauses = Object.entries(interactionFilter)
       .filter(([, { value }]) => !isEmptyValue(value))
       .map(([, { property, value }]) =>
@@ -232,7 +236,6 @@
           return { [field]: acc };
         }, {}),
       );
-
     interactionFilters =
       clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
 
@@ -248,13 +251,12 @@
           {},
         )
       : {};
-
     const newFilter =
       searchProperty && searchTerm !== ''
         ? deepMerge(filter, searchFilter)
         : filter;
 
-    const completeFilter = deepMerge(newFilter, interactionFilters);
+    const completeFilter = deepMerge(newFilter, interactionFilters, filterv2);
 
     const where = useFilter(completeFilter);
 

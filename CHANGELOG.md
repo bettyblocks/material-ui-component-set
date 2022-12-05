@@ -1,3 +1,53 @@
+# [2.82.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.81.0...v2.82.0) (2022-11-30)
+
+
+### Features
+
+* bumped sdk version lock ([c1e0c7d](https://github.com/bettyblocks/material-ui-component-set/commit/c1e0c7d7266bf23cd45067ab35c28fecdf145ae2))
+
+# [2.81.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.80.0...v2.81.0) (2022-11-30)
+
+
+### Bug Fixes
+
+* search bar doesn't disappear when deselecting the search option ([ae6f3ce](https://github.com/bettyblocks/material-ui-component-set/commit/ae6f3ce0e9115064f575018dbd65984c411c1884))
+
+
+### Features
+
+* improved reconfigure structure with wizard type ([8738b01](https://github.com/bettyblocks/material-ui-component-set/commit/8738b0149a6b21cd7da86cdbf7a2348ae46e3114))
+* reconfigure add child with prop ([1fe9d70](https://github.com/bettyblocks/material-ui-component-set/commit/1fe9d70a40edde3a55dc713ee5a2eec6ee8d0bd0))
+
+# [2.80.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.79.0...v2.80.0) (2022-11-29)
+
+
+### Features
+
+* add onBlur interaction trigger on text input ([8c2fcdc](https://github.com/bettyblocks/material-ui-component-set/commit/8c2fcdc1a70dab2ef4704a781fc53c97c66c5962))
+
+# [2.79.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.78.0...v2.79.0) (2022-11-29)
+
+
+### Bug Fixes
+
+* add default value query to checkbox group ([e8e6401](https://github.com/bettyblocks/material-ui-component-set/commit/e8e640112efa5ac0bcfe2a14baa32c4b4d94eab6))
+* add modelAndRelation to autocomplete ([e840ca0](https://github.com/bettyblocks/material-ui-component-set/commit/e840ca0f6d3ae961bbf14984a47e73d48e5bbe13))
+* add modelAndRelation to checkboxgroup ([389037b](https://github.com/bettyblocks/material-ui-component-set/commit/389037b9534d10c364e2c53d0e9e40aa2f93f304))
+* add modelAndRelation to multiautocomplete ([9fa31f6](https://github.com/bettyblocks/material-ui-component-set/commit/9fa31f6ca234fb8f6a4a73f04d9f45016fe19064))
+* add modelAndRelation to radio ([c7f2c80](https://github.com/bettyblocks/material-ui-component-set/commit/c7f2c80525393effc50f2506908077f7aac82379))
+* check if allResults are present before filtering ([ef82b9a](https://github.com/bettyblocks/material-ui-component-set/commit/ef82b9a50e10fc235e477709ffae8d48d306bb49))
+* don’t do default value query when option type is property ([d474675](https://github.com/bettyblocks/material-ui-component-set/commit/d474675438665a33d96e7f622ebd4d0ef36c2c0d))
+* hide order by option when no model selected ([3185476](https://github.com/bettyblocks/material-ui-component-set/commit/318547671c4386dea1e1d58a56093037e4ce6d85))
+* multiautocomplete/checkboxgroup default value ([ccec137](https://github.com/bettyblocks/material-ui-component-set/commit/ccec137b8df56acc8e93b692d0982eb05ee5e70c))
+* only check values if they appear in the complete set ([3692c80](https://github.com/bettyblocks/material-ui-component-set/commit/3692c80c544ddfc217f3310f8d1f235eb4ea0c7f))
+* only use value option for filtering default values ([17a61aa](https://github.com/bettyblocks/material-ui-component-set/commit/17a61aaeb1082234b3a6cf7679096568b130f47a))
+* remove check for all results ([03fab6b](https://github.com/bettyblocks/material-ui-component-set/commit/03fab6bc9f53e9e3fc11e6469fb4b06d68a88f36))
+
+
+### Features
+
+* model option to modelAndRelation option ([0e7fc4b](https://github.com/bettyblocks/material-ui-component-set/commit/0e7fc4bb5093ca3f6dc0a82e30d86fe4f71e640e))
+
 # [2.78.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.77.3...v2.78.0) (2022-11-24)
 
 
