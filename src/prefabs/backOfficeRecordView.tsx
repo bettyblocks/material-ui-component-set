@@ -56,6 +56,8 @@ import {
   FormErrorAlert,
   Divider,
   dataContainerOptions,
+  Subview,
+  subviewOptions,
 } from './structures';
 import { ModelProps, ModelQuery, IdPropertyProps } from './types';
 import { options as defaults } from './structures/ActionJSForm/options';
@@ -201,7 +203,7 @@ const interactions: PrefabInteraction[] = [
     sourceEvent: 'Click',
     ref: {
       targetComponentId: '#backofficeDetailview',
-      sourceComponentId: '#backToOverview',
+      sourceComponentId: '#backToRecordView',
     },
     type: InteractionType.Custom,
   },
@@ -210,7 +212,7 @@ const interactions: PrefabInteraction[] = [
     sourceEvent: 'Click',
     ref: {
       targetComponentId: '#updateRecord',
-      sourceComponentId: '#backToOverview',
+      sourceComponentId: '#backToRecordView',
     },
     type: InteractionType.Custom,
   },
@@ -365,10 +367,10 @@ const attributes = {
   icon: Icon.UpdateFormIcon,
   type: 'page',
   description:
-    'This page contains a detail view and all you need to update a record.',
+    'Within the detail view you can show and edit the specifications of a specific record.',
   detail:
-    'In this ready to use back office detail view, it is possible to display (read) and update a record.',
-  previewUrl: 'https://preview-dev.app/back-office-details',
+    'Within the detail view you can show and edit the specifications of a specific record. Recommended to use in combination with the Back Office v2, overview.',
+  previewUrl: 'https://preview.betty.app/back-office-record-view',
   previewImage:
     'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/f1a4017ab78f41f38d1882f6b6cef37a',
   interactions,
@@ -845,7 +847,7 @@ const drawerSidebar = DrawerBar(
                       options: {
                         ...buttonOptions,
                         buttonText: variable('Button text', {
-                          value: ['Model info'],
+                          value: ['First list item'],
                         }),
                       },
                       style: {
@@ -1255,7 +1257,7 @@ const drawerContainer = DrawerContainer(
                                   options: {
                                     ...textOptions,
                                     content: variable('Content', {
-                                      value: ['Details'],
+                                      value: ['Record view'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
                                     outerSpacing: sizes('Outer space', {
@@ -1489,7 +1491,7 @@ const drawerContainer = DrawerContainer(
                                   options: {
                                     ...breadcrumbItemOptions,
                                     breadcrumbContent: variable('Content', {
-                                      value: ['details'],
+                                      value: ['record view'],
                                     }),
                                   },
                                 },
@@ -1739,6 +1741,141 @@ const drawerContainer = DrawerContainer(
                                     ],
                                   ),
                                 ],
+                              ),
+                            ],
+                          ),
+                          Column(
+                            {
+                              options: {
+                                ...columnOptions,
+                                columnWidth: option('CUSTOM', {
+                                  label: 'Column width',
+                                  value: '4',
+                                  configuration: {
+                                    as: 'DROPDOWN',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      {
+                                        name: 'Fit content',
+                                        value: 'fitContent',
+                                      },
+                                      { name: 'Flexible', value: 'flexible' },
+                                      { name: 'Hidden', value: 'hidden' },
+                                      { name: '1', value: '1' },
+                                      { name: '2', value: '2' },
+                                      { name: '3', value: '3' },
+                                      { name: '4', value: '4' },
+                                      { name: '5', value: '5' },
+                                      { name: '6', value: '6' },
+                                      { name: '7', value: '7' },
+                                      { name: '8', value: '8' },
+                                      { name: '9', value: '9' },
+                                      { name: '10', value: '10' },
+                                      { name: '11', value: '11' },
+                                      { name: '12', value: '12' },
+                                    ],
+                                  },
+                                }),
+                                columnWidthTabletLandscape: option('CUSTOM', {
+                                  label: 'Column width (tablet landscape)',
+                                  value: '4',
+                                  configuration: {
+                                    as: 'DROPDOWN',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      {
+                                        name: 'Fit content',
+                                        value: 'fitContent',
+                                      },
+                                      { name: 'Flexible', value: 'flexible' },
+                                      { name: 'Hidden', value: 'hidden' },
+                                      { name: '1', value: '1' },
+                                      { name: '2', value: '2' },
+                                      { name: '3', value: '3' },
+                                      { name: '4', value: '4' },
+                                      { name: '5', value: '5' },
+                                      { name: '6', value: '6' },
+                                      { name: '7', value: '7' },
+                                      { name: '8', value: '8' },
+                                      { name: '9', value: '9' },
+                                      { name: '10', value: '10' },
+                                      { name: '11', value: '11' },
+                                      { name: '12', value: '12' },
+                                    ],
+                                  },
+                                }),
+                                columnWidthTabletPortrait: option('CUSTOM', {
+                                  value: '12',
+                                  label: 'Column width (tablet portrait)',
+                                  configuration: {
+                                    as: 'DROPDOWN',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      {
+                                        name: 'Fit content',
+                                        value: 'fitContent',
+                                      },
+                                      { name: 'Flexible', value: 'flexible' },
+                                      { name: 'Hidden', value: 'hidden' },
+                                      { name: '1', value: '1' },
+                                      { name: '2', value: '2' },
+                                      { name: '3', value: '3' },
+                                      { name: '4', value: '4' },
+                                      { name: '5', value: '5' },
+                                      { name: '6', value: '6' },
+                                      { name: '7', value: '7' },
+                                      { name: '8', value: '8' },
+                                      { name: '9', value: '9' },
+                                      { name: '10', value: '10' },
+                                      { name: '11', value: '11' },
+                                      { name: '12', value: '12' },
+                                    ],
+                                  },
+                                }),
+                                columnWidthMobile: option('CUSTOM', {
+                                  value: '12',
+                                  label: 'Column width (mobile)',
+                                  configuration: {
+                                    as: 'DROPDOWN',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      {
+                                        name: 'Fit content',
+                                        value: 'fitContent',
+                                      },
+                                      { name: 'Flexible', value: 'flexible' },
+                                      { name: 'Hidden', value: 'hidden' },
+                                      { name: '1', value: '1' },
+                                      { name: '2', value: '2' },
+                                      { name: '3', value: '3' },
+                                      { name: '4', value: '4' },
+                                      { name: '5', value: '5' },
+                                      { name: '6', value: '6' },
+                                      { name: '7', value: '7' },
+                                      { name: '8', value: '8' },
+                                      { name: '9', value: '9' },
+                                      { name: '10', value: '10' },
+                                      { name: '11', value: '11' },
+                                      { name: '12', value: '12' },
+                                    ],
+                                  },
+                                }),
+                                innerSpacing: sizes('Inner space', {
+                                  value: ['M', '0rem', 'M', 'M'],
+                                }),
+                              },
+                            },
+                            [
+                              Subview(
+                                {
+                                  options: {
+                                    ...subviewOptions,
+                                    backgroundColor: color('Background color', {
+                                      value: ThemeColor.WHITE,
+                                    }),
+                                  },
+                                },
+                                [],
                               ),
                             ],
                           ),
@@ -2028,7 +2165,7 @@ const beforeCreate = ({
 
   return (
     <>
-      <Header onClose={close} title="Configure back office details" />
+      <Header onClose={close} title="Configure back office record view" />
       <BoxComp
         justify="center"
         margin={{ left: '2rem', top: '-1rem', bottom: '-1rem' }}
@@ -2659,7 +2796,8 @@ const beforeCreate = ({
               (prop) =>
                 prop.label !== 'Created at' &&
                 prop.label !== 'Updated at' &&
-                prop.label !== 'Id',
+                prop.label !== 'Id' &&
+                prop.kind !== 'PASSWORD',
             );
 
             const result = await prepareAction(
@@ -2667,6 +2805,8 @@ const beforeCreate = ({
               idProperty,
               filteredproperties,
               'update',
+              undefined,
+              `Back office v2 - Update ${model.label}`,
             );
 
             const formInputStructure = (
@@ -3066,6 +3206,7 @@ const beforeCreate = ({
               undefined,
               'delete',
               undefined,
+              `Back office v2 - Delete ${model.label}`,
             );
             setOption(
               deleteForm,
@@ -3169,17 +3310,6 @@ const beforeCreate = ({
                 } as PrefabInteraction,
               );
             }
-
-            const menuButton = treeSearch('#menuButton', newPrefab.structure);
-            if (!menuButton) throw new Error('No menu button found');
-            setOption(
-              menuButton,
-              'buttonText',
-              (opt: PrefabComponentOption) => ({
-                ...opt,
-                value: [`${model.label} info`],
-              }),
-            );
 
             const updateTitle = treeSearch('#updateTitle', newPrefab.structure);
             if (!updateTitle) throw new Error('No create title found');
@@ -3554,7 +3684,7 @@ const prefabStructure = [
                               Button(
                                 {
                                   ref: {
-                                    id: '#backToOverview',
+                                    id: '#backToRecordView',
                                   },
                                   style: {
                                     overwrite: {
@@ -3579,7 +3709,7 @@ const prefabStructure = [
                                   options: {
                                     ...buttonOptions,
                                     buttonText: variable('Button text', {
-                                      value: ['Back to overview'],
+                                      value: ['Back to record view'],
                                     }),
                                     icon: icon('Icon', {
                                       value: 'ChevronLeft',
@@ -3896,7 +4026,7 @@ const prefabStructure = [
 ];
 
 export default makePrefab(
-  'Back office v2 - Detail view',
+  'Back office v2, record view',
   attributes,
   beforeCreate,
   prefabStructure,
