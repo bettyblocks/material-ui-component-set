@@ -51,11 +51,8 @@
           split = split.join('\n');
           alteredContent += split;
         } else {
-          alteredContent += `<div class='${classes.inline}'><div class='${
-            classes.flex
-          }'>{{<div class='${classes.ellipsis}'>${
-            value.name.split('{{')[1].split('}}')[0]
-          }</div>}}</div></div>`;
+          const propertyName = value.name.split('{{')[1].split('}}')[0];
+          alteredContent += `<span title='${propertyName}' class='${classes.inlineProperty}'>${propertyName}</span>`;
         }
       });
       linkedContent = (
@@ -164,16 +161,18 @@
             style.getFontSize(type, 'Desktop'),
         },
       },
-      ellipsis: {
+      inlineProperty: {
+        display: 'inline-block',
+        position: 'relative',
+        borderRadius: '4px',
+        background: '#efe8fd',
+        color: '#4927ad',
         textOverflow: 'ellipsis',
         overflow: 'hidden',
+        maxWidth: 'calc(100% - 10px)',
+        padding: '0 5px',
         whiteSpace: 'nowrap',
-      },
-      flex: {
-        display: 'flex',
-      },
-      inline: {
-        display: 'inline-block',
+        marginBottom: '-4px',
       },
       link: {
         textDecoration: ['none', '!important'],
