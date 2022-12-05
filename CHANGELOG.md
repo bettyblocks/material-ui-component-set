@@ -1,3 +1,10 @@
+## [2.82.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.82.0...v2.82.1) (2022-12-05)
+
+
+### Bug Fixes
+
+* password field does not set value in update form TMPLT-1853 ([38529e6](https://github.com/bettyblocks/material-ui-component-set/commit/38529e6689394ac26598744fe734f7889cd9611d))
+
 # [2.82.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.81.0...v2.82.0) (2022-11-30)
 
 
