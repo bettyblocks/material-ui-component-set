@@ -42,7 +42,7 @@ export const styles = {
   }),
 
   buttonColor: color('Button color', {
-    value: ThemeColor.ACCENT_1,
+    value: ThemeColor.DARK,
   }),
 
   buttonHoverColor: color('Button color (hover)', {
