@@ -21,7 +21,6 @@
       }
       return result;
     };
-
     const [groups, setGroups] = React.useState([
       {
         id: makeId(),
@@ -37,8 +36,11 @@
         ],
       },
     ]);
-
     const [groupsOperator, setGroupsOperator] = React.useState('_and');
+
+    const stringKinds = ['string', 'email_address', 'serial', 'zipcode'];
+    const numberKinds = [];
+
     const operatorList = [
       {
         operator: 'eq',
@@ -53,7 +55,7 @@
       {
         operator: 'starts_with',
         label: 'Starts with',
-        kinds: ['string', 'email_address', 'serial'],
+        kinds: ['string', 'email_address', 'serial', 'zipcode'],
       },
       {
         operator: 'ends_with',
@@ -86,20 +88,17 @@
         kinds: ['integer'],
       },
     ];
-
     const filterProps = (properties, id) => {
       return Object.values(properties).filter((props) => {
         return props.modelId === id;
       });
     };
-
     const filterOperators = (kind, operators) => {
       if (!kind) return operators;
       return operators.filter((op) => {
         return op.kinds.includes(kind) || op.kinds.includes('*');
       });
     };
-
     const renderOption = (key, value) => {
       return (
         <MenuItem key={key} value={key}>
@@ -107,7 +106,6 @@
         </MenuItem>
       );
     };
-
     const makeFilterChild = (prop, op, right) => {
       return {
         [prop]: {
@@ -115,7 +113,6 @@
         },
       };
     };
-
     const makeFilter = (tree) => {
       return {
         where: {
@@ -133,7 +130,6 @@
         },
       };
     };
-
     const updateRowProperty = (rowId, tree, propertyToUpdate, newValue) => {
       return tree.map((group) => {
         const foundRow = group.rows.filter((row) => row.rowId === rowId);
@@ -157,7 +153,6 @@
         return group;
       });
     };
-
     const updateGroupProperty = (groupId, tree, propertyToUpdate, newValue) => {
       return tree.map((group) => {
         if (group.id === groupId) {
@@ -199,10 +194,10 @@
         return group;
       });
     };
-
     const filterRow = (row, deletable) => {
       // eslint-disable-next-line no-undef
-      const { properties } = artifact;
+      const { properties } = artifact || {};
+
       const filteredProps = filterProps(properties, modelId, 'string');
       // set initial dropdown value
       if (row.propertyValue === '') {
@@ -220,6 +215,7 @@
       );
       const selectedProp = filteredProps[selectedIndex];
 
+      // eslint-disable-next-line consistent-return
       return (
         <div key={row.rowId} style={{ width: '100%', marginBottom: '10px' }}>
           <TextField
@@ -246,7 +242,7 @@
             value={row.operator}
             select
             variant="outlined"
-            style={{ marginRight: '10px' }}
+            style={{ marginRight: '10px', width: '15%' }}
             onChange={(e) => {
               setGroups(
                 updateRowProperty(
@@ -265,6 +261,7 @@
           <TextField
             size="small"
             value={row.rightValue}
+            type={selectedProp.kind === 'integer' ? 'number' : 'text'}
             style={{ width: '33%' }}
             variant="outlined"
             onChange={(e) => {
@@ -290,7 +287,6 @@
         </div>
       );
     };
-
     const addGroupButton = () => {
       return (
         <Button
@@ -322,7 +318,6 @@
         </Button>
       );
     };
-
     const addFilter = (tree, groupId) => {
       const newRow = {
         rowId: makeId(),
@@ -341,7 +336,6 @@
         return group;
       });
     };
-
     const addFilterButton = (group) => {
       return (
         <Button
@@ -356,7 +350,6 @@
         </Button>
       );
     };
-
     const deleteGroup = (tree, groupId) => {
       const newTree = tree.slice();
       const foundIndex = newTree.findIndex((g) => g.id === groupId);
@@ -366,7 +359,6 @@
       }
       return newTree;
     };
-
     const operatorSwitch = (node) => {
       return (
         <ButtonGroup size="small" className={classes.operator}>
@@ -399,7 +391,6 @@
         </ButtonGroup>
       );
     };
-
     const renderTree = (tree) => {
       return (
         <>
@@ -466,15 +457,10 @@
         </>
       );
     };
-
-    const filterBuilder = () => {
-      return <div>{renderTree(groups)}</div>;
-    };
-
     return isDev ? (
-      <div className={`${classes.pristine} ${classes.root}`}>Filter</div>
+      <div className={`${classes.root} ${classes.pristine}`}>Filter</div>
     ) : (
-      <div className={classes.root}>{filterBuilder()}</div>
+      <div className={classes.root}>{renderTree(groups)}</div>
     );
   })(),
   styles: (B) => (theme) => {
@@ -527,10 +513,6 @@
         width: ({ options: { width } }) => !isDev && width,
         height: ({ options: { height } }) => (isDev ? '100%' : height),
         minHeight: 0,
-        backgroundColor: ({ options: { backgroundColor } }) => [
-          style.getColor(backgroundColor),
-          '!important',
-        ],
       },
       saveButton: {
         backgroundColor: ({ options: { highlightColor } }) => [
@@ -573,6 +555,10 @@
         marginTop: '15px',
         marginBottom: '15px',
         position: 'relative',
+        backgroundColor: ({ options: { backgroundColor } }) => [
+          style.getColor(backgroundColor),
+          '!important',
+        ],
       },
       filterInput: {
         width: '33%',
