@@ -7,16 +7,7 @@
     {
       label: 'Recharts',
       package: 'npm:recharts@2.1.14',
-      imports: [
-        'LineChart',
-        'Line',
-        'XAxis',
-        'YAxis',
-        'CartesianGrid',
-        'Tooltip',
-        'Legend',
-        'ResponsiveContainer',
-      ],
+      imports: ['*'],
     },
   ],
   jsx: (() => {
