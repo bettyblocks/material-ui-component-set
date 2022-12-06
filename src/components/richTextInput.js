@@ -467,8 +467,7 @@
         (isBlockActive(editor, 'numbered-list', 'type') ||
           isBlockActive(editor, 'bulleted-list', 'type'))
       ) {
-        const lastNode = Node.last(editor, editor.selection.focus.path);
-        if (lastNode[0].text !== '' && editor.selection.focus.offset === 0) {
+        if (editor.selection.focus.offset === 0) {
           Transforms.setNodes(editor, { type: 'none' });
           if (
             editor.children[editor.selection.anchor.path[0]].children[0]
