@@ -54,7 +54,10 @@
 
     const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
     const { modelId: propertyModelId, referenceModelId } = modelProperty;
-    const modelId = referenceModelId || propertyModelId || model || '';
+    const { contextModelId } = model;
+
+    const modelId =
+      contextModelId || referenceModelId || propertyModelId || model || '';
 
     const idProperty = getIdProperty(modelId || '') || {};
     const isListProperty =
@@ -63,11 +66,12 @@
 
     const propertyModel = getModel(modelId);
 
-    const defaultLabelProperty = getProperty(
-      propertyModel && propertyModel.labelPropertyId
-        ? propertyModel.labelPropertyId
-        : '',
-    );
+    const defaultLabelProperty =
+      getProperty(
+        propertyModel && propertyModel.labelPropertyId
+          ? propertyModel.labelPropertyId
+          : '',
+      ) || {};
 
     const labelProperty =
       getProperty(labelPropertyId) || defaultLabelProperty || idProperty;
@@ -83,6 +87,30 @@
         valid = false;
       }
     }
+
+    /*
+     * Merges interaction filters with local filters
+     */
+    const mergeFilters = (...filters) => {
+      const isObject = (item) =>
+        item && typeof item === 'object' && !Array.isArray(item);
+
+      return filters.reduce((acc, object) => {
+        Object.entries(object).forEach(([key, filterValue]) => {
+          const accValue = acc[key];
+
+          if (Array.isArray(accValue) && Array.isArray(filterValue)) {
+            acc[key] = accValue.concat(filterValue);
+          } else if (isObject(accValue) && isObject(filterValue)) {
+            acc[key] = mergeFilters(accValue, filterValue);
+          } else {
+            acc[key] = filterValue;
+          }
+        });
+
+        return acc;
+      }, {});
+    };
 
     const getValues = () => {
       const value = defaultValueText || [];
@@ -141,58 +169,7 @@
           }
         },
       },
-      !model,
-    );
-
-    const parentProperty = getIdProperty(propertyModelId);
-    const parentIdProperty = parentProperty ? parentProperty.id : '';
-    const parentIdValue = B.useProperty(parentIdProperty);
-    const queryWasResolvable = !!parentIdValue;
-
-    let valuesFilter = {};
-    let valueFilter;
-    // this should be merged into the final filter
-    if (modelProperty.id && !isListProperty) {
-      valuesFilter = {
-        _and: [
-          {
-            [modelProperty.inverseAssociationId]: {
-              [parentIdProperty]: {
-                eq: {
-                  id: [parentIdProperty],
-                  type: 'PROPERTY',
-                },
-              },
-            },
-          },
-        ],
-      };
-      valueFilter = useFilter(valuesFilter);
-    }
-
-    useAllQuery(
-      modelProperty.referenceModelId,
-      {
-        take: 20,
-        rawFilter: valueFilter,
-        variables: {},
-        onCompleted(res) {
-          const hasResult = res && res.results && res.results.length > 0;
-          if (hasResult) {
-            const ids = res.results.map(({ id }) => id.toString());
-            setValues(ids);
-          }
-        },
-        onError(resp) {
-          if (!displayError) {
-            B.triggerEvent('onError', resp);
-          }
-        },
-      },
-      optionType === 'property' ||
-        !valid ||
-        !queryWasResolvable ||
-        isListProperty,
+      !!contextModelId || optionType === 'property' || !valid,
     );
 
     const { hasResults, data: relationData } = useRelation(
@@ -209,6 +186,69 @@
     }
 
     const { results } = data || {};
+
+    let parentIdValue;
+    let valuesFilter = {};
+
+    // check if the value option has a relation with an id property
+    const relationPropertyId = valueRaw[0] && valueRaw[0].id;
+    const relationProperty = getProperty(relationPropertyId || '');
+
+    // check if the value option has a relational property
+    if (relationProperty) {
+      const parentProperty = getIdProperty(relationProperty.modelId);
+      const parentIdProperty = parentProperty ? parentProperty.id : '';
+      parentIdValue = B.useProperty(parentIdProperty);
+
+      // create a filter with the relation id and the parent id-property id
+      valuesFilter = {
+        _and: [
+          {
+            [relationProperty.inverseAssociationId]: {
+              [parentIdProperty]: {
+                eq: {
+                  id: [parentIdProperty],
+                  type: 'PROPERTY',
+                },
+              },
+            },
+          },
+        ],
+      };
+    }
+
+    // merge the values filter with the options filter to get the values in range of the complete set
+    const valueFilter = useFilter(mergeFilters(valuesFilter, filter));
+    const queryWasResolvable = !!parentIdValue;
+
+    useAllQuery(
+      // use contextModelId when selecting a relation in the model option
+      contextModelId || model,
+      {
+        take: 50,
+        rawFilter: valueFilter,
+        variables: {},
+        onCompleted(res) {
+          const hasResult = res && res.results && res.results.length > 0;
+          if (hasResult) {
+            // get the id's of the filtered results to set as values
+            const ids = res.results.map(({ id }) => id.toString());
+            setValues(ids);
+          }
+        },
+        onError(resp) {
+          if (!displayError) {
+            B.triggerEvent('onError', resp);
+          }
+        },
+      },
+      /*
+       * don't execute if the optionType is a property like a list-property
+       * don't execute if not valid (no property, no model etc)
+       * don't execute when the filter cannot use the parent id-property (queryWasResolvable)
+       */
+      optionType === 'property' || !valid || !queryWasResolvable,
+    );
 
     B.defineFunction('Refetch', () => refetch());
     B.defineFunction('Reset', () => setValues(defaultValueText || []));
@@ -277,9 +317,12 @@
       if (isDev) return renderCheckbox('Placeholder', false);
       if (loading) return <span>Loading...</span>;
       if (err && displayError) return <span>{err.message}</span>;
-      return results.map((item) =>
-        renderCheckbox(item[labelProperty.name], `${item[valueProperty.name]}`),
-      );
+      if (!loading && results) {
+        return results.map((item) => {
+          return renderCheckbox(item[labelProperty.name], `${item.id}`);
+        });
+      }
+      return <span>No results</span>;
     };
 
     useEffect(() => {

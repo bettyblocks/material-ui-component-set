@@ -1,7 +1,7 @@
 import {
   buttongroup,
   hideIf,
-  model,
+  modelAndRelation,
   option,
   property,
   showIf,
@@ -27,7 +27,12 @@ export const options = {
     },
   }),
   label: variable('Label', { value: [] }),
-  value: variable('Value', { value: [] }),
+  value: variable('Value', {
+    value: [],
+    configuration: {
+      allowRelations: true,
+    },
+  }),
   optionType: buttongroup(
     'Option type',
     [
@@ -42,7 +47,7 @@ export const options = {
       },
     },
   ),
-  model: model('Model', {
+  model: modelAndRelation('Model', {
     value: '',
     configuration: {
       condition: showIf('optionType', 'EQ', 'variable'),
@@ -58,7 +63,10 @@ export const options = {
   }),
   orderBy: property('Order by for options', {
     value: '',
-    configuration: { condition: hideIf('optionType', 'EQ', 'property') },
+    configuration: {
+      dependsOn: 'model',
+      condition: hideIf('optionType', 'EQ', 'property'),
+    },
   }),
   labelProperty: property('Label for options', {
     value: '',

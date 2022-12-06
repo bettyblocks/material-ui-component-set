@@ -1,12 +1,12 @@
 import {
-  hideIf,
-  showIf,
-  option,
-  variable,
   buttongroup,
-  property,
   filter,
-  model,
+  hideIf,
+  modelAndRelation,
+  option,
+  property,
+  showIf,
+  variable,
 } from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
 import { validation } from './validation';
@@ -43,7 +43,7 @@ export const options = {
       },
     },
   ),
-  model: model('Model', {
+  model: modelAndRelation('Model', {
     value: '',
     configuration: {
       condition: showIf('optionType', 'EQ', 'variable'),
@@ -59,7 +59,10 @@ export const options = {
 
   orderBy: property('Order by', {
     value: '',
-    configuration: { condition: hideIf('optionType', 'EQ', 'property') },
+    configuration: {
+      dependsOn: 'model',
+      condition: hideIf('optionType', 'EQ', 'property'),
+    },
   }),
 
   labelProperty: property('Label for options', {
