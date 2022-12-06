@@ -683,7 +683,6 @@
     const Button = React.forwardRef(
       ({ active, disable, icon, ...props }, ref) => {
         const IconButton = allIcons[icon];
-        console.log({ IconButton, icon, allIcons });
         if (IconButton) {
           return (
             <IconButton
