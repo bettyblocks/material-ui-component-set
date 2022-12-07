@@ -259,7 +259,6 @@
       const { properties } = artifact || {};
 
       const filteredProps = filterProps(properties, modelId);
-      console.log(filteredProps);
       // set initial dropdown value
       if (row.propertyValue === '') {
         setGroups(
@@ -511,7 +510,6 @@
               e.preventDefault();
               if (tree) {
                 B.triggerEvent('onSubmit', makeFilter(tree));
-                console.log(makeFilter(tree));
               }
             }}
             classes={{ contained: classes.saveButton }}
