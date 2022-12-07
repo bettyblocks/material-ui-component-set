@@ -1,7 +1,7 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { Configuration } from '../Configuration';
 import {
-  FilterComponentOptions as defaultOptions,
+  filterComponentOptions as defaultOptions,
   // categories as defaultCategories,
 } from './options';
 

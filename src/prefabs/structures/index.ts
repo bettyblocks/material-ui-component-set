@@ -31,6 +31,7 @@ import { Drawer } from './Drawer';
 import { DrawerBar } from './DrawerBar';
 import { DrawerContainer } from './DrawerContainer';
 import { ExpansionPanel } from './ExpansionPanel';
+import { FilterComponent } from './FilterComponent';
 import { Grid } from './Grid';
 import { Icon } from './Icon';
 import { List } from './List';
@@ -59,11 +60,9 @@ import { Tabs } from './Tabs';
 import { Text } from './Text';
 import { TextArea } from './TextArea';
 import { TextInput } from './TextInput';
-import { FilterComponent } from './FilterComponent';
 
 // Import all prefab options here
 import { options as actionJSButtonOptions } from './ActionJSButton/options';
-import { FilterComponentOptions } from './FilterComponent/options';
 import { alertOptions } from './Alert/options';
 import { appBarOptions } from './Appbar/options';
 import { options as autocompleteInputOptions } from './AutocompleteInput/options';
@@ -95,6 +94,7 @@ import { drawerOptions } from './Drawer/options';
 import { drawerBarOptions } from './DrawerBar/options';
 import { drawerContainerOptions } from './DrawerContainer/options';
 import { expansionPanelOptions } from './ExpansionPanel/options';
+import { filterComponentOptions } from './FilterComponent/options';
 import { gridOptions } from './Grid/options';
 import { iconOptions } from './Icon/options';
 import { listOptions } from './List/options';
@@ -157,6 +157,7 @@ export {
   DrawerBar,
   DrawerContainer,
   ExpansionPanel,
+  FilterComponent,
   FormErrorAlert,
   FormSuccessAlert,
   Grid,
@@ -187,7 +188,6 @@ export {
   Text,
   TextArea,
   TextInput,
-  FilterComponent,
   actionJSButtonOptions,
   alertOptions,
   appBarOptions,
@@ -220,6 +220,7 @@ export {
   drawerBarOptions,
   drawerContainerOptions,
   expansionPanelOptions,
+  filterComponentOptions,
   gridOptions,
   iconOptions,
   listOptions,
@@ -248,5 +249,4 @@ export {
   textOptions,
   textAreaOptions,
   textInputOptions,
-  FilterComponentOptions,
 };
