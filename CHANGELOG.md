@@ -1,3 +1,11 @@
+## [2.82.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.82.1...v2.82.2) (2022-12-07)
+
+
+### Bug Fixes
+
+* show properties in reconfigure popup ([983f732](https://github.com/bettyblocks/material-ui-component-set/commit/983f7320e83cc521de8be30141f6bdeddc797989))
+* use new component-sdk ([4cf9695](https://github.com/bettyblocks/material-ui-component-set/commit/4cf969550a6b2d0c833303b4d8fc30d1fff508b0))
+
 ## [2.82.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.82.0...v2.82.1) (2022-12-05)
 
 
