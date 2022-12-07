@@ -55,6 +55,7 @@ const beforeCreate = ({
     cloneStructure,
     createUuid,
     makeBettyUpdateInput,
+    makeBettyInput,
     prepareAction,
     getPageAuthenticationProfileId,
     getPageName,
@@ -508,7 +509,7 @@ const beforeCreate = ({
                 break;
               case PropertyKind.PASSWORD:
                 structure.descendants.push(
-                  makeBettyUpdateInput(
+                  makeBettyInput(
                     BettyPrefabs.PASSWORD,
                     model,
                     property,
