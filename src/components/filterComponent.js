@@ -38,8 +38,31 @@
     ]);
     const [groupsOperator, setGroupsOperator] = React.useState('_and');
 
-    const stringKinds = ['string', 'email_address', 'serial', 'zipcode'];
-    const numberKinds = [];
+    const stringKinds = [
+      'string',
+      'string_expression',
+      'email_address',
+      'serial',
+      'zipcode',
+      'url',
+      'text',
+      'text_expression',
+    ];
+    const numberKinds = [
+      'count',
+      'decimal',
+      'decimal_expression',
+      'float',
+      'integer',
+      'integer_expression',
+      'price',
+      'price_expression',
+      'phone_number',
+    ];
+
+    // const booleanKinds = ['boolean', 'boolean_expression'];
+
+    const relationKinds = ['has_and_belongs_to_many', 'has_many', 'has_one'];
 
     const operatorList = [
       {
@@ -49,48 +72,68 @@
       },
       {
         operator: 'neq',
-        label: 'Not equals',
+        label: 'Is not equal to',
+        kinds: ['*'],
+      },
+      {
+        operator: 'ex',
+        label: 'Exists',
+        kinds: ['*'],
+      },
+      {
+        operator: 'nex',
+        label: 'Not exists',
         kinds: ['*'],
       },
       {
         operator: 'starts_with',
         label: 'Starts with',
-        kinds: ['string', 'email_address', 'serial', 'zipcode'],
+        kinds: [...stringKinds],
       },
       {
         operator: 'ends_with',
         label: 'Ends with',
-        kinds: ['string', 'email_address', 'serial'],
+        kinds: [...stringKinds],
       },
       {
-        operator: 'contains',
+        operator: 'regex',
         label: 'Contains',
-        kinds: ['string', 'email_address', 'serial'],
+        kinds: [...stringKinds],
       },
       {
         operator: 'matches',
-        label: 'Matches',
-        kinds: ['string', 'email_address', 'serial'],
+        label: 'Matches with',
+        kinds: [...stringKinds],
       },
       {
         operator: 'does_not_match',
         label: 'Does not match',
-        kinds: ['string', 'email_address', 'serial'],
+        kinds: [...stringKinds],
       },
       {
         operator: 'gt',
         label: 'Greater than',
-        kinds: ['integer'],
+        kinds: [...numberKinds],
       },
       {
         operator: 'lt',
         label: 'Lower than',
-        kinds: ['integer'],
+        kinds: [...numberKinds],
+      },
+      {
+        operator: 'gteq',
+        label: 'Greater than or equal',
+        kinds: [...numberKinds],
+      },
+      {
+        operator: 'lteq',
+        label: 'Lower than or equal',
+        kinds: [...numberKinds],
       },
     ];
     const filterProps = (properties, id) => {
-      return Object.values(properties).filter((props) => {
-        return props.modelId === id;
+      return Object.values(properties).filter((prop) => {
+        return prop.modelId === id && !relationKinds.includes(prop.kind);
       });
     };
     const filterOperators = (kind, operators) => {
@@ -107,11 +150,28 @@
       );
     };
     const makeFilterChild = (prop, op, right) => {
-      return {
-        [prop]: {
-          [op]: right,
-        },
-      };
+      switch (op) {
+        case 'ex':
+          return {
+            [prop]: {
+              exists: true,
+            },
+          };
+
+        case 'nex':
+          return {
+            [prop]: {
+              does_not_exist: 0,
+            },
+          };
+
+        default:
+          return {
+            [prop]: {
+              [op]: right,
+            },
+          };
+      }
     };
     const makeFilter = (tree) => {
       return {
@@ -198,7 +258,8 @@
       // eslint-disable-next-line no-undef
       const { properties } = artifact || {};
 
-      const filteredProps = filterProps(properties, modelId, 'string');
+      const filteredProps = filterProps(properties, modelId);
+      console.log(filteredProps);
       // set initial dropdown value
       if (row.propertyValue === '') {
         setGroups(
@@ -214,8 +275,8 @@
         (prop) => prop.id === row.propertyValue,
       );
       const selectedProp = filteredProps[selectedIndex];
-
-      // eslint-disable-next-line consistent-return
+      const isNumberType = numberKinds.includes(selectedProp.kind);
+      const isSpecialType = row.operator === 'ex' || row.operator === 'nex';
       return (
         <div key={row.rowId} style={{ width: '100%', marginBottom: '10px' }}>
           <TextField
@@ -258,23 +319,25 @@
               return renderOption(op.operator, op.label);
             })}
           </TextField>
-          <TextField
-            size="small"
-            value={row.rightValue}
-            type={selectedProp.kind === 'integer' ? 'number' : 'text'}
-            style={{ width: '33%' }}
-            variant="outlined"
-            onChange={(e) => {
-              setGroups(
-                updateRowProperty(
-                  row.rowId,
-                  groups,
-                  'rightValue',
-                  e.target.value,
-                ),
-              );
-            }}
-          />
+          {!isSpecialType && (
+            <TextField
+              size="small"
+              value={row.rightValue}
+              type={isNumberType ? 'number' : 'text'}
+              style={{ width: '33%' }}
+              variant="outlined"
+              onChange={(e) => {
+                setGroups(
+                  updateRowProperty(
+                    row.rowId,
+                    groups,
+                    'rightValue',
+                    e.target.value,
+                  ),
+                );
+              }}
+            />
+          )}
           <IconButton
             aria-label="delete"
             disabled={!deletable}
@@ -446,7 +509,10 @@
           <Button
             onClick={(e) => {
               e.preventDefault();
-              B.triggerEvent('onSubmit', makeFilter(tree));
+              if (tree) {
+                B.triggerEvent('onSubmit', makeFilter(tree));
+                console.log(makeFilter(tree));
+              }
             }}
             classes={{ contained: classes.saveButton }}
             style={{ textTransform: 'none' }}
