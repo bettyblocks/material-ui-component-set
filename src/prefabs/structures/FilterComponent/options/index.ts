@@ -48,7 +48,7 @@ import { advanced } from '../advanced';
 //   },
 // ];
 
-export const FilterComponentOptions = {
+export const filterComponentOptions = {
   modelId: model('Model'),
   height: size('Height', {
     value: '',

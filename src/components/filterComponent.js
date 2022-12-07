@@ -21,7 +21,6 @@
       }
       return result;
     };
-
     const [groups, setGroups] = React.useState([
       {
         id: makeId(),
@@ -37,8 +36,34 @@
         ],
       },
     ]);
-
     const [groupsOperator, setGroupsOperator] = React.useState('_and');
+
+    const stringKinds = [
+      'string',
+      'string_expression',
+      'email_address',
+      'serial',
+      'zipcode',
+      'url',
+      'text',
+      'text_expression',
+    ];
+    const numberKinds = [
+      'count',
+      'decimal',
+      'decimal_expression',
+      'float',
+      'integer',
+      'integer_expression',
+      'price',
+      'price_expression',
+      'phone_number',
+    ];
+
+    // const booleanKinds = ['boolean', 'boolean_expression'];
+
+    const relationKinds = ['has_and_belongs_to_many', 'has_many', 'has_one'];
+
     const operatorList = [
       {
         operator: 'eq',
@@ -47,59 +72,76 @@
       },
       {
         operator: 'neq',
-        label: 'Not equals',
+        label: 'Is not equal to',
+        kinds: ['*'],
+      },
+      {
+        operator: 'ex',
+        label: 'Exists',
+        kinds: ['*'],
+      },
+      {
+        operator: 'nex',
+        label: 'Not exists',
         kinds: ['*'],
       },
       {
         operator: 'starts_with',
         label: 'Starts with',
-        kinds: ['string', 'email_address', 'serial'],
+        kinds: [...stringKinds],
       },
       {
         operator: 'ends_with',
         label: 'Ends with',
-        kinds: ['string', 'email_address', 'serial'],
+        kinds: [...stringKinds],
       },
       {
-        operator: 'contains',
+        operator: 'regex',
         label: 'Contains',
-        kinds: ['string', 'email_address', 'serial'],
+        kinds: [...stringKinds],
       },
       {
         operator: 'matches',
-        label: 'Matches',
-        kinds: ['string', 'email_address', 'serial'],
+        label: 'Matches with',
+        kinds: [...stringKinds],
       },
       {
         operator: 'does_not_match',
         label: 'Does not match',
-        kinds: ['string', 'email_address', 'serial'],
+        kinds: [...stringKinds],
       },
       {
         operator: 'gt',
         label: 'Greater than',
-        kinds: ['integer'],
+        kinds: [...numberKinds],
       },
       {
         operator: 'lt',
         label: 'Lower than',
-        kinds: ['integer'],
+        kinds: [...numberKinds],
+      },
+      {
+        operator: 'gteq',
+        label: 'Greater than or equal',
+        kinds: [...numberKinds],
+      },
+      {
+        operator: 'lteq',
+        label: 'Lower than or equal',
+        kinds: [...numberKinds],
       },
     ];
-
     const filterProps = (properties, id) => {
-      return Object.values(properties).filter((props) => {
-        return props.modelId === id;
+      return Object.values(properties).filter((prop) => {
+        return prop.modelId === id && !relationKinds.includes(prop.kind);
       });
     };
-
     const filterOperators = (kind, operators) => {
       if (!kind) return operators;
       return operators.filter((op) => {
         return op.kinds.includes(kind) || op.kinds.includes('*');
       });
     };
-
     const renderOption = (key, value) => {
       return (
         <MenuItem key={key} value={key}>
@@ -107,15 +149,30 @@
         </MenuItem>
       );
     };
-
     const makeFilterChild = (prop, op, right) => {
-      return {
-        [prop]: {
-          [op]: right,
-        },
-      };
-    };
+      switch (op) {
+        case 'ex':
+          return {
+            [prop]: {
+              exists: true,
+            },
+          };
 
+        case 'nex':
+          return {
+            [prop]: {
+              does_not_exist: 0,
+            },
+          };
+
+        default:
+          return {
+            [prop]: {
+              [op]: right,
+            },
+          };
+      }
+    };
     const makeFilter = (tree) => {
       return {
         where: {
@@ -133,7 +190,6 @@
         },
       };
     };
-
     const updateRowProperty = (rowId, tree, propertyToUpdate, newValue) => {
       return tree.map((group) => {
         const foundRow = group.rows.filter((row) => row.rowId === rowId);
@@ -157,7 +213,6 @@
         return group;
       });
     };
-
     const updateGroupProperty = (groupId, tree, propertyToUpdate, newValue) => {
       return tree.map((group) => {
         if (group.id === groupId) {
@@ -199,11 +254,11 @@
         return group;
       });
     };
-
     const filterRow = (row, deletable) => {
       // eslint-disable-next-line no-undef
-      const { properties } = artifact;
-      const filteredProps = filterProps(properties, modelId, 'string');
+      const { properties } = artifact || {};
+
+      const filteredProps = filterProps(properties, modelId);
       // set initial dropdown value
       if (row.propertyValue === '') {
         setGroups(
@@ -219,7 +274,8 @@
         (prop) => prop.id === row.propertyValue,
       );
       const selectedProp = filteredProps[selectedIndex];
-
+      const isNumberType = numberKinds.includes(selectedProp.kind);
+      const isSpecialType = row.operator === 'ex' || row.operator === 'nex';
       return (
         <div key={row.rowId} style={{ width: '100%', marginBottom: '10px' }}>
           <TextField
@@ -246,7 +302,7 @@
             value={row.operator}
             select
             variant="outlined"
-            style={{ marginRight: '10px' }}
+            style={{ marginRight: '10px', width: '15%' }}
             onChange={(e) => {
               setGroups(
                 updateRowProperty(
@@ -262,22 +318,25 @@
               return renderOption(op.operator, op.label);
             })}
           </TextField>
-          <TextField
-            size="small"
-            value={row.rightValue}
-            style={{ width: '33%' }}
-            variant="outlined"
-            onChange={(e) => {
-              setGroups(
-                updateRowProperty(
-                  row.rowId,
-                  groups,
-                  'rightValue',
-                  e.target.value,
-                ),
-              );
-            }}
-          />
+          {!isSpecialType && (
+            <TextField
+              size="small"
+              value={row.rightValue}
+              type={isNumberType ? 'number' : 'text'}
+              style={{ width: '33%' }}
+              variant="outlined"
+              onChange={(e) => {
+                setGroups(
+                  updateRowProperty(
+                    row.rowId,
+                    groups,
+                    'rightValue',
+                    e.target.value,
+                  ),
+                );
+              }}
+            />
+          )}
           <IconButton
             aria-label="delete"
             disabled={!deletable}
@@ -290,7 +349,6 @@
         </div>
       );
     };
-
     const addGroupButton = () => {
       return (
         <Button
@@ -322,7 +380,6 @@
         </Button>
       );
     };
-
     const addFilter = (tree, groupId) => {
       const newRow = {
         rowId: makeId(),
@@ -341,7 +398,6 @@
         return group;
       });
     };
-
     const addFilterButton = (group) => {
       return (
         <Button
@@ -356,7 +412,6 @@
         </Button>
       );
     };
-
     const deleteGroup = (tree, groupId) => {
       const newTree = tree.slice();
       const foundIndex = newTree.findIndex((g) => g.id === groupId);
@@ -366,7 +421,6 @@
       }
       return newTree;
     };
-
     const operatorSwitch = (node) => {
       return (
         <ButtonGroup size="small" className={classes.operator}>
@@ -399,7 +453,6 @@
         </ButtonGroup>
       );
     };
-
     const renderTree = (tree) => {
       return (
         <>
@@ -455,7 +508,9 @@
           <Button
             onClick={(e) => {
               e.preventDefault();
-              B.triggerEvent('onSubmit', makeFilter(tree));
+              if (tree) {
+                B.triggerEvent('onSubmit', makeFilter(tree));
+              }
             }}
             classes={{ contained: classes.saveButton }}
             style={{ textTransform: 'none' }}
@@ -466,15 +521,10 @@
         </>
       );
     };
-
-    const filterBuilder = () => {
-      return <div>{renderTree(groups)}</div>;
-    };
-
     return isDev ? (
-      <div className={`${classes.pristine} ${classes.root}`}>Filter</div>
+      <div className={`${classes.root} ${classes.pristine}`}>Filter</div>
     ) : (
-      <div className={classes.root}>{filterBuilder()}</div>
+      <div className={classes.root}>{renderTree(groups)}</div>
     );
   })(),
   styles: (B) => (theme) => {
@@ -527,10 +577,6 @@
         width: ({ options: { width } }) => !isDev && width,
         height: ({ options: { height } }) => (isDev ? '100%' : height),
         minHeight: 0,
-        backgroundColor: ({ options: { backgroundColor } }) => [
-          style.getColor(backgroundColor),
-          '!important',
-        ],
       },
       saveButton: {
         backgroundColor: ({ options: { highlightColor } }) => [
@@ -573,6 +619,10 @@
         marginTop: '15px',
         marginBottom: '15px',
         position: 'relative',
+        backgroundColor: ({ options: { backgroundColor } }) => [
+          style.getColor(backgroundColor),
+          '!important',
+        ],
       },
       filterInput: {
         width: '33%',
