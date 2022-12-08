@@ -52,7 +52,13 @@
           alteredContent += split;
         } else {
           const propertyName = value.name.split('{{')[1].split('}}')[0];
-          alteredContent += `<span title='${propertyName}' class='${classes.inlineProperty}'>${propertyName}</span>`;
+          alteredContent += `<span title='${propertyName}' class='${
+            classes.inline
+          } ${
+            value.type === 'PROPERTY'
+              ? classes.inlineProperty
+              : classes.inlineTranslation
+          }'>${propertyName}</span>`;
         }
       });
       linkedContent = (
@@ -161,18 +167,24 @@
             style.getFontSize(type, 'Desktop'),
         },
       },
-      inlineProperty: {
-        display: 'inline-block',
+      inline: {
+        display: 'inherit',
         position: 'relative',
         borderRadius: '4px',
-        background: '#efe8fd',
-        color: '#4927ad',
         textOverflow: 'ellipsis',
         overflow: 'hidden',
         maxWidth: 'calc(100% - 10px)',
         padding: '0 5px',
         whiteSpace: 'nowrap',
         marginBottom: '-4px',
+      },
+      inlineProperty: {
+        background: '#efe8fd',
+        color: '#4927ad',
+      },
+      inlineTranslation: {
+        background: '#ebf0fe',
+        color: '#0851cf',
       },
       link: {
         textDecoration: ['none', '!important'],
