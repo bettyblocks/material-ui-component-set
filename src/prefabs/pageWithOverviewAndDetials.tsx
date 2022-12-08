@@ -1653,7 +1653,7 @@ const beforeCreate = ({
           (originalOption: PrefabComponentOption) => {
             return {
               ...originalOption,
-              value: newProperty.id,
+              value: newProperty as any,
             };
           },
         );
