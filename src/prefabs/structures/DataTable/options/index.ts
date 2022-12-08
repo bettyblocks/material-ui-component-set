@@ -71,7 +71,7 @@ export const categories = [
 
 export const dataTableOptions = {
   reconfigure: reconfigure('Reconfigure', { value: '' }),
-  addChild: addChild('Add child', { value: '' }),
+  addChild: addChild('Add Column', { value: '' }),
   model: modelAndRelation('Model', { value: '' }),
   filter: filter('Filter', {
     value: {},
