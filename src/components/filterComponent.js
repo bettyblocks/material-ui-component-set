@@ -272,7 +272,6 @@
       const selectedIndex = filteredProps.findIndex(
         (prop) => prop.id === row.propertyValue,
       );
-      console.log(filteredProps);
       const selectedProp = filteredProps[selectedIndex];
       const isNumberType = numberKinds.includes(selectedProp.kind);
       const isDateType = dateKinds.includes(selectedProp.kind);
