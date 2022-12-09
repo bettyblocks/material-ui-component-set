@@ -1,3 +1,17 @@
+## [2.82.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.82.3...v2.82.4) (2022-12-09)
+
+
+### Bug Fixes
+
+* removed showError from advanced options file ([6f2ac04](https://github.com/bettyblocks/material-ui-component-set/commit/6f2ac047bff03427cb9adf7dd6e3b351be6c0c6b))
+
+## [2.82.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.82.2...v2.82.3) (2022-12-08)
+
+
+### Bug Fixes
+
+* use correct format to set the default value ([7dc3eb6](https://github.com/bettyblocks/material-ui-component-set/commit/7dc3eb6f5fa0f616e904b3fcc5cdb1bf07bd2898))
+
 ## [2.82.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.82.1...v2.82.2) (2022-12-07)
 
 
