@@ -5,7 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { env, Icon } = B;
-    const { MenuItem, TextField, Button, ButtonGroup, IconButton } =
+    const { MenuItem, TextField, Button, ButtonGroup, IconButton, Checkbox } =
       window.MaterialUI.Core;
     const { modelId } = options;
     const isDev = env === 'dev';
@@ -59,11 +59,15 @@
       'price_expression',
       'phone_number',
     ];
-
-    // const booleanKinds = ['boolean', 'boolean_expression'];
-
-    const relationKinds = ['has_and_belongs_to_many', 'has_many', 'has_one'];
-
+    const dateKinds = ['date', 'date_expression'];
+    const dateTimeKinds = ['date_time_expression', 'date_time'];
+    const booleanKinds = ['boolean', 'boolean_expression'];
+    const relationKinds = [
+      'has_and_belongs_to_many',
+      'has_many',
+      'has_one',
+      'belongs_to',
+    ];
     const operatorList = [
       {
         operator: 'eq',
@@ -93,11 +97,6 @@
       {
         operator: 'ends_with',
         label: 'Ends with',
-        kinds: [...stringKinds],
-      },
-      {
-        operator: 'regex',
-        label: 'Contains',
         kinds: [...stringKinds],
       },
       {
@@ -275,7 +274,16 @@
       );
       const selectedProp = filteredProps[selectedIndex];
       const isNumberType = numberKinds.includes(selectedProp.kind);
+      const isDateType = dateKinds.includes(selectedProp.kind);
+      const isDateTimeType = dateTimeKinds.includes(selectedProp.kind);
+      const isBooleanType = booleanKinds.includes(selectedProp.kind);
       const isSpecialType = row.operator === 'ex' || row.operator === 'nex';
+      const inputType = () => {
+        if (isNumberType) return 'number';
+        if (isDateType) return 'date';
+        if (isDateTimeType) return 'datetime-local';
+        return 'text';
+      };
       return (
         <div key={row.rowId} style={{ width: '100%', marginBottom: '10px' }}>
           <TextField
@@ -318,11 +326,11 @@
               return renderOption(op.operator, op.label);
             })}
           </TextField>
-          {!isSpecialType && (
+          {!isSpecialType && !isBooleanType && (
             <TextField
               size="small"
               value={row.rightValue}
-              type={isNumberType ? 'number' : 'text'}
+              type={inputType()}
               style={{ width: '33%' }}
               variant="outlined"
               onChange={(e) => {
@@ -335,6 +343,23 @@
                   ),
                 );
               }}
+            />
+          )}
+          {isBooleanType && !isSpecialType && (
+            <Checkbox
+              checked={row.rightValue}
+              classes={{ checked: classes.checkBox }}
+              onChange={(e) => {
+                setGroups(
+                  updateRowProperty(
+                    row.rowId,
+                    groups,
+                    'rightValue',
+                    e.target.checked,
+                  ),
+                );
+              }}
+              inputProps={{ 'aria-label': 'primary checkbox' }}
             />
           )}
           <IconButton
@@ -577,6 +602,12 @@
         width: ({ options: { width } }) => !isDev && width,
         height: ({ options: { height } }) => (isDev ? '100%' : height),
         minHeight: 0,
+      },
+      checkBox: {
+        color: ({ options: { highlightColor } }) => [
+          style.getColor(highlightColor),
+          '!important',
+        ],
       },
       saveButton: {
         backgroundColor: ({ options: { highlightColor } }) => [
