@@ -1,4 +1,9 @@
-import { showIfTrue, toggle, variable } from '@betty-blocks/component-sdk';
+import {
+  buttongroup,
+  showIfTrue,
+  toggle,
+  variable,
+} from '@betty-blocks/component-sdk';
 
 export const validation = {
   required: toggle('Required'),
@@ -8,4 +13,12 @@ export const validation = {
       condition: showIfTrue('required'),
     },
   }),
+  showError: buttongroup(
+    'Error message',
+    [
+      ['Built in', 'built-in'],
+      ['Interaction', 'iteraction'],
+    ],
+    { value: 'built-in' },
+  ),
 };
