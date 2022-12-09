@@ -44,21 +44,9 @@
       let alteredContent = '';
       content.forEach((value) => {
         if (typeof value === 'string' || value instanceof String) {
-          let split = value.split('\n');
-          if (split[0] === '') {
-            split.shift();
-          }
-          split = split.join('\n');
-          alteredContent += split;
+          alteredContent += value;
         } else {
-          const propertyName = value.name.split('{{')[1].split('}}')[0];
-          alteredContent += `<span title='${propertyName}' class='${
-            classes.inline
-          } ${
-            value.type === 'PROPERTY'
-              ? classes.inlineProperty
-              : classes.inlineTranslation
-          }'>${propertyName}</span>`;
+          alteredContent += `<span class="${classes.nowrap}" >${value.name}</span>`;
         }
       });
       linkedContent = (
@@ -167,24 +155,9 @@
             style.getFontSize(type, 'Desktop'),
         },
       },
-      inline: {
-        display: 'inherit',
-        position: 'relative',
-        borderRadius: '4px',
-        textOverflow: 'ellipsis',
-        overflow: 'hidden',
-        maxWidth: 'calc(100% - 10px)',
-        padding: '0 5px',
+      nowrap: {
         whiteSpace: 'nowrap',
         marginBottom: '-4px',
-      },
-      inlineProperty: {
-        background: '#efe8fd',
-        color: '#4927ad',
-      },
-      inlineTranslation: {
-        background: '#ebf0fe',
-        color: '#0851cf',
       },
       link: {
         textDecoration: ['none', '!important'],
