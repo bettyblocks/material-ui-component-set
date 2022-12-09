@@ -1,4 +1,10 @@
-import { option, toggle, variable } from '@betty-blocks/component-sdk';
+import {
+  createPage,
+  modelAndRelation,
+  option,
+  toggle,
+  variable,
+} from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
 export const categories = [
@@ -16,6 +22,8 @@ export const conditionalOptions = {
       as: 'VISIBILITY',
     },
   }),
+  createPage: createPage('CreatePage', { value: ' ' }),
+  model: modelAndRelation('Model', { value: '' }),
   left: variable('Left', {
     value: [],
   }),

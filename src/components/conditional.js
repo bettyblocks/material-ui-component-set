@@ -10,6 +10,7 @@
       compare,
       visible: initVisibility,
       dataComponentAttribute,
+      createPage,
     } = options;
     const { useText, env } = B;
     const isDev = env === 'dev';
@@ -20,6 +21,7 @@
     const [leftValue, setLeftValue] = useState(leftText);
     const [rightValue, setRightValue] = useState(rightText);
     const [visible, setVisible] = useState(initVisibility);
+    console.log('conditionalComp', createPage);
 
     const evalCondition = () => {
       const leftAsNumber = parseFloat(leftValue);
