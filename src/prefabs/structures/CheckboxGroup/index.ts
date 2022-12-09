@@ -15,7 +15,7 @@ export const CheckboxGroup = (
     {
       label: 'Validation Options',
       expanded: false,
-      members: ['required', 'validationValueMissing'],
+      members: ['required', 'validationValueMissing', 'showError'],
     },
     {
       label: 'Styling',
@@ -33,7 +33,7 @@ export const CheckboxGroup = (
     {
       label: 'Advanced Options',
       expanded: false,
-      members: ['showError', 'dataComponentAttribute'],
+      members: ['dataComponentAttribute'],
     },
   ];
 
