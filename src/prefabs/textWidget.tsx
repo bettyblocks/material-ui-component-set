@@ -25,7 +25,89 @@ import {
   textInputOptions,
 } from './structures';
 
-const beforeCreate = ({ save, close, prefab }: BeforeCreateArgs) => {};
+const beforeCreate = ({
+  save,
+  close,
+  prefab: originalPrefab,
+  components: {
+    Header,
+    Content,
+    Footer,
+    Field,
+    ModelSelector,
+    PropertySelector,
+    Text: BeforeCreateText,
+  },
+  helpers: { useModelQuery },
+}: BeforeCreateArgs) => {
+  const [modelId, setModelId] = React.useState();
+  const [model, setModel] = React.useState(null);
+  const [validationMessage, setValidationMessage] = React.useState('');
+  const [idProperty, setIdProperty] = React.useState(null);
+
+  const modelRequest = useModelQuery({
+    variables: { id: modelId },
+    onCompleted: (result) => {
+      setModel(result.model);
+      // setIdProperty(result.model.properties.find(({ name }) => name === 'id'));
+    },
+  });
+
+  const validate = () => {
+    if (modelRequest.loading) {
+      setValidationMessage(
+        'Model details are still loading, please try submitting again.',
+      );
+      return false;
+    }
+
+    return true;
+  };
+
+  return (
+    <>
+      <Header onClose={close} title="Configure your text widget" />
+      <Content>
+        <Field
+          label="Select model"
+          error={
+            validationMessage && (
+              <BeforeCreateText color="#e82600">
+                {validationMessage}
+              </BeforeCreateText>
+            )
+          }
+        >
+          <ModelSelector
+            onChange={(id: any) => {
+              setModelId(id);
+            }}
+            margin
+          />
+        </Field>
+        <Field label="What question do you want to display?">
+          <PropertySelector
+            modelId={modelId}
+            onChange={(value: any) => {
+              setIdProperty(value);
+            }}
+            value={idProperty}
+            disabled={!modelId}
+          />
+        </Field>
+      </Content>
+      <Footer
+        onSave={() => {
+          if (validate()) {
+            const newPrefab = { ...originalPrefab };
+
+            save(newPrefab);
+          }
+        }}
+      />
+    </>
+  );
+};
 
 const interactions: PrefabInteraction[] = [];
 
@@ -36,7 +118,7 @@ const attributes = {
   variables: [],
 };
 
-export default prefab('Text Widget', attributes, undefined, [
+export default prefab('Text Widget', attributes, beforeCreate, [
   wrapper(
     {
       label: 'Text widget',
