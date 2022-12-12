@@ -1,3 +1,10 @@
+## [2.83.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.83.0...v2.83.1) (2022-12-12)
+
+
+### Bug Fixes
+
+* removed commented lines in icons.js ([1ce971b](https://github.com/bettyblocks/material-ui-component-set/commit/1ce971bc76e59deccb600e6418c2524b1a3ef7f9))
+
 # [2.83.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.82.4...v2.83.0) (2022-12-12)
 
 
