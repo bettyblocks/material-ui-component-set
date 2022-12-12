@@ -1,3 +1,31 @@
+## [2.83.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.83.0...v2.83.1) (2022-12-12)
+
+
+### Bug Fixes
+
+* removed commented lines in icons.js ([1ce971b](https://github.com/bettyblocks/material-ui-component-set/commit/1ce971bc76e59deccb600e6418c2524b1a3ef7f9))
+
+# [2.83.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.82.4...v2.83.0) (2022-12-12)
+
+
+### Bug Fixes
+
+* change rich input category ([3789a20](https://github.com/bettyblocks/material-ui-component-set/commit/3789a20578446196d66747900660507512708f72))
+* error when selecting multiple heading types in text ([f417590](https://github.com/bettyblocks/material-ui-component-set/commit/f417590ea49db7e185f1b2b6908cb140ac37a13c))
+* html save bug ([91cedaf](https://github.com/bettyblocks/material-ui-component-set/commit/91cedafc6b78fbfff58507db8ab548bf8fdc9173))
+* removed icon spread from extra icons ([d841f21](https://github.com/bettyblocks/material-ui-component-set/commit/d841f21f2c0988bec5fbf1fd0f0e8702bb9c30c5))
+* removed unnecessary space when nodes have no alignment ([31c38c5](https://github.com/bettyblocks/material-ui-component-set/commit/31c38c5237750cf49e3604007f4f55ab677e2a5f))
+* update bb cli ([c8b781e](https://github.com/bettyblocks/material-ui-component-set/commit/c8b781ee74a0c281dccfdd279cf372c354043ca6))
+
+
+### Features
+
+* add alignment function to richtext ([29346e1](https://github.com/bettyblocks/material-ui-component-set/commit/29346e173d82b5b4dcfa8f7865418b29a51c5471))
+* add code button functionality ([613afc0](https://github.com/bettyblocks/material-ui-component-set/commit/613afc04955ca48d1007d69e56489c4e46025b7d))
+* add dependecies via new system ([c3dd908](https://github.com/bettyblocks/material-ui-component-set/commit/c3dd908ad75e06e83d5e2bd2cdedb1c7d14a9ca6))
+* initial code button ([32211ba](https://github.com/bettyblocks/material-ui-component-set/commit/32211ba1675c6a134dbed183787414f409e5f8d3))
+* text editor ([25047fa](https://github.com/bettyblocks/material-ui-component-set/commit/25047fabdbc4288dd8b9d39e9b8de530b5694261))
+
 ## [2.82.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.82.3...v2.82.4) (2022-12-09)
 
 
