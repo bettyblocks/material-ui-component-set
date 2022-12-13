@@ -50,6 +50,7 @@
         const listRef = React.createRef();
         const [showPagination, setShowPagination] = useState(true);
         const [prevData, setPrevData] = useState(null);
+        const [filterv2, setFilterV2] = useState({});
         const isInline = type === 'inline';
         const isGrid = type === 'grid';
 
@@ -231,7 +232,11 @@
             ? deepMerge(filter, searchFilter)
             : filter;
 
-        const completeFilter = deepMerge(newFilter, interactionFilters);
+        const completeFilter = deepMerge(
+          newFilter,
+          interactionFilters,
+          filterv2,
+        );
         const where = useFilter(completeFilter);
 
         const {
@@ -310,6 +315,14 @@
             clearTimeout(handler);
           };
         }, [search]);
+
+        B.defineFunction('Filter v2', (value) => {
+          setFilterV2(value.where);
+        });
+
+        B.defineFunction('Clear filter v2', () => {
+          setFilterV2({});
+        });
 
         useEffect(() => {
           B.defineFunction('Refetch', () => refetch());
