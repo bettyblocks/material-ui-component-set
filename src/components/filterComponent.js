@@ -617,8 +617,6 @@
           {tree.map((node, index) => (
             <>
               <div key={node.id} className={classes.filter}>
-                {operatorSwitch(node, dev)}
-
                 {tree.length > 1 && (
                   <div className={classes.deleteGroup}>
                     <IconButton
@@ -633,6 +631,8 @@
                     </IconButton>
                   </div>
                 )}
+                {operatorSwitch(node, dev)}
+
                 {node.rows.map((row) =>
                   dev ? filterRowDev() : filterRow(row, node.rows.length > 1),
                 )}
@@ -797,13 +797,13 @@
         height: '25px',
         margin: '0px',
         top: '1.2rem',
-        right: '0.5rem',
+        right: '3.5rem',
       },
       deleteGroup: {
         position: 'absolute',
         margin: '0px',
         top: '0.6rem',
-        right: '6.5rem',
+        right: '0.5rem',
       },
       pristine: {
         borderWidth: '0.0625rem',
