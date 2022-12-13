@@ -174,6 +174,10 @@
       setFilterV2(value.where);
     });
 
+    B.defineFunction('Clear filter v2', () => {
+      setFilterV2({});
+    });
+
     /**
      * @name Filter
      * @param {Property} property

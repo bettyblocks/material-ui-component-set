@@ -7,6 +7,13 @@
     const { env, Icon } = B;
     const { MenuItem, TextField, Button, ButtonGroup, IconButton, Checkbox } =
       window.MaterialUI.Core;
+    const { DateFnsUtils } = window.MaterialUI;
+    const {
+      MuiPickersUtilsProvider,
+      KeyboardDatePicker,
+      KeyboardDateTimePicker,
+    } = window.MaterialUI.Pickers;
+
     const { modelId } = options;
     const isDev = env === 'dev';
     const makeId = (length = 16) => {
@@ -47,6 +54,11 @@
       'url',
       'text',
       'text_expression',
+      'rich_text',
+      'auto_increment',
+      'phone_number',
+      'iban',
+      'list',
     ];
     const numberKinds = [
       'count',
@@ -57,16 +69,22 @@
       'integer_expression',
       'price',
       'price_expression',
-      'phone_number',
+      'minutes',
     ];
     const dateKinds = ['date', 'date_expression'];
-    const dateTimeKinds = ['date_time_expression', 'date_time'];
+    const dateTimeKinds = ['date_time_expression', 'date_time', 'time'];
     const booleanKinds = ['boolean', 'boolean_expression'];
-    const relationKinds = [
+    const forbiddenKinds = [
       'has_and_belongs_to_many',
       'has_many',
       'has_one',
       'belongs_to',
+      'image',
+      'file',
+      'password',
+      'pdf',
+      'multi_image',
+      'multi_file',
     ];
     const operatorList = [
       {
@@ -76,7 +94,7 @@
       },
       {
         operator: 'neq',
-        label: 'Is not equal to',
+        label: 'Does not equal',
         kinds: ['*'],
       },
       {
@@ -86,7 +104,7 @@
       },
       {
         operator: 'nex',
-        label: 'Not exists',
+        label: 'Does not exist',
         kinds: ['*'],
       },
       {
@@ -112,27 +130,66 @@
       {
         operator: 'gt',
         label: 'Greater than',
-        kinds: [...numberKinds],
+        kinds: [...numberKinds, 'serial'],
       },
       {
         operator: 'lt',
         label: 'Lower than',
-        kinds: [...numberKinds],
+        kinds: [...numberKinds, 'serial'],
       },
       {
         operator: 'gteq',
-        label: 'Greater than or equal',
-        kinds: [...numberKinds],
+        label: 'Greater than or equals',
+        kinds: [...numberKinds, 'serial'],
       },
       {
         operator: 'lteq',
-        label: 'Lower than or equal',
-        kinds: [...numberKinds],
+        label: 'Lower than or equals',
+        kinds: [...numberKinds, 'serial'],
+      },
+      {
+        operator: 'gt',
+        label: 'Is after',
+        kinds: [...dateKinds, ...dateTimeKinds],
+      },
+      {
+        operator: 'lt',
+        label: 'Is before',
+        kinds: [...dateKinds, ...dateTimeKinds],
+      },
+      {
+        operator: 'gteg',
+        label: 'Is after or at',
+        kinds: [...dateKinds, ...dateTimeKinds],
+      },
+      {
+        operator: 'lteq',
+        label: 'Is before or at',
+        kinds: [...dateKinds, ...dateTimeKinds],
       },
     ];
+    B.defineFunction('Add filter group', () => {
+      setGroups([
+        ...groups,
+        {
+          id: makeId(),
+          operator: '_or',
+          groups: [],
+          rows: [
+            {
+              rowId: makeId(),
+              propertyValue: '',
+              operator: 'eq',
+              rightValue: '',
+            },
+          ],
+        },
+      ]);
+    });
+
     const filterProps = (properties, id) => {
       return Object.values(properties).filter((prop) => {
-        return prop.modelId === id && !relationKinds.includes(prop.kind);
+        return prop.modelId === id && !forbiddenKinds.includes(prop.kind);
       });
     };
     const filterOperators = (kind, operators) => {
@@ -189,6 +246,7 @@
         },
       };
     };
+
     const updateRowProperty = (rowId, tree, propertyToUpdate, newValue) => {
       return tree.map((group) => {
         const foundRow = group.rows.filter((row) => row.rowId === rowId);
@@ -254,6 +312,7 @@
       });
     };
     const filterRow = (row, deletable) => {
+      if (!modelId) return <p>Please select a model</p>;
       // eslint-disable-next-line no-undef
       const { properties } = artifact || {};
 
@@ -280,10 +339,10 @@
       const isSpecialType = row.operator === 'ex' || row.operator === 'nex';
       const inputType = () => {
         if (isNumberType) return 'number';
-        if (isDateType) return 'date';
-        if (isDateTimeType) return 'datetime-local';
         return 'text';
       };
+      const isTextType =
+        !isSpecialType && !isBooleanType && !isDateTimeType && !isDateType;
       return (
         <div key={row.rowId} style={{ width: '100%', marginBottom: '10px' }}>
           <TextField
@@ -301,6 +360,7 @@
                   e.target.value,
                 ),
               );
+              setGroups(updateRowProperty(row.rowId, groups, 'rightValue', ''));
             }}
           >
             {filteredProps.map((prop) => renderOption(prop.id, prop.label))}
@@ -326,7 +386,7 @@
               return renderOption(op.operator, op.label);
             })}
           </TextField>
-          {!isSpecialType && !isBooleanType && (
+          {isTextType && (
             <TextField
               size="small"
               value={row.rightValue}
@@ -362,47 +422,119 @@
               inputProps={{ 'aria-label': 'primary checkbox' }}
             />
           )}
-          <IconButton
-            aria-label="delete"
-            disabled={!deletable}
-            onClick={() => {
-              setGroups(deleteFilter(groups, row.rowId));
-            }}
-          >
-            <Icon name="Delete" fontSize="small" />
-          </IconButton>
+          {isDateType && !isSpecialType && (
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                margin="none"
+                classes={{
+                  toolbar: classes.datePicker,
+                  daySelected: classes.datePicker,
+                }}
+                size="small"
+                value={row.rightValue === '' ? null : row.rightValue}
+                initialFocusedDate={new Date()}
+                style={{ width: '33%', margin: '0px' }}
+                id="date-picker-dialog"
+                variant="inline"
+                inputVariant="outlined"
+                format="MM/dd/yyyy"
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+                onKeyDown={(e) => {
+                  e.preventDefault();
+                }}
+                allowKeyboardControl={false}
+                onChange={(date) => {
+                  const dateValue = date.toISOString().split('T')[0];
+                  setGroups(
+                    updateRowProperty(
+                      row.rowId,
+                      groups,
+                      'rightValue',
+                      dateValue,
+                    ),
+                  );
+                }}
+              />
+            </MuiPickersUtilsProvider>
+          )}
+          {isDateTimeType && !isSpecialType && (
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDateTimePicker
+                margin="none"
+                classes={{
+                  toolbar: classes.datePicker,
+                  daySelected: classes.datePicker,
+                }}
+                id="date-picker-dialog"
+                style={{ width: '33%', margin: '0px' }}
+                size="small"
+                value={row.rightValue === '' ? null : row.rightValue}
+                variant="inline"
+                inputVariant="outlined"
+                format="MM/dd/yyyy"
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+                onKeyDown={(e) => {
+                  e.preventDefault();
+                }}
+                allowKeyboardControl={false}
+                onChange={(date) => {
+                  setGroups(
+                    updateRowProperty(
+                      row.rowId,
+                      groups,
+                      'rightValue',
+                      date.toISOString(),
+                    ),
+                  );
+                }}
+              />
+            </MuiPickersUtilsProvider>
+          )}
+          {deletable && (
+            <IconButton
+              aria-label="delete"
+              onClick={() => {
+                setGroups(deleteFilter(groups, row.rowId));
+              }}
+            >
+              <Icon name="Delete" fontSize="small" />
+            </IconButton>
+          )}
         </div>
       );
     };
-    const addGroupButton = () => {
+    const filterRowDev = () => {
       return (
-        <Button
-          type="button"
-          style={{ textTransform: 'none' }}
-          variant="outlined"
-          classes={{ outlined: classes.addFilterButton }}
-          onClick={() => {
-            setGroups([
-              ...groups,
-              {
-                id: makeId(),
-                operator: '_or',
-                groups: [],
-                rows: [
-                  {
-                    rowId: makeId(),
-                    propertyValue: '',
-                    operator: 'eq',
-                    rightValue: '',
-                  },
-                ],
-              },
-            ]);
-          }}
-        >
-          <Icon name="Add" fontSize="small" />
-          Add filter group
-        </Button>
+        <div style={{ width: '100%', marginBottom: '10px' }}>
+          <TextField
+            disabled
+            select
+            size="small"
+            variant="outlined"
+            style={{ marginRight: '10px', width: '33%' }}
+          />
+          <TextField
+            size="small"
+            disabled
+            select
+            variant="outlined"
+            style={{ marginRight: '10px', width: '15%' }}
+          />
+          <TextField
+            size="small"
+            disabled
+            type="text"
+            style={{ width: '33%' }}
+            variant="outlined"
+          />
+          <IconButton aria-label="delete" disabled>
+            <Icon name="Delete" fontSize="small" />
+          </IconButton>
+        </div>
       );
     };
     const addFilter = (tree, groupId) => {
@@ -423,10 +555,11 @@
         return group;
       });
     };
-    const addFilterButton = (group) => {
+    const addFilterButton = (group, dev) => {
       return (
         <Button
           type="button"
+          disabled={dev}
           style={{ textTransform: 'none' }}
           onClick={() => {
             setGroups(addFilter(groups, group.id));
@@ -446,9 +579,9 @@
       }
       return newTree;
     };
-    const operatorSwitch = (node) => {
+    const operatorSwitch = (node, dev) => {
       return (
-        <ButtonGroup size="small" className={classes.operator}>
+        <ButtonGroup size="small" className={classes.operator} disabled={dev}>
           <Button
             disableElevation
             variant="contained"
@@ -478,31 +611,35 @@
         </ButtonGroup>
       );
     };
-    const renderTree = (tree) => {
+    const renderTree = (tree, dev) => {
       return (
         <>
           {tree.map((node, index) => (
             <>
               <div key={node.id} className={classes.filter}>
-                {operatorSwitch(node)}
-                <div className={classes.deleteGroup}>
-                  <IconButton
-                    disabled={index === 0}
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      const newGroups = deleteGroup(groups, node.id);
-                      setGroups(newGroups);
-                    }}
-                  >
-                    <Icon name="Delete" fontSize="small" />
-                  </IconButton>
-                </div>
-                {node.rows.map((row) => filterRow(row, node.rows.length > 1))}
-                {addFilterButton(node)}
+                {operatorSwitch(node, dev)}
+
+                {tree.length > 1 && (
+                  <div className={classes.deleteGroup}>
+                    <IconButton
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const newGroups = deleteGroup(groups, node.id);
+                        setGroups(newGroups);
+                      }}
+                    >
+                      <Icon name="Delete" fontSize="small" />
+                    </IconButton>
+                  </div>
+                )}
+                {node.rows.map((row) =>
+                  dev ? filterRowDev() : filterRow(row, node.rows.length > 1),
+                )}
+                {addFilterButton(node, dev)}
               </div>
               {index + 1 < tree.length && (
-                <ButtonGroup size="small">
+                <ButtonGroup size="small" disabled={dev}>
                   <Button
                     disableElevation
                     variant="contained"
@@ -529,25 +666,16 @@
               )}
             </>
           ))}
-          {addGroupButton(groups)}
-          <Button
-            onClick={(e) => {
-              e.preventDefault();
-              if (tree) {
-                B.triggerEvent('onSubmit', makeFilter(tree));
-              }
-            }}
-            classes={{ contained: classes.saveButton }}
-            style={{ textTransform: 'none' }}
-            variant="contained"
-          >
-            Apply filter
-          </Button>
         </>
       );
     };
+
+    B.defineFunction('Apply filter', () => {
+      B.triggerEvent('onSubmit', makeFilter(groups));
+    });
+
     return isDev ? (
-      <div className={`${classes.root} ${classes.pristine}`}>Filter</div>
+      <div className={`${classes.root}`}>{renderTree(groups, true)}</div>
     ) : (
       <div className={classes.root}>{renderTree(groups)}</div>
     );
@@ -605,6 +733,12 @@
       },
       checkBox: {
         color: ({ options: { highlightColor } }) => [
+          style.getColor(highlightColor),
+          '!important',
+        ],
+      },
+      datePicker: {
+        backgroundColor: ({ options: { highlightColor } }) => [
           style.getColor(highlightColor),
           '!important',
         ],
