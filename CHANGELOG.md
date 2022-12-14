@@ -1,3 +1,10 @@
+## [2.83.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.83.1...v2.83.2) (2022-12-13)
+
+
+### Bug Fixes
+
+* rich text doesn't overflow anymore ([b7f3219](https://github.com/bettyblocks/material-ui-component-set/commit/b7f321976e1578ca5b2e3194716ab529c4267043))
+
 ## [2.83.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.83.0...v2.83.1) (2022-12-12)
 
 
