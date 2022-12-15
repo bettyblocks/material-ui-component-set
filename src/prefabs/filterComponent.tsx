@@ -39,9 +39,9 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attributes = {
-  category: 'LAYOUT',
-  icon: Icon.ContainerIcon,
-  keywords: ['Layout', 'box'],
+  category: 'DATA',
+  icon: Icon.FilterIcon,
+  keywords: ['DATA', 'filter', 'cat', 'kitty', 'smokey'],
   interactions,
 };
 
@@ -165,7 +165,7 @@ const attributes = {
 //   );
 // };
 
-export default prefab('Filter Component', attributes, undefined, [
+export default prefab('Filter', attributes, undefined, [
   Box(
     {
       options: {
@@ -226,23 +226,23 @@ export default prefab('Filter Component', attributes, undefined, [
               },
             },
             [
-              Button(
-                {
-                  ref: { id: '#clearButton' },
-                  style: { name: 'Outline' },
+              // Button(
+              //   {
+              //     ref: { id: '#clearButton' },
+              //     style: { name: 'Outline' },
 
-                  options: {
-                    ...buttonOptions,
-                    buttonText: variable('Button text', {
-                      value: ['Clear filter'],
-                    }),
-                    outerSpacing: sizes('Outer space', {
-                      value: ['0rem', 'M', '0rem', '0rem'],
-                    }),
-                  },
-                },
-                [],
-              ),
+              //     options: {
+              //       ...buttonOptions,
+              //       buttonText: variable('Button text', {
+              //         value: ['Clear filter'],
+              //       }),
+              //       outerSpacing: sizes('Outer space', {
+              //         value: ['0rem', 'M', '0rem', '0rem'],
+              //       }),
+              //     },
+              //   },
+              //   [],
+              // ),
               Button(
                 {
                   ref: { id: '#applyButton' },
