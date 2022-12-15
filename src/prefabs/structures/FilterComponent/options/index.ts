@@ -62,7 +62,7 @@ export const filterComponentOptions = {
       as: 'UNIT',
     },
   }),
-  outerSpacing: sizes('Outer space', {
+  outerSpacing: sizes('Oubter space', {
     value: ['0rem', '0rem', '0rem', '0rem'],
   }),
   highlightColor: color('Highlight Color', {
@@ -73,6 +73,12 @@ export const filterComponentOptions = {
   }),
   borderColor: color('Border color', {
     value: ThemeColor.LIGHT,
+  }),
+  borderRadius: size('Border radius', {
+    value: '4px',
+    configuration: {
+      as: 'UNIT',
+    },
   }),
   backgroundColor: color('Background color', {
     value: ThemeColor.TRANSPARENT,

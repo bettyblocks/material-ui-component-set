@@ -775,7 +775,7 @@
       },
       filter: {
         border: '1px solid',
-        borderRadius: '10px',
+        borderRadius: ({ options: { borderRadius } }) => borderRadius,
         borderColor: ({ options: { borderColor } }) => [
           style.getColor(borderColor),
           '!important',
