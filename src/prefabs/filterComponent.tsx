@@ -39,9 +39,9 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attributes = {
-  category: 'LAYOUT',
+  category: 'DATA',
   icon: Icon.FilterIcon,
-  keywords: ['Layout', 'filter', 'cat', 'kitty', 'smokey'],
+  keywords: ['DATA', 'filter', 'cat', 'kitty', 'smokey'],
   interactions,
 };
 
