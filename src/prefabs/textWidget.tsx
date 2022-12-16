@@ -191,18 +191,24 @@ const beforeCreate = ({
               },
             }),
           );
+
+          let actionVarId: string;
+          Object.keys(result.variables).forEach((key) => {
+            actionVarId = key;
+          });
+
           setOption(
             textInput,
             'actionVariableId',
             (opt: PrefabComponentOption) => ({
               ...opt,
-              value: '',
+              value: result.variables[actionVarId][1].id,
               configuration: {
                 condition: {
                   type: 'HIDE',
                   option: 'actionVariableId',
                   comparator: 'EQ',
-                  value: '',
+                  value: result.variables[actionVarId][1].id,
                 },
               },
             }),
