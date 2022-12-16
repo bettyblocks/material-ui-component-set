@@ -248,15 +248,6 @@ export default makePrefab('Text Widget', attributes, beforeCreate, [
         },
       ],
       options: {
-        pappel: linked({
-          label: '#textCompType',
-          value: {
-            ref: {
-              componentId: '#questionText',
-              optionId: '##textCompType',
-            },
-          },
-        }),
         question: linked({
           label: 'Question',
           value: {
