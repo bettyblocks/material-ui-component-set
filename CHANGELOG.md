@@ -1,3 +1,10 @@
+# [2.84.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.83.2...v2.84.0) (2022-12-16)
+
+
+### Features
+
+* new types for wizards ([a52152a](https://github.com/bettyblocks/material-ui-component-set/commit/a52152a9584afc01499eb5bcaa0853f28eb884ce))
+
 ## [2.83.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.83.1...v2.83.2) (2022-12-13)
 
 
