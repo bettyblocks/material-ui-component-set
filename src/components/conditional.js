@@ -12,7 +12,7 @@
       dataComponentAttribute,
       createPage,
     } = options;
-    const { useText, env } = B;
+    const { useText, env, useProperty, useLogic } = B;
     const isDev = env === 'dev';
     const isPristine = isDev && children.length === 0;
     const mounted = useRef(false);
@@ -21,7 +21,16 @@
     const [leftValue, setLeftValue] = useState(leftText);
     const [rightValue, setRightValue] = useState(rightText);
     const [visible, setVisible] = useState(initVisibility);
+    const logic = useLogic(createPage);
+    console.log({ leftText, left });
     console.log('conditionalComp', createPage);
+    const propValue =
+      !isDev &&
+      createPage &&
+      createPage.left &&
+      useProperty(createPage.left.id);
+    console.log('propValue', propValue);
+    console.log('logic', logic);
 
     const evalCondition = () => {
       const leftAsNumber = parseFloat(leftValue);
