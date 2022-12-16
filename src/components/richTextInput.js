@@ -1,6 +1,6 @@
 (() => ({
   name: 'RichTextInput',
-  type: 'FORM_COMPONENT',
+  type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   dependencies: [
@@ -1045,7 +1045,7 @@
         padding: '0.5px 14px',
         color: isDev && 'rgb(0, 0, 0)',
         height: ({ options: { height } }) => height,
-        overflow: 'overlay',
+        overflow: 'auto',
         '& pre': {
           backgroundColor: '#eee',
           padding: '10px',
@@ -1117,7 +1117,7 @@
         '&.show': {
           display: 'block',
         },
-        overflow: 'overlay',
+        overflow: 'auto',
         height: 'min-content',
         maxHeight: ({ options: { height } }) => `calc(${height} - 44px)`,
       },
