@@ -119,12 +119,12 @@
       },
       {
         operator: 'matches',
-        label: 'Matches with',
+        label: 'Contains',
         kinds: [...stringKinds],
       },
       {
         operator: 'does_not_match',
-        label: 'Does not match',
+        label: 'Does not contain',
         kinds: [...stringKinds],
       },
       {
@@ -347,6 +347,7 @@
         <div key={row.rowId} style={{ width: '100%', marginBottom: '10px' }}>
           <TextField
             value={row.propertyValue}
+            classes={{ root: classes.textFieldHighlight }}
             select
             size="small"
             variant="outlined"
@@ -368,6 +369,7 @@
           <TextField
             size="small"
             value={row.operator}
+            classes={{ root: classes.textFieldHighlight }}
             select
             variant="outlined"
             style={{ marginRight: '10px', width: '15%' }}
@@ -390,6 +392,7 @@
             <TextField
               size="small"
               value={row.rightValue}
+              classes={{ root: classes.textFieldHighlight }}
               type={inputType()}
               style={{ width: '33%' }}
               variant="outlined"
@@ -429,6 +432,7 @@
                 classes={{
                   toolbar: classes.datePicker,
                   daySelected: classes.datePicker,
+                  root: classes.textFieldHighlight,
                 }}
                 size="small"
                 value={row.rightValue === '' ? null : row.rightValue}
@@ -466,6 +470,7 @@
                 classes={{
                   toolbar: classes.datePicker,
                   daySelected: classes.datePicker,
+                  root: classes.textFieldHighlight,
                 }}
                 id="date-picker-dialog"
                 style={{ width: '33%', margin: '0px' }}
@@ -730,6 +735,19 @@
         width: ({ options: { width } }) => !isDev && width,
         height: ({ options: { height } }) => (isDev ? '100%' : height),
         minHeight: 0,
+      },
+      textFieldHighlight: {
+        '& .MuiInputBase-root': {
+          '&.Mui-focused, &.Mui-focused:hover': {
+            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
+              {
+                borderColor: ({ options: { highlightColor } }) => [
+                  style.getColor(highlightColor),
+                  '!important',
+                ],
+              },
+          },
+        },
       },
       checkBox: {
         color: ({ options: { highlightColor } }) => [
