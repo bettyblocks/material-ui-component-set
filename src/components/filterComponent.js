@@ -1,5 +1,5 @@
 (() => ({
-  name: 'FilterComponent',
+  name: 'Filter',
   type: 'CONTAINER_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
