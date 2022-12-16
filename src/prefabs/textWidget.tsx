@@ -18,6 +18,7 @@ import {
   linked,
   PrefabComponentOption,
   component as makeComponent,
+  InteractionType,
 } from '@betty-blocks/component-sdk';
 import { options as formOptions } from './structures/ActionJSForm/options';
 import {
@@ -27,6 +28,8 @@ import {
   TextInput,
   textOptions,
   textInputOptions,
+  Conditional,
+  conditionalOptions,
 } from './structures';
 import { IdPropertyProps, ModelQuery } from './types';
 
@@ -55,7 +58,6 @@ const beforeCreate = ({
   const componentId = createUuid();
   const pageName = getPageName();
   const unsupportedKinds = createBlacklist(['TEXT', 'URL', 'IBAN', 'STRING']);
-
   const { data } = useModelQuery({
     variables: { id: modelId },
     onCompleted: (result: ModelQuery) => {
@@ -206,18 +208,18 @@ const beforeCreate = ({
             }),
           );
 
-          // const interaction = {
-          //   name: 'Submit',
-          //   sourceEvent: 'onblur',
-          //   parameters: [],
-          //   ref: {
-          //     targetComponentId: '#TextWidgetForm',
-          //     sourceComponentId: '#TextInput',
-          //   },
-          //   type: 'Global' as InteractionType,
-          // };
+          const interaction = {
+            name: 'Submit',
+            sourceEvent: 'onBlur',
+            parameters: [],
+            ref: {
+              targetComponentId: '#TextWidgetForm',
+              sourceComponentId: '#TextInput',
+            },
+            type: 'Custom' as InteractionType,
+          };
 
-          // newPrefab.interactions?.push(interaction);
+          newPrefab.interactions?.push(interaction);
           setValidationMessage('');
           save(newPrefab);
         }}
@@ -238,7 +240,23 @@ export default makePrefab('Text Widget', attributes, beforeCreate, [
   wrapper(
     {
       label: 'Text widget',
+      optionCategories: [
+        {
+          label: 'Conditional options',
+          expanded: true,
+          members: ['conditionLeft', 'conditionComparison', 'conditionRight'],
+        },
+      ],
       options: {
+        pappel: linked({
+          label: '#textCompType',
+          value: {
+            ref: {
+              componentId: '#questionText',
+              optionId: '##textCompType',
+            },
+          },
+        }),
         question: linked({
           label: 'Question',
           value: {
@@ -263,6 +281,33 @@ export default makePrefab('Text Widget', attributes, beforeCreate, [
             ref: {
               componentId: '#TextInput',
               optionId: '#textInputRequired',
+            },
+          },
+        }),
+        conditionLeft: linked({
+          label: 'Left condition',
+          value: {
+            ref: {
+              componentId: '#conditional',
+              optionId: '#conditionOptionLeft',
+            },
+          },
+        }),
+        conditionComparison: linked({
+          label: 'equals',
+          value: {
+            ref: {
+              componentId: '#conditional',
+              optionId: '#conditionOptionCompare',
+            },
+          },
+        }),
+        conditionRight: linked({
+          label: 'Right condition',
+          value: {
+            ref: {
+              componentId: '#conditional',
+              optionId: '#conditionOptionRight',
             },
           },
         }),
@@ -294,73 +339,137 @@ export default makePrefab('Text Widget', attributes, beforeCreate, [
           },
         },
         [
-          makeComponent(
-            'Form',
-            { ref: { id: '#TextWidgetForm' }, options: { ...formOptions } },
-            [
-              TextComp(
-                {
-                  ref: { id: '#questionText' },
-                  options: {
-                    ...textOptions,
-                    content: variable('Content', {
-                      ref: { id: '#textContent' },
-                      value: [],
-                      configuration: { as: 'MULTILINE' },
-                    }),
-                    type: font('Font', { value: ['Body1'] }),
-                    outerSpacing: sizes('Outer space', {
-                      value: ['0rem', '0rem', 'S', '0rem'],
-                    }),
-                    fontWeight: option('CUSTOM', {
-                      label: 'Font weight',
-                      value: '500',
-                      configuration: {
-                        as: 'DROPDOWN',
-                        dataType: 'string',
-                        allowedInput: [
-                          { name: '100', value: '100' },
-                          { name: '200', value: '200' },
-                          { name: '300', value: '300' },
-                          { name: '400', value: '400' },
-                          { name: '500', value: '500' },
-                          { name: '600', value: '600' },
-                          { name: '700', value: '700' },
-                          { name: '800', value: '800' },
-                          { name: '900', value: '900' },
-                        ],
+          Conditional(
+            {
+              ref: { id: '#conditional' },
+              options: {
+                ...conditionalOptions,
+                left: variable('Left', {
+                  ref: { id: '#conditionOptionLeft' },
+                  value: [],
+                }),
+                compare: option('CUSTOM', {
+                  label: 'Compare',
+                  ref: { id: '#conditionOptionCompare' },
+                  value: 'eq',
+                  configuration: {
+                    as: 'DROPDOWN',
+                    dataType: 'string',
+                    allowedInput: [
+                      {
+                        name: 'Equals',
+                        value: 'eq',
                       },
-                    }),
+                      {
+                        name: 'Not equal',
+                        value: 'neq',
+                      },
+                      {
+                        name: 'Contains',
+                        value: 'contains',
+                      },
+                      {
+                        name: 'Does not contain',
+                        value: 'notcontains',
+                      },
+                      {
+                        name: 'Greater than',
+                        value: 'gt',
+                      },
+                      {
+                        name: 'Less than',
+                        value: 'lt',
+                      },
+                      {
+                        name: 'Greater than or equal to',
+                        value: 'gteq',
+                      },
+                      {
+                        name: 'Less than or equal to',
+                        value: 'lteq',
+                      },
+                    ],
                   },
-                },
-                [],
-              ),
-              TextInput(
-                {
-                  label: 'Text field',
-                  ref: { id: '#TextInput' },
-                  options: {
-                    ...textInputOptions,
-                    hideLabel: toggle('Hide label', { value: true }),
-                    placeholder: variable('Placeholder', {
-                      ref: { id: '#textInputPlaceholder' },
-                      value: [''],
-                    }),
-                    required: toggle('Required', {
-                      ref: { id: '#textInputRequired' },
-                    }),
-                    margin: buttongroup(
-                      'Margin',
-                      [
-                        ['None', 'none'],
-                        ['Dense', 'dense'],
-                        ['Normal', 'normal'],
-                      ],
-                      { value: 'none' },
-                    ),
-                  },
-                },
-                [],
+                }),
+                right: variable('Right', {
+                  ref: { id: '#conditionOptionRight' },
+                  value: [],
+                }),
+              },
+            },
+            [
+              makeComponent(
+                'Form',
+                { ref: { id: '#TextWidgetForm' }, options: { ...formOptions } },
+                [
+                  TextComp(
+                    {
+                      ref: { id: '#questionText' },
+                      options: {
+                        ...textOptions,
+                        content: variable('Content', {
+                          ref: { id: '#textContent' },
+                          value: [],
+                          configuration: { as: 'MULTILINE' },
+                        }),
+                        type: font('Font', {
+                          ref: { id: '#textCompType' },
+                          value: ['Body1'],
+                        }),
+                        outerSpacing: sizes('Outer space', {
+                          value: ['0rem', '0rem', 'S', '0rem'],
+                        }),
+                        fontWeight: option('CUSTOM', {
+                          label: 'Font weight',
+                          value: '500',
+                          configuration: {
+                            as: 'DROPDOWN',
+                            dataType: 'string',
+                            allowedInput: [
+                              { name: '100', value: '100' },
+                              { name: '200', value: '200' },
+                              { name: '300', value: '300' },
+                              { name: '400', value: '400' },
+                              { name: '500', value: '500' },
+                              { name: '600', value: '600' },
+                              { name: '700', value: '700' },
+                              { name: '800', value: '800' },
+                              { name: '900', value: '900' },
+                            ],
+                          },
+                        }),
+                      },
+                    },
+                    [],
+                  ),
+                  TextInput(
+                    {
+                      label: 'Text field',
+                      ref: { id: '#TextInput' },
+                      options: {
+                        ...textInputOptions,
+                        hideLabel: toggle('Hide label', { value: true }),
+                        placeholder: variable('Placeholder', {
+                          ref: { id: '#textInputPlaceholder' },
+                          value: [''],
+                        }),
+                        required: toggle('Required', {
+                          ref: { id: '#textInputRequired' },
+                        }),
+                        margin: buttongroup(
+                          'Margin',
+                          [
+                            ['None', 'none'],
+                            ['Dense', 'dense'],
+                            ['Normal', 'normal'],
+                          ],
+                          { value: 'none' },
+                        ),
+                      },
+                    },
+                    [],
+                  ),
+                ],
               ),
             ],
           ),
