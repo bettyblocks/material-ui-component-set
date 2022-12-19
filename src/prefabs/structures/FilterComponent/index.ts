@@ -17,9 +17,5 @@ export const FilterComponent = (
   //   ? { ...config.optionCategories }
   //   : defaultCategories;
 
-  return component(
-    'FilterComponent',
-    { options, ref, style, label },
-    descendants,
-  );
+  return component('Filter', { options, ref, style, label }, descendants);
 };

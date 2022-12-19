@@ -134,11 +134,11 @@
             }
           });
 
-          B.defineFunction('Filter v2', (value) => {
+          B.defineFunction('Advanced filter', (value) => {
             setFilterV2(value.where);
           });
 
-          B.defineFunction('Clear filter v2', () => {
+          B.defineFunction('Clear advanced filter', () => {
             setFilterV2({});
           });
 
