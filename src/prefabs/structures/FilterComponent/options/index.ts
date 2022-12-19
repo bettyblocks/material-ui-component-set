@@ -62,7 +62,7 @@ export const filterComponentOptions = {
       as: 'UNIT',
     },
   }),
-  outerSpacing: sizes('Oubter space', {
+  outerSpacing: sizes('Outer space', {
     value: ['0rem', '0rem', '0rem', '0rem'],
   }),
   highlightColor: color('Highlight Color', {
