@@ -1,3 +1,17 @@
+# [2.85.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.84.0...v2.85.0) (2022-12-19)
+
+
+### Bug Fixes
+
+* added interaction to datalist and container ([8b9b8dd](https://github.com/bettyblocks/material-ui-component-set/commit/8b9b8dd59236b41ae41818629c7fc676544e966e))
+* small name changes ([903b552](https://github.com/bettyblocks/material-ui-component-set/commit/903b55203fc90f09ef1f97c6bec49aed22ca38c9))
+
+
+### Features
+
+* add beforeCreate ([2c67d21](https://github.com/bettyblocks/material-ui-component-set/commit/2c67d21fc96a206a81043b16191c69adbbe31076))
+* add filter component ([146c848](https://github.com/bettyblocks/material-ui-component-set/commit/146c848214a561e168a2ae4cd10de8d2f90ff75b))
+
 # [2.84.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.83.2...v2.84.0) (2022-12-16)
 
 
