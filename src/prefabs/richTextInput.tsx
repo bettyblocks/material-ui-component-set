@@ -32,7 +32,7 @@ const beforeCreate = ({
 
 const attributes = {
   category: 'FORM',
-  icon: Icon.TextareaIcon,
+  icon: Icon.RichTextEditorIcon,
   keywords: ['Form', 'input', 'rich text', 'rich', 'text', 'editor'],
 };
 

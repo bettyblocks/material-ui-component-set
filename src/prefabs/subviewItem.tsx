@@ -8,7 +8,7 @@ import {
 import { SubviewItem } from './structures';
 
 const attr = {
-  icon: Icon.ListItemIcon,
+  icon: Icon.SubViewItemIcon,
   category: 'LIST',
   keywords: ['List', 'item', 'listitem'],
 };
