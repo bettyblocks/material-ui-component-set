@@ -39,9 +39,9 @@
     const linkToExternalText =
       (linkToExternal && useText(linkToExternal)) || '';
     let linkedContent = parsedContent;
+    let alteredContent = '';
 
     if (isDev && !isPristine) {
-      let alteredContent = '';
       content.forEach((value) => {
         if (typeof value === 'string' || value instanceof String) {
           alteredContent += value;
@@ -49,31 +49,43 @@
           alteredContent += `<span class="${classes.nowrap}" >${value.name}</span>`;
         }
       });
-      linkedContent = (
-        <Tag
-          dangerouslySetInnerHTML={{
-            __html: alteredContent.replace(/^\s+|\s+$/g, ''),
-          }}
-        />
-      );
+      if (!hasLink && !hasExternalLink) {
+        linkedContent = (
+          <Tag
+            className={classes.content}
+            data-component={useText(dataComponentAttribute) || 'Text'}
+            dangerouslySetInnerHTML={{
+              __html: alteredContent.replace(/^\s+|\s+$/g, ''),
+            }}
+          />
+        );
+      }
     } else if (isDev) {
-      linkedContent = (
-        <span className={classes.placeholder}>Empty content</span>
-      );
+      linkedContent = <Tag className={classes.placeholder}>Empty content</Tag>;
     }
 
     if (hasLink || hasExternalLink) {
       linkedContent = (
-        <Link
-          className={classes.link}
-          href={hasExternalLink ? linkToExternalText : undefined}
-          target={linkTarget}
-          rel={linkTarget === '_blank' ? 'noopener' : ''}
-          component={hasLink ? BLink : undefined}
-          endpoint={hasLink ? linkTo : undefined}
+        <Tag
+          className={classes.content}
+          data-component={useText(dataComponentAttribute) || 'Text'}
         >
-          {linkedContent}
-        </Link>
+          <Link
+            className={classes.link}
+            href={hasExternalLink ? linkToExternalText : undefined}
+            target={linkTarget}
+            rel={linkTarget === '_blank' ? 'noopener' : ''}
+            component={hasLink ? BLink : undefined}
+            endpoint={hasLink ? linkTo : undefined}
+          >
+            <span
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{
+                __html: isDev ? alteredContent : linkedContent,
+              }}
+            />
+          </Link>
+        </Tag>
       );
     }
 
@@ -84,12 +96,7 @@
         data-component={useText(dataComponentAttribute) || 'Text'}
       />
     ) : (
-      <Tag
-        className={classes.content}
-        data-component={useText(dataComponentAttribute) || 'Text'}
-      >
-        {linkedContent}
-      </Tag>
+      linkedContent
     );
   })(),
   styles: (B) => (t) => {
