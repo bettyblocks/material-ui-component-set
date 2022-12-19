@@ -157,9 +157,9 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
-"@betty-blocks/cli@^25.59.1":
+"@betty-blocks/cli@25.60.0":
   version "25.60.0"
-  resolved "https://registry.npmjs.org/@betty-blocks/cli/-/cli-25.60.0.tgz"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.60.0.tgz#28ba07a5def4e95f5559fad08545de357e16fbfd"
   integrity sha512-dtPMowT7cN1y2C6jGDADx/j9VRTbD7ey8QTqi80k7/IkaAAp5IRvZbiBKHj90jXfQNfxUI737CY02r5ZApUGRQ==
   dependencies:
     "@azure/ms-rest-js" "^2.0.4"
