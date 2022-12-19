@@ -16,16 +16,20 @@ import {
   PrefabComponent,
   PrefabComponentOption,
   component as makeComponent,
+  toggle,
+  InteractionType,
 } from '@betty-blocks/component-sdk';
 import {
   Box,
   boxOptions,
+  Conditional,
+  conditionalOptions,
   RadioInput,
   radioInputOptions,
   Text as TextPrefab,
   textOptions,
 } from './structures';
-import { IdPropertyProps, ModelQuery } from './types';
+import { IdPropertyProps, ModelProps, ModelQuery } from './types';
 import { options as formOptions } from './structures/ActionJSForm/options';
 
 const beforeCreate = ({
@@ -41,20 +45,23 @@ const beforeCreate = ({
     prepareAction,
     getPageName,
     setOption,
+    BettyPrefabs,
+    makeBettyUpdateInput,
   },
 }: BeforeCreateArgs) => {
   const [primaryProperty, setPrimaryProperty] = React.useState('');
   const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
   const [validationMessage, setValidationMessage] = React.useState('');
+  const [model, setModel] = React.useState<ModelProps>();
 
   const modelId = useModelIdSelector();
   const componentId = createUuid();
   const pageName = getPageName();
   const unsupportedKinds = createBlacklist(['LIST']);
-
   const { data } = useModelQuery({
     variables: { id: modelId },
     onCompleted: (result: ModelQuery) => {
+      setModel(result.model);
       setIdProperty(result.model.properties.find(({ name }) => name === 'id'));
     },
   });
@@ -100,9 +107,10 @@ const beforeCreate = ({
       }
       return treeSearch(refValue, component.descendants);
     }, null);
+
   return (
     <>
-      <Header title="Configure your text widget" onClose={close} />
+      <Header title="Configure your radio widget" onClose={close} />
       <Content>
         <Field label="Property">
           <PropertySelector
@@ -110,7 +118,6 @@ const beforeCreate = ({
               setPrimaryProperty(value);
             }}
             modelId={modelId}
-            size="large"
             value={primaryProperty}
             disabledKinds={unsupportedKinds}
             error={
@@ -125,13 +132,10 @@ const beforeCreate = ({
         onSave={async (): Promise<void> => {
           const newPrefab = { ...prefab };
 
-          const text = treeSearch(
-            '#questionTitleComponent',
-            newPrefab.structure,
-          );
-          const textInput = treeSearch('#radioOption', newPrefab.structure);
-          const textWidgetForm = treeSearch(
-            '#TextWidgetForm',
+          const text = treeSearch('#QuestionText', newPrefab.structure);
+          const radioInput = treeSearch('#RadioInput', newPrefab.structure);
+          const radioWidgetForm = treeSearch(
+            '#RadioWidgetForm',
             newPrefab.structure,
           );
           const propertyObj = transformProperty(primaryProperty);
@@ -139,27 +143,23 @@ const beforeCreate = ({
             ...opt,
             value: [propertyObj.label],
           }));
-          setOption(textInput, 'placeholder', (opt: PrefabComponentOption) => ({
-            ...opt,
-            value: [],
-          }));
 
           if (!idProperty) {
             throw new Error('We could not find an idProperty.');
           }
-          textWidgetForm.id = componentId;
+          radioWidgetForm.id = componentId;
           const result = await prepareAction(
             componentId,
             idProperty,
             [transformProperty(primaryProperty)],
-            'create',
+            'update',
             undefined,
-            `${pageName} - create ${propertyObj.label}`,
+            `${pageName} - update ${propertyObj.label}`,
             'public',
           );
 
           setOption(
-            textWidgetForm,
+            radioWidgetForm,
             'actionId',
             (opts: PrefabComponentOption) => ({
               ...opts,
@@ -172,15 +172,19 @@ const beforeCreate = ({
             console.error('unable to set model option, no model selected');
             return;
           }
-          setOption(textWidgetForm, 'model', (opts: PrefabComponentOption) => ({
-            ...opts,
-            value: modelId,
-            configuration: {
-              disabled: true,
-            },
-          }));
           setOption(
-            textInput,
+            radioWidgetForm,
+            'model',
+            (opts: PrefabComponentOption) => ({
+              ...opts,
+              value: modelId,
+              configuration: {
+                disabled: true,
+              },
+            }),
+          );
+          setOption(
+            radioInput,
             'actionProperty',
             (opt: PrefabComponentOption) => ({
               ...opt,
@@ -189,22 +193,55 @@ const beforeCreate = ({
               },
             }),
           );
+
+          setOption(radioInput, 'value', (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: [enrichVarObj(primaryProperty)],
+          }));
+
+          let actionVarId: string;
+          Object.keys(result.variables).forEach((key) => {
+            actionVarId = key;
+          });
+
           setOption(
-            textInput,
+            radioInput,
             'actionVariableId',
             (opt: PrefabComponentOption) => ({
               ...opt,
-              value: '',
+              value: result.variables[actionVarId][1].id,
               configuration: {
                 condition: {
                   type: 'HIDE',
                   option: 'actionVariableId',
                   comparator: 'EQ',
-                  value: '',
+                  value: result.variables[actionVarId][1].id,
                 },
               },
             }),
           );
+
+          radioWidgetForm.descendants.push(
+            makeBettyUpdateInput(
+              BettyPrefabs.HIDDEN,
+              model,
+              idProperty,
+              result.recordInputVariable,
+            ),
+          );
+
+          const interaction = {
+            name: 'Submit',
+            sourceEvent: 'onChange',
+            parameters: [],
+            ref: {
+              targetComponentId: '#RadioWidgetForm',
+              sourceComponentId: '#RadioInput',
+            },
+            type: 'Custom' as InteractionType,
+          };
+
+          newPrefab.interactions?.push(interaction);
           setValidationMessage('');
           save(newPrefab);
         }}
@@ -217,7 +254,7 @@ const beforeCreate = ({
 const interactions: PrefabInteraction[] = [];
 
 const attributes = {
-  category: 'LAYOUT',
+  category: '0-Widget',
   icon: Icon.RadioButtonIcon,
   interactions,
   variables: [],
@@ -229,9 +266,9 @@ export default makePrefab('Radio Widget', attributes, beforeCreate, [
       label: 'Radio widget',
       optionCategories: [
         {
-          label: 'Question',
+          label: 'Conditional options',
           expanded: true,
-          members: ['questionTitle'],
+          members: ['left', 'compare', 'right'],
           condition: {
             type: 'SHOW',
             option: 'visibility',
@@ -245,93 +282,206 @@ export default makePrefab('Radio Widget', attributes, beforeCreate, [
           label: 'Question',
           value: {
             ref: {
-              componentId: '#questionTitleComponent',
+              componentId: '#QuestionText',
               optionId: '#questionTitleContent',
+            },
+          },
+        }),
+        required: linked({
+          label: 'Required to answer',
+          value: {
+            ref: {
+              componentId: '#RadioInput',
+              optionId: '#questionRequired',
+            },
+          },
+        }),
+        left: linked({
+          label: 'Left condition',
+          value: {
+            ref: {
+              componentId: '#questionCondition',
+              optionId: '#conditionLeft',
+            },
+          },
+        }),
+        compare: linked({
+          label: 'equals',
+          value: {
+            ref: {
+              componentId: '#questionCondition',
+              optionId: '#conditionCompare',
+            },
+          },
+        }),
+        right: linked({
+          label: 'Right condition',
+          value: {
+            ref: {
+              componentId: '#questionCondition',
+              optionId: '#conditionRight',
             },
           },
         }),
       },
     },
     [
-      Box(
+      Conditional(
         {
+          ref: {
+            id: '#questionCondition',
+          },
           options: {
-            ...boxOptions,
-            backgroundColor: color('Background color', {
-              value: ThemeColor.WHITE,
-            }),
-            borderColor: color('Border color', {
-              value: ThemeColor.MEDIUM,
-            }),
-            borderWidth: size('Border thickness', {
-              value: '1px',
-              configuration: {
-                as: 'UNIT',
+            ...conditionalOptions,
+            left: variable('Left', {
+              value: [],
+              ref: {
+                id: '#conditionLeft',
               },
             }),
-            borderRadius: size('Border radius', {
-              value: '5px',
+            compare: option('CUSTOM', {
+              label: 'Compare',
+              value: 'eq',
               configuration: {
-                as: 'UNIT',
+                as: 'DROPDOWN',
+                dataType: 'string',
+                allowedInput: [
+                  {
+                    name: 'Equals',
+                    value: 'eq',
+                  },
+                  {
+                    name: 'Not equal',
+                    value: 'neq',
+                  },
+                  {
+                    name: 'Contains',
+                    value: 'contains',
+                  },
+                  {
+                    name: 'Does not contain',
+                    value: 'notcontains',
+                  },
+                  {
+                    name: 'Greater than',
+                    value: 'gt',
+                  },
+                  {
+                    name: 'Less than',
+                    value: 'lt',
+                  },
+                  {
+                    name: 'Greater than or equal to',
+                    value: 'gteq',
+                  },
+                  {
+                    name: 'Less than or equal to',
+                    value: 'lteq',
+                  },
+                ],
+              },
+              ref: {
+                id: '#conditionCompare',
               },
             }),
-            innerSpacing: sizes('Inner space', {
-              value: ['L', 'L', 'L', 'L'],
+            right: variable('Right', {
+              value: [],
+              ref: {
+                id: '#conditionRight',
+              },
             }),
           },
         },
         [
-          makeComponent(
-            'Form',
-            { ref: { id: '#TextWidgetForm' }, options: { ...formOptions } },
+          Box(
+            {
+              options: {
+                ...boxOptions,
+                backgroundColor: color('Background color', {
+                  value: ThemeColor.WHITE,
+                }),
+                borderColor: color('Border color', {
+                  value: ThemeColor.MEDIUM,
+                }),
+                borderWidth: size('Border thickness', {
+                  value: '1px',
+                  configuration: {
+                    as: 'UNIT',
+                  },
+                }),
+                borderRadius: size('Border radius', {
+                  value: '5px',
+                  configuration: {
+                    as: 'UNIT',
+                  },
+                }),
+                innerSpacing: sizes('Inner space', {
+                  value: ['L', 'L', 'L', 'L'],
+                }),
+              },
+            },
             [
-              TextPrefab({
-                ref: {
-                  id: '#questionTitleComponent',
+              makeComponent(
+                'Form',
+                {
+                  ref: { id: '#RadioWidgetForm' },
+                  options: { ...formOptions },
                 },
-                options: {
-                  ...textOptions,
-                  content: variable('Content', {
-                    value: [''],
-                    configuration: {
-                      as: 'MULTILINE',
-                    },
+                [
+                  TextPrefab({
                     ref: {
-                      id: '#questionTitleContent',
+                      id: '#QuestionText',
+                    },
+                    options: {
+                      ...textOptions,
+                      content: variable('Content', {
+                        value: [''],
+                        configuration: {
+                          as: 'MULTILINE',
+                        },
+                        ref: {
+                          id: '#questionTitleContent',
+                        },
+                      }),
+                      type: font('Font', { value: ['Body1'] }),
+                      outerSpacing: sizes('Outer space', {
+                        value: ['0rem', '0rem', 'S', '0rem'],
+                      }),
+                      fontWeight: option('CUSTOM', {
+                        label: 'Font weight',
+                        value: '500',
+                        configuration: {
+                          as: 'DROPDOWN',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: '100', value: '100' },
+                            { name: '200', value: '200' },
+                            { name: '300', value: '300' },
+                            { name: '400', value: '400' },
+                            { name: '500', value: '500' },
+                            { name: '600', value: '600' },
+                            { name: '700', value: '700' },
+                            { name: '800', value: '800' },
+                            { name: '900', value: '900' },
+                          ],
+                        },
+                      }),
                     },
                   }),
-                  type: font('Font', { value: ['Body1'] }),
-                  outerSpacing: sizes('Outer space', {
-                    value: ['0rem', '0rem', 'S', '0rem'],
-                  }),
-                  fontWeight: option('CUSTOM', {
-                    label: 'Font weight',
-                    value: '500',
-                    configuration: {
-                      as: 'DROPDOWN',
-                      dataType: 'string',
-                      allowedInput: [
-                        { name: '100', value: '100' },
-                        { name: '200', value: '200' },
-                        { name: '300', value: '300' },
-                        { name: '400', value: '400' },
-                        { name: '500', value: '500' },
-                        { name: '600', value: '600' },
-                        { name: '700', value: '700' },
-                        { name: '800', value: '800' },
-                        { name: '900', value: '900' },
-                      ],
+                  RadioInput({
+                    ref: { id: '#RadioInput' },
+                    options: {
+                      ...radioInputOptions,
+                      label: variable('Label', { value: [''] }),
+                      required: toggle('Required', {
+                        ref: {
+                          id: '#questionRequired',
+                        },
+                      }),
                     },
                   }),
-                },
-              }),
-              RadioInput({
-                ref: { id: '#radioOption' },
-                options: {
-                  ...radioInputOptions,
-                  label: variable('Label', { value: [''] }),
-                },
-              }),
+                ],
+              ),
             ],
           ),
         ],
