@@ -31,7 +31,7 @@ import {
   Conditional,
   conditionalOptions,
 } from './structures';
-import { IdPropertyProps, ModelQuery } from './types';
+import { IdPropertyProps, ModelProps, ModelQuery } from './types';
 
 const interactions: PrefabInteraction[] = [];
 
@@ -48,12 +48,14 @@ const beforeCreate = ({
     prepareAction,
     getPageName,
     setOption,
+    makeBettyUpdateInput,
+    BettyPrefabs,
   },
 }: BeforeCreateArgs) => {
   const [primaryProperty, setPrimaryProperty] = React.useState('');
   const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
   const [validationMessage, setValidationMessage] = React.useState('');
-
+  const [model, setModel] = React.useState<ModelProps>();
   const modelId = useModelIdSelector();
   const componentId = createUuid();
   const pageName = getPageName();
@@ -62,6 +64,7 @@ const beforeCreate = ({
     variables: { id: modelId },
     onCompleted: (result: ModelQuery) => {
       setIdProperty(result.model.properties.find(({ name }) => name === 'id'));
+      setModel(result.model);
     },
   });
 
@@ -154,10 +157,20 @@ const beforeCreate = ({
             componentId,
             idProperty,
             [transformProperty(primaryProperty)],
-            'create',
+            'update',
             undefined,
             `${pageName} - create ${propertyObj.label}`,
             'public',
+          );
+
+          if (!model) throw new Error('No mode found.');
+          textWidgetForm.descendants.push(
+            makeBettyUpdateInput(
+              BettyPrefabs.HIDDEN,
+              model,
+              idProperty,
+              result.recordInputVariable,
+            ),
           );
 
           setOption(
