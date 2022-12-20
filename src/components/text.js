@@ -39,9 +39,9 @@
     const linkToExternalText =
       (linkToExternal && useText(linkToExternal)) || '';
     let linkedContent = parsedContent;
+    let alteredContent = '';
 
     if (isDev && !isPristine) {
-      let alteredContent = '';
       content.forEach((value) => {
         if (typeof value === 'string' || value instanceof String) {
           alteredContent += value;
@@ -49,19 +49,9 @@
           alteredContent += `<span class="${classes.nowrap}" >${value.name}</span>`;
         }
       });
-      linkedContent = (
-        <Tag
-          dangerouslySetInnerHTML={{
-            __html: alteredContent.replace(/^\s+|\s+$/g, ''),
-          }}
-        />
-      );
     } else if (isDev) {
-      linkedContent = (
-        <span className={classes.placeholder}>Empty content</span>
-      );
+      linkedContent = <Tag className={classes.placeholder}>Empty content</Tag>;
     }
-
     if (hasLink || hasExternalLink) {
       linkedContent = (
         <Link
@@ -72,7 +62,12 @@
           component={hasLink ? BLink : undefined}
           endpoint={hasLink ? linkTo : undefined}
         >
-          {linkedContent}
+          <span
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{
+              __html: isDev ? alteredContent : parsedContent,
+            }}
+          />
         </Link>
       );
     }
