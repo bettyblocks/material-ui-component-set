@@ -43,49 +43,33 @@
 
     if (isDev && !isPristine) {
       content.forEach((value) => {
+        console.log(value);
         if (typeof value === 'string' || value instanceof String) {
           alteredContent += value;
         } else {
           alteredContent += `<span class="${classes.nowrap}" >${value.name}</span>`;
         }
       });
-      if (!hasLink && !hasExternalLink) {
-        linkedContent = (
-          <Tag
-            className={classes.content}
-            data-component={useText(dataComponentAttribute) || 'Text'}
-            dangerouslySetInnerHTML={{
-              __html: alteredContent.replace(/^\s+|\s+$/g, ''),
-            }}
-          />
-        );
-      }
     } else if (isDev) {
       linkedContent = <Tag className={classes.placeholder}>Empty content</Tag>;
     }
-
     if (hasLink || hasExternalLink) {
       linkedContent = (
-        <Tag
-          className={classes.content}
-          data-component={useText(dataComponentAttribute) || 'Text'}
+        <Link
+          className={classes.link}
+          href={hasExternalLink ? linkToExternalText : undefined}
+          target={linkTarget}
+          rel={linkTarget === '_blank' ? 'noopener' : ''}
+          component={hasLink ? BLink : undefined}
+          endpoint={hasLink ? linkTo : undefined}
         >
-          <Link
-            className={classes.link}
-            href={hasExternalLink ? linkToExternalText : undefined}
-            target={linkTarget}
-            rel={linkTarget === '_blank' ? 'noopener' : ''}
-            component={hasLink ? BLink : undefined}
-            endpoint={hasLink ? linkTo : undefined}
-          >
-            <span
-              // eslint-disable-next-line react/no-danger
-              dangerouslySetInnerHTML={{
-                __html: isDev ? alteredContent : linkedContent,
-              }}
-            />
-          </Link>
-        </Tag>
+          <span
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{
+              __html: isDev ? alteredContent : parsedContent,
+            }}
+          />
+        </Link>
       );
     }
 
@@ -96,7 +80,12 @@
         data-component={useText(dataComponentAttribute) || 'Text'}
       />
     ) : (
-      linkedContent
+      <Tag
+        className={classes.content}
+        data-component={useText(dataComponentAttribute) || 'Text'}
+      >
+        {linkedContent}
+      </Tag>
     );
   })(),
   styles: (B) => (t) => {
