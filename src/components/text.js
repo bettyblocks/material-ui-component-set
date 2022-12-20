@@ -43,7 +43,6 @@
 
     if (isDev && !isPristine) {
       content.forEach((value) => {
-        console.log(value);
         if (typeof value === 'string' || value instanceof String) {
           alteredContent += value;
         } else {
