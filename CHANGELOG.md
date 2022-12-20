@@ -1,3 +1,16 @@
+# [2.86.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.85.0...v2.86.0) (2022-12-19)
+
+
+### Bug Fixes
+
+* detail tab spacing on bigger sidebar ([c429d45](https://github.com/bettyblocks/material-ui-component-set/commit/c429d45836c52c0a77d7c610e8afd04ec1af47f4))
+* set width options on column ([2364c31](https://github.com/bettyblocks/material-ui-component-set/commit/2364c3156ca6cb2c986f25a964b337842c057855))
+
+
+### Features
+
+* add new icons to subview ([b72bc86](https://github.com/bettyblocks/material-ui-component-set/commit/b72bc86d6155c589fc10ceda0afddc11a9349a89))
+
 # [2.85.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.84.0...v2.85.0) (2022-12-19)
 
 
