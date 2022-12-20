@@ -1,3 +1,10 @@
+## [2.86.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.86.0...v2.86.1) (2022-12-20)
+
+
+### Bug Fixes
+
+* title and text with headings get the correct styling ([3fb67e6](https://github.com/bettyblocks/material-ui-component-set/commit/3fb67e683518f5d1e5bdca89c1f6db2a21c1f06c))
+
 # [2.86.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.85.0...v2.86.0) (2022-12-19)
 
 
