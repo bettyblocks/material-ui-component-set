@@ -39,7 +39,6 @@
     const linkToExternalText =
       (linkToExternal && useText(linkToExternal)) || '';
     let linkedContent = parsedContent;
-
     if (isDev && !isPristine) {
       linkedContent = '';
       content.forEach((value) => {
@@ -50,7 +49,7 @@
         }
       });
     } else if (isDev) {
-      linkedContent = <Tag className={classes.placeholder}>Empty content</Tag>;
+      linkedContent = `<span class=${classes.placeholder}>Empty content</span>`;
     }
     if (hasLink || hasExternalLink) {
       linkedContent = (
