@@ -39,14 +39,14 @@
     const linkToExternalText =
       (linkToExternal && useText(linkToExternal)) || '';
     let linkedContent = parsedContent;
-    let alteredContent = '';
 
     if (isDev && !isPristine) {
+      linkedContent = '';
       content.forEach((value) => {
         if (typeof value === 'string' || value instanceof String) {
-          alteredContent += value;
+          linkedContent += value;
         } else {
-          alteredContent += `<span class="${classes.nowrap}" >${value.name}</span>`;
+          linkedContent += `<span class="${classes.nowrap}" >${value.name}</span>`;
         }
       });
     } else if (isDev) {
@@ -65,10 +65,29 @@
           <span
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
-              __html: isDev ? alteredContent : parsedContent,
+              __html: linkedContent,
             }}
           />
         </Link>
+      );
+    }
+
+    if (isDev && !(hasLink || hasExternalLink)) {
+      linkedContent = (
+        <Tag
+          className={classes.content}
+          data-component={useText(dataComponentAttribute) || 'Text'}
+          dangerouslySetInnerHTML={{ __html: linkedContent }}
+        />
+      );
+    } else {
+      linkedContent = (
+        <Tag
+          className={classes.content}
+          data-component={useText(dataComponentAttribute) || 'Text'}
+        >
+          {linkedContent}
+        </Tag>
       );
     }
 
@@ -79,12 +98,7 @@
         data-component={useText(dataComponentAttribute) || 'Text'}
       />
     ) : (
-      <Tag
-        className={classes.content}
-        data-component={useText(dataComponentAttribute) || 'Text'}
-      >
-        {linkedContent}
-      </Tag>
+      linkedContent
     );
   })(),
   styles: (B) => (t) => {
