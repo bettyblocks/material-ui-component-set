@@ -373,14 +373,8 @@
 
     const optionFilter = useFilter(filterRaw || {});
 
-    // Adds the default values to the filter
-    const defaultValuesFilterArray = initialValue.reduce((acc, next) => {
-      return [...acc, { [valueProp.name]: { eq: next } }];
-    }, []);
-
     // We need to do this, because options.filter is not immutable
     const filter = {
-      ...(initialValue.length > 0 && { _or: defaultValuesFilterArray }),
       ...optionFilter,
     };
 
