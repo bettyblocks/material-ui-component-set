@@ -276,7 +276,9 @@
     }
 
     const ButtonWithTooltip = (
-      <Tooltip {...tooltipProps}>{ButtonComponent}</Tooltip>
+      <Tooltip {...tooltipProps}>
+        <div style={{ display: 'inline-block' }}>{ButtonComponent}</div>
+      </Tooltip>
     );
     const Button = addTooltip ? ButtonWithTooltip : ButtonComponent;
 
