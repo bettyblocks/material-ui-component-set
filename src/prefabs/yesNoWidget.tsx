@@ -2,38 +2,37 @@ import * as React from 'react';
 import {
   Icon,
   PrefabInteraction,
-  BeforeCreateArgs,
   wrapper,
-  sizes,
   ThemeColor,
   color,
   size,
-  variable,
-  option,
-  buttongroup,
   font,
-  hideIf,
-  modelAndRelation,
-  showIf,
-  PrefabComponentOption,
-  PrefabComponent,
+  variable,
+  sizes,
+  option,
   linked,
+  BeforeCreateArgs,
+  prefab as makePrefab,
+  PrefabComponent,
+  PrefabComponentOption,
   component as makeComponent,
-  prefab,
+  toggle,
+  InteractionType,
+  hideIf,
   property,
 } from '@betty-blocks/component-sdk';
 import {
   Box,
   boxOptions,
-  Text as TextComp,
-  textOptions,
+  Conditional,
+  conditionalOptions,
   RadioInput,
   radioInputOptions,
+  Text as TextPrefab,
+  textOptions,
 } from './structures';
+import { IdPropertyProps, ModelProps, ModelQuery } from './types';
 import { options as formOptions } from './structures/ActionJSForm/options';
-import { IdPropertyProps, ModelQuery } from './types';
-
-const interactions: PrefabInteraction[] = [];
 
 const beforeCreate = ({
   components: { Content, Header, Field, Footer, PropertySelector, Text },
@@ -48,20 +47,23 @@ const beforeCreate = ({
     prepareAction,
     getPageName,
     setOption,
+    BettyPrefabs,
+    makeBettyUpdateInput,
   },
 }: BeforeCreateArgs) => {
   const [primaryProperty, setPrimaryProperty] = React.useState('');
   const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
   const [validationMessage, setValidationMessage] = React.useState('');
+  const [model, setModel] = React.useState<ModelProps>();
 
   const modelId = useModelIdSelector();
   const componentId = createUuid();
   const pageName = getPageName();
-  const unsupportedKinds = createBlacklist(['BOOLEAN']);
-
+  const unsupportedKinds = createBlacklist(['LIST']);
   const { data } = useModelQuery({
     variables: { id: modelId },
     onCompleted: (result: ModelQuery) => {
+      setModel(result.model);
       setIdProperty(result.model.properties.find(({ name }) => name === 'id'));
     },
   });
@@ -96,6 +98,12 @@ const beforeCreate = ({
     return outputProp;
   };
 
+  if (modelId === null && validationMessage === '') {
+    setValidationMessage(
+      'The Yes/No widget needs to be inside a parent with a model',
+    );
+  }
+
   const treeSearch = (refValue: string, structure: any) =>
     structure.reduce((acc: string, component: PrefabComponent) => {
       if (acc) return acc;
@@ -107,11 +115,19 @@ const beforeCreate = ({
       }
       return treeSearch(refValue, component.descendants);
     }, null);
+
   return (
     <>
-      <Header title="Configure your text widget" onClose={close} />
+      <Header title="Configure your Yes/No widget" onClose={close} />
       <Content>
-        <Field label="Property">
+        <Field
+          label="Property"
+          error={
+            validationMessage && (
+              <Text color="#e82600">{validationMessage}</Text>
+            )
+          }
+        >
           <PropertySelector
             onChange={(value: string) => {
               setPrimaryProperty(value);
@@ -119,11 +135,7 @@ const beforeCreate = ({
             modelId={modelId}
             value={primaryProperty}
             disabledKinds={unsupportedKinds}
-            error={
-              validationMessage && (
-                <Text color="#e82600">{validationMessage}</Text>
-              )
-            }
+            disable={modelId === null}
           />
         </Field>
       </Content>
@@ -131,7 +143,7 @@ const beforeCreate = ({
         onSave={async (): Promise<void> => {
           const newPrefab = { ...prefab };
 
-          const text = treeSearch('#questionText', newPrefab.structure);
+          const text = treeSearch('#QuestionText', newPrefab.structure);
           const radioInput = treeSearch('#RadioInput', newPrefab.structure);
           const yesNoWidgetForm = treeSearch(
             '#YesNoWidgetForm',
@@ -142,14 +154,6 @@ const beforeCreate = ({
             ...opt,
             value: [propertyObj.label],
           }));
-          setOption(
-            radioInput,
-            'placeholder',
-            (opt: PrefabComponentOption) => ({
-              ...opt,
-              value: [],
-            }),
-          );
 
           if (!idProperty) {
             throw new Error('We could not find an idProperty.');
@@ -159,9 +163,9 @@ const beforeCreate = ({
             componentId,
             idProperty,
             [transformProperty(primaryProperty)],
-            'create',
+            'update',
             undefined,
-            `${pageName} - create ${propertyObj.label}`,
+            `${pageName} - update ${propertyObj.label}`,
             'public',
           );
 
@@ -190,6 +194,7 @@ const beforeCreate = ({
               },
             }),
           );
+
           setOption(
             radioInput,
             'actionProperty',
@@ -200,35 +205,64 @@ const beforeCreate = ({
               },
             }),
           );
+
+          setOption(radioInput, 'value', (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: [enrichVarObj(primaryProperty)],
+          }));
+
+          setOption(
+            radioInput,
+            'labelProperty',
+            (opt: PrefabComponentOption) => ({
+              ...opt,
+              value: enrichVarObj(primaryProperty),
+            }),
+          );
+
+          let actionVarId: string;
+          Object.keys(result.variables).forEach((key) => {
+            actionVarId = key;
+          });
+
           setOption(
             radioInput,
             'actionVariableId',
             (opt: PrefabComponentOption) => ({
               ...opt,
-              value: '',
+              value: result.variables[actionVarId][1].id,
               configuration: {
                 condition: {
                   type: 'HIDE',
                   option: 'actionVariableId',
                   comparator: 'EQ',
-                  value: '',
+                  value: result.variables[actionVarId][1].id,
                 },
               },
             }),
           );
 
-          // const interaction = {
-          //   name: 'Submit',
-          //   sourceEvent: 'onblur',
-          //   parameters: [],
-          //   ref: {
-          //     targetComponentId: '#YesNoWidgetForm',
-          //     sourceComponentId: '#RadioInput',
-          //   },
-          //   type: 'Global' as InteractionType,
-          // };
+          yesNoWidgetForm.descendants.push(
+            makeBettyUpdateInput(
+              BettyPrefabs.HIDDEN,
+              model,
+              idProperty,
+              result.recordInputVariable,
+            ),
+          );
 
-          // newPrefab.interactions?.push(interaction);
+          const interaction = {
+            name: 'Submit',
+            sourceEvent: 'onChange',
+            parameters: [],
+            ref: {
+              targetComponentId: '#YesNoWidgetForm',
+              sourceComponentId: '#RadioInput',
+            },
+            type: 'Custom' as InteractionType,
+          };
+
+          newPrefab.interactions?.push(interaction);
           setValidationMessage('');
           save(newPrefab);
         }}
@@ -238,33 +272,39 @@ const beforeCreate = ({
   );
 };
 
+const interactions: PrefabInteraction[] = [];
+
 const attributes = {
-  category: 'LAYOUT',
-  icon: Icon.UpdateFormIcon,
+  category: 'Widgets',
+  icon: Icon.RadioButtonIcon,
   interactions,
   variables: [],
 };
 
-export default prefab('Yes/No Widget', attributes, beforeCreate, [
+export default makePrefab('Yes/No Widget', attributes, beforeCreate, [
   wrapper(
     {
       label: 'Yes/No widget',
+      optionCategories: [
+        {
+          label: 'Conditional options',
+          expanded: true,
+          members: ['left', 'compare', 'right'],
+          condition: {
+            type: 'SHOW',
+            option: 'visibility',
+            comparator: 'EQ',
+            value: false,
+          },
+        },
+      ],
       options: {
-        question: linked({
+        questionTitle: linked({
           label: 'Question',
           value: {
             ref: {
-              componentId: '#questionText',
-              optionId: '#textContent',
-            },
-          },
-        }),
-        placeholder: linked({
-          label: 'Placeholder',
-          value: {
-            ref: {
-              componentId: '#RadioInput',
-              optionId: '#radioInputPlaceholder',
+              componentId: '#QuestionText',
+              optionId: '#questionTitleContent',
             },
           },
         }),
@@ -273,117 +313,201 @@ export default prefab('Yes/No Widget', attributes, beforeCreate, [
           value: {
             ref: {
               componentId: '#RadioInput',
-              optionId: '#radioInputRequired',
+              optionId: '#questionRequired',
+            },
+          },
+        }),
+        left: linked({
+          label: 'Left condition',
+          value: {
+            ref: {
+              componentId: '#questionCondition',
+              optionId: '#conditionLeft',
+            },
+          },
+        }),
+        compare: linked({
+          label: 'equals',
+          value: {
+            ref: {
+              componentId: '#questionCondition',
+              optionId: '#conditionCompare',
+            },
+          },
+        }),
+        right: linked({
+          label: 'Right condition',
+          value: {
+            ref: {
+              componentId: '#questionCondition',
+              optionId: '#conditionRight',
             },
           },
         }),
       },
     },
     [
-      Box(
+      Conditional(
         {
+          ref: {
+            id: '#questionCondition',
+          },
           options: {
-            ...boxOptions,
-            backgroundColor: color('Background color', {
-              value: ThemeColor.WHITE,
-            }),
-            borderColor: color('Border color', {
-              value: ThemeColor.MEDIUM,
-            }),
-            borderWidth: size('Border thickness', {
-              value: '1px',
-              configuration: {
-                as: 'UNIT',
+            ...conditionalOptions,
+            left: variable('Left', {
+              value: [],
+              ref: {
+                id: '#conditionLeft',
               },
             }),
-            borderRadius: size('Border radius', {
-              value: '5px',
+            compare: option('CUSTOM', {
+              label: 'Compare',
+              value: 'eq',
               configuration: {
-                as: 'UNIT',
+                as: 'DROPDOWN',
+                dataType: 'string',
+                allowedInput: [
+                  {
+                    name: 'Equals',
+                    value: 'eq',
+                  },
+                  {
+                    name: 'Not equal',
+                    value: 'neq',
+                  },
+                  {
+                    name: 'Contains',
+                    value: 'contains',
+                  },
+                  {
+                    name: 'Does not contain',
+                    value: 'notcontains',
+                  },
+                  {
+                    name: 'Greater than',
+                    value: 'gt',
+                  },
+                  {
+                    name: 'Less than',
+                    value: 'lt',
+                  },
+                  {
+                    name: 'Greater than or equal to',
+                    value: 'gteq',
+                  },
+                  {
+                    name: 'Less than or equal to',
+                    value: 'lteq',
+                  },
+                ],
+              },
+              ref: {
+                id: '#conditionCompare',
+              },
+            }),
+            right: variable('Right', {
+              value: [],
+              ref: {
+                id: '#conditionRight',
               },
             }),
           },
         },
         [
-          makeComponent(
-            'Form',
-            { ref: { id: '#YesNoWidgetForm' }, options: { ...formOptions } },
+          Box(
+            {
+              options: {
+                ...boxOptions,
+                backgroundColor: color('Background color', {
+                  value: ThemeColor.WHITE,
+                }),
+                borderColor: color('Border color', {
+                  value: ThemeColor.MEDIUM,
+                }),
+                borderWidth: size('Border thickness', {
+                  value: '1px',
+                  configuration: {
+                    as: 'UNIT',
+                  },
+                }),
+                borderRadius: size('Border radius', {
+                  value: '5px',
+                  configuration: {
+                    as: 'UNIT',
+                  },
+                }),
+                innerSpacing: sizes('Inner space', {
+                  value: ['L', 'L', 'L', 'L'],
+                }),
+              },
+            },
             [
-              TextComp(
+              makeComponent(
+                'Form',
                 {
-                  ref: { id: '#questionText' },
-                  options: {
-                    ...textOptions,
-                    content: variable('Content', {
-                      ref: { id: '#textContent' },
-                      value: [],
-                      configuration: { as: 'MULTILINE' },
-                    }),
-                    type: font('Font', { value: ['Body1'] }),
-                    outerSpacing: sizes('Outer space', {
-                      value: ['0rem', '0rem', 'S', '0rem'],
-                    }),
-                    fontWeight: option('CUSTOM', {
-                      label: 'Font weight',
-                      value: '500',
-                      configuration: {
-                        as: 'DROPDOWN',
-                        dataType: 'string',
-                        allowedInput: [
-                          { name: '100', value: '100' },
-                          { name: '200', value: '200' },
-                          { name: '300', value: '300' },
-                          { name: '400', value: '400' },
-                          { name: '500', value: '500' },
-                          { name: '600', value: '600' },
-                          { name: '700', value: '700' },
-                          { name: '800', value: '800' },
-                          { name: '900', value: '900' },
-                        ],
-                      },
-                    }),
-                  },
+                  ref: { id: '#YesNoWidgetForm' },
+                  options: { ...formOptions },
                 },
-                [],
-              ),
-              RadioInput(
-                {
-                  label: 'Radio Input',
-                  ref: { id: '#RadioInput' },
-                  options: {
-                    ...radioInputOptions,
-                    label: variable('Label', { value: [''] }),
-                    actionProperty: option('ACTION_JS_PROPERTY', {
-                      label: 'Property',
-                      value: '',
-                      configuration: {
-                        condition: hideIf('actionProperty', 'EQ', ''),
-                      },
-                    }),
-                    model: modelAndRelation('Model', {
-                      value: '',
-                      configuration: {
-                        condition: showIf('optionType', 'EQ', 'variable'),
-                      },
-                    }),
-                    labelProperty: property('Label for options', {
-                      value: '',
-                      configuration: {
-                        condition: hideIf('optionType', 'EQ', 'property'),
-                      },
-                    }),
-                    margin: buttongroup(
-                      'Margin',
-                      [
-                        ['None', 'none'],
-                        ['Dense', 'dense'],
-                        ['Normal', 'normal'],
-                      ],
-                      { value: 'none' },
-                    ),
-                  },
-                },
-                [],
+                [
+                  TextPrefab({
+                    ref: {
+                      id: '#QuestionText',
+                    },
+                    options: {
+                      ...textOptions,
+                      content: variable('Content', {
+                        value: [''],
+                        configuration: {
+                          as: 'MULTILINE',
+                        },
+                        ref: {
+                          id: '#questionTitleContent',
+                        },
+                      }),
+                      type: font('Font', { value: ['Body1'] }),
+                      outerSpacing: sizes('Outer space', {
+                        value: ['0rem', '0rem', 'S', '0rem'],
+                      }),
+                      fontWeight: option('CUSTOM', {
+                        label: 'Font weight',
+                        value: '500',
+                        configuration: {
+                          as: 'DROPDOWN',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: '100', value: '100' },
+                            { name: '200', value: '200' },
+                            { name: '300', value: '300' },
+                            { name: '400', value: '400' },
+                            { name: '500', value: '500' },
+                            { name: '600', value: '600' },
+                            { name: '700', value: '700' },
+                            { name: '800', value: '800' },
+                            { name: '900', value: '900' },
+                          ],
+                        },
+                      }),
+                    },
+                  }),
+                  RadioInput({
+                    ref: { id: '#RadioInput' },
+                    options: {
+                      ...radioInputOptions,
+                      label: variable('Label', { value: [''] }),
+                      labelProperty: property('Label for options', {
+                        value: '',
+                        configuration: {
+                          condition: hideIf('optionType', 'EQ', 'property'),
+                        },
+                      }),
+                      required: toggle('Required', {
+                        ref: {
+                          id: '#questionRequired',
+                        },
+                      }),
+                    },
+                  }),
+                ],
               ),
             ],
           ),
