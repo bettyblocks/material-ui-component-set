@@ -254,6 +254,7 @@ const beforeCreate = ({
           setValidationMessage('');
           save(newPrefab);
         }}
+        canSave={!validationMessage}
         onClose={close}
       />
     </>
