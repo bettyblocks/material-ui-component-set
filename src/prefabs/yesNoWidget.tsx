@@ -59,7 +59,11 @@ const beforeCreate = ({
   const modelId = useModelIdSelector();
   const componentId = createUuid();
   const pageName = getPageName();
-  const unsupportedKinds = createBlacklist(['LIST']);
+  const unsupportedKinds = [
+    'MINUTES',
+    'RICH_TEXT',
+    ...createBlacklist(['LIST']),
+  ];
   const { data } = useModelQuery({
     variables: { id: modelId },
     onCompleted: (result: ModelQuery) => {
@@ -71,11 +75,11 @@ const beforeCreate = ({
   const enrichVarObj = (obj: any) => {
     const returnObject = obj;
     if (data && data.model) {
-      const property = data.model.properties.find(
+      const propertObj = data.model.properties.find(
         (prop: any) => prop.id === obj.id[0],
       );
-      if (property) {
-        returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
+      if (propertObj) {
+        returnObject.name = `{{ ${data.model.name}.${propertObj.name} }}`;
       }
     }
     return returnObject;
@@ -87,12 +91,12 @@ const beforeCreate = ({
       setValidationMessage('No property is selected.');
     }
     if (data && data.model) {
-      const property = data.model.properties.find(
+      const transformProp = data.model.properties.find(
         (prop: any) => prop.id === obj.id[0],
       );
-      if (property) {
-        outputProp.label = property.label;
-        outputProp.kind = property.kind;
+      if (transformProp) {
+        outputProp.label = transformProp.label;
+        outputProp.kind = transformProp.kind;
       }
     }
     return outputProp;
