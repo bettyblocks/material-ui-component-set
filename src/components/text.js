@@ -39,7 +39,19 @@
     const linkToExternalText =
       (linkToExternal && useText(linkToExternal)) || '';
     let linkedContent = parsedContent;
+    let alteredContent = '';
 
+    if (isDev && !isPristine) {
+      content.forEach((value) => {
+        if (typeof value === 'string' || value instanceof String) {
+          alteredContent += value;
+        } else {
+          alteredContent += `<span class="${classes.nowrap}" >${value.name}</span>`;
+        }
+      });
+    } else if (isDev) {
+      linkedContent = <Tag className={classes.placeholder}>Empty content</Tag>;
+    }
     if (hasLink || hasExternalLink) {
       linkedContent = (
         <Link
@@ -50,7 +62,12 @@
           component={hasLink ? BLink : undefined}
           endpoint={hasLink ? linkTo : undefined}
         >
-          {parsedContent}
+          <span
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{
+              __html: isDev ? alteredContent : parsedContent,
+            }}
+          />
         </Link>
       );
     }
@@ -66,10 +83,7 @@
         className={classes.content}
         data-component={useText(dataComponentAttribute) || 'Text'}
       >
-        {!isEmpty && linkedContent}
-        {isPristine && (
-          <span className={classes.placeholder}>Empty content</span>
-        )}
+        {linkedContent}
       </Tag>
     );
   })(),
@@ -135,6 +149,10 @@
           fontSize: ({ options: { type } }) =>
             style.getFontSize(type, 'Desktop'),
         },
+      },
+      nowrap: {
+        whiteSpace: 'nowrap',
+        marginBottom: '-4px',
       },
       link: {
         textDecoration: ['none', '!important'],
