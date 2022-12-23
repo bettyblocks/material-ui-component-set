@@ -20,6 +20,7 @@ import {
   InteractionType,
   hideIf,
   property,
+  buttongroup,
 } from '@betty-blocks/component-sdk';
 import {
   Box,
@@ -246,15 +247,16 @@ const beforeCreate = ({
             }),
           );
 
-          yesNoWidgetForm.descendants.push(
-            makeBettyUpdateInput(
-              BettyPrefabs.HIDDEN,
-              model,
-              idProperty,
-              result.recordInputVariable,
-            ),
-          );
-
+          if (model) {
+            yesNoWidgetForm.descendants.push(
+              makeBettyUpdateInput(
+                BettyPrefabs.HIDDEN,
+                model,
+                idProperty,
+                result.recordInputVariable,
+              ),
+            );
+          }
           const interaction = {
             name: 'Submit',
             sourceEvent: 'onChange',
@@ -509,6 +511,15 @@ export default makePrefab('Yes/No Widget', attributes, beforeCreate, [
                           id: '#questionRequired',
                         },
                       }),
+                      margin: buttongroup(
+                        'Margin',
+                        [
+                          ['None', 'none'],
+                          ['Dense', 'dense'],
+                          ['Normal', 'normal'],
+                        ],
+                        { value: 'none' },
+                      ),
                     },
                   }),
                 ],
