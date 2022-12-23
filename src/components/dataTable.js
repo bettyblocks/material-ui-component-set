@@ -37,7 +37,6 @@
       model,
       filter,
       searchProperty,
-      hideSearch,
       orderProperty,
       sortOrder,
       labelRowsPerPage,
@@ -69,6 +68,7 @@
     const autoLoadTakeAmountNum = parseInt(autoLoadTakeAmount, 10);
     const [rowsPerPage, setRowsPerPage] = useState(takeNum);
     const [search, setSearch] = useState('');
+    const [filterv2, setFilterV2] = useState({});
     const [searchTerm, setSearchTerm] = useState('');
     const [interactionSearchTerm, setInteractionSearchTerm] = useState('');
     const [interactionSearchProperty, setInteractionSearchProperty] =
@@ -129,7 +129,7 @@
 
     const titleText = useText(title);
     const hasSearchProperty = searchProperty && searchProperty.id;
-    const hasToolbar = titleText || (hasSearchProperty && !hideSearch);
+    const hasToolbar = titleText || hasSearchProperty;
     const elevationLevel = variant === 'flat' ? 0 : elevation;
     const hasLink = linkTo && linkTo.id !== '';
     const toolbarRef = React.createRef();
@@ -170,6 +170,14 @@
       return value;
     };
 
+    B.defineFunction('Advanced filter', (value) => {
+      setFilterV2(value.where);
+    });
+
+    B.defineFunction('Clear advanced filter', () => {
+      setFilterV2({});
+    });
+
     /**
      * @name Filter
      * @param {Property} property
@@ -188,19 +196,20 @@
         event.target ? event.target.value : transformValue(event),
       );
       setInteractionSearchProperty(property ? property.id : '');
+      setPage(0);
     });
 
     B.defineFunction('ResetFilter', () => {
       setInteractionFilter({});
       setInteractionSearchTerm('');
       setInteractionSearchProperty('');
+      setPage(0);
     });
 
     let interactionFilters = {};
 
     const isEmptyValue = (value) =>
       !value || (Array.isArray(value) && value.length === 0);
-
     const clauses = Object.entries(interactionFilter)
       .filter(([, { value }]) => !isEmptyValue(value))
       .map(([, { property, value }]) =>
@@ -219,7 +228,6 @@
           return { [field]: acc };
         }, {}),
       );
-
     interactionFilters =
       clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
 
@@ -235,13 +243,12 @@
           {},
         )
       : {};
-
     const newFilter =
       searchProperty && searchTerm !== ''
         ? deepMerge(filter, searchFilter)
         : filter;
 
-    const completeFilter = deepMerge(newFilter, interactionFilters);
+    const completeFilter = deepMerge(newFilter, interactionFilters, filterv2);
 
     const where = useFilter(completeFilter);
 
@@ -349,10 +356,6 @@
       }
     });
 
-    B.defineFunction('SetSearchValue', (event) => {
-      setSearch(event.target.value);
-    });
-
     useEffect(() => {
       if (!isDev) return;
       const placeholders = placeholderTake || amountOfRows;
@@ -439,6 +442,7 @@
 
     const handleSearch = (event) => {
       setSearch(event.target.value);
+      setPage(0);
     };
 
     const handleRowClick = (endpoint, context) => {
@@ -645,7 +649,7 @@
           {hasToolbar && (
             <Toolbar ref={toolbarRef} classes={{ root: classes.toolbar }}>
               {titleText && <span className={classes.title}>{titleText}</span>}
-              {hasSearchProperty && !hideSearch && (
+              {hasSearchProperty && (
                 <TextField
                   classes={{ root: classes.searchField }}
                   placeholder={`${useText(

@@ -1,10 +1,9 @@
 (() => ({
-  name: 'Header',
+  name: 'Top menu',
   icon: 'ContainerIcon',
-  description: 'This is a header partial.',
+  description: 'This is a top menu partial.',
   detail:
     'This partial is used to display the header of the page. It has a logo and a menu.',
-  // previewUrl: 'https://preview.betty.app/homepage',
   previewImage:
     'https://assets.bettyblocks.com/bea59bf27f2a414a9ca069afa6524a2b_assets/files/Header',
   category: 'LAYOUT',
@@ -1498,12 +1497,57 @@
                                   type: 'VARIABLE',
                                 },
                                 {
+                                  label: 'Media type',
+                                  value: 'url',
+                                  key: 'type',
+                                  type: 'CUSTOM',
+                                  configuration: {
+                                    as: 'BUTTONGROUP',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      {
+                                        name: 'Image',
+                                        value: 'img',
+                                      },
+                                      {
+                                        name: 'URL',
+                                        value: 'url',
+                                      },
+                                    ],
+                                  },
+                                },
+                                {
+                                  value: '',
+                                  type: 'PUBLIC_FILE',
                                   label: 'Logo',
                                   key: 'logoSource',
+                                  configuration: {
+                                    condition: {
+                                      type: 'SHOW',
+                                      option: 'type',
+                                      comparator: 'EQ',
+                                      value: 'img',
+                                    },
+                                  },
+                                },
+                                {
                                   value: [
                                     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
                                   ],
+                                  label: 'URL source',
+                                  key: 'urlFileSource',
                                   type: 'VARIABLE',
+                                  configuration: {
+                                    placeholder:
+                                      'Starts with https:// or http://',
+                                    as: 'MULTILINE',
+                                    condition: {
+                                      type: 'SHOW',
+                                      option: 'type',
+                                      comparator: 'EQ',
+                                      value: 'url',
+                                    },
+                                  },
                                 },
                                 {
                                   type: 'SIZE',

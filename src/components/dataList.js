@@ -28,7 +28,6 @@
           type,
           model,
           showError,
-          hideSearch,
           searchProperty,
           order,
           orderBy,
@@ -51,6 +50,7 @@
         const listRef = React.createRef();
         const [showPagination, setShowPagination] = useState(true);
         const [prevData, setPrevData] = useState(null);
+        const [filterv2, setFilterV2] = useState({});
         const isInline = type === 'inline';
         const isGrid = type === 'grid';
 
@@ -58,7 +58,7 @@
 
         const builderLayout = () => (
           <div data-component={dataComponentAttributeText || 'DataList'}>
-            {searchProperty && !hideSearch && (
+            {searchProperty && searchProperty.type && searchProperty.id !== '' && (
               <div className={classes.header}>
                 <SearchComponent label={searchPropertyLabel} />
               </div>
@@ -232,7 +232,11 @@
             ? deepMerge(filter, searchFilter)
             : filter;
 
-        const completeFilter = deepMerge(newFilter, interactionFilters);
+        const completeFilter = deepMerge(
+          newFilter,
+          interactionFilters,
+          filterv2,
+        );
         const where = useFilter(completeFilter);
 
         const {
@@ -292,9 +296,7 @@
                 setShowPagination(false);
                 break;
               case 'whenNeeded':
-                if (rowsPerPage >= data.totalCount) {
-                  setShowPagination(false);
-                }
+                setShowPagination(rowsPerPage < data.totalCount);
                 break;
               case 'always':
               default:
@@ -314,11 +316,16 @@
           };
         }, [search]);
 
+        B.defineFunction('Advanced filter', (value) => {
+          setFilterV2(value.where);
+        });
+
+        B.defineFunction('Clear advanced filter', () => {
+          setFilterV2({});
+        });
+
         useEffect(() => {
           B.defineFunction('Refetch', () => refetch());
-          B.defineFunction('SetSearchValue', (event) => {
-            setSearch(event.target.value);
-          });
 
           /**
            * @name Filter
@@ -418,17 +425,19 @@
 
           return (
             <div data-component={dataComponentAttributeText || 'DataContainer'}>
-              {searchProperty && !hideSearch && (
-                <div className={classes.header}>
-                  <SearchComponent
-                    label={searchPropertyLabel}
-                    onChange={handleSearch}
-                    value={search}
-                    isTyping={isTyping}
-                    setIsTyping={setIsTyping}
-                  />
-                </div>
-              )}
+              {searchProperty &&
+                searchProperty.type &&
+                searchProperty.id !== '' && (
+                  <div className={classes.header}>
+                    <SearchComponent
+                      label={searchPropertyLabel}
+                      onChange={handleSearch}
+                      value={search}
+                      isTyping={isTyping}
+                      setIsTyping={setIsTyping}
+                    />
+                  </div>
+                )}
 
               {!isGrid ? (
                 Looper(results)

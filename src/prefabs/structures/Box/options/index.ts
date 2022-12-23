@@ -6,13 +6,52 @@ import {
   ThemeColor,
   toggle,
   variable,
-  showIf,
   buttongroup,
   dropdown,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Alignment',
+    expanded: true,
+    members: ['alignment', 'valignment', 'stretch'],
+  },
+  {
+    label: 'Styling',
+    expanded: false,
+    members: ['innerSpacing', 'outerSpacing', 'transparent', 'height', 'width'],
+  },
+  {
+    label: 'Positioning',
+    expanded: false,
+    members: ['position', 'top', 'right', 'bottom', 'left'],
+  },
+  {
+    label: 'Background',
+    expanded: false,
+    members: [
+      'backgroundColor',
+      'backgroundColorAlpha',
+      'backgroundUrl',
+      'backgroundSize',
+      'backgroundPosition',
+      'backgroundRepeat',
+      'backgroundAttachment',
+      'borderColor',
+      'borderWidth',
+      'borderStyle',
+      'borderRadius',
+    ],
+  },
+  {
+    label: 'Advanced Options',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const boxOptions = {
   alignment: buttongroup(
     'Alignment',
     [
@@ -68,9 +107,6 @@ export const options = {
   innerSpacing: sizes('Inner space', {
     value: ['M', 'M', 'M', 'M'],
   }),
-  positioningOptions: toggle('Show positioning options', {
-    value: false,
-  }),
   position: buttongroup(
     'Position',
     [
@@ -84,7 +120,6 @@ export const options = {
       value: 'static',
       configuration: {
         dataType: 'string',
-        condition: showIf('positioningOptions', 'EQ', true),
       },
     },
   ),
@@ -92,51 +127,36 @@ export const options = {
     value: '',
     configuration: {
       as: 'UNIT',
-      condition: showIf('positioningOptions', 'EQ', true),
     },
   }),
   right: size('Right position', {
     value: '',
     configuration: {
       as: 'UNIT',
-      condition: showIf('positioningOptions', 'EQ', true),
     },
   }),
   bottom: size('Bottom position', {
     value: '',
     configuration: {
       as: 'UNIT',
-      condition: showIf('positioningOptions', 'EQ', true),
     },
   }),
   left: size('Left position', {
     value: '',
     configuration: {
       as: 'UNIT',
-      condition: showIf('positioningOptions', 'EQ', true),
     },
   }),
-  backgroundOptions: toggle('Show background options', {
-    value: false,
-  }),
+
   backgroundColor: color('Background color', {
     value: ThemeColor.TRANSPARENT,
-    configuration: {
-      condition: showIf('backgroundOptions', 'EQ', true),
-    },
   }),
   backgroundColorAlpha: option('NUMBER', {
     label: 'Background color opacity',
     value: 100,
-    configuration: {
-      condition: showIf('backgroundOptions', 'EQ', true),
-    },
   }),
   backgroundUrl: variable('Background url', {
     value: [''],
-    configuration: {
-      condition: showIf('backgroundOptions', 'EQ', true),
-    },
   }),
   backgroundSize: buttongroup(
     'Background size',
@@ -149,7 +169,6 @@ export const options = {
       value: 'initial',
       configuration: {
         dataType: 'string',
-        condition: showIf('backgroundOptions', 'EQ', true),
       },
     },
   ),
@@ -170,7 +189,6 @@ export const options = {
       value: 'center center',
       configuration: {
         dataType: 'string',
-        condition: showIf('backgroundOptions', 'EQ', true),
       },
     },
   ),
@@ -186,7 +204,6 @@ export const options = {
       value: 'no-repeat',
       configuration: {
         dataType: 'string',
-        condition: showIf('backgroundOptions', 'EQ', true),
       },
     },
   ),
@@ -201,21 +218,16 @@ export const options = {
       value: 'inherit',
       configuration: {
         dataType: 'string',
-        condition: showIf('backgroundOptions', 'EQ', true),
       },
     },
   ),
   borderColor: color('Border color', {
     value: ThemeColor.TRANSPARENT,
-    configuration: {
-      condition: showIf('backgroundOptions', 'EQ', true),
-    },
   }),
   borderWidth: size('Border thickness', {
     value: '',
     configuration: {
       as: 'UNIT',
-      condition: showIf('backgroundOptions', 'EQ', true),
     },
   }),
   borderStyle: buttongroup(
@@ -230,7 +242,6 @@ export const options = {
       value: 'solid',
       configuration: {
         dataType: 'string',
-        condition: showIf('backgroundOptions', 'EQ', true),
       },
     },
   ),
@@ -238,8 +249,7 @@ export const options = {
     value: '',
     configuration: {
       as: 'UNIT',
-      condition: showIf('backgroundOptions', 'EQ', true),
     },
   }),
-  ...advanced,
+  ...advanced('Box'),
 };

@@ -1,41 +1,180 @@
 (() => ({
   name: 'SelectInput',
-  type: 'FORM_COMPONENT',
+  type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
       actionProperty,
       actionVariableId,
-      disabled,
-      variant,
-      size,
-      fullWidth,
-      margin,
-      helperText = [''],
-      label,
-      required,
-      hideLabel,
-      validationValueMissing = [''],
-      value: prefabValue,
       blanco,
       dataComponentAttribute = ['Select'],
+      disabled: initialIsDisabled,
+      filter,
+      fullWidth,
+      helperText = [''],
+      hideLabel,
+      label,
+      labelProperty,
+      margin,
+      model,
+      order,
+      orderBy,
+      required,
+      size,
+      validationValueMissing = [''],
+      value: prefabValue,
+      variant,
     } = options;
-    const { env, getProperty, useText } = B;
+    const { env, getProperty, useText, useAllQuery, useRelation } = B;
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
+    const [interactionFilter, setInteractionFilter] = useState({});
+    const [disabled, setIsDisabled] = useState(initialIsDisabled);
     const mounted = useRef(false);
     const blancoText = useText(blanco);
-    const { values = [] } = getProperty(actionProperty.modelProperty) || {};
+    const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
     const [currentValue, setCurrentValue] = useState(useText(prefabValue));
     const labelText = useText(label);
     const defaultValueText = useText(prefabValue);
     const helperTextResolved = useText(helperText);
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
+    const { contextModelId } = model;
+
+    const {
+      referenceModelId,
+      modelId = contextModelId || model,
+      kind,
+      values = [],
+    } = modelProperty;
+
+    B.defineFunction('Clear', () => setCurrentValue(''));
+    B.defineFunction('Enable', () => setIsDisabled(false));
+    B.defineFunction('Disable', () => setIsDisabled(true));
+
+    const transformValue = (arg) => {
+      if (arg instanceof Date) {
+        return arg.toISOString();
+      }
+
+      return arg;
+    };
+
+    const deepMerge = (...objects) => {
+      const isObject = (item) =>
+        item && typeof item === 'object' && !Array.isArray(item);
+
+      return objects.reduce((accumulator, object) => {
+        Object.keys(object).forEach((key) => {
+          const accumulatorValue = accumulator[key];
+          const valueArg = object[key];
+
+          if (Array.isArray(accumulatorValue) && Array.isArray(valueArg)) {
+            accumulator[key] = accumulatorValue.concat(valueArg);
+          } else if (isObject(accumulatorValue) && isObject(valueArg)) {
+            accumulator[key] = deepMerge(accumulatorValue, valueArg);
+          } else {
+            accumulator[key] = valueArg;
+          }
+        });
+        return accumulator;
+      }, {});
+    };
+
+    const orderByArray = [orderBy].flat();
+    const sort =
+      !isDev && orderBy.id
+        ? orderByArray.reduceRight((acc, orderByProperty, index) => {
+            const prop = getProperty(orderByProperty);
+            return index === orderByArray.length - 1
+              ? { [prop.name]: order.toUpperCase() }
+              : { [prop.name]: acc };
+          }, {})
+        : {};
+
+    let interactionFilters = {};
+
+    const isEmptyValue = (arg) =>
+      !arg || (Array.isArray(arg) && arg.length === 0);
+
+    const clauses = Object.entries(interactionFilter)
+      .filter(([, { value: valueArg }]) => !isEmptyValue(valueArg))
+      .map(([, { property: propertyArg, value: valueArg }]) =>
+        propertyArg.id.reduceRight((acc, field, index, arr) => {
+          const isLast = index === arr.length - 1;
+          if (isLast) {
+            return Array.isArray(valueArg)
+              ? {
+                  _or: valueArg.map((el) => ({
+                    [field]: { [propertyArg.operator]: el },
+                  })),
+                }
+              : { [field]: { [propertyArg.operator]: valueArg } };
+          }
+
+          return { [field]: acc };
+        }, {}),
+      );
+
+    interactionFilters =
+      clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
+
+    const completeFilter = deepMerge(filter, interactionFilters);
+
+    const {
+      data: queryData,
+      loading: queryLoading,
+      refetch,
+    } = useAllQuery(
+      referenceModelId || modelId,
+      {
+        filter: completeFilter,
+        take: 50,
+        variables: {
+          ...(orderBy.id ? { sort: { relation: sort } } : {}),
+        },
+      },
+      !!contextModelId || !modelId,
+    );
+
+    const { hasResults, data: relationData } = useRelation(
+      model,
+      {},
+      typeof model === 'string' || !model,
+    );
+
+    const data = hasResults ? relationData : queryData;
+    const loading = hasResults ? false : queryLoading;
+
+    useEffect(() => {
+      B.defineFunction('Refetch', () => refetch());
+
+      /**
+       * @name Filter
+       * @param {Property} property
+       * @returns {Void}
+       */
+      B.defineFunction(
+        'Filter',
+        ({ event, property: propertyArg, interactionId }) => {
+          setInteractionFilter((s) => ({
+            ...s,
+            [interactionId]: {
+              property: propertyArg,
+              value: event.target ? event.target.value : transformValue(event),
+            },
+          }));
+        },
+      );
+
+      B.defineFunction('ResetFilter', () => {
+        setInteractionFilter({});
+      });
+    }, []);
 
     useEffect(() => {
       B.defineFunction('Reset', () => setCurrentValue(defaultValueText));
@@ -85,12 +224,52 @@
       }
     }, [isDev, defaultValueText]);
 
+    let valid = true;
+    let message = '';
+    const isListProperty = kind === 'list' || kind === 'LIST';
+
+    if (!isListProperty && !isDev) {
+      if (!modelId) {
+        message = 'No model selected';
+        valid = false;
+      }
+    }
+
     const renderOptions = () => {
-      return values.map(({ value: v }) => (
-        <MenuItem key={v} value={v}>
-          {v}
-        </MenuItem>
-      ));
+      if (isListProperty) {
+        return values.map(({ value: v }) => (
+          <MenuItem key={v} value={v}>
+            {v}
+          </MenuItem>
+        ));
+      }
+
+      if (!loading && !isDev) {
+        let labelKey = 'id';
+        if (labelProperty) {
+          labelKey = B.getProperty(labelProperty).name;
+        } else {
+          const modelReference = B.getModel(referenceModelId || modelId);
+          if (modelReference.labelPropertyId)
+            labelKey = B.getProperty(modelReference.labelPropertyId).name;
+        }
+
+        const rows = data ? data.results : [];
+        return rows.map((row) => {
+          const itemLabel = row[labelKey];
+          return (
+            <MenuItem key={row.id} value={row.id}>
+              {itemLabel}
+            </MenuItem>
+          );
+        });
+      }
+
+      if (!loading && !data) {
+        return <span>unable to fetch data</span>;
+      }
+
+      return <span>loading...</span>;
     };
 
     const SelectCmp = (
@@ -111,14 +290,14 @@
             'data-component': dataComponentAttributeValue,
           }}
           required={required}
-          disabled={disabled}
-          label={!hideLabel && labelText}
+          disabled={disabled || !valid}
+          label={!valid ? message : !hideLabel && labelText}
           error={errorState}
           margin={margin}
           helperText={helper}
         >
           {blancoText && <MenuItem value="">{blancoText}</MenuItem>}
-          {renderOptions()}
+          {valid && renderOptions()}
         </TextField>
         <input
           id={actionVariableId}
@@ -144,6 +323,7 @@
         '& > *': {
           pointerEvents: 'none',
         },
+        width: ({ options: { fullWidth } }) => (fullWidth ? '100%' : 'auto'),
       },
       validationInput: {
         height: 0,

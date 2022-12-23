@@ -1,28 +1,47 @@
-import {
-  component,
-  OptionProducer,
-  PrefabComponent,
-} from '@betty-blocks/component-sdk';
-import { updateOption } from '../../../utils';
-import { deleteActionVariable } from '../../hooks/deleteActionVariable';
-import { options as defaults } from './options';
-
-export interface Configuration {
-  options?: Record<string, OptionProducer>;
-  label?: string;
-}
-
-const $afterDelete = [deleteActionVariable];
+import { component, PrefabReference } from '@betty-blocks/component-sdk';
+import { Configuration } from '../Configuration';
+import { options as defaults } from './options/index';
 
 export const SelectInput = (
   config: Configuration,
-  children: PrefabComponent[] = [],
+  children: PrefabReference[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
+  const style = { ...config.style };
+  const ref = config.ref ? { ...config.ref } : undefined;
+  const label = config.label ? config.label : undefined;
 
-  if (config.label) {
-    options.label = updateOption(options.label, { value: [config.label] });
-  }
+  const categories = [
+    {
+      label: 'Validation Options',
+      expanded: false,
+      members: ['required', 'validationValueMissing'],
+    },
+    {
+      label: 'Styling',
+      expanded: false,
+      members: [
+        'hideLabel',
+        'backgroundColor',
+        'borderColor',
+        'borderHoverColor',
+        'borderFocusColor',
+        'labelColor',
+        'textColor',
+        'helperColor',
+        'errorColor',
+      ],
+    },
+    {
+      label: 'Advanced Options',
+      expanded: false,
+      members: ['blanco', 'dataComponentAttribute'],
+    },
+  ];
 
-  return component('SelectInput', { options, $afterDelete }, children);
+  return component(
+    'SelectInput',
+    { options, style, ref, label, optionCategories: categories },
+    children,
+  );
 };

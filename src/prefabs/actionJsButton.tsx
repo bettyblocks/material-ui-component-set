@@ -2,11 +2,11 @@ import { Icon, prefab } from '@betty-blocks/component-sdk';
 import { ActionJSButton } from './structures/ActionJSButton';
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'BUTTON',
   icon: Icon.ButtonIcon,
-  keywords: ['Form', 'input'],
+  keywords: ['Button', 'Action', 'input'],
 };
 
-export default prefab('Action Button Beta', attributes, undefined, [
+export default prefab('Action Button', attributes, undefined, [
   ActionJSButton({}),
 ]);

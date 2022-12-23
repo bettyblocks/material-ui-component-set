@@ -1,50 +1,192 @@
 (() => ({
   name: 'RadioInput',
-  type: 'FORM_COMPONENT',
+  type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      actionVariableId: name,
       actionProperty,
-      propertyData,
-      disabled,
+      actionVariableId: name,
+      dataComponentAttribute = ['Radio'],
+      disabled: initialIsDisabled,
+      filter,
+      fullWidth,
+      helperText = [''],
+      hideLabel,
+      label,
       labelPosition,
+      labelProperty,
+      margin,
+      model,
+      order,
+      orderBy,
+      required,
       row,
       size,
-      fullWidth,
-      margin,
-      helperText = [''],
-      label,
-      required,
-      hideLabel,
       validationValueMissing = [''],
       value: prefabValue,
-      dataComponentAttribute = ['Select'],
     } = options;
-    const { env, getProperty, useText } = B;
+    const { env, getProperty, useText, useAllQuery, useRelation } = B;
     const {
       FormControl: MUIFormControl,
-      RadioGroup,
       FormControlLabel: MUIFormControlLabel,
       FormHelperText,
       FormLabel,
       Radio,
+      RadioGroup,
     } = window.MaterialUI.Core;
     const isDev = env === 'dev';
+    const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
+
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
+    const [interactionFilter, setInteractionFilter] = useState({});
+    const [disabled, setIsDisabled] = useState(initialIsDisabled);
     const mounted = useRef(false);
-    const { values = [] } = getProperty(actionProperty.modelProperty) || {};
-    const [currentValue, setCurrentValue] = useState(useText(prefabValue));
+    const getValue = (val) => (isNaN(Number(val)) ? val : Number(val));
     const labelText = useText(label);
     const defaultValueText = useText(prefabValue);
     const helperTextResolved = useText(helperText);
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
-    const { kind, values: listValues } = getProperty(propertyData) || {};
-    let radioValues = [];
+    const { contextModelId } = model;
+
+    const {
+      referenceModelId,
+      modelId = contextModelId || model,
+      kind,
+      values = [],
+    } = modelProperty;
+
+    const isListProperty = kind === 'list' || kind === 'LIST';
+    const [currentValue, setCurrentValue] = useState(
+      isListProperty ? useText(prefabValue) : getValue(prefabValue),
+    );
+
+    B.defineFunction('Clear', () => setCurrentValue(''));
+    B.defineFunction('Enable', () => setIsDisabled(false));
+    B.defineFunction('Disable', () => setIsDisabled(true));
+
+    const transformValue = (arg) => {
+      if (arg instanceof Date) {
+        return arg.toISOString();
+      }
+
+      return arg;
+    };
+
+    const deepMerge = (...objects) => {
+      const isObject = (item) =>
+        item && typeof item === 'object' && !Array.isArray(item);
+
+      return objects.reduce((accumulator, object) => {
+        Object.keys(object).forEach((key) => {
+          const accumulatorValue = accumulator[key];
+          const valueArg = object[key];
+
+          if (Array.isArray(accumulatorValue) && Array.isArray(valueArg)) {
+            accumulator[key] = accumulatorValue.concat(valueArg);
+          } else if (isObject(accumulatorValue) && isObject(valueArg)) {
+            accumulator[key] = deepMerge(accumulatorValue, valueArg);
+          } else {
+            accumulator[key] = valueArg;
+          }
+        });
+        return accumulator;
+      }, {});
+    };
+
+    const orderByArray = [orderBy].flat();
+    const sort =
+      !isDev && orderBy.id
+        ? orderByArray.reduceRight((acc, orderByProperty, index) => {
+            const prop = getProperty(orderByProperty);
+            return index === orderByArray.length - 1
+              ? { [prop.name]: order.toUpperCase() }
+              : { [prop.name]: acc };
+          }, {})
+        : {};
+
+    let interactionFilters = {};
+
+    const isEmptyValue = (arg) =>
+      !arg || (Array.isArray(arg) && arg.length === 0);
+
+    const clauses = Object.entries(interactionFilter)
+      .filter(([, { value: valueArg }]) => !isEmptyValue(valueArg))
+      .map(([, { property: propertyArg, value: valueArg }]) =>
+        propertyArg.id.reduceRight((acc, field, index, arr) => {
+          const isLast = index === arr.length - 1;
+          if (isLast) {
+            return Array.isArray(valueArg)
+              ? {
+                  _or: valueArg.map((el) => ({
+                    [field]: { [propertyArg.operator]: el },
+                  })),
+                }
+              : { [field]: { [propertyArg.operator]: valueArg } };
+          }
+
+          return { [field]: acc };
+        }, {}),
+      );
+
+    interactionFilters =
+      clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
+
+    const completeFilter = deepMerge(filter, interactionFilters);
+
+    const {
+      data: queryData,
+      loading: queryLoading,
+      refetch,
+    } = useAllQuery(
+      referenceModelId || modelId,
+      {
+        filter: completeFilter,
+        take: 50,
+        variables: {
+          ...(orderBy.id ? { sort: { relation: sort } } : {}),
+        },
+      },
+      !!contextModelId || !model,
+    );
+
+    const { hasResults, data: relationData } = useRelation(
+      model,
+      {},
+      typeof model === 'string' || !model,
+    );
+
+    const data = hasResults ? relationData : queryData;
+    const loading = hasResults ? false : queryLoading;
+
+    useEffect(() => {
+      B.defineFunction('Refetch', () => refetch());
+
+      /**
+       * @name Filter
+       * @param {Property} property
+       * @returns {Void}
+       */
+      B.defineFunction(
+        'Filter',
+        ({ event, property: propertyArg, interactionId }) => {
+          setInteractionFilter((s) => ({
+            ...s,
+            [interactionId]: {
+              property: propertyArg,
+              value: event.target ? event.target.value : transformValue(event),
+            },
+          }));
+        },
+      );
+
+      B.defineFunction('ResetFilter', () => {
+        setInteractionFilter({});
+      });
+    }, []);
 
     useEffect(() => {
       B.defineFunction('Reset', () => setCurrentValue(defaultValueText));
@@ -79,7 +221,7 @@
         handleValidation();
       }
 
-      setCurrentValue(eventValue);
+      setCurrentValue(isListProperty ? eventValue : getValue(eventValue));
     };
 
     const validationHandler = () => {
@@ -94,6 +236,16 @@
       }
     }, [isDev, defaultValueText]);
 
+    let valid = true;
+    let message = '';
+
+    if (!isListProperty && !isDev) {
+      if (!modelId) {
+        message = 'No model selected';
+        valid = false;
+      }
+    }
+
     // renders the radio component
     const renderRadio = (optionValue, optionLabel) => (
       <MUIFormControlLabel
@@ -106,11 +258,38 @@
     );
 
     const renderRadios = () => {
-      if (isDev && kind === 'LIST') {
-        return listValues.map((item) => renderRadio(item.value, item.value));
+      if (!valid) {
+        return <span>{message}</span>;
       }
-      radioValues = values.map((item) => item);
-      return values.map((item) => renderRadio(item.value, item.value));
+
+      if (isDev && !isListProperty) return renderRadio('value', 'Placeholder');
+
+      if (isListProperty) {
+        return values.map(({ value }) => renderRadio(value, value));
+      }
+
+      if (!loading && !isDev) {
+        let labelKey = 'id';
+        if (labelProperty) {
+          labelKey = B.getProperty(labelProperty).name;
+        } else {
+          const modelReference = B.getModel(referenceModelId || modelId);
+          if (modelReference.labelPropertyId)
+            labelKey = B.getProperty(modelReference.labelPropertyId).name;
+        }
+
+        const results = data ? data.results : [];
+
+        return results.map((result) => {
+          return renderRadio(result.id, result[labelKey]);
+        });
+      }
+
+      if (!loading && !data) {
+        return <span>unable to fetch data</span>;
+      }
+
+      return <span>loading...</span>;
     };
 
     const RadioComp = (
@@ -141,7 +320,7 @@
           type="text"
           tabIndex="-1"
           required={required}
-          value={radioValues.includes(currentValue) ? currentValue : ''}
+          value={currentValue}
         />
       </MUIFormControl>
     );

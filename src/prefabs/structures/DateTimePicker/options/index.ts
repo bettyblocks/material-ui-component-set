@@ -1,35 +1,29 @@
 import {
+  hideIf,
   option,
   showIf,
   text,
   toggle,
   variable,
 } from '@betty-blocks/component-sdk';
-import { showOn } from '../../../../utils';
 import { advanced } from './advanced';
 import { styles } from './styles';
+import { validation } from './validation';
 
 export const options = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
-    label: 'Name',
+    label: 'Action input variable',
     value: '',
-    configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
   }),
 
   actionProperty: option('ACTION_JS_PROPERTY', {
     label: 'Property',
     value: '',
+    configuration: { condition: hideIf('actionProperty', 'EQ', '') },
   }),
 
   label: variable('Label', { value: [''] }),
   value: variable('Value', { value: [''] }),
-
-  required: toggle('Required'),
-
-  validationValueMissing: variable('Value required message', {
-    value: ['This field is required'],
-    ...showOn('required'),
-  }),
 
   type: text('Type', {
     value: 'datetime',
@@ -39,11 +33,8 @@ export const options = {
   }),
 
   autoComplete: toggle('Autocomplete', { value: true }),
-
   disabled: toggle('Disabled', { value: false }),
-
   placeholder: variable('Placeholder', { value: [] }),
-
   helperText: variable('Helper text', { value: [] }),
 
   timeFormat: text('Format', {
@@ -70,11 +61,10 @@ export const options = {
   }),
 
   use24HourClockTime: toggle('Use 24-hour format', { value: true }),
-
   disablePastDates: toggle('Disable past dates', { value: false }),
-
   closeOnSelect: toggle('Close picker after select', { value: true }),
 
+  ...validation,
   ...styles,
   ...advanced,
 };

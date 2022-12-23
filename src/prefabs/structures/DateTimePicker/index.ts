@@ -1,10 +1,6 @@
-import {
-  component,
-  OptionProducer,
-  PrefabComponent,
-} from '@betty-blocks/component-sdk';
+import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
-import { deleteActionVariable } from '../../hooks/deleteActionVariable';
+import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
 
 export enum DateInputTypes {
@@ -13,21 +9,44 @@ export enum DateInputTypes {
   TIME = 'time',
 }
 
-export interface Configuration {
-  label?: string;
-  options?: Record<string, OptionProducer>;
-  inputType?: string;
-  placeholder?: string;
-  dataComponentAttribute?: string;
-}
-
-const $afterDelete = [deleteActionVariable];
-
 export const DateTimePicker = (
   config: Configuration,
-  children: PrefabComponent[] = [],
+  descendants: PrefabReference[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
+  const style = { ...config.style };
+  const ref = config.ref ? { ...config.ref } : undefined;
+  const label = config.label ? config.label : undefined;
+
+  const categories = [
+    {
+      label: 'Validation Options',
+      expanded: false,
+      members: ['required', 'validationValueMissing'],
+    },
+    {
+      label: 'Styling',
+      expanded: false,
+      members: [
+        'hideLabel',
+        'backgroundColor',
+        'backgroundColorPopup',
+        'borderColor',
+        'borderHoverColor',
+        'borderFocusColor',
+        'labelColor',
+        'textColor',
+        'placeholderColor',
+        'helperColor',
+        'errorColor',
+      ],
+    },
+    {
+      label: 'Advanced Options',
+      expanded: false,
+      members: ['dataComponentAttribute'],
+    },
+  ];
 
   if (config.inputType) {
     let format;
@@ -57,6 +76,12 @@ export const DateTimePicker = (
     options[key] = updateOption(options[key], update);
 
     options.type = updateOption(options.type, { value: config.inputType });
+
+    if (config.inputLabel) {
+      options.label = updateOption(options.label, {
+        value: [config.inputLabel],
+      });
+    }
   }
 
   if (config.dataComponentAttribute) {
@@ -68,11 +93,9 @@ export const DateTimePicker = (
     );
   }
 
-  const { label } = config;
-
   return component(
     'DateTimePickerInput',
-    { label, options, $afterDelete },
-    children,
+    { options, style, ref, label, optionCategories: categories },
+    descendants,
   );
 };

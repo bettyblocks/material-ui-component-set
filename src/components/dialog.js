@@ -8,6 +8,7 @@
     const {
       isVisible,
       isFullscreen,
+      invisible,
       width,
       disableClick: disableBackdropClick,
       dataComponentAttribute,
@@ -60,10 +61,17 @@
       </Dialog>
     );
 
+    // eslint-disable-next-line no-nested-ternary
     return isDev ? (
-      <div className={isOpen ? classes.overlay : classes.root}>
-        {isOpen ? <EmptyCmp /> : 'Dialog'}
-      </div>
+      !invisible ? (
+        <div className={isOpen ? classes.overlay : classes.root}>
+          {isOpen ? <EmptyCmp /> : 'Dialog'}
+        </div>
+      ) : (
+        <div className={isOpen ? classes.overlay : ''}>
+          {isOpen ? <EmptyCmp /> : ''}
+        </div>
+      )
     ) : (
       DialogCmp
     );

@@ -1,6 +1,6 @@
 (() => ({
   name: 'CheckboxInput',
-  type: 'FORM_COMPONENT',
+  type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
@@ -133,6 +133,7 @@
     const Control = (
       <FormGroup>
         <FormControl
+          style={{ display: 'block' }}
           required={required}
           error={errorState}
           classes={{ root: classes.formControl }}

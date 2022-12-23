@@ -1,18 +1,14 @@
-import {
-  component,
-  OptionProducer,
-  PrefabComponent,
-} from '@betty-blocks/component-sdk';
+import { component, PrefabReference } from '@betty-blocks/component-sdk';
+import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
 
-export interface Configuration {
-  options?: Record<string, OptionProducer>;
-}
 export const SubmitButton = (
   config: Configuration,
-  children: PrefabComponent[] = [],
+  descendants: PrefabReference[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
-
-  return component('Button', { options }, children);
+  const style = { ...config.style };
+  const ref = config.ref ? { ...config.ref } : undefined;
+  const label = config.label ? config.label : undefined;
+  return component('Button', { options, style, ref, label }, descendants);
 };

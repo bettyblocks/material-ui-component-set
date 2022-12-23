@@ -1,28 +1,45 @@
-import {
-  component,
-  PrefabComponent,
-  OptionProducer,
-} from '@betty-blocks/component-sdk';
-import { updateOption } from '../../../utils';
-import { deleteActionVariable } from '../../hooks/deleteActionVariable';
+import { component, PrefabReference } from '@betty-blocks/component-sdk';
+import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
-
-export interface Configuration {
-  options?: Record<string, OptionProducer>;
-  label?: string;
-}
-
-const $afterDelete = [deleteActionVariable];
 
 export const RadioInput = (
   config: Configuration,
-  children: PrefabComponent[] = [],
+  children: PrefabReference[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
+  const style = { ...config.style };
+  const ref = config.ref ? { ...config.ref } : undefined;
+  const label = config.label ? config.label : undefined;
 
-  if (config.label) {
-    options.label = updateOption(options.label, { value: [config.label] });
-  }
+  const categories = [
+    {
+      label: 'Validation Options',
+      expanded: false,
+      members: ['required', 'validationValueMissing'],
+    },
+    {
+      label: 'Styling',
+      expanded: false,
+      members: [
+        'hideLabel',
+        'radioColor',
+        'radioColorChecked',
+        'labelColor',
+        'textColor',
+        'helperColor',
+        'errorColor',
+      ],
+    },
+    {
+      label: 'Advanced Options',
+      expanded: false,
+      members: ['dataComponentAttribute'],
+    },
+  ];
 
-  return component('RadioInput', { options, $afterDelete }, children);
+  return component(
+    'RadioInput',
+    { options, style, ref, label, optionCategories: categories },
+    children,
+  );
 };

@@ -1,6 +1,6 @@
 (() => ({
-  name: 'Hidden Input Beta',
-  type: 'FORM_COMPONENT',
+  name: 'Hidden Input',
+  type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
@@ -11,13 +11,11 @@
       return <div className={classes.dev}>Hidden input</div>;
     }
 
-    const valueProperty = B.useProperty(value);
-
     function Input() {
       return (
         <input
           className={[isDev ? classes.dev : ''].join(' ')}
-          defaultValue={parseInt(valueProperty, 10)}
+          defaultValue={B.useText(value)}
           id={name}
           name={name}
           type="hidden"

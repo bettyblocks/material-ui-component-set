@@ -1,29 +1,52 @@
-import {
-  component,
-  OptionProducer,
-  PrefabComponent,
-} from '@betty-blocks/component-sdk';
+import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
-import { deleteActionVariable } from '../../hooks/deleteActionVariable';
-import { options as defaults } from './options';
-
-export interface Configuration {
-  options?: Record<string, OptionProducer>;
-  validationPattern?: string;
-  adornmentIcon?: string;
-  label?: string;
-  inputLabel?: string;
-  type?: HTMLInputElement['type'];
-  pattern?: string;
-}
-
-const $afterDelete = [deleteActionVariable];
+import { Configuration } from '../Configuration';
+import { options as defaults } from './options/index';
 
 export const TextInput = (
   config: Configuration,
-  children: PrefabComponent[] = [],
+  children: PrefabReference[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
+  const ref = config.ref ? { ...config.ref } : undefined;
+
+  const categories = [
+    {
+      label: 'Validation Options',
+      expanded: false,
+      members: [
+        'required',
+        'validationValueMissing',
+        'pattern',
+        'validationPatternMismatch',
+        'minLength',
+        'validationTooShort',
+        'maxLength',
+        'validationTooLong',
+      ],
+    },
+    {
+      label: 'Styling',
+      expanded: false,
+      members: [
+        'hideLabel',
+        'backgroundColor',
+        'borderColor',
+        'borderHoverColor',
+        'borderFocusColor',
+        'labelColor',
+        'textColor',
+        'placeholderColor',
+        'helperColor',
+        'errorColor',
+      ],
+    },
+    {
+      label: 'Advanced Options',
+      expanded: false,
+      members: ['dataComponentAttribute'],
+    },
+  ];
 
   if (config.type) {
     options.type = updateOption(options.type, { value: config.type });
@@ -57,7 +80,7 @@ export const TextInput = (
 
   return component(
     'TextInput',
-    { label: config.label, options, $afterDelete },
+    { label: config.label, options, ref, optionCategories: categories },
     children,
   );
 };

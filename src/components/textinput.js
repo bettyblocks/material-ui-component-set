@@ -1,6 +1,6 @@
 (() => ({
   name: 'TextInput',
-  type: 'FORM_COMPONENT',
+  type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
@@ -23,8 +23,8 @@
       adornmentIcon,
       adornmentPosition,
       pattern,
-      minlength,
-      maxlength,
+      minLength,
+      maxLength,
       minvalue,
       maxvalue,
       validationTypeMismatch = [''],
@@ -65,8 +65,8 @@
     const labelText = parsedLabel || name;
 
     const validPattern = pattern || null;
-    const validMinlength = minlength || null;
-    const validMaxlength = maxlength || null;
+    const validMinlength = minLength || null;
+    const validMaxlength = maxLength || null;
     const validMinvalue = minvalue || null;
     const validMaxvalue = maxvalue || null;
 
@@ -168,6 +168,8 @@
 
       setAfterFirstInvalidation(!validation.valid);
       handleValidation(validation);
+      const { value: eventValue } = target;
+      B.triggerEvent('onBlur', eventValue);
     };
 
     const invalidHandler = (event) => {
@@ -185,7 +187,7 @@
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
-    B.defineFunction('Reset', () => setCurrentValue(''));
+    B.defineFunction('Reset', () => setCurrentValue(useText(value)));
 
     const handleClickShowPassword = () => {
       togglePassword(!showPassword);
@@ -316,6 +318,7 @@
         '& > *': {
           pointerEvents: 'none',
         },
+        width: ({ options: { fullWidth } }) => (fullWidth ? '100%' : 'auto'),
       },
       label: {
         color: ({ options: { labelColor } }) => [

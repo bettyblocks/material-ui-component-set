@@ -1,6 +1,6 @@
 (() => ({
   name: 'DateTimePickerInput',
-  type: 'FORM_COMPONENT',
+  type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
@@ -31,7 +31,6 @@
       use24HourClockTime,
       label,
       locale,
-      clearable,
       dataComponentAttribute = ['DateTimePicker'],
     } = options;
     const { env, useText, Icon } = B;
@@ -54,6 +53,7 @@
     const placeholderText = useText(placeholder);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const mounted = useRef(false);
+    const clearable = true;
 
     const localeMap = {
       nl: nlLocale,
@@ -107,7 +107,36 @@
 
     useEffect(() => {
       if (parsedValue) {
-        setSelectedDate(parsedValue);
+        switch (type) {
+          case 'date': {
+            setSelectedDate(DateFns.parse(parsedValue, dateFormat));
+            break;
+          }
+
+          case 'datetime': {
+            const formatDefaultParse = DateFns.parse(
+              parsedValue,
+              datetimeFormat,
+            );
+
+            if (!parsedValue) return;
+
+            if (isValidDate(formatDefaultParse)) {
+              setSelectedDate(formatDefaultParse);
+            } else {
+              setSelectedDate(new Date(parsedValue));
+            }
+
+            break;
+          }
+
+          case 'time': {
+            setSelectedDate(DateFns.parse(parsedValue, timeFormat));
+            break;
+          }
+
+          default:
+        }
       }
     }, [parsedValue]);
 
@@ -179,6 +208,7 @@
     }
 
     const onBlurHandler = () => {
+      if (!selectedDate) return;
       if (selectedDate && DateFns.isValid(selectedDate)) {
         setErrorState(false);
         setHelper('');
@@ -270,6 +300,7 @@
         '& > *': {
           pointerEvents: 'none',
         },
+        width: ({ options: { fullWidth } }) => (fullWidth ? '100%' : 'auto'),
       },
       dialog: {
         '& .MuiPickersToolbar-toolbar, & .MuiPickersDay-daySelected': {

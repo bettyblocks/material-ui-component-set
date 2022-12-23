@@ -4,14 +4,17 @@
   allowedTypes: [],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { env, useText } = B;
+    const { env, useText, usePublicFile } = B;
     const { Link } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const {
-      type,
-      imageSource,
-      videoSource,
+      type = 'url',
+      imageFileSource,
+      propertyFileSource,
+      videoFileSource,
+      urlFileSource,
       iframeSource,
+      urlSourceType = 'image',
       imgAlt,
       title,
       linkTo,
@@ -21,14 +24,42 @@
     } = options;
 
     const titleText = useText(title);
-    const videoUrl = useText(videoSource);
     const iframeUrl = useText(iframeSource);
-    const imageSourceText = useText(imageSource);
-    const [imgUrl, setImgUrl] = useState(imageSourceText);
+    const propValue = !isDev && propertyFileSource;
+    const { url: imgSource = '', name: imgName = 'image' } =
+      usePublicFile(imageFileSource) || {};
+    const { url: videoSource = '#', name: videoName = 'video' } =
+      usePublicFile(videoFileSource) || {};
+
+    const isUrlImg = type === 'url' && urlSourceType === 'image';
+    const isURLVideo = type === 'url' && urlSourceType === 'video';
+    const isDataUrl = type === 'data' && propertyFileSource && propValue;
+    const isImage = type === 'img' || isUrlImg || isDataUrl;
+    const isVideo = type === 'video' || isURLVideo;
+    const isData = type === 'data' || isDataUrl;
+    const isIframe = type === 'iframe' && iframeUrl;
+    const urlFileSourceText = useText(urlFileSource);
+    const videoUrl = isURLVideo ? urlFileSourceText : videoSource;
+
+    function getImgUrl() {
+      switch (true) {
+        case isDataUrl && propValue !== {}:
+          return propValue[propertyFileSource.useKey];
+        case isUrlImg:
+          return urlFileSourceText;
+        case type === 'img':
+          return imgSource;
+        default:
+          return '';
+      }
+    }
+
+    const initialImg = getImgUrl();
+    const [imgUrl, setImgUrl] = useState(initialImg);
 
     useEffect(() => {
-      setImgUrl(imageSourceText);
-    }, [imageSourceText]);
+      setImgUrl(getImgUrl());
+    }, [propValue, urlFileSourceText, imgSource, type]);
 
     useEffect(() => {
       B.defineFunction('SetCustomImage', (url) => {
@@ -36,17 +67,17 @@
       });
 
       B.defineFunction('RemoveCustomImage', () => {
-        setImgUrl(imageSourceText);
+        setImgUrl(initialImg);
       });
     }, []);
 
-    const isImage = type === 'img' && imgUrl;
-    const isVideo = type === 'video' && videoUrl;
-    const isIframe = type === 'iframe' && iframeUrl;
-    const isEmpty = !isImage && !isVideo && !isIframe;
+    const isEmpty = !isImage && !isVideo && !isData && !isIframe;
 
-    const variable = imageSource && imageSource.findIndex((v) => v.name) !== -1;
-    const variableDev = env === 'dev' && (variable || !imgUrl);
+    const variable =
+      (isUrlImg || isURLVideo) &&
+      urlFileSource &&
+      urlFileSource.findIndex((v) => v.name) !== -1;
+    const variableDev = env === 'dev' && imgUrl === '';
 
     const hasInteralLink =
       linkType === 'internal' && linkTo && linkTo.id !== '';
@@ -57,6 +88,16 @@
     const href = hasExternalLink ? linkToExternalText : undefined;
 
     function ImgPlaceholder() {
+      return (
+        <svg className={classes.placeholder} width={86} height={48}>
+          <title>{titleText}</title>
+          <rect x="19.5" y="8.5" rx="2" />
+          <path d="M61.1349945 29.020979v3.9160839H25v-2.5379375l6.5998225-4.9892478 5.6729048 4.2829541 13.346858-11.2981564L61.1349945 29.020979zm-22.5-10.270979c0 1.0416667-.3645833 1.9270833-1.09375 2.65625S35.9266612 22.5 34.8849945 22.5s-1.9270833-.3645833-2.65625-1.09375-1.09375-1.6145833-1.09375-2.65625.3645833-1.9270833 1.09375-2.65625S33.8433278 15 34.8849945 15s1.9270833.3645833 2.65625 1.09375 1.09375 1.6145833 1.09375 2.65625z" />
+        </svg>
+      );
+    }
+
+    function DataPlaceholder() {
       return (
         <svg className={classes.placeholder} width={86} height={48}>
           <title>{titleText}</title>
@@ -94,11 +135,13 @@
     }
 
     function Placeholder() {
-      switch (type) {
-        case 'img':
+      switch (true) {
+        case isImage:
           return <ImgPlaceholder />;
-        case 'video':
+        case isVideo:
           return <VideoPlaceholder />;
+        case isData:
+          return <DataPlaceholder />;
         default:
           return <IframePlaceholder />;
       }
@@ -109,9 +152,14 @@
         <img
           className={classes.media}
           src={imgUrl}
-          title={titleText}
-          alt={imgAlt}
+          title={titleText || variable || imgName}
+          alt={imgAlt || imgName}
           data-component={useText(dataComponentAttribute) || 'Media'}
+          role="presentation"
+          onClick={(event) => {
+            event.stopPropagation();
+            B.triggerEvent('onClick', event);
+          }}
         />
       );
     }
@@ -136,7 +184,7 @@
           component={hasInteralLink ? B.Link : undefined}
           endpoint={hasInteralLink ? linkTo : undefined}
         >
-          {ImageComponent}
+          {ImageComponent()}
         </Link>
       );
     }
@@ -146,7 +194,7 @@
         <video
           className={classes.media}
           src={videoUrl}
-          title={titleText}
+          title={titleText || videoName}
           controls
           data-component={useText(dataComponentAttribute) || 'Media'}
         />
