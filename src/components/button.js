@@ -280,7 +280,7 @@
     }
 
     const ButtonWithTooltip = (
-      <div>
+      <div style={{ width: 'fit-content' }}>
         <Tooltip {...tooltipProps}>
           <div>{ButtonComponent}</div>
         </Tooltip>
