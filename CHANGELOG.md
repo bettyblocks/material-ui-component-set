@@ -1,3 +1,10 @@
+## [2.86.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.86.1...v2.86.2) (2022-12-23)
+
+
+### Bug Fixes
+
+* disabled state open page button not working ([c50501a](https://github.com/bettyblocks/material-ui-component-set/commit/c50501aac9cae4e40bbe34ac3b8e99895cbfaad5))
+
 ## [2.86.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.86.0...v2.86.1) (2022-12-20)
 
 
