@@ -17,6 +17,7 @@ import {
   PrefabComponentOption,
   component as makeComponent,
   InteractionType,
+  toggle,
 } from '@betty-blocks/component-sdk';
 import {
   Box,
@@ -136,7 +137,7 @@ const beforeCreate = ({
             modelId={modelId}
             value={primaryProperty}
             disabledKinds={unsupportedKinds}
-            disable={modelId === null}
+            disabled={modelId === null}
           />
         </Field>
       </Content>
@@ -242,14 +243,16 @@ const beforeCreate = ({
             }),
           );
 
-          checkboxWidgetForm.descendants.push(
-            makeBettyUpdateInput(
-              BettyPrefabs.HIDDEN,
-              model,
-              idProperty,
-              result.recordInputVariable,
-            ),
-          );
+          if (model) {
+            checkboxWidgetForm.descendants.push(
+              makeBettyUpdateInput(
+                BettyPrefabs.HIDDEN,
+                model,
+                idProperty,
+                result.recordInputVariable,
+              ),
+            );
+          }
 
           const interaction = {
             name: 'Submit',
@@ -276,7 +279,7 @@ const interactions: PrefabInteraction[] = [];
 
 const attributes = {
   category: 'Widgets',
-  icon: Icon.RadioButtonIcon,
+  icon: Icon.CheckboxIcon,
   interactions,
   variables: [],
 };
@@ -507,6 +510,11 @@ export default makePrefab('Checkbox Widget', attributes, beforeCreate, [
                           value: [''],
                           ref: {
                             id: '#questionLabel',
+                          },
+                        }),
+                        required: toggle('Required', {
+                          ref: {
+                            id: '#questionRequired',
                           },
                         }),
                       },
