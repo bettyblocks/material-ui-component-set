@@ -100,6 +100,7 @@ const beforeCreate = ({
   const [validationMessage, setValidationMessage] = React.useState('');
   const [stepNumber, setStepNumber] = React.useState(1);
 
+  // TODO: could this code be simplified by using only one query?
   const { data } = useModelQuery({
     variables: { id: modelId },
     onCompleted: (result: ModelQuery) => {
@@ -176,6 +177,7 @@ const beforeCreate = ({
         );
       }
       return (
+        // TODO: make this beforeCreate page look a bit nicer if possible
         <>
           <Text size="medium" weight="bolder">
             Select models for your questionnaire datacontainers.
@@ -228,6 +230,9 @@ const beforeCreate = ({
         '#secondTabDataContainer',
         newPrefab.structure,
       );
+
+      // TODO: (questionable) Can the user create new sections? If yes, how are we going
+      // to do this in the beforeCreate?
 
       setOption(titleText, 'content', (opt: PrefabComponentOption) => ({
         ...opt,
