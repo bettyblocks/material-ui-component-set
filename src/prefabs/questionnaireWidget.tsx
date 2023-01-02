@@ -363,26 +363,14 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'page',
+  type: 'page',
+  category: 'LAYOUT',
   icon: Icon.UpdateFormIcon,
   interactions,
   variables,
 };
 
 export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
-  // wrapper(
-  //   {
-  //     label: 'Text widget',
-  //     optionCategories: [
-  //       {
-  //         label: 'Conditional options',
-  //         expanded: true,
-  //         members: [''],
-  //       },
-  //     ],
-  //     options: {},
-  //   },
-  //   [
   Drawer({}, [
     DrawerBar(
       {
@@ -1920,4 +1908,3 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
     ),
   ]),
 ]);
-// ]);
