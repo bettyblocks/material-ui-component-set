@@ -1,6 +1,7 @@
 name: Publish component set on production
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
@@ -83,6 +84,7 @@ jobs:
         env:
           AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_FRASERS }}
           AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_FRASERS }}
+        run: yarn upload
       - name: upload pfl
         env:
           AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_PFL }}
