@@ -18,7 +18,6 @@ import {
   PrefabComponentOption,
   PrefabVariable,
   InteractionType,
-  // InteractionType,
 } from '@betty-blocks/component-sdk';
 import {
   Box,
@@ -48,8 +47,7 @@ import {
   Tabs,
   tabsOptions,
 } from './structures';
-import { ModelProps } from './types';
-import { ModelQuery } from './types/types';
+import { ModelProps, ModelQuery } from './types';
 
 const interactions: PrefabInteraction[] = [
   {
@@ -230,6 +228,14 @@ const beforeCreate = ({
         '#secondTabDataContainer',
         newPrefab.structure,
       );
+      const primaryListItem = treeSearch(
+        '#PrimaryListItem',
+        newPrefab.structure,
+      );
+      const secondaryListItem = treeSearch(
+        '#SecondaryListItem',
+        newPrefab.structure,
+      );
 
       // TODO: (questionable) Can the user create new sections? If yes, how are we going
       // to do this in the beforeCreate?
@@ -267,12 +273,29 @@ const beforeCreate = ({
           value: [model.label],
         }));
         primaryTab.label = model.label;
+
+        setOption(
+          primaryListItem,
+          'primaryText',
+          (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: [model.label],
+          }),
+        );
       }
       if (secondaryData && secondaryModel) {
         setOption(secondaryTab, 'label', (opt: PrefabComponentOption) => ({
           ...opt,
           value: [secondaryModel.label],
         }));
+        setOption(
+          secondaryListItem,
+          'primaryText',
+          (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: [secondaryModel.label],
+          }),
+        );
         secondaryTab.label = secondaryModel.label;
       }
 
@@ -1846,7 +1869,7 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                                       'Content',
                                                                       {
                                                                         value: [
-                                                                          `We'll start with some basic questions before we dive into details.`,
+                                                                          `On this page you can drag and drop widgets or make your own to create your questionnaire.`,
                                                                         ],
                                                                         configuration:
                                                                           {
