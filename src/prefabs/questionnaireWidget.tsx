@@ -55,7 +55,7 @@ const interactions: PrefabInteraction[] = [
     sourceEvent: 'Click',
     ref: {
       targetComponentId: '#PrimaryTab',
-      sourceComponentId: '#PrimaryListItem',
+      sourceComponentId: '#primaryButton',
     },
     type: InteractionType.Custom,
   },
@@ -64,7 +64,7 @@ const interactions: PrefabInteraction[] = [
     sourceEvent: 'Click',
     ref: {
       targetComponentId: '#SecondaryTab',
-      sourceComponentId: '#SecondaryListItem',
+      sourceComponentId: '#secondaryButton',
     },
     type: InteractionType.Custom,
   },
@@ -228,12 +228,9 @@ const beforeCreate = ({
         '#secondTabDataContainer',
         newPrefab.structure,
       );
-      const primaryListItem = treeSearch(
-        '#PrimaryListItem',
-        newPrefab.structure,
-      );
-      const secondaryListItem = treeSearch(
-        '#SecondaryListItem',
+      const primaryButton = treeSearch('#primaryButton', newPrefab.structure);
+      const secondaryButton = treeSearch(
+        '#secondaryButton',
         newPrefab.structure,
       );
 
@@ -275,8 +272,8 @@ const beforeCreate = ({
         primaryTab.label = model.label;
 
         setOption(
-          primaryListItem,
-          'primaryText',
+          primaryButton,
+          'buttonText',
           (opt: PrefabComponentOption) => ({
             ...opt,
             value: [model.label],
@@ -289,8 +286,8 @@ const beforeCreate = ({
           value: [secondaryModel.label],
         }));
         setOption(
-          secondaryListItem,
-          'primaryText',
+          secondaryButton,
+          'buttonText',
           (opt: PrefabComponentOption) => ({
             ...opt,
             value: [secondaryModel.label],
@@ -1220,29 +1217,48 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                             },
                                                             [],
                                                           ),
-                                                          ListItem(
+                                                          Button(
                                                             {
                                                               ref: {
-                                                                id: '#PrimaryListItem',
+                                                                id: '#primaryButton',
+                                                              },
+                                                              style: {
+                                                                overwrite: {
+                                                                  backgroundColor:
+                                                                    {
+                                                                      type: 'THEME_COLOR',
+                                                                      value:
+                                                                        'transparent',
+                                                                    },
+                                                                  padding: [
+                                                                    '0.6875rem',
+                                                                    '1rem',
+                                                                    '0.6875rem',
+                                                                    '1rem',
+                                                                  ],
+                                                                  color: {
+                                                                    type: 'THEME_COLOR',
+                                                                    value:
+                                                                      'primary',
+                                                                  },
+                                                                  boxShadow:
+                                                                    'none',
+                                                                  textDecoration:
+                                                                    'none',
+                                                                  textTransform:
+                                                                    'none',
+                                                                },
                                                               },
 
                                                               options: {
-                                                                ...listItemOptions,
-                                                                primaryText:
+                                                                ...buttonOptions,
+                                                                buttonText:
                                                                   variable(
                                                                     'Primary text',
                                                                     {
                                                                       value: [
-                                                                        'Basic Information',
+                                                                        'Other information',
                                                                       ],
-                                                                    },
-                                                                  ),
-                                                                titleColor:
-                                                                  color(
-                                                                    'Title color',
-                                                                    {
-                                                                      value:
-                                                                        ThemeColor.PRIMARY,
                                                                     },
                                                                   ),
                                                               },
@@ -1378,30 +1394,48 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                             },
                                                             [],
                                                           ),
-                                                          ListItem(
+                                                          Button(
                                                             {
                                                               ref: {
-                                                                id: '#SecondaryListItem',
+                                                                id: '#secondaryButton',
+                                                              },
+                                                              style: {
+                                                                overwrite: {
+                                                                  backgroundColor:
+                                                                    {
+                                                                      type: 'THEME_COLOR',
+                                                                      value:
+                                                                        'transparent',
+                                                                    },
+                                                                  padding: [
+                                                                    '0.6875rem',
+                                                                    '1rem',
+                                                                    '0.6875rem',
+                                                                    '1rem',
+                                                                  ],
+                                                                  color: {
+                                                                    type: 'THEME_COLOR',
+                                                                    value:
+                                                                      'primary',
+                                                                  },
+                                                                  boxShadow:
+                                                                    'none',
+                                                                  textDecoration:
+                                                                    'none',
+                                                                  textTransform:
+                                                                    'none',
+                                                                },
                                                               },
 
                                                               options: {
-                                                                ...listItemOptions,
-                                                                primaryText:
+                                                                ...buttonOptions,
+                                                                content:
                                                                   variable(
                                                                     'Primary text',
                                                                     {
                                                                       value: [
                                                                         'Other information',
                                                                       ],
-                                                                    },
-                                                                  ),
-
-                                                                titleColor:
-                                                                  color(
-                                                                    'Title color',
-                                                                    {
-                                                                      value:
-                                                                        ThemeColor.PRIMARY,
                                                                     },
                                                                   ),
                                                               },
