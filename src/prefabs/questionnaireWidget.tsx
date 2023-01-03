@@ -98,7 +98,6 @@ const beforeCreate = ({
   const [validationMessage, setValidationMessage] = React.useState('');
   const [stepNumber, setStepNumber] = React.useState(1);
 
-  // TODO: could this code be simplified by using only one query?
   const { data } = useModelQuery({
     variables: { id: modelId },
     onCompleted: (result: ModelQuery) => {
@@ -234,9 +233,6 @@ const beforeCreate = ({
         newPrefab.structure,
       );
 
-      // TODO: (questionable) Can the user create new sections? If yes, how are we going
-      // to do this in the beforeCreate?
-
       setOption(titleText, 'content', (opt: PrefabComponentOption) => ({
         ...opt,
         value: [title],
@@ -360,7 +356,6 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  type: 'page',
   category: 'LAYOUT',
   icon: Icon.UpdateFormIcon,
   interactions,
@@ -656,7 +651,7 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                 ref: {
                                                   id: '#TitleText',
                                                 },
-                                                value: [],
+                                                value: ['Title'],
                                                 configuration: {
                                                   as: 'MULTILINE',
                                                 },
@@ -690,7 +685,7 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                 ref: {
                                                   id: '#DescriptionText',
                                                 },
-                                                value: [],
+                                                value: ['Description'],
                                                 configuration: {
                                                   as: 'MULTILINE',
                                                 },
@@ -1166,7 +1161,7 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                                 value: [
                                                                   '0rem',
                                                                   '0rem',
-                                                                  '0rem',
+                                                                  'M',
                                                                   '0rem',
                                                                 ],
                                                               },
