@@ -1157,7 +1157,7 @@ export default makePrefab('Card and list view', attrs, beforeCreate, [
                                             },
                                           }),
                                           type: font('Font', {
-                                            value: ['Title4'],
+                                            value: ['Title1'],
                                           }),
                                           outerSpacing: sizes('Outer space', {
                                             value: [

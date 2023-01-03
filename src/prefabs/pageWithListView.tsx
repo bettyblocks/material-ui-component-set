@@ -982,7 +982,7 @@ export default makePrefab('List view', attrs, beforeCreate, [
                                           id: '#pageTitleContent',
                                         },
                                       }),
-                                      type: font('Font', { value: ['Title4'] }),
+                                      type: font('Font', { value: ['Title1'] }),
                                       outerSpacing: sizes('Outer space', {
                                         value: ['0rem', '0rem', 'M', '0rem'],
                                       }),
@@ -2044,7 +2044,7 @@ export default makePrefab('List view', attrs, beforeCreate, [
                                                                               {
                                                                                 value:
                                                                                   [
-                                                                                    'Title4',
+                                                                                    'Title1',
                                                                                   ],
                                                                               },
                                                                             ),

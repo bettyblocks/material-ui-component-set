@@ -1327,7 +1327,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                           configuration: { as: 'MULTILINE' },
                                         }),
                                         type: font('Font', {
-                                          value: ['Title4'],
+                                          value: ['Title1'],
                                         }),
                                       },
                                     }),
@@ -2393,7 +2393,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                       },
                                                     ),
                                                     type: font('Font', {
-                                                      value: ['Title4'],
+                                                      value: ['Title1'],
                                                     }),
                                                     textAlignment: option(
                                                       'CUSTOM',
@@ -3020,7 +3020,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                       },
                                                     ),
                                                     type: font('Font', {
-                                                      value: ['Title4'],
+                                                      value: ['Title1'],
                                                     }),
                                                     textAlignment: option(
                                                       'CUSTOM',
@@ -3648,7 +3648,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                       },
                                                     ),
                                                     type: font('Font', {
-                                                      value: ['Title4'],
+                                                      value: ['Title1'],
                                                     }),
                                                     textAlignment: option(
                                                       'CUSTOM',
@@ -4278,7 +4278,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                       },
                                                     ),
                                                     type: font('Font', {
-                                                      value: ['Title4'],
+                                                      value: ['Title1'],
                                                     }),
                                                     textAlignment: option(
                                                       'CUSTOM',

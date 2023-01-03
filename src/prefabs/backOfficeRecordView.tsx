@@ -1927,7 +1927,7 @@ const drawerContainer = DrawerContainer(
                                         },
                                       }),
                                       type: font('Font', {
-                                        value: ['Title4'],
+                                        value: ['Title1'],
                                       }),
                                     },
                                   },
@@ -3863,7 +3863,7 @@ const prefabStructure = [
                                           configuration: { as: 'MULTILINE' },
                                         }),
                                         type: font('Font', {
-                                          value: ['Title4'],
+                                          value: ['Title1'],
                                         }),
                                         outerSpacing: sizes('Outer space', {
                                           value: ['0rem', '0rem', 'M', '0rem'],
