@@ -286,10 +286,6 @@ const beforeCreate = ({
               }));
             }
           }
-          console.log({
-            ...originalPrefab,
-            structure: [newPrefab.structure[0]],
-          });
           save({ ...originalPrefab, structure: [newPrefab.structure[0]] });
         }}
       />
