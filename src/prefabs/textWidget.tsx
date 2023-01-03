@@ -98,6 +98,12 @@ const beforeCreate = ({
     return outputProp;
   };
 
+  if (modelId === null && validationMessage === '') {
+    setValidationMessage(
+      'The text widget needs to be inside a parent with a model',
+    );
+  }
+
   const treeSearch = (refValue: string, structure: any) =>
     structure.reduce((acc: string, component: PrefabComponent) => {
       if (acc) return acc;
@@ -113,7 +119,14 @@ const beforeCreate = ({
     <>
       <Header title="Configure your text widget" onClose={close} />
       <Content>
-        <Field label="Property">
+        <Field
+          label="Property"
+          error={
+            validationMessage && (
+              <Text color="#e82600">{validationMessage}</Text>
+            )
+          }
+        >
           <PropertySelector
             onChange={(value: string) => {
               setPrimaryProperty(value);
@@ -121,11 +134,7 @@ const beforeCreate = ({
             modelId={modelId}
             value={primaryProperty}
             disabledKinds={unsupportedKinds}
-            error={
-              validationMessage && (
-                <Text color="#e82600">{validationMessage}</Text>
-              )
-            }
+            disabled={modelId === null}
           />
         </Field>
       </Content>
