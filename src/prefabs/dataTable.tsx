@@ -74,7 +74,7 @@ const beforeCreate = ({
             type: 'MODEL_AND_RELATION',
           };
           properties.forEach(
-            (property: {
+            (propertyObject: {
               defaultValue: null;
               id: string[];
               kind: string;
@@ -82,7 +82,7 @@ const beforeCreate = ({
               type: string;
               format: string;
             }) => {
-              let newProperty = property;
+              let newProperty = propertyObject;
               const inheritFormatKinds = [
                 'DATE',
                 'DATE_EXPRESSION',
@@ -96,9 +96,9 @@ const beforeCreate = ({
                 'PRICE_EXPRESSION',
                 'TIME',
               ];
-              if (inheritFormatKinds.includes(property.kind)) {
+              if (inheritFormatKinds.includes(propertyObject.kind)) {
                 newProperty = {
-                  ...property,
+                  ...propertyObject,
                   format: 'INHERIT',
                 };
               }
