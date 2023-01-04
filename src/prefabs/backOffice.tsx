@@ -48,6 +48,7 @@ import {
   DrawerContainer,
   drawerContainerOptions,
   drawerOptions,
+  FilterComponent,
   FormErrorAlert,
   Grid,
   gridOptions,
@@ -454,6 +455,87 @@ const interactions: PrefabInteraction[] = [
       targetComponentId: '#deleteSubmitButton',
       sourceComponentId: '#deleteForm',
     },
+  },
+  {
+    name: 'Add filter group',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#filterComp',
+      sourceComponentId: '#addFilterButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Apply filter',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#filterComp',
+      sourceComponentId: '#applyButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Advanced filter',
+    sourceEvent: 'onSubmit',
+    ref: {
+      targetComponentId: '#dataTable',
+      sourceComponentId: '#filterComp',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#filterColumn',
+      sourceComponentId: '#filterButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#filterButtonActive',
+      sourceComponentId: '#filterButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#filterButton',
+      sourceComponentId: '#filterButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#filterButtonActive',
+      sourceComponentId: '#filterButtonActive',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#filterColumn',
+      sourceComponentId: '#filterButtonActive',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#filterButton',
+      sourceComponentId: '#filterButtonActive',
+    },
+    type: InteractionType.Custom,
   },
 ];
 
@@ -3286,6 +3368,176 @@ const drawerContainer = DrawerContainer(
                                                                 Button(
                                                                   {
                                                                     ref: {
+                                                                      id: '#filterButtonActive',
+                                                                    },
+                                                                    label:
+                                                                      'Active filter button',
+                                                                    style: {
+                                                                      overwrite:
+                                                                        {
+                                                                          backgroundColor:
+                                                                            {
+                                                                              type: 'STATIC',
+                                                                              value:
+                                                                                'white',
+                                                                            },
+                                                                          boxShadow:
+                                                                            'none',
+                                                                          color:
+                                                                            {
+                                                                              type: 'THEME_COLOR',
+                                                                              value:
+                                                                                'primary',
+                                                                            },
+                                                                          fontFamily:
+                                                                            'Roboto',
+                                                                          fontSize:
+                                                                            '0.875rem',
+                                                                          fontStyle:
+                                                                            'none',
+                                                                          fontWeight:
+                                                                            '400',
+                                                                          padding:
+                                                                            [
+                                                                              '0.5rem',
+                                                                              '0.625rem',
+                                                                            ],
+                                                                          textDecoration:
+                                                                            'none',
+                                                                          textTransform:
+                                                                            'none',
+                                                                        },
+                                                                    },
+                                                                    options: {
+                                                                      ...buttonOptions,
+                                                                      visible:
+                                                                        toggle(
+                                                                          'Toggle visibility',
+                                                                          {
+                                                                            value:
+                                                                              false,
+                                                                            configuration:
+                                                                              {
+                                                                                as: 'VISIBILITY',
+                                                                              },
+                                                                          },
+                                                                        ),
+                                                                      buttonText:
+                                                                        variable(
+                                                                          'Button text',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                'Filter',
+                                                                              ],
+                                                                          },
+                                                                        ),
+                                                                      icon: icon(
+                                                                        'Icon',
+                                                                        {
+                                                                          value:
+                                                                            'FilterList',
+                                                                        },
+                                                                      ),
+                                                                      outerSpacing:
+                                                                        sizes(
+                                                                          'Outer space',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                '0rem',
+                                                                                'XL',
+                                                                                '0rem',
+                                                                                '0rem',
+                                                                              ],
+                                                                          },
+                                                                        ),
+                                                                    },
+                                                                  },
+                                                                  [],
+                                                                ),
+                                                                Button(
+                                                                  {
+                                                                    ref: {
+                                                                      id: '#filterButton',
+                                                                    },
+                                                                    label:
+                                                                      'Filter button',
+                                                                    style: {
+                                                                      overwrite:
+                                                                        {
+                                                                          backgroundColor:
+                                                                            {
+                                                                              type: 'STATIC',
+                                                                              value:
+                                                                                'transparent',
+                                                                            },
+                                                                          boxShadow:
+                                                                            'none',
+                                                                          color:
+                                                                            {
+                                                                              type: 'THEME_COLOR',
+                                                                              value:
+                                                                                'primary',
+                                                                            },
+                                                                          fontFamily:
+                                                                            'Roboto',
+                                                                          fontSize:
+                                                                            '0.875rem',
+                                                                          fontStyle:
+                                                                            'none',
+                                                                          fontWeight:
+                                                                            '400',
+                                                                          padding:
+                                                                            [
+                                                                              '0.5rem',
+                                                                              '0.625rem',
+                                                                            ],
+                                                                          textDecoration:
+                                                                            'none',
+                                                                          textTransform:
+                                                                            'none',
+                                                                        },
+                                                                    },
+                                                                    options: {
+                                                                      ...buttonOptions,
+                                                                      buttonText:
+                                                                        variable(
+                                                                          'Button text',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                'Filter',
+                                                                              ],
+                                                                          },
+                                                                        ),
+                                                                      icon: icon(
+                                                                        'Icon',
+                                                                        {
+                                                                          value:
+                                                                            'FilterList',
+                                                                        },
+                                                                      ),
+                                                                      outerSpacing:
+                                                                        sizes(
+                                                                          'Outer space',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                '0rem',
+                                                                                'XL',
+                                                                                '0rem',
+                                                                                '0rem',
+                                                                              ],
+                                                                          },
+                                                                        ),
+                                                                    },
+                                                                  },
+                                                                  [],
+                                                                ),
+                                                                Button(
+                                                                  {
+                                                                    ref: {
                                                                       id: '#searchButtonActive',
                                                                     },
                                                                     label:
@@ -3892,6 +4144,286 @@ const drawerContainer = DrawerContainer(
                                                                               },
                                                                           },
                                                                           [],
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Column(
+                                                              {
+                                                                label:
+                                                                  'Filter Column',
+                                                                ref: {
+                                                                  id: '#filterColumn',
+                                                                },
+                                                                options: {
+                                                                  ...columnOptions,
+                                                                  visible:
+                                                                    toggle(
+                                                                      'Toggle visibility',
+                                                                      {
+                                                                        value:
+                                                                          false,
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'VISIBILITY',
+                                                                          },
+                                                                      },
+                                                                    ),
+                                                                  innerSpacing:
+                                                                    sizes(
+                                                                      'Inner space',
+                                                                      {
+                                                                        value: [
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                        ],
+                                                                      },
+                                                                    ),
+                                                                },
+                                                              },
+                                                              [
+                                                                Box(
+                                                                  {
+                                                                    options: {
+                                                                      ...boxOptions,
+                                                                      innerSpacing:
+                                                                        sizes(
+                                                                          'Inner space',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                '0rem',
+                                                                                '0rem',
+                                                                                '0rem',
+                                                                                '0rem',
+                                                                              ],
+                                                                          },
+                                                                        ),
+                                                                      stretch:
+                                                                        toggle(
+                                                                          'Stretch (when in flex container)',
+                                                                          {
+                                                                            value:
+                                                                              true,
+                                                                          },
+                                                                        ),
+                                                                      position:
+                                                                        buttongroup(
+                                                                          'Position',
+                                                                          [
+                                                                            [
+                                                                              'Static',
+                                                                              'static',
+                                                                            ],
+                                                                            [
+                                                                              'Relative',
+                                                                              'relative',
+                                                                            ],
+                                                                            [
+                                                                              'Absolute',
+                                                                              'absolute',
+                                                                            ],
+                                                                            [
+                                                                              'Fixed',
+                                                                              'fixed',
+                                                                            ],
+                                                                            [
+                                                                              'Sticky',
+                                                                              'sticky',
+                                                                            ],
+                                                                          ],
+                                                                          {
+                                                                            value:
+                                                                              'relative',
+                                                                            configuration:
+                                                                              {
+                                                                                dataType:
+                                                                                  'string',
+                                                                              },
+                                                                          },
+                                                                        ),
+                                                                    },
+                                                                  },
+                                                                  [
+                                                                    FilterComponent(
+                                                                      {
+                                                                        ref: {
+                                                                          id: '#filterComp',
+                                                                        },
+                                                                      },
+                                                                      [],
+                                                                    ),
+                                                                    Box(
+                                                                      {
+                                                                        options:
+                                                                          {
+                                                                            ...boxOptions,
+                                                                            alignment:
+                                                                              buttongroup(
+                                                                                'Alignment',
+                                                                                [
+                                                                                  [
+                                                                                    'None',
+                                                                                    'none',
+                                                                                  ],
+                                                                                  [
+                                                                                    'Left',
+                                                                                    'flex-start',
+                                                                                  ],
+                                                                                  [
+                                                                                    'Center',
+                                                                                    'center',
+                                                                                  ],
+                                                                                  [
+                                                                                    'Right',
+                                                                                    'flex-end',
+                                                                                  ],
+                                                                                  [
+                                                                                    'Justified',
+                                                                                    'space-between',
+                                                                                  ],
+                                                                                ],
+                                                                                {
+                                                                                  value:
+                                                                                    'space-between',
+                                                                                  configuration:
+                                                                                    {
+                                                                                      dataType:
+                                                                                        'string',
+                                                                                    },
+                                                                                },
+                                                                              ),
+                                                                            innerSpacing:
+                                                                              sizes(
+                                                                                'Inner space',
+                                                                                {
+                                                                                  value:
+                                                                                    [
+                                                                                      '0rem',
+                                                                                      '0rem',
+                                                                                      '0rem',
+                                                                                      '0rem',
+                                                                                    ],
+                                                                                },
+                                                                              ),
+                                                                          },
+                                                                      },
+                                                                      [
+                                                                        Button(
+                                                                          {
+                                                                            ref: {
+                                                                              id: '#addFilterButton',
+                                                                            },
+                                                                            style:
+                                                                              {
+                                                                                name: 'Outline',
+                                                                              },
+                                                                            options:
+                                                                              {
+                                                                                ...buttonOptions,
+                                                                                buttonText:
+                                                                                  variable(
+                                                                                    'Button text',
+                                                                                    {
+                                                                                      value:
+                                                                                        [
+                                                                                          'Add filter group',
+                                                                                        ],
+                                                                                    },
+                                                                                  ),
+                                                                              },
+                                                                          },
+                                                                          [],
+                                                                        ),
+                                                                        Box(
+                                                                          {
+                                                                            options:
+                                                                              {
+                                                                                ...boxOptions,
+                                                                                innerSpacing:
+                                                                                  sizes(
+                                                                                    'Inner space',
+                                                                                    {
+                                                                                      value:
+                                                                                        [
+                                                                                          '0rem',
+                                                                                          '0rem',
+                                                                                          '0rem',
+                                                                                          '0rem',
+                                                                                        ],
+                                                                                    },
+                                                                                  ),
+                                                                              },
+                                                                          },
+                                                                          [
+                                                                            Button(
+                                                                              {
+                                                                                ref: {
+                                                                                  id: '#clearFilterButton',
+                                                                                },
+                                                                                style:
+                                                                                  {
+                                                                                    name: 'Outline',
+                                                                                  },
+
+                                                                                options:
+                                                                                  {
+                                                                                    ...buttonOptions,
+                                                                                    buttonText:
+                                                                                      variable(
+                                                                                        'Button text',
+                                                                                        {
+                                                                                          value:
+                                                                                            [
+                                                                                              'Clear filter',
+                                                                                            ],
+                                                                                        },
+                                                                                      ),
+                                                                                    outerSpacing:
+                                                                                      sizes(
+                                                                                        'Outer space',
+                                                                                        {
+                                                                                          value:
+                                                                                            [
+                                                                                              '0rem',
+                                                                                              'M',
+                                                                                              '0rem',
+                                                                                              '0rem',
+                                                                                            ],
+                                                                                        },
+                                                                                      ),
+                                                                                  },
+                                                                              },
+                                                                              [],
+                                                                            ),
+                                                                            Button(
+                                                                              {
+                                                                                ref: {
+                                                                                  id: '#applyButton',
+                                                                                },
+                                                                                options:
+                                                                                  {
+                                                                                    ...buttonOptions,
+                                                                                    buttonText:
+                                                                                      variable(
+                                                                                        'Button text',
+                                                                                        {
+                                                                                          value:
+                                                                                            [
+                                                                                              'Apply filter',
+                                                                                            ],
+                                                                                        },
+                                                                                      ),
+                                                                                  },
+                                                                              },
+                                                                              [],
+                                                                            ),
+                                                                          ],
                                                                         ),
                                                                       ],
                                                                     ),
@@ -5915,6 +6447,13 @@ const beforeCreate = ({
           ),
         );
       }
+      const filterComp = treeSearch('#filterComp', newPrefab.structure);
+      if (modelId && filterComp?.type === 'COMPONENT') {
+        setOption(filterComp, 'modelId', (opts: PrefabComponentOption) => ({
+          ...opts,
+          value: modelId,
+        }));
+      }
       if (idProperty && newPrefab.interactions) {
         newPrefab.interactions.push(
           {
@@ -6104,4 +6643,9 @@ const beforeCreate = ({
   );
 };
 
-export default prefab('Back office', attributes, beforeCreate, prefabStructure);
+export default prefab(
+  'Back office - local',
+  attributes,
+  beforeCreate,
+  prefabStructure,
+);
