@@ -1,3 +1,10 @@
+## [2.86.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.86.3...v2.86.4) (2023-01-04)
+
+
+### Bug Fixes
+
+* set value of value option ([8504ee7](https://github.com/bettyblocks/material-ui-component-set/commit/8504ee7aec9534fd2fc3545f673aa663176b1bff))
+
 ## [2.86.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.86.2...v2.86.3) (2022-12-23)
 
 
