@@ -249,6 +249,10 @@ const beforeCreate = ({
                 },
               },
             }));
+            setOption(newPrefab.structure[0], 'value', (option) => ({
+              ...option,
+              value: [propertyPath.id[propertyPath.id.length - 1]],
+            }));
           }
           if (validate()) {
             if (
