@@ -49,6 +49,7 @@ import {
   drawerContainerOptions,
   drawerOptions,
   FilterComponent,
+  filterComponentOptions,
   FormErrorAlert,
   Grid,
   gridOptions,
@@ -4255,6 +4256,18 @@ const drawerContainer = DrawerContainer(
                                                                         ref: {
                                                                           id: '#filterComp',
                                                                         },
+                                                                        options:
+                                                                          {
+                                                                            ...filterComponentOptions,
+                                                                            backgroundColor:
+                                                                              color(
+                                                                                'Background color',
+                                                                                {
+                                                                                  value:
+                                                                                    ThemeColor.WHITE,
+                                                                                },
+                                                                              ),
+                                                                          },
                                                                       },
                                                                       [],
                                                                     ),
