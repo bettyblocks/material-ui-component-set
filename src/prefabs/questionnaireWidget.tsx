@@ -724,7 +724,7 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                         options: {
                                           ...boxOptions,
                                           innerSpacing: sizes('Inner space', {
-                                            value: ['L', 'L', 'L', 'L'],
+                                            value: ['L', 'XL', 'XL', 'XL'],
                                           }),
                                           backgroundColor: color(
                                             'Background color',
@@ -899,11 +899,22 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                 },
                                                 options: {
                                                   ...columnOptions,
+                                                  innerSpacing: sizes(
+                                                    'Inner space',
+                                                    {
+                                                      value: [
+                                                        'XL',
+                                                        '0rem',
+                                                        'XL',
+                                                        'XL',
+                                                      ],
+                                                    },
+                                                  ),
                                                   columnWidth: option(
                                                     'CUSTOM',
                                                     {
                                                       label: 'Column width',
-                                                      value: '3',
+                                                      value: '2',
                                                       configuration: {
                                                         as: 'DROPDOWN',
                                                         dataType: 'string',
@@ -976,7 +987,7 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                     option('CUSTOM', {
                                                       label:
                                                         'Column width (tablet landscape)',
-                                                      value: '3',
+                                                      value: '2',
                                                       configuration: {
                                                         as: 'DROPDOWN',
                                                         dataType: 'string',
@@ -1615,11 +1626,22 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                 },
                                                 options: {
                                                   ...columnOptions,
+                                                  innerSpacing: sizes(
+                                                    'Inner space',
+                                                    {
+                                                      value: [
+                                                        'XL',
+                                                        'XL',
+                                                        'XL',
+                                                        '0rem',
+                                                      ],
+                                                    },
+                                                  ),
                                                   columnWidth: option(
                                                     'CUSTOM',
                                                     {
                                                       label: 'Column width',
-                                                      value: '9',
+                                                      value: '10',
                                                       configuration: {
                                                         as: 'DROPDOWN',
                                                         dataType: 'string',
@@ -1692,7 +1714,7 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                     option('CUSTOM', {
                                                       label:
                                                         'Column width (tablet landscape)',
-                                                      value: '9',
+                                                      value: '10',
                                                       configuration: {
                                                         as: 'DROPDOWN',
                                                         dataType: 'string',
