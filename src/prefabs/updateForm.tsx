@@ -589,7 +589,7 @@ const beforeCreate = ({
               case PropertyKind.RICH_TEXT:
                 structure.descendants.push(
                   makeBettyUpdateInput(
-                    'Rich Text Editor',
+                    BettyPrefabs.RICH_TEXT,
                     model,
                     property,
                     variable,
