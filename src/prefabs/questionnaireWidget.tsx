@@ -18,6 +18,7 @@ import {
   PrefabComponentOption,
   PrefabVariable,
   InteractionType,
+  ValueDefault,
 } from '@betty-blocks/component-sdk';
 import {
   Box,
@@ -46,8 +47,11 @@ import {
   Tab,
   Tabs,
   tabsOptions,
+  Dialog,
+  dialogOptions,
 } from './structures';
 import { ModelProps, ModelQuery } from './types';
+import { Form } from './structures/ActionJSForm';
 
 const interactions: PrefabInteraction[] = [
   {
@@ -65,6 +69,15 @@ const interactions: PrefabInteraction[] = [
     ref: {
       targetComponentId: '#SecondaryTab',
       sourceComponentId: '#secondaryButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Submit',
+    sourceEvent: 'onNoResults',
+    ref: {
+      targetComponentId: '#formId',
+      sourceComponentId: '#firstTabDataContainer',
     },
     type: InteractionType.Custom,
   },
@@ -86,17 +99,27 @@ const beforeCreate = ({
   prefab,
   save,
   close,
-  helpers: { useModelQuery, setOption },
+  helpers: {
+    useModelQuery,
+    setOption,
+    useCurrentPageId,
+    camelToSnakeCase,
+    createUuid,
+    prepareAction,
+  },
 }: BeforeCreateArgs) => {
   const [model, setModel] = React.useState<ModelProps>();
   const [secondaryModel, setSecondaryModel] = React.useState<ModelProps>();
-
   const [modelId, setModelId] = React.useState('');
+
   const [secondModelId, setSecondModelId] = React.useState('');
   const [title, setTitle] = React.useState('');
   const [description, setDescription] = React.useState('');
+  const [validation, setValidation] = React.useState(false);
   const [validationMessage, setValidationMessage] = React.useState('');
   const [stepNumber, setStepNumber] = React.useState(1);
+  const pageId = useCurrentPageId();
+  const componentId = createUuid();
 
   const { data } = useModelQuery({
     variables: { id: modelId },
@@ -125,7 +148,20 @@ const beforeCreate = ({
       return treeSearch(refValue, component.descendants);
     }, null);
 
-  if (modelId === null && validationMessage === '') {
+  const enrichVarObj = (obj: any) => {
+    const returnObject = obj;
+    if (data && data.model) {
+      const property = data.model.properties.find(
+        (prop: any) => prop.id === obj.id[0],
+      );
+      if (property) {
+        returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
+      }
+    }
+    return returnObject;
+  };
+
+  if (modelId === '' && validationMessage === '') {
     setValidationMessage('Selecting a model is required');
   }
 
@@ -182,38 +218,37 @@ const beforeCreate = ({
           <Field
             label="Primary tab model"
             error={
-              validationMessage === '' && (
-                <Text color="#e82600">{validationMessage}</Text>
-              )
+              validation && <Text color="#e82600">{validationMessage}</Text>
             }
           >
             <ModelSelector
               onChange={(value: string) => {
                 setModelId(value);
+                setValidationMessage('');
+                setValidation(false);
               }}
               required
               modelId={modelId}
               value={modelId}
             />
           </Field>
-          <Field label="Second tab model">
+          <Field label="Second tab model (optional)">
             <ModelSelector
               onChange={(value: string) => {
                 setSecondModelId(value);
               }}
               modelId={secondModelId}
               value={secondModelId}
-              error={
-                validationMessage && (
-                  <Text color="#e82600">{validationMessage}</Text>
-                )
-              }
             />
           </Field>
         </>
       );
     },
     onSave: async () => {
+      if (!modelId) {
+        setValidation(true);
+        return;
+      }
       const newPrefab = { ...prefab };
       const titleText = treeSearch('#Title', newPrefab.structure);
       const descriptionText = treeSearch('#Description', newPrefab.structure);
@@ -232,17 +267,28 @@ const beforeCreate = ({
         '#secondaryButton',
         newPrefab.structure,
       );
+      const form = treeSearch('#formId', newPrefab.structure);
+      const idProperty = data?.model.properties.find(
+        (property: any) => property.name === 'id', // property comes from a source. This is not typed anywhere. what type is this property?
+      );
+      const filterOption = firstTabDataContainer.options.find(
+        (o: any) => o.key === 'filter',
+      ) as ValueDefault;
 
-      setOption(titleText, 'content', (opt: PrefabComponentOption) => ({
-        ...opt,
-        value: [title],
-        configuration: { as: 'MULTILINE' },
-      }));
-      setOption(descriptionText, 'content', (opt: PrefabComponentOption) => ({
-        ...opt,
-        value: [description],
-        configuration: { as: 'MULTILINE' },
-      }));
+      if (title) {
+        setOption(titleText, 'content', (opt: PrefabComponentOption) => ({
+          ...opt,
+          value: [title],
+          configuration: { as: 'MULTILINE' },
+        }));
+      }
+      if (description) {
+        setOption(descriptionText, 'content', (opt: PrefabComponentOption) => ({
+          ...opt,
+          value: [description],
+          configuration: { as: 'MULTILINE' },
+        }));
+      }
       setOption(
         firstTabDataContainer,
         'model',
@@ -259,8 +305,8 @@ const beforeCreate = ({
           value: secondModelId,
         }),
       );
-
       if (data && model) {
+        const variableName = `${camelToSnakeCase(data?.model.label)}_id`;
         setOption(primaryTab, 'label', (opt: PrefabComponentOption) => ({
           ...opt,
           value: [model.label],
@@ -275,6 +321,24 @@ const beforeCreate = ({
             value: [model.label],
           }),
         );
+
+        newPrefab.variables?.push({
+          ...{ pageId },
+          kind: 'integer',
+          name: variableName,
+          ref: {
+            id: '#idVariable',
+          },
+        });
+        filterOption.value = {
+          [idProperty.id]: {
+            eq: {
+              ref: { id: '#idVariable' },
+              name: variableName,
+              type: 'VARIABLE',
+            },
+          },
+        };
       }
       if (secondaryData && secondaryModel) {
         setOption(secondaryTab, 'label', (opt: PrefabComponentOption) => ({
@@ -291,6 +355,32 @@ const beforeCreate = ({
         );
         secondaryTab.label = secondaryModel.label;
       }
+      form.id = componentId;
+      const result = await prepareAction(
+        componentId,
+        idProperty,
+        [enrichVarObj(model?.properties[0])],
+        'create',
+        undefined,
+        undefined,
+        'public',
+        undefined,
+        'Questionnaire - create empty record',
+      );
+
+      setOption(form, 'actionId', (opt: PrefabComponentOption) => ({
+        ...opt,
+        value: result.action.actionId,
+        configuration: { disabled: true },
+      }));
+
+      setOption(form, 'model', (opt: PrefabComponentOption) => ({
+        ...opt,
+        value: modelId,
+        configuration: {
+          disabled: true,
+        },
+      }));
 
       save(newPrefab);
     },
@@ -347,7 +437,7 @@ const beforeCreate = ({
   };
   return (
     <>
-      <Header onClose={close} title="Configure your questionnaire template" />
+      <Header onClose={close} title="Configure your questionnaire" />
       {stepper.progressBar()}
       <Content>{stepper.setStep(stepNumber)}</Content>
       {stepper.buttons()}
@@ -485,6 +575,18 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                     [],
                   ),
                 ]),
+                Dialog(
+                  {
+                    options: {
+                      ...dialogOptions,
+                      invisible: toggle('Invisible', {
+                        value: true,
+                      }),
+                    },
+                  },
+                  [Box({}, [Form('Create form')])],
+                  // TODO: for tomorrow -> add interactions on the form and link the action to the form
+                ),
               ],
             ),
           ],
@@ -670,6 +772,52 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                   ],
                                                 },
                                               ),
+                                              fontWeight: option('CUSTOM', {
+                                                label: 'Font weight',
+                                                value: '500',
+                                                configuration: {
+                                                  as: 'DROPDOWN',
+                                                  dataType: 'string',
+                                                  allowedInput: [
+                                                    {
+                                                      name: '100',
+                                                      value: '100',
+                                                    },
+                                                    {
+                                                      name: '200',
+                                                      value: '200',
+                                                    },
+                                                    {
+                                                      name: '300',
+                                                      value: '300',
+                                                    },
+                                                    {
+                                                      name: '400',
+                                                      value: '400',
+                                                    },
+                                                    {
+                                                      name: '500',
+                                                      value: '500',
+                                                    },
+                                                    {
+                                                      name: '600',
+                                                      value: '600',
+                                                    },
+                                                    {
+                                                      name: '700',
+                                                      value: '700',
+                                                    },
+                                                    {
+                                                      name: '800',
+                                                      value: '800',
+                                                    },
+                                                    {
+                                                      name: '900',
+                                                      value: '900',
+                                                    },
+                                                  ],
+                                                },
+                                              }),
                                             },
                                           },
                                           [],
@@ -1221,23 +1369,31 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                                 overwrite: {
                                                                   backgroundColor:
                                                                     {
-                                                                      type: 'THEME_COLOR',
+                                                                      type: 'STATIC',
                                                                       value:
                                                                         'transparent',
                                                                     },
+                                                                  boxShadow:
+                                                                    'none',
+                                                                  color: {
+                                                                    type: 'THEME_COLOR',
+                                                                    value:
+                                                                      'primary',
+                                                                  },
+                                                                  fontFamily:
+                                                                    'Roboto',
+                                                                  fontSize:
+                                                                    '0.875rem',
+                                                                  fontStyle:
+                                                                    'none',
+                                                                  fontWeight:
+                                                                    '400',
                                                                   padding: [
                                                                     '0.6875rem',
                                                                     '1rem',
                                                                     '0.6875rem',
                                                                     '1rem',
                                                                   ],
-                                                                  color: {
-                                                                    type: 'THEME_COLOR',
-                                                                    value:
-                                                                      'primary',
-                                                                  },
-                                                                  boxShadow:
-                                                                    'none',
                                                                   textDecoration:
                                                                     'none',
                                                                   textTransform:
@@ -1398,30 +1554,37 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                                 overwrite: {
                                                                   backgroundColor:
                                                                     {
-                                                                      type: 'THEME_COLOR',
+                                                                      type: 'STATIC',
                                                                       value:
                                                                         'transparent',
                                                                     },
+                                                                  boxShadow:
+                                                                    'none',
+                                                                  color: {
+                                                                    type: 'THEME_COLOR',
+                                                                    value:
+                                                                      'primary',
+                                                                  },
+                                                                  fontFamily:
+                                                                    'Roboto',
+                                                                  fontSize:
+                                                                    '0.875rem',
+                                                                  fontStyle:
+                                                                    'none',
+                                                                  fontWeight:
+                                                                    '400',
                                                                   padding: [
                                                                     '0.6875rem',
                                                                     '1rem',
                                                                     '0.6875rem',
                                                                     '1rem',
                                                                   ],
-                                                                  color: {
-                                                                    type: 'THEME_COLOR',
-                                                                    value:
-                                                                      'primary',
-                                                                  },
-                                                                  boxShadow:
-                                                                    'none',
                                                                   textDecoration:
                                                                     'none',
                                                                   textTransform:
                                                                     'none',
                                                                 },
                                                               },
-
                                                               options: {
                                                                 ...buttonOptions,
                                                                 content:
@@ -1796,6 +1959,70 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                                       ],
                                                                     },
                                                                   ),
+                                                                  fontWeight:
+                                                                    option(
+                                                                      'CUSTOM',
+                                                                      {
+                                                                        label:
+                                                                          'Font weight',
+                                                                        value:
+                                                                          '500',
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'DROPDOWN',
+                                                                            dataType:
+                                                                              'string',
+                                                                            allowedInput:
+                                                                              [
+                                                                                {
+                                                                                  name: '100',
+                                                                                  value:
+                                                                                    '100',
+                                                                                },
+                                                                                {
+                                                                                  name: '200',
+                                                                                  value:
+                                                                                    '200',
+                                                                                },
+                                                                                {
+                                                                                  name: '300',
+                                                                                  value:
+                                                                                    '300',
+                                                                                },
+                                                                                {
+                                                                                  name: '400',
+                                                                                  value:
+                                                                                    '400',
+                                                                                },
+                                                                                {
+                                                                                  name: '500',
+                                                                                  value:
+                                                                                    '500',
+                                                                                },
+                                                                                {
+                                                                                  name: '600',
+                                                                                  value:
+                                                                                    '600',
+                                                                                },
+                                                                                {
+                                                                                  name: '700',
+                                                                                  value:
+                                                                                    '700',
+                                                                                },
+                                                                                {
+                                                                                  name: '800',
+                                                                                  value:
+                                                                                    '800',
+                                                                                },
+                                                                                {
+                                                                                  name: '900',
+                                                                                  value:
+                                                                                    '900',
+                                                                                },
+                                                                              ],
+                                                                          },
+                                                                      },
+                                                                    ),
                                                                 },
                                                               },
                                                               [],
