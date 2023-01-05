@@ -19,7 +19,7 @@
     const rightText = useText(right);
     const [leftValue, setLeftValue] = useState(leftText);
     const [rightValue, setRightValue] = useState(rightText);
-    const [visible, setVisible] = useState(initVisibility);
+    const [visible, setVisible] = useState();
 
     const evalCondition = () => {
       const leftAsNumber = parseFloat(leftValue);
