@@ -1,3 +1,16 @@
+# [2.87.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.86.6...v2.87.0) (2023-01-05)
+
+
+### Bug Fixes
+
+* add rich text to update and create form ([500ea70](https://github.com/bettyblocks/material-ui-component-set/commit/500ea70cb6bcc0e739410e4ad265f31601ed7c6a))
+* eslint error fix ([3423a43](https://github.com/bettyblocks/material-ui-component-set/commit/3423a43690d3b149f57093c73c211603eab9cbc4))
+
+
+### Features
+
+* add rich text to form config ([b3b003b](https://github.com/bettyblocks/material-ui-component-set/commit/b3b003b15ace3f9c879dbf7cb4de474985f2f4ad))
+
 ## [2.86.6](https://github.com/bettyblocks/material-ui-component-set/compare/v2.86.5...v2.86.6) (2023-01-05)
 
 

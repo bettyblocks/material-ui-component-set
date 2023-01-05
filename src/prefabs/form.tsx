@@ -56,7 +56,6 @@ const beforeCreate = ({
     'MULTI_IMAGE',
     'PDF',
     'PRICE_EXPRESSION',
-    'RICH_TEXT',
     'SERIAL',
     'SIGNED_PDF',
     'STRING_EXPRESSION',
@@ -404,6 +403,16 @@ const beforeCreate = ({
                   structure.descendants.push(
                     makeBettyInput(
                       BettyPrefabs.BOOLEAN,
+                      model,
+                      property,
+                      variable,
+                    ),
+                  );
+                  break;
+                case PropertyKind.RICH_TEXT:
+                  structure.descendants.push(
+                    makeBettyInput(
+                      BettyPrefabs.RICH_TEXT,
                       model,
                       property,
                       variable,
