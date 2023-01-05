@@ -1,3 +1,31 @@
+## [2.86.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.86.4...v2.86.5) (2023-01-04)
+
+
+### Bug Fixes
+
+* conditional components fetches on change ([e0868c9](https://github.com/bettyblocks/material-ui-component-set/commit/e0868c9f9b499e67ac3b0b1a6eb4547daf28ec51))
+
+## [2.86.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.86.3...v2.86.4) (2023-01-04)
+
+
+### Bug Fixes
+
+* set value of value option ([8504ee7](https://github.com/bettyblocks/material-ui-component-set/commit/8504ee7aec9534fd2fc3545f673aa663176b1bff))
+
+## [2.86.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.86.2...v2.86.3) (2022-12-23)
+
+
+### Bug Fixes
+
+* property name on one line ([76ee61a](https://github.com/bettyblocks/material-ui-component-set/commit/76ee61a5363c54ce8184dd5780f099bc9d127ceb))
+
+## [2.86.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.86.1...v2.86.2) (2022-12-23)
+
+
+### Bug Fixes
+
+* disabled state open page button not working ([c50501a](https://github.com/bettyblocks/material-ui-component-set/commit/c50501aac9cae4e40bbe34ac3b8e99895cbfaad5))
+
 ## [2.86.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.86.0...v2.86.1) (2022-12-20)
 
 
