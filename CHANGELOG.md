@@ -1,3 +1,12 @@
+## [2.86.6](https://github.com/bettyblocks/material-ui-component-set/compare/v2.86.5...v2.86.6) (2023-01-05)
+
+
+### Bug Fixes
+
+* positioning not right when inside of box ([0285bea](https://github.com/bettyblocks/material-ui-component-set/commit/0285bea241746c46e85856d342da42ce816351a6))
+* tooltip not showing when open page has internal page ([3e51981](https://github.com/bettyblocks/material-ui-component-set/commit/3e519810174eded8881e7843bbaa3a96f9198576))
+* tooltip placement not correct in datatable ([062be2c](https://github.com/bettyblocks/material-ui-component-set/commit/062be2c4e058040d4a755bbb04a670ce042c00b7))
+
 ## [2.86.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.86.4...v2.86.5) (2023-01-04)
 
 
