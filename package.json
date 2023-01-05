@@ -5,7 +5,7 @@
   "license": "UNLICENSED",
   "private": false,
   "devDependencies": {
-    "@betty-blocks/cli": "^25.60.1",
+    "@betty-blocks/cli": "25.60.0",
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-angular": "^16.0.0",
     "@semantic-release/changelog": "^6.0.1",
@@ -62,11 +62,7 @@
     "@material-ui/styles": "^4.9.10",
     "date-fns": "^2.11.0",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "slate": "^0.82.1",
-    "slate-history": "^0.66.0",
-    "slate-hyperscript": "^0.77.0",
-    "slate-react": "^0.82.2"
+    "react-dom": "^16.13.1"
   },
   "repository": {
     "type": "git",
