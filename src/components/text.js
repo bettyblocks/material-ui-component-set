@@ -39,7 +39,18 @@
     const linkToExternalText =
       (linkToExternal && useText(linkToExternal)) || '';
     let linkedContent = parsedContent;
-
+    if (isDev && !isPristine) {
+      linkedContent = '';
+      content.forEach((value) => {
+        if (typeof value === 'string' || value instanceof String) {
+          linkedContent += value;
+        } else {
+          linkedContent += `<span class="${classes.nowrap}" >${value.name}</span>`;
+        }
+      });
+    } else if (isDev) {
+      linkedContent = `<span class=${classes.placeholder}>Empty content</span>`;
+    }
     if (hasLink || hasExternalLink) {
       linkedContent = (
         <Link
@@ -50,8 +61,32 @@
           component={hasLink ? BLink : undefined}
           endpoint={hasLink ? linkTo : undefined}
         >
-          {parsedContent}
+          <span
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{
+              __html: linkedContent,
+            }}
+          />
         </Link>
+      );
+    }
+
+    if (isDev && !(hasLink || hasExternalLink)) {
+      linkedContent = (
+        <Tag
+          className={classes.content}
+          data-component={useText(dataComponentAttribute) || 'Text'}
+          dangerouslySetInnerHTML={{ __html: linkedContent }}
+        />
+      );
+    } else {
+      linkedContent = (
+        <Tag
+          className={classes.content}
+          data-component={useText(dataComponentAttribute) || 'Text'}
+        >
+          {linkedContent}
+        </Tag>
       );
     }
 
@@ -62,15 +97,7 @@
         data-component={useText(dataComponentAttribute) || 'Text'}
       />
     ) : (
-      <Tag
-        className={classes.content}
-        data-component={useText(dataComponentAttribute) || 'Text'}
-      >
-        {!isEmpty && linkedContent}
-        {isPristine && (
-          <span className={classes.placeholder}>Empty content</span>
-        )}
-      </Tag>
+      linkedContent
     );
   })(),
   styles: (B) => (t) => {
@@ -135,6 +162,10 @@
           fontSize: ({ options: { type } }) =>
             style.getFontSize(type, 'Desktop'),
         },
+      },
+      nowrap: {
+        whiteSpace: 'nowrap',
+        marginBottom: '-4px',
       },
       link: {
         textDecoration: ['none', '!important'],

@@ -31,6 +31,7 @@ import { Drawer } from './Drawer';
 import { DrawerBar } from './DrawerBar';
 import { DrawerContainer } from './DrawerContainer';
 import { ExpansionPanel } from './ExpansionPanel';
+import { FilterComponent } from './FilterComponent';
 import { Grid } from './Grid';
 import { Icon } from './Icon';
 import { List } from './List';
@@ -46,6 +47,7 @@ import { Paper } from './Paper';
 import { PriceInput } from './PriceInput';
 import { Progress } from './Progress';
 import { RadioInput } from './RadioInput';
+import { RichTextInput } from './RichTextInput';
 import { Row } from './Row';
 import { SelectInput } from './SelectInput';
 import { Snackbar } from './Snackbar';
@@ -93,6 +95,7 @@ import { drawerOptions } from './Drawer/options';
 import { drawerBarOptions } from './DrawerBar/options';
 import { drawerContainerOptions } from './DrawerContainer/options';
 import { expansionPanelOptions } from './ExpansionPanel/options';
+import { filterComponentOptions } from './FilterComponent/options';
 import { gridOptions } from './Grid/options';
 import { iconOptions } from './Icon/options';
 import { listOptions } from './List/options';
@@ -109,6 +112,7 @@ import { options as priceInputOptions } from './PriceInput/options';
 import { progressOptions } from './Progress/options';
 import { options as radioInputOptions } from './RadioInput/options';
 import { rowOptions } from './Row/options';
+import { richTextOptions } from './RichTextInput/options';
 import { options as selectInputOptions } from './SelectInput/options';
 import { snackbarOptions } from './Snackbar/options';
 import { stepOptions } from './Step/options';
@@ -155,6 +159,7 @@ export {
   DrawerBar,
   DrawerContainer,
   ExpansionPanel,
+  FilterComponent,
   FormErrorAlert,
   FormSuccessAlert,
   Grid,
@@ -172,6 +177,7 @@ export {
   PriceInput,
   Progress,
   RadioInput,
+  RichTextInput,
   Row,
   SelectInput,
   Snackbar,
@@ -217,6 +223,7 @@ export {
   drawerBarOptions,
   drawerContainerOptions,
   expansionPanelOptions,
+  filterComponentOptions,
   gridOptions,
   iconOptions,
   listOptions,
@@ -232,6 +239,7 @@ export {
   priceInputOptions,
   progressOptions,
   radioInputOptions,
+  richTextOptions,
   rowOptions,
   selectInputOptions,
   snackbarOptions,
