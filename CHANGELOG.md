@@ -1,3 +1,10 @@
+## [2.87.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.87.0...v2.87.1) (2023-01-06)
+
+
+### Bug Fixes
+
+* model selector value not showing in form ([c1ed047](https://github.com/bettyblocks/material-ui-component-set/commit/c1ed0478160755bb068705b257c21ba971334c68))
+
 # [2.87.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.86.6...v2.87.0) (2023-01-05)
 
 

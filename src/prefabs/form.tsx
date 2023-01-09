@@ -141,6 +141,7 @@ const beforeCreate = ({
                 onChange={(id) => {
                   setModelId(id);
                 }}
+                value={modelId}
                 margin
               />
             </Field>
