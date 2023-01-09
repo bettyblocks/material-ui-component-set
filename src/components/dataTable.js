@@ -172,6 +172,8 @@
 
     B.defineFunction('Advanced filter', (value) => {
       setFilterV2(value.where);
+      setSkip(0);
+      setResults([]);
     });
 
     B.defineFunction('Clear advanced filter', () => {
