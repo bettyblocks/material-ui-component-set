@@ -1,3 +1,10 @@
+## [2.87.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.87.1...v2.87.2) (2023-01-09)
+
+
+### Bug Fixes
+
+* conditional hides when property value is empty ([f4a9b7a](https://github.com/bettyblocks/material-ui-component-set/commit/f4a9b7a3a3f8b3b131bc0d5d89361e49405634eb))
+
 ## [2.87.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.87.0...v2.87.1) (2023-01-06)
 
 
