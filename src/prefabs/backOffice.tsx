@@ -485,6 +485,15 @@ const interactions: PrefabInteraction[] = [
     type: InteractionType.Custom,
   },
   {
+    name: 'Clear advanced filter',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#dataTable',
+      sourceComponentId: '#clearFilterButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
     name: 'Show',
     sourceEvent: 'Click',
     ref: {
