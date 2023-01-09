@@ -4593,13 +4593,19 @@ const beforeCreate = ({
   }
 
   const enrichVarObj = (obj: any) => {
-    const returnObject = obj;
-    if (data && data.model) {
-      const property = data.model.properties.find(
-        (prop: any) => prop.id === obj.id[0],
+    const returnObject = {
+      id: [obj.id],
+      kind: obj.kind,
+      label: obj.label,
+      name: '',
+      type: 'PROPERTY',
+    };
+    if (model) {
+      const property = model.properties.find(
+        (prop: any) => prop.id === returnObject.id[0],
       );
       if (property) {
-        returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
+        returnObject.name = `{{ ${model.name}.${property.name} }}`;
       }
     }
     return returnObject;
@@ -4608,14 +4614,10 @@ const beforeCreate = ({
   const makeDetail = (prop: any) => {
     const noEmptyValueConditional = cloneStructure('Conditional');
     if (noEmptyValueConditional.type === 'COMPONENT') {
-      setOption(
-        noEmptyValueConditional,
-        'left',
-        (originalOption: PrefabComponentOption) => ({
-          ...originalOption,
-          value: [enrichVarObj({ ...prop })],
-        }),
-      );
+      setOption(noEmptyValueConditional, 'left', (originalOption: any) => ({
+        ...originalOption,
+        value: [enrichVarObj({ ...prop })],
+      }));
       setOption(
         noEmptyValueConditional,
         'compare',
@@ -4710,9 +4712,9 @@ const beforeCreate = ({
             setOption(
               mediaComponent,
               'urlFileSource',
-              (originalOption: PrefabComponentOption) => ({
+              (originalOption: any) => ({
                 ...originalOption,
-                value: [{ ...prop }],
+                value: [{ ...enrichVarObj({ ...prop }), useKey: 'url' }],
               }),
             );
             setOption(
@@ -4760,14 +4762,10 @@ const beforeCreate = ({
                 value: ['View file'],
               }),
             );
-            setOption(
-              fileButton,
-              'linkToExternal',
-              (originalOption: PrefabComponentOption) => ({
-                ...originalOption,
-                value: [enrichVarObj({ ...prop })],
-              }),
-            );
+            setOption(fileButton, 'linkToExternal', (originalOption: any) => ({
+              ...originalOption,
+              value: [enrichVarObj({ ...prop })],
+            }));
             setOption(
               fileButton,
               'linkType',
@@ -4793,14 +4791,10 @@ const beforeCreate = ({
 
         const valueText = cloneStructure('Text');
         if (valueText.type === 'COMPONENT') {
-          setOption(
-            valueText,
-            'content',
-            (originalOption: PrefabComponentOption) => ({
-              ...originalOption,
-              value: [enrichVarObj({ ...prop })],
-            }),
-          );
+          setOption(valueText, 'content', (originalOption: any) => ({
+            ...originalOption,
+            value: [enrichVarObj({ ...prop })],
+          }));
         }
         detailComponent.descendants = [labelText, valueText];
         noEmptyValueConditional.descendants = [detailComponent];
@@ -5286,7 +5280,10 @@ const beforeCreate = ({
         (prop: Properties) =>
           prop.label !== 'Created at' &&
           prop.label !== 'Updated at' &&
-          prop.label !== 'Id',
+          prop.label !== 'Id' &&
+          prop.kind !== 'PDF' &&
+          prop.kind !== 'MULTI_FILE' &&
+          prop.kind !== 'PASSWORD',
       );
 
       if (idProperty && model) {
