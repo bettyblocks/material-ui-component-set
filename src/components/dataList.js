@@ -214,6 +214,10 @@
                 return { [field]: { [property.operator]: value } };
               }
 
+              if (Object.keys(acc).includes('_or')) {
+                return acc;
+              }
+
               return { [field]: acc };
             }, {}),
           );
