@@ -14,7 +14,7 @@ import {
 const attrs = {
   icon: Icon.DataTable,
   category: 'DATA',
-  keywords: ['Data', 'table', 'datatable', 'collection'],
+  keywords: ['Data', 'table', 'datatable', 'collection', 'Data table'],
 };
 
 const beforeCreate = ({
