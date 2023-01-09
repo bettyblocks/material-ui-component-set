@@ -6656,9 +6656,4 @@ const beforeCreate = ({
   );
 };
 
-export default prefab(
-  'Back office - local',
-  attributes,
-  beforeCreate,
-  prefabStructure,
-);
+export default prefab('Back office', attributes, beforeCreate, prefabStructure);
