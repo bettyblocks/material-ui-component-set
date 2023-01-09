@@ -198,13 +198,24 @@
             property.id.reduceRight((acc, field, index, arr) => {
               const isLast = index === arr.length - 1;
               if (isLast) {
-                return Array.isArray(value)
-                  ? {
-                      _or: value.map((el) => ({
-                        [field]: { [property.operator]: el },
-                      })),
-                    }
-                  : { [field]: { [property.operator]: value } };
+                if (Array.isArray(value)) {
+                  return {
+                    _or: value.map((d) =>
+                      arr.reduceRight((accq, fieldf, i, a) => {
+                        const issLast = i === a.length - 1;
+                        if (issLast) {
+                          return { [fieldf]: { [property.operator]: d } };
+                        }
+                        return { [fieldf]: accq };
+                      }, {}),
+                    ),
+                  };
+                }
+                return { [field]: { [property.operator]: value } };
+              }
+
+              if (Object.keys(acc).includes('_or')) {
+                return acc;
               }
 
               return { [field]: acc };
