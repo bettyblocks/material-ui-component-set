@@ -96,6 +96,7 @@
       field: orderPropertyPath,
       order: orderProperty ? sortOrder : null,
     });
+    const [prevOrderBy, setPrevOrderBy] = React.useState(orderBy);
     const [results, setResults] = useState([]);
     const [totalCount, setTotalCount] = useState(0);
     const [previousSearchTerm, setPreviousSearchTerm] = useState('');
@@ -252,6 +253,12 @@
 
     const where = useFilter(completeFilter);
 
+    useEffect(() => {
+      if (loadOnScroll) {
+        setSkip(0);
+      }
+    }, [orderBy]);
+
     // TODO: move model to skip
     const {
       loading: queryLoading,
@@ -316,7 +323,13 @@
           ) {
             setResults(data.results);
           } else {
-            setResults((prev) => [...prev, ...data.results]);
+            // HERE
+            console.log(prevOrderBy, orderBy, skip);
+            setResults(
+              prevOrderBy === orderBy && skip > 0
+                ? (prev) => [...prev, ...data.results]
+                : data.results,
+            );
           }
           fetchingNextSet.current = false;
           setNewSearch(false);
@@ -432,6 +445,7 @@
 
     const handleSort = (field, newOrder) => {
       if (isDev) return;
+      setPrevOrderBy(orderBy);
       setOrderBy({ field, order: newOrder });
       setVariables({
         sort: {
@@ -550,6 +564,7 @@
             const { scrollTop, clientHeight, scrollHeight } = e.target;
             const offset = scrollHeight / 5;
             const hitBottom = scrollTop + clientHeight >= scrollHeight - offset;
+            if (prevOrderBy !== orderBy) setPrevOrderBy(orderBy);
             if (hitBottom && !fetchingNextSet.current) {
               fetchNextSet();
             }
