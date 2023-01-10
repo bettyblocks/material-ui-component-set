@@ -1,3 +1,11 @@
+## [2.88.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.88.0...v2.88.1) (2023-01-10)
+
+
+### Bug Fixes
+
+* add tmp folder to gitignore TMPLT-2012 ([eb54ec1](https://github.com/bettyblocks/material-ui-component-set/commit/eb54ec18962153d91b1db3b39a153f6e1653f0fc))
+* added tmp to prettier and eslint ignores ([06ef82f](https://github.com/bettyblocks/material-ui-component-set/commit/06ef82f25998a9c0f36a6ae2cb9fedc33e552967))
+
 # [2.88.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.87.3...v2.88.0) (2023-01-10)
 
 
