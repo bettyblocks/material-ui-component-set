@@ -1,3 +1,32 @@
+## [2.88.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.88.0...v2.88.1) (2023-01-10)
+
+
+### Bug Fixes
+
+* add tmp folder to gitignore TMPLT-2012 ([eb54ec1](https://github.com/bettyblocks/material-ui-component-set/commit/eb54ec18962153d91b1db3b39a153f6e1653f0fc))
+* added tmp to prettier and eslint ignores ([06ef82f](https://github.com/bettyblocks/material-ui-component-set/commit/06ef82f25998a9c0f36a6ae2cb9fedc33e552967))
+
+# [2.88.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.87.3...v2.88.0) (2023-01-10)
+
+
+### Features
+
+* use childselector for addchild wizard ([efbd6a8](https://github.com/bettyblocks/material-ui-component-set/commit/efbd6a81b4ff25e97b2119abac7aecfc29e671ff))
+
+## [2.87.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.87.2...v2.87.3) (2023-01-09)
+
+
+### Bug Fixes
+
+* removed property based toggle for image and file upload ([3c64812](https://github.com/bettyblocks/material-ui-component-set/commit/3c64812876e4fc0e007c11ece6c1c45f6fd25101))
+
+## [2.87.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.87.1...v2.87.2) (2023-01-09)
+
+
+### Bug Fixes
+
+* conditional hides when property value is empty ([f4a9b7a](https://github.com/bettyblocks/material-ui-component-set/commit/f4a9b7a3a3f8b3b131bc0d5d89361e49405634eb))
+
 ## [2.87.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.87.0...v2.87.1) (2023-01-06)
 
 
