@@ -143,7 +143,7 @@ const reconfigure = {
     }),
   ],
   reconfigureWizardType: 'PropertiesSelector',
-  addChildWizardType: 'ChildSelector',
+  addChildWizardType: 'PropertySelector',
 };
 
 export default makePrefab(
