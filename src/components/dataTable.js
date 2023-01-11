@@ -323,8 +323,6 @@
           ) {
             setResults(data.results);
           } else {
-            // HERE
-            console.log(prevOrderBy, orderBy, skip);
             setResults(
               prevOrderBy === orderBy && skip > 0
                 ? (prev) => [...prev, ...data.results]
