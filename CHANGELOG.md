@@ -1,3 +1,32 @@
+## [2.88.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.88.2...v2.88.3) (2023-01-11)
+
+
+### Bug Fixes
+
+* trigger pipelines ([df88a9e](https://github.com/bettyblocks/material-ui-component-set/commit/df88a9e3fc7c0d4beb525a83e8a69cde460b4ca3))
+
+## [2.88.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.88.1...v2.88.2) (2023-01-10)
+
+
+### Bug Fixes
+
+* trigger pipelines ([916e79d](https://github.com/bettyblocks/material-ui-component-set/commit/916e79d32b902dcb2e236ed82cf9c35b07a76021))
+
+## [2.88.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.88.0...v2.88.1) (2023-01-10)
+
+
+### Bug Fixes
+
+* add tmp folder to gitignore TMPLT-2012 ([eb54ec1](https://github.com/bettyblocks/material-ui-component-set/commit/eb54ec18962153d91b1db3b39a153f6e1653f0fc))
+* added tmp to prettier and eslint ignores ([06ef82f](https://github.com/bettyblocks/material-ui-component-set/commit/06ef82f25998a9c0f36a6ae2cb9fedc33e552967))
+
+# [2.88.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.87.3...v2.88.0) (2023-01-10)
+
+
+### Features
+
+* use childselector for addchild wizard ([efbd6a8](https://github.com/bettyblocks/material-ui-component-set/commit/efbd6a81b4ff25e97b2119abac7aecfc29e671ff))
+
 ## [2.87.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.87.2...v2.87.3) (2023-01-09)
 
 
