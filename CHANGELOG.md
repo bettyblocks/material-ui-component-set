@@ -1,3 +1,24 @@
+# [2.89.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.88.3...v2.89.0) (2023-01-11)
+
+
+### Bug Fixes
+
+* exclude of not working props ([e14c66c](https://github.com/bettyblocks/material-ui-component-set/commit/e14c66cec26b81a2ac25a5a50f5f257ef78e4b79))
+* file link in detail work now ([726410a](https://github.com/bettyblocks/material-ui-component-set/commit/726410a19f1fec4854d49bd3f339155a4c4c0d62))
+* updated create form default modelId value ([12fd63e](https://github.com/bettyblocks/material-ui-component-set/commit/12fd63eb293110c58104355f5cab72a347dde230))
+
+
+### Features
+
+* generate backoffice properties for CRU TMPLT-1900 ([bf709c0](https://github.com/bettyblocks/material-ui-component-set/commit/bf709c0d7b1eea5143d735ecb742eecb82a8da95))
+
+## [2.88.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.88.2...v2.88.3) (2023-01-11)
+
+
+### Bug Fixes
+
+* trigger pipelines ([df88a9e](https://github.com/bettyblocks/material-ui-component-set/commit/df88a9e3fc7c0d4beb525a83e8a69cde460b4ca3))
+
 ## [2.88.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.88.1...v2.88.2) (2023-01-10)
 
 
