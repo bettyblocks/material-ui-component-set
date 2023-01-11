@@ -120,7 +120,7 @@ const beforeCreate = ({
       <Header title="Configure your text widget" onClose={close} />
       <Content>
         <Field
-          label="Property"
+          label="Where would you like to store your answer?"
           error={
             validationMessage && (
               <Text color="#e82600">{validationMessage}</Text>
@@ -258,8 +258,8 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'Widgets',
-  icon: Icon.UpdateFormIcon,
+  category: 'WIDGETS',
+  icon: Icon.TextInputIcon,
   interactions,
   variables: [],
 };
@@ -368,7 +368,7 @@ export default makePrefab('Text Widget', attributes, beforeCreate, [
               },
             }),
             outerSpacing: sizes('Outer space', {
-              value: ['0rem', '0rem', '0rem', '0rem'],
+              value: ['0rem', '0rem', 'M', '0rem'],
               ref: {
                 id: '#questionBoxOuterSpacing',
               },

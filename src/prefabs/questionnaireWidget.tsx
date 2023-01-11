@@ -64,15 +64,6 @@ const interactions: PrefabInteraction[] = [
     type: InteractionType.Custom,
   },
   {
-    name: 'Select',
-    sourceEvent: 'Click',
-    ref: {
-      targetComponentId: '#SecondaryTab',
-      sourceComponentId: '#secondaryButton',
-    },
-    type: InteractionType.Custom,
-  },
-  {
     name: 'Submit',
     sourceEvent: 'onNoResults',
     ref: {
@@ -92,7 +83,6 @@ const beforeCreate = ({
     ModelSelector,
     Text,
     TextInput,
-
     Box: BoxComp,
     Button: ButtonComp,
   },
@@ -106,6 +96,7 @@ const beforeCreate = ({
     camelToSnakeCase,
     createUuid,
     prepareAction,
+    cloneStructure,
   },
 }: BeforeCreateArgs) => {
   const [model, setModel] = React.useState<ModelProps>();
@@ -115,6 +106,8 @@ const beforeCreate = ({
   const [secondModelId, setSecondModelId] = React.useState('');
   const [title, setTitle] = React.useState('');
   const [description, setDescription] = React.useState('');
+  const [sectionTitle, setSectionTitle] = React.useState('');
+  const [sectionDescription, setSectionDescription] = React.useState('');
   const [validation, setValidation] = React.useState(false);
   const [validationMessage, setValidationMessage] = React.useState('');
   const [stepNumber, setStepNumber] = React.useState(1);
@@ -171,12 +164,9 @@ const beforeCreate = ({
         return (
           <>
             <Field pad={{ bottom: '15px' }}>
-              <Text>
-                Add a title and a description to (the first section of) the
-                questionnaire
-              </Text>
+              <Text>Add a title and a description to the questionnaire</Text>
             </Field>
-            <Field pad={{ bottom: '15px' }} label="Section title">
+            <Field pad={{ bottom: '15px' }} label="Questionnaire title">
               <TextInput
                 onChange={({
                   target: { value },
@@ -191,7 +181,7 @@ const beforeCreate = ({
                 value={title}
               />
             </Field>
-            <Field pad={{ bottom: '15px' }} label="Section Description">
+            <Field pad={{ bottom: '15px' }} label="Questionnaire description">
               <TextInput
                 onChange={({
                   target: { value },
@@ -209,12 +199,53 @@ const beforeCreate = ({
           </>
         );
       }
+      if (step === 2) {
+        return (
+          <>
+            <Field pad={{ bottom: '15px' }}>
+              <Text>
+                Add a title and a description to the first section of the
+                questionnaire
+              </Text>
+            </Field>
+            <Field pad={{ bottom: '15px' }} label="Section title">
+              <TextInput
+                onChange={({
+                  target: { value },
+                }: {
+                  target: { value: string };
+                }) => {
+                  if (typeof value !== 'string') {
+                    throw new Error('expected string');
+                  }
+                  setSectionTitle(value);
+                }}
+                value={sectionTitle}
+              />
+            </Field>
+            <Field pad={{ bottom: '15px' }} label="Section description">
+              <TextInput
+                onChange={({
+                  target: { value },
+                }: {
+                  target: { value: string };
+                }) => {
+                  if (typeof value !== 'string') {
+                    throw new Error('expected string');
+                  }
+                  setSectionDescription(value);
+                }}
+                value={sectionDescription}
+              />
+            </Field>
+          </>
+        );
+      }
       return (
-        // TODO: make this beforeCreate page look a bit nicer if possible
         <>
-          <Text size="medium" weight="bolder">
-            Select models for your questionnaire datacontainers.
-          </Text>
+          <Field pad={{ bottom: '15px' }}>
+            <Text>Select models for your questionnaire datacontainers.</Text>
+          </Field>
           <Field
             label="Primary tab model"
             error={
@@ -260,11 +291,6 @@ const beforeCreate = ({
       );
       const secondTabDataContainer = treeSearch(
         '#secondTabDataContainer',
-        newPrefab.structure,
-      );
-      const primaryButton = treeSearch('#primaryButton', newPrefab.structure);
-      const secondaryButton = treeSearch(
-        '#secondaryButton',
         newPrefab.structure,
       );
       const form = treeSearch('#formId', newPrefab.structure);
@@ -313,15 +339,6 @@ const beforeCreate = ({
         }));
         primaryTab.label = model.label;
 
-        setOption(
-          primaryButton,
-          'buttonText',
-          (opt: PrefabComponentOption) => ({
-            ...opt,
-            value: [model.label],
-          }),
-        );
-
         newPrefab.variables?.push({
           ...{ pageId },
           kind: 'integer',
@@ -340,20 +357,167 @@ const beforeCreate = ({
           },
         };
       }
-      if (secondaryData && secondaryModel) {
+
+      if (sectionTitle !== '') {
+        const sectionTitleText = treeSearch(
+          '#sectionTitle',
+          newPrefab.structure,
+        );
+        if (sectionTitleText.type === 'COMPONENT') {
+          setOption(
+            sectionTitleText,
+            'content',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [sectionTitle],
+            }),
+          );
+        }
+
+        const sectionButton = treeSearch('#primaryButton', newPrefab.structure);
+        if (sectionButton.type === 'COMPONENT') {
+          setOption(
+            sectionButton,
+            'buttonText',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [sectionTitle],
+            }),
+          );
+        }
+      }
+
+      if (sectionDescription !== '') {
+        const sectionDescriptionText = treeSearch(
+          '#sectionDescription',
+          newPrefab.structure,
+        );
+        if (sectionDescriptionText.type === 'COMPONENT') {
+          setOption(
+            sectionDescriptionText,
+            'content',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [sectionDescription],
+            }),
+          );
+        }
+      }
+
+      if (secondaryData && secondaryModel && newPrefab.interactions) {
         setOption(secondaryTab, 'label', (opt: PrefabComponentOption) => ({
           ...opt,
           value: [secondaryModel.label],
         }));
-        setOption(
-          secondaryButton,
-          'buttonText',
-          (opt: PrefabComponentOption) => ({
-            ...opt,
-            value: [secondaryModel.label],
-          }),
-        );
         secondaryTab.label = secondaryModel.label;
+        const sectionButtonList = treeSearch(
+          '#sectionButtonList',
+          newPrefab.structure,
+        );
+        const sectionButtonBox = cloneStructure('Box');
+        if (sectionButtonBox.type === 'COMPONENT') {
+          setOption(
+            sectionButtonBox,
+            'alignment',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: 'flex-start',
+            }),
+          );
+          setOption(
+            sectionButtonBox,
+            'valignment',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: 'center',
+            }),
+          );
+          setOption(
+            sectionButtonBox,
+            'innerSpacing',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: ['0rem', '0rem', 'M', '0rem'],
+            }),
+          );
+          const sectionButtonNumber = cloneStructure('Button');
+          const sectionButtonText = cloneStructure('Button');
+          if (sectionButtonNumber.type === 'COMPONENT') {
+            sectionButtonNumber.style = {
+              overwrite: {
+                backgroundColor: {
+                  type: 'THEME_COLOR',
+                  value: 'primary',
+                },
+                borderColor: {
+                  type: 'THEME_COLOR',
+                  value: 'primary',
+                },
+                borderRadius: ['1.5625rem'],
+
+                padding: ['0.6875rem', '1rem', '0.6875rem', '1rem'],
+              },
+            };
+            setOption(
+              sectionButtonNumber,
+              'buttonText',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: ['2'],
+              }),
+            );
+          }
+          if (sectionButtonText.type === 'COMPONENT') {
+            sectionButtonText.ref = {
+              id: '#secondaryButton',
+            };
+            sectionButtonText.style = {
+              overwrite: {
+                backgroundColor: {
+                  type: 'STATIC',
+                  value: 'transparent',
+                },
+                boxShadow: 'none',
+                color: {
+                  type: 'THEME_COLOR',
+                  value: 'primary',
+                },
+                fontFamily: 'Roboto',
+                fontSize: '0.875rem',
+                fontStyle: 'none',
+                fontWeight: '400',
+                padding: ['0.6875rem', '1rem', '0.6875rem', '1rem'],
+                textDecoration: 'none',
+                textTransform: 'none',
+              },
+            };
+            setOption(
+              sectionButtonText,
+              'buttonText',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: ['Other information'],
+              }),
+            );
+            newPrefab.interactions.push({
+              name: 'Select',
+              sourceEvent: 'Click',
+              ref: {
+                targetComponentId: '#SecondaryTab',
+                sourceComponentId: '#secondaryButton',
+              },
+              type: 'Custom',
+            } as PrefabInteraction);
+          }
+          sectionButtonBox.descendants = [
+            sectionButtonNumber,
+            sectionButtonText,
+          ];
+        }
+        sectionButtonList.descendants = [
+          ...sectionButtonList.descendants,
+          sectionButtonBox,
+        ];
       }
       form.id = componentId;
       const result = await prepareAction(
@@ -416,7 +580,7 @@ const beforeCreate = ({
           <Footer
             onClose={close}
             onSave={stepper.onSave}
-            canSave={stepNumber === stepper.stepAmount}
+            canSave={stepNumber === stepper.stepAmount && modelId !== ''}
           />
         </BoxComp>
       </BoxComp>
@@ -427,13 +591,14 @@ const beforeCreate = ({
           justify="center"
           margin={{ left: '2rem', top: '-1rem', bottom: '-1rem' }}
         >
-          <Text size="medium" weight="bold">{`Step: ${stepNumber + 1} / ${
-            stepper.stepAmount + 1
-          }`}</Text>
+          <Text
+            size="medium"
+            weight="bold"
+          >{`Step: ${stepNumber} / ${stepper.stepAmount}`}</Text>
         </BoxComp>
       );
     },
-    stepAmount: 2,
+    stepAmount: 3,
   };
   return (
     <>
@@ -446,7 +611,7 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'Widgets',
+  category: 'WIDGETS',
   icon: Icon.UpdateFormIcon,
   interactions,
   variables,
@@ -585,7 +750,6 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                     },
                   },
                   [Box({}, [Form('Create form')])],
-                  // TODO: for tomorrow -> add interactions on the form and link the action to the form
                 ),
               ],
             ),
@@ -1242,379 +1406,202 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                     },
                                                   },
                                                   [
-                                                    // DataList({}, [
-                                                    List({}, [
-                                                      Box(
-                                                        {
-                                                          options: {
-                                                            ...boxOptions,
-                                                            alignment:
-                                                              buttongroup(
-                                                                'Alignment',
-                                                                [
-                                                                  [
-                                                                    'None',
-                                                                    'none',
-                                                                  ],
-                                                                  [
-                                                                    'Left',
-                                                                    'flex-start',
-                                                                  ],
-                                                                  [
-                                                                    'Center',
-                                                                    'center',
-                                                                  ],
-                                                                  [
-                                                                    'Right',
-                                                                    'flex-end',
-                                                                  ],
-                                                                  [
-                                                                    'Justified',
-                                                                    'space-between',
-                                                                  ],
-                                                                ],
-                                                                {
-                                                                  value:
-                                                                    'flex-start',
-                                                                  configuration:
-                                                                    {
-                                                                      dataType:
-                                                                        'string',
-                                                                    },
-                                                                },
-                                                              ),
-                                                            valignment:
-                                                              buttongroup(
-                                                                'Vertical alignment',
-                                                                [
-                                                                  [
-                                                                    'None',
-                                                                    'none',
-                                                                  ],
-                                                                  [
-                                                                    'Top',
-                                                                    'flex-start',
-                                                                  ],
-                                                                  [
-                                                                    'Center',
-                                                                    'center',
-                                                                  ],
-                                                                  [
-                                                                    'Bottom',
-                                                                    'flex-end',
-                                                                  ],
-                                                                ],
-                                                                {
-                                                                  value:
-                                                                    'center',
-                                                                  configuration:
-                                                                    {
-                                                                      dataType:
-                                                                        'string',
-                                                                    },
-                                                                },
-                                                              ),
-                                                            innerSpacing: sizes(
-                                                              'Inner space',
-                                                              {
-                                                                value: [
-                                                                  '0rem',
-                                                                  '0rem',
-                                                                  'M',
-                                                                  '0rem',
-                                                                ],
-                                                              },
-                                                            ),
-                                                          },
+                                                    List(
+                                                      {
+                                                        ref: {
+                                                          id: '#sectionButtonList',
                                                         },
-                                                        [
-                                                          Button(
-                                                            {
-                                                              style: {
-                                                                overwrite: {
-                                                                  backgroundColor:
-                                                                    {
+                                                      },
+                                                      [
+                                                        Box(
+                                                          {
+                                                            options: {
+                                                              ...boxOptions,
+                                                              alignment:
+                                                                buttongroup(
+                                                                  'Alignment',
+                                                                  [
+                                                                    [
+                                                                      'None',
+                                                                      'none',
+                                                                    ],
+                                                                    [
+                                                                      'Left',
+                                                                      'flex-start',
+                                                                    ],
+                                                                    [
+                                                                      'Center',
+                                                                      'center',
+                                                                    ],
+                                                                    [
+                                                                      'Right',
+                                                                      'flex-end',
+                                                                    ],
+                                                                    [
+                                                                      'Justified',
+                                                                      'space-between',
+                                                                    ],
+                                                                  ],
+                                                                  {
+                                                                    value:
+                                                                      'flex-start',
+                                                                    configuration:
+                                                                      {
+                                                                        dataType:
+                                                                          'string',
+                                                                      },
+                                                                  },
+                                                                ),
+                                                              valignment:
+                                                                buttongroup(
+                                                                  'Vertical alignment',
+                                                                  [
+                                                                    [
+                                                                      'None',
+                                                                      'none',
+                                                                    ],
+                                                                    [
+                                                                      'Top',
+                                                                      'flex-start',
+                                                                    ],
+                                                                    [
+                                                                      'Center',
+                                                                      'center',
+                                                                    ],
+                                                                    [
+                                                                      'Bottom',
+                                                                      'flex-end',
+                                                                    ],
+                                                                  ],
+                                                                  {
+                                                                    value:
+                                                                      'center',
+                                                                    configuration:
+                                                                      {
+                                                                        dataType:
+                                                                          'string',
+                                                                      },
+                                                                  },
+                                                                ),
+                                                              innerSpacing:
+                                                                sizes(
+                                                                  'Inner space',
+                                                                  {
+                                                                    value: [
+                                                                      '0rem',
+                                                                      '0rem',
+                                                                      'M',
+                                                                      '0rem',
+                                                                    ],
+                                                                  },
+                                                                ),
+                                                            },
+                                                          },
+                                                          [
+                                                            Button(
+                                                              {
+                                                                style: {
+                                                                  overwrite: {
+                                                                    backgroundColor:
+                                                                      {
+                                                                        type: 'THEME_COLOR',
+                                                                        value:
+                                                                          'primary',
+                                                                      },
+                                                                    borderColor:
+                                                                      {
+                                                                        type: 'THEME_COLOR',
+                                                                        value:
+                                                                          'primary',
+                                                                      },
+                                                                    borderRadius:
+                                                                      [
+                                                                        '1.5625rem',
+                                                                      ],
+
+                                                                    padding: [
+                                                                      '0.6875rem',
+                                                                      '1rem',
+                                                                      '0.6875rem',
+                                                                      '1rem',
+                                                                    ],
+                                                                  },
+                                                                },
+                                                                options: {
+                                                                  ...buttonOptions,
+                                                                  buttonText:
+                                                                    variable(
+                                                                      'Button text',
+                                                                      {
+                                                                        value: [
+                                                                          '1',
+                                                                        ],
+                                                                      },
+                                                                    ),
+                                                                },
+                                                              },
+                                                              [],
+                                                            ),
+                                                            Button(
+                                                              {
+                                                                ref: {
+                                                                  id: '#primaryButton',
+                                                                },
+                                                                style: {
+                                                                  overwrite: {
+                                                                    backgroundColor:
+                                                                      {
+                                                                        type: 'STATIC',
+                                                                        value:
+                                                                          'transparent',
+                                                                      },
+                                                                    boxShadow:
+                                                                      'none',
+                                                                    color: {
                                                                       type: 'THEME_COLOR',
                                                                       value:
                                                                         'primary',
                                                                     },
-                                                                  borderColor: {
-                                                                    type: 'THEME_COLOR',
-                                                                    value:
-                                                                      'primary',
-                                                                  },
-                                                                  borderRadius:
-                                                                    [
-                                                                      '1.5625rem',
+                                                                    fontFamily:
+                                                                      'Roboto',
+                                                                    fontSize:
+                                                                      '0.875rem',
+                                                                    fontStyle:
+                                                                      'none',
+                                                                    fontWeight:
+                                                                      '400',
+                                                                    padding: [
+                                                                      '0.6875rem',
+                                                                      '1rem',
+                                                                      '0.6875rem',
+                                                                      '1rem',
                                                                     ],
-
-                                                                  padding: [
-                                                                    '0.6875rem',
-                                                                    '1rem',
-                                                                    '0.6875rem',
-                                                                    '1rem',
-                                                                  ],
-                                                                },
-                                                              },
-                                                              options: {
-                                                                ...buttonOptions,
-                                                                buttonText:
-                                                                  variable(
-                                                                    'Button text',
-                                                                    {
-                                                                      value: [
-                                                                        '1',
-                                                                      ],
-                                                                    },
-                                                                  ),
-                                                              },
-                                                            },
-                                                            [],
-                                                          ),
-                                                          Button(
-                                                            {
-                                                              ref: {
-                                                                id: '#primaryButton',
-                                                              },
-                                                              style: {
-                                                                overwrite: {
-                                                                  backgroundColor:
-                                                                    {
-                                                                      type: 'STATIC',
-                                                                      value:
-                                                                        'transparent',
-                                                                    },
-                                                                  boxShadow:
-                                                                    'none',
-                                                                  color: {
-                                                                    type: 'THEME_COLOR',
-                                                                    value:
-                                                                      'primary',
+                                                                    textDecoration:
+                                                                      'none',
+                                                                    textTransform:
+                                                                      'none',
                                                                   },
-                                                                  fontFamily:
-                                                                    'Roboto',
-                                                                  fontSize:
-                                                                    '0.875rem',
-                                                                  fontStyle:
-                                                                    'none',
-                                                                  fontWeight:
-                                                                    '400',
-                                                                  padding: [
-                                                                    '0.6875rem',
-                                                                    '1rem',
-                                                                    '0.6875rem',
-                                                                    '1rem',
-                                                                  ],
-                                                                  textDecoration:
-                                                                    'none',
-                                                                  textTransform:
-                                                                    'none',
                                                                 },
-                                                              },
 
-                                                              options: {
-                                                                ...buttonOptions,
-                                                                buttonText:
-                                                                  variable(
-                                                                    'Primary text',
-                                                                    {
-                                                                      value: [
-                                                                        'Other information',
-                                                                      ],
-                                                                    },
-                                                                  ),
-                                                              },
-                                                            },
-                                                            [],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Box(
-                                                        {
-                                                          options: {
-                                                            ...boxOptions,
-                                                            alignment:
-                                                              buttongroup(
-                                                                'Alignment',
-                                                                [
-                                                                  [
-                                                                    'None',
-                                                                    'none',
-                                                                  ],
-                                                                  [
-                                                                    'Left',
-                                                                    'flex-start',
-                                                                  ],
-                                                                  [
-                                                                    'Center',
-                                                                    'center',
-                                                                  ],
-                                                                  [
-                                                                    'Right',
-                                                                    'flex-end',
-                                                                  ],
-                                                                  [
-                                                                    'Justified',
-                                                                    'space-between',
-                                                                  ],
-                                                                ],
-                                                                {
-                                                                  value:
-                                                                    'flex-start',
-                                                                  configuration:
-                                                                    {
-                                                                      dataType:
-                                                                        'string',
-                                                                    },
+                                                                options: {
+                                                                  ...buttonOptions,
+                                                                  buttonText:
+                                                                    variable(
+                                                                      'Button Text',
+                                                                      {
+                                                                        value: [
+                                                                          'Basic information',
+                                                                        ],
+                                                                      },
+                                                                    ),
                                                                 },
-                                                              ),
-                                                            valignment:
-                                                              buttongroup(
-                                                                'Vertical alignment',
-                                                                [
-                                                                  [
-                                                                    'None',
-                                                                    'none',
-                                                                  ],
-                                                                  [
-                                                                    'Top',
-                                                                    'flex-start',
-                                                                  ],
-                                                                  [
-                                                                    'Center',
-                                                                    'center',
-                                                                  ],
-                                                                  [
-                                                                    'Bottom',
-                                                                    'flex-end',
-                                                                  ],
-                                                                ],
-                                                                {
-                                                                  value:
-                                                                    'center',
-                                                                  configuration:
-                                                                    {
-                                                                      dataType:
-                                                                        'string',
-                                                                    },
-                                                                },
-                                                              ),
-                                                            innerSpacing: sizes(
-                                                              'Inner space',
-                                                              {
-                                                                value: [
-                                                                  '0rem',
-                                                                  '0rem',
-                                                                  '0rem',
-                                                                  '0rem',
-                                                                ],
                                                               },
+                                                              [],
                                                             ),
-                                                          },
-                                                        },
-                                                        [
-                                                          Button(
-                                                            {
-                                                              style: {
-                                                                overwrite: {
-                                                                  backgroundColor:
-                                                                    {
-                                                                      type: 'THEME_COLOR',
-                                                                      value:
-                                                                        'primary',
-                                                                    },
-                                                                  borderColor: {
-                                                                    type: 'THEME_COLOR',
-                                                                    value:
-                                                                      'primary',
-                                                                  },
-                                                                  borderRadius:
-                                                                    [
-                                                                      '1.5625rem',
-                                                                    ],
-
-                                                                  padding: [
-                                                                    '0.6875rem',
-                                                                    '1rem',
-                                                                    '0.6875rem',
-                                                                    '1rem',
-                                                                  ],
-                                                                },
-                                                              },
-                                                              options: {
-                                                                ...buttonOptions,
-                                                                buttonText:
-                                                                  variable(
-                                                                    'Button text',
-                                                                    {
-                                                                      value: [
-                                                                        '2',
-                                                                      ],
-                                                                    },
-                                                                  ),
-                                                              },
-                                                            },
-                                                            [],
-                                                          ),
-                                                          Button(
-                                                            {
-                                                              ref: {
-                                                                id: '#secondaryButton',
-                                                              },
-                                                              style: {
-                                                                overwrite: {
-                                                                  backgroundColor:
-                                                                    {
-                                                                      type: 'STATIC',
-                                                                      value:
-                                                                        'transparent',
-                                                                    },
-                                                                  boxShadow:
-                                                                    'none',
-                                                                  color: {
-                                                                    type: 'THEME_COLOR',
-                                                                    value:
-                                                                      'primary',
-                                                                  },
-                                                                  fontFamily:
-                                                                    'Roboto',
-                                                                  fontSize:
-                                                                    '0.875rem',
-                                                                  fontStyle:
-                                                                    'none',
-                                                                  fontWeight:
-                                                                    '400',
-                                                                  padding: [
-                                                                    '0.6875rem',
-                                                                    '1rem',
-                                                                    '0.6875rem',
-                                                                    '1rem',
-                                                                  ],
-                                                                  textDecoration:
-                                                                    'none',
-                                                                  textTransform:
-                                                                    'none',
-                                                                },
-                                                              },
-                                                              options: {
-                                                                ...buttonOptions,
-                                                                content:
-                                                                  variable(
-                                                                    'Primary text',
-                                                                    {
-                                                                      value: [
-                                                                        'Other information',
-                                                                      ],
-                                                                    },
-                                                                  ),
-                                                              },
-                                                            },
-                                                            [],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ]),
-                                                    // ]),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ],
                                                 ),
                                               ],
@@ -1958,6 +1945,9 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                           [
                                                             TextComp(
                                                               {
+                                                                ref: {
+                                                                  id: '#sectionTitle',
+                                                                },
                                                                 options: {
                                                                   ...textOptions,
                                                                   content:
@@ -2051,6 +2041,9 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                             ),
                                                             TextComp(
                                                               {
+                                                                ref: {
+                                                                  id: '#sectionDescription',
+                                                                },
                                                                 options: {
                                                                   ...textOptions,
                                                                   content:
@@ -2078,7 +2071,13 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                               },
                                                               [],
                                                             ),
-                                                            Box({}, []),
+                                                            Box(
+                                                              {
+                                                                label:
+                                                                  'Question drop area',
+                                                              },
+                                                              [],
+                                                            ),
                                                           ],
                                                         ),
                                                       ],
@@ -2122,6 +2121,70 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                                       ],
                                                                     },
                                                                   ),
+                                                                  fontWeight:
+                                                                    option(
+                                                                      'CUSTOM',
+                                                                      {
+                                                                        label:
+                                                                          'Font weight',
+                                                                        value:
+                                                                          '500',
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'DROPDOWN',
+                                                                            dataType:
+                                                                              'string',
+                                                                            allowedInput:
+                                                                              [
+                                                                                {
+                                                                                  name: '100',
+                                                                                  value:
+                                                                                    '100',
+                                                                                },
+                                                                                {
+                                                                                  name: '200',
+                                                                                  value:
+                                                                                    '200',
+                                                                                },
+                                                                                {
+                                                                                  name: '300',
+                                                                                  value:
+                                                                                    '300',
+                                                                                },
+                                                                                {
+                                                                                  name: '400',
+                                                                                  value:
+                                                                                    '400',
+                                                                                },
+                                                                                {
+                                                                                  name: '500',
+                                                                                  value:
+                                                                                    '500',
+                                                                                },
+                                                                                {
+                                                                                  name: '600',
+                                                                                  value:
+                                                                                    '600',
+                                                                                },
+                                                                                {
+                                                                                  name: '700',
+                                                                                  value:
+                                                                                    '700',
+                                                                                },
+                                                                                {
+                                                                                  name: '800',
+                                                                                  value:
+                                                                                    '800',
+                                                                                },
+                                                                                {
+                                                                                  name: '900',
+                                                                                  value:
+                                                                                    '900',
+                                                                                },
+                                                                              ],
+                                                                          },
+                                                                      },
+                                                                    ),
                                                                 },
                                                               },
                                                               [],
@@ -2155,7 +2218,13 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                               },
                                                               [],
                                                             ),
-                                                            Box({}, []),
+                                                            Box(
+                                                              {
+                                                                label:
+                                                                  'Question drop area',
+                                                              },
+                                                              [],
+                                                            ),
                                                           ],
                                                         ),
                                                       ],
