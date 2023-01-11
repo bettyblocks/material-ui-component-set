@@ -5,6 +5,9 @@
 /dist
 /.prefabs
 
+# tmp
+/tmp
+
 # misc
 .DS_Store
 .vscode/
