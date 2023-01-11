@@ -4764,7 +4764,12 @@ const beforeCreate = ({
             );
             setOption(fileButton, 'linkToExternal', (originalOption: any) => ({
               ...originalOption,
-              value: [enrichVarObj({ ...prop })],
+              value: [
+                {
+                  ...enrichVarObj({ ...prop }),
+                  useKey: 'url',
+                },
+              ],
             }));
             setOption(
               fileButton,
