@@ -276,7 +276,11 @@
     }
 
     const ButtonWithTooltip = (
-      <Tooltip {...tooltipProps}>{ButtonComponent}</Tooltip>
+      <div style={{ width: 'fit-content' }}>
+        <Tooltip {...tooltipProps}>
+          <div>{ButtonComponent}</div>
+        </Tooltip>
+      </div>
     );
     const Button = addTooltip ? ButtonWithTooltip : ButtonComponent;
 
