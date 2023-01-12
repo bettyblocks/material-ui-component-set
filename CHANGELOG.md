@@ -1,3 +1,11 @@
+## [2.89.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.89.0...v2.89.1) (2023-01-11)
+
+
+### Bug Fixes
+
+* multi autocomplete filter on datatable ([913007b](https://github.com/bettyblocks/material-ui-component-set/commit/913007b016a98c49e8b48973888ec06323bd687d))
+* return acc if is or statement ([23d7209](https://github.com/bettyblocks/material-ui-component-set/commit/23d7209b6b470a7d8210fb54b8b9f0dfc5e3e3dd))
+
 # [2.89.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.88.3...v2.89.0) (2023-01-11)
 
 
