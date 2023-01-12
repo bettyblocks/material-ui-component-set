@@ -3,13 +3,8 @@ import {
   Icon,
   prefab as makePrefab,
   BeforeCreateArgs,
-  property,
 } from '@betty-blocks/component-sdk';
-import {
-  DataTable,
-  DataTableColumn,
-  dataTableColumnOptions,
-} from './structures';
+import { DataTable } from './structures';
 
 const attrs = {
   icon: Icon.DataTable,
@@ -133,23 +128,4 @@ const beforeCreate = ({
   );
 };
 
-const reconfigure = {
-  children: [
-    DataTableColumn({
-      options: {
-        ...dataTableColumnOptions,
-        property: property('Property', { value: '', showInAddChild: true }),
-      },
-    }),
-  ],
-  reconfigureWizardType: 'PropertiesSelector',
-  addChildWizardType: 'PropertySelector',
-};
-
-export default makePrefab(
-  'Datatable',
-  attrs,
-  beforeCreate,
-  [DataTable({})],
-  reconfigure,
-);
+export default makePrefab('Datatable', attrs, beforeCreate, [DataTable({})]);
