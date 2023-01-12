@@ -116,10 +116,10 @@ const beforeCreate = ({
 
   return (
     <>
-      <Header title="Configure your radio widget" onClose={close} />
+      <Header title="Configure your multiple choice widget" onClose={close} />
       <Content>
         <Field
-          label="Property"
+          label="Where would you like to store your answer?"
           error={
             validationMessage && (
               <Text color="#e82600">{validationMessage}</Text>
@@ -230,6 +230,7 @@ const beforeCreate = ({
             }),
           );
 
+          if (!model) throw new Error('No mode found.');
           radioWidgetForm.descendants.push(
             makeBettyUpdateInput(
               BettyPrefabs.HIDDEN,
@@ -264,16 +265,16 @@ const beforeCreate = ({
 const interactions: PrefabInteraction[] = [];
 
 const attributes = {
-  category: '0-Widget',
+  category: 'WIDGETS',
   icon: Icon.RadioButtonIcon,
   interactions,
   variables: [],
 };
 
-export default makePrefab('Radio Widget', attributes, beforeCreate, [
+export default makePrefab('Multiple Choice Widget', attributes, beforeCreate, [
   wrapper(
     {
-      label: 'Radio widget',
+      label: 'Multiple choice widget',
       optionCategories: [
         {
           label: 'Conditional options',
@@ -303,6 +304,15 @@ export default makePrefab('Radio Widget', attributes, beforeCreate, [
             ref: {
               componentId: '#RadioInput',
               optionId: '#questionRequired',
+            },
+          },
+        }),
+        questionSpacing: linked({
+          label: 'Question spacing',
+          value: {
+            ref: {
+              componentId: '#questionBox',
+              optionId: '#questionBoxOuterSpacing',
             },
           },
         }),
@@ -336,97 +346,103 @@ export default makePrefab('Radio Widget', attributes, beforeCreate, [
       },
     },
     [
-      Conditional(
+      Box(
         {
           ref: {
-            id: '#questionCondition',
+            id: '#questionBox',
           },
           options: {
-            ...conditionalOptions,
-            left: variable('Left', {
-              value: [],
-              ref: {
-                id: '#conditionLeft',
-              },
+            ...boxOptions,
+            backgroundColor: color('Background color', {
+              value: ThemeColor.WHITE,
             }),
-            compare: option('CUSTOM', {
-              label: 'Compare',
-              value: 'eq',
+            borderColor: color('Border color', {
+              value: ThemeColor.MEDIUM,
+            }),
+            borderWidth: size('Border thickness', {
+              value: '1px',
               configuration: {
-                as: 'DROPDOWN',
-                dataType: 'string',
-                allowedInput: [
-                  {
-                    name: 'Equals',
-                    value: 'eq',
-                  },
-                  {
-                    name: 'Not equal',
-                    value: 'neq',
-                  },
-                  {
-                    name: 'Contains',
-                    value: 'contains',
-                  },
-                  {
-                    name: 'Does not contain',
-                    value: 'notcontains',
-                  },
-                  {
-                    name: 'Greater than',
-                    value: 'gt',
-                  },
-                  {
-                    name: 'Less than',
-                    value: 'lt',
-                  },
-                  {
-                    name: 'Greater than or equal to',
-                    value: 'gteq',
-                  },
-                  {
-                    name: 'Less than or equal to',
-                    value: 'lteq',
-                  },
-                ],
-              },
-              ref: {
-                id: '#conditionCompare',
+                as: 'UNIT',
               },
             }),
-            right: variable('Right', {
-              value: [],
+            borderRadius: size('Border radius', {
+              value: '5px',
+              configuration: {
+                as: 'UNIT',
+              },
+            }),
+            outerSpacing: sizes('Outer space', {
+              value: ['0rem', '0rem', 'M', '0rem'],
               ref: {
-                id: '#conditionRight',
+                id: '#questionBoxOuterSpacing',
               },
             }),
           },
         },
         [
-          Box(
+          Conditional(
             {
+              ref: {
+                id: '#questionCondition',
+              },
               options: {
-                ...boxOptions,
-                backgroundColor: color('Background color', {
-                  value: ThemeColor.WHITE,
-                }),
-                borderColor: color('Border color', {
-                  value: ThemeColor.MEDIUM,
-                }),
-                borderWidth: size('Border thickness', {
-                  value: '1px',
-                  configuration: {
-                    as: 'UNIT',
+                ...conditionalOptions,
+                left: variable('Left', {
+                  value: [],
+                  ref: {
+                    id: '#conditionLeft',
                   },
                 }),
-                borderRadius: size('Border radius', {
-                  value: '5px',
+                compare: option('CUSTOM', {
+                  label: 'Compare',
+                  value: 'eq',
                   configuration: {
-                    as: 'UNIT',
+                    as: 'DROPDOWN',
+                    dataType: 'string',
+                    allowedInput: [
+                      {
+                        name: 'Equals',
+                        value: 'eq',
+                      },
+                      {
+                        name: 'Not equal',
+                        value: 'neq',
+                      },
+                      {
+                        name: 'Contains',
+                        value: 'contains',
+                      },
+                      {
+                        name: 'Does not contain',
+                        value: 'notcontains',
+                      },
+                      {
+                        name: 'Greater than',
+                        value: 'gt',
+                      },
+                      {
+                        name: 'Less than',
+                        value: 'lt',
+                      },
+                      {
+                        name: 'Greater than or equal to',
+                        value: 'gteq',
+                      },
+                      {
+                        name: 'Less than or equal to',
+                        value: 'lteq',
+                      },
+                    ],
+                  },
+                  ref: {
+                    id: '#conditionCompare',
                   },
                 }),
-                innerSpacing: sizes('Inner space', {
-                  value: ['L', 'L', 'L', 'L'],
+                right: variable('Right', {
+                  value: [],
+                  ref: {
+                    id: '#conditionRight',
+                  },
                 }),
               },
             },
@@ -438,58 +454,64 @@ export default makePrefab('Radio Widget', attributes, beforeCreate, [
                   options: { ...formOptions },
                 },
                 [
-                  TextPrefab({
-                    ref: {
-                      id: '#QuestionText',
+                  TextPrefab(
+                    {
+                      ref: {
+                        id: '#QuestionText',
+                      },
+                      options: {
+                        ...textOptions,
+                        content: variable('Content', {
+                          value: [''],
+                          configuration: {
+                            as: 'MULTILINE',
+                          },
+                          ref: {
+                            id: '#questionTitleContent',
+                          },
+                        }),
+                        type: font('Font', { value: ['Body1'] }),
+                        outerSpacing: sizes('Outer space', {
+                          value: ['0rem', '0rem', 'S', '0rem'],
+                        }),
+                        fontWeight: option('CUSTOM', {
+                          label: 'Font weight',
+                          value: '500',
+                          configuration: {
+                            as: 'DROPDOWN',
+                            dataType: 'string',
+                            allowedInput: [
+                              { name: '100', value: '100' },
+                              { name: '200', value: '200' },
+                              { name: '300', value: '300' },
+                              { name: '400', value: '400' },
+                              { name: '500', value: '500' },
+                              { name: '600', value: '600' },
+                              { name: '700', value: '700' },
+                              { name: '800', value: '800' },
+                              { name: '900', value: '900' },
+                            ],
+                          },
+                        }),
+                      },
                     },
-                    options: {
-                      ...textOptions,
-                      content: variable('Content', {
-                        value: [''],
-                        configuration: {
-                          as: 'MULTILINE',
-                        },
-                        ref: {
-                          id: '#questionTitleContent',
-                        },
-                      }),
-                      type: font('Font', { value: ['Body1'] }),
-                      outerSpacing: sizes('Outer space', {
-                        value: ['0rem', '0rem', 'S', '0rem'],
-                      }),
-                      fontWeight: option('CUSTOM', {
-                        label: 'Font weight',
-                        value: '500',
-                        configuration: {
-                          as: 'DROPDOWN',
-                          dataType: 'string',
-                          allowedInput: [
-                            { name: '100', value: '100' },
-                            { name: '200', value: '200' },
-                            { name: '300', value: '300' },
-                            { name: '400', value: '400' },
-                            { name: '500', value: '500' },
-                            { name: '600', value: '600' },
-                            { name: '700', value: '700' },
-                            { name: '800', value: '800' },
-                            { name: '900', value: '900' },
-                          ],
-                        },
-                      }),
+                    [],
+                  ),
+                  RadioInput(
+                    {
+                      ref: { id: '#RadioInput' },
+                      options: {
+                        ...radioInputOptions,
+                        label: variable('Label', { value: [''] }),
+                        required: toggle('Required', {
+                          ref: {
+                            id: '#questionRequired',
+                          },
+                        }),
+                      },
                     },
-                  }),
-                  RadioInput({
-                    ref: { id: '#RadioInput' },
-                    options: {
-                      ...radioInputOptions,
-                      label: variable('Label', { value: [''] }),
-                      required: toggle('Required', {
-                        ref: {
-                          id: '#questionRequired',
-                        },
-                      }),
-                    },
-                  }),
+                    [],
+                  ),
                 ],
               ),
             ],
