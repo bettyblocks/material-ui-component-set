@@ -84,7 +84,7 @@ export const dataTableOptions = {
   reconfigure: reconfigure('Reconfigure', {
     value: { children, reconfigureWizardType: 'PropertiesSelector' },
   }),
-  addChild: addChild('Add child', {
+  addChild: addChild('Add Column', {
     value: { children, addChildWizardType: 'PropertySelector' },
   }),
   model: modelAndRelation('Model', { value: '' }),
