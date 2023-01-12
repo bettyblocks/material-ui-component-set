@@ -4546,9 +4546,15 @@ const beforeCreate = ({
   } = helpers;
   const [modelId, setModelId] = React.useState('');
   const [model, setModel] = React.useState<ModelProps>();
-  const [properties, setProperties] = React.useState<Properties[]>([]);
+  const [dataTableProperties, setDataTableProperties] = React.useState<
+    Properties[]
+  >([]);
+  const [modelProperties, setModelProperties] = React.useState<Properties[]>(
+    [],
+  );
   const [modelValidation, setModelValidation] = React.useState(false);
-  const [propertiesValidation, setPropertiesValidation] = React.useState(false);
+  const [dataTablePropertiesValidation, setDataTablePropertiesValidation] =
+    React.useState(false);
   const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
   const { data } = useModelQuery({
     variables: { id: modelId },
@@ -4587,13 +4593,19 @@ const beforeCreate = ({
   }
 
   const enrichVarObj = (obj: any) => {
-    const returnObject = obj;
-    if (data && data.model) {
-      const property = data.model.properties.find(
-        (prop: any) => prop.id === obj.id[0],
+    const returnObject = {
+      id: [obj.id],
+      kind: obj.kind,
+      label: obj.label,
+      name: '',
+      type: 'PROPERTY',
+    };
+    if (model) {
+      const property = model.properties.find(
+        (prop: any) => prop.id === returnObject.id[0],
       );
       if (property) {
-        returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
+        returnObject.name = `{{ ${model.name}.${property.name} }}`;
       }
     }
     return returnObject;
@@ -4602,14 +4614,10 @@ const beforeCreate = ({
   const makeDetail = (prop: any) => {
     const noEmptyValueConditional = cloneStructure('Conditional');
     if (noEmptyValueConditional.type === 'COMPONENT') {
-      setOption(
-        noEmptyValueConditional,
-        'left',
-        (originalOption: PrefabComponentOption) => ({
-          ...originalOption,
-          value: [enrichVarObj({ ...prop })],
-        }),
-      );
+      setOption(noEmptyValueConditional, 'left', (originalOption: any) => ({
+        ...originalOption,
+        value: [enrichVarObj({ ...prop })],
+      }));
       setOption(
         noEmptyValueConditional,
         'compare',
@@ -4704,9 +4712,9 @@ const beforeCreate = ({
             setOption(
               mediaComponent,
               'urlFileSource',
-              (originalOption: PrefabComponentOption) => ({
+              (originalOption: any) => ({
                 ...originalOption,
-                value: [{ ...prop }],
+                value: [{ ...enrichVarObj({ ...prop }), useKey: 'url' }],
               }),
             );
             setOption(
@@ -4754,14 +4762,15 @@ const beforeCreate = ({
                 value: ['View file'],
               }),
             );
-            setOption(
-              fileButton,
-              'linkToExternal',
-              (originalOption: PrefabComponentOption) => ({
-                ...originalOption,
-                value: [enrichVarObj({ ...prop })],
-              }),
-            );
+            setOption(fileButton, 'linkToExternal', (originalOption: any) => ({
+              ...originalOption,
+              value: [
+                {
+                  ...enrichVarObj({ ...prop }),
+                  useKey: 'url',
+                },
+              ],
+            }));
             setOption(
               fileButton,
               'linkType',
@@ -4787,14 +4796,10 @@ const beforeCreate = ({
 
         const valueText = cloneStructure('Text');
         if (valueText.type === 'COMPONENT') {
-          setOption(
-            valueText,
-            'content',
-            (originalOption: PrefabComponentOption) => ({
-              ...originalOption,
-              value: [enrichVarObj({ ...prop })],
-            }),
-          );
+          setOption(valueText, 'content', (originalOption: any) => ({
+            ...originalOption,
+            value: [enrichVarObj({ ...prop })],
+          }));
         }
         detailComponent.descendants = [labelText, valueText];
         noEmptyValueConditional.descendants = [detailComponent];
@@ -4808,6 +4813,11 @@ const beforeCreate = ({
     onCompleted: ({ model: dataModel }: ModelQuery) => {
       setModel(dataModel);
       setIdProperty(dataModel.properties.find(({ name }) => name === 'id'));
+      setModelProperties(
+        dataModel.properties.filter(
+          (prop: Properties) => prop.kind !== 'PASSWORD',
+        ),
+      );
     },
   });
 
@@ -4929,9 +4939,9 @@ const beforeCreate = ({
             />
           </Field>
           <Field
-            label="Properties used in Backoffice"
+            label="Properties shown in the data table"
             error={
-              propertiesValidation && (
+              dataTablePropertiesValidation && (
                 <TextComp color="#e82600">
                   Selecting a property is required
                 </TextComp>
@@ -4940,7 +4950,7 @@ const beforeCreate = ({
           >
             <PropertiesSelector
               modelId={modelId}
-              value={properties}
+              value={dataTableProperties}
               disabledKinds={[
                 'BELONGS_TO',
                 'HAS_AND_BELONGS_TO_MANY',
@@ -4966,8 +4976,8 @@ const beforeCreate = ({
                 'ZIPCODE',
               ]}
               onChange={(value: Properties[]) => {
-                setProperties(value);
-                setPropertiesValidation(false);
+                setDataTableProperties(value);
+                setDataTablePropertiesValidation(false);
               }}
             />
           </Field>
@@ -5027,8 +5037,8 @@ const beforeCreate = ({
         setModelValidation(true);
         return;
       }
-      if (!properties || properties.length < 1) {
-        setPropertiesValidation(true);
+      if (!dataTableProperties || dataTableProperties.length < 1) {
+        setDataTablePropertiesValidation(true);
         return;
       }
 
@@ -5087,7 +5097,7 @@ const beforeCreate = ({
         'PRICE_EXPRESSION',
         'TIME',
       ];
-      properties.forEach((property) => {
+      dataTableProperties.forEach((property) => {
         let newProperty = property;
         if (property.kind && inheritFormatKinds.includes(property.kind)) {
           newProperty = {
@@ -5271,11 +5281,14 @@ const beforeCreate = ({
       dataTableComp.descendants.push(buttonColumn);
 
       // set create form
-      const filteredproperties = properties.filter(
+      const filteredproperties = modelProperties.filter(
         (prop: Properties) =>
           prop.label !== 'Created at' &&
           prop.label !== 'Updated at' &&
-          prop.label !== 'Id',
+          prop.label !== 'Id' &&
+          prop.kind !== 'PDF' &&
+          prop.kind !== 'MULTI_FILE' &&
+          prop.kind !== 'PASSWORD',
       );
 
       if (idProperty && model) {
@@ -5556,7 +5569,9 @@ const beforeCreate = ({
           value: modelId,
         }),
       );
-      properties.map((prop) => detailColumn.descendants.push(makeDetail(prop)));
+      modelProperties.map((prop) =>
+        detailColumn.descendants.push(makeDetail(prop)),
+      );
 
       // set edit form
       const updateForm = treeSearch('#updateForm', newPrefab.structure);

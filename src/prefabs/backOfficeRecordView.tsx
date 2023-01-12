@@ -2797,6 +2797,8 @@ const beforeCreate = ({
                 prop.label !== 'Created at' &&
                 prop.label !== 'Updated at' &&
                 prop.label !== 'Id' &&
+                prop.kind !== 'PDF' &&
+                prop.kind !== 'MULTI_FILE' &&
                 prop.kind !== 'PASSWORD',
             );
 
