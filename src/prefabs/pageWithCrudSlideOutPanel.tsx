@@ -28,6 +28,8 @@ import {
   linked,
   childSelector,
   number,
+  property,
+  reconfigure,
 } from '@betty-blocks/component-sdk';
 
 import { Property } from '@betty-blocks/component-sdk/build/prefabs/types/property';
@@ -44,6 +46,8 @@ import {
   conditionalOptions,
   DataContainer,
   DataTable,
+  DataTableColumn,
+  dataTableColumnOptions,
   dataTableOptions,
   Dialog,
   dialogOptions,
@@ -73,6 +77,15 @@ import {
 import { options as defaults } from './structures/ActionJSForm/options';
 import { IdPropertyProps, ModelProps, ModelQuery, Properties } from './types';
 import { PermissionType } from './types/types';
+
+const children = [
+  DataTableColumn({
+    options: {
+      ...dataTableColumnOptions,
+      property: property('Property', { value: '', showInAddChild: true }),
+    },
+  }),
+];
 
 const interactions: PrefabInteraction[] = [
   {
@@ -621,6 +634,15 @@ const drawerContainer = DrawerContainer(
                                     option: 'toggleOverview',
                                     comparator: 'EQ',
                                     value: true,
+                                  },
+                                },
+                              }),
+                              reconfigure: linked({
+                                label: 'Reconfigure',
+                                value: {
+                                  ref: {
+                                    componentId: '#dataTable',
+                                    optionId: '#reconfigure',
                                   },
                                 },
                               }),
@@ -1886,6 +1908,19 @@ const drawerContainer = DrawerContainer(
                                                         {
                                                           value:
                                                             ThemeColor.WHITE,
+                                                        },
+                                                      ),
+                                                      reconfigure: reconfigure(
+                                                        'Reconfigure',
+                                                        {
+                                                          ref: {
+                                                            id: '#reconfigure',
+                                                          },
+                                                          value: {
+                                                            children,
+                                                            reconfigureWizardType:
+                                                              'PropertiesSelector',
+                                                          },
                                                         },
                                                       ),
                                                       variant: option(

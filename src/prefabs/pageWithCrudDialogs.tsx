@@ -25,6 +25,8 @@ import {
   linked,
   wrapper,
   childSelector,
+  reconfigure,
+  property,
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
@@ -68,6 +70,15 @@ import { options as defaults } from './structures/ActionJSForm/options';
 import { PermissionType } from './types/types';
 
 const interactions: PrefabInteraction[] = [];
+
+const children = [
+  DataTableColumn({
+    options: {
+      ...dataTableColumnOptions,
+      property: property('Property', { value: '', showInAddChild: true }),
+    },
+  }),
+];
 
 const attrs = {
   name: 'CRUD with dialogs',
@@ -1892,6 +1903,15 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                 ),
                               },
                             }),
+                            reconfigure: linked({
+                              label: 'Reconfigure',
+                              value: {
+                                ref: {
+                                  componentId: '#dataTable',
+                                  optionId: '#reconfigure',
+                                },
+                              },
+                            }),
                             crudTabs: linked({
                               label: 'CRUD dialog tabs',
                               value: {
@@ -2504,6 +2524,16 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                       }),
                                       outerSpacing: sizes('Outer space', {
                                         value: ['L', '0rem', 'L', '0rem'],
+                                      }),
+                                      reconfigure: reconfigure('Reconfigure', {
+                                        ref: {
+                                          id: '#reconfigure',
+                                        },
+                                        value: {
+                                          children,
+                                          reconfigureWizardType:
+                                            'PropertiesSelector',
+                                        },
                                       }),
                                     },
                                   },

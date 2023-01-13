@@ -27,6 +27,8 @@ import {
   linked,
   childSelector,
   showIfTrue,
+  reconfigure,
+  property as componentproperty,
 } from '@betty-blocks/component-sdk';
 
 import {
@@ -39,6 +41,8 @@ import {
   DataContainer,
   dataContainerOptions,
   DataTable,
+  DataTableColumn,
+  dataTableColumnOptions,
   dataTableOptions,
   Dialog,
   dialogOptions,
@@ -75,6 +79,18 @@ import {
 import { options as defaults } from './structures/ActionJSForm/options';
 import { Properties, IdPropertyProps, ModelProps, ModelQuery } from './types';
 import { PermissionType, PropertyStateProps } from './types/types';
+
+const children = [
+  DataTableColumn({
+    options: {
+      ...dataTableColumnOptions,
+      property: componentproperty('Property', {
+        value: '',
+        showInAddChild: true,
+      }),
+    },
+  }),
+];
 
 const interactions: PrefabInteraction[] = [
   {
@@ -722,6 +738,15 @@ const drawerContainer = DrawerContainer(
               ref: {
                 componentId: '#contentContainer',
                 optionId: '#contentContainerVisibility',
+              },
+            },
+          }),
+          reconfigure: linked({
+            label: 'Reconfigure',
+            value: {
+              ref: {
+                componentId: '#dataTable',
+                optionId: '#reconfigure',
               },
             },
           }),
@@ -4379,6 +4404,20 @@ const drawerContainer = DrawerContainer(
                                                                     },
                                                                 },
                                                               ),
+                                                              reconfigure:
+                                                                reconfigure(
+                                                                  'Reconfigure',
+                                                                  {
+                                                                    ref: {
+                                                                      id: '#reconfigure',
+                                                                    },
+                                                                    value: {
+                                                                      children,
+                                                                      reconfigureWizardType:
+                                                                        'PropertiesSelector',
+                                                                    },
+                                                                  },
+                                                                ),
                                                               background: color(
                                                                 'Background',
                                                                 {
