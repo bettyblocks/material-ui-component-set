@@ -28,7 +28,7 @@ import {
   childSelector,
   showIfTrue,
   reconfigure,
-  property as componentproperty,
+  property,
 } from '@betty-blocks/component-sdk';
 
 import {
@@ -84,7 +84,7 @@ const children = [
   DataTableColumn({
     options: {
       ...dataTableColumnOptions,
-      property: componentproperty('Property', {
+      property: property('Property', {
         value: '',
         showInAddChild: true,
       }),
@@ -4640,6 +4640,7 @@ const beforeCreate = ({
       type: 'PROPERTY',
     };
     if (model) {
+      // eslint-disable-next-line @typescript-eslint/no-shadow
       const property = model.properties.find(
         (prop: any) => prop.id === returnObject.id[0],
       );
@@ -5136,6 +5137,7 @@ const beforeCreate = ({
         'PRICE_EXPRESSION',
         'TIME',
       ];
+      // eslint-disable-next-line @typescript-eslint/no-shadow
       dataTableProperties.forEach((property) => {
         let newProperty = property;
         if (property.kind && inheritFormatKinds.includes(property.kind)) {

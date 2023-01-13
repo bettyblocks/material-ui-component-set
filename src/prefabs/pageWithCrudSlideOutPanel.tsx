@@ -28,11 +28,10 @@ import {
   linked,
   childSelector,
   number,
-  property,
   reconfigure,
+  property,
 } from '@betty-blocks/component-sdk';
 
-import { Property } from '@betty-blocks/component-sdk/build/prefabs/types/property';
 import {
   AppBar,
   appBarOptions,
@@ -75,14 +74,23 @@ import {
   textOptions,
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
-import { IdPropertyProps, ModelProps, ModelQuery, Properties } from './types';
+import {
+  IdPropertyProps,
+  ModelProps,
+  ModelQuery,
+  Properties,
+  Property,
+} from './types';
 import { PermissionType } from './types/types';
 
 const children = [
   DataTableColumn({
     options: {
       ...dataTableColumnOptions,
-      property: property('Property', { value: '', showInAddChild: true }),
+      property: property('Property', {
+        value: '',
+        showInAddChild: true,
+      }),
     },
   }),
 ];
@@ -3141,6 +3149,7 @@ const beforeCreate = ({
   const enrichVarObj = (obj: any) => {
     const returnObject = obj;
     if (data && data.model) {
+      // eslint-disable-next-line @typescript-eslint/no-shadow
       const property = data.model.properties.find(
         (prop: any) => prop.id === obj.id[0],
       );
@@ -3470,6 +3479,7 @@ const beforeCreate = ({
         value: modelId,
       }));
 
+      // eslint-disable-next-line @typescript-eslint/no-shadow
       properties.forEach((property) => {
         let newProperty = property;
         const inheritFormatKinds = [

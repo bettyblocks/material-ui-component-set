@@ -146,6 +146,7 @@ const beforeCreate = ({
   const enrichVarObj = (obj: any) => {
     const returnObj = obj;
     if (data && data.model) {
+      // eslint-disable-next-line @typescript-eslint/no-shadow
       const property = data.model.properties.find(
         (prop: { id: string }) => prop.id === returnObj.id[0],
       );
@@ -332,6 +333,7 @@ const beforeCreate = ({
     onSave: async () => {
       const newPrefab = { ...prefab };
       const formProperties = properties.filter(
+        // eslint-disable-next-line @typescript-eslint/no-shadow
         (property: any) =>
           property.label !== 'Created at' &&
           property.label !== 'Updated at' &&
@@ -1052,6 +1054,7 @@ const beforeCreate = ({
       modelOption.value = modelId;
       DataTableStructure.ref = { id: '#detailsDataContainer' };
 
+      // eslint-disable-next-line @typescript-eslint/no-shadow
       const newDetailInput = (property: any) => {
         const boxStructure = cloneStructure('Box');
         boxStructure.options[0].value = 'center';
