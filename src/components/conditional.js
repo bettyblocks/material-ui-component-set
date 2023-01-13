@@ -51,6 +51,7 @@
     const checkCondition = evalCondition();
 
     useEffect(() => {
+      setLeftValue(leftValue);
       setRightValue(rightText);
     }, [leftText, rightText, setLeftValue, setRightValue]);
 
@@ -90,15 +91,8 @@
     B.defineFunction('Set Left Value', (evt) => setLeftValue(getValue(evt)));
     B.defineFunction('Set Right Value', (evt) => setRightValue(getValue(evt)));
 
-    const leftPristine =
-      left.filter((e) => e.type === 'PROPERTY').length > 0 && leftValue === '';
-    const rightPristine =
-      right.filter((e) => e.type === 'PROPERTY').length > 0 &&
-      rightValue === '';
+    if (!isDev && !visible) return <></>;
 
-    if (!isDev && (!visible || leftPristine || rightPristine)) {
-      return <></>;
-    }
     return (
       <div
         className={children.length === 0 ? classes.empty : undefined}
