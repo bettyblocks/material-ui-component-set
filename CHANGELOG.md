@@ -1,3 +1,10 @@
+## [2.90.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.90.0...v2.90.1) (2023-01-13)
+
+
+### Bug Fixes
+
+* long text overflows in select form ([1875548](https://github.com/bettyblocks/material-ui-component-set/commit/18755488527430b7fbc553f7dbf2d6046706f89d))
+
 # [2.90.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.89.1...v2.90.0) (2023-01-12)
 
 
