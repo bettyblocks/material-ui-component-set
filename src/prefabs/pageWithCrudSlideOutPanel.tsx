@@ -32,6 +32,7 @@ import {
   property,
 } from '@betty-blocks/component-sdk';
 
+import { Property } from '@betty-blocks/component-sdk/build/prefabs/types/property';
 import {
   AppBar,
   appBarOptions,
@@ -74,13 +75,7 @@ import {
   textOptions,
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
-import {
-  IdPropertyProps,
-  ModelProps,
-  ModelQuery,
-  Properties,
-  Property,
-} from './types';
+import { IdPropertyProps, ModelProps, ModelQuery, Properties } from './types';
 import { PermissionType } from './types/types';
 
 const children = [
