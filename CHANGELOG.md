@@ -1,3 +1,10 @@
+## [2.90.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.90.1...v2.90.2) (2023-01-13)
+
+
+### Bug Fixes
+
+* reverted back to original check ([6a8376c](https://github.com/bettyblocks/material-ui-component-set/commit/6a8376c9b43179551013e187a95e6040abe29e96))
+
 ## [2.90.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.90.0...v2.90.1) (2023-01-13)
 
 
