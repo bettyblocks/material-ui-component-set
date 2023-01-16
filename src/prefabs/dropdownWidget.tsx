@@ -305,15 +305,6 @@ export default makePrefab('Dropdown Widget', attributes, beforeCreate, [
             },
           },
         }),
-        questionContent: linked({
-          label: 'Checkbox label',
-          value: {
-            ref: {
-              componentId: '#DropdownInput',
-              optionId: '#questionLabel',
-            },
-          },
-        }),
         required: linked({
           label: 'Required to answer',
           value: {
