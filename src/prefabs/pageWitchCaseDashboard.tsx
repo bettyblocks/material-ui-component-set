@@ -728,7 +728,7 @@ export default makePrefab('Case dashboard', attrs, undefined, [
                                 options: {
                                   ...avatarOptions,
                                   margin: sizes('Outer Space', {
-                                    value: ['S', 'S', 'S', 'S'],
+                                    value: ['S', 'M', 'S', 'S'],
                                   }),
                                 },
                               }),
@@ -900,7 +900,7 @@ export default makePrefab('Case dashboard', attrs, undefined, [
                       options: {
                         ...boxOptions,
                         innerSpacing: sizes('Inner space', {
-                          value: ['0rem', 'M', '0rem', 'M'],
+                          value: ['S', 'M', 'S', 'M'],
                         }),
                         alignment: buttongroup(
                           'Alignment',
@@ -965,7 +965,7 @@ export default makePrefab('Case dashboard', attrs, undefined, [
                               ['Dense', 'dense'],
                               ['Normal', 'normal'],
                             ],
-                            { value: 'none' },
+                            { value: 'dense' },
                           ),
                         },
                       }),
@@ -1357,7 +1357,7 @@ export default makePrefab('Case dashboard', attrs, undefined, [
                     options: {
                       ...dividerOptions,
                       outerSpacing: sizes('Outer space', {
-                        value: ['0rem', '0rem', 'L', '0rem'],
+                        value: ['0rem', '0rem', 'S', '0rem'],
                       }),
                     },
                   }),
@@ -1365,342 +1365,124 @@ export default makePrefab('Case dashboard', attrs, undefined, [
                     {
                       options: {
                         ...boxOptions,
-                        outerSpacing: sizes('Outer space', {
-                          value: ['0rem', '0rem', 'L', '0rem'],
-                        }),
                         innerSpacing: sizes('Inner space', {
                           value: ['0rem', '0rem', '0rem', '0rem'],
                         }),
-                        alignment: buttongroup(
-                          'Alignment',
-                          [
-                            ['None', 'none'],
-                            ['Left', 'flex-start'],
-                            ['Center', 'center'],
-                            ['Right', 'flex-end'],
-                            ['Justified', 'space-between'],
-                          ],
-                          {
-                            value: 'space-between',
-                            configuration: {
-                              dataType: 'string',
-                            },
-                          },
-                        ),
-                        valignment: buttongroup(
-                          'Vertical alignment',
-                          [
-                            ['None', 'none'],
-                            ['Top', 'flex-start'],
-                            ['Center', 'center'],
-                            ['Bottom', 'flex-end'],
-                          ],
-                          {
-                            value: 'none',
-                            configuration: {
-                              dataType: 'string',
-                            },
-                          },
-                        ),
                       },
                     },
                     [
-                      boxPrefab(
-                        {
-                          options: {
-                            ...boxOptions,
-                            innerSpacing: sizes('Inner space', {
-                              value: ['0rem', '0rem', '0rem', '0rem'],
-                            }),
+                      Button({
+                        options: {
+                          ...buttonOptions,
+                          buttonText: variable('Button text', {
+                            value: ['Home'],
+                          }),
+                          outerSpacing: sizes('Outer space', {
+                            value: ['S', '0rem', 'S', '0rem'],
+                          }),
+                          fullWidth: toggle('Full width', { value: true }),
+                        },
+                        style: {
+                          overwrite: {
+                            textTransform: 'none',
+                            backgroundColor: {
+                              type: 'STATIC',
+                              value: 'Transparent',
+                            },
+                            color: {
+                              type: 'THEME_COLOR',
+                              value: 'primary',
+                            },
+                            fontWeight: '700',
+                            padding: ['0.5rem', '1rem'],
+                            boxShadow: 'none',
                           },
                         },
-                        [
-                          Text({
-                            options: {
-                              ...textOptions,
-                              content: variable('Content', {
-                                value: ['Home'],
-                                configuration: { as: 'MULTILINE' },
-                              }),
-                              type: font('Font', { value: ['Body1'] }),
-                              textColor: color('Text color', {
-                                value: ThemeColor.PRIMARY,
-                              }),
-                              fontWeight: option('CUSTOM', {
-                                label: 'Font weight',
-                                value: '600',
-                                configuration: {
-                                  as: 'DROPDOWN',
-                                  dataType: 'string',
-                                  allowedInput: [
-                                    { name: '100', value: '100' },
-                                    { name: '200', value: '200' },
-                                    { name: '300', value: '300' },
-                                    { name: '400', value: '400' },
-                                    { name: '500', value: '500' },
-                                    { name: '600', value: '600' },
-                                    { name: '700', value: '700' },
-                                    { name: '800', value: '800' },
-                                    { name: '900', value: '900' },
-                                  ],
-                                },
-                              }),
-                            },
+                      }),
+                      Button({
+                        options: {
+                          ...buttonOptions,
+                          buttonText: variable('Button text', {
+                            value: ['Cases'],
                           }),
-                          Divider({
-                            options: {
-                              ...dividerOptions,
-                              thickness: size('Thickness', { value: 'L' }),
-                              color: color('Color', {
-                                value: ThemeColor.PRIMARY,
-                              }),
-                              outerSpacing: sizes('Outer space', {
-                                value: ['M', '0rem', '0rem', '0rem'],
-                              }),
-                            },
+                          outerSpacing: sizes('Outer space', {
+                            value: ['S', '0rem', 'S', '0rem'],
                           }),
-                        ],
-                      ),
-                    ],
-                  ),
-                  boxPrefab(
-                    {
-                      options: {
-                        ...boxOptions,
-                        outerSpacing: sizes('Outer space', {
-                          value: ['0rem', '0rem', 'L', '0rem'],
-                        }),
-                        innerSpacing: sizes('Inner space', {
-                          value: ['0rem', '0rem', '0rem', '0rem'],
-                        }),
-                        alignment: buttongroup(
-                          'Alignment',
-                          [
-                            ['None', 'none'],
-                            ['Left', 'flex-start'],
-                            ['Center', 'center'],
-                            ['Right', 'flex-end'],
-                            ['Justified', 'space-between'],
-                          ],
-                          {
-                            value: 'space-between',
-                            configuration: {
-                              dataType: 'string',
+                          fullWidth: toggle('Full width', { value: true }),
+                        },
+                        style: {
+                          overwrite: {
+                            textTransform: 'none',
+                            backgroundColor: {
+                              type: 'STATIC',
+                              value: 'Transparent',
                             },
-                          },
-                        ),
-                        valignment: buttongroup(
-                          'Vertical alignment',
-                          [
-                            ['None', 'none'],
-                            ['Top', 'flex-start'],
-                            ['Center', 'center'],
-                            ['Bottom', 'flex-end'],
-                          ],
-                          {
-                            value: 'none',
-                            configuration: {
-                              dataType: 'string',
+                            color: {
+                              type: 'THEME_COLOR',
+                              value: 'black',
                             },
-                          },
-                        ),
-                      },
-                    },
-                    [
-                      boxPrefab(
-                        {
-                          options: {
-                            ...boxOptions,
-                            innerSpacing: sizes('Inner space', {
-                              value: ['0rem', '0rem', '0rem', '0rem'],
-                            }),
+                            fontWeight: '400',
+                            padding: ['0.5rem', '1rem'],
+                            boxShadow: 'none',
                           },
                         },
-                        [
-                          Text({
-                            options: {
-                              ...textOptions,
-                              content: variable('Content', {
-                                value: ['Cases'],
-                                configuration: { as: 'MULTILINE' },
-                              }),
-                              type: font('Font', { value: ['Body1'] }),
-                            },
+                      }),
+                      Button({
+                        options: {
+                          ...buttonOptions,
+                          buttonText: variable('Button text', {
+                            value: ['Users'],
                           }),
-                          Divider({
-                            options: {
-                              ...dividerOptions,
-                              thickness: size('Thickness', { value: 'L' }),
-                              color: color('Color', {
-                                value: ThemeColor.TRANSPARENT,
-                              }),
-                              outerSpacing: sizes('Outer space', {
-                                value: ['M', '0rem', '0rem', '0rem'],
-                              }),
-                            },
+                          outerSpacing: sizes('Outer space', {
+                            value: ['S', '0rem', 'S', '0rem'],
                           }),
-                        ],
-                      ),
-                    ],
-                  ),
-                  boxPrefab(
-                    {
-                      options: {
-                        ...boxOptions,
-                        outerSpacing: sizes('Outer space', {
-                          value: ['0rem', '0rem', 'L', '0rem'],
-                        }),
-                        innerSpacing: sizes('Inner space', {
-                          value: ['0rem', '0rem', '0rem', '0rem'],
-                        }),
-                        alignment: buttongroup(
-                          'Alignment',
-                          [
-                            ['None', 'none'],
-                            ['Left', 'flex-start'],
-                            ['Center', 'center'],
-                            ['Right', 'flex-end'],
-                            ['Justified', 'space-between'],
-                          ],
-                          {
-                            value: 'space-between',
-                            configuration: {
-                              dataType: 'string',
+                          fullWidth: toggle('Full width', { value: true }),
+                        },
+                        style: {
+                          overwrite: {
+                            textTransform: 'none',
+                            backgroundColor: {
+                              type: 'STATIC',
+                              value: 'Transparent',
                             },
-                          },
-                        ),
-                        valignment: buttongroup(
-                          'Vertical alignment',
-                          [
-                            ['None', 'none'],
-                            ['Top', 'flex-start'],
-                            ['Center', 'center'],
-                            ['Bottom', 'flex-end'],
-                          ],
-                          {
-                            value: 'none',
-                            configuration: {
-                              dataType: 'string',
+                            color: {
+                              type: 'THEME_COLOR',
+                              value: 'black',
                             },
-                          },
-                        ),
-                      },
-                    },
-                    [
-                      boxPrefab(
-                        {
-                          options: {
-                            ...boxOptions,
-                            innerSpacing: sizes('Inner space', {
-                              value: ['0rem', '0rem', '0rem', '0rem'],
-                            }),
+                            fontWeight: '400',
+                            padding: ['0.5rem', '1rem'],
+                            boxShadow: 'none',
                           },
                         },
-                        [
-                          Text({
-                            options: {
-                              ...textOptions,
-                              content: variable('Content', {
-                                value: ['Users'],
-                                configuration: { as: 'MULTILINE' },
-                              }),
-                              type: font('Font', { value: ['Body1'] }),
-                            },
+                      }),
+                      Button({
+                        options: {
+                          ...buttonOptions,
+                          buttonText: variable('Button text', {
+                            value: ['Case types'],
                           }),
-                          Divider({
-                            options: {
-                              ...dividerOptions,
-                              thickness: size('Thickness', { value: 'L' }),
-                              color: color('Color', {
-                                value: ThemeColor.TRANSPARENT,
-                              }),
-                              outerSpacing: sizes('Outer space', {
-                                value: ['M', '0rem', '0rem', '0rem'],
-                              }),
-                            },
+                          outerSpacing: sizes('Outer space', {
+                            value: ['S', '0rem', 'S', '0rem'],
                           }),
-                        ],
-                      ),
-                    ],
-                  ),
-                  boxPrefab(
-                    {
-                      options: {
-                        ...boxOptions,
-                        innerSpacing: sizes('Inner space', {
-                          value: ['0rem', '0rem', '0rem', '0rem'],
-                        }),
-                        alignment: buttongroup(
-                          'Alignment',
-                          [
-                            ['None', 'none'],
-                            ['Left', 'flex-start'],
-                            ['Center', 'center'],
-                            ['Right', 'flex-end'],
-                            ['Justified', 'space-between'],
-                          ],
-                          {
-                            value: 'space-between',
-                            configuration: {
-                              dataType: 'string',
+                          fullWidth: toggle('Full width', { value: true }),
+                        },
+                        style: {
+                          overwrite: {
+                            textTransform: 'none',
+                            backgroundColor: {
+                              type: 'STATIC',
+                              value: 'Transparent',
                             },
-                          },
-                        ),
-                        valignment: buttongroup(
-                          'Vertical alignment',
-                          [
-                            ['None', 'none'],
-                            ['Top', 'flex-start'],
-                            ['Center', 'center'],
-                            ['Bottom', 'flex-end'],
-                          ],
-                          {
-                            value: 'none',
-                            configuration: {
-                              dataType: 'string',
+                            color: {
+                              type: 'THEME_COLOR',
+                              value: 'black',
                             },
-                          },
-                        ),
-                      },
-                    },
-                    [
-                      boxPrefab(
-                        {
-                          options: {
-                            ...boxOptions,
-                            innerSpacing: sizes('Inner space', {
-                              value: ['0rem', '0rem', '0rem', '0rem'],
-                            }),
-                            outerSpacing: sizes('Outer space', {
-                              value: ['0rem', '0rem', 'M', '0rem'],
-                            }),
+                            fontWeight: '400',
+                            padding: ['0.5rem', '1rem'],
+                            boxShadow: 'none',
                           },
                         },
-                        [
-                          Text({
-                            options: {
-                              ...textOptions,
-                              content: variable('Content', {
-                                value: ['Case types'],
-                                configuration: { as: 'MULTILINE' },
-                              }),
-                              type: font('Font', { value: ['Body1'] }),
-                            },
-                          }),
-                          Divider({
-                            options: {
-                              ...dividerOptions,
-                              thickness: size('Thickness', { value: 'L' }),
-                              color: color('Color', {
-                                value: ThemeColor.TRANSPARENT,
-                              }),
-                              outerSpacing: sizes('Outer space', {
-                                value: ['M', '0rem', '0rem', '0rem'],
-                              }),
-                            },
-                          }),
-                        ],
-                      ),
+                      }),
                     ],
                   ),
                   Divider({
