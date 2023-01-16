@@ -93,7 +93,7 @@
     return useInnerHtml && !isDev ? (
       <Tag
         className={classes.content}
-        dangerouslySetInnerHTML={{ __html: linkedContent }}
+        dangerouslySetInnerHTML={{ __html: parsedContent }}
         data-component={useText(dataComponentAttribute) || 'Text'}
       />
     ) : (
