@@ -168,6 +168,8 @@
 
       setAfterFirstInvalidation(!validation.valid);
       handleValidation(validation);
+      const { value: eventValue } = target;
+      B.triggerEvent('onBlur', eventValue);
     };
 
     const invalidHandler = (event) => {
@@ -185,7 +187,7 @@
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
-    B.defineFunction('Reset', () => setCurrentValue(''));
+    B.defineFunction('Reset', () => setCurrentValue(useText(value)));
 
     const handleClickShowPassword = () => {
       togglePassword(!showPassword);
@@ -316,6 +318,7 @@
         '& > *': {
           pointerEvents: 'none',
         },
+        width: ({ options: { fullWidth } }) => (fullWidth ? '100%' : 'auto'),
       },
       label: {
         color: ({ options: { labelColor } }) => [

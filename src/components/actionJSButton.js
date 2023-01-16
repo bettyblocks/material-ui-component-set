@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Action Button Beta',
+  name: 'Action Button',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'VERTICAL',
@@ -289,6 +289,7 @@
         '& > *': {
           pointerEvents: 'none',
         },
+        width: ({ options: { fullWidth } }) => (fullWidth ? '100%' : 'auto'),
       },
       linkComponent: {
         '&, &.MuiTypography-root': {

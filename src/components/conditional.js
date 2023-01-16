@@ -19,8 +19,7 @@
     const rightText = useText(right);
     const [leftValue, setLeftValue] = useState(leftText);
     const [rightValue, setRightValue] = useState(rightText);
-    const [visible, setVisible] = useState(initVisibility);
-
+    const [visible, setVisible] = useState();
     const evalCondition = () => {
       const leftAsNumber = parseFloat(leftValue);
       const rightAsNumber = parseFloat(rightValue);
@@ -52,7 +51,7 @@
     const checkCondition = evalCondition();
 
     useEffect(() => {
-      setLeftValue(leftText);
+      setLeftValue(leftValue);
       setRightValue(rightText);
     }, [leftText, rightText, setLeftValue, setRightValue]);
 
@@ -89,11 +88,11 @@
       const value = (evt && evt.target && evt.target.value) || evt;
       return `${value}`;
     };
-
     B.defineFunction('Set Left Value', (evt) => setLeftValue(getValue(evt)));
     B.defineFunction('Set Right Value', (evt) => setRightValue(getValue(evt)));
 
     if (!isDev && !visible) return <></>;
+
     return (
       <div
         className={children.length === 0 ? classes.empty : undefined}

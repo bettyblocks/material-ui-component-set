@@ -65,6 +65,7 @@ import {
   conditionalOptions,
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
+import { PermissionType } from './types/types';
 
 const interactions: PrefabInteraction[] = [];
 
@@ -98,6 +99,7 @@ const beforeCreate = ({
   helpers: {
     createUuid,
     prepareAction,
+    getPageAuthenticationProfileId,
     PropertyKind,
     useModelQuery,
     cloneStructure,
@@ -126,6 +128,9 @@ const beforeCreate = ({
     },
     skip: !modelId,
   });
+
+  const permissions: PermissionType = 'private';
+  const pageAuthenticationProfileId = getPageAuthenticationProfileId();
 
   const enrichVarObj = (obj: any) => {
     const returnObj = obj;
@@ -405,6 +410,10 @@ const beforeCreate = ({
         idProperty,
         properties,
         'create',
+        undefined,
+        undefined,
+        permissions,
+        pageAuthenticationProfileId,
       );
       Object.values(createResult.variables).forEach(
         ([prop, inputVariable]): void => {
@@ -671,6 +680,10 @@ const beforeCreate = ({
         idProperty,
         properties,
         'update',
+        undefined,
+        undefined,
+        permissions,
+        pageAuthenticationProfileId,
       );
       Object.values(updateResult.variables).forEach(
         ([prop, inputVariable]): void => {
@@ -2694,6 +2707,9 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                         value: false,
                                         configuration: { as: 'VISIBILITY' },
                                       }),
+                                      invisible: toggle('Invisible', {
+                                        value: true,
+                                      }),
                                     },
                                   },
                                   [
@@ -2973,7 +2989,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                         },
                                                         [
                                                           component(
-                                                            'Form Beta',
+                                                            'Form',
                                                             {
                                                               ref: {
                                                                 id: '#createTabFormId',
@@ -3322,7 +3338,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                         },
                                                         [
                                                           component(
-                                                            'Form Beta',
+                                                            'Form',
                                                             {
                                                               ref: {
                                                                 id: '#updateTabFormId',
@@ -4288,7 +4304,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                             [],
                                                           ),
                                                           component(
-                                                            'Form Beta',
+                                                            'Form',
                                                             {
                                                               ref: {
                                                                 id: '#deleteFormId',

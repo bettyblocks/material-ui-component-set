@@ -16,8 +16,11 @@ import {
   sizes,
   modelAndRelation,
   reconfigure,
+  addChild,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
+import { DataTableColumn } from '../../DataTableColumn';
+import { dataTableColumnOptions } from '../../DataTableColumn/options';
 
 export const categories = [
   {
@@ -62,14 +65,28 @@ export const categories = [
     members: ['outerSpacing'],
   },
   {
-    label: 'Advanced settings',
+    label: 'Advanced Options',
     expanded: false,
     members: ['dataComponentAttribute'],
   },
 ];
 
+const children = [
+  DataTableColumn({
+    options: {
+      ...dataTableColumnOptions,
+      property: property('Property', { value: '', showInAddChild: true }),
+    },
+  }),
+];
+
 export const dataTableOptions = {
-  reconfigure: reconfigure('Reconfigure', { value: '' }),
+  reconfigure: reconfigure('Reconfigure', {
+    value: { children, reconfigureWizardType: 'PropertiesSelector' },
+  }),
+  addChild: addChild('Add Column', {
+    value: { children, addChildWizardType: 'PropertySelector' },
+  }),
   model: modelAndRelation('Model', { value: '' }),
   filter: filter('Filter', {
     value: {},

@@ -8,6 +8,7 @@
     const { CircularProgress, TextField, FormControl, FormHelperText } =
       window.MaterialUI.Core;
     const {
+      Icon,
       InteractionScope,
       ModelProvider,
       env,
@@ -16,8 +17,8 @@
       getProperty,
       useAllQuery,
       useFilter,
+      useRelation,
       useText,
-      Icon,
     } = B;
     const {
       actionProperty,
@@ -100,9 +101,10 @@
     const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
     const labelProperty = getProperty(labelPropertyId) || {};
 
-    const { modelId: propertyModelId } = modelProperty;
+    const { modelId: propertyModelId, referenceModelId } = modelProperty;
+    const { contextModelId } = model;
     const modelId =
-      modelProperty.referenceModelId || propertyModelId || model || '';
+      contextModelId || referenceModelId || propertyModelId || model || '';
     const propertyModel = getModel(modelId);
     const defaultLabelProperty =
       getProperty(
@@ -287,7 +289,7 @@
       filter._or = [
         {
           [searchProp.name]: {
-            [searchPropIsNumber ? 'eq' : 'match']: searchPropIsNumber
+            [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
               ? parseInt(debouncedInputValue, 10)
               : debouncedInputValue,
           },
@@ -302,7 +304,7 @@
       ];
     } else if (debouncedInputValue) {
       filter[searchProp.name] = {
-        [searchPropIsNumber ? 'eq' : 'match']: searchPropIsNumber
+        [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
           ? parseInt(debouncedInputValue, 10)
           : debouncedInputValue,
       };
@@ -310,7 +312,7 @@
       filter._or = [
         {
           [valueProp.name]: {
-            [valuePropIsNumber ? 'eq' : 'match']:
+            [valuePropIsNumber ? 'eq' : 'matches']:
               typeof value === 'string' ? value : value[valueProp.name],
           },
         },
@@ -394,9 +396,9 @@
     }
 
     const {
-      loading,
+      loading: queryLoading,
       error,
-      data: { results } = {},
+      data: queryData,
       refetch,
     } = useAllQuery(
       modelId,
@@ -422,12 +424,23 @@
           }
         },
       },
-      isListProperty || !valid,
+      !!contextModelId || isListProperty || !valid,
     );
+
+    const { hasResults, data: relationData } = useRelation(
+      model,
+      {},
+      typeof model === 'string' || !model,
+    );
+
+    const data = hasResults ? relationData : queryData;
+    const loading = hasResults ? false : queryLoading;
 
     if (loading) {
       B.triggerEvent('onLoad', loading);
     }
+
+    const { results } = data || {};
 
     if (error && displayError) {
       valid = false;
@@ -778,6 +791,7 @@
         '& > *': {
           pointerEvents: 'none',
         },
+        width: ({ options: { fullWidth } }) => (fullWidth ? '100%' : 'auto'),
       },
       formControl: {
         '& > label': {

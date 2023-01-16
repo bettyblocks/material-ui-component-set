@@ -68,6 +68,7 @@
     const autoLoadTakeAmountNum = parseInt(autoLoadTakeAmount, 10);
     const [rowsPerPage, setRowsPerPage] = useState(takeNum);
     const [search, setSearch] = useState('');
+    const [filterv2, setFilterV2] = useState({});
     const [searchTerm, setSearchTerm] = useState('');
     const [interactionSearchTerm, setInteractionSearchTerm] = useState('');
     const [interactionSearchProperty, setInteractionSearchProperty] =
@@ -169,6 +170,14 @@
       return value;
     };
 
+    B.defineFunction('Advanced filter', (value) => {
+      setFilterV2(value.where);
+    });
+
+    B.defineFunction('Clear advanced filter', () => {
+      setFilterV2({});
+    });
+
     /**
      * @name Filter
      * @param {Property} property
@@ -201,26 +210,34 @@
 
     const isEmptyValue = (value) =>
       !value || (Array.isArray(value) && value.length === 0);
-
     const clauses = Object.entries(interactionFilter)
       .filter(([, { value }]) => !isEmptyValue(value))
       .map(([, { property, value }]) =>
         property.id.reduceRight((acc, field, index, arr) => {
           const isLast = index === arr.length - 1;
           if (isLast) {
-            return Array.isArray(value)
-              ? {
-                  _or: value.map((el) => ({
-                    [field]: { [property.operator]: el },
-                  })),
-                }
-              : { [field]: { [property.operator]: value } };
+            if (Array.isArray(value)) {
+              return {
+                _or: value.map((d) =>
+                  arr.reduceRight((accq, fieldf, i, a) => {
+                    const issLast = i === a.length - 1;
+                    if (issLast) {
+                      return { [fieldf]: { [property.operator]: d } };
+                    }
+                    return { [fieldf]: accq };
+                  }, {}),
+                ),
+              };
+            }
+            return { [field]: { [property.operator]: value } };
           }
 
+          if (Object.keys(acc).includes('_or')) {
+            return acc;
+          }
           return { [field]: acc };
         }, {}),
       );
-
     interactionFilters =
       clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
 
@@ -236,13 +253,12 @@
           {},
         )
       : {};
-
     const newFilter =
       searchProperty && searchTerm !== ''
         ? deepMerge(filter, searchFilter)
         : filter;
 
-    const completeFilter = deepMerge(newFilter, interactionFilters);
+    const completeFilter = deepMerge(newFilter, interactionFilters, filterv2);
 
     const where = useFilter(completeFilter);
 

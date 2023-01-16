@@ -6,6 +6,7 @@ import {
   PrefabInteraction,
 } from '@betty-blocks/component-sdk';
 import { Form } from './structures/ActionJSForm';
+import { PermissionType } from './types/types';
 
 const beforeCreate = ({
   close,
@@ -35,6 +36,8 @@ const beforeCreate = ({
     createUuid,
     makeBettyInput,
     prepareAction,
+    getPageAuthenticationProfileId,
+    getPageName,
     setOption,
     useModelQuery,
   } = helpers;
@@ -53,7 +56,6 @@ const beforeCreate = ({
     'MULTI_IMAGE',
     'PDF',
     'PRICE_EXPRESSION',
-    'RICH_TEXT',
     'SERIAL',
     'SIGNED_PDF',
     'STRING_EXPRESSION',
@@ -68,6 +70,9 @@ const beforeCreate = ({
   const [properties, setProperties] = React.useState([]);
   const [modelBased, setmodelBased] = React.useState(true);
   const [actionName, setActionName] = React.useState('');
+  const permissions: PermissionType = 'inherit';
+  const pageAuthenticationProfileId = getPageAuthenticationProfileId();
+  const pageName = getPageName();
 
   const [validationMessage, setValidationMessage] = React.useState('');
   const componentId = createUuid();
@@ -136,6 +141,7 @@ const beforeCreate = ({
                 onChange={(id) => {
                   setModelId(id);
                 }}
+                value={modelId}
                 margin
               />
             </Field>
@@ -201,6 +207,9 @@ const beforeCreate = ({
             modelBased ? 'empty' : 'custom',
             null,
             actionName,
+            permissions,
+            pageAuthenticationProfileId,
+            pageName,
           );
 
           const structure = originalPrefab.structure[0];
@@ -400,6 +409,16 @@ const beforeCreate = ({
                     ),
                   );
                   break;
+                case PropertyKind.RICH_TEXT:
+                  structure.descendants.push(
+                    makeBettyInput(
+                      BettyPrefabs.RICH_TEXT,
+                      model,
+                      property,
+                      variable,
+                    ),
+                  );
+                  break;
                 default:
                   structure.descendants.push(
                     makeBettyInput(
@@ -522,11 +541,9 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.FormIcon,
   interactions,
 };
 
-export default prefab('Form Beta', attributes, beforeCreate, [
-  Form('Form Beta', true),
-]);
+export default prefab('Form', attributes, beforeCreate, [Form('Form', true)]);

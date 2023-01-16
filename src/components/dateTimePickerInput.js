@@ -109,14 +109,14 @@
       if (parsedValue) {
         switch (type) {
           case 'date': {
-            setSelectedDate(DateFns.parse(parsedValue, 'yyyy-MM-dd'));
+            setSelectedDate(DateFns.parse(parsedValue, dateFormat));
             break;
           }
 
           case 'datetime': {
             const formatDefaultParse = DateFns.parse(
               parsedValue,
-              'yyyy-MM-dd HH:mm:ss',
+              datetimeFormat,
             );
 
             if (!parsedValue) return;
@@ -131,7 +131,7 @@
           }
 
           case 'time': {
-            setSelectedDate(DateFns.parse(parsedValue, 'HH:mm:ss'));
+            setSelectedDate(DateFns.parse(parsedValue, timeFormat));
             break;
           }
 
@@ -300,6 +300,7 @@
         '& > *': {
           pointerEvents: 'none',
         },
+        width: ({ options: { fullWidth } }) => (fullWidth ? '100%' : 'auto'),
       },
       dialog: {
         '& .MuiPickersToolbar-toolbar, & .MuiPickersDay-daySelected': {

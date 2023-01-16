@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Form Beta',
+  name: 'Form',
   type: 'CONTAINER_COMPONENT',
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
@@ -9,6 +9,7 @@
     const formRef = React.createRef();
     const [interactionFilter, setInteractionFilter] = useState({});
     const [, setOptions] = useOptions();
+    const mounted = useRef(false);
 
     const isDev = B.env === 'dev';
 
@@ -79,6 +80,15 @@
         });
       }
     });
+
+    useEffect(() => {
+      mounted.current = true;
+
+      B.triggerEvent('onRender');
+      return () => {
+        mounted.current = false;
+      };
+    }, []);
 
     /**
      * @name Filter
@@ -189,6 +199,7 @@
       border: 0,
       margin: 0,
       padding: 0,
+      minInlineSize: 'auto',
     },
     empty: {
       display: 'flex',

@@ -6,6 +6,7 @@ import {
   prefab,
 } from '@betty-blocks/component-sdk';
 import { Form } from './structures/ActionJSForm';
+import { PermissionType } from './types/types';
 
 const beforeCreate = ({
   close,
@@ -27,6 +28,7 @@ const beforeCreate = ({
     prepareAction,
     PropertyKind,
     makeBettyInput,
+    getPageName,
     BettyPrefabs,
     setOption,
     cloneStructure,
@@ -37,16 +39,17 @@ const beforeCreate = ({
   const [authProfileId, setAuthProfileId] = React.useState('');
   const [authProfile, setAuthProfile] = React.useState(null);
   const [authProfileInvalid, setAuthProfileInvalid] = React.useState(false);
-
   const [endpoint, setEndpoint] = React.useState(null);
   const [endpointInvalid, setEndpointInvalid] = React.useState(false);
-
   const [model, setModel] = React.useState(null);
+
+  const permissions: PermissionType = 'public';
 
   const isEmptyEndpoint = (value): boolean =>
     !value || Object.keys(value).length === 0 || value.id === '';
 
   const modelId = (authProfile && authProfile.loginModel) || '';
+  const pageName = getPageName();
 
   useModelQuery({
     skip: !modelId,
@@ -125,6 +128,8 @@ const beforeCreate = ({
             console.warn('Model not found');
           }
 
+          const pageAuthenticationProfileId = undefined;
+
           // eslint-disable-next-line no-param-reassign
           originalPrefab.structure[0].id = componentId;
           const result = await prepareAction(
@@ -133,6 +138,10 @@ const beforeCreate = ({
             null,
             'login',
             authProfile,
+            undefined,
+            permissions,
+            pageAuthenticationProfileId,
+            pageName,
           );
 
           const structure = originalPrefab.structure[0];
@@ -255,11 +264,11 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attributes = {
-  category: 'FORMV2',
+  category: 'FORM',
   icon: Icon.LoginFormIcon,
   interactions,
 };
 
-export default prefab('Login Form Beta', attributes, beforeCreate, [
-  Form('Login Form Beta'),
+export default prefab('Login Form', attributes, beforeCreate, [
+  Form('Login Form'),
 ]);
