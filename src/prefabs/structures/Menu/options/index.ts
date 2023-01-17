@@ -67,7 +67,7 @@ export const menuOptions = {
   reconfigure: reconfigure('Reconfigure', {
     value: { children, reconfigureWizardType: 'ChildrenSelector' },
   }),
-  addChild: addChild('Add Item', {
+  addChild: addChild('Add Menu Item', {
     value: { children, addChildWizardType: 'ChildSelector' },
   }),
   isMenuListVisible: toggle('Toggle menu', {
