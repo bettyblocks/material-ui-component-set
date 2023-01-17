@@ -23,6 +23,7 @@ import {
   number,
   PrefabInteraction,
   linked,
+  linkedPartial,
   wrapper,
   childSelector,
   reconfigure,
@@ -1572,59 +1573,202 @@ const beforeCreate = ({
 };
 
 export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
-  Row(
+  wrapper(
     {
+      label: 'CRUD with Dialogs wrapper',
+      optionCategories: [
+        {
+          label: 'Dialog title',
+          expanded: true,
+          members: [
+            'createDialogTitle',
+            'updateDialogTitle',
+            'detailsDialogTitle',
+            'deleteDialogTitle',
+          ],
+          condition: {
+            type: 'SHOW',
+            option: 'dialogVisibility',
+            comparator: 'EQ',
+            value: true,
+          },
+        },
+      ],
       options: {
-        ...rowOptions,
-        maxRowWidth: option('CUSTOM', {
-          label: 'Width',
-          value: 'Full',
+        dialogVisibility: linked({
+          label: 'Visibility',
+          value: {
+            ref: {
+              componentId: '#crudDialogVisibility',
+              optionId: '#crudVisibility',
+            },
+          },
           configuration: {
             as: 'BUTTONGROUP',
-            dataType: 'string',
             allowedInput: [
-              { name: 'S', value: 'S' },
-              { name: 'M', value: 'M' },
-              { name: 'L', value: 'L' },
-              { name: 'XL', value: 'XL' },
-              { name: 'Full', value: 'Full' },
+              { name: 'Overview', value: false },
+              { name: 'Dialog', value: true },
             ],
           },
         }),
-        rowHeight: text('Height', {
-          value: '100%',
+        titleOption: linked({
+          label: 'Page title',
+          value: {
+            ref: {
+              componentId: '#modelTitle',
+              optionId: '#titleOption',
+            },
+          },
           configuration: {
-            as: 'UNIT',
+            condition: showIf('dialogVisibility', 'EQ', false),
+          },
+        }),
+        reconfigure: linked({
+          label: 'Reconfigure',
+          value: {
+            ref: {
+              componentId: '#dataTable',
+              optionId: '#reconfigure',
+            },
+          },
+        }),
+        partial: linkedPartial({
+          label: 'Edit Partial',
+          value: {
+            ref: {
+              componentId: '#headerPartial',
+            },
+          },
+        }),
+        crudTabs: linked({
+          label: 'CRUD dialog tabs',
+          value: {
+            ref: {
+              componentId: '#DialogTabs',
+              optionId: '#selectedTabs',
+            },
+          },
+          configuration: {
+            as: 'BUTTONGROUP',
+            condition: {
+              type: 'SHOW',
+              option: 'dialogVisibility',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        }),
+        createDialogTitle: linked({
+          label: 'Create tab title',
+          value: {
+            ref: {
+              componentId: '#createDialogTitle',
+              optionId: '#createDialogTitleOption',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'crudTabs',
+              comparator: 'EQ',
+              value: 1,
+            },
+          },
+        }),
+        updateDialogTitle: linked({
+          label: 'Update tab title',
+          value: {
+            ref: {
+              componentId: '#updateDialogTitle',
+              optionId: '#updateDialogTitleOption',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'crudTabs',
+              comparator: 'EQ',
+              value: 2,
+            },
+          },
+        }),
+        detailsDialogTitle: linked({
+          label: 'Details tab title',
+          value: {
+            ref: {
+              componentId: '#detailsDialogTitle',
+              optionId: '#detailsDialogTitleOption',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'crudTabs',
+              comparator: 'EQ',
+              value: 3,
+            },
+          },
+        }),
+        deleteDialogTitle: linked({
+          label: 'Delete tab title',
+          value: {
+            ref: {
+              componentId: '#deleteDialogTitle',
+              optionId: '#deleteDialogTitleOption',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'crudTabs',
+              comparator: 'EQ',
+              value: 4,
+            },
           },
         }),
       },
     },
     [
-      Column(
+      Row(
         {
           options: {
-            ...columnOptions,
-            columnHeight: text('Height', {
+            ...rowOptions,
+            maxRowWidth: option('CUSTOM', {
+              label: 'Width',
+              value: 'Full',
+              configuration: {
+                as: 'BUTTONGROUP',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'S', value: 'S' },
+                  { name: 'M', value: 'M' },
+                  { name: 'L', value: 'L' },
+                  { name: 'XL', value: 'XL' },
+                  { name: 'Full', value: 'Full' },
+                ],
+              },
+            }),
+            rowHeight: text('Height', {
               value: '100%',
               configuration: {
                 as: 'UNIT',
               },
             }),
-            innerSpacing: sizes('Inner space', {
-              value: ['0rem', '0rem', '0rem', '0rem'],
-            }),
           },
         },
         [
-          Grid(
+          Column(
             {
               options: {
-                ...gridOptions,
-                height: size('Height', {
+                ...columnOptions,
+                columnHeight: text('Height', {
                   value: '100%',
                   configuration: {
                     as: 'UNIT',
                   },
+                }),
+                innerSpacing: sizes('Inner space', {
+                  value: ['0rem', '0rem', '0rem', '0rem'],
                 }),
               },
             },
@@ -1633,372 +1777,249 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                 {
                   options: {
                     ...gridOptions,
-                    direction: option('CUSTOM', {
-                      value: 'column',
-                      label: 'Direction',
+                    height: size('Height', {
+                      value: '100%',
                       configuration: {
-                        as: 'BUTTONGROUP',
-                        dataType: 'string',
-                        allowedInput: [
-                          { name: 'Horizontal', value: 'row' },
-                          { name: 'Vertical', value: 'column' },
-                        ],
-                        condition: showIf('type', 'EQ', 'container'),
+                        as: 'UNIT',
                       },
                     }),
                   },
                 },
                 [
-                  prefabBox(
+                  Grid(
                     {
-                      ref: { id: '#Header' },
-
                       options: {
-                        ...boxOptions,
-                        innerSpacing: sizes('Inner space', {
-                          value: ['0rem', '0rem', '0rem', '0rem'],
+                        ...gridOptions,
+                        direction: option('CUSTOM', {
+                          value: 'column',
+                          label: 'Direction',
+                          configuration: {
+                            as: 'BUTTONGROUP',
+                            dataType: 'string',
+                            allowedInput: [
+                              { name: 'Horizontal', value: 'row' },
+                              { name: 'Vertical', value: 'column' },
+                            ],
+                            condition: showIf('type', 'EQ', 'container'),
+                          },
                         }),
                       },
                     },
                     [
-                      Column(
+                      prefabBox(
                         {
+                          ref: { id: '#Header' },
                           options: {
-                            ...columnOptions,
+                            ...boxOptions,
                             innerSpacing: sizes('Inner space', {
                               value: ['0rem', '0rem', '0rem', '0rem'],
                             }),
                           },
                         },
                         [
-                          prefabBox(
+                          Column(
                             {
                               options: {
-                                ...boxOptions,
+                                ...columnOptions,
                                 innerSpacing: sizes('Inner space', {
                                   value: ['0rem', '0rem', '0rem', '0rem'],
-                                }),
-                                backgroundOptions: toggle(
-                                  'Show background options',
-                                  {
-                                    value: true,
-                                  },
-                                ),
-                                backgroundColor: color('Background color', {
-                                  value: ThemeColor.PRIMARY,
-                                  configuration: {
-                                    condition: showIf(
-                                      'backgroundOptions',
-                                      'EQ',
-                                      true,
-                                    ),
-                                  },
                                 }),
                               },
                             },
                             [
-                              Row({}, [
-                                Column(
-                                  {
-                                    options: {
-                                      ...columnOptions,
-                                      innerSpacing: sizes('Inner space', {
-                                        value: ['0rem', '0rem', '0rem', '0rem'],
-                                      }),
-                                    },
+                              prefabBox(
+                                {
+                                  ref: { id: '#headerPartial' },
+                                  options: {
+                                    ...boxOptions,
+                                    innerSpacing: sizes('Inner space', {
+                                      value: ['0rem', '0rem', '0rem', '0rem'],
+                                    }),
+                                    backgroundOptions: toggle(
+                                      'Show background options',
+                                      {
+                                        value: true,
+                                      },
+                                    ),
+                                    backgroundColor: color('Background color', {
+                                      value: ThemeColor.PRIMARY,
+                                      configuration: {
+                                        condition: showIf(
+                                          'backgroundOptions',
+                                          'EQ',
+                                          true,
+                                        ),
+                                      },
+                                    }),
                                   },
-                                  [
-                                    AppBar(
+                                },
+                                [
+                                  Row({}, [
+                                    Column(
                                       {
                                         options: {
-                                          ...appBarOptions,
-                                          logoSource: variable('Logo', {
+                                          ...columnOptions,
+                                          innerSpacing: sizes('Inner space', {
                                             value: [
-                                              'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
+                                              '0rem',
+                                              '0rem',
+                                              '0rem',
+                                              '0rem',
                                             ],
-                                          }),
-                                          title: variable('Title', {
-                                            value: [],
                                           }),
                                         },
                                       },
                                       [
-                                        OpenPageButton(
+                                        AppBar(
                                           {
-                                            style: {
-                                              overwrite: {
-                                                backgroundColor: {
-                                                  type: 'STATIC',
-                                                  value: 'transparent',
-                                                },
-                                                boxShadow: 'none',
-                                                color: {
-                                                  type: 'THEME_COLOR',
-                                                  value: 'white',
-                                                },
-                                                fontFamily: 'Roboto',
-                                                fontSize: '0.875rem',
-                                                fontStyle: 'none',
-                                                fontWeight: '400',
-                                                padding: ['0rem', '0rem'],
-                                                textDecoration: 'none',
-                                                textTransform: 'none',
-                                              },
-                                            },
                                             options: {
-                                              ...openPageButtonOptions,
-                                              buttonText: variable(
-                                                'Button text',
-                                                { value: ['Menu 1'] },
-                                              ),
-                                              outerSpacing: sizes(
-                                                'Outer space',
-                                                {
-                                                  value: [
-                                                    '0rem',
-                                                    'M',
-                                                    '0rem',
-                                                    'M',
-                                                  ],
-                                                },
-                                              ),
+                                              ...appBarOptions,
+                                              logoSource: variable('Logo', {
+                                                value: [
+                                                  'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
+                                                ],
+                                              }),
+                                              title: variable('Title', {
+                                                value: [],
+                                              }),
                                             },
                                           },
-                                          [],
-                                        ),
-                                        OpenPageButton(
-                                          {
-                                            style: {
-                                              overwrite: {
-                                                backgroundColor: {
-                                                  type: 'STATIC',
-                                                  value: 'transparent',
+                                          [
+                                            OpenPageButton(
+                                              {
+                                                style: {
+                                                  overwrite: {
+                                                    backgroundColor: {
+                                                      type: 'STATIC',
+                                                      value: 'transparent',
+                                                    },
+                                                    boxShadow: 'none',
+                                                    color: {
+                                                      type: 'THEME_COLOR',
+                                                      value: 'white',
+                                                    },
+                                                    fontFamily: 'Roboto',
+                                                    fontSize: '0.875rem',
+                                                    fontStyle: 'none',
+                                                    fontWeight: '400',
+                                                    padding: ['0rem', '0rem'],
+                                                    textDecoration: 'none',
+                                                    textTransform: 'none',
+                                                  },
                                                 },
-                                                boxShadow: 'none',
-                                                color: {
-                                                  type: 'THEME_COLOR',
-                                                  value: 'white',
+                                                options: {
+                                                  ...openPageButtonOptions,
+                                                  buttonText: variable(
+                                                    'Button text',
+                                                    { value: ['Menu 1'] },
+                                                  ),
+                                                  outerSpacing: sizes(
+                                                    'Outer space',
+                                                    {
+                                                      value: [
+                                                        '0rem',
+                                                        'M',
+                                                        '0rem',
+                                                        'M',
+                                                      ],
+                                                    },
+                                                  ),
                                                 },
-                                                fontFamily: 'Roboto',
-                                                fontSize: '0.875rem',
-                                                fontStyle: 'none',
-                                                fontWeight: '400',
-                                                padding: ['0rem', '0rem'],
-                                                textDecoration: 'none',
-                                                textTransform: 'none',
                                               },
-                                            },
-                                            options: {
-                                              ...openPageButtonOptions,
-                                              buttonText: variable(
-                                                'Button text',
-                                                { value: ['Menu 2'] },
-                                              ),
-                                              outerSpacing: sizes(
-                                                'Outer space',
-                                                {
-                                                  value: [
-                                                    '0rem',
-                                                    'M',
-                                                    '0rem',
-                                                    '0rem',
-                                                  ],
+                                              [],
+                                            ),
+                                            OpenPageButton(
+                                              {
+                                                style: {
+                                                  overwrite: {
+                                                    backgroundColor: {
+                                                      type: 'STATIC',
+                                                      value: 'transparent',
+                                                    },
+                                                    boxShadow: 'none',
+                                                    color: {
+                                                      type: 'THEME_COLOR',
+                                                      value: 'white',
+                                                    },
+                                                    fontFamily: 'Roboto',
+                                                    fontSize: '0.875rem',
+                                                    fontStyle: 'none',
+                                                    fontWeight: '400',
+                                                    padding: ['0rem', '0rem'],
+                                                    textDecoration: 'none',
+                                                    textTransform: 'none',
+                                                  },
                                                 },
-                                              ),
-                                            },
-                                          },
-                                          [],
+                                                options: {
+                                                  ...openPageButtonOptions,
+                                                  buttonText: variable(
+                                                    'Button text',
+                                                    { value: ['Menu 2'] },
+                                                  ),
+                                                  outerSpacing: sizes(
+                                                    'Outer space',
+                                                    {
+                                                      value: [
+                                                        '0rem',
+                                                        'M',
+                                                        '0rem',
+                                                        '0rem',
+                                                      ],
+                                                    },
+                                                  ),
+                                                },
+                                              },
+                                              [],
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
-                                  ],
-                                ),
-                              ]),
+                                  ]),
+                                ],
+                              ),
                             ],
                           ),
                         ],
                       ),
-                    ],
-                  ),
-                  prefabBox(
-                    {
-                      options: {
-                        ...boxOptions,
-                        stretch: toggle('Stretch (when in flex container)', {
-                          value: true,
-                        }),
-                        width: size('Width', {
-                          value: '100%',
-                          configuration: {
-                            as: 'UNIT',
-                          },
-                        }),
-                        innerSpacing: sizes('Inner space', {
-                          value: ['0rem', '0rem', '0rem', '0rem'],
-                        }),
-                        backgroundColor: color('Background color', {
-                          value: ThemeColor.LIGHT,
-                          configuration: {
-                            condition: showIf('backgroundOptions', 'EQ', true),
-                          },
-                        }),
-                        backgroundColorAlpha: option('NUMBER', {
-                          label: 'Background color opacity',
-                          value: 20,
-                          configuration: {
-                            condition: showIf('backgroundOptions', 'EQ', true),
-                          },
-                        }),
-                      },
-                    },
-                    [
-                      wrapper(
+                      prefabBox(
                         {
-                          label: 'CRUD with Dialogs wrapper',
-                          optionCategories: [
-                            {
-                              label: 'Dialog title',
-                              expanded: true,
-                              members: [
-                                'createDialogTitle',
-                                'updateDialogTitle',
-                                'detailsDialogTitle',
-                                'deleteDialogTitle',
-                              ],
-                              condition: {
-                                type: 'SHOW',
-                                option: 'dialogVisibility',
-                                comparator: 'EQ',
+                          options: {
+                            ...boxOptions,
+                            stretch: toggle(
+                              'Stretch (when in flex container)',
+                              {
                                 value: true,
                               },
-                            },
-                          ],
-                          options: {
-                            dialogVisibility: linked({
-                              label: 'Visibility',
-                              value: {
-                                ref: {
-                                  componentId: '#crudDialogVisibility',
-                                  optionId: '#crudVisibility',
-                                },
-                              },
+                            ),
+                            width: size('Width', {
+                              value: '100%',
                               configuration: {
-                                as: 'BUTTONGROUP',
-                                allowedInput: [
-                                  { name: 'Overview', value: false },
-                                  { name: 'Dialog', value: true },
-                                ],
+                                as: 'UNIT',
                               },
                             }),
-                            titleOption: linked({
-                              label: 'Page title',
-                              value: {
-                                ref: {
-                                  componentId: '#modelTitle',
-                                  optionId: '#titleOption',
-                                },
-                              },
+                            innerSpacing: sizes('Inner space', {
+                              value: ['0rem', '0rem', '0rem', '0rem'],
+                            }),
+                            backgroundColor: color('Background color', {
+                              value: ThemeColor.LIGHT,
                               configuration: {
                                 condition: showIf(
-                                  'dialogVisibility',
+                                  'backgroundOptions',
                                   'EQ',
-                                  false,
+                                  true,
                                 ),
                               },
                             }),
-                            reconfigure: linked({
-                              label: 'Reconfigure',
-                              value: {
-                                ref: {
-                                  componentId: '#dataTable',
-                                  optionId: '#reconfigure',
-                                },
-                              },
-                            }),
-                            crudTabs: linked({
-                              label: 'CRUD dialog tabs',
-                              value: {
-                                ref: {
-                                  componentId: '#DialogTabs',
-                                  optionId: '#selectedTabs',
-                                },
-                              },
+                            backgroundColorAlpha: option('NUMBER', {
+                              label: 'Background color opacity',
+                              value: 20,
                               configuration: {
-                                as: 'BUTTONGROUP',
-                                condition: {
-                                  type: 'SHOW',
-                                  option: 'dialogVisibility',
-                                  comparator: 'EQ',
-                                  value: true,
-                                },
-                              },
-                            }),
-                            createDialogTitle: linked({
-                              label: 'Create tab title',
-                              value: {
-                                ref: {
-                                  componentId: '#createDialogTitle',
-                                  optionId: '#createDialogTitleOption',
-                                },
-                              },
-                              configuration: {
-                                condition: {
-                                  type: 'SHOW',
-                                  option: 'crudTabs',
-                                  comparator: 'EQ',
-                                  value: 1,
-                                },
-                              },
-                            }),
-                            updateDialogTitle: linked({
-                              label: 'Update tab title',
-                              value: {
-                                ref: {
-                                  componentId: '#updateDialogTitle',
-                                  optionId: '#updateDialogTitleOption',
-                                },
-                              },
-                              configuration: {
-                                condition: {
-                                  type: 'SHOW',
-                                  option: 'crudTabs',
-                                  comparator: 'EQ',
-                                  value: 2,
-                                },
-                              },
-                            }),
-                            detailsDialogTitle: linked({
-                              label: 'Details tab title',
-                              value: {
-                                ref: {
-                                  componentId: '#detailsDialogTitle',
-                                  optionId: '#detailsDialogTitleOption',
-                                },
-                              },
-                              configuration: {
-                                condition: {
-                                  type: 'SHOW',
-                                  option: 'crudTabs',
-                                  comparator: 'EQ',
-                                  value: 3,
-                                },
-                              },
-                            }),
-                            deleteDialogTitle: linked({
-                              label: 'Delete tab title',
-                              value: {
-                                ref: {
-                                  componentId: '#deleteDialogTitle',
-                                  optionId: '#deleteDialogTitleOption',
-                                },
-                              },
-                              configuration: {
-                                condition: {
-                                  type: 'SHOW',
-                                  option: 'crudTabs',
-                                  comparator: 'EQ',
-                                  value: 4,
-                                },
+                                condition: showIf(
+                                  'backgroundOptions',
+                                  'EQ',
+                                  true,
+                                ),
                               },
                             }),
                           },
@@ -4517,80 +4538,88 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                           ]),
                         ],
                       ),
-                    ],
-                  ),
-                  prefabBox(
-                    {
-                      ref: { id: '#Footer' },
-                      options: {
-                        ...boxOptions,
-                        width: size('Width', {
-                          value: '100%',
-                          configuration: {
-                            as: 'UNIT',
-                          },
-                        }),
-                        innerSpacing: sizes('Inner space', {
-                          value: ['0rem', '0rem', '0rem', '0rem'],
-                        }),
-                        backgroundColor: color('Background color', {
-                          value: ThemeColor.LIGHT,
-                          configuration: {
-                            condition: showIf('backgroundOptions', 'EQ', true),
-                          },
-                        }),
-                        backgroundColorAlpha: option('NUMBER', {
-                          label: 'Background color opacity',
-                          value: 20,
-                          configuration: {
-                            condition: showIf('backgroundOptions', 'EQ', true),
-                          },
-                        }),
-                      },
-                    },
-                    [
                       prefabBox(
                         {
+                          ref: { id: '#Footer' },
                           options: {
                             ...boxOptions,
+                            width: size('Width', {
+                              value: '100%',
+                              configuration: {
+                                as: 'UNIT',
+                              },
+                            }),
                             innerSpacing: sizes('Inner space', {
-                              value: ['L', 'L', 'L', 'L'],
+                              value: ['0rem', '0rem', '0rem', '0rem'],
+                            }),
+                            backgroundColor: color('Background color', {
+                              value: ThemeColor.LIGHT,
+                              configuration: {
+                                condition: showIf(
+                                  'backgroundOptions',
+                                  'EQ',
+                                  true,
+                                ),
+                              },
+                            }),
+                            backgroundColorAlpha: option('NUMBER', {
+                              label: 'Background color opacity',
+                              value: 20,
+                              configuration: {
+                                condition: showIf(
+                                  'backgroundOptions',
+                                  'EQ',
+                                  true,
+                                ),
+                              },
                             }),
                           },
                         },
                         [
-                          TextPrefab(
+                          prefabBox(
                             {
                               options: {
-                                ...textOptions,
-                                content: variable('Content', {
-                                  value: ['Powered by Bettyblocks'],
-                                  configuration: { as: 'MULTILINE' },
-                                }),
-                                textAlignment: option('CUSTOM', {
-                                  label: 'Text Alignment',
-                                  value: 'center',
-                                  configuration: {
-                                    as: 'BUTTONGROUP',
-                                    dataType: 'string',
-                                    allowedInput: [
-                                      { name: 'Left', value: 'left' },
-                                      { name: 'Center', value: 'center' },
-                                      { name: 'Right', value: 'right' },
-                                    ],
-                                  },
-                                }),
-                                type: font('Font', { value: ['Body1'] }),
-                                styles: toggle('Styles', { value: true }),
-                                textColor: color('Text color', {
-                                  value: ThemeColor.MEDIUM,
-                                  configuration: {
-                                    condition: showIfTrue('styles'),
-                                  },
+                                ...boxOptions,
+                                innerSpacing: sizes('Inner space', {
+                                  value: ['L', 'L', 'L', 'L'],
                                 }),
                               },
                             },
-                            [],
+                            [
+                              TextPrefab(
+                                {
+                                  options: {
+                                    ...textOptions,
+                                    content: variable('Content', {
+                                      value: ['Powered by Bettyblocks'],
+                                      configuration: { as: 'MULTILINE' },
+                                    }),
+                                    textAlignment: option('CUSTOM', {
+                                      label: 'Text Alignment',
+                                      value: 'center',
+                                      configuration: {
+                                        as: 'BUTTONGROUP',
+                                        dataType: 'string',
+                                        allowedInput: [
+                                          { name: 'Left', value: 'left' },
+                                          { name: 'Center', value: 'center' },
+                                          { name: 'Right', value: 'right' },
+                                        ],
+                                      },
+                                    }),
+                                    type: font('Font', { value: ['Body1'] }),
+                                    styles: toggle('Styles', { value: true }),
+                                    textColor: color('Text color', {
+                                      value: ThemeColor.MEDIUM,
+                                      configuration: {
+                                        condition: showIfTrue('styles'),
+                                      },
+                                    }),
+                                  },
+                                },
+                                [],
+                              ),
+                            ],
                           ),
                         ],
                       ),
