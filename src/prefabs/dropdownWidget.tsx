@@ -436,6 +436,9 @@ export default makePrefab('Dropdown Widget', attributes, beforeCreate, [
                 innerSpacing: sizes('Inner space', {
                   value: ['L', 'L', 'L', 'L'],
                 }),
+                outerSpacing: sizes('Inner space', {
+                  value: ['0rem', '0rem', 'M', '0rem'],
+                }),
               },
             },
             [
