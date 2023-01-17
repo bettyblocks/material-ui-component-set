@@ -6,8 +6,15 @@ import {
   showIf,
   size,
   toggle,
+  reconfigure,
+  addChild,
+  variable,
+  icon,
+  hideIf,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
+import { Tab } from '../../Tab';
+import { tabOptions } from '../../Tab/options';
 
 export const categories = [
   {
@@ -22,7 +29,47 @@ export const categories = [
   },
 ];
 
+const children = [
+  Tab({
+    options: {
+      ...tabOptions,
+      label: variable('Tab label', {
+        value: ['TAB'],
+        showInAddChild: true,
+        showInReconfigure: true,
+      }),
+      icon: icon('Icon', {
+        value: 'None',
+        showInAddChild: true,
+        showInReconfigure: true,
+      }),
+      iconAlignment: option('CUSTOM', {
+        label: 'Icon Alignment',
+        value: 'top',
+        configuration: {
+          as: 'BUTTONGROUP',
+          dataType: 'string',
+          allowedInput: [
+            { name: 'Left', value: 'left' },
+            { name: 'Top', value: 'top' },
+            { name: 'Right', value: 'right' },
+            { name: 'Bottom', value: 'bottom' },
+          ],
+          condition: hideIf('icon', 'EQ', 'None'),
+        },
+        showInAddChild: true,
+      }),
+    },
+  }),
+];
+
 export const tabsOptions = {
+  reconfigure: reconfigure('Reconfigure', {
+    value: { children, reconfigureWizardType: 'ChildrenSelector' },
+  }),
+  addChild: addChild('Add Tab', {
+    value: { children, addChildWizardType: 'ChildSelector' },
+  }),
   defaultValue: childSelector('Selected tab (runtime)', { value: 1 }),
   selectedDesignTabIndex: childSelector('Selected tab (design)', {
     value: 1,
