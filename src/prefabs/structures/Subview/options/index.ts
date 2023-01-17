@@ -41,12 +41,10 @@ const children = [
       linkTo: endpoint('Page', {
         value: '',
         showInAddChild: true,
-        showInReconfigure: true,
       }),
       icon: icon('Icon', {
         value: '',
         showInAddChild: true,
-        showInReconfigure: true,
       }),
     },
   }),

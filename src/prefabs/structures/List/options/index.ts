@@ -32,7 +32,6 @@ const children = [
       secondaryText: variable('Secondary text', {
         value: [''],
         showInAddChild: true,
-        showInReconfigure: true,
       }),
     },
   }),
