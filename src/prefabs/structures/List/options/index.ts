@@ -42,7 +42,7 @@ export const listOptions = {
   reconfigure: reconfigure('Reconfigure', {
     value: { children, reconfigureWizardType: 'ChildrenSelector' },
   }),
-  addChild: addChild('Add Column', {
+  addChild: addChild('Add List Item', {
     value: { children, addChildWizardType: 'ChildSelector' },
   }),
   backgroundColor: color('Background color', { value: ThemeColor.TRANSPARENT }),
