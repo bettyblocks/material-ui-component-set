@@ -75,17 +75,21 @@ const children = [
   DataTableColumn({
     options: {
       ...dataTableColumnOptions,
-      property: property('Property', { value: '', showInAddChild: true }),
+      property: property('Property', {
+        value: '',
+        showInAddChild: true,
+        showInReconfigure: true,
+      }),
     },
   }),
 ];
 
 export const dataTableOptions = {
   reconfigure: reconfigure('Reconfigure', {
-    value: { children, reconfigureWizardType: 'PropertiesSelector' },
+    value: { children, reconfigureWizardType: 'ChildrenSelector' },
   }),
   addChild: addChild('Add Column', {
-    value: { children, addChildWizardType: 'PropertySelector' },
+    value: { children, addChildWizardType: 'ChildSelector' },
   }),
   model: modelAndRelation('Model', { value: '' }),
   filter: filter('Filter', {

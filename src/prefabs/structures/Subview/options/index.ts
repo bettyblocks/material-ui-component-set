@@ -1,12 +1,20 @@
 import {
-  color,
   ThemeColor,
-  toggle,
-  sizes,
-  size,
+  addChild,
   buttongroup,
+  color,
+  endpoint,
+  icon,
+  property,
+  reconfigure,
+  size,
+  sizes,
+  toggle,
+  variable,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
+import { SubviewItem } from '../../SubviewItem';
+import { subviewItemOptions } from '../../SubviewItem/options';
 
 export const categories = [
   {
@@ -16,7 +24,41 @@ export const categories = [
   },
 ];
 
+const children = [
+  SubviewItem({
+    options: {
+      ...subviewItemOptions,
+      prop: property('Property', {
+        value: '',
+        showInAddChild: true,
+        showInReconfigure: true,
+      }),
+      content: variable('Label', {
+        value: [''],
+        showInAddChild: true,
+        showInReconfigure: true,
+      }),
+      linkTo: endpoint('Page', {
+        value: '',
+        showInAddChild: true,
+        showInReconfigure: true,
+      }),
+      icon: icon('Icon', {
+        value: '',
+        showInAddChild: true,
+        showInReconfigure: true,
+      }),
+    },
+  }),
+];
+
 export const subviewOptions = {
+  reconfigure: reconfigure('Reconfigure', {
+    value: { children, reconfigureWizardType: 'ChildrenSelector' },
+  }),
+  addChild: addChild('Add Subview Item', {
+    value: { children, addChildWizardType: 'ChildSelector' },
+  }),
   backgroundColor: color('Background color', { value: ThemeColor.TRANSPARENT }),
   outerSpacing: sizes('Outer space', {
     value: ['0rem', '0rem', '0rem', '0rem'],

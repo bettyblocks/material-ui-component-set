@@ -4,8 +4,14 @@ import {
   text,
   showIf,
   icon,
+  addChild,
+  reconfigure,
+  variable,
+  endpoint,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
+import { BreadcrumbItem } from '../../BreadcrumbItem';
+import { breadcrumbItemOptions } from '../../BreadcrumbItem/options';
 
 export const categories = [
   {
@@ -15,7 +21,35 @@ export const categories = [
   },
 ];
 
+const children = [
+  BreadcrumbItem({
+    options: {
+      ...breadcrumbItemOptions,
+      breadcrumbContent: variable('Content', {
+        value: ['Breadcrumb Item'],
+        showInAddChild: true,
+        showInReconfigure: true,
+      }),
+      icon: icon('Icon', {
+        value: 'None',
+        showInAddChild: true,
+        showInReconfigure: true,
+      }),
+      endpoint: endpoint('Page', {
+        value: '',
+        showInAddChild: true,
+      }),
+    },
+  }),
+];
+
 export const breadcrumbsOptions = {
+  reconfigure: reconfigure('Reconfigure', {
+    value: { children, reconfigureWizardType: 'ChildrenSelector' },
+  }),
+  addChild: addChild('Add Breadcrumb Item', {
+    value: { children, addChildWizardType: 'ChildSelector' },
+  }),
   maxItems: option('CUSTOM', {
     label: 'Max Items',
     value: '0',
