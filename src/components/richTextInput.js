@@ -32,8 +32,16 @@
   ],
   jsx: (() => {
     const {
-      Slate: { createEditor, Editor, Text, Element, Transforms, Node },
-      SlateReact: { Editable, withReact, Slate, useSlate },
+      Slate: { createEditor, Editor, Text, Element, Transforms, Node, Path },
+      SlateReact: {
+        Editable,
+        withReact,
+        Slate,
+        useSlate,
+        useSelected,
+        useFocused,
+        useSlateStatic,
+      },
       SlateHistory: { withHistory },
       SlateHyperscript: { jsx },
       // MuiExtraIcons: {
@@ -120,6 +128,8 @@
       StrikethroughS:
         'M6.85 7.08C6.85 4.37 9.45 3 12.24 3c1.64 0 3 .49 3.9 1.28.77.65 1.46 1.73 1.46 3.24h-3.01c0-.31-.05-.59-.15-.85-.29-.86-1.2-1.28-2.25-1.28-1.86 0-2.34 1.02-2.34 1.7 0 .48.25.88.74 1.21.38.25.77.48 1.41.7H7.39c-.21-.34-.54-.89-.54-1.92zM21 12v-2H3v2h9.62c1.15.45 1.96.75 1.96 1.97 0 1-.81 1.67-2.28 1.67-1.54 0-2.93-.54-2.93-2.51H6.4c0 .55.08 1.13.24 1.58.81 2.29 3.29 3.3 5.67 3.3 2.27 0 5.3-.89 5.3-4.05 0-.3-.01-1.16-.48-1.94H21V12z',
       FirstPage: 'M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z',
+      LinkOff:
+        'M 17 7 h -4 v 1.9 h 4 c 1.71 0 3.1 1.39 3.1 3.1 c 0 1.43 -0.98 2.63 -2.31 2.98 l 1.46 1.46 C 20.88 15.61 22 13.95 22 12 c 0 -2.76 -2.24 -5 -5 -5 Z m -1 4 h -2.19 l 2 2 H 16 Z M 2 4.27 l 3.11 3.11 C 3.29 8.12 2 9.91 2 12 c 0 2.76 2.24 5 5 5 h 4 v -1.9 H 7 c -1.71 0 -3.1 -1.39 -3.1 -3.1 c 0 -1.59 1.21 -2.9 2.76 -3.07 L 8.73 11 H 8 v 2 h 2.73 L 13 15.27 V 17 h 1.73 l 4.01 4 L 20 19.74 L 3.27 3 L 2 4.27 Z',
     };
 
     const isMarkActive = (editor, format) => {
@@ -651,6 +661,37 @@
       );
     }
 
+    const removeLink = (staticEditor, opts = {}) => {
+      Transforms.unwrapNodes(staticEditor, {
+        ...opts,
+        match: (n) =>
+          !Editor.isEditor(n) && Element.isElement(n) && n.type === 'link',
+      });
+    };
+
+    function Link({ attributes, children, element: { align, href } }) {
+      const staticEditor = useSlateStatic();
+      const selected = useSelected();
+      const focused = useFocused();
+
+      return (
+        <span className={`${classes.elementLink}`} style={{ textAlign: align }}>
+          <a {...attributes} href={href}>
+            {children}
+          </a>
+          {selected && focused && (
+            <div className="popup" contentEditable={false}>
+              <a href={href} rel="noreferrer" target="_blank">
+                <Button icon="Link">{href}</Button>
+                {href}
+              </a>
+              <Button icon="LinkOff" onClick={() => removeLink(staticEditor)} />
+            </div>
+          )}
+        </span>
+      );
+    }
+
     const renderElement = useCallback((props) => {
       switch (props.element.type) {
         case 'code':
@@ -673,6 +714,8 @@
           return HeadingElement(props, 'h5');
         case 'heading-six':
           return HeadingElement(props, 'h6');
+        case 'link':
+          return Link(props);
         case 'paragraph':
         default:
           return DefaultElement(props);
@@ -727,7 +770,7 @@
       );
     }
 
-    function MarkButton({ format, icon, disable }) {
+    function MarkButton({ format, icon, disable, click, toggle = true }) {
       const ownEditor = useSlate();
       return (
         <Button
@@ -736,8 +779,9 @@
           onMouseDown={(event) => {
             event.preventDefault();
             if (disable) return;
-            toggleMark(ownEditor, format);
+            if (toggle) toggleMark(ownEditor, format);
           }}
+          onClick={click || ''}
           icon={icon}
         />
       );
@@ -890,6 +934,69 @@
       );
     }
 
+    const createLinkNode = (href, text) => ({
+      type: 'link',
+      href,
+      children: [{ text }],
+    });
+
+    const createParagraphNode = (children = [{ text: '' }]) => ({
+      type: 'paragraph',
+      children,
+    });
+
+    const insertLink = (url, text) => {
+      if (!url) return;
+      const { selection } = editor;
+      // eslint-disable-next-line no-shadow
+      const link = createLinkNode(url, text);
+
+      if (!selection) {
+        const [parentNode, parentPath] = Editor.parent(
+          editor,
+          selection.focus.path,
+        );
+
+        // Remove the Link node if we're inserting a new link node inside of another
+        // link.
+        if (parentNode.type === 'link') {
+          removeLink(editor);
+        }
+
+        if (editor.isVoid(parentNode)) {
+          // Insert the new link after the void node
+          Transforms.insertNodes(editor, createParagraphNode([link]), {
+            at: Path.next(parentPath),
+            select: true,
+          });
+        } else if (document.getSelection().isCollapsed) {
+          // Insert the new link in our last known location
+          Transforms.insertNodes(editor, link, { select: true });
+        } else {
+          // Wrap the currently selected range of text into a Link
+          Transforms.wrapNodes(editor, link, { split: true });
+          Transforms.collapse(editor, { edge: 'end' });
+        }
+      } else {
+        // Insert the new link node at the bottom of the Editor when selection
+        // is falsey
+        Transforms.insertNodes(editor, createParagraphNode([link]));
+      }
+    };
+
+    function handleInsertLink() {
+      // eslint-disable-next-line no-alert
+      const url = prompt('Enter a URL');
+      // eslint-disable-next-line no-alert
+      const text = prompt(
+        'Enter the text for the url',
+        !window.getSelection().isCollapsed
+          ? window.getSelection().toString()
+          : url,
+      );
+      insertLink(url, text);
+    }
+
     return (
       <div className={classes.root}>
         {labelText && !hideLabel && (
@@ -917,6 +1024,13 @@
                   {showStrikethrough && (
                     <MarkButton format="strikethrough" icon="StrikethroughS" />
                   )}
+                  <MarkButton
+                    format="link"
+                    icon="Link"
+                    // eslint-disable-next-line react/jsx-no-bind
+                    click={handleInsertLink}
+                    toggle={false}
+                  />
                 </div>
                 {(showCodeInline || showCodeBlock) && (
                   <div className={classes.toolbarSubGroup}>
@@ -1179,6 +1293,37 @@
         color: ({ options: { placeholderColor } }) => [
           style.getColor(placeholderColor),
         ],
+      },
+      elementLink: {
+        display: 'inline',
+        position: 'relative',
+        '& .popup': {
+          position: 'absolute',
+          left: 0,
+          display: 'flex',
+          alignItems: 'center',
+          backgroundColor: 'white',
+          padding: '6px 10px',
+          gap: '10px',
+          borderRadius: '6px',
+          border: '1px solid lightgray',
+          zIndex: 10,
+          '& a': {
+            display: 'flex',
+            alignItems: 'center',
+            gap: '5px',
+            paddingRight: '10px',
+            borderRight: '1px solid lightgrey',
+          },
+          '& button': {
+            border: 'none',
+            background: 'transparent',
+            '&:hover': {
+              color: 'rebeccapurple',
+              cursor: 'pointer',
+            },
+          },
+        },
       },
     };
   },
