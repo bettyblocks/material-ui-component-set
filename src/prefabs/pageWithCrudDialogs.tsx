@@ -23,7 +23,6 @@ import {
   number,
   PrefabInteraction,
   linked,
-  linkedPartial,
   wrapper,
   childSelector,
   reconfigure,
@@ -1500,6 +1499,18 @@ const beforeCreate = ({
             partialId: headerPartialId,
           },
         ];
+        if (newPrefab.structure[0].type === 'WRAPPER') {
+          newPrefab.structure[0].options.unshift({
+            key: 'partial',
+            label: 'Edit Partial',
+            type: 'LINKED_PARTIAL',
+            value: {
+              ref: {
+                componentId: '#headerPartial',
+              },
+            },
+          });
+        }
       }
 
       if (footerPartialId) {
@@ -1624,20 +1635,15 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
           },
         }),
         reconfigure: linked({
-          label: 'Reconfigure',
+          label: 'Reconfigure data table',
           value: {
             ref: {
               componentId: '#dataTable',
               optionId: '#reconfigure',
             },
           },
-        }),
-        partial: linkedPartial({
-          label: 'Edit Partial',
-          value: {
-            ref: {
-              componentId: '#headerPartial',
-            },
+          configuration: {
+            condition: showIf('dialogVisibility', 'EQ', false),
           },
         }),
         crudTabs: linked({

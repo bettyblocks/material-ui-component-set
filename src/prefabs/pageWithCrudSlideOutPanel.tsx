@@ -26,7 +26,6 @@ import {
   showIfTrue,
   wrapper,
   linked,
-  linkedPartial,
   childSelector,
   number,
   reconfigure,
@@ -2879,19 +2878,19 @@ const prefabStructure = [
           },
         }),
         reconfigure: linked({
-          label: 'Reconfigure',
+          label: 'Reconfigure data table',
           value: {
             ref: {
               componentId: '#dataTable',
               optionId: '#reconfigure',
             },
           },
-        }),
-        partial: linkedPartial({
-          label: 'Edit Partial',
-          value: {
-            ref: {
-              componentId: '#headerPartial',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'toggleOverview',
+              comparator: 'EQ',
+              value: false,
             },
           },
         }),
@@ -3380,6 +3379,18 @@ const beforeCreate = ({
             partialId: headerPartialId,
           },
         ];
+        if (newPrefab.structure[0].type === 'WRAPPER') {
+          newPrefab.structure[0].options.unshift({
+            key: 'partial',
+            label: 'Edit Partial',
+            type: 'LINKED_PARTIAL',
+            value: {
+              ref: {
+                componentId: '#headerPartial',
+              },
+            },
+          });
+        }
       }
 
       if (footerPartialId && prefabFooter) {
