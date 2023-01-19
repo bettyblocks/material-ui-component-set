@@ -272,7 +272,7 @@ const beforeCreate = ({
 const interactions: PrefabInteraction[] = [];
 
 const attributes = {
-  category: 'Widgets',
+  category: 'WIDGETS',
   icon: Icon.SelectIcon,
   interactions,
   variables: [],
