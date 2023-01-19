@@ -1,3 +1,31 @@
+## [2.90.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.90.2...v2.90.3) (2023-01-13)
+
+
+### Bug Fixes
+
+* display normal value again richt text value in text ([d20d5a9](https://github.com/bettyblocks/material-ui-component-set/commit/d20d5a92d72e920f83277214357a3ae47281b6e0))
+
+## [2.90.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.90.1...v2.90.2) (2023-01-13)
+
+
+### Bug Fixes
+
+* reverted back to original check ([6a8376c](https://github.com/bettyblocks/material-ui-component-set/commit/6a8376c9b43179551013e187a95e6040abe29e96))
+
+## [2.90.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.90.0...v2.90.1) (2023-01-13)
+
+
+### Bug Fixes
+
+* long text overflows in select form ([1875548](https://github.com/bettyblocks/material-ui-component-set/commit/18755488527430b7fbc553f7dbf2d6046706f89d))
+
+# [2.90.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.89.1...v2.90.0) (2023-01-12)
+
+
+### Features
+
+* use reconfigure in options ([42cd72f](https://github.com/bettyblocks/material-ui-component-set/commit/42cd72fccd916154593fa42d6efbffc75dfb6352))
+
 ## [2.89.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.89.0...v2.89.1) (2023-01-11)
 
 
@@ -20,7 +48,14 @@
 
 * generate backoffice properties for CRU TMPLT-1900 ([bf709c0](https://github.com/bettyblocks/material-ui-component-set/commit/bf709c0d7b1eea5143d735ecb742eecb82a8da95))
 
-## [2.88.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.88.2...v2.88.3) (2023-01-11)
+## [2.88.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.88.3...v2.88.4) (2023-01-11)
+
+
+### Bug Fixes
+
+* updated create form default modelId value ([12fd63e](https://github.com/bettyblocks/material-ui-component-set/commit/12fd63eb293110c58104355f5cab72a347dde230))
+
+## [2.88.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.88.2...v2.88.3) (2023-01-11)--
 
 
 ### Bug Fixes
