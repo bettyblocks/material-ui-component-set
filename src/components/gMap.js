@@ -13,7 +13,6 @@
   jsx: (() => {
     const { useText } = B;
     const { GoogleMap } = dependencies;
-    console.log('dependencies?', dependencies);
     const { lat, long, markerText, zoom } = options;
 
     const { default: GoogleMapReact } = GoogleMap;
