@@ -868,7 +868,7 @@ const drawerContainer = DrawerContainer(
                                                         },
                                                       ),
                                                       type: font('Font', {
-                                                        value: ['Title4'],
+                                                        value: ['Title1'],
                                                       }),
                                                       textColor: color(
                                                         'Text color',
@@ -1005,7 +1005,7 @@ const drawerContainer = DrawerContainer(
                                                                   'Font',
                                                                   {
                                                                     value: [
-                                                                      'Title4',
+                                                                      'Title1',
                                                                     ],
                                                                   },
                                                                 ),
