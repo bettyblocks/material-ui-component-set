@@ -65,6 +65,7 @@
           isPristine ? classes.pristine : '',
           !isPristine ? classes.background : '',
           !isPristine ? classes.border : '',
+          !isEmpty && options.placeOnTop === true ? classes.placeOnTop : '',
         ].join(' ')}
         {...boxOptions}
         onClick={handleClick}
@@ -256,6 +257,9 @@
         borderColor: '#AFB5C8',
         borderStyle: 'dashed',
         backgroundColor: '#F0F1F5',
+      },
+      placeOnTop: {
+        zIndex: 999,
       },
     };
   },

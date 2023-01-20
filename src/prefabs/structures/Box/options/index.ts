@@ -25,7 +25,7 @@ export const categories = [
   {
     label: 'Positioning',
     expanded: false,
-    members: ['position', 'top', 'right', 'bottom', 'left'],
+    members: ['position', 'top', 'right', 'bottom', 'left', 'placeOnTop'],
   },
   {
     label: 'Background',
@@ -146,6 +146,9 @@ export const boxOptions = {
     configuration: {
       as: 'UNIT',
     },
+  }),
+  placeOnTop: toggle('Place on top', {
+    value: false,
   }),
 
   backgroundColor: color('Background color', {
