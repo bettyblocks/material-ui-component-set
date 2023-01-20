@@ -9,6 +9,7 @@ import {
   ThemeColor,
   color,
   size,
+  number,
   variable,
   option,
   toggle,
@@ -143,7 +144,7 @@ const beforeCreate = ({
           const newPrefab = { ...prefab };
 
           const text = treeSearch('#questionText', newPrefab.structure);
-          const textInput = treeSearch('#TextInput', newPrefab.structure);
+          const textInput = treeSearch('#textInput', newPrefab.structure);
           const multilineWidgetForm = treeSearch(
             '#MultilineWidgetForm',
             newPrefab.structure,
@@ -246,7 +247,7 @@ const beforeCreate = ({
             parameters: [],
             ref: {
               targetComponentId: '#MultilineWidgetForm',
-              sourceComponentId: '#TextInput',
+              sourceComponentId: '#textInput',
             },
             type: 'Custom' as InteractionType,
           };
@@ -293,7 +294,7 @@ export default makePrefab('Multiline Widget', attributes, beforeCreate, [
           label: 'Placeholder',
           value: {
             ref: {
-              componentId: '#TextInput',
+              componentId: '#textInput',
               optionId: '#textInputPlaceholder',
             },
           },
@@ -302,8 +303,17 @@ export default makePrefab('Multiline Widget', attributes, beforeCreate, [
           label: 'Required to answer',
           value: {
             ref: {
-              componentId: '#TextInput',
+              componentId: '#textInput',
               optionId: '#textInputRequired',
+            },
+          },
+        }),
+        rows: linked({
+          label: 'Number of rows',
+          value: {
+            ref: {
+              componentId: '#textInput',
+              optionId: '#textInputRows',
             },
           },
         }),
@@ -488,8 +498,8 @@ export default makePrefab('Multiline Widget', attributes, beforeCreate, [
                   ),
                   TextArea(
                     {
-                      label: 'Text field',
-                      ref: { id: '#TextInput' },
+                      label: 'Text area',
+                      ref: { id: '#textInput' },
                       options: {
                         ...textAreaOptions,
                         hideLabel: toggle('Hide label', { value: true }),
@@ -499,6 +509,10 @@ export default makePrefab('Multiline Widget', attributes, beforeCreate, [
                         }),
                         required: toggle('Required', {
                           ref: { id: '#textInputRequired' },
+                        }),
+                        rows: number('Rows', {
+                          ref: { id: '#textInputRows' },
+                          value: 4,
                         }),
                         margin: buttongroup(
                           'Margin',
