@@ -1,3 +1,23 @@
+# [2.91.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.90.4...v2.91.0) (2023-01-23)
+
+
+### Bug Fixes
+
+* use edit partial optional ([96a944e](https://github.com/bettyblocks/material-ui-component-set/commit/96a944e6e9859c8237e029beefbfccf34512225d))
+
+
+### Features
+
+* add edit partial to the wrapper ([053174e](https://github.com/bettyblocks/material-ui-component-set/commit/053174e650ccd7e8fdbee39ab0d09bbb928e0e47))
+* add reconfigure to wrapper ([d899a83](https://github.com/bettyblocks/material-ui-component-set/commit/d899a83de614f3c3ecb7624964a059f559379110))
+
+## [2.90.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.90.3...v2.90.4) (2023-01-20)
+
+
+### Bug Fixes
+
+* updated slatejs to newer version ([ef116c6](https://github.com/bettyblocks/material-ui-component-set/commit/ef116c695524ae15ea6b99e49d12d5670ba740e5))
+
 ## [2.90.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.90.2...v2.90.3) (2023-01-13)
 
 

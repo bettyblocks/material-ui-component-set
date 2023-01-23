@@ -6,7 +6,7 @@
   dependencies: [
     {
       label: 'Slate',
-      package: 'npm:slate@0.86.0',
+      package: 'npm:slate@0.88.1',
       imports: ['*'],
     },
     {
