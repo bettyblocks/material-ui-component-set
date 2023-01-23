@@ -1,14 +1,19 @@
 import {
+  ThemeColor,
+  addChild,
+  color,
   hideIf,
+  icon,
   option,
+  reconfigure,
+  sizes,
   toggle,
   variable,
-  icon,
-  color,
-  ThemeColor,
-  sizes,
 } from '@betty-blocks/component-sdk';
+
 import { advanced } from '../../advanced';
+import { MenuItem } from '../../MenuItem';
+import { menuItemOptions } from '../../MenuItem/options';
 
 export const categories = [
   {
@@ -40,7 +45,31 @@ export const categories = [
   },
 ];
 
+const children = [
+  MenuItem({
+    options: {
+      ...menuItemOptions,
+      primaryText: variable('Primary text', {
+        value: [],
+        showInAddChild: true,
+        showInReconfigure: true,
+      }),
+      icon: icon('Icon', {
+        value: 'none',
+        showInAddChild: true,
+        showInReconfigure: true,
+      }),
+    },
+  }),
+];
+
 export const menuOptions = {
+  reconfigure: reconfigure('Reconfigure', {
+    value: { children, reconfigureWizardType: 'ChildrenSelector' },
+  }),
+  addChild: addChild('Add Menu Item', {
+    value: { children, addChildWizardType: 'ChildSelector' },
+  }),
   isMenuListVisible: toggle('Toggle menu', {
     value: true,
     configuration: { as: 'VISIBILITY' },

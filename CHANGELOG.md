@@ -1,3 +1,44 @@
+# [2.93.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.92.0...v2.93.0) (2023-01-23)
+
+
+### Features
+
+* add filter component to backoffice ([7b4d2d8](https://github.com/bettyblocks/material-ui-component-set/commit/7b4d2d8fff03b9e12da6605aabb2ee769c0654cb))
+* added filter to backoffice v2 and fixed bug in filter component ([75d204a](https://github.com/bettyblocks/material-ui-component-set/commit/75d204a8f344855445f0bf477af7fd0c7dc81cf8))
+
+# [2.92.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.91.0...v2.92.0) (2023-01-23)
+
+
+### Features
+
+* add ‘addChild’ and ‘reconfigure’ to breadcrumbs ([c39cfdd](https://github.com/bettyblocks/material-ui-component-set/commit/c39cfdda523e715b6825f31c50abf2aaf7134cd5))
+* add ‘addChild’ and ‘reconfigure’ to stepper ([90cff69](https://github.com/bettyblocks/material-ui-component-set/commit/90cff69bce85e1bfa5df24906b32ca8de2d8fdc4))
+* add ‘addChild’ and ‘reconfigure’ to tabs ([031f949](https://github.com/bettyblocks/material-ui-component-set/commit/031f949f488a06212e4f4d6a099f3e9d55cd6ecc))
+* add children to data table prefab ([879a329](https://github.com/bettyblocks/material-ui-component-set/commit/879a329b9afe6af4843ea6f4178c5d962e1f985d))
+* add children to list prefab ([0e9e84b](https://github.com/bettyblocks/material-ui-component-set/commit/0e9e84b7bd12af4ecf01a21e96fa15f8ec0f25b9))
+* add children to menu prefab ([f8a13a9](https://github.com/bettyblocks/material-ui-component-set/commit/f8a13a9d80adfbba2d8d08788e96a1a59e508247))
+* add children to subview prefab ([1fff00c](https://github.com/bettyblocks/material-ui-component-set/commit/1fff00cb28151299224c26193f2af3134191c63c))
+
+# [2.91.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.90.4...v2.91.0) (2023-01-23)
+
+
+### Bug Fixes
+
+* use edit partial optional ([96a944e](https://github.com/bettyblocks/material-ui-component-set/commit/96a944e6e9859c8237e029beefbfccf34512225d))
+
+
+### Features
+
+* add edit partial to the wrapper ([053174e](https://github.com/bettyblocks/material-ui-component-set/commit/053174e650ccd7e8fdbee39ab0d09bbb928e0e47))
+* add reconfigure to wrapper ([d899a83](https://github.com/bettyblocks/material-ui-component-set/commit/d899a83de614f3c3ecb7624964a059f559379110))
+
+## [2.90.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.90.3...v2.90.4) (2023-01-20)
+
+
+### Bug Fixes
+
+* updated slatejs to newer version ([ef116c6](https://github.com/bettyblocks/material-ui-component-set/commit/ef116c695524ae15ea6b99e49d12d5670ba740e5))
+
 ## [2.90.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.90.2...v2.90.3) (2023-01-13)
 
 
