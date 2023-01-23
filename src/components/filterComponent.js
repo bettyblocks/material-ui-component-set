@@ -49,7 +49,6 @@
       'string',
       'string_expression',
       'email_address',
-      'serial',
       'zipcode',
       'url',
       'text',
@@ -61,6 +60,7 @@
       'list',
     ];
     const numberKinds = [
+      'serial',
       'count',
       'decimal',
       'decimal_expression',
@@ -130,22 +130,22 @@
       {
         operator: 'gt',
         label: 'Greater than',
-        kinds: [...numberKinds, 'serial'],
+        kinds: [...numberKinds],
       },
       {
         operator: 'lt',
         label: 'Lower than',
-        kinds: [...numberKinds, 'serial'],
+        kinds: [...numberKinds],
       },
       {
         operator: 'gteq',
         label: 'Greater than or equals',
-        kinds: [...numberKinds, 'serial'],
+        kinds: [...numberKinds],
       },
       {
         operator: 'lteq',
         label: 'Lower than or equals',
-        kinds: [...numberKinds, 'serial'],
+        kinds: [...numberKinds],
       },
       {
         operator: 'gt',
