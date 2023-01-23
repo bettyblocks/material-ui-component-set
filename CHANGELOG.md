@@ -1,3 +1,10 @@
+# [2.94.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.93.0...v2.94.0) (2023-01-23)
+
+
+### Features
+
+* rich text list numbers and bullets move with text ([e1a02cb](https://github.com/bettyblocks/material-ui-component-set/commit/e1a02cb2cf84133a1ca9d9398c7698575cd87fc0))
+
 # [2.93.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.92.0...v2.93.0) (2023-01-23)
 
 
