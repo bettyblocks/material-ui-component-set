@@ -1,3 +1,11 @@
+# [2.93.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.92.0...v2.93.0) (2023-01-23)
+
+
+### Features
+
+* add filter component to backoffice ([7b4d2d8](https://github.com/bettyblocks/material-ui-component-set/commit/7b4d2d8fff03b9e12da6605aabb2ee769c0654cb))
+* added filter to backoffice v2 and fixed bug in filter component ([75d204a](https://github.com/bettyblocks/material-ui-component-set/commit/75d204a8f344855445f0bf477af7fd0c7dc81cf8))
+
 # [2.92.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.91.0...v2.92.0) (2023-01-23)
 
 
