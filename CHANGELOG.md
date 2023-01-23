@@ -1,3 +1,16 @@
+# [2.92.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.91.0...v2.92.0) (2023-01-23)
+
+
+### Features
+
+* add ‘addChild’ and ‘reconfigure’ to breadcrumbs ([c39cfdd](https://github.com/bettyblocks/material-ui-component-set/commit/c39cfdda523e715b6825f31c50abf2aaf7134cd5))
+* add ‘addChild’ and ‘reconfigure’ to stepper ([90cff69](https://github.com/bettyblocks/material-ui-component-set/commit/90cff69bce85e1bfa5df24906b32ca8de2d8fdc4))
+* add ‘addChild’ and ‘reconfigure’ to tabs ([031f949](https://github.com/bettyblocks/material-ui-component-set/commit/031f949f488a06212e4f4d6a099f3e9d55cd6ecc))
+* add children to data table prefab ([879a329](https://github.com/bettyblocks/material-ui-component-set/commit/879a329b9afe6af4843ea6f4178c5d962e1f985d))
+* add children to list prefab ([0e9e84b](https://github.com/bettyblocks/material-ui-component-set/commit/0e9e84b7bd12af4ecf01a21e96fa15f8ec0f25b9))
+* add children to menu prefab ([f8a13a9](https://github.com/bettyblocks/material-ui-component-set/commit/f8a13a9d80adfbba2d8d08788e96a1a59e508247))
+* add children to subview prefab ([1fff00c](https://github.com/bettyblocks/material-ui-component-set/commit/1fff00cb28151299224c26193f2af3134191c63c))
+
 # [2.91.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.90.4...v2.91.0) (2023-01-23)
 
 
