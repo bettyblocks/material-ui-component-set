@@ -633,7 +633,11 @@
 
     function ListItemElement({ attributes, children, element: { align } }) {
       return (
-        <li style={{ textAlign: align }} {...attributes}>
+        <li
+          style={{ textAlign: align }}
+          className={`${classes.list}`}
+          {...attributes}
+        >
           {children}
         </li>
       );
@@ -1179,6 +1183,9 @@
         color: ({ options: { placeholderColor } }) => [
           style.getColor(placeholderColor),
         ],
+      },
+      list: {
+        listStylePosition: 'inside',
       },
     };
   },
