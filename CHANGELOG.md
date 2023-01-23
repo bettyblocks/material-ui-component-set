@@ -1,3 +1,10 @@
+## [2.90.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.90.3...v2.90.4) (2023-01-20)
+
+
+### Bug Fixes
+
+* updated slatejs to newer version ([ef116c6](https://github.com/bettyblocks/material-ui-component-set/commit/ef116c695524ae15ea6b99e49d12d5670ba740e5))
+
 ## [2.90.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.90.2...v2.90.3) (2023-01-13)
 
 
