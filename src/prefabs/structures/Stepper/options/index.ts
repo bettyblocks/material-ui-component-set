@@ -7,8 +7,13 @@ import {
   showIf,
   toggle,
   variable,
+  addChild,
+  reconfigure,
+  icon,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
+import { Step } from '../../Step';
+import { stepOptions } from '../../Step/options';
 
 export const categories = [
   {
@@ -30,7 +35,31 @@ export const categories = [
   },
 ];
 
+const children = [
+  Step({
+    options: {
+      ...stepOptions,
+      label: variable('Label', {
+        value: ['Step'],
+        showInAddChild: true,
+        showInReconfigure: true,
+      }),
+      icon: icon('Icon', {
+        value: 'None',
+        showInAddChild: true,
+        showInReconfigure: true,
+      }),
+    },
+  }),
+];
+
 export const stepperOptions = {
+  reconfigure: reconfigure('Reconfigure', {
+    value: { children, reconfigureWizardType: 'ChildrenSelector' },
+  }),
+  addChild: addChild('Add Step', {
+    value: { children, addChildWizardType: 'ChildSelector' },
+  }),
   activeStep: childSelector('Selected step (runtime)', { value: 1 }),
   selectedDesignStepIndex: childSelector('Selected step (design)', {
     value: 1,

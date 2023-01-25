@@ -184,8 +184,8 @@
     const linkProps = {
       ...targetProps,
       href: getInternalHref({ linkTo, linkToInternalVariable, disabled }),
-      component: hasInteralLink ? B.Link : undefined,
-      endpoint: hasInteralLink ? linkTo : undefined,
+      component: hasInteralLink && !disabled ? B.Link : undefined,
+      endpoint: hasInteralLink && !disabled ? linkTo : undefined,
     };
 
     const ButtonContent = (
@@ -276,7 +276,11 @@
     }
 
     const ButtonWithTooltip = (
-      <Tooltip {...tooltipProps}>{ButtonComponent}</Tooltip>
+      <div style={{ width: 'fit-content' }}>
+        <Tooltip {...tooltipProps}>
+          <div>{ButtonComponent}</div>
+        </Tooltip>
+      </div>
     );
     const Button = addTooltip ? ButtonWithTooltip : ButtonComponent;
 

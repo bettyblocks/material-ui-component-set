@@ -7,7 +7,7 @@ import {
 import { Subview } from './structures';
 
 const attr = {
-  icon: Icon.OrderedListIcon,
+  icon: Icon.SubViewIcon,
   category: 'LIST',
   keywords: ['Subview'],
 };

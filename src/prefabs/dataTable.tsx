@@ -4,12 +4,12 @@ import {
   prefab as makePrefab,
   BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
-import { DataTable, DataTableColumn } from './structures';
+import { DataTable } from './structures';
 
 const attrs = {
   icon: Icon.DataTable,
   category: 'DATA',
-  keywords: ['Data', 'table', 'datatable', 'collection'],
+  keywords: ['Data', 'table', 'datatable', 'collection', 'Data table'],
 };
 
 const beforeCreate = ({
@@ -69,7 +69,7 @@ const beforeCreate = ({
             type: 'MODEL_AND_RELATION',
           };
           properties.forEach(
-            (property: {
+            (propertyObject: {
               defaultValue: null;
               id: string[];
               kind: string;
@@ -77,7 +77,7 @@ const beforeCreate = ({
               type: string;
               format: string;
             }) => {
-              let newProperty = property;
+              let newProperty = propertyObject;
               const inheritFormatKinds = [
                 'DATE',
                 'DATE_EXPRESSION',
@@ -91,9 +91,9 @@ const beforeCreate = ({
                 'PRICE_EXPRESSION',
                 'TIME',
               ];
-              if (inheritFormatKinds.includes(property.kind)) {
+              if (inheritFormatKinds.includes(propertyObject.kind)) {
                 newProperty = {
-                  ...property,
+                  ...propertyObject,
                   format: 'INHERIT',
                 };
               }
@@ -128,15 +128,4 @@ const beforeCreate = ({
   );
 };
 
-const reconfigure = {
-  children: [DataTableColumn({})],
-  wizardType: 'PropertySelector',
-};
-
-export default makePrefab(
-  'Datatable',
-  attrs,
-  beforeCreate,
-  [DataTable({})],
-  reconfigure,
-);
+export default makePrefab('Datatable', attrs, beforeCreate, [DataTable({})]);

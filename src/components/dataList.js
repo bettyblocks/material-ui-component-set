@@ -50,6 +50,7 @@
         const listRef = React.createRef();
         const [showPagination, setShowPagination] = useState(true);
         const [prevData, setPrevData] = useState(null);
+        const [filterv2, setFilterV2] = useState({});
         const isInline = type === 'inline';
         const isGrid = type === 'grid';
 
@@ -57,11 +58,13 @@
 
         const builderLayout = () => (
           <div data-component={dataComponentAttributeText || 'DataList'}>
-            {searchProperty && searchProperty.type && searchProperty.id !== '' && (
-              <div className={classes.header}>
-                <SearchComponent label={searchPropertyLabel} />
-              </div>
-            )}
+            {searchProperty &&
+              searchProperty.type &&
+              searchProperty.id !== '' && (
+                <div className={classes.header}>
+                  <SearchComponent label={searchPropertyLabel} />
+                </div>
+              )}
             <div ref={listRef} className={isGrid ? classes.grid : undefined}>
               <div
                 className={
@@ -195,13 +198,24 @@
             property.id.reduceRight((acc, field, index, arr) => {
               const isLast = index === arr.length - 1;
               if (isLast) {
-                return Array.isArray(value)
-                  ? {
-                      _or: value.map((el) => ({
-                        [field]: { [property.operator]: el },
-                      })),
-                    }
-                  : { [field]: { [property.operator]: value } };
+                if (Array.isArray(value)) {
+                  return {
+                    _or: value.map((d) =>
+                      arr.reduceRight((accq, fieldf, i, a) => {
+                        const issLast = i === a.length - 1;
+                        if (issLast) {
+                          return { [fieldf]: { [property.operator]: d } };
+                        }
+                        return { [fieldf]: accq };
+                      }, {}),
+                    ),
+                  };
+                }
+                return { [field]: { [property.operator]: value } };
+              }
+
+              if (Object.keys(acc).includes('_or')) {
+                return acc;
               }
 
               return { [field]: acc };
@@ -231,7 +245,11 @@
             ? deepMerge(filter, searchFilter)
             : filter;
 
-        const completeFilter = deepMerge(newFilter, interactionFilters);
+        const completeFilter = deepMerge(
+          newFilter,
+          interactionFilters,
+          filterv2,
+        );
         const where = useFilter(completeFilter);
 
         const {
@@ -310,6 +328,14 @@
             clearTimeout(handler);
           };
         }, [search]);
+
+        B.defineFunction('Advanced filter', (value) => {
+          setFilterV2(value.where);
+        });
+
+        B.defineFunction('Clear advanced filter', () => {
+          setFilterV2({});
+        });
 
         useEffect(() => {
           B.defineFunction('Refetch', () => refetch());

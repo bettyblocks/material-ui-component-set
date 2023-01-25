@@ -19,6 +19,8 @@ import {
   addChild,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
+import { DataTableColumn } from '../../DataTableColumn';
+import { dataTableColumnOptions } from '../../DataTableColumn/options';
 
 export const categories = [
   {
@@ -69,9 +71,26 @@ export const categories = [
   },
 ];
 
+const children = [
+  DataTableColumn({
+    options: {
+      ...dataTableColumnOptions,
+      property: property('Property', {
+        value: '',
+        showInAddChild: true,
+        showInReconfigure: true,
+      }),
+    },
+  }),
+];
+
 export const dataTableOptions = {
-  reconfigure: reconfigure('Reconfigure', { value: '' }),
-  addChild: addChild('Add child', { value: '' }),
+  reconfigure: reconfigure('Reconfigure', {
+    value: { children, reconfigureWizardType: 'ChildrenSelector' },
+  }),
+  addChild: addChild('Add Column', {
+    value: { children, addChildWizardType: 'ChildSelector' },
+  }),
   model: modelAndRelation('Model', { value: '' }),
   filter: filter('Filter', {
     value: {},

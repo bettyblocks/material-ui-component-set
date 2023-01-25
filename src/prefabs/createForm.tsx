@@ -37,7 +37,6 @@ const beforeCreate = ({
     'MULTI_IMAGE',
     'PDF',
     'PRICE_EXPRESSION',
-    'RICH_TEXT',
     'SERIAL',
     'SIGNED_PDF',
     'STRING_EXPRESSION',
@@ -59,7 +58,7 @@ const beforeCreate = ({
     useModelQuery,
   } = helpers;
 
-  const [modelId, setModelId] = React.useState(null);
+  const [modelId, setModelId] = React.useState('');
   const [model, setModel] = React.useState(null);
   const [idProperty, setIdProperty] = React.useState(null);
   const [properties, setProperties] = React.useState([]);
@@ -106,6 +105,7 @@ const beforeCreate = ({
             onChange={(id) => {
               setModelId(id);
             }}
+            value={modelId}
             margin
           />
         </Field>
@@ -290,6 +290,16 @@ const beforeCreate = ({
                 structure.descendants.push(
                   makeBettyInput(
                     BettyPrefabs.BOOLEAN,
+                    model,
+                    property,
+                    variable,
+                  ),
+                );
+                break;
+              case PropertyKind.RICH_TEXT:
+                structure.descendants.push(
+                  makeBettyInput(
+                    BettyPrefabs.RICH_TEXT,
                     model,
                     property,
                     variable,

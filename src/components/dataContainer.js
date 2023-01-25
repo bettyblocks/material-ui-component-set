@@ -37,6 +37,7 @@
         const [, setOptions] = useOptions();
 
         const [interactionFilter, setInteractionFilter] = useState({});
+        const [filterv2, setFilterV2] = useState({});
 
         const getFilter = React.useCallback(() => {
           if (isDev || !currentRecord || !model) {
@@ -57,12 +58,11 @@
           history.push(useEndpoint(redirectWithoutResult));
         };
 
+        // eslint-disable-next-line consistent-return
         const transformValue = (value) => {
           if (value instanceof Date) {
             return value.toISOString();
           }
-
-          return value;
         };
 
         const deepMerge = (...objects) => {
@@ -113,7 +113,11 @@
         interactionFilters =
           clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
 
-        const completeFilter = deepMerge(selectedFilter, interactionFilters);
+        const completeFilter = deepMerge(
+          selectedFilter,
+          interactionFilters,
+          filterv2,
+        );
         const where = useFilter(completeFilter);
 
         useEffect(() => {
@@ -124,6 +128,14 @@
                 currentRecord: id,
               });
             }
+          });
+
+          B.defineFunction('Advanced filter', (value) => {
+            setFilterV2(value.where);
+          });
+
+          B.defineFunction('Clear advanced filter', () => {
+            setFilterV2({});
           });
 
           /**
