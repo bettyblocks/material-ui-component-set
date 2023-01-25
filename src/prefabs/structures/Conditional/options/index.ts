@@ -1,5 +1,5 @@
 import {
-  createPage,
+  displayLogic,
   modelAndRelation,
   option,
   toggle,
@@ -22,7 +22,7 @@ export const conditionalOptions = {
       as: 'VISIBILITY',
     },
   }),
-  createPage: createPage('CreatePage', { value: ' ' }),
+  displayLogic: displayLogic('Display logic', { value: '' }),
   model: modelAndRelation('Model', { value: '' }),
   left: variable('Left', {
     value: [],

@@ -10,7 +10,7 @@
       compare,
       visible: initVisibility,
       dataComponentAttribute,
-      createPage,
+      displayLogic,
     } = options;
     const { useText, env, useProperty, useLogic } = B;
     const isDev = env === 'dev';
@@ -21,14 +21,14 @@
     const [leftValue, setLeftValue] = useState(leftText);
     const [rightValue, setRightValue] = useState(rightText);
     const [visible, setVisible] = useState(initVisibility);
-    const logic = useLogic(createPage);
+    const logic = useLogic(displayLogic);
     console.log({ leftText, left });
-    console.log('conditionalComp', createPage);
+    console.log('conditionalComp', displayLogic);
     const propValue =
       !isDev &&
-      createPage &&
-      createPage.left &&
-      useProperty(createPage.left.id);
+      displayLogic &&
+      displayLogic.left &&
+      useProperty(displayLogic.left.id);
     console.log('propValue', propValue);
     console.log('logic', logic);
 
