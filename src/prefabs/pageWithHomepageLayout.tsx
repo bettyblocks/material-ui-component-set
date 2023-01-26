@@ -4093,7 +4093,6 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                   'Hide label',
                                                   { value: true },
                                                 ),
-                                                
                                               },
                                             },
                                             [],
