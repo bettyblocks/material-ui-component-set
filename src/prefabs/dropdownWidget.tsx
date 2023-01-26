@@ -18,6 +18,7 @@ import {
   component as makeComponent,
   InteractionType,
   toggle,
+  buttongroup,
 } from '@betty-blocks/component-sdk';
 import {
   Box,
@@ -433,10 +434,7 @@ export default makePrefab('Dropdown Widget', attributes, beforeCreate, [
                     as: 'UNIT',
                   },
                 }),
-                innerSpacing: sizes('Inner space', {
-                  value: ['L', 'L', 'L', 'L'],
-                }),
-                outerSpacing: sizes('Inner space', {
+                outerSpacing: sizes('Outer space', {
                   value: ['0rem', '0rem', 'M', '0rem'],
                 }),
               },
@@ -499,6 +497,15 @@ export default makePrefab('Dropdown Widget', attributes, beforeCreate, [
                         },
                       }),
                       label: variable('Label', { value: [''] }),
+                      margin: buttongroup(
+                        'Margin',
+                        [
+                          ['None', 'none'],
+                          ['Dense', 'dense'],
+                          ['Normal', 'normal'],
+                        ],
+                        { value: 'none' },
+                      ),
                     },
                   }),
                 ],
