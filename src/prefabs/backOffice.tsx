@@ -4891,7 +4891,7 @@ const prefabStructure = [
         {
           label: 'Page view',
           expanded: true,
-          members: ['visibility', 'shownTab', 'drawerWidth'],
+          members: ['visibility', 'shownTab', 'drawerWidth', 'addDetailChild'],
         },
         {
           label: 'Table',
@@ -5097,23 +5097,23 @@ const prefabStructure = [
             },
           },
         }),
-        // addDetailChild: linked({
-        //   label: 'Add detail view child',
-        //   value: {
-        //     ref: {
-        //       componentId: '#detailColumn',
-        //       optionId: '#addDetailViewChild',
-        //     },
-        //   },
-        //   configuration: {
-        //     condition: {
-        //       type: 'SHOW',
-        //       option: 'shownTab',
-        //       comparator: 'EQ',
-        //       value: 2,
-        //     },
-        //   },
-        // }),
+        addDetailChild: linked({
+          label: 'Add detail view child',
+          value: {
+            ref: {
+              componentId: '#detailColumn',
+              optionId: '#addDetailViewChild',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'shownTab',
+              comparator: 'EQ',
+              value: 2,
+            },
+          },
+        }),
         detailsTabTitle: linked({
           label: 'Details tab title',
           value: {
