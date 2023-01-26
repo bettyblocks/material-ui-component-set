@@ -148,7 +148,7 @@
       disabled: disabled || isLoading || loading,
       tabIndex: isDev ? -1 : undefined,
       onClick: (event) => {
-        event.stopPropagation();
+        event.preventDefault();
         actionCallback();
       },
       role: 'button',
