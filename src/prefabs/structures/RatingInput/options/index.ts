@@ -8,6 +8,8 @@ import {
   sizes,
   color,
   ThemeColor,
+  option,
+  showIf,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -20,6 +22,11 @@ export const categories = [
 ];
 
 export const ratingInputOptions = {
+  actionVariableId: option('ACTION_JS_VARIABLE', {
+    label: 'Action input variable',
+    value: '',
+    configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
+  }),
   content: variable('Rating', {
     value: [],
     configuration: { as: 'MULTILINE', allowedTypes: ['decimal'] },
@@ -46,12 +53,7 @@ export const ratingInputOptions = {
   validationValueMissing: variable('Position', {
     value: 'end',
     configuration: {
-      condition: {
-        type: 'SHOW',
-        option: 'validationOptions',
-        comparator: 'EQ',
-        value: 'true',
-      },
+      condition: showIf('validationOptions', 'EQ', true),
     },
   }),
   disabled: toggle('Disabled'),
@@ -121,34 +123,19 @@ export const ratingInputOptions = {
   helperColor: color('Helper color', {
     value: ThemeColor.ACCENT_2,
     configuration: {
-      condition: {
-        type: 'SHOW',
-        option: 'styles',
-        comparator: 'EQ',
-        value: true,
-      },
+      condition: showIf('styles', 'EQ', true),
     },
   }),
   errorColor: color('Error color', {
     value: ThemeColor.DANGER,
     configuration: {
-      condition: {
-        type: 'SHOW',
-        option: 'styles',
-        comparator: 'EQ',
-        value: true,
-      },
+      condition: showIf('styles', 'EQ', true),
     },
   }),
   labelColor: color('Label color', {
     value: ThemeColor.ACCENT_3,
     configuration: {
-      condition: {
-        type: 'SHOW',
-        option: 'styles',
-        comparator: 'EQ',
-        value: true,
-      },
+      condition: showIf('styles', 'EQ', true),
     },
   }),
 

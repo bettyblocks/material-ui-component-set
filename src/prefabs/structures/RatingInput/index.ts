@@ -18,7 +18,7 @@ export const RatingInput = (
     : defaultCategories;
 
   return component(
-    'RatingInput',
+    'Rating',
     { options, ref, style, label, optionCategories },
     descendants,
   );
