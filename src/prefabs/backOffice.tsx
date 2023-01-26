@@ -4889,6 +4889,22 @@ const prefabStructure = [
       label: 'Overview + Record view',
       optionCategories: [
         {
+          label: 'Page view',
+          expanded: true,
+          members: ['visibility', 'shownTab', 'drawerWidth'],
+        },
+        {
+          label: 'Table',
+          expanded: true,
+          members: ['reconfigure', 'addChild'],
+          condition: {
+            type: 'SHOW',
+            option: 'visibility',
+            comparator: 'EQ',
+            value: false,
+          },
+        },
+        {
           label: 'Page title',
           expanded: true,
           members: ['pageTitle'],
@@ -5738,6 +5754,21 @@ const beforeCreate = ({
               },
             },
           });
+
+          const newCategories = newPrefab.structure[0].optionCategories;
+          if (newCategories) {
+            newCategories.splice(1, 0, {
+              label: 'Side menu',
+              expanded: true,
+              members: ['partial'],
+              condition: {
+                type: 'SHOW',
+                option: 'visibility',
+                comparator: 'EQ',
+                value: false,
+              },
+            });
+          }
         }
       }
 
