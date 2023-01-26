@@ -103,7 +103,7 @@ const detailChildren = [
     {
       options: {
         ...conditionalOptions,
-        left: variable('Property', {
+        left: variable('Conditional property', {
           value: [],
           showInAddChild: true,
         }),
