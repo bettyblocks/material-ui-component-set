@@ -19,6 +19,8 @@ import {
   PrefabComponentOption,
   component as makeComponent,
   InteractionType,
+  showIf,
+  text as textType,
 } from '@betty-blocks/component-sdk';
 import { options as formOptions } from './structures/ActionJSForm/options';
 import {
@@ -238,7 +240,7 @@ const beforeCreate = ({
 
           const interaction = {
             name: 'Submit',
-            sourceEvent: 'onBlur',
+            sourceEvent: 'onChange',
             parameters: [],
             ref: {
               targetComponentId: '#DateWidgetForm',
@@ -501,6 +503,12 @@ export default makePrefab('Date Widget', attributes, beforeCreate, [
                           ],
                           { value: 'none' },
                         ),
+                        type: textType('Type', {
+                          value: 'date',
+                          configuration: {
+                            condition: showIf('type', 'EQ', false),
+                          },
+                        }),
                       },
                     },
                     [],
