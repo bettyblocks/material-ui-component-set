@@ -1,3 +1,10 @@
+## [2.95.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.95.0...v2.95.1) (2023-01-26)
+
+
+### Bug Fixes
+
+* add color to placeholder text in textarea ([cf7e666](https://github.com/bettyblocks/material-ui-component-set/commit/cf7e66671d8408bbcc30580b0a86ea26d9d92c76))
+
 # [2.95.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.94.0...v2.95.0) (2023-01-26)
 
 
