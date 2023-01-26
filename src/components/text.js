@@ -123,6 +123,8 @@
         color: ({ options: { textColor } }) => style.getColor(textColor),
         fontFamily: ({ options: { type } }) => style.getFontFamily(type),
         fontSize: ({ options: { type } }) => style.getFontSize(type),
+        fontStyle: ({ options: { type } }) =>
+          `var(--text-fontStyle-${type.toString().toLowerCase()})`,
         fontWeight: ({ options: { fontWeight } }) => fontWeight,
         textTransform: ({ options: { type } }) => style.getTextTransform(type),
         letterSpacing: ({ options: { type } }) => style.getLetterSpacing(type),
