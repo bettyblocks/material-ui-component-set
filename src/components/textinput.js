@@ -392,7 +392,7 @@
               hideLabel ? ['none', '!important'] : null,
             overflow: 'hidden',
           },
-          '& input': {
+          '& input, & textarea': {
             '&::placeholder': {
               color: ({ options: { placeholderColor } }) => [
                 style.getColor(placeholderColor),
