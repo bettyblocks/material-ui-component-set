@@ -7,28 +7,48 @@
     {
       label: 'Slate',
       package: 'npm:slate@0.88.1',
-      imports: ['*'],
+      imports: [
+        'createEditor',
+        'Editor',
+        'Text',
+        'Element',
+        'Transforms',
+        'Node',
+      ],
     },
     {
       label: 'SlateHistory',
       package: 'npm:slate-history@0.66.0',
-      imports: ['*'],
+      imports: ['withHistory'],
     },
     {
       label: 'SlateReact',
       package: 'npm:slate-react@0.86.0',
-      imports: ['*'],
+      imports: ['Editable', 'withReact', 'Slate', 'useSlate'],
     },
     {
       label: 'SlateHyperscript',
       package: 'npm:slate-hyperscript@0.77.0',
-      imports: ['*'],
+      imports: ['jsx'],
     },
-    // {
-    //   label: 'MuiExtraIcons',
-    //   package: 'npm:@material-ui/icons@4.11.2',
-    //   imports: ['*'],
-    // },
+    {
+      label: 'MuiExtraIcons',
+      package: 'npm:@material-ui/icons@4.11.2',
+      imports: [
+        'FormatBold',
+        'FormatAlignCenter',
+        'FormatAlignJustify',
+        'FormatAlignLeft',
+        'FormatAlignRight',
+        'FormatItalic',
+        'FormatListBulleted',
+        'FormatListNumbered',
+        'FormatQuote',
+        'FormatUnderlined',
+        'StrikethroughS',
+        'FirstPage',
+      ],
+    },
   ],
   jsx: (() => {
     const {
@@ -36,37 +56,37 @@
       SlateReact: { Editable, withReact, Slate, useSlate },
       SlateHistory: { withHistory },
       SlateHyperscript: { jsx },
-      // MuiExtraIcons: {
-      //   FormatBold,
-      //   FormatAlignCenter,
-      //   FormatAlignJustify,
-      //   FormatAlignLeft,
-      //   FormatAlignRight,
-      //   FormatItalic,
-      //   FormatListBulleted,
-      //   FormatListNumbered,
-      //   FormatQuote,
-      //   FormatUnderlined,
-      //   StrikethroughS,
-      //   FirstPage,
-      // },
+      MuiExtraIcons: {
+        FormatBold,
+        FormatAlignCenter,
+        FormatAlignJustify,
+        FormatAlignLeft,
+        FormatAlignRight,
+        FormatItalic,
+        FormatListBulleted,
+        FormatListNumbered,
+        FormatQuote,
+        FormatUnderlined,
+        StrikethroughS,
+        FirstPage,
+      },
     } = dependencies;
-    const { Icons: allIcons } = window.MaterialUI;
-    // const extraIcons = {
-    //   FormatBold,
-    //   FormatAlignCenter,
-    //   FormatAlignJustify,
-    //   FormatAlignLeft,
-    //   FormatAlignRight,
-    //   FormatItalic,
-    //   FormatListBulleted,
-    //   FormatListNumbered,
-    //   FormatQuote,
-    //   FormatUnderlined,
-    //   StrikethroughS,
-    //   FirstPage,
-    // };
-    // const allIcons = { ...Icons, ...extraIcons };
+    const { Icons } = window.MaterialUI;
+    const extraIcons = {
+      FormatBold,
+      FormatAlignCenter,
+      FormatAlignJustify,
+      FormatAlignLeft,
+      FormatAlignRight,
+      FormatItalic,
+      FormatListBulleted,
+      FormatListNumbered,
+      FormatQuote,
+      FormatUnderlined,
+      StrikethroughS,
+      FirstPage,
+    };
+    const allIcons = { ...Icons, ...extraIcons };
     const { FormHelperText, SvgIcon } = window.MaterialUI.Core;
     const { useText, env } = B;
     const {
@@ -98,29 +118,6 @@
     const labelText = useText(label);
     const [showDropdown, setShowDropdown] = useState(false);
     const [activeStyleName, setActiveStyleName] = useState('Body 1');
-    const customIcons = {
-      FormatBold:
-        'M15.6 10.79c.97-.67 1.65-1.77 1.65-2.79 0-2.26-1.75-4-4-4H7v14h7.04c2.09 0 3.71-1.7 3.71-3.79 0-1.52-.86-2.82-2.15-3.42zM10 6.5h3c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-3v-3zm3.5 9H10v-3h3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z',
-      FormatAlignCenter:
-        'M7 15v2h10v-2H7zm-4 6h18v-2H3v2zm0-8h18v-2H3v2zm4-6v2h10V7H7zM3 3v2h18V3H3z',
-      FormatAlignJustify:
-        'M3 21h18v-2H3v2zm0-4h18v-2H3v2zm0-4h18v-2H3v2zm0-4h18V7H3v2zm0-6v2h18V3H3z',
-      FormatAlignLeft:
-        'M15 15H3v2h12v-2zm0-8H3v2h12V7zM3 13h18v-2H3v2zm0 8h18v-2H3v2zM3 3v2h18V3H3z',
-      FormatAlignRight:
-        'M3 21h18v-2H3v2zm6-4h12v-2H9v2zm-6-4h18v-2H3v2zm6-4h12V7H9v2zM3 3v2h18V3H3z',
-      FormatItalic: 'M10 4v3h2.21l-3.42 8H6v3h8v-3h-2.21l3.42-8H18V4z',
-      FormatListBulleted:
-        'M4 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S3.17 7.5 4 7.5 5.5 6.83 5.5 6 4.83 4.5 4 4.5zm0 12c-.83 0-1.5.68-1.5 1.5s.68 1.5 1.5 1.5 1.5-.68 1.5-1.5-.67-1.5-1.5-1.5zM7 19h14v-2H7v2zm0-6h14v-2H7v2zm0-8v2h14V5H7z',
-      FormatListNumbered:
-        'M2 17h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2v1zm5-6v2h14V5H7zm0 14h14v-2H7v2zm0-6h14v-2H7v2z',
-      FormatQuote: 'M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z',
-      FormatUnderlined:
-        'M12 17c3.31 0 6-2.69 6-6V3h-2.5v8c0 1.93-1.57 3.5-3.5 3.5S8.5 12.93 8.5 11V3H6v8c0 3.31 2.69 6 6 6zm-7 2v2h14v-2H5z',
-      StrikethroughS:
-        'M6.85 7.08C6.85 4.37 9.45 3 12.24 3c1.64 0 3 .49 3.9 1.28.77.65 1.46 1.73 1.46 3.24h-3.01c0-.31-.05-.59-.15-.85-.29-.86-1.2-1.28-2.25-1.28-1.86 0-2.34 1.02-2.34 1.7 0 .48.25.88.74 1.21.38.25.77.48 1.41.7H7.39c-.21-.34-.54-.89-.54-1.92zM21 12v-2H3v2h9.62c1.15.45 1.96.75 1.96 1.97 0 1-.81 1.67-2.28 1.67-1.54 0-2.93-.54-2.93-2.51H6.4c0 .55.08 1.13.24 1.58.81 2.29 3.29 3.3 5.67 3.3 2.27 0 5.3-.89 5.3-4.05 0-.3-.01-1.16-.48-1.94H21V12z',
-      FirstPage: 'M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z',
-    };
 
     const isMarkActive = (editor, format) => {
       const marks = Editor.marks(editor);
@@ -705,7 +702,7 @@
               active ? 'active' : ''
             }`}
           >
-            <path d={customIcons[icon]} />
+            <path d={allIcons[icon]} />
           </SvgIcon>
         );
       },
