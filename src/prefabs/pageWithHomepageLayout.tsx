@@ -4077,7 +4077,6 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                               ),
                                             ],
                                           ),
-                                          // Raiting
                                           RatingInput(
                                             {
                                               options: {

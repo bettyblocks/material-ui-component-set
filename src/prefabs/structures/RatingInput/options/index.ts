@@ -10,6 +10,7 @@ import {
   ThemeColor,
   option,
   showIf,
+  hideIf,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -27,11 +28,19 @@ export const ratingInputOptions = {
     value: '',
     configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
   }),
+  actionProperty: option('ACTION_JS_PROPERTY', {
+    label: 'Property',
+    value: '',
+    configuration: { condition: hideIf('actionProperty', 'EQ', '') },
+  }),
   content: variable('Rating', {
     value: [],
     configuration: { as: 'MULTILINE', allowedTypes: ['decimal'] },
   }),
   hideLabel: toggle('Hide label'),
+
+  label: variable('Label', { value: ['Select'] }),
+  value: variable('Value', { value: [''] }),
   numberOfIcons: dropdown(
     'Number of icons',
     [
@@ -51,7 +60,7 @@ export const ratingInputOptions = {
   ),
   validationOptions: toggle('Validation options', { value: true }),
   validationValueMissing: variable('Position', {
-    value: 'end',
+    value: ['end'],
     configuration: {
       condition: showIf('validationOptions', 'EQ', true),
     },
@@ -92,7 +101,7 @@ export const ratingInputOptions = {
       },
     },
   }),
-  helperText: variable('Helper text', { value: '' }),
+  helperText: variable('Helper text', { value: [''] }),
   icon: icon('Icon', { value: 'Star' }),
   outerSpacing: sizes('Outer space', {
     value: ['0rem', '0rem', '0rem', '0rem'],

@@ -56,6 +56,8 @@ export const richTextOptions = {
 
   label: variable('Label', { value: [''] }),
   value: variable('Value', { value: [''] }),
+  required: toggle('Required', { value: true }),
+
   showBold: toggle('Bold', { value: true }),
   showItalic: toggle('Italic', { value: true }),
   showUnderlined: toggle('Underlined', { value: true }),
