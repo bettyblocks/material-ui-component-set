@@ -29,6 +29,7 @@ import {
   showIfTrue,
   reconfigure,
   property,
+  addChild,
 } from '@betty-blocks/component-sdk';
 
 import {
@@ -38,6 +39,8 @@ import {
   buttonOptions,
   Column,
   columnOptions,
+  Conditional,
+  conditionalOptions,
   DataContainer,
   dataContainerOptions,
   DataTable,
@@ -89,9 +92,128 @@ const children = [
       property: property('Property', {
         value: '',
         showInAddChild: true,
+        showInReconfigure: true,
       }),
     },
   }),
+];
+
+const detailChildren = [
+  Conditional(
+    {
+      options: {
+        ...conditionalOptions,
+        left: variable('Conditional property', {
+          value: [],
+          showInAddChild: true,
+        }),
+        compare: option('CUSTOM', {
+          label: 'Compare',
+          value: 'neq',
+          configuration: {
+            as: 'DROPDOWN',
+            dataType: 'string',
+            allowedInput: [
+              {
+                name: 'Equals',
+                value: 'eq',
+              },
+              {
+                name: 'Not equal',
+                value: 'neq',
+              },
+              {
+                name: 'Contains',
+                value: 'contains',
+              },
+              {
+                name: 'Does not contain',
+                value: 'notcontains',
+              },
+              {
+                name: 'Greater than',
+                value: 'gt',
+              },
+              {
+                name: 'Less than',
+                value: 'lt',
+              },
+              {
+                name: 'Greater than or equal to',
+                value: 'gteq',
+              },
+              {
+                name: 'Less than or equal to',
+                value: 'lteq',
+              },
+            ],
+          },
+        }),
+      },
+    },
+    [
+      Box(
+        {
+          options: {
+            ...boxOptions,
+            outerSpacing: sizes('Outer space', {
+              value: ['M', '0rem', 'M', '0rem'],
+            }),
+            backgroundColor: color('Background color', {
+              value: ThemeColor.ACCENT_1,
+            }),
+            backgroundColorAlpha: option('NUMBER', {
+              label: 'Background color opacity',
+              value: 20,
+            }),
+          },
+        },
+        [
+          Text({
+            options: {
+              ...textOptions,
+              content: variable('Label', {
+                value: [''],
+                configuration: { as: 'MULTILINE' },
+                showInAddChild: true,
+              }),
+              type: font('Font', { value: ['Body1'] }),
+              fontWeight: option('CUSTOM', {
+                label: 'Font weight',
+                value: '500',
+                configuration: {
+                  as: 'DROPDOWN',
+                  dataType: 'string',
+                  allowedInput: [
+                    { name: '100', value: '100' },
+                    { name: '200', value: '200' },
+                    { name: '300', value: '300' },
+                    { name: '400', value: '400' },
+                    { name: '500', value: '500' },
+                    { name: '600', value: '600' },
+                    { name: '700', value: '700' },
+                    { name: '800', value: '800' },
+                    { name: '900', value: '900' },
+                  ],
+                },
+              }),
+            },
+          }),
+          Text({
+            options: {
+              ...textOptions,
+              type: font('Font', { value: ['Body1'] }),
+              content: variable('Property', {
+                value: [],
+                configuration: { as: 'MULTILINE' },
+                showInAddChild: true,
+              }),
+            },
+          }),
+        ],
+      ),
+    ],
+  ),
 ];
 
 const interactions: PrefabInteraction[] = [
@@ -1790,6 +1912,20 @@ const drawerContainer = DrawerContainer(
                                                             value: '12',
                                                           },
                                                         ],
+                                                      },
+                                                    },
+                                                  ),
+                                                  addDetail: addChild(
+                                                    'Add Child',
+                                                    {
+                                                      ref: {
+                                                        id: '#addDetailViewChild',
+                                                      },
+                                                      value: {
+                                                        children:
+                                                          detailChildren,
+                                                        addChildWizardType:
+                                                          'ChildSelector',
                                                       },
                                                     },
                                                   ),
@@ -4638,10 +4774,23 @@ const drawerContainer = DrawerContainer(
                                                                 value: {
                                                                   children,
                                                                   reconfigureWizardType:
-                                                                    'PropertiesSelector',
+                                                                    'ChildrenSelector',
                                                                 },
                                                               },
                                                             ),
+                                                          addChild: addChild(
+                                                            'Add Column',
+                                                            {
+                                                              ref: {
+                                                                id: '#addChild',
+                                                              },
+                                                              value: {
+                                                                children,
+                                                                addChildWizardType:
+                                                                  'ChildSelector',
+                                                              },
+                                                            },
+                                                          ),
                                                           background: color(
                                                             'Background',
                                                             {
@@ -4740,6 +4889,22 @@ const prefabStructure = [
       label: 'Overview + Record view',
       optionCategories: [
         {
+          label: 'Page view',
+          expanded: true,
+          members: ['visibility', 'shownTab', 'drawerWidth'],
+        },
+        {
+          label: 'Table',
+          expanded: true,
+          members: ['reconfigure', 'addChild'],
+          condition: {
+            type: 'SHOW',
+            option: 'visibility',
+            comparator: 'EQ',
+            value: false,
+          },
+        },
+        {
           label: 'Page title',
           expanded: true,
           members: ['pageTitle'],
@@ -4762,9 +4927,14 @@ const prefabStructure = [
           },
         },
         {
-          label: 'Tab title',
+          label: 'Tab',
           expanded: true,
-          members: ['detailsTabTitle', 'updateTabTitle', 'createTabTitle'],
+          members: [
+            'detailsTabTitle',
+            'updateTabTitle',
+            'createTabTitle',
+            'addDetailChild',
+          ],
           condition: {
             type: 'SHOW',
             option: 'visibility',
@@ -4819,6 +4989,25 @@ const prefabStructure = [
             },
           },
         }),
+
+        addChild: linked({
+          label: 'Add data table column',
+          value: {
+            ref: {
+              componentId: '#dataTable',
+              optionId: '#addChild',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'visibility',
+              comparator: 'EQ',
+              value: false,
+            },
+          },
+        }),
+
         pageTitle: linked({
           label: 'Page title',
           value: {
@@ -4913,6 +5102,23 @@ const prefabStructure = [
             },
           },
         }),
+        addDetailChild: linked({
+          label: 'Add detail view child',
+          value: {
+            ref: {
+              componentId: '#detailColumn',
+              optionId: '#addDetailViewChild',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'shownTab',
+              comparator: 'EQ',
+              value: 2,
+            },
+          },
+        }),
         detailsTabTitle: linked({
           label: 'Details tab title',
           value: {
@@ -4930,6 +5136,7 @@ const prefabStructure = [
             },
           },
         }),
+
         updateTabTitle: linked({
           label: 'Update tab title',
           value: {
@@ -5552,6 +5759,21 @@ const beforeCreate = ({
               },
             },
           });
+
+          const newCategories = newPrefab.structure[0].optionCategories;
+          if (newCategories) {
+            newCategories.splice(1, 0, {
+              label: 'Side menu',
+              expanded: true,
+              members: ['partial'],
+              condition: {
+                type: 'SHOW',
+                option: 'visibility',
+                comparator: 'EQ',
+                value: false,
+              },
+            });
+          }
         }
       }
 

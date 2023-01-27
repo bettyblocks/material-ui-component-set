@@ -1,3 +1,36 @@
+# [2.96.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.95.1...v2.96.0) (2023-01-27)
+
+
+### Bug Fixes
+
+* add detail child stays hidden in overview ([f4214bd](https://github.com/bettyblocks/material-ui-component-set/commit/f4214bd8534674feb5f4ac80585c7a682260ec58))
+
+
+### Features
+
+* add categories to newly added options ([2df5db1](https://github.com/bettyblocks/material-ui-component-set/commit/2df5db1aaabe4295f8e48be9a0d7a07c93db3c24))
+* add child to backoffice ([0fbe90f](https://github.com/bettyblocks/material-ui-component-set/commit/0fbe90f30d0f4ec7cda2a9ee13c4def2100af5c9))
+
+## [2.95.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.95.0...v2.95.1) (2023-01-26)
+
+
+### Bug Fixes
+
+* add color to placeholder text in textarea ([cf7e666](https://github.com/bettyblocks/material-ui-component-set/commit/cf7e66671d8408bbcc30580b0a86ea26d9d92c76))
+
+# [2.95.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.94.0...v2.95.0) (2023-01-26)
+
+
+### Bug Fixes
+
+* updated cli ([f65da6e](https://github.com/bettyblocks/material-ui-component-set/commit/f65da6ed854c088a92f728ce634a123ccef15cb5))
+* updated slate back to 0.88.1 ([8e19ede](https://github.com/bettyblocks/material-ui-component-set/commit/8e19ede3c9dcc9aee409e45463cbe4584a552dac))
+
+
+### Features
+
+* switch to specified imports ([4004d58](https://github.com/bettyblocks/material-ui-component-set/commit/4004d58e4e8464fd05b1bbbb8678c904c7232b86))
+
 # [2.94.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.93.0...v2.94.0) (2023-01-23)
 
 
