@@ -27,7 +27,11 @@
     const opac = transparent ? 0 : 1;
     const [opacity, setOpacity] = useState(opac);
     const [interactionBackground, setInteractionBackground] = useState('');
-    const logic = useLogic(!isDev && displayLogic);
+
+    let logic = true;
+    if (displayLogic.left !== '') {
+      logic = useLogic(!isDev && displayLogic);
+    }
 
     useEffect(() => {
       B.defineFunction('setCustomBackgroundImage', (url) => {
