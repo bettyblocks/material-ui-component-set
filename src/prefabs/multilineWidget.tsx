@@ -356,95 +356,95 @@ export default makePrefab('Multiline Widget', attributes, beforeCreate, [
       },
     },
     [
-      Box(
+      Conditional(
         {
-          ref: {
-            id: '#questionBox',
-          },
+          ref: { id: '#conditional' },
           options: {
-            ...boxOptions,
-            backgroundColor: color('Background color', {
-              value: ThemeColor.WHITE,
+            ...conditionalOptions,
+            left: variable('Left', {
+              ref: { id: '#conditionOptionLeft' },
+              value: [],
             }),
-            borderColor: color('Border color', {
-              value: ThemeColor.MEDIUM,
-            }),
-            borderWidth: size('Border thickness', {
-              value: '1px',
+            compare: option('CUSTOM', {
+              label: 'Compare',
+              ref: { id: '#conditionOptionCompare' },
+              value: 'eq',
               configuration: {
-                as: 'UNIT',
+                as: 'DROPDOWN',
+                dataType: 'string',
+                allowedInput: [
+                  {
+                    name: 'Equals',
+                    value: 'eq',
+                  },
+                  {
+                    name: 'Not equal',
+                    value: 'neq',
+                  },
+                  {
+                    name: 'Contains',
+                    value: 'contains',
+                  },
+                  {
+                    name: 'Does not contain',
+                    value: 'notcontains',
+                  },
+                  {
+                    name: 'Greater than',
+                    value: 'gt',
+                  },
+                  {
+                    name: 'Less than',
+                    value: 'lt',
+                  },
+                  {
+                    name: 'Greater than or equal to',
+                    value: 'gteq',
+                  },
+                  {
+                    name: 'Less than or equal to',
+                    value: 'lteq',
+                  },
+                ],
               },
             }),
-            borderRadius: size('Border radius', {
-              value: '5px',
-              configuration: {
-                as: 'UNIT',
-              },
-            }),
-            outerSpacing: sizes('Outer space', {
-              value: ['0rem', '0rem', 'M', '0rem'],
-              ref: {
-                id: '#questionBoxOuterSpacing',
-              },
+            right: variable('Right', {
+              ref: { id: '#conditionOptionRight' },
+              value: [],
             }),
           },
         },
         [
-          Conditional(
+          Box(
             {
-              ref: { id: '#conditional' },
+              ref: {
+                id: '#questionBox',
+              },
               options: {
-                ...conditionalOptions,
-                left: variable('Left', {
-                  ref: { id: '#conditionOptionLeft' },
-                  value: [],
+                ...boxOptions,
+                backgroundColor: color('Background color', {
+                  value: ThemeColor.WHITE,
                 }),
-                compare: option('CUSTOM', {
-                  label: 'Compare',
-                  ref: { id: '#conditionOptionCompare' },
-                  value: 'eq',
+                borderColor: color('Border color', {
+                  value: ThemeColor.MEDIUM,
+                }),
+                borderWidth: size('Border thickness', {
+                  value: '1px',
                   configuration: {
-                    as: 'DROPDOWN',
-                    dataType: 'string',
-                    allowedInput: [
-                      {
-                        name: 'Equals',
-                        value: 'eq',
-                      },
-                      {
-                        name: 'Not equal',
-                        value: 'neq',
-                      },
-                      {
-                        name: 'Contains',
-                        value: 'contains',
-                      },
-                      {
-                        name: 'Does not contain',
-                        value: 'notcontains',
-                      },
-                      {
-                        name: 'Greater than',
-                        value: 'gt',
-                      },
-                      {
-                        name: 'Less than',
-                        value: 'lt',
-                      },
-                      {
-                        name: 'Greater than or equal to',
-                        value: 'gteq',
-                      },
-                      {
-                        name: 'Less than or equal to',
-                        value: 'lteq',
-                      },
-                    ],
+                    as: 'UNIT',
                   },
                 }),
-                right: variable('Right', {
-                  ref: { id: '#conditionOptionRight' },
-                  value: [],
+                borderRadius: size('Border radius', {
+                  value: '5px',
+                  configuration: {
+                    as: 'UNIT',
+                  },
+                }),
+                outerSpacing: sizes('Outer space', {
+                  value: ['0rem', '0rem', 'M', '0rem'],
+                  ref: {
+                    id: '#questionBoxOuterSpacing',
+                  },
                 }),
               },
             },

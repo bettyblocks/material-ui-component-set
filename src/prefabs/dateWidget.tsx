@@ -1,37 +1,41 @@
 import * as React from 'react';
 import {
+  prefab as makePrefab,
   Icon,
   PrefabInteraction,
+  BeforeCreateArgs,
   wrapper,
+  sizes,
   ThemeColor,
   color,
   size,
-  font,
   variable,
-  sizes,
   option,
-  linked,
-  BeforeCreateArgs,
-  prefab as makePrefab,
+  toggle,
+  buttongroup,
+  font,
   PrefabComponent,
+  linked,
   PrefabComponentOption,
   component as makeComponent,
   InteractionType,
-  toggle,
-  buttongroup,
+  showIf,
+  text as textType,
 } from '@betty-blocks/component-sdk';
+import { options as formOptions } from './structures/ActionJSForm/options';
 import {
   Box,
   boxOptions,
+  Text as TextComp,
+  textOptions,
   Conditional,
   conditionalOptions,
-  SelectInput,
-  selectInputOptions,
-  Text as TextPrefab,
-  textOptions,
+  DateTimePicker,
+  dateTimePickerOptions,
 } from './structures';
 import { IdPropertyProps, ModelProps, ModelQuery } from './types';
-import { options as formOptions } from './structures/ActionJSForm/options';
+
+const interactions: PrefabInteraction[] = [];
 
 const beforeCreate = ({
   components: { Content, Header, Field, Footer, PropertySelector, Text },
@@ -46,39 +50,34 @@ const beforeCreate = ({
     prepareAction,
     getPageName,
     setOption,
-    BettyPrefabs,
     makeBettyUpdateInput,
+    BettyPrefabs,
   },
 }: BeforeCreateArgs) => {
   const [primaryProperty, setPrimaryProperty] = React.useState('');
   const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
   const [validationMessage, setValidationMessage] = React.useState('');
   const [model, setModel] = React.useState<ModelProps>();
-
   const modelId = useModelIdSelector();
   const componentId = createUuid();
   const pageName = getPageName();
-  const unsupportedKinds = [
-    'MINUTES',
-    'RICH_TEXT',
-    ...createBlacklist(['LIST']),
-  ];
+  const unsupportedKinds = createBlacklist(['DATE', 'DATE_TIME']);
   const { data } = useModelQuery({
     variables: { id: modelId },
     onCompleted: (result: ModelQuery) => {
-      setModel(result.model);
       setIdProperty(result.model.properties.find(({ name }) => name === 'id'));
+      setModel(result.model);
     },
   });
 
   const enrichVarObj = (obj: any) => {
     const returnObject = obj;
     if (data && data.model) {
-      const propertObj = data.model.properties.find(
+      const property = data.model.properties.find(
         (prop: any) => prop.id === obj.id[0],
       );
-      if (propertObj) {
-        returnObject.name = `{{ ${data.model.name}.${propertObj.name} }}`;
+      if (property) {
+        returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
       }
     }
     return returnObject;
@@ -90,12 +89,12 @@ const beforeCreate = ({
       setValidationMessage('No property is selected.');
     }
     if (data && data.model) {
-      const transformProp = data.model.properties.find(
+      const property = data.model.properties.find(
         (prop: any) => prop.id === obj.id[0],
       );
-      if (transformProp) {
-        outputProp.label = transformProp.label;
-        outputProp.kind = transformProp.kind;
+      if (property) {
+        outputProp.label = property.label;
+        outputProp.kind = property.kind;
       }
     }
     return outputProp;
@@ -103,7 +102,7 @@ const beforeCreate = ({
 
   if (modelId === null && validationMessage === '') {
     setValidationMessage(
-      'The Dropdown widget needs to be inside a parent with a model',
+      'The date widget needs to be inside a parent with a model',
     );
   }
 
@@ -118,13 +117,12 @@ const beforeCreate = ({
       }
       return treeSearch(refValue, component.descendants);
     }, null);
-
   return (
     <>
-      <Header title="Configure your Dropdown widget" onClose={close} />
+      <Header title="Configure your date widget" onClose={close} />
       <Content>
         <Field
-          label="Property"
+          label="Where would you like to store your answer?"
           error={
             validationMessage && (
               <Text color="#e82600">{validationMessage}</Text>
@@ -146,13 +144,10 @@ const beforeCreate = ({
         onSave={async (): Promise<void> => {
           const newPrefab = { ...prefab };
 
-          const text = treeSearch('#QuestionText', newPrefab.structure);
-          const dropdownInput = treeSearch(
-            '#DropdownInput',
-            newPrefab.structure,
-          );
-          const dropdownWidgetForm = treeSearch(
-            '#DropdownWidgetForm',
+          const text = treeSearch('#questionText', newPrefab.structure);
+          const dateInput = treeSearch('#DateInput', newPrefab.structure);
+          const dateWidgetForm = treeSearch(
+            '#DateWidgetForm',
             newPrefab.structure,
           );
           const propertyObj = transformProperty(primaryProperty);
@@ -160,22 +155,37 @@ const beforeCreate = ({
             ...opt,
             value: [propertyObj.label],
           }));
+          setOption(dateInput, 'placeholder', (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: [],
+          }));
+
           if (!idProperty) {
             throw new Error('We could not find an idProperty.');
           }
-          dropdownWidgetForm.id = componentId;
+          dateWidgetForm.id = componentId;
           const result = await prepareAction(
             componentId,
             idProperty,
             [transformProperty(primaryProperty)],
             'update',
             undefined,
-            `${pageName} - update ${propertyObj.label}`,
+            `${pageName} - create ${propertyObj.label}`,
             'public',
           );
 
+          if (!model) throw new Error('No mode found.');
+          dateWidgetForm.descendants.push(
+            makeBettyUpdateInput(
+              BettyPrefabs.HIDDEN,
+              model,
+              idProperty,
+              result.recordInputVariable,
+            ),
+          );
+
           setOption(
-            dropdownWidgetForm,
+            dateWidgetForm,
             'actionId',
             (opts: PrefabComponentOption) => ({
               ...opts,
@@ -188,20 +198,15 @@ const beforeCreate = ({
             console.error('unable to set model option, no model selected');
             return;
           }
+          setOption(dateWidgetForm, 'model', (opts: PrefabComponentOption) => ({
+            ...opts,
+            value: modelId,
+            configuration: {
+              disabled: true,
+            },
+          }));
           setOption(
-            dropdownWidgetForm,
-            'model',
-            (opts: PrefabComponentOption) => ({
-              ...opts,
-              value: modelId,
-              configuration: {
-                disabled: true,
-              },
-            }),
-          );
-
-          setOption(
-            dropdownInput,
+            dateInput,
             'actionProperty',
             (opt: PrefabComponentOption) => ({
               ...opt,
@@ -211,18 +216,13 @@ const beforeCreate = ({
             }),
           );
 
-          setOption(dropdownInput, 'value', (opt: PrefabComponentOption) => ({
-            ...opt,
-            value: [enrichVarObj(primaryProperty)],
-          }));
-
           let actionVarId: string;
           Object.keys(result.variables).forEach((key) => {
             actionVarId = key;
           });
 
           setOption(
-            dropdownInput,
+            dateInput,
             'actionVariableId',
             (opt: PrefabComponentOption) => ({
               ...opt,
@@ -238,24 +238,13 @@ const beforeCreate = ({
             }),
           );
 
-          if (model) {
-            dropdownWidgetForm.descendants.push(
-              makeBettyUpdateInput(
-                BettyPrefabs.HIDDEN,
-                model,
-                idProperty,
-                result.recordInputVariable,
-              ),
-            );
-          }
-
           const interaction = {
             name: 'Submit',
             sourceEvent: 'onChange',
             parameters: [],
             ref: {
-              targetComponentId: '#DropdownWidgetForm',
-              sourceComponentId: '#DropdownInput',
+              targetComponentId: '#DateWidgetForm',
+              sourceComponentId: '#DateInput',
             },
             type: 'Custom' as InteractionType,
           };
@@ -270,39 +259,40 @@ const beforeCreate = ({
   );
 };
 
-const interactions: PrefabInteraction[] = [];
-
 const attributes = {
   category: 'WIDGETS',
-  icon: Icon.SelectIcon,
+  icon: Icon.DatePickerIcon,
   interactions,
   variables: [],
 };
 
-export default makePrefab('Dropdown Widget', attributes, beforeCreate, [
+export default makePrefab('Date Widget', attributes, beforeCreate, [
   wrapper(
     {
-      label: 'Dropdown widget',
+      label: 'Date widget',
       optionCategories: [
         {
           label: 'Conditional options',
           expanded: true,
-          members: ['left', 'compare', 'right'],
-          condition: {
-            type: 'SHOW',
-            option: 'visibility',
-            comparator: 'EQ',
-            value: false,
-          },
+          members: ['conditionLeft', 'conditionComparison', 'conditionRight'],
         },
       ],
       options: {
-        questionTitle: linked({
+        question: linked({
           label: 'Question',
           value: {
             ref: {
-              componentId: '#QuestionText',
-              optionId: '#questionTitleContent',
+              componentId: '#questionText',
+              optionId: '#textContent',
+            },
+          },
+        }),
+        placeholder: linked({
+          label: 'Placeholder',
+          value: {
+            ref: {
+              componentId: '#DateInput',
+              optionId: '#DateInputPlaceholder',
             },
           },
         }),
@@ -310,35 +300,44 @@ export default makePrefab('Dropdown Widget', attributes, beforeCreate, [
           label: 'Required to answer',
           value: {
             ref: {
-              componentId: '#DropdownInput',
-              optionId: '#questionRequired',
+              componentId: '#DateInput',
+              optionId: '#DateInputRequired',
             },
           },
         }),
-        left: linked({
+        questionSpacing: linked({
+          label: 'Question spacing',
+          value: {
+            ref: {
+              componentId: '#questionBox',
+              optionId: '#questionBoxOuterSpacing',
+            },
+          },
+        }),
+        conditionLeft: linked({
           label: 'Left condition',
           value: {
             ref: {
-              componentId: '#questionCondition',
-              optionId: '#conditionLeft',
+              componentId: '#conditional',
+              optionId: '#conditionOptionLeft',
             },
           },
         }),
-        compare: linked({
+        conditionComparison: linked({
           label: 'equals',
           value: {
             ref: {
-              componentId: '#questionCondition',
-              optionId: '#conditionCompare',
+              componentId: '#conditional',
+              optionId: '#conditionOptionCompare',
             },
           },
         }),
-        right: linked({
+        conditionRight: linked({
           label: 'Right condition',
           value: {
             ref: {
-              componentId: '#questionCondition',
-              optionId: '#conditionRight',
+              componentId: '#conditional',
+              optionId: '#conditionOptionRight',
             },
           },
         }),
@@ -347,19 +346,16 @@ export default makePrefab('Dropdown Widget', attributes, beforeCreate, [
     [
       Conditional(
         {
-          ref: {
-            id: '#questionCondition',
-          },
+          ref: { id: '#conditional' },
           options: {
             ...conditionalOptions,
             left: variable('Left', {
+              ref: { id: '#conditionOptionLeft' },
               value: [],
-              ref: {
-                id: '#conditionLeft',
-              },
             }),
             compare: option('CUSTOM', {
               label: 'Compare',
+              ref: { id: '#conditionOptionCompare' },
               value: 'eq',
               configuration: {
                 as: 'DROPDOWN',
@@ -399,21 +395,19 @@ export default makePrefab('Dropdown Widget', attributes, beforeCreate, [
                   },
                 ],
               },
-              ref: {
-                id: '#conditionCompare',
-              },
             }),
             right: variable('Right', {
+              ref: { id: '#conditionOptionRight' },
               value: [],
-              ref: {
-                id: '#conditionRight',
-              },
             }),
           },
         },
         [
           Box(
             {
+              ref: {
+                id: '#questionBox',
+              },
               options: {
                 ...boxOptions,
                 backgroundColor: color('Background color', {
@@ -436,78 +430,89 @@ export default makePrefab('Dropdown Widget', attributes, beforeCreate, [
                 }),
                 outerSpacing: sizes('Outer space', {
                   value: ['0rem', '0rem', 'M', '0rem'],
+                  ref: {
+                    id: '#questionBoxOuterSpacing',
+                  },
                 }),
               },
             },
             [
               makeComponent(
                 'Form',
-                {
-                  ref: { id: '#DropdownWidgetForm' },
-                  options: { ...formOptions },
-                },
+                { ref: { id: '#DateWidgetForm' }, options: { ...formOptions } },
                 [
-                  TextPrefab({
-                    ref: {
-                      id: '#QuestionText',
+                  TextComp(
+                    {
+                      ref: { id: '#questionText' },
+                      options: {
+                        ...textOptions,
+                        content: variable('Content', {
+                          ref: { id: '#textContent' },
+                          value: [],
+                          configuration: { as: 'MULTILINE' },
+                        }),
+                        type: font('Font', {
+                          ref: { id: '#textCompType' },
+                          value: ['Body1'],
+                        }),
+                        outerSpacing: sizes('Outer space', {
+                          value: ['0rem', '0rem', 'S', '0rem'],
+                        }),
+                        fontWeight: option('CUSTOM', {
+                          label: 'Font weight',
+                          value: '500',
+                          configuration: {
+                            as: 'DROPDOWN',
+                            dataType: 'string',
+                            allowedInput: [
+                              { name: '100', value: '100' },
+                              { name: '200', value: '200' },
+                              { name: '300', value: '300' },
+                              { name: '400', value: '400' },
+                              { name: '500', value: '500' },
+                              { name: '600', value: '600' },
+                              { name: '700', value: '700' },
+                              { name: '800', value: '800' },
+                              { name: '900', value: '900' },
+                            ],
+                          },
+                        }),
+                      },
                     },
-                    options: {
-                      ...textOptions,
-                      content: variable('Content', {
-                        value: [''],
-                        configuration: {
-                          as: 'MULTILINE',
-                        },
-                        ref: {
-                          id: '#questionTitleContent',
-                        },
-                      }),
-                      type: font('Font', { value: ['Body1'] }),
-                      outerSpacing: sizes('Outer space', {
-                        value: ['0rem', '0rem', 'S', '0rem'],
-                      }),
-                      fontWeight: option('CUSTOM', {
-                        label: 'Font weight',
-                        value: '500',
-                        configuration: {
-                          as: 'DROPDOWN',
-                          dataType: 'string',
-                          allowedInput: [
-                            { name: '100', value: '100' },
-                            { name: '200', value: '200' },
-                            { name: '300', value: '300' },
-                            { name: '400', value: '400' },
-                            { name: '500', value: '500' },
-                            { name: '600', value: '600' },
-                            { name: '700', value: '700' },
-                            { name: '800', value: '800' },
-                            { name: '900', value: '900' },
+                    [],
+                  ),
+                  DateTimePicker(
+                    {
+                      ref: { id: '#DateInput' },
+                      options: {
+                        ...dateTimePickerOptions,
+                        hideLabel: toggle('Hide label', { value: true }),
+                        placeholder: variable('Placeholder', {
+                          ref: { id: '#DateInputPlaceholder' },
+                          value: [''],
+                        }),
+                        required: toggle('Required', {
+                          ref: { id: '#DateInputRequired' },
+                        }),
+                        margin: buttongroup(
+                          'Margin',
+                          [
+                            ['None', 'none'],
+                            ['Dense', 'dense'],
+                            ['Normal', 'normal'],
                           ],
-                        },
-                      }),
+                          { value: 'none' },
+                        ),
+                        type: textType('Type', {
+                          value: 'date',
+                          configuration: {
+                            condition: showIf('type', 'EQ', false),
+                          },
+                        }),
+                      },
                     },
-                  }),
-                  SelectInput({
-                    ref: { id: '#DropdownInput' },
-                    options: {
-                      ...selectInputOptions,
-                      required: toggle('Required', {
-                        ref: {
-                          id: '#questionRequired',
-                        },
-                      }),
-                      label: variable('Label', { value: [''] }),
-                      margin: buttongroup(
-                        'Margin',
-                        [
-                          ['None', 'none'],
-                          ['Dense', 'dense'],
-                          ['Normal', 'normal'],
-                        ],
-                        { value: 'none' },
-                      ),
-                    },
-                  }),
+                    [],
+                  ),
                 ],
               ),
             ],

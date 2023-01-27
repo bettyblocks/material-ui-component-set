@@ -85,6 +85,7 @@ const beforeCreate = ({
     TextInput,
     Box: BoxComp,
     Button: ButtonComp,
+    TextArea,
   },
   prefab,
   save,
@@ -182,7 +183,9 @@ const beforeCreate = ({
               />
             </Field>
             <Field pad={{ bottom: '15px' }} label="Questionnaire description">
-              <TextInput
+              <TextArea
+                resize={false}
+                style={{ minHeight: '150px' }}
                 onChange={({
                   target: { value },
                 }: {
@@ -224,7 +227,9 @@ const beforeCreate = ({
               />
             </Field>
             <Field pad={{ bottom: '15px' }} label="Section description">
-              <TextInput
+              <TextArea
+                resize={false}
+                style={{ minHeight: '150px' }}
                 onChange={({
                   target: { value },
                 }: {
