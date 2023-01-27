@@ -1,3 +1,11 @@
+# [2.97.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.96.0...v2.97.0) (2023-01-27)
+
+
+### Features
+
+* added fontstyle to text component ([c512565](https://github.com/bettyblocks/material-ui-component-set/commit/c5125658a0d24d2e6b41ae920f2c876eb7bb046b))
+* added theme values for family and size on text component ([071dc70](https://github.com/bettyblocks/material-ui-component-set/commit/071dc705f8f5aa66157b48beead5d998ee5a47ac))
+
 # [2.96.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.95.1...v2.96.0) (2023-01-27)
 
 
