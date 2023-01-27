@@ -1,3 +1,16 @@
+# [2.96.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.95.1...v2.96.0) (2023-01-27)
+
+
+### Bug Fixes
+
+* add detail child stays hidden in overview ([f4214bd](https://github.com/bettyblocks/material-ui-component-set/commit/f4214bd8534674feb5f4ac80585c7a682260ec58))
+
+
+### Features
+
+* add categories to newly added options ([2df5db1](https://github.com/bettyblocks/material-ui-component-set/commit/2df5db1aaabe4295f8e48be9a0d7a07c93db3c24))
+* add child to backoffice ([0fbe90f](https://github.com/bettyblocks/material-ui-component-set/commit/0fbe90f30d0f4ec7cda2a9ee13c4def2100af5c9))
+
 ## [2.95.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.95.0...v2.95.1) (2023-01-26)
 
 
