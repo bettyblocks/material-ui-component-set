@@ -1,3 +1,23 @@
+## [2.95.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.95.0...v2.95.1) (2023-01-26)
+
+
+### Bug Fixes
+
+* add color to placeholder text in textarea ([cf7e666](https://github.com/bettyblocks/material-ui-component-set/commit/cf7e66671d8408bbcc30580b0a86ea26d9d92c76))
+
+# [2.95.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.94.0...v2.95.0) (2023-01-26)
+
+
+### Bug Fixes
+
+* updated cli ([f65da6e](https://github.com/bettyblocks/material-ui-component-set/commit/f65da6ed854c088a92f728ce634a123ccef15cb5))
+* updated slate back to 0.88.1 ([8e19ede](https://github.com/bettyblocks/material-ui-component-set/commit/8e19ede3c9dcc9aee409e45463cbe4584a552dac))
+
+
+### Features
+
+* switch to specified imports ([4004d58](https://github.com/bettyblocks/material-ui-component-set/commit/4004d58e4e8464fd05b1bbbb8678c904c7232b86))
+
 # [2.94.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.93.0...v2.94.0) (2023-01-23)
 
 
