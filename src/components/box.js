@@ -7,6 +7,7 @@
     const { env, useText } = B;
     const { Box } = window.MaterialUI.Core;
     const {
+      displayLogic,
       alignment,
       valignment,
       transparent,
@@ -92,7 +93,9 @@
     B.defineFunction('ToOpaque', () => setOpacity(1));
     B.defineFunction('ToSemiTransparent', () => setOpacity(0.5));
     B.defineFunction('ToTransparent', () => setOpacity(0));
-
+    if (!displayLogic) {
+      return <></>;
+    }
     return isDev ? <div className={classes.wrapper}>{BoxCmp}</div> : BoxCmp;
   })(),
   styles: (B) => (theme) => {

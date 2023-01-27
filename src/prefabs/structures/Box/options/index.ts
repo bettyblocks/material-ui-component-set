@@ -8,6 +8,7 @@ import {
   variable,
   buttongroup,
   dropdown,
+  displayLogic,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -52,6 +53,7 @@ export const categories = [
 ];
 
 export const boxOptions = {
+  displayLogic: displayLogic('Display logic', { value: '' }),
   alignment: buttongroup(
     'Alignment',
     [

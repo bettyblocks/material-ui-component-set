@@ -199,7 +199,7 @@
   optionalDependencies:
     isolated-vm "^4.0.0"
 
-"@betty-blocks/component-sdk@^1.56.0":
+"@betty-blocks/component-sdk@^1.57.0":
   version "1.57.0"
   resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.57.0.tgz#3e06b4ad66f610011ab638623c17d0eaa2467363"
   integrity sha512-Xg758r3f+hrSu+Tk130mSrumW11AZu6TD6803y+YTOBtW0AGrSRBbPhnKlcAFVLEJnm1eoc4Euv9un4hOl5VBg==
