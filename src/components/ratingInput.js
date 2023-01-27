@@ -28,16 +28,13 @@
       dataComponentAttribute = ['Rating'],
     } = options;
 
-    console.log('1', label);
     const labelText = useText(label);
 
-    console.log('2', defaultValue);
     const [currentValue, setCurrentValue] = useState(
       useText(defaultValue, { rawValue: true }),
     );
     const [isDisabled, setIsDisabled] = useState(disabled);
 
-    console.log('3', defaultValue);
     const value = useText(defaultValue, { rawValue: true });
     useEffect(() => {
       setCurrentValue(value);
@@ -49,20 +46,15 @@
 
     const maxIcons = parseInt(numberOfIcons, 10) || 0;
     const [errorState, setErrorState] = useState(error);
-    console.log('4', helperText);
     const [helper, setHelper] = useState(useText(helperText));
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
 
     const IconComponent = <Icon name={icon} className={classes.ratingIcon} />;
 
-    console.log('5', defaultValue);
     const defaultValueText = useText(defaultValue);
-    console.log('6', helperText);
     const helperTextResolved = useText(helperText);
 
-    console.log('7', validationValueMissing);
     const validationMessageText = useText(validationValueMissing);
-    console.log('8', dataComponentAttribute);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
 
     const handleValidation = () => {
