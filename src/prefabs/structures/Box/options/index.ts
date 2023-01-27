@@ -46,6 +46,11 @@ export const categories = [
     ],
   },
   {
+    label: 'Logic Options',
+    expanded: false,
+    members: ['displayLogic'],
+  },
+  {
     label: 'Advanced Options',
     expanded: false,
     members: ['dataComponentAttribute'],
@@ -53,7 +58,9 @@ export const categories = [
 ];
 
 export const boxOptions = {
-  displayLogic: displayLogic('Display logic', { value: '' }),
+  displayLogic: displayLogic('Display logic', {
+    value: { left: '', right: '', predicate: 'eq' },
+  }),
   alignment: buttongroup(
     'Alignment',
     [
