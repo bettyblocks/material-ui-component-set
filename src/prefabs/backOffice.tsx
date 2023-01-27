@@ -4891,7 +4891,7 @@ const prefabStructure = [
         {
           label: 'Page view',
           expanded: true,
-          members: ['visibility', 'shownTab', 'drawerWidth', 'addDetailChild'],
+          members: ['visibility', 'shownTab', 'drawerWidth'],
         },
         {
           label: 'Table',
@@ -4927,9 +4927,14 @@ const prefabStructure = [
           },
         },
         {
-          label: 'Tab title',
+          label: 'Tab',
           expanded: true,
-          members: ['detailsTabTitle', 'updateTabTitle', 'createTabTitle'],
+          members: [
+            'detailsTabTitle',
+            'updateTabTitle',
+            'createTabTitle',
+            'addDetailChild',
+          ],
           condition: {
             type: 'SHOW',
             option: 'visibility',
