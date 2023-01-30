@@ -291,11 +291,9 @@ const beforeCreate = ({
 };
 
 const attributes = {
-  category: 'CONTENT',
-  icon: Icon.TitleIcon,
-  keywords: [''],
+  category: 'FORM',
+  icon: Icon.RatingIcon,
+  keywords: ['FORM', 'INPUT', 'RATING'],
 };
 
-export default prefab('RatingInput', attributes, beforeCreate, [
-  RatingInput({}),
-]);
+export default prefab('Rating', attributes, beforeCreate, [RatingInput({})]);
