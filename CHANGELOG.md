@@ -1,3 +1,235 @@
+# [2.97.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.96.0...v2.97.0) (2023-01-27)
+
+
+### Features
+
+* added fontstyle to text component ([c512565](https://github.com/bettyblocks/material-ui-component-set/commit/c5125658a0d24d2e6b41ae920f2c876eb7bb046b))
+* added theme values for family and size on text component ([071dc70](https://github.com/bettyblocks/material-ui-component-set/commit/071dc705f8f5aa66157b48beead5d998ee5a47ac))
+
+# [2.96.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.95.1...v2.96.0) (2023-01-27)
+
+
+### Bug Fixes
+
+* add detail child stays hidden in overview ([f4214bd](https://github.com/bettyblocks/material-ui-component-set/commit/f4214bd8534674feb5f4ac80585c7a682260ec58))
+
+
+### Features
+
+* add categories to newly added options ([2df5db1](https://github.com/bettyblocks/material-ui-component-set/commit/2df5db1aaabe4295f8e48be9a0d7a07c93db3c24))
+* add child to backoffice ([0fbe90f](https://github.com/bettyblocks/material-ui-component-set/commit/0fbe90f30d0f4ec7cda2a9ee13c4def2100af5c9))
+
+## [2.95.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.95.0...v2.95.1) (2023-01-26)
+
+
+### Bug Fixes
+
+* add color to placeholder text in textarea ([cf7e666](https://github.com/bettyblocks/material-ui-component-set/commit/cf7e66671d8408bbcc30580b0a86ea26d9d92c76))
+
+# [2.95.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.94.0...v2.95.0) (2023-01-26)
+
+
+### Bug Fixes
+
+* updated cli ([f65da6e](https://github.com/bettyblocks/material-ui-component-set/commit/f65da6ed854c088a92f728ce634a123ccef15cb5))
+* updated slate back to 0.88.1 ([8e19ede](https://github.com/bettyblocks/material-ui-component-set/commit/8e19ede3c9dcc9aee409e45463cbe4584a552dac))
+
+
+### Features
+
+* switch to specified imports ([4004d58](https://github.com/bettyblocks/material-ui-component-set/commit/4004d58e4e8464fd05b1bbbb8678c904c7232b86))
+
+# [2.94.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.93.0...v2.94.0) (2023-01-23)
+
+
+### Features
+
+* rich text list numbers and bullets move with text ([e1a02cb](https://github.com/bettyblocks/material-ui-component-set/commit/e1a02cb2cf84133a1ca9d9398c7698575cd87fc0))
+
+# [2.93.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.92.0...v2.93.0) (2023-01-23)
+
+
+### Features
+
+* add filter component to backoffice ([7b4d2d8](https://github.com/bettyblocks/material-ui-component-set/commit/7b4d2d8fff03b9e12da6605aabb2ee769c0654cb))
+* added filter to backoffice v2 and fixed bug in filter component ([75d204a](https://github.com/bettyblocks/material-ui-component-set/commit/75d204a8f344855445f0bf477af7fd0c7dc81cf8))
+
+# [2.92.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.91.0...v2.92.0) (2023-01-23)
+
+
+### Features
+
+* add ‘addChild’ and ‘reconfigure’ to breadcrumbs ([c39cfdd](https://github.com/bettyblocks/material-ui-component-set/commit/c39cfdda523e715b6825f31c50abf2aaf7134cd5))
+* add ‘addChild’ and ‘reconfigure’ to stepper ([90cff69](https://github.com/bettyblocks/material-ui-component-set/commit/90cff69bce85e1bfa5df24906b32ca8de2d8fdc4))
+* add ‘addChild’ and ‘reconfigure’ to tabs ([031f949](https://github.com/bettyblocks/material-ui-component-set/commit/031f949f488a06212e4f4d6a099f3e9d55cd6ecc))
+* add children to data table prefab ([879a329](https://github.com/bettyblocks/material-ui-component-set/commit/879a329b9afe6af4843ea6f4178c5d962e1f985d))
+* add children to list prefab ([0e9e84b](https://github.com/bettyblocks/material-ui-component-set/commit/0e9e84b7bd12af4ecf01a21e96fa15f8ec0f25b9))
+* add children to menu prefab ([f8a13a9](https://github.com/bettyblocks/material-ui-component-set/commit/f8a13a9d80adfbba2d8d08788e96a1a59e508247))
+* add children to subview prefab ([1fff00c](https://github.com/bettyblocks/material-ui-component-set/commit/1fff00cb28151299224c26193f2af3134191c63c))
+
+# [2.91.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.90.4...v2.91.0) (2023-01-23)
+
+
+### Bug Fixes
+
+* use edit partial optional ([96a944e](https://github.com/bettyblocks/material-ui-component-set/commit/96a944e6e9859c8237e029beefbfccf34512225d))
+
+
+### Features
+
+* add edit partial to the wrapper ([053174e](https://github.com/bettyblocks/material-ui-component-set/commit/053174e650ccd7e8fdbee39ab0d09bbb928e0e47))
+* add reconfigure to wrapper ([d899a83](https://github.com/bettyblocks/material-ui-component-set/commit/d899a83de614f3c3ecb7624964a059f559379110))
+
+## [2.90.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.90.3...v2.90.4) (2023-01-20)
+
+
+### Bug Fixes
+
+* updated slatejs to newer version ([ef116c6](https://github.com/bettyblocks/material-ui-component-set/commit/ef116c695524ae15ea6b99e49d12d5670ba740e5))
+
+## [2.90.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.90.2...v2.90.3) (2023-01-13)
+
+
+### Bug Fixes
+
+* display normal value again richt text value in text ([d20d5a9](https://github.com/bettyblocks/material-ui-component-set/commit/d20d5a92d72e920f83277214357a3ae47281b6e0))
+
+## [2.90.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.90.1...v2.90.2) (2023-01-13)
+
+
+### Bug Fixes
+
+* reverted back to original check ([6a8376c](https://github.com/bettyblocks/material-ui-component-set/commit/6a8376c9b43179551013e187a95e6040abe29e96))
+
+## [2.90.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.90.0...v2.90.1) (2023-01-13)
+
+
+### Bug Fixes
+
+* long text overflows in select form ([1875548](https://github.com/bettyblocks/material-ui-component-set/commit/18755488527430b7fbc553f7dbf2d6046706f89d))
+
+# [2.90.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.89.1...v2.90.0) (2023-01-12)
+
+
+### Features
+
+* use reconfigure in options ([42cd72f](https://github.com/bettyblocks/material-ui-component-set/commit/42cd72fccd916154593fa42d6efbffc75dfb6352))
+
+## [2.89.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.89.0...v2.89.1) (2023-01-11)
+
+
+### Bug Fixes
+
+* multi autocomplete filter on datatable ([913007b](https://github.com/bettyblocks/material-ui-component-set/commit/913007b016a98c49e8b48973888ec06323bd687d))
+* return acc if is or statement ([23d7209](https://github.com/bettyblocks/material-ui-component-set/commit/23d7209b6b470a7d8210fb54b8b9f0dfc5e3e3dd))
+
+# [2.89.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.88.3...v2.89.0) (2023-01-11)
+
+
+### Bug Fixes
+
+* exclude of not working props ([e14c66c](https://github.com/bettyblocks/material-ui-component-set/commit/e14c66cec26b81a2ac25a5a50f5f257ef78e4b79))
+* file link in detail work now ([726410a](https://github.com/bettyblocks/material-ui-component-set/commit/726410a19f1fec4854d49bd3f339155a4c4c0d62))
+* updated create form default modelId value ([12fd63e](https://github.com/bettyblocks/material-ui-component-set/commit/12fd63eb293110c58104355f5cab72a347dde230))
+
+
+### Features
+
+* generate backoffice properties for CRU TMPLT-1900 ([bf709c0](https://github.com/bettyblocks/material-ui-component-set/commit/bf709c0d7b1eea5143d735ecb742eecb82a8da95))
+
+## [2.88.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.88.3...v2.88.4) (2023-01-11)
+
+
+### Bug Fixes
+
+* updated create form default modelId value ([12fd63e](https://github.com/bettyblocks/material-ui-component-set/commit/12fd63eb293110c58104355f5cab72a347dde230))
+
+## [2.88.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.88.2...v2.88.3) (2023-01-11)--
+
+
+### Bug Fixes
+
+* trigger pipelines ([df88a9e](https://github.com/bettyblocks/material-ui-component-set/commit/df88a9e3fc7c0d4beb525a83e8a69cde460b4ca3))
+
+## [2.88.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.88.1...v2.88.2) (2023-01-10)
+
+
+### Bug Fixes
+
+* trigger pipelines ([916e79d](https://github.com/bettyblocks/material-ui-component-set/commit/916e79d32b902dcb2e236ed82cf9c35b07a76021))
+
+## [2.88.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.88.0...v2.88.1) (2023-01-10)
+
+
+### Bug Fixes
+
+* add tmp folder to gitignore TMPLT-2012 ([eb54ec1](https://github.com/bettyblocks/material-ui-component-set/commit/eb54ec18962153d91b1db3b39a153f6e1653f0fc))
+* added tmp to prettier and eslint ignores ([06ef82f](https://github.com/bettyblocks/material-ui-component-set/commit/06ef82f25998a9c0f36a6ae2cb9fedc33e552967))
+
+# [2.88.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.87.3...v2.88.0) (2023-01-10)
+
+
+### Features
+
+* use childselector for addchild wizard ([efbd6a8](https://github.com/bettyblocks/material-ui-component-set/commit/efbd6a81b4ff25e97b2119abac7aecfc29e671ff))
+
+## [2.87.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.87.2...v2.87.3) (2023-01-09)
+
+
+### Bug Fixes
+
+* removed property based toggle for image and file upload ([3c64812](https://github.com/bettyblocks/material-ui-component-set/commit/3c64812876e4fc0e007c11ece6c1c45f6fd25101))
+
+## [2.87.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.87.1...v2.87.2) (2023-01-09)
+
+
+### Bug Fixes
+
+* conditional hides when property value is empty ([f4a9b7a](https://github.com/bettyblocks/material-ui-component-set/commit/f4a9b7a3a3f8b3b131bc0d5d89361e49405634eb))
+
+## [2.87.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.87.0...v2.87.1) (2023-01-06)
+
+
+### Bug Fixes
+
+* model selector value not showing in form ([c1ed047](https://github.com/bettyblocks/material-ui-component-set/commit/c1ed0478160755bb068705b257c21ba971334c68))
+
+# [2.87.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.86.6...v2.87.0) (2023-01-05)
+
+
+### Bug Fixes
+
+* add rich text to update and create form ([500ea70](https://github.com/bettyblocks/material-ui-component-set/commit/500ea70cb6bcc0e739410e4ad265f31601ed7c6a))
+* eslint error fix ([3423a43](https://github.com/bettyblocks/material-ui-component-set/commit/3423a43690d3b149f57093c73c211603eab9cbc4))
+
+
+### Features
+
+* add rich text to form config ([b3b003b](https://github.com/bettyblocks/material-ui-component-set/commit/b3b003b15ace3f9c879dbf7cb4de474985f2f4ad))
+
+## [2.86.6](https://github.com/bettyblocks/material-ui-component-set/compare/v2.86.5...v2.86.6) (2023-01-05)
+
+
+### Bug Fixes
+
+* positioning not right when inside of box ([0285bea](https://github.com/bettyblocks/material-ui-component-set/commit/0285bea241746c46e85856d342da42ce816351a6))
+* tooltip not showing when open page has internal page ([3e51981](https://github.com/bettyblocks/material-ui-component-set/commit/3e519810174eded8881e7843bbaa3a96f9198576))
+* tooltip placement not correct in datatable ([062be2c](https://github.com/bettyblocks/material-ui-component-set/commit/062be2c4e058040d4a755bbb04a670ce042c00b7))
+
+## [2.86.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.86.4...v2.86.5) (2023-01-04)
+
+
+### Bug Fixes
+
+* conditional components fetches on change ([e0868c9](https://github.com/bettyblocks/material-ui-component-set/commit/e0868c9f9b499e67ac3b0b1a6eb4547daf28ec51))
+
+## [2.86.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.86.3...v2.86.4) (2023-01-04)
+
+
+### Bug Fixes
+
+* set value of value option ([8504ee7](https://github.com/bettyblocks/material-ui-component-set/commit/8504ee7aec9534fd2fc3545f673aa663176b1bff))
+
 ## [2.86.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.86.2...v2.86.3) (2022-12-23)
 
 

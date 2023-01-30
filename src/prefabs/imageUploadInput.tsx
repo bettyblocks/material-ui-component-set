@@ -9,13 +9,8 @@ const beforeCreate = ({
     Field,
     Footer,
     Header,
-    FormField,
-    Toggle,
     PropertySelector,
-    Label,
     TextInput: Text,
-    CircleQuestion,
-    BBTooltip,
   },
   prefab: originalPrefab,
   save,
@@ -36,12 +31,10 @@ const beforeCreate = ({
   } = helpers;
 
   const [propertyPath, setProperty] = React.useState<any>('');
-  const [variableInput, setVariableInput] = React.useState(null);
   const modelId = useModelIdSelector();
   const actionId = useActionIdSelector();
   const selectedPrefab = usePrefabSelector();
   const [model, setModel] = React.useState<any>(null);
-  const [propertyBased, setPropertyBased] = React.useState(!!modelId);
   const [prefabSaved, setPrefabSaved] = React.useState(false);
 
   const [validationMessage, setValidationMessage] = React.useState('');
@@ -136,17 +129,6 @@ const beforeCreate = ({
       <Header onClose={close} title="Configure form input field" />
       <Content>
         {modelId && (
-          <Field label="Property based input">
-            <FormField onClick={(): void => setPropertyBased(!propertyBased)}>
-              <Toggle
-                color="purple"
-                checked={propertyBased}
-                onChange={(): void => {}}
-              />
-            </FormField>
-          </Field>
-        )}
-        {propertyBased ? (
           <Field
             label="Property"
             error={
@@ -166,40 +148,18 @@ const beforeCreate = ({
               modelId={modelId}
             />
           </Field>
-        ) : (
-          <Field>
-            <Label>
-              Action input variable
-              <CircleQuestion
-                color="grey500"
-                size="medium"
-                data-tip="You can use this action input variable in the action itself."
-                data-for="variable-tooltip"
-              />
-            </Label>
-            <BBTooltip
-              id="variable-tooltip"
-              place="top"
-              type="dark"
-              effect="solid"
-            />
-            <Text
-              onChange={(e): void => setVariableInput(e.target.value)}
-              color="orange"
-            />
-          </Field>
         )}
       </Content>
       <Footer
         onClose={close}
-        canSave={(propertyPath && !!name) || variableInput}
+        canSave={propertyPath && !!name}
         onSave={async (): Promise<void> => {
           // eslint-disable-next-line no-param-reassign
           structure.id = componentId;
 
           const kind = propertyKind || 'STRING';
 
-          const variableName = variableInput || name;
+          const variableName = name;
           const result = await prepareInput(
             actionId,
             variableName,
@@ -233,23 +193,25 @@ const beforeCreate = ({
             ...option,
             value: result.variable.variableId,
           }));
-          if (propertyBased) {
-            setOption(newPrefab.structure[0], 'actionProperty', (option) => ({
-              ...option,
-              value: {
-                modelProperty: propertyPath,
-                actionVariableId: result.variable.variableId,
+          setOption(newPrefab.structure[0], 'actionProperty', (option) => ({
+            ...option,
+            value: {
+              modelProperty: propertyPath,
+              actionVariableId: result.variable.variableId,
+            },
+            configuration: {
+              condition: {
+                type: 'HIDE',
+                option: 'actionProperty',
+                comparator: 'EQ',
+                value: '',
               },
-              configuration: {
-                condition: {
-                  type: 'HIDE',
-                  option: 'actionProperty',
-                  comparator: 'EQ',
-                  value: '',
-                },
-              },
-            }));
-          }
+            },
+          }));
+          setOption(newPrefab.structure[0], 'value', (option) => ({
+            ...option,
+            value: [propertyPath.id[propertyPath.id.length - 1]],
+          }));
           if (validate()) {
             if (
               (selectedPrefab?.name === BettyPrefabs.UPDATE_FORM ||
