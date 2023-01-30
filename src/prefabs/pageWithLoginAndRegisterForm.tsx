@@ -1303,7 +1303,7 @@ export default makePrefab('Header and footer', attrs, beforeCreate, [
                                                   },
                                                 }),
                                                 type: font('Font', {
-                                                  value: ['Title1'],
+                                                  value: ['Title4'],
                                                 }),
                                               },
                                             },

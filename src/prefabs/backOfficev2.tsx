@@ -3490,7 +3490,7 @@ const prefabStructure = [
                                           configuration: { as: 'MULTILINE' },
                                         }),
                                         type: font('Font', {
-                                          value: ['Title1'],
+                                          value: ['Title4'],
                                         }),
                                         outerSpacing: sizes('Outer space', {
                                           value: ['0rem', '0rem', 'M', '0rem'],

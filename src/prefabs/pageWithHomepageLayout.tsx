@@ -1000,7 +1000,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['About us'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Title1'] }),
+                                    type: font('Font', { value: ['Title4'] }),
                                     outerSpacing: sizes('Outer space', {
                                       value: ['0rem', '0rem', 'M', '0rem'],
                                     }),
@@ -1279,7 +1279,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                         ],
                                       },
                                     }),
-                                    type: font('Font', { value: ['Title1'] }),
+                                    type: font('Font', { value: ['Title4'] }),
                                     fontWeight: option('CUSTOM', {
                                       label: 'Font weight',
                                       value: '300',
@@ -3583,7 +3583,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                         ],
                                       },
                                     }),
-                                    type: font('Font', { value: ['Title1'] }),
+                                    type: font('Font', { value: ['Title4'] }),
                                     fontWeight: option('CUSTOM', {
                                       label: 'Font weight',
                                       value: '300',
@@ -6455,7 +6455,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['Are you interested?'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Title1'] }),
+                                    type: font('Font', { value: ['Title4'] }),
                                     outerSpacing: sizes('Outer space', {
                                       value: ['0rem', '0rem', 'M', '0rem'],
                                     }),

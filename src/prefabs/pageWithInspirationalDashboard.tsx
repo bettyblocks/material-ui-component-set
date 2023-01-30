@@ -1071,7 +1071,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                           configuration: { as: 'MULTILINE' },
                                         }),
                                         type: font('Font', {
-                                          value: ['Title1'],
+                                          value: ['Title4'],
                                         }),
                                       },
                                     },
@@ -3410,7 +3410,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                                   },
                                                 }),
                                                 type: font('Font', {
-                                                  value: ['Title1'],
+                                                  value: ['Title4'],
                                                 }),
                                                 outerSpacing: sizes(
                                                   'Outer space',

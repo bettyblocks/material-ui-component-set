@@ -2197,7 +2197,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                             },
                                           ),
                                           type: font('Font', {
-                                            value: ['Title1'],
+                                            value: ['Title4'],
                                           }),
                                         },
                                       },
@@ -2947,7 +2947,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                   'Font',
                                                                   {
                                                                     value: [
-                                                                      'Title1',
+                                                                      'Title4',
                                                                     ],
                                                                   },
                                                                 ),
@@ -3296,7 +3296,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                   'Font',
                                                                   {
                                                                     value: [
-                                                                      'Title1',
+                                                                      'Title4',
                                                                     ],
                                                                   },
                                                                 ),
@@ -3730,7 +3730,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                   'Font',
                                                                   {
                                                                     value: [
-                                                                      'Title1',
+                                                                      'Title4',
                                                                     ],
                                                                   },
                                                                 ),
@@ -4164,7 +4164,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                   'Font',
                                                                   {
                                                                     value: [
-                                                                      'Title1',
+                                                                      'Title4',
                                                                     ],
                                                                   },
                                                                 ),
