@@ -895,7 +895,7 @@ const prefabStructure: PrefabComponent[] = [
                                                     },
                                                   }),
                                                   type: font('Font', {
-                                                    value: ['Title1'],
+                                                    value: ['Title4'],
                                                   }),
                                                 },
                                               },
