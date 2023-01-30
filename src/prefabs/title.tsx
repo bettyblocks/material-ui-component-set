@@ -1,4 +1,4 @@
-import { prefab, Icon, variable } from '@betty-blocks/component-sdk';
+import { prefab, Icon, option } from '@betty-blocks/component-sdk';
 import { Text, textOptions } from './structures';
 
 const attr = {
@@ -22,10 +22,26 @@ const attr = {
 
 const defaultOptions = { ...textOptions };
 
-defaultOptions.dataComponentAttribute = variable('Test attribute', {
-  value: ['Title'],
+defaultOptions.fontWeight = option('CUSTOM', {
+  label: 'Font weight',
+  value: '300',
+  configuration: {
+    as: 'DROPDOWN',
+    dataType: 'string',
+    allowedInput: [
+      { name: '100', value: '100' },
+      { name: '200', value: '200' },
+      { name: '300', value: '300' },
+      { name: '400', value: '400' },
+      { name: '500', value: '500' },
+      { name: '600', value: '600' },
+      { name: '700', value: '700' },
+      { name: '800', value: '800' },
+      { name: '900', value: '900' },
+    ],
+  },
 });
 
 export default prefab('Title', attr, undefined, [
-  Text({ label: 'Title', options: defaultOptions }, []),
+  Text({ options: defaultOptions }, []),
 ]);

@@ -37,7 +37,7 @@ export const textOptions = {
       condition: showIfTrue('useInnerHtml'),
     },
   }),
-  type: font('Font', { value: ['Title1'] }),
+  type: font('Font', { value: ['Title2'] }),
   textAlignment: option('CUSTOM', {
     label: 'Text Alignment',
     value: 'left',
@@ -97,7 +97,7 @@ export const textOptions = {
 
   fontWeight: option('CUSTOM', {
     label: 'Font weight',
-    value: '500',
+    value: '400',
     configuration: {
       as: 'DROPDOWN',
       dataType: 'string',
