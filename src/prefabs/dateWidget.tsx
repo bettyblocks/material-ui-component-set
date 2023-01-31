@@ -136,6 +136,7 @@ const beforeCreate = ({
             modelId={modelId}
             value={primaryProperty}
             disabledKinds={unsupportedKinds}
+            disabledNames={['created_at', 'updated_at']}
             disabled={modelId === null}
           />
         </Field>
