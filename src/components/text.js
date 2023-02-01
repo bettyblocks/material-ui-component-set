@@ -121,8 +121,12 @@
         padding: 0,
         whiteSpace: 'pre-wrap',
         color: ({ options: { textColor } }) => style.getColor(textColor),
-        fontFamily: ({ options: { type } }) => style.getFontFamily(type),
-        fontSize: ({ options: { type } }) => style.getFontSize(type),
+        fontFamily: ({ options: { type } }) =>
+          `var(--text-fontFamily-${type.toString().toLowerCase()})`,
+        fontSize: ({ options: { type } }) =>
+          `var(--text-fontSize-${type.toString().toLowerCase()})`,
+        fontStyle: ({ options: { type } }) =>
+          `var(--text-fontStyle-${type.toString().toLowerCase()})`,
         fontWeight: ({ options: { fontWeight } }) => fontWeight,
         textTransform: ({ options: { type } }) => style.getTextTransform(type),
         letterSpacing: ({ options: { type } }) => style.getLetterSpacing(type),
