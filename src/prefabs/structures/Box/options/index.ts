@@ -59,7 +59,7 @@ export const categories = [
 
 export const boxOptions = {
   displayLogic: displayLogic('Display logic', {
-    value: { left: '', right: '', predicate: 'eq' },
+    value: {},
   }),
   alignment: buttongroup(
     'Alignment',
