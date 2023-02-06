@@ -31,6 +31,7 @@
           searchProperty,
           order,
           orderBy,
+          labelNumberOfPages,
           pagination,
           loadingType,
           loadingText,
@@ -49,6 +50,7 @@
         const displayError = showError === 'built-in';
         const listRef = React.createRef();
         const [showPagination, setShowPagination] = useState(true);
+        const numOfPagesLabel = useText(labelNumberOfPages);
         const [prevData, setPrevData] = useState(null);
         const [filterv2, setFilterV2] = useState({});
         const isInline = type === 'inline';
@@ -58,13 +60,11 @@
 
         const builderLayout = () => (
           <div data-component={dataComponentAttributeText || 'DataList'}>
-            {searchProperty &&
-              searchProperty.type &&
-              searchProperty.id !== '' && (
-                <div className={classes.header}>
-                  <SearchComponent label={searchPropertyLabel} />
-                </div>
-              )}
+            {searchProperty && searchProperty.type && searchProperty.id !== '' && (
+              <div className={classes.header}>
+                <SearchComponent label={searchPropertyLabel} />
+              </div>
+            )}
             <div ref={listRef} className={isGrid ? classes.grid : undefined}>
               <div
                 className={
@@ -530,7 +530,7 @@
                 {firstItem + 1}
                 {firstItem + 1 !== totalCount &&
                   ` - ${firstItem + resultCount}`}{' '}
-                of {totalText}
+                {numOfPagesLabel} {totalText}
               </span>
               <div className={classes.pagination}>
                 {typeof currentPage !== 'undefined' && currentPage > 1 ? (
