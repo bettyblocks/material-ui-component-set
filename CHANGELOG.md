@@ -1,3 +1,10 @@
+# [2.98.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.97.0...v2.98.0) (2023-02-07)
+
+
+### Features
+
+* add variable option for pagination label ([b7cfe1f](https://github.com/bettyblocks/material-ui-component-set/commit/b7cfe1f592e4be0e6e6f681f629839130e5c9701))
+
 # [2.97.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.96.0...v2.97.0) (2023-01-27)
 
 
