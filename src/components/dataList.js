@@ -330,10 +330,12 @@
         }, [search]);
 
         B.defineFunction('Advanced filter', (value) => {
+          setPage(1);
           setFilterV2(value.where);
         });
 
         B.defineFunction('Clear advanced filter', () => {
+          setPage(1);
           setFilterV2({});
         });
 
@@ -523,7 +525,6 @@
           }, [totalCount]);
 
           const totalText = env === 'dev' ? '[total]' : totalCount;
-
           return (
             <>
               <span>
