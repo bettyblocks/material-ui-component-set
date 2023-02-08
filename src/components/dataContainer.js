@@ -19,6 +19,7 @@
           filter,
           model,
           authProfile,
+          fetchPolicy,
           redirectWithoutResult,
           showError,
           currentRecord,
@@ -213,11 +214,7 @@
 
         if (model) {
           return (
-            <GetOne
-              modelId={model}
-              rawFilter={where}
-              fetchPolicy="cache-and-network"
-            >
+            <GetOne modelId={model} rawFilter={where} fetchPolicy={fetchPolicy}>
               {({ loading, error, data, refetch }) => {
                 if (!loading && data && data.id) {
                   B.triggerEvent('onSuccess', data);
