@@ -1,3 +1,11 @@
+## [2.98.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.98.0...v2.98.1) (2023-02-08)
+
+
+### Bug Fixes
+
+* update action input type in switch ([c17ebdd](https://github.com/bettyblocks/material-ui-component-set/commit/c17ebdd45b42a6e672409ecd02141cb72ee08fe4))
+* updated action input type in 4 components ([8aeb551](https://github.com/bettyblocks/material-ui-component-set/commit/8aeb551fd68a80dae493bd12a4cd3d4b2078eb3e))
+
 # [2.98.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.97.0...v2.98.0) (2023-02-07)
 
 
