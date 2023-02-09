@@ -377,6 +377,15 @@ const interactions: PrefabInteraction[] = [
     type: InteractionType.Custom,
   },
   {
+    name: 'Reset advanced filter',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#filterComp',
+      sourceComponentId: '#clearFilterButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
     name: 'Show',
     sourceEvent: 'Click',
     ref: {
