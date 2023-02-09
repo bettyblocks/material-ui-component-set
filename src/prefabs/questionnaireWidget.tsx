@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   prefab as makePrefab,
   Icon,
-  PrefabInteraction,
   BeforeCreateArgs,
   sizes,
   variable,
@@ -16,8 +15,6 @@ import {
   ThemeColor,
   buttongroup,
   PrefabComponentOption,
-  PrefabVariable,
-  InteractionType,
 } from '@betty-blocks/component-sdk';
 import {
   Box,
@@ -46,33 +43,9 @@ import {
   Tab,
   Tabs,
   tabsOptions,
-  Dialog,
-  dialogOptions,
 } from './structures';
 import { ModelProps, ModelQuery } from './types';
-import { Form } from './structures/ActionJSForm';
 
-const interactions: PrefabInteraction[] = [
-  {
-    name: 'Select',
-    sourceEvent: 'Click',
-    ref: {
-      targetComponentId: '#PrimaryTab',
-      sourceComponentId: '#primaryButton',
-    },
-    type: InteractionType.Custom,
-  },
-  {
-    name: 'Submit',
-    sourceEvent: 'onNoResults',
-    ref: {
-      targetComponentId: '#formId',
-      sourceComponentId: '#questionnaireDataContainer',
-    },
-    type: InteractionType.Custom,
-  },
-];
-const variables: PrefabVariable[] = [];
 const beforeCreate = ({
   components: {
     Content,
@@ -89,7 +62,7 @@ const beforeCreate = ({
   prefab,
   save,
   close,
-  helpers: { useModelQuery, setOption, createUuid, prepareAction },
+  helpers: { useModelQuery, setOption },
 }: BeforeCreateArgs) => {
   const [model, setModel] = React.useState<ModelProps>();
   const [modelId, setModelId] = React.useState('');
@@ -101,7 +74,6 @@ const beforeCreate = ({
   const [validation, setValidation] = React.useState(false);
   const [validationMessage, setValidationMessage] = React.useState('');
   const [stepNumber, setStepNumber] = React.useState(1);
-  const componentId = createUuid();
 
   const { data } = useModelQuery({
     variables: { id: modelId },
@@ -122,19 +94,6 @@ const beforeCreate = ({
       }
       return treeSearch(refValue, component.descendants);
     }, null);
-
-  const enrichVarObj = (obj: any) => {
-    const returnObject = obj;
-    if (data && data.model) {
-      const property = data.model.properties.find(
-        (prop: any) => prop.id === obj.id[0],
-      );
-      if (property) {
-        returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
-      }
-    }
-    return returnObject;
-  };
 
   if (modelId === '' && validationMessage === '') {
     setValidationMessage('Selecting a model is required');
@@ -266,10 +225,6 @@ const beforeCreate = ({
         newPrefab.structure,
       );
 
-      const form = treeSearch('#formId', newPrefab.structure);
-      const idProperty = data?.model.properties.find(
-        (property: any) => property.name === 'id', // property comes from a source. This is not typed anywhere. what type is this property?
-      );
       if (title) {
         setOption(titleText, 'content', (opt: PrefabComponentOption) => ({
           ...opt,
@@ -346,33 +301,6 @@ const beforeCreate = ({
         }
       }
 
-      form.id = componentId;
-      const result = await prepareAction(
-        componentId,
-        idProperty,
-        [enrichVarObj(model?.properties[0])],
-        'create',
-        undefined,
-        undefined,
-        'public',
-        undefined,
-        'Questionnaire - create empty record',
-      );
-
-      setOption(form, 'actionId', (opt: PrefabComponentOption) => ({
-        ...opt,
-        value: result.action.actionId,
-        configuration: { disabled: true },
-      }));
-
-      setOption(form, 'model', (opt: PrefabComponentOption) => ({
-        ...opt,
-        value: modelId,
-        configuration: {
-          disabled: true,
-        },
-      }));
-
       save(newPrefab);
     },
     buttons: () => (
@@ -440,8 +368,6 @@ const beforeCreate = ({
 const attributes = {
   category: 'WIDGETS',
   icon: Icon.UpdateFormIcon,
-  interactions,
-  variables,
   type: 'page',
   detail:
     'Easily build a questionnaire with or without sections, weighted scoring, logic and more with this template.',
@@ -574,17 +500,6 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                     [],
                   ),
                 ]),
-                Dialog(
-                  {
-                    options: {
-                      ...dialogOptions,
-                      invisible: toggle('Invisible', {
-                        value: true,
-                      }),
-                    },
-                  },
-                  [Box({}, [Form('Create form')])],
-                ),
               ],
             ),
           ],
@@ -1886,144 +1801,6 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                                       {
                                                                         value: [
                                                                           `We'll start with some basic questions before we dive into details.`,
-                                                                        ],
-                                                                        configuration:
-                                                                          {
-                                                                            as: 'MULTILINE',
-                                                                          },
-                                                                      },
-                                                                    ),
-                                                                  type: font(
-                                                                    'Font',
-                                                                    {
-                                                                      value: [
-                                                                        'Body1',
-                                                                      ],
-                                                                    },
-                                                                  ),
-                                                                },
-                                                              },
-                                                              [],
-                                                            ),
-                                                            Box(
-                                                              {
-                                                                label:
-                                                                  'Question drop area',
-                                                              },
-                                                              [],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Tab(
-                                                          {
-                                                            ref: {
-                                                              id: '#SecondaryTab',
-                                                            },
-                                                          },
-                                                          [
-                                                            TextComp(
-                                                              {
-                                                                options: {
-                                                                  ...textOptions,
-                                                                  content:
-                                                                    variable(
-                                                                      'Content',
-                                                                      {
-                                                                        value: [
-                                                                          'Other information',
-                                                                        ],
-                                                                        configuration:
-                                                                          {
-                                                                            as: 'MULTILINE',
-                                                                          },
-                                                                      },
-                                                                    ),
-                                                                  type: font(
-                                                                    'Font',
-                                                                    {
-                                                                      value: [
-                                                                        'Title5',
-                                                                      ],
-                                                                    },
-                                                                  ),
-                                                                  fontWeight:
-                                                                    option(
-                                                                      'CUSTOM',
-                                                                      {
-                                                                        label:
-                                                                          'Font weight',
-                                                                        value:
-                                                                          '500',
-                                                                        configuration:
-                                                                          {
-                                                                            as: 'DROPDOWN',
-                                                                            dataType:
-                                                                              'string',
-                                                                            allowedInput:
-                                                                              [
-                                                                                {
-                                                                                  name: '100',
-                                                                                  value:
-                                                                                    '100',
-                                                                                },
-                                                                                {
-                                                                                  name: '200',
-                                                                                  value:
-                                                                                    '200',
-                                                                                },
-                                                                                {
-                                                                                  name: '300',
-                                                                                  value:
-                                                                                    '300',
-                                                                                },
-                                                                                {
-                                                                                  name: '400',
-                                                                                  value:
-                                                                                    '400',
-                                                                                },
-                                                                                {
-                                                                                  name: '500',
-                                                                                  value:
-                                                                                    '500',
-                                                                                },
-                                                                                {
-                                                                                  name: '600',
-                                                                                  value:
-                                                                                    '600',
-                                                                                },
-                                                                                {
-                                                                                  name: '700',
-                                                                                  value:
-                                                                                    '700',
-                                                                                },
-                                                                                {
-                                                                                  name: '800',
-                                                                                  value:
-                                                                                    '800',
-                                                                                },
-                                                                                {
-                                                                                  name: '900',
-                                                                                  value:
-                                                                                    '900',
-                                                                                },
-                                                                              ],
-                                                                          },
-                                                                      },
-                                                                    ),
-                                                                },
-                                                              },
-                                                              [],
-                                                            ),
-                                                            TextComp(
-                                                              {
-                                                                options: {
-                                                                  ...textOptions,
-                                                                  content:
-                                                                    variable(
-                                                                      'Content',
-                                                                      {
-                                                                        value: [
-                                                                          `On this page you can drag and drop widgets or make your own to create your questionnaire.`,
                                                                         ],
                                                                         configuration:
                                                                           {
