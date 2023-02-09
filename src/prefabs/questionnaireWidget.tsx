@@ -377,7 +377,7 @@ const attributes = {
     'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/56b89343f4ef499393e162173777c9ec',
 };
 
-export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
+export default makePrefab('Questionnaire', attributes, beforeCreate, [
   Drawer({}, [
     DrawerBar(
       {
@@ -1251,6 +1251,8 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                               {
                                                                 style: {
                                                                   overwrite: {
+                                                                    boxShadow:
+                                                                      'none',
                                                                     backgroundColor:
                                                                       {
                                                                         type: 'THEME_COLOR',
@@ -1824,6 +1826,21 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                               {
                                                                 label:
                                                                   'Question drop area',
+                                                                options: {
+                                                                  ...boxOptions,
+                                                                  innerSpacing:
+                                                                    sizes(
+                                                                      'Inner space',
+                                                                      {
+                                                                        value: [
+                                                                          'L',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                        ],
+                                                                      },
+                                                                    ),
+                                                                },
                                                               },
                                                               [],
                                                             ),
