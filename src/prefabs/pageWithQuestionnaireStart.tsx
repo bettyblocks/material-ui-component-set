@@ -10,12 +10,10 @@ import {
   toggle,
   color,
   ThemeColor,
-  PrefabReference,
   BeforeCreateArgs,
   variable,
   font,
   showIfTrue,
-  PrefabComponent,
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
@@ -33,7 +31,7 @@ import {
   OpenPageButton,
   openPageButtonOptions,
 } from './structures';
-import { Property, PropertyStateProps } from './types';
+import { Property, PropertyStateProps, Endpoint } from './types';
 
 const attrs = {
   icon: Icon.SubmitButtonIcon,
@@ -52,19 +50,15 @@ const beforeCreate = ({
   components: {
     Header,
     Content,
-    PartialSelector,
     ModelSelector,
     PropertySelector,
+    EndpointSelector,
     Footer,
     Field,
-    Box,
     Text,
-    Button,
+    Box,
   },
 }: BeforeCreateArgs) => {
-  const [stepNumber, setStepNumber] = React.useState(1);
-  const [headerPartialId, setHeaderPartialId] = React.useState('');
-  const [footerPartialId, setFooterPartialId] = React.useState('');
   const [showValidation, setShowValidation] = React.useState(false);
   const [modelId, setModelId] = React.useState('');
   const [titleProperty, setTitleProperty] = React.useState<PropertyStateProps>({
@@ -74,198 +68,11 @@ const beforeCreate = ({
     React.useState<PropertyStateProps>({
       id: '',
     });
+  const [endpoint, setEndpoint] = React.useState<Endpoint>();
+  const [endpointInvalid, setEndpointInvalid] = React.useState(false);
 
-  function treeSearch(
-    dirName: string,
-    array: PrefabReference[],
-  ): PrefabComponent | undefined {
-    // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < array.length; i++) {
-      const q = array[i];
-      if (q.type === 'COMPONENT') {
-        if (q.ref && q.ref.id === dirName) {
-          return q;
-        }
-      }
-      if (q.type !== 'PARTIAL' && q.descendants && q.descendants.length) {
-        const result = treeSearch(dirName, q.descendants);
-        if (result) return result;
-      }
-    }
-    return undefined;
-  }
-
-  const stepper = {
-    setStep: (step: number) => {
-      if (step === 1) {
-        return (
-          <>
-            <Box pad={{ bottom: '15px' }}>
-              <Box pad={{ bottom: '15px' }}>
-                <Text size="medium" weight="bolder">
-                  Select partials
-                </Text>
-              </Box>
-              <Box pad={{ bottom: '15px' }}>
-                <Text color="grey700">
-                  By using a partial for the top menu and footer you can easily
-                  reuse the same structure without having to go through every
-                  page.
-                </Text>
-              </Box>
-              <Field label="TOP MENU PARTIAL">
-                <PartialSelector
-                  label="Select a partial"
-                  onChange={(headerId: string) => {
-                    setHeaderPartialId(headerId);
-                  }}
-                  preSelected="Top menu"
-                  value={headerPartialId}
-                  allowedTypes={[
-                    'BODY_COMPONENT',
-                    'CONTAINER_COMPONENT',
-                    'CONTENT_COMPONENT',
-                  ]}
-                />
-              </Field>
-            </Box>
-            <Box pad={{ bottom: '15px' }}>
-              <Field label="FOOTER PARTIAL">
-                <PartialSelector
-                  label="Select a partial"
-                  onChange={(footerId: string) => {
-                    setFooterPartialId(footerId);
-                  }}
-                  preSelected="Footer"
-                  value={footerPartialId}
-                  allowedTypes={[
-                    'BODY_COMPONENT',
-                    'CONTAINER_COMPONENT',
-                    'CONTENT_COMPONENT',
-                  ]}
-                />
-              </Field>
-            </Box>
-          </>
-        );
-      }
-      return (
-        <>
-          <Field
-            label="Select a model for saving the questionnaire data"
-            error={
-              showValidation && (
-                <Text color="#e82600">Selecting a model is required</Text>
-              )
-            }
-          >
-            <ModelSelector
-              onChange={(value: string) => {
-                setShowValidation(false);
-                setModelId(value);
-                setTitleProperty({ id: '' });
-                setDescriptionProperty({ id: '' });
-              }}
-              value={modelId}
-            />
-          </Field>
-          <Field label="Title property">
-            <PropertySelector
-              modelId={modelId}
-              onChange={(value: Property) => {
-                setTitleProperty(value);
-              }}
-              value={titleProperty}
-              disabled={!modelId}
-            />
-          </Field>
-          <Field label="Description property">
-            <PropertySelector
-              modelId={modelId}
-              onChange={(value: Property) => {
-                setDescriptionProperty(value);
-              }}
-              value={descriptionProperty}
-              disabled={!modelId}
-            />
-          </Field>
-        </>
-      );
-    },
-    onSave: () => {
-      if (!modelId) {
-        setShowValidation(true);
-        return;
-      }
-      const newPrefab = { ...prefab };
-      const prefabFooter = treeSearch('#Footer', newPrefab.structure);
-      const prefabHeader = treeSearch('#Header', newPrefab.structure);
-      if (headerPartialId && prefabHeader) {
-        prefabHeader.descendants = [
-          { type: 'PARTIAL', partialId: headerPartialId },
-        ];
-      }
-
-      if (footerPartialId && prefabFooter) {
-        prefabFooter.descendants = [
-          { type: 'PARTIAL', partialId: footerPartialId },
-        ];
-      }
-
-      save(newPrefab);
-    },
-    buttons: () => (
-      <Box direction="row" justify="between">
-        <Box direction="row" margin="2rem">
-          <Button
-            label="Previous"
-            size="large"
-            background={{ color: '#f0f1f5' }}
-            onClick={() => {
-              if (stepNumber === 1) {
-                return;
-              }
-              const newStepnumber = stepNumber - 1;
-              setStepNumber(newStepnumber);
-            }}
-            margin={{ right: '5px' }}
-            disabled={stepNumber === 1}
-          />
-          <Button
-            label="Next"
-            size="large"
-            disabled={stepNumber === stepper.stepAmount}
-            onClick={() => {
-              const newStepnumber = stepNumber + 1;
-              setStepNumber(newStepnumber);
-            }}
-            primary
-          />
-        </Box>
-        <Box>
-          <Footer
-            onClose={close}
-            onSave={stepNumber === stepper.stepAmount && stepper.onSave}
-            canSave={stepNumber === stepper.stepAmount}
-          />
-        </Box>
-      </Box>
-    ),
-    progressBar: () => {
-      return (
-        <Box
-          justify="center"
-          margin={{ bottom: '2rem', left: '2rem', top: '-1rem' }}
-        >
-          <Text
-            size="medium"
-            weight="bold"
-          >{`Step: ${stepNumber} / ${stepper.stepAmount}`}</Text>
-        </Box>
-      );
-    },
-    stepAmount: 2,
-  };
+  const isEmptyEndpoint = (value: Endpoint): boolean =>
+    !value || Object.keys(value).length === 0 || value.id === '';
 
   return (
     <>
@@ -273,9 +80,88 @@ const beforeCreate = ({
         onClose={close}
         title="Configure Questionnaire initialization page"
       />
-      {stepper.progressBar()}
-      <Content>{stepper.setStep(stepNumber)}</Content>
-      {stepper.buttons()}
+      <Content>
+        <Field
+          label="Select a model for saving the questionnaire data"
+          error={
+            showValidation && (
+              <Text color="#e82600">Selecting a model is required</Text>
+            )
+          }
+        >
+          <ModelSelector
+            onChange={(value: string) => {
+              setShowValidation(false);
+              setModelId(value);
+              setTitleProperty({ id: '' });
+              setDescriptionProperty({ id: '' });
+            }}
+            value={modelId}
+          />
+        </Field>
+        <Field label="Title property">
+          <PropertySelector
+            modelId={modelId}
+            onChange={(value: Property) => {
+              setTitleProperty(value);
+            }}
+            value={titleProperty}
+            disabled={!modelId}
+          />
+        </Field>
+        <Field label="Description property">
+          <PropertySelector
+            modelId={modelId}
+            onChange={(value: Property) => {
+              setDescriptionProperty(value);
+            }}
+            value={descriptionProperty}
+            disabled={!modelId}
+          />
+        </Field>
+        <Field
+          label="Set the redirect page"
+          error={
+            endpointInvalid && (
+              <Text color="#e82600">Selecting a page is required</Text>
+            )
+          }
+        >
+          <Box pad={{ bottom: '15px' }}>
+            <Text color="grey700">
+              This is the page that the user will be redirected to when they
+              start the questionnaire.
+            </Text>
+            <EndpointSelector
+              value={endpoint || ''}
+              size="large"
+              onChange={(value: Endpoint): void => {
+                setEndpointInvalid(isEmptyEndpoint(value));
+                setEndpoint(value);
+              }}
+            />
+          </Box>
+        </Field>
+      </Content>
+      <Footer
+        onSave={() => {
+          if (!modelId) {
+            setShowValidation(true);
+            return;
+          }
+          if (!endpoint) {
+            throw new Error('There was no redirected page selected');
+          }
+          if (isEmptyEndpoint(endpoint)) {
+            setEndpointInvalid(true);
+            // eslint-disable-next-line no-useless-return
+            return;
+          }
+          const newPrefab = { ...prefab };
+
+          save(newPrefab);
+        }}
+      />
     </>
   );
 };
