@@ -1824,6 +1824,21 @@ export default makePrefab('Questionnaire', attributes, beforeCreate, [
                                                               {
                                                                 label:
                                                                   'Question drop area',
+                                                                options: {
+                                                                  ...boxOptions,
+                                                                  innerSpacing:
+                                                                    sizes(
+                                                                      'Inner space',
+                                                                      {
+                                                                        value: [
+                                                                          'L',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                        ],
+                                                                      },
+                                                                    ),
+                                                                },
                                                               },
                                                               [],
                                                             ),
