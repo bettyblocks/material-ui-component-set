@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   prefab as makePrefab,
   Icon,
-  PrefabInteraction,
   BeforeCreateArgs,
   sizes,
   variable,
@@ -16,9 +15,6 @@ import {
   ThemeColor,
   buttongroup,
   PrefabComponentOption,
-  PrefabVariable,
-  InteractionType,
-  ValueDefault,
 } from '@betty-blocks/component-sdk';
 import {
   Box,
@@ -47,33 +43,9 @@ import {
   Tab,
   Tabs,
   tabsOptions,
-  Dialog,
-  dialogOptions,
 } from './structures';
 import { ModelProps, ModelQuery } from './types';
-import { Form } from './structures/ActionJSForm';
 
-const interactions: PrefabInteraction[] = [
-  {
-    name: 'Select',
-    sourceEvent: 'Click',
-    ref: {
-      targetComponentId: '#PrimaryTab',
-      sourceComponentId: '#primaryButton',
-    },
-    type: InteractionType.Custom,
-  },
-  {
-    name: 'Submit',
-    sourceEvent: 'onNoResults',
-    ref: {
-      targetComponentId: '#formId',
-      sourceComponentId: '#firstTabDataContainer',
-    },
-    type: InteractionType.Custom,
-  },
-];
-const variables: PrefabVariable[] = [];
 const beforeCreate = ({
   components: {
     Content,
@@ -90,21 +62,11 @@ const beforeCreate = ({
   prefab,
   save,
   close,
-  helpers: {
-    useModelQuery,
-    setOption,
-    useCurrentPageId,
-    camelToSnakeCase,
-    createUuid,
-    prepareAction,
-    cloneStructure,
-  },
+  helpers: { useModelQuery, setOption },
 }: BeforeCreateArgs) => {
   const [model, setModel] = React.useState<ModelProps>();
-  const [secondaryModel, setSecondaryModel] = React.useState<ModelProps>();
   const [modelId, setModelId] = React.useState('');
 
-  const [secondModelId, setSecondModelId] = React.useState('');
   const [title, setTitle] = React.useState('');
   const [description, setDescription] = React.useState('');
   const [sectionTitle, setSectionTitle] = React.useState('');
@@ -112,8 +74,6 @@ const beforeCreate = ({
   const [validation, setValidation] = React.useState(false);
   const [validationMessage, setValidationMessage] = React.useState('');
   const [stepNumber, setStepNumber] = React.useState(1);
-  const pageId = useCurrentPageId();
-  const componentId = createUuid();
 
   const { data } = useModelQuery({
     variables: { id: modelId },
@@ -121,13 +81,6 @@ const beforeCreate = ({
       setModel(result.model);
     },
     skip: !modelId,
-  });
-  const { data: secondaryData } = useModelQuery({
-    variables: { id: secondModelId },
-    onCompleted: (result: ModelQuery) => {
-      setSecondaryModel(result.model);
-    },
-    skip: !secondModelId,
   });
 
   const treeSearch = (refValue: string, structure: any) =>
@@ -141,19 +94,6 @@ const beforeCreate = ({
       }
       return treeSearch(refValue, component.descendants);
     }, null);
-
-  const enrichVarObj = (obj: any) => {
-    const returnObject = obj;
-    if (data && data.model) {
-      const property = data.model.properties.find(
-        (prop: any) => prop.id === obj.id[0],
-      );
-      if (property) {
-        returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
-      }
-    }
-    return returnObject;
-  };
 
   if (modelId === '' && validationMessage === '') {
     setValidationMessage('Selecting a model is required');
@@ -249,10 +189,10 @@ const beforeCreate = ({
       return (
         <>
           <Field pad={{ bottom: '15px' }}>
-            <Text>Select models for your questionnaire datacontainers.</Text>
+            <Text>Select a model for your questionnaire</Text>
           </Field>
           <Field
-            label="Primary tab model"
+            label="Questionnaire model"
             error={
               validation && <Text color="#e82600">{validationMessage}</Text>
             }
@@ -268,15 +208,6 @@ const beforeCreate = ({
               value={modelId}
             />
           </Field>
-          <Field label="Second tab model (optional)">
-            <ModelSelector
-              onChange={(value: string) => {
-                setSecondModelId(value);
-              }}
-              modelId={secondModelId}
-              value={secondModelId}
-            />
-          </Field>
         </>
       );
     },
@@ -289,22 +220,10 @@ const beforeCreate = ({
       const titleText = treeSearch('#Title', newPrefab.structure);
       const descriptionText = treeSearch('#Description', newPrefab.structure);
       const primaryTab = treeSearch('#PrimaryTab', newPrefab.structure);
-      const secondaryTab = treeSearch('#SecondaryTab', newPrefab.structure);
-      const firstTabDataContainer = treeSearch(
-        '#firstTabDataContainer',
+      const questionnaireDataContainer = treeSearch(
+        '#questionnaireDataContainer',
         newPrefab.structure,
       );
-      const secondTabDataContainer = treeSearch(
-        '#secondTabDataContainer',
-        newPrefab.structure,
-      );
-      const form = treeSearch('#formId', newPrefab.structure);
-      const idProperty = data?.model.properties.find(
-        (property: any) => property.name === 'id', // property comes from a source. This is not typed anywhere. what type is this property?
-      );
-      const filterOption = firstTabDataContainer.options.find(
-        (o: any) => o.key === 'filter',
-      ) as ValueDefault;
 
       if (title) {
         setOption(titleText, 'content', (opt: PrefabComponentOption) => ({
@@ -321,46 +240,19 @@ const beforeCreate = ({
         }));
       }
       setOption(
-        firstTabDataContainer,
+        questionnaireDataContainer,
         'model',
         (opt: PrefabComponentOption) => ({
           ...opt,
           value: modelId,
         }),
       );
-      setOption(
-        secondTabDataContainer,
-        'model',
-        (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: secondModelId,
-        }),
-      );
       if (data && model) {
-        const variableName = `${camelToSnakeCase(data?.model.label)}_id`;
         setOption(primaryTab, 'label', (opt: PrefabComponentOption) => ({
           ...opt,
           value: [model.label],
         }));
         primaryTab.label = model.label;
-
-        newPrefab.variables?.push({
-          ...{ pageId },
-          kind: 'integer',
-          name: variableName,
-          ref: {
-            id: '#idVariable',
-          },
-        });
-        filterOption.value = {
-          [idProperty.id]: {
-            eq: {
-              ref: { id: '#idVariable' },
-              name: variableName,
-              type: 'VARIABLE',
-            },
-          },
-        };
       }
 
       if (sectionTitle !== '') {
@@ -408,148 +300,6 @@ const beforeCreate = ({
           );
         }
       }
-
-      if (secondaryData && secondaryModel && newPrefab.interactions) {
-        setOption(secondaryTab, 'label', (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: [secondaryModel.label],
-        }));
-        secondaryTab.label = secondaryModel.label;
-        const sectionButtonList = treeSearch(
-          '#sectionButtonList',
-          newPrefab.structure,
-        );
-        const sectionButtonBox = cloneStructure('Box');
-        if (sectionButtonBox.type === 'COMPONENT') {
-          setOption(
-            sectionButtonBox,
-            'alignment',
-            (originalOption: PrefabComponentOption) => ({
-              ...originalOption,
-              value: 'flex-start',
-            }),
-          );
-          setOption(
-            sectionButtonBox,
-            'valignment',
-            (originalOption: PrefabComponentOption) => ({
-              ...originalOption,
-              value: 'center',
-            }),
-          );
-          setOption(
-            sectionButtonBox,
-            'innerSpacing',
-            (originalOption: PrefabComponentOption) => ({
-              ...originalOption,
-              value: ['0rem', '0rem', 'M', '0rem'],
-            }),
-          );
-          const sectionButtonNumber = cloneStructure('Button');
-          const sectionButtonText = cloneStructure('Button');
-          if (sectionButtonNumber.type === 'COMPONENT') {
-            sectionButtonNumber.style = {
-              overwrite: {
-                backgroundColor: {
-                  type: 'THEME_COLOR',
-                  value: 'primary',
-                },
-                borderColor: {
-                  type: 'THEME_COLOR',
-                  value: 'primary',
-                },
-                borderRadius: ['1.5625rem'],
-
-                padding: ['0.6875rem', '1rem', '0.6875rem', '1rem'],
-              },
-            };
-            setOption(
-              sectionButtonNumber,
-              'buttonText',
-              (originalOption: PrefabComponentOption) => ({
-                ...originalOption,
-                value: ['2'],
-              }),
-            );
-          }
-          if (sectionButtonText.type === 'COMPONENT') {
-            sectionButtonText.ref = {
-              id: '#secondaryButton',
-            };
-            sectionButtonText.style = {
-              overwrite: {
-                backgroundColor: {
-                  type: 'STATIC',
-                  value: 'transparent',
-                },
-                boxShadow: 'none',
-                color: {
-                  type: 'THEME_COLOR',
-                  value: 'primary',
-                },
-                fontFamily: 'Roboto',
-                fontSize: '0.875rem',
-                fontStyle: 'none',
-                fontWeight: '400',
-                padding: ['0.6875rem', '1rem', '0.6875rem', '1rem'],
-                textDecoration: 'none',
-                textTransform: 'none',
-              },
-            };
-            setOption(
-              sectionButtonText,
-              'buttonText',
-              (originalOption: PrefabComponentOption) => ({
-                ...originalOption,
-                value: ['Other information'],
-              }),
-            );
-            newPrefab.interactions.push({
-              name: 'Select',
-              sourceEvent: 'Click',
-              ref: {
-                targetComponentId: '#SecondaryTab',
-                sourceComponentId: '#secondaryButton',
-              },
-              type: 'Custom',
-            } as PrefabInteraction);
-          }
-          sectionButtonBox.descendants = [
-            sectionButtonNumber,
-            sectionButtonText,
-          ];
-        }
-        sectionButtonList.descendants = [
-          ...sectionButtonList.descendants,
-          sectionButtonBox,
-        ];
-      }
-      form.id = componentId;
-      const result = await prepareAction(
-        componentId,
-        idProperty,
-        [enrichVarObj(model?.properties[0])],
-        'create',
-        undefined,
-        undefined,
-        'public',
-        undefined,
-        'Questionnaire - create empty record',
-      );
-
-      setOption(form, 'actionId', (opt: PrefabComponentOption) => ({
-        ...opt,
-        value: result.action.actionId,
-        configuration: { disabled: true },
-      }));
-
-      setOption(form, 'model', (opt: PrefabComponentOption) => ({
-        ...opt,
-        value: modelId,
-        configuration: {
-          disabled: true,
-        },
-      }));
 
       save(newPrefab);
     },
@@ -618,8 +368,13 @@ const beforeCreate = ({
 const attributes = {
   category: 'WIDGETS',
   icon: Icon.UpdateFormIcon,
-  interactions,
-  variables,
+  type: 'page',
+  detail:
+    'Easily build a questionnaire with or without sections, weighted scoring, logic and more with this template.',
+  description:
+    'Easily build a questionnaire with or without sections, weighted scoring, logic and more with this template.',
+  previewImage:
+    'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/56b89343f4ef499393e162173777c9ec',
 };
 
 export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
@@ -745,17 +500,6 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                     [],
                   ),
                 ]),
-                Dialog(
-                  {
-                    options: {
-                      ...dialogOptions,
-                      invisible: toggle('Invisible', {
-                        value: true,
-                      }),
-                    },
-                  },
-                  [Box({}, [Form('Create form')])],
-                ),
               ],
             ),
           ],
@@ -1923,28 +1667,28 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                 },
                                               },
                                               [
-                                                Tabs(
+                                                DataContainer(
                                                   {
-                                                    options: {
-                                                      ...tabsOptions,
-                                                      hideTabs: toggle(
-                                                        'Hide visual tabs',
-                                                        { value: true },
-                                                      ),
+                                                    ref: {
+                                                      id: '#questionnaireDataContainer',
                                                     },
                                                   },
                                                   [
-                                                    Tab(
+                                                    Tabs(
                                                       {
-                                                        ref: {
-                                                          id: '#PrimaryTab',
+                                                        options: {
+                                                          ...tabsOptions,
+                                                          hideTabs: toggle(
+                                                            'Hide visual tabs',
+                                                            { value: true },
+                                                          ),
                                                         },
                                                       },
                                                       [
-                                                        DataContainer(
+                                                        Tab(
                                                           {
                                                             ref: {
-                                                              id: '#firstTabDataContainer',
+                                                              id: '#PrimaryTab',
                                                             },
                                                           },
                                                           [
@@ -2057,153 +1801,6 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                                       {
                                                                         value: [
                                                                           `We'll start with some basic questions before we dive into details.`,
-                                                                        ],
-                                                                        configuration:
-                                                                          {
-                                                                            as: 'MULTILINE',
-                                                                          },
-                                                                      },
-                                                                    ),
-                                                                  type: font(
-                                                                    'Font',
-                                                                    {
-                                                                      value: [
-                                                                        'Body1',
-                                                                      ],
-                                                                    },
-                                                                  ),
-                                                                },
-                                                              },
-                                                              [],
-                                                            ),
-                                                            Box(
-                                                              {
-                                                                label:
-                                                                  'Question drop area',
-                                                              },
-                                                              [],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Tab(
-                                                      {
-                                                        ref: {
-                                                          id: '#SecondaryTab',
-                                                        },
-                                                      },
-                                                      [
-                                                        DataContainer(
-                                                          {
-                                                            ref: {
-                                                              id: '#secondTabDataContainer',
-                                                            },
-                                                          },
-                                                          [
-                                                            TextComp(
-                                                              {
-                                                                options: {
-                                                                  ...textOptions,
-                                                                  content:
-                                                                    variable(
-                                                                      'Content',
-                                                                      {
-                                                                        value: [
-                                                                          'Other information',
-                                                                        ],
-                                                                        configuration:
-                                                                          {
-                                                                            as: 'MULTILINE',
-                                                                          },
-                                                                      },
-                                                                    ),
-                                                                  type: font(
-                                                                    'Font',
-                                                                    {
-                                                                      value: [
-                                                                        'Title5',
-                                                                      ],
-                                                                    },
-                                                                  ),
-                                                                  fontWeight:
-                                                                    option(
-                                                                      'CUSTOM',
-                                                                      {
-                                                                        label:
-                                                                          'Font weight',
-                                                                        value:
-                                                                          '500',
-                                                                        configuration:
-                                                                          {
-                                                                            as: 'DROPDOWN',
-                                                                            dataType:
-                                                                              'string',
-                                                                            allowedInput:
-                                                                              [
-                                                                                {
-                                                                                  name: '100',
-                                                                                  value:
-                                                                                    '100',
-                                                                                },
-                                                                                {
-                                                                                  name: '200',
-                                                                                  value:
-                                                                                    '200',
-                                                                                },
-                                                                                {
-                                                                                  name: '300',
-                                                                                  value:
-                                                                                    '300',
-                                                                                },
-                                                                                {
-                                                                                  name: '400',
-                                                                                  value:
-                                                                                    '400',
-                                                                                },
-                                                                                {
-                                                                                  name: '500',
-                                                                                  value:
-                                                                                    '500',
-                                                                                },
-                                                                                {
-                                                                                  name: '600',
-                                                                                  value:
-                                                                                    '600',
-                                                                                },
-                                                                                {
-                                                                                  name: '700',
-                                                                                  value:
-                                                                                    '700',
-                                                                                },
-                                                                                {
-                                                                                  name: '800',
-                                                                                  value:
-                                                                                    '800',
-                                                                                },
-                                                                                {
-                                                                                  name: '900',
-                                                                                  value:
-                                                                                    '900',
-                                                                                },
-                                                                              ],
-                                                                          },
-                                                                      },
-                                                                    ),
-                                                                },
-                                                              },
-                                                              [],
-                                                            ),
-                                                            TextComp(
-                                                              {
-                                                                options: {
-                                                                  ...textOptions,
-                                                                  content:
-                                                                    variable(
-                                                                      'Content',
-                                                                      {
-                                                                        value: [
-                                                                          `On this page you can drag and drop widgets or make your own to create your questionnaire.`,
                                                                         ],
                                                                         configuration:
                                                                           {
