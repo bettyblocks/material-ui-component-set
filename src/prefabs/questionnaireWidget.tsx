@@ -1251,6 +1251,8 @@ export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
                                                               {
                                                                 style: {
                                                                   overwrite: {
+                                                                    boxShadow:
+                                                                      'none',
                                                                     backgroundColor:
                                                                       {
                                                                         type: 'THEME_COLOR',
