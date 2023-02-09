@@ -377,7 +377,7 @@ const attributes = {
     'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/56b89343f4ef499393e162173777c9ec',
 };
 
-export default makePrefab('Questionnaire Widget', attributes, beforeCreate, [
+export default makePrefab('Questionnaire', attributes, beforeCreate, [
   Drawer({}, [
     DrawerBar(
       {
