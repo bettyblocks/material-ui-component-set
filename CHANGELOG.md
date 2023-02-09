@@ -1,3 +1,10 @@
+## [2.99.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.99.0...v2.99.1) (2023-02-09)
+
+
+### Bug Fixes
+
+* multiple onchange interactions on page render ([712d322](https://github.com/bettyblocks/material-ui-component-set/commit/712d322fa8a9ff5729eb0b894c60b67d10440bf0))
+
 # [2.99.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.98.1...v2.99.0) (2023-02-08)
 
 
