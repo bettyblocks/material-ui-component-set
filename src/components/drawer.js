@@ -14,21 +14,24 @@
       temporaryAnchor,
       breakpoint,
       visibility,
+      editorVisibility,
       dataComponentAttribute,
     } = options;
 
     const isTemporary = drawerType === 'temporary';
     const anchor = isTemporary ? temporaryAnchor : persistentAnchor;
 
-    const [isOpen, setIsOpen] = useState(visibility);
+    const currentVisibility =
+      env === 'dev' ? editorVisibility : visibility === 'true';
+    const [isOpen, setIsOpen] = useState(currentVisibility);
 
     const closeDrawer = () => setIsOpen(false);
     const openDrawer = () => setIsOpen(true);
     const toggleDrawer = () => setIsOpen((s) => !s);
 
     useEffect(() => {
-      setIsOpen(visibility);
-    }, [visibility]);
+      setIsOpen(currentVisibility);
+    }, [currentVisibility]);
 
     return (
       <div
