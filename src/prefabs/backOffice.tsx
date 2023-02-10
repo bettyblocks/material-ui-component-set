@@ -905,15 +905,6 @@ const drawerContainer = DrawerContainer(
         },
         options: {
           ...drawerOptions,
-          visibility: toggle('Toggle visibility', {
-            value: false,
-            configuration: {
-              as: 'VISIBILITY',
-            },
-            ref: {
-              id: '#contentContainerVisibility',
-            },
-          }),
           drawerType: option('CUSTOM', {
             value: 'temporary',
             label: 'Drawer type',
@@ -1924,6 +1915,21 @@ const drawerContainer = DrawerContainer(
                                                       },
                                                     },
                                                   ),
+                                                  reconfigureDetail:
+                                                    reconfigure(
+                                                      'Reconfigure Details',
+                                                      {
+                                                        ref: {
+                                                          id: '#reconfigureDetailViewChild',
+                                                        },
+                                                        value: {
+                                                          children:
+                                                            detailChildren,
+                                                          addChildWizardType:
+                                                            'ChildrenSelector',
+                                                        },
+                                                      },
+                                                    ),
                                                   addDetail: addChild(
                                                     'Add Child',
                                                     {
@@ -4900,7 +4906,7 @@ const prefabStructure = [
         {
           label: 'Page view',
           expanded: true,
-          members: ['visibility', 'shownTab', 'drawerWidth'],
+          members: ['editorVisibility', 'shownTab', 'drawerWidth'],
         },
         {
           label: 'Table',
@@ -4908,7 +4914,7 @@ const prefabStructure = [
           members: ['reconfigure', 'addChild'],
           condition: {
             type: 'SHOW',
-            option: 'visibility',
+            option: 'editorVisibility',
             comparator: 'EQ',
             value: false,
           },
@@ -4919,7 +4925,7 @@ const prefabStructure = [
           members: ['pageTitle'],
           condition: {
             type: 'SHOW',
-            option: 'visibility',
+            option: 'editorVisibility',
             comparator: 'EQ',
             value: false,
           },
@@ -4930,7 +4936,7 @@ const prefabStructure = [
           members: ['deleteFormAction'],
           condition: {
             type: 'SHOW',
-            option: 'visibility',
+            option: 'editorVisibility',
             comparator: 'EQ',
             value: false,
           },
@@ -4946,7 +4952,7 @@ const prefabStructure = [
           ],
           condition: {
             type: 'SHOW',
-            option: 'visibility',
+            option: 'editorVisibility',
             comparator: 'EQ',
             value: true,
           },
@@ -4957,14 +4963,14 @@ const prefabStructure = [
           members: ['createFormAction', 'updateFormAction'],
           condition: {
             type: 'SHOW',
-            option: 'visibility',
+            option: 'editorVisibility',
             comparator: 'EQ',
             value: true,
           },
         },
       ],
       options: {
-        visibility: linked({
+        editorVisibility: linked({
           label: 'Page view',
           configuration: {
             as: 'BUTTONGROUP',
@@ -4977,7 +4983,7 @@ const prefabStructure = [
           value: {
             ref: {
               componentId: '#contentContainer',
-              optionId: '#contentContainerVisibility',
+              optionId: '#editorVisibility',
             },
           },
         }),
@@ -5111,8 +5117,25 @@ const prefabStructure = [
             },
           },
         }),
+        reconfigureDetailChild: linked({
+          label: 'Reconfigure Details',
+          value: {
+            ref: {
+              componentId: '#detailColumn',
+              optionId: '#reconfigureDetailViewChild',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'shownTab',
+              comparator: 'EQ',
+              value: 2,
+            },
+          },
+        }),
         addDetailChild: linked({
-          label: 'Add detail view child',
+          label: 'Add Detail Item',
           value: {
             ref: {
               componentId: '#detailColumn',

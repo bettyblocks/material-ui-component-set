@@ -77,10 +77,31 @@ export const drawerOptions = {
       condition: hideIf('drawerType', 'EQ', 'temporary'),
     },
   }),
-  visibility: toggle('Toggle visibility', {
+  visibility: option('CUSTOM', {
+    label: 'Initial state',
+    value: true,
+    configuration: {
+      as: 'DROPDOWN',
+      dataType: 'boolean',
+      allowedInput: [
+        {
+          name: 'Open',
+          value: true,
+        },
+        {
+          name: 'Closed',
+          value: false,
+        },
+      ],
+    },
+  }),
+  editorVisibility: toggle('Opened in Editor', {
     value: true,
     configuration: {
       as: 'VISIBILITY',
+    },
+    ref: {
+      id: '#editorVisibility',
     },
   }),
 
