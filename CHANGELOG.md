@@ -1,3 +1,11 @@
+## [2.99.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.99.1...v2.99.2) (2023-02-10)
+
+
+### Bug Fixes
+
+* add reset filter interaction to templates ([a0224d7](https://github.com/bettyblocks/material-ui-component-set/commit/a0224d71bd0d76bd0c45df2e6a2f52bbe9a7920c))
+* filter not clearing after reset ([1df922b](https://github.com/bettyblocks/material-ui-component-set/commit/1df922bda06337b48d2eda9dcb833593ec9b05fc))
+
 ## [2.99.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.99.0...v2.99.1) (2023-02-09)
 
 
