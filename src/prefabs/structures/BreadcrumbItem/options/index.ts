@@ -18,10 +18,25 @@ export const categories = [
 ];
 
 export const breadcrumbItemOptions = {
-  breadcrumbContent: variable('Content', { value: ['Breadcrumb Item'] }),
-  endpoint: endpoint('Page', { value: '' }),
+  breadcrumbContent: variable('Content', {
+    value: ['Breadcrumb Item'],
+    configuration: {
+      showOnDrop: true,
+    },
+  }),
+  endpoint: endpoint('Page', {
+    value: '',
+    configuration: {
+      showOnDrop: true,
+    },
+  }),
   textColor: color('Text Color', { value: ThemeColor.BLACK }),
-  icon: icon('Icon', { value: 'None' }),
+  icon: icon('Icon', {
+    value: 'None',
+    configuration: {
+      showOnDrop: true,
+    },
+  }),
   iconPosition: option('CUSTOM', {
     label: 'Icon position',
     value: 'start',
