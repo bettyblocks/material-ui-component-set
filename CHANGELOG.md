@@ -1,3 +1,32 @@
+## [2.99.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.99.0...v2.99.1) (2023-02-09)
+
+
+### Bug Fixes
+
+* multiple onchange interactions on page render ([712d322](https://github.com/bettyblocks/material-ui-component-set/commit/712d322fa8a9ff5729eb0b894c60b67d10440bf0))
+
+# [2.99.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.98.1...v2.99.0) (2023-02-08)
+
+
+### Features
+
+* make fetch policy configurable ([79c9d64](https://github.com/bettyblocks/material-ui-component-set/commit/79c9d6413ebd30db2a65c1e9e9426c0abeda8b04))
+
+## [2.98.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.98.0...v2.98.1) (2023-02-08)
+
+
+### Bug Fixes
+
+* update action input type in switch ([c17ebdd](https://github.com/bettyblocks/material-ui-component-set/commit/c17ebdd45b42a6e672409ecd02141cb72ee08fe4))
+* updated action input type in 4 components ([8aeb551](https://github.com/bettyblocks/material-ui-component-set/commit/8aeb551fd68a80dae493bd12a4cd3d4b2078eb3e))
+
+# [2.98.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.97.0...v2.98.0) (2023-02-07)
+
+
+### Features
+
+* add variable option for pagination label ([b7cfe1f](https://github.com/bettyblocks/material-ui-component-set/commit/b7cfe1f592e4be0e6e6f681f629839130e5c9701))
+
 # [2.97.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.96.0...v2.97.0) (2023-01-27)
 
 
