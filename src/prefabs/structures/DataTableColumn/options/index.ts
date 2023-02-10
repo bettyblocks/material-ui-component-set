@@ -33,8 +33,8 @@ export const dataTableColumnOptions = {
   property: property('Property', {
     value: '',
     configuration: {
-      showOnDrop: true
-    }
+      showOnDrop: true,
+    },
   }),
   sortable: toggle('Sortable', { value: false }),
   headerText: variable('Header text', { value: [''] }),
