@@ -10,8 +10,18 @@ export const categories = [
 ];
 
 export const stepOptions = {
-  label: variable('Label', { value: ['Step'] }),
-  icon: icon('Icon', { value: 'None' }),
+  label: variable('Label', {
+    value: ['Step'],
+    configuration: {
+      showOnDrop: true,
+    },
+  }),
+  icon: icon('Icon', {
+    value: 'None',
+    configuration: {
+      showOnDrop: true,
+    },
+  }),
 
   ...advanced('Step'),
 };
