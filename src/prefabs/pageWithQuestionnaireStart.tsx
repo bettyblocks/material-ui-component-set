@@ -8,15 +8,16 @@ import {
   size,
   showIf,
   toggle,
-  color,
-  ThemeColor,
   BeforeCreateArgs,
   variable,
+  buttongroup,
+  ThemeColor,
+  color,
   font,
-  showIfTrue,
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
+  Text as prefabText,
   Column,
   boxOptions,
   columnOptions,
@@ -24,12 +25,13 @@ import {
   gridOptions,
   Row,
   rowOptions,
-  Text as TextPrefab,
+  Media,
+  mediaOptions,
   textOptions,
-  AppBar,
-  appBarOptions,
-  OpenPageButton,
-  openPageButtonOptions,
+  ActionJSButton,
+  actionJSButtonOptions,
+  Divider,
+  dividerOptions,
 } from './structures';
 import { Property, PropertyStateProps, Endpoint } from './types';
 
@@ -246,290 +248,541 @@ export default makePrefab('Start questionnaire', attrs, beforeCreate, [
                 [
                   prefabBox(
                     {
-                      ref: { id: '#Header' },
-
                       options: {
                         ...boxOptions,
                         innerSpacing: sizes('Inner space', {
                           value: ['0rem', '0rem', '0rem', '0rem'],
                         }),
-                      },
-                    },
-                    [
-                      Column(
-                        {
-                          options: {
-                            ...columnOptions,
-                            innerSpacing: sizes('Inner space', {
-                              value: ['0rem', '0rem', '0rem', '0rem'],
-                            }),
-                          },
-                        },
-                        [
-                          prefabBox(
-                            {
-                              options: {
-                                ...boxOptions,
-                                innerSpacing: sizes('Inner space', {
-                                  value: ['0rem', '0rem', '0rem', '0rem'],
-                                }),
-                                backgroundOptions: toggle(
-                                  'Show background options',
-                                  {
-                                    value: true,
-                                  },
-                                ),
-                                backgroundColor: color('Background color', {
-                                  value: ThemeColor.PRIMARY,
-                                  configuration: {
-                                    condition: showIf(
-                                      'backgroundOptions',
-                                      'EQ',
-                                      true,
-                                    ),
-                                  },
-                                }),
-                              },
-                            },
-                            [
-                              Row({}, [
-                                Column(
-                                  {
-                                    options: {
-                                      ...columnOptions,
-                                      innerSpacing: sizes('Inner space', {
-                                        value: ['0rem', '0rem', '0rem', '0rem'],
-                                      }),
-                                    },
-                                  },
-                                  [
-                                    AppBar(
-                                      {
-                                        options: {
-                                          ...appBarOptions,
-                                          urlFileSource: variable('Source', {
-                                            value: [
-                                              'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
-                                            ],
-                                            configuration: {
-                                              placeholder:
-                                                'Starts with https:// or http://',
-                                              as: 'MULTILINE',
-                                              condition: showIf(
-                                                'type',
-                                                'EQ',
-                                                'url',
-                                              ),
-                                            },
-                                          }),
-                                          title: variable('Title', {
-                                            value: [],
-                                          }),
-                                        },
-                                      },
-                                      [
-                                        OpenPageButton(
-                                          {
-                                            style: {
-                                              overwrite: {
-                                                backgroundColor: {
-                                                  type: 'STATIC',
-                                                  value: 'transparent',
-                                                },
-                                                boxShadow: 'none',
-                                                color: {
-                                                  type: 'THEME_COLOR',
-                                                  value: 'white',
-                                                },
-                                                fontFamily: 'Roboto',
-                                                fontSize: '0.875rem',
-                                                fontStyle: 'none',
-                                                fontWeight: '400',
-                                                padding: ['0rem', '0rem'],
-                                                textDecoration: 'none',
-                                                textTransform: 'none',
-                                              },
-                                            },
-                                            options: {
-                                              ...openPageButtonOptions,
-                                              buttonText: variable(
-                                                'Button text',
-                                                { value: ['Menu 1'] },
-                                              ),
-                                              outerSpacing: sizes(
-                                                'Outer space',
-                                                {
-                                                  value: [
-                                                    '0rem',
-                                                    'M',
-                                                    '0rem',
-                                                    'M',
-                                                  ],
-                                                },
-                                              ),
-                                            },
-                                          },
-                                          [],
-                                        ),
-                                        OpenPageButton(
-                                          {
-                                            style: {
-                                              overwrite: {
-                                                backgroundColor: {
-                                                  type: 'STATIC',
-                                                  value: 'transparent',
-                                                },
-                                                boxShadow: 'none',
-                                                color: {
-                                                  type: 'THEME_COLOR',
-                                                  value: 'white',
-                                                },
-                                                fontFamily: 'Roboto',
-                                                fontSize: '0.875rem',
-                                                fontStyle: 'none',
-                                                fontWeight: '400',
-                                                padding: ['0rem', '0rem'],
-                                                textDecoration: 'none',
-                                                textTransform: 'none',
-                                              },
-                                            },
-                                            options: {
-                                              ...openPageButtonOptions,
-                                              buttonText: variable(
-                                                'Button text',
-                                                { value: ['Menu 2'] },
-                                              ),
-                                              outerSpacing: sizes(
-                                                'Outer space',
-                                                {
-                                                  value: [
-                                                    '0rem',
-                                                    'M',
-                                                    '0rem',
-                                                    '0rem',
-                                                  ],
-                                                },
-                                              ),
-                                            },
-                                          },
-                                          [],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ]),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  prefabBox(
-                    {
-                      options: {
-                        ...boxOptions,
                         stretch: toggle('Stretch (when in flex container)', {
                           value: true,
                         }),
-                        width: size('Width', {
-                          value: '100%',
-                          configuration: {
-                            as: 'UNIT',
+                        backgroundUrl: variable('Background url', {
+                          value: [
+                            'https://assets.bettyblocks.com/1e9019bb1c5c4af2ba799c2ee1761af0_assets/files/login-background',
+                          ],
+                        }),
+                        backgroundSize: buttongroup(
+                          'Background size',
+                          [
+                            ['Initial', 'initial'],
+                            ['Contain', 'contain'],
+                            ['Cover', 'cover'],
+                          ],
+                          {
+                            value: 'cover',
+                            configuration: {
+                              dataType: 'string',
+                            },
                           },
-                        }),
-                        innerSpacing: sizes('Inner space', {
-                          value: ['0rem', '0rem', '0rem', '0rem'],
-                        }),
-                        backgroundColor: color('Background color', {
-                          value: ThemeColor.LIGHT,
-                          configuration: {
-                            condition: showIf('backgroundOptions', 'EQ', true),
-                          },
-                        }),
-                        backgroundColorAlpha: option('NUMBER', {
-                          label: 'Background color opacity',
-                          value: 20,
-                          configuration: {
-                            condition: showIf('backgroundOptions', 'EQ', true),
-                          },
-                        }),
-                      },
-                    },
-                    [],
-                  ),
-                  prefabBox(
-                    {
-                      ref: { id: '#Footer' },
-                      options: {
-                        ...boxOptions,
-                        width: size('Width', {
-                          value: '100%',
-                          configuration: {
-                            as: 'UNIT',
-                          },
-                        }),
-                        innerSpacing: sizes('Inner space', {
-                          value: ['0rem', '0rem', '0rem', '0rem'],
-                        }),
-                        backgroundColor: color('Background color', {
-                          value: ThemeColor.LIGHT,
-                          configuration: {
-                            condition: showIf('backgroundOptions', 'EQ', true),
-                          },
-                        }),
-                        backgroundColorAlpha: option('NUMBER', {
-                          label: 'Background color opacity',
-                          value: 20,
-                          configuration: {
-                            condition: showIf('backgroundOptions', 'EQ', true),
-                          },
-                        }),
+                        ),
                       },
                     },
                     [
-                      prefabBox(
+                      Row(
                         {
                           options: {
-                            ...boxOptions,
-                            innerSpacing: sizes('Inner space', {
-                              value: ['L', 'L', 'L', 'L'],
+                            ...rowOptions,
+                            maxRowWidth: option('CUSTOM', {
+                              label: 'Width',
+                              value: 'Full',
+                              configuration: {
+                                as: 'BUTTONGROUP',
+                                dataType: 'string',
+                                allowedInput: [
+                                  { name: 'S', value: 'S' },
+                                  { name: 'M', value: 'M' },
+                                  { name: 'L', value: 'L' },
+                                  { name: 'XL', value: 'XL' },
+                                  { name: 'Full', value: 'Full' },
+                                ],
+                              },
+                            }),
+                            rowHeight: text('Height', {
+                              value: '92%',
+                              configuration: {
+                                as: 'UNIT',
+                              },
                             }),
                           },
                         },
                         [
-                          TextPrefab(
+                          Column(
                             {
                               options: {
-                                ...textOptions,
-                                content: variable('Content', {
-                                  value: ['Powered by Bettyblocks'],
-                                  configuration: { as: 'MULTILINE' },
+                                ...columnOptions,
+                                columnWidth: option('CUSTOM', {
+                                  label: 'Column width',
+                                  value: '4',
+                                  configuration: {
+                                    as: 'DROPDOWN',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      {
+                                        name: 'Fit content',
+                                        value: 'fitContent',
+                                      },
+                                      { name: 'Flexible', value: 'flexible' },
+                                      { name: 'Hidden', value: 'hidden' },
+                                      { name: '1', value: '1' },
+                                      { name: '2', value: '2' },
+                                      { name: '3', value: '3' },
+                                      { name: '4', value: '4' },
+                                      { name: '5', value: '5' },
+                                      { name: '6', value: '6' },
+                                      { name: '7', value: '7' },
+                                      { name: '8', value: '8' },
+                                      { name: '9', value: '9' },
+                                      { name: '10', value: '10' },
+                                      { name: '11', value: '11' },
+                                      { name: '12', value: '12' },
+                                    ],
+                                  },
                                 }),
-                                textAlignment: option('CUSTOM', {
-                                  label: 'Text Alignment',
+                                columnWidthTabletLandscape: option('CUSTOM', {
+                                  label: 'Column width (tablet landscape)',
+                                  value: '4',
+                                  configuration: {
+                                    as: 'DROPDOWN',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      {
+                                        name: 'Fit content',
+                                        value: 'fitContent',
+                                      },
+                                      { name: 'Flexible', value: 'flexible' },
+                                      { name: 'Hidden', value: 'hidden' },
+                                      { name: '1', value: '1' },
+                                      { name: '2', value: '2' },
+                                      { name: '3', value: '3' },
+                                      { name: '4', value: '4' },
+                                      { name: '5', value: '5' },
+                                      { name: '6', value: '6' },
+                                      { name: '7', value: '7' },
+                                      { name: '8', value: '8' },
+                                      { name: '9', value: '9' },
+                                      { name: '10', value: '10' },
+                                      { name: '11', value: '11' },
+                                      { name: '12', value: '12' },
+                                    ],
+                                  },
+                                }),
+                                columnWidthTabletPortrait: option('CUSTOM', {
+                                  value: '6',
+                                  label: 'Column width (tablet portrait)',
+                                  configuration: {
+                                    as: 'DROPDOWN',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      {
+                                        name: 'Fit content',
+                                        value: 'fitContent',
+                                      },
+                                      { name: 'Flexible', value: 'flexible' },
+                                      { name: 'Hidden', value: 'hidden' },
+                                      { name: '1', value: '1' },
+                                      { name: '2', value: '2' },
+                                      { name: '3', value: '3' },
+                                      { name: '4', value: '4' },
+                                      { name: '5', value: '5' },
+                                      { name: '6', value: '6' },
+                                      { name: '7', value: '7' },
+                                      { name: '8', value: '8' },
+                                      { name: '9', value: '9' },
+                                      { name: '10', value: '10' },
+                                      { name: '11', value: '11' },
+                                      { name: '12', value: '12' },
+                                    ],
+                                  },
+                                }),
+                                columnWidthMobile: option('CUSTOM', {
+                                  value: '12',
+                                  label: 'Column width (mobile)',
+                                  configuration: {
+                                    as: 'DROPDOWN',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      {
+                                        name: 'Fit content',
+                                        value: 'fitContent',
+                                      },
+                                      { name: 'Flexible', value: 'flexible' },
+                                      { name: 'Hidden', value: 'hidden' },
+                                      { name: '1', value: '1' },
+                                      { name: '2', value: '2' },
+                                      { name: '3', value: '3' },
+                                      { name: '4', value: '4' },
+                                      { name: '5', value: '5' },
+                                      { name: '6', value: '6' },
+                                      { name: '7', value: '7' },
+                                      { name: '8', value: '8' },
+                                      { name: '9', value: '9' },
+                                      { name: '10', value: '10' },
+                                      { name: '11', value: '11' },
+                                      { name: '12', value: '12' },
+                                    ],
+                                  },
+                                }),
+                                backgroundColor: color('Background color', {
+                                  value: ThemeColor.WHITE,
+                                }),
+                                verticalAlignment: option('CUSTOM', {
+                                  label: 'Vertical Alignment',
                                   value: 'center',
                                   configuration: {
                                     as: 'BUTTONGROUP',
                                     dataType: 'string',
                                     allowedInput: [
-                                      { name: 'Left', value: 'left' },
+                                      { name: 'None', value: 'inherit' },
+                                      { name: 'Top', value: 'flex-start' },
                                       { name: 'Center', value: 'center' },
-                                      { name: 'Right', value: 'right' },
+                                      { name: 'Bottom', value: 'flex-end' },
                                     ],
                                   },
                                 }),
-                                type: font('Font', { value: ['Body1'] }),
-                                styles: toggle('Styles', { value: true }),
-                                textColor: color('Text color', {
-                                  value: ThemeColor.MEDIUM,
-                                  configuration: {
-                                    condition: showIfTrue('styles'),
-                                  },
+                                innerSpacing: sizes('Inner space', {
+                                  value: ['0rem', '0rem', '0rem', '0rem'],
                                 }),
                               },
                             },
-                            [],
+                            [
+                              prefabBox(
+                                {
+                                  options: {
+                                    ...boxOptions,
+                                    innerSpacing: sizes('Inner space', {
+                                      value: ['0rem', 'XL', '0rem', 'XL'],
+                                    }),
+                                  },
+                                },
+                                [
+                                  Media({
+                                    options: {
+                                      ...mediaOptions,
+                                      type: option('CUSTOM', {
+                                        label: 'Media type',
+                                        value: 'url',
+                                        configuration: {
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            { name: 'Image', value: 'img' },
+                                            { name: 'Data/URL', value: 'url' },
+                                            { name: 'Video', value: 'video' },
+                                            {
+                                              name: 'I-frame',
+                                              value: 'iframe',
+                                            },
+                                          ],
+                                        },
+                                      }),
+                                      urlFileSource: variable('Source', {
+                                        value: [
+                                          'https://assets.bettyblocks.com/373317d12bf04d5496079adc02aab34a_assets/files/Your_Logo_-_B.svg',
+                                        ],
+                                        configuration: {
+                                          placeholder:
+                                            'Starts with https:// or http://',
+                                          as: 'MULTILINE',
+                                          condition: showIf(
+                                            'type',
+                                            'EQ',
+                                            'url',
+                                          ),
+                                        },
+                                      }),
+                                      width: size('Width', {
+                                        value: '',
+                                        configuration: {
+                                          as: 'UNIT',
+                                        },
+                                      }),
+                                      outerSpacing: sizes('Outer space', {
+                                        value: ['0rem', '0rem', 'XL', '0rem'],
+                                      }),
+                                    },
+                                  }),
+                                  prefabText({
+                                    options: {
+                                      ...textOptions,
+                                      content: variable('Content', {
+                                        value: ['Employee Satisfaction'],
+                                        configuration: { as: 'MULTILINE' },
+                                      }),
+                                      type: font('Font', { value: ['Title4'] }),
+                                      outerSpacing: sizes('Outer space', {
+                                        value: ['XL', '0rem', '0rem', '0rem'],
+                                      }),
+                                    },
+                                  }),
+                                  prefabText({
+                                    options: {
+                                      ...textOptions,
+                                      content: variable('Content', {
+                                        value: [
+                                          'GDPR affects every organisation processing the personal identifiable information of EU residents, as well as organisations outside of the EU, providing the services to EU businesses.',
+                                        ],
+                                        configuration: { as: 'MULTILINE' },
+                                      }),
+                                      type: font('Font', { value: ['Body1'] }),
+                                      outerSpacing: sizes('Outer space', {
+                                        value: ['M', '0rem', '0rem', '0rem'],
+                                      }),
+                                    },
+                                  }),
+                                  ActionJSButton({
+                                    style: {
+                                      overwrite: {
+                                        backgroundColor: {
+                                          type: 'THEME_COLOR',
+                                          value: 'primary',
+                                        },
+                                        borderColor: {
+                                          type: 'THEME_COLOR',
+                                          value: 'primary',
+                                        },
+                                        borderRadius: ['0.25rem'],
+                                        borderStyle: 'solid',
+                                        borderWidth: ['0.0625rem'],
+                                        boxShadow: 'none',
+                                        color: {
+                                          type: 'THEME_COLOR',
+                                          value: 'white',
+                                        },
+                                        fontFamily: 'Roboto',
+                                        fontSize: '0.875rem',
+                                        fontStyle: 'none',
+                                        fontWeight: '400',
+                                        padding: ['0.625rem', '1.3125rem'],
+                                        textDecoration: 'none',
+                                        textTransform: 'none',
+                                      },
+                                    },
+                                    options: {
+                                      ...actionJSButtonOptions,
+                                      actionId: option('ACTION_JS', {
+                                        label: 'Action',
+                                        value: '',
+                                        configuration: {
+                                          disabled: true,
+                                        },
+                                      }),
+                                      buttonText: variable('Button text', {
+                                        value: ['Start questionnaire'],
+                                      }),
+                                      outerSpacing: sizes('Outer space', {
+                                        value: ['M', '0rem', '0rem', '0rem'],
+                                      }),
+                                    },
+                                  }),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Row(
+                        {
+                          options: {
+                            ...rowOptions,
+                            maxRowWidth: option('CUSTOM', {
+                              label: 'Width',
+                              value: 'Full',
+                              configuration: {
+                                as: 'BUTTONGROUP',
+                                dataType: 'string',
+                                allowedInput: [
+                                  { name: 'S', value: 'S' },
+                                  { name: 'M', value: 'M' },
+                                  { name: 'L', value: 'L' },
+                                  { name: 'XL', value: 'XL' },
+                                  { name: 'Full', value: 'Full' },
+                                ],
+                              },
+                            }),
+                            rowHeight: text('Height', {
+                              value: '8%',
+                              configuration: {
+                                as: 'UNIT',
+                              },
+                            }),
+                          },
+                        },
+                        [
+                          Column(
+                            {
+                              options: {
+                                ...columnOptions,
+                                columnWidth: option('CUSTOM', {
+                                  label: 'Column width',
+                                  value: '4',
+                                  configuration: {
+                                    as: 'DROPDOWN',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      {
+                                        name: 'Fit content',
+                                        value: 'fitContent',
+                                      },
+                                      { name: 'Flexible', value: 'flexible' },
+                                      { name: 'Hidden', value: 'hidden' },
+                                      { name: '1', value: '1' },
+                                      { name: '2', value: '2' },
+                                      { name: '3', value: '3' },
+                                      { name: '4', value: '4' },
+                                      { name: '5', value: '5' },
+                                      { name: '6', value: '6' },
+                                      { name: '7', value: '7' },
+                                      { name: '8', value: '8' },
+                                      { name: '9', value: '9' },
+                                      { name: '10', value: '10' },
+                                      { name: '11', value: '11' },
+                                      { name: '12', value: '12' },
+                                    ],
+                                  },
+                                }),
+                                columnWidthTabletLandscape: option('CUSTOM', {
+                                  label: 'Column width (tablet landscape)',
+                                  value: '4',
+                                  configuration: {
+                                    as: 'DROPDOWN',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      {
+                                        name: 'Fit content',
+                                        value: 'fitContent',
+                                      },
+                                      { name: 'Flexible', value: 'flexible' },
+                                      { name: 'Hidden', value: 'hidden' },
+                                      { name: '1', value: '1' },
+                                      { name: '2', value: '2' },
+                                      { name: '3', value: '3' },
+                                      { name: '4', value: '4' },
+                                      { name: '5', value: '5' },
+                                      { name: '6', value: '6' },
+                                      { name: '7', value: '7' },
+                                      { name: '8', value: '8' },
+                                      { name: '9', value: '9' },
+                                      { name: '10', value: '10' },
+                                      { name: '11', value: '11' },
+                                      { name: '12', value: '12' },
+                                    ],
+                                  },
+                                }),
+                                columnWidthTabletPortrait: option('CUSTOM', {
+                                  value: '6',
+                                  label: 'Column width (tablet portrait)',
+                                  configuration: {
+                                    as: 'DROPDOWN',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      {
+                                        name: 'Fit content',
+                                        value: 'fitContent',
+                                      },
+                                      { name: 'Flexible', value: 'flexible' },
+                                      { name: 'Hidden', value: 'hidden' },
+                                      { name: '1', value: '1' },
+                                      { name: '2', value: '2' },
+                                      { name: '3', value: '3' },
+                                      { name: '4', value: '4' },
+                                      { name: '5', value: '5' },
+                                      { name: '6', value: '6' },
+                                      { name: '7', value: '7' },
+                                      { name: '8', value: '8' },
+                                      { name: '9', value: '9' },
+                                      { name: '10', value: '10' },
+                                      { name: '11', value: '11' },
+                                      { name: '12', value: '12' },
+                                    ],
+                                  },
+                                }),
+                                columnWidthMobile: option('CUSTOM', {
+                                  value: '12',
+                                  label: 'Column width (mobile)',
+                                  configuration: {
+                                    as: 'DROPDOWN',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      {
+                                        name: 'Fit content',
+                                        value: 'fitContent',
+                                      },
+                                      { name: 'Flexible', value: 'flexible' },
+                                      { name: 'Hidden', value: 'hidden' },
+                                      { name: '1', value: '1' },
+                                      { name: '2', value: '2' },
+                                      { name: '3', value: '3' },
+                                      { name: '4', value: '4' },
+                                      { name: '5', value: '5' },
+                                      { name: '6', value: '6' },
+                                      { name: '7', value: '7' },
+                                      { name: '8', value: '8' },
+                                      { name: '9', value: '9' },
+                                      { name: '10', value: '10' },
+                                      { name: '11', value: '11' },
+                                      { name: '12', value: '12' },
+                                    ],
+                                  },
+                                }),
+                                backgroundColor: color('Background color', {
+                                  value: ThemeColor.WHITE,
+                                }),
+                                innerSpacing: sizes('Inner space', {
+                                  value: ['0rem', '0rem', '0rem', '0rem'],
+                                }),
+                              },
+                            },
+                            [
+                              prefabBox(
+                                {
+                                  options: {
+                                    ...boxOptions,
+                                    innerSpacing: sizes('Inner space', {
+                                      value: ['0rem', '0rem', '0rem', '0rem'],
+                                    }),
+                                  },
+                                },
+                                [
+                                  Divider({
+                                    options: {
+                                      ...dividerOptions,
+                                      outerSpacing: sizes('Outer space', {
+                                        value: ['0rem', '0rem', '0rem', '0rem'],
+                                      }),
+                                    },
+                                  }),
+                                  prefabText({
+                                    options: {
+                                      ...textOptions,
+                                      content: variable('Content', {
+                                        value: ['Powered by Betty Blocks'],
+                                        configuration: { as: 'MULTILINE' },
+                                      }),
+                                      type: font('Font', { value: ['Body1'] }),
+                                      textAlignment: option('CUSTOM', {
+                                        label: 'Text Alignment',
+                                        value: 'center',
+                                        configuration: {
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            { name: 'Left', value: 'left' },
+                                            { name: 'Center', value: 'center' },
+                                            { name: 'Right', value: 'right' },
+                                          ],
+                                        },
+                                      }),
+                                      outerSpacing: sizes('Outer space', {
+                                        value: ['M', '0rem', 'M', '0rem'],
+                                      }),
+                                      textColor: color('Text color', {
+                                        value: ThemeColor.LIGHT,
+                                      }),
+                                    },
+                                  }),
+                                ],
+                              ),
+                            ],
                           ),
                         ],
                       ),
