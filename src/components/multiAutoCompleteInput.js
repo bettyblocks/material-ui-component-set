@@ -45,6 +45,7 @@
       minvalue,
       model,
       nameAttribute: nameAttributeRaw,
+      groupBy,
       optionType,
       order,
       orderBy,
@@ -388,6 +389,24 @@
     const valuePropIsNumber = numberPropTypes.includes(valueProp.kind);
 
     /*
+     * Build up group array for grouping options
+     */
+    const idOrPathGroup =
+      typeof groupBy.id !== 'undefined' ? groupBy.id : groupBy;
+    const groupByPath =
+      typeof idOrPathGroup === 'string' ? [idOrPathGroup] : idOrPathGroup;
+
+    let group = [];
+
+    if (!isDev) {
+      if (groupByPath.length === 1 && groupByPath[0] !== '') {
+        group = [getProperty(groupByPath[0]).name];
+      } else if (groupByPath.length > 1) {
+        group = groupByPath.map((propertyId) => getProperty(propertyId).name);
+      }
+    }
+
+    /*
      * We extend the option filter with the value of the `value` state and the value of the `inputValue` state.
      *
      * Those values always need to be returned in the results of the request
@@ -647,7 +666,18 @@
       return [];
     };
 
+    const getSortByGroupValue = (obj) =>
+      [obj]
+        .concat(group)
+        .reduce((a, b) => (a && a[b]) || '')
+        .toString();
+
     const currentOptions = getOptions();
+    const currentOptionsGrouped =
+      group.length &&
+      currentOptions.sort(
+        (a, b) => -getSortByGroupValue(b).localeCompare(getSortByGroupValue(a)),
+      );
 
     /*
      * Convert `value` state into something the `value` prop of the `Autocomplete` component will accept with the right settings
@@ -720,6 +750,9 @@
           inputValue={inputValue}
           loading={loading}
           multiple={multiple}
+          {...(group.length && {
+            groupBy: (option) => getSortByGroupValue(option),
+          })}
           onChange={(_, newValue) => {
             setValue(newValue || (multiple ? [] : ''));
 
@@ -766,7 +799,7 @@
             handleValidation(validation);
             setInputValue('');
           }}
-          options={currentOptions}
+          options={currentOptionsGrouped || currentOptions}
           renderInput={(params) => (
             <>
               {(optionType === 'model' || optionType === 'variable') && (
