@@ -28,7 +28,8 @@
       }
       return result;
     };
-    const [groups, setGroups] = React.useState([
+
+    const initialState = [
       {
         id: makeId(),
         operator: '_and',
@@ -42,7 +43,8 @@
           },
         ],
       },
-    ]);
+    ];
+    const [groups, setGroups] = React.useState(initialState);
     const [groupsOperator, setGroupsOperator] = React.useState('_and');
 
     const stringKinds = [
@@ -185,6 +187,10 @@
           ],
         },
       ]);
+    });
+
+    B.defineFunction('Reset advanced filter', () => {
+      setGroups(initialState);
     });
 
     const filterProps = (properties, id) => {
