@@ -193,10 +193,6 @@
       setGroups(initialState);
     });
 
-    B.defineFunction('Reset advanced filter', () => {
-      setGroups(initialState);
-    });
-
     const whiteListItems =
       (propertyWhiteList && propertyWhiteList.split(',')) || [];
     const filterProps = (properties, id) => {
