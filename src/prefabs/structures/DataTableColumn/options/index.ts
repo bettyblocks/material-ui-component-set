@@ -33,14 +33,14 @@ export const dataTableColumnOptions = {
   property: property('Property', { value: '' }),
   sortable: toggle('Sortable', { value: false }),
   headerText: variable('Header text', { value: [''] }),
-  type: font('Header type', { value: 'Body1' }),
+  type: font('Header Text Style', { value: 'Body1' }),
   content: variable('Content', {
     value: [''],
     configuration: {
       as: 'MULTILINE',
     },
   }),
-  bodyType: font('Body type', { value: 'Body1' }),
+  bodyType: font('Body Text Style', { value: 'Body1' }),
   horizontalAlignment: option('CUSTOM', {
     label: 'Column Alignment',
     value: 'left',

@@ -37,7 +37,7 @@ export const textOptions = {
       condition: showIfTrue('useInnerHtml'),
     },
   }),
-  type: font('Font', { value: ['Title2'] }),
+  type: font('Text Style', { value: ['Title2'] }),
   textAlignment: option('CUSTOM', {
     label: 'Text Alignment',
     value: 'left',

@@ -13,7 +13,7 @@ export default prefab('Card Content', attr, undefined, [
       {
         options: {
           ...textOptions,
-          type: font('Font', { value: ['Title5'] }),
+          type: font('Text Style', { value: ['Title5'] }),
         },
       },
       [],
@@ -22,7 +22,7 @@ export default prefab('Card Content', attr, undefined, [
       {
         options: {
           ...textOptions,
-          type: font('Font', { value: ['Body2'] }),
+          type: font('Text Style', { value: ['Body2'] }),
           useInnerHtml: toggle('Display Rich Text', {
             value: false,
           }),

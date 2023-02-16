@@ -640,7 +640,7 @@ const drawerSidebar = DrawerBar(
                         value: ['AB'],
                         configuration: { as: 'MULTILINE' },
                       }),
-                      type: font('Font', { value: ['Body2'] }),
+                      type: font('Text Style', { value: ['Body2'] }),
                       textAlignment: option('CUSTOM', {
                         label: 'Text Alignment',
                         value: 'center',
@@ -715,7 +715,7 @@ const drawerSidebar = DrawerBar(
                       textColor: color('Text color', {
                         value: ThemeColor.WHITE,
                       }),
-                      type: font('Font', { value: ['Body2'] }),
+                      type: font('Text Style', { value: ['Body2'] }),
                       textAlignment: option('CUSTOM', {
                         label: 'Text Alignment',
                         value: 'center',
@@ -1266,7 +1266,9 @@ const drawerContainer = DrawerContainer(
                                     textColor: color('Text color', {
                                       value: ThemeColor.PRIMARY,
                                     }),
-                                    type: font('Font', { value: ['Title5'] }),
+                                    type: font('Text Style', {
+                                      value: ['Title5'],
+                                    }),
                                   },
                                 },
                                 [],
@@ -1729,7 +1731,7 @@ const drawerContainer = DrawerContainer(
                                                     as: 'MULTILINE',
                                                   },
                                                 }),
-                                                type: font('Font', {
+                                                type: font('Text Style', {
                                                   value: ['Title5'],
                                                 }),
                                               },
@@ -1926,7 +1928,7 @@ const drawerContainer = DrawerContainer(
                                           as: 'MULTILINE',
                                         },
                                       }),
-                                      type: font('Font', {
+                                      type: font('Text Style', {
                                         value: ['Title4'],
                                       }),
                                     },
@@ -2000,7 +2002,7 @@ const drawerContainer = DrawerContainer(
                                           as: 'MULTILINE',
                                         },
                                       }),
-                                      type: font('Font', {
+                                      type: font('Text Style', {
                                         value: ['Body1'],
                                       }),
                                     },
@@ -3864,7 +3866,7 @@ const prefabStructure = [
                                           value: ['Create record'],
                                           configuration: { as: 'MULTILINE' },
                                         }),
-                                        type: font('Font', {
+                                        type: font('Text Style', {
                                           value: ['Title4'],
                                         }),
                                         outerSpacing: sizes('Outer space', {

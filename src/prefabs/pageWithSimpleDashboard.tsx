@@ -1326,7 +1326,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                           value: ['Dashboard'],
                                           configuration: { as: 'MULTILINE' },
                                         }),
-                                        type: font('Font', {
+                                        type: font('Text Style', {
                                           value: ['Title4'],
                                         }),
                                       },
@@ -1542,7 +1542,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                 as: 'MULTILINE',
                                               },
                                             }),
-                                            type: font('Font', {
+                                            type: font('Text Style', {
                                               value: ['Title6'],
                                             }),
                                           },
@@ -1671,7 +1671,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                     ],
                                                   },
                                                 ),
-                                                type: font('Font', {
+                                                type: font('Text Style', {
                                                   value: ['Body1'],
                                                 }),
                                               },
@@ -1691,7 +1691,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                 textColor: color('Text color', {
                                                   value: ThemeColor.DARK,
                                                 }),
-                                                type: font('Font', {
+                                                type: font('Text Style', {
                                                   value: ['Body1'],
                                                 }),
                                               },
@@ -2392,7 +2392,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                         },
                                                       },
                                                     ),
-                                                    type: font('Font', {
+                                                    type: font('Text Style', {
                                                       value: ['Title4'],
                                                     }),
                                                     textAlignment: option(
@@ -2448,7 +2448,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                         },
                                                       },
                                                     ),
-                                                    type: font('Font', {
+                                                    type: font('Text Style', {
                                                       value: ['Body1'],
                                                     }),
                                                     textColor: color(
@@ -3019,7 +3019,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                         },
                                                       },
                                                     ),
-                                                    type: font('Font', {
+                                                    type: font('Text Style', {
                                                       value: ['Title4'],
                                                     }),
                                                     textAlignment: option(
@@ -3075,7 +3075,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                         },
                                                       },
                                                     ),
-                                                    type: font('Font', {
+                                                    type: font('Text Style', {
                                                       value: ['Body1'],
                                                     }),
                                                     textColor: color(
@@ -3647,7 +3647,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                         },
                                                       },
                                                     ),
-                                                    type: font('Font', {
+                                                    type: font('Text Style', {
                                                       value: ['Title4'],
                                                     }),
                                                     textAlignment: option(
@@ -3705,7 +3705,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                         },
                                                       },
                                                     ),
-                                                    type: font('Font', {
+                                                    type: font('Text Style', {
                                                       value: ['Body1'],
                                                     }),
                                                     textColor: color(
@@ -4277,7 +4277,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                         },
                                                       },
                                                     ),
-                                                    type: font('Font', {
+                                                    type: font('Text Style', {
                                                       value: ['Title4'],
                                                     }),
                                                     textAlignment: option(
@@ -4335,7 +4335,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                         },
                                                       },
                                                     ),
-                                                    type: font('Font', {
+                                                    type: font('Text Style', {
                                                       value: ['Body1'],
                                                     }),
                                                     textColor: color(
@@ -4626,7 +4626,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                   as: 'MULTILINE',
                                                 },
                                               }),
-                                              type: font('Font', {
+                                              type: font('Text Style', {
                                                 value: ['Title6'],
                                               }),
                                             },
@@ -5037,7 +5037,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                     ],
                                   },
                                 }),
-                                type: font('Font', { value: ['Body1'] }),
+                                type: font('Text Style', { value: ['Body1'] }),
                                 styles: toggle('Styles', { value: true }),
                                 textColor: color('Text color', {
                                   value: ThemeColor.MEDIUM,

@@ -1302,7 +1302,7 @@ export default makePrefab('Header and footer', attrs, beforeCreate, [
                                                     as: 'MULTILINE',
                                                   },
                                                 }),
-                                                type: font('Font', {
+                                                type: font('Text Style', {
                                                   value: ['Title4'],
                                                 }),
                                               },
