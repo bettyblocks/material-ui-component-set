@@ -1,3 +1,23 @@
+# [2.101.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.100.0...v2.101.0) (2023-02-15)
+
+
+### Features
+
+* Add property whitelist to filter ([421f6d6](https://github.com/bettyblocks/material-ui-component-set/commit/421f6d6e1705ab652da941885993470e00552632))
+* Add property whitelist to filter ([08a2235](https://github.com/bettyblocks/material-ui-component-set/commit/08a2235505882951c9d948c3ae3a1238a9b05b74))
+
+# [2.100.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.99.2...v2.100.0) (2023-02-14)
+
+
+### Bug Fixes
+
+* resolve issue when using number property ([a64992e](https://github.com/bettyblocks/material-ui-component-set/commit/a64992e54980992452c57bcb9b5aefa58de23740))
+
+
+### Features
+
+* add groupBy component option to autocomplete ([2d96143](https://github.com/bettyblocks/material-ui-component-set/commit/2d96143d7903504f4fef2ca8e5a7784df2e73b9d))
+
 ## [2.99.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.99.1...v2.99.2) (2023-02-10)
 
 
