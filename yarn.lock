@@ -199,10 +199,13 @@
   optionalDependencies:
     isolated-vm "^4.0.0"
 
-"@betty-blocks/component-sdk@^1.59.0":
-  version "1.59.0"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.59.0.tgz#5c83291974a2e574ec2c5eb9f7eea58b57d91aab"
-  integrity sha512-Q1PaCurntjWSl4757+FFgIGFEEStWQvbBlzCIsBribC5VZPR3QUdcUkXuOf1Lak/+KHneBiVZD+k3WP5wsl6nw==
+"@betty-blocks/component-sdk@../component-sdk":
+  version "1.0.0"
+
+"@betty-blocks/component-sdk@^1.61.0":
+  version "1.61.0"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.61.0.tgz#239b04135af3312d92f337c7c62e3ee6c1c1e224"
+  integrity sha512-/r0uxWSDLNa3xEXV8jcgyj3RU51V8sIPxfSS+N2+ExxlJXXDr9r4xGyh/goWCBRIEcFtjEeYLnyKaouDXRLKvw==
 
 "@colors/colors@1.5.0":
   version "1.5.0"
