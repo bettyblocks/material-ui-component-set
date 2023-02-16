@@ -557,7 +557,10 @@
     };
 
     const getSortByGroupValue = (obj) =>
-      [obj].concat(group).reduce((a, b) => a && a[b].toString()) || '';
+      [obj]
+        .concat(group)
+        .reduce((a, b) => (a && a[b]) || '')
+        .toString();
 
     const currentOptions = getOptions();
     const currentOptionsGrouped =
