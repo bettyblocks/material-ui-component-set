@@ -144,7 +144,6 @@
         .split(',')
         .map((x) => x.trim());
     }
-
     const validationMessage = (validityObject) => {
       if (!validityObject) {
         return '';
@@ -323,19 +322,29 @@
         ],
       };
     }
+    // Adds the default values to the filter
+    const defaultValuesFilterArray = initialValue.reduce((acc, next) => {
+      return [...acc, { [valueProp.name]: { eq: next } }];
+    }, []);
+
+    const initialValueFilter = {
+      ...(initialValue.length > 0 && { _or: defaultValuesFilterArray }),
+    };
 
     const valueFilter = useFilter(valuesFilter);
-    const queryWasResolvable = !!parentIdValue;
+    const optionFilter = useFilter(filterRaw || {});
+    const queryWasResolvable = !!parentIdValue || initialValue.length > 0;
 
     useAllQuery(
       // use contextModelId when selecting a relation in the model option
       contextModelId || model,
       {
         take: 20,
-        rawFilter: valueFilter,
+        rawFilter: mergeFilters(valueFilter, initialValueFilter),
         variables: {},
         onCompleted(res) {
           const hasResult = res && res.results && res.results.length > 0;
+
           if (hasResult) {
             setValue(res.results);
           }
@@ -372,19 +381,6 @@
       };
     }, [inputValue]);
 
-    const optionFilter = useFilter(filterRaw || {});
-
-    // Adds the default values to the filter
-    const defaultValuesFilterArray = initialValue.reduce((acc, next) => {
-      return [...acc, { [valueProp.name]: { eq: next } }];
-    }, []);
-
-    // We need to do this, because options.filter is not immutable
-    const filter = {
-      ...(initialValue.length > 0 && { _or: defaultValuesFilterArray }),
-      ...optionFilter,
-    };
-
     const searchPropIsNumber = numberPropTypes.includes(searchProp.kind);
     const valuePropIsNumber = numberPropTypes.includes(valueProp.kind);
 
@@ -414,10 +410,10 @@
     /* eslint-disable no-underscore-dangle */
     if (multiple) {
       if (debouncedInputValue) {
-        if (!filter._or) {
-          filter._or = [];
+        if (!optionFilter._or) {
+          optionFilter._or = [];
         }
-        filter._or.push({
+        optionFilter._or.push({
           [searchProp.name]: {
             [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
               ? parseInt(debouncedInputValue, 10)
@@ -505,7 +501,7 @@
       actionProperty ? modelProperty.referenceModelId : modelId,
       {
         take: 20,
-        rawFilter: mergeFilters(filter, resolvedExternalFiltersObject),
+        rawFilter: mergeFilters(optionFilter, resolvedExternalFiltersObject),
         variables: {
           sort,
         },
@@ -531,7 +527,6 @@
       {},
       typeof model === 'string' || !model,
     );
-
     const data = hasResults ? relationData : queryData;
     const loading = hasResults ? false : queryLoading;
 
