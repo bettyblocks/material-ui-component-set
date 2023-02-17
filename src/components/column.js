@@ -10,7 +10,6 @@
     const isEmpty = children.length === 0;
     const isPristine = isEmpty && isDev;
     const [isVisible, setIsVisible] = useState(true);
-
     useEffect(() => {
       setIsVisible(visible);
     }, []);
@@ -26,6 +25,7 @@
         className={[
           classes.column,
           isVisible || isDev ? '' : classes.hide,
+          !visible && isDev ? classes.visibilityInfo : '',
         ].join(' ')}
         data-component={useText(dataComponentAttribute) || 'Column'}
       >
@@ -54,6 +54,47 @@
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
 
     return {
+      visibilityInfo: {
+        position: 'relative',
+        pointerEvent: 'none',
+        transition: '0.2s ease all',
+        '&::before': {
+          pointerEvent: 'none',
+          transition: '0.2s ease all',
+          content: '""',
+          background: '#fff',
+          position: 'absolute',
+          left: '0',
+          top: 0,
+          right: 0,
+          bottom: 0,
+          opacity: 0.8,
+          border: '1px #ccc dashed',
+        },
+        '&::after': {
+          pointerEvent: 'none',
+          transition: '0.2s ease all',
+          content: '"This element is hidden in runtime"',
+          position: 'absolute',
+          top: '50%',
+          transform: 'translateY(-50%) translateX(-50%)',
+          background: '#fff',
+          margin: '0 auto',
+          textAlign: 'center',
+          padding: '10px 14px',
+          borderRadius: '6px',
+          display: 'inline-block',
+          left: '50%',
+        },
+        '&:hover': {
+          '&::after': {
+            opacity: 0,
+          },
+          '&::before': {
+            opacity: 0,
+          },
+        },
+      },
       column: {
         display: ({
           options: {
