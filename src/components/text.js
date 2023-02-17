@@ -120,7 +120,11 @@
         textAlign: ({ options: { textAlignment } }) => textAlignment,
         padding: 0,
         whiteSpace: 'pre-wrap',
-        color: ({ options: { textColor } }) => style.getColor(textColor),
+        color: ({ options: { textColor, type } }) => {
+          return textColor === '[Inherit]'
+            ? style.getFontColor(type)
+            : style.getColor(textColor);
+        },
         fontFamily: ({ options: { type } }) =>
           `var(--text-fontFamily-${type.toString().toLowerCase()})`,
         fontSize: ({ options: { type } }) =>
