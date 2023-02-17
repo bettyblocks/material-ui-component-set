@@ -199,10 +199,10 @@
   optionalDependencies:
     isolated-vm "^4.0.0"
 
-"@betty-blocks/component-sdk@^1.59.0":
-  version "1.59.0"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.59.0.tgz#5c83291974a2e574ec2c5eb9f7eea58b57d91aab"
-  integrity sha512-Q1PaCurntjWSl4757+FFgIGFEEStWQvbBlzCIsBribC5VZPR3QUdcUkXuOf1Lak/+KHneBiVZD+k3WP5wsl6nw==
+"@betty-blocks/component-sdk@^1.62.0":
+  version "1.62.0"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.62.0.tgz#0dfedd7150967ff07777e382196c24c2081afa7d"
+  integrity sha512-yD/KvSNzFVM1uLsiJV/QAzqL9AMe9oKOelTpzE9u02qcv7dRW1UPHoe+BsKuVToJ04a4sE26GuIQ9CqwIr01uA==
 
 "@colors/colors@1.5.0":
   version "1.5.0"
@@ -3610,9 +3610,9 @@ htmlparser2@^8.0.1:
     entities "^4.3.0"
 
 http-cache-semantics@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/http-cache-semantics/-/http-cache-semantics-4.1.0.tgz#49e91c5cbf36c9b94bcfcd71c23d5249ec74e390"
-  integrity sha512-carPklcUh7ROWRK7Cv27RPtdhYhUsela/ue5/jKzjegVvXDqM2ILE9Q2BGn9JZJh1g87cp56su/FgQSzcWS8cQ==
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/http-cache-semantics/-/http-cache-semantics-4.1.1.tgz#abe02fcb2985460bf0323be664436ec3476a6d5a"
+  integrity sha512-er295DKPVsV82j5kw1Gjt+ADA/XYHsajl82cGNQG2eyoPkvgUhX+nDIyelzhIWbbsXP39EHcI6l5tYs2FYqYXQ==
 
 http-proxy-agent@^5.0.0:
   version "5.0.0"
