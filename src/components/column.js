@@ -56,10 +56,9 @@
     return {
       visibilityInfo: {
         position: 'relative',
-        pointerEvent: 'none',
         transition: '0.2s ease all',
         '&::before': {
-          pointerEvent: 'none',
+          pointerEvents: 'none',
           transition: '0.2s ease all',
           content: '""',
           background: '#fff',
@@ -72,7 +71,7 @@
           border: '1px #ccc dashed',
         },
         '&::after': {
-          pointerEvent: 'none',
+          pointerEvents: 'none',
           transition: '0.2s ease all',
           content: '"This element is hidden in runtime"',
           position: 'absolute',
