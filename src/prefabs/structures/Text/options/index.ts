@@ -92,7 +92,7 @@ export const textOptions = {
     },
   }),
   textColor: color('Text color', {
-    value: ThemeColor.BLACK,
+    value: ThemeColor.INHERIT,
   }),
 
   fontWeight: option('CUSTOM', {
