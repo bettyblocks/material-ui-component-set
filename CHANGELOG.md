@@ -1,3 +1,61 @@
+# [2.105.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.104.0...v2.105.0) (2023-02-17)
+
+
+### Features
+
+* create release step for NL6 ([5900a45](https://github.com/bettyblocks/material-ui-component-set/commit/5900a4561d2c1dc532a766f61fceaa4bc7ff9571))
+
+# [2.104.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.103.0...v2.104.0) (2023-02-17)
+
+
+### Bug Fixes
+
+* bump component-sdk version to latest version ([84e2af5](https://github.com/bettyblocks/material-ui-component-set/commit/84e2af50b29806be991ae6f344d6154edd574ef3))
+
+
+### Features
+
+* add inherit option to text component ([86fcd35](https://github.com/bettyblocks/material-ui-component-set/commit/86fcd356d98c38dc69cf4a85c705fa129bfdc72c))
+
+# [2.103.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.102.0...v2.103.0) (2023-02-16)
+
+
+### Bug Fixes
+
+* resolve issue with empty list property value ([d80e00a](https://github.com/bettyblocks/material-ui-component-set/commit/d80e00a3f84868f40e5141ed12f351ee5ff5d551))
+
+
+### Features
+
+* add groupBy option to multiAutocomplete ([9655a07](https://github.com/bettyblocks/material-ui-component-set/commit/9655a07ce4f8e95378b01c1237b348d28bf6f046))
+
+# [2.102.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.101.1...v2.102.0) (2023-02-16)
+
+
+### Bug Fixes
+
+* remove v2 backoffice versions ([0ea7ccc](https://github.com/bettyblocks/material-ui-component-set/commit/0ea7ccc12bc57ca02165921786eed936b4a98b9c))
+
+
+### Features
+
+* add belongs to relations to backoffice ([8a1c5d5](https://github.com/bettyblocks/material-ui-component-set/commit/8a1c5d56479075a1a48da77ca00077e0a03779f9))
+
+## [2.101.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.101.0...v2.101.1) (2023-02-16)
+
+
+### Bug Fixes
+
+* multi value auto complete has no options when default value ([4fafd70](https://github.com/bettyblocks/material-ui-component-set/commit/4fafd70e5f0437ec3b891aa069688fda520c2e97))
+
+# [2.101.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.100.0...v2.101.0) (2023-02-15)
+
+
+### Features
+
+* Add property whitelist to filter ([421f6d6](https://github.com/bettyblocks/material-ui-component-set/commit/421f6d6e1705ab652da941885993470e00552632))
+* Add property whitelist to filter ([08a2235](https://github.com/bettyblocks/material-ui-component-set/commit/08a2235505882951c9d948c3ae3a1238a9b05b74))
+
 # [2.100.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.99.2...v2.100.0) (2023-02-14)
 
 
