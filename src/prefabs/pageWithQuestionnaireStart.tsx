@@ -58,14 +58,16 @@ const beforeCreate = ({
     Footer,
     Field,
     Text,
-    Box,
   },
 }: BeforeCreateArgs) => {
-  const [showValidation, setShowValidation] = React.useState(false);
+  const [showModelValidation, setShowModelValidation] = React.useState(false);
   const [modelId, setModelId] = React.useState('');
   const [titleProperty, setTitleProperty] = React.useState<PropertyStateProps>({
     id: '',
   });
+  const [showTitleValidation, setShowTitleValidation] = React.useState(false);
+  const [showDescriptionValidation, setShowDescriptionValidation] =
+    React.useState(false);
   const [descriptionProperty, setDescriptionProperty] =
     React.useState<PropertyStateProps>({
       id: '',
@@ -86,14 +88,14 @@ const beforeCreate = ({
         <Field
           label="Select a model for saving the questionnaire data"
           error={
-            showValidation && (
+            showModelValidation && (
               <Text color="#e82600">Selecting a model is required</Text>
             )
           }
         >
           <ModelSelector
             onChange={(value: string) => {
-              setShowValidation(false);
+              setShowModelValidation(false);
               setModelId(value);
               setTitleProperty({ id: '' });
               setDescriptionProperty({ id: '' });
@@ -101,21 +103,37 @@ const beforeCreate = ({
             value={modelId}
           />
         </Field>
-        <Field label="Title property">
+        <Field
+          label="Title property"
+          error={
+            showTitleValidation && (
+              <Text color="#e82600">Selecting a title is required</Text>
+            )
+          }
+        >
           <PropertySelector
             modelId={modelId}
             onChange={(value: Property) => {
               setTitleProperty(value);
+              setShowTitleValidation(false);
             }}
             value={titleProperty}
             disabled={!modelId}
           />
         </Field>
-        <Field label="Description property">
+        <Field
+          label="Description property"
+          error={
+            showDescriptionValidation && (
+              <Text color="#e82600">Selecting a description is required</Text>
+            )
+          }
+        >
           <PropertySelector
             modelId={modelId}
             onChange={(value: Property) => {
               setDescriptionProperty(value);
+              setShowDescriptionValidation(false);
             }}
             value={descriptionProperty}
             disabled={!modelId}
@@ -129,26 +147,32 @@ const beforeCreate = ({
             )
           }
         >
-          <Box pad={{ bottom: '15px' }}>
-            <Text color="grey700">
-              This is the page that the user will be redirected to when they
-              start the questionnaire.
-            </Text>
-            <EndpointSelector
-              value={endpoint || ''}
-              size="large"
-              onChange={(value: Endpoint): void => {
-                setEndpointInvalid(isEmptyEndpoint(value));
-                setEndpoint(value);
-              }}
-            />
-          </Box>
+          <Text color="grey700">
+            This is the page that the user will be redirected to when they start
+            the questionnaire.
+          </Text>
+          <EndpointSelector
+            value={endpoint || ''}
+            size="large"
+            onChange={(value: Endpoint): void => {
+              setEndpointInvalid(isEmptyEndpoint(value));
+              setEndpoint(value);
+            }}
+          />
         </Field>
       </Content>
       <Footer
         onSave={() => {
           if (!modelId) {
-            setShowValidation(true);
+            setShowModelValidation(true);
+            return;
+          }
+          if (!titleProperty.id) {
+            setShowTitleValidation(true);
+            return;
+          }
+          if (!descriptionProperty.id) {
+            setShowDescriptionValidation(true);
             return;
           }
           if (!endpoint) {
@@ -156,7 +180,6 @@ const beforeCreate = ({
           }
           if (isEmptyEndpoint(endpoint)) {
             setEndpointInvalid(true);
-            // eslint-disable-next-line no-useless-return
             return;
           }
           const newPrefab = { ...prefab };
