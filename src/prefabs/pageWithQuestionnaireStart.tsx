@@ -14,6 +14,11 @@ import {
   ThemeColor,
   color,
   font,
+  PrefabReference,
+  PrefabComponent,
+  PrefabComponentOption,
+  PrefabInteraction,
+  InteractionType,
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
@@ -25,6 +30,8 @@ import {
   gridOptions,
   Row,
   rowOptions,
+  DataContainer,
+  dataContainerOptions,
   Media,
   mediaOptions,
   textOptions,
@@ -33,7 +40,27 @@ import {
   Divider,
   dividerOptions,
 } from './structures';
-import { Property, PropertyStateProps, Endpoint } from './types';
+import {
+  Property,
+  PropertyStateProps,
+  Endpoint,
+  IdPropertyProps,
+  ModelProps,
+  ModelQuery,
+  Properties,
+} from './types';
+
+const interactions: PrefabInteraction[] = [
+  {
+    type: InteractionType.Global,
+    name: 'redirect',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      sourceComponentId: '#createAction',
+    },
+    parameters: [],
+  },
+];
 
 const attrs = {
   icon: Icon.SubmitButtonIcon,
@@ -43,6 +70,7 @@ const attrs = {
   previewUrl: '?',
   previewImage: '?',
   category: 'FORMV2',
+  interactions,
 };
 
 const beforeCreate = ({
@@ -59,9 +87,12 @@ const beforeCreate = ({
     Field,
     Text,
   },
+  helpers: { useModelQuery, setOption, prepareAction, createUuid },
 }: BeforeCreateArgs) => {
   const [showModelValidation, setShowModelValidation] = React.useState(false);
   const [modelId, setModelId] = React.useState('');
+  const [model, setModel] = React.useState<ModelProps>();
+  const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
   const [titleProperty, setTitleProperty] = React.useState<PropertyStateProps>({
     id: '',
   });
@@ -74,9 +105,63 @@ const beforeCreate = ({
     });
   const [endpoint, setEndpoint] = React.useState<Endpoint>();
   const [endpointInvalid, setEndpointInvalid] = React.useState(false);
+  const { data } = useModelQuery({
+    variables: { id: modelId },
+    skip: !modelId,
+  });
+
+  const createActionId = createUuid();
 
   const isEmptyEndpoint = (value: Endpoint): boolean =>
     !value || Object.keys(value).length === 0 || value.id === '';
+
+  function treeSearch(
+    dirName: string,
+    array: PrefabReference[],
+  ): PrefabComponent | undefined {
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < array.length; i++) {
+      const q = array[i];
+      if (q.type === 'COMPONENT') {
+        if (q.ref && q.ref.id === dirName) {
+          return q;
+        }
+      }
+      if (q.type !== 'PARTIAL' && q.descendants && q.descendants.length) {
+        const result = treeSearch(dirName, q.descendants);
+        if (result) return result;
+      }
+    }
+    return undefined;
+  }
+
+  const enrichVarObj = (obj: any) => {
+    const returnObject = obj;
+    if (data && data.model) {
+      const property = data.model.properties.find(
+        (prop: any) => prop.id === obj.id[0],
+      );
+      if (property) {
+        returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
+      }
+    }
+    return returnObject;
+  };
+
+  useModelQuery({
+    variables: { id: modelId },
+    onCompleted: ({ model: dataModel }: ModelQuery) => {
+      setModel(dataModel);
+      setIdProperty(dataModel.properties.find(({ name }) => name === 'id'));
+    },
+  });
+
+  function serializeParameters(obj: Object) {
+    return Object.entries(obj).map(([name, entry]) => ({
+      name,
+      value: entry.map((v: JSON) => JSON.stringify(v)),
+    }));
+  }
 
   return (
     <>
@@ -148,8 +233,7 @@ const beforeCreate = ({
           }
         >
           <Text color="grey700">
-            This is the page that the user will be redirected to when they start
-            the questionnaire.
+            This page should redirect to your questionnaire template.
           </Text>
           <EndpointSelector
             value={endpoint || ''}
@@ -162,7 +246,7 @@ const beforeCreate = ({
         </Field>
       </Content>
       <Footer
-        onSave={() => {
+        onSave={async () => {
           if (!modelId) {
             setShowModelValidation(true);
             return;
@@ -183,6 +267,93 @@ const beforeCreate = ({
             return;
           }
           const newPrefab = { ...prefab };
+
+          const datacontainer = treeSearch(
+            '#datacontainer',
+            newPrefab.structure,
+          );
+          if (!datacontainer) throw new Error('No data container found');
+          setOption(datacontainer, 'model', (opts: PrefabComponentOption) => ({
+            ...opts,
+            value: modelId,
+          }));
+
+          const titleText = treeSearch('#titleText', newPrefab.structure);
+          if (!titleText) throw new Error('No questionnaire title found');
+          setOption(titleText, 'content', (opts: PrefabComponentOption) => ({
+            ...opts,
+            value: [enrichVarObj(titleProperty)],
+          }));
+          const descriptionText = treeSearch(
+            '#descriptionText',
+            newPrefab.structure,
+          );
+          if (!descriptionText)
+            throw new Error('No questionnaire description found');
+          setOption(
+            descriptionText,
+            'content',
+            (opts: PrefabComponentOption) => ({
+              ...opts,
+              value: [enrichVarObj(descriptionProperty)],
+            }),
+          );
+
+          if (idProperty && model) {
+            const createAction = treeSearch(
+              '#createAction',
+              newPrefab.structure,
+            );
+            if (!createAction) throw new Error('No action button found');
+            createAction.id = createActionId;
+            const properties: Properties[] = [];
+
+            const result = await prepareAction(
+              createActionId,
+              idProperty,
+              properties,
+              'create',
+              undefined,
+              `Start Questionnaire - Create ${model.label}`,
+              'public',
+            );
+            setOption(
+              createAction,
+              'actionId',
+              (opt: PrefabComponentOption) => ({
+                ...opt,
+                value: result.action.actionId,
+                configuration: { disabled: true },
+              }),
+            );
+            setOption(createAction, 'model', (opt: PrefabComponentOption) => ({
+              ...opt,
+              value: modelId,
+              configuration: {
+                disabled: true,
+              },
+            }));
+          }
+
+          if (
+            newPrefab.interactions &&
+            endpoint &&
+            endpoint.params &&
+            'parameters' in newPrefab.interactions[0]
+          ) {
+            newPrefab.interactions[0].parameters = [
+              {
+                parameter: 'redirectTo',
+                pageId: endpoint.pageId,
+                endpointId: endpoint.id,
+                parameters: serializeParameters(endpoint.params),
+              },
+            ];
+          } else {
+            throw new Error(
+              'Could not modify the interaction because one of the following items could not be found: Interaction, Interaction parameters, Endpoint, Endpoint parameters',
+            );
+          }
 
           save(newPrefab);
         }}
@@ -524,79 +695,135 @@ export default makePrefab('Start questionnaire', attrs, beforeCreate, [
                                       }),
                                     },
                                   }),
-                                  prefabText({
-                                    options: {
-                                      ...textOptions,
-                                      content: variable('Content', {
-                                        value: ['Employee Satisfaction'],
-                                        configuration: { as: 'MULTILINE' },
-                                      }),
-                                      type: font('Font', { value: ['Title4'] }),
-                                      outerSpacing: sizes('Outer space', {
-                                        value: ['XL', '0rem', '0rem', '0rem'],
-                                      }),
-                                    },
-                                  }),
-                                  prefabText({
-                                    options: {
-                                      ...textOptions,
-                                      content: variable('Content', {
-                                        value: [
-                                          'GDPR affects every organisation processing the personal identifiable information of EU residents, as well as organisations outside of the EU, providing the services to EU businesses.',
-                                        ],
-                                        configuration: { as: 'MULTILINE' },
-                                      }),
-                                      type: font('Font', { value: ['Body1'] }),
-                                      outerSpacing: sizes('Outer space', {
-                                        value: ['M', '0rem', '0rem', '0rem'],
-                                      }),
-                                    },
-                                  }),
-                                  ActionJSButton({
-                                    style: {
-                                      overwrite: {
-                                        backgroundColor: {
-                                          type: 'THEME_COLOR',
-                                          value: 'primary',
-                                        },
-                                        borderColor: {
-                                          type: 'THEME_COLOR',
-                                          value: 'primary',
-                                        },
-                                        borderRadius: ['0.25rem'],
-                                        borderStyle: 'solid',
-                                        borderWidth: ['0.0625rem'],
-                                        boxShadow: 'none',
-                                        color: {
-                                          type: 'THEME_COLOR',
-                                          value: 'white',
-                                        },
-                                        fontFamily: 'Roboto',
-                                        fontSize: '0.875rem',
-                                        fontStyle: 'none',
-                                        fontWeight: '400',
-                                        padding: ['0.625rem', '1.3125rem'],
-                                        textDecoration: 'none',
-                                        textTransform: 'none',
+                                  DataContainer(
+                                    {
+                                      ref: {
+                                        id: '#datacontainer',
+                                      },
+                                      options: {
+                                        ...dataContainerOptions,
+                                        loadingType: option('CUSTOM', {
+                                          value: 'showChildren',
+                                          label: 'Show on load',
+                                          configuration: {
+                                            as: 'BUTTONGROUP',
+                                            dataType: 'string',
+                                            allowedInput: [
+                                              {
+                                                name: 'Message',
+                                                value: 'default',
+                                              },
+                                              {
+                                                name: 'Content',
+                                                value: 'showChildren',
+                                              },
+                                            ],
+                                          },
+                                        }),
                                       },
                                     },
-                                    options: {
-                                      ...actionJSButtonOptions,
-                                      actionId: option('ACTION_JS', {
-                                        label: 'Action',
-                                        value: '',
-                                        configuration: {
-                                          disabled: true,
+                                    [
+                                      prefabText({
+                                        ref: {
+                                          id: '#titleText',
+                                        },
+                                        options: {
+                                          ...textOptions,
+                                          content: variable('Content', {
+                                            value: [''],
+                                            configuration: { as: 'MULTILINE' },
+                                          }),
+                                          type: font('Font', {
+                                            value: ['Title4'],
+                                          }),
+                                          outerSpacing: sizes('Outer space', {
+                                            value: [
+                                              'XL',
+                                              '0rem',
+                                              '0rem',
+                                              '0rem',
+                                            ],
+                                          }),
                                         },
                                       }),
-                                      buttonText: variable('Button text', {
-                                        value: ['Start questionnaire'],
+                                      prefabText({
+                                        ref: {
+                                          id: '#descriptionText',
+                                        },
+                                        options: {
+                                          ...textOptions,
+                                          content: variable('Content', {
+                                            value: [''],
+                                            configuration: { as: 'MULTILINE' },
+                                          }),
+                                          type: font('Font', {
+                                            value: ['Body1'],
+                                          }),
+                                          outerSpacing: sizes('Outer space', {
+                                            value: [
+                                              'M',
+                                              '0rem',
+                                              '0rem',
+                                              '0rem',
+                                            ],
+                                          }),
+                                        },
                                       }),
-                                      outerSpacing: sizes('Outer space', {
-                                        value: ['M', '0rem', '0rem', '0rem'],
+                                      ActionJSButton({
+                                        ref: {
+                                          id: '#createAction',
+                                        },
+                                        style: {
+                                          overwrite: {
+                                            backgroundColor: {
+                                              type: 'THEME_COLOR',
+                                              value: 'primary',
+                                            },
+                                            borderColor: {
+                                              type: 'THEME_COLOR',
+                                              value: 'primary',
+                                            },
+                                            borderRadius: ['0.25rem'],
+                                            borderStyle: 'solid',
+                                            borderWidth: ['0.0625rem'],
+                                            boxShadow: 'none',
+                                            color: {
+                                              type: 'THEME_COLOR',
+                                              value: 'white',
+                                            },
+                                            fontFamily: 'Roboto',
+                                            fontSize: '0.875rem',
+                                            fontStyle: 'none',
+                                            fontWeight: '400',
+                                            padding: ['0.625rem', '1.3125rem'],
+                                            textDecoration: 'none',
+                                            textTransform: 'none',
+                                          },
+                                        },
+                                        options: {
+                                          ...actionJSButtonOptions,
+                                          actionId: option('ACTION_JS', {
+                                            label: 'Action',
+                                            value: '',
+                                            configuration: {
+                                              disabled: true,
+                                            },
+                                          }),
+                                          buttonText: variable('Button text', {
+                                            value: ['Start questionnaire'],
+                                          }),
+                                          outerSpacing: sizes('Outer space', {
+                                            value: [
+                                              'M',
+                                              '0rem',
+                                              '0rem',
+                                              '0rem',
+                                            ],
+                                          }),
+                                        },
                                       }),
-                                    },
-                                  }),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ],
