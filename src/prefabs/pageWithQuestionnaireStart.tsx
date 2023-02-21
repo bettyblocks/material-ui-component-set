@@ -22,9 +22,10 @@ import {
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
-  Text as prefabText,
-  Column,
   boxOptions,
+  Text as prefabText,
+  textOptions,
+  Column,
   columnOptions,
   Grid,
   gridOptions,
@@ -34,7 +35,6 @@ import {
   dataContainerOptions,
   Media,
   mediaOptions,
-  textOptions,
   ActionJSButton,
   actionJSButtonOptions,
   Divider,
@@ -43,11 +43,11 @@ import {
 import {
   Property,
   PropertyStateProps,
+  Properties,
   Endpoint,
   IdPropertyProps,
   ModelProps,
   ModelQuery,
-  Properties,
 } from './types';
 
 const interactions: PrefabInteraction[] = [
@@ -89,20 +89,20 @@ const beforeCreate = ({
   },
   helpers: { useModelQuery, setOption, prepareAction, createUuid },
 }: BeforeCreateArgs) => {
-  const [showModelValidation, setShowModelValidation] = React.useState(false);
-  const [modelId, setModelId] = React.useState('');
   const [model, setModel] = React.useState<ModelProps>();
+  const [modelId, setModelId] = React.useState('');
+  const [showModelValidation, setShowModelValidation] = React.useState(false);
   const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
   const [titleProperty, setTitleProperty] = React.useState<PropertyStateProps>({
     id: '',
   });
   const [showTitleValidation, setShowTitleValidation] = React.useState(false);
-  const [showDescriptionValidation, setShowDescriptionValidation] =
-    React.useState(false);
   const [descriptionProperty, setDescriptionProperty] =
     React.useState<PropertyStateProps>({
       id: '',
     });
+  const [showDescriptionValidation, setShowDescriptionValidation] =
+    React.useState(false);
   const [endpoint, setEndpoint] = React.useState<Endpoint>();
   const [endpointInvalid, setEndpointInvalid] = React.useState(false);
   const { data } = useModelQuery({
@@ -983,24 +983,61 @@ export default makePrefab('Start questionnaire', attrs, beforeCreate, [
                               },
                             },
                             [
+                              Divider({
+                                options: {
+                                  ...dividerOptions,
+                                  outerSpacing: sizes('Outer space', {
+                                    value: ['0rem', '0rem', '0rem', '0rem'],
+                                  }),
+                                },
+                              }),
                               prefabBox(
                                 {
                                   options: {
                                     ...boxOptions,
+                                    alignment: buttongroup(
+                                      'Alignment',
+                                      [
+                                        ['None', 'none'],
+                                        ['Left', 'flex-start'],
+                                        ['Center', 'center'],
+                                        ['Right', 'flex-end'],
+                                        ['Justified', 'space-between'],
+                                      ],
+                                      {
+                                        value: 'center',
+                                        configuration: {
+                                          dataType: 'string',
+                                        },
+                                      },
+                                    ),
+                                    valignment: buttongroup(
+                                      'Vertical alignment',
+                                      [
+                                        ['None', 'none'],
+                                        ['Top', 'flex-start'],
+                                        ['Center', 'center'],
+                                        ['Bottom', 'flex-end'],
+                                      ],
+                                      {
+                                        value: 'center',
+                                        configuration: {
+                                          dataType: 'string',
+                                        },
+                                      },
+                                    ),
+                                    height: size('Height', {
+                                      value: '100%',
+                                      configuration: {
+                                        as: 'UNIT',
+                                      },
+                                    }),
                                     innerSpacing: sizes('Inner space', {
                                       value: ['0rem', '0rem', '0rem', '0rem'],
                                     }),
                                   },
                                 },
                                 [
-                                  Divider({
-                                    options: {
-                                      ...dividerOptions,
-                                      outerSpacing: sizes('Outer space', {
-                                        value: ['0rem', '0rem', '0rem', '0rem'],
-                                      }),
-                                    },
-                                  }),
                                   prefabText({
                                     options: {
                                       ...textOptions,
