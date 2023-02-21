@@ -1028,7 +1028,7 @@ export default makePrefab('Register form', attrs, beforeCreate, [
                                                           },
                                                         },
                                                       ),
-                                                      type: font('Font', {
+                                                      type: font('Text style', {
                                                         value: ['Body1'],
                                                       }),
                                                       outerSpacing: sizes(
@@ -1117,7 +1117,7 @@ export default makePrefab('Register form', attrs, beforeCreate, [
                                                           },
                                                         },
                                                       ),
-                                                      type: font('Font', {
+                                                      type: font('Text style', {
                                                         value: ['Body1'],
                                                       }),
                                                       outerSpacing: sizes(
@@ -1206,7 +1206,7 @@ export default makePrefab('Register form', attrs, beforeCreate, [
                                                           },
                                                         },
                                                       ),
-                                                      type: font('Font', {
+                                                      type: font('Text style', {
                                                         value: ['Body1'],
                                                       }),
                                                       outerSpacing: sizes(
@@ -1296,7 +1296,7 @@ export default makePrefab('Register form', attrs, beforeCreate, [
                                                   as: 'MULTILINE',
                                                 },
                                               }),
-                                              type: font('Font', {
+                                              type: font('Text style', {
                                                 value: ['Title4'],
                                               }),
                                             },

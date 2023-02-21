@@ -867,7 +867,7 @@ const drawerContainer = DrawerContainer(
                                                           },
                                                         },
                                                       ),
-                                                      type: font('Font', {
+                                                      type: font('Text style', {
                                                         value: ['Title4'],
                                                       }),
                                                       textColor: color(
@@ -1002,7 +1002,7 @@ const drawerContainer = DrawerContainer(
                                                                     },
                                                                   ),
                                                                 type: font(
-                                                                  'Font',
+                                                                  'Text style',
                                                                   {
                                                                     value: [
                                                                       'Title4',
@@ -1131,7 +1131,7 @@ const drawerContainer = DrawerContainer(
                                                                     },
                                                                   ),
                                                                 type: font(
-                                                                  'Font',
+                                                                  'Text style',
                                                                   {
                                                                     value: [
                                                                       'Body1',
@@ -1344,9 +1344,12 @@ const drawerContainer = DrawerContainer(
                                                               },
                                                             },
                                                           ),
-                                                          type: font('Font', {
-                                                            value: ['Body1'],
-                                                          }),
+                                                          type: font(
+                                                            'Text style',
+                                                            {
+                                                              value: ['Body1'],
+                                                            },
+                                                          ),
                                                           outerSpacing: sizes(
                                                             'Outer space',
                                                             {
@@ -1444,9 +1447,12 @@ const drawerContainer = DrawerContainer(
                                                               },
                                                             },
                                                           ),
-                                                          type: font('Font', {
-                                                            value: ['Body1'],
-                                                          }),
+                                                          type: font(
+                                                            'Text style',
+                                                            {
+                                                              value: ['Body1'],
+                                                            },
+                                                          ),
                                                           outerSpacing: sizes(
                                                             'Outer space',
                                                             {
@@ -1544,9 +1550,12 @@ const drawerContainer = DrawerContainer(
                                                               },
                                                             },
                                                           ),
-                                                          type: font('Font', {
-                                                            value: ['Body1'],
-                                                          }),
+                                                          type: font(
+                                                            'Text style',
+                                                            {
+                                                              value: ['Body1'],
+                                                            },
+                                                          ),
                                                           outerSpacing: sizes(
                                                             'Outer space',
                                                             {
@@ -1815,7 +1824,9 @@ const drawerContainer = DrawerContainer(
                                       ],
                                     },
                                   }),
-                                  type: font('Font', { value: ['Body1'] }),
+                                  type: font('Text style', {
+                                    value: ['Body1'],
+                                  }),
                                   styles: toggle('Styles', { value: true }),
                                   textColor: color('Text color', {
                                     value: ThemeColor.MEDIUM,
@@ -1992,7 +2003,7 @@ const drawerBar = DrawerBar(
                                     value: ['Create'],
                                     configuration: { as: 'MULTILINE' },
                                   }),
-                                  type: font('Font', {
+                                  type: font('Text style', {
                                     value: ['Title5'],
                                   }),
                                   textColor: color('Text color', {
@@ -2300,7 +2311,7 @@ const drawerBar = DrawerBar(
                                     value: ['Details'],
                                     configuration: { as: 'MULTILINE' },
                                   }),
-                                  type: font('Font', {
+                                  type: font('Text style', {
                                     value: ['Title5'],
                                   }),
                                   textColor: color('Text color', {
@@ -2594,7 +2605,7 @@ const drawerBar = DrawerBar(
                                     value: ['Update'],
                                     configuration: { as: 'MULTILINE' },
                                   }),
-                                  type: font('Font', {
+                                  type: font('Text style', {
                                     value: ['Title5'],
                                   }),
                                   textColor: color('Text color', {
