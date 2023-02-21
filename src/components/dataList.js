@@ -268,7 +268,6 @@
             variables: {
               ...(orderByPath ? { sort: { relation: sort } } : {}),
             },
-            onCompleted() {},
             onError(resp) {
               if (!displayError) {
                 B.triggerEvent('onError', resp);
