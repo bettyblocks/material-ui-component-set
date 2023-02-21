@@ -268,14 +268,7 @@
             variables: {
               ...(orderByPath ? { sort: { relation: sort } } : {}),
             },
-            onCompleted(res) {
-              const hasResult = res && res.results && res.results.length > 0;
-              if (hasResult) {
-                B.triggerEvent('onSuccess', res.results);
-              } else {
-                B.triggerEvent('onNoResults');
-              }
-            },
+            onCompleted() {},
             onError(resp) {
               if (!displayError) {
                 B.triggerEvent('onError', resp);
@@ -293,6 +286,13 @@
 
         const data = hasResults ? relationData : queryData;
         const loading = hasResults ? false : queryLoading;
+
+        const hasResult = data && data.results && data.results.length > 0;
+        if (hasResult) {
+          B.triggerEvent('onSuccess', data.results);
+        } else {
+          B.triggerEvent('onNoResults');
+        }
 
         useEffect(() => {
           if (isDev) {
