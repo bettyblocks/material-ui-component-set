@@ -36,8 +36,8 @@
     }
   },
   "scripts": {
-    "start": "bb components serve -p 5002",
-    "start-docker": "bb components serve -p 5002 --host 0.0.0.0",
+    "start": "bb components serve -p 5003",
+    "start-docker": "bb components serve -p 5003 --host 0.0.0.0",
     "build": "bb components build",
     "dev": "nodemon",
     "lint": "eslint --ext .js,.ts,.tsx ./src",

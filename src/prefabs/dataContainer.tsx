@@ -27,12 +27,42 @@ const beforeCreate = ({
     Text,
   },
   helpers: {
+    addSchemaModel,
     useCurrentPageId,
     useCurrentPartialId,
     camelToSnakeCase,
     useModelQuery,
   },
 }: BeforeCreateArgs) => {
+  const nameInput = 'test1';
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const jsonSchema = {
+    $id: 'https://bettyblocks.com/question.schema.json',
+    $schema: 'https://json-schema.org/draft/2020-12/schema',
+    description: 'BLA BLA BLA',
+    title: 'Question',
+    type: 'object',
+    properties: {
+      score: { type: 'integer' },
+      answer: { type: 'string' },
+      uuid: { type: 'string' },
+    },
+  };
+
+  const [schemaModelId, setschemaModelId] = React.useState('');
+
+  React.useEffect(() => {
+    addSchemaModel(nameInput, JSON.stringify(jsonSchema)).then(
+      (value) => setschemaModelId(value.id),
+      (error) => {
+        // eslint-disable-next-line no-console
+        console.log({ error });
+      },
+    );
+  }, [addSchemaModel, jsonSchema]);
+
+  // eslint-disable-next-line no-console
+  console.log({ addSchemaModelResult: schemaModelId });
   type PageState = {
     modelId: string | number | boolean | string[] | ValueConfig;
     component: PrefabComponent;
@@ -227,6 +257,7 @@ const beforeCreate = ({
     <>
       <Header onClose={close} title="Configure data container" />
       <Content>
+        <Field label={schemaModelId} />
         <Field
           label="Where is the data coming from?"
           info={
