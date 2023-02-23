@@ -836,8 +836,8 @@
         position: 'absolute',
         height: '25px',
         margin: '0px',
-        top: '1.2rem',
-        right: '3.5rem',
+        bottom: '15px',
+        right: '15px',
       },
       deleteGroup: {
         position: 'absolute',
