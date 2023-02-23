@@ -211,7 +211,6 @@ const beforeCreate = ({
             pageAuthenticationProfileId,
             pageName,
           );
-
           const structure = originalPrefab.structure[0];
           if (modelBased) {
             Object.values(result.variables).map(([property, variable]) => {

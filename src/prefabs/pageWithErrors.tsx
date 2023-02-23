@@ -150,7 +150,7 @@ const beforeCreate = ({
       }));
       setOption(errorCodeText, 'type', (opt: PrefabComponentOption) => ({
         ...opt,
-        value: ['Title1'],
+        value: ['Title4'],
       }));
       setOption(
         errorCodeText,
@@ -349,7 +349,7 @@ const beforeCreate = ({
       }));
       setOption(errorMessageText, 'type', (opt: PrefabComponentOption) => ({
         ...opt,
-        value: ['Title4'],
+        value: ['Title1'],
       }));
       setOption(
         errorMessageText,

@@ -4,9 +4,10 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, useText } = B;
+    const { env, useText, useLogic } = B;
     const { Box } = window.MaterialUI.Core;
     const {
+      displayLogic,
       alignment,
       valignment,
       transparent,
@@ -26,6 +27,8 @@
     const opac = transparent ? 0 : 1;
     const [opacity, setOpacity] = useState(opac);
     const [interactionBackground, setInteractionBackground] = useState('');
+
+    const logic = useLogic(!isDev && displayLogic);
 
     useEffect(() => {
       B.defineFunction('setCustomBackgroundImage', (url) => {
@@ -92,7 +95,9 @@
     B.defineFunction('ToOpaque', () => setOpacity(1));
     B.defineFunction('ToSemiTransparent', () => setOpacity(0.5));
     B.defineFunction('ToTransparent', () => setOpacity(0));
-
+    if (!isDev && !logic) {
+      return <></>;
+    }
     return isDev ? <div className={classes.wrapper}>{BoxCmp}</div> : BoxCmp;
   })(),
   styles: (B) => (theme) => {
@@ -156,6 +161,8 @@
           getSpacing(innerSpacing[2]),
         paddingLeft: ({ options: { innerSpacing } }) =>
           getSpacing(innerSpacing[3]),
+        zIndex: ({ options: { position } }) =>
+          position === 'fixed' && !isDev ? 999 : 'auto',
         [`@media ${mediaMinWidth(600)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
