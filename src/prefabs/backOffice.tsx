@@ -177,7 +177,7 @@ const detailChildren = [
                 configuration: { as: 'MULTILINE' },
                 showInAddChild: true,
               }),
-              type: font('Font', { value: ['Body1'] }),
+              type: font('Text style', { value: ['Body1'] }),
               fontWeight: option('CUSTOM', {
                 label: 'Font weight',
                 value: '500',
@@ -202,7 +202,7 @@ const detailChildren = [
           Text({
             options: {
               ...textOptions,
-              type: font('Font', { value: ['Body1'] }),
+              type: font('Text style', { value: ['Body1'] }),
               content: variable('Property', {
                 value: [],
                 configuration: { as: 'MULTILINE' },
@@ -1127,7 +1127,7 @@ const drawerContainer = DrawerContainer(
                                               id: '#createTabTitleContent',
                                             },
                                           }),
-                                          type: font('Font', {
+                                          type: font('Text style', {
                                             value: ['Title5'],
                                           }),
                                           textColor: color('Text color', {
@@ -1470,7 +1470,7 @@ const drawerContainer = DrawerContainer(
                                               id: '#detailsTabTitleContent',
                                             },
                                           }),
-                                          type: font('Font', {
+                                          type: font('Text style', {
                                             value: ['Title5'],
                                           }),
                                           textColor: color('Text color', {
@@ -2487,7 +2487,7 @@ const drawerContainer = DrawerContainer(
                                               id: '#updateTabTitleContent',
                                             },
                                           }),
-                                          type: font('Font', {
+                                          type: font('Text style', {
                                             value: ['Title5'],
                                           }),
                                           textColor: color('Text color', {

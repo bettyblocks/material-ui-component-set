@@ -33,7 +33,7 @@ export const textOptions = {
   useInnerHtml: toggle('Display Rich Text', {
     value: false,
   }),
-  type: font('Font', { value: ['Title2'] }),
+  type: font('Text style', { value: ['Title2'] }),
   textAlignment: option('CUSTOM', {
     label: 'Text Alignment',
     value: 'left',
