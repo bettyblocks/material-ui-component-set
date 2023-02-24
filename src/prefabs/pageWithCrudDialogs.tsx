@@ -2944,7 +2944,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                     },
                                                                   ),
                                                                 type: font(
-                                                                  'Font',
+                                                                  'Text style',
                                                                   {
                                                                     value: [
                                                                       'Title4',
@@ -3293,7 +3293,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                     },
                                                                   ),
                                                                 type: font(
-                                                                  'Font',
+                                                                  'Text style',
                                                                   {
                                                                     value: [
                                                                       'Title4',
@@ -3727,7 +3727,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                     },
                                                                   ),
                                                                 type: font(
-                                                                  'Font',
+                                                                  'Text style',
                                                                   {
                                                                     value: [
                                                                       'Title4',
@@ -4161,7 +4161,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                     },
                                                                   ),
                                                                 type: font(
-                                                                  'Font',
+                                                                  'Text style',
                                                                   {
                                                                     value: [
                                                                       'Title4',

@@ -3173,7 +3173,7 @@ const drawerContainer = DrawerContainer(
                                                             options: {
                                                               ...textOptions,
                                                               type: font(
-                                                                'Font',
+                                                                'Text style',
                                                                 {
                                                                   value: [
                                                                     'Title4',

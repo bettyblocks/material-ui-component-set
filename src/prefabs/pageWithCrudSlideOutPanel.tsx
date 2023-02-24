@@ -1002,7 +1002,7 @@ const drawerContainer = DrawerContainer(
                                                                     },
                                                                   ),
                                                                 type: font(
-                                                                  'Font',
+                                                                  'Text style',
                                                                   {
                                                                     value: [
                                                                       'Title4',
@@ -1131,7 +1131,7 @@ const drawerContainer = DrawerContainer(
                                                                     },
                                                                   ),
                                                                 type: font(
-                                                                  'Font',
+                                                                  'Text style',
                                                                   {
                                                                     value: [
                                                                       'Body1',

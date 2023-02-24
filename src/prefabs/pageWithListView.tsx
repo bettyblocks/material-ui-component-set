@@ -2042,7 +2042,7 @@ export default makePrefab('List view', attrs, beforeCreate, [
                                                                                 },
                                                                               ),
                                                                             type: font(
-                                                                              'Font',
+                                                                              'Text style',
                                                                               {
                                                                                 value:
                                                                                   [
@@ -2077,7 +2077,7 @@ export default makePrefab('List view', attrs, beforeCreate, [
                                                                                 },
                                                                               ),
                                                                             type: font(
-                                                                              'Font',
+                                                                              'Text style',
                                                                               {
                                                                                 value:
                                                                                   [
@@ -2169,7 +2169,7 @@ export default makePrefab('List view', attrs, beforeCreate, [
                                                                                 },
                                                                               ),
                                                                             type: font(
-                                                                              'Font',
+                                                                              'Text style',
                                                                               {
                                                                                 value:
                                                                                   [
