@@ -32,7 +32,6 @@ export const dataTableColumnOptions = {
   }),
   property: property('Property', {
     value: '',
-    showInReconfigure: true,
     configuration: {
       showOnDrop: true,
       createNewProperty: {
