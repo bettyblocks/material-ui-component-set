@@ -8,7 +8,7 @@ import {
   variable,
   authenticationProfile,
 } from '@betty-blocks/component-sdk';
-import { advanced } from '../../advanced';
+import { advanced } from './advanced';
 
 export const categories = [
   {
@@ -19,7 +19,7 @@ export const categories = [
   {
     label: 'Advanced Options',
     expanded: false,
-    members: ['dataComponentAttribute'],
+    members: ['dataComponentAttribute', 'fetchPolicy'],
   },
 ];
 
@@ -81,5 +81,5 @@ export const dataContainerOptions = {
     },
   }),
 
-  ...advanced('DataContainer'),
+  ...advanced,
 };

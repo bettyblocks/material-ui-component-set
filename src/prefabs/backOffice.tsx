@@ -632,6 +632,15 @@ const interactions: PrefabInteraction[] = [
     type: InteractionType.Custom,
   },
   {
+    name: 'Reset advanced filter',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#filterComp',
+      sourceComponentId: '#clearFilterButton',
+    },
+    type: InteractionType.Custom,
+  },
+  {
     name: 'Show',
     sourceEvent: 'Click',
     ref: {
@@ -5648,7 +5657,6 @@ const beforeCreate = ({
               modelId={modelId}
               value={dataTableProperties}
               disabledKinds={[
-                'BELONGS_TO',
                 'HAS_AND_BELONGS_TO_MANY',
                 'HAS_MANY',
                 'MULTI_FILE',
@@ -5729,7 +5737,7 @@ const beforeCreate = ({
         return boxPrefab;
       };
 
-      if (!modelId) {
+      if (!modelId || !model || !idProperty) {
         setModelValidation(true);
         return;
       }
@@ -6019,265 +6027,258 @@ const beforeCreate = ({
           prop.kind !== 'PASSWORD',
       );
 
-      if (idProperty && model) {
-        const createForm = treeSearch('#createForm', newPrefab.structure);
-        if (!createForm) throw new Error('No create form found');
-        createForm.id = createFormId;
+      const relationProperties = model.relationships.filter(
+        (e) => e.kind === 'BELONGS_TO',
+      );
 
-        const createAction = await prepareAction(
-          createFormId,
-          idProperty,
-          filteredproperties,
-          'create',
-          undefined,
-          `Back office - Create ${data?.model.label}`,
-          permissions,
-          pageAuthenticationProfileId,
-        );
+      const createForm = treeSearch('#createForm', newPrefab.structure);
+      if (!createForm) throw new Error('No create form found');
+      createForm.id = createFormId;
 
-        Object.values(createAction.variables).forEach(
-          ([prop, inputVariable]): void => {
-            const generateInputPrefabs = () => {
-              let imageUpload;
-              let imageUploadButton;
-              let fileUpload;
-              let fileUploadButton;
-              switch (prop.kind) {
-                case PropertyKind.INTEGER:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyInput(
-                      BettyPrefabs.INTEGER,
-                      model,
-                      prop,
-                      inputVariable,
-                    ),
-                  );
-                case PropertyKind.EMAIL_ADDRESS:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyInput(
-                      BettyPrefabs.EMAIL_ADDRESS,
-                      model,
-                      prop,
-                      inputVariable,
-                    ),
-                  );
-                case PropertyKind.DECIMAL:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyInput(
-                      BettyPrefabs.DECIMAL,
-                      model,
-                      prop,
-                      inputVariable,
-                    ),
-                  );
-                case PropertyKind.TEXT:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyInput(
-                      BettyPrefabs.TEXT,
-                      model,
-                      prop,
-                      inputVariable,
-                    ),
-                  );
-                case PropertyKind.PRICE:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyInput(
-                      BettyPrefabs.PRICE,
-                      model,
-                      prop,
-                      inputVariable,
-                    ),
-                  );
-                case PropertyKind.PASSWORD:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyInput(
-                      BettyPrefabs.PASSWORD,
-                      model,
-                      prop,
-                      inputVariable,
-                    ),
-                  );
-                case PropertyKind.DATE:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyInput(
-                      BettyPrefabs.DATE,
-                      model,
-                      prop,
-                      inputVariable,
-                    ),
-                  );
-                case PropertyKind.DATE_TIME:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyInput(
-                      BettyPrefabs.DATE_TIME,
-                      model,
-                      prop,
-                      inputVariable,
-                    ),
-                  );
-                case PropertyKind.TIME:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyInput(
-                      BettyPrefabs.TIME,
-                      model,
-                      prop,
-                      inputVariable,
-                    ),
-                  );
-                case PropertyKind.FILE:
-                  fileUpload = makeBettyInput(
-                    BettyPrefabs.FILE,
+      const createAction = await prepareAction(
+        createFormId,
+        idProperty,
+        [...filteredproperties, ...relationProperties],
+        'create',
+        undefined,
+        `Back office - Create ${data?.model.label}`,
+        permissions,
+        pageAuthenticationProfileId,
+      );
+      Object.values(createAction.variables).forEach(
+        ([prop, inputVariable]): void => {
+          const generateInputPrefabs = () => {
+            let imageUpload;
+            let imageUploadButton;
+            let fileUpload;
+            let fileUploadButton;
+            switch (prop.kind) {
+              case PropertyKind.BELONGS_TO:
+                return inputStructure(
+                  prop.label,
+                  makeBettyInput(
+                    BettyPrefabs.AUTO_COMPLETE,
                     model,
                     prop,
                     inputVariable,
-                  );
-                  if (fileUpload.type === 'COMPONENT') {
-                    [fileUploadButton] = fileUpload.descendants;
-                    if (fileUploadButton.type === 'COMPONENT') {
-                      fileUploadButton.style = {
-                        overwrite: {
-                          backgroundColor: {
-                            type: 'THEME_COLOR',
-                            value: 'primary',
-                          },
-                          boxShadow: 'none',
-                          color: {
-                            type: 'THEME_COLOR',
-                            value: 'white',
-                          },
-                          fontFamily: 'Roboto',
-                          fontSize: '0.875rem',
-                          fontStyle: 'none',
-                          fontWeight: '400',
-                          padding: ['0.6875rem', '1.375rem'],
-                          textDecoration: 'none',
-                          textTransform: 'none',
-                        },
-                      };
-                    }
-                  }
-                  return inputStructure(prop.label, fileUpload);
-                case PropertyKind.IMAGE:
-                  imageUpload = makeBettyInput(
-                    BettyPrefabs.IMAGE,
+                    createAction.relatedIdProperties,
+                    createAction.relatedModelIds,
+                  ),
+                );
+              case PropertyKind.INTEGER:
+                return inputStructure(
+                  prop.label,
+                  makeBettyInput(
+                    BettyPrefabs.INTEGER,
                     model,
                     prop,
                     inputVariable,
-                  );
-                  if (imageUpload.type === 'COMPONENT') {
-                    [imageUploadButton] = imageUpload.descendants;
-                    if (imageUploadButton.type === 'COMPONENT') {
-                      imageUploadButton.style = {
-                        overwrite: {
-                          backgroundColor: {
-                            type: 'THEME_COLOR',
-                            value: 'primary',
-                          },
-                          boxShadow: 'none',
-                          color: {
-                            type: 'THEME_COLOR',
-                            value: 'white',
-                          },
-                          fontFamily: 'Roboto',
-                          fontSize: '0.875rem',
-                          fontStyle: 'none',
-                          fontWeight: '400',
-                          padding: ['0.6875rem', '1.375rem'],
-                          textDecoration: 'none',
-                          textTransform: 'none',
+                  ),
+                );
+              case PropertyKind.EMAIL_ADDRESS:
+                return inputStructure(
+                  prop.label,
+                  makeBettyInput(
+                    BettyPrefabs.EMAIL_ADDRESS,
+                    model,
+                    prop,
+                    inputVariable,
+                  ),
+                );
+              case PropertyKind.DECIMAL:
+                return inputStructure(
+                  prop.label,
+                  makeBettyInput(
+                    BettyPrefabs.DECIMAL,
+                    model,
+                    prop,
+                    inputVariable,
+                  ),
+                );
+              case PropertyKind.TEXT:
+                return inputStructure(
+                  prop.label,
+                  makeBettyInput(BettyPrefabs.TEXT, model, prop, inputVariable),
+                );
+              case PropertyKind.PRICE:
+                return inputStructure(
+                  prop.label,
+                  makeBettyInput(
+                    BettyPrefabs.PRICE,
+                    model,
+                    prop,
+                    inputVariable,
+                  ),
+                );
+              case PropertyKind.PASSWORD:
+                return inputStructure(
+                  prop.label,
+                  makeBettyInput(
+                    BettyPrefabs.PASSWORD,
+                    model,
+                    prop,
+                    inputVariable,
+                  ),
+                );
+              case PropertyKind.DATE:
+                return inputStructure(
+                  prop.label,
+                  makeBettyInput(BettyPrefabs.DATE, model, prop, inputVariable),
+                );
+              case PropertyKind.DATE_TIME:
+                return inputStructure(
+                  prop.label,
+                  makeBettyInput(
+                    BettyPrefabs.DATE_TIME,
+                    model,
+                    prop,
+                    inputVariable,
+                  ),
+                );
+              case PropertyKind.TIME:
+                return inputStructure(
+                  prop.label,
+                  makeBettyInput(BettyPrefabs.TIME, model, prop, inputVariable),
+                );
+              case PropertyKind.FILE:
+                fileUpload = makeBettyInput(
+                  BettyPrefabs.FILE,
+                  model,
+                  prop,
+                  inputVariable,
+                );
+                if (fileUpload.type === 'COMPONENT') {
+                  [fileUploadButton] = fileUpload.descendants;
+                  if (fileUploadButton.type === 'COMPONENT') {
+                    fileUploadButton.style = {
+                      overwrite: {
+                        backgroundColor: {
+                          type: 'THEME_COLOR',
+                          value: 'primary',
                         },
-                      };
-                    }
+                        boxShadow: 'none',
+                        color: {
+                          type: 'THEME_COLOR',
+                          value: 'white',
+                        },
+                        fontFamily: 'Roboto',
+                        fontSize: '0.875rem',
+                        fontStyle: 'none',
+                        fontWeight: '400',
+                        padding: ['0.6875rem', '1.375rem'],
+                        textDecoration: 'none',
+                        textTransform: 'none',
+                      },
+                    };
                   }
-                  return inputStructure(prop.label, imageUpload);
-                case PropertyKind.BOOLEAN:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyInput(
-                      BettyPrefabs.BOOLEAN,
-                      model,
-                      prop,
-                      inputVariable,
-                    ),
-                  );
-                case PropertyKind.LIST:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyInput(
-                      BettyPrefabs.LIST,
-                      model,
-                      prop,
-                      inputVariable,
-                    ),
-                  );
-                default:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyInput(
-                      BettyPrefabs.STRING,
-                      model,
-                      prop,
-                      inputVariable,
-                    ),
-                  );
-              }
-            };
-            const createFormInputPrefabs = generateInputPrefabs();
-            if (
-              createFormInputPrefabs.type === 'COMPONENT' &&
-              createFormInputPrefabs.descendants[1].type === 'COMPONENT'
-            ) {
-              setOption(
-                createFormInputPrefabs.descendants[1],
-                'margin',
-                (options: PrefabComponentOption) => ({
-                  ...options,
-                  value: 'none',
-                }),
-              );
-              setOption(
-                createFormInputPrefabs.descendants[1],
-                'hideLabel',
-                (opts: PrefabComponentOption) => ({
-                  ...opts,
-                  value: true,
-                }),
-              );
+                }
+                return inputStructure(prop.label, fileUpload);
+              case PropertyKind.IMAGE:
+                imageUpload = makeBettyInput(
+                  BettyPrefabs.IMAGE,
+                  model,
+                  prop,
+                  inputVariable,
+                );
+                if (imageUpload.type === 'COMPONENT') {
+                  [imageUploadButton] = imageUpload.descendants;
+                  if (imageUploadButton.type === 'COMPONENT') {
+                    imageUploadButton.style = {
+                      overwrite: {
+                        backgroundColor: {
+                          type: 'THEME_COLOR',
+                          value: 'primary',
+                        },
+                        boxShadow: 'none',
+                        color: {
+                          type: 'THEME_COLOR',
+                          value: 'white',
+                        },
+                        fontFamily: 'Roboto',
+                        fontSize: '0.875rem',
+                        fontStyle: 'none',
+                        fontWeight: '400',
+                        padding: ['0.6875rem', '1.375rem'],
+                        textDecoration: 'none',
+                        textTransform: 'none',
+                      },
+                    };
+                  }
+                }
+                return inputStructure(prop.label, imageUpload);
+              case PropertyKind.BOOLEAN:
+                return inputStructure(
+                  prop.label,
+                  makeBettyInput(
+                    BettyPrefabs.BOOLEAN,
+                    model,
+                    prop,
+                    inputVariable,
+                  ),
+                );
+              case PropertyKind.LIST:
+                return inputStructure(
+                  prop.label,
+                  makeBettyInput(BettyPrefabs.LIST, model, prop, inputVariable),
+                );
+              default:
+                return inputStructure(
+                  prop.label,
+                  makeBettyInput(
+                    BettyPrefabs.STRING,
+                    model,
+                    prop,
+                    inputVariable,
+                  ),
+                );
             }
-            createForm.descendants.push(createFormInputPrefabs);
-            if (!prop.kind) {
-              // eslint-disable-next-line no-console
-              console.warn('PropertyKind not found');
-            }
-          },
-        );
+          };
+          const createFormInputPrefabs = generateInputPrefabs();
+          if (
+            createFormInputPrefabs.type === 'COMPONENT' &&
+            createFormInputPrefabs.descendants[1].type === 'COMPONENT'
+          ) {
+            setOption(
+              createFormInputPrefabs.descendants[1],
+              'margin',
+              (options: PrefabComponentOption) => ({
+                ...options,
+                value: 'none',
+              }),
+            );
+            setOption(
+              createFormInputPrefabs.descendants[1],
+              'hideLabel',
+              (opts: PrefabComponentOption) => ({
+                ...opts,
+                value: true,
+              }),
+            );
+          }
+          createForm.descendants.push(createFormInputPrefabs);
+          if (!prop.kind) {
+            // eslint-disable-next-line no-console
+            console.warn('PropertyKind not found');
+          }
+        },
+      );
 
-        setOption(createForm, 'actionId', (opts: PrefabComponentOption) => ({
-          ...opts,
-          value: createAction.action.actionId,
-          configuration: { disabled: true },
-          ref: {
-            id: '#createFormAction',
-          },
-        }));
+      setOption(createForm, 'actionId', (opts: PrefabComponentOption) => ({
+        ...opts,
+        value: createAction.action.actionId,
+        configuration: { disabled: true },
+        ref: {
+          id: '#createFormAction',
+        },
+      }));
 
-        setOption(createForm, 'model', (opts: PrefabComponentOption) => ({
-          ...opts,
-          value: modelId,
-          configuration: {
-            disabled: true,
-          },
-        }));
-      }
+      setOption(createForm, 'model', (opts: PrefabComponentOption) => ({
+        ...opts,
+        value: modelId,
+        configuration: {
+          disabled: true,
+        },
+      }));
 
       // set detail tab
       const detailColumn = treeSearch('#detailColumn', newPrefab.structure);
@@ -6305,367 +6306,376 @@ const beforeCreate = ({
       const updateForm = treeSearch('#updateForm', newPrefab.structure);
       if (!updateForm) throw new Error('No edit form found');
       updateForm.id = updateFormId;
-      if (idProperty && model) {
-        const updateAction = await prepareAction(
-          updateFormId,
+      const updateAction = await prepareAction(
+        updateFormId,
+        idProperty,
+        [...filteredproperties, ...relationProperties],
+        'update',
+        undefined,
+        `Back office - Update ${data?.model.label}`,
+        permissions,
+        pageAuthenticationProfileId,
+      );
+      setOption(updateForm, 'actionId', (opts: PrefabComponentOption) => ({
+        ...opts,
+        value: updateAction.action.actionId,
+        configuration: { disabled: true },
+        ref: {
+          id: '#updateFormAction',
+        },
+      }));
+      setOption(updateForm, 'model', (opts: PrefabComponentOption) => ({
+        ...opts,
+        value: modelId,
+        configuration: {
+          disabled: true,
+        },
+      }));
+
+      Object.values(updateAction.variables).forEach(
+        ([prop, inputVariable]): void => {
+          const generateInputPrefabs = () => {
+            let imageUpload;
+            let imageUploadButton;
+            let fileUpload;
+            let fileUploadButton;
+            switch (prop.kind) {
+              case PropertyKind.BELONGS_TO:
+                return inputStructure(
+                  prop.label,
+                  makeBettyInput(
+                    BettyPrefabs.AUTO_COMPLETE,
+                    model,
+                    prop,
+                    inputVariable,
+                    updateAction.relatedIdProperties,
+                    updateAction.relatedModelIds,
+                  ),
+                );
+              case PropertyKind.INTEGER:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.INTEGER,
+                    model,
+                    prop,
+                    inputVariable,
+                    updateAction.relatedIdProperties,
+                  ),
+                );
+              case PropertyKind.EMAIL_ADDRESS:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.EMAIL_ADDRESS,
+                    model,
+                    prop,
+                    inputVariable,
+                    updateAction.relatedIdProperties,
+                  ),
+                );
+              case PropertyKind.DECIMAL:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.DECIMAL,
+                    model,
+                    prop,
+                    inputVariable,
+                    updateAction.relatedIdProperties,
+                  ),
+                );
+              case PropertyKind.TEXT:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.TEXT,
+                    model,
+                    prop,
+                    inputVariable,
+                    updateAction.relatedIdProperties,
+                  ),
+                );
+              case PropertyKind.PRICE:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.PRICE,
+                    model,
+                    prop,
+                    inputVariable,
+                    updateAction.relatedIdProperties,
+                  ),
+                );
+              case PropertyKind.PASSWORD:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.PASSWORD,
+                    model,
+                    prop,
+                    inputVariable,
+                    updateAction.relatedIdProperties,
+                  ),
+                );
+              case PropertyKind.DATE:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.DATE,
+                    model,
+                    prop,
+                    inputVariable,
+                    updateAction.relatedIdProperties,
+                  ),
+                );
+              case PropertyKind.DATE_TIME:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.DATE_TIME,
+                    model,
+                    prop,
+                    inputVariable,
+                    updateAction.relatedIdProperties,
+                  ),
+                );
+              case PropertyKind.TIME:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.TIME,
+                    model,
+                    prop,
+                    inputVariable,
+                    updateAction.relatedIdProperties,
+                  ),
+                );
+              case PropertyKind.FILE:
+                fileUpload = makeBettyUpdateInput(
+                  BettyPrefabs.FILE,
+                  model,
+                  prop,
+                  inputVariable,
+                  updateAction.relatedIdProperties,
+                );
+                if (fileUpload.type === 'COMPONENT') {
+                  [fileUploadButton] = fileUpload.descendants;
+                  if (fileUploadButton.type === 'COMPONENT') {
+                    fileUploadButton.style = {
+                      overwrite: {
+                        backgroundColor: {
+                          type: 'THEME_COLOR',
+                          value: 'primary',
+                        },
+                        boxShadow: 'none',
+                        color: {
+                          type: 'THEME_COLOR',
+                          value: 'white',
+                        },
+                        fontFamily: 'Roboto',
+                        fontSize: '0.875rem',
+                        fontStyle: 'none',
+                        fontWeight: '400',
+                        padding: ['0.6875rem', '1.375rem'],
+                        textDecoration: 'none',
+                        textTransform: 'none',
+                      },
+                    };
+                  }
+                }
+                return inputStructure(prop.label, fileUpload);
+              case PropertyKind.IMAGE:
+                imageUpload = makeBettyUpdateInput(
+                  BettyPrefabs.IMAGE,
+                  model,
+                  prop,
+                  inputVariable,
+                  updateAction.relatedIdProperties,
+                );
+                if (imageUpload.type === 'COMPONENT') {
+                  [imageUploadButton] = imageUpload.descendants;
+                  if (imageUploadButton.type === 'COMPONENT') {
+                    imageUploadButton.style = {
+                      overwrite: {
+                        backgroundColor: {
+                          type: 'THEME_COLOR',
+                          value: 'primary',
+                        },
+                        boxShadow: 'none',
+                        color: {
+                          type: 'THEME_COLOR',
+                          value: 'white',
+                        },
+                        fontFamily: 'Roboto',
+                        fontSize: '0.875rem',
+                        fontStyle: 'none',
+                        fontWeight: '400',
+                        padding: ['0.6875rem', '1.375rem'],
+                        textDecoration: 'none',
+                        textTransform: 'none',
+                      },
+                    };
+                  }
+                }
+                return inputStructure(prop.label, imageUpload);
+              case PropertyKind.BOOLEAN:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.BOOLEAN,
+                    model,
+                    prop,
+                    inputVariable,
+                    updateAction.relatedIdProperties,
+                  ),
+                );
+              case PropertyKind.LIST:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.LIST,
+                    model,
+                    prop,
+                    inputVariable,
+                    updateAction.relatedIdProperties,
+                  ),
+                );
+              default:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.STRING,
+                    model,
+                    prop,
+                    inputVariable,
+                    updateAction.relatedIdProperties,
+                  ),
+                );
+            }
+          };
+          const updateFormInput = generateInputPrefabs();
+          if (
+            updateFormInput.type === 'COMPONENT' &&
+            updateFormInput.descendants[1].type === 'COMPONENT'
+          ) {
+            setOption(
+              updateFormInput.descendants[1],
+              'margin',
+              (opts: PrefabComponentOption) => ({
+                ...opts,
+                value: 'none',
+              }),
+            );
+            setOption(
+              updateFormInput.descendants[1],
+              'hideLabel',
+              (opts: PrefabComponentOption) => ({
+                ...opts,
+                value: true,
+              }),
+            );
+          }
+          updateForm.descendants.push(updateFormInput);
+          if (!prop.kind) {
+            // eslint-disable-next-line no-console
+            console.warn('PropertyKind not found');
+          }
+        },
+      );
+
+      updateForm.descendants.push(
+        makeBettyUpdateInput(
+          BettyPrefabs.HIDDEN,
+          model,
           idProperty,
-          filteredproperties,
-          'update',
-          undefined,
-          `Back office - Update ${data?.model.label}`,
-          permissions,
-          pageAuthenticationProfileId,
-        );
-        setOption(updateForm, 'actionId', (opts: PrefabComponentOption) => ({
-          ...opts,
-          value: updateAction.action.actionId,
-          configuration: { disabled: true },
-          ref: {
-            id: '#updateFormAction',
-          },
-        }));
-        setOption(updateForm, 'model', (opts: PrefabComponentOption) => ({
-          ...opts,
-          value: modelId,
-          configuration: {
-            disabled: true,
-          },
-        }));
-
-        Object.values(updateAction.variables).forEach(
-          ([prop, inputVariable]): void => {
-            const generateInputPrefabs = () => {
-              let imageUpload;
-              let imageUploadButton;
-              let fileUpload;
-              let fileUploadButton;
-              switch (prop.kind) {
-                case PropertyKind.INTEGER:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.INTEGER,
-                      model,
-                      prop,
-                      inputVariable,
-                      updateAction.relatedIdProperties,
-                    ),
-                  );
-                case PropertyKind.EMAIL_ADDRESS:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.EMAIL_ADDRESS,
-                      model,
-                      prop,
-                      inputVariable,
-                      updateAction.relatedIdProperties,
-                    ),
-                  );
-                case PropertyKind.DECIMAL:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.DECIMAL,
-                      model,
-                      prop,
-                      inputVariable,
-                      updateAction.relatedIdProperties,
-                    ),
-                  );
-                case PropertyKind.TEXT:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.TEXT,
-                      model,
-                      prop,
-                      inputVariable,
-                      updateAction.relatedIdProperties,
-                    ),
-                  );
-                case PropertyKind.PRICE:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.PRICE,
-                      model,
-                      prop,
-                      inputVariable,
-                      updateAction.relatedIdProperties,
-                    ),
-                  );
-                case PropertyKind.PASSWORD:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.PASSWORD,
-                      model,
-                      prop,
-                      inputVariable,
-                      updateAction.relatedIdProperties,
-                    ),
-                  );
-                case PropertyKind.DATE:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.DATE,
-                      model,
-                      prop,
-                      inputVariable,
-                      updateAction.relatedIdProperties,
-                    ),
-                  );
-                case PropertyKind.DATE_TIME:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.DATE_TIME,
-                      model,
-                      prop,
-                      inputVariable,
-                      updateAction.relatedIdProperties,
-                    ),
-                  );
-                case PropertyKind.TIME:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.TIME,
-                      model,
-                      prop,
-                      inputVariable,
-                      updateAction.relatedIdProperties,
-                    ),
-                  );
-                case PropertyKind.FILE:
-                  fileUpload = makeBettyUpdateInput(
-                    BettyPrefabs.FILE,
-                    model,
-                    prop,
-                    inputVariable,
-                    updateAction.relatedIdProperties,
-                  );
-                  if (fileUpload.type === 'COMPONENT') {
-                    [fileUploadButton] = fileUpload.descendants;
-                    if (fileUploadButton.type === 'COMPONENT') {
-                      fileUploadButton.style = {
-                        overwrite: {
-                          backgroundColor: {
-                            type: 'THEME_COLOR',
-                            value: 'primary',
-                          },
-                          boxShadow: 'none',
-                          color: {
-                            type: 'THEME_COLOR',
-                            value: 'white',
-                          },
-                          fontFamily: 'Roboto',
-                          fontSize: '0.875rem',
-                          fontStyle: 'none',
-                          fontWeight: '400',
-                          padding: ['0.6875rem', '1.375rem'],
-                          textDecoration: 'none',
-                          textTransform: 'none',
-                        },
-                      };
-                    }
-                  }
-                  return inputStructure(prop.label, fileUpload);
-                case PropertyKind.IMAGE:
-                  imageUpload = makeBettyUpdateInput(
-                    BettyPrefabs.IMAGE,
-                    model,
-                    prop,
-                    inputVariable,
-                    updateAction.relatedIdProperties,
-                  );
-                  if (imageUpload.type === 'COMPONENT') {
-                    [imageUploadButton] = imageUpload.descendants;
-                    if (imageUploadButton.type === 'COMPONENT') {
-                      imageUploadButton.style = {
-                        overwrite: {
-                          backgroundColor: {
-                            type: 'THEME_COLOR',
-                            value: 'primary',
-                          },
-                          boxShadow: 'none',
-                          color: {
-                            type: 'THEME_COLOR',
-                            value: 'white',
-                          },
-                          fontFamily: 'Roboto',
-                          fontSize: '0.875rem',
-                          fontStyle: 'none',
-                          fontWeight: '400',
-                          padding: ['0.6875rem', '1.375rem'],
-                          textDecoration: 'none',
-                          textTransform: 'none',
-                        },
-                      };
-                    }
-                  }
-                  return inputStructure(prop.label, imageUpload);
-                case PropertyKind.BOOLEAN:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.BOOLEAN,
-                      model,
-                      prop,
-                      inputVariable,
-                      updateAction.relatedIdProperties,
-                    ),
-                  );
-                case PropertyKind.LIST:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.LIST,
-                      model,
-                      prop,
-                      inputVariable,
-                      updateAction.relatedIdProperties,
-                    ),
-                  );
-                default:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.STRING,
-                      model,
-                      prop,
-                      inputVariable,
-                      updateAction.relatedIdProperties,
-                    ),
-                  );
-              }
-            };
-            const updateFormInput = generateInputPrefabs();
-            if (
-              updateFormInput.type === 'COMPONENT' &&
-              updateFormInput.descendants[1].type === 'COMPONENT'
-            ) {
-              setOption(
-                updateFormInput.descendants[1],
-                'margin',
-                (opts: PrefabComponentOption) => ({
-                  ...opts,
-                  value: 'none',
-                }),
-              );
-              setOption(
-                updateFormInput.descendants[1],
-                'hideLabel',
-                (opts: PrefabComponentOption) => ({
-                  ...opts,
-                  value: true,
-                }),
-              );
-            }
-            updateForm.descendants.push(updateFormInput);
-            if (!prop.kind) {
-              // eslint-disable-next-line no-console
-              console.warn('PropertyKind not found');
-            }
-          },
-        );
-
-        updateForm.descendants.push(
-          makeBettyUpdateInput(
-            BettyPrefabs.HIDDEN,
-            model,
-            idProperty,
-            updateAction.recordInputVariable,
-          ),
-        );
-      }
+          updateAction.recordInputVariable,
+        ),
+      );
 
       // set delete action
       const deleteForm = treeSearch('#deleteForm', newPrefab.structure);
       if (!deleteForm) throw new Error('No delete form found');
       deleteForm.id = deleteButtonId;
 
-      if (idProperty && model) {
-        const result = await prepareAction(
-          deleteButtonId,
-          idProperty,
-          undefined,
-          'delete',
-          undefined,
-          `Back office - Delete ${data?.model.label}`,
-          permissions,
-          pageAuthenticationProfileId,
-        );
-        setOption(deleteForm, 'actionId', (opts: PrefabComponentOption) => ({
-          ...opts,
-          value: result.action.actionId,
-          configuration: { disabled: true },
-          ref: {
-            id: '#deleteFormAction',
-          },
-        }));
+      const result = await prepareAction(
+        deleteButtonId,
+        idProperty,
+        undefined,
+        'delete',
+        undefined,
+        `Back office - Delete ${data?.model.label}`,
+        permissions,
+        pageAuthenticationProfileId,
+      );
+      setOption(deleteForm, 'actionId', (opts: PrefabComponentOption) => ({
+        ...opts,
+        value: result.action.actionId,
+        configuration: { disabled: true },
+        ref: {
+          id: '#deleteFormAction',
+        },
+      }));
 
-        setOption(deleteForm, 'model', (opts: PrefabComponentOption) => ({
-          ...opts,
-          value: modelId,
-          configuration: {
-            disabled: true,
-          },
-        }));
+      setOption(deleteForm, 'model', (opts: PrefabComponentOption) => ({
+        ...opts,
+        value: modelId,
+        configuration: {
+          disabled: true,
+        },
+      }));
 
-        const deleteSubmitButton = cloneStructure('Submit Button');
-        if (deleteSubmitButton.type === 'COMPONENT') {
-          deleteSubmitButton.ref = { id: '#deleteSubmitButton' };
-          deleteSubmitButton.style = {
-            overwrite: {
-              backgroundColor: {
-                type: 'STATIC',
-                value: 'red',
-              },
-              boxShadow: 'none',
-              color: {
-                type: 'THEME_COLOR',
-                value: 'white',
-              },
-              fontFamily: 'Roboto',
-              fontSize: '0.875rem',
-              fontStyle: 'none',
-              fontWeight: '400',
-              padding: ['0.6875rem', '1.375rem'],
-              textDecoration: 'none',
-              textTransform: 'none',
+      const deleteSubmitButton = cloneStructure('Submit Button');
+      if (deleteSubmitButton.type === 'COMPONENT') {
+        deleteSubmitButton.ref = { id: '#deleteSubmitButton' };
+        deleteSubmitButton.style = {
+          overwrite: {
+            backgroundColor: {
+              type: 'STATIC',
+              value: 'red',
             },
-          };
-          setOption(
-            deleteSubmitButton,
-            'buttonText',
-            (opts: PrefabComponentOption) => ({
-              ...opts,
-              value: ['Delete'],
-            }),
-          );
-        }
-        deleteForm.descendants.push(deleteSubmitButton);
-
-        deleteForm.descendants.push(
-          makeBettyUpdateInput(
-            BettyPrefabs.HIDDEN,
-            model,
-            idProperty,
-            result.recordInputVariable,
-          ),
+            boxShadow: 'none',
+            color: {
+              type: 'THEME_COLOR',
+              value: 'white',
+            },
+            fontFamily: 'Roboto',
+            fontSize: '0.875rem',
+            fontStyle: 'none',
+            fontWeight: '400',
+            padding: ['0.6875rem', '1.375rem'],
+            textDecoration: 'none',
+            textTransform: 'none',
+          },
+        };
+        setOption(
+          deleteSubmitButton,
+          'buttonText',
+          (opts: PrefabComponentOption) => ({
+            ...opts,
+            value: ['Delete'],
+          }),
         );
       }
+      deleteForm.descendants.push(deleteSubmitButton);
+
+      deleteForm.descendants.push(
+        makeBettyUpdateInput(
+          BettyPrefabs.HIDDEN,
+          model,
+          idProperty,
+          result.recordInputVariable,
+        ),
+      );
+
       const filterComp = treeSearch('#filterComp', newPrefab.structure);
-      if (modelId && filterComp?.type === 'COMPONENT') {
+      if (filterComp?.type === 'COMPONENT') {
         setOption(filterComp, 'modelId', (opts: PrefabComponentOption) => ({
           ...opts,
           value: modelId,
         }));
       }
-      if (idProperty && newPrefab.interactions) {
+      if (newPrefab.interactions) {
         newPrefab.interactions.push(
           {
             name: 'setCurrentRecord',

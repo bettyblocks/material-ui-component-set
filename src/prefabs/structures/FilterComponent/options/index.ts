@@ -5,6 +5,7 @@ import {
   option,
   ThemeColor,
   model,
+  text,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../advanced';
 
@@ -87,5 +88,6 @@ export const filterComponentOptions = {
     label: 'Background color opacity',
     value: 100,
   }),
+  propertyWhiteList: text('Property Whitelist', {}),
   ...advanced,
 };

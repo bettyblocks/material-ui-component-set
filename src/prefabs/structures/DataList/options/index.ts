@@ -18,7 +18,7 @@ export const categories = [
   {
     label: 'Pagination',
     expanded: false,
-    members: ['pagination', 'take', 'placeholderTake'],
+    members: ['pagination', 'labelNumberOfPages', 'take', 'placeholderTake'],
   },
   {
     label: 'Messages',
@@ -95,6 +95,12 @@ export const dataListOptions = {
   }),
   placeholderTake: number('Placeholder rows', {
     value: '',
+  }),
+  labelNumberOfPages: variable(`Pagination label (x 'of' y)`, {
+    value: ['of'],
+    configuration: {
+      condition: hideIf('pagination', 'EQ', 'never'),
+    },
   }),
   type: option('CUSTOM', {
     label: 'Type',
