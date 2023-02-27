@@ -17,8 +17,8 @@ import {
   PrefabReference,
   PrefabComponent,
   PrefabComponentOption,
-  PrefabInteraction,
-  InteractionType,
+  // PrefabInteraction,
+  // InteractionType,
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
@@ -43,13 +43,14 @@ import {
 import {
   Property,
   PropertyStateProps,
-  Properties,
-  Endpoint,
-  IdPropertyProps,
-  ModelProps,
-  ModelQuery,
+  // Properties,
+  // Endpoint,
+  // IdPropertyProps,
+  // ModelProps,
+  // ModelQuery,
 } from './types';
 
+/* 
 const interactions: PrefabInteraction[] = [
   {
     type: InteractionType.Global,
@@ -61,8 +62,10 @@ const interactions: PrefabInteraction[] = [
     parameters: [],
   },
 ];
+*/
 
 const attrs = {
+  name: 'Start Questionnaire',
   icon: Icon.SubmitButtonIcon,
   type: 'page',
   description: '?',
@@ -70,7 +73,7 @@ const attrs = {
   previewUrl: '?',
   previewImage: '?',
   category: 'FORMV2',
-  interactions,
+  // interactions,
 };
 
 const beforeCreate = ({
@@ -82,17 +85,17 @@ const beforeCreate = ({
     Content,
     ModelSelector,
     PropertySelector,
-    EndpointSelector,
+    // EndpointSelector,
     Footer,
     Field,
     Text,
   },
-  helpers: { useModelQuery, setOption, prepareAction, createUuid },
+  helpers: { useModelQuery, setOption /* prepareAction, createUuid */ },
 }: BeforeCreateArgs) => {
-  const [model, setModel] = React.useState<ModelProps>();
+  // const [model, setModel] = React.useState<ModelProps>();
   const [modelId, setModelId] = React.useState('');
   const [showModelValidation, setShowModelValidation] = React.useState(false);
-  const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
+  // const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
   const [titleProperty, setTitleProperty] = React.useState<PropertyStateProps>({
     id: '',
   });
@@ -103,17 +106,17 @@ const beforeCreate = ({
     });
   const [showDescriptionValidation, setShowDescriptionValidation] =
     React.useState(false);
-  const [endpoint, setEndpoint] = React.useState<Endpoint>();
-  const [endpointInvalid, setEndpointInvalid] = React.useState(false);
+  // const [endpoint, setEndpoint] = React.useState<Endpoint>();
+  // const [endpointInvalid, setEndpointInvalid] = React.useState(false);
   const { data } = useModelQuery({
     variables: { id: modelId },
     skip: !modelId,
   });
 
-  const createActionId = createUuid();
+  /* const createActionId = createUuid();
 
   const isEmptyEndpoint = (value: Endpoint): boolean =>
-    !value || Object.keys(value).length === 0 || value.id === '';
+    !value || Object.keys(value).length === 0 || value.id === ''; */
 
   function treeSearch(
     dirName: string,
@@ -148,20 +151,22 @@ const beforeCreate = ({
     return returnObject;
   };
 
-  useModelQuery({
+  /* useModelQuery({
     variables: { id: modelId },
     onCompleted: ({ model: dataModel }: ModelQuery) => {
       setModel(dataModel);
       setIdProperty(dataModel.properties.find(({ name }) => name === 'id'));
     },
-  });
+  }); */
 
+  /* 
   function serializeParameters(obj: Object) {
     return Object.entries(obj).map(([name, entry]) => ({
       name,
       value: entry.map((v: JSON) => JSON.stringify(v)),
     }));
   }
+  */
 
   return (
     <>
@@ -224,6 +229,7 @@ const beforeCreate = ({
             disabled={!modelId}
           />
         </Field>
+        {/*
         <Field
           label="Set the redirect page"
           error={
@@ -244,6 +250,7 @@ const beforeCreate = ({
             }}
           />
         </Field>
+          */}
       </Content>
       <Footer
         onSave={async () => {
@@ -259,13 +266,13 @@ const beforeCreate = ({
             setShowDescriptionValidation(true);
             return;
           }
-          if (!endpoint) {
+          /* if (!endpoint) {
             throw new Error('There was no redirected page selected');
-          }
+          } 
           if (isEmptyEndpoint(endpoint)) {
             setEndpointInvalid(true);
             return;
-          }
+          } */
           const newPrefab = { ...prefab };
 
           const datacontainer = treeSearch(
@@ -299,6 +306,7 @@ const beforeCreate = ({
             }),
           );
 
+          /* 
           if (idProperty && model) {
             const createAction = treeSearch(
               '#createAction',
@@ -354,6 +362,7 @@ const beforeCreate = ({
               'Could not modify the interaction because one of the following items could not be found: Interaction, Interaction parameters, Endpoint, Endpoint parameters',
             );
           }
+          */
 
           save(newPrefab);
         }}
