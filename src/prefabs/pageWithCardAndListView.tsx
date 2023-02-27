@@ -3003,7 +3003,7 @@ export default makePrefab('Card and list view', attrs, beforeCreate, [
                                                                                         },
                                                                                       ),
                                                                                     type: font(
-                                                                                      'Font',
+                                                                                      'Text style',
                                                                                       {
                                                                                         value:
                                                                                           [
@@ -3038,7 +3038,7 @@ export default makePrefab('Card and list view', attrs, beforeCreate, [
                                                                                         },
                                                                                       ),
                                                                                     type: font(
-                                                                                      'Font',
+                                                                                      'Text style',
                                                                                       {
                                                                                         value:
                                                                                           [

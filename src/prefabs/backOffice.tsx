@@ -3173,7 +3173,7 @@ const drawerContainer = DrawerContainer(
                                                             options: {
                                                               ...textOptions,
                                                               type: font(
-                                                                'Font',
+                                                                'Text style',
                                                                 {
                                                                   value: [
                                                                     'Title4',
@@ -4389,7 +4389,7 @@ const drawerContainer = DrawerContainer(
                                                                             },
                                                                           ),
                                                                         type: font(
-                                                                          'Font',
+                                                                          'Text style',
                                                                           {
                                                                             value:
                                                                               [
@@ -4527,7 +4527,7 @@ const drawerContainer = DrawerContainer(
                                                                             },
                                                                           ),
                                                                         type: font(
-                                                                          'Font',
+                                                                          'Text style',
                                                                           {
                                                                             value:
                                                                               [

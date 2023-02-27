@@ -3210,7 +3210,7 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                                 },
                                                               ),
                                                               type: font(
-                                                                'Font',
+                                                                'Text style',
                                                                 {
                                                                   value: [
                                                                     'Title5',
@@ -3601,7 +3601,7 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                                 },
                                                               ),
                                                               type: font(
-                                                                'Font',
+                                                                'Text style',
                                                                 {
                                                                   value: [
                                                                     'Title5',
@@ -3827,7 +3827,7 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                                           },
                                                                         ),
                                                                       type: font(
-                                                                        'Font',
+                                                                        'Text style',
                                                                         {
                                                                           value:
                                                                             [
@@ -3960,7 +3960,7 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                                           },
                                                                         ),
                                                                       type: font(
-                                                                        'Font',
+                                                                        'Text style',
                                                                         {
                                                                           value:
                                                                             [
