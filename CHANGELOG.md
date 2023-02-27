@@ -1,3 +1,10 @@
+## [2.106.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.106.0...v2.106.1) (2023-02-27)
+
+
+### Bug Fixes
+
+* squeezed and/or button in filter component ([c5ff1ce](https://github.com/bettyblocks/material-ui-component-set/commit/c5ff1cefff45ce388d3f450ec8ea790145b5100a))
+
 # [2.106.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.105.0...v2.106.0) (2023-02-27)
 
 
