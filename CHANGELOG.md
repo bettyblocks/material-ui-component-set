@@ -1,3 +1,10 @@
+## [2.106.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.106.1...v2.106.2) (2023-02-27)
+
+
+### Bug Fixes
+
+* default value not working with property ([392ec57](https://github.com/bettyblocks/material-ui-component-set/commit/392ec5790e2818c108516b16e0b41bdff4b2d35d))
+
 ## [2.106.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.106.0...v2.106.1) (2023-02-27)
 
 
