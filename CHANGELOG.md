@@ -1,3 +1,10 @@
+# [2.106.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.105.0...v2.106.0) (2023-02-27)
+
+
+### Features
+
+* add ondrop to child components ([99a5111](https://github.com/bettyblocks/material-ui-component-set/commit/99a51113706e352ac15afca63589a487169010a0))
+
 # [2.105.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.104.0...v2.105.0) (2023-02-17)
 
 
