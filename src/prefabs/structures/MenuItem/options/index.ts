@@ -30,7 +30,12 @@ export const categories = [
 ];
 
 export const menuItemOptions = {
-  primaryText: variable('Primary text', { value: ['Menu Item'] }),
+  primaryText: variable('Primary text', {
+    value: ['Menu Item'],
+    configuration: {
+      showOnDrop: true,
+    },
+  }),
   backgroundColor: color('Background color', { value: ThemeColor.TRANSPARENT }),
   linkType: option('CUSTOM', {
     label: 'Link to',
@@ -70,7 +75,12 @@ export const menuItemOptions = {
       ],
     },
   }),
-  icon: icon('Icon', { value: 'none' }),
+  icon: icon('Icon', {
+    value: 'none',
+    configuration: {
+      showOnDrop: true,
+    },
+  }),
   iconPosition: option('CUSTOM', {
     label: 'Icon position',
     value: 'start',
