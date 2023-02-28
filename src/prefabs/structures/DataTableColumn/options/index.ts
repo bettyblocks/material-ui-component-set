@@ -34,11 +34,6 @@ export const dataTableColumnOptions = {
     value: '',
     configuration: {
       showOnDrop: true,
-      createNewProperty: {
-        value: '',
-        type: 'STRING',
-        dependsOn: 'MODEL_AND_RELATION',
-      },
     },
   }),
   sortable: toggle('Sortable', { value: false }),
