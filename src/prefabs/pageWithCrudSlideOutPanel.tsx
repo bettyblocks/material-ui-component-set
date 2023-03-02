@@ -4122,15 +4122,6 @@ const beforeCreate = ({
         }
 
         deleteForm.descendants.push(deleteSubmitButton);
-
-        deleteForm.descendants.push(
-          makeBettyUpdateInput(
-            BettyPrefabs.HIDDEN,
-            model,
-            idProperty,
-            result.recordInputVariable,
-          ),
-        );
       }
       if (idProperty && newPrefab.interactions) {
         newPrefab.interactions.push(
