@@ -935,15 +935,6 @@ const beforeCreate = ({
           value: modelId,
         }));
 
-        passwordForm.descendants.push(
-          makeBettyUpdateInput(
-            BettyPrefabs.HIDDEN,
-            modelProp,
-            idProperty,
-            resultPass.recordInputVariable,
-          ),
-        );
-
         const editProfileFormObject = treeSearch(
           '#editProfileDetailsForm',
           newPrefab.structure,
@@ -995,14 +986,6 @@ const beforeCreate = ({
               ],
             },
           }),
-        );
-        editProfileFormObject.descendants.push(
-          makeBettyUpdateInput(
-            BettyPrefabs.HIDDEN,
-            modelProp,
-            idProperty,
-            result.recordInputVariable,
-          ),
         );
 
         if (hasProfilePictureProperty) {
