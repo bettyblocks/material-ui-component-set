@@ -880,14 +880,7 @@ const beforeCreate = ({
           updateTabForm.descendants.push(updateFormInputPrefabs);
         },
       );
-      updateTabForm.descendants.push(
-        makeBettyUpdateInput(
-          BettyPrefabs.HIDDEN,
-          model,
-          idProperty,
-          updateResult.recordInputVariable,
-        ),
-      );
+
       newPrefab.interactions.push(
         {
           name: 'Show',
@@ -1351,14 +1344,6 @@ const beforeCreate = ({
       }));
 
       deleteForm.descendants.push(deleteSubmitButton);
-      deleteForm.descendants.push(
-        makeBettyUpdateInput(
-          BettyPrefabs.HIDDEN,
-          model,
-          idProperty,
-          deleteResult.recordInputVariable,
-        ),
-      );
       newPrefab.interactions.push(
         {
           name: 'Show',
