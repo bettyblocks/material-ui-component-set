@@ -4057,15 +4057,6 @@ const beforeCreate = ({
             console.warn('PropertyKind not found');
           }
         });
-
-        editForm.descendants.push(
-          makeBettyUpdateInput(
-            BettyPrefabs.HIDDEN,
-            model,
-            idProperty,
-            result.recordInputVariable,
-          ),
-        );
       }
 
       // set delete action

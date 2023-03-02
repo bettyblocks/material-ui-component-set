@@ -170,6 +170,7 @@
           onActionSuccess={onActionSuccess}
           onActionError={onActionError}
           ref={formRef}
+          currentRecord={currentRecord}
         >
           <fieldset className={classes.fieldset}>{children}</fieldset>
         </Form>

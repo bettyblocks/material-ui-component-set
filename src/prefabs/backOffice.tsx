@@ -6024,7 +6024,8 @@ const beforeCreate = ({
           prop.label !== 'Id' &&
           prop.kind !== 'PDF' &&
           prop.kind !== 'MULTI_FILE' &&
-          prop.kind !== 'PASSWORD',
+          prop.kind !== 'PASSWORD' &&
+          prop.kind !== 'LOGIN_TOKEN',
       );
 
       const relationProperties = model.relationships.filter(
