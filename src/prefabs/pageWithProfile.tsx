@@ -1215,14 +1215,6 @@ const beforeCreate = ({
               ],
             },
           }));
-          imageObject.descendants.push(
-            makeBettyUpdateInput(
-              BettyPrefabs.HIDDEN,
-              modelProp,
-              idProperty,
-              imageObjectResult.recordInputVariable,
-            ),
-          );
         } else {
           const avatarGrid = treeSearch('#AvatarGrid', newPrefab.structure);
 
