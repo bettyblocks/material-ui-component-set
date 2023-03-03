@@ -161,7 +161,7 @@
     const where = useFilter(completeFilter);
     const hasFilter = where && Object.keys(where).length !== 0;
 
-    function FormComponent() {
+    function FormComponent({ record }) {
       return (
         <Form
           actionId={actionId}
@@ -170,6 +170,7 @@
           onActionSuccess={onActionSuccess}
           onActionError={onActionError}
           ref={formRef}
+          currentRecord={currentRecord || record}
         >
           <fieldset className={classes.fieldset}>{children}</fieldset>
         </Form>
@@ -187,7 +188,18 @@
     if (model && hasFilter) {
       return (
         <GetOne modelId={model} rawFilter={where}>
-          <FormComponent />
+          {({ loading, error, data }) => {
+            if (loading) {
+              return <></>;
+            }
+
+            if (error) {
+              return <span>Something went wrong: {error.message}</span>;
+            }
+            const { id } = data;
+
+            return <FormComponent record={id} />;
+          }}
         </GetOne>
       );
     }

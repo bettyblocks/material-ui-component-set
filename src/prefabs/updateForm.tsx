@@ -609,15 +609,6 @@ const beforeCreate = ({
           });
 
           structure.descendants.push(
-            makeBettyUpdateInput(
-              BettyPrefabs.HIDDEN,
-              model,
-              idProperty,
-              result.recordInputVariable,
-            ),
-          );
-
-          structure.descendants.push(
             cloneStructure(BettyPrefabs.SUBMIT_BUTTON),
           );
 
