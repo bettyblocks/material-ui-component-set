@@ -46,7 +46,7 @@ export const categories = [
     ],
   },
   {
-    label: 'Logic Options',
+    label: 'Logic Option',
     expanded: false,
     members: ['displayLogic'],
   },
@@ -58,9 +58,6 @@ export const categories = [
 ];
 
 export const boxOptions = {
-  displayLogic: displayLogic('Display logic', {
-    value: {},
-  }),
   alignment: buttongroup(
     'Alignment',
     [
@@ -92,6 +89,9 @@ export const boxOptions = {
       },
     },
   ),
+  displayLogic: displayLogic('Display logic', {
+    value: {},
+  }),
   stretch: toggle('Stretch (when in flex container)', {
     value: false,
   }),

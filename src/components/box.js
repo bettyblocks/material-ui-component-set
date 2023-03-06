@@ -7,14 +7,14 @@
     const { env, useText, useLogic } = B;
     const { Box } = window.MaterialUI.Core;
     const {
-      displayLogic,
       alignment,
-      valignment,
-      transparent,
       backgroundColor,
-      borderColor,
       backgroundUrl,
+      borderColor,
       dataComponentAttribute,
+      displayLogic,
+      transparent,
+      valignment,
     } = options;
     const isDev = env === 'dev';
     const hasBackgroundColor = backgroundColor !== 'Transparent';
@@ -27,8 +27,7 @@
     const opac = transparent ? 0 : 1;
     const [opacity, setOpacity] = useState(opac);
     const [interactionBackground, setInteractionBackground] = useState('');
-
-    const logic = useLogic(!isDev && displayLogic);
+    const logic = useLogic(displayLogic);
 
     useEffect(() => {
       B.defineFunction('setCustomBackgroundImage', (url) => {
@@ -95,6 +94,7 @@
     B.defineFunction('ToOpaque', () => setOpacity(1));
     B.defineFunction('ToSemiTransparent', () => setOpacity(0.5));
     B.defineFunction('ToTransparent', () => setOpacity(0));
+
     if (!isDev && !logic) {
       return <></>;
     }
@@ -161,8 +161,6 @@
           getSpacing(innerSpacing[2]),
         paddingLeft: ({ options: { innerSpacing } }) =>
           getSpacing(innerSpacing[3]),
-        zIndex: ({ options: { position } }) =>
-          position === 'fixed' && !isDev ? 999 : 'auto',
         [`@media ${mediaMinWidth(600)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
