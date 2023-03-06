@@ -1,3 +1,10 @@
+## [2.108.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.108.0...v2.108.1) (2023-03-06)
+
+
+### Bug Fixes
+
+* remove actionjs dialog from templates ([f8ef197](https://github.com/bettyblocks/material-ui-component-set/commit/f8ef197e35fd5fc82cbb2cc1cee2cda31b10d8c1))
+
 # [2.108.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.107.0...v2.108.0) (2023-03-06)
 
 
