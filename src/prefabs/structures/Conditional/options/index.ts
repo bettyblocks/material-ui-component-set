@@ -1,4 +1,11 @@
-import { option, toggle, variable } from '@betty-blocks/component-sdk';
+import {
+  buttongroup,
+  displayLogic,
+  option,
+  showIf,
+  toggle,
+  variable,
+} from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
 export const categories = [
@@ -10,14 +17,31 @@ export const categories = [
 ];
 
 export const conditionalOptions = {
+  type: buttongroup(
+    'Logic type',
+    [
+      ['Single rule', 'singleRule'],
+      ['Multi rule', 'multiRule'],
+    ],
+    {
+      value: 'singleRule',
+      configuration: {
+        dataType: 'string',
+      },
+    },
+  ),
   visible: toggle('Initial visibility', {
     value: true,
     configuration: {
       as: 'VISIBILITY',
+      condition: showIf('type', 'EQ', 'singleRule'),
     },
   }),
   left: variable('Left', {
     value: [],
+    configuration: {
+      condition: showIf('type', 'EQ', 'singleRule'),
+    },
   }),
   compare: option('CUSTOM', {
     label: 'Compare',
@@ -59,10 +83,20 @@ export const conditionalOptions = {
           value: 'lteq',
         },
       ],
+      condition: showIf('type', 'EQ', 'singleRule'),
     },
   }),
   right: variable('Right', {
     value: [],
+    configuration: {
+      condition: showIf('type', 'EQ', 'singleRule'),
+    },
+  }),
+  displayLogic: displayLogic('Display logic', {
+    value: {},
+    configuration: {
+      condition: showIf('type', 'EQ', 'multiRule'),
+    },
   }),
 
   ...advanced('Conditional'),
