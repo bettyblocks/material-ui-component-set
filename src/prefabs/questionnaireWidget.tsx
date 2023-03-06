@@ -418,6 +418,7 @@ const beforeCreate = ({
 const attributes = {
   category: 'WIDGETS',
   icon: Icon.UpdateFormIcon,
+  type: 'page',
   detail:
     'Easily build a questionnaire with or without sections, weighted scoring, logic and more with this template.',
   description:
