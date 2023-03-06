@@ -373,6 +373,11 @@ const beforeCreate = ({
             configuration: { disabled: true },
           }));
 
+          setOption(structure, 'recordVariable', (option) => ({
+            ...option,
+            value: result.recordInputVariable.id,
+          }));
+
           if (!modelId) {
             // eslint-disable-next-line no-console
             console.error('unable to set model option, no model selected');

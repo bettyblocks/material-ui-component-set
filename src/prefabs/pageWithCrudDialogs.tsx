@@ -1492,6 +1492,10 @@ const beforeCreate = ({
         value: updateResult.action.actionId,
         configuration: { disabled: true },
       }));
+      setOption(updateTabForm, 'recordVariable', (options: any) => ({
+        ...options,
+        value: updateResult.recordInputVariable.id,
+      }));
       setOption(updateTabForm, 'model', (options: any) => ({
         ...options,
         value: modelId,
@@ -1503,6 +1507,10 @@ const beforeCreate = ({
         ...options,
         value: deleteResult.action.actionId,
         configuration: { disabled: true },
+      }));
+      setOption(deleteForm, 'recordVariable', (options: any) => ({
+        ...options,
+        value: deleteResult.recordInputVariable.id,
       }));
       setOption(deleteForm, 'model', (options: any) => ({
         ...options,
