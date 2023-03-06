@@ -17,6 +17,8 @@
       hideTabs,
       dataComponentAttribute,
       preLoadTabs,
+      disableMenuClick,
+      layout,
     } = options;
 
     const orientation =
@@ -53,7 +55,10 @@
         centered={centered}
         orientation={orientation}
         scrollButtons={scrollButtons}
-        classes={{ root: classes.root, indicator: classes.indicator }}
+        classes={{
+          root: layout === 'circle' ? classes.circleRoot : classes.root,
+          indicator: classes.indicator,
+        }}
       >
         {React.Children.map(children, (child, index) => {
           const { options = {} } = child.props;
@@ -77,7 +82,27 @@
                 return 'row';
             }
           }
-
+          if (layout === 'circle') {
+            return (
+              <Tab
+                label={
+                  <div className={classes.circleWrapper}>
+                    <div className={classes.circle}>{index + 1}</div>
+                    <div>
+                      {typeof label === 'string' ? label : useText(label)}
+                    </div>
+                  </div>
+                }
+                classes={{
+                  textColorInherit: classes.textOpacity,
+                  selected: classes.circleSelected,
+                }}
+                disabled={disabled}
+                disableRipple={disableRipple}
+                style={{ pointerEvents: disableMenuClick ? 'none' : 'auto' }}
+              />
+            );
+          }
           return (
             <Tab
               label={
@@ -88,7 +113,7 @@
                   <div className={classes.iconWrapper}>
                     {icon && icon !== 'None' ? <Icon name={icon} /> : undefined}
                   </div>
-                  <div>
+                  <div className={classes.circleLabel}>
                     {typeof label === 'string' ? label : useText(label)}
                   </div>
                 </div>
@@ -147,7 +172,6 @@
     const { env, Styling } = B;
     const style = new Styling(t);
     const isDev = env === 'dev';
-
     return {
       wrapper: {
         height: ({ options: { height } }) => height,
@@ -155,6 +179,68 @@
         '& .MuiTabs-flexContainer > button': {
           pointerEvents: 'none',
         },
+      },
+      circleWrapper: {
+        flexDirection: 'row',
+        display: 'flex',
+        textTransform: 'none',
+        alignSelf: 'flex-start',
+        alignItems: 'center',
+      },
+      textOpacity: {
+        opacity: '1 !important',
+        zIndex: '2',
+      },
+      circleLabel: {
+        color: ({ options: { inactiveCircleLabelColor } }) => [
+          style.getColor(inactiveCircleLabelColor),
+          '!important',
+        ],
+      },
+      circleSelected: {
+        '& $circle': {
+          backgroundColor: ({ options: { circleColor } }) => [
+            style.getColor(circleColor),
+            '!important',
+          ],
+          borderColor: ({ options: { circleBorderColor } }) => [
+            style.getColor(circleBorderColor),
+            '!important',
+          ],
+          color: ({ options: { circleTextColor } }) => [
+            style.getColor(circleTextColor),
+            '!important',
+          ],
+        },
+        '& $circleLabel': {
+          color: ({ options: { circleLabelColor } }) => [
+            style.getColor(circleLabelColor),
+            '!important',
+          ],
+        },
+      },
+      circle: {
+        height: ({ options: { circleWidth } }) => circleWidth,
+        marginRight: '10px',
+        width: ({ options: { circleWidth } }) => circleWidth,
+        backgroundColor: ({ options: { inactiveCircleColor } }) => [
+          style.getColor(inactiveCircleColor),
+          '!important',
+        ],
+        borderRadius: ({ options: { circleWidth } }) => circleWidth,
+        borderStyle: 'solid',
+        borderColor: ({ options: { inactiveCircleBorderColor } }) => [
+          style.getColor(inactiveCircleBorderColor),
+          '!important',
+        ],
+        borderWidth: '1px',
+        display: 'flex',
+        color: ({ options: { inactiveCircleTextColor } }) => [
+          style.getColor(inactiveCircleTextColor),
+          '!important',
+        ],
+        alignItems: 'center',
+        justifyContent: 'center',
       },
       tabs: {
         display: 'flex',
@@ -184,11 +270,29 @@
         ],
         minWidth: '10rem',
       },
+      circleRoot: {
+        minWidth: '10rem',
+        position: 'relative',
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          top: '12px',
+          left: ({ options: { circleWidth } }) =>
+            `calc(12px + calc(${circleWidth} / 2))`,
+          bottom: '12px',
+          backgroundColor: ({ options: { connectorColor } }) => [
+            style.getColor(connectorColor),
+            '!important',
+          ],
+          width: '1px',
+          zIndex: '1',
+        },
+      },
       indicator: {
         left: ({ options: { alignment } }) => alignment === 'right' && 0,
         top: ({ options: { alignment } }) => alignment === 'bottom' && 0,
-        backgroundColor: ({ options: { indicatorColor } }) => [
-          style.getColor(indicatorColor),
+        backgroundColor: ({ options: { indicatorColor, layout } }) => [
+          layout === 'circle' ? 'transparent' : style.getColor(indicatorColor),
           '!important',
         ],
       },
