@@ -213,7 +213,7 @@ export const tabsOptions = {
     },
   }),
   inactiveCircleTextColor: color('Inactive circle text color', {
-    value: ThemeColor.WHITE,
+    value: ThemeColor.BLACK,
     configuration: {
       condition: showIf('layout', 'EQ', 'circle'),
     },
