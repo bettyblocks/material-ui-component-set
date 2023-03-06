@@ -1,3 +1,22 @@
+# [2.108.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.107.0...v2.108.0) (2023-03-06)
+
+
+### Bug Fixes
+
+* changed more font options to text style ([8b00f0a](https://github.com/bettyblocks/material-ui-component-set/commit/8b00f0a4b894f00af9fb2b30606d9f9715987168))
+
+
+### Features
+
+* change font option to text style ([218dda1](https://github.com/bettyblocks/material-ui-component-set/commit/218dda12f6d69870018592cde568d9ab33179382))
+
+# [2.107.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.106.2...v2.107.0) (2023-03-03)
+
+
+### Features
+
+* implement allowkinds and relation in subview ([a7f3ad1](https://github.com/bettyblocks/material-ui-component-set/commit/a7f3ad11b9e38c96e23576898bb8af097de98ad7))
+
 ## [2.106.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.106.1...v2.106.2) (2023-02-27)
 
 
