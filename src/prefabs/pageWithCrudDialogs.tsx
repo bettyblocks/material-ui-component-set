@@ -1055,13 +1055,54 @@ const beforeCreate = ({
       // eslint-disable-next-line @typescript-eslint/no-shadow
       const newDetailInput = (property: any) => {
         const boxStructure = cloneStructure('Box');
-        boxStructure.options[0].value = 'center';
-        boxStructure.options[1].value = 'center';
-        boxStructure.options[6].value = ['0rem', 'M', 'M', 'M'];
-        boxStructure.options[7].value = ['0rem', '0rem', '0rem', '0rem'];
-
-        boxStructure.options[13].value = 'Light';
-        boxStructure.options[14].value = 20;
+        setOption(
+          boxStructure,
+          'alignment',
+          (options: PrefabComponentOption) => ({
+            ...options,
+            value: 'center',
+          }),
+        );
+        setOption(
+          boxStructure,
+          'valignment',
+          (options: PrefabComponentOption) => ({
+            ...options,
+            value: 'center',
+          }),
+        );
+        setOption(
+          boxStructure,
+          'outerSpacing',
+          (options: PrefabComponentOption) => ({
+            ...options,
+            value: ['0rem', 'M', 'M', 'M'],
+          }),
+        );
+        setOption(
+          boxStructure,
+          'innerSpacing',
+          (options: PrefabComponentOption) => ({
+            ...options,
+            value: ['0rem', '0rem', '0rem', '0rem'],
+          }),
+        );
+        setOption(
+          boxStructure,
+          'backgroundColor',
+          (options: PrefabComponentOption) => ({
+            ...options,
+            value: 'light',
+          }),
+        );
+        setOption(
+          boxStructure,
+          'backgroundColorAlpha',
+          (options: PrefabComponentOption) => ({
+            ...options,
+            value: 20,
+          }),
+        );
 
         const rowColumnStructure = cloneStructure('2 Columns');
         const textStructure = cloneStructure('Text');
