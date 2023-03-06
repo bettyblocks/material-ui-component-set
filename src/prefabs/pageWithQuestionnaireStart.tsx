@@ -17,8 +17,6 @@ import {
   PrefabReference,
   PrefabComponent,
   PrefabComponentOption,
-  // PrefabInteraction,
-  // InteractionType,
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
@@ -43,26 +41,11 @@ import {
 import {
   Property,
   PropertyStateProps,
-  // Properties,
-  // Endpoint,
-  // IdPropertyProps,
-  // ModelProps,
-  // ModelQuery,
+  Properties,
+  IdPropertyProps,
+  ModelProps,
+  ModelQuery,
 } from './types';
-
-/* 
-const interactions: PrefabInteraction[] = [
-  {
-    type: InteractionType.Global,
-    name: 'redirect',
-    sourceEvent: 'onActionSuccess',
-    ref: {
-      sourceComponentId: '#createAction',
-    },
-    parameters: [],
-  },
-];
-*/
 
 const attrs = {
   name: 'Start Questionnaire',
@@ -73,7 +56,6 @@ const attrs = {
   previewUrl: '?',
   previewImage: '?',
   category: 'FORMV2',
-  // interactions,
 };
 
 const beforeCreate = ({
@@ -85,17 +67,16 @@ const beforeCreate = ({
     Content,
     ModelSelector,
     PropertySelector,
-    // EndpointSelector,
     Footer,
     Field,
     Text,
   },
-  helpers: { useModelQuery, setOption /* prepareAction, createUuid */ },
+  helpers: { useModelQuery, setOption, prepareAction, createUuid },
 }: BeforeCreateArgs) => {
-  // const [model, setModel] = React.useState<ModelProps>();
+  const [model, setModel] = React.useState<ModelProps>();
   const [modelId, setModelId] = React.useState('');
   const [showModelValidation, setShowModelValidation] = React.useState(false);
-  // const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
+  const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
   const [titleProperty, setTitleProperty] = React.useState<PropertyStateProps>({
     id: '',
   });
@@ -106,17 +87,12 @@ const beforeCreate = ({
     });
   const [showDescriptionValidation, setShowDescriptionValidation] =
     React.useState(false);
-  // const [endpoint, setEndpoint] = React.useState<Endpoint>();
-  // const [endpointInvalid, setEndpointInvalid] = React.useState(false);
   const { data } = useModelQuery({
     variables: { id: modelId },
     skip: !modelId,
   });
 
-  /* const createActionId = createUuid();
-
-  const isEmptyEndpoint = (value: Endpoint): boolean =>
-    !value || Object.keys(value).length === 0 || value.id === ''; */
+  const createActionId = createUuid();
 
   function treeSearch(
     dirName: string,
@@ -151,22 +127,13 @@ const beforeCreate = ({
     return returnObject;
   };
 
-  /* useModelQuery({
+  useModelQuery({
     variables: { id: modelId },
     onCompleted: ({ model: dataModel }: ModelQuery) => {
       setModel(dataModel);
       setIdProperty(dataModel.properties.find(({ name }) => name === 'id'));
     },
-  }); */
-
-  /* 
-  function serializeParameters(obj: Object) {
-    return Object.entries(obj).map(([name, entry]) => ({
-      name,
-      value: entry.map((v: JSON) => JSON.stringify(v)),
-    }));
-  }
-  */
+  });
 
   return (
     <>
@@ -229,28 +196,6 @@ const beforeCreate = ({
             disabled={!modelId}
           />
         </Field>
-        {/*
-        <Field
-          label="Set the redirect page"
-          error={
-            endpointInvalid && (
-              <Text color="#e82600">Selecting a page is required</Text>
-            )
-          }
-        >
-          <Text color="grey700">
-            This page should redirect to your questionnaire template.
-          </Text>
-          <EndpointSelector
-            value={endpoint || ''}
-            size="large"
-            onChange={(value: Endpoint): void => {
-              setEndpointInvalid(isEmptyEndpoint(value));
-              setEndpoint(value);
-            }}
-          />
-        </Field>
-          */}
       </Content>
       <Footer
         onSave={async () => {
@@ -266,13 +211,6 @@ const beforeCreate = ({
             setShowDescriptionValidation(true);
             return;
           }
-          /* if (!endpoint) {
-            throw new Error('There was no redirected page selected');
-          } 
-          if (isEmptyEndpoint(endpoint)) {
-            setEndpointInvalid(true);
-            return;
-          } */
           const newPrefab = { ...prefab };
 
           const datacontainer = treeSearch(
@@ -306,7 +244,6 @@ const beforeCreate = ({
             }),
           );
 
-          /* 
           if (idProperty && model) {
             const createAction = treeSearch(
               '#createAction',
@@ -342,27 +279,6 @@ const beforeCreate = ({
               },
             }));
           }
-
-          if (
-            newPrefab.interactions &&
-            endpoint &&
-            endpoint.params &&
-            'parameters' in newPrefab.interactions[0]
-          ) {
-            newPrefab.interactions[0].parameters = [
-              {
-                parameter: 'redirectTo',
-                pageId: endpoint.pageId,
-                endpointId: endpoint.id,
-                parameters: serializeParameters(endpoint.params),
-              },
-            ];
-          } else {
-            throw new Error(
-              'Could not modify the interaction because one of the following items could not be found: Interaction, Interaction parameters, Endpoint, Endpoint parameters',
-            );
-          }
-          */
 
           save(newPrefab);
         }}
@@ -416,92 +332,217 @@ export default makePrefab('Start questionnaire', attrs, beforeCreate, [
           },
         },
         [
-          Grid(
+          prefabBox(
             {
               options: {
-                ...gridOptions,
+                ...boxOptions,
+                innerSpacing: sizes('Inner space', {
+                  value: ['0rem', '0rem', '0rem', '0rem'],
+                }),
+                stretch: toggle('Stretch (when in flex container)', {
+                  value: true,
+                }),
                 height: size('Height', {
                   value: '100%',
                   configuration: {
                     as: 'UNIT',
                   },
                 }),
+                backgroundUrl: variable('Background url', {
+                  value: [
+                    'https://assets.bettyblocks.com/1e9019bb1c5c4af2ba799c2ee1761af0_assets/files/login-background',
+                  ],
+                }),
+                backgroundSize: buttongroup(
+                  'Background size',
+                  [
+                    ['Initial', 'initial'],
+                    ['Contain', 'contain'],
+                    ['Cover', 'cover'],
+                  ],
+                  {
+                    value: 'cover',
+                    configuration: {
+                      dataType: 'string',
+                    },
+                  },
+                ),
               },
             },
             [
-              Grid(
+              Row(
                 {
                   options: {
-                    ...gridOptions,
-                    direction: option('CUSTOM', {
-                      value: 'column',
-                      label: 'Direction',
+                    ...rowOptions,
+                    maxRowWidth: option('CUSTOM', {
+                      label: 'Width',
+                      value: 'Full',
                       configuration: {
                         as: 'BUTTONGROUP',
                         dataType: 'string',
                         allowedInput: [
-                          { name: 'Horizontal', value: 'row' },
-                          { name: 'Vertical', value: 'column' },
+                          { name: 'S', value: 'S' },
+                          { name: 'M', value: 'M' },
+                          { name: 'L', value: 'L' },
+                          { name: 'XL', value: 'XL' },
+                          { name: 'Full', value: 'Full' },
                         ],
-                        condition: showIf('type', 'EQ', 'container'),
+                      },
+                    }),
+                    rowHeight: text('Height', {
+                      value: '100%',
+                      configuration: {
+                        as: 'UNIT',
                       },
                     }),
                   },
                 },
                 [
-                  prefabBox(
+                  Column(
                     {
                       options: {
-                        ...boxOptions,
+                        ...columnOptions,
+                        columnWidth: option('CUSTOM', {
+                          label: 'Column width',
+                          value: '4',
+                          configuration: {
+                            as: 'DROPDOWN',
+                            dataType: 'string',
+                            allowedInput: [
+                              {
+                                name: 'Fit content',
+                                value: 'fitContent',
+                              },
+                              { name: 'Flexible', value: 'flexible' },
+                              { name: 'Hidden', value: 'hidden' },
+                              { name: '1', value: '1' },
+                              { name: '2', value: '2' },
+                              { name: '3', value: '3' },
+                              { name: '4', value: '4' },
+                              { name: '5', value: '5' },
+                              { name: '6', value: '6' },
+                              { name: '7', value: '7' },
+                              { name: '8', value: '8' },
+                              { name: '9', value: '9' },
+                              { name: '10', value: '10' },
+                              { name: '11', value: '11' },
+                              { name: '12', value: '12' },
+                            ],
+                          },
+                        }),
+                        columnWidthTabletLandscape: option('CUSTOM', {
+                          label: 'Column width (tablet landscape)',
+                          value: '4',
+                          configuration: {
+                            as: 'DROPDOWN',
+                            dataType: 'string',
+                            allowedInput: [
+                              {
+                                name: 'Fit content',
+                                value: 'fitContent',
+                              },
+                              { name: 'Flexible', value: 'flexible' },
+                              { name: 'Hidden', value: 'hidden' },
+                              { name: '1', value: '1' },
+                              { name: '2', value: '2' },
+                              { name: '3', value: '3' },
+                              { name: '4', value: '4' },
+                              { name: '5', value: '5' },
+                              { name: '6', value: '6' },
+                              { name: '7', value: '7' },
+                              { name: '8', value: '8' },
+                              { name: '9', value: '9' },
+                              { name: '10', value: '10' },
+                              { name: '11', value: '11' },
+                              { name: '12', value: '12' },
+                            ],
+                          },
+                        }),
+                        columnWidthTabletPortrait: option('CUSTOM', {
+                          value: '6',
+                          label: 'Column width (tablet portrait)',
+                          configuration: {
+                            as: 'DROPDOWN',
+                            dataType: 'string',
+                            allowedInput: [
+                              {
+                                name: 'Fit content',
+                                value: 'fitContent',
+                              },
+                              { name: 'Flexible', value: 'flexible' },
+                              { name: 'Hidden', value: 'hidden' },
+                              { name: '1', value: '1' },
+                              { name: '2', value: '2' },
+                              { name: '3', value: '3' },
+                              { name: '4', value: '4' },
+                              { name: '5', value: '5' },
+                              { name: '6', value: '6' },
+                              { name: '7', value: '7' },
+                              { name: '8', value: '8' },
+                              { name: '9', value: '9' },
+                              { name: '10', value: '10' },
+                              { name: '11', value: '11' },
+                              { name: '12', value: '12' },
+                            ],
+                          },
+                        }),
+                        columnWidthMobile: option('CUSTOM', {
+                          value: '12',
+                          label: 'Column width (mobile)',
+                          configuration: {
+                            as: 'DROPDOWN',
+                            dataType: 'string',
+                            allowedInput: [
+                              {
+                                name: 'Fit content',
+                                value: 'fitContent',
+                              },
+                              { name: 'Flexible', value: 'flexible' },
+                              { name: 'Hidden', value: 'hidden' },
+                              { name: '1', value: '1' },
+                              { name: '2', value: '2' },
+                              { name: '3', value: '3' },
+                              { name: '4', value: '4' },
+                              { name: '5', value: '5' },
+                              { name: '6', value: '6' },
+                              { name: '7', value: '7' },
+                              { name: '8', value: '8' },
+                              { name: '9', value: '9' },
+                              { name: '10', value: '10' },
+                              { name: '11', value: '11' },
+                              { name: '12', value: '12' },
+                            ],
+                          },
+                        }),
+                        backgroundColor: color('Background color', {
+                          value: ThemeColor.WHITE,
+                        }),
+                        verticalAlignment: option('CUSTOM', {
+                          label: 'Vertical Alignment',
+                          value: 'center',
+                          configuration: {
+                            as: 'BUTTONGROUP',
+                            dataType: 'string',
+                            allowedInput: [
+                              { name: 'None', value: 'inherit' },
+                              { name: 'Top', value: 'flex-start' },
+                              { name: 'Center', value: 'center' },
+                              { name: 'Bottom', value: 'flex-end' },
+                            ],
+                          },
+                        }),
                         innerSpacing: sizes('Inner space', {
                           value: ['0rem', '0rem', '0rem', '0rem'],
                         }),
-                        stretch: toggle('Stretch (when in flex container)', {
-                          value: true,
-                        }),
-                        backgroundUrl: variable('Background url', {
-                          value: [
-                            'https://assets.bettyblocks.com/1e9019bb1c5c4af2ba799c2ee1761af0_assets/files/login-background',
-                          ],
-                        }),
-                        backgroundSize: buttongroup(
-                          'Background size',
-                          [
-                            ['Initial', 'initial'],
-                            ['Contain', 'contain'],
-                            ['Cover', 'cover'],
-                          ],
-                          {
-                            value: 'cover',
-                            configuration: {
-                              dataType: 'string',
-                            },
-                          },
-                        ),
                       },
                     },
                     [
-                      Row(
+                      Grid(
                         {
                           options: {
-                            ...rowOptions,
-                            maxRowWidth: option('CUSTOM', {
-                              label: 'Width',
-                              value: 'Full',
-                              configuration: {
-                                as: 'BUTTONGROUP',
-                                dataType: 'string',
-                                allowedInput: [
-                                  { name: 'S', value: 'S' },
-                                  { name: 'M', value: 'M' },
-                                  { name: 'L', value: 'L' },
-                                  { name: 'XL', value: 'XL' },
-                                  { name: 'Full', value: 'Full' },
-                                ],
-                              },
-                            }),
-                            rowHeight: text('Height', {
-                              value: '92%',
+                            ...gridOptions,
+                            height: size('Height', {
+                              value: '100%',
                               configuration: {
                                 as: 'UNIT',
                               },
@@ -509,517 +550,34 @@ export default makePrefab('Start questionnaire', attrs, beforeCreate, [
                           },
                         },
                         [
-                          Column(
+                          Grid(
                             {
                               options: {
-                                ...columnOptions,
-                                columnWidth: option('CUSTOM', {
-                                  label: 'Column width',
-                                  value: '4',
-                                  configuration: {
-                                    as: 'DROPDOWN',
-                                    dataType: 'string',
-                                    allowedInput: [
-                                      {
-                                        name: 'Fit content',
-                                        value: 'fitContent',
-                                      },
-                                      { name: 'Flexible', value: 'flexible' },
-                                      { name: 'Hidden', value: 'hidden' },
-                                      { name: '1', value: '1' },
-                                      { name: '2', value: '2' },
-                                      { name: '3', value: '3' },
-                                      { name: '4', value: '4' },
-                                      { name: '5', value: '5' },
-                                      { name: '6', value: '6' },
-                                      { name: '7', value: '7' },
-                                      { name: '8', value: '8' },
-                                      { name: '9', value: '9' },
-                                      { name: '10', value: '10' },
-                                      { name: '11', value: '11' },
-                                      { name: '12', value: '12' },
-                                    ],
-                                  },
-                                }),
-                                columnWidthTabletLandscape: option('CUSTOM', {
-                                  label: 'Column width (tablet landscape)',
-                                  value: '4',
-                                  configuration: {
-                                    as: 'DROPDOWN',
-                                    dataType: 'string',
-                                    allowedInput: [
-                                      {
-                                        name: 'Fit content',
-                                        value: 'fitContent',
-                                      },
-                                      { name: 'Flexible', value: 'flexible' },
-                                      { name: 'Hidden', value: 'hidden' },
-                                      { name: '1', value: '1' },
-                                      { name: '2', value: '2' },
-                                      { name: '3', value: '3' },
-                                      { name: '4', value: '4' },
-                                      { name: '5', value: '5' },
-                                      { name: '6', value: '6' },
-                                      { name: '7', value: '7' },
-                                      { name: '8', value: '8' },
-                                      { name: '9', value: '9' },
-                                      { name: '10', value: '10' },
-                                      { name: '11', value: '11' },
-                                      { name: '12', value: '12' },
-                                    ],
-                                  },
-                                }),
-                                columnWidthTabletPortrait: option('CUSTOM', {
-                                  value: '6',
-                                  label: 'Column width (tablet portrait)',
-                                  configuration: {
-                                    as: 'DROPDOWN',
-                                    dataType: 'string',
-                                    allowedInput: [
-                                      {
-                                        name: 'Fit content',
-                                        value: 'fitContent',
-                                      },
-                                      { name: 'Flexible', value: 'flexible' },
-                                      { name: 'Hidden', value: 'hidden' },
-                                      { name: '1', value: '1' },
-                                      { name: '2', value: '2' },
-                                      { name: '3', value: '3' },
-                                      { name: '4', value: '4' },
-                                      { name: '5', value: '5' },
-                                      { name: '6', value: '6' },
-                                      { name: '7', value: '7' },
-                                      { name: '8', value: '8' },
-                                      { name: '9', value: '9' },
-                                      { name: '10', value: '10' },
-                                      { name: '11', value: '11' },
-                                      { name: '12', value: '12' },
-                                    ],
-                                  },
-                                }),
-                                columnWidthMobile: option('CUSTOM', {
-                                  value: '12',
-                                  label: 'Column width (mobile)',
-                                  configuration: {
-                                    as: 'DROPDOWN',
-                                    dataType: 'string',
-                                    allowedInput: [
-                                      {
-                                        name: 'Fit content',
-                                        value: 'fitContent',
-                                      },
-                                      { name: 'Flexible', value: 'flexible' },
-                                      { name: 'Hidden', value: 'hidden' },
-                                      { name: '1', value: '1' },
-                                      { name: '2', value: '2' },
-                                      { name: '3', value: '3' },
-                                      { name: '4', value: '4' },
-                                      { name: '5', value: '5' },
-                                      { name: '6', value: '6' },
-                                      { name: '7', value: '7' },
-                                      { name: '8', value: '8' },
-                                      { name: '9', value: '9' },
-                                      { name: '10', value: '10' },
-                                      { name: '11', value: '11' },
-                                      { name: '12', value: '12' },
-                                    ],
-                                  },
-                                }),
-                                backgroundColor: color('Background color', {
-                                  value: ThemeColor.WHITE,
-                                }),
-                                verticalAlignment: option('CUSTOM', {
-                                  label: 'Vertical Alignment',
-                                  value: 'center',
+                                ...gridOptions,
+                                direction: option('CUSTOM', {
+                                  value: 'column',
+                                  label: 'Direction',
                                   configuration: {
                                     as: 'BUTTONGROUP',
                                     dataType: 'string',
                                     allowedInput: [
-                                      { name: 'None', value: 'inherit' },
-                                      { name: 'Top', value: 'flex-start' },
-                                      { name: 'Center', value: 'center' },
-                                      { name: 'Bottom', value: 'flex-end' },
+                                      { name: 'Horizontal', value: 'row' },
+                                      { name: 'Vertical', value: 'column' },
                                     ],
-                                  },
-                                }),
-                                innerSpacing: sizes('Inner space', {
-                                  value: ['0rem', '0rem', '0rem', '0rem'],
-                                }),
-                              },
-                            },
-                            [
-                              prefabBox(
-                                {
-                                  options: {
-                                    ...boxOptions,
-                                    innerSpacing: sizes('Inner space', {
-                                      value: ['0rem', 'XL', '0rem', 'XL'],
-                                    }),
-                                  },
-                                },
-                                [
-                                  Media({
-                                    options: {
-                                      ...mediaOptions,
-                                      type: option('CUSTOM', {
-                                        label: 'Media type',
-                                        value: 'url',
-                                        configuration: {
-                                          as: 'BUTTONGROUP',
-                                          dataType: 'string',
-                                          allowedInput: [
-                                            { name: 'Image', value: 'img' },
-                                            { name: 'Data/URL', value: 'url' },
-                                            { name: 'Video', value: 'video' },
-                                            {
-                                              name: 'I-frame',
-                                              value: 'iframe',
-                                            },
-                                          ],
-                                        },
-                                      }),
-                                      urlFileSource: variable('Source', {
-                                        value: [
-                                          'https://assets.bettyblocks.com/373317d12bf04d5496079adc02aab34a_assets/files/Your_Logo_-_B.svg',
-                                        ],
-                                        configuration: {
-                                          placeholder:
-                                            'Starts with https:// or http://',
-                                          as: 'MULTILINE',
-                                          condition: showIf(
-                                            'type',
-                                            'EQ',
-                                            'url',
-                                          ),
-                                        },
-                                      }),
-                                      width: size('Width', {
-                                        value: '',
-                                        configuration: {
-                                          as: 'UNIT',
-                                        },
-                                      }),
-                                      outerSpacing: sizes('Outer space', {
-                                        value: ['0rem', '0rem', 'XL', '0rem'],
-                                      }),
-                                    },
-                                  }),
-                                  DataContainer(
-                                    {
-                                      ref: {
-                                        id: '#datacontainer',
-                                      },
-                                      options: {
-                                        ...dataContainerOptions,
-                                        loadingType: option('CUSTOM', {
-                                          value: 'showChildren',
-                                          label: 'Show on load',
-                                          configuration: {
-                                            as: 'BUTTONGROUP',
-                                            dataType: 'string',
-                                            allowedInput: [
-                                              {
-                                                name: 'Message',
-                                                value: 'default',
-                                              },
-                                              {
-                                                name: 'Content',
-                                                value: 'showChildren',
-                                              },
-                                            ],
-                                          },
-                                        }),
-                                      },
-                                    },
-                                    [
-                                      prefabText({
-                                        ref: {
-                                          id: '#titleText',
-                                        },
-                                        options: {
-                                          ...textOptions,
-                                          content: variable('Content', {
-                                            value: [''],
-                                            configuration: { as: 'MULTILINE' },
-                                          }),
-                                          type: font('Font', {
-                                            value: ['Title4'],
-                                          }),
-                                          outerSpacing: sizes('Outer space', {
-                                            value: [
-                                              'XL',
-                                              '0rem',
-                                              '0rem',
-                                              '0rem',
-                                            ],
-                                          }),
-                                        },
-                                      }),
-                                      prefabText({
-                                        ref: {
-                                          id: '#descriptionText',
-                                        },
-                                        options: {
-                                          ...textOptions,
-                                          content: variable('Content', {
-                                            value: [''],
-                                            configuration: { as: 'MULTILINE' },
-                                          }),
-                                          type: font('Font', {
-                                            value: ['Body1'],
-                                          }),
-                                          outerSpacing: sizes('Outer space', {
-                                            value: [
-                                              'M',
-                                              '0rem',
-                                              '0rem',
-                                              '0rem',
-                                            ],
-                                          }),
-                                        },
-                                      }),
-                                      ActionJSButton({
-                                        ref: {
-                                          id: '#createAction',
-                                        },
-                                        style: {
-                                          overwrite: {
-                                            backgroundColor: {
-                                              type: 'THEME_COLOR',
-                                              value: 'primary',
-                                            },
-                                            borderColor: {
-                                              type: 'THEME_COLOR',
-                                              value: 'primary',
-                                            },
-                                            borderRadius: ['0.25rem'],
-                                            borderStyle: 'solid',
-                                            borderWidth: ['0.0625rem'],
-                                            boxShadow: 'none',
-                                            color: {
-                                              type: 'THEME_COLOR',
-                                              value: 'white',
-                                            },
-                                            fontFamily: 'Roboto',
-                                            fontSize: '0.875rem',
-                                            fontStyle: 'none',
-                                            fontWeight: '400',
-                                            padding: ['0.625rem', '1.3125rem'],
-                                            textDecoration: 'none',
-                                            textTransform: 'none',
-                                          },
-                                        },
-                                        options: {
-                                          ...actionJSButtonOptions,
-                                          actionId: option('ACTION_JS', {
-                                            label: 'Action',
-                                            value: '',
-                                            configuration: {
-                                              disabled: true,
-                                            },
-                                          }),
-                                          buttonText: variable('Button text', {
-                                            value: ['Start questionnaire'],
-                                          }),
-                                          outerSpacing: sizes('Outer space', {
-                                            value: [
-                                              'M',
-                                              '0rem',
-                                              '0rem',
-                                              '0rem',
-                                            ],
-                                          }),
-                                        },
-                                      }),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Row(
-                        {
-                          options: {
-                            ...rowOptions,
-                            maxRowWidth: option('CUSTOM', {
-                              label: 'Width',
-                              value: 'Full',
-                              configuration: {
-                                as: 'BUTTONGROUP',
-                                dataType: 'string',
-                                allowedInput: [
-                                  { name: 'S', value: 'S' },
-                                  { name: 'M', value: 'M' },
-                                  { name: 'L', value: 'L' },
-                                  { name: 'XL', value: 'XL' },
-                                  { name: 'Full', value: 'Full' },
-                                ],
-                              },
-                            }),
-                            rowHeight: text('Height', {
-                              value: '8%',
-                              configuration: {
-                                as: 'UNIT',
-                              },
-                            }),
-                          },
-                        },
-                        [
-                          Column(
-                            {
-                              options: {
-                                ...columnOptions,
-                                columnWidth: option('CUSTOM', {
-                                  label: 'Column width',
-                                  value: '4',
-                                  configuration: {
-                                    as: 'DROPDOWN',
-                                    dataType: 'string',
-                                    allowedInput: [
-                                      {
-                                        name: 'Fit content',
-                                        value: 'fitContent',
-                                      },
-                                      { name: 'Flexible', value: 'flexible' },
-                                      { name: 'Hidden', value: 'hidden' },
-                                      { name: '1', value: '1' },
-                                      { name: '2', value: '2' },
-                                      { name: '3', value: '3' },
-                                      { name: '4', value: '4' },
-                                      { name: '5', value: '5' },
-                                      { name: '6', value: '6' },
-                                      { name: '7', value: '7' },
-                                      { name: '8', value: '8' },
-                                      { name: '9', value: '9' },
-                                      { name: '10', value: '10' },
-                                      { name: '11', value: '11' },
-                                      { name: '12', value: '12' },
-                                    ],
-                                  },
-                                }),
-                                columnWidthTabletLandscape: option('CUSTOM', {
-                                  label: 'Column width (tablet landscape)',
-                                  value: '4',
-                                  configuration: {
-                                    as: 'DROPDOWN',
-                                    dataType: 'string',
-                                    allowedInput: [
-                                      {
-                                        name: 'Fit content',
-                                        value: 'fitContent',
-                                      },
-                                      { name: 'Flexible', value: 'flexible' },
-                                      { name: 'Hidden', value: 'hidden' },
-                                      { name: '1', value: '1' },
-                                      { name: '2', value: '2' },
-                                      { name: '3', value: '3' },
-                                      { name: '4', value: '4' },
-                                      { name: '5', value: '5' },
-                                      { name: '6', value: '6' },
-                                      { name: '7', value: '7' },
-                                      { name: '8', value: '8' },
-                                      { name: '9', value: '9' },
-                                      { name: '10', value: '10' },
-                                      { name: '11', value: '11' },
-                                      { name: '12', value: '12' },
-                                    ],
-                                  },
-                                }),
-                                columnWidthTabletPortrait: option('CUSTOM', {
-                                  value: '6',
-                                  label: 'Column width (tablet portrait)',
-                                  configuration: {
-                                    as: 'DROPDOWN',
-                                    dataType: 'string',
-                                    allowedInput: [
-                                      {
-                                        name: 'Fit content',
-                                        value: 'fitContent',
-                                      },
-                                      { name: 'Flexible', value: 'flexible' },
-                                      { name: 'Hidden', value: 'hidden' },
-                                      { name: '1', value: '1' },
-                                      { name: '2', value: '2' },
-                                      { name: '3', value: '3' },
-                                      { name: '4', value: '4' },
-                                      { name: '5', value: '5' },
-                                      { name: '6', value: '6' },
-                                      { name: '7', value: '7' },
-                                      { name: '8', value: '8' },
-                                      { name: '9', value: '9' },
-                                      { name: '10', value: '10' },
-                                      { name: '11', value: '11' },
-                                      { name: '12', value: '12' },
-                                    ],
-                                  },
-                                }),
-                                columnWidthMobile: option('CUSTOM', {
-                                  value: '12',
-                                  label: 'Column width (mobile)',
-                                  configuration: {
-                                    as: 'DROPDOWN',
-                                    dataType: 'string',
-                                    allowedInput: [
-                                      {
-                                        name: 'Fit content',
-                                        value: 'fitContent',
-                                      },
-                                      { name: 'Flexible', value: 'flexible' },
-                                      { name: 'Hidden', value: 'hidden' },
-                                      { name: '1', value: '1' },
-                                      { name: '2', value: '2' },
-                                      { name: '3', value: '3' },
-                                      { name: '4', value: '4' },
-                                      { name: '5', value: '5' },
-                                      { name: '6', value: '6' },
-                                      { name: '7', value: '7' },
-                                      { name: '8', value: '8' },
-                                      { name: '9', value: '9' },
-                                      { name: '10', value: '10' },
-                                      { name: '11', value: '11' },
-                                      { name: '12', value: '12' },
-                                    ],
-                                  },
-                                }),
-                                backgroundColor: color('Background color', {
-                                  value: ThemeColor.WHITE,
-                                }),
-                                innerSpacing: sizes('Inner space', {
-                                  value: ['0rem', '0rem', '0rem', '0rem'],
-                                }),
-                              },
-                            },
-                            [
-                              Divider({
-                                options: {
-                                  ...dividerOptions,
-                                  outerSpacing: sizes('Outer space', {
-                                    value: ['0rem', '0rem', '0rem', '0rem'],
-                                  }),
-                                },
-                              }),
-                              prefabBox(
-                                {
-                                  options: {
-                                    ...boxOptions,
-                                    alignment: buttongroup(
-                                      'Alignment',
-                                      [
-                                        ['None', 'none'],
-                                        ['Left', 'flex-start'],
-                                        ['Center', 'center'],
-                                        ['Right', 'flex-end'],
-                                        ['Justified', 'space-between'],
-                                      ],
-                                      {
-                                        value: 'center',
-                                        configuration: {
-                                          dataType: 'string',
-                                        },
-                                      },
+                                    condition: showIf(
+                                      'type',
+                                      'EQ',
+                                      'container',
                                     ),
+                                  },
+                                }),
+                              },
+                            },
+                            [
+                              prefabBox(
+                                {
+                                  options: {
+                                    ...boxOptions,
                                     valignment: buttongroup(
                                       'Vertical alignment',
                                       [
@@ -1035,18 +593,351 @@ export default makePrefab('Start questionnaire', attrs, beforeCreate, [
                                         },
                                       },
                                     ),
-                                    height: size('Height', {
-                                      value: '100%',
-                                      configuration: {
-                                        as: 'UNIT',
+                                    stretch: toggle(
+                                      'Stretch (when in flex container)',
+                                      {
+                                        value: true,
                                       },
+                                    ),
+                                    innerSpacing: sizes('Inner space', {
+                                      value: ['0rem', 'XL', '0rem', 'XL'],
                                     }),
+                                  },
+                                },
+                                [
+                                  Row(
+                                    {
+                                      options: {
+                                        ...rowOptions,
+                                        maxRowWidth: option('CUSTOM', {
+                                          label: 'Width',
+                                          value: 'Full',
+                                          configuration: {
+                                            as: 'BUTTONGROUP',
+                                            dataType: 'string',
+                                            allowedInput: [
+                                              { name: 'S', value: 'S' },
+                                              { name: 'M', value: 'M' },
+                                              { name: 'L', value: 'L' },
+                                              { name: 'XL', value: 'XL' },
+                                              { name: 'Full', value: 'Full' },
+                                            ],
+                                          },
+                                        }),
+                                      },
+                                    },
+                                    [
+                                      Column(
+                                        {
+                                          options: {
+                                            ...columnOptions,
+                                            verticalAlignment: option(
+                                              'CUSTOM',
+                                              {
+                                                label: 'Vertical Alignment',
+                                                value: 'center',
+                                                configuration: {
+                                                  as: 'BUTTONGROUP',
+                                                  dataType: 'string',
+                                                  allowedInput: [
+                                                    {
+                                                      name: 'None',
+                                                      value: 'inherit',
+                                                    },
+                                                    {
+                                                      name: 'Top',
+                                                      value: 'flex-start',
+                                                    },
+                                                    {
+                                                      name: 'Center',
+                                                      value: 'center',
+                                                    },
+                                                    {
+                                                      name: 'Bottom',
+                                                      value: 'flex-end',
+                                                    },
+                                                  ],
+                                                },
+                                              },
+                                            ),
+                                            innerSpacing: sizes('Inner space', {
+                                              value: [
+                                                '0rem',
+                                                '0rem',
+                                                '0rem',
+                                                '0rem',
+                                              ],
+                                            }),
+                                          },
+                                        },
+                                        [
+                                          Media({
+                                            options: {
+                                              ...mediaOptions,
+                                              type: option('CUSTOM', {
+                                                label: 'Media type',
+                                                value: 'url',
+                                                configuration: {
+                                                  as: 'BUTTONGROUP',
+                                                  dataType: 'string',
+                                                  allowedInput: [
+                                                    {
+                                                      name: 'Image',
+                                                      value: 'img',
+                                                    },
+                                                    {
+                                                      name: 'Data/URL',
+                                                      value: 'url',
+                                                    },
+                                                    {
+                                                      name: 'Video',
+                                                      value: 'video',
+                                                    },
+                                                    {
+                                                      name: 'I-frame',
+                                                      value: 'iframe',
+                                                    },
+                                                  ],
+                                                },
+                                              }),
+                                              urlFileSource: variable(
+                                                'Source',
+                                                {
+                                                  value: [
+                                                    'https://assets.bettyblocks.com/373317d12bf04d5496079adc02aab34a_assets/files/Your_Logo_-_B.svg',
+                                                  ],
+                                                  configuration: {
+                                                    placeholder:
+                                                      'Starts with https:// or http://',
+                                                    as: 'MULTILINE',
+                                                    condition: showIf(
+                                                      'type',
+                                                      'EQ',
+                                                      'url',
+                                                    ),
+                                                  },
+                                                },
+                                              ),
+                                              width: size('Width', {
+                                                value: '',
+                                                configuration: {
+                                                  as: 'UNIT',
+                                                },
+                                              }),
+                                              outerSpacing: sizes(
+                                                'Outer space',
+                                                {
+                                                  value: [
+                                                    '0rem',
+                                                    '0rem',
+                                                    'XL',
+                                                    '0rem',
+                                                  ],
+                                                },
+                                              ),
+                                            },
+                                          }),
+                                          DataContainer(
+                                            {
+                                              ref: {
+                                                id: '#datacontainer',
+                                              },
+                                              options: {
+                                                ...dataContainerOptions,
+                                                loadingType: option('CUSTOM', {
+                                                  value: 'showChildren',
+                                                  label: 'Show on load',
+                                                  configuration: {
+                                                    as: 'BUTTONGROUP',
+                                                    dataType: 'string',
+                                                    allowedInput: [
+                                                      {
+                                                        name: 'Message',
+                                                        value: 'default',
+                                                      },
+                                                      {
+                                                        name: 'Content',
+                                                        value: 'showChildren',
+                                                      },
+                                                    ],
+                                                  },
+                                                }),
+                                              },
+                                            },
+                                            [
+                                              prefabText({
+                                                ref: {
+                                                  id: '#titleText',
+                                                },
+                                                options: {
+                                                  ...textOptions,
+                                                  content: variable('Content', {
+                                                    value: [''],
+                                                    configuration: {
+                                                      as: 'MULTILINE',
+                                                    },
+                                                  }),
+                                                  type: font('Font', {
+                                                    value: ['Title4'],
+                                                  }),
+                                                  outerSpacing: sizes(
+                                                    'Outer space',
+                                                    {
+                                                      value: [
+                                                        'L',
+                                                        '0rem',
+                                                        '0rem',
+                                                        '0rem',
+                                                      ],
+                                                    },
+                                                  ),
+                                                },
+                                              }),
+                                              prefabText({
+                                                ref: {
+                                                  id: '#descriptionText',
+                                                },
+                                                options: {
+                                                  ...textOptions,
+                                                  content: variable('Content', {
+                                                    value: [''],
+                                                    configuration: {
+                                                      as: 'MULTILINE',
+                                                    },
+                                                  }),
+                                                  type: font('Font', {
+                                                    value: ['Body1'],
+                                                  }),
+                                                  outerSpacing: sizes(
+                                                    'Outer space',
+                                                    {
+                                                      value: [
+                                                        'M',
+                                                        '0rem',
+                                                        '0rem',
+                                                        '0rem',
+                                                      ],
+                                                    },
+                                                  ),
+                                                },
+                                              }),
+                                              prefabBox(
+                                                {
+                                                  options: {
+                                                    ...boxOptions,
+                                                    innerSpacing: sizes(
+                                                      'Inner space',
+                                                      {
+                                                        value: [
+                                                          '0rem',
+                                                          '0rem',
+                                                          '0rem',
+                                                          '0rem',
+                                                        ],
+                                                      },
+                                                    ),
+                                                  },
+                                                },
+                                                [
+                                                  ActionJSButton({
+                                                    ref: {
+                                                      id: '#createAction',
+                                                    },
+                                                    style: {
+                                                      overwrite: {
+                                                        backgroundColor: {
+                                                          type: 'THEME_COLOR',
+                                                          value: 'primary',
+                                                        },
+                                                        borderColor: {
+                                                          type: 'THEME_COLOR',
+                                                          value: 'primary',
+                                                        },
+                                                        borderRadius: [
+                                                          '0.25rem',
+                                                        ],
+                                                        borderStyle: 'solid',
+                                                        borderWidth: [
+                                                          '0.0625rem',
+                                                        ],
+                                                        boxShadow: 'none',
+                                                        color: {
+                                                          type: 'THEME_COLOR',
+                                                          value: 'white',
+                                                        },
+                                                        fontFamily: 'Roboto',
+                                                        fontSize: '0.875rem',
+                                                        fontStyle: 'none',
+                                                        fontWeight: '400',
+                                                        padding: [
+                                                          '0.625rem',
+                                                          '1.3125rem',
+                                                        ],
+                                                        textDecoration: 'none',
+                                                        textTransform: 'none',
+                                                      },
+                                                    },
+                                                    options: {
+                                                      ...actionJSButtonOptions,
+                                                      actionId: option(
+                                                        'ACTION_JS',
+                                                        {
+                                                          label: 'Action',
+                                                          value: '',
+                                                          configuration: {
+                                                            disabled: true,
+                                                          },
+                                                        },
+                                                      ),
+                                                      buttonText: variable(
+                                                        'Button text',
+                                                        {
+                                                          value: [
+                                                            'Start questionnaire',
+                                                          ],
+                                                        },
+                                                      ),
+                                                      outerSpacing: sizes(
+                                                        'Outer space',
+                                                        {
+                                                          value: [
+                                                            'M',
+                                                            '0rem',
+                                                            '0rem',
+                                                            '0rem',
+                                                          ],
+                                                        },
+                                                      ),
+                                                    },
+                                                  }),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              prefabBox(
+                                {
+                                  options: {
+                                    ...boxOptions,
                                     innerSpacing: sizes('Inner space', {
                                       value: ['0rem', '0rem', '0rem', '0rem'],
                                     }),
                                   },
                                 },
                                 [
+                                  Divider({
+                                    options: {
+                                      ...dividerOptions,
+                                      outerSpacing: sizes('Outer space', {
+                                        value: ['0rem', '0rem', '0rem', '0rem'],
+                                      }),
+                                    },
+                                  }),
                                   prefabText({
                                     options: {
                                       ...textOptions,
@@ -1069,7 +960,7 @@ export default makePrefab('Start questionnaire', attrs, beforeCreate, [
                                         },
                                       }),
                                       outerSpacing: sizes('Outer space', {
-                                        value: ['M', '0rem', 'M', '0rem'],
+                                        value: ['L', '0rem', 'L', '0rem'],
                                       }),
                                       textColor: color('Text color', {
                                         value: ThemeColor.LIGHT,
