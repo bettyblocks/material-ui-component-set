@@ -197,7 +197,7 @@ const beforeCreate = ({
           // eslint-disable-next-line no-param-reassign
           structure.id = componentId;
 
-          const kind = propertyKind || 'STRING';
+          const kind = propertyKind || 'BOOLEAN';
 
           const variableName = variableInput || name;
           const result = await prepareInput(

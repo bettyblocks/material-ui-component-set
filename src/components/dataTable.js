@@ -171,10 +171,12 @@
     };
 
     B.defineFunction('Advanced filter', (value) => {
+      setPage(0);
       setFilterV2(value.where);
     });
 
     B.defineFunction('Clear advanced filter', () => {
+      setPage(0);
       setFilterV2({});
     });
 

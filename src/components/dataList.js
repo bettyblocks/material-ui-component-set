@@ -31,6 +31,7 @@
           searchProperty,
           order,
           orderBy,
+          labelNumberOfPages,
           pagination,
           loadingType,
           loadingText,
@@ -49,6 +50,7 @@
         const displayError = showError === 'built-in';
         const listRef = React.createRef();
         const [showPagination, setShowPagination] = useState(true);
+        const numOfPagesLabel = useText(labelNumberOfPages);
         const [prevData, setPrevData] = useState(null);
         const [filterv2, setFilterV2] = useState({});
         const isInline = type === 'inline';
@@ -266,14 +268,6 @@
             variables: {
               ...(orderByPath ? { sort: { relation: sort } } : {}),
             },
-            onCompleted(res) {
-              const hasResult = res && res.results && res.results.length > 0;
-              if (hasResult) {
-                B.triggerEvent('onSuccess', res.results);
-              } else {
-                B.triggerEvent('onNoResults');
-              }
-            },
             onError(resp) {
               if (!displayError) {
                 B.triggerEvent('onError', resp);
@@ -291,6 +285,13 @@
 
         const data = hasResults ? relationData : queryData;
         const loading = hasResults ? false : queryLoading;
+
+        const hasResult = data && data.results && data.results.length > 0;
+        if (hasResult) {
+          B.triggerEvent('onSuccess', data.results);
+        } else {
+          B.triggerEvent('onNoResults');
+        }
 
         useEffect(() => {
           if (isDev) {
@@ -330,10 +331,12 @@
         }, [search]);
 
         B.defineFunction('Advanced filter', (value) => {
+          setPage(1);
           setFilterV2(value.where);
         });
 
         B.defineFunction('Clear advanced filter', () => {
+          setPage(1);
           setFilterV2({});
         });
 
@@ -523,14 +526,13 @@
           }, [totalCount]);
 
           const totalText = env === 'dev' ? '[total]' : totalCount;
-
           return (
             <>
               <span>
                 {firstItem + 1}
                 {firstItem + 1 !== totalCount &&
                   ` - ${firstItem + resultCount}`}{' '}
-                of {totalText}
+                {numOfPagesLabel} {totalText}
               </span>
               <div className={classes.pagination}>
                 {typeof currentPage !== 'undefined' && currentPage > 1 ? (

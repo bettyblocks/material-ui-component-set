@@ -14,7 +14,7 @@
       KeyboardDateTimePicker,
     } = window.MaterialUI.Pickers;
 
-    const { modelId } = options;
+    const { modelId, propertyWhiteList } = options;
     const isDev = env === 'dev';
     const makeId = (length = 16) => {
       let result = '';
@@ -28,7 +28,8 @@
       }
       return result;
     };
-    const [groups, setGroups] = React.useState([
+
+    const initialState = [
       {
         id: makeId(),
         operator: '_and',
@@ -42,7 +43,8 @@
           },
         ],
       },
-    ]);
+    ];
+    const [groups, setGroups] = React.useState(initialState);
     const [groupsOperator, setGroupsOperator] = React.useState('_and');
 
     const stringKinds = [
@@ -187,9 +189,27 @@
       ]);
     });
 
+    B.defineFunction('Reset advanced filter', () => {
+      setGroups(initialState);
+    });
+
+    const whiteListItems =
+      (propertyWhiteList && propertyWhiteList.split(',')) || [];
     const filterProps = (properties, id) => {
       return Object.values(properties).filter((prop) => {
-        return prop.modelId === id && !forbiddenKinds.includes(prop.kind);
+        return (
+          // Always add the id
+          (prop.modelId === id && prop.name === 'id') ||
+          // Add all properties besides the forbidden
+          (prop.modelId === id &&
+            !forbiddenKinds.includes(prop.kind) &&
+            whiteListItems.length === 0) ||
+          // Only add properties who are whitelisted and not forbidden
+          (prop.modelId === id &&
+            !forbiddenKinds.includes(prop.kind) &&
+            whiteListItems.length > 0 &&
+            whiteListItems.includes(prop.name))
+        );
       });
     };
     const filterOperators = (kind, operators) => {
@@ -316,7 +336,9 @@
       // eslint-disable-next-line no-undef
       const { properties } = artifact || {};
 
-      const filteredProps = filterProps(properties, modelId);
+      const filteredProps = filterProps(properties, modelId).sort((a, b) =>
+        a.name.localeCompare(b.name),
+      );
       // set initial dropdown value
       if (row.propertyValue === '') {
         setGroups(
@@ -814,8 +836,8 @@
         position: 'absolute',
         height: '25px',
         margin: '0px',
-        top: '1.2rem',
-        right: '3.5rem',
+        bottom: '15px',
+        right: '15px',
       },
       deleteGroup: {
         position: 'absolute',

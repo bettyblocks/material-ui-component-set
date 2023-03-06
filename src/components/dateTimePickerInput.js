@@ -45,14 +45,13 @@
     const DateFns = new DateFnsUtils();
     const isDev = env === 'dev';
     const parsedValue = useText(value);
-    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(parsedValue || null);
     const [errorState, setErrorState] = useState(error);
     const helperTextResolved = useText(helperText);
     const [helper, setHelper] = useState(helperTextResolved);
     const valueMissingMessage = useText(validationValueMissing);
     const placeholderText = useText(placeholder);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
-    const mounted = useRef(false);
     const clearable = true;
 
     const localeMap = {
@@ -91,9 +90,14 @@
     const changeHandler = (date) => {
       setSelectedDate(date);
 
-      if (!date || DateFns.isValid(date)) {
+      if (type === 'date') {
+        B.triggerEvent('onChange', convertToDate(date));
+      } else if (!date || DateFns.isValid(date)) {
+        B.triggerEvent('onChange', date);
         setErrorState(false);
         setHelper('');
+      } else {
+        B.triggerEvent('onChange', '');
       }
     };
 
@@ -139,33 +143,6 @@
         }
       }
     }, [parsedValue]);
-
-    useEffect(() => {
-      if (mounted.current) {
-        let datevalue = selectedDate;
-        if (type === 'date') {
-          datevalue = convertToDate(selectedDate);
-          B.triggerEvent('onChange', datevalue);
-          return;
-        }
-
-        if (!datevalue) {
-          B.triggerEvent('onChange', '');
-          return;
-        }
-
-        if (DateFns.isValid(datevalue)) {
-          B.triggerEvent('onChange', datevalue);
-        }
-      }
-    }, [selectedDate]);
-
-    useEffect(() => {
-      mounted.current = true;
-      return () => {
-        mounted.current = false;
-      };
-    }, []);
 
     B.defineFunction('Clear', () => setSelectedDate(null));
 
