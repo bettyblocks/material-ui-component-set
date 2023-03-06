@@ -44,6 +44,12 @@
           },
         },
         {
+          value: {},
+          label: 'Display logic',
+          key: 'displayLogic',
+          type: 'DISPLAY_LOGIC',
+        },
+        {
           value: false,
           label: 'Stretch (when in flex container)',
           key: 'stretch',
