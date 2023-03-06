@@ -117,7 +117,6 @@
           : '',
       ) || {};
     const idProperty = getIdProperty(modelId || '') || {};
-
     const isListProperty =
       modelProperty.kind === 'LIST' || modelProperty.kind === 'list';
 
@@ -301,7 +300,7 @@
     const relationProperty = getProperty(relationPropertyId || '');
 
     // check if the value option has a relational property
-    if (relationProperty) {
+    if (relationProperty && relationProperty.inverseAssociationId) {
       const parentProperty = getIdProperty(relationProperty.modelId);
       const parentIdProperty = parentProperty ? parentProperty.id : '';
       parentIdValue = B.useProperty(parentIdProperty);
@@ -322,6 +321,26 @@
         ],
       };
     }
+    if (relationProperty && !relationProperty.inverseAssociationId) {
+      const parentProperty = getIdProperty(relationProperty.modelId);
+      const parentIdProperty = parentProperty ? parentProperty.id : '';
+      parentIdValue = B.useProperty(parentIdProperty);
+
+      // create a filter with the relation id and the parent id-property id
+      valuesFilter = {
+        _and: [
+          {
+            [parentIdProperty]: {
+              eq: {
+                id: [parentIdProperty],
+                type: 'PROPERTY',
+              },
+            },
+          },
+        ],
+      };
+    }
+
     // Adds the default values to the filter
     const defaultValuesFilterArray = initialValue.reduce((acc, next) => {
       return [...acc, { [valueProp.name]: { eq: next } }];

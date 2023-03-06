@@ -894,7 +894,7 @@ const prefabStructure: PrefabComponent[] = [
                                                       as: 'MULTILINE',
                                                     },
                                                   }),
-                                                  type: font('Font', {
+                                                  type: font('Text style', {
                                                     value: ['Title4'],
                                                   }),
                                                 },
@@ -1345,7 +1345,7 @@ const prefabStructure: PrefabComponent[] = [
                                     ],
                                   },
                                 }),
-                                type: font('Font', { value: ['Body1'] }),
+                                type: font('Text style', { value: ['Body1'] }),
                                 useInnerHtml: toggle('Display Rich Text', {
                                   value: false,
                                 }),
