@@ -4,7 +4,13 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { actionId, model, currentRecord, filter = {} } = options;
+    const {
+      recordVariable,
+      actionId,
+      model,
+      currentRecord,
+      filter = {},
+    } = options;
     const { Form, GetOne, useFilter, getIdProperty } = B;
     const formRef = React.createRef();
     const [interactionFilter, setInteractionFilter] = useState({});
@@ -171,6 +177,7 @@
           onActionError={onActionError}
           ref={formRef}
           currentRecord={currentRecord || record}
+          recordVariable={recordVariable}
         >
           <fieldset className={classes.fieldset}>{children}</fieldset>
         </Form>

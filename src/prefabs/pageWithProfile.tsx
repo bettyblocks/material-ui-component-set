@@ -962,6 +962,14 @@ const beforeCreate = ({
         );
         setOption(
           editProfileFormObject,
+          'recordVariable',
+          (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: result.recordInputVariable.id,
+          }),
+        );
+        setOption(
+          editProfileFormObject,
           'model',
           (opt: PrefabComponentOption) => ({
             ...opt,

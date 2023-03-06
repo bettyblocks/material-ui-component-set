@@ -6325,6 +6325,14 @@ const beforeCreate = ({
           id: '#updateFormAction',
         },
       }));
+      setOption(
+        updateForm,
+        'recordVariable',
+        (opts: PrefabComponentOption) => ({
+          ...opts,
+          value: updateAction.recordInputVariable.id,
+        }),
+      );
       setOption(updateForm, 'model', (opts: PrefabComponentOption) => ({
         ...opts,
         value: modelId,
@@ -6608,6 +6616,14 @@ const beforeCreate = ({
           id: '#deleteFormAction',
         },
       }));
+      setOption(
+        deleteForm,
+        'recordVariable',
+        (opts: PrefabComponentOption) => ({
+          ...opts,
+          value: result.recordInputVariable.id,
+        }),
+      );
 
       setOption(deleteForm, 'model', (opts: PrefabComponentOption) => ({
         ...opts,

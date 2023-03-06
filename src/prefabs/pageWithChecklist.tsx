@@ -1393,6 +1393,14 @@ const beforeCreate = ({
           value: result.action.actionId,
           configuration: { disabled: true },
         }));
+        setOption(
+          editForm,
+          'recordVariable',
+          (opts: PrefabComponentOption) => ({
+            ...opts,
+            value: result.recordInputVariable.id,
+          }),
+        );
         setOption(editForm, 'model', (opts: PrefabComponentOption) => ({
           ...opts,
           value: modelId,
