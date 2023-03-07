@@ -2012,7 +2012,9 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                           id: '#pageTitleContent',
                                         },
                                       }),
-                                      type: font('Font', { value: ['Title4'] }),
+                                      type: font('Text style', {
+                                        value: ['Title4'],
+                                      }),
                                       outerSpacing: sizes('Outer space', {
                                         value: ['0rem', '0rem', 'M', 'M'],
                                       }),
@@ -2412,9 +2414,12 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                         },
                                                         options: {
                                                           ...textOptions,
-                                                          type: font('Font', {
-                                                            value: ['Title5'],
-                                                          }),
+                                                          type: font(
+                                                            'Text style',
+                                                            {
+                                                              value: ['Title5'],
+                                                            },
+                                                          ),
                                                           textAlignment: option(
                                                             'CUSTOM',
                                                             {
@@ -3188,7 +3193,7 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                                 },
                                                               ),
                                                               type: font(
-                                                                'Font',
+                                                                'Text style',
                                                                 {
                                                                   value: [
                                                                     'Title5',
@@ -3579,7 +3584,7 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                                 },
                                                               ),
                                                               type: font(
-                                                                'Font',
+                                                                'Text style',
                                                                 {
                                                                   value: [
                                                                     'Title5',
@@ -3805,7 +3810,7 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                                           },
                                                                         ),
                                                                       type: font(
-                                                                        'Font',
+                                                                        'Text style',
                                                                         {
                                                                           value:
                                                                             [
@@ -3938,7 +3943,7 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                                                           },
                                                                         ),
                                                                       type: font(
-                                                                        'Font',
+                                                                        'Text style',
                                                                         {
                                                                           value:
                                                                             [
@@ -4278,7 +4283,7 @@ export default makePrefab('Profile details', attrs, beforeCreate, [
                                     ],
                                   },
                                 }),
-                                type: font('Font', { value: ['Body1'] }),
+                                type: font('Text style', { value: ['Body1'] }),
                                 styles: toggle('Styles', { value: true }),
                                 textColor: color('Text color', {
                                   value: ThemeColor.MEDIUM,

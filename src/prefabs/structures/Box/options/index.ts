@@ -8,6 +8,7 @@ import {
   variable,
   buttongroup,
   dropdown,
+  displayLogic,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -43,6 +44,11 @@ export const categories = [
       'borderStyle',
       'borderRadius',
     ],
+  },
+  {
+    label: 'Logic Option',
+    expanded: false,
+    members: ['displayLogic'],
   },
   {
     label: 'Advanced Options',
@@ -83,6 +89,9 @@ export const boxOptions = {
       },
     },
   ),
+  displayLogic: displayLogic('Display logic', {
+    value: {},
+  }),
   stretch: toggle('Stretch (when in flex container)', {
     value: false,
   }),
