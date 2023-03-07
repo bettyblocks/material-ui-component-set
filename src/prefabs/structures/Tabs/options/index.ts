@@ -177,7 +177,7 @@ export const tabsOptions = {
     },
   }),
   circleWidth: size('Circle width', {
-    value: '30px',
+    value: '33px',
     configuration: {
       as: 'UNIT',
     },
@@ -195,7 +195,7 @@ export const tabsOptions = {
     },
   }),
   circleLabelColor: color('Active circle label color', {
-    value: ThemeColor.BLACK,
+    value: ThemeColor.PRIMARY,
     configuration: {
       condition: showIf('layout', 'EQ', 'circle'),
     },
@@ -219,12 +219,12 @@ export const tabsOptions = {
     },
   }),
   inactiveCircleLabelColor: color('Inactive circle label color', {
-    value: ThemeColor.WHITE,
+    value: ThemeColor.BLACK,
     configuration: {
       condition: showIf('layout', 'EQ', 'circle'),
     },
   }),
-  inactiveCircleBorderColor: color('Inactive circle label color', {
+  inactiveCircleBorderColor: color('Inactive circle border color', {
     value: ThemeColor.ACCENT_1,
     configuration: {
       condition: showIf('layout', 'EQ', 'circle'),

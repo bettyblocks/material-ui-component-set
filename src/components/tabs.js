@@ -56,7 +56,10 @@
         orientation={orientation}
         scrollButtons={scrollButtons}
         classes={{
-          root: layout === 'circle' ? classes.circleRoot : classes.root,
+          root:
+            layout === 'circle' && alignment === 'left'
+              ? classes.circleRoot
+              : classes.root,
           indicator: classes.indicator,
         }}
       >
@@ -82,13 +85,13 @@
                 return 'row';
             }
           }
-          if (layout === 'circle') {
+          if (layout === 'circle' && alignment === 'left') {
             return (
               <Tab
                 label={
                   <div className={classes.circleWrapper}>
                     <div className={classes.circle}>{index + 1}</div>
-                    <div>
+                    <div className={classes.circleLabel}>
                       {typeof label === 'string' ? label : useText(label)}
                     </div>
                   </div>
@@ -96,6 +99,7 @@
                 classes={{
                   textColorInherit: classes.textOpacity,
                   selected: classes.circleSelected,
+                  root: classes.circleTabRoot,
                 }}
                 disabled={disabled}
                 disableRipple={disableRipple}
@@ -113,7 +117,7 @@
                   <div className={classes.iconWrapper}>
                     {icon && icon !== 'None' ? <Icon name={icon} /> : undefined}
                   </div>
-                  <div className={classes.circleLabel}>
+                  <div>
                     {typeof label === 'string' ? label : useText(label)}
                   </div>
                 </div>
@@ -270,15 +274,18 @@
         ],
         minWidth: '10rem',
       },
+      circleTabRoot: {
+        padding: '6px 0 !important',
+      },
       circleRoot: {
         minWidth: '10rem',
         position: 'relative',
+        alignSelf: 'flex-start',
         '&::after': {
           content: '""',
           position: 'absolute',
           top: '12px',
-          left: ({ options: { circleWidth } }) =>
-            `calc(12px + calc(${circleWidth} / 2))`,
+          left: ({ options: { circleWidth } }) => `calc(${circleWidth} / 2)`,
           bottom: '12px',
           backgroundColor: ({ options: { connectorColor } }) => [
             style.getColor(connectorColor),
@@ -291,8 +298,12 @@
       indicator: {
         left: ({ options: { alignment } }) => alignment === 'right' && 0,
         top: ({ options: { alignment } }) => alignment === 'bottom' && 0,
-        backgroundColor: ({ options: { indicatorColor, layout } }) => [
-          layout === 'circle' ? 'transparent' : style.getColor(indicatorColor),
+        backgroundColor: ({
+          options: { indicatorColor, layout, alignment },
+        }) => [
+          layout === 'circle' && alignment === 'left'
+            ? 'transparent'
+            : style.getColor(indicatorColor),
           '!important',
         ],
       },
