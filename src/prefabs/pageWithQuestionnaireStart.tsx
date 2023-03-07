@@ -48,13 +48,16 @@ import {
 } from './types';
 
 const attrs = {
-  name: 'Start Questionnaire',
+  name: 'Questionnaire Startpage',
   icon: Icon.SubmitButtonIcon,
   type: 'page',
-  description: '?',
-  detail: '?',
-  previewUrl: '?',
-  previewImage: '?',
+  description:
+    "Use this page as the start of your questionnaire flow. This template is best used in combination with the 'Questionnaire' template.",
+  detail:
+    "Use this page as the start of your questionnaire flow. This template is best used in combination with the 'Questionnaire' template.",
+  previewUrl: 'https://preview.betty.app/questionnaire-startpage',
+  previewImage:
+    'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/b520d74dff324c5f8e06b319d02c4c6e',
   category: 'FORMV2',
 };
 
@@ -287,7 +290,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('Start questionnaire', attrs, beforeCreate, [
+export default makePrefab('Questionnaire Startpage', attrs, beforeCreate, [
   Row(
     {
       options: {
@@ -350,7 +353,7 @@ export default makePrefab('Start questionnaire', attrs, beforeCreate, [
                 }),
                 backgroundUrl: variable('Background url', {
                   value: [
-                    'https://assets.bettyblocks.com/1e9019bb1c5c4af2ba799c2ee1761af0_assets/files/login-background',
+                    'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/7da5d896b3194eddb22f92cf89781ab3',
                   ],
                 }),
                 backgroundSize: buttongroup(
