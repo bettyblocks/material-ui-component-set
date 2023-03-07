@@ -935,15 +935,6 @@ const beforeCreate = ({
           value: modelId,
         }));
 
-        passwordForm.descendants.push(
-          makeBettyUpdateInput(
-            BettyPrefabs.HIDDEN,
-            modelProp,
-            idProperty,
-            resultPass.recordInputVariable,
-          ),
-        );
-
         const editProfileFormObject = treeSearch(
           '#editProfileDetailsForm',
           newPrefab.structure,
@@ -967,6 +958,14 @@ const beforeCreate = ({
           (opt: PrefabComponentOption) => ({
             ...opt,
             value: result.action.actionId,
+          }),
+        );
+        setOption(
+          editProfileFormObject,
+          'recordVariable',
+          (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: result.recordInputVariable.id,
           }),
         );
         setOption(
@@ -995,14 +994,6 @@ const beforeCreate = ({
               ],
             },
           }),
-        );
-        editProfileFormObject.descendants.push(
-          makeBettyUpdateInput(
-            BettyPrefabs.HIDDEN,
-            modelProp,
-            idProperty,
-            result.recordInputVariable,
-          ),
         );
 
         if (hasProfilePictureProperty) {
@@ -1232,14 +1223,6 @@ const beforeCreate = ({
               ],
             },
           }));
-          imageObject.descendants.push(
-            makeBettyUpdateInput(
-              BettyPrefabs.HIDDEN,
-              modelProp,
-              idProperty,
-              imageObjectResult.recordInputVariable,
-            ),
-          );
         } else {
           const avatarGrid = treeSearch('#AvatarGrid', newPrefab.structure);
 

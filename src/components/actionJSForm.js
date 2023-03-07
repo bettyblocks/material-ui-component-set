@@ -4,7 +4,13 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { actionId, model, currentRecord, filter = {} } = options;
+    const {
+      recordVariable,
+      actionId,
+      model,
+      currentRecord,
+      filter = {},
+    } = options;
     const { Form, GetOne, useFilter, getIdProperty } = B;
     const formRef = React.createRef();
     const [interactionFilter, setInteractionFilter] = useState({});
@@ -161,7 +167,7 @@
     const where = useFilter(completeFilter);
     const hasFilter = where && Object.keys(where).length !== 0;
 
-    function FormComponent() {
+    function FormComponent({ record }) {
       return (
         <Form
           actionId={actionId}
@@ -170,6 +176,8 @@
           onActionSuccess={onActionSuccess}
           onActionError={onActionError}
           ref={formRef}
+          currentRecord={currentRecord || record}
+          recordVariable={recordVariable}
         >
           <fieldset className={classes.fieldset}>{children}</fieldset>
         </Form>
@@ -187,7 +195,18 @@
     if (model && hasFilter) {
       return (
         <GetOne modelId={model} rawFilter={where}>
-          <FormComponent />
+          {({ loading, error, data }) => {
+            if (loading) {
+              return <></>;
+            }
+
+            if (error) {
+              return <span>Something went wrong: {error.message}</span>;
+            }
+            const { id } = data;
+
+            return <FormComponent record={id} />;
+          }}
         </GetOne>
       );
     }

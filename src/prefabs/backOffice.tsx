@@ -6024,7 +6024,8 @@ const beforeCreate = ({
           prop.label !== 'Id' &&
           prop.kind !== 'PDF' &&
           prop.kind !== 'MULTI_FILE' &&
-          prop.kind !== 'PASSWORD',
+          prop.kind !== 'PASSWORD' &&
+          prop.kind !== 'LOGIN_TOKEN',
       );
 
       const relationProperties = model.relationships.filter(
@@ -6324,6 +6325,14 @@ const beforeCreate = ({
           id: '#updateFormAction',
         },
       }));
+      setOption(
+        updateForm,
+        'recordVariable',
+        (opts: PrefabComponentOption) => ({
+          ...opts,
+          value: updateAction.recordInputVariable.id,
+        }),
+      );
       setOption(updateForm, 'model', (opts: PrefabComponentOption) => ({
         ...opts,
         value: modelId,
@@ -6584,15 +6593,6 @@ const beforeCreate = ({
         },
       );
 
-      updateForm.descendants.push(
-        makeBettyUpdateInput(
-          BettyPrefabs.HIDDEN,
-          model,
-          idProperty,
-          updateAction.recordInputVariable,
-        ),
-      );
-
       // set delete action
       const deleteForm = treeSearch('#deleteForm', newPrefab.structure);
       if (!deleteForm) throw new Error('No delete form found');
@@ -6616,6 +6616,14 @@ const beforeCreate = ({
           id: '#deleteFormAction',
         },
       }));
+      setOption(
+        deleteForm,
+        'recordVariable',
+        (opts: PrefabComponentOption) => ({
+          ...opts,
+          value: result.recordInputVariable.id,
+        }),
+      );
 
       setOption(deleteForm, 'model', (opts: PrefabComponentOption) => ({
         ...opts,
@@ -6658,15 +6666,6 @@ const beforeCreate = ({
         );
       }
       deleteForm.descendants.push(deleteSubmitButton);
-
-      deleteForm.descendants.push(
-        makeBettyUpdateInput(
-          BettyPrefabs.HIDDEN,
-          model,
-          idProperty,
-          result.recordInputVariable,
-        ),
-      );
 
       const filterComp = treeSearch('#filterComp', newPrefab.structure);
       if (filterComp?.type === 'COMPONENT') {

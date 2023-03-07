@@ -1397,6 +1397,14 @@ const beforeCreate = ({
           value: result.action.actionId,
           configuration: { disabled: true },
         }));
+        setOption(
+          editForm,
+          'recordVariable',
+          (opts: PrefabComponentOption) => ({
+            ...opts,
+            value: result.recordInputVariable.id,
+          }),
+        );
         setOption(editForm, 'model', (opts: PrefabComponentOption) => ({
           ...opts,
           value: modelId,
@@ -1445,20 +1453,11 @@ const beforeCreate = ({
               },
             },
           }));
-          const hiddenInput = makeBettyUpdateInput(
-            BettyPrefabs.HIDDEN,
-            model,
-            idProperty,
-            result.recordInputVariable,
-          );
+
           const formBox = treeSearch('#formBox', newPrefab.structure);
           if (!formBox) throw new Error('No form box component found');
 
-          formBox.descendants = [
-            checkBoxInput,
-            hiddenInput,
-            ...formBox.descendants,
-          ];
+          formBox.descendants = [checkBoxInput, ...formBox.descendants];
         });
       }
 
