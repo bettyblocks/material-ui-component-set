@@ -35,7 +35,6 @@
         const parsedLoadingText = useText(loadingText);
         const dataComponentAttributeText =
           useText(dataComponentAttribute) || 'DataContainer';
-        const [, setOptions] = useOptions();
 
         const [interactionFilter, setInteractionFilter] = useState({});
         const [filterv2, setFilterV2] = useState({});
@@ -122,15 +121,6 @@
         const where = useFilter(completeFilter);
 
         useEffect(() => {
-          B.defineFunction('setCurrentRecord', (value) => {
-            const id = Number(value);
-            if (typeof id === 'number') {
-              setOptions({
-                currentRecord: id,
-              });
-            }
-          });
-
           B.defineFunction('Advanced filter', (value) => {
             setFilterV2(value.where);
           });
