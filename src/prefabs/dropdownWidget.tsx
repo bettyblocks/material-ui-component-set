@@ -238,17 +238,6 @@ const beforeCreate = ({
             }),
           );
 
-          if (model) {
-            dropdownWidgetForm.descendants.push(
-              makeBettyUpdateInput(
-                BettyPrefabs.HIDDEN,
-                model,
-                idProperty,
-                result.recordInputVariable,
-              ),
-            );
-          }
-
           const interaction = {
             name: 'Submit',
             sourceEvent: 'onChange',

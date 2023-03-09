@@ -173,16 +173,6 @@ const beforeCreate = ({
             'public',
           );
 
-          if (!model) throw new Error('No mode found.');
-          multilineWidgetForm.descendants.push(
-            makeBettyUpdateInput(
-              BettyPrefabs.HIDDEN,
-              model,
-              idProperty,
-              result.recordInputVariable,
-            ),
-          );
-
           setOption(
             multilineWidgetForm,
             'actionId',

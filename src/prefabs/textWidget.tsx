@@ -19,6 +19,7 @@ import {
   PrefabComponentOption,
   component as makeComponent,
   InteractionType,
+  property,
 } from '@betty-blocks/component-sdk';
 import { options as formOptions } from './structures/ActionJSForm/options';
 import {
@@ -48,8 +49,6 @@ const beforeCreate = ({
     prepareAction,
     getPageName,
     setOption,
-    makeBettyUpdateInput,
-    BettyPrefabs,
   },
 }: BeforeCreateArgs) => {
   const [primaryProperty, setPrimaryProperty] = React.useState('');
@@ -67,19 +66,6 @@ const beforeCreate = ({
       setModel(result.model);
     },
   });
-
-  const enrichVarObj = (obj: any) => {
-    const returnObject = obj;
-    if (data && data.model) {
-      const property = data.model.properties.find(
-        (prop: any) => prop.id === obj.id[0],
-      );
-      if (property) {
-        returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
-      }
-    }
-    return returnObject;
-  };
 
   const transformProperty = (obj: any) => {
     const outputProp = { ...obj };
@@ -172,16 +158,6 @@ const beforeCreate = ({
             'public',
           );
 
-          if (!model) throw new Error('No mode found.');
-          textWidgetForm.descendants.push(
-            makeBettyUpdateInput(
-              BettyPrefabs.HIDDEN,
-              model,
-              idProperty,
-              result.recordInputVariable,
-            ),
-          );
-
           setOption(
             textWidgetForm,
             'actionId',
@@ -203,16 +179,10 @@ const beforeCreate = ({
               disabled: true,
             },
           }));
-          setOption(
-            textInput,
-            'actionProperty',
-            (opt: PrefabComponentOption) => ({
-              ...opt,
-              value: {
-                modelProperty: enrichVarObj(primaryProperty),
-              },
-            }),
-          );
+          setOption(textInput, 'property', (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: primaryProperty,
+          }));
 
           let actionVarId: string;
           Object.keys(result.variables).forEach((key) => {
@@ -276,6 +246,18 @@ export default makePrefab('Text Widget', attributes, beforeCreate, [
         },
       ],
       options: {
+        property: linked({
+          label: 'Property',
+          value: {
+            ref: {
+              componentId: '#TextInput',
+              optionId: '#textInputProperty',
+            },
+          },
+          configuration: {
+            showOnDrop: true,
+          },
+        }),
         question: linked({
           label: 'Question',
           value: {
@@ -437,7 +419,16 @@ export default makePrefab('Text Widget', attributes, beforeCreate, [
             [
               makeComponent(
                 'Form',
-                { ref: { id: '#TextWidgetForm' }, options: { ...formOptions } },
+                {
+                  ref: { id: '#TextWidgetForm' },
+                  options: {
+                    ...formOptions,
+                    actionId: option('ACTION_JS', {
+                      label: 'Action',
+                      value: '',
+                    }),
+                  },
+                },
                 [
                   TextComp(
                     {
@@ -485,6 +476,15 @@ export default makePrefab('Text Widget', attributes, beforeCreate, [
                       ref: { id: '#TextInput' },
                       options: {
                         ...textInputOptions,
+                        property: property('Property', {
+                          value: '',
+                          ref: { id: '#textInputProperty' },
+                          configuration: {
+                            createNewProperty: {
+                              type: 'string',
+                            },
+                          },
+                        }),
                         hideLabel: toggle('Hide label', { value: true }),
                         placeholder: variable('Placeholder', {
                           ref: { id: '#textInputPlaceholder' },

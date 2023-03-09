@@ -243,17 +243,6 @@ const beforeCreate = ({
             }),
           );
 
-          if (model) {
-            checkboxWidgetForm.descendants.push(
-              makeBettyUpdateInput(
-                BettyPrefabs.HIDDEN,
-                model,
-                idProperty,
-                result.recordInputVariable,
-              ),
-            );
-          }
-
           const interaction = {
             name: 'Submit',
             sourceEvent: 'onChange',

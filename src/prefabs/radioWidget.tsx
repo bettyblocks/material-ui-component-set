@@ -230,16 +230,6 @@ const beforeCreate = ({
             }),
           );
 
-          if (!model) throw new Error('No mode found.');
-          radioWidgetForm.descendants.push(
-            makeBettyUpdateInput(
-              BettyPrefabs.HIDDEN,
-              model,
-              idProperty,
-              result.recordInputVariable,
-            ),
-          );
-
           const interaction = {
             name: 'Submit',
             sourceEvent: 'onChange',
