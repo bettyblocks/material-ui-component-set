@@ -1,3 +1,32 @@
+# [2.111.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.110.0...v2.111.0) (2023-03-07)
+
+
+### Features
+
+* remove hidden input from update form ([56547e6](https://github.com/bettyblocks/material-ui-component-set/commit/56547e63a5424ec21b8507fe91da30f7731b8282))
+* remove hidden input from update form ([de885c6](https://github.com/bettyblocks/material-ui-component-set/commit/de885c6e3293c397170095fc7b36e0f40d0ffaeb))
+
+# [2.110.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.109.0...v2.110.0) (2023-03-06)
+
+
+### Features
+
+* add display logic to box and conditional ([109562a](https://github.com/bettyblocks/material-ui-component-set/commit/109562a352d4146fe66b039233ea7681181c8147))
+
+# [2.109.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.108.1...v2.109.0) (2023-03-06)
+
+
+### Features
+
+* add previos and next interaction to tabs component ([6fe8609](https://github.com/bettyblocks/material-ui-component-set/commit/6fe8609f76970c1cbedf7cf47df7395f1c4ec337))
+
+## [2.108.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.108.0...v2.108.1) (2023-03-06)
+
+
+### Bug Fixes
+
+* remove actionjs dialog from templates ([f8ef197](https://github.com/bettyblocks/material-ui-component-set/commit/f8ef197e35fd5fc82cbb2cc1cee2cda31b10d8c1))
+
 # [2.108.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.107.0...v2.108.0) (2023-03-06)
 
 
