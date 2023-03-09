@@ -23,6 +23,7 @@
       useFilter,
       useText,
       Icon,
+      getIdProperty,
     } = B;
     const {
       closeOnSelect,
@@ -98,6 +99,7 @@
     const tooShortMessage = useText(validationTooShort);
     const belowMinimumMessage = useText(validationBelowMinimum);
     const helperTextResolved = useText(helperTextRaw);
+    const { contextModelId } = model;
 
     const validationMessage = (validityObject) => {
       if (!validityObject) {
@@ -169,12 +171,12 @@
     const label = useText(labelRaw);
     const defaultValue = useText(valueRaw, { rawValue: true });
 
-    let initalValue = defaultValue.replace(/\n/g, '');
+    let initialValue = defaultValue.replace(/\n/g, '');
 
     if (defaultValue.trim() === '') {
-      initalValue = [];
+      initialValue = [];
     } else {
-      initalValue = defaultValue
+      initialValue = defaultValue
         .trim()
         .split(',')
         .map((x) => x.trim());
@@ -187,7 +189,7 @@
      * In case of freeSolo the type is string or and array of strings.
      *
      */
-    const [value, setValue] = useState(initalValue);
+    const [value, setValue] = useState(initialValue);
 
     useEffect(() => {
       if (isDev && typeof value === 'string') {
@@ -219,7 +221,7 @@
      */
     const [interactionFilter, setInteractionFilter] = useState({});
 
-    const defaultValueEvaluatedRef = useRef(false);
+    // const defaultValueEvaluatedRef = useRef(false);
 
     const { kind: propertyKind = '', values: propertyValues } =
       getProperty(property) || {};
@@ -302,6 +304,49 @@
       }
     }
 
+    let parentIdValue;
+    let valuesFilter = {};
+
+    // check if the value option has a relation with an id key
+    const relationPropertyId = valueRaw[0] && valueRaw[0].id;
+    const relationProperty = getProperty(relationPropertyId || '');
+
+    // check if the value option has a relational property
+    if (relationProperty && relationProperty.inverseAssociationId) {
+      const parentProperty = getIdProperty(relationProperty.modelId);
+      const parentIdProperty = parentProperty ? parentProperty.id : '';
+      parentIdValue = B.useProperty(parentIdProperty);
+
+      // create a filter with the relation id and the parent id-property id
+      valuesFilter = {
+        _and: [
+          {
+            [relationProperty.inverseAssociationId]: {
+              [parentIdProperty]: {
+                eq: {
+                  id: [parentIdProperty],
+                  type: 'PROPERTY',
+                },
+              },
+            },
+          },
+        ],
+      };
+    }
+
+    // Adds the default values to the filter
+    const defaultValuesFilterArray = initialValue.reduce((acc, next) => {
+      return [...acc, { [valueProp.name]: { eq: next } }];
+    }, []);
+
+    const initialValueFilter = {
+      ...(initialValue.length > 0 && { _or: defaultValuesFilterArray }),
+    };
+
+    const valueFilter = useFilter(valuesFilter);
+    const optionFilter = useFilter(filterRaw || {});
+    const queryWasResolvable = !!parentIdValue || initialValue.length > 0;
+
     useEffect(() => {
       let debounceInput;
 
@@ -320,19 +365,7 @@
       };
     }, [inputValue]);
 
-    const optionFilter = useFilter(filterRaw || {});
-
-    // Adds the default values to the filter
-    const defaultValuesFilterArray = initalValue.reduce((acc, next) => {
-      return [...acc, { [valueProp.name]: { eq: next } }];
-    }, []);
-
     // We need to do this, because options.filter is not immutable
-    const filter = {
-      ...(initalValue.length > 0 && { _or: defaultValuesFilterArray }),
-      ...optionFilter,
-    };
-
     const searchPropIsNumber = numberPropTypes.includes(searchProp.kind);
     const valuePropIsNumber = numberPropTypes.includes(valueProp.kind);
 
@@ -344,10 +377,10 @@
     /* eslint-disable no-underscore-dangle */
     if (multiple) {
       if (debouncedInputValue) {
-        if (!filter._or) {
-          filter._or = [];
+        if (!optionFilter._or) {
+          optionFilter._or = [];
         }
-        filter._or.push({
+        optionFilter._or.push({
           [searchProp.name]: {
             [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
               ? parseInt(debouncedInputValue, 10)
@@ -426,22 +459,18 @@
       }
     }
 
-    const {
-      loading,
-      error,
-      data: { results } = {},
-      refetch,
-    } = useAllQuery(
+    const { loading, error, data, refetch } = useAllQuery(
       model,
       {
         take: 20,
-        rawFilter: mergeFilters(filter, resolvedExternalFiltersObject),
+        rawFilter: mergeFilters(optionFilter, resolvedExternalFiltersObject),
         variables: {
           sort,
         },
         onCompleted(res) {
           const hasResult = res && res.results && res.results.length > 0;
           if (hasResult) {
+            // setValue(res.results);
             B.triggerEvent('onSuccess', res.results);
           } else {
             B.triggerEvent('onNoResults');
@@ -465,22 +494,35 @@
       message = error;
     }
 
-    // If the default value is a value that lives outside the take range of the query we should fetch the values before we continue.
-    if (!isDev && !defaultValueEvaluatedRef.current && value && results) {
-      setValue((prev) => {
-        return prev
-          .map((val) =>
-            results.find(
-              (result) =>
-                result[valueProp.name] ===
-                (valuePropIsNumber ? parseInt(val, 10) : val),
-            ),
-          )
-          .filter((x) => typeof x !== 'undefined');
-      });
+    useAllQuery(
+      // use contextModelId when selecting a relation in the model option
+      contextModelId || model,
+      {
+        take: 20,
+        rawFilter: mergeFilters(valueFilter, initialValueFilter),
+        variables: {},
+        onCompleted(res) {
+          const hasResult = res && res.results && res.results.length > 0;
 
-      defaultValueEvaluatedRef.current = true;
-    }
+          if (hasResult) {
+            setValue(res.results);
+          }
+        },
+        onError(resp) {
+          if (!displayError) {
+            B.triggerEvent('onError', resp);
+          }
+        },
+      },
+      /*
+       * don't execute if the optionType is a property like a list-property
+       * don't execute if not valid (no property, no model etc)
+       * don't execute when the filter cannot use the parent id-property (queryWasResolvable)
+       */
+      optionType === 'property' || !valid || !queryWasResolvable,
+    );
+
+    const { results } = data || {};
 
     B.defineFunction('Clear', () => {
       setValue([]);
@@ -596,14 +638,12 @@
             nonFetchedOptions.push(x);
           }
         });
-
         return [...nonFetchedOptions, ...results];
       }
       return [];
     };
 
     const currentOptions = getOptions();
-
     /*
      * Convert `value` state into something the `value` prop of the `Autocomplete` component will accept with the right settings
      */
