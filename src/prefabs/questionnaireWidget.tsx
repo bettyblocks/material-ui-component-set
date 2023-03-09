@@ -62,7 +62,7 @@ const beforeCreate = ({
   prefab,
   save,
   close,
-  helpers: { useModelQuery, setOption },
+  helpers: { useModelQuery, setOption, addModelAndProperties },
 }: BeforeCreateArgs) => {
   const [model, setModel] = React.useState<ModelProps>();
   const [modelId, setModelId] = React.useState('');
@@ -74,8 +74,10 @@ const beforeCreate = ({
   const [validation, setValidation] = React.useState(false);
   const [validationMessage, setValidationMessage] = React.useState('');
   const [stepNumber, setStepNumber] = React.useState(1);
+  const [createNewQuestionnaire, setCreateNewQuestionnaire] =
+    React.useState(true);
 
-  const { data } = useModelQuery({
+  useModelQuery({
     variables: { id: modelId },
     onCompleted: (result: ModelQuery) => {
       setModel(result.model);
@@ -95,10 +97,6 @@ const beforeCreate = ({
       return treeSearch(refValue, component.descendants);
     }, null);
 
-  if (modelId === '' && validationMessage === '') {
-    setValidationMessage('Selecting a model is required');
-  }
-
   const stepper = {
     setStep: (step: number) => {
       if (step === 1) {
@@ -107,20 +105,64 @@ const beforeCreate = ({
             <Field pad={{ bottom: '15px' }}>
               <Text>Add a title and a description to the questionnaire</Text>
             </Field>
-            <Field pad={{ bottom: '15px' }} label="Questionnaire title">
-              <TextInput
-                onChange={({
-                  target: { value },
-                }: {
-                  target: { value: string };
-                }) => {
-                  if (typeof value !== 'string') {
-                    throw new Error('expected string');
-                  }
-                  setTitle(value);
-                }}
-                value={title}
-              />
+            <Field
+              pad={{ bottom: '15px' }}
+              label="Questionnaire title"
+              error={
+                <>
+                  <Text color="#666D85">or </Text>
+                  {createNewQuestionnaire ? (
+                    <Text
+                      color="purple"
+                      onClick={() => setCreateNewQuestionnaire(false)}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      use an existing questionnaire model
+                    </Text>
+                  ) : (
+                    <Text
+                      color="purple"
+                      onClick={() => setCreateNewQuestionnaire(true)}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      create a new questionnaire
+                    </Text>
+                  )}
+                  {validation && (
+                    <Text color="#e82600">
+                      <br />
+                      {validationMessage}
+                    </Text>
+                  )}
+                </>
+              }
+            >
+              {createNewQuestionnaire ? (
+                <TextInput
+                  onChange={({
+                    target: { value },
+                  }: {
+                    target: { value: string };
+                  }) => {
+                    if (typeof value !== 'string') {
+                      throw new Error('expected string');
+                    }
+                    setTitle(value);
+                  }}
+                  value={title}
+                />
+              ) : (
+                <ModelSelector
+                  onChange={(value: string) => {
+                    setModelId(value);
+                    setValidationMessage('');
+                    setValidation(false);
+                  }}
+                  required
+                  modelId={modelId}
+                  value={modelId}
+                />
+              )}
             </Field>
             <Field pad={{ bottom: '15px' }} label="Questionnaire description">
               <TextArea
@@ -142,80 +184,50 @@ const beforeCreate = ({
           </>
         );
       }
-      if (step === 2) {
-        return (
-          <>
-            <Field pad={{ bottom: '15px' }}>
-              <Text>
-                Add a title and a description to the first section of the
-                questionnaire
-              </Text>
-            </Field>
-            <Field pad={{ bottom: '15px' }} label="Section title">
-              <TextInput
-                onChange={({
-                  target: { value },
-                }: {
-                  target: { value: string };
-                }) => {
-                  if (typeof value !== 'string') {
-                    throw new Error('expected string');
-                  }
-                  setSectionTitle(value);
-                }}
-                value={sectionTitle}
-              />
-            </Field>
-            <Field pad={{ bottom: '15px' }} label="Section description">
-              <TextArea
-                resize={false}
-                style={{ minHeight: '150px' }}
-                onChange={({
-                  target: { value },
-                }: {
-                  target: { value: string };
-                }) => {
-                  if (typeof value !== 'string') {
-                    throw new Error('expected string');
-                  }
-                  setSectionDescription(value);
-                }}
-                value={sectionDescription}
-              />
-            </Field>
-          </>
-        );
-      }
       return (
         <>
           <Field pad={{ bottom: '15px' }}>
-            <Text>Select a model for your questionnaire</Text>
+            <Text>
+              Add a title and a description to the first section of the
+              questionnaire
+            </Text>
           </Field>
-          <Field
-            label="Questionnaire model"
-            error={
-              validation && <Text color="#e82600">{validationMessage}</Text>
-            }
-          >
-            <ModelSelector
-              onChange={(value: string) => {
-                setModelId(value);
-                setValidationMessage('');
-                setValidation(false);
+          <Field pad={{ bottom: '15px' }} label="Section title">
+            <TextInput
+              onChange={({
+                target: { value },
+              }: {
+                target: { value: string };
+              }) => {
+                if (typeof value !== 'string') {
+                  throw new Error('expected string');
+                }
+                setSectionTitle(value);
               }}
-              required
-              modelId={modelId}
-              value={modelId}
+              value={sectionTitle}
+            />
+          </Field>
+          <Field pad={{ bottom: '15px' }} label="Section description">
+            <TextArea
+              resize={false}
+              style={{ minHeight: '150px' }}
+              onChange={({
+                target: { value },
+              }: {
+                target: { value: string };
+              }) => {
+                if (typeof value !== 'string') {
+                  throw new Error('expected string');
+                }
+                setSectionDescription(value);
+              }}
+              value={sectionDescription}
             />
           </Field>
         </>
       );
     },
     onSave: async () => {
-      if (!modelId) {
-        setValidation(true);
-        return;
-      }
       const newPrefab = { ...prefab };
       const titleText = treeSearch('#Title', newPrefab.structure);
       const descriptionText = treeSearch('#Description', newPrefab.structure);
@@ -224,6 +236,56 @@ const beforeCreate = ({
         '#questionnaireDataContainer',
         newPrefab.structure,
       );
+
+      if (createNewQuestionnaire) {
+        try {
+          const newModel = await addModelAndProperties(title, [
+            {
+              label: 'UUID',
+              kind: 'STRING',
+            },
+          ]);
+          if (newModel.id && newModel.label) {
+            setOption(
+              questionnaireDataContainer,
+              'model',
+              (opt: PrefabComponentOption) => ({
+                ...opt,
+                value: `${newModel.id}`,
+              }),
+            );
+            setOption(primaryTab, 'label', (opt: PrefabComponentOption) => ({
+              ...opt,
+              value: [`${newModel.label}`],
+            }));
+            primaryTab.label = newModel.label;
+          }
+        } catch {
+          setValidationMessage(
+            'Model name already exists. Please choose another name.',
+          );
+          setValidation(true);
+          return;
+        }
+      } else if (model && modelId) {
+        setOption(
+          questionnaireDataContainer,
+          'model',
+          (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: modelId,
+          }),
+        );
+        setOption(primaryTab, 'label', (opt: PrefabComponentOption) => ({
+          ...opt,
+          value: [model.label],
+        }));
+        primaryTab.label = model.label;
+      } else {
+        setValidationMessage('Selecting a model is required');
+        setValidation(true);
+        return;
+      }
 
       if (title) {
         setOption(titleText, 'content', (opt: PrefabComponentOption) => ({
@@ -238,21 +300,6 @@ const beforeCreate = ({
           value: [description],
           configuration: { as: 'MULTILINE' },
         }));
-      }
-      setOption(
-        questionnaireDataContainer,
-        'model',
-        (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: modelId,
-        }),
-      );
-      if (data && model) {
-        setOption(primaryTab, 'label', (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: [model.label],
-        }));
-        primaryTab.label = model.label;
       }
 
       if (sectionTitle !== '') {
@@ -335,7 +382,10 @@ const beforeCreate = ({
           <Footer
             onClose={close}
             onSave={stepper.onSave}
-            canSave={stepNumber === stepper.stepAmount && modelId !== ''}
+            canSave={
+              stepNumber === stepper.stepAmount &&
+              (createNewQuestionnaire ? title.trim() !== '' : modelId !== '')
+            }
           />
         </BoxComp>
       </BoxComp>
@@ -353,7 +403,7 @@ const beforeCreate = ({
         </BoxComp>
       );
     },
-    stepAmount: 3,
+    stepAmount: 2,
   };
   return (
     <>
