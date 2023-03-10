@@ -120,11 +120,21 @@ const beforeCreate = ({
               label="Questionnaire title"
               error={
                 <>
+                  {validation && (
+                    <Text color="#E9004C" size=".75rem">
+                      {validationMessage}
+                      <br />
+                    </Text>
+                  )}
                   <Text color="#666D85">or </Text>
                   {createNewQuestionnaire ? (
                     <Text
                       color="purple"
-                      onClick={() => setCreateNewQuestionnaire(false)}
+                      onClick={() => {
+                        setCreateNewQuestionnaire(false);
+                        setValidation(false);
+                        setValidationMessage('');
+                      }}
                       style={{ cursor: 'pointer' }}
                     >
                       use an existing questionnaire model
@@ -132,16 +142,14 @@ const beforeCreate = ({
                   ) : (
                     <Text
                       color="purple"
-                      onClick={() => setCreateNewQuestionnaire(true)}
+                      onClick={() => {
+                        setCreateNewQuestionnaire(true);
+                        setValidation(false);
+                        setValidationMessage('');
+                      }}
                       style={{ cursor: 'pointer' }}
                     >
                       create a new questionnaire
-                    </Text>
-                  )}
-                  {validation && (
-                    <Text color="#e82600">
-                      <br />
-                      {validationMessage}
                     </Text>
                   )}
                 </>
@@ -158,8 +166,18 @@ const beforeCreate = ({
                       throw new Error('expected string');
                     }
                     setTitle(value);
+                    if (value.length >= 50) {
+                      setValidationMessage(
+                        'Name should be at most 50 character(s)',
+                      );
+                      setValidation(true);
+                    } else {
+                      setValidation(false);
+                      setValidationMessage('');
+                    }
                   }}
                   value={title}
+                  color={validation && 'pink'}
                 />
               ) : (
                 <ModelSelector
@@ -247,6 +265,7 @@ const beforeCreate = ({
         newPrefab.structure,
       );
       let variableName = '';
+      let idProperty = '';
       const context = pageId ? { pageId } : { partialId };
 
       if (createNewQuestionnaire) {
@@ -270,14 +289,15 @@ const beforeCreate = ({
               ...opt,
               value: [`${newModel.label}`],
             }));
+            idProperty =
+              newModel.properties.find(({ name }) => name === 'id')?.id || '';
             primaryTab.label = newModel.label;
             variableName = `${camelToSnakeCase(newModel.label)}_id`;
           }
         } catch {
-          setValidationMessage(
-            'Model name already exists. Please choose another name.',
-          );
+          setValidationMessage('Model name already exists.');
           setValidation(true);
+          setStepNumber(1);
           return;
         }
       } else if (model && modelId) {
@@ -293,6 +313,8 @@ const beforeCreate = ({
           ...opt,
           value: [model.label],
         }));
+        idProperty =
+          model.properties.find(({ name }) => name === 'id')?.id || '';
         primaryTab.label = model.label;
         variableName = `${camelToSnakeCase(model.label)}_id`;
       } else {
@@ -300,6 +322,23 @@ const beforeCreate = ({
         setValidation(true);
         return;
       }
+
+      setOption(
+        questionnaireDataContainer,
+        'filter',
+        (opt: PrefabComponentOption) => ({
+          ...opt,
+          value: {
+            [idProperty]: {
+              eq: {
+                ref: { id: '#idVariable' },
+                name: variableName,
+                type: 'VARIABLE',
+              },
+            },
+          },
+        }),
+      );
 
       const schemaName = 'Questionnaire object';
       const jsonSchema = {
@@ -311,7 +350,6 @@ const beforeCreate = ({
         properties: {
           answer: { type: 'string' },
           score: { type: 'integer' },
-          dol: { type: 'integer' },
         },
       };
 
@@ -326,23 +364,6 @@ const beforeCreate = ({
           id: '#idVariable',
         },
       });
-      // TODO: add variable to filter option
-      // setOption(
-      //   questionnaireDataContainer,
-      //   'filter',
-      //   (opt: PrefabComponentOption) => ({
-      //     ...opt,
-      //     value: {
-      //       [idProperty.id]: {
-      //         eq: {
-      //           ref: { id: '#idVariable' },
-      //           name: variableName,
-      //           type: 'VARIABLE',
-      //         },
-      //       },
-      //     },
-      //   }),
-      // );
 
       if (title) {
         setOption(titleText, 'content', (opt: PrefabComponentOption) => ({
@@ -427,8 +448,13 @@ const beforeCreate = ({
           <ButtonComp
             label="Next"
             size="large"
-            disabled={stepNumber === stepper.stepAmount}
+            disabled={stepNumber === stepper.stepAmount || validation}
             onClick={() => {
+              if (modelId === '' && !createNewQuestionnaire) {
+                setValidationMessage('Selecting a model is required');
+                setValidation(true);
+                return;
+              }
               const newStepnumber = stepNumber + 1;
               setStepNumber(newStepnumber);
             }}
@@ -484,7 +510,7 @@ const attributes = {
     'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/56b89343f4ef499393e162173777c9ec',
 };
 
-export default makePrefab('{{{Questionnaire', attributes, beforeCreate, [
+export default makePrefab('Questionnaire', attributes, beforeCreate, [
   Drawer({}, [
     DrawerBar(
       {
