@@ -62,11 +62,18 @@ const beforeCreate = ({
   prefab,
   save,
   close,
-  helpers: { useModelQuery, setOption, addModelAndProperties },
+  helpers: {
+    useModelQuery,
+    setOption,
+    addModelAndProperties,
+    useCurrentPageId,
+    useCurrentPartialId,
+    camelToSnakeCase,
+    addSchemaModel,
+  },
 }: BeforeCreateArgs) => {
   const [model, setModel] = React.useState<ModelProps>();
   const [modelId, setModelId] = React.useState('');
-
   const [title, setTitle] = React.useState('');
   const [description, setDescription] = React.useState('');
   const [sectionTitle, setSectionTitle] = React.useState('');
@@ -76,6 +83,9 @@ const beforeCreate = ({
   const [stepNumber, setStepNumber] = React.useState(1);
   const [createNewQuestionnaire, setCreateNewQuestionnaire] =
     React.useState(true);
+
+  const pageId = useCurrentPageId();
+  const partialId = useCurrentPartialId();
 
   useModelQuery({
     variables: { id: modelId },
@@ -236,6 +246,8 @@ const beforeCreate = ({
         '#questionnaireDataContainer',
         newPrefab.structure,
       );
+      let variableName = '';
+      const context = pageId ? { pageId } : { partialId };
 
       if (createNewQuestionnaire) {
         try {
@@ -259,6 +271,7 @@ const beforeCreate = ({
               value: [`${newModel.label}`],
             }));
             primaryTab.label = newModel.label;
+            variableName = `${camelToSnakeCase(newModel.label)}_id`;
           }
         } catch {
           setValidationMessage(
@@ -281,11 +294,55 @@ const beforeCreate = ({
           value: [model.label],
         }));
         primaryTab.label = model.label;
+        variableName = `${camelToSnakeCase(model.label)}_id`;
       } else {
         setValidationMessage('Selecting a model is required');
         setValidation(true);
         return;
       }
+
+      const schemaName = 'Questionnaire object';
+      const jsonSchema = {
+        $id: 'https://bettyblocks.com/question.schema.json',
+        $schema: 'https://json-schema.org/draft/2020-12/schema',
+        description: 'Question description',
+        title: 'Question',
+        type: 'object',
+        properties: {
+          answer: { type: 'string' },
+          score: { type: 'integer' },
+          dol: { type: 'integer' },
+        },
+      };
+
+      addSchemaModel(schemaName, JSON.stringify(jsonSchema));
+
+      newPrefab.variables = [];
+      newPrefab.variables.push({
+        ...context,
+        kind: 'integer',
+        name: variableName,
+        ref: {
+          id: '#idVariable',
+        },
+      });
+      // TODO: add variable to filter option
+      // setOption(
+      //   questionnaireDataContainer,
+      //   'filter',
+      //   (opt: PrefabComponentOption) => ({
+      //     ...opt,
+      //     value: {
+      //       [idProperty.id]: {
+      //         eq: {
+      //           ref: { id: '#idVariable' },
+      //           name: variableName,
+      //           type: 'VARIABLE',
+      //         },
+      //       },
+      //     },
+      //   }),
+      // );
 
       if (title) {
         setOption(titleText, 'content', (opt: PrefabComponentOption) => ({
@@ -427,7 +484,7 @@ const attributes = {
     'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/56b89343f4ef499393e162173777c9ec',
 };
 
-export default makePrefab('Questionnaire', attributes, beforeCreate, [
+export default makePrefab('{{{Questionnaire', attributes, beforeCreate, [
   Drawer({}, [
     DrawerBar(
       {
