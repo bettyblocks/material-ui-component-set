@@ -16,22 +16,21 @@ export const categories = [
 ];
 
 export const snackbarOptions = {
-  runTimeVisibility: option('CUSTOM', {
-    label: 'Initial State',
-    value: true,
-    configuration: {
-      as: 'DROPDOWN',
-      dataType: 'boolean',
-      allowedInput: [
-        { name: 'Visible', value: true },
-        { name: 'Hidden', value: false },
-      ],
-    },
-  }),
   visible: toggle('Visible in builder', {
     value: true,
     configuration: {
       as: 'VISIBILITY',
+    },
+  }),
+  runTimeVisibility: option('CUSTOM', {
+    label: 'Initial State',
+    value: 'false',
+    configuration: {
+      as: 'DROPDOWN',
+      allowedInput: [
+        { name: 'Visible', value: 'true' },
+        { name: 'Hidden', value: 'false' },
+      ],
     },
   }),
   content: variable('Content', {
