@@ -177,7 +177,7 @@ const detailChildren = [
                 configuration: { as: 'MULTILINE' },
                 showInAddChild: true,
               }),
-              type: font('Font', { value: ['Body1'] }),
+              type: font('Text style', { value: ['Body1'] }),
               fontWeight: option('CUSTOM', {
                 label: 'Font weight',
                 value: '500',
@@ -202,7 +202,7 @@ const detailChildren = [
           Text({
             options: {
               ...textOptions,
-              type: font('Font', { value: ['Body1'] }),
+              type: font('Text style', { value: ['Body1'] }),
               content: variable('Property', {
                 value: [],
                 configuration: { as: 'MULTILINE' },
@@ -1127,7 +1127,7 @@ const drawerContainer = DrawerContainer(
                                               id: '#createTabTitleContent',
                                             },
                                           }),
-                                          type: font('Font', {
+                                          type: font('Text style', {
                                             value: ['Title5'],
                                           }),
                                           textColor: color('Text color', {
@@ -1470,7 +1470,7 @@ const drawerContainer = DrawerContainer(
                                               id: '#detailsTabTitleContent',
                                             },
                                           }),
-                                          type: font('Font', {
+                                          type: font('Text style', {
                                             value: ['Title5'],
                                           }),
                                           textColor: color('Text color', {
@@ -2487,7 +2487,7 @@ const drawerContainer = DrawerContainer(
                                               id: '#updateTabTitleContent',
                                             },
                                           }),
-                                          type: font('Font', {
+                                          type: font('Text style', {
                                             value: ['Title5'],
                                           }),
                                           textColor: color('Text color', {
@@ -3173,7 +3173,7 @@ const drawerContainer = DrawerContainer(
                                                             options: {
                                                               ...textOptions,
                                                               type: font(
-                                                                'Font',
+                                                                'Text style',
                                                                 {
                                                                   value: [
                                                                     'Title4',
@@ -4389,7 +4389,7 @@ const drawerContainer = DrawerContainer(
                                                                             },
                                                                           ),
                                                                         type: font(
-                                                                          'Font',
+                                                                          'Text style',
                                                                           {
                                                                             value:
                                                                               [
@@ -4527,7 +4527,7 @@ const drawerContainer = DrawerContainer(
                                                                             },
                                                                           ),
                                                                         type: font(
-                                                                          'Font',
+                                                                          'Text style',
                                                                           {
                                                                             value:
                                                                               [
@@ -6024,7 +6024,8 @@ const beforeCreate = ({
           prop.label !== 'Id' &&
           prop.kind !== 'PDF' &&
           prop.kind !== 'MULTI_FILE' &&
-          prop.kind !== 'PASSWORD',
+          prop.kind !== 'PASSWORD' &&
+          prop.kind !== 'LOGIN_TOKEN',
       );
 
       const relationProperties = model.relationships.filter(
@@ -6324,6 +6325,14 @@ const beforeCreate = ({
           id: '#updateFormAction',
         },
       }));
+      setOption(
+        updateForm,
+        'recordVariable',
+        (opts: PrefabComponentOption) => ({
+          ...opts,
+          value: updateAction.recordInputVariable.id,
+        }),
+      );
       setOption(updateForm, 'model', (opts: PrefabComponentOption) => ({
         ...opts,
         value: modelId,
@@ -6584,15 +6593,6 @@ const beforeCreate = ({
         },
       );
 
-      updateForm.descendants.push(
-        makeBettyUpdateInput(
-          BettyPrefabs.HIDDEN,
-          model,
-          idProperty,
-          updateAction.recordInputVariable,
-        ),
-      );
-
       // set delete action
       const deleteForm = treeSearch('#deleteForm', newPrefab.structure);
       if (!deleteForm) throw new Error('No delete form found');
@@ -6616,6 +6616,14 @@ const beforeCreate = ({
           id: '#deleteFormAction',
         },
       }));
+      setOption(
+        deleteForm,
+        'recordVariable',
+        (opts: PrefabComponentOption) => ({
+          ...opts,
+          value: result.recordInputVariable.id,
+        }),
+      );
 
       setOption(deleteForm, 'model', (opts: PrefabComponentOption) => ({
         ...opts,
@@ -6658,15 +6666,6 @@ const beforeCreate = ({
         );
       }
       deleteForm.descendants.push(deleteSubmitButton);
-
-      deleteForm.descendants.push(
-        makeBettyUpdateInput(
-          BettyPrefabs.HIDDEN,
-          model,
-          idProperty,
-          result.recordInputVariable,
-        ),
-      );
 
       const filterComp = treeSearch('#filterComp', newPrefab.structure);
       if (filterComp?.type === 'COMPONENT') {
