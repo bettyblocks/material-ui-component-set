@@ -10,7 +10,19 @@ export const categories = [
 ];
 
 export const dialogOptions = {
-  isVisible: toggle('Toggle visibility', {
+  runTimeVisibility: option('CUSTOM', {
+    label: 'Initial State',
+    value: true,
+    configuration: {
+      as: 'DROPDOWN',
+      dataType: 'boolean',
+      allowedInput: [
+        { name: 'Visible', value: true },
+        { name: 'Hidden', value: false },
+      ],
+    },
+  }),
+  isVisible: toggle('Visible in builder', {
     value: false,
     configuration: { as: 'VISIBILITY' },
   }),
