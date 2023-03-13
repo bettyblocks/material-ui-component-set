@@ -1,3 +1,10 @@
+# [2.112.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.111.0...v2.112.0) (2023-03-13)
+
+
+### Features
+
+* add theme weight to text component ([cccdb45](https://github.com/bettyblocks/material-ui-component-set/commit/cccdb45db26e1eb2744e728df6456e2deea68408))
+
 # [2.111.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.110.0...v2.111.0) (2023-03-07)
 
 
