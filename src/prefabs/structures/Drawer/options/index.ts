@@ -22,17 +22,6 @@ export const drawerOptions = {
       as: 'VISIBILITY',
     },
   }),
-  runTimeVisibility: option('CUSTOM', {
-    label: 'Initial State',
-    value: 'false',
-    configuration: {
-      as: 'DROPDOWN',
-      allowedInput: [
-        { name: 'Visible', value: 'true' },
-        { name: 'Hidden', value: 'false' },
-      ],
-    },
-  }),
   drawerWidth: size('Drawer Width', {
     value: '200px',
     configuration: {
@@ -92,6 +81,17 @@ export const drawerOptions = {
         { name: 'Right', value: 'right' },
       ],
       condition: hideIf('drawerType', 'EQ', 'temporary'),
+    },
+  }),
+  runTimeVisibility: option('CUSTOM', {
+    label: 'Initial State (RUNTIME)',
+    value: 'false',
+    configuration: {
+      as: 'DROPDOWN',
+      allowedInput: [
+        { name: 'Visible', value: 'true' },
+        { name: 'Hidden', value: 'false' },
+      ],
     },
   }),
 

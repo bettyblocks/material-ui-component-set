@@ -22,17 +22,6 @@ export const snackbarOptions = {
       as: 'VISIBILITY',
     },
   }),
-  runTimeVisibility: option('CUSTOM', {
-    label: 'Initial State',
-    value: 'false',
-    configuration: {
-      as: 'DROPDOWN',
-      allowedInput: [
-        { name: 'Visible', value: 'true' },
-        { name: 'Hidden', value: 'false' },
-      ],
-    },
-  }),
   content: variable('Content', {
     value: ['You can also drag an alert component here for example'],
   }),
@@ -84,6 +73,17 @@ export const snackbarOptions = {
     value: 6000,
     configuration: {
       condition: showIfTrue('autoHide'),
+    },
+  }),
+  runTimeVisibility: option('CUSTOM', {
+    label: 'Initial State (RUNTIME)',
+    value: 'false',
+    configuration: {
+      as: 'DROPDOWN',
+      allowedInput: [
+        { name: 'Visible', value: 'true' },
+        { name: 'Hidden', value: 'false' },
+      ],
     },
   }),
 
