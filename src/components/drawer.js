@@ -14,21 +14,26 @@
       temporaryAnchor,
       breakpoint,
       visibility,
+      runTimeVisibility,
       dataComponentAttribute,
     } = options;
 
     const isTemporary = drawerType === 'temporary';
     const anchor = isTemporary ? temporaryAnchor : persistentAnchor;
 
-    const [isOpen, setIsOpen] = useState(visibility);
+    // Because custom boolean option returns false as a string, do an additonal check
+    const componentVisibility =
+      env === 'dev' ? visibility : runTimeVisibility !== 'false';
+
+    const [isOpen, setIsOpen] = useState(componentVisibility);
 
     const closeDrawer = () => setIsOpen(false);
     const openDrawer = () => setIsOpen(true);
     const toggleDrawer = () => setIsOpen((s) => !s);
 
     useEffect(() => {
-      setIsOpen(visibility);
-    }, [visibility]);
+      setIsOpen(componentVisibility);
+    }, [componentVisibility]);
 
     return (
       <div

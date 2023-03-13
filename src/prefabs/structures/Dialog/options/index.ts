@@ -10,8 +10,8 @@ export const categories = [
 ];
 
 export const dialogOptions = {
-  isVisible: toggle('Toggle visibility', {
-    value: false,
+  isVisible: toggle('Visible in builder', {
+    value: true,
     configuration: { as: 'VISIBILITY' },
   }),
   isFullscreen: toggle('Fullscreen', {
@@ -32,6 +32,17 @@ export const dialogOptions = {
         { name: 'Medium', value: 'md' },
         { name: 'Large', value: 'lg' },
         { name: 'Extra-large', value: 'xl' },
+      ],
+    },
+  }),
+  runTimeVisibility: option('CUSTOM', {
+    label: 'Initial State (RUNTIME)',
+    value: 'false',
+    configuration: {
+      as: 'DROPDOWN',
+      allowedInput: [
+        { name: 'Visible', value: 'true' },
+        { name: 'Hidden', value: 'false' },
       ],
     },
   }),
