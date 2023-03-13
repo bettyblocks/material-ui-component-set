@@ -1,3 +1,37 @@
+# [2.114.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.113.1...v2.114.0) (2023-03-13)
+
+
+### Features
+
+* change childselector in tabs to dropdown ([bf998f6](https://github.com/bettyblocks/material-ui-component-set/commit/bf998f6bd32fdd4a9f422039e427094c9761b90d))
+
+## [2.113.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.113.0...v2.113.1) (2023-03-13)
+
+
+### Bug Fixes
+
+* delete column layout page template ([f2486df](https://github.com/bettyblocks/material-ui-component-set/commit/f2486df7017e8146f9c9747496f26a9f53be7da5))
+
+# [2.113.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.112.0...v2.113.0) (2023-03-13)
+
+
+### Bug Fixes
+
+* change booleans to string for default value ([cf641ba](https://github.com/bettyblocks/material-ui-component-set/commit/cf641ba36d3642418a64d34b0e2c900d35629255))
+* change order of component options ([2304cc8](https://github.com/bettyblocks/material-ui-component-set/commit/2304cc8c3463c381fc70ccbeece8b21e3e5efe40))
+
+
+### Features
+
+* initial visibility to drawer dialog snackbar ([1fb792d](https://github.com/bettyblocks/material-ui-component-set/commit/1fb792d9ab8b1166a6354b312739542c7aea74fd))
+
+# [2.112.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.111.0...v2.112.0) (2023-03-13)
+
+
+### Features
+
+* add theme weight to text component ([cccdb45](https://github.com/bettyblocks/material-ui-component-set/commit/cccdb45db26e1eb2744e728df6456e2deea68408))
+
 # [2.111.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.110.0...v2.111.0) (2023-03-07)
 
 
