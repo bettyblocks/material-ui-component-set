@@ -294,8 +294,20 @@ const beforeCreate = ({
             primaryTab.label = newModel.label;
             variableName = `${camelToSnakeCase(newModel.label)}_id`;
           }
-        } catch {
-          setValidationMessage('Model name already exists.');
+        } catch (e) {
+          switch (e.message) {
+            case 'has already been taken':
+              setValidationMessage('Name already exists.');
+              break;
+            case 'should be at most 50 character(s)':
+              setValidationMessage('Name should be at most 50 character(s)');
+              break;
+            case 'should start with a letter':
+              setValidationMessage('Name should start with a letter');
+              break;
+            default:
+              setValidationMessage('Creating new model failed');
+          }
           setValidation(true);
           setStepNumber(1);
           return;
