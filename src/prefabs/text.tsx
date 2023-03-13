@@ -9,7 +9,7 @@ const attr = {
 };
 
 const options = { ...textOptions };
-options.type = font('Font', { value: ['Body1'] });
+options.type = font('Text style', { value: ['Body1'] });
 options.useInnerHtml = toggle('Display Rich Text', {
   value: false,
 });
