@@ -70,9 +70,17 @@ export const tabsOptions = {
   addChild: addChild('Add Tab', {
     value: { children, addChildWizardType: 'ChildSelector' },
   }),
-  defaultValue: childSelector('Selected tab (runtime)', { value: 1 }),
+  defaultValue: childSelector('Selected tab (runtime)', {
+    value: 1,
+    configuration: {
+      as: 'DROPDOWN',
+    },
+  }),
   selectedDesignTabIndex: childSelector('Selected tab (design)', {
     value: 1,
+    configuration: {
+      as: 'DROPDOWN',
+    },
   }),
   showAllTabs: toggle('Show all tabs', { value: false }),
   height: size('Height', {
