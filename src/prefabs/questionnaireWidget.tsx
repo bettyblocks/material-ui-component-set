@@ -83,6 +83,8 @@ const beforeCreate = ({
   const [stepNumber, setStepNumber] = React.useState(1);
   const [createNewQuestionnaire, setCreateNewQuestionnaire] =
     React.useState(true);
+  // regax to only support the following characters A-Z a-z 0-9 . _ -
+  const nameRegExp = /^[\w\-\s.]+$/g;
 
   const pageId = useCurrentPageId();
   const partialId = useCurrentPartialId();
@@ -169,6 +171,14 @@ const beforeCreate = ({
                     if (value.length >= 50) {
                       setValidationMessage(
                         'Name should be at most 50 character(s)',
+                      );
+                      setValidation(true);
+                    } else if (
+                      value.trim().length > 0 &&
+                      !nameRegExp.test(value)
+                    ) {
+                      setValidationMessage(
+                        'Only use alphanumeric characters (A-Z a-z 0-9 . _ -) and spaces here.',
                       );
                       setValidation(true);
                     } else {
