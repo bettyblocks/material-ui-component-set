@@ -3511,6 +3511,14 @@ const beforeCreate = ({
           value: result.action.actionId,
           configuration: { disabled: true },
         }));
+        setOption(
+          editForm,
+          'recordVariable',
+          (opts: PrefabComponentOption) => ({
+            ...opts,
+            value: result.recordInputVariable.id,
+          }),
+        );
         setOption(editForm, 'model', (opts: PrefabComponentOption) => ({
           ...opts,
           value: modelId,
@@ -3706,15 +3714,6 @@ const beforeCreate = ({
             console.warn('PropertyKind not found');
           }
         });
-
-        editForm.descendants.push(
-          makeBettyUpdateInput(
-            BettyPrefabs.HIDDEN,
-            model,
-            idProperty,
-            result.recordInputVariable,
-          ),
-        );
       }
 
       // set delete action
@@ -3739,6 +3738,14 @@ const beforeCreate = ({
           value: result.action.actionId,
           configuration: { disabled: true },
         }));
+        setOption(
+          deleteForm,
+          'recordVariable',
+          (opts: PrefabComponentOption) => ({
+            ...opts,
+            value: result.recordInputVariable.id,
+          }),
+        );
         setOption(deleteForm, 'model', (opts: PrefabComponentOption) => ({
           ...opts,
           value: modelId,
@@ -3780,15 +3787,6 @@ const beforeCreate = ({
         }
 
         deleteForm.descendants.push(deleteSubmitButton);
-
-        deleteForm.descendants.push(
-          makeBettyUpdateInput(
-            BettyPrefabs.HIDDEN,
-            model,
-            idProperty,
-            result.recordInputVariable,
-          ),
-        );
       }
       if (idProperty && newPrefab.interactions) {
         newPrefab.interactions.push(

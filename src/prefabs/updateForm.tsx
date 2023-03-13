@@ -373,6 +373,11 @@ const beforeCreate = ({
             configuration: { disabled: true },
           }));
 
+          setOption(structure, 'recordVariable', (option) => ({
+            ...option,
+            value: result.recordInputVariable.id,
+          }));
+
           if (!modelId) {
             // eslint-disable-next-line no-console
             console.error('unable to set model option, no model selected');
@@ -607,15 +612,6 @@ const beforeCreate = ({
                 );
             }
           });
-
-          structure.descendants.push(
-            makeBettyUpdateInput(
-              BettyPrefabs.HIDDEN,
-              model,
-              idProperty,
-              result.recordInputVariable,
-            ),
-          );
 
           structure.descendants.push(
             cloneStructure(BettyPrefabs.SUBMIT_BUTTON),
