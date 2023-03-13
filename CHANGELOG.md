@@ -1,3 +1,10 @@
+## [2.113.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.113.0...v2.113.1) (2023-03-13)
+
+
+### Bug Fixes
+
+* delete column layout page template ([f2486df](https://github.com/bettyblocks/material-ui-component-set/commit/f2486df7017e8146f9c9747496f26a9f53be7da5))
+
 # [2.113.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.112.0...v2.113.0) (2023-03-13)
 
 
