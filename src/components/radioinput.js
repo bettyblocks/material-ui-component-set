@@ -60,8 +60,19 @@
     } = modelProperty;
 
     const isListProperty = kind === 'list' || kind === 'LIST';
+
+    const isPropertyValueAnArray =
+      prefabValue.length !== 0
+        ? !!prefabValue.find((p) => p.type === 'PROPERTY')
+        : false;
+
     const [currentValue, setCurrentValue] = useState(
-      isListProperty ? useText(prefabValue) : getValue(prefabValue),
+      // eslint-disable-next-line no-nested-ternary
+      isListProperty
+        ? useText(prefabValue)
+        : isPropertyValueAnArray
+        ? parseInt(useText(prefabValue), 10)
+        : getValue(prefabValue),
     );
 
     B.defineFunction('Clear', () => setCurrentValue(''));
