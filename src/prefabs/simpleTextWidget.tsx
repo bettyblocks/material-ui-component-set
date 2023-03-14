@@ -20,7 +20,7 @@ import {
 const interactions: PrefabInteraction[] = [];
 
 const attributes = {
-  category: 'WIDGETS',
+  category: 'TEST',
   icon: Icon.TextInputIcon,
   interactions,
   variables: [],

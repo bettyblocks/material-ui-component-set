@@ -30,13 +30,13 @@ import { allOptionsOptions } from './structures/AllOptions/options';
 const interactions: PrefabInteraction[] = [];
 
 const attributes = {
-  category: 'WIDGETS',
+  category: 'TEST',
   icon: Icon.TextInputIcon,
   interactions,
   variables: [],
 };
 
-export default prefab('All options widget', attributes, undefined, [
+export default prefab('AllOptions widget', attributes, undefined, [
   wrapper(
     {
       label: 'All options widget',
