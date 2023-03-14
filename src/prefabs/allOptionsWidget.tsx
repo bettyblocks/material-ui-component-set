@@ -47,7 +47,7 @@ export default prefab('AllOptions widget', attributes, undefined, [
           value: {
             ref: {
               componentId: '#allOptions',
-              optionId: '#property',
+              optionId: '#content',
             },
           },
           configuration: {
@@ -91,7 +91,7 @@ export default prefab('AllOptions widget', attributes, undefined, [
           },
         }),
         filter: linked({
-          label: 'endpoint',
+          label: 'filter',
           value: {
             ref: {
               componentId: '#allOptions',
@@ -103,7 +103,7 @@ export default prefab('AllOptions widget', attributes, undefined, [
           },
         }),
         font: linked({
-          label: 'endpoint',
+          label: 'font',
           value: {
             ref: {
               componentId: '#allOptions',
@@ -115,7 +115,7 @@ export default prefab('AllOptions widget', attributes, undefined, [
           },
         }),
         icon: linked({
-          label: 'endpoint',
+          label: 'icon',
           value: {
             ref: {
               componentId: '#allOptions',
@@ -127,7 +127,7 @@ export default prefab('AllOptions widget', attributes, undefined, [
           },
         }),
         model: linked({
-          label: 'endpoint',
+          label: 'model',
           value: {
             ref: {
               componentId: '#allOptions',
@@ -139,7 +139,7 @@ export default prefab('AllOptions widget', attributes, undefined, [
           },
         }),
         modelAndRelation: linked({
-          label: 'endpoint',
+          label: 'modelAndRelation',
           value: {
             ref: {
               componentId: '#allOptions',
@@ -151,7 +151,7 @@ export default prefab('AllOptions widget', attributes, undefined, [
           },
         }),
         number: linked({
-          label: 'endpoint',
+          label: 'number',
           value: {
             ref: {
               componentId: '#allOptions',
@@ -163,7 +163,7 @@ export default prefab('AllOptions widget', attributes, undefined, [
           },
         }),
         property: linked({
-          label: 'endpoint',
+          label: 'property',
           value: {
             ref: {
               componentId: '#allOptions',
@@ -175,7 +175,7 @@ export default prefab('AllOptions widget', attributes, undefined, [
           },
         }),
         size: linked({
-          label: 'endpoint',
+          label: 'size',
           value: {
             ref: {
               componentId: '#allOptions',
@@ -187,7 +187,7 @@ export default prefab('AllOptions widget', attributes, undefined, [
           },
         }),
         toggle: linked({
-          label: 'endpoint',
+          label: 'toggle',
           value: {
             ref: {
               componentId: '#allOptions',
@@ -199,7 +199,7 @@ export default prefab('AllOptions widget', attributes, undefined, [
           },
         }),
         text: linked({
-          label: 'endpoint',
+          label: 'text',
           value: {
             ref: {
               componentId: '#allOptions',
@@ -211,7 +211,7 @@ export default prefab('AllOptions widget', attributes, undefined, [
           },
         }),
         actionId: linked({
-          label: 'endpoint',
+          label: 'actionId',
           value: {
             ref: {
               componentId: '#allOptions',
@@ -223,7 +223,7 @@ export default prefab('AllOptions widget', attributes, undefined, [
           },
         }),
         iconPosition: linked({
-          label: 'endpoint',
+          label: 'iconPosition',
           value: {
             ref: {
               componentId: '#allOptions',
@@ -259,7 +259,7 @@ export default prefab('AllOptions widget', attributes, undefined, [
         //   },
         // }),
         fontWeight: linked({
-          label: 'endpoint',
+          label: 'fontWeight',
           value: {
             ref: {
               componentId: '#allOptions',
@@ -271,7 +271,7 @@ export default prefab('AllOptions widget', attributes, undefined, [
           },
         }),
         displayLogic: linked({
-          label: 'endpoint',
+          label: 'displayLogic',
           value: {
             ref: {
               componentId: '#allOptions',
@@ -333,7 +333,7 @@ export default prefab('AllOptions widget', attributes, undefined, [
             }),
             property: property('Property', {
               value: '',
-              ref: { id: '#number' },
+              ref: { id: '#property' },
             }),
             size: size('size', {
               value: 'L',
