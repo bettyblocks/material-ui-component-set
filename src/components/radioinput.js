@@ -63,17 +63,14 @@
 
     const isPropertyValueAnArray =
       prefabValue.length !== 0
-        ? !!prefabValue.find((p) => p.type === 'PROPERTY')
+        ? !!prefabValue.some((p) => p.type === 'PROPERTY')
         : false;
-
-    const [currentValue, setCurrentValue] = useState(
-      // eslint-disable-next-line no-nested-ternary
-      isListProperty
-        ? useText(prefabValue)
-        : isPropertyValueAnArray
-        ? parseInt(useText(prefabValue), 10)
-        : getValue(prefabValue),
-    );
+    let resolvedCurrentValue;
+    if (isListProperty) resolvedCurrentValue = useText(prefabValue);
+    else if (isPropertyValueAnArray)
+      resolvedCurrentValue = parseInt(useText(prefabValue), 10);
+    else resolvedCurrentValue = getValue(prefabValue);
+    const [currentValue, setCurrentValue] = useState(resolvedCurrentValue);
 
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
