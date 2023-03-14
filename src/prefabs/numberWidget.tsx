@@ -48,14 +48,12 @@ const beforeCreate = ({
     prepareAction,
     getPageName,
     setOption,
-    makeBettyUpdateInput,
-    BettyPrefabs,
   },
 }: BeforeCreateArgs) => {
   const [primaryProperty, setPrimaryProperty] = React.useState('');
   const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
   const [validationMessage, setValidationMessage] = React.useState('');
-  const [model, setModel] = React.useState<ModelProps>();
+  const [, setModel] = React.useState<ModelProps>();
   const modelId = useModelIdSelector();
   const componentId = createUuid();
   const pageName = getPageName();
