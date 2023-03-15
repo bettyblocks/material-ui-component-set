@@ -16,6 +16,12 @@ export const categories = [
 ];
 
 export const drawerOptions = {
+  visibility: toggle('Visible in builder', {
+    value: true,
+    configuration: {
+      as: 'VISIBILITY',
+    },
+  }),
   drawerWidth: size('Drawer Width', {
     value: '200px',
     configuration: {
@@ -77,10 +83,15 @@ export const drawerOptions = {
       condition: hideIf('drawerType', 'EQ', 'temporary'),
     },
   }),
-  visibility: toggle('Toggle visibility', {
-    value: true,
+  runTimeVisibility: option('CUSTOM', {
+    label: 'Initial State (RUNTIME)',
+    value: 'false',
     configuration: {
-      as: 'VISIBILITY',
+      as: 'DROPDOWN',
+      allowedInput: [
+        { name: 'Visible', value: 'true' },
+        { name: 'Hidden', value: 'false' },
+      ],
     },
   }),
 

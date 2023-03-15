@@ -44,6 +44,16 @@
       }
     }, [isDev, currentTab]);
 
+    B.defineFunction('Next tab', () => {
+      if (value + 1 >= children.length) return;
+      setValue(value + 1);
+    });
+
+    B.defineFunction('Previous tab', () => {
+      if (value - 1 < 0) return;
+      setValue(value - 1);
+    });
+
     const TabsHeader = (
       <Tabs
         aria-label="tabs"
