@@ -302,5 +302,6 @@ export default prefab('Password', attributes, beforeCreate, [
     inputLabel: 'Password',
     type: 'password',
     adornmentIcon: 'VisibilityOff',
+    dataComponentAttribute: 'PasswordInput',
   }),
 ]);
