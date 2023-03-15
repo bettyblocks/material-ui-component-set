@@ -104,6 +104,18 @@ export const tabsOptions = {
       as: 'UNIT',
     },
   }),
+  layout: option('CUSTOM', {
+    label: 'Layout',
+    value: 'default',
+    configuration: {
+      as: 'BUTTONGROUP',
+      dataType: 'string',
+      allowedInput: [
+        { name: 'Default', value: 'default' },
+        { name: 'Circle', value: 'circle' },
+      ],
+    },
+  }),
   alignment: option('CUSTOM', {
     value: 'top',
     label: 'Alignment',
@@ -116,19 +128,6 @@ export const tabsOptions = {
         { name: 'Right', value: 'right' },
         { name: 'Bottom', value: 'bottom' },
       ],
-    },
-  }),
-  layout: option('CUSTOM', {
-    label: 'Layout',
-    value: 'default',
-    configuration: {
-      as: 'BUTTONGROUP',
-      dataType: 'string',
-      allowedInput: [
-        { name: 'Default', value: 'default' },
-        { name: 'Circle', value: 'circle' },
-      ],
-      condition: showIf('alignment', 'EQ', 'left'),
     },
   }),
   variant: option('CUSTOM', {

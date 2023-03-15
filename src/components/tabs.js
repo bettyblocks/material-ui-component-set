@@ -56,10 +56,7 @@
         orientation={orientation}
         scrollButtons={scrollButtons}
         classes={{
-          root:
-            layout === 'circle' && alignment === 'left'
-              ? classes.circleRoot
-              : classes.root,
+          root: layout === 'circle' ? classes.circleRoot : classes.root,
           indicator: classes.indicator,
         }}
       >
@@ -85,7 +82,7 @@
                 return 'row';
             }
           }
-          if (layout === 'circle' && alignment === 'left') {
+          if (layout === 'circle') {
             return (
               <Tab
                 label={
@@ -200,6 +197,8 @@
           style.getColor(inactiveCircleLabelColor),
           '!important',
         ],
+        textAlign: 'left',
+        lineHeight: '1.4',
       },
       circleSelected: {
         '& $circle': {
@@ -245,6 +244,7 @@
         ],
         alignItems: 'center',
         justifyContent: 'center',
+        flexShrink: '0',
       },
       tabs: {
         display: 'flex',
@@ -301,9 +301,7 @@
         backgroundColor: ({
           options: { indicatorColor, layout, alignment },
         }) => [
-          layout === 'circle' && alignment === 'left'
-            ? 'transparent'
-            : style.getColor(indicatorColor),
+          layout === 'circle' ? 'transparent' : style.getColor(indicatorColor),
           '!important',
         ],
       },
