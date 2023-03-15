@@ -298,9 +298,7 @@
       indicator: {
         left: ({ options: { alignment } }) => alignment === 'right' && 0,
         top: ({ options: { alignment } }) => alignment === 'bottom' && 0,
-        backgroundColor: ({
-          options: { indicatorColor, layout, alignment },
-        }) => [
+        backgroundColor: ({ options: { indicatorColor, layout } }) => [
           layout === 'circle' ? 'transparent' : style.getColor(indicatorColor),
           '!important',
         ],
