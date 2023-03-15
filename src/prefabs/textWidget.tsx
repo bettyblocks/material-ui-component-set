@@ -19,7 +19,7 @@ import {
   PrefabComponentOption,
   component as makeComponent,
   InteractionType,
-  property,
+  property as propertyOption,
 } from '@betty-blocks/component-sdk';
 import { options as formOptions } from './structures/ActionJSForm/options';
 import {
@@ -54,7 +54,7 @@ const beforeCreate = ({
   const [primaryProperty, setPrimaryProperty] = React.useState('');
   const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
   const [validationMessage, setValidationMessage] = React.useState('');
-  const [model, setModel] = React.useState<ModelProps>();
+  const [, setModel] = React.useState<ModelProps>();
   const modelId = useModelIdSelector();
   const componentId = createUuid();
   const pageName = getPageName();
@@ -476,7 +476,7 @@ export default makePrefab('Text Widget', attributes, beforeCreate, [
                       ref: { id: '#TextInput' },
                       options: {
                         ...textInputOptions,
-                        property: property('Property', {
+                        property: propertyOption('Property', {
                           value: '',
                           ref: { id: '#textInputProperty' },
                           configuration: {
