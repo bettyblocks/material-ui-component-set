@@ -480,7 +480,7 @@ export default makePrefab('Text Widget', attributes, beforeCreate, [
                           value: '',
                           ref: { id: '#textInputProperty' },
                           configuration: {
-                            createNewProperty: {
+                            createProperty: {
                               type: 'string',
                             },
                           },
