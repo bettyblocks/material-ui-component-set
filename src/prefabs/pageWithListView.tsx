@@ -74,7 +74,7 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attrs = {
-  name: 'List view',
+  name: 'Overview, list view',
   icon: Icon.DataList,
   type: 'page',
   description:
@@ -540,7 +540,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('List view', attrs, beforeCreate, [
+export default makePrefab('Overview, list view', attrs, beforeCreate, [
   Row(
     {
       options: {

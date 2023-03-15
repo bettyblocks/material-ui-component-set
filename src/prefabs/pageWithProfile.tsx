@@ -301,7 +301,7 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attrs = {
-  name: 'Profile details',
+  name: 'User, profile details',
   icon: Icon.NavbarIcon,
   type: 'page',
   description:
@@ -1525,7 +1525,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('Profile details', attrs, beforeCreate, [
+export default makePrefab('User, profile details', attrs, beforeCreate, [
   Row(
     {
       options: {

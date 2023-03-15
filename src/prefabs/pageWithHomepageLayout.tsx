@@ -54,7 +54,7 @@ import {
 import { styles } from './structures/ListItem/options/styles';
 
 const attrs = {
-  name: 'Page with homepage layout',
+  name: 'Homepage, inspirational',
   icon: Icon.ContainerIcon,
   type: 'page',
   isPublicPage: false,

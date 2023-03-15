@@ -108,7 +108,7 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attrs = {
-  name: 'Register form',
+  name: 'User, account register only',
   icon: Icon.LoginFormIcon,
   type: 'page',
   isPublicPage: true,

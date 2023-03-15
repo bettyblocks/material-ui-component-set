@@ -21,7 +21,7 @@ import {
 } from './structures';
 
 const attrs = {
-  name: 'Error pages',
+  name: 'Various error pages',
   icon: Icon.NavbarIcon,
   type: 'page',
   isPublicPage: true,

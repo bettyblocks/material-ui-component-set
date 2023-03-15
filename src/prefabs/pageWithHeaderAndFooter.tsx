@@ -155,7 +155,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('Header and footer', attrs, beforeCreate, [
+export default makePrefab('Basic header and footer page', attrs, beforeCreate, [
   Row(
     {
       options: {
