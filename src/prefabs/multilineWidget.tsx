@@ -1,254 +1,36 @@
-import * as React from 'react';
 import {
-  prefab as makePrefab,
   Icon,
   PrefabInteraction,
-  BeforeCreateArgs,
-  wrapper,
-  sizes,
   ThemeColor,
-  color,
-  size,
-  number,
-  variable,
-  option,
-  toggle,
   buttongroup,
+  color,
+  component,
+  displayLogic,
   font,
-  PrefabComponent,
   linked,
-  PrefabComponentOption,
-  component as makeComponent,
-  InteractionType,
+  number,
+  option,
+  prefab,
+  property,
+  size,
+  sizes,
+  toggle,
+  variable,
+  wrapper,
 } from '@betty-blocks/component-sdk';
 import { options as formOptions } from './structures/ActionJSForm/options';
 import {
   Box,
-  boxOptions,
+  Conditional,
   Text as TextComp,
   TextArea,
-  textOptions,
-  Conditional,
+  boxOptions,
   conditionalOptions,
   textAreaOptions,
+  textOptions,
 } from './structures';
-import { IdPropertyProps, ModelProps, ModelQuery } from './types';
 
 const interactions: PrefabInteraction[] = [];
-
-const beforeCreate = ({
-  components: { Content, Header, Field, Footer, PropertySelector, Text },
-  prefab,
-  save,
-  close,
-  helpers: {
-    useModelQuery,
-    useModelIdSelector,
-    createBlacklist,
-    createUuid,
-    prepareAction,
-    getPageName,
-    setOption,
-  },
-}: BeforeCreateArgs) => {
-  const [primaryProperty, setPrimaryProperty] = React.useState('');
-  const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
-  const [validationMessage, setValidationMessage] = React.useState('');
-  const [, setModel] = React.useState<ModelProps>();
-  const modelId = useModelIdSelector();
-  const componentId = createUuid();
-  const pageName = getPageName();
-  const unsupportedKinds = createBlacklist(['TEXT']);
-  const { data } = useModelQuery({
-    variables: { id: modelId },
-    onCompleted: (result: ModelQuery) => {
-      setIdProperty(result.model.properties.find(({ name }) => name === 'id'));
-      setModel(result.model);
-    },
-  });
-
-  const enrichVarObj = (obj: any) => {
-    const returnObject = obj;
-    if (data && data.model) {
-      const property = data.model.properties.find(
-        (prop: any) => prop.id === obj.id[0],
-      );
-      if (property) {
-        returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
-      }
-    }
-    return returnObject;
-  };
-
-  const transformProperty = (obj: any) => {
-    const outputProp = { ...obj };
-    if (!obj) {
-      setValidationMessage('No property is selected.');
-    }
-    if (data && data.model) {
-      const property = data.model.properties.find(
-        (prop: any) => prop.id === obj.id[0],
-      );
-      if (property) {
-        outputProp.label = property.label;
-        outputProp.kind = property.kind;
-      }
-    }
-    return outputProp;
-  };
-
-  if (modelId === null && validationMessage === '') {
-    setValidationMessage(
-      'The multiline widget needs to be inside a parent with a model',
-    );
-  }
-
-  const treeSearch = (refValue: string, structure: any) =>
-    structure.reduce((acc: string, component: PrefabComponent) => {
-      if (acc) return acc;
-      if (
-        component.ref &&
-        Object.values(component.ref).indexOf(refValue) > -1
-      ) {
-        return component;
-      }
-      return treeSearch(refValue, component.descendants);
-    }, null);
-  return (
-    <>
-      <Header title="Configure your multiline widget" onClose={close} />
-      <Content>
-        <Field
-          label="Where would you like to store your answer?"
-          error={
-            validationMessage && (
-              <Text color="#e82600">{validationMessage}</Text>
-            )
-          }
-        >
-          <PropertySelector
-            onChange={(value: string) => {
-              setPrimaryProperty(value);
-            }}
-            modelId={modelId}
-            value={primaryProperty}
-            disabledKinds={unsupportedKinds}
-            disabled={modelId === null}
-          />
-        </Field>
-      </Content>
-      <Footer
-        onSave={async (): Promise<void> => {
-          const newPrefab = { ...prefab };
-
-          const text = treeSearch('#questionText', newPrefab.structure);
-          const textInput = treeSearch('#textInput', newPrefab.structure);
-          const multilineWidgetForm = treeSearch(
-            '#MultilineWidgetForm',
-            newPrefab.structure,
-          );
-          const propertyObj = transformProperty(primaryProperty);
-          setOption(text, 'content', (opt: PrefabComponentOption) => ({
-            ...opt,
-            value: [propertyObj.label],
-          }));
-          setOption(textInput, 'placeholder', (opt: PrefabComponentOption) => ({
-            ...opt,
-            value: [],
-          }));
-
-          if (!idProperty) {
-            throw new Error('We could not find an idProperty.');
-          }
-          multilineWidgetForm.id = componentId;
-          const result = await prepareAction(
-            componentId,
-            idProperty,
-            [transformProperty(primaryProperty)],
-            'update',
-            undefined,
-            `${pageName} - create ${propertyObj.label}`,
-            'public',
-          );
-
-          setOption(
-            multilineWidgetForm,
-            'actionId',
-            (opts: PrefabComponentOption) => ({
-              ...opts,
-              value: result.action.actionId,
-              configuration: { disabled: true },
-            }),
-          );
-          if (!modelId) {
-            // eslint-disable-next-line no-console
-            console.error('unable to set model option, no model selected');
-            return;
-          }
-          setOption(
-            multilineWidgetForm,
-            'model',
-            (opts: PrefabComponentOption) => ({
-              ...opts,
-              value: modelId,
-              configuration: {
-                disabled: true,
-              },
-            }),
-          );
-          setOption(
-            textInput,
-            'actionProperty',
-            (opt: PrefabComponentOption) => ({
-              ...opt,
-              value: {
-                modelProperty: enrichVarObj(primaryProperty),
-              },
-            }),
-          );
-
-          let actionVarId: string;
-          Object.keys(result.variables).forEach((key) => {
-            actionVarId = key;
-          });
-
-          setOption(
-            textInput,
-            'actionVariableId',
-            (opt: PrefabComponentOption) => ({
-              ...opt,
-              value: result.variables[actionVarId][1].id,
-              configuration: {
-                condition: {
-                  type: 'HIDE',
-                  option: 'actionVariableId',
-                  comparator: 'EQ',
-                  value: result.variables[actionVarId][1].id,
-                },
-              },
-            }),
-          );
-
-          const interaction = {
-            name: 'Submit',
-            sourceEvent: 'onBlur',
-            parameters: [],
-            ref: {
-              targetComponentId: '#MultilineWidgetForm',
-              sourceComponentId: '#textInput',
-            },
-            type: 'Custom' as InteractionType,
-          };
-
-          newPrefab.interactions?.push(interaction);
-          setValidationMessage('');
-          save(newPrefab);
-        }}
-        onClose={close}
-      />
-    </>
-  );
-};
 
 const attributes = {
   category: 'WIDGETS',
@@ -257,25 +39,22 @@ const attributes = {
   variables: [],
 };
 
-export default makePrefab('Multiline Widget', attributes, beforeCreate, [
+export default prefab('Multiline question', attributes, undefined, [
   wrapper(
     {
-      label: 'Multi widget',
-      optionCategories: [
-        {
-          label: 'Conditional options',
-          expanded: true,
-          members: ['conditionLeft', 'conditionComparison', 'conditionRight'],
-        },
-      ],
+      label: 'Multi question',
+      optionCategories: [],
       options: {
-        question: linked({
+        property: linked({
           label: 'Question',
           value: {
             ref: {
-              componentId: '#questionText',
-              optionId: '#textContent',
+              componentId: '#textInput',
+              optionId: '#textInputProperty',
             },
+          },
+          configuration: {
+            showOnDrop: true,
           },
         }),
         placeholder: linked({
@@ -296,15 +75,6 @@ export default makePrefab('Multiline Widget', attributes, beforeCreate, [
             },
           },
         }),
-        rows: linked({
-          label: 'Number of rows',
-          value: {
-            ref: {
-              componentId: '#textInput',
-              optionId: '#textInputRows',
-            },
-          },
-        }),
         questionSpacing: linked({
           label: 'Question spacing',
           value: {
@@ -314,30 +84,12 @@ export default makePrefab('Multiline Widget', attributes, beforeCreate, [
             },
           },
         }),
-        conditionLeft: linked({
-          label: 'Left condition',
+        displayLogic: linked({
+          label: 'Display logic',
           value: {
             ref: {
-              componentId: '#conditional',
-              optionId: '#conditionOptionLeft',
-            },
-          },
-        }),
-        conditionComparison: linked({
-          label: 'equals',
-          value: {
-            ref: {
-              componentId: '#conditional',
-              optionId: '#conditionOptionCompare',
-            },
-          },
-        }),
-        conditionRight: linked({
-          label: 'Right condition',
-          value: {
-            ref: {
-              componentId: '#conditional',
-              optionId: '#conditionOptionRight',
+              componentId: '#questionBox',
+              optionId: '#questionBoxDisplayLogic',
             },
           },
         }),
@@ -434,14 +186,32 @@ export default makePrefab('Multiline Widget', attributes, beforeCreate, [
                     id: '#questionBoxOuterSpacing',
                   },
                 }),
+                displayLogic: displayLogic('Display logic', {
+                  value: {},
+                  ref: {
+                    id: '#questionBoxDisplayLogic',
+                  },
+                }),
               },
             },
             [
-              makeComponent(
+              component(
                 'Form',
                 {
                   ref: { id: '#MultilineWidgetForm' },
-                  options: { ...formOptions },
+                  options: {
+                    ...formOptions,
+                    actionId: option('ACTION_JS', {
+                      label: 'Action',
+                      value: '',
+                      configuration: {
+                        createAction: {
+                          template: 'update',
+                          permissions: 'inherit',
+                        },
+                      },
+                    }),
+                  },
                 },
                 [
                   TextComp(
@@ -490,6 +260,15 @@ export default makePrefab('Multiline Widget', attributes, beforeCreate, [
                       ref: { id: '#textInput' },
                       options: {
                         ...textAreaOptions,
+                        property: property('Property', {
+                          value: '',
+                          ref: { id: '#textInputProperty' },
+                          configuration: {
+                            createProperty: {
+                              type: 'string',
+                            },
+                          },
+                        }),
                         hideLabel: toggle('Hide label', { value: true }),
                         placeholder: variable('Placeholder', {
                           ref: { id: '#textInputPlaceholder' },
