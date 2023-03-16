@@ -27,7 +27,9 @@ export const categories = [
 export const textOptions = {
   content: variable('Content', {
     value: [],
-    configuration: { as: 'MULTILINE', allowPropertyName: true },
+    configuration: {
+      as: 'MULTILINE', // allowPropertyName: true
+    },
   }),
 
   useInnerHtml: toggle('Display Rich Text', {
