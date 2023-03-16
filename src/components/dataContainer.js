@@ -135,25 +135,21 @@
            * @returns {Void}
            */
           B.defineFunction('Filter', ({ event, property, interactionId }) => {
-            setInteractionFilter((s) => ({
-              ...s,
+            setInteractionFilter({
+              ...interactionFilter,
               [interactionId]: {
                 property,
                 value: event.target
                   ? event.target.value
                   : transformValue(event),
               },
-            }));
+            });
           });
 
           B.defineFunction('ResetFilter', () => {
             setInteractionFilter({});
           });
-
-          if (isDev) {
-            B.defineFunction('Refetch', () => {});
-          }
-        }, []);
+        });
 
         const DataContainer = (
           <div data-component={dataComponentAttributeText}>{children}</div>

@@ -1,4 +1,4 @@
-import { prefab, Icon, toggle, font } from '@betty-blocks/component-sdk';
+import { prefab, Icon, font, toggle } from '@betty-blocks/component-sdk';
 import { Text } from './structures/Text';
 import { textOptions } from './structures/Text/options';
 
