@@ -219,6 +219,12 @@
 
     const { totalCount } = data || {};
 
+    let disabledValue = '';
+    const parsedValue = parseInt(currentValue, 10);
+    if (totalData.length > 0 && parsedValue) {
+      disabledValue = totalData.find((e) => e.id === parsedValue)[labelName];
+    }
+
     useEffect(() => {
       B.defineFunction('Refetch', () => refetch());
 
@@ -298,7 +304,10 @@
         (item) =>
           propName &&
           labelName && (
-            <MenuItem key={item.id} value={item[propName]}>
+            <MenuItem
+              key={item.id}
+              value={disabled ? item[labelName] : item[propName]}
+            >
               {item[labelName]}
             </MenuItem>
           ),
@@ -337,8 +346,8 @@
       <>
         <TextField
           select={!disabled}
-          defaultValue={value}
-          value={value}
+          defaultValue={disabled ? disabledValue : value}
+          value={disabled ? disabledValue : value}
           size={size}
           classes={{ root: classes.formControl }}
           variant={variant}
