@@ -20,6 +20,7 @@ export const categories = [
   {
     label: 'Styling',
     expanded: false,
+
     members: [
       'height',
       'width',
@@ -111,6 +112,18 @@ export const tabsOptions = {
       as: 'UNIT',
     },
   }),
+  layout: option('CUSTOM', {
+    label: 'Layout',
+    value: 'default',
+    configuration: {
+      as: 'BUTTONGROUP',
+      dataType: 'string',
+      allowedInput: [
+        { name: 'Default', value: 'default' },
+        { name: 'Circle', value: 'circle' },
+      ],
+    },
+  }),
   alignment: option('CUSTOM', {
     value: 'top',
     label: 'Alignment',
@@ -123,19 +136,6 @@ export const tabsOptions = {
         { name: 'Right', value: 'right' },
         { name: 'Bottom', value: 'bottom' },
       ],
-    },
-  }),
-  layout: option('CUSTOM', {
-    label: 'Layout',
-    value: 'default',
-    configuration: {
-      as: 'BUTTONGROUP',
-      dataType: 'string',
-      allowedInput: [
-        { name: 'Default', value: 'default' },
-        { name: 'Circle', value: 'circle' },
-      ],
-      condition: showIf('alignment', 'EQ', 'left'),
     },
   }),
   variant: option('CUSTOM', {
@@ -188,6 +188,7 @@ export const tabsOptions = {
     value: '33px',
     configuration: {
       as: 'UNIT',
+      condition: showIf('layout', 'EQ', 'circle'),
     },
   }),
   circleColor: color('Active circle color', {
@@ -255,7 +256,7 @@ export const tabsOptions = {
     value: true,
   }),
   disableMenuClick: toggle('Disable navigation buttons', {
-    value: true,
+    value: false,
     configuration: {
       condition: showIf('layout', 'EQ', 'circle'),
     },
