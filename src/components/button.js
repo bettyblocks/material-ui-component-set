@@ -144,14 +144,6 @@
       return null;
     };
 
-    const handleMouseEnter = (event) => {
-      B.triggerEvent('onMouseEnter', event);
-    };
-
-    const handleMouseLeave = (event) => {
-      B.triggerEvent('onMouseLeave', event);
-    };
-
     const buttonProps = {
       disabled: disabled || isLoading || loading,
       tabIndex: isDev ? -1 : undefined,
@@ -164,12 +156,6 @@
       endpoint:
         linkType === 'internal' && linkTo && linkTo.id ? linkTo : undefined,
       'data-component': useText(dataComponentAttribute) || 'Button',
-      onMouseEnter: (event) => {
-        handleMouseEnter(event);
-      },
-      onMouseLeave: (event) => {
-        handleMouseLeave(event);
-      },
     };
 
     const targetProps = {
