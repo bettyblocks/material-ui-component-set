@@ -14,7 +14,6 @@
     const { Form, GetOne, useFilter, getIdProperty } = B;
     const formRef = React.createRef();
     const [interactionFilter, setInteractionFilter] = useState({});
-    const [, setOptions] = useOptions();
     const mounted = useRef(false);
 
     const isDev = B.env === 'dev';
@@ -77,15 +76,6 @@
 
       return value;
     };
-
-    B.defineFunction('setCurrentRecord', (value) => {
-      const id = Number(value);
-      if (typeof id === 'number') {
-        setOptions({
-          currentRecord: id,
-        });
-      }
-    });
 
     useEffect(() => {
       mounted.current = true;
