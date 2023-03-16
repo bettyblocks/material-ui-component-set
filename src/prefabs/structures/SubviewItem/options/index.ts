@@ -40,11 +40,25 @@ export const categories = [
 ];
 
 export const subviewItemOptions = {
-  prop: property('Property'),
+  prop: property('Property', {
+    configuration: {
+      allowRelations: true,
+      allowedKinds: [
+        'BELONGS_TO',
+        'HAS_AND_BELONGS_TO_MANY',
+        'HAS_MANY',
+        'HAS_ONE',
+      ],
+      showOnDrop: true,
+    },
+  }),
   content: variable('Label', { value: [''] }),
   backgroundColor: color('Background color', { value: ThemeColor.TRANSPARENT }),
   linkTo: endpoint('Page', {
     value: '',
+    configuration: {
+      showOnDrop: true,
+    },
   }),
   alignItems: option('CUSTOM', {
     label: 'Align items',

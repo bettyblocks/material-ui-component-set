@@ -45,6 +45,12 @@
           },
         },
         {
+          value: {},
+          label: 'Display logic',
+          key: 'displayLogic',
+          type: 'DISPLAY_LOGIC',
+        },
+        {
           value: true,
           label: 'Stretch (when in flex container)',
           key: 'stretch',
@@ -440,6 +446,12 @@
                   { name: 'Bottom', value: 'flex-end' },
                 ],
               },
+            },
+            {
+              value: {},
+              label: 'Display logic',
+              key: 'displayLogic',
+              type: 'DISPLAY_LOGIC',
             },
             {
               value: false,
@@ -1062,6 +1074,12 @@
                   { name: 'Bottom', value: 'flex-end' },
                 ],
               },
+            },
+            {
+              value: {},
+              label: 'Display logic',
+              key: 'displayLogic',
+              type: 'DISPLAY_LOGIC',
             },
             {
               value: false,

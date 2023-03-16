@@ -1,3 +1,197 @@
+## [2.115.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.115.0...v2.115.1) (2023-03-16)
+
+
+### Bug Fixes
+
+* add correct filter for relations ([9a714ed](https://github.com/bettyblocks/material-ui-component-set/commit/9a714ed281310983b8772a0944ccbe405026b87f))
+
+# [2.115.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.114.1...v2.115.0) (2023-03-14)
+
+
+### Features
+
+* bump sdk and cli ([11e9396](https://github.com/bettyblocks/material-ui-component-set/commit/11e9396f3f302ac929de38733c959250cd60a57d))
+
+## [2.114.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.114.0...v2.114.1) (2023-03-13)
+
+
+### Bug Fixes
+
+* remove the custom set current record ([b1b7393](https://github.com/bettyblocks/material-ui-component-set/commit/b1b739363d0d831d56524544fea216d6dcf52d63))
+
+# [2.114.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.113.1...v2.114.0) (2023-03-13)
+
+
+### Features
+
+* change childselector in tabs to dropdown ([bf998f6](https://github.com/bettyblocks/material-ui-component-set/commit/bf998f6bd32fdd4a9f422039e427094c9761b90d))
+
+## [2.113.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.113.0...v2.113.1) (2023-03-13)
+
+
+### Bug Fixes
+
+* delete column layout page template ([f2486df](https://github.com/bettyblocks/material-ui-component-set/commit/f2486df7017e8146f9c9747496f26a9f53be7da5))
+
+# [2.113.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.112.0...v2.113.0) (2023-03-13)
+
+
+### Bug Fixes
+
+* change booleans to string for default value ([cf641ba](https://github.com/bettyblocks/material-ui-component-set/commit/cf641ba36d3642418a64d34b0e2c900d35629255))
+* change order of component options ([2304cc8](https://github.com/bettyblocks/material-ui-component-set/commit/2304cc8c3463c381fc70ccbeece8b21e3e5efe40))
+
+
+### Features
+
+* initial visibility to drawer dialog snackbar ([1fb792d](https://github.com/bettyblocks/material-ui-component-set/commit/1fb792d9ab8b1166a6354b312739542c7aea74fd))
+
+# [2.112.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.111.0...v2.112.0) (2023-03-13)
+
+
+### Features
+
+* add theme weight to text component ([cccdb45](https://github.com/bettyblocks/material-ui-component-set/commit/cccdb45db26e1eb2744e728df6456e2deea68408))
+
+# [2.111.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.110.0...v2.111.0) (2023-03-07)
+
+
+### Features
+
+* remove hidden input from update form ([56547e6](https://github.com/bettyblocks/material-ui-component-set/commit/56547e63a5424ec21b8507fe91da30f7731b8282))
+* remove hidden input from update form ([de885c6](https://github.com/bettyblocks/material-ui-component-set/commit/de885c6e3293c397170095fc7b36e0f40d0ffaeb))
+
+# [2.110.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.109.0...v2.110.0) (2023-03-06)
+
+
+### Features
+
+* add display logic to box and conditional ([109562a](https://github.com/bettyblocks/material-ui-component-set/commit/109562a352d4146fe66b039233ea7681181c8147))
+
+# [2.109.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.108.1...v2.109.0) (2023-03-06)
+
+
+### Features
+
+* add previos and next interaction to tabs component ([6fe8609](https://github.com/bettyblocks/material-ui-component-set/commit/6fe8609f76970c1cbedf7cf47df7395f1c4ec337))
+
+## [2.108.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.108.0...v2.108.1) (2023-03-06)
+
+
+### Bug Fixes
+
+* remove actionjs dialog from templates ([f8ef197](https://github.com/bettyblocks/material-ui-component-set/commit/f8ef197e35fd5fc82cbb2cc1cee2cda31b10d8c1))
+
+# [2.108.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.107.0...v2.108.0) (2023-03-06)
+
+
+### Bug Fixes
+
+* changed more font options to text style ([8b00f0a](https://github.com/bettyblocks/material-ui-component-set/commit/8b00f0a4b894f00af9fb2b30606d9f9715987168))
+
+
+### Features
+
+* change font option to text style ([218dda1](https://github.com/bettyblocks/material-ui-component-set/commit/218dda12f6d69870018592cde568d9ab33179382))
+
+# [2.107.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.106.2...v2.107.0) (2023-03-03)
+
+
+### Features
+
+* implement allowkinds and relation in subview ([a7f3ad1](https://github.com/bettyblocks/material-ui-component-set/commit/a7f3ad11b9e38c96e23576898bb8af097de98ad7))
+
+## [2.106.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.106.1...v2.106.2) (2023-02-27)
+
+
+### Bug Fixes
+
+* default value not working with property ([392ec57](https://github.com/bettyblocks/material-ui-component-set/commit/392ec5790e2818c108516b16e0b41bdff4b2d35d))
+
+## [2.106.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.106.0...v2.106.1) (2023-02-27)
+
+
+### Bug Fixes
+
+* squeezed and/or button in filter component ([c5ff1ce](https://github.com/bettyblocks/material-ui-component-set/commit/c5ff1cefff45ce388d3f450ec8ea790145b5100a))
+
+# [2.106.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.105.0...v2.106.0) (2023-02-27)
+
+
+### Features
+
+* add ondrop to child components ([99a5111](https://github.com/bettyblocks/material-ui-component-set/commit/99a51113706e352ac15afca63589a487169010a0))
+
+# [2.105.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.104.0...v2.105.0) (2023-02-17)
+
+
+### Features
+
+* create release step for NL6 ([5900a45](https://github.com/bettyblocks/material-ui-component-set/commit/5900a4561d2c1dc532a766f61fceaa4bc7ff9571))
+
+# [2.104.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.103.0...v2.104.0) (2023-02-17)
+
+
+### Bug Fixes
+
+* bump component-sdk version to latest version ([84e2af5](https://github.com/bettyblocks/material-ui-component-set/commit/84e2af50b29806be991ae6f344d6154edd574ef3))
+
+
+### Features
+
+* add inherit option to text component ([86fcd35](https://github.com/bettyblocks/material-ui-component-set/commit/86fcd356d98c38dc69cf4a85c705fa129bfdc72c))
+
+# [2.103.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.102.0...v2.103.0) (2023-02-16)
+
+
+### Bug Fixes
+
+* resolve issue with empty list property value ([d80e00a](https://github.com/bettyblocks/material-ui-component-set/commit/d80e00a3f84868f40e5141ed12f351ee5ff5d551))
+
+
+### Features
+
+* add groupBy option to multiAutocomplete ([9655a07](https://github.com/bettyblocks/material-ui-component-set/commit/9655a07ce4f8e95378b01c1237b348d28bf6f046))
+
+# [2.102.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.101.1...v2.102.0) (2023-02-16)
+
+
+### Bug Fixes
+
+* remove v2 backoffice versions ([0ea7ccc](https://github.com/bettyblocks/material-ui-component-set/commit/0ea7ccc12bc57ca02165921786eed936b4a98b9c))
+
+
+### Features
+
+* add belongs to relations to backoffice ([8a1c5d5](https://github.com/bettyblocks/material-ui-component-set/commit/8a1c5d56479075a1a48da77ca00077e0a03779f9))
+
+## [2.101.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.101.0...v2.101.1) (2023-02-16)
+
+
+### Bug Fixes
+
+* multi value auto complete has no options when default value ([4fafd70](https://github.com/bettyblocks/material-ui-component-set/commit/4fafd70e5f0437ec3b891aa069688fda520c2e97))
+
+# [2.101.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.100.0...v2.101.0) (2023-02-15)
+
+
+### Features
+
+* Add property whitelist to filter ([421f6d6](https://github.com/bettyblocks/material-ui-component-set/commit/421f6d6e1705ab652da941885993470e00552632))
+* Add property whitelist to filter ([08a2235](https://github.com/bettyblocks/material-ui-component-set/commit/08a2235505882951c9d948c3ae3a1238a9b05b74))
+
+# [2.100.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.99.2...v2.100.0) (2023-02-14)
+
+
+### Bug Fixes
+
+* resolve issue when using number property ([a64992e](https://github.com/bettyblocks/material-ui-component-set/commit/a64992e54980992452c57bcb9b5aefa58de23740))
+
+
+### Features
+
+* add groupBy component option to autocomplete ([2d96143](https://github.com/bettyblocks/material-ui-component-set/commit/2d96143d7903504f4fef2ca8e5a7784df2e73b9d))
+
 ## [2.99.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.99.1...v2.99.2) (2023-02-10)
 
 

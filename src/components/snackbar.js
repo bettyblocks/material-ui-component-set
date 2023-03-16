@@ -8,6 +8,7 @@
     const { Icons } = window.MaterialUI;
     const {
       visible,
+      runTimeVisibility,
       anchorOriginHorizontal,
       anchorOriginVertical,
       autoHide,
@@ -19,7 +20,9 @@
     const { env, useText } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
-    const [open, setOpen] = useState(false);
+    // Because custom boolean option returns false as a string, do an additonal check
+    const componentVisibility = isDev ? visible : runTimeVisibility !== 'false';
+    const [open, setOpen] = useState(componentVisibility);
     const text = useText(content);
     const [textFromServer, setTextFromServer] = useState('');
 
@@ -63,8 +66,8 @@
     B.defineFunction('Show/Hide', () => setOpen((s) => !s));
 
     useEffect(() => {
-      setOpen(visible);
-    }, [visible]);
+      setOpen(componentVisibility);
+    }, [componentVisibility]);
 
     const duration = autoHide ? autoHideDuration : null;
 

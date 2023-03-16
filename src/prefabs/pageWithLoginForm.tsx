@@ -632,7 +632,7 @@ const prefabStructure: PrefabComponent[] = [
                                                   as: 'MULTILINE',
                                                 },
                                               }),
-                                              type: font('Font', {
+                                              type: font('Text style', {
                                                 value: ['Title4'],
                                               }),
                                             },

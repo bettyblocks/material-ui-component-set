@@ -55,6 +55,13 @@ export const options = {
       condition: hideIf('optionType', 'EQ', 'property'),
     },
   }),
+  groupBy: property('Group by for options', {
+    value: '',
+    configuration: {
+      dependsOn: 'model',
+      condition: hideIf('optionType', 'EQ', 'property'),
+    },
+  }),
   orderBy: property('Order by for options', {
     value: '',
     configuration: {

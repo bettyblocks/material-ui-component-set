@@ -4,7 +4,6 @@ import {
   buttongroup,
   color,
   endpoint,
-  icon,
   property,
   reconfigure,
   size,
@@ -32,17 +31,21 @@ const children = [
         value: '',
         showInAddChild: true,
         showInReconfigure: true,
+        configuration: {
+          allowRelations: true,
+          allowedKinds: [
+            'BELONGS_TO',
+            'HAS_AND_BELONGS_TO_MANY',
+            'HAS_MANY',
+            'HAS_ONE',
+          ],
+        },
       }),
       content: variable('Label', {
         value: [''],
-        showInAddChild: true,
         showInReconfigure: true,
       }),
       linkTo: endpoint('Page', {
-        value: '',
-        showInAddChild: true,
-      }),
-      icon: icon('Icon', {
         value: '',
         showInAddChild: true,
       }),
