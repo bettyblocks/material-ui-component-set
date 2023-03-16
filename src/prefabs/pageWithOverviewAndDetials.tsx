@@ -55,7 +55,6 @@ const interactions = [
 ] as PrefabInteraction[];
 
 const attrs = {
-  name: 'Overview, with inline details',
   icon: Icon.DataList,
   type: 'page',
   description:

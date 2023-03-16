@@ -145,7 +145,6 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attrs = {
-  name: 'User, account login and register',
   icon: Icon.LoginFormIcon,
   type: 'page',
   description: 'Page with a ready to use login form, register form and image.',

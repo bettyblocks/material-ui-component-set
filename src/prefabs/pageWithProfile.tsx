@@ -301,7 +301,6 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attrs = {
-  name: 'User, profile details',
   icon: Icon.NavbarIcon,
   type: 'page',
   description:

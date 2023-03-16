@@ -54,7 +54,6 @@ import { Property } from './types';
 const interactions: PrefabInteraction[] = [];
 
 const attrs = {
-  name: 'Dashboard, clean and simple',
   icon: Icon.DataTable,
   type: 'page',
   description:

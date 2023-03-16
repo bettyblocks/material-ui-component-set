@@ -121,7 +121,6 @@ const interactions = [
 ] as PrefabInteraction[];
 
 const attrs = {
-  name: 'Form checklist',
   icon: Icon.DataList,
   type: 'page',
   description: 'This page contains a checklist based on your model',

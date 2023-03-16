@@ -108,7 +108,6 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attrs = {
-  name: 'User, account register only',
   icon: Icon.LoginFormIcon,
   type: 'page',
   isPublicPage: true,
@@ -587,7 +586,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('Register form', attrs, beforeCreate, [
+export default makePrefab('User, account register only', attrs, beforeCreate, [
   Row(
     {
       options: newRowOptions,
