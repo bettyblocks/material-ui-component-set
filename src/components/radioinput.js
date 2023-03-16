@@ -61,10 +61,10 @@
 
     const isListProperty = kind === 'list' || kind === 'LIST';
 
-    const isPropertyValueAnArray =
-      prefabValue.length !== 0
-        ? !!prefabValue.some((p) => p.type === 'PROPERTY')
-        : false;
+    const isPropertyValueAnArray = Boolean(
+      prefabValue.length && prefabValue.some((p) => p.type === 'PROPERTY'),
+    );
+
     let resolvedCurrentValue;
     if (isListProperty) resolvedCurrentValue = useText(prefabValue);
     else if (isPropertyValueAnArray)
