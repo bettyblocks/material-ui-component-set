@@ -49,12 +49,12 @@
       B.triggerEvent('OnClick');
     };
 
-    const handleMouseEnter = () => {
-      B.triggerEvent('OnMouseEnter');
+    const handleMouseEnter = (event) => {
+      B.triggerEvent('OnMouseEnter', event);
     };
 
-    const handleMouseLeave = () => {
-      B.triggerEvent('OnMouseLeave');
+    const handleMouseLeave = (event) => {
+      B.triggerEvent('OnMouseLeave', event);
     };
 
     const BoxCmp = (
