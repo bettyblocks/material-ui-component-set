@@ -1,3 +1,51 @@
+## [2.117.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.117.0...v2.117.1) (2023-03-17)
+
+
+### Bug Fixes
+
+* default value from property not shown ([fd351e7](https://github.com/bettyblocks/material-ui-component-set/commit/fd351e7ab27c0790d667195e6040103b84163936))
+* fix eslint errors ([4ac42ff](https://github.com/bettyblocks/material-ui-component-set/commit/4ac42ff7d0ef7d6634fd95fd0523ca2e34874b97))
+
+# [2.117.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.116.2...v2.117.0) (2023-03-17)
+
+
+### Bug Fixes
+
+* update deps ([840471e](https://github.com/bettyblocks/material-ui-component-set/commit/840471e078e16d1f3449a0f55e793f6cb4a986d8))
+
+
+### Features
+
+* added no formatting to datatable orderby ([25de7fa](https://github.com/bettyblocks/material-ui-component-set/commit/25de7fae6321978bde5463abe8bcbee1f0a7d4f1))
+
+## [2.116.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.116.1...v2.116.2) (2023-03-17)
+
+
+### Bug Fixes
+
+* complex filters not workng multi autocomplete ([63e38b2](https://github.com/bettyblocks/material-ui-component-set/commit/63e38b2a872fe8a8322c825d94a7df58f45da548))
+
+## [2.116.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.116.0...v2.116.1) (2023-03-17)
+
+
+### Bug Fixes
+
+* hide dialogs by default in templates ([0d20120](https://github.com/bettyblocks/material-ui-component-set/commit/0d2012017042205ae6056176796997dfc21656fe))
+
+# [2.116.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.115.2...v2.116.0) (2023-03-17)
+
+
+### Features
+
+* change page template names ([0e6b66a](https://github.com/bettyblocks/material-ui-component-set/commit/0e6b66a07a1ce9f181c1082732bec3ed223d7780))
+
+## [2.115.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.115.1...v2.115.2) (2023-03-16)
+
+
+### Bug Fixes
+
+* remove not working interaction from button ([210d28d](https://github.com/bettyblocks/material-ui-component-set/commit/210d28dd585fa9afbff834effffb22c7add91913))
+
 ## [2.115.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.115.0...v2.115.1) (2023-03-16)
 
 
