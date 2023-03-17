@@ -1320,7 +1320,7 @@ const beforeCreate = ({
 };
 
 export default prefab(
-  'Login form with image',
+  'User, account login only',
   attrs,
   beforeCreate,
   prefabStructure,
