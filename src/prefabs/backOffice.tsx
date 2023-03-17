@@ -30,6 +30,7 @@ import {
   reconfigure,
   property,
   addChild,
+  endpoint,
 } from '@betty-blocks/component-sdk';
 
 import {
@@ -72,6 +73,8 @@ import {
   SubmitButton,
   submitButtonOptions,
   Subview,
+  SubviewItem,
+  subviewItemOptions,
   subviewOptions,
   Tab,
   tabOptions,
@@ -215,6 +218,36 @@ const detailChildren = [
       ),
     ],
   ),
+];
+
+const subViewChildren = [
+  SubviewItem({
+    options: {
+      ...subviewItemOptions,
+      prop: property('Property', {
+        value: '',
+        showInAddChild: true,
+        showInReconfigure: true,
+        configuration: {
+          allowRelations: true,
+          allowedKinds: [
+            'BELONGS_TO',
+            'HAS_AND_BELONGS_TO_MANY',
+            'HAS_MANY',
+            'HAS_ONE',
+          ],
+        },
+      }),
+      content: variable('Label', {
+        value: [''],
+        showInReconfigure: true,
+      }),
+      linkTo: endpoint('Page', {
+        value: '',
+        showInAddChild: true,
+      }),
+    },
+  }),
 ];
 
 const interactions: PrefabInteraction[] = [
@@ -2255,7 +2288,8 @@ const drawerContainer = DrawerContainer(
                                                             id: '#addSubViewChild',
                                                           },
                                                           value: {
-                                                            children,
+                                                            children:
+                                                              subViewChildren,
                                                             addChildWizardType:
                                                               'ChildSelector',
                                                           },
