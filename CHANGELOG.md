@@ -1,3 +1,10 @@
+## [2.116.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.116.0...v2.116.1) (2023-03-17)
+
+
+### Bug Fixes
+
+* hide dialogs by default in templates ([0d20120](https://github.com/bettyblocks/material-ui-component-set/commit/0d2012017042205ae6056176796997dfc21656fe))
+
 # [2.116.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.115.2...v2.116.0) (2023-03-17)
 
 
