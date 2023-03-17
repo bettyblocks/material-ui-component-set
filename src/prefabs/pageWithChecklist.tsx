@@ -121,7 +121,6 @@ const interactions = [
 ] as PrefabInteraction[];
 
 const attrs = {
-  name: 'Checklist',
   icon: Icon.DataList,
   type: 'page',
   description: 'This page contains a checklist based on your model',
@@ -1553,4 +1552,9 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('Checklist', attrs, beforeCreate, prefabStructure);
+export default makePrefab(
+  'Form checklist',
+  attrs,
+  beforeCreate,
+  prefabStructure,
+);
