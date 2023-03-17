@@ -419,7 +419,7 @@ const beforeCreate = ({
       const createResult = await prepareAction(
         createTabForm.id,
         idProperty,
-        properties,
+        formProperties,
         'create',
         undefined,
         undefined,
@@ -689,7 +689,7 @@ const beforeCreate = ({
       const updateResult = await prepareAction(
         updateTabForm.id,
         idProperty,
-        properties,
+        formProperties,
         'update',
         undefined,
         undefined,
@@ -2516,7 +2516,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                     },
                                     options: {
                                       ...dialogOptions,
-                                      isVisible: toggle('Toggle visibility', {
+                                      isVisible: toggle('Visible in builder', {
                                         ref: { id: '#crudVisibility' },
                                         value: false,
                                         configuration: { as: 'VISIBILITY' },
@@ -4145,7 +4145,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                     ref: { id: '#snackbarCreated' },
                                     options: {
                                       ...snackbarOptions,
-                                      visible: toggle('Toggle visibility', {
+                                      visible: toggle('Visible in builder', {
                                         value: false,
                                         configuration: { as: 'VISIBILITY' },
                                       }),
@@ -4196,7 +4196,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                     ref: { id: '#snackbarUpdated' },
                                     options: {
                                       ...snackbarOptions,
-                                      visible: toggle('Toggle visibility', {
+                                      visible: toggle('Visible in builder', {
                                         value: false,
                                         configuration: { as: 'VISIBILITY' },
                                       }),
@@ -4247,7 +4247,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                     ref: { id: '#snackbarDeleted' },
                                     options: {
                                       ...snackbarOptions,
-                                      visible: toggle('Toggle visibility', {
+                                      visible: toggle('Visible in builder', {
                                         value: false,
                                         configuration: { as: 'VISIBILITY' },
                                       }),

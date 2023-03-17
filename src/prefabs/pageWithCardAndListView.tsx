@@ -674,7 +674,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('Card and list view', attrs, beforeCreate, [
+export default makePrefab('Overview, card and list view', attrs, beforeCreate, [
   Row(
     {
       options: {
