@@ -1,3 +1,11 @@
+## [2.117.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.117.0...v2.117.1) (2023-03-17)
+
+
+### Bug Fixes
+
+* default value from property not shown ([fd351e7](https://github.com/bettyblocks/material-ui-component-set/commit/fd351e7ab27c0790d667195e6040103b84163936))
+* fix eslint errors ([4ac42ff](https://github.com/bettyblocks/material-ui-component-set/commit/4ac42ff7d0ef7d6634fd95fd0523ca2e34874b97))
+
 # [2.117.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.116.2...v2.117.0) (2023-03-17)
 
 
