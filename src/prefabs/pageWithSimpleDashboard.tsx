@@ -54,7 +54,6 @@ import { Property } from './types';
 const interactions: PrefabInteraction[] = [];
 
 const attrs = {
-  name: 'Simple Dashboard',
   icon: Icon.DataTable,
   type: 'page',
   description:
@@ -593,7 +592,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
+export default makePrefab('Dashboard, clean and simple', attrs, beforeCreate, [
   Row(
     {
       options: {

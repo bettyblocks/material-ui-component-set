@@ -1,3 +1,31 @@
+## [2.116.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.116.0...v2.116.1) (2023-03-17)
+
+
+### Bug Fixes
+
+* hide dialogs by default in templates ([0d20120](https://github.com/bettyblocks/material-ui-component-set/commit/0d2012017042205ae6056176796997dfc21656fe))
+
+# [2.116.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.115.2...v2.116.0) (2023-03-17)
+
+
+### Features
+
+* change page template names ([0e6b66a](https://github.com/bettyblocks/material-ui-component-set/commit/0e6b66a07a1ce9f181c1082732bec3ed223d7780))
+
+## [2.115.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.115.1...v2.115.2) (2023-03-16)
+
+
+### Bug Fixes
+
+* remove not working interaction from button ([210d28d](https://github.com/bettyblocks/material-ui-component-set/commit/210d28dd585fa9afbff834effffb22c7add91913))
+
+## [2.115.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.115.0...v2.115.1) (2023-03-16)
+
+
+### Bug Fixes
+
+* add correct filter for relations ([9a714ed](https://github.com/bettyblocks/material-ui-component-set/commit/9a714ed281310983b8772a0944ccbe405026b87f))
+
 # [2.115.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.114.1...v2.115.0) (2023-03-14)
 
 
