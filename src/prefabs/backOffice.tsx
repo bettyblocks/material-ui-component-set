@@ -906,7 +906,7 @@ const drawerContainer = DrawerContainer(
         },
         options: {
           ...drawerOptions,
-          visibility: toggle('Toggle visibility', {
+          visibility: toggle('Visible in builder', {
             value: false,
             configuration: {
               as: 'VISIBILITY',
@@ -4339,6 +4339,15 @@ const drawerContainer = DrawerContainer(
                                                       {
                                                         options: {
                                                           ...dialogOptions,
+                                                          isVisible: toggle(
+                                                            'Visible in builder',
+                                                            {
+                                                              value: false,
+                                                              configuration: {
+                                                                as: 'VISIBILITY',
+                                                              },
+                                                            },
+                                                          ),
                                                           invisible: toggle(
                                                             'Invisible',
                                                             {
@@ -5236,6 +5245,17 @@ const prefabStructure = [
               value: '240px',
               configuration: {
                 as: 'UNIT',
+              },
+            }),
+            runTimeVisibility: option('CUSTOM', {
+              label: 'Initial State (RUNTIME)',
+              value: 'true',
+              configuration: {
+                as: 'DROPDOWN',
+                allowedInput: [
+                  { name: 'Visible', value: 'true' },
+                  { name: 'Hidden', value: 'false' },
+                ],
               },
             }),
           },

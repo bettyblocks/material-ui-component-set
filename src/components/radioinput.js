@@ -60,9 +60,17 @@
     } = modelProperty;
 
     const isListProperty = kind === 'list' || kind === 'LIST';
-    const [currentValue, setCurrentValue] = useState(
-      isListProperty ? useText(prefabValue) : getValue(prefabValue),
+
+    const isPropertyValueAnArray = Boolean(
+      prefabValue.length && prefabValue.some((p) => p.type === 'PROPERTY'),
     );
+
+    let resolvedCurrentValue;
+    if (isListProperty) resolvedCurrentValue = useText(prefabValue);
+    else if (isPropertyValueAnArray)
+      resolvedCurrentValue = parseInt(useText(prefabValue), 10);
+    else resolvedCurrentValue = getValue(prefabValue);
+    const [currentValue, setCurrentValue] = useState(resolvedCurrentValue);
 
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
