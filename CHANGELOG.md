@@ -1,3 +1,15 @@
+# [2.118.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.117.1...v2.118.0) (2023-03-17)
+
+
+### Bug Fixes
+
+* add child subview model ([f80281f](https://github.com/bettyblocks/material-ui-component-set/commit/f80281f05d151f994ae5e998ba2d66ec8e691403))
+
+
+### Features
+
+* add subview item in backoffice wrapper ([d429d15](https://github.com/bettyblocks/material-ui-component-set/commit/d429d159013e83d114dab1f574dc196043bc40c2))
+
 ## [2.117.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.117.0...v2.117.1) (2023-03-17)
 
 
