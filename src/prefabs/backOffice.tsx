@@ -72,6 +72,7 @@ import {
   SubmitButton,
   submitButtonOptions,
   Subview,
+  subviewOptions,
   Tab,
   tabOptions,
   Tabs,
@@ -2239,7 +2240,32 @@ const drawerContainer = DrawerContainer(
                                                   ),
                                                 },
                                               },
-                                              [Subview({}, [])],
+                                              [
+                                                Subview(
+                                                  {
+                                                    ref: {
+                                                      id: '#subView',
+                                                    },
+                                                    options: {
+                                                      ...subviewOptions,
+                                                      addChild: addChild(
+                                                        'Add Subview Item',
+                                                        {
+                                                          ref: {
+                                                            id: '#addSubViewChild',
+                                                          },
+                                                          value: {
+                                                            children,
+                                                            addChildWizardType:
+                                                              'ChildSelector',
+                                                          },
+                                                        },
+                                                      ),
+                                                    },
+                                                  },
+                                                  [],
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
@@ -4943,6 +4969,7 @@ const prefabStructure = [
             'updateTabTitle',
             'createTabTitle',
             'addDetailChild',
+            'addSubViewChild',
           ],
           condition: {
             type: 'SHOW',
@@ -5117,6 +5144,23 @@ const prefabStructure = [
             ref: {
               componentId: '#detailColumn',
               optionId: '#addDetailViewChild',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'shownTab',
+              comparator: 'EQ',
+              value: 2,
+            },
+          },
+        }),
+        addSubViewChild: linked({
+          label: 'Add subview item',
+          value: {
+            ref: {
+              componentId: '#subView',
+              optionId: '#addSubViewChild',
             },
           },
           configuration: {
@@ -6352,7 +6396,7 @@ const beforeCreate = ({
               case PropertyKind.BELONGS_TO:
                 return inputStructure(
                   prop.label,
-                  makeBettyInput(
+                  makeBettyUpdateInput(
                     BettyPrefabs.AUTO_COMPLETE,
                     model,
                     prop,
