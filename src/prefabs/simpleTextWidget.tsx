@@ -7,6 +7,7 @@ import {
   linked,
   component as makeComponent,
   property,
+  option,
 } from '@betty-blocks/component-sdk';
 import { options as formOptions } from './structures/ActionJSForm/options';
 import {
@@ -55,7 +56,18 @@ export default prefab('Simple text widget', attributes, undefined, [
           'Form',
           {
             ref: { id: '#allOptionsWidgetForm' },
-            options: { ...formOptions },
+            options: {
+              ...formOptions,
+              actionId: option('ACTION_JS', {
+                label: 'Action',
+                value: '',
+                configuration: {
+                  createAction: {
+                    template: 'update',
+                  },
+                },
+              }),
+            },
           },
           [
             TextComp(
