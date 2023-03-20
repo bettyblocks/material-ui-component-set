@@ -1,6 +1,7 @@
 import {
   buttongroup,
   color,
+  font,
   hideIf,
   icon,
   sizes,
@@ -14,7 +15,14 @@ export const categories = [
   {
     label: 'Styling',
     expanded: false,
-    members: ['textColor', 'iconColor', 'background', 'borderColor'],
+    members: [
+      'titleFont',
+      'font',
+      'textColor',
+      'iconColor',
+      'background',
+      'borderColor',
+    ],
   },
   {
     label: 'Alignment',
@@ -53,6 +61,9 @@ export const alertOptions = {
       value: false,
     },
   ),
+  font: font('Text style', { value: 'Body1' }),
+  titleFont: font('Title text style', { value: 'Body1' }),
+
   textColor: color('Text color', {
     value: ThemeColor.BLACK,
   }),

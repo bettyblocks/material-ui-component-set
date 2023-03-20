@@ -177,6 +177,22 @@
           getSpacing(outerSpacing[2]),
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
+        '& .MuiAlertTitle-root': {
+          fontFamily: ({ options: { titleFont } }) =>
+            style.getFontFamily(titleFont),
+          fontSize: ({ options: { titleFont } }) =>
+            style.getFontSize(titleFont),
+        },
+        '& .MuiAlert-message': {
+          fontFamily: ({ options: { font } }) => [
+            style.getFontFamily(font),
+            '!important',
+          ],
+          fontSize: ({ options: { font } }) => [
+            style.getFontSize(font),
+            '!important',
+          ],
+        },
       },
       hide: {
         display: 'none !important',

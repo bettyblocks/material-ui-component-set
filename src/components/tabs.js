@@ -167,6 +167,10 @@
         },
       },
       tabs: {
+        '& .MuiTab-root': {
+          fontFamily: ({ options: { font } }) => style.getFontFamily(font),
+          fontSize: ({ options: { font } }) => style.getFontSize(font),
+        },
         display: 'flex',
         height: ({ options: { height } }) => (isDev ? '100%' : height),
         width: ({ options: { width } }) => (isDev ? '100%' : width),

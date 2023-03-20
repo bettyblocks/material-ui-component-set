@@ -119,39 +119,45 @@
       SnackbarCmp
     );
   })(),
-  styles: () => () => ({
-    root: {
-      zIndex: [9, '!important'],
-      left: ({ options: { anchorOriginHorizontal } }) => {
-        const isRight = anchorOriginHorizontal === 'right';
-        const isLeft = anchorOriginHorizontal === 'left';
-        const recalculatedPosition = isLeft
-          ? 'calc(8px + 328px)'
-          : 'calc(50% + 328px / 2)';
-        return !isRight && [recalculatedPosition, '!important'];
+  styles: (B) => (theme) => {
+    const { Styling } = B;
+    const style = new Styling(theme);
+    return {
+      root: {
+        zIndex: [9, '!important'],
+        left: ({ options: { anchorOriginHorizontal } }) => {
+          const isRight = anchorOriginHorizontal === 'right';
+          const isLeft = anchorOriginHorizontal === 'left';
+          const recalculatedPosition = isLeft
+            ? 'calc(8px + 328px)'
+            : 'calc(50% + 328px / 2)';
+          return !isRight && [recalculatedPosition, '!important'];
+        },
+        '& .MuiSnackbarContent-root': {
+          fontFamily: ({ options: { font } }) => style.getFontFamily(font),
+          fontSize: ({ options: { font } }) => style.getFontSize(font),
+          transition: () => [
+            'opacity 0ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 0ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+            '!important',
+          ],
+        },
       },
-      '& .MuiSnackbarContent-root': {
-        transition: () => [
-          'opacity 0ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 0ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-          '!important',
-        ],
+      pristine: {
+        borderWidth: '0.0625rem',
+        borderColor: '#AFB5C8',
+        borderStyle: 'dashed',
+        backgroundColor: '#F0F1F5',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '2rem',
+        width: '100%',
+        fontSize: '0.75rem',
+        color: '#262A3A',
+        textTransform: 'uppercase',
+        boxSizing: 'border-box',
+        textAlign: 'center',
       },
-    },
-    pristine: {
-      borderWidth: '0.0625rem',
-      borderColor: '#AFB5C8',
-      borderStyle: 'dashed',
-      backgroundColor: '#F0F1F5',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: '2rem',
-      width: '100%',
-      fontSize: '0.75rem',
-      color: '#262A3A',
-      textTransform: 'uppercase',
-      boxSizing: 'border-box',
-      textAlign: 'center',
-    },
-  }),
+    };
+  },
 }))();

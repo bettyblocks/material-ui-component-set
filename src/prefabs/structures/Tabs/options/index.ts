@@ -11,6 +11,7 @@ import {
   variable,
   icon,
   hideIf,
+  font,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 import { Tab } from '../../Tab';
@@ -144,6 +145,7 @@ export const tabsOptions = {
     },
   }),
   appBarColor: color('Bar color', { value: ThemeColor.PRIMARY }),
+  font: font('Text style', { value: 'Body1' }),
   textColor: color('Text color', { value: ThemeColor.WHITE }),
   indicatorColor: color('Indicator color', { value: ThemeColor.SUCCESS }),
   hideTabs: toggle('Hide visual tabs', { value: false }),

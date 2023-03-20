@@ -1,12 +1,7 @@
-import { text, color, ThemeColor, option } from '@betty-blocks/component-sdk';
+import { color, ThemeColor, option, font } from '@betty-blocks/component-sdk';
 
 export const styles = {
-  titleSize: text('Title Font Size', {
-    value: '1rem',
-    configuration: {
-      as: 'UNIT',
-    },
-  }),
+  font: font('Title text style', { value: 'Body1' }),
   titleColor: color('Title color', {
     value: ThemeColor.BLACK,
   }),
@@ -29,12 +24,7 @@ export const styles = {
       ],
     },
   }),
-  subtitleSize: text('Subtitle Font Size', {
-    value: '0.875rem',
-    configuration: {
-      as: 'UNIT',
-    },
-  }),
+  subtitleFont: font('Subtitle text style', { value: 'Body1' }),
   subtitleColor: color('Subtitle color', {
     value: ThemeColor.SECONDARY,
   }),

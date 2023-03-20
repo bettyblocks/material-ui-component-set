@@ -1,6 +1,7 @@
 import {
   color,
   endpoint,
+  font,
   hideIf,
   icon,
   option,
@@ -31,6 +32,7 @@ export const breadcrumbItemOptions = {
     },
   }),
   textColor: color('Text Color', { value: ThemeColor.BLACK }),
+  font: font('Text style', { value: 'Body1' }),
   icon: icon('Icon', {
     value: 'None',
     configuration: {

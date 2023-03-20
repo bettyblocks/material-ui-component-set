@@ -112,14 +112,18 @@
             ],
           },
         '& .MuiListItemText-primary': {
-          fontSize: ({ options: { titleSize } }) => titleSize,
+          fontFamily: ({ options: { font } }) => style.getFontFamily(font),
+          fontSize: ({ options: { font } }) => style.getFontSize(font),
           fontWeight: ({ options: { titleWeight } }) => titleWeight,
         },
         '& .MuiListItemText-secondary': {
+          fontFamily: ({ options: { subtitleFont } }) =>
+            style.getFontFamily(subtitleFont),
+          fontSize: ({ options: { subtitleFont } }) =>
+            style.getFontSize(subtitleFont),
+          fontWeight: ({ options: { titleWeight } }) => titleWeight,
           color: ({ options: { subtitleColor } }) =>
             style.getColor(subtitleColor),
-          fontSize: ({ options: { subtitleSize } }) => subtitleSize,
-          fontWeight: ({ options: { subtitleWeight } }) => subtitleWeight,
         },
         '& .MuiListItemIcon-root': {
           color: ({ options: { iconColor } }) => style.getColor(iconColor),

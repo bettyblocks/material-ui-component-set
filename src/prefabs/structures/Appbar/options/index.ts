@@ -7,6 +7,7 @@ import {
   endpoint,
   showIf,
   toggle,
+  font,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -27,6 +28,7 @@ export const categories = [
       'square',
       'toolbarVariant',
       'alignItems',
+      'font',
       'backgroundColor',
       'color',
     ],
@@ -42,6 +44,7 @@ export const appBarOptions = {
   backgroundColor: color('Background color', { value: ThemeColor.PRIMARY }),
   color: color('Text color', { value: ThemeColor.WHITE }),
   height: size('Height', { value: '', configuration: { as: 'UNIT' } }),
+  font: font('Title text style', { value: 'Body1' }),
   position: option('CUSTOM', {
     label: 'Position',
     value: 'static',

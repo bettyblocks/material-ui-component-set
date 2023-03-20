@@ -74,6 +74,10 @@
         '& > *': {
           pointerEvents: 'none',
         },
+        '& $content': {
+          fontFamily: ({ options: { font } }) => style.getFontFamily(font),
+          fontSize: ({ options: { font } }) => style.getFontSize(font),
+        },
       },
       content: {
         display: 'flex',

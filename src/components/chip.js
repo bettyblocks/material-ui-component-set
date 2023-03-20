@@ -62,6 +62,16 @@
     return {
       wrapper: {
         display: 'inline-block',
+        '& $root': {
+          '& .MuiChip-label': {
+            fontSize: ({ options: { font } }) => style.getFontSize(font),
+          },
+
+          fontFamily: ({ options: { font } }) => [
+            style.getFontFamily(font),
+            '!important',
+          ],
+        },
       },
       root: {
         margin: ({ options: { margin } }) => convertSizes(margin),
@@ -69,6 +79,7 @@
           style.getColor(textColor),
           '!important',
         ],
+
         '& .MuiChip-icon': {
           color: ({ options: { textColor } }) => [
             style.getColor(textColor),

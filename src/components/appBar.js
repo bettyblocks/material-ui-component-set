@@ -81,7 +81,6 @@
         <Toolbar variant={toolbarVariant} classes={{ root: classes.toolbar }}>
           {initialLogo}
           <Typography
-            variant="h6"
             noWrap
             className={classes.title}
             component={endpoint.id && Link}
@@ -134,6 +133,13 @@
           style.getColor(backgroundColor),
           '!important',
         ],
+        '& $title': {
+          fontFamily: ({ options: { font } }) => [
+            style.getFontFamily(font),
+            '!important',
+          ],
+          fontSize: ({ options: { font } }) => style.getFontSize(font),
+        },
         color: ({ options: { color } }) => [
           style.getColor(color),
           '!important',
@@ -160,6 +166,7 @@
         marginLeft: style.getSpacing('M'),
         marginRight: style.getSpacing('M'),
       },
+
       title: {
         textDecoration: 'none',
         color: ({ options: { color } }) => [
