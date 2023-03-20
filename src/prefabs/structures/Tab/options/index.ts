@@ -18,7 +18,7 @@ export const categories = [
 
 export const tabOptions = {
   label: variable('Tab label', {
-    value: ['TAB'],
+    value: ['Tab'],
     configuration: {
       showOnDrop: true,
     },
