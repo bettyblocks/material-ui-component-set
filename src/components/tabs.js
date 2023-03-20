@@ -67,6 +67,7 @@
         scrollButtons={scrollButtons}
         classes={{
           root: layout === 'circle' ? classes.circleRoot : classes.root,
+          flexContainer: layout === 'circle' && classes.flexContainer,
           indicator: classes.indicator,
         }}
       >
@@ -287,6 +288,10 @@
       circleTabRoot: {
         padding: '6px 0 !important',
       },
+      flexContainer: {
+        width: '100%',
+        flexWrap: 'wrap',
+      },
       circleRoot: {
         minWidth: '10rem',
         position: 'relative',
@@ -303,6 +308,8 @@
           ],
           width: '1px',
           zIndex: '1',
+          display: ({ options: { alignment } }) =>
+            alignment === 'left' || alignment === 'right' ? 'inherit' : 'none',
         },
       },
       indicator: {
