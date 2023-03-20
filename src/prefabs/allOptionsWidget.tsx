@@ -342,19 +342,6 @@ export default prefab('AllOptions widget', attributes, undefined, [
                 ref: { id: '#iconPosition' },
               },
             ),
-            // actionVariableId: option('ACTION_JS_VARIABLE', {
-            //   label: 'Action input variable',
-            //   value: '',
-            //   ref: { id: '#actionVariableId' },
-            // }),
-            // actionProperty: option('ACTION_JS_PROPERTY', {
-            //   label: 'Property',
-            //   value: '',
-            //   configuration: {
-            //     condition: hideIf('actionProperty', 'EQ', ''),
-            //   },
-            //   ref: { id: '#actionProperty' },
-            // }),
             fontWeight: option('CUSTOM', {
               label: 'Font weight',
               value: '300',
