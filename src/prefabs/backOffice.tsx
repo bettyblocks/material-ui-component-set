@@ -30,6 +30,7 @@ import {
   reconfigure,
   property,
   addChild,
+  endpoint,
 } from '@betty-blocks/component-sdk';
 
 import {
@@ -72,6 +73,9 @@ import {
   SubmitButton,
   submitButtonOptions,
   Subview,
+  SubviewItem,
+  subviewItemOptions,
+  subviewOptions,
   Tab,
   tabOptions,
   Tabs,
@@ -177,7 +181,7 @@ const detailChildren = [
                 configuration: { as: 'MULTILINE' },
                 showInAddChild: true,
               }),
-              type: font('Font', { value: ['Body1'] }),
+              type: font('Text style', { value: ['Body1'] }),
               fontWeight: option('CUSTOM', {
                 label: 'Font weight',
                 value: '500',
@@ -202,7 +206,7 @@ const detailChildren = [
           Text({
             options: {
               ...textOptions,
-              type: font('Font', { value: ['Body1'] }),
+              type: font('Text style', { value: ['Body1'] }),
               content: variable('Property', {
                 value: [],
                 configuration: { as: 'MULTILINE' },
@@ -214,6 +218,36 @@ const detailChildren = [
       ),
     ],
   ),
+];
+
+const subViewChildren = [
+  SubviewItem({
+    options: {
+      ...subviewItemOptions,
+      prop: property('Property', {
+        value: '',
+        showInAddChild: true,
+        showInReconfigure: true,
+        configuration: {
+          allowRelations: true,
+          allowedKinds: [
+            'BELONGS_TO',
+            'HAS_AND_BELONGS_TO_MANY',
+            'HAS_MANY',
+            'HAS_ONE',
+          ],
+        },
+      }),
+      content: variable('Label', {
+        value: [''],
+        showInReconfigure: true,
+      }),
+      linkTo: endpoint('Page', {
+        value: '',
+        showInAddChild: true,
+      }),
+    },
+  }),
 ];
 
 const interactions: PrefabInteraction[] = [
@@ -905,7 +939,7 @@ const drawerContainer = DrawerContainer(
         },
         options: {
           ...drawerOptions,
-          visibility: toggle('Toggle visibility', {
+          visibility: toggle('Visible in builder', {
             value: false,
             configuration: {
               as: 'VISIBILITY',
@@ -1127,7 +1161,7 @@ const drawerContainer = DrawerContainer(
                                               id: '#createTabTitleContent',
                                             },
                                           }),
-                                          type: font('Font', {
+                                          type: font('Text style', {
                                             value: ['Title5'],
                                           }),
                                           textColor: color('Text color', {
@@ -1470,7 +1504,7 @@ const drawerContainer = DrawerContainer(
                                               id: '#detailsTabTitleContent',
                                             },
                                           }),
-                                          type: font('Font', {
+                                          type: font('Text style', {
                                             value: ['Title5'],
                                           }),
                                           textColor: color('Text color', {
@@ -2239,7 +2273,33 @@ const drawerContainer = DrawerContainer(
                                                   ),
                                                 },
                                               },
-                                              [Subview({}, [])],
+                                              [
+                                                Subview(
+                                                  {
+                                                    ref: {
+                                                      id: '#subView',
+                                                    },
+                                                    options: {
+                                                      ...subviewOptions,
+                                                      addChild: addChild(
+                                                        'Add Subview Item',
+                                                        {
+                                                          ref: {
+                                                            id: '#addSubViewChild',
+                                                          },
+                                                          value: {
+                                                            children:
+                                                              subViewChildren,
+                                                            addChildWizardType:
+                                                              'ChildSelector',
+                                                          },
+                                                        },
+                                                      ),
+                                                    },
+                                                  },
+                                                  [],
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
@@ -2487,7 +2547,7 @@ const drawerContainer = DrawerContainer(
                                               id: '#updateTabTitleContent',
                                             },
                                           }),
-                                          type: font('Font', {
+                                          type: font('Text style', {
                                             value: ['Title5'],
                                           }),
                                           textColor: color('Text color', {
@@ -3173,7 +3233,7 @@ const drawerContainer = DrawerContainer(
                                                             options: {
                                                               ...textOptions,
                                                               type: font(
-                                                                'Font',
+                                                                'Text style',
                                                                 {
                                                                   value: [
                                                                     'Title4',
@@ -4313,6 +4373,15 @@ const drawerContainer = DrawerContainer(
                                                       {
                                                         options: {
                                                           ...dialogOptions,
+                                                          isVisible: toggle(
+                                                            'Visible in builder',
+                                                            {
+                                                              value: false,
+                                                              configuration: {
+                                                                as: 'VISIBILITY',
+                                                              },
+                                                            },
+                                                          ),
                                                           invisible: toggle(
                                                             'Invisible',
                                                             {
@@ -4389,7 +4458,7 @@ const drawerContainer = DrawerContainer(
                                                                             },
                                                                           ),
                                                                         type: font(
-                                                                          'Font',
+                                                                          'Text style',
                                                                           {
                                                                             value:
                                                                               [
@@ -4527,7 +4596,7 @@ const drawerContainer = DrawerContainer(
                                                                             },
                                                                           ),
                                                                         type: font(
-                                                                          'Font',
+                                                                          'Text style',
                                                                           {
                                                                             value:
                                                                               [
@@ -4943,6 +5012,7 @@ const prefabStructure = [
             'updateTabTitle',
             'createTabTitle',
             'addDetailChild',
+            'addSubViewChild',
           ],
           condition: {
             type: 'SHOW',
@@ -5128,6 +5198,23 @@ const prefabStructure = [
             },
           },
         }),
+        addSubViewChild: linked({
+          label: 'Add subview item',
+          value: {
+            ref: {
+              componentId: '#subView',
+              optionId: '#addSubViewChild',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'shownTab',
+              comparator: 'EQ',
+              value: 2,
+            },
+          },
+        }),
         detailsTabTitle: linked({
           label: 'Details tab title',
           value: {
@@ -5192,6 +5279,17 @@ const prefabStructure = [
               value: '240px',
               configuration: {
                 as: 'UNIT',
+              },
+            }),
+            runTimeVisibility: option('CUSTOM', {
+              label: 'Initial State (RUNTIME)',
+              value: 'true',
+              configuration: {
+                as: 'DROPDOWN',
+                allowedInput: [
+                  { name: 'Visible', value: 'true' },
+                  { name: 'Hidden', value: 'false' },
+                ],
               },
             }),
           },
@@ -6024,7 +6122,8 @@ const beforeCreate = ({
           prop.label !== 'Id' &&
           prop.kind !== 'PDF' &&
           prop.kind !== 'MULTI_FILE' &&
-          prop.kind !== 'PASSWORD',
+          prop.kind !== 'PASSWORD' &&
+          prop.kind !== 'LOGIN_TOKEN',
       );
 
       const relationProperties = model.relationships.filter(
@@ -6324,6 +6423,14 @@ const beforeCreate = ({
           id: '#updateFormAction',
         },
       }));
+      setOption(
+        updateForm,
+        'recordVariable',
+        (opts: PrefabComponentOption) => ({
+          ...opts,
+          value: updateAction.recordInputVariable.id,
+        }),
+      );
       setOption(updateForm, 'model', (opts: PrefabComponentOption) => ({
         ...opts,
         value: modelId,
@@ -6343,7 +6450,7 @@ const beforeCreate = ({
               case PropertyKind.BELONGS_TO:
                 return inputStructure(
                   prop.label,
-                  makeBettyInput(
+                  makeBettyUpdateInput(
                     BettyPrefabs.AUTO_COMPLETE,
                     model,
                     prop,
@@ -6584,15 +6691,6 @@ const beforeCreate = ({
         },
       );
 
-      updateForm.descendants.push(
-        makeBettyUpdateInput(
-          BettyPrefabs.HIDDEN,
-          model,
-          idProperty,
-          updateAction.recordInputVariable,
-        ),
-      );
-
       // set delete action
       const deleteForm = treeSearch('#deleteForm', newPrefab.structure);
       if (!deleteForm) throw new Error('No delete form found');
@@ -6616,6 +6714,14 @@ const beforeCreate = ({
           id: '#deleteFormAction',
         },
       }));
+      setOption(
+        deleteForm,
+        'recordVariable',
+        (opts: PrefabComponentOption) => ({
+          ...opts,
+          value: result.recordInputVariable.id,
+        }),
+      );
 
       setOption(deleteForm, 'model', (opts: PrefabComponentOption) => ({
         ...opts,
@@ -6658,15 +6764,6 @@ const beforeCreate = ({
         );
       }
       deleteForm.descendants.push(deleteSubmitButton);
-
-      deleteForm.descendants.push(
-        makeBettyUpdateInput(
-          BettyPrefabs.HIDDEN,
-          model,
-          idProperty,
-          result.recordInputVariable,
-        ),
-      );
 
       const filterComp = treeSearch('#filterComp', newPrefab.structure);
       if (filterComp?.type === 'COMPONENT') {

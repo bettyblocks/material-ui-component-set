@@ -674,7 +674,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('Card and list view', attrs, beforeCreate, [
+export default makePrefab('Overview, card and list view', attrs, beforeCreate, [
   Row(
     {
       options: {
@@ -1156,7 +1156,7 @@ export default makePrefab('Card and list view', attrs, beforeCreate, [
                                               id: '#pageTitleContent',
                                             },
                                           }),
-                                          type: font('Font', {
+                                          type: font('Text style', {
                                             value: ['Title4'],
                                           }),
                                           outerSpacing: sizes('Outer space', {
@@ -1423,7 +1423,7 @@ export default makePrefab('Card and list view', attrs, beforeCreate, [
                                                         },
                                                       },
                                                     ),
-                                                    type: font('Font', {
+                                                    type: font('Text style', {
                                                       value: ['Body1'],
                                                     }),
                                                     useInnerHtml: toggle(
@@ -1666,9 +1666,14 @@ export default makePrefab('Card and list view', attrs, beforeCreate, [
                                                                 },
                                                               },
                                                             ),
-                                                            type: font('Font', {
-                                                              value: ['Body2'],
-                                                            }),
+                                                            type: font(
+                                                              'Text style',
+                                                              {
+                                                                value: [
+                                                                  'Body2',
+                                                                ],
+                                                              },
+                                                            ),
                                                             useInnerHtml:
                                                               toggle(
                                                                 'Display Rich Text',
@@ -1824,7 +1829,7 @@ export default makePrefab('Card and list view', attrs, beforeCreate, [
                                                         },
                                                       },
                                                     ),
-                                                    type: font('Font', {
+                                                    type: font('Text style', {
                                                       value: ['Body1'],
                                                     }),
                                                     useInnerHtml: toggle(
@@ -2998,7 +3003,7 @@ export default makePrefab('Card and list view', attrs, beforeCreate, [
                                                                                         },
                                                                                       ),
                                                                                     type: font(
-                                                                                      'Font',
+                                                                                      'Text style',
                                                                                       {
                                                                                         value:
                                                                                           [
@@ -3033,7 +3038,7 @@ export default makePrefab('Card and list view', attrs, beforeCreate, [
                                                                                         },
                                                                                       ),
                                                                                     type: font(
-                                                                                      'Font',
+                                                                                      'Text style',
                                                                                       {
                                                                                         value:
                                                                                           [
@@ -3435,7 +3440,7 @@ export default makePrefab('Card and list view', attrs, beforeCreate, [
                                     ],
                                   },
                                 }),
-                                type: font('Font', { value: ['Body1'] }),
+                                type: font('Text style', { value: ['Body1'] }),
                                 useInnerHtml: toggle('Display Rich Text', {
                                   value: false,
                                 }),

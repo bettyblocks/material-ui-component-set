@@ -155,7 +155,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('Header and footer', attrs, beforeCreate, [
+export default makePrefab('Basic header and footer page', attrs, beforeCreate, [
   Row(
     {
       options: {
@@ -508,7 +508,7 @@ export default makePrefab('Header and footer', attrs, beforeCreate, [
                                     ],
                                   },
                                 }),
-                                type: font('Font', { value: ['Body1'] }),
+                                type: font('Text style', { value: ['Body1'] }),
                                 styles: toggle('Styles', { value: true }),
                                 textColor: color('Text color', {
                                   value: ThemeColor.MEDIUM,

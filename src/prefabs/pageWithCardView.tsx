@@ -539,7 +539,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('Card view', attrs, beforeCreate, [
+export default makePrefab('Overview, card view', attrs, beforeCreate, [
   Row(
     {
       options: {
@@ -981,7 +981,9 @@ export default makePrefab('Card view', attrs, beforeCreate, [
                                           id: '#pageTitleContent',
                                         },
                                       }),
-                                      type: font('Font', { value: ['Title4'] }),
+                                      type: font('Text style', {
+                                        value: ['Title4'],
+                                      }),
                                       outerSpacing: sizes('Outer space', {
                                         value: ['0rem', '0rem', 'M', '0rem'],
                                       }),
@@ -1060,7 +1062,7 @@ export default makePrefab('Card view', attrs, beforeCreate, [
                                                 as: 'MULTILINE',
                                               },
                                             }),
-                                            type: font('Font', {
+                                            type: font('Text style', {
                                               value: ['Body1'],
                                             }),
                                           },
@@ -1276,7 +1278,7 @@ export default makePrefab('Card view', attrs, beforeCreate, [
                                                         },
                                                       },
                                                     ),
-                                                    type: font('Font', {
+                                                    type: font('Text style', {
                                                       value: ['Body2'],
                                                     }),
                                                   },
@@ -1450,7 +1452,7 @@ export default makePrefab('Card view', attrs, beforeCreate, [
                                     ],
                                   },
                                 }),
-                                type: font('Font', { value: ['Body1'] }),
+                                type: font('Text style', { value: ['Body1'] }),
                                 styles: toggle('Styles', { value: true }),
                                 textColor: color('Text color', {
                                   value: ThemeColor.MEDIUM,

@@ -131,7 +131,11 @@
           `var(--text-fontSize-${type.toString().toLowerCase()})`,
         fontStyle: ({ options: { type } }) =>
           `var(--text-fontStyle-${type.toString().toLowerCase()})`,
-        fontWeight: ({ options: { fontWeight } }) => fontWeight,
+        fontWeight: ({ options }) => {
+          return options.fontWeight === '[Inherit]'
+            ? style.getFontWeight(options.type)
+            : options.fontWeight;
+        },
         textTransform: ({ options: { type } }) => style.getTextTransform(type),
         letterSpacing: ({ options: { type } }) => style.getLetterSpacing(type),
         [`@media ${mediaMinWidth(600)}`]: {

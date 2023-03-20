@@ -632,7 +632,7 @@ const prefabStructure: PrefabComponent[] = [
                                                   as: 'MULTILINE',
                                                 },
                                               }),
-                                              type: font('Font', {
+                                              type: font('Text style', {
                                                 value: ['Title4'],
                                               }),
                                             },
@@ -1320,7 +1320,7 @@ const beforeCreate = ({
 };
 
 export default prefab(
-  'Login form with image',
+  'User, account login only',
   attrs,
   beforeCreate,
   prefabStructure,

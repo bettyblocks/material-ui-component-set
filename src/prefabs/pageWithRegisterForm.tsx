@@ -44,8 +44,6 @@ import {
   OpenPageButton,
   openPageButtonOptions,
   alertOptions,
-  Conditional,
-  conditionalOptions,
 } from './structures';
 import { options as formOptions } from './structures/ActionJSForm/options';
 import { Alert } from './structures/Alert/index';
@@ -110,7 +108,6 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attrs = {
-  name: 'Register form',
   icon: Icon.LoginFormIcon,
   type: 'page',
   isPublicPage: true,
@@ -589,7 +586,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('Register form', attrs, beforeCreate, [
+export default makePrefab('User, account register only', attrs, beforeCreate, [
   Row(
     {
       options: newRowOptions,
@@ -967,323 +964,6 @@ export default makePrefab('Register form', attrs, beforeCreate, [
                                         },
                                       },
                                       [
-                                        Conditional(
-                                          {
-                                            options: {
-                                              ...conditionalOptions,
-                                              visible: toggle(
-                                                'Initial visibility',
-                                                {
-                                                  value: false,
-                                                  configuration: {
-                                                    as: 'VISIBILITY',
-                                                  },
-                                                },
-                                              ),
-                                            },
-                                          },
-                                          [
-                                            BoxComponent(
-                                              {
-                                                options: {
-                                                  ...boxOptions,
-                                                  outerSpacing: sizes(
-                                                    'Outer space',
-                                                    {
-                                                      value: [
-                                                        '0rem',
-                                                        '0rem',
-                                                        'XL',
-                                                        '0rem',
-                                                      ],
-                                                    },
-                                                  ),
-                                                  backgroundColor: color(
-                                                    'Background color',
-                                                    {
-                                                      value: ThemeColor.DANGER,
-                                                    },
-                                                  ),
-                                                  borderRadius: size(
-                                                    'Border radius',
-                                                    {
-                                                      value: '5px',
-                                                    },
-                                                  ),
-                                                },
-                                              },
-                                              [
-                                                TextComponent(
-                                                  {
-                                                    options: {
-                                                      ...textOptions,
-                                                      content: variable(
-                                                        'Content',
-                                                        {
-                                                          value: [
-                                                            'Attention: This template is using next generation actions!',
-                                                          ],
-                                                          configuration: {
-                                                            as: 'MULTILINE',
-                                                          },
-                                                        },
-                                                      ),
-                                                      type: font('Font', {
-                                                        value: ['Body1'],
-                                                      }),
-                                                      outerSpacing: sizes(
-                                                        'Outer space',
-                                                        {
-                                                          value: [
-                                                            '0rem',
-                                                            '0rem',
-                                                            '0rem',
-                                                            'S',
-                                                          ],
-                                                        },
-                                                      ),
-                                                      textColor: color(
-                                                        'Text color',
-                                                        {
-                                                          value:
-                                                            ThemeColor.WHITE,
-                                                        },
-                                                      ),
-                                                      fontWeight: option(
-                                                        'CUSTOM',
-                                                        {
-                                                          label: 'Font weight',
-                                                          value: '500',
-                                                          configuration: {
-                                                            as: 'DROPDOWN',
-                                                            dataType: 'string',
-                                                            allowedInput: [
-                                                              {
-                                                                name: '100',
-                                                                value: '100',
-                                                              },
-                                                              {
-                                                                name: '200',
-                                                                value: '200',
-                                                              },
-                                                              {
-                                                                name: '300',
-                                                                value: '300',
-                                                              },
-                                                              {
-                                                                name: '400',
-                                                                value: '400',
-                                                              },
-                                                              {
-                                                                name: '500',
-                                                                value: '500',
-                                                              },
-                                                              {
-                                                                name: '600',
-                                                                value: '600',
-                                                              },
-                                                              {
-                                                                name: '700',
-                                                                value: '700',
-                                                              },
-                                                              {
-                                                                name: '800',
-                                                                value: '800',
-                                                              },
-                                                              {
-                                                                name: '900',
-                                                                value: '900',
-                                                              },
-                                                            ],
-                                                          },
-                                                        },
-                                                      ),
-                                                    },
-                                                  },
-                                                  [],
-                                                ),
-                                                TextComponent(
-                                                  {
-                                                    options: {
-                                                      ...textOptions,
-                                                      content: variable(
-                                                        'Content',
-                                                        {
-                                                          value: [
-                                                            'You need to configure the permissions of the "Form" actions in order to use this template.',
-                                                          ],
-                                                          configuration: {
-                                                            as: 'MULTILINE',
-                                                          },
-                                                        },
-                                                      ),
-                                                      type: font('Font', {
-                                                        value: ['Body1'],
-                                                      }),
-                                                      outerSpacing: sizes(
-                                                        'Outer space',
-                                                        {
-                                                          value: [
-                                                            '0rem',
-                                                            '0rem',
-                                                            '0rem',
-                                                            'S',
-                                                          ],
-                                                        },
-                                                      ),
-                                                      textColor: color(
-                                                        'Text color',
-                                                        {
-                                                          value:
-                                                            ThemeColor.WHITE,
-                                                        },
-                                                      ),
-                                                      fontWeight: option(
-                                                        'CUSTOM',
-                                                        {
-                                                          label: 'Font weight',
-                                                          value: '500',
-                                                          configuration: {
-                                                            as: 'DROPDOWN',
-                                                            dataType: 'string',
-                                                            allowedInput: [
-                                                              {
-                                                                name: '100',
-                                                                value: '100',
-                                                              },
-                                                              {
-                                                                name: '200',
-                                                                value: '200',
-                                                              },
-                                                              {
-                                                                name: '300',
-                                                                value: '300',
-                                                              },
-                                                              {
-                                                                name: '400',
-                                                                value: '400',
-                                                              },
-                                                              {
-                                                                name: '500',
-                                                                value: '500',
-                                                              },
-                                                              {
-                                                                name: '600',
-                                                                value: '600',
-                                                              },
-                                                              {
-                                                                name: '700',
-                                                                value: '700',
-                                                              },
-                                                              {
-                                                                name: '800',
-                                                                value: '800',
-                                                              },
-                                                              {
-                                                                name: '900',
-                                                                value: '900',
-                                                              },
-                                                            ],
-                                                          },
-                                                        },
-                                                      ),
-                                                    },
-                                                  },
-                                                  [],
-                                                ),
-                                                TextComponent(
-                                                  {
-                                                    options: {
-                                                      ...textOptions,
-                                                      content: variable(
-                                                        'Content',
-                                                        {
-                                                          value: [
-                                                            'This message is not visible in your app',
-                                                          ],
-                                                          configuration: {
-                                                            as: 'MULTILINE',
-                                                          },
-                                                        },
-                                                      ),
-                                                      type: font('Font', {
-                                                        value: ['Body1'],
-                                                      }),
-                                                      outerSpacing: sizes(
-                                                        'Outer space',
-                                                        {
-                                                          value: [
-                                                            '0rem',
-                                                            '0rem',
-                                                            '0rem',
-                                                            'S',
-                                                          ],
-                                                        },
-                                                      ),
-                                                      textColor: color(
-                                                        'Text color',
-                                                        {
-                                                          value:
-                                                            ThemeColor.WHITE,
-                                                        },
-                                                      ),
-                                                      fontWeight: option(
-                                                        'CUSTOM',
-                                                        {
-                                                          label: 'Font weight',
-                                                          value: '500',
-                                                          configuration: {
-                                                            as: 'DROPDOWN',
-                                                            dataType: 'string',
-                                                            allowedInput: [
-                                                              {
-                                                                name: '100',
-                                                                value: '100',
-                                                              },
-                                                              {
-                                                                name: '200',
-                                                                value: '200',
-                                                              },
-                                                              {
-                                                                name: '300',
-                                                                value: '300',
-                                                              },
-                                                              {
-                                                                name: '400',
-                                                                value: '400',
-                                                              },
-                                                              {
-                                                                name: '500',
-                                                                value: '500',
-                                                              },
-                                                              {
-                                                                name: '600',
-                                                                value: '600',
-                                                              },
-                                                              {
-                                                                name: '700',
-                                                                value: '700',
-                                                              },
-                                                              {
-                                                                name: '800',
-                                                                value: '800',
-                                                              },
-                                                              {
-                                                                name: '900',
-                                                                value: '900',
-                                                              },
-                                                            ],
-                                                          },
-                                                        },
-                                                      ),
-                                                    },
-                                                  },
-                                                  [],
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
                                         TextComponent(
                                           {
                                             ref: { id: '#titleTextPrefab' },
@@ -1296,7 +976,7 @@ export default makePrefab('Register form', attrs, beforeCreate, [
                                                   as: 'MULTILINE',
                                                 },
                                               }),
-                                              type: font('Font', {
+                                              type: font('Text style', {
                                                 value: ['Title4'],
                                               }),
                                             },

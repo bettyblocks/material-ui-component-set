@@ -55,11 +55,10 @@ const interactions = [
 ] as PrefabInteraction[];
 
 const attrs = {
-  name: 'Overview and detail view',
   icon: Icon.DataList,
   type: 'page',
   description:
-    'This is a page contains a data table with detail view, vertically oriented',
+    'This page contains a data table with detail view, vertically oriented',
   detail:
     'Display your data in a Data Table by connecting a model. The details of this data is shown on the same page via a detail view (vertically oriented). This page template also contains an App Bar on top of the page.',
   previewUrl: 'https://preview.betty.app/overview-and-detail-view',
@@ -894,7 +893,7 @@ const prefabStructure: PrefabComponent[] = [
                                                       as: 'MULTILINE',
                                                     },
                                                   }),
-                                                  type: font('Font', {
+                                                  type: font('Text style', {
                                                     value: ['Title4'],
                                                   }),
                                                 },
@@ -1345,7 +1344,7 @@ const prefabStructure: PrefabComponent[] = [
                                     ],
                                   },
                                 }),
-                                type: font('Font', { value: ['Body1'] }),
+                                type: font('Text style', { value: ['Body1'] }),
                                 useInnerHtml: toggle('Display Rich Text', {
                                   value: false,
                                 }),
@@ -1907,7 +1906,7 @@ const beforeCreate = ({
 };
 
 export default prefab(
-  'Card and List view',
+  'Overview, with inline details',
   attrs,
   beforeCreate,
   prefabStructure,

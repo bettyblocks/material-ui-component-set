@@ -54,7 +54,6 @@ import {
 import { styles } from './structures/ListItem/options/styles';
 
 const attrs = {
-  name: 'Page with homepage layout',
   icon: Icon.ContainerIcon,
   type: 'page',
   isPublicPage: false,
@@ -177,7 +176,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('Home Page', attrs, beforeCreate, [
+export default makePrefab('Homepage, inspirational', attrs, beforeCreate, [
   Row(
     {
       options: {
@@ -850,7 +849,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['Welcome to our site'],
                                       // configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Title2'] }),
+                                    type: font('Text style', {
+                                      value: ['Title2'],
+                                    }),
                                     textColor: color('Text color', {
                                       value: ThemeColor.WHITE,
                                     }),
@@ -887,7 +888,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       ],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Title5'] }),
+                                    type: font('Text style', {
+                                      value: ['Title5'],
+                                    }),
                                     outerSpacing: sizes('Outer space', {
                                       value: ['M', '0rem', 'XL', '0rem'],
                                     }),
@@ -1000,7 +1003,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['About us'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Title4'] }),
+                                    type: font('Text style', {
+                                      value: ['Title4'],
+                                    }),
                                     outerSpacing: sizes('Outer space', {
                                       value: ['0rem', '0rem', 'M', '0rem'],
                                     }),
@@ -1037,7 +1042,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       ],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Body1'] }),
+                                    type: font('Text style', {
+                                      value: ['Body1'],
+                                    }),
                                     textAlignment: option('CUSTOM', {
                                       label: 'Text Alignment',
                                       value: 'center',
@@ -1279,7 +1286,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                         ],
                                       },
                                     }),
-                                    type: font('Font', { value: ['Title4'] }),
+                                    type: font('Text style', {
+                                      value: ['Title4'],
+                                    }),
                                     fontWeight: option('CUSTOM', {
                                       label: 'Font weight',
                                       value: '300',
@@ -1708,7 +1717,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                       as: 'MULTILINE',
                                                     },
                                                   }),
-                                                  type: font('Font', {
+                                                  type: font('Text style', {
                                                     value: ['Body1'],
                                                   }),
                                                 },
@@ -2042,7 +2051,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                       as: 'MULTILINE',
                                                     },
                                                   }),
-                                                  type: font('Font', {
+                                                  type: font('Text style', {
                                                     value: ['Body1'],
                                                   }),
                                                 },
@@ -2376,7 +2385,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                       as: 'MULTILINE',
                                                     },
                                                   }),
-                                                  type: font('Font', {
+                                                  type: font('Text style', {
                                                     value: ['Body1'],
                                                   }),
                                                 },
@@ -2694,7 +2703,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['12.345'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Title5'] }),
+                                    type: font('Text style', {
+                                      value: ['Title5'],
+                                    }),
                                     outerSpacing: sizes('Outer space', {
                                       value: ['S', '0rem', '0rem', '0rem'],
                                     }),
@@ -2710,7 +2721,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['Satisfied customers'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Body1'] }),
+                                    type: font('Text style', {
+                                      value: ['Body1'],
+                                    }),
                                     textColor: color('Text color', {
                                       value: ThemeColor.DARK,
                                     }),
@@ -2917,7 +2930,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['24/7'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Title5'] }),
+                                    type: font('Text style', {
+                                      value: ['Title5'],
+                                    }),
                                     outerSpacing: sizes('Outer space', {
                                       value: ['S', '0rem', '0rem', '0rem'],
                                     }),
@@ -2933,7 +2948,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['Support'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Body1'] }),
+                                    type: font('Text style', {
+                                      value: ['Body1'],
+                                    }),
                                     textColor: color('Text color', {
                                       value: ThemeColor.DARK,
                                     }),
@@ -3140,7 +3157,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['98.765'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Title5'] }),
+                                    type: font('Text style', {
+                                      value: ['Title5'],
+                                    }),
                                     outerSpacing: sizes('Outer space', {
                                       value: ['S', '0rem', '0rem', '0rem'],
                                     }),
@@ -3156,7 +3175,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['Magical sparks'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Body1'] }),
+                                    type: font('Text style', {
+                                      value: ['Body1'],
+                                    }),
                                     textColor: color('Text color', {
                                       value: ThemeColor.DARK,
                                     }),
@@ -3363,7 +3384,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['9,1'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Title5'] }),
+                                    type: font('Text style', {
+                                      value: ['Title5'],
+                                    }),
                                     outerSpacing: sizes('Outer space', {
                                       value: ['S', '0rem', '0rem', '0rem'],
                                     }),
@@ -3379,7 +3402,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['Average rating'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Body1'] }),
+                                    type: font('Text style', {
+                                      value: ['Body1'],
+                                    }),
                                     textColor: color('Text color', {
                                       value: ThemeColor.DARK,
                                     }),
@@ -3583,7 +3608,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                         ],
                                       },
                                     }),
-                                    type: font('Font', { value: ['Title4'] }),
+                                    type: font('Text style', {
+                                      value: ['Title4'],
+                                    }),
                                     fontWeight: option('CUSTOM', {
                                       label: 'Font weight',
                                       value: '300',
@@ -4035,9 +4062,12 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                             },
                                                           },
                                                         ),
-                                                        type: font('Font', {
-                                                          value: ['Title6'],
-                                                        }),
+                                                        type: font(
+                                                          'Text style',
+                                                          {
+                                                            value: ['Title6'],
+                                                          },
+                                                        ),
                                                       },
                                                     },
                                                     [],
@@ -4057,9 +4087,12 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                             },
                                                           },
                                                         ),
-                                                        type: font('Font', {
-                                                          value: ['Body1'],
-                                                        }),
+                                                        type: font(
+                                                          'Text style',
+                                                          {
+                                                            value: ['Body1'],
+                                                          },
+                                                        ),
                                                         textColor: color(
                                                           'Text color',
                                                           {
@@ -4394,7 +4427,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                     as: 'MULTILINE',
                                                   },
                                                 }),
-                                                type: font('Font', {
+                                                type: font('Text style', {
                                                   value: ['Body1'],
                                                 }),
                                                 textColor: color('Text color', {
@@ -4690,9 +4723,12 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                             },
                                                           },
                                                         ),
-                                                        type: font('Font', {
-                                                          value: ['Title6'],
-                                                        }),
+                                                        type: font(
+                                                          'Text style',
+                                                          {
+                                                            value: ['Title6'],
+                                                          },
+                                                        ),
                                                       },
                                                     },
                                                     [],
@@ -4712,9 +4748,12 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                             },
                                                           },
                                                         ),
-                                                        type: font('Font', {
-                                                          value: ['Body1'],
-                                                        }),
+                                                        type: font(
+                                                          'Text style',
+                                                          {
+                                                            value: ['Body1'],
+                                                          },
+                                                        ),
                                                         textColor: color(
                                                           'Text color',
                                                           {
@@ -5049,7 +5088,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                     as: 'MULTILINE',
                                                   },
                                                 }),
-                                                type: font('Font', {
+                                                type: font('Text style', {
                                                   value: ['Body1'],
                                                 }),
                                                 textColor: color('Text color', {
@@ -5345,9 +5384,12 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                             },
                                                           },
                                                         ),
-                                                        type: font('Font', {
-                                                          value: ['Title6'],
-                                                        }),
+                                                        type: font(
+                                                          'Text style',
+                                                          {
+                                                            value: ['Title6'],
+                                                          },
+                                                        ),
                                                       },
                                                     },
                                                     [],
@@ -5365,9 +5407,12 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                             },
                                                           },
                                                         ),
-                                                        type: font('Font', {
-                                                          value: ['Body1'],
-                                                        }),
+                                                        type: font(
+                                                          'Text style',
+                                                          {
+                                                            value: ['Body1'],
+                                                          },
+                                                        ),
                                                         textColor: color(
                                                           'Text color',
                                                           {
@@ -5702,7 +5747,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                     as: 'MULTILINE',
                                                   },
                                                 }),
-                                                type: font('Font', {
+                                                type: font('Text style', {
                                                   value: ['Body1'],
                                                 }),
                                                 textColor: color('Text color', {
@@ -5998,9 +6043,12 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                             },
                                                           },
                                                         ),
-                                                        type: font('Font', {
-                                                          value: ['Title6'],
-                                                        }),
+                                                        type: font(
+                                                          'Text style',
+                                                          {
+                                                            value: ['Title6'],
+                                                          },
+                                                        ),
                                                       },
                                                     },
                                                     [],
@@ -6020,9 +6068,12 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                             },
                                                           },
                                                         ),
-                                                        type: font('Font', {
-                                                          value: ['Body1'],
-                                                        }),
+                                                        type: font(
+                                                          'Text style',
+                                                          {
+                                                            value: ['Body1'],
+                                                          },
+                                                        ),
                                                         textColor: color(
                                                           'Text color',
                                                           {
@@ -6357,7 +6408,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                     as: 'MULTILINE',
                                                   },
                                                 }),
-                                                type: font('Font', {
+                                                type: font('Text style', {
                                                   value: ['Body1'],
                                                 }),
                                                 textColor: color('Text color', {
@@ -6455,7 +6506,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['Are you interested?'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Title4'] }),
+                                    type: font('Text style', {
+                                      value: ['Title4'],
+                                    }),
                                     outerSpacing: sizes('Outer space', {
                                       value: ['0rem', '0rem', 'M', '0rem'],
                                     }),
@@ -6492,7 +6545,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       ],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Body1'] }),
+                                    type: font('Text style', {
+                                      value: ['Body1'],
+                                    }),
                                     outerSpacing: sizes('Outer space', {
                                       value: ['0rem', 'M', 'XL', 'M'],
                                     }),
@@ -6712,7 +6767,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['Contact information'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Title5'] }),
+                                    type: font('Text style', {
+                                      value: ['Title5'],
+                                    }),
                                     outerSpacing: sizes('Outer space', {
                                       value: ['0rem', '0rem', 'M', '0rem'],
                                     }),
@@ -6750,7 +6807,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['Company name'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Body1'] }),
+                                    type: font('Text style', {
+                                      value: ['Body1'],
+                                    }),
                                     textColor: color('Text color', {
                                       value: ThemeColor.WHITE,
                                     }),
@@ -6766,7 +6825,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['Heuvelstraat 131'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Body1'] }),
+                                    type: font('Text style', {
+                                      value: ['Body1'],
+                                    }),
                                     textColor: color('Text color', {
                                       value: ThemeColor.WHITE,
                                     }),
@@ -6782,7 +6843,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['4812 PH Breda'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Body1'] }),
+                                    type: font('Text style', {
+                                      value: ['Body1'],
+                                    }),
                                     textColor: color('Text color', {
                                       value: ThemeColor.WHITE,
                                     }),
@@ -6798,7 +6861,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['The Netherlands'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Body1'] }),
+                                    type: font('Text style', {
+                                      value: ['Body1'],
+                                    }),
                                     textColor: color('Text color', {
                                       value: ThemeColor.WHITE,
                                     }),
@@ -6814,7 +6879,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['+31 6 12345678'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Body1'] }),
+                                    type: font('Text style', {
+                                      value: ['Body1'],
+                                    }),
                                     textColor: color('Text color', {
                                       value: ThemeColor.WHITE,
                                     }),
@@ -6833,7 +6900,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['info@companyexample.com'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Body1'] }),
+                                    type: font('Text style', {
+                                      value: ['Body1'],
+                                    }),
                                     textColor: color('Text color', {
                                       value: ThemeColor.WHITE,
                                     }),
@@ -6970,7 +7039,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['Support'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Title5'] }),
+                                    type: font('Text style', {
+                                      value: ['Title5'],
+                                    }),
                                     outerSpacing: sizes('Outer space', {
                                       value: ['0rem', '0rem', 'M', '0rem'],
                                     }),
@@ -7010,7 +7081,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       ],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Body2'] }),
+                                    type: font('Text style', {
+                                      value: ['Body2'],
+                                    }),
                                     outerSpacing: sizes('Outer space', {
                                       value: ['0rem', '0rem', 'M', '0rem'],
                                     }),
@@ -7048,7 +7121,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['Customer Service'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Body2'] }),
+                                    type: font('Text style', {
+                                      value: ['Body2'],
+                                    }),
                                     outerSpacing: sizes('Outer space', {
                                       value: ['0rem', '0rem', 'M', '0rem'],
                                     }),
@@ -7086,7 +7161,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['Chat with a service employee'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Body2'] }),
+                                    type: font('Text style', {
+                                      value: ['Body2'],
+                                    }),
                                     outerSpacing: sizes('Outer space', {
                                       value: ['0rem', '0rem', 'M', '0rem'],
                                     }),
@@ -7245,7 +7322,9 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                       value: ['Social'],
                                       configuration: { as: 'MULTILINE' },
                                     }),
-                                    type: font('Font', { value: ['Title5'] }),
+                                    type: font('Text style', {
+                                      value: ['Title5'],
+                                    }),
                                     textColor: color('Text color', {
                                       value: ThemeColor.WHITE,
                                     }),
@@ -7609,7 +7688,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                 as: 'MULTILINE',
                                               },
                                             }),
-                                            type: font('Font', {
+                                            type: font('Text style', {
                                               value: ['Body2'],
                                             }),
                                             textColor: color('Text color', {
@@ -7649,7 +7728,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                 as: 'MULTILINE',
                                               },
                                             }),
-                                            type: font('Font', {
+                                            type: font('Text style', {
                                               value: ['Body2'],
                                             }),
                                             textColor: color('Text color', {
@@ -7691,7 +7770,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                 as: 'MULTILINE',
                                               },
                                             }),
-                                            type: font('Font', {
+                                            type: font('Text style', {
                                               value: ['Body2'],
                                             }),
                                             textColor: color('Text color', {
@@ -7711,7 +7790,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                 as: 'MULTILINE',
                                               },
                                             }),
-                                            type: font('Font', {
+                                            type: font('Text style', {
                                               value: ['Body2'],
                                             }),
                                             textColor: color('Text color', {
@@ -7753,7 +7832,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                 as: 'MULTILINE',
                                               },
                                             }),
-                                            type: font('Font', {
+                                            type: font('Text style', {
                                               value: ['Body2'],
                                             }),
                                             textColor: color('Text color', {
@@ -7773,7 +7852,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                 as: 'MULTILINE',
                                               },
                                             }),
-                                            type: font('Font', {
+                                            type: font('Text style', {
                                               value: ['Body2'],
                                             }),
                                             textColor: color('Text color', {
@@ -7818,7 +7897,7 @@ export default makePrefab('Home Page', attrs, beforeCreate, [
                                                 },
                                               },
                                             ),
-                                            type: font('Font', {
+                                            type: font('Text style', {
                                               value: ['Body2'],
                                             }),
                                             textColor: color('Text color', {

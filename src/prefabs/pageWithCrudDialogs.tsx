@@ -63,8 +63,6 @@ import {
   Alert,
   alertOptions,
   snackbarOptions,
-  Conditional,
-  conditionalOptions,
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
 import { PermissionType } from './types/types';
@@ -421,7 +419,7 @@ const beforeCreate = ({
       const createResult = await prepareAction(
         createTabForm.id,
         idProperty,
-        properties,
+        formProperties,
         'create',
         undefined,
         undefined,
@@ -691,7 +689,7 @@ const beforeCreate = ({
       const updateResult = await prepareAction(
         updateTabForm.id,
         idProperty,
-        properties,
+        formProperties,
         'update',
         undefined,
         undefined,
@@ -880,14 +878,7 @@ const beforeCreate = ({
           updateTabForm.descendants.push(updateFormInputPrefabs);
         },
       );
-      updateTabForm.descendants.push(
-        makeBettyUpdateInput(
-          BettyPrefabs.HIDDEN,
-          model,
-          idProperty,
-          updateResult.recordInputVariable,
-        ),
-      );
+
       newPrefab.interactions.push(
         {
           name: 'Show',
@@ -1057,13 +1048,54 @@ const beforeCreate = ({
       // eslint-disable-next-line @typescript-eslint/no-shadow
       const newDetailInput = (property: any) => {
         const boxStructure = cloneStructure('Box');
-        boxStructure.options[0].value = 'center';
-        boxStructure.options[1].value = 'center';
-        boxStructure.options[6].value = ['0rem', 'M', 'M', 'M'];
-        boxStructure.options[7].value = ['0rem', '0rem', '0rem', '0rem'];
-
-        boxStructure.options[13].value = 'Light';
-        boxStructure.options[14].value = 20;
+        setOption(
+          boxStructure,
+          'alignment',
+          (options: PrefabComponentOption) => ({
+            ...options,
+            value: 'center',
+          }),
+        );
+        setOption(
+          boxStructure,
+          'valignment',
+          (options: PrefabComponentOption) => ({
+            ...options,
+            value: 'center',
+          }),
+        );
+        setOption(
+          boxStructure,
+          'outerSpacing',
+          (options: PrefabComponentOption) => ({
+            ...options,
+            value: ['0rem', 'M', 'M', 'M'],
+          }),
+        );
+        setOption(
+          boxStructure,
+          'innerSpacing',
+          (options: PrefabComponentOption) => ({
+            ...options,
+            value: ['0rem', '0rem', '0rem', '0rem'],
+          }),
+        );
+        setOption(
+          boxStructure,
+          'backgroundColor',
+          (options: PrefabComponentOption) => ({
+            ...options,
+            value: 'light',
+          }),
+        );
+        setOption(
+          boxStructure,
+          'backgroundColorAlpha',
+          (options: PrefabComponentOption) => ({
+            ...options,
+            value: 20,
+          }),
+        );
 
         const rowColumnStructure = cloneStructure('2 Columns');
         const textStructure = cloneStructure('Text');
@@ -1351,14 +1383,6 @@ const beforeCreate = ({
       }));
 
       deleteForm.descendants.push(deleteSubmitButton);
-      deleteForm.descendants.push(
-        makeBettyUpdateInput(
-          BettyPrefabs.HIDDEN,
-          model,
-          idProperty,
-          deleteResult.recordInputVariable,
-        ),
-      );
       newPrefab.interactions.push(
         {
           name: 'Show',
@@ -1468,6 +1492,10 @@ const beforeCreate = ({
         value: updateResult.action.actionId,
         configuration: { disabled: true },
       }));
+      setOption(updateTabForm, 'recordVariable', (options: any) => ({
+        ...options,
+        value: updateResult.recordInputVariable.id,
+      }));
       setOption(updateTabForm, 'model', (options: any) => ({
         ...options,
         value: modelId,
@@ -1479,6 +1507,10 @@ const beforeCreate = ({
         ...options,
         value: deleteResult.action.actionId,
         configuration: { disabled: true },
+      }));
+      setOption(deleteForm, 'recordVariable', (options: any) => ({
+        ...options,
+        value: deleteResult.recordInputVariable.id,
       }));
       setOption(deleteForm, 'model', (options: any) => ({
         ...options,
@@ -2196,7 +2228,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                               value: false,
                                             },
                                           ),
-                                          type: font('Font', {
+                                          type: font('Text style', {
                                             value: ['Title4'],
                                           }),
                                         },
@@ -2235,284 +2267,6 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                         },
                                       },
                                       [],
-                                    ),
-                                  ],
-                                ),
-                                Conditional(
-                                  {
-                                    options: {
-                                      ...conditionalOptions,
-                                      visible: toggle('Initial visibility', {
-                                        value: false,
-                                        configuration: {
-                                          as: 'VISIBILITY',
-                                        },
-                                      }),
-                                    },
-                                  },
-                                  [
-                                    prefabBox(
-                                      {
-                                        options: {
-                                          ...boxOptions,
-                                          outerSpacing: sizes('Outer space', {
-                                            value: [
-                                              '0rem',
-                                              '0rem',
-                                              'XL',
-                                              '0rem',
-                                            ],
-                                          }),
-                                          backgroundColor: color(
-                                            'Background color',
-                                            {
-                                              value: ThemeColor.DANGER,
-                                            },
-                                          ),
-                                          borderRadius: size('Border radius', {
-                                            value: '5px',
-                                          }),
-                                        },
-                                      },
-                                      [
-                                        prefabText(
-                                          {
-                                            options: {
-                                              ...textOptions,
-                                              content: variable('Content', {
-                                                value: [
-                                                  'Attention: This template is using next generation actions!',
-                                                ],
-                                                configuration: {
-                                                  as: 'MULTILINE',
-                                                },
-                                              }),
-                                              type: font('Font', {
-                                                value: ['Body1'],
-                                              }),
-                                              outerSpacing: sizes(
-                                                'Outer space',
-                                                {
-                                                  value: [
-                                                    '0rem',
-                                                    '0rem',
-                                                    '0rem',
-                                                    'S',
-                                                  ],
-                                                },
-                                              ),
-                                              textColor: color('Text color', {
-                                                value: ThemeColor.WHITE,
-                                              }),
-                                              fontWeight: option('CUSTOM', {
-                                                label: 'Font weight',
-                                                value: '500',
-                                                configuration: {
-                                                  as: 'DROPDOWN',
-                                                  dataType: 'string',
-                                                  allowedInput: [
-                                                    {
-                                                      name: '100',
-                                                      value: '100',
-                                                    },
-                                                    {
-                                                      name: '200',
-                                                      value: '200',
-                                                    },
-                                                    {
-                                                      name: '300',
-                                                      value: '300',
-                                                    },
-                                                    {
-                                                      name: '400',
-                                                      value: '400',
-                                                    },
-                                                    {
-                                                      name: '500',
-                                                      value: '500',
-                                                    },
-                                                    {
-                                                      name: '600',
-                                                      value: '600',
-                                                    },
-                                                    {
-                                                      name: '700',
-                                                      value: '700',
-                                                    },
-                                                    {
-                                                      name: '800',
-                                                      value: '800',
-                                                    },
-                                                    {
-                                                      name: '900',
-                                                      value: '900',
-                                                    },
-                                                  ],
-                                                },
-                                              }),
-                                            },
-                                          },
-                                          [],
-                                        ),
-                                        prefabText(
-                                          {
-                                            options: {
-                                              ...textOptions,
-                                              content: variable('Content', {
-                                                value: [
-                                                  'You need to configure the permissions of the "create", "update" and "delete" actions in order to use this template.',
-                                                ],
-                                                configuration: {
-                                                  as: 'MULTILINE',
-                                                },
-                                              }),
-                                              type: font('Font', {
-                                                value: ['Body1'],
-                                              }),
-                                              outerSpacing: sizes(
-                                                'Outer space',
-                                                {
-                                                  value: [
-                                                    '0rem',
-                                                    '0rem',
-                                                    '0rem',
-                                                    'S',
-                                                  ],
-                                                },
-                                              ),
-                                              textColor: color('Text color', {
-                                                value: ThemeColor.WHITE,
-                                              }),
-                                              fontWeight: option('CUSTOM', {
-                                                label: 'Font weight',
-                                                value: '500',
-                                                configuration: {
-                                                  as: 'DROPDOWN',
-                                                  dataType: 'string',
-                                                  allowedInput: [
-                                                    {
-                                                      name: '100',
-                                                      value: '100',
-                                                    },
-                                                    {
-                                                      name: '200',
-                                                      value: '200',
-                                                    },
-                                                    {
-                                                      name: '300',
-                                                      value: '300',
-                                                    },
-                                                    {
-                                                      name: '400',
-                                                      value: '400',
-                                                    },
-                                                    {
-                                                      name: '500',
-                                                      value: '500',
-                                                    },
-                                                    {
-                                                      name: '600',
-                                                      value: '600',
-                                                    },
-                                                    {
-                                                      name: '700',
-                                                      value: '700',
-                                                    },
-                                                    {
-                                                      name: '800',
-                                                      value: '800',
-                                                    },
-                                                    {
-                                                      name: '900',
-                                                      value: '900',
-                                                    },
-                                                  ],
-                                                },
-                                              }),
-                                            },
-                                          },
-                                          [],
-                                        ),
-                                        prefabText(
-                                          {
-                                            options: {
-                                              ...textOptions,
-                                              content: variable('Content', {
-                                                value: [
-                                                  'This message is not visible in your app',
-                                                ],
-                                                configuration: {
-                                                  as: 'MULTILINE',
-                                                },
-                                              }),
-                                              type: font('Font', {
-                                                value: ['Body1'],
-                                              }),
-                                              outerSpacing: sizes(
-                                                'Outer space',
-                                                {
-                                                  value: [
-                                                    '0rem',
-                                                    '0rem',
-                                                    '0rem',
-                                                    'S',
-                                                  ],
-                                                },
-                                              ),
-                                              textColor: color('Text color', {
-                                                value: ThemeColor.WHITE,
-                                              }),
-                                              fontWeight: option('CUSTOM', {
-                                                label: 'Font weight',
-                                                value: '500',
-                                                configuration: {
-                                                  as: 'DROPDOWN',
-                                                  dataType: 'string',
-                                                  allowedInput: [
-                                                    {
-                                                      name: '100',
-                                                      value: '100',
-                                                    },
-                                                    {
-                                                      name: '200',
-                                                      value: '200',
-                                                    },
-                                                    {
-                                                      name: '300',
-                                                      value: '300',
-                                                    },
-                                                    {
-                                                      name: '400',
-                                                      value: '400',
-                                                    },
-                                                    {
-                                                      name: '500',
-                                                      value: '500',
-                                                    },
-                                                    {
-                                                      name: '600',
-                                                      value: '600',
-                                                    },
-                                                    {
-                                                      name: '700',
-                                                      value: '700',
-                                                    },
-                                                    {
-                                                      name: '800',
-                                                      value: '800',
-                                                    },
-                                                    {
-                                                      name: '900',
-                                                      value: '900',
-                                                    },
-                                                  ],
-                                                },
-                                              }),
-                                            },
-                                          },
-                                          [],
-                                        ),
-                                      ],
                                     ),
                                   ],
                                 ),
@@ -2762,7 +2516,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                     },
                                     options: {
                                       ...dialogOptions,
-                                      isVisible: toggle('Toggle visibility', {
+                                      isVisible: toggle('Visible in builder', {
                                         ref: { id: '#crudVisibility' },
                                         value: false,
                                         configuration: { as: 'VISIBILITY' },
@@ -2944,7 +2698,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                     },
                                                                   ),
                                                                 type: font(
-                                                                  'Font',
+                                                                  'Text style',
                                                                   {
                                                                     value: [
                                                                       'Title4',
@@ -3293,7 +3047,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                     },
                                                                   ),
                                                                 type: font(
-                                                                  'Font',
+                                                                  'Text style',
                                                                   {
                                                                     value: [
                                                                       'Title4',
@@ -3727,7 +3481,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                     },
                                                                   ),
                                                                 type: font(
-                                                                  'Font',
+                                                                  'Text style',
                                                                   {
                                                                     value: [
                                                                       'Title4',
@@ -4161,7 +3915,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                     },
                                                                   ),
                                                                 type: font(
-                                                                  'Font',
+                                                                  'Text style',
                                                                   {
                                                                     value: [
                                                                       'Title4',
@@ -4391,7 +4145,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                     ref: { id: '#snackbarCreated' },
                                     options: {
                                       ...snackbarOptions,
-                                      visible: toggle('Toggle visibility', {
+                                      visible: toggle('Visible in builder', {
                                         value: false,
                                         configuration: { as: 'VISIBILITY' },
                                       }),
@@ -4442,7 +4196,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                     ref: { id: '#snackbarUpdated' },
                                     options: {
                                       ...snackbarOptions,
-                                      visible: toggle('Toggle visibility', {
+                                      visible: toggle('Visible in builder', {
                                         value: false,
                                         configuration: { as: 'VISIBILITY' },
                                       }),
@@ -4493,7 +4247,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                     ref: { id: '#snackbarDeleted' },
                                     options: {
                                       ...snackbarOptions,
-                                      visible: toggle('Toggle visibility', {
+                                      visible: toggle('Visible in builder', {
                                         value: false,
                                         configuration: { as: 'VISIBILITY' },
                                       }),
@@ -4613,7 +4367,9 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                         ],
                                       },
                                     }),
-                                    type: font('Font', { value: ['Body1'] }),
+                                    type: font('Text style', {
+                                      value: ['Body1'],
+                                    }),
                                     styles: toggle('Styles', { value: true }),
                                     textColor: color('Text color', {
                                       value: ThemeColor.MEDIUM,

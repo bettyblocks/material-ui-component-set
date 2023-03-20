@@ -102,6 +102,7 @@ export const dataTableOptions = {
     value: '',
     configuration: {
       dependsOn: 'model',
+      allowFormatting: false,
     },
   }),
   sortOrder: option('CUSTOM', {
