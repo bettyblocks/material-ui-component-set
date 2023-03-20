@@ -234,30 +234,6 @@ export default prefab('AllOptions widget', attributes, undefined, [
             showOnDrop: true,
           },
         }),
-        // actionVariableId: linked({
-        //   label: 'endpoint',
-        //   value: {
-        //     ref: {
-        //       componentId: '#allOptions',
-        //       optionId: '#actionVariableId',
-        //     },
-        //   },
-        //   configuration: {
-        //     showOnDrop: true,
-        //   },
-        // }),
-        // actionProperty: linked({
-        //   label: 'endpoint',
-        //   value: {
-        //     ref: {
-        //       componentId: '#allOptions',
-        //       optionId: '#actionProperty',
-        //     },
-        //   },
-        //   configuration: {
-        //     showOnDrop: true,
-        //   },
-        // }),
         fontWeight: linked({
           label: 'fontWeight',
           value: {
