@@ -1,3 +1,10 @@
+# [2.119.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.118.0...v2.119.0) (2023-03-21)
+
+
+### Features
+
+* add propertyName config ([f10e028](https://github.com/bettyblocks/material-ui-component-set/commit/f10e028006357e440b767366de70be994d83e658))
+
 # [2.118.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.117.1...v2.118.0) (2023-03-17)
 
 
