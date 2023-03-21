@@ -25,6 +25,10 @@ export const styles = {
     ],
     { value: 'medium' },
   ),
+  floatLabel: toggle('Place label above input', {
+    value: false,
+  }),
+
   fullWidth: toggle('Full width', { value: true }),
 
   variant: buttongroup(
