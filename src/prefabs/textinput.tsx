@@ -216,7 +216,7 @@ const beforeCreate = ({
             configuration: {
               condition: {
                 type: 'SHOW',
-                option: 'actionProperty',
+                option: 'property',
                 comparator: 'EQ',
                 value: '',
               },
@@ -232,20 +232,9 @@ const beforeCreate = ({
             value: result.variable.variableId,
           }));
           if (propertyBased) {
-            setOption(newPrefab.structure[0], 'actionProperty', (option) => ({
+            setOption(newPrefab.structure[0], 'property', (option) => ({
               ...option,
-              value: {
-                modelProperty: propertyPath,
-                actionVariableId: result.variable.variableId,
-              },
-              configuration: {
-                condition: {
-                  type: 'HIDE',
-                  option: 'actionProperty',
-                  comparator: 'EQ',
-                  value: '',
-                },
-              },
+              value: propertyPath,
             }));
           }
           if (validate()) {

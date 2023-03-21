@@ -15,7 +15,9 @@ import {
   linked,
   displayLogic,
   property,
+  component,
 } from '@betty-blocks/component-sdk';
+import { options as formOptions } from './structures/ActionJSForm/options';
 import {
   Box,
   Text,
@@ -38,60 +40,39 @@ export default prefab('Text Question', attributes, undefined, [
   wrapper(
     {
       label: 'Text question',
-      optionCategories: [
-        {
-          label: 'Conditional options',
-          expanded: true,
-          members: ['displayLogic'],
-        },
-      ],
+      optionCategories: [],
       options: {
-        // question: linked({
-        //   label: 'Question',
-        //   value: {
-        //     ref: {
-        //       componentId: '#questionText',
-        //       optionId: '#textContent',
-        //     },
-        //   },
-        //   configuration: {
-        //     showOnDrop: true,
-        //   },
-        // }),
         property: linked({
           label: 'Property',
           value: {
             ref: {
-              componentId: '#TextInput',
+              componentId: '#textInput',
               optionId: '#textInputProperty',
             },
           },
           configuration: {
             showOnDrop: true,
           },
+          optionRef: {
+            id: '#textInputPropertyRef',
+          },
         }),
         placeholder: linked({
           label: 'Placeholder',
           value: {
             ref: {
-              componentId: '#TextInput',
+              componentId: '#textInput',
               optionId: '#textInputPlaceholder',
             },
-          },
-          configuration: {
-            showOnDrop: true,
           },
         }),
         required: linked({
           label: 'Required to answer',
           value: {
             ref: {
-              componentId: '#TextInput',
+              componentId: '#textInput',
               optionId: '#textInputRequired',
             },
-          },
-          configuration: {
-            showOnDrop: true,
           },
         }),
         questionSpacing: linked({
@@ -102,9 +83,6 @@ export default prefab('Text Question', attributes, undefined, [
               optionId: '#questionBoxOuterSpacing',
             },
           },
-          configuration: {
-            showOnDrop: true,
-          },
         }),
         displayLogic: linked({
           label: 'Display logic',
@@ -113,9 +91,6 @@ export default prefab('Text Question', attributes, undefined, [
               componentId: '#questionBox',
               optionId: '#questionBoxDisplayLogic',
             },
-          },
-          configuration: {
-            showOnDrop: true,
           },
         }),
       },
@@ -161,78 +136,108 @@ export default prefab('Text Question', attributes, undefined, [
           },
         },
         [
-          Text(
+          component(
+            'Form',
             {
-              ref: { id: '#questionText' },
+              ref: { id: '#textQuestionForm' },
               options: {
-                ...textOptions,
-                content: variable('Content', {
-                  ref: { id: '#textContent' },
-                  value: [],
-                  configuration: {
-                    as: 'MULTILINE',
-                  },
-                }),
-                type: font('Font', {
-                  ref: { id: '#textCompType' },
-                  value: ['Body1'],
-                }),
-                outerSpacing: sizes('Outer space', {
-                  value: ['0rem', '0rem', 'S', '0rem'],
-                }),
-                fontWeight: option('CUSTOM', {
-                  label: 'Font weight',
-                  value: '500',
-                  configuration: {
-                    as: 'DROPDOWN',
-                    dataType: 'string',
-                    allowedInput: [
-                      { name: '100', value: '100' },
-                      { name: '200', value: '200' },
-                      { name: '300', value: '300' },
-                      { name: '400', value: '400' },
-                      { name: '500', value: '500' },
-                      { name: '600', value: '600' },
-                      { name: '700', value: '700' },
-                      { name: '800', value: '800' },
-                      { name: '900', value: '900' },
-                    ],
-                  },
-                }),
-              },
-            },
-            [],
-          ),
-          TextInput(
-            {
-              label: 'Text field',
-              ref: { id: '#TextInput' },
-              options: {
-                ...textInputOptions,
-                actionProperty: property('Property', {
+                ...formOptions,
+                actionId: option('ACTION_JS', {
+                  label: 'Action',
                   value: '',
-                  ref: { id: '#textInputProperty' },
+                  configuration: {
+                    createAction: {
+                      template: 'update',
+                      permissions: 'inherit',
+                    },
+                  },
                 }),
-                hideLabel: toggle('Hide label', { value: true }),
-                placeholder: variable('Placeholder', {
-                  ref: { id: '#textInputPlaceholder' },
-                  value: [''],
-                }),
-                required: toggle('Required', {
-                  ref: { id: '#textInputRequired' },
-                }),
-                margin: buttongroup(
-                  'Margin',
-                  [
-                    ['None', 'none'],
-                    ['Dense', 'dense'],
-                    ['Normal', 'normal'],
-                  ],
-                  { value: 'none' },
-                ),
               },
             },
-            [],
+            [
+              Text(
+                {
+                  ref: { id: '#questionText' },
+                  options: {
+                    ...textOptions,
+                    content: variable('Content', {
+                      ref: { id: '#textContent' },
+                      value: [],
+                      configuration: {
+                        as: 'MULTILINE',
+                      },
+                      optionRef: {
+                        sourceId: '#textInputPropertyRef',
+                        inherit: 'label',
+                      },
+                    }),
+                    type: font('Font', {
+                      ref: { id: '#questionTextType' },
+                      value: ['Body1'],
+                    }),
+                    outerSpacing: sizes('Outer space', {
+                      value: ['0rem', '0rem', 'S', '0rem'],
+                    }),
+                    fontWeight: option('CUSTOM', {
+                      label: 'Font weight',
+                      value: '500',
+                      configuration: {
+                        as: 'DROPDOWN',
+                        dataType: 'string',
+                        allowedInput: [
+                          { name: '100', value: '100' },
+                          { name: '200', value: '200' },
+                          { name: '300', value: '300' },
+                          { name: '400', value: '400' },
+                          { name: '500', value: '500' },
+                          { name: '600', value: '600' },
+                          { name: '700', value: '700' },
+                          { name: '800', value: '800' },
+                          { name: '900', value: '900' },
+                        ],
+                      },
+                    }),
+                  },
+                },
+                [],
+              ),
+              TextInput(
+                {
+                  label: 'Text field',
+                  ref: { id: '#textInput' },
+                  options: {
+                    ...textInputOptions,
+                    actionProperty: property('Property', {
+                      value: '',
+                      ref: { id: '#textInputProperty' },
+                      configuration: {
+                        createProperty: {
+                          type: 'TEXT',
+                        },
+                      },
+                    }),
+                    hideLabel: toggle('Hide label', { value: true }),
+                    placeholder: variable('Placeholder', {
+                      ref: { id: '#textInputPlaceholder' },
+                      value: [''],
+                    }),
+                    required: toggle('Required', {
+                      ref: { id: '#textInputRequired' },
+                    }),
+                    margin: buttongroup(
+                      'Margin',
+                      [
+                        ['None', 'none'],
+                        ['Dense', 'dense'],
+                        ['Normal', 'normal'],
+                      ],
+                      { value: 'none' },
+                    ),
+                  },
+                },
+                [],
+              ),
+            ],
           ),
         ],
       ),
