@@ -31,38 +31,38 @@ const interactions: PrefabInteraction[] = [];
 
 const attributes = {
   category: 'WIDGETS',
-  icon: Icon.TextInputIcon,
+  icon: Icon.NumberInputIcon,
   interactions,
   variables: [],
 };
 
-export default prefab('Text Question', attributes, undefined, [
+export default prefab('Number Question', attributes, undefined, [
   wrapper(
     {
-      label: 'Text question',
+      label: 'Number question',
       optionCategories: [],
       options: {
         property: linked({
           label: 'Property',
           value: {
             ref: {
-              componentId: '#textInput',
-              optionId: '#textInputProperty',
+              componentId: '#numerInput',
+              optionId: '#numerInputProperty',
             },
           },
           configuration: {
             showOnDrop: true,
           },
           optionRef: {
-            id: '#textInputPropertyRef',
+            id: '#numerInputPropertyRef',
           },
         }),
         placeholder: linked({
           label: 'Placeholder',
           value: {
             ref: {
-              componentId: '#textInput',
-              optionId: '#textInputPlaceholder',
+              componentId: '#numerInput',
+              optionId: '#numerInputPlaceholder',
             },
           },
         }),
@@ -70,8 +70,8 @@ export default prefab('Text Question', attributes, undefined, [
           label: 'Required to answer',
           value: {
             ref: {
-              componentId: '#textInput',
-              optionId: '#textInputRequired',
+              componentId: '#numerInput',
+              optionId: '#numerInputRequired',
             },
           },
         }),
@@ -167,7 +167,7 @@ export default prefab('Text Question', attributes, undefined, [
                         as: 'MULTILINE',
                       },
                       optionRef: {
-                        sourceId: '#textInputPropertyRef',
+                        sourceId: '#numerInputPropertyRef',
                         inherit: 'label',
                       },
                     }),
@@ -203,27 +203,30 @@ export default prefab('Text Question', attributes, undefined, [
               ),
               TextInput(
                 {
-                  label: 'Text field',
-                  ref: { id: '#textInput' },
+                  label: 'Number field',
+                  inputLabel: 'Number',
+                  type: 'number',
+                  pattern: '^[0-9]*$',
+                  ref: { id: '#numerInput' },
                   options: {
                     ...textInputOptions,
                     property: property('Property', {
                       value: '',
-                      ref: { id: '#textInputProperty' },
+                      ref: { id: '#numerInputProperty' },
                       configuration: {
                         createProperty: {
-                          type: 'STRING',
+                          type: 'INTEGER',
                         },
-                        allowedKinds: ['TEXT', 'URL', 'IBAN', 'STRING'],
+                        allowedKinds: ['INTEGER', 'PRICE'],
                       },
                     }),
                     hideLabel: toggle('Hide label', { value: true }),
                     placeholder: variable('Placeholder', {
-                      ref: { id: '#textInputPlaceholder' },
+                      ref: { id: '#numerInputPlaceholder' },
                       value: [''],
                     }),
                     required: toggle('Required', {
-                      ref: { id: '#textInputRequired' },
+                      ref: { id: '#numerInputRequired' },
                     }),
                     margin: buttongroup(
                       'Margin',
