@@ -308,7 +308,7 @@ export default makePrefab('Questionnaire Startpage', attrs, beforeCreate, [
           },
         }),
         description: linked({
-          label: 'Description',
+          label: 'Questionnaire description',
           value: {
             ref: {
               componentId: '#descriptionText',
