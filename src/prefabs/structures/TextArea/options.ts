@@ -3,7 +3,7 @@ import {
   text,
   variable,
   toggle,
-  hideIf,
+  property,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../TextInput/options/advanced';
 import { styles } from '../TextInput/options/styles';
@@ -15,10 +15,8 @@ export const options = {
     value: '',
   }),
 
-  actionProperty: option('ACTION_JS_PROPERTY', {
-    label: 'Property',
+  property: property('Property', {
     value: '',
-    configuration: { condition: hideIf('actionProperty', 'EQ', '') },
   }),
 
   label: variable('Label', { value: [''] }),

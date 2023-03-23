@@ -1,4 +1,4 @@
-import { option, variable, property } from '@betty-blocks/component-sdk';
+import { option, property, variable } from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
 import { styles } from './styles';
 import { validation } from './validation';
@@ -9,10 +9,12 @@ export const options = {
     value: '',
   }),
 
-  property: property('property', {
+  property: property('Property', {
     value: '',
+    configuration: {
+      allowedKinds: ['TEXT', 'URL', 'IBAN', 'STRING'],
+    },
   }),
-
   label: variable('Label', { value: [''] }),
   value: variable('Value', { value: [''] }),
 

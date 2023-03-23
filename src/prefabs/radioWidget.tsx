@@ -45,14 +45,12 @@ const beforeCreate = ({
     prepareAction,
     getPageName,
     setOption,
-    BettyPrefabs,
-    makeBettyUpdateInput,
   },
 }: BeforeCreateArgs) => {
   const [primaryProperty, setPrimaryProperty] = React.useState('');
   const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
   const [validationMessage, setValidationMessage] = React.useState('');
-  const [model, setModel] = React.useState<ModelProps>();
+  const [, setModel] = React.useState<ModelProps>();
 
   const modelId = useModelIdSelector();
   const componentId = createUuid();
@@ -228,16 +226,6 @@ const beforeCreate = ({
                 },
               },
             }),
-          );
-
-          if (!model) throw new Error('No mode found.');
-          radioWidgetForm.descendants.push(
-            makeBettyUpdateInput(
-              BettyPrefabs.HIDDEN,
-              model,
-              idProperty,
-              result.recordInputVariable,
-            ),
           );
 
           const interaction = {
