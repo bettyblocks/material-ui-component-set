@@ -204,7 +204,7 @@
         onBlur={onBlurHandler}
         autoComplete={autoComplete ? 'on' : 'off'}
         classes={{
-          root: (classes.formControl, floatLabel && classes.floatLabel),
+          root: `${classes.formControl} ${floatLabel && classes.floatLabel}`,
         }}
         variant={variant}
         placeholder={placeholderText}

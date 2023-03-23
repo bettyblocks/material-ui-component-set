@@ -282,7 +282,7 @@
           value={currentValue}
           size={size}
           classes={{
-            root: (classes.formControl, floatLabel && classes.floatLabel),
+            root: `${classes.formControl} ${floatLabel && classes.floatLabel}`,
           }}
           variant={variant}
           fullWidth={fullWidth}

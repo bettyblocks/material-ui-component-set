@@ -652,7 +652,7 @@
     const MuiAutocomplete = (
       <FormControl
         classes={{
-          root: (classes.formControl, floatLabel && classes.floatLabel),
+          root: `${classes.formControl} ${floatLabel && classes.floatLabel}`,
         }}
         variant={variant}
         size={size}
@@ -734,7 +734,9 @@
                   ),
                 }}
                 classes={{
-                  root: (classes.formControl, floatLabel && classes.floatLabel),
+                  root: `${classes.formControl} ${
+                    floatLabel && classes.floatLabel
+                  }`,
                 }}
                 data-component={dataComponentAttribute}
                 disabled={disabled}
@@ -786,7 +788,9 @@
               endAdornment: <Icon name="ExpandMore" />,
             }}
             classes={{
-              root: (classes.formControl, floatLabel && classes.floatLabel),
+              root: `${classes.formControl} ${
+                floatLabel && classes.floatLabel
+              }`,
             }}
             dataComponent={dataComponentAttribute}
             disabled={disabled || !valid}
