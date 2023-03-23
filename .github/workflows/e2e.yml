@@ -1,4 +1,4 @@
-name: Commit lint check
+name: e2e tests
 
 on: workflow_dispatch
 
