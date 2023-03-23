@@ -211,7 +211,7 @@ export default prefab('Multiline question', attributes, undefined, [
                       ref: { id: '#textInputProperty' },
                       configuration: {
                         createProperty: {
-                          type: 'TEXT',
+                          type: 'STRING',
                         },
                       },
                     }),

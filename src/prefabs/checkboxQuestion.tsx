@@ -55,8 +55,8 @@ export default prefab('Checkbox question', attributes, undefined, [
           label: 'Checkbox label',
           value: {
             ref: {
-              componentId: '#CheckboxInput',
-              optionId: '#questionLabel',
+              componentId: '#questionLabel',
+              optionId: '#questionLabelContent',
             },
           },
           configuration: {
@@ -137,15 +137,29 @@ export default prefab('Checkbox question', attributes, undefined, [
             'Form',
             {
               ref: { id: '#CheckboxWidgetForm' },
-              options: { ...formOptions },
+              options: {
+                ...formOptions,
+                actionId: option('ACTION_JS', {
+                  label: 'Action',
+                  value: '',
+                  configuration: {
+                    createAction: {
+                      template: 'update',
+                      permissions: 'inherit',
+                    },
+                  },
+                }),
+              },
             },
             [
               TextPrefab(
                 {
+                  ref: { id: '#questionLabel' },
                   options: {
                     ...textOptions,
                     content: variable('Content', {
                       value: [''],
+                      ref: { id: '#questionLabelContent' },
                       configuration: {
                         as: 'MULTILINE',
                       },
