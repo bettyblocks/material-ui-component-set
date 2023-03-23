@@ -139,7 +139,7 @@
     );
   })(),
   styles: (B) => (theme) => {
-    const { Styling } = B;
+    const { mediaMinWidth, Styling } = B;
     const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
@@ -182,6 +182,24 @@
             style.getFontFamily(titleFont),
           fontSize: ({ options: { titleFont } }) =>
             style.getFontSize(titleFont),
+          [`@media ${mediaMinWidth(600)}`]: {
+            fontSize: ({ options: { titleFont } }) => [
+              style.getFontSize(titleFont, 'Portrait'),
+              '!important',
+            ],
+          },
+          [`@media ${mediaMinWidth(960)}`]: {
+            fontSize: ({ options: { titleFont } }) => [
+              style.getFontSize(titleFont, 'Landscape'),
+              '!important',
+            ],
+          },
+          [`@media ${mediaMinWidth(1280)}`]: {
+            fontSize: ({ options: { titleFont } }) => [
+              style.getFontSize(titleFont, 'Desktop'),
+              '!important',
+            ],
+          },
         },
         '& .MuiAlert-message': {
           fontFamily: ({ options: { font } }) => [
@@ -192,6 +210,24 @@
             style.getFontSize(font),
             '!important',
           ],
+          [`@media ${mediaMinWidth(600)}`]: {
+            fontSize: ({ options: { font } }) => [
+              style.getFontSize(font, 'Portrait'),
+              '!important',
+            ],
+          },
+          [`@media ${mediaMinWidth(960)}`]: {
+            fontSize: ({ options: { font } }) => [
+              style.getFontSize(font, 'Landscape'),
+              '!important',
+            ],
+          },
+          [`@media ${mediaMinWidth(1280)}`]: {
+            fontSize: ({ options: { font } }) => [
+              style.getFontSize(font, 'Desktop'),
+              '!important',
+            ],
+          },
         },
       },
       hide: {

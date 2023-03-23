@@ -55,7 +55,7 @@
     );
   })(),
   styles: (B) => (theme) => {
-    const { Styling } = B;
+    const { mediaMinWidth, Styling } = B;
     const style = new Styling(theme);
     const convertSizes = (sizes) =>
       sizes.map((size) => style.getSpacing(size)).join(' ');
@@ -71,6 +71,42 @@
             style.getFontFamily(font),
             '!important',
           ],
+          [`@media ${mediaMinWidth(600)}`]: {
+            fontSize: ({ options: { font } }) => [
+              style.getFontSize(font, 'Portrait'),
+              '!important',
+            ],
+            [`@media ${mediaMinWidth(600)}`]: {
+              fontSize: ({ options: { font } }) => [
+                style.getFontSize(font, 'Portrait'),
+                '!important',
+              ],
+            },
+            [`@media ${mediaMinWidth(960)}`]: {
+              fontSize: ({ options: { font } }) => [
+                style.getFontSize(font, 'Landscape'),
+                '!important',
+              ],
+            },
+            [`@media ${mediaMinWidth(1280)}`]: {
+              fontSize: ({ options: { font } }) => [
+                style.getFontSize(font, 'Desktop'),
+                '!important',
+              ],
+            },
+          },
+          [`@media ${mediaMinWidth(960)}`]: {
+            fontSize: ({ options: { font } }) => [
+              style.getFontSize(font, 'Landscape'),
+              '!important',
+            ],
+          },
+          [`@media ${mediaMinWidth(1280)}`]: {
+            fontSize: ({ options: { font } }) => [
+              style.getFontSize(font, 'Desktop'),
+              '!important',
+            ],
+          },
         },
       },
       root: {

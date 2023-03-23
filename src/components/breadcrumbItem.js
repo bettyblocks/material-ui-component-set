@@ -67,7 +67,7 @@
     );
   })(),
   styles: (B) => (t) => {
-    const { Styling } = B;
+    const { mediaMinWidth, Styling } = B;
     const style = new Styling(t);
     return {
       root: {
@@ -77,6 +77,24 @@
         '& $content': {
           fontFamily: ({ options: { font } }) => style.getFontFamily(font),
           fontSize: ({ options: { font } }) => style.getFontSize(font),
+          [`@media ${mediaMinWidth(600)}`]: {
+            fontSize: ({ options: { type } }) => [
+              style.getFontSize(type, 'Portrait'),
+              '!important',
+            ],
+          },
+          [`@media ${mediaMinWidth(960)}`]: {
+            fontSize: ({ options: { font } }) => [
+              style.getFontSize(font, 'Landscape'),
+              '!important',
+            ],
+          },
+          [`@media ${mediaMinWidth(1280)}`]: {
+            fontSize: ({ options: { font } }) => [
+              style.getFontSize(font, 'Desktop'),
+              '!important',
+            ],
+          },
         },
       },
       content: {

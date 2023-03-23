@@ -139,6 +139,24 @@
             '!important',
           ],
           fontSize: ({ options: { font } }) => style.getFontSize(font),
+          [`@media ${mediaMinWidth(600)}`]: {
+            fontSize: ({ options: { font } }) => [
+              style.getFontSize(font, 'Portrait'),
+              '!important',
+            ],
+          },
+          [`@media ${mediaMinWidth(960)}`]: {
+            fontSize: ({ options: { font } }) => [
+              style.getFontSize(font, 'Landscape'),
+              '!important',
+            ],
+          },
+          [`@media ${mediaMinWidth(1280)}`]: {
+            fontSize: ({ options: { font } }) => [
+              style.getFontSize(font, 'Desktop'),
+              '!important',
+            ],
+          },
         },
         color: ({ options: { color } }) => [
           style.getColor(color),
