@@ -17,19 +17,19 @@ jobs:
         run: yarn install
 
       - name: build component set
-        run: bb components build
+        run: yarn build
 
       - name: serve component set in background
-        run: bb components serve -p 5002 &
+        run: yarn start:ci
 
       - name: clone testing repo
         run: git clone https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.betty.services/code/component-set-tests.git && cd component-set-tests
 
       - name: Install packages
-        run: yarn install
+        run: npm install
 
       - name: Install Playwright
         run: npx playwright install --with-deps
 
       - name: Run tests
-        run: yarn test
+        run: npm run test
