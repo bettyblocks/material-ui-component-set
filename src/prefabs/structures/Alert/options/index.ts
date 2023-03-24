@@ -46,12 +46,6 @@ export const alertOptions = {
     value: true,
     configuration: { as: 'VISIBILITY' },
   }),
-  bodyText: variable('Body text', {
-    value: ['Type your content here...'],
-  }),
-  allowTextServerResponse: toggle('Allow to overwrite by the server response', {
-    value: false,
-  }),
   titleText: variable('Title text', {
     value: [''],
   }),
@@ -61,8 +55,15 @@ export const alertOptions = {
       value: false,
     },
   ),
-  font: font('Text style', { value: 'Body1' }),
+  bodyText: variable('Body text', {
+    value: ['Type your content here...'],
+  }),
+  allowTextServerResponse: toggle('Allow to overwrite by the server response', {
+    value: false,
+  }),
+
   titleFont: font('Title text style', { value: 'Body1' }),
+  font: font('Body text style', { value: 'Body1' }),
 
   textColor: color('Text color', {
     value: ThemeColor.BLACK,

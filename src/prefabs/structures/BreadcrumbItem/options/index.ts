@@ -12,6 +12,11 @@ import { advanced } from '../../advanced';
 
 export const categories = [
   {
+    label: 'Styling',
+    expanded: false,
+    members: ['font', 'textColor'],
+  },
+  {
     label: 'Advanced Options',
     expanded: false,
     members: ['dataComponentAttribute'],
