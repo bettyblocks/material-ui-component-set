@@ -1,4 +1,5 @@
 import {
+  buttongroup,
   hideIf,
   option,
   showIf,
@@ -31,6 +32,15 @@ export const options = {
       condition: showIf('type', 'EQ', false),
     },
   }),
+
+  locale: buttongroup(
+    'Locale',
+    [
+      ['English', 'en'],
+      ['Nederlands', 'nl'],
+    ],
+    { value: 'en' },
+  ),
 
   autoComplete: toggle('Autocomplete', { value: true }),
   disabled: toggle('Disabled', { value: false }),
