@@ -1,3 +1,25 @@
+# [2.120.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.119.1...v2.120.0) (2023-03-23)
+
+
+### Bug Fixes
+
+* fix file ([09a6a29](https://github.com/bettyblocks/material-ui-component-set/commit/09a6a299eb7f42678fa634e20f3d134bbfb1b50f))
+* fix yaml file again ([cd1d4ed](https://github.com/bettyblocks/material-ui-component-set/commit/cd1d4ed642665684d6de1e3a48625fb731d5164f))
+* rename ci file ([2adfd26](https://github.com/bettyblocks/material-ui-component-set/commit/2adfd26af3b607d049c80c6dd158397b550706df))
+
+
+### Features
+
+* add e2e to pipeline ([05ef94c](https://github.com/bettyblocks/material-ui-component-set/commit/05ef94c39c18da5ece3a4e1b98760d25d22c4f47))
+* add e2e to pipeline ([0fcdb60](https://github.com/bettyblocks/material-ui-component-set/commit/0fcdb6089ade5d1090dd36fcfc32de7cdba93567))
+
+## [2.119.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.119.0...v2.119.1) (2023-03-23)
+
+
+### Bug Fixes
+
+* typo in header and footer template ([476de06](https://github.com/bettyblocks/material-ui-component-set/commit/476de0639ae4ff43c33f2f19f24c156d51e5da05))
+
 # [2.119.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.118.0...v2.119.0) (2023-03-21)
 
 
