@@ -698,7 +698,7 @@ const prefabStructure = [
             ...drawerOptions,
             runTimeVisibility: option('CUSTOM', {
               label: 'Initial State (RUNTIME)',
-              value: 'false',
+              value: 'true',
               configuration: {
                 as: 'DROPDOWN',
                 allowedInput: [
