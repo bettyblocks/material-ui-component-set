@@ -1,6 +1,7 @@
 import {
   color,
   endpoint,
+  font,
   hideIf,
   icon,
   option,
@@ -10,6 +11,11 @@ import {
 import { advanced } from '../../advanced';
 
 export const categories = [
+  {
+    label: 'Styling',
+    expanded: false,
+    members: ['font', 'textColor'],
+  },
   {
     label: 'Advanced Options',
     expanded: false,
@@ -31,6 +37,7 @@ export const breadcrumbItemOptions = {
     },
   }),
   textColor: color('Text Color', { value: ThemeColor.BLACK }),
+  font: font('Text style', { value: 'Body1' }),
   icon: icon('Icon', {
     value: 'None',
     configuration: {

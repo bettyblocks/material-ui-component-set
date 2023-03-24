@@ -11,6 +11,7 @@ import {
   variable,
   icon,
   hideIf,
+  font,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 import { Tab } from '../../Tab';
@@ -20,11 +21,11 @@ export const categories = [
   {
     label: 'Styling',
     expanded: false,
-
     members: [
       'height',
       'width',
       'appBarColor',
+      'font',
       'textColor',
       'indicatorColor',
       'circleWidth',
@@ -251,6 +252,7 @@ export const tabsOptions = {
       condition: showIf('layout', 'EQ', 'default'),
     },
   }),
+  font: font('Text style', { value: 'Body1' }),
   hideTabs: toggle('Hide visual tabs', { value: false }),
   preLoadTabs: toggle('Preload data in all tabs', {
     value: true,

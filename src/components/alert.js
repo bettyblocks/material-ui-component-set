@@ -145,7 +145,7 @@
     );
   })(),
   styles: (B) => (theme) => {
-    const { Styling } = B;
+    const { mediaMinWidth, Styling } = B;
     const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
@@ -183,6 +183,41 @@
           getSpacing(outerSpacing[2]),
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
+        '& .MuiAlertTitle-root': {
+          fontFamily: ({ options: { titleFont } }) =>
+            style.getFontFamily(titleFont),
+          fontSize: ({ options: { titleFont } }) =>
+            style.getFontSize(titleFont),
+          [`@media ${mediaMinWidth(600)}`]: {
+            fontSize: ({ options: { titleFont } }) =>
+              style.getFontSize(titleFont, 'Portrait'),
+          },
+          [`@media ${mediaMinWidth(960)}`]: {
+            fontSize: ({ options: { titleFont } }) =>
+              style.getFontSize(titleFont, 'Landscape'),
+          },
+          [`@media ${mediaMinWidth(1280)}`]: {
+            fontSize: ({ options: { titleFont } }) =>
+              style.getFontSize(titleFont, 'Desktop'),
+          },
+        },
+        '& .MuiAlert-message': {
+          fontFamily: ({ options: { font } }) => style.getFontFamily(font),
+
+          fontSize: ({ options: { font } }) => style.getFontSize(font),
+          [`@media ${mediaMinWidth(600)}`]: {
+            fontSize: ({ options: { font } }) =>
+              style.getFontSize(font, 'Portrait'),
+          },
+          [`@media ${mediaMinWidth(960)}`]: {
+            fontSize: ({ options: { font } }) =>
+              style.getFontSize(font, 'Landscape'),
+          },
+          [`@media ${mediaMinWidth(1280)}`]: {
+            fontSize: ({ options: { font } }) =>
+              style.getFontSize(font, 'Desktop'),
+          },
+        },
       },
       hide: {
         display: 'none !important',
