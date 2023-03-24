@@ -60,11 +60,13 @@
 
         const builderLayout = () => (
           <div data-component={dataComponentAttributeText || 'DataList'}>
-            {searchProperty && searchProperty.type && searchProperty.id !== '' && (
-              <div className={classes.header}>
-                <SearchComponent label={searchPropertyLabel} />
-              </div>
-            )}
+            {searchProperty &&
+              searchProperty.type &&
+              searchProperty.id !== '' && (
+                <div className={classes.header}>
+                  <SearchComponent label={searchPropertyLabel} />
+                </div>
+              )}
             <div ref={listRef} className={isGrid ? classes.grid : undefined}>
               <div
                 className={

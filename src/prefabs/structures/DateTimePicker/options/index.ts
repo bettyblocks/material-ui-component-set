@@ -33,15 +33,6 @@ export const options = {
     },
   }),
 
-  locale: buttongroup(
-    'Locale',
-    [
-      ['English', 'en'],
-      ['Nederlands', 'nl'],
-    ],
-    { value: 'en' },
-  ),
-
   autoComplete: toggle('Autocomplete', { value: true }),
   disabled: toggle('Disabled', { value: false }),
   placeholder: variable('Placeholder', { value: [] }),
@@ -54,14 +45,12 @@ export const options = {
       condition: showIf('type', 'EQ', 'time'),
     },
   }),
-
   dateFormat: text('Format', {
     value: 'MM/dd/yyyy',
     configuration: {
       condition: showIf('type', 'EQ', 'date'),
     },
   }),
-
   datetimeFormat: text('Format', {
     value: 'MM/dd/yyyy HH:mm:ss',
     configuration: {
@@ -69,6 +58,15 @@ export const options = {
       condition: showIf('type', 'EQ', 'datetime'),
     },
   }),
+
+  locale: buttongroup(
+    'Locale',
+    [
+      ['English', 'en'],
+      ['Dutch', 'nl'],
+    ],
+    { value: 'en' },
+  ),
 
   use24HourClockTime: toggle('Use 24-hour format', { value: true }),
   disablePastDates: toggle('Disable past dates', { value: false }),
