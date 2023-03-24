@@ -238,8 +238,9 @@
     const TextFieldCmp = (
       <FormControl
         classes={{
-          root:
-            (classes.formControl, floatLabel && classes.formControlFloatLabel),
+          root: `${classes.formControl} ${
+            floatLabel && classes.formControlFloatLabel
+          }`,
         }}
         variant={variant}
         size={size}
@@ -252,7 +253,7 @@
         {labelText && !hideLabel && (
           <InputLabel
             classes={{
-              root: (classes.label, floatLabel && classes.floatLabel),
+              root: `${classes.label} ${floatLabel && classes.floatLabel}`,
             }}
           >
             {labelText}
