@@ -1,6 +1,6 @@
 import {
-  hideIf,
   option,
+  property,
   showIf,
   text,
   toggle,
@@ -16,10 +16,11 @@ export const options = {
     value: '',
   }),
 
-  actionProperty: option('ACTION_JS_PROPERTY', {
-    label: 'Property',
+  property: property('Property', {
     value: '',
-    configuration: { condition: hideIf('actionProperty', 'EQ', '') },
+    configuration: {
+      allowedKinds: ['DATE', 'DATE_TIME'],
+    },
   }),
 
   label: variable('Label', { value: [''] }),
