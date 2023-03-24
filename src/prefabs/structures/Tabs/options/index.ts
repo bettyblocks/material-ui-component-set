@@ -21,7 +21,14 @@ export const categories = [
   {
     label: 'Styling',
     expanded: false,
-    members: ['height', 'width', 'appBarColor', 'textColor', 'indicatorColor'],
+    members: [
+      'height',
+      'width',
+      'appBarColor',
+      'font',
+      'textColor',
+      'indicatorColor',
+    ],
   },
   {
     label: 'Advanced Options',

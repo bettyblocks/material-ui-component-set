@@ -105,7 +105,7 @@
     }
 
     const SnackbarCmp = (
-      <Snackbar {...snackbarOptions}>
+      <Snackbar className={classes.snackBar} {...snackbarOptions}>
         {isEmpty ? null : <div>{children}</div>}
       </Snackbar>
     );
@@ -120,10 +120,55 @@
     );
   })(),
   styles: (B) => (theme) => {
-    const { Styling } = B;
+    const { mediaMinWidth, Styling } = B;
     const style = new Styling(theme);
     return {
+      snackBar: {
+        '& .MuiSnackbarContent-root': {
+          fontFamily: ({ options: { font } }) => style.getFontFamily(font),
+
+          fontSize: ({ options: { font } }) => style.getFontSize(font),
+          [`@media ${mediaMinWidth(600)}`]: {
+            fontSize: ({ options: { font } }) =>
+              style.getFontSize(font, 'Portrait'),
+          },
+          [`@media ${mediaMinWidth(960)}`]: {
+            fontSize: ({ options: { font } }) =>
+              style.getFontSize(font, 'Landscape'),
+          },
+          [`@media ${mediaMinWidth(1280)}`]: {
+            fontSize: ({ options: { font } }) =>
+              style.getFontSize(font, 'Desktop'),
+          },
+          transition: () => [
+            'opacity 0ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 0ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+            '!important',
+          ],
+        },
+      },
       root: {
+        '& .MuiSnackbarContent-root': {
+          fontFamily: ({ options: { font } }) => style.getFontFamily(font),
+
+          fontSize: ({ options: { font } }) => style.getFontSize(font),
+          [`@media ${mediaMinWidth(600)}`]: {
+            fontSize: ({ options: { font } }) =>
+              style.getFontSize(font, 'Portrait'),
+          },
+          [`@media ${mediaMinWidth(960)}`]: {
+            fontSize: ({ options: { font } }) =>
+              style.getFontSize(font, 'Landscape'),
+          },
+          [`@media ${mediaMinWidth(1280)}`]: {
+            fontSize: ({ options: { font } }) =>
+              style.getFontSize(font, 'Desktop'),
+          },
+          transition: () => [
+            'opacity 0ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 0ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+            '!important',
+          ],
+        },
+
         zIndex: [9, '!important'],
         left: ({ options: { anchorOriginHorizontal } }) => {
           const isRight = anchorOriginHorizontal === 'right';
@@ -132,14 +177,6 @@
             ? 'calc(8px + 328px)'
             : 'calc(50% + 328px / 2)';
           return !isRight && [recalculatedPosition, '!important'];
-        },
-        '& .MuiSnackbarContent-root': {
-          fontFamily: ({ options: { font } }) => style.getFontFamily(font),
-          fontSize: ({ options: { font } }) => style.getFontSize(font),
-          transition: () => [
-            'opacity 0ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 0ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-            '!important',
-          ],
         },
       },
       pristine: {

@@ -115,22 +115,16 @@
           fontFamily: ({ options: { font } }) => style.getFontFamily(font),
           fontSize: ({ options: { font } }) => style.getFontSize(font),
           [`@media ${mediaMinWidth(600)}`]: {
-            fontSize: ({ options: { font } }) => [
+            fontSize: ({ options: { font } }) =>
               style.getFontSize(font, 'Portrait'),
-              '!important',
-            ],
           },
           [`@media ${mediaMinWidth(960)}`]: {
-            fontSize: ({ options: { font } }) => [
+            fontSize: ({ options: { font } }) =>
               style.getFontSize(font, 'Landscape'),
-              '!important',
-            ],
           },
           [`@media ${mediaMinWidth(1280)}`]: {
-            fontSize: ({ options: { font } }) => [
+            fontSize: ({ options: { font } }) =>
               style.getFontSize(font, 'Desktop'),
-              '!important',
-            ],
           },
           fontWeight: ({ options: { titleWeight } }) => titleWeight,
         },
@@ -139,6 +133,18 @@
             style.getFontFamily(subtitleFont),
           fontSize: ({ options: { subtitleFont } }) =>
             style.getFontSize(subtitleFont),
+          [`@media ${mediaMinWidth(600)}`]: {
+            fontSize: ({ options: { subtitleFont } }) =>
+              style.getFontSize(subtitleFont, 'Portrait'),
+          },
+          [`@media ${mediaMinWidth(960)}`]: {
+            fontSize: ({ options: { subtitleFont } }) =>
+              style.getFontSize(subtitleFont, 'Landscape'),
+          },
+          [`@media ${mediaMinWidth(1280)}`]: {
+            fontSize: ({ options: { subtitleFont } }) =>
+              style.getFontSize(subtitleFont, 'Desktop'),
+          },
           fontWeight: ({ options: { titleWeight } }) => titleWeight,
           color: ({ options: { subtitleColor } }) =>
             style.getColor(subtitleColor),

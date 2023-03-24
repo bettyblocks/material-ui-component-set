@@ -65,47 +65,33 @@
         '& $root': {
           '& .MuiChip-label': {
             fontSize: ({ options: { font } }) => style.getFontSize(font),
-          },
+            fontFamily: ({ options: { font } }) => style.getFontFamily(font),
 
-          fontFamily: ({ options: { font } }) => [
-            style.getFontFamily(font),
-            '!important',
-          ],
-          [`@media ${mediaMinWidth(600)}`]: {
-            fontSize: ({ options: { font } }) => [
-              style.getFontSize(font, 'Portrait'),
-              '!important',
-            ],
             [`@media ${mediaMinWidth(600)}`]: {
-              fontSize: ({ options: { font } }) => [
+              fontSize: ({ options: { font } }) =>
                 style.getFontSize(font, 'Portrait'),
-                '!important',
-              ],
+
+              [`@media ${mediaMinWidth(600)}`]: {
+                fontSize: ({ options: { font } }) =>
+                  style.getFontSize(font, 'Portrait'),
+              },
+              [`@media ${mediaMinWidth(960)}`]: {
+                fontSize: ({ options: { font } }) =>
+                  style.getFontSize(font, 'Landscape'),
+              },
+              [`@media ${mediaMinWidth(1280)}`]: {
+                fontSize: ({ options: { font } }) =>
+                  style.getFontSize(font, 'Desktop'),
+              },
             },
             [`@media ${mediaMinWidth(960)}`]: {
-              fontSize: ({ options: { font } }) => [
+              fontSize: ({ options: { font } }) =>
                 style.getFontSize(font, 'Landscape'),
-                '!important',
-              ],
             },
             [`@media ${mediaMinWidth(1280)}`]: {
-              fontSize: ({ options: { font } }) => [
+              fontSize: ({ options: { font } }) =>
                 style.getFontSize(font, 'Desktop'),
-                '!important',
-              ],
             },
-          },
-          [`@media ${mediaMinWidth(960)}`]: {
-            fontSize: ({ options: { font } }) => [
-              style.getFontSize(font, 'Landscape'),
-              '!important',
-            ],
-          },
-          [`@media ${mediaMinWidth(1280)}`]: {
-            fontSize: ({ options: { font } }) => [
-              style.getFontSize(font, 'Desktop'),
-              '!important',
-            ],
           },
         },
       },
@@ -121,6 +107,36 @@
             style.getColor(textColor),
             '!important',
           ],
+        },
+        '& .MuiChip-label': {
+          fontSize: ({ options: { font } }) => style.getFontSize(font),
+          fontFamily: ({ options: { font } }) => style.getFontFamily(font),
+
+          [`@media ${mediaMinWidth(600)}`]: {
+            fontSize: ({ options: { font } }) =>
+              style.getFontSize(font, 'Portrait'),
+
+            [`@media ${mediaMinWidth(600)}`]: {
+              fontSize: ({ options: { font } }) =>
+                style.getFontSize(font, 'Portrait'),
+            },
+            [`@media ${mediaMinWidth(960)}`]: {
+              fontSize: ({ options: { font } }) =>
+                style.getFontSize(font, 'Landscape'),
+            },
+            [`@media ${mediaMinWidth(1280)}`]: {
+              fontSize: ({ options: { font } }) =>
+                style.getFontSize(font, 'Desktop'),
+            },
+          },
+          [`@media ${mediaMinWidth(960)}`]: {
+            fontSize: ({ options: { font } }) =>
+              style.getFontSize(font, 'Landscape'),
+          },
+          [`@media ${mediaMinWidth(1280)}`]: {
+            fontSize: ({ options: { font } }) =>
+              style.getFontSize(font, 'Desktop'),
+          },
         },
       },
       chip: {

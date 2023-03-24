@@ -183,50 +183,33 @@
           fontSize: ({ options: { titleFont } }) =>
             style.getFontSize(titleFont),
           [`@media ${mediaMinWidth(600)}`]: {
-            fontSize: ({ options: { titleFont } }) => [
+            fontSize: ({ options: { titleFont } }) =>
               style.getFontSize(titleFont, 'Portrait'),
-              '!important',
-            ],
           },
           [`@media ${mediaMinWidth(960)}`]: {
-            fontSize: ({ options: { titleFont } }) => [
+            fontSize: ({ options: { titleFont } }) =>
               style.getFontSize(titleFont, 'Landscape'),
-              '!important',
-            ],
           },
           [`@media ${mediaMinWidth(1280)}`]: {
-            fontSize: ({ options: { titleFont } }) => [
+            fontSize: ({ options: { titleFont } }) =>
               style.getFontSize(titleFont, 'Desktop'),
-              '!important',
-            ],
           },
         },
         '& .MuiAlert-message': {
-          fontFamily: ({ options: { font } }) => [
-            style.getFontFamily(font),
-            '!important',
-          ],
-          fontSize: ({ options: { font } }) => [
-            style.getFontSize(font),
-            '!important',
-          ],
+          fontFamily: ({ options: { font } }) => style.getFontFamily(font),
+
+          fontSize: ({ options: { font } }) => style.getFontSize(font),
           [`@media ${mediaMinWidth(600)}`]: {
-            fontSize: ({ options: { font } }) => [
+            fontSize: ({ options: { font } }) =>
               style.getFontSize(font, 'Portrait'),
-              '!important',
-            ],
           },
           [`@media ${mediaMinWidth(960)}`]: {
-            fontSize: ({ options: { font } }) => [
+            fontSize: ({ options: { font } }) =>
               style.getFontSize(font, 'Landscape'),
-              '!important',
-            ],
           },
           [`@media ${mediaMinWidth(1280)}`]: {
-            fontSize: ({ options: { font } }) => [
+            fontSize: ({ options: { font } }) =>
               style.getFontSize(font, 'Desktop'),
-              '!important',
-            ],
           },
         },
       },

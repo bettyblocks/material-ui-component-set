@@ -6,7 +6,6 @@
   jsx: (() => {
     const { Link, useText, env, Icon } = B;
     const isDev = env === 'dev';
-    const { Typography } = window.MaterialUI.Core;
     const {
       endpoint,
       breadcrumbContent,
@@ -52,12 +51,12 @@
         {BreadcrumbChildren}
       </Link>
     ) : (
-      <Typography
+      <span
         className={classes.content}
         data-component={useText(dataComponentAttribute) || 'BreadcrumbItem'}
       >
         {BreadcrumbChildren}
-      </Typography>
+      </span>
     );
 
     return isDev ? (
@@ -78,28 +77,37 @@
           fontFamily: ({ options: { font } }) => style.getFontFamily(font),
           fontSize: ({ options: { font } }) => style.getFontSize(font),
           [`@media ${mediaMinWidth(600)}`]: {
-            fontSize: ({ options: { type } }) => [
-              style.getFontSize(type, 'Portrait'),
-              '!important',
-            ],
+            fontSize: ({ options: { font } }) =>
+              style.getFontSize(font, 'Portrait'),
           },
           [`@media ${mediaMinWidth(960)}`]: {
-            fontSize: ({ options: { font } }) => [
+            fontSize: ({ options: { font } }) =>
               style.getFontSize(font, 'Landscape'),
-              '!important',
-            ],
           },
           [`@media ${mediaMinWidth(1280)}`]: {
-            fontSize: ({ options: { font } }) => [
+            fontSize: ({ options: { font } }) =>
               style.getFontSize(font, 'Desktop'),
-              '!important',
-            ],
           },
         },
       },
       content: {
         display: 'flex',
         color: ({ options: { textColor } }) => style.getColor(textColor),
+
+        fontFamily: ({ options: { font } }) => style.getFontFamily(font),
+        fontSize: ({ options: { font } }) => style.getFontSize(font),
+        [`@media ${mediaMinWidth(600)}`]: {
+          fontSize: ({ options: { font } }) =>
+            style.getFontSize(font, 'Portrait'),
+        },
+        [`@media ${mediaMinWidth(960)}`]: {
+          fontSize: ({ options: { font } }) =>
+            style.getFontSize(font, 'Landscape'),
+        },
+        [`@media ${mediaMinWidth(1280)}`]: {
+          fontSize: ({ options: { font } }) =>
+            style.getFontSize(font, 'Desktop'),
+        },
       },
       link: {
         textDecoration: 'none',

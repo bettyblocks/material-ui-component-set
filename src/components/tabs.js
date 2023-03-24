@@ -154,7 +154,7 @@
     );
   })(),
   styles: (B) => (t) => {
-    const { env, Styling } = B;
+    const { mediaMinWidth, env, Styling } = B;
     const style = new Styling(t);
     const isDev = env === 'dev';
 
@@ -170,6 +170,18 @@
         '& .MuiTab-root': {
           fontFamily: ({ options: { font } }) => style.getFontFamily(font),
           fontSize: ({ options: { font } }) => style.getFontSize(font),
+          [`@media ${mediaMinWidth(600)}`]: {
+            fontSize: ({ options: { font } }) =>
+              style.getFontSize(font, 'Portrait'),
+          },
+          [`@media ${mediaMinWidth(960)}`]: {
+            fontSize: ({ options: { font } }) =>
+              style.getFontSize(font, 'Landscape'),
+          },
+          [`@media ${mediaMinWidth(1280)}`]: {
+            fontSize: ({ options: { font } }) =>
+              style.getFontSize(font, 'Desktop'),
+          },
         },
         display: 'flex',
         height: ({ options: { height } }) => (isDev ? '100%' : height),
