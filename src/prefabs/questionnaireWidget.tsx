@@ -278,8 +278,9 @@ const beforeCreate = ({
         '#questionnaireDataContainer',
         newPrefab.structure,
       );
-      let variableName = '';
       let idProperty = '';
+      let modelName = '';
+      let modelid = '';
       const context = pageId ? { pageId } : { partialId };
 
       if (createNewQuestionnaire) {
@@ -291,22 +292,10 @@ const beforeCreate = ({
             },
           ]);
           if (newModel.id && newModel.label) {
-            setOption(
-              questionnaireDataContainer,
-              'model',
-              (opt: PrefabComponentOption) => ({
-                ...opt,
-                value: `${newModel.id}`,
-              }),
-            );
-            setOption(primaryTab, 'label', (opt: PrefabComponentOption) => ({
-              ...opt,
-              value: [`${newModel.label}`],
-            }));
+            modelName = newModel.label;
+            modelid = newModel.id;
             idProperty =
               newModel.properties.find(({ name }) => name === 'id')?.id || '';
-            primaryTab.label = newModel.label;
-            variableName = `${camelToSnakeCase(newModel.label)}_id`;
           }
         } catch (e) {
           switch (e.message) {
@@ -327,22 +316,10 @@ const beforeCreate = ({
           return;
         }
       } else if (model && modelId) {
-        setOption(
-          questionnaireDataContainer,
-          'model',
-          (opt: PrefabComponentOption) => ({
-            ...opt,
-            value: modelId,
-          }),
-        );
-        setOption(primaryTab, 'label', (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: [model.label],
-        }));
+        modelName = model.label;
+        modelid = modelId;
         idProperty =
           model.properties.find(({ name }) => name === 'id')?.id || '';
-        primaryTab.label = model.label;
-        variableName = `${camelToSnakeCase(model.label)}_id`;
       } else {
         setValidationMessage('Selecting a model is required');
         setValidation(true);
@@ -358,13 +335,31 @@ const beforeCreate = ({
             [idProperty]: {
               eq: {
                 ref: { id: '#idVariable' },
-                name: variableName,
+                name: `${camelToSnakeCase(modelName)}_id`,
                 type: 'VARIABLE',
               },
             },
           },
         }),
       );
+      setOption(
+        questionnaireDataContainer,
+        'model',
+        (opt: PrefabComponentOption) => ({
+          ...opt,
+          value: `${modelid}`,
+        }),
+      );
+      setOption(primaryTab, 'label', (opt: PrefabComponentOption) => ({
+        ...opt,
+        value: [`${modelName}`],
+      }));
+      setOption(titleText, 'content', (opt: PrefabComponentOption) => ({
+        ...opt,
+        value: [modelName],
+        configuration: { as: 'MULTILINE' },
+      }));
+      primaryTab.label = modelName;
 
       const schemaName = 'Questionnaire object';
       const jsonSchema = {
@@ -385,19 +380,12 @@ const beforeCreate = ({
       newPrefab.variables.push({
         ...context,
         kind: 'integer',
-        name: variableName,
+        name: `${camelToSnakeCase(modelName)}_id`,
         ref: {
           id: '#idVariable',
         },
       });
 
-      if (title) {
-        setOption(titleText, 'content', (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: [title],
-          configuration: { as: 'MULTILINE' },
-        }));
-      }
       if (description) {
         setOption(descriptionText, 'content', (opt: PrefabComponentOption) => ({
           ...opt,
@@ -415,18 +403,6 @@ const beforeCreate = ({
           setOption(
             sectionTitleText,
             'content',
-            (originalOption: PrefabComponentOption) => ({
-              ...originalOption,
-              value: [sectionTitle],
-            }),
-          );
-        }
-
-        const sectionButton = treeSearch('#primaryButton', newPrefab.structure);
-        if (sectionButton.type === 'COMPONENT') {
-          setOption(
-            sectionButton,
-            'buttonText',
             (originalOption: PrefabComponentOption) => ({
               ...originalOption,
               value: [sectionTitle],
