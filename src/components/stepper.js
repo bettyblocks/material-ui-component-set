@@ -292,8 +292,6 @@
           color: ({ options: { inactiveLabelColor } }) =>
             style.getColor(inactiveLabelColor),
           '&.MuiStepLabel-active': {
-            fontFamily: ({ options: { font } }) => style.getFontFamily(font),
-            fontSize: ({ options: { font } }) => style.getFontSize(font),
             color: ({ options: { activeLabelColor } }) =>
               style.getColor(activeLabelColor),
           },
