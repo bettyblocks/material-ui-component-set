@@ -30,6 +30,7 @@ import {
   reconfigure,
   property,
   addChild,
+  endpoint,
 } from '@betty-blocks/component-sdk';
 
 import {
@@ -72,6 +73,9 @@ import {
   SubmitButton,
   submitButtonOptions,
   Subview,
+  SubviewItem,
+  subviewItemOptions,
+  subviewOptions,
   Tab,
   tabOptions,
   Tabs,
@@ -214,6 +218,36 @@ const detailChildren = [
       ),
     ],
   ),
+];
+
+const subViewChildren = [
+  SubviewItem({
+    options: {
+      ...subviewItemOptions,
+      prop: property('Property', {
+        value: '',
+        showInAddChild: true,
+        showInReconfigure: true,
+        configuration: {
+          allowRelations: true,
+          allowedKinds: [
+            'BELONGS_TO',
+            'HAS_AND_BELONGS_TO_MANY',
+            'HAS_MANY',
+            'HAS_ONE',
+          ],
+        },
+      }),
+      content: variable('Label', {
+        value: [''],
+        showInReconfigure: true,
+      }),
+      linkTo: endpoint('Page', {
+        value: '',
+        showInAddChild: true,
+      }),
+    },
+  }),
 ];
 
 const interactions: PrefabInteraction[] = [
@@ -2239,7 +2273,33 @@ const drawerContainer = DrawerContainer(
                                                   ),
                                                 },
                                               },
-                                              [Subview({}, [])],
+                                              [
+                                                Subview(
+                                                  {
+                                                    ref: {
+                                                      id: '#subView',
+                                                    },
+                                                    options: {
+                                                      ...subviewOptions,
+                                                      addChild: addChild(
+                                                        'Add Subview Item',
+                                                        {
+                                                          ref: {
+                                                            id: '#addSubViewChild',
+                                                          },
+                                                          value: {
+                                                            children:
+                                                              subViewChildren,
+                                                            addChildWizardType:
+                                                              'ChildSelector',
+                                                          },
+                                                        },
+                                                      ),
+                                                    },
+                                                  },
+                                                  [],
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
@@ -4952,6 +5012,7 @@ const prefabStructure = [
             'updateTabTitle',
             'createTabTitle',
             'addDetailChild',
+            'addSubViewChild',
           ],
           condition: {
             type: 'SHOW',
@@ -5126,6 +5187,23 @@ const prefabStructure = [
             ref: {
               componentId: '#detailColumn',
               optionId: '#addDetailViewChild',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'shownTab',
+              comparator: 'EQ',
+              value: 2,
+            },
+          },
+        }),
+        addSubViewChild: linked({
+          label: 'Add subview item',
+          value: {
+            ref: {
+              componentId: '#subView',
+              optionId: '#addSubViewChild',
             },
           },
           configuration: {
@@ -6372,7 +6450,7 @@ const beforeCreate = ({
               case PropertyKind.BELONGS_TO:
                 return inputStructure(
                   prop.label,
-                  makeBettyInput(
+                  makeBettyUpdateInput(
                     BettyPrefabs.AUTO_COMPLETE,
                     model,
                     prop,
