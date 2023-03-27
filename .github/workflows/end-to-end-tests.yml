@@ -1,0 +1,42 @@
+name: End to end tests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.11.1
+      - name: Install packages
+        run: yarn install
+
+      - name: build component set
+        run: yarn build
+
+      - name: serve component set in background
+        run: yarn start:ci
+
+      - name: clone testing repo
+        working-directory: /home/runner/work
+        run: git clone https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.betty.services/code/component-set-tests.git
+
+      - name: Authenticate with private NPM package
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
+      - name: Install packages
+        working-directory: /home/runner/work/component-set-tests
+        run: npm install
+
+      - name: Install Playwright
+        working-directory: /home/runner/work/component-set-tests
+        run: npx playwright install --with-deps
+
+      - name: Run tests
+        working-directory: /home/runner/work/component-set-tests
+        run: npm run test

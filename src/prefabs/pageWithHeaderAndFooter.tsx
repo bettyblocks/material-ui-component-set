@@ -492,7 +492,7 @@ export default makePrefab('Basic header and footer page', attrs, beforeCreate, [
                               options: {
                                 ...textOptions,
                                 content: variable('Content', {
-                                  value: ['Powered by Bettyblocks'],
+                                  value: ['Powered by Betty Blocks'],
                                   configuration: { as: 'MULTILINE' },
                                 }),
                                 textAlignment: option('CUSTOM', {
