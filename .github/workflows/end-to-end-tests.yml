@@ -17,19 +17,26 @@ jobs:
         run: yarn install
 
       - name: build component set
-        run: bb components build
+        run: yarn build
 
       - name: serve component set in background
-        run: bb components serve -p 5002 &
+        run: yarn start:ci
 
       - name: clone testing repo
-        run: git clone https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.betty.services/code/component-set-tests.git && cd component-set-tests
+        working-directory: /home/runner/work
+        run: git clone https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.betty.services/code/component-set-tests.git
+
+      - name: Authenticate with private NPM package
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Install packages
-        run: yarn install
+        working-directory: /home/runner/work/component-set-tests
+        run: npm install
 
       - name: Install Playwright
+        working-directory: /home/runner/work/component-set-tests
         run: npx playwright install --with-deps
 
       - name: Run tests
-        run: yarn test
+        working-directory: /home/runner/work/component-set-tests
+        run: npm run test
