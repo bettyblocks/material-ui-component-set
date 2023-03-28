@@ -22,6 +22,9 @@ export const styles = {
   outerSpacing: sizes('Outer space', {
     value: ['S', '0rem', 'S', '0rem'],
   }),
+  floatLabel: toggle('Place label above input', {
+    value: false,
+  }),
 
   hideLabel: toggle('Hide label'),
 
