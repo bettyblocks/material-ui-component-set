@@ -1,6 +1,6 @@
 {
   "name": "component-set",
-  "version": "2.117.1",
+  "version": "2.120.0",
   "main": "dist/templates.json",
   "license": "UNLICENSED",
   "private": false,
@@ -37,6 +37,7 @@
   },
   "scripts": {
     "start": "bb components serve -p 5002",
+    "start:ci": "bb components serve -p 5002 &",
     "start-docker": "bb components serve -p 5002 --host 0.0.0.0",
     "build": "bb components build",
     "dev": "nodemon",
