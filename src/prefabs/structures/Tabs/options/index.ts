@@ -11,6 +11,7 @@ import {
   variable,
   icon,
   hideIf,
+  font,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 import { Tab } from '../../Tab';
@@ -25,6 +26,7 @@ export const categories = [
       'height',
       'width',
       'appBarColor',
+      'font',
       'textColor',
       'indicatorColor',
       'circleWidth',
@@ -178,6 +180,7 @@ export const tabsOptions = {
       condition: showIf('layout', 'EQ', 'default'),
     },
   }),
+  font: font('Text style', { value: 'Body1' }),
   textColor: color('Text color', {
     value: ThemeColor.WHITE,
     configuration: {

@@ -8,6 +8,7 @@ import {
   text,
   sizes,
   icon,
+  font,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -15,7 +16,7 @@ export const categories = [
   {
     label: 'Styling',
     expanded: false,
-    members: ['color', 'textColor'],
+    members: ['font', 'color', 'textColor'],
   },
   {
     label: 'Spacing',
@@ -65,6 +66,7 @@ export const chipOptions = {
       ],
     },
   }),
+  font: font('Text style', { value: 'Body1' }),
   color: color('Color', {
     value: ThemeColor.PRIMARY,
   }),

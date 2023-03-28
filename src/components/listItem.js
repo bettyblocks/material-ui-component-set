@@ -94,7 +94,7 @@
     );
   })(),
   styles: (B) => (t) => {
-    const { Styling } = B;
+    const { mediaMinWidth, Styling } = B;
     const { env } = B;
     const isDev = env === 'dev';
     const style = new Styling(t);
@@ -112,14 +112,42 @@
             ],
           },
         '& .MuiListItemText-primary': {
-          fontSize: ({ options: { titleSize } }) => titleSize,
+          fontFamily: ({ options: { font } }) => style.getFontFamily(font),
+          fontSize: ({ options: { font } }) => style.getFontSize(font),
+          [`@media ${mediaMinWidth(600)}`]: {
+            fontSize: ({ options: { font } }) =>
+              style.getFontSize(font, 'Portrait'),
+          },
+          [`@media ${mediaMinWidth(960)}`]: {
+            fontSize: ({ options: { font } }) =>
+              style.getFontSize(font, 'Landscape'),
+          },
+          [`@media ${mediaMinWidth(1280)}`]: {
+            fontSize: ({ options: { font } }) =>
+              style.getFontSize(font, 'Desktop'),
+          },
           fontWeight: ({ options: { titleWeight } }) => titleWeight,
         },
         '& .MuiListItemText-secondary': {
+          fontFamily: ({ options: { subtitleFont } }) =>
+            style.getFontFamily(subtitleFont),
+          fontSize: ({ options: { subtitleFont } }) =>
+            style.getFontSize(subtitleFont),
+          [`@media ${mediaMinWidth(600)}`]: {
+            fontSize: ({ options: { subtitleFont } }) =>
+              style.getFontSize(subtitleFont, 'Portrait'),
+          },
+          [`@media ${mediaMinWidth(960)}`]: {
+            fontSize: ({ options: { subtitleFont } }) =>
+              style.getFontSize(subtitleFont, 'Landscape'),
+          },
+          [`@media ${mediaMinWidth(1280)}`]: {
+            fontSize: ({ options: { subtitleFont } }) =>
+              style.getFontSize(subtitleFont, 'Desktop'),
+          },
+          fontWeight: ({ options: { titleWeight } }) => titleWeight,
           color: ({ options: { subtitleColor } }) =>
             style.getColor(subtitleColor),
-          fontSize: ({ options: { subtitleSize } }) => subtitleSize,
-          fontWeight: ({ options: { subtitleWeight } }) => subtitleWeight,
         },
         '& .MuiListItemIcon-root': {
           color: ({ options: { iconColor } }) => style.getColor(iconColor),
