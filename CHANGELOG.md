@@ -1,3 +1,15 @@
+# [2.121.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.120.0...v2.121.0) (2023-03-28)
+
+
+### Bug Fixes
+
+* overwrite styles on floating label ([e5f1aa9](https://github.com/bettyblocks/material-ui-component-set/commit/e5f1aa9595d24d50f2f6b214516659f3e91d68ac))
+
+
+### Features
+
+* add permanent label on input components ([4fa76a2](https://github.com/bettyblocks/material-ui-component-set/commit/4fa76a25ed06a171eb2a4ea1d2d61e33d4f7c2c9))
+
 # [2.120.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.119.1...v2.120.0) (2023-03-23)
 
 
