@@ -179,6 +179,7 @@ export const tabsOptions = {
       condition: showIf('layout', 'EQ', 'default'),
     },
   }),
+  font: font('Text style', { value: 'Body1' }),
   textColor: color('Text color', {
     value: ThemeColor.WHITE,
     configuration: {
@@ -252,7 +253,6 @@ export const tabsOptions = {
       condition: showIf('layout', 'EQ', 'default'),
     },
   }),
-  font: font('Text style', { value: 'Body1' }),
   hideTabs: toggle('Hide visual tabs', { value: false }),
   preLoadTabs: toggle('Preload data in all tabs', {
     value: true,
