@@ -1,3 +1,15 @@
+# [2.123.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.122.0...v2.123.0) (2023-03-28)
+
+
+### Bug Fixes
+
+* set local option in correct order and remove old datepicker ([23d500f](https://github.com/bettyblocks/material-ui-component-set/commit/23d500f0c1e40a19b2f60f09deea56c22f7b98e5))
+
+
+### Features
+
+* add locale option and fix prettier datalist ([8ab52fc](https://github.com/bettyblocks/material-ui-component-set/commit/8ab52fc9a141a68eebaeec779c57e96071f6e153))
+
 # [2.122.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.121.0...v2.122.0) (2023-03-28)
 
 
