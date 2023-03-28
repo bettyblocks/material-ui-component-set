@@ -32,6 +32,7 @@
       label,
       locale,
       dataComponentAttribute = ['DateTimePicker'],
+      floatLabel,
     } = options;
     const { env, useText, Icon } = B;
     const {
@@ -202,7 +203,9 @@
         size={size}
         onBlur={onBlurHandler}
         autoComplete={autoComplete ? 'on' : 'off'}
-        classes={{ root: classes.formControl }}
+        classes={{
+          root: `${classes.formControl} ${floatLabel && classes.floatLabel}`,
+        }}
         variant={variant}
         placeholder={placeholderText}
         fullWidth={fullWidth}
@@ -299,6 +302,20 @@
             style.getColor(backgroundColorPopup),
             '!important',
           ],
+        },
+      },
+      floatLabel: {
+        '& > label': {
+          position: 'static !important',
+          transform: 'none !important',
+          marginBottom: '8px !important',
+        },
+        '& .MuiInputBase-root': {
+          '& > fieldset': {
+            '& > legend': {
+              maxWidth: '0px !important',
+            },
+          },
         },
       },
       formControl: {
