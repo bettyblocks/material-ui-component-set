@@ -1,3 +1,19 @@
+# [2.122.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.121.0...v2.122.0) (2023-03-28)
+
+
+### Bug Fixes
+
+* changed default values ([e2a5af9](https://github.com/bettyblocks/material-ui-component-set/commit/e2a5af9fd661de32eb6525e2c76a67e63b64ace0))
+* fix styling bug ([ace1dc0](https://github.com/bettyblocks/material-ui-component-set/commit/ace1dc0696189afb9e3a0f4e828d34c6aee00426))
+* fixed css bugs ([660213f](https://github.com/bettyblocks/material-ui-component-set/commit/660213fd50427a58dbb5ca73d431c02992c80935))
+* fixed css bugs ([e39d573](https://github.com/bettyblocks/material-ui-component-set/commit/e39d573f55a9244adac3176021249e07867a6e3a))
+* overflow when many tabs ([302ee27](https://github.com/bettyblocks/material-ui-component-set/commit/302ee27de97fde58d764462e4a57568a36fa7cb0))
+
+
+### Features
+
+* add new variant to tabs ([cddd1fb](https://github.com/bettyblocks/material-ui-component-set/commit/cddd1fb852eac894ada531ab5c6eadc0009fe4cf))
+
 # [2.121.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.120.0...v2.121.0) (2023-03-28)
 
 
