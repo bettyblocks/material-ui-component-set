@@ -55,6 +55,7 @@
       validationValueMissing = [''],
       value: valueRaw,
       variant,
+      floatLabel,
     } = options;
     const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
 
@@ -650,7 +651,9 @@
 
     const MuiAutocomplete = (
       <FormControl
-        classes={{ root: classes.formControl }}
+        classes={{
+          root: `${classes.formControl} ${floatLabel && classes.floatLabel}`,
+        }}
         variant={variant}
         size={size}
         fullWidth={fullWidth}
@@ -730,7 +733,11 @@
                     </>
                   ),
                 }}
-                classes={{ root: classes.formControl }}
+                classes={{
+                  root: `${classes.formControl} ${
+                    floatLabel && classes.floatLabel
+                  }`,
+                }}
                 data-component={dataComponentAttribute}
                 disabled={disabled}
                 fullWidth={fullWidth}
@@ -780,7 +787,11 @@
               },
               endAdornment: <Icon name="ExpandMore" />,
             }}
-            classes={{ root: classes.formControl }}
+            classes={{
+              root: `${classes.formControl} ${
+                floatLabel && classes.floatLabel
+              }`,
+            }}
             dataComponent={dataComponentAttribute}
             disabled={disabled || !valid}
             error={errorState}
@@ -825,6 +836,20 @@
           pointerEvents: 'none',
         },
         width: ({ options: { fullWidth } }) => (fullWidth ? '100%' : 'auto'),
+      },
+      floatLabel: {
+        '& > label': {
+          position: 'static !important',
+          transform: 'none !important',
+          marginBottom: '8px !important',
+        },
+        '& .MuiInputBase-root': {
+          '& > fieldset': {
+            '& > legend': {
+              maxWidth: '0px !important',
+            },
+          },
+        },
       },
       formControl: {
         '& > label': {

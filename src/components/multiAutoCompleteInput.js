@@ -64,6 +64,7 @@
       validationValueMissing = [''],
       value: valueRaw,
       variant,
+      floatLabel,
     } = options;
     const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
     /*
@@ -631,7 +632,11 @@
                 ),
               }),
             }}
-            classes={{ root: classes.formControl }}
+            classes={{
+              root: `${classes.formControl} ${
+                floatLabel && classes.floatLabel
+              }`,
+            }}
             dataComponent={dataComponentAttribute}
             disabled={disabled || !valid}
             error={showError}
@@ -748,7 +753,9 @@
 
     const MuiAutocomplete = (
       <FormControl
-        classes={{ root: classes.formControl }}
+        classes={{
+          root: `${classes.formControl} ${floatLabel && classes.floatLabel}`,
+        }}
         variant={variant}
         size={size}
         fullWidth={fullWidth}
@@ -849,7 +856,11 @@
                     </>
                   ),
                 }}
-                classes={{ root: classes.formControl }}
+                classes={{
+                  root: `${classes.formControl} ${
+                    floatLabel && classes.floatLabel
+                  }`,
+                }}
                 data-component={dataComponentAttribute}
                 disabled={disabled}
                 error={errorState}
@@ -929,6 +940,20 @@
             getOpacColor(style.getColor(checkboxColor), 0.04),
             '!important',
           ],
+        },
+      },
+      floatLabel: {
+        '& > label': {
+          position: 'static !important',
+          transform: 'none !important',
+          marginBottom: '8px !important',
+        },
+        '& .MuiInputBase-root': {
+          '& > fieldset': {
+            '& > legend': {
+              maxWidth: '0px !important',
+            },
+          },
         },
       },
       formControl: {

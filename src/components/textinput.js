@@ -17,6 +17,7 @@
       type,
       size,
       fullWidth,
+      floatLabel,
       margin,
       helperText = [''],
       adornment,
@@ -235,7 +236,11 @@
 
     const TextFieldCmp = (
       <FormControl
-        classes={{ root: classes.formControl }}
+        classes={{
+          root: `${classes.formControl} ${
+            floatLabel && classes.formControlFloatLabel
+          }`,
+        }}
         variant={variant}
         size={size}
         fullWidth={fullWidth}
@@ -245,7 +250,13 @@
         error={errorState}
       >
         {labelText && !hideLabel && (
-          <InputLabel classes={{ root: classes.label }}>{labelText}</InputLabel>
+          <InputLabel
+            classes={{
+              root: `${classes.label} ${floatLabel && classes.floatLabel}`,
+            }}
+          >
+            {labelText}
+          </InputLabel>
         )}
         <InputCmp
           name={name}
@@ -342,6 +353,11 @@
           opacity: '0.7',
         },
       },
+      floatLabel: {
+        position: 'static !important',
+        transform: 'none !important',
+        marginBottom: '8px !important',
+      },
       helper: {
         color: ({ options: { helperColor } }) => [
           style.getColor(helperColor),
@@ -352,6 +368,15 @@
             style.getColor(errorColor),
             '!important',
           ],
+        },
+      },
+      formControlFloatLabel: {
+        '& .MuiInputBase-root': {
+          '& > fieldset': {
+            '& > legend': {
+              maxWidth: '0px !important',
+            },
+          },
         },
       },
       formControl: {
