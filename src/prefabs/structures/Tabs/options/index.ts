@@ -11,6 +11,7 @@ import {
   variable,
   icon,
   hideIf,
+  font,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 import { Tab } from '../../Tab';
@@ -20,12 +21,30 @@ export const categories = [
   {
     label: 'Styling',
     expanded: false,
-    members: ['height', 'width', 'appBarColor', 'textColor', 'indicatorColor'],
+
+    members: [
+      'height',
+      'width',
+      'appBarColor',
+      'font',
+      'textColor',
+      'indicatorColor',
+      'circleWidth',
+      'circleColor',
+      'circleTextColor',
+      'circleLabelColor',
+      'circleBorderColor',
+      'inactiveCircleColor',
+      'inactiveCircleTextColor',
+      'inactiveCircleLabelColor',
+      'inactiveCircleBorderColor',
+      'connectorColor',
+    ],
   },
   {
     label: 'Advanced Options',
     expanded: false,
-    members: ['preLoadTabs', 'dataComponentAttribute'],
+    members: ['preLoadTabs', 'disableMenuClick', 'dataComponentAttribute'],
   },
 ];
 
@@ -95,6 +114,18 @@ export const tabsOptions = {
       as: 'UNIT',
     },
   }),
+  layout: option('CUSTOM', {
+    label: 'Layout',
+    value: 'default',
+    configuration: {
+      as: 'BUTTONGROUP',
+      dataType: 'string',
+      allowedInput: [
+        { name: 'Default', value: 'default' },
+        { name: 'Circle', value: 'circle' },
+      ],
+    },
+  }),
   alignment: option('CUSTOM', {
     value: 'top',
     label: 'Alignment',
@@ -143,13 +174,95 @@ export const tabsOptions = {
       condition: showIf('orientation', 'EQ', 'horizontal'),
     },
   }),
-  appBarColor: color('Bar color', { value: ThemeColor.PRIMARY }),
-  textColor: color('Text color', { value: ThemeColor.WHITE }),
-  indicatorColor: color('Indicator color', { value: ThemeColor.SUCCESS }),
+  appBarColor: color('Bar color', {
+    value: ThemeColor.PRIMARY,
+    configuration: {
+      condition: showIf('layout', 'EQ', 'default'),
+    },
+  }),
+  font: font('Text style', { value: 'Body1' }),
+  textColor: color('Text color', {
+    value: ThemeColor.WHITE,
+    configuration: {
+      condition: showIf('layout', 'EQ', 'default'),
+    },
+  }),
+  circleWidth: size('Circle width', {
+    value: '33px',
+    configuration: {
+      as: 'UNIT',
+      condition: showIf('layout', 'EQ', 'circle'),
+    },
+  }),
+  circleColor: color('Active circle color', {
+    value: ThemeColor.PRIMARY,
+    configuration: {
+      condition: showIf('layout', 'EQ', 'circle'),
+    },
+  }),
+  circleTextColor: color('Active circle text color', {
+    value: ThemeColor.WHITE,
+    configuration: {
+      condition: showIf('layout', 'EQ', 'circle'),
+    },
+  }),
+  circleLabelColor: color('Active circle label color', {
+    value: ThemeColor.PRIMARY,
+    configuration: {
+      condition: showIf('layout', 'EQ', 'circle'),
+    },
+  }),
+  circleBorderColor: color('Active circle border color', {
+    value: ThemeColor.TRANSPARENT,
+    configuration: {
+      condition: showIf('layout', 'EQ', 'circle'),
+    },
+  }),
+  inactiveCircleColor: color('Inactive circle color', {
+    value: ThemeColor.WHITE,
+    configuration: {
+      condition: showIf('layout', 'EQ', 'circle'),
+    },
+  }),
+  inactiveCircleTextColor: color('Inactive circle text color', {
+    value: ThemeColor.BLACK,
+    configuration: {
+      condition: showIf('layout', 'EQ', 'circle'),
+    },
+  }),
+  inactiveCircleLabelColor: color('Inactive circle label color', {
+    value: ThemeColor.BLACK,
+    configuration: {
+      condition: showIf('layout', 'EQ', 'circle'),
+    },
+  }),
+  inactiveCircleBorderColor: color('Inactive circle border color', {
+    value: ThemeColor.ACCENT_1,
+    configuration: {
+      condition: showIf('layout', 'EQ', 'circle'),
+    },
+  }),
+  connectorColor: color('Connector color', {
+    value: ThemeColor.ACCENT_1,
+    configuration: {
+      condition: showIf('layout', 'EQ', 'circle'),
+    },
+  }),
+  indicatorColor: color('Indicator color', {
+    value: ThemeColor.SUCCESS,
+    configuration: {
+      condition: showIf('layout', 'EQ', 'default'),
+    },
+  }),
   hideTabs: toggle('Hide visual tabs', { value: false }),
   preLoadTabs: toggle('Preload data in all tabs', {
     value: true,
   }),
-
+  disableMenuClick: toggle('Disable navigation buttons', {
+    value: false,
+    configuration: {
+      condition: showIf('layout', 'EQ', 'circle'),
+    },
+  }),
   ...advanced('Tabs'),
 };

@@ -4,6 +4,7 @@ import {
   option,
   number,
   showIfTrue,
+  font,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -25,6 +26,7 @@ export const snackbarOptions = {
   content: variable('Content', {
     value: ['You can also drag an alert component here for example'],
   }),
+  font: font('Text style', { value: 'Body1' }),
   allowTextServerResponse: toggle('Allow to overwrite by the server response', {
     value: false,
   }),

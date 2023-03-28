@@ -1,6 +1,7 @@
 import {
   buttongroup,
   color,
+  font,
   hideIf,
   icon,
   sizes,
@@ -14,7 +15,14 @@ export const categories = [
   {
     label: 'Styling',
     expanded: false,
-    members: ['textColor', 'iconColor', 'background', 'borderColor'],
+    members: [
+      'titleFont',
+      'font',
+      'textColor',
+      'iconColor',
+      'background',
+      'borderColor',
+    ],
   },
   {
     label: 'Alignment',
@@ -38,12 +46,6 @@ export const alertOptions = {
     value: true,
     configuration: { as: 'VISIBILITY' },
   }),
-  bodyText: variable('Body text', {
-    value: ['Type your content here...'],
-  }),
-  allowTextServerResponse: toggle('Allow to overwrite by the server response', {
-    value: false,
-  }),
   titleText: variable('Title text', {
     value: [''],
   }),
@@ -53,6 +55,16 @@ export const alertOptions = {
       value: false,
     },
   ),
+  bodyText: variable('Body text', {
+    value: ['Type your content here...'],
+  }),
+  allowTextServerResponse: toggle('Allow to overwrite by the server response', {
+    value: false,
+  }),
+
+  titleFont: font('Title text style', { value: 'Body1' }),
+  font: font('Body text style', { value: 'Body1' }),
+
   textColor: color('Text color', {
     value: ThemeColor.BLACK,
   }),
