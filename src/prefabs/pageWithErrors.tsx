@@ -21,7 +21,6 @@ import {
 } from './structures';
 
 const attrs = {
-  name: 'Error pages',
   icon: Icon.NavbarIcon,
   type: 'page',
   isPublicPage: true,
@@ -651,7 +650,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('Error pages', attrs, beforeCreate, [
+export default makePrefab('Various error pages', attrs, beforeCreate, [
   Row(
     {
       options: {

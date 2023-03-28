@@ -761,7 +761,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
+export default makePrefab('Dashboard, inspirational', attrs, beforeCreate, [
   Row(
     {
       options: {

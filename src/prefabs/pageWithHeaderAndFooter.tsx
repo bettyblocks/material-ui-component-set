@@ -155,7 +155,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('Header and footer', attrs, beforeCreate, [
+export default makePrefab('Basic header and footer page', attrs, beforeCreate, [
   Row(
     {
       options: {
@@ -492,7 +492,7 @@ export default makePrefab('Header and footer', attrs, beforeCreate, [
                               options: {
                                 ...textOptions,
                                 content: variable('Content', {
-                                  value: ['Powered by Bettyblocks'],
+                                  value: ['Powered by Betty Blocks'],
                                   configuration: { as: 'MULTILINE' },
                                 }),
                                 textAlignment: option('CUSTOM', {

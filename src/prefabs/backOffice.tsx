@@ -30,6 +30,7 @@ import {
   reconfigure,
   property,
   addChild,
+  endpoint,
 } from '@betty-blocks/component-sdk';
 
 import {
@@ -72,6 +73,9 @@ import {
   SubmitButton,
   submitButtonOptions,
   Subview,
+  SubviewItem,
+  subviewItemOptions,
+  subviewOptions,
   Tab,
   tabOptions,
   Tabs,
@@ -214,6 +218,36 @@ const detailChildren = [
       ),
     ],
   ),
+];
+
+const subViewChildren = [
+  SubviewItem({
+    options: {
+      ...subviewItemOptions,
+      prop: property('Property', {
+        value: '',
+        showInAddChild: true,
+        showInReconfigure: true,
+        configuration: {
+          allowRelations: true,
+          allowedKinds: [
+            'BELONGS_TO',
+            'HAS_AND_BELONGS_TO_MANY',
+            'HAS_MANY',
+            'HAS_ONE',
+          ],
+        },
+      }),
+      content: variable('Label', {
+        value: [''],
+        showInReconfigure: true,
+      }),
+      linkTo: endpoint('Page', {
+        value: '',
+        showInAddChild: true,
+      }),
+    },
+  }),
 ];
 
 const interactions: PrefabInteraction[] = [
@@ -905,7 +939,7 @@ const drawerContainer = DrawerContainer(
         },
         options: {
           ...drawerOptions,
-          visibility: toggle('Toggle visibility', {
+          visibility: toggle('Visible in builder', {
             value: false,
             configuration: {
               as: 'VISIBILITY',
@@ -2239,7 +2273,33 @@ const drawerContainer = DrawerContainer(
                                                   ),
                                                 },
                                               },
-                                              [Subview({}, [])],
+                                              [
+                                                Subview(
+                                                  {
+                                                    ref: {
+                                                      id: '#subView',
+                                                    },
+                                                    options: {
+                                                      ...subviewOptions,
+                                                      addChild: addChild(
+                                                        'Add Subview Item',
+                                                        {
+                                                          ref: {
+                                                            id: '#addSubViewChild',
+                                                          },
+                                                          value: {
+                                                            children:
+                                                              subViewChildren,
+                                                            addChildWizardType:
+                                                              'ChildSelector',
+                                                          },
+                                                        },
+                                                      ),
+                                                    },
+                                                  },
+                                                  [],
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
@@ -4313,6 +4373,15 @@ const drawerContainer = DrawerContainer(
                                                       {
                                                         options: {
                                                           ...dialogOptions,
+                                                          isVisible: toggle(
+                                                            'Visible in builder',
+                                                            {
+                                                              value: false,
+                                                              configuration: {
+                                                                as: 'VISIBILITY',
+                                                              },
+                                                            },
+                                                          ),
                                                           invisible: toggle(
                                                             'Invisible',
                                                             {
@@ -4943,6 +5012,7 @@ const prefabStructure = [
             'updateTabTitle',
             'createTabTitle',
             'addDetailChild',
+            'addSubViewChild',
           ],
           condition: {
             type: 'SHOW',
@@ -5128,6 +5198,23 @@ const prefabStructure = [
             },
           },
         }),
+        addSubViewChild: linked({
+          label: 'Add subview item',
+          value: {
+            ref: {
+              componentId: '#subView',
+              optionId: '#addSubViewChild',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'shownTab',
+              comparator: 'EQ',
+              value: 2,
+            },
+          },
+        }),
         detailsTabTitle: linked({
           label: 'Details tab title',
           value: {
@@ -5192,6 +5279,17 @@ const prefabStructure = [
               value: '240px',
               configuration: {
                 as: 'UNIT',
+              },
+            }),
+            runTimeVisibility: option('CUSTOM', {
+              label: 'Initial State (RUNTIME)',
+              value: 'true',
+              configuration: {
+                as: 'DROPDOWN',
+                allowedInput: [
+                  { name: 'Visible', value: 'true' },
+                  { name: 'Hidden', value: 'false' },
+                ],
               },
             }),
           },
@@ -6352,7 +6450,7 @@ const beforeCreate = ({
               case PropertyKind.BELONGS_TO:
                 return inputStructure(
                   prop.label,
-                  makeBettyInput(
+                  makeBettyUpdateInput(
                     BettyPrefabs.AUTO_COMPLETE,
                     model,
                     prop,

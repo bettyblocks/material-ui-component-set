@@ -931,6 +931,21 @@ const drawerContainer = DrawerContainer(
                                               {
                                                 options: {
                                                   ...dialogOptions,
+                                                  isVisible: toggle(
+                                                    'Visible in builder',
+                                                    {
+                                                      value: false,
+                                                      configuration: {
+                                                        as: 'VISIBILITY',
+                                                      },
+                                                    },
+                                                  ),
+                                                  invisible: toggle(
+                                                    'Invisible',
+                                                    {
+                                                      value: true,
+                                                    },
+                                                  ),
                                                 },
                                                 ref: {
                                                   id: '#deleteDialog',
@@ -2623,7 +2638,7 @@ const prefabStructure = [
                 condition: showIf('drawerType', 'EQ', 'temporary'),
               },
             }),
-            visibility: toggle('Toggle visibility', {
+            visibility: toggle('Visible in builder', {
               ref: { id: '#toggleSlideoutPanel' },
               value: false,
               configuration: {

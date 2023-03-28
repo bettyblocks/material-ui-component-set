@@ -54,7 +54,6 @@ import {
 import { styles } from './structures/ListItem/options/styles';
 
 const attrs = {
-  name: 'Page with homepage layout',
   icon: Icon.ContainerIcon,
   type: 'page',
   isPublicPage: false,
@@ -177,7 +176,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('Home Page', attrs, beforeCreate, [
+export default makePrefab('Homepage, inspirational', attrs, beforeCreate, [
   Row(
     {
       options: {

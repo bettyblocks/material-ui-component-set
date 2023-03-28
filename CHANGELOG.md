@@ -1,3 +1,92 @@
+# [2.120.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.119.1...v2.120.0) (2023-03-23)
+
+
+### Bug Fixes
+
+* fix file ([09a6a29](https://github.com/bettyblocks/material-ui-component-set/commit/09a6a299eb7f42678fa634e20f3d134bbfb1b50f))
+* fix yaml file again ([cd1d4ed](https://github.com/bettyblocks/material-ui-component-set/commit/cd1d4ed642665684d6de1e3a48625fb731d5164f))
+* rename ci file ([2adfd26](https://github.com/bettyblocks/material-ui-component-set/commit/2adfd26af3b607d049c80c6dd158397b550706df))
+
+
+### Features
+
+* add e2e to pipeline ([05ef94c](https://github.com/bettyblocks/material-ui-component-set/commit/05ef94c39c18da5ece3a4e1b98760d25d22c4f47))
+* add e2e to pipeline ([0fcdb60](https://github.com/bettyblocks/material-ui-component-set/commit/0fcdb6089ade5d1090dd36fcfc32de7cdba93567))
+
+## [2.119.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.119.0...v2.119.1) (2023-03-23)
+
+
+### Bug Fixes
+
+* typo in header and footer template ([476de06](https://github.com/bettyblocks/material-ui-component-set/commit/476de0639ae4ff43c33f2f19f24c156d51e5da05))
+
+# [2.119.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.118.0...v2.119.0) (2023-03-21)
+
+
+### Features
+
+* add propertyName config ([f10e028](https://github.com/bettyblocks/material-ui-component-set/commit/f10e028006357e440b767366de70be994d83e658))
+
+# [2.118.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.117.1...v2.118.0) (2023-03-17)
+
+
+### Bug Fixes
+
+* add child subview model ([f80281f](https://github.com/bettyblocks/material-ui-component-set/commit/f80281f05d151f994ae5e998ba2d66ec8e691403))
+
+
+### Features
+
+* add subview item in backoffice wrapper ([d429d15](https://github.com/bettyblocks/material-ui-component-set/commit/d429d159013e83d114dab1f574dc196043bc40c2))
+
+## [2.117.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.117.0...v2.117.1) (2023-03-17)
+
+
+### Bug Fixes
+
+* default value from property not shown ([fd351e7](https://github.com/bettyblocks/material-ui-component-set/commit/fd351e7ab27c0790d667195e6040103b84163936))
+* fix eslint errors ([4ac42ff](https://github.com/bettyblocks/material-ui-component-set/commit/4ac42ff7d0ef7d6634fd95fd0523ca2e34874b97))
+
+# [2.117.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.116.2...v2.117.0) (2023-03-17)
+
+
+### Bug Fixes
+
+* update deps ([840471e](https://github.com/bettyblocks/material-ui-component-set/commit/840471e078e16d1f3449a0f55e793f6cb4a986d8))
+
+
+### Features
+
+* added no formatting to datatable orderby ([25de7fa](https://github.com/bettyblocks/material-ui-component-set/commit/25de7fae6321978bde5463abe8bcbee1f0a7d4f1))
+
+## [2.116.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.116.1...v2.116.2) (2023-03-17)
+
+
+### Bug Fixes
+
+* complex filters not workng multi autocomplete ([63e38b2](https://github.com/bettyblocks/material-ui-component-set/commit/63e38b2a872fe8a8322c825d94a7df58f45da548))
+
+## [2.116.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.116.0...v2.116.1) (2023-03-17)
+
+
+### Bug Fixes
+
+* hide dialogs by default in templates ([0d20120](https://github.com/bettyblocks/material-ui-component-set/commit/0d2012017042205ae6056176796997dfc21656fe))
+
+# [2.116.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.115.2...v2.116.0) (2023-03-17)
+
+
+### Features
+
+* change page template names ([0e6b66a](https://github.com/bettyblocks/material-ui-component-set/commit/0e6b66a07a1ce9f181c1082732bec3ed223d7780))
+
+## [2.115.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.115.1...v2.115.2) (2023-03-16)
+
+
+### Bug Fixes
+
+* remove not working interaction from button ([210d28d](https://github.com/bettyblocks/material-ui-component-set/commit/210d28dd585fa9afbff834effffb22c7add91913))
+
 ## [2.115.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.115.0...v2.115.1) (2023-03-16)
 
 

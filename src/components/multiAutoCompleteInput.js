@@ -429,10 +429,10 @@
     /* eslint-disable no-underscore-dangle */
     if (multiple) {
       if (debouncedInputValue) {
-        if (!optionFilter._or) {
-          optionFilter._or = [];
+        if (!optionFilter._and) {
+          optionFilter._and = [];
         }
-        optionFilter._or.push({
+        optionFilter._and.push({
           [searchProp.name]: {
             [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
               ? parseInt(debouncedInputValue, 10)
