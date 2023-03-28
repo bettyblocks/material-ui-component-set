@@ -1,3 +1,18 @@
+# [2.124.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.123.0...v2.124.0) (2023-03-28)
+
+
+### Bug Fixes
+
+* fix font size reactional ([2eb86d3](https://github.com/bettyblocks/material-ui-component-set/commit/2eb86d33a803721957a218e247072cbd5342f1a2))
+* font size not working on custom font ([865ab52](https://github.com/bettyblocks/material-ui-component-set/commit/865ab52f7c834e04521a288ef54862c036f955f8))
+* fontsize in stepper for multi devices ([065be35](https://github.com/bettyblocks/material-ui-component-set/commit/065be355b326a669b5865c9a7fd60cab9e6f89bd))
+* implement font option more components ([54da329](https://github.com/bettyblocks/material-ui-component-set/commit/54da3299b5baf16115bbc42274c42408df14477f))
+
+
+### Features
+
+* add styling categories to component options ([32aa928](https://github.com/bettyblocks/material-ui-component-set/commit/32aa92864e21175bb06edabc1e82d9666fc9f801))
+
 # [2.123.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.122.0...v2.123.0) (2023-03-28)
 
 
