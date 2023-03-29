@@ -63,7 +63,7 @@
     const [helper, setHelper] = useState(useText(helperText));
     const [currentValue, setCurrentValue] = useState(useText(value));
     const parsedLabel = useText(label);
-    const labelText = parsedLabel || name;
+    const labelText = parsedLabel;
 
     const validPattern = pattern || null;
     const validMinlength = minLength || null;
