@@ -20,6 +20,7 @@
       model,
       order,
       orderBy,
+      property,
       required,
       row,
       size,
@@ -36,7 +37,8 @@
       RadioGroup,
     } = window.MaterialUI.Core;
     const isDev = env === 'dev';
-    const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
+    const modelProperty =
+      getProperty(property || actionProperty.modelProperty || '') || {};
 
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
