@@ -35,6 +35,10 @@
     );
     const [isDisabled, setIsDisabled] = useState(disabled);
 
+    useEffect(() => {
+      setIsDisabled(disabled);
+    }, [disabled]);
+
     const value = useText(defaultValue, { rawValue: true });
     useEffect(() => {
       setCurrentValue(value);
