@@ -16,6 +16,23 @@ import { advanced } from '../../advanced';
 
 export const categories = [
   {
+    label: 'Styling',
+    expanded: false,
+    members: [
+      'hideLabel',
+      'emptyColor',
+      'filledColor',
+      'helperColor',
+      'errorColor',
+      'labelColor',
+    ],
+  },
+  {
+    label: 'Validation Options',
+    expanded: false,
+    members: ['required', 'validationValueMissing'],
+  },
+  {
     label: 'Advanced Options',
     expanded: false,
     members: ['dataComponentAttribute'],
@@ -37,6 +54,13 @@ export const ratingInputOptions = {
 
   label: variable('Label', { value: ['Select'] }),
   value: variable('Value', { value: [''] }),
+  required: toggle('Required'),
+  validationValueMissing: variable('Validation error text', {
+    value: ['This value is required'],
+  }),
+  disabled: toggle('Disabled'),
+  readonly: toggle('Is read only'),
+  helperText: variable('Helper text', { value: [''] }),
   numberOfIcons: dropdown(
     'Number of icons',
     [
@@ -55,13 +79,6 @@ export const ratingInputOptions = {
       value: '5',
     },
   ),
-  validationOptions: toggle('Validation options', { value: true }),
-  required: toggle('Required'),
-  validationValueMissing: variable('Validation error text', {
-    value: ['This value is required'],
-  }),
-  disabled: toggle('Disabled'),
-  readonly: toggle('Is read only'),
   precision: buttongroup(
     'Precision',
     [
@@ -96,51 +113,24 @@ export const ratingInputOptions = {
       },
     },
   }),
-  helperText: variable('Helper text', { value: [''] }),
-  icon: icon('Icon', { value: 'Star' }),
   outerSpacing: sizes('Outer space', {
     value: ['0rem', '0rem', '0rem', '0rem'],
   }),
-  styles: toggle('Styles'),
+  icon: icon('Icon', { value: 'Star' }),
   emptyColor: color('Empty icon color', {
     value: ThemeColor.LIGHT,
-    configuration: {
-      condition: {
-        type: 'SHOW',
-        option: 'styles',
-        comparator: 'EQ',
-        value: true,
-      },
-    },
   }),
   filledColor: color('Filled icon color', {
     value: ThemeColor.WARNING,
-    configuration: {
-      condition: {
-        type: 'SHOW',
-        option: 'styles',
-        comparator: 'EQ',
-        value: true,
-      },
-    },
   }),
   helperColor: color('Helper color', {
     value: ThemeColor.ACCENT_2,
-    configuration: {
-      condition: showIf('styles', 'EQ', true),
-    },
   }),
   errorColor: color('Error color', {
     value: ThemeColor.DANGER,
-    configuration: {
-      condition: showIf('styles', 'EQ', true),
-    },
   }),
   labelColor: color('Label color', {
     value: ThemeColor.ACCENT_3,
-    configuration: {
-      condition: showIf('styles', 'EQ', true),
-    },
   }),
 
   ...advanced('RatingInput'),
