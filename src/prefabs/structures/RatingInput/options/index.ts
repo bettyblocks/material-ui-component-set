@@ -79,7 +79,7 @@ export const ratingInputOptions = {
     },
   ),
   size: buttongroup(
-    'Precision',
+    'Size',
     [
       ['Small', 'small'],
       ['Medium', 'medium'],
