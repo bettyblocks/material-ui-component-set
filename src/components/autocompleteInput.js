@@ -57,7 +57,13 @@
       variant,
       floatLabel,
     } = options;
-    const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
+    const numberPropTypes = [
+      'count',
+      'decimal',
+      'integer',
+      'minutes',
+      'serial',
+    ];
 
     /*
      * To understand this component it is important to know what the following options are used for:
@@ -86,6 +92,7 @@
     const [debouncedInputValue, setDebouncedInputValue] = useState();
     const [interactionFilter, setInteractionFilter] = useState({});
     const defaultValueEvaluatedRef = useRef(false);
+
     const isNumberType = type === 'number';
 
     const validPattern = pattern || null;
@@ -102,7 +109,6 @@
     const helperTextResolved = useText(helperTextRaw);
     const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
     const labelProperty = getProperty(labelPropertyId) || {};
-
     const { modelId: propertyModelId, referenceModelId } = modelProperty;
     const { contextModelId } = model;
     const modelId =
@@ -302,7 +308,7 @@
     if (
       debouncedInputValue &&
       (searchPropIsNumber
-        ? parseInt(debouncedInputValue, 10)
+        ? parseFloat(debouncedInputValue, 10)
         : debouncedInputValue) ===
         (typeof value === 'string' ? value : value[searchProp.name])
     ) {
@@ -310,14 +316,14 @@
         {
           [searchProp.name]: {
             [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
-              ? parseInt(debouncedInputValue, 10)
+              ? parseFloat(debouncedInputValue, 10)
               : debouncedInputValue,
           },
         },
         {
           [valueProp.name]: {
             neq: valuePropIsNumber
-              ? parseInt(value[valueProp.name], 10)
+              ? parseFloat(value[valueProp.name], 10)
               : value[valueProp.name],
           },
         },
@@ -325,7 +331,7 @@
     } else if (debouncedInputValue) {
       filter[searchProp.name] = {
         [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
-          ? parseInt(debouncedInputValue, 10)
+          ? parseFloat(debouncedInputValue, 10)
           : debouncedInputValue,
       };
     } else if (value !== '') {
@@ -541,7 +547,7 @@
           !results.some((result) => {
             if (typeof value === 'string') {
               return valuePropIsNumber
-                ? result[valueProp.name] === parseInt(value, 10)
+                ? result[valueProp.name] === parseFloat(value, 10)
                 : result[valueProp.name] === value;
             }
 
@@ -585,7 +591,7 @@
       return currentOptions.find((option) => {
         if (typeof value === 'string') {
           return valuePropIsNumber
-            ? option[valueProp.name] === parseInt(value, 10)
+            ? option[valueProp.name] === parseFloat(value, 10)
             : option[valueProp.name] === value;
         }
 
