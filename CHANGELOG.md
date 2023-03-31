@@ -1,3 +1,10 @@
+## [2.124.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.124.0...v2.124.1) (2023-03-31)
+
+
+### Bug Fixes
+
+* add enable/disable interaction to datepickers ([9630bd0](https://github.com/bettyblocks/material-ui-component-set/commit/9630bd0478e4c76a5aa77090b733c75ee0a56316))
+
 # [2.124.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.123.0...v2.124.0) (2023-03-28)
 
 
