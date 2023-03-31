@@ -90,7 +90,7 @@ export const ratingInputOptions = {
       value: 'medium',
     },
   ),
-  customSize: size('customSize', {
+  customSize: size('Custom size', {
     value: '',
     configuration: {
       as: 'UNIT',
