@@ -1,3 +1,10 @@
+## [2.124.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.124.1...v2.124.2) (2023-03-31)
+
+
+### Bug Fixes
+
+* decimal label value breaks autocomplete ([db5538e](https://github.com/bettyblocks/material-ui-component-set/commit/db5538e6e80c4252d74c9a4fd9bf6cdb8919a500))
+
 ## [2.124.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.124.0...v2.124.1) (2023-03-31)
 
 
