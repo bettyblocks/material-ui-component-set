@@ -72,10 +72,10 @@ export const ratingInputOptions = {
     'Precision',
     [
       ['Half', '0.5'],
-      ['Full', '1'],
+      ['Full', '1.0'],
     ],
     {
-      value: '1',
+      value: '1.0',
     },
   ),
   size: buttongroup(
