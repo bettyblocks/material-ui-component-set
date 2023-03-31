@@ -60,11 +60,9 @@ export const ratingInputOptions = {
     },
   ),
   validationOptions: toggle('Validation options', { value: true }),
-  validationValueMissing: variable('Position', {
-    value: ['end'],
-    configuration: {
-      condition: showIf('validationOptions', 'EQ', true),
-    },
+  required: toggle('Required'),
+  validationValueMissing: variable('Validation error text', {
+    value: ['This value is required'],
   }),
   disabled: toggle('Disabled'),
   readonly: toggle('Is read only'),
