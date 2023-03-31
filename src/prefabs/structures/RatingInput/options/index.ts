@@ -33,10 +33,6 @@ export const ratingInputOptions = {
     value: '',
     configuration: { condition: hideIf('actionProperty', 'EQ', '') },
   }),
-  content: variable('Rating', {
-    value: [],
-    configuration: { as: 'MULTILINE', allowedTypes: ['decimal'] },
-  }),
   hideLabel: toggle('Hide label'),
 
   label: variable('Label', { value: ['Select'] }),
