@@ -62,7 +62,7 @@
     };
 
     const parsedLabel = useText(label);
-    const labelText = parsedLabel || name;
+    const labelText = parsedLabel;
     const isValidDate = (date) => date instanceof Date && !isNaN(date);
 
     const convertToDate = (date) => {
