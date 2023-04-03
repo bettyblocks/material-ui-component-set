@@ -6,37 +6,38 @@
   jsx: (() => {
     const { FormControl, FormHelperText, InputLabel } = window.MaterialUI.Core;
     const { Rating } = window.MaterialUI.Lab;
-    const { env, getCustomModelAttribute, useText, Icon } = B;
+    const { env, useText, Icon } = B;
     const isDev = env === 'dev';
 
     const {
+      actionVariableId: name,
       hideLabel,
-      customModelAttribute: customModelAttributeObj,
+      label = '',
+      value: defaultValue,
       numberOfIcons,
       size,
+      required,
       customSize,
       disabled,
       readonly,
       precision,
       icon,
-      nameAttribute,
       validationValueMissing = [''],
       error,
       helperText = [''],
       dataComponentAttribute = ['Rating'],
     } = options;
 
-    const {
-      id: customModelAttributeId,
-      label = [],
-      value: defaultValue = [],
-    } = customModelAttributeObj;
     const labelText = useText(label);
 
     const [currentValue, setCurrentValue] = useState(
       useText(defaultValue, { rawValue: true }),
     );
     const [isDisabled, setIsDisabled] = useState(disabled);
+
+    useEffect(() => {
+      setIsDisabled(disabled);
+    }, [disabled]);
 
     const value = useText(defaultValue, { rawValue: true });
     useEffect(() => {
@@ -47,9 +48,6 @@
       B.defineFunction('Reset', () => setCurrentValue(value));
     }, [value]);
 
-    const customModelAttribute = getCustomModelAttribute(
-      customModelAttributeId,
-    );
     const maxIcons = parseInt(numberOfIcons, 10) || 0;
     const [errorState, setErrorState] = useState(error);
     const [helper, setHelper] = useState(useText(helperText));
@@ -57,12 +55,9 @@
 
     const IconComponent = <Icon name={icon} className={classes.ratingIcon} />;
 
-    const { name: customModelAttributeName, validations: { required } = {} } =
-      customModelAttribute || {};
-    const nameAttributeValue = useText(nameAttribute);
-
     const defaultValueText = useText(defaultValue);
     const helperTextResolved = useText(helperText);
+
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
 
@@ -114,7 +109,7 @@
           )}
           <Rating
             className={classes.ratingIcon}
-            name={nameAttributeValue || customModelAttributeName}
+            name={name}
             value={currentValue}
             precision={precision}
             size={size === 'custom' ? customSize : size}
