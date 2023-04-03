@@ -1,3 +1,94 @@
+## [2.124.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.124.2...v2.124.3) (2023-03-31)
+
+
+### Bug Fixes
+
+* empty lable show uuid ([e2b8663](https://github.com/bettyblocks/material-ui-component-set/commit/e2b8663cd5c107ad408118195d5d8c8aa08382d6))
+
+## [2.124.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.124.1...v2.124.2) (2023-03-31)
+
+
+### Bug Fixes
+
+* decimal label value breaks autocomplete ([db5538e](https://github.com/bettyblocks/material-ui-component-set/commit/db5538e6e80c4252d74c9a4fd9bf6cdb8919a500))
+
+## [2.124.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.124.0...v2.124.1) (2023-03-31)
+
+
+### Bug Fixes
+
+* add enable/disable interaction to datepickers ([9630bd0](https://github.com/bettyblocks/material-ui-component-set/commit/9630bd0478e4c76a5aa77090b733c75ee0a56316))
+
+# [2.124.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.123.0...v2.124.0) (2023-03-28)
+
+
+### Bug Fixes
+
+* fix font size reactional ([2eb86d3](https://github.com/bettyblocks/material-ui-component-set/commit/2eb86d33a803721957a218e247072cbd5342f1a2))
+* font size not working on custom font ([865ab52](https://github.com/bettyblocks/material-ui-component-set/commit/865ab52f7c834e04521a288ef54862c036f955f8))
+* fontsize in stepper for multi devices ([065be35](https://github.com/bettyblocks/material-ui-component-set/commit/065be355b326a669b5865c9a7fd60cab9e6f89bd))
+* implement font option more components ([54da329](https://github.com/bettyblocks/material-ui-component-set/commit/54da3299b5baf16115bbc42274c42408df14477f))
+
+
+### Features
+
+* add styling categories to component options ([32aa928](https://github.com/bettyblocks/material-ui-component-set/commit/32aa92864e21175bb06edabc1e82d9666fc9f801))
+
+# [2.123.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.122.0...v2.123.0) (2023-03-28)
+
+
+### Bug Fixes
+
+* set local option in correct order and remove old datepicker ([23d500f](https://github.com/bettyblocks/material-ui-component-set/commit/23d500f0c1e40a19b2f60f09deea56c22f7b98e5))
+
+
+### Features
+
+* add locale option and fix prettier datalist ([8ab52fc](https://github.com/bettyblocks/material-ui-component-set/commit/8ab52fc9a141a68eebaeec779c57e96071f6e153))
+
+# [2.122.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.121.0...v2.122.0) (2023-03-28)
+
+
+### Bug Fixes
+
+* changed default values ([e2a5af9](https://github.com/bettyblocks/material-ui-component-set/commit/e2a5af9fd661de32eb6525e2c76a67e63b64ace0))
+* fix styling bug ([ace1dc0](https://github.com/bettyblocks/material-ui-component-set/commit/ace1dc0696189afb9e3a0f4e828d34c6aee00426))
+* fixed css bugs ([660213f](https://github.com/bettyblocks/material-ui-component-set/commit/660213fd50427a58dbb5ca73d431c02992c80935))
+* fixed css bugs ([e39d573](https://github.com/bettyblocks/material-ui-component-set/commit/e39d573f55a9244adac3176021249e07867a6e3a))
+* overflow when many tabs ([302ee27](https://github.com/bettyblocks/material-ui-component-set/commit/302ee27de97fde58d764462e4a57568a36fa7cb0))
+
+
+### Features
+
+* add new variant to tabs ([cddd1fb](https://github.com/bettyblocks/material-ui-component-set/commit/cddd1fb852eac894ada531ab5c6eadc0009fe4cf))
+
+# [2.121.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.120.0...v2.121.0) (2023-03-28)
+
+
+### Bug Fixes
+
+* overwrite styles on floating label ([e5f1aa9](https://github.com/bettyblocks/material-ui-component-set/commit/e5f1aa9595d24d50f2f6b214516659f3e91d68ac))
+
+
+### Features
+
+* add permanent label on input components ([4fa76a2](https://github.com/bettyblocks/material-ui-component-set/commit/4fa76a25ed06a171eb2a4ea1d2d61e33d4f7c2c9))
+
+# [2.120.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.119.1...v2.120.0) (2023-03-23)
+
+
+### Bug Fixes
+
+* fix file ([09a6a29](https://github.com/bettyblocks/material-ui-component-set/commit/09a6a299eb7f42678fa634e20f3d134bbfb1b50f))
+* fix yaml file again ([cd1d4ed](https://github.com/bettyblocks/material-ui-component-set/commit/cd1d4ed642665684d6de1e3a48625fb731d5164f))
+* rename ci file ([2adfd26](https://github.com/bettyblocks/material-ui-component-set/commit/2adfd26af3b607d049c80c6dd158397b550706df))
+
+
+### Features
+
+* add e2e to pipeline ([05ef94c](https://github.com/bettyblocks/material-ui-component-set/commit/05ef94c39c18da5ece3a4e1b98760d25d22c4f47))
+* add e2e to pipeline ([0fcdb60](https://github.com/bettyblocks/material-ui-component-set/commit/0fcdb6089ade5d1090dd36fcfc32de7cdba93567))
+
 ## [2.119.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.119.0...v2.119.1) (2023-03-23)
 
 

@@ -109,6 +109,7 @@
       showCenterAlign,
       showRightAlign,
       showJustifyAlign,
+      floatLabel,
     } = options;
     const isDev = env === 'dev';
 
@@ -894,7 +895,11 @@
     return (
       <div className={classes.root}>
         {labelText && !hideLabel && (
-          <FormHelperText className={classes.label}>{labelText}</FormHelperText>
+          <FormHelperText
+            className={`${classes.label} ${floatLabel && classes.floatLabel}`}
+          >
+            {labelText}
+          </FormHelperText>
         )}
         <div className={classes.editorWrapper}>
           <Slate
@@ -1041,6 +1046,11 @@
         ],
         whiteSpace: 'nowrap',
         margin: '0 14px !important',
+      },
+      floatLabel: {
+        fontSize: '1rem !important',
+        lineHeight: '1.4 !important',
+        margin: '0px !important',
       },
       editor: {
         padding: '0.5px 14px',

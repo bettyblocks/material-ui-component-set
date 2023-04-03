@@ -32,6 +32,7 @@
       label,
       locale,
       dataComponentAttribute = ['DateTimePicker'],
+      floatLabel,
     } = options;
     const { env, useText, Icon } = B;
     const {
@@ -45,6 +46,7 @@
     const DateFns = new DateFnsUtils();
     const isDev = env === 'dev';
     const parsedValue = useText(value);
+    const [isDisabled, setIsDisabled] = useState(disabled);
     const [selectedDate, setSelectedDate] = useState(parsedValue || null);
     const [errorState, setErrorState] = useState(error);
     const helperTextResolved = useText(helperText);
@@ -60,7 +62,7 @@
     };
 
     const parsedLabel = useText(label);
-    const labelText = parsedLabel || name;
+    const labelText = parsedLabel;
     const isValidDate = (date) => date instanceof Date && !isNaN(date);
 
     const convertToDate = (date) => {
@@ -145,6 +147,8 @@
     }, [parsedValue]);
 
     B.defineFunction('Clear', () => setSelectedDate(null));
+    B.defineFunction('Enable', () => setIsDisabled(false));
+    B.defineFunction('Disable', () => setIsDisabled(true));
 
     let DateTimeComponent;
     let format;
@@ -202,7 +206,9 @@
         size={size}
         onBlur={onBlurHandler}
         autoComplete={autoComplete ? 'on' : 'off'}
-        classes={{ root: classes.formControl }}
+        classes={{
+          root: `${classes.formControl} ${floatLabel && classes.floatLabel}`,
+        }}
         variant={variant}
         placeholder={placeholderText}
         fullWidth={fullWidth}
@@ -218,7 +224,7 @@
           tabIndex: isDev ? -1 : undefined,
         }}
         required={required}
-        disabled={disabled}
+        disabled={isDisabled}
         label={!hideLabel && labelText}
         margin={margin}
         helperText={helper}
@@ -299,6 +305,20 @@
             style.getColor(backgroundColorPopup),
             '!important',
           ],
+        },
+      },
+      floatLabel: {
+        '& > label': {
+          position: 'static !important',
+          transform: 'none !important',
+          marginBottom: '8px !important',
+        },
+        '& .MuiInputBase-root': {
+          '& > fieldset': {
+            '& > legend': {
+              maxWidth: '0px !important',
+            },
+          },
         },
       },
       formControl: {
