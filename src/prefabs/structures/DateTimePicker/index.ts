@@ -55,7 +55,7 @@ export const DateTimePicker = (
         format = 'MM/dd/yyyy HH:mm:ss';
         break;
       case DateInputTypes.DATE:
-        format = 'MM/dd/yyyy';
+        format = 'dd/MM/yyyy';
         break;
       case DateInputTypes.TIME:
         format = 'HH:mm:ss';
