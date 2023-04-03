@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
+import {
+  BeforeCreateArgs,
+  Icon,
+  PrefabComponentOption,
+  prefab,
+} from '@betty-blocks/component-sdk';
 import { FileUpload } from './structures/FileUpload';
 
 const beforeCreate = ({
@@ -176,7 +181,7 @@ const beforeCreate = ({
             configuration: {
               condition: {
                 type: 'SHOW',
-                option: 'actionProperty',
+                option: 'property',
                 comparator: 'EQ',
                 value: '',
               },
@@ -191,28 +196,30 @@ const beforeCreate = ({
             ...option,
             value: result.variable.variableId,
           }));
-          setOption(newPrefab.structure[0], 'actionProperty', (option) => ({
-            ...option,
-            value: {
-              modelProperty: propertyPath,
-              actionVariableId: result.variable.variableId,
-            },
-            configuration: {
-              condition: {
-                type: 'HIDE',
-                option: 'actionProperty',
-                comparator: 'EQ',
-                value: '',
+          setOption(
+            newPrefab.structure[0],
+            'property',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: {
+                id:
+                  result.isRelational && !result.isMultiRelational
+                    ? [propertyId, modelProperty.id]
+                    : propertyId,
+                type: 'PROPERTY',
+                name:
+                  result.isRelational && !result.isMultiRelational
+                    ? `{{ ${model?.name}.${name}.id }}`
+                    : `{{ ${model?.name}.${name} }}`,
               },
-            },
-          }));
+            }),
+          );
           if (validate()) {
             if (
               (selectedPrefab?.name === BettyPrefabs.UPDATE_FORM ||
-                ((selectedPrefab?.name === BettyPrefabs.CREATE_FORM ||
-                  selectedPrefab?.name === BettyPrefabs.FORM ||
-                  selectedPrefab?.name === BettyPrefabs.LOGIN_FORM) &&
-                  originalPrefab.name === BettyPrefabs.HIDDEN)) &&
+                selectedPrefab?.name === BettyPrefabs.CREATE_FORM ||
+                selectedPrefab?.name === BettyPrefabs.FORM ||
+                selectedPrefab?.name === BettyPrefabs.LOGIN_FORM) &&
               propertyId
             ) {
               const valueOptions = [

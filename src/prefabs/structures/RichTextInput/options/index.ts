@@ -1,4 +1,10 @@
-import { option, hideIf, variable, toggle } from '@betty-blocks/component-sdk';
+import {
+  option,
+  hideIf,
+  variable,
+  toggle,
+  property,
+} from '@betty-blocks/component-sdk';
 import { styles } from './styles';
 import { validation } from './validation';
 
@@ -48,10 +54,13 @@ export const richTextOptions = {
     value: '',
   }),
 
-  actionProperty: option('ACTION_JS_PROPERTY', {
-    label: 'Property',
+  property: property('Property', {
     value: '',
-    configuration: { condition: hideIf('actionProperty', 'EQ', '') },
+    configuration: {
+      allowedKinds: ['TEXT', 'URL', 'IBAN', 'STRING'],
+      disabled: true,
+      condition: hideIf('property', 'EQ', ''),
+    },
   }),
 
   label: variable('Label', { value: [''] }),
