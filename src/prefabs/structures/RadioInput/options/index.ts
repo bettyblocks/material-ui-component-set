@@ -18,12 +18,9 @@ export const options = {
     value: '',
     configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
   }),
-  actionProperty: option('ACTION_JS_PROPERTY', {
-    label: 'Property',
+
+  property: property('Property', {
     value: '',
-    configuration: {
-      condition: hideIf('actionProperty', 'EQ', ''),
-    },
   }),
 
   label: variable('Label', { value: ['Radio'] }),
