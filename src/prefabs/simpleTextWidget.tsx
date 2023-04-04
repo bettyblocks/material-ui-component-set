@@ -99,7 +99,7 @@ export default prefab('Simple text widget', attributes, undefined, [
                     ref: { id: '#property' },
                     configuration: {
                       createProperty: {
-                        type: 'string',
+                        type: 'STRING',
                       },
                     },
                   }),
