@@ -5703,6 +5703,11 @@ const beforeCreate = ({
                 onChange={(value: string) => {
                   setModelValidation(false);
                   setModelId(value);
+                  // if the value gets emptied also empty the properties selector values
+                  if (!value) {
+                    setDataTableProperties([]);
+                    if (otherPropertiesInForms) setFormProperties([]);
+                  }
                 }}
                 value={modelId}
               />
@@ -5751,7 +5756,11 @@ const beforeCreate = ({
             </Field>
             <BeforeCreateBox pad={{ bottom: 'medium' }}>
               <CheckBox
-                label="Use different properties for forms and detail view"
+                label={
+                  <TextComp color="#262a3a;">
+                    Use different properties for forms and detail view
+                  </TextComp>
+                }
                 checked={otherPropertiesInForms}
                 onChange={() => {
                   setOtherPropertiesInForm(!otherPropertiesInForms);
@@ -5840,6 +5849,7 @@ const beforeCreate = ({
                 'TEXT_EXPRESSION',
                 'MINUTES',
                 'ZIPCODE',
+                'BELONGS_TO',
               ]}
               onChange={(value: Properties[]) => {
                 setFormProperties(value);
@@ -5863,7 +5873,6 @@ const beforeCreate = ({
         }
         return inputPrefab;
       };
-
       if (otherPropertiesInForms && formProperties.length < 1) {
         setFormPropertiesValidation(true);
         return;
@@ -6147,21 +6156,23 @@ const beforeCreate = ({
         buttonColumn.descendants = [boxComp];
       }
       dataTableComp.descendants.push(buttonColumn);
-
       const resolvedProperties = otherPropertiesInForms
         ? formProperties
         : modelProperties;
 
       // set create form
       const filteredproperties = resolvedProperties.filter(
-        (prop: Properties) =>
-          prop.label !== 'Created at' &&
-          prop.label !== 'Updated at' &&
-          prop.label !== 'Id' &&
-          prop.kind !== 'PDF' &&
-          prop.kind !== 'MULTI_FILE' &&
-          prop.kind !== 'PASSWORD' &&
-          prop.kind !== 'LOGIN_TOKEN',
+        (prop: Properties) => {
+          return (
+            prop.label !== 'Created at' &&
+            prop.label !== 'Updated at' &&
+            prop.label !== 'Id' &&
+            prop.kind !== 'PDF' &&
+            prop.kind !== 'MULTI_FILE' &&
+            prop.kind !== 'PASSWORD' &&
+            prop.kind !== 'LOGIN_TOKEN'
+          );
+        },
       );
 
       const relationProperties = model.relationships.filter(
@@ -6171,11 +6182,14 @@ const beforeCreate = ({
       const createForm = treeSearch('#createForm', newPrefab.structure);
       if (!createForm) throw new Error('No create form found');
       createForm.id = createFormId;
-
       const createAction = await prepareAction(
         createFormId,
         idProperty,
-        [...filteredproperties, ...relationProperties],
+        [
+          ...filteredproperties,
+          // other properties not checked then add all belongs_to's otherwise spread empty array
+          ...(!otherPropertiesInForms ? relationProperties : []),
+        ],
         'create',
         undefined,
         `Back office - Create ${data?.model.label}`,
@@ -6184,7 +6198,7 @@ const beforeCreate = ({
       );
       Object.values(createAction.variables).forEach(
         ([prop, inputVariable]): void => {
-          const generateInputPrefabs = () => {
+          const generateInputPrefabs = (): PrefabReference | undefined => {
             let imageUpload;
             let imageUploadButton;
             let fileUpload;
@@ -6207,7 +6221,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6227,7 +6241,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6247,7 +6261,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6267,7 +6281,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6287,7 +6301,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6307,7 +6321,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6327,7 +6341,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6347,7 +6361,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6367,7 +6381,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6387,7 +6401,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6473,7 +6487,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6493,7 +6507,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6513,7 +6527,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6563,7 +6577,7 @@ const beforeCreate = ({
           value: modelId,
         }),
       );
-      modelProperties.map((prop) =>
+      resolvedProperties.map((prop) =>
         detailColumn.descendants.push(makeDetail(prop)),
       );
 
@@ -6574,7 +6588,11 @@ const beforeCreate = ({
       const updateAction = await prepareAction(
         updateFormId,
         idProperty,
-        [...filteredproperties, ...relationProperties],
+        [
+          ...filteredproperties,
+          // other properties not checked then add all belongs_to's otherwise spread empty array
+          ...(!otherPropertiesInForms ? relationProperties : []),
+        ],
         'update',
         undefined,
         `Back office - Update ${data?.model.label}`,
@@ -6630,7 +6648,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6650,7 +6668,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6670,7 +6688,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6690,7 +6708,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6710,7 +6728,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6730,7 +6748,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6750,7 +6768,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6770,7 +6788,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6790,7 +6808,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6810,7 +6828,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6898,7 +6916,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6918,7 +6936,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
@@ -6938,7 +6956,7 @@ const beforeCreate = ({
                   }));
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
-                    value: 'BLACK',
+                    value: 'Black',
                   }));
                 }
                 return input;
