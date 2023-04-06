@@ -22,11 +22,9 @@ const beforeCreate = ({
   helpers,
 }: BeforeCreateArgs) => {
   const {
-    BettyPrefabs,
     prepareInput,
     useModelIdSelector,
     useActionIdSelector,
-    usePrefabSelector,
     usePropertyQuery,
     setOption,
     createUuid,
@@ -39,7 +37,6 @@ const beforeCreate = ({
   const [variableInput, setVariableInput] = React.useState(null);
   const modelId = useModelIdSelector();
   const actionId = useActionIdSelector();
-  const selectedPrefab = usePrefabSelector();
   const [model, setModel] = React.useState<any>(null);
   const [propertyBased, setPropertyBased] = React.useState(!!modelId);
   const [prefabSaved, setPrefabSaved] = React.useState(false);
@@ -219,7 +216,7 @@ const beforeCreate = ({
             configuration: {
               condition: {
                 type: 'SHOW',
-                option: 'actionProperty',
+                option: 'property',
                 comparator: 'EQ',
                 value: '',
               },
@@ -235,54 +232,32 @@ const beforeCreate = ({
             value: result.variable.variableId,
           }));
           if (propertyBased) {
-            setOption(newPrefab.structure[0], 'actionProperty', (option) => ({
+            setOption(newPrefab.structure[0], 'property', (option) => ({
               ...option,
               value: {
-                modelProperty: propertyPath,
-                actionVariableId: result.variable.variableId,
+                id:
+                  result.isRelational && !result.isMultiRelational
+                    ? [propertyId, modelProperty.id]
+                    : propertyId,
+                type: 'PROPERTY',
+                name:
+                  result.isRelational && !result.isMultiRelational
+                    ? `{{ ${model?.name}.${name}.id }}`
+                    : `{{ ${model?.name}.${name} }}`,
               },
               configuration: {
+                allowedKinds: ['PASSWORD'],
+                disabled: true,
                 condition: {
                   type: 'HIDE',
-                  option: 'actionProperty',
+                  option: 'property',
                   comparator: 'EQ',
                   value: '',
                 },
               },
             }));
           }
-          if (validate()) {
-            if (
-              (selectedPrefab?.name === BettyPrefabs.UPDATE_FORM ||
-                ((selectedPrefab?.name === BettyPrefabs.CREATE_FORM ||
-                  selectedPrefab?.name === BettyPrefabs.FORM ||
-                  selectedPrefab?.name === BettyPrefabs.LOGIN_FORM) &&
-                  originalPrefab.name === BettyPrefabs.HIDDEN)) &&
-              propertyId
-            ) {
-              const valueOptions = [
-                {
-                  id:
-                    result.isRelational && !result.isMultiRelational
-                      ? [propertyId, modelProperty.id]
-                      : propertyId,
-                  type: 'PROPERTY',
-                  name:
-                    result.isRelational && !result.isMultiRelational
-                      ? `{{ ${model?.name}.${name}.id }}`
-                      : `{{ ${model?.name}.${name} }}`,
-                },
-              ];
-
-              setOption(newPrefab.structure[0], 'value', (option) => ({
-                ...option,
-                value:
-                  option.type === 'VARIABLE'
-                    ? valueOptions
-                    : (propertyId as any),
-              }));
-            }
-          }
+          validate();
           save({ ...originalPrefab, structure: [newPrefab.structure[0]] });
         }}
       />

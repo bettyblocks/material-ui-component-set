@@ -36,7 +36,7 @@
       RadioGroup,
     } = window.MaterialUI.Core;
     const isDev = env === 'dev';
-    const modelProperty = getProperty(property || '') || {};
+    const modelProperty = getProperty(property.id || '') || {};
 
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);

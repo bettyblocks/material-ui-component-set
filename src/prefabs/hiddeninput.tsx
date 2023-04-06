@@ -6,6 +6,7 @@ import {
   variable,
   Icon,
   BeforeCreateArgs,
+  PrefabComponentOption,
 } from '@betty-blocks/component-sdk';
 import { deleteActionVariable } from './hooks/deleteActionVariable';
 
@@ -234,7 +235,7 @@ const beforeCreate = ({
             configuration: {
               condition: {
                 type: 'SHOW',
-                option: 'actionProperty',
+                option: 'property',
                 comparator: 'EQ',
                 value: '',
               },
@@ -264,21 +265,24 @@ const beforeCreate = ({
             value: result.variable.variableId,
           }));
           if (propertyBased) {
-            setOption(newPrefab.structure[0], 'actionProperty', (option) => ({
-              ...option,
-              value: {
-                modelProperty: propertyPath,
-                actionVariableId: result.variable.variableId,
-              },
-              configuration: {
-                condition: {
-                  type: 'HIDE',
-                  option: 'actionProperty',
-                  comparator: 'EQ',
-                  value: '',
+            setOption(
+              newPrefab.structure[0],
+              'property',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: {
+                  id:
+                    result.isRelational && !result.isMultiRelational
+                      ? [propertyId, modelProperty.id]
+                      : propertyId,
+                  type: 'PROPERTY',
+                  name:
+                    result.isRelational && !result.isMultiRelational
+                      ? `{{ ${model?.name}.${name}.id }}`
+                      : `{{ ${model?.name}.${name} }}`,
                 },
-              },
-            }));
+              }),
+            );
           }
           if (validate()) {
             if (

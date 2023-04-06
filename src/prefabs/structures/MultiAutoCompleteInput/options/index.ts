@@ -19,11 +19,13 @@ export const options = {
     value: '',
     configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
   }),
-  actionProperty: option('ACTION_JS_PROPERTY', {
-    label: 'Property',
+  property: property('Property', {
     value: '',
     configuration: {
-      condition: hideIf('actionProperty', 'EQ', ''),
+      allowedKinds: ['HAS_AND_BELONGS_TO_MANY', 'HAS_MANY'],
+      allowRelations: true,
+      disabled: true,
+      condition: hideIf('property', 'EQ', ''),
     },
   }),
   label: variable('Label', { value: [] }),

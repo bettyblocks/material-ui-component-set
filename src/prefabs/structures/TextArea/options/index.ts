@@ -1,13 +1,14 @@
 import {
+  hideIf,
   option,
-  text,
-  variable,
-  toggle,
   property,
+  text,
+  toggle,
+  variable,
 } from '@betty-blocks/component-sdk';
-import { advanced } from '../TextInput/options/advanced';
-import { styles } from '../TextInput/options/styles';
-import { validation } from '../TextInput/options/validation';
+import { advanced } from '../../TextInput/options/advanced';
+import { styles } from '../../TextInput/options/styles';
+import { validation } from '../../TextInput/options/validation';
 
 export const options = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
@@ -17,6 +18,11 @@ export const options = {
 
   property: property('Property', {
     value: '',
+    configuration: {
+      allowedKinds: ['TEXT', 'URL', 'IBAN', 'STRING'],
+      disabled: true,
+      condition: hideIf('property', 'EQ', ''),
+    },
   }),
 
   label: variable('Label', { value: [''] }),

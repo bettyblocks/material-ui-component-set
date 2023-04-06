@@ -18,9 +18,13 @@ export const options = {
     value: '',
     configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
   }),
-
   property: property('Property', {
     value: '',
+    configuration: {
+      allowedKinds: ['LIST', 'BELONGS_TO'],
+      disabled: true,
+      condition: hideIf('property', 'EQ', ''),
+    },
   }),
 
   label: variable('Label', { value: ['Radio'] }),

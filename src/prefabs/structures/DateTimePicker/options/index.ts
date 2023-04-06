@@ -1,5 +1,6 @@
 import {
   buttongroup,
+  hideIf,
   option,
   property,
   showIf,
@@ -20,7 +21,9 @@ export const options = {
   property: property('Property', {
     value: '',
     configuration: {
-      allowedKinds: ['DATE', 'DATE_TIME'],
+      allowedKinds: ['DATE'],
+      disabled: true,
+      condition: hideIf('property', 'EQ', ''),
     },
   }),
 
