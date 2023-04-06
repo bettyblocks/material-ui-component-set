@@ -107,7 +107,6 @@
           )}
           <Rating
             className={classes.ratingIcon}
-            name={name}
             value={currentValue}
             precision={precision}
             size={size === 'custom' ? customSize : size}
@@ -132,6 +131,7 @@
             tabIndex="-1"
             required={required}
             value={currentValue}
+            name={name}
           />
         </FormControl>
       </FormGroup>
@@ -221,12 +221,7 @@
         },
       },
       validationInput: {
-        height: 0,
-        width: 0,
-        fontSize: 0,
-        padding: 0,
-        border: 'none',
-        pointerEvents: 'none',
+        display: 'none',
       },
       formControl: {
         marginTop: '15px !important',
