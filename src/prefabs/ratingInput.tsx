@@ -254,10 +254,9 @@ const beforeCreate = ({
           if (validate()) {
             if (
               (selectedPrefab?.name === BettyPrefabs.UPDATE_FORM ||
-                ((selectedPrefab?.name === BettyPrefabs.CREATE_FORM ||
-                  selectedPrefab?.name === BettyPrefabs.FORM ||
-                  selectedPrefab?.name === BettyPrefabs.LOGIN_FORM) &&
-                  originalPrefab.name === BettyPrefabs.HIDDEN)) &&
+                selectedPrefab?.name === BettyPrefabs.CREATE_FORM ||
+                selectedPrefab?.name === BettyPrefabs.FORM ||
+                selectedPrefab?.name === BettyPrefabs.LOGIN_FORM) &&
               propertyId
             ) {
               const valueOptions = [
