@@ -11,6 +11,7 @@ import {
   option,
   showIf,
   hideIf,
+  property,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -45,10 +46,13 @@ export const ratingInputOptions = {
     value: '',
     configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
   }),
-  actionProperty: option('ACTION_JS_PROPERTY', {
-    label: 'Property',
+  property: property('Property', {
     value: '',
-    configuration: { condition: hideIf('actionProperty', 'EQ', '') },
+    configuration: {
+      allowedKinds: ['DECIMAL'],
+      disabled: true,
+      condition: hideIf('property', 'EQ', ''),
+    },
   }),
   hideLabel: toggle('Hide label'),
 

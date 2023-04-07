@@ -219,7 +219,7 @@ const beforeCreate = ({
             configuration: {
               condition: {
                 type: 'SHOW',
-                option: 'actionProperty',
+                option: 'property',
                 comparator: 'EQ',
                 value: '',
               },
@@ -235,16 +235,25 @@ const beforeCreate = ({
             value: result.variable.variableId,
           }));
           if (propertyBased) {
-            setOption(newPrefab.structure[0], 'actionProperty', (option) => ({
+            setOption(newPrefab.structure[0], 'property', (option) => ({
               ...option,
               value: {
-                modelProperty: propertyPath,
-                actionVariableId: result.variable.variableId,
+                id:
+                  result.isRelational && !result.isMultiRelational
+                    ? [propertyId, modelProperty.id]
+                    : propertyId,
+                type: 'PROPERTY',
+                name:
+                  result.isRelational && !result.isMultiRelational
+                    ? `{{ ${model?.name}.${name}.id }}`
+                    : `{{ ${model?.name}.${name} }}`,
               },
               configuration: {
+                allowedKinds: ['DECIMAL'],
+                disabled: true,
                 condition: {
                   type: 'HIDE',
-                  option: 'actionProperty',
+                  option: 'property',
                   comparator: 'EQ',
                   value: '',
                 },
