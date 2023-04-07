@@ -4,7 +4,8 @@
   allowedTypes: [],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { FormControl, FormHelperText, InputLabel } = window.MaterialUI.Core;
+    const { FormControl, FormHelperText, InputLabel, FormGroup } =
+      window.MaterialUI.Core;
     const { Rating } = window.MaterialUI.Lab;
     const { env, useText, Icon } = B;
     const isDev = env === 'dev';
@@ -90,10 +91,7 @@
     }, [isDev, defaultValueText, helperTextResolved]);
 
     const RatingComponent = (
-      <div
-        className={classes.root}
-        data-component={dataComponentAttributeValue}
-      >
+      <FormGroup>
         <FormControl
           classes={{
             root: labelText.length !== 0 && !hideLabel && classes.formControl,
@@ -109,7 +107,6 @@
           )}
           <Rating
             className={classes.ratingIcon}
-            name={name}
             value={currentValue}
             precision={precision}
             size={size === 'custom' ? customSize : size}
@@ -120,6 +117,7 @@
             icon={IconComponent}
             onBlur={validationHandler}
             max={maxIcons}
+            data-component={dataComponentAttributeValue}
           />
           {helper && (
             <FormHelperText classes={{ root: classes.helper }}>
@@ -133,9 +131,10 @@
             tabIndex="-1"
             required={required}
             value={currentValue}
+            name={name}
           />
         </FormControl>
-      </div>
+      </FormGroup>
     );
 
     return isDev ? (
@@ -222,12 +221,7 @@
         },
       },
       validationInput: {
-        height: 0,
-        width: 0,
-        fontSize: 0,
-        padding: 0,
-        border: 'none',
-        pointerEvents: 'none',
+        display: 'none',
       },
       formControl: {
         marginTop: '15px !important',
