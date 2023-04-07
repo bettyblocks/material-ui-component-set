@@ -1,5 +1,5 @@
 import {
-  option,
+  hideIf,
   property,
   toggle,
   variable,
@@ -12,9 +12,13 @@ export const options = (supportImages?: boolean) => {
   const style = styles(supportImages);
 
   return {
-    actionProperty: option('ACTION_JS_PROPERTY', {
-      label: 'Property',
+    property: property('Property', {
       value: '',
+      configuration: {
+        allowedKinds: ['FILE'],
+        disabled: true,
+        condition: hideIf('property', 'EQ', ''),
+      },
     }),
     label: variable('Label', { value: ['Select file(s)...'] }),
     value: property('Value'),
