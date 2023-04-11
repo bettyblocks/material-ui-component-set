@@ -46,6 +46,7 @@
     const DateFns = new DateFnsUtils();
     const isDev = env === 'dev';
     const parsedValue = useText(value);
+    const [isDisabled, setIsDisabled] = useState(disabled);
     const [selectedDate, setSelectedDate] = useState(parsedValue || null);
     const [errorState, setErrorState] = useState(error);
     const helperTextResolved = useText(helperText);
@@ -61,7 +62,7 @@
     };
 
     const parsedLabel = useText(label);
-    const labelText = parsedLabel || name;
+    const labelText = parsedLabel;
     const isValidDate = (date) => date instanceof Date && !isNaN(date);
 
     const convertToDate = (date) => {
@@ -146,6 +147,8 @@
     }, [parsedValue]);
 
     B.defineFunction('Clear', () => setSelectedDate(null));
+    B.defineFunction('Enable', () => setIsDisabled(false));
+    B.defineFunction('Disable', () => setIsDisabled(true));
 
     let DateTimeComponent;
     let format;
@@ -221,7 +224,7 @@
           tabIndex: isDev ? -1 : undefined,
         }}
         required={required}
-        disabled={disabled}
+        disabled={isDisabled}
         label={!hideLabel && labelText}
         margin={margin}
         helperText={helper}

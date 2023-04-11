@@ -2,6 +2,7 @@ import {
   buttongroup,
   hideIf,
   option,
+  property,
   showIf,
   text,
   toggle,
@@ -17,10 +18,13 @@ export const options = {
     value: '',
   }),
 
-  actionProperty: option('ACTION_JS_PROPERTY', {
-    label: 'Property',
+  property: property('Property', {
     value: '',
-    configuration: { condition: hideIf('actionProperty', 'EQ', '') },
+    configuration: {
+      allowedKinds: ['DATE'],
+      disabled: true,
+      condition: hideIf('property', 'EQ', ''),
+    },
   }),
 
   label: variable('Label', { value: [''] }),

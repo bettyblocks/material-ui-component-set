@@ -19,7 +19,7 @@ const beforeCreate = ({
 
   return (
     <CreateFormInputWizard
-      supportedKinds={['RICHTEXT']}
+      supportedKinds={['RICH_TEXT']}
       actionVariableOption={actionVariableOption?.key || null}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
