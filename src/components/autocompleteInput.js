@@ -21,7 +21,6 @@
       useText,
     } = B;
     const {
-      actionProperty,
       actionVariableId: name,
       closeOnSelect,
       dataComponentAttribute: dataComponentAttributeRaw,
@@ -44,6 +43,7 @@
       orderBy,
       pattern,
       placeholder: placeholderRaw,
+      property,
       required: defaultRequired,
       size,
       type,
@@ -107,7 +107,7 @@
     const tooShortMessage = useText(validationTooShort);
     const belowMinimumMessage = useText(validationBelowMinimum);
     const helperTextResolved = useText(helperTextRaw);
-    const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
+    const modelProperty = getProperty(property || '') || {};
     const labelProperty = getProperty(labelPropertyId) || {};
     const { modelId: propertyModelId, referenceModelId } = modelProperty;
     const { contextModelId } = model;

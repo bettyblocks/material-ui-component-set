@@ -1,3 +1,10 @@
+# [2.125.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.124.3...v2.125.0) (2023-04-07)
+
+
+### Features
+
+* convert actionProperty to property option ([42bef12](https://github.com/bettyblocks/material-ui-component-set/commit/42bef12a61e287203acd94f294744317f9b114be))
+
 ## [2.124.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.124.2...v2.124.3) (2023-03-31)
 
 

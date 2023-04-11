@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      actionProperty,
       actionVariableId: name,
       dataComponentAttribute = ['CheckboxGroup'],
       disabled,
@@ -21,6 +20,7 @@
       order,
       orderBy,
       position,
+      property,
       required,
       row,
       showError,
@@ -52,7 +52,7 @@
     const helperTextResolved = useText(helperText);
     const defaultValueText = useText(valueRaw, { rawValue: true });
 
-    const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
+    const modelProperty = getProperty(property || '') || {};
     const { modelId: propertyModelId, referenceModelId } = modelProperty;
     const { contextModelId } = model;
 
