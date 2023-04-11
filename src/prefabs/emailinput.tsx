@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
+import {
+  BeforeCreateArgs,
+  Icon,
+  prefab,
+  PrefabComponentOption,
+} from '@betty-blocks/component-sdk';
 import { TextInput } from './structures/TextInput';
 
 const beforeCreate = ({
@@ -219,7 +224,7 @@ const beforeCreate = ({
             configuration: {
               condition: {
                 type: 'SHOW',
-                option: 'actionProperty',
+                option: 'property',
                 comparator: 'EQ',
                 value: '',
               },
@@ -230,48 +235,46 @@ const beforeCreate = ({
             value: [variableName],
           }));
 
-          if (
-            originalPrefab.name === BettyPrefabs.SELECT ||
-            originalPrefab.name === BettyPrefabs.RADIO
-          ) {
-            setOption(newPrefab.structure[0], 'property', (option) => ({
-              ...option,
-              value: {
-                id: propertyId,
-                type: 'PROPERTY',
-                componentId: selectedPrefab?.id,
-              },
-            }));
-          }
-
           setOption(newPrefab.structure[0], nameOptionKey, (option) => ({
             ...option,
             value: result.variable.variableId,
           }));
           if (propertyBased) {
-            setOption(newPrefab.structure[0], 'actionProperty', (option) => ({
-              ...option,
-              value: {
-                modelProperty: propertyPath,
-                actionVariableId: result.variable.variableId,
-              },
-              configuration: {
-                condition: {
-                  type: 'HIDE',
-                  option: 'actionProperty',
-                  comparator: 'EQ',
-                  value: '',
+            setOption(
+              newPrefab.structure[0],
+              'property',
+              (originalOption: PrefabComponentOption) => ({
+                ...originalOption,
+                value: {
+                  id:
+                    result.isRelational && !result.isMultiRelational
+                      ? [propertyId, modelProperty.id]
+                      : propertyId,
+                  type: 'PROPERTY',
+                  name:
+                    result.isRelational && !result.isMultiRelational
+                      ? `{{ ${model?.name}.${name}.id }}`
+                      : `{{ ${model?.name}.${name} }}`,
                 },
-              },
-            }));
+                configuration: {
+                  allowedKinds: ['EMAIL_ADDRESS'],
+                  disabled: true,
+                  condition: {
+                    type: 'HIDE',
+                    option: 'property',
+                    comparator: 'EQ',
+                    value: '',
+                  },
+                },
+              }),
+            );
           }
           if (validate()) {
             if (
               (selectedPrefab?.name === BettyPrefabs.UPDATE_FORM ||
-                ((selectedPrefab?.name === BettyPrefabs.CREATE_FORM ||
-                  selectedPrefab?.name === BettyPrefabs.FORM ||
-                  selectedPrefab?.name === BettyPrefabs.LOGIN_FORM) &&
-                  originalPrefab.name === BettyPrefabs.HIDDEN)) &&
+                selectedPrefab?.name === BettyPrefabs.CREATE_FORM ||
+                selectedPrefab?.name === BettyPrefabs.FORM ||
+                selectedPrefab?.name === BettyPrefabs.LOGIN_FORM) &&
               propertyId
             ) {
               const valueOptions = [

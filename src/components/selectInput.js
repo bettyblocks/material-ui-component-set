@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      actionProperty,
       actionVariableId,
       blanco,
       dataComponentAttribute = ['Select'],
@@ -21,6 +20,7 @@
       order,
       floatLabel,
       orderBy,
+      property,
       required,
       size,
       validationValueMissing = [''],
@@ -37,7 +37,7 @@
     const [disabled, setIsDisabled] = useState(initialIsDisabled);
     const mounted = useRef(false);
     const blancoText = useText(blanco);
-    const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
+    const modelProperty = getProperty(property || '') || {};
     const [currentValue, setCurrentValue] = useState(useText(prefabValue));
     const labelText = useText(label);
     const defaultValueText = useText(prefabValue);

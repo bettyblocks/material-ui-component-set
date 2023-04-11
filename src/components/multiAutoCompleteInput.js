@@ -27,7 +27,6 @@
       useText,
     } = B;
     const {
-      actionProperty,
       actionVariableId: name,
       closeOnSelect,
       dataComponentAttribute: dataComponentAttributeRaw,
@@ -51,6 +50,7 @@
       orderBy,
       pattern,
       placeholder: placeholderRaw,
+      property,
       renderCheckboxes,
       required,
       showError,
@@ -104,7 +104,7 @@
     const belowMinimumMessage = useText(validationBelowMinimum);
     const helperTextResolved = useText(helperTextRaw);
 
-    const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
+    const modelProperty = getProperty(property || '') || {};
     const { contextModelId } = model;
     const labelProperty = getProperty(labelPropertyId) || {};
     const { modelId: propertyModelId } = modelProperty;
@@ -518,7 +518,7 @@
       data: queryData,
       refetch,
     } = useAllQuery(
-      actionProperty ? modelProperty.referenceModelId : modelId,
+      property ? modelProperty.referenceModelId : modelId,
       {
         take: 20,
         rawFilter: mergeFilters(optionFilter, resolvedExternalFiltersObject),

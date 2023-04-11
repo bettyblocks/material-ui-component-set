@@ -1,11 +1,7 @@
 import * as React from 'react';
-import {
-  BeforeCreateArgs,
-  Icon,
-  PrefabComponentOption,
-  prefab,
-} from '@betty-blocks/component-sdk';
-import { RadioInput } from './structures/RadioInput';
+import { prefab, Icon, BeforeCreateArgs } from '@betty-blocks/component-sdk';
+
+import { RatingInput } from './structures/RatingInput';
 
 const beforeCreate = ({
   close,
@@ -50,7 +46,6 @@ const beforeCreate = ({
   const [prefabSaved, setPrefabSaved] = React.useState(false);
 
   const [validationMessage, setValidationMessage] = React.useState('');
-
   const modelRequest = useModelQuery({
     variables: { id: modelId },
     onCompleted: (result) => {
@@ -113,7 +108,7 @@ const beforeCreate = ({
     }
   }
 
-  const unsupportedKinds = createBlacklist(['LIST', 'BELONGS_TO']);
+  const unsupportedKinds = createBlacklist(['DECIMAL']);
 
   const structure = originalPrefab.structure[0];
 
@@ -203,14 +198,7 @@ const beforeCreate = ({
           // eslint-disable-next-line no-param-reassign
           structure.id = componentId;
 
-          let kind = propertyKind || 'STRING';
-          const isListProperty = kind === ('LIST' || 'list');
-
-          const integerKind = 'BELONGS_TO';
-
-          if (!propertyBased && !isListProperty) {
-            kind = integerKind;
-          }
+          const kind = propertyKind || 'DECIMAL';
 
           const variableName = variableInput || name;
           const result = await prepareInput(
@@ -242,40 +230,35 @@ const beforeCreate = ({
             value: [variableName],
           }));
 
-          if (propertyModelId && !isListProperty) {
-            setOption(newPrefab.structure[0], 'model', (option) => ({
-              ...option,
-              value: propertyModelId,
-            }));
-          }
-
           setOption(newPrefab.structure[0], nameOptionKey, (option) => ({
             ...option,
             value: result.variable.variableId,
           }));
           if (propertyBased) {
-            setOption(newPrefab.structure[0], 'optionType', (option) => ({
+            setOption(newPrefab.structure[0], 'property', (option) => ({
               ...option,
-              value: result.isRelational ? 'model' : 'property',
-            }));
-            setOption(
-              newPrefab.structure[0],
-              'property',
-              (originalOption: PrefabComponentOption) => ({
-                ...originalOption,
-                value: {
-                  id:
-                    result.isRelational && !result.isMultiRelational
-                      ? [propertyId, modelProperty.id]
-                      : propertyId,
-                  type: 'PROPERTY',
-                  name:
-                    result.isRelational && !result.isMultiRelational
-                      ? `{{ ${model?.name}.${name}.id }}`
-                      : `{{ ${model?.name}.${name} }}`,
+              value: {
+                id:
+                  result.isRelational && !result.isMultiRelational
+                    ? [propertyId, modelProperty.id]
+                    : propertyId,
+                type: 'PROPERTY',
+                name:
+                  result.isRelational && !result.isMultiRelational
+                    ? `{{ ${model?.name}.${name}.id }}`
+                    : `{{ ${model?.name}.${name} }}`,
+              },
+              configuration: {
+                allowedKinds: ['DECIMAL'],
+                disabled: true,
+                condition: {
+                  type: 'HIDE',
+                  option: 'property',
+                  comparator: 'EQ',
+                  value: '',
                 },
-              }),
-            );
+              },
+            }));
           }
           if (validate()) {
             if (
@@ -317,12 +300,8 @@ const beforeCreate = ({
 
 const attributes = {
   category: 'FORM',
-  icon: Icon.RadioButtonIcon,
-  keywords: ['Form', 'input'],
+  icon: Icon.RatingIcon,
+  keywords: ['FORM', 'INPUT', 'RATING'],
 };
 
-export default prefab('Radio', attributes, beforeCreate, [
-  RadioInput({
-    label: 'Radio',
-  }),
-]);
+export default prefab('Rating', attributes, beforeCreate, [RatingInput({})]);
