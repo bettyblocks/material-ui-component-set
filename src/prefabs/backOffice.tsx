@@ -5396,7 +5396,7 @@ const beforeCreate = ({
 
   const enrichVarObj = (obj: any) => {
     const returnObject = {
-      id: [obj.id],
+      id: [obj.id].flat(),
       kind: obj.kind,
       label: obj.label,
       name: '',

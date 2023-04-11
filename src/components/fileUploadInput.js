@@ -9,21 +9,21 @@
       window.MaterialUI.Core;
     const {
       accept,
-      actionProperty,
       actionVariableId: name,
       dataComponentAttribute = ['FileUpload'],
       disabled,
       fullWidth,
       helperText,
-      hideLabel,
       hideDefaultError,
+      hideLabel,
       label,
-      value: valueRaw,
       margin,
       maxFileSize,
       maxFileSizeMessage: maxFileSizeMessageRaw,
-      showImagePreview,
+      property: selectedProperty,
       required,
+      showImagePreview,
+      value: valueRaw,
     } = options;
 
     const isDev = env === 'dev';
@@ -37,8 +37,6 @@
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const requiredText = required ? '*' : '';
 
-    const { modelProperty } = actionProperty;
-
     const getPropertyId = (property) => {
       if (Array.isArray(property)) {
         return property[0];
@@ -51,7 +49,7 @@
       return property;
     };
 
-    const propertyId = getPropertyId(modelProperty);
+    const propertyId = getPropertyId(selectedProperty);
 
     const [upload, { error, loading, data: fileReference }] =
       usePresignedUpload({ propertyId });
@@ -214,7 +212,6 @@
 
       // mitigation of issue DT-1856
       if (!isDev && !fileName) return null;
-
       return (
         <div className={classes.listView}>
           <div className={classes.fileDetailList}>

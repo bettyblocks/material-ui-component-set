@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
+import {
+  BeforeCreateArgs,
+  Icon,
+  PrefabComponentOption,
+  prefab,
+} from '@betty-blocks/component-sdk';
 import { FileUpload } from './structures/FileUpload';
 
 const beforeCreate = ({
@@ -178,7 +183,7 @@ const beforeCreate = ({
             configuration: {
               condition: {
                 type: 'SHOW',
-                option: 'actionProperty',
+                option: 'property',
                 comparator: 'EQ',
                 value: '',
               },
@@ -193,21 +198,34 @@ const beforeCreate = ({
             ...option,
             value: result.variable.variableId,
           }));
-          setOption(newPrefab.structure[0], 'actionProperty', (option) => ({
-            ...option,
-            value: {
-              modelProperty: propertyPath,
-              actionVariableId: result.variable.variableId,
-            },
-            configuration: {
-              condition: {
-                type: 'HIDE',
-                option: 'actionProperty',
-                comparator: 'EQ',
-                value: '',
+          setOption(
+            newPrefab.structure[0],
+            'property',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: {
+                id:
+                  result.isRelational && !result.isMultiRelational
+                    ? [propertyId, modelProperty.id]
+                    : propertyId,
+                type: 'PROPERTY',
+                name:
+                  result.isRelational && !result.isMultiRelational
+                    ? `{{ ${model?.name}.${name}.id }}`
+                    : `{{ ${model?.name}.${name} }}`,
               },
-            },
-          }));
+              configuration: {
+                allowedKinds: ['IMAGE'],
+                disabled: true,
+                condition: {
+                  type: 'HIDE',
+                  option: 'property',
+                  comparator: 'EQ',
+                  value: '',
+                },
+              },
+            }),
+          );
           setOption(newPrefab.structure[0], 'value', (option) => ({
             ...option,
             value: [propertyPath.id[propertyPath.id.length - 1]],

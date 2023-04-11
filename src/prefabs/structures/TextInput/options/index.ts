@@ -1,4 +1,9 @@
-import { option, hideIf, variable } from '@betty-blocks/component-sdk';
+import {
+  option,
+  hideIf,
+  variable,
+  property,
+} from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
 import { styles } from './styles';
 import { validation } from './validation';
@@ -9,10 +14,13 @@ export const options = {
     value: '',
   }),
 
-  actionProperty: option('ACTION_JS_PROPERTY', {
-    label: 'Property',
+  property: property('Property', {
     value: '',
-    configuration: { condition: hideIf('actionProperty', 'EQ', '') },
+    configuration: {
+      allowedKinds: ['TEXT', 'URL', 'IBAN', 'STRING'],
+      disabled: true,
+      condition: hideIf('property', 'EQ', ''),
+    },
   }),
 
   label: variable('Label', { value: [''] }),
