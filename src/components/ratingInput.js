@@ -4,39 +4,41 @@
   allowedTypes: [],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { FormControl, FormHelperText, InputLabel } = window.MaterialUI.Core;
+    const { FormControl, FormHelperText, InputLabel, FormGroup } =
+      window.MaterialUI.Core;
     const { Rating } = window.MaterialUI.Lab;
-    const { env, getCustomModelAttribute, useText, Icon } = B;
+    const { env, useText, Icon } = B;
     const isDev = env === 'dev';
 
     const {
+      actionVariableId: name,
       hideLabel,
-      customModelAttribute: customModelAttributeObj,
+      label = '',
+      value: defaultValue,
       numberOfIcons,
       size,
+      required,
       customSize,
       disabled,
       readonly,
       precision,
       icon,
-      nameAttribute,
       validationValueMissing = [''],
       error,
       helperText = [''],
       dataComponentAttribute = ['Rating'],
     } = options;
 
-    const {
-      id: customModelAttributeId,
-      label = [],
-      value: defaultValue = [],
-    } = customModelAttributeObj;
     const labelText = useText(label);
 
     const [currentValue, setCurrentValue] = useState(
       useText(defaultValue, { rawValue: true }),
     );
     const [isDisabled, setIsDisabled] = useState(disabled);
+
+    useEffect(() => {
+      setIsDisabled(disabled);
+    }, [disabled]);
 
     const value = useText(defaultValue, { rawValue: true });
     useEffect(() => {
@@ -47,9 +49,6 @@
       B.defineFunction('Reset', () => setCurrentValue(value));
     }, [value]);
 
-    const customModelAttribute = getCustomModelAttribute(
-      customModelAttributeId,
-    );
     const maxIcons = parseInt(numberOfIcons, 10) || 0;
     const [errorState, setErrorState] = useState(error);
     const [helper, setHelper] = useState(useText(helperText));
@@ -57,12 +56,9 @@
 
     const IconComponent = <Icon name={icon} className={classes.ratingIcon} />;
 
-    const { name: customModelAttributeName, validations: { required } = {} } =
-      customModelAttribute || {};
-    const nameAttributeValue = useText(nameAttribute);
-
     const defaultValueText = useText(defaultValue);
     const helperTextResolved = useText(helperText);
+
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
 
@@ -95,10 +91,7 @@
     }, [isDev, defaultValueText, helperTextResolved]);
 
     const RatingComponent = (
-      <div
-        className={classes.root}
-        data-component={dataComponentAttributeValue}
-      >
+      <FormGroup>
         <FormControl
           classes={{
             root: labelText.length !== 0 && !hideLabel && classes.formControl,
@@ -114,7 +107,6 @@
           )}
           <Rating
             className={classes.ratingIcon}
-            name={nameAttributeValue || customModelAttributeName}
             value={currentValue}
             precision={precision}
             size={size === 'custom' ? customSize : size}
@@ -125,6 +117,7 @@
             icon={IconComponent}
             onBlur={validationHandler}
             max={maxIcons}
+            data-component={dataComponentAttributeValue}
           />
           {helper && (
             <FormHelperText classes={{ root: classes.helper }}>
@@ -138,9 +131,10 @@
             tabIndex="-1"
             required={required}
             value={currentValue}
+            name={name}
           />
         </FormControl>
-      </div>
+      </FormGroup>
     );
 
     return isDev ? (
@@ -227,12 +221,7 @@
         },
       },
       validationInput: {
-        height: 0,
-        width: 0,
-        fontSize: 0,
-        padding: 0,
-        border: 'none',
-        pointerEvents: 'none',
+        display: 'none',
       },
       formControl: {
         marginTop: '15px !important',
