@@ -1,3 +1,22 @@
+# [2.126.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.125.0...v2.126.0) (2023-04-11)
+
+
+### Bug Fixes
+
+* properties misconfigured ([ca59741](https://github.com/bettyblocks/material-ui-component-set/commit/ca5974119d855b5a048ef0b89a643aaa0594a1ad))
+
+
+### Features
+
+* change backoffice inputs and allow seperate properties ([ec0492d](https://github.com/bettyblocks/material-ui-component-set/commit/ec0492d60b3a8602bef7d4162aea759afd214435))
+
+# [2.125.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.124.3...v2.125.0) (2023-04-07)
+
+
+### Features
+
+* convert actionProperty to property option ([42bef12](https://github.com/bettyblocks/material-ui-component-set/commit/42bef12a61e287203acd94f294744317f9b114be))
+
 ## [2.124.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.124.2...v2.124.3) (2023-03-31)
 
 

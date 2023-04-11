@@ -18,10 +18,13 @@ export const checkboxGroupInputOptions = {
     label: 'Action input variable',
     value: '',
   }),
-  actionProperty: option('ACTION_JS_PROPERTY', {
-    label: 'Property',
+  property: property('Property', {
     value: '',
-    configuration: { condition: hideIf('actionProperty', 'EQ', '') },
+    configuration: {
+      allowedKinds: ['BOOLEAN'],
+      disabled: true,
+      condition: hideIf('property', 'EQ', ''),
+    },
   }),
   label: variable('Label', { value: ['CheckboxGroup'] }),
   value: variable('Value', {

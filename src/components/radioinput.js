@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      actionProperty,
       actionVariableId: name,
       dataComponentAttribute = ['Radio'],
       disabled: initialIsDisabled,
@@ -20,6 +19,7 @@
       model,
       order,
       orderBy,
+      property,
       required,
       row,
       size,
@@ -36,7 +36,7 @@
       RadioGroup,
     } = window.MaterialUI.Core;
     const isDev = env === 'dev';
-    const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
+    const modelProperty = getProperty(property.id || '') || {};
 
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
