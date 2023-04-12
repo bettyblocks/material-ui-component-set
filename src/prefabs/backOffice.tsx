@@ -5324,6 +5324,8 @@ const beforeCreate = ({
     PropertySelector,
     ModelRelationSelector,
     PropertiesSelector,
+    Box: BeforeCreateBox,
+    CheckBox,
     PartialSelector,
     Text: TextComp,
     Box: BoxComp,
@@ -5354,6 +5356,11 @@ const beforeCreate = ({
   const [modelProperties, setModelProperties] = React.useState<Properties[]>(
     [],
   );
+  const [otherPropertiesInForms, setOtherPropertiesInForm] =
+    React.useState<Boolean>(false);
+  const [formProperties, setFormProperties] = React.useState<Properties[]>([]);
+  const [formPropertiesValidation, setFormPropertiesValidation] =
+    React.useState<Boolean>(false);
   const [modelValidation, setModelValidation] = React.useState(false);
   const [dataTablePropertiesValidation, setDataTablePropertiesValidation] =
     React.useState(false);
@@ -5625,6 +5632,7 @@ const beforeCreate = ({
   });
 
   const stepper = {
+    // eslint-disable-next-line consistent-return
     setStep: (step: number) => {
       if (step === 1) {
         return (
@@ -5678,73 +5686,138 @@ const beforeCreate = ({
           </>
         );
       }
-
-      return (
-        <>
+      if (step === 2) {
+        return (
+          <>
+            <Field
+              label="Model"
+              error={
+                modelValidation && (
+                  <TextComp color="#e82600">
+                    Selecting a model is required
+                  </TextComp>
+                )
+              }
+            >
+              <ModelRelationSelector
+                onChange={(value: string) => {
+                  setModelValidation(false);
+                  setModelId(value);
+                  // if the value gets emptied also empty the properties selector values
+                  if (!value) {
+                    setDataTableProperties([]);
+                    if (otherPropertiesInForms) setFormProperties([]);
+                  }
+                }}
+                value={modelId}
+              />
+            </Field>
+            <Field label="Property used for the search field">
+              <PropertySelector
+                modelId={modelId}
+                onChange={(value: any) => {
+                  setSearchProp(value);
+                }}
+                value={searchProp}
+                disabled={!modelId}
+                disabledKinds={[
+                  'DATE',
+                  'DATE_TIME',
+                  'TIME',
+                  'BELONGS_TO',
+                  'HAS_AND_BELONGS_TO_MANY',
+                  'HAS_MANY',
+                  'MULTI_FILE',
+                  'AUTO_INCREMENT',
+                  'COUNT',
+                  'MULTI_IMAGE',
+                  'PDF',
+                  'RICH_TEXT',
+                  'SIGNED_PDF',
+                  'SUM',
+                  'BOOLEAN_EXPRESSION',
+                  'DATE_EXPRESSION',
+                  'DATE_TIME_EXPRESSION',
+                  'DECIMAL_EXPRESSION',
+                  'INTEGER_EXPRESSION',
+                  'MINUTES_EXPRESSION',
+                  'PRICE_EXPRESSION',
+                  'STRING_EXPRESSION',
+                  'TEXT_EXPRESSION',
+                  'MINUTES',
+                  'ZIPCODE',
+                  'IMAGE',
+                  'FILE',
+                  'PASSWORD',
+                  'SERIAL',
+                ]}
+                showFormat={false}
+              />
+            </Field>
+            <BeforeCreateBox pad={{ bottom: 'medium' }}>
+              <CheckBox
+                label={
+                  <TextComp color="#262a3a;">
+                    Use different properties for forms and detail view
+                  </TextComp>
+                }
+                checked={otherPropertiesInForms}
+                onChange={() => {
+                  setOtherPropertiesInForm(!otherPropertiesInForms);
+                }}
+              />
+            </BeforeCreateBox>
+            <Field
+              label="Properties shown in the data table"
+              error={
+                dataTablePropertiesValidation && (
+                  <TextComp color="#e82600">
+                    Selecting a property is required
+                  </TextComp>
+                )
+              }
+            >
+              <PropertiesSelector
+                modelId={modelId}
+                value={dataTableProperties}
+                disabledKinds={[
+                  'HAS_AND_BELONGS_TO_MANY',
+                  'HAS_MANY',
+                  'MULTI_FILE',
+                  'AUTO_INCREMENT',
+                  'COUNT',
+                  'MULTI_IMAGE',
+                  'PDF',
+                  'RICH_TEXT',
+                  'SIGNED_PDF',
+                  'SUM',
+                  'BOOLEAN_EXPRESSION',
+                  'DATE_EXPRESSION',
+                  'DATE_TIME_EXPRESSION',
+                  'DECIMAL_EXPRESSION',
+                  'INTEGER_EXPRESSION',
+                  'MINUTES_EXPRESSION',
+                  'PRICE_EXPRESSION',
+                  'STRING_EXPRESSION',
+                  'TEXT_EXPRESSION',
+                  'MINUTES',
+                  'ZIPCODE',
+                ]}
+                onChange={(value: Properties[]) => {
+                  setDataTableProperties(value);
+                  setDataTablePropertiesValidation(false);
+                }}
+              />
+            </Field>
+          </>
+        );
+      }
+      if (step === 3) {
+        return (
           <Field
-            label="Model"
+            label="Properties shown in the detail view and forms"
             error={
-              modelValidation && (
-                <TextComp color="#e82600">
-                  Selecting a model is required
-                </TextComp>
-              )
-            }
-          >
-            <ModelRelationSelector
-              onChange={(value: string) => {
-                setModelValidation(false);
-                setModelId(value);
-              }}
-              value={modelId}
-            />
-          </Field>
-          <Field label="Property used for the search field">
-            <PropertySelector
-              modelId={modelId}
-              onChange={(value: any) => {
-                setSearchProp(value);
-              }}
-              value={searchProp}
-              disabled={!modelId}
-              disabledKinds={[
-                'DATE',
-                'DATE_TIME',
-                'TIME',
-                'BELONGS_TO',
-                'HAS_AND_BELONGS_TO_MANY',
-                'HAS_MANY',
-                'MULTI_FILE',
-                'AUTO_INCREMENT',
-                'COUNT',
-                'MULTI_IMAGE',
-                'PDF',
-                'RICH_TEXT',
-                'SIGNED_PDF',
-                'SUM',
-                'BOOLEAN_EXPRESSION',
-                'DATE_EXPRESSION',
-                'DATE_TIME_EXPRESSION',
-                'DECIMAL_EXPRESSION',
-                'INTEGER_EXPRESSION',
-                'MINUTES_EXPRESSION',
-                'PRICE_EXPRESSION',
-                'STRING_EXPRESSION',
-                'TEXT_EXPRESSION',
-                'MINUTES',
-                'ZIPCODE',
-                'IMAGE',
-                'FILE',
-                'PASSWORD',
-                'SERIAL',
-              ]}
-              showFormat={false}
-            />
-          </Field>
-          <Field
-            label="Properties shown in the data table"
-            error={
-              dataTablePropertiesValidation && (
+              formPropertiesValidation && (
                 <TextComp color="#e82600">
                   Selecting a property is required
                 </TextComp>
@@ -5753,7 +5826,7 @@ const beforeCreate = ({
           >
             <PropertiesSelector
               modelId={modelId}
-              value={dataTableProperties}
+              value={formProperties}
               disabledKinds={[
                 'HAS_AND_BELONGS_TO_MANY',
                 'HAS_MANY',
@@ -5776,64 +5849,34 @@ const beforeCreate = ({
                 'TEXT_EXPRESSION',
                 'MINUTES',
                 'ZIPCODE',
+                'BELONGS_TO',
               ]}
               onChange={(value: Properties[]) => {
-                setDataTableProperties(value);
-                setDataTablePropertiesValidation(false);
+                setFormProperties(value);
+                setFormPropertiesValidation(false);
               }}
             />
           </Field>
-        </>
-      );
+        );
+      }
     },
     onSave: async () => {
       const newPrefab = { ...originalPrefab };
       const inputStructure = (
-        textValue: string,
         inputPrefab: PrefabReference,
       ): PrefabReference => {
-        const boxPrefab = cloneStructure('Box');
-        if (boxPrefab.type === 'COMPONENT') {
-          setOption(
-            boxPrefab,
-            'innerSpacing',
-            (options: PrefabComponentOption) => ({
-              ...options,
-              value: ['M', '0rem', '0rem', '0rem'],
-            }),
-          );
-
-          const textPrefab = cloneStructure('Text');
-          if (textPrefab.type === 'COMPONENT') {
-            setOption(
-              textPrefab,
-              'content',
-              (options: PrefabComponentOption) => ({
-                ...options,
-                value: [textValue],
-                configuration: { as: 'MULTILINE' },
-              }),
-            );
-            setOption(textPrefab, 'type', (options: PrefabComponentOption) => ({
-              ...options,
-              value: ['Body1'],
-            }));
-            setOption(
-              textPrefab,
-              'outerSpacing',
-              (options: PrefabComponentOption) => ({
-                ...options,
-                value: ['0rem', '0rem', 'S', '0rem'],
-              }),
-            );
-          }
-
-          boxPrefab.descendants.push(textPrefab);
-          boxPrefab.descendants.push(inputPrefab);
+        if (inputPrefab.type === 'COMPONENT') {
+          setOption(inputPrefab, 'floatLabel', (options) => ({
+            ...options,
+            value: true,
+          }));
         }
-
-        return boxPrefab;
+        return inputPrefab;
       };
+      if (otherPropertiesInForms && formProperties.length < 1) {
+        setFormPropertiesValidation(true);
+        return;
+      }
 
       if (!modelId || !model || !idProperty) {
         setModelValidation(true);
@@ -6113,17 +6156,23 @@ const beforeCreate = ({
         buttonColumn.descendants = [boxComp];
       }
       dataTableComp.descendants.push(buttonColumn);
+      const resolvedProperties = otherPropertiesInForms
+        ? formProperties
+        : modelProperties;
 
       // set create form
-      const filteredproperties = modelProperties.filter(
-        (prop: Properties) =>
-          prop.label !== 'Created at' &&
-          prop.label !== 'Updated at' &&
-          prop.label !== 'Id' &&
-          prop.kind !== 'PDF' &&
-          prop.kind !== 'MULTI_FILE' &&
-          prop.kind !== 'PASSWORD' &&
-          prop.kind !== 'LOGIN_TOKEN',
+      const filteredproperties = resolvedProperties.filter(
+        (prop: Properties) => {
+          return (
+            prop.label !== 'Created at' &&
+            prop.label !== 'Updated at' &&
+            prop.label !== 'Id' &&
+            prop.kind !== 'PDF' &&
+            prop.kind !== 'MULTI_FILE' &&
+            prop.kind !== 'PASSWORD' &&
+            prop.kind !== 'LOGIN_TOKEN'
+          );
+        },
       );
 
       const relationProperties = model.relationships.filter(
@@ -6133,11 +6182,14 @@ const beforeCreate = ({
       const createForm = treeSearch('#createForm', newPrefab.structure);
       if (!createForm) throw new Error('No create form found');
       createForm.id = createFormId;
-
       const createAction = await prepareAction(
         createFormId,
         idProperty,
-        [...filteredproperties, ...relationProperties],
+        [
+          ...filteredproperties,
+          // other properties not checked then add all belongs_to's otherwise spread empty array
+          ...(!otherPropertiesInForms ? relationProperties : []),
+        ],
         'create',
         undefined,
         `Back office - Create ${data?.model.label}`,
@@ -6146,99 +6198,213 @@ const beforeCreate = ({
       );
       Object.values(createAction.variables).forEach(
         ([prop, inputVariable]): void => {
-          const generateInputPrefabs = () => {
+          const generateInputPrefabs = (): PrefabReference | undefined => {
             let imageUpload;
             let imageUploadButton;
             let fileUpload;
             let fileUploadButton;
+            let input;
             switch (prop.kind) {
               case PropertyKind.BELONGS_TO:
-                return inputStructure(
-                  prop.label,
-                  makeBettyInput(
-                    BettyPrefabs.AUTO_COMPLETE,
-                    model,
-                    prop,
-                    inputVariable,
-                    createAction.relatedIdProperties,
-                    createAction.relatedModelIds,
-                  ),
+                input = makeBettyInput(
+                  BettyPrefabs.AUTO_COMPLETE,
+                  model,
+                  prop,
+                  inputVariable,
+                  createAction.relatedIdProperties,
+                  createAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               case PropertyKind.INTEGER:
-                return inputStructure(
-                  prop.label,
-                  makeBettyInput(
-                    BettyPrefabs.INTEGER,
-                    model,
-                    prop,
-                    inputVariable,
-                  ),
+                input = makeBettyInput(
+                  BettyPrefabs.INTEGER,
+                  model,
+                  prop,
+                  inputVariable,
+                  createAction.relatedIdProperties,
+                  createAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               case PropertyKind.EMAIL_ADDRESS:
-                return inputStructure(
-                  prop.label,
-                  makeBettyInput(
-                    BettyPrefabs.EMAIL_ADDRESS,
-                    model,
-                    prop,
-                    inputVariable,
-                  ),
+                input = makeBettyInput(
+                  BettyPrefabs.EMAIL_ADDRESS,
+                  model,
+                  prop,
+                  inputVariable,
+                  createAction.relatedIdProperties,
+                  createAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               case PropertyKind.DECIMAL:
-                return inputStructure(
-                  prop.label,
-                  makeBettyInput(
-                    BettyPrefabs.DECIMAL,
-                    model,
-                    prop,
-                    inputVariable,
-                  ),
+                input = makeBettyInput(
+                  BettyPrefabs.DECIMAL,
+                  model,
+                  prop,
+                  inputVariable,
+                  createAction.relatedIdProperties,
+                  createAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               case PropertyKind.TEXT:
-                return inputStructure(
-                  prop.label,
-                  makeBettyInput(BettyPrefabs.TEXT, model, prop, inputVariable),
+                input = makeBettyInput(
+                  BettyPrefabs.TEXT,
+                  model,
+                  prop,
+                  inputVariable,
+                  createAction.relatedIdProperties,
+                  createAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               case PropertyKind.PRICE:
-                return inputStructure(
-                  prop.label,
-                  makeBettyInput(
-                    BettyPrefabs.PRICE,
-                    model,
-                    prop,
-                    inputVariable,
-                  ),
+                input = makeBettyInput(
+                  BettyPrefabs.PRICE,
+                  model,
+                  prop,
+                  inputVariable,
+                  createAction.relatedIdProperties,
+                  createAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               case PropertyKind.PASSWORD:
-                return inputStructure(
-                  prop.label,
-                  makeBettyInput(
-                    BettyPrefabs.PASSWORD,
-                    model,
-                    prop,
-                    inputVariable,
-                  ),
+                input = makeBettyInput(
+                  BettyPrefabs.PASSWORD,
+                  model,
+                  prop,
+                  inputVariable,
+                  createAction.relatedIdProperties,
+                  createAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               case PropertyKind.DATE:
-                return inputStructure(
-                  prop.label,
-                  makeBettyInput(BettyPrefabs.DATE, model, prop, inputVariable),
+                input = makeBettyInput(
+                  BettyPrefabs.DATE,
+                  model,
+                  prop,
+                  inputVariable,
+                  createAction.relatedIdProperties,
+                  createAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               case PropertyKind.DATE_TIME:
-                return inputStructure(
-                  prop.label,
-                  makeBettyInput(
-                    BettyPrefabs.DATE_TIME,
-                    model,
-                    prop,
-                    inputVariable,
-                  ),
+                input = makeBettyInput(
+                  BettyPrefabs.DATE_TIME,
+                  model,
+                  prop,
+                  inputVariable,
+                  createAction.relatedIdProperties,
+                  createAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               case PropertyKind.TIME:
-                return inputStructure(
-                  prop.label,
-                  makeBettyInput(BettyPrefabs.TIME, model, prop, inputVariable),
+                input = makeBettyInput(
+                  BettyPrefabs.TIME,
+                  model,
+                  prop,
+                  inputVariable,
+                  createAction.relatedIdProperties,
+                  createAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               case PropertyKind.FILE:
                 fileUpload = makeBettyInput(
                   BettyPrefabs.FILE,
@@ -6271,7 +6437,7 @@ const beforeCreate = ({
                     };
                   }
                 }
-                return inputStructure(prop.label, fileUpload);
+                return inputStructure(fileUpload);
               case PropertyKind.IMAGE:
                 imageUpload = makeBettyInput(
                   BettyPrefabs.IMAGE,
@@ -6304,56 +6470,70 @@ const beforeCreate = ({
                     };
                   }
                 }
-                return inputStructure(prop.label, imageUpload);
+                return inputStructure(imageUpload);
               case PropertyKind.BOOLEAN:
-                return inputStructure(
-                  prop.label,
-                  makeBettyInput(
-                    BettyPrefabs.BOOLEAN,
-                    model,
-                    prop,
-                    inputVariable,
-                  ),
+                input = makeBettyInput(
+                  BettyPrefabs.BOOLEAN,
+                  model,
+                  prop,
+                  inputVariable,
+                  createAction.relatedIdProperties,
+                  createAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               case PropertyKind.LIST:
-                return inputStructure(
-                  prop.label,
-                  makeBettyInput(BettyPrefabs.LIST, model, prop, inputVariable),
+                input = makeBettyInput(
+                  BettyPrefabs.LIST,
+                  model,
+                  prop,
+                  inputVariable,
+                  createAction.relatedIdProperties,
+                  createAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               default:
-                return inputStructure(
-                  prop.label,
-                  makeBettyInput(
-                    BettyPrefabs.STRING,
-                    model,
-                    prop,
-                    inputVariable,
-                  ),
+                input = makeBettyInput(
+                  BettyPrefabs.STRING,
+                  model,
+                  prop,
+                  inputVariable,
+                  createAction.relatedIdProperties,
+                  createAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
             }
           };
           const createFormInputPrefabs = generateInputPrefabs();
-          if (
-            createFormInputPrefabs.type === 'COMPONENT' &&
-            createFormInputPrefabs.descendants[1].type === 'COMPONENT'
-          ) {
-            setOption(
-              createFormInputPrefabs.descendants[1],
-              'margin',
-              (options: PrefabComponentOption) => ({
-                ...options,
-                value: 'none',
-              }),
-            );
-            setOption(
-              createFormInputPrefabs.descendants[1],
-              'hideLabel',
-              (opts: PrefabComponentOption) => ({
-                ...opts,
-                value: true,
-              }),
-            );
-          }
           createForm.descendants.push(createFormInputPrefabs);
           if (!prop.kind) {
             // eslint-disable-next-line no-console
@@ -6397,7 +6577,7 @@ const beforeCreate = ({
           value: modelId,
         }),
       );
-      modelProperties.map((prop) =>
+      resolvedProperties.map((prop) =>
         detailColumn.descendants.push(makeDetail(prop)),
       );
 
@@ -6408,7 +6588,11 @@ const beforeCreate = ({
       const updateAction = await prepareAction(
         updateFormId,
         idProperty,
-        [...filteredproperties, ...relationProperties],
+        [
+          ...filteredproperties,
+          // other properties not checked then add all belongs_to's otherwise spread empty array
+          ...(!otherPropertiesInForms ? relationProperties : []),
+        ],
         'update',
         undefined,
         `Back office - Update ${data?.model.label}`,
@@ -6446,118 +6630,208 @@ const beforeCreate = ({
             let imageUploadButton;
             let fileUpload;
             let fileUploadButton;
+            let input;
             switch (prop.kind) {
               case PropertyKind.BELONGS_TO:
-                return inputStructure(
-                  prop.label,
-                  makeBettyUpdateInput(
-                    BettyPrefabs.AUTO_COMPLETE,
-                    model,
-                    prop,
-                    inputVariable,
-                    updateAction.relatedIdProperties,
-                    updateAction.relatedModelIds,
-                  ),
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.AUTO_COMPLETE,
+                  model,
+                  prop,
+                  inputVariable,
+                  updateAction.relatedIdProperties,
+                  updateAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               case PropertyKind.INTEGER:
-                return inputStructure(
-                  prop.label,
-                  makeBettyUpdateInput(
-                    BettyPrefabs.INTEGER,
-                    model,
-                    prop,
-                    inputVariable,
-                    updateAction.relatedIdProperties,
-                  ),
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.INTEGER,
+                  model,
+                  prop,
+                  inputVariable,
+                  updateAction.relatedIdProperties,
+                  updateAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               case PropertyKind.EMAIL_ADDRESS:
-                return inputStructure(
-                  prop.label,
-                  makeBettyUpdateInput(
-                    BettyPrefabs.EMAIL_ADDRESS,
-                    model,
-                    prop,
-                    inputVariable,
-                    updateAction.relatedIdProperties,
-                  ),
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.EMAIL_ADDRESS,
+                  model,
+                  prop,
+                  inputVariable,
+                  updateAction.relatedIdProperties,
+                  updateAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               case PropertyKind.DECIMAL:
-                return inputStructure(
-                  prop.label,
-                  makeBettyUpdateInput(
-                    BettyPrefabs.DECIMAL,
-                    model,
-                    prop,
-                    inputVariable,
-                    updateAction.relatedIdProperties,
-                  ),
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.DECIMAL,
+                  model,
+                  prop,
+                  inputVariable,
+                  updateAction.relatedIdProperties,
+                  updateAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               case PropertyKind.TEXT:
-                return inputStructure(
-                  prop.label,
-                  makeBettyUpdateInput(
-                    BettyPrefabs.TEXT,
-                    model,
-                    prop,
-                    inputVariable,
-                    updateAction.relatedIdProperties,
-                  ),
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.TEXT,
+                  model,
+                  prop,
+                  inputVariable,
+                  updateAction.relatedIdProperties,
+                  updateAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               case PropertyKind.PRICE:
-                return inputStructure(
-                  prop.label,
-                  makeBettyUpdateInput(
-                    BettyPrefabs.PRICE,
-                    model,
-                    prop,
-                    inputVariable,
-                    updateAction.relatedIdProperties,
-                  ),
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.PRICE,
+                  model,
+                  prop,
+                  inputVariable,
+                  updateAction.relatedIdProperties,
+                  updateAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               case PropertyKind.PASSWORD:
-                return inputStructure(
-                  prop.label,
-                  makeBettyUpdateInput(
-                    BettyPrefabs.PASSWORD,
-                    model,
-                    prop,
-                    inputVariable,
-                    updateAction.relatedIdProperties,
-                  ),
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.PASSWORD,
+                  model,
+                  prop,
+                  inputVariable,
+                  updateAction.relatedIdProperties,
+                  updateAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               case PropertyKind.DATE:
-                return inputStructure(
-                  prop.label,
-                  makeBettyUpdateInput(
-                    BettyPrefabs.DATE,
-                    model,
-                    prop,
-                    inputVariable,
-                    updateAction.relatedIdProperties,
-                  ),
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.DATE,
+                  model,
+                  prop,
+                  inputVariable,
+                  updateAction.relatedIdProperties,
+                  updateAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               case PropertyKind.DATE_TIME:
-                return inputStructure(
-                  prop.label,
-                  makeBettyUpdateInput(
-                    BettyPrefabs.DATE_TIME,
-                    model,
-                    prop,
-                    inputVariable,
-                    updateAction.relatedIdProperties,
-                  ),
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.DATE_TIME,
+                  model,
+                  prop,
+                  inputVariable,
+                  updateAction.relatedIdProperties,
+                  updateAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               case PropertyKind.TIME:
-                return inputStructure(
-                  prop.label,
-                  makeBettyUpdateInput(
-                    BettyPrefabs.TIME,
-                    model,
-                    prop,
-                    inputVariable,
-                    updateAction.relatedIdProperties,
-                  ),
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.TIME,
+                  model,
+                  prop,
+                  inputVariable,
+                  updateAction.relatedIdProperties,
+                  updateAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               case PropertyKind.FILE:
                 fileUpload = makeBettyUpdateInput(
                   BettyPrefabs.FILE,
@@ -6591,7 +6865,7 @@ const beforeCreate = ({
                     };
                   }
                 }
-                return inputStructure(prop.label, fileUpload);
+                return inputStructure(fileUpload);
               case PropertyKind.IMAGE:
                 imageUpload = makeBettyUpdateInput(
                   BettyPrefabs.IMAGE,
@@ -6625,64 +6899,70 @@ const beforeCreate = ({
                     };
                   }
                 }
-                return inputStructure(prop.label, imageUpload);
+                return inputStructure(imageUpload);
               case PropertyKind.BOOLEAN:
-                return inputStructure(
-                  prop.label,
-                  makeBettyUpdateInput(
-                    BettyPrefabs.BOOLEAN,
-                    model,
-                    prop,
-                    inputVariable,
-                    updateAction.relatedIdProperties,
-                  ),
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.BOOLEAN,
+                  model,
+                  prop,
+                  inputVariable,
+                  updateAction.relatedIdProperties,
+                  updateAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               case PropertyKind.LIST:
-                return inputStructure(
-                  prop.label,
-                  makeBettyUpdateInput(
-                    BettyPrefabs.LIST,
-                    model,
-                    prop,
-                    inputVariable,
-                    updateAction.relatedIdProperties,
-                  ),
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.LIST,
+                  model,
+                  prop,
+                  inputVariable,
+                  updateAction.relatedIdProperties,
+                  updateAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
               default:
-                return inputStructure(
-                  prop.label,
-                  makeBettyUpdateInput(
-                    BettyPrefabs.STRING,
-                    model,
-                    prop,
-                    inputVariable,
-                    updateAction.relatedIdProperties,
-                  ),
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.STRING,
+                  model,
+                  prop,
+                  inputVariable,
+                  updateAction.relatedIdProperties,
+                  updateAction.relatedModelIds,
                 );
+                if (input.type === 'COMPONENT') {
+                  setOption(input, 'floatLabel', (options) => ({
+                    ...options,
+                    value: true,
+                  }));
+                  setOption(input, 'labelColor', (options) => ({
+                    ...options,
+                    value: 'Black',
+                  }));
+                }
+                return input;
             }
           };
           const updateFormInput = generateInputPrefabs();
-          if (
-            updateFormInput.type === 'COMPONENT' &&
-            updateFormInput.descendants[1].type === 'COMPONENT'
-          ) {
-            setOption(
-              updateFormInput.descendants[1],
-              'margin',
-              (opts: PrefabComponentOption) => ({
-                ...opts,
-                value: 'none',
-              }),
-            );
-            setOption(
-              updateFormInput.descendants[1],
-              'hideLabel',
-              (opts: PrefabComponentOption) => ({
-                ...opts,
-                value: true,
-              }),
-            );
-          }
           updateForm.descendants.push(updateFormInput);
           if (!prop.kind) {
             // eslint-disable-next-line no-console
@@ -6922,6 +7202,14 @@ const beforeCreate = ({
             disabled={stepNumber === stepper.stepAmount}
             onClick={() => {
               const newStepnumber = stepNumber + 1;
+              if (
+                stepNumber === 2 &&
+                otherPropertiesInForms &&
+                dataTableProperties.length < 1
+              ) {
+                setDataTablePropertiesValidation(true);
+                return;
+              }
               setStepNumber(newStepnumber);
             }}
             primary
@@ -6949,7 +7237,7 @@ const beforeCreate = ({
         </BoxComp>
       );
     },
-    stepAmount: 2,
+    stepAmount: otherPropertiesInForms ? 3 : 2,
   };
   return (
     <>

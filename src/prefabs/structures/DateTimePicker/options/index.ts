@@ -50,7 +50,7 @@ export const options = {
     },
   }),
   dateFormat: text('Format', {
-    value: 'MM/dd/yyyy',
+    value: 'dd-MM-yyyy',
     configuration: {
       condition: showIf('type', 'EQ', 'date'),
     },
