@@ -24,7 +24,7 @@ import {
   textOptions,
 } from '../structures';
 
-export default [
+export const numberWidget = [
   wrapper(
     {
       label: 'Number question',

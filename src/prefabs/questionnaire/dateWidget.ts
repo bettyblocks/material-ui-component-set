@@ -8,7 +8,6 @@ import {
   option,
   toggle,
   buttongroup,
-  font,
   linked,
   component,
   showIf,
@@ -20,13 +19,11 @@ import { options as formOptions } from '../structures/ActionJSForm/options';
 import {
   Box,
   boxOptions,
-  Text as TextComp,
-  textOptions,
   DateTimePicker,
   dateTimePickerOptions,
 } from '../structures';
 
-export default [
+export const dateWidget = [
   wrapper(
     {
       label: 'Date question',
@@ -39,12 +36,6 @@ export default [
               componentId: '#dateInput',
               optionId: '#dateInputProperty',
             },
-          },
-          configuration: {
-            showOnDrop: true,
-          },
-          optionRef: {
-            id: '#dateInputProperty',
           },
         }),
         placeholder: linked({
@@ -145,50 +136,6 @@ export default [
               },
             },
             [
-              TextComp(
-                {
-                  ref: { id: '#questionText' },
-                  options: {
-                    ...textOptions,
-                    content: variable('Content', {
-                      ref: { id: '#textContent' },
-                      value: [],
-                      configuration: { as: 'MULTILINE' },
-                      optionRef: {
-                        sourceId: '#dateInputProperty',
-                        inherit: 'label',
-                      },
-                    }),
-                    type: font('Font', {
-                      ref: { id: '#textCompType' },
-                      value: ['Body1'],
-                    }),
-                    outerSpacing: sizes('Outer space', {
-                      value: ['0rem', '0rem', 'S', '0rem'],
-                    }),
-                    fontWeight: option('CUSTOM', {
-                      label: 'Font weight',
-                      value: '500',
-                      configuration: {
-                        as: 'DROPDOWN',
-                        dataType: 'string',
-                        allowedInput: [
-                          { name: '100', value: '100' },
-                          { name: '200', value: '200' },
-                          { name: '300', value: '300' },
-                          { name: '400', value: '400' },
-                          { name: '500', value: '500' },
-                          { name: '600', value: '600' },
-                          { name: '700', value: '700' },
-                          { name: '800', value: '800' },
-                          { name: '900', value: '900' },
-                        ],
-                      },
-                    }),
-                  },
-                },
-                [],
-              ),
               DateTimePicker(
                 {
                   ref: { id: '#dateInput' },
@@ -196,17 +143,35 @@ export default [
                     ...dateTimePickerOptions,
                     property: property('Question', {
                       value: '',
+                      ref: {
+                        id: '#dateInputProperty',
+                      },
+                      optionRef: {
+                        id: '#dateInputPropertyRef',
+                      },
                       configuration: {
                         allowedKinds: ['DATE', 'DATE_TIME'],
                         createProperty: {
                           type: 'DATE_TIME',
                         },
+                        showOnDrop: true,
                       },
-                      ref: {
-                        id: '#dateInputProperty',
+                      showInAddChild: true,
+                    }),
+                    label: variable('Label', {
+                      value: [''],
+                      ref: { id: '#dateInputLabel' },
+                      optionRef: {
+                        sourceId: '#dateInputPropertyRef',
+                        inherit: 'label',
                       },
                     }),
-                    hideLabel: toggle('Hide label', { value: true }),
+                    floatLabel: toggle('Place label above input', {
+                      value: true,
+                    }),
+                    labelColor: color('Label color', {
+                      value: ThemeColor.BLACK,
+                    }),
                     placeholder: variable('Placeholder', {
                       ref: { id: '#dateInputPlaceholder' },
                       value: [''],

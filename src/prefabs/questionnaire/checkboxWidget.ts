@@ -13,17 +13,12 @@ import {
   property,
   displayLogic,
 } from '@betty-blocks/component-sdk';
-import {
-  Box,
-  boxOptions,
-  Text as TextPrefab,
-  textOptions,
-} from '../structures';
+import { Box, boxOptions, Text, textOptions } from '../structures';
 import { options as formOptions } from '../structures/ActionJSForm/options';
 import { CheckboxInput } from '../structures/CheckboxInput';
 import { checkboxInputOptions } from '../structures/CheckboxInput/options';
 
-export default [
+export const checkboxWidget = [
   wrapper(
     {
       label: 'Checkbox question',
@@ -33,12 +28,9 @@ export default [
           label: 'Question',
           value: {
             ref: {
-              componentId: '#CheckboxInput',
-              optionId: '#questionProperty',
+              componentId: '#checkboxInput',
+              optionId: '#checkboxInputProperty',
             },
-          },
-          optionRef: {
-            id: '#questionProperty',
           },
         }),
         questionContent: linked({
@@ -54,8 +46,8 @@ export default [
           label: 'Required to answer',
           value: {
             ref: {
-              componentId: '#CheckboxInput',
-              optionId: '#questionRequired',
+              componentId: '#checkboxInput',
+              optionId: '#checkboxInputRequired',
             },
           },
         }),
@@ -139,7 +131,7 @@ export default [
               },
             },
             [
-              TextPrefab(
+              Text(
                 {
                   ref: { id: '#questionLabel' },
                   options: {
@@ -182,7 +174,7 @@ export default [
               ),
               CheckboxInput(
                 {
-                  ref: { id: '#CheckboxInput' },
+                  ref: { id: '#checkboxInput' },
                   options: {
                     ...checkboxInputOptions,
                     property: property('Question', {
@@ -195,23 +187,26 @@ export default [
                         showOnDrop: true,
                       },
                       ref: {
-                        id: '#questionProperty',
+                        id: '#checkboxInputProperty',
+                      },
+                      optionRef: {
+                        id: '#checkboxInputPropertyRef',
                       },
                       showInAddChild: true,
                     }),
                     label: variable('Label', {
                       value: [''],
                       ref: {
-                        id: '#questionLabel',
+                        id: '#checkboxInputLabel',
                       },
                       optionRef: {
-                        sourceId: '#questionProperty',
+                        sourceId: '#checkboxInputPropertyRef',
                         inherit: 'label',
                       },
                     }),
                     required: toggle('Required', {
                       ref: {
-                        id: '#questionRequired',
+                        id: '#checkboxInputRequired',
                       },
                     }),
                   },

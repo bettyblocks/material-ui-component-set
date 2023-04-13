@@ -22,7 +22,7 @@ import {
 } from '../structures';
 import { options as formOptions } from '../structures/ActionJSForm/options';
 
-export default [
+export const radioWidget = [
   wrapper(
     {
       label: 'Multiple choice question',

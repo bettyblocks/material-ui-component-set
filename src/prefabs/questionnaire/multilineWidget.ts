@@ -25,7 +25,7 @@ import {
   textOptions,
 } from '../structures';
 
-export default [
+export const multilineWidget = [
   wrapper(
     {
       label: 'Multi question',

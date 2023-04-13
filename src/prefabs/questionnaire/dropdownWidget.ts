@@ -21,7 +21,7 @@ import {
 } from '../structures';
 import { options as formOptions } from '../structures/ActionJSForm/options';
 
-export default [
+export const dropdownWidget = [
   wrapper(
     {
       label: 'Dropdown question',
