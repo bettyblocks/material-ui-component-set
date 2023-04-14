@@ -1,5 +1,4 @@
-// import { textWidget } from './textWidget';
-import textWidget from './textWidget';
+import { textWidget } from './textWidget';
 import { dateWidget } from './dateWidget';
 import { radioWidget } from './radioWidget';
 import { numberWidget } from './numberWidget';

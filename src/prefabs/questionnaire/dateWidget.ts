@@ -37,6 +37,18 @@ export const dateWidget = [
               optionId: '#dateInputProperty',
             },
           },
+          optionRef: {
+            id: '#dateInputPropertyRef',
+          },
+          configuration: {
+            showOnDrop: true,
+          },
+        }),
+        label: linked({
+          label: 'Label',
+          value: {
+            ref: { componentId: '#dateInput', optionId: '#dateInputLabel' },
+          },
         }),
         placeholder: linked({
           label: 'Placeholder',
@@ -51,8 +63,8 @@ export const dateWidget = [
           label: 'Required to answer',
           value: {
             ref: {
-              componentId: '#DateInput',
-              optionId: '#DateInputRequired',
+              componentId: '#dateInput',
+              optionId: '#dateInputRequired',
             },
           },
         }),
@@ -120,7 +132,7 @@ export const dateWidget = [
           component(
             'Form',
             {
-              ref: { id: '#DateWidgetForm' },
+              ref: { id: '#dateQuestionForm' },
               options: {
                 ...formOptions,
                 actionId: option('ACTION_JS', {
@@ -146,15 +158,11 @@ export const dateWidget = [
                       ref: {
                         id: '#dateInputProperty',
                       },
-                      optionRef: {
-                        id: '#dateInputPropertyRef',
-                      },
                       configuration: {
                         allowedKinds: ['DATE', 'DATE_TIME'],
                         createProperty: {
                           type: 'DATE_TIME',
                         },
-                        showOnDrop: true,
                       },
                       showInAddChild: true,
                     }),
