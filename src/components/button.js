@@ -322,7 +322,7 @@
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0]),
           marginRight: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[1]),
+            '' && getSpacing(outerSpacing[1]),
           marginBottom: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[2]),
           marginLeft: ({ options: { outerSpacing } }) =>
