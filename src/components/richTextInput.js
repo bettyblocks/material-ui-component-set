@@ -6,7 +6,7 @@
   dependencies: [
     {
       label: 'Slate',
-      package: 'npm:slate@0.88.1',
+      package: 'npm:slate@0.93.0',
       imports: [
         'createEditor',
         'Editor',
@@ -18,17 +18,17 @@
     },
     {
       label: 'SlateHistory',
-      package: 'npm:slate-history@0.66.0',
+      package: 'npm:slate-history@0.93.0',
       imports: ['withHistory'],
     },
     {
       label: 'SlateReact',
-      package: 'npm:slate-react@0.86.0',
+      package: 'npm:slate-react@0.93.0',
       imports: ['Editable', 'withReact', 'Slate', 'useSlate'],
     },
     {
       label: 'SlateHyperscript',
-      package: 'npm:slate-hyperscript@0.77.0',
+      package: 'npm:slate-hyperscript@0.81.3',
       imports: ['jsx'],
     },
     {
