@@ -58,13 +58,6 @@
           history.push(useEndpoint(redirectWithoutResult));
         };
 
-        // eslint-disable-next-line consistent-return
-        const transformValue = (value) => {
-          if (value instanceof Date) {
-            return value.toISOString();
-          }
-        };
-
         const deepMerge = (...objects) => {
           const isObject = (item) =>
             item && typeof item === 'object' && !Array.isArray(item);
@@ -109,7 +102,6 @@
               return { [field]: acc };
             }, {}),
           );
-
         interactionFilters =
           clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
 
@@ -147,9 +139,7 @@
               ...interactionFilter,
               [interactionId]: {
                 property,
-                value: event.target
-                  ? event.target.value
-                  : transformValue(event),
+                value: event instanceof Date ? event.toISOString : event,
               },
             });
           });
