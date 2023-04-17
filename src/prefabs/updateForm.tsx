@@ -322,7 +322,7 @@ const beforeCreate = ({
               }}
               value={thisPageState.component ? thisPageState.component.id : ''}
               placeholder="No components available."
-              allowedComponents={['DataTable', 'DataList']}
+              allowedComponents={['DataTable']}
             />
           </Field>
         )}
