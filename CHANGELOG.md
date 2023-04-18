@@ -1,3 +1,10 @@
+## [2.126.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.126.2...v2.126.3) (2023-04-18)
+
+
+### Bug Fixes
+
+* datacontainer not working with filter interaction ([95117a6](https://github.com/bettyblocks/material-ui-component-set/commit/95117a6909ab2cd3f1a445e7cd1c0ce7f4e13977))
+
 ## [2.126.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.126.1...v2.126.2) (2023-04-17)
 
 
