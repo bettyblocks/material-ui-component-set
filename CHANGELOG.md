@@ -1,3 +1,10 @@
+## [2.126.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.126.1...v2.126.2) (2023-04-17)
+
+
+### Bug Fixes
+
+* update richtext dependencies ([#2943](https://github.com/bettyblocks/material-ui-component-set/issues/2943)) ([0f17891](https://github.com/bettyblocks/material-ui-component-set/commit/0f178912f4a2421e5495d3aefe30a45afb1ca266))
+
 ## [2.126.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.126.0...v2.126.1) (2023-04-11)
 
 
