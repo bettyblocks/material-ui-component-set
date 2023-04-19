@@ -1,22 +1,26 @@
 import {
-  wrapper,
+  CreatePropertyKind,
   ThemeColor,
   color,
-  size,
-  variable,
-  sizes,
-  option,
-  linked,
   component,
-  toggle,
-  property,
   displayLogic,
+  font,
+  linked,
+  option,
+  property,
+  size,
+  sizes,
+  toggle,
+  variable,
+  wrapper,
 } from '@betty-blocks/component-sdk';
 import {
   Box,
-  boxOptions,
   CheckboxInput,
+  Text,
+  boxOptions,
   checkboxInputOptions,
+  textOptions,
 } from '../structures';
 import { options as formOptions } from '../structures/ActionJSForm/options';
 
@@ -41,6 +45,15 @@ export const checkboxWidget = [
             showOnDrop: true,
           },
         }),
+        questionText: linked({
+          label: 'Question text',
+          value: {
+            ref: {
+              componentId: '#questionText',
+              optionId: '#questionTextContent',
+            },
+          },
+        }),
         questionContent: linked({
           label: 'Checkbox label',
           value: {
@@ -48,6 +61,9 @@ export const checkboxWidget = [
               componentId: '#checkboxInput',
               optionId: '#checkboxInputLabel',
             },
+          },
+          configuration: {
+            showOnDrop: true,
           },
         }),
         required: linked({
@@ -139,6 +155,32 @@ export const checkboxWidget = [
               },
             },
             [
+              Text(
+                {
+                  ref: {
+                    id: '#questionText',
+                  },
+                  options: {
+                    ...textOptions,
+                    content: variable('Question text', {
+                      value: [''],
+                      configuration: {
+                        as: 'MULTILINE',
+                        allowPropertyName: true,
+                      },
+                      ref: {
+                        id: '#questionTextContent',
+                      },
+                      optionRef: {
+                        sourceId: '#checkboxInputPropertyRef',
+                        inherit: 'label',
+                      },
+                    }),
+                    type: font('Font', { value: ['Body1'] }),
+                  },
+                },
+                [],
+              ),
               CheckboxInput(
                 {
                   ref: { id: '#checkboxInput' },
@@ -152,18 +194,19 @@ export const checkboxWidget = [
                       configuration: {
                         allowedKinds: ['BOOLEAN', 'BOOLEAN_EXPRESSION'],
                         createProperty: {
-                          type: 'BOOLEAN',
+                          type: CreatePropertyKind.BOOLEAN,
                         },
+                        disabled: true,
                       },
                       showInAddChild: true,
                     }),
-                    label: variable('Label', {
+                    label: variable('Checkbox label', {
                       value: [''],
                       ref: { id: '#checkboxInputLabel' },
-                      optionRef: {
-                        sourceId: '#checkboxInputPropertyRef',
-                        inherit: 'label',
+                      configuration: {
+                        allowPropertyName: true,
                       },
+                      showInAddChild: true,
                     }),
                     labelColor: color('Label color', {
                       value: ThemeColor.BLACK,

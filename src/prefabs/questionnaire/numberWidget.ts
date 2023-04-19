@@ -1,28 +1,21 @@
 import {
-  wrapper,
-  sizes,
+  CreatePropertyKind,
   ThemeColor,
-  color,
-  size,
-  variable,
-  option,
-  toggle,
   buttongroup,
-  font,
-  linked,
-  displayLogic,
-  property,
+  color,
   component,
+  displayLogic,
+  linked,
+  option,
+  property,
+  size,
+  sizes,
+  toggle,
+  variable,
+  wrapper,
 } from '@betty-blocks/component-sdk';
 import { options as formOptions } from '../structures/ActionJSForm/options';
-import {
-  Box,
-  Text,
-  TextInput,
-  boxOptions,
-  textInputOptions,
-  textOptions,
-} from '../structures';
+import { Box, TextInput, boxOptions, textInputOptions } from '../structures';
 
 export const numberWidget = [
   wrapper(
@@ -31,26 +24,32 @@ export const numberWidget = [
       optionCategories: [],
       options: {
         property: linked({
-          label: 'Property',
+          label: 'Question',
           value: {
             ref: {
-              componentId: '#numerInput',
-              optionId: '#numerInputProperty',
+              componentId: '#numberInput',
+              optionId: '#numberInputProperty',
             },
+          },
+          optionRef: {
+            id: '#numberInputPropertyRef',
           },
           configuration: {
             showOnDrop: true,
           },
-          optionRef: {
-            id: '#numerInputPropertyRef',
+        }),
+        label: linked({
+          label: 'Label',
+          value: {
+            ref: { componentId: '#numberInput', optionId: '#numberInputLabel' },
           },
         }),
         placeholder: linked({
           label: 'Placeholder',
           value: {
             ref: {
-              componentId: '#numerInput',
-              optionId: '#numerInputPlaceholder',
+              componentId: '#numberInput',
+              optionId: '#numberInputPlaceholder',
             },
           },
         }),
@@ -58,8 +57,8 @@ export const numberWidget = [
           label: 'Required to answer',
           value: {
             ref: {
-              componentId: '#numerInput',
-              optionId: '#numerInputRequired',
+              componentId: '#numberInput',
+              optionId: '#numberInputRequired',
             },
           },
         }),
@@ -127,7 +126,7 @@ export const numberWidget = [
           component(
             'Form',
             {
-              ref: { id: '#textQuestionForm' },
+              ref: { id: '#numberQuestionForm' },
               options: {
                 ...formOptions,
                 actionId: option('ACTION_JS', {
@@ -143,78 +142,53 @@ export const numberWidget = [
               },
             },
             [
-              Text(
-                {
-                  ref: { id: '#questionText' },
-                  options: {
-                    ...textOptions,
-                    content: variable('Content', {
-                      ref: { id: '#textContent' },
-                      value: [],
-                      configuration: {
-                        as: 'MULTILINE',
-                      },
-                      optionRef: {
-                        sourceId: '#numerInputPropertyRef',
-                        inherit: 'label',
-                      },
-                    }),
-                    type: font('Font', {
-                      ref: { id: '#questionTextType' },
-                      value: ['Body1'],
-                    }),
-                    outerSpacing: sizes('Outer space', {
-                      value: ['0rem', '0rem', 'S', '0rem'],
-                    }),
-                    fontWeight: option('CUSTOM', {
-                      label: 'Font weight',
-                      value: '500',
-                      configuration: {
-                        as: 'DROPDOWN',
-                        dataType: 'string',
-                        allowedInput: [
-                          { name: '100', value: '100' },
-                          { name: '200', value: '200' },
-                          { name: '300', value: '300' },
-                          { name: '400', value: '400' },
-                          { name: '500', value: '500' },
-                          { name: '600', value: '600' },
-                          { name: '700', value: '700' },
-                          { name: '800', value: '800' },
-                          { name: '900', value: '900' },
-                        ],
-                      },
-                    }),
-                  },
-                },
-                [],
-              ),
               TextInput(
                 {
                   label: 'Number field',
                   inputLabel: 'Number',
                   type: 'number',
                   pattern: '^[0-9]*$',
-                  ref: { id: '#numerInput' },
+                  ref: { id: '#numberInput' },
                   options: {
                     ...textInputOptions,
-                    property: property('Property', {
+                    property: property('Question', {
                       value: '',
-                      ref: { id: '#numerInputProperty' },
+                      ref: { id: '#numberInputProperty' },
                       configuration: {
                         createProperty: {
-                          type: 'INTEGER',
+                          type: CreatePropertyKind.INTEGER,
                         },
                         allowedKinds: ['INTEGER', 'PRICE'],
+                        disabled: true,
+                      },
+                      showInAddChild: true,
+                    }),
+                    label: variable('Label', {
+                      value: [''],
+                      ref: { id: '#numberInputLabel' },
+                      optionRef: {
+                        sourceId: '#numberInputPropertyRef',
+                        inherit: 'label',
+                      },
+                      configuration: {
+                        allowPropertyName: true,
                       },
                     }),
-                    hideLabel: toggle('Hide label', { value: true }),
+                    floatLabel: toggle('Place label above input', {
+                      value: true,
+                    }),
+                    labelColor: color('Label color', {
+                      value: ThemeColor.BLACK,
+                    }),
                     placeholder: variable('Placeholder', {
-                      ref: { id: '#numerInputPlaceholder' },
+                      ref: { id: '#numberInputPlaceholder' },
                       value: [''],
+                      configuration: {
+                        allowPropertyName: true,
+                      },
                     }),
                     required: toggle('Required', {
-                      ref: { id: '#numerInputRequired' },
+                      ref: { id: '#numberInputRequired' },
                     }),
                     margin: buttongroup(
                       'Margin',

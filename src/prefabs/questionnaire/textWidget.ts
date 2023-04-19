@@ -1,17 +1,18 @@
 import {
-  wrapper,
-  sizes,
+  CreatePropertyKind,
   ThemeColor,
-  color,
-  size,
-  variable,
-  option,
-  toggle,
   buttongroup,
-  linked,
-  displayLogic,
-  property,
+  color,
   component,
+  displayLogic,
+  linked,
+  option,
+  property,
+  size,
+  sizes,
+  toggle,
+  variable,
+  wrapper,
 } from '@betty-blocks/component-sdk';
 import { options as formOptions } from '../structures/ActionJSForm/options';
 import { Box, TextInput, boxOptions, textInputOptions } from '../structures';
@@ -147,14 +148,15 @@ export const textWidget = [
                   ref: { id: '#textInput' },
                   options: {
                     ...textInputOptions,
-                    property: property('Property', {
+                    property: property('Question', {
                       value: '',
                       ref: { id: '#textInputProperty' },
                       configuration: {
-                        createProperty: {
-                          type: 'STRING',
-                        },
                         allowedKinds: ['TEXT', 'URL', 'IBAN', 'STRING'],
+                        disabled: true,
+                        createProperty: {
+                          type: CreatePropertyKind.STRING,
+                        },
                       },
                       showInAddChild: true,
                     }),
@@ -164,6 +166,9 @@ export const textWidget = [
                       optionRef: {
                         sourceId: '#textInputPropertyRef',
                         inherit: 'label',
+                      },
+                      configuration: {
+                        allowPropertyName: true,
                       },
                     }),
                     floatLabel: toggle('Place label above input', {
@@ -175,6 +180,9 @@ export const textWidget = [
                     placeholder: variable('Placeholder', {
                       ref: { id: '#textInputPlaceholder' },
                       value: [''],
+                      configuration: {
+                        allowPropertyName: true,
+                      },
                     }),
                     required: toggle('Required', {
                       ref: { id: '#textInputRequired' },

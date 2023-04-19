@@ -1,23 +1,24 @@
 import {
-  wrapper,
+  CreatePropertyKind,
   ThemeColor,
   color,
-  size,
-  font,
-  variable,
-  sizes,
-  option,
-  linked,
   component,
-  toggle,
+  font,
+  linked,
+  option,
   property,
+  size,
+  sizes,
+  toggle,
+  variable,
+  wrapper,
 } from '@betty-blocks/component-sdk';
 import {
   Box,
-  boxOptions,
   RadioInput,
+  Text,
+  boxOptions,
   radioInputOptions,
-  Text as TextPrefab,
   textOptions,
 } from '../structures';
 import { options as formOptions } from '../structures/ActionJSForm/options';
@@ -117,7 +118,7 @@ export const radioWidget = [
               },
             },
             [
-              TextPrefab(
+              Text(
                 {
                   ref: {
                     id: '#QuestionText',
@@ -128,6 +129,7 @@ export const radioWidget = [
                       value: [''],
                       configuration: {
                         as: 'MULTILINE',
+                        allowPropertyName: true,
                       },
                       ref: {
                         id: '#questionTitleContent',
@@ -168,18 +170,25 @@ export const radioWidget = [
                     property: property('Question', {
                       value: '',
                       configuration: {
+                        disabled: true,
                         createProperty: {
-                          type: 'OBJECT',
+                          type: CreatePropertyKind.OBJECT,
                         },
-                        manageObjectValues: {
-                          value: [],
-                        },
+                        // manageObjectValues: {
+                        //   value: [],
+                        // },
                       },
                       ref: {
                         id: '#questionProperty',
                       },
+                      showInAddChild: true,
                     }),
-                    label: variable('Label', { value: [''] }),
+                    label: variable('Label', {
+                      value: [''],
+                      configuration: {
+                        allowPropertyName: true,
+                      },
+                    }),
                     required: toggle('Required', {
                       ref: {
                         id: '#questionRequired',

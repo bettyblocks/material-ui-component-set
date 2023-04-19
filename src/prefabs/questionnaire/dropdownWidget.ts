@@ -1,22 +1,24 @@
 import {
-  wrapper,
+  CreatePropertyKind,
   ThemeColor,
-  color,
-  size,
-  variable,
-  sizes,
-  linked,
-  component,
   buttongroup,
+  color,
+  component,
   displayLogic,
-  property,
+  linked,
   option,
+  property,
+  showIf,
+  size,
+  sizes,
   toggle,
+  variable,
+  wrapper,
 } from '@betty-blocks/component-sdk';
 import {
   Box,
-  boxOptions,
   SelectInput,
+  boxOptions,
   selectInputOptions,
 } from '../structures';
 import { options as formOptions } from '../structures/ActionJSForm/options';
@@ -35,11 +37,20 @@ export const dropdownWidget = [
               optionId: '#dropdownInputProperty',
             },
           },
+          optionRef: {
+            id: '#dropdownInputPropertyRef',
+          },
           configuration: {
             showOnDrop: true,
           },
-          optionRef: {
-            id: '#dropdownInputProperty',
+        }),
+        label: linked({
+          label: 'Label',
+          value: {
+            ref: {
+              componentId: '#dropdownInput',
+              optionId: '#dropdownInputLabel',
+            },
           },
         }),
         required: linked({
@@ -77,12 +88,6 @@ export const dropdownWidget = [
           ref: { id: '#questionBox' },
           options: {
             ...boxOptions,
-            displayLogic: displayLogic('Display logic', {
-              value: {},
-              ref: {
-                id: '#questionBoxDisplayLogic',
-              },
-            }),
             backgroundColor: color('Background color', {
               value: ThemeColor.WHITE,
             }),
@@ -105,6 +110,12 @@ export const dropdownWidget = [
               value: ['0rem', '0rem', 'M', '0rem'],
               ref: { id: '#questionBoxOuterSpacing' },
             }),
+            displayLogic: displayLogic('Display logic', {
+              value: {},
+              ref: {
+                id: '#questionBoxDisplayLogic',
+              },
+            }),
           },
         },
         [
@@ -120,6 +131,7 @@ export const dropdownWidget = [
                   configuration: {
                     createAction: {
                       template: 'update',
+                      permissions: 'inherit',
                     },
                   },
                 }),
@@ -130,7 +142,7 @@ export const dropdownWidget = [
                 ref: { id: '#dropdownInput' },
                 options: {
                   ...selectInputOptions,
-                  property: property('Property', {
+                  property: property('Question', {
                     value: '',
                     ref: {
                       id: '#dropdownInputProperty',
@@ -139,15 +151,46 @@ export const dropdownWidget = [
                       allowRelations: true,
                       allowedKinds: ['LIST'],
                       createProperty: {
-                        type: 'ARRAY',
+                        type: CreatePropertyKind.LIST,
                       },
+                      disabled: true,
                     },
+                    showInAddChild: true,
                   }),
                   label: variable('Label', {
                     value: [''],
+                    ref: { id: '#dropdownInputLabel' },
                     optionRef: {
-                      sourceId: '#dropdownInputProperty',
+                      sourceId: '#dropdownInputPropertyRef',
                       inherit: 'label',
+                    },
+                    configuration: {
+                      allowPropertyName: true,
+                    },
+                  }),
+                  floatLabel: toggle('Place label above input', {
+                    value: true,
+                  }),
+                  labelColor: color('Label color', {
+                    value: ThemeColor.BLACK,
+                  }),
+                  optionType: buttongroup(
+                    'Option type',
+                    [
+                      ['Model', 'model'],
+                      ['Property', 'property'],
+                      ['Variable', 'variable'],
+                    ],
+                    {
+                      value: 'property',
+                      configuration: {
+                        condition: showIf('optionType', 'EQ', 'never'),
+                      },
+                    },
+                  ),
+                  required: toggle('Required', {
+                    ref: {
+                      id: '#dropdownInputRequired',
                     },
                   }),
                   margin: buttongroup(
@@ -159,11 +202,6 @@ export const dropdownWidget = [
                     ],
                     { value: 'none' },
                   ),
-                  required: toggle('Required', {
-                    ref: {
-                      id: '#dropdownInputRequired',
-                    },
-                  }),
                 },
               }),
             ],

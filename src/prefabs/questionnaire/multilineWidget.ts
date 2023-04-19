@@ -1,10 +1,10 @@
 import {
+  CreatePropertyKind,
   ThemeColor,
   buttongroup,
   color,
   component,
   displayLogic,
-  font,
   linked,
   number,
   option,
@@ -16,19 +16,12 @@ import {
   wrapper,
 } from '@betty-blocks/component-sdk';
 import { options as formOptions } from '../structures/ActionJSForm/options';
-import {
-  Box,
-  Text,
-  TextArea,
-  boxOptions,
-  textAreaOptions,
-  textOptions,
-} from '../structures';
+import { Box, TextArea, boxOptions, textAreaOptions } from '../structures';
 
 export const multilineWidget = [
   wrapper(
     {
-      label: 'Multi question',
+      label: 'Multiline question',
       optionCategories: [],
       options: {
         property: linked({
@@ -39,11 +32,17 @@ export const multilineWidget = [
               optionId: '#textInputProperty',
             },
           },
+          optionRef: {
+            id: '#textInputPropertyRef',
+          },
           configuration: {
             showOnDrop: true,
           },
-          optionRef: {
-            id: '#property',
+        }),
+        label: linked({
+          label: 'Label',
+          value: {
+            ref: { componentId: '#textInput', optionId: '#textInputLabel' },
           },
         }),
         placeholder: linked({
@@ -128,7 +127,7 @@ export const multilineWidget = [
           component(
             'Form',
             {
-              ref: { id: '#MultilineWidgetForm' },
+              ref: { id: '#multiTextQuestionForm' },
               options: {
                 ...formOptions,
                 actionId: option('ACTION_JS', {
@@ -144,69 +143,47 @@ export const multilineWidget = [
               },
             },
             [
-              Text(
-                {
-                  ref: { id: '#questionText' },
-                  options: {
-                    ...textOptions,
-                    content: variable('Content', {
-                      ref: { id: '#textContent' },
-                      value: [],
-                      configuration: { as: 'MULTILINE' },
-                      optionRef: {
-                        sourceId: '#property',
-                        inherit: 'label',
-                      },
-                    }),
-                    type: font('Font', {
-                      ref: { id: '#textCompType' },
-                      value: ['Body1'],
-                    }),
-                    outerSpacing: sizes('Outer space', {
-                      value: ['0rem', '0rem', 'S', '0rem'],
-                    }),
-                    fontWeight: option('CUSTOM', {
-                      label: 'Font weight',
-                      value: '500',
-                      configuration: {
-                        as: 'DROPDOWN',
-                        dataType: 'string',
-                        allowedInput: [
-                          { name: '100', value: '100' },
-                          { name: '200', value: '200' },
-                          { name: '300', value: '300' },
-                          { name: '400', value: '400' },
-                          { name: '500', value: '500' },
-                          { name: '600', value: '600' },
-                          { name: '700', value: '700' },
-                          { name: '800', value: '800' },
-                          { name: '900', value: '900' },
-                        ],
-                      },
-                    }),
-                  },
-                },
-                [],
-              ),
               TextArea(
                 {
                   label: 'Text area',
                   ref: { id: '#textInput' },
                   options: {
                     ...textAreaOptions,
-                    property: property('Property', {
+                    property: property('Question', {
                       value: '',
                       ref: { id: '#textInputProperty' },
                       configuration: {
                         createProperty: {
-                          type: 'STRING',
+                          type: CreatePropertyKind.TEXT,
                         },
+                        allowedKinds: ['TEXT'],
+                        disabled: true,
+                      },
+                      showInAddChild: true,
+                    }),
+                    label: variable('Label', {
+                      value: [''],
+                      ref: { id: '#textInputLabel' },
+                      optionRef: {
+                        sourceId: '#textInputPropertyRef',
+                        inherit: 'label',
+                      },
+                      configuration: {
+                        allowPropertyName: true,
                       },
                     }),
-                    hideLabel: toggle('Hide label', { value: true }),
+                    floatLabel: toggle('Place label above input', {
+                      value: true,
+                    }),
+                    labelColor: color('Label color', {
+                      value: ThemeColor.BLACK,
+                    }),
                     placeholder: variable('Placeholder', {
                       ref: { id: '#textInputPlaceholder' },
                       value: [''],
+                      configuration: {
+                        allowPropertyName: true,
+                      },
                     }),
                     required: toggle('Required', {
                       ref: { id: '#textInputRequired' },

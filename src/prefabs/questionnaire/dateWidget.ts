@@ -1,25 +1,26 @@
 import {
-  wrapper,
-  sizes,
+  CreatePropertyKind,
   ThemeColor,
-  color,
-  size,
-  variable,
-  option,
-  toggle,
   buttongroup,
-  linked,
+  color,
   component,
-  showIf,
-  text as textType,
   displayLogic,
+  linked,
+  option,
   property,
+  showIf,
+  size,
+  sizes,
+  text,
+  toggle,
+  variable,
+  wrapper,
 } from '@betty-blocks/component-sdk';
 import { options as formOptions } from '../structures/ActionJSForm/options';
 import {
   Box,
-  boxOptions,
   DateTimePicker,
+  boxOptions,
   dateTimePickerOptions,
 } from '../structures';
 
@@ -161,8 +162,9 @@ export const dateWidget = [
                       configuration: {
                         allowedKinds: ['DATE', 'DATE_TIME'],
                         createProperty: {
-                          type: 'DATE_TIME',
+                          type: CreatePropertyKind.DATE_TIME,
                         },
+                        disabled: true,
                       },
                       showInAddChild: true,
                     }),
@@ -172,6 +174,9 @@ export const dateWidget = [
                       optionRef: {
                         sourceId: '#dateInputPropertyRef',
                         inherit: 'label',
+                      },
+                      configuration: {
+                        allowPropertyName: true,
                       },
                     }),
                     floatLabel: toggle('Place label above input', {
@@ -183,6 +188,9 @@ export const dateWidget = [
                     placeholder: variable('Placeholder', {
                       ref: { id: '#dateInputPlaceholder' },
                       value: [''],
+                      configuration: {
+                        allowPropertyName: true,
+                      },
                     }),
                     required: toggle('Required', {
                       ref: { id: '#dateInputRequired' },
@@ -196,7 +204,7 @@ export const dateWidget = [
                       ],
                       { value: 'none' },
                     ),
-                    type: textType('Type', {
+                    type: text('Type', {
                       value: 'date',
                       configuration: {
                         condition: showIf('type', 'EQ', false),
