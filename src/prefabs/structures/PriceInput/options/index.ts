@@ -2,6 +2,7 @@ import {
   hideIf,
   option,
   property,
+  showIf,
   text,
   variable,
 } from '@betty-blocks/component-sdk';
@@ -19,6 +20,9 @@ export const options = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
+    configuration: {
+      condition: showIf('property', 'EQ', ''),
+    },
   }),
 
   property: property('Property', {
