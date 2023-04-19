@@ -78,6 +78,7 @@ const children = [
   }),
 ];
 
+// eslint-disable-next-line import/no-default-export
 export default prefab('Side Menu', attrs, undefined, [
   Box(
     {

@@ -17,6 +17,7 @@ const attrs = {
   description: 'This is the footer partial',
 };
 
+// eslint-disable-next-line import/no-default-export
 export default prefab('Footer', attrs, undefined, [
   Box(
     {

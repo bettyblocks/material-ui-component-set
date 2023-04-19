@@ -29,6 +29,7 @@ const attrs = {
   description: 'This is a top menu partial.',
 };
 
+// eslint-disable-next-line import/no-default-export
 export default prefab('Top menu', attrs, undefined, [
   Box(
     {
