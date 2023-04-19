@@ -1,3 +1,24 @@
+# [2.127.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.126.3...v2.127.0) (2023-04-19)
+
+
+### Features
+
+* add condition to actionVariableId ([6dbbbe1](https://github.com/bettyblocks/material-ui-component-set/commit/6dbbbe1c8e178a6e17e898bfb7d7e2850b6857e6))
+
+## [2.126.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.126.2...v2.126.3) (2023-04-18)
+
+
+### Bug Fixes
+
+* datacontainer not working with filter interaction ([95117a6](https://github.com/bettyblocks/material-ui-component-set/commit/95117a6909ab2cd3f1a445e7cd1c0ce7f4e13977))
+
+## [2.126.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.126.1...v2.126.2) (2023-04-17)
+
+
+### Bug Fixes
+
+* update richtext dependencies ([#2943](https://github.com/bettyblocks/material-ui-component-set/issues/2943)) ([0f17891](https://github.com/bettyblocks/material-ui-component-set/commit/0f178912f4a2421e5495d3aefe30a45afb1ca266))
+
 ## [2.126.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.126.0...v2.126.1) (2023-04-11)
 
 
