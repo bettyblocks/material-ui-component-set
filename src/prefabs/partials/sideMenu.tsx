@@ -1,6 +1,7 @@
 import {
   Icon,
   ThemeColor,
+  addChild,
   color,
   font,
   icon,
@@ -75,9 +76,6 @@ const linkListBoxOptions = { ...boxOptions };
 linkListBoxOptions.innerSpacing = sizes('Inner space', {
   value: ['0rem', '0rem', '0rem', '0rem'],
 });
-
-const linkListOptions = { ...listOptions };
-linkListOptions.disablePadding = toggle('Disable padding', { value: true });
 
 const firstLinkItemOptions = { ...listItemOptions };
 firstLinkItemOptions.primaryText = variable('Primary text', {
@@ -157,6 +155,63 @@ secondLinkItemOptions.titleColor = color('Title color', {
 });
 secondLinkItemOptions.subtitleFont = font('Subtitle text style', {
   value: 'Body2',
+});
+
+const children = [
+  ListItem({
+    options: {
+      ...listItemOptions,
+      primaryText: variable('Menu item name', {
+        value: ['New menu item'],
+        showInAddChild: true,
+        configuration: {
+          showOnDrop: true,
+        },
+      }),
+      avatarOrIcon: option('CUSTOM', {
+        label: 'Visual',
+        value: 'icon',
+        configuration: {
+          as: 'BUTTONGROUP',
+          dataType: 'string',
+          allowedInput: [
+            { name: 'None', value: 'none' },
+            { name: 'Icon', value: 'icon' },
+            { name: 'Avatar', value: 'avatar' },
+          ],
+        },
+      }),
+      icon: icon('Icon', {
+        value: 'Apartment',
+        showInAddChild: true,
+        configuration: {
+          condition: showIf('avatarOrIcon', 'EQ', 'icon'),
+        },
+      }),
+      iconColor: color('Icon color', {
+        value: ThemeColor.WHITE,
+        configuration: {
+          condition: showIf('avatarOrIcon', 'EQ', 'icon'),
+        },
+      }),
+      selected: toggle('Selected', { value: false }),
+      titleColor: color('Title color', {
+        value: ThemeColor.WHITE,
+      }),
+      subtitleFont: font('Subtitle text style', {
+        value: 'Body2',
+      }),
+    },
+  }),
+];
+
+const linkListOptions = { ...listOptions };
+linkListOptions.disablePadding = toggle('Disable padding', { value: true });
+linkListOptions.addChild = addChild('Add Menu Item', {
+  value: { children, addChildWizardType: 'ChildSelector' },
+  ref: {
+    id: '#addChild',
+  },
 });
 
 export default prefab('Side Menu', attrs, undefined, [
