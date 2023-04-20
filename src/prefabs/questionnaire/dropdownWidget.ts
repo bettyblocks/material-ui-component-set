@@ -148,10 +148,9 @@ export const dropdownWidget = [
                       id: '#dropdownInputProperty',
                     },
                     configuration: {
-                      allowRelations: true,
-                      allowedKinds: ['LIST'],
+                      allowedKinds: ['OBJECT'],
                       createProperty: {
-                        type: CreatePropertyKind.LIST,
+                        type: CreatePropertyKind.OBJECT,
                       },
                       disabled: true,
                     },
