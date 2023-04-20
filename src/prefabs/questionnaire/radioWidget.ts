@@ -177,6 +177,7 @@ export const radioWidget = [
                         createProperty: {
                           type: CreatePropertyKind.OBJECT,
                         },
+                        disabled: true,
                         manageObjectValues: {
                           value: [],
                         },
