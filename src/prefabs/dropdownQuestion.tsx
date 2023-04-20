@@ -15,6 +15,7 @@ import {
   property,
   option,
   toggle,
+  CreatePropertyKind,
 } from '@betty-blocks/component-sdk';
 import { Box, boxOptions, SelectInput, selectInputOptions } from './structures';
 import { options as formOptions } from './structures/ActionJSForm/options';
@@ -137,16 +138,18 @@ export default prefab('Dropdown question', attributes, undefined, [
                 ref: { id: '#dropdownInput' },
                 options: {
                   ...selectInputOptions,
-                  property: property('Property', {
+                  property: property('Question', {
                     value: '',
                     ref: {
                       id: '#dropdownInputProperty',
                     },
                     configuration: {
-                      allowRelations: true,
-                      allowedKinds: ['LIST'],
+                      allowedKinds: ['OBJECT'],
                       createProperty: {
-                        type: 'ARRAY',
+                        type: CreatePropertyKind.OBJECT,
+                      },
+                      manageObjectValues: {
+                        value: [],
                       },
                     },
                   }),

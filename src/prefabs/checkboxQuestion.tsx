@@ -15,8 +15,9 @@ import {
   toggle,
   property,
   displayLogic,
+  CreatePropertyKind,
 } from '@betty-blocks/component-sdk';
-import { Box, boxOptions, Text as TextPrefab, textOptions } from './structures';
+import { Box, boxOptions, Text, textOptions } from './structures';
 import { options as formOptions } from './structures/ActionJSForm/options';
 import { CheckboxInput } from './structures/CheckboxInput';
 import { checkboxInputOptions } from './structures/CheckboxInput/options';
@@ -40,23 +41,32 @@ export default prefab('Checkbox question', attributes, undefined, [
           label: 'Question',
           value: {
             ref: {
-              componentId: '#CheckboxInput',
-              optionId: '#questionProperty',
+              componentId: '#checkboxInput',
+              optionId: '#checkboxInputProperty',
             },
+          },
+          optionRef: {
+            id: '#checkboxInputPropertyRef',
           },
           configuration: {
             showOnDrop: true,
           },
-          optionRef: {
-            id: '#questionProperty',
+        }),
+        questionText: linked({
+          label: 'Question text',
+          value: {
+            ref: {
+              componentId: '#questionText',
+              optionId: '#questionTextContent',
+            },
           },
         }),
         questionContent: linked({
           label: 'Checkbox label',
           value: {
             ref: {
-              componentId: '#questionLabel',
-              optionId: '#questionLabelContent',
+              componentId: '#checkboxInput',
+              optionId: '#checkboxInputLabel',
             },
           },
           configuration: {
@@ -67,8 +77,8 @@ export default prefab('Checkbox question', attributes, undefined, [
           label: 'Required to answer',
           value: {
             ref: {
-              componentId: '#CheckboxInput',
-              optionId: '#questionRequired',
+              componentId: '#checkboxInput',
+              optionId: '#checkboxInputRequired',
             },
           },
         }),
@@ -136,7 +146,7 @@ export default prefab('Checkbox question', attributes, undefined, [
           component(
             'Form',
             {
-              ref: { id: '#CheckboxWidgetForm' },
+              ref: { id: '#checkboxQuestionForm' },
               options: {
                 ...formOptions,
                 actionId: option('ACTION_JS', {
@@ -152,17 +162,26 @@ export default prefab('Checkbox question', attributes, undefined, [
               },
             },
             [
-              TextPrefab(
+              Text(
                 {
-                  ref: { id: '#questionLabel' },
+                  ref: {
+                    id: '#questionText',
+                  },
                   options: {
                     ...textOptions,
-                    content: variable('Content', {
+                    content: variable('Question text', {
                       value: [''],
-                      ref: { id: '#questionLabelContent' },
                       configuration: {
                         as: 'MULTILINE',
                       },
+                      ref: {
+                        id: '#questionTextContent',
+                      },
+                      optionRef: {
+                        sourceId: '#checkboxInputPropertyRef',
+                        inherit: 'label',
+                      },
+                      showInAddChild: true,
                     }),
                     type: font('Font', { value: ['Body1'] }),
                     outerSpacing: sizes('Outer space', {
@@ -193,34 +212,33 @@ export default prefab('Checkbox question', attributes, undefined, [
               ),
               CheckboxInput(
                 {
-                  ref: { id: '#CheckboxInput' },
+                  ref: { id: '#checkboxInput' },
                   options: {
                     ...checkboxInputOptions,
                     property: property('Question', {
                       value: '',
+                      ref: {
+                        id: '#checkboxInputProperty',
+                      },
                       configuration: {
                         allowedKinds: ['BOOLEAN', 'BOOLEAN_EXPRESSION'],
                         createProperty: {
-                          type: 'BOOLEAN',
+                          type: CreatePropertyKind.BOOLEAN,
                         },
                       },
-                      ref: {
-                        id: '#questionProperty',
-                      },
+                      showInAddChild: true,
                     }),
-                    label: variable('Label', {
+                    label: variable('Checkbox label', {
                       value: [''],
-                      ref: {
-                        id: '#questionLabel',
-                      },
-                      optionRef: {
-                        sourceId: '#questionProperty',
-                        inherit: 'label',
-                      },
+                      ref: { id: '#checkboxInputLabel' },
+                      showInAddChild: true,
+                    }),
+                    labelColor: color('Label color', {
+                      value: ThemeColor.BLACK,
                     }),
                     required: toggle('Required', {
                       ref: {
-                        id: '#questionRequired',
+                        id: '#checkboxInputRequired',
                       },
                     }),
                   },

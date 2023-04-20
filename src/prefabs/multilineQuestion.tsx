@@ -17,6 +17,7 @@ import {
   toggle,
   variable,
   wrapper,
+  CreatePropertyKind,
 } from '@betty-blocks/component-sdk';
 import { options as formOptions } from './structures/ActionJSForm/options';
 import {
@@ -211,7 +212,7 @@ export default prefab('Multiline question', attributes, undefined, [
                       ref: { id: '#textInputProperty' },
                       configuration: {
                         createProperty: {
-                          type: 'STRING',
+                          type: CreatePropertyKind.TEXT,
                         },
                       },
                     }),

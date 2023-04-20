@@ -18,6 +18,7 @@ import {
   text as textType,
   displayLogic,
   property,
+  CreatePropertyKind,
 } from '@betty-blocks/component-sdk';
 import { options as formOptions } from './structures/ActionJSForm/options';
 import {
@@ -211,7 +212,7 @@ export default prefab('Date question', attributes, undefined, [
                       configuration: {
                         allowedKinds: ['DATE', 'DATE_TIME'],
                         createProperty: {
-                          type: 'DATE_TIME',
+                          type: CreatePropertyKind.DATE_TIME,
                         },
                       },
                       ref: {

@@ -16,6 +16,7 @@ import {
   displayLogic,
   property,
   component,
+  CreatePropertyKind,
 } from '@betty-blocks/component-sdk';
 import { options as formOptions } from './structures/ActionJSForm/options';
 import {
@@ -215,7 +216,7 @@ export default prefab('Number Question', attributes, undefined, [
                       ref: { id: '#numerInputProperty' },
                       configuration: {
                         createProperty: {
-                          type: 'INTEGER',
+                          type: CreatePropertyKind.INTEGER,
                         },
                         allowedKinds: ['INTEGER', 'PRICE'],
                       },

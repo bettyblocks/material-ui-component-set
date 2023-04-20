@@ -14,6 +14,7 @@ import {
   component,
   toggle,
   property,
+  CreatePropertyKind,
 } from '@betty-blocks/component-sdk';
 import {
   Box,
@@ -180,8 +181,9 @@ export default prefab('Multiple Choice question', attributes, undefined, [
                     property: property('Question', {
                       value: '',
                       configuration: {
+                        allowedKinds: ['OBJECT'],
                         createProperty: {
-                          type: 'OBJECT',
+                          type: CreatePropertyKind.OBJECT,
                         },
                         manageObjectValues: {
                           value: [],
