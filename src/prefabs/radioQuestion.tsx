@@ -21,7 +21,7 @@ import {
   boxOptions,
   RadioInput,
   radioInputOptions,
-  Text as TextPrefab,
+  Text,
   textOptions,
 } from './structures';
 import { options as formOptions } from './structures/ActionJSForm/options';
@@ -130,7 +130,7 @@ export default prefab('Multiple Choice question', attributes, undefined, [
               },
             },
             [
-              TextPrefab(
+              Text(
                 {
                   ref: {
                     id: '#QuestionText',
@@ -144,6 +144,10 @@ export default prefab('Multiple Choice question', attributes, undefined, [
                       },
                       ref: {
                         id: '#questionTitleContent',
+                      },
+                      optionRef: {
+                        sourceId: '#questionProperty',
+                        inherit: 'label',
                       },
                     }),
                     type: font('Font', { value: ['Body1'] }),
