@@ -119,6 +119,8 @@
     const labelText = useText(label);
     const [showDropdown, setShowDropdown] = useState(false);
     const [activeStyleName, setActiveStyleName] = useState('Body 1');
+    const placeholderText = useText(placeholder);
+    const helperTextResolved = useText(helperText);
 
     const isMarkActive = (editor, format) => {
       const marks = Editor.marks(editor);
@@ -973,7 +975,9 @@
               renderLeaf={renderLeaf}
               renderElement={renderElement}
               placeholder={
-                <span className={classes.placeholderText}>{placeholder}</span>
+                <span className={classes.placeholderText}>
+                  {placeholderText}
+                </span>
               }
               readOnly={isDev || disabled}
               onKeyDown={(event) => {
@@ -983,9 +987,9 @@
           </Slate>
           <input type="hidden" name={name} value={currentValue} />
         </div>
-        {helperText && (
+        {helperTextResolved && (
           <FormHelperText classes={{ root: classes.helper }}>
-            {helperText}
+            {helperTextResolved}
           </FormHelperText>
         )}
       </div>
@@ -1068,6 +1072,9 @@
           backgroundColor: '#eee',
           padding: '3px',
         },
+        '& [data-slate-placeholder]': {
+          width: ['auto', '!important'],
+        },
       },
       helper: {
         color: ({ options: { helperColor } }) => [
@@ -1080,7 +1087,7 @@
             '!important',
           ],
         },
-        margin: '0 14px !important',
+        margin: '3px 14px 0 !important',
       },
       toolbar: {
         padding: '16px 8px 0px 8px',
