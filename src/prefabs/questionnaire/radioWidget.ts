@@ -129,10 +129,13 @@ export const radioWidget = [
                       value: [''],
                       configuration: {
                         as: 'MULTILINE',
-                        allowPropertyName: true,
                       },
                       ref: {
                         id: '#questionTitleContent',
+                      },
+                      optionRef: {
+                        sourceId: '#questionProperty',
+                        inherit: 'label',
                       },
                     }),
                     type: font('Font', { value: ['Body1'] }),
@@ -170,18 +173,17 @@ export const radioWidget = [
                     property: property('Question', {
                       value: '',
                       configuration: {
-                        disabled: true,
+                        allowedKinds: ['OBJECT'],
                         createProperty: {
                           type: CreatePropertyKind.OBJECT,
                         },
-                        // manageObjectValues: {
-                        //   value: [],
-                        // },
+                        manageObjectValues: {
+                          value: [],
+                        },
                       },
                       ref: {
                         id: '#questionProperty',
                       },
-                      showInAddChild: true,
                     }),
                     label: variable('Label', {
                       value: [''],
