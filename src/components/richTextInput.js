@@ -1072,6 +1072,9 @@
           backgroundColor: '#eee',
           padding: '3px',
         },
+        '& [data-slate-placeholder]': {
+          width: ['auto', '!important'],
+        },
       },
       helper: {
         color: ({ options: { helperColor } }) => [
