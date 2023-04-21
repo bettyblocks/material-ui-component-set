@@ -6,7 +6,7 @@
   dependencies: [
     {
       label: 'Slate',
-      package: 'npm:slate@0.93.0',
+      package: 'npm:slate@0.94.0',
       imports: [
         'createEditor',
         'Editor',
@@ -23,7 +23,7 @@
     },
     {
       label: 'SlateReact',
-      package: 'npm:slate-react@0.93.0',
+      package: 'npm:slate-react@0.94.0',
       imports: ['Editable', 'withReact', 'Slate', 'useSlate'],
     },
     {
@@ -143,7 +143,7 @@
 
       return !!match;
     };
-
+    console.log(Editor);
     const isHeadingActive = (editor) => {
       const { selection } = editor;
       if (!selection) return false;
