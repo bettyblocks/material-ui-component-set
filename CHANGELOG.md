@@ -1,3 +1,11 @@
+## [2.127.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.127.0...v2.127.1) (2023-04-21)
+
+
+### Bug Fixes
+
+* remove log ([17cfacf](https://github.com/bettyblocks/material-ui-component-set/commit/17cfacfe3ca1de2886bdedec4ed0d94ab5a4cf6d))
+* upgrade slate ([7d4f182](https://github.com/bettyblocks/material-ui-component-set/commit/7d4f182afaf5cfb0a002454ce5f860ba8b4a7857))
+
 # [2.127.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.126.3...v2.127.0) (2023-04-19)
 
 
