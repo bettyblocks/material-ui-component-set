@@ -1,13 +1,28 @@
-import { Icon, prefab, PrefabInteraction } from '@betty-blocks/component-sdk';
+import {
+  Icon,
+  InteractionType,
+  PrefabInteraction,
+  prefab,
+} from '@betty-blocks/component-sdk';
 import { multilineWidget } from './questionnaire';
 
-const interactions: PrefabInteraction[] = [];
+const interactions: PrefabInteraction[] = [
+  {
+    name: 'Submit',
+    sourceEvent: 'onBlur',
+    ref: {
+      targetComponentId: '#multilineQuestionForm',
+      sourceComponentId: '#textInput',
+    },
+    type: InteractionType.Custom,
+  },
+];
 
 const attributes = {
   category: 'WIDGETS',
   icon: Icon.TextareaIcon,
+  keywords: ['question', 'text', 'multiline', 'multiline question'],
   interactions,
-  variables: [],
 };
 
 export default prefab(

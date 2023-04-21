@@ -1,13 +1,28 @@
-import { Icon, prefab, PrefabInteraction } from '@betty-blocks/component-sdk';
+import {
+  Icon,
+  InteractionType,
+  PrefabInteraction,
+  prefab,
+} from '@betty-blocks/component-sdk';
 import { dropdownWidget } from './questionnaire';
 
-const interactions: PrefabInteraction[] = [];
+const interactions: PrefabInteraction[] = [
+  {
+    name: 'Submit',
+    sourceEvent: 'onChange',
+    ref: {
+      targetComponentId: '#dropdownQuestionForm',
+      sourceComponentId: '#dropdownInput',
+    },
+    type: InteractionType.Custom,
+  },
+];
 
 const attributes = {
   category: 'WIDGETS',
   icon: Icon.SelectIcon,
+  keywords: ['question', 'dropdown', 'dropdown question'],
   interactions,
-  variables: [],
 };
 
 export default prefab(

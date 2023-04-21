@@ -127,7 +127,7 @@ export const multilineWidget = [
           component(
             'Form',
             {
-              ref: { id: '#multiTextQuestionForm' },
+              ref: { id: '#multilineQuestionForm' },
               options: {
                 ...formOptions,
                 actionId: option('ACTION_JS', {

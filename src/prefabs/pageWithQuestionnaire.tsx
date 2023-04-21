@@ -95,7 +95,7 @@ const beforeCreate = ({
   const [stepNumber, setStepNumber] = React.useState(1);
   const [createNewQuestionnaire, setCreateNewQuestionnaire] =
     React.useState(true);
-  // regax to only support the following characters A-Z a-z 0-9 . _ -
+  // regex to only support the following characters A-Z a-z 0-9 . _ -
   const nameRegExp = /^[\w\-\s.]+$/g;
 
   const pageId = useCurrentPageId();

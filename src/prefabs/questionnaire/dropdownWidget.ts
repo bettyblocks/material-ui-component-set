@@ -122,7 +122,7 @@ export const dropdownWidget = [
           component(
             'Form',
             {
-              ref: { id: '#dropdownWidgetForm' },
+              ref: { id: '#dropdownQuestionForm' },
               options: {
                 ...formOptions,
                 actionId: option('ACTION_JS', {
