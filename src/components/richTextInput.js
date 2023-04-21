@@ -143,7 +143,7 @@
 
       return !!match;
     };
-    console.log(Editor);
+
     const isHeadingActive = (editor) => {
       const { selection } = editor;
       if (!selection) return false;
