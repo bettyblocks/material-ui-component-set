@@ -1,17 +1,17 @@
 import {
+  ThemeColor,
   buttongroup,
+  color,
   dropdown,
+  hideIf,
+  icon,
+  option,
+  property,
+  showIf,
   size,
+  sizes,
   toggle,
   variable,
-  icon,
-  sizes,
-  color,
-  ThemeColor,
-  option,
-  showIf,
-  hideIf,
-  property,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -44,7 +44,9 @@ export const ratingInputOptions = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
-    configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
+    configuration: {
+      condition: showIf('property', 'EQ', ''),
+    },
   }),
   property: property('Property', {
     value: '',

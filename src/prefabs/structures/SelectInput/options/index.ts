@@ -2,11 +2,11 @@ import {
   buttongroup,
   filter,
   hideIf,
+  modelAndRelation,
   option,
   property,
   showIf,
   variable,
-  modelAndRelation,
 } from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
 import { validation } from './validation';
@@ -16,7 +16,9 @@ export const options = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
-    configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
+    configuration: {
+      condition: showIf('property', 'EQ', ''),
+    },
   }),
 
   property: property('Property', {
