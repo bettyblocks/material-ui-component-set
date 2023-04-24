@@ -25,9 +25,7 @@
     "husky": "^4.2.5",
     "nodemon": "^2.0.15",
     "prettier": "^2.5.0",
-    "semantic-release": "^19.0.3",
-    "webpack": "^5.76.0",
-    "webpack-cli": "^4.9.2"
+    "semantic-release": "^19.0.3"
   },
   "husky": {
     "hooks": {
@@ -48,7 +46,7 @@
     "prettier:write": "yarn prettier:base --write \"src/**/*.js\"",
     "upload": "bb components publish -b material-ui-component-set",
     "test": "echo \"Error: no test specified\" && exit 0",
-    "bundle": "npx webpack --config webpack.config.js"
+    "bundle": "esbuild src/index.js --bundle --outfile=dist/bundle.js --minify --sourcemap --target=es6 --legal-comments=external --banner:js='/* For license information please see bundle.js.LEGAL.txt */' --external:react --external:react-dom"
   },
   "files": [
     "dist"
@@ -62,6 +60,7 @@
     "@material-ui/pickers": "^3.2.10",
     "@material-ui/styles": "^4.9.10",
     "date-fns": "^2.11.0",
+    "esbuild": "0.17.18",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
