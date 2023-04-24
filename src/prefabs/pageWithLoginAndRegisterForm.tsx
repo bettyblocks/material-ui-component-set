@@ -439,7 +439,6 @@ const beforeCreate = ({
         throw new Error('Register form could not be found');
 
       if (!idProperty) throw new Error('Property id is not set');
-
       const result = await prepareAction(
         componentId,
         idProperty,
@@ -459,7 +458,6 @@ const beforeCreate = ({
         'login',
         authProfile,
       );
-
       if (authProfile) {
         if (authProfile.properties) {
           if (authProfile.properties[0].kind === 'PASSWORD') {
@@ -552,79 +550,79 @@ const beforeCreate = ({
             },
           );
 
-          authProfile.properties.forEach((prop) => {
-            const { kind, name } = prop;
+          Object.values(resultAuth.variables).forEach(
+            ([prop, inputVariable]): void => {
+              const { kind } = prop;
 
-            const vari = Object.values(resultAuth.variables).find((v) => {
-              // this typing is also wrong probably hence the ts-ignore
-              // @ts-ignore
-              return v?.name === name;
-            });
-
-            const inputPrefabs = () => {
-              const bettyInput = (prefabName: string): PrefabReference => {
-                if (modelProp !== null && vari && 'options' in vari) {
-                  const inputPrefab = makeBettyInput(
-                    prefabName,
-                    modelProp,
-                    prop,
-                    vari,
-                  );
-                  if (inputPrefab.type === 'COMPONENT') {
-                    setOption(
-                      inputPrefab,
-                      'hideLabel',
-                      (originalOption: PrefabComponentOption) => ({
-                        ...originalOption,
-                        value: true,
-                      }),
+              const inputPrefabs = () => {
+                const bettyInput = (prefabName: string): PrefabReference => {
+                  if (
+                    modelProp !== null &&
+                    inputVariable &&
+                    'options' in inputVariable
+                  ) {
+                    const inputPrefab = makeBettyInput(
+                      prefabName,
+                      modelProp,
+                      prop,
+                      inputVariable,
                     );
-                    setOption(
-                      inputPrefab,
-                      'margin',
-                      (originalOption: PrefabComponentOption) => ({
-                        ...originalOption,
-                        value: 'none',
-                      }),
-                    );
-                    setOption(
-                      inputPrefab,
-                      'required',
-                      (originalOption: PrefabComponentOption) => ({
-                        ...originalOption,
-                        value: true,
-                      }),
-                    );
+                    if (inputPrefab.type === 'COMPONENT') {
+                      setOption(
+                        inputPrefab,
+                        'hideLabel',
+                        (originalOption: PrefabComponentOption) => ({
+                          ...originalOption,
+                          value: true,
+                        }),
+                      );
+                      setOption(
+                        inputPrefab,
+                        'margin',
+                        (originalOption: PrefabComponentOption) => ({
+                          ...originalOption,
+                          value: 'none',
+                        }),
+                      );
+                      setOption(
+                        inputPrefab,
+                        'required',
+                        (originalOption: PrefabComponentOption) => ({
+                          ...originalOption,
+                          value: true,
+                        }),
+                      );
+                    }
+                    return inputPrefab;
                   }
-                  return inputPrefab;
+                  throw new Error('Could not return the prefab');
+                };
+                switch (kind) {
+                  case PropertyKind.EMAIL_ADDRESS:
+                    return inputStructure(
+                      prop.label,
+                      bettyInput(BettyPrefabs.EMAIL_ADDRESS),
+                    );
+                  case PropertyKind.PASSWORD:
+                    return inputStructure(
+                      prop.label,
+                      bettyInput(BettyPrefabs.PASSWORD),
+                    );
+                  default:
+                    return inputStructure(
+                      prop.label,
+                      bettyInput(BettyPrefabs.STRING),
+                    );
                 }
-                throw new Error('Could not return the prefab');
               };
-              switch (kind) {
-                case PropertyKind.EMAIL_ADDRESS:
-                  return inputStructure(
-                    prop.label,
-                    bettyInput(BettyPrefabs.EMAIL_ADDRESS),
-                  );
-                case PropertyKind.PASSWORD:
-                  return inputStructure(
-                    prop.label,
-                    bettyInput(BettyPrefabs.PASSWORD),
-                  );
-                default:
-                  return inputStructure(
-                    prop.label,
-                    bettyInput(BettyPrefabs.STRING),
-                  );
-              }
-            };
-            const formInputPrefabs = inputPrefabs();
-            loginFormBox.descendants.push(formInputPrefabs);
+              const formInputPrefabs = inputPrefabs();
+              loginFormBox.descendants.push(formInputPrefabs);
 
-            if (!kind) {
-              throw new Error('PropertyKind not found');
-            }
-          });
+              if (!kind) {
+                throw new Error('PropertyKind not found');
+              }
+            },
+          );
         }
 
         if (
@@ -748,7 +746,7 @@ const beforeCreate = ({
 };
 
 export default makePrefab(
-  'User, account login and register',
+  'User, account login and register - local',
   attrs,
   beforeCreate,
   [
