@@ -1,3 +1,10 @@
+## [2.128.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.128.0...v2.128.1) (2023-04-25)
+
+
+### Bug Fixes
+
+* always show rich text option on text component ([85f1e3e](https://github.com/bettyblocks/material-ui-component-set/commit/85f1e3e9af6f0988820b2a104d4e2a9fe25a534d))
+
 # [2.128.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.127.2...v2.128.0) (2023-04-25)
 
 

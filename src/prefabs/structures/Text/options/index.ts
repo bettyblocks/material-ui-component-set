@@ -6,7 +6,6 @@ import {
   endpoint,
   showIf,
   toggle,
-  showIfTrue,
   ThemeColor,
   color,
 } from '@betty-blocks/component-sdk';
@@ -16,7 +15,7 @@ export const categories = [
   {
     label: 'Styling',
     expanded: false,
-    members: ['textColor', 'fontWeight'],
+    members: ['textColor', 'fontWeight', 'useInnerHtml'],
   },
   {
     label: 'Advanced Options',
@@ -33,9 +32,6 @@ export const textOptions = {
 
   useInnerHtml: toggle('Display Rich Text', {
     value: false,
-    configuration: {
-      condition: showIfTrue('useInnerHtml'),
-    },
   }),
   type: font('Text style', { value: ['Title2'] }),
   textAlignment: option('CUSTOM', {
