@@ -103,6 +103,11 @@ jobs:
           AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_NL6 }}
           AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_NL6 }}
         run: yarn upload
+        name: upload police
+        env:
+          AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_POLICE }}
+          AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_POLICE }}
+        run: yarn upload
       - name: release notes
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
