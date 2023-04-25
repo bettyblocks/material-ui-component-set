@@ -30,7 +30,12 @@ export const dataTableColumnOptions = {
       as: 'VISIBILITY',
     },
   }),
-  property: property('Property', { value: '' }),
+  property: property('Property', {
+    value: '',
+    configuration: {
+      showOnDrop: true,
+    },
+  }),
   sortable: toggle('Sortable', { value: false }),
   headerText: variable('Header text', { value: [''] }),
   type: font('Header type', { value: 'Body1' }),

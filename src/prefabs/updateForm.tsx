@@ -322,7 +322,7 @@ const beforeCreate = ({
               }}
               value={thisPageState.component ? thisPageState.component.id : ''}
               placeholder="No components available."
-              allowedComponents={['DataTable', 'DataList']}
+              allowedComponents={['DataTable']}
             />
           </Field>
         )}
@@ -371,6 +371,11 @@ const beforeCreate = ({
             ...option,
             value: result.action.actionId,
             configuration: { disabled: true },
+          }));
+
+          setOption(structure, 'recordVariable', (option) => ({
+            ...option,
+            value: result.recordInputVariable.id,
           }));
 
           if (!modelId) {
@@ -607,15 +612,6 @@ const beforeCreate = ({
                 );
             }
           });
-
-          structure.descendants.push(
-            makeBettyUpdateInput(
-              BettyPrefabs.HIDDEN,
-              model,
-              idProperty,
-              result.recordInputVariable,
-            ),
-          );
 
           structure.descendants.push(
             cloneStructure(BettyPrefabs.SUBMIT_BUTTON),

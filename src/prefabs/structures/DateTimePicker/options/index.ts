@@ -1,6 +1,8 @@
 import {
+  buttongroup,
   hideIf,
   option,
+  property,
   showIf,
   text,
   toggle,
@@ -14,12 +16,18 @@ export const options = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
+    configuration: {
+      condition: showIf('property', 'EQ', ''),
+    },
   }),
 
-  actionProperty: option('ACTION_JS_PROPERTY', {
-    label: 'Property',
+  property: property('Property', {
     value: '',
-    configuration: { condition: hideIf('actionProperty', 'EQ', '') },
+    configuration: {
+      allowedKinds: ['DATE'],
+      disabled: true,
+      condition: hideIf('property', 'EQ', ''),
+    },
   }),
 
   label: variable('Label', { value: [''] }),
@@ -44,14 +52,12 @@ export const options = {
       condition: showIf('type', 'EQ', 'time'),
     },
   }),
-
   dateFormat: text('Format', {
-    value: 'MM/dd/yyyy',
+    value: 'dd-MM-yyyy',
     configuration: {
       condition: showIf('type', 'EQ', 'date'),
     },
   }),
-
   datetimeFormat: text('Format', {
     value: 'MM/dd/yyyy HH:mm:ss',
     configuration: {
@@ -59,6 +65,15 @@ export const options = {
       condition: showIf('type', 'EQ', 'datetime'),
     },
   }),
+
+  locale: buttongroup(
+    'Locale',
+    [
+      ['English', 'en'],
+      ['Dutch', 'nl'],
+    ],
+    { value: 'en' },
+  ),
 
   use24HourClockTime: toggle('Use 24-hour format', { value: true }),
   disablePastDates: toggle('Disable past dates', { value: false }),

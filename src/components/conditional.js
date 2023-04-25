@@ -5,21 +5,26 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
+      type,
       left,
       right,
       compare,
       visible: initVisibility,
       dataComponentAttribute,
+      displayLogic,
     } = options;
-    const { useText, env } = B;
+    const { useText, env, useLogic } = B;
     const isDev = env === 'dev';
     const isPristine = isDev && children.length === 0;
+    const isSingleRule = type === 'singleRule';
     const mounted = useRef(false);
     const leftText = useText(left);
     const rightText = useText(right);
     const [leftValue, setLeftValue] = useState(leftText);
     const [rightValue, setRightValue] = useState(rightText);
     const [visible, setVisible] = useState();
+    const logic = useLogic(displayLogic);
+
     const evalCondition = () => {
       const leftAsNumber = parseFloat(leftValue);
       const rightAsNumber = parseFloat(rightValue);
@@ -91,7 +96,13 @@
     B.defineFunction('Set Left Value', (evt) => setLeftValue(getValue(evt)));
     B.defineFunction('Set Right Value', (evt) => setRightValue(getValue(evt)));
 
-    if (!isDev && !visible) return <></>;
+    if (isSingleRule && !isDev && !visible) {
+      return <></>;
+    }
+
+    if (!isSingleRule && !isDev && !logic) {
+      return <></>;
+    }
 
     return (
       <div

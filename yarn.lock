@@ -157,10 +157,10 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
-"@betty-blocks/cli@^25.63.1":
-  version "25.63.1"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.63.1.tgz#5fec398760b068f5bbccd2e5379924b5b866884b"
-  integrity sha512-Gwqp2uh2kauvIOW9ZUsIflgLorg4G7nHuW20G98wxv8hVNApLkoEQ9O1Le0kDqRT+En38ma6hjv2lbSu65d4aw==
+"@betty-blocks/cli@^25.72.0":
+  version "25.72.0"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.72.0.tgz#a10616569eb88bc652b35e7a7115a5b96a2ebd3a"
+  integrity sha512-mpX9zCaYIcS2katWJUqwoSmdMimwQ2Mv1gsbzeVA0x+wqqQUbBaRnBqm3zTNbQNjTp4a6AL4URiOYzFT5WZO2Q==
   dependencies:
     "@azure/ms-rest-js" "^2.0.4"
     "@azure/storage-blob" "^10.3.0"
@@ -199,10 +199,10 @@
   optionalDependencies:
     isolated-vm "^4.0.0"
 
-"@betty-blocks/component-sdk@^1.59.0":
-  version "1.59.0"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.59.0.tgz#5c83291974a2e574ec2c5eb9f7eea58b57d91aab"
-  integrity sha512-Q1PaCurntjWSl4757+FFgIGFEEStWQvbBlzCIsBribC5VZPR3QUdcUkXuOf1Lak/+KHneBiVZD+k3WP5wsl6nw==
+"@betty-blocks/component-sdk@^1.70.0":
+  version "1.70.0"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.70.0.tgz#fe247610b7933d27dafebe26efeac93680867934"
+  integrity sha512-iylG1YKY0I7mHS4plurmrr8VIoBd/4YtAk5InKx5VlBNB5SELzcfuBietvdYAOjd2dNnAhzpYaA5ess75ocr2g==
 
 "@colors/colors@1.5.0":
   version "1.5.0"
@@ -3610,9 +3610,9 @@ htmlparser2@^8.0.1:
     entities "^4.3.0"
 
 http-cache-semantics@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/http-cache-semantics/-/http-cache-semantics-4.1.0.tgz#49e91c5cbf36c9b94bcfcd71c23d5249ec74e390"
-  integrity sha512-carPklcUh7ROWRK7Cv27RPtdhYhUsela/ue5/jKzjegVvXDqM2ILE9Q2BGn9JZJh1g87cp56su/FgQSzcWS8cQ==
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/http-cache-semantics/-/http-cache-semantics-4.1.1.tgz#abe02fcb2985460bf0323be664436ec3476a6d5a"
+  integrity sha512-er295DKPVsV82j5kw1Gjt+ADA/XYHsajl82cGNQG2eyoPkvgUhX+nDIyelzhIWbbsXP39EHcI6l5tYs2FYqYXQ==
 
 http-proxy-agent@^5.0.0:
   version "5.0.0"
@@ -7054,10 +7054,10 @@ webpack-sources@^3.2.3:
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-3.2.3.tgz#2d4daab8451fd4b240cc27055ff6a0c2ccea0cde"
   integrity sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==
 
-webpack@^5.64.4:
-  version "5.75.0"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.75.0.tgz#1e440468647b2505860e94c9ff3e44d5b582c152"
-  integrity sha512-piaIaoVJlqMsPtX/+3KTTO6jfvrSYgauFVdt8cr9LTHKmcq/AMd4mhzsiP7ZF/PGRNPGA8336jldh9l2Kt2ogQ==
+webpack@^5.76.0:
+  version "5.76.0"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.76.0.tgz#f9fb9fb8c4a7dbdcd0d56a98e56b8a942ee2692c"
+  integrity sha512-l5sOdYBDunyf72HW8dF23rFtWq/7Zgvt/9ftMof71E/yUb1YLOBmTgA2K4vQthB3kotMrSj609txVE0dnr2fjA==
   dependencies:
     "@types/eslint-scope" "^3.7.3"
     "@types/estree" "^0.0.51"

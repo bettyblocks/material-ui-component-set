@@ -288,7 +288,7 @@ export default prefab('Dialog', attr, undefined, [
                         ],
                         configuration: { as: 'MULTILINE' },
                       }),
-                      type: font('Font', { value: ['Body1'] }),
+                      type: font('Text style', { value: ['Body1'] }),
                     },
                   },
                   [],

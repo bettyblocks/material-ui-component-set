@@ -36,7 +36,6 @@
         const dataComponentAttributeText =
           useText(dataComponentAttribute) || 'DataContainer';
         const [, setOptions] = useOptions();
-
         const [interactionFilter, setInteractionFilter] = useState({});
         const [filterv2, setFilterV2] = useState({});
 
@@ -57,13 +56,6 @@
         const redirect = () => {
           // eslint-disable-next-line react-hooks/rules-of-hooks
           history.push(useEndpoint(redirectWithoutResult));
-        };
-
-        // eslint-disable-next-line consistent-return
-        const transformValue = (value) => {
-          if (value instanceof Date) {
-            return value.toISOString();
-          }
         };
 
         const deepMerge = (...objects) => {
@@ -110,7 +102,6 @@
               return { [field]: acc };
             }, {}),
           );
-
         interactionFilters =
           clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
 
@@ -121,16 +112,15 @@
         );
         const where = useFilter(completeFilter);
 
+        B.defineFunction('setCurrentRecordFromSelect', (value) => {
+          const id = Number(value);
+          if (typeof id === 'number') {
+            setOptions({
+              currentRecord: id,
+            });
+          }
+        });
         useEffect(() => {
-          B.defineFunction('setCurrentRecord', (value) => {
-            const id = Number(value);
-            if (typeof id === 'number') {
-              setOptions({
-                currentRecord: id,
-              });
-            }
-          });
-
           B.defineFunction('Advanced filter', (value) => {
             setFilterV2(value.where);
           });
@@ -149,9 +139,7 @@
               ...s,
               [interactionId]: {
                 property,
-                value: event.target
-                  ? event.target.value
-                  : transformValue(event),
+                value: event instanceof Date ? event.toISOString : event,
               },
             }));
           });

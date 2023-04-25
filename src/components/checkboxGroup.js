@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      actionProperty,
       actionVariableId: name,
       dataComponentAttribute = ['CheckboxGroup'],
       disabled,
@@ -21,6 +20,7 @@
       order,
       orderBy,
       position,
+      property,
       required,
       row,
       showError,
@@ -52,7 +52,7 @@
     const helperTextResolved = useText(helperText);
     const defaultValueText = useText(valueRaw, { rawValue: true });
 
-    const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
+    const modelProperty = getProperty(property || '') || {};
     const { modelId: propertyModelId, referenceModelId } = modelProperty;
     const { contextModelId } = model;
 
@@ -195,7 +195,7 @@
     const relationProperty = getProperty(relationPropertyId || '');
 
     // check if the value option has a relational property
-    if (relationProperty) {
+    if (relationProperty && relationProperty.inverseAssociationId) {
       const parentProperty = getIdProperty(relationProperty.modelId);
       const parentIdProperty = parentProperty ? parentProperty.id : '';
       parentIdValue = B.useProperty(parentIdProperty);
@@ -210,6 +210,26 @@
                   id: [parentIdProperty],
                   type: 'PROPERTY',
                 },
+              },
+            },
+          },
+        ],
+      };
+    }
+
+    if (relationProperty && !relationProperty.inverseAssociationId) {
+      const parentProperty = getIdProperty(relationProperty.modelId);
+      const parentIdProperty = parentProperty ? parentProperty.id : '';
+      parentIdValue = B.useProperty(parentIdProperty);
+
+      // create a filter with the relation id and the parent id-property id
+      valuesFilter = {
+        _and: [
+          {
+            [parentIdProperty]: {
+              eq: {
+                id: [parentIdProperty],
+                type: 'PROPERTY',
               },
             },
           },

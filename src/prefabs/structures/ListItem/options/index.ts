@@ -24,10 +24,10 @@ export const categories = [
       'dense',
       'divider',
       'selected',
-      'titleSize',
+      'font',
       'titleColor',
       'titleWeight',
-      'subtitleSize',
+      'subtitleFont',
       'subtitleColor',
       'subtitleWeight',
     ],
@@ -40,8 +40,18 @@ export const categories = [
 ];
 
 export const listItemOptions = {
-  primaryText: variable('Primary text', { value: ['Title'] }),
-  secondaryText: variable('Secondary text', { value: [''] }),
+  primaryText: variable('Primary text', {
+    value: ['Title'],
+    configuration: {
+      showOnDrop: true,
+    },
+  }),
+  secondaryText: variable('Secondary text', {
+    value: [''],
+    configuration: {
+      showOnDrop: true,
+    },
+  }),
   backgroundColor: color('Background color', { value: ThemeColor.TRANSPARENT }),
   linkType: option('CUSTOM', {
     label: 'Link to',

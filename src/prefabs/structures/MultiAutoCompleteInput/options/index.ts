@@ -17,13 +17,17 @@ export const options = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
-    configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
+    configuration: {
+      condition: showIf('property', 'EQ', ''),
+    },
   }),
-  actionProperty: option('ACTION_JS_PROPERTY', {
-    label: 'Property',
+  property: property('Property', {
     value: '',
     configuration: {
-      condition: hideIf('actionProperty', 'EQ', ''),
+      allowedKinds: ['HAS_AND_BELONGS_TO_MANY', 'HAS_MANY'],
+      allowRelations: true,
+      disabled: true,
+      condition: hideIf('property', 'EQ', ''),
     },
   }),
   label: variable('Label', { value: [] }),
@@ -56,6 +60,13 @@ export const options = {
   filter: option('FILTER', {
     label: 'Filter for options',
     value: {},
+    configuration: {
+      dependsOn: 'model',
+      condition: hideIf('optionType', 'EQ', 'property'),
+    },
+  }),
+  groupBy: property('Group by for options', {
+    value: '',
     configuration: {
       dependsOn: 'model',
       condition: hideIf('optionType', 'EQ', 'property'),

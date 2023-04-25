@@ -26,7 +26,7 @@ const beforeCreate = ({
     Box,
     Text,
   },
-  helpers: { setOption, cloneStructure },
+  helpers: { setOption, cloneStructure, createBlacklist },
 }: BeforeCreateArgs) => {
   const [property, setProperty] = React.useState('');
   const [errorMessage, setErrorMessage] = React.useState('');
@@ -50,49 +50,12 @@ const beforeCreate = ({
                 setProperty(value);
               }}
               value={property}
-              disabledKinds={[
-                'AUTO_INCREMENT',
-                'BOOLEAN_EXPRESSION',
-                'COUNT',
-                'DATE',
-                'DATE_EXPRESSION',
-                'DATE_TIME',
-                'DATE_TIME_EXPRESSION',
-                'DECIMAL',
-                'DECIMAL_EXPRESSION',
-                'EMAIL',
-                'EMAIL_ADDRESS',
-                'ENUM',
-                'FILE',
-                'FLOAT',
-                'IBAN',
-                'IMAGE',
-                'INTEGER',
-                'INTEGER_EXPRESSION',
-                'LIST',
-                'MINUTES',
-                'MINUTES_EXPRESSION',
-                'MULTI_FILE',
-                'MULTI_IMAGE',
-                'PASSWORD',
-                'PDF',
-                'PERIODIC_COUNT',
-                'PHONE_NUMBER',
-                'PRICE',
-                'PRICE_EXPRESSION',
-                'RICH_TEXT',
-                'SERIAL',
-                'SIGNED_PDF',
-                'STRING',
-                'STRING_EXPRESSION',
-                'SUM',
-                'TEXT',
-                'TEXT_EXPRESSION',
-                'TIME',
-                'URL',
-                'ZIPCODE',
-                'BOOLEAN',
-              ]}
+              disabledKinds={createBlacklist([
+                'BELONGS_TO',
+                'HAS_AND_BELONGS_TO_MANY',
+                'HAS_MANY',
+                'HAS_ONE',
+              ])}
             />
           </Field>
           <Field label="Select subview page">
@@ -124,6 +87,12 @@ const beforeCreate = ({
               return {
                 ...originalOption,
                 value: property,
+              };
+            });
+            setOption(subviewItem, 'linkTo', (originalOption) => {
+              return {
+                ...originalOption,
+                value: endpoint,
               };
             });
           }

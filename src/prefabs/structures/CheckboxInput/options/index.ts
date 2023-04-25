@@ -1,10 +1,11 @@
 import {
-  option,
-  toggle,
-  text,
-  variable,
-  showIf,
   hideIf,
+  option,
+  property,
+  showIf,
+  text,
+  toggle,
+  variable,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 import { styles } from './styles';
@@ -14,11 +15,17 @@ export const checkboxInputOptions = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
+    configuration: {
+      condition: showIf('property', 'EQ', ''),
+    },
   }),
-  actionProperty: option('ACTION_JS_PROPERTY', {
-    label: 'Property',
+  property: property('Property', {
     value: '',
-    configuration: { condition: hideIf('actionProperty', 'EQ', '') },
+    configuration: {
+      allowedKinds: ['BOOLEAN'],
+      disabled: true,
+      condition: hideIf('property', 'EQ', ''),
+    },
   }),
 
   label: variable('Label', { value: ['Checkbox'] }),

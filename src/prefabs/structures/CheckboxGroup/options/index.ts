@@ -17,11 +17,17 @@ export const checkboxGroupInputOptions = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
+    configuration: {
+      condition: showIf('property', 'EQ', ''),
+    },
   }),
-  actionProperty: option('ACTION_JS_PROPERTY', {
-    label: 'Property',
+  property: property('Property', {
     value: '',
-    configuration: { condition: hideIf('actionProperty', 'EQ', '') },
+    configuration: {
+      allowedKinds: ['BOOLEAN'],
+      disabled: true,
+      condition: hideIf('property', 'EQ', ''),
+    },
   }),
   label: variable('Label', { value: ['CheckboxGroup'] }),
   value: variable('Value', {

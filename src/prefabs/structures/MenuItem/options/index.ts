@@ -8,6 +8,7 @@ import {
   icon,
   toggle,
   hideIf,
+  displayLogic,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -30,7 +31,12 @@ export const categories = [
 ];
 
 export const menuItemOptions = {
-  primaryText: variable('Primary text', { value: ['Menu Item'] }),
+  primaryText: variable('Primary text', {
+    value: ['Menu Item'],
+    configuration: {
+      showOnDrop: true,
+    },
+  }),
   backgroundColor: color('Background color', { value: ThemeColor.TRANSPARENT }),
   linkType: option('CUSTOM', {
     label: 'Link to',
@@ -70,7 +76,12 @@ export const menuItemOptions = {
       ],
     },
   }),
-  icon: icon('Icon', { value: 'none' }),
+  icon: icon('Icon', {
+    value: 'none',
+    configuration: {
+      showOnDrop: true,
+    },
+  }),
   iconPosition: option('CUSTOM', {
     label: 'Icon position',
     value: 'start',
@@ -88,6 +99,9 @@ export const menuItemOptions = {
   disabled: toggle('Disabled', { value: false }),
   dense: toggle('Dense', { value: false }),
   divider: toggle('Divider', { value: false }),
+  displayLogic: displayLogic('Display logic', {
+    value: {},
+  }),
 
   ...advanced('Menu item'),
 };

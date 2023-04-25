@@ -42,8 +42,6 @@ import {
   buttonOptions,
   Column,
   columnOptions,
-  Conditional,
-  conditionalOptions,
   DataContainer,
   DataTable,
   DataTableColumn,
@@ -867,7 +865,7 @@ const drawerContainer = DrawerContainer(
                                                           },
                                                         },
                                                       ),
-                                                      type: font('Font', {
+                                                      type: font('Text style', {
                                                         value: ['Title4'],
                                                       }),
                                                       textColor: color(
@@ -933,6 +931,21 @@ const drawerContainer = DrawerContainer(
                                               {
                                                 options: {
                                                   ...dialogOptions,
+                                                  isVisible: toggle(
+                                                    'Visible in builder',
+                                                    {
+                                                      value: false,
+                                                      configuration: {
+                                                        as: 'VISIBILITY',
+                                                      },
+                                                    },
+                                                  ),
+                                                  invisible: toggle(
+                                                    'Invisible',
+                                                    {
+                                                      value: true,
+                                                    },
+                                                  ),
                                                 },
                                                 ref: {
                                                   id: '#deleteDialog',
@@ -1002,7 +1015,7 @@ const drawerContainer = DrawerContainer(
                                                                     },
                                                                   ),
                                                                 type: font(
-                                                                  'Font',
+                                                                  'Text style',
                                                                   {
                                                                     value: [
                                                                       'Title4',
@@ -1131,7 +1144,7 @@ const drawerContainer = DrawerContainer(
                                                                     },
                                                                   ),
                                                                 type: font(
-                                                                  'Font',
+                                                                  'Text style',
                                                                   {
                                                                     value: [
                                                                       'Body1',
@@ -1280,357 +1293,6 @@ const drawerContainer = DrawerContainer(
                                                     ]),
                                                   ]),
                                                 ]),
-                                              ],
-                                            ),
-                                            Conditional(
-                                              {
-                                                options: {
-                                                  ...conditionalOptions,
-                                                  visible: toggle(
-                                                    'Initial visibility',
-                                                    {
-                                                      value: false,
-                                                      configuration: {
-                                                        as: 'VISIBILITY',
-                                                      },
-                                                    },
-                                                  ),
-                                                },
-                                              },
-                                              [
-                                                Box(
-                                                  {
-                                                    options: {
-                                                      ...boxOptions,
-                                                      outerSpacing: sizes(
-                                                        'Outer space',
-                                                        {
-                                                          value: [
-                                                            '0rem',
-                                                            '0rem',
-                                                            'XL',
-                                                            '0rem',
-                                                          ],
-                                                        },
-                                                      ),
-                                                      backgroundColor: color(
-                                                        'Background color',
-                                                        {
-                                                          value:
-                                                            ThemeColor.DANGER,
-                                                        },
-                                                      ),
-                                                      borderRadius: size(
-                                                        'Border radius',
-                                                        {
-                                                          value: '5px',
-                                                        },
-                                                      ),
-                                                    },
-                                                  },
-                                                  [
-                                                    Text(
-                                                      {
-                                                        options: {
-                                                          ...textOptions,
-                                                          content: variable(
-                                                            'Content',
-                                                            {
-                                                              value: [
-                                                                'Attention: This template is using next generation actions!',
-                                                              ],
-                                                              configuration: {
-                                                                as: 'MULTILINE',
-                                                              },
-                                                            },
-                                                          ),
-                                                          type: font('Font', {
-                                                            value: ['Body1'],
-                                                          }),
-                                                          outerSpacing: sizes(
-                                                            'Outer space',
-                                                            {
-                                                              value: [
-                                                                '0rem',
-                                                                '0rem',
-                                                                '0rem',
-                                                                'S',
-                                                              ],
-                                                            },
-                                                          ),
-                                                          textColor: color(
-                                                            'Text color',
-                                                            {
-                                                              value:
-                                                                ThemeColor.WHITE,
-                                                            },
-                                                          ),
-                                                          fontWeight: option(
-                                                            'CUSTOM',
-                                                            {
-                                                              label:
-                                                                'Font weight',
-                                                              value: '500',
-                                                              configuration: {
-                                                                as: 'DROPDOWN',
-                                                                dataType:
-                                                                  'string',
-                                                                allowedInput: [
-                                                                  {
-                                                                    name: '100',
-                                                                    value:
-                                                                      '100',
-                                                                  },
-                                                                  {
-                                                                    name: '200',
-                                                                    value:
-                                                                      '200',
-                                                                  },
-                                                                  {
-                                                                    name: '300',
-                                                                    value:
-                                                                      '300',
-                                                                  },
-                                                                  {
-                                                                    name: '400',
-                                                                    value:
-                                                                      '400',
-                                                                  },
-                                                                  {
-                                                                    name: '500',
-                                                                    value:
-                                                                      '500',
-                                                                  },
-                                                                  {
-                                                                    name: '600',
-                                                                    value:
-                                                                      '600',
-                                                                  },
-                                                                  {
-                                                                    name: '700',
-                                                                    value:
-                                                                      '700',
-                                                                  },
-                                                                  {
-                                                                    name: '800',
-                                                                    value:
-                                                                      '800',
-                                                                  },
-                                                                  {
-                                                                    name: '900',
-                                                                    value:
-                                                                      '900',
-                                                                  },
-                                                                ],
-                                                              },
-                                                            },
-                                                          ),
-                                                        },
-                                                      },
-                                                      [],
-                                                    ),
-                                                    Text(
-                                                      {
-                                                        options: {
-                                                          ...textOptions,
-                                                          content: variable(
-                                                            'Content',
-                                                            {
-                                                              value: [
-                                                                'You need to configure the permissions of the "create", "update" and "delete" actions in order to use this template.',
-                                                              ],
-                                                              configuration: {
-                                                                as: 'MULTILINE',
-                                                              },
-                                                            },
-                                                          ),
-                                                          type: font('Font', {
-                                                            value: ['Body1'],
-                                                          }),
-                                                          outerSpacing: sizes(
-                                                            'Outer space',
-                                                            {
-                                                              value: [
-                                                                '0rem',
-                                                                '0rem',
-                                                                '0rem',
-                                                                'S',
-                                                              ],
-                                                            },
-                                                          ),
-                                                          textColor: color(
-                                                            'Text color',
-                                                            {
-                                                              value:
-                                                                ThemeColor.WHITE,
-                                                            },
-                                                          ),
-                                                          fontWeight: option(
-                                                            'CUSTOM',
-                                                            {
-                                                              label:
-                                                                'Font weight',
-                                                              value: '500',
-                                                              configuration: {
-                                                                as: 'DROPDOWN',
-                                                                dataType:
-                                                                  'string',
-                                                                allowedInput: [
-                                                                  {
-                                                                    name: '100',
-                                                                    value:
-                                                                      '100',
-                                                                  },
-                                                                  {
-                                                                    name: '200',
-                                                                    value:
-                                                                      '200',
-                                                                  },
-                                                                  {
-                                                                    name: '300',
-                                                                    value:
-                                                                      '300',
-                                                                  },
-                                                                  {
-                                                                    name: '400',
-                                                                    value:
-                                                                      '400',
-                                                                  },
-                                                                  {
-                                                                    name: '500',
-                                                                    value:
-                                                                      '500',
-                                                                  },
-                                                                  {
-                                                                    name: '600',
-                                                                    value:
-                                                                      '600',
-                                                                  },
-                                                                  {
-                                                                    name: '700',
-                                                                    value:
-                                                                      '700',
-                                                                  },
-                                                                  {
-                                                                    name: '800',
-                                                                    value:
-                                                                      '800',
-                                                                  },
-                                                                  {
-                                                                    name: '900',
-                                                                    value:
-                                                                      '900',
-                                                                  },
-                                                                ],
-                                                              },
-                                                            },
-                                                          ),
-                                                        },
-                                                      },
-                                                      [],
-                                                    ),
-                                                    Text(
-                                                      {
-                                                        options: {
-                                                          ...textOptions,
-                                                          content: variable(
-                                                            'Content',
-                                                            {
-                                                              value: [
-                                                                'This message is not visible in your app',
-                                                              ],
-                                                              configuration: {
-                                                                as: 'MULTILINE',
-                                                              },
-                                                            },
-                                                          ),
-                                                          type: font('Font', {
-                                                            value: ['Body1'],
-                                                          }),
-                                                          outerSpacing: sizes(
-                                                            'Outer space',
-                                                            {
-                                                              value: [
-                                                                '0rem',
-                                                                '0rem',
-                                                                '0rem',
-                                                                'S',
-                                                              ],
-                                                            },
-                                                          ),
-                                                          textColor: color(
-                                                            'Text color',
-                                                            {
-                                                              value:
-                                                                ThemeColor.WHITE,
-                                                            },
-                                                          ),
-                                                          fontWeight: option(
-                                                            'CUSTOM',
-                                                            {
-                                                              label:
-                                                                'Font weight',
-                                                              value: '500',
-                                                              configuration: {
-                                                                as: 'DROPDOWN',
-                                                                dataType:
-                                                                  'string',
-                                                                allowedInput: [
-                                                                  {
-                                                                    name: '100',
-                                                                    value:
-                                                                      '100',
-                                                                  },
-                                                                  {
-                                                                    name: '200',
-                                                                    value:
-                                                                      '200',
-                                                                  },
-                                                                  {
-                                                                    name: '300',
-                                                                    value:
-                                                                      '300',
-                                                                  },
-                                                                  {
-                                                                    name: '400',
-                                                                    value:
-                                                                      '400',
-                                                                  },
-                                                                  {
-                                                                    name: '500',
-                                                                    value:
-                                                                      '500',
-                                                                  },
-                                                                  {
-                                                                    name: '600',
-                                                                    value:
-                                                                      '600',
-                                                                  },
-                                                                  {
-                                                                    name: '700',
-                                                                    value:
-                                                                      '700',
-                                                                  },
-                                                                  {
-                                                                    name: '800',
-                                                                    value:
-                                                                      '800',
-                                                                  },
-                                                                  {
-                                                                    name: '900',
-                                                                    value:
-                                                                      '900',
-                                                                  },
-                                                                ],
-                                                              },
-                                                            },
-                                                          ),
-                                                        },
-                                                      },
-                                                      [],
-                                                    ),
-                                                  ],
-                                                ),
                                               ],
                                             ),
                                             DataTable(
@@ -1815,7 +1477,9 @@ const drawerContainer = DrawerContainer(
                                       ],
                                     },
                                   }),
-                                  type: font('Font', { value: ['Body1'] }),
+                                  type: font('Text style', {
+                                    value: ['Body1'],
+                                  }),
                                   styles: toggle('Styles', { value: true }),
                                   textColor: color('Text color', {
                                     value: ThemeColor.MEDIUM,
@@ -1992,7 +1656,7 @@ const drawerBar = DrawerBar(
                                     value: ['Create'],
                                     configuration: { as: 'MULTILINE' },
                                   }),
-                                  type: font('Font', {
+                                  type: font('Text style', {
                                     value: ['Title5'],
                                   }),
                                   textColor: color('Text color', {
@@ -2300,7 +1964,7 @@ const drawerBar = DrawerBar(
                                     value: ['Details'],
                                     configuration: { as: 'MULTILINE' },
                                   }),
-                                  type: font('Font', {
+                                  type: font('Text style', {
                                     value: ['Title5'],
                                   }),
                                   textColor: color('Text color', {
@@ -2594,7 +2258,7 @@ const drawerBar = DrawerBar(
                                     value: ['Update'],
                                     configuration: { as: 'MULTILINE' },
                                   }),
-                                  type: font('Font', {
+                                  type: font('Text style', {
                                     value: ['Title5'],
                                   }),
                                   textColor: color('Text color', {
@@ -2974,7 +2638,7 @@ const prefabStructure = [
                 condition: showIf('drawerType', 'EQ', 'temporary'),
               },
             }),
-            visibility: toggle('Toggle visibility', {
+            visibility: toggle('Visible in builder', {
               ref: { id: '#toggleSlideoutPanel' },
               value: false,
               configuration: {
@@ -3862,6 +3526,14 @@ const beforeCreate = ({
           value: result.action.actionId,
           configuration: { disabled: true },
         }));
+        setOption(
+          editForm,
+          'recordVariable',
+          (opts: PrefabComponentOption) => ({
+            ...opts,
+            value: result.recordInputVariable.id,
+          }),
+        );
         setOption(editForm, 'model', (opts: PrefabComponentOption) => ({
           ...opts,
           value: modelId,
@@ -4057,15 +3729,6 @@ const beforeCreate = ({
             console.warn('PropertyKind not found');
           }
         });
-
-        editForm.descendants.push(
-          makeBettyUpdateInput(
-            BettyPrefabs.HIDDEN,
-            model,
-            idProperty,
-            result.recordInputVariable,
-          ),
-        );
       }
 
       // set delete action
@@ -4090,6 +3753,14 @@ const beforeCreate = ({
           value: result.action.actionId,
           configuration: { disabled: true },
         }));
+        setOption(
+          deleteForm,
+          'recordVariable',
+          (opts: PrefabComponentOption) => ({
+            ...opts,
+            value: result.recordInputVariable.id,
+          }),
+        );
         setOption(deleteForm, 'model', (opts: PrefabComponentOption) => ({
           ...opts,
           value: modelId,
@@ -4131,15 +3802,6 @@ const beforeCreate = ({
         }
 
         deleteForm.descendants.push(deleteSubmitButton);
-
-        deleteForm.descendants.push(
-          makeBettyUpdateInput(
-            BettyPrefabs.HIDDEN,
-            model,
-            idProperty,
-            result.recordInputVariable,
-          ),
-        );
       }
       if (idProperty && newPrefab.interactions) {
         newPrefab.interactions.push(

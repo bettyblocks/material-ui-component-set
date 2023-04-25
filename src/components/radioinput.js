@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      actionProperty,
       actionVariableId: name,
       dataComponentAttribute = ['Radio'],
       disabled: initialIsDisabled,
@@ -20,6 +19,7 @@
       model,
       order,
       orderBy,
+      property,
       required,
       row,
       size,
@@ -36,7 +36,7 @@
       RadioGroup,
     } = window.MaterialUI.Core;
     const isDev = env === 'dev';
-    const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
+    const modelProperty = getProperty(property.id || '') || {};
 
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
@@ -60,9 +60,17 @@
     } = modelProperty;
 
     const isListProperty = kind === 'list' || kind === 'LIST';
-    const [currentValue, setCurrentValue] = useState(
-      isListProperty ? useText(prefabValue) : getValue(prefabValue),
+
+    const isPropertyValueAnArray = Boolean(
+      prefabValue.length && prefabValue.some((p) => p.type === 'PROPERTY'),
     );
+
+    let resolvedCurrentValue;
+    if (isListProperty) resolvedCurrentValue = useText(prefabValue);
+    else if (isPropertyValueAnArray)
+      resolvedCurrentValue = parseInt(useText(prefabValue), 10);
+    else resolvedCurrentValue = getValue(prefabValue);
+    const [currentValue, setCurrentValue] = useState(resolvedCurrentValue);
 
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));

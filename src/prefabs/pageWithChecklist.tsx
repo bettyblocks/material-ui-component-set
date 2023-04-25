@@ -121,7 +121,6 @@ const interactions = [
 ] as PrefabInteraction[];
 
 const attrs = {
-  name: 'Checklist',
   icon: Icon.DataList,
   type: 'page',
   description: 'This page contains a checklist based on your model',
@@ -548,7 +547,9 @@ const prefabStructure = [
                                     value: ['Page title'],
                                     configuration: { as: 'MULTILINE' },
                                   }),
-                                  type: font('Font', { value: ['Title5'] }),
+                                  type: font('Text style', {
+                                    value: ['Title5'],
+                                  }),
                                   outerSpacing: sizes('Outer space', {
                                     value: ['M', '0rem', '0rem', '0rem'],
                                   }),
@@ -566,7 +567,9 @@ const prefabStructure = [
                                     ],
                                     configuration: { as: 'MULTILINE' },
                                   }),
-                                  type: font('Font', { value: ['Body1'] }),
+                                  type: font('Text style', {
+                                    value: ['Body1'],
+                                  }),
                                   outerSpacing: sizes('Outer space', {
                                     value: ['M', '0rem', 'XL', '0rem'],
                                   }),
@@ -924,7 +927,7 @@ const prefabStructure = [
                                                         },
                                                       },
                                                     ),
-                                                    type: font('Font', {
+                                                    type: font('Text style', {
                                                       value: ['Body1'],
                                                     }),
                                                     textColor: color(
@@ -1012,7 +1015,7 @@ const prefabStructure = [
                                     ],
                                   },
                                 }),
-                                type: font('Font', { value: ['Body1'] }),
+                                type: font('Text style', { value: ['Body1'] }),
                                 styles: toggle('Styles', { value: true }),
                                 textColor: color('Text color', {
                                   value: ThemeColor.MEDIUM,
@@ -1393,6 +1396,14 @@ const beforeCreate = ({
           value: result.action.actionId,
           configuration: { disabled: true },
         }));
+        setOption(
+          editForm,
+          'recordVariable',
+          (opts: PrefabComponentOption) => ({
+            ...opts,
+            value: result.recordInputVariable.id,
+          }),
+        );
         setOption(editForm, 'model', (opts: PrefabComponentOption) => ({
           ...opts,
           value: modelId,
@@ -1441,20 +1452,11 @@ const beforeCreate = ({
               },
             },
           }));
-          const hiddenInput = makeBettyUpdateInput(
-            BettyPrefabs.HIDDEN,
-            model,
-            idProperty,
-            result.recordInputVariable,
-          );
+
           const formBox = treeSearch('#formBox', newPrefab.structure);
           if (!formBox) throw new Error('No form box component found');
 
-          formBox.descendants = [
-            checkBoxInput,
-            hiddenInput,
-            ...formBox.descendants,
-          ];
+          formBox.descendants = [checkBoxInput, ...formBox.descendants];
         });
       }
 
@@ -1550,4 +1552,9 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('Checklist', attrs, beforeCreate, prefabStructure);
+export default makePrefab(
+  'Form checklist',
+  attrs,
+  beforeCreate,
+  prefabStructure,
+);

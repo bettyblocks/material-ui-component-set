@@ -9,20 +9,26 @@
       isVisible,
       isFullscreen,
       invisible,
+      runTimeVisibility,
       width,
       disableClick: disableBackdropClick,
       dataComponentAttribute,
     } = options;
     const { Dialog } = window.MaterialUI.Core;
     const isDev = env === 'dev';
-    const [isOpen, setIsOpen] = useState(isVisible);
+
+    // Because custom boolean option returns false as a string, do an additonal check
+    const componentVisibility = isDev
+      ? isVisible
+      : runTimeVisibility !== 'false';
+    const [isOpen, setIsOpen] = useState(componentVisibility);
 
     const closeDialog = () => setIsOpen(false);
     const openDialog = () => setIsOpen(true);
 
     useEffect(() => {
-      setIsOpen(isVisible);
-    }, [isVisible]);
+      setIsOpen(componentVisibility);
+    }, [componentVisibility]);
 
     useEffect(() => {
       B.defineFunction('Show', openDialog);

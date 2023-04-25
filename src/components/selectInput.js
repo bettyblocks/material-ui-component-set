@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      actionProperty,
       actionVariableId,
       blanco,
       dataComponentAttribute = ['Select'],
@@ -19,7 +18,9 @@
       margin,
       model,
       order,
+      floatLabel,
       orderBy,
+      property,
       required,
       size,
       validationValueMissing = [''],
@@ -36,7 +37,7 @@
     const [disabled, setIsDisabled] = useState(initialIsDisabled);
     const mounted = useRef(false);
     const blancoText = useText(blanco);
-    const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
+    const modelProperty = getProperty(property || '') || {};
     const [currentValue, setCurrentValue] = useState(useText(prefabValue));
     const labelText = useText(label);
     const defaultValueText = useText(prefabValue);
@@ -280,7 +281,9 @@
           defaultValue={currentValue}
           value={currentValue}
           size={size}
-          classes={{ root: classes.formControl }}
+          classes={{
+            root: `${classes.formControl} ${floatLabel && classes.floatLabel}`,
+          }}
           variant={variant}
           fullWidth={fullWidth}
           onChange={handleChange}
@@ -332,6 +335,20 @@
         padding: 0,
         border: 'none',
         pointerEvents: 'none',
+      },
+      floatLabel: {
+        '& > label': {
+          position: 'static !important',
+          transform: 'none !important',
+          marginBottom: '8px !important',
+        },
+        '& .MuiInputBase-root': {
+          '& > fieldset': {
+            '& > legend': {
+              maxWidth: '0px !important',
+            },
+          },
+        },
       },
       formControl: {
         '& > label': {

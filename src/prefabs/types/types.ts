@@ -80,12 +80,17 @@ export interface IdPropertyProps {
   kind: PropertyKind;
 }
 
+export interface RelationPropertyProps extends IdPropertyProps {
+  modelId: string;
+}
+
 export interface ModelProps {
   id: string;
   label: string;
   name: string;
   helpText: string;
   properties: Properties[];
+  relationships: RelationPropertyProps[];
 }
 
 export interface ModelQuery {

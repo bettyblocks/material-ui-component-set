@@ -1,6 +1,7 @@
 import {
   color,
   endpoint,
+  font,
   hideIf,
   icon,
   option,
@@ -11,6 +12,11 @@ import { advanced } from '../../advanced';
 
 export const categories = [
   {
+    label: 'Styling',
+    expanded: false,
+    members: ['font', 'textColor'],
+  },
+  {
     label: 'Advanced Options',
     expanded: false,
     members: ['dataComponentAttribute'],
@@ -18,10 +24,26 @@ export const categories = [
 ];
 
 export const breadcrumbItemOptions = {
-  breadcrumbContent: variable('Content', { value: ['Breadcrumb Item'] }),
-  endpoint: endpoint('Page', { value: '' }),
+  breadcrumbContent: variable('Content', {
+    value: ['Breadcrumb Item'],
+    configuration: {
+      showOnDrop: true,
+    },
+  }),
+  endpoint: endpoint('Page', {
+    value: '',
+    configuration: {
+      showOnDrop: true,
+    },
+  }),
   textColor: color('Text Color', { value: ThemeColor.BLACK }),
-  icon: icon('Icon', { value: 'None' }),
+  font: font('Text style', { value: 'Body1' }),
+  icon: icon('Icon', {
+    value: 'None',
+    configuration: {
+      showOnDrop: true,
+    },
+  }),
   iconPosition: option('CUSTOM', {
     label: 'Icon position',
     value: 'start',

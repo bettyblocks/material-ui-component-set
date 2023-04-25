@@ -4,16 +4,17 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, useText } = B;
+    const { env, useText, useLogic } = B;
     const { Box } = window.MaterialUI.Core;
     const {
       alignment,
-      valignment,
-      transparent,
       backgroundColor,
-      borderColor,
       backgroundUrl,
+      borderColor,
       dataComponentAttribute,
+      displayLogic,
+      transparent,
+      valignment,
     } = options;
     const isDev = env === 'dev';
     const hasBackgroundColor = backgroundColor !== 'Transparent';
@@ -26,6 +27,7 @@
     const opac = transparent ? 0 : 1;
     const [opacity, setOpacity] = useState(opac);
     const [interactionBackground, setInteractionBackground] = useState('');
+    const logic = useLogic(displayLogic);
 
     useEffect(() => {
       B.defineFunction('setCustomBackgroundImage', (url) => {
@@ -49,12 +51,12 @@
       B.triggerEvent('OnClick');
     };
 
-    const handleMouseEnter = () => {
-      B.triggerEvent('OnMouseEnter');
+    const handleMouseEnter = (event) => {
+      B.triggerEvent('OnMouseEnter', event);
     };
 
-    const handleMouseLeave = () => {
-      B.triggerEvent('OnMouseLeave');
+    const handleMouseLeave = (event) => {
+      B.triggerEvent('OnMouseLeave', event);
     };
 
     const BoxCmp = (
@@ -93,6 +95,9 @@
     B.defineFunction('ToSemiTransparent', () => setOpacity(0.5));
     B.defineFunction('ToTransparent', () => setOpacity(0));
 
+    if (!isDev && !logic) {
+      return <></>;
+    }
     return isDev ? <div className={classes.wrapper}>{BoxCmp}</div> : BoxCmp;
   })(),
   styles: (B) => (theme) => {

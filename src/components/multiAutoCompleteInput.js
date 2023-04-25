@@ -27,7 +27,6 @@
       useText,
     } = B;
     const {
-      actionProperty,
       actionVariableId: name,
       closeOnSelect,
       dataComponentAttribute: dataComponentAttributeRaw,
@@ -45,11 +44,13 @@
       minvalue,
       model,
       nameAttribute: nameAttributeRaw,
+      groupBy,
       optionType,
       order,
       orderBy,
       pattern,
       placeholder: placeholderRaw,
+      property,
       renderCheckboxes,
       required,
       showError,
@@ -63,6 +64,7 @@
       validationValueMissing = [''],
       value: valueRaw,
       variant,
+      floatLabel,
     } = options;
     const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
     /*
@@ -102,7 +104,7 @@
     const belowMinimumMessage = useText(validationBelowMinimum);
     const helperTextResolved = useText(helperTextRaw);
 
-    const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
+    const modelProperty = getProperty(property || '') || {};
     const { contextModelId } = model;
     const labelProperty = getProperty(labelPropertyId) || {};
     const { modelId: propertyModelId } = modelProperty;
@@ -116,7 +118,6 @@
           : '',
       ) || {};
     const idProperty = getIdProperty(modelId || '') || {};
-
     const isListProperty =
       modelProperty.kind === 'LIST' || modelProperty.kind === 'list';
 
@@ -143,7 +144,6 @@
         .split(',')
         .map((x) => x.trim());
     }
-
     const validationMessage = (validityObject) => {
       if (!validityObject) {
         return '';
@@ -301,7 +301,7 @@
     const relationProperty = getProperty(relationPropertyId || '');
 
     // check if the value option has a relational property
-    if (relationProperty) {
+    if (relationProperty && relationProperty.inverseAssociationId) {
       const parentProperty = getIdProperty(relationProperty.modelId);
       const parentIdProperty = parentProperty ? parentProperty.id : '';
       parentIdValue = B.useProperty(parentIdProperty);
@@ -322,19 +322,49 @@
         ],
       };
     }
+    if (relationProperty && !relationProperty.inverseAssociationId) {
+      const parentProperty = getIdProperty(relationProperty.modelId);
+      const parentIdProperty = parentProperty ? parentProperty.id : '';
+      parentIdValue = B.useProperty(parentIdProperty);
+
+      // create a filter with the relation id and the parent id-property id
+      valuesFilter = {
+        _and: [
+          {
+            [parentIdProperty]: {
+              eq: {
+                id: [parentIdProperty],
+                type: 'PROPERTY',
+              },
+            },
+          },
+        ],
+      };
+    }
+
+    // Adds the default values to the filter
+    const defaultValuesFilterArray = initialValue.reduce((acc, next) => {
+      return [...acc, { [valueProp.name]: { eq: next } }];
+    }, []);
+
+    const initialValueFilter = {
+      ...(initialValue.length > 0 && { _or: defaultValuesFilterArray }),
+    };
 
     const valueFilter = useFilter(valuesFilter);
-    const queryWasResolvable = !!parentIdValue;
+    const optionFilter = useFilter(filterRaw || {});
+    const queryWasResolvable = !!parentIdValue || initialValue.length > 0;
 
     useAllQuery(
       // use contextModelId when selecting a relation in the model option
       contextModelId || model,
       {
         take: 20,
-        rawFilter: valueFilter,
+        rawFilter: mergeFilters(valueFilter, initialValueFilter),
         variables: {},
         onCompleted(res) {
           const hasResult = res && res.results && res.results.length > 0;
+
           if (hasResult) {
             setValue(res.results);
           }
@@ -371,21 +401,26 @@
       };
     }, [inputValue]);
 
-    const optionFilter = useFilter(filterRaw || {});
-
-    // Adds the default values to the filter
-    const defaultValuesFilterArray = initialValue.reduce((acc, next) => {
-      return [...acc, { [valueProp.name]: { eq: next } }];
-    }, []);
-
-    // We need to do this, because options.filter is not immutable
-    const filter = {
-      ...(initialValue.length > 0 && { _or: defaultValuesFilterArray }),
-      ...optionFilter,
-    };
-
     const searchPropIsNumber = numberPropTypes.includes(searchProp.kind);
     const valuePropIsNumber = numberPropTypes.includes(valueProp.kind);
+
+    /*
+     * Build up group array for grouping options
+     */
+    const idOrPathGroup =
+      typeof groupBy.id !== 'undefined' ? groupBy.id : groupBy;
+    const groupByPath =
+      typeof idOrPathGroup === 'string' ? [idOrPathGroup] : idOrPathGroup;
+
+    let group = [];
+
+    if (!isDev) {
+      if (groupByPath.length === 1 && groupByPath[0] !== '') {
+        group = [getProperty(groupByPath[0]).name];
+      } else if (groupByPath.length > 1) {
+        group = groupByPath.map((propertyId) => getProperty(propertyId).name);
+      }
+    }
 
     /*
      * We extend the option filter with the value of the `value` state and the value of the `inputValue` state.
@@ -395,10 +430,10 @@
     /* eslint-disable no-underscore-dangle */
     if (multiple) {
       if (debouncedInputValue) {
-        if (!filter._or) {
-          filter._or = [];
+        if (!optionFilter._and) {
+          optionFilter._and = [];
         }
-        filter._or.push({
+        optionFilter._and.push({
           [searchProp.name]: {
             [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
               ? parseInt(debouncedInputValue, 10)
@@ -483,10 +518,10 @@
       data: queryData,
       refetch,
     } = useAllQuery(
-      actionProperty ? modelProperty.referenceModelId : modelId,
+      property ? modelProperty.referenceModelId : modelId,
       {
         take: 20,
-        rawFilter: mergeFilters(filter, resolvedExternalFiltersObject),
+        rawFilter: mergeFilters(optionFilter, resolvedExternalFiltersObject),
         variables: {
           sort,
         },
@@ -512,7 +547,6 @@
       {},
       typeof model === 'string' || !model,
     );
-
     const data = hasResults ? relationData : queryData;
     const loading = hasResults ? false : queryLoading;
 
@@ -598,7 +632,11 @@
                 ),
               }),
             }}
-            classes={{ root: classes.formControl }}
+            classes={{
+              root: `${classes.formControl} ${
+                floatLabel && classes.floatLabel
+              }`,
+            }}
             dataComponent={dataComponentAttribute}
             disabled={disabled || !valid}
             error={showError}
@@ -647,7 +685,18 @@
       return [];
     };
 
+    const getSortByGroupValue = (obj) =>
+      [obj]
+        .concat(group)
+        .reduce((a, b) => (a && a[b]) || '')
+        .toString();
+
     const currentOptions = getOptions();
+    const currentOptionsGrouped =
+      group.length &&
+      currentOptions.sort(
+        (a, b) => -getSortByGroupValue(b).localeCompare(getSortByGroupValue(a)),
+      );
 
     /*
      * Convert `value` state into something the `value` prop of the `Autocomplete` component will accept with the right settings
@@ -704,7 +753,9 @@
 
     const MuiAutocomplete = (
       <FormControl
-        classes={{ root: classes.formControl }}
+        classes={{
+          root: `${classes.formControl} ${floatLabel && classes.floatLabel}`,
+        }}
         variant={variant}
         size={size}
         fullWidth={fullWidth}
@@ -720,6 +771,9 @@
           inputValue={inputValue}
           loading={loading}
           multiple={multiple}
+          {...(group.length && {
+            groupBy: (option) => getSortByGroupValue(option),
+          })}
           onChange={(_, newValue) => {
             setValue(newValue || (multiple ? [] : ''));
 
@@ -766,7 +820,7 @@
             handleValidation(validation);
             setInputValue('');
           }}
-          options={currentOptions}
+          options={currentOptionsGrouped || currentOptions}
           renderInput={(params) => (
             <>
               {(optionType === 'model' || optionType === 'variable') && (
@@ -802,7 +856,11 @@
                     </>
                   ),
                 }}
-                classes={{ root: classes.formControl }}
+                classes={{
+                  root: `${classes.formControl} ${
+                    floatLabel && classes.floatLabel
+                  }`,
+                }}
                 data-component={dataComponentAttribute}
                 disabled={disabled}
                 error={errorState}
@@ -882,6 +940,20 @@
             getOpacColor(style.getColor(checkboxColor), 0.04),
             '!important',
           ],
+        },
+      },
+      floatLabel: {
+        '& > label': {
+          position: 'static !important',
+          transform: 'none !important',
+          marginBottom: '8px !important',
+        },
+        '& .MuiInputBase-root': {
+          '& > fieldset': {
+            '& > legend': {
+              maxWidth: '0px !important',
+            },
+          },
         },
       },
       formControl: {

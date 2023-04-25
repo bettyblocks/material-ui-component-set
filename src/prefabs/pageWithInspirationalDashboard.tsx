@@ -252,7 +252,7 @@ const statusPaper = (
                   value: [statusTitle],
                   configuration: { as: 'MULTILINE' },
                 }),
-                type: font('Font', { value: ['Body1'] }),
+                type: font('Text style', { value: ['Body1'] }),
                 textColor: color('Text color', {
                   value: ThemeColor.WHITE,
                   configuration: {
@@ -291,7 +291,7 @@ const statusPaper = (
                   value: [statusValue],
                   configuration: { as: 'MULTILINE' },
                 }),
-                type: font('Font', { value: ['Title5'] }),
+                type: font('Text style', { value: ['Title5'] }),
                 textColor: color('Text color', {
                   value: ThemeColor.WHITE,
                   configuration: {
@@ -473,7 +473,7 @@ const linearProgressBox = (
                 useInnerHtml: toggle('Display Rich Text', {
                   value: false,
                 }),
-                type: font('Font', { value: ['Body1'] }),
+                type: font('Text style', { value: ['Body1'] }),
                 textColor: color('Text color', {
                   value: ThemeColor.DARK,
                 }),
@@ -492,7 +492,7 @@ const linearProgressBox = (
                 useInnerHtml: toggle('Display Rich Text', {
                   value: false,
                 }),
-                type: font('Font', { value: ['Body1'] }),
+                type: font('Text style', { value: ['Body1'] }),
                 textColor: color('Text color', {
                   value: ThemeColor.DARK,
                 }),
@@ -616,7 +616,7 @@ const statisticsBox = (
               useInnerHtml: toggle('Display Rich Text', {
                 value: false,
               }),
-              type: font('Font', { value: ['Body1'] }),
+              type: font('Text style', { value: ['Body1'] }),
               textColor: color('Text color', {
                 value: ThemeColor.MEDIUM,
               }),
@@ -632,7 +632,7 @@ const statisticsBox = (
                 value: [bottomText],
                 configuration: { as: 'MULTILINE' },
               }),
-              type: font('Font', { value: ['Title5'] }),
+              type: font('Text style', { value: ['Title5'] }),
               textColor: color('Text color', {
                 value: ThemeColor.DARK,
               }),
@@ -761,7 +761,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
+export default makePrefab('Dashboard, inspirational', attrs, beforeCreate, [
   Row(
     {
       options: {
@@ -1070,7 +1070,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                           value: ['Dashboard'],
                                           configuration: { as: 'MULTILINE' },
                                         }),
-                                        type: font('Font', {
+                                        type: font('Text style', {
                                           value: ['Title4'],
                                         }),
                                       },
@@ -1274,7 +1274,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                                   as: 'MULTILINE',
                                                 },
                                               }),
-                                              type: font('Font', {
+                                              type: font('Text style', {
                                                 value: ['Title5'],
                                               }),
                                               textAlignment: option('CUSTOM', {
@@ -1337,7 +1337,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                                   value: false,
                                                 },
                                               ),
-                                              type: font('Font', {
+                                              type: font('Text style', {
                                                 value: ['Body1'],
                                               }),
                                               textAlignment: option('CUSTOM', {
@@ -1460,7 +1460,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                                       as: 'MULTILINE',
                                                     },
                                                   }),
-                                                  type: font('Font', {
+                                                  type: font('Text style', {
                                                     value: ['Title5'],
                                                   }),
                                                   outerSpacing: sizes(
@@ -1585,7 +1585,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                                           value: false,
                                                         },
                                                       ),
-                                                      type: font('Font', {
+                                                      type: font('Text style', {
                                                         value: ['Body1'],
                                                       }),
                                                     },
@@ -1766,7 +1766,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                                   value: false,
                                                 },
                                               ),
-                                              type: font('Font', {
+                                              type: font('Text style', {
                                                 value: ['Body1'],
                                               }),
                                               textAlignment: option('CUSTOM', {
@@ -1823,7 +1823,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                                   as: 'MULTILINE',
                                                 },
                                               }),
-                                              type: font('Font', {
+                                              type: font('Text style', {
                                                 value: ['Title5'],
                                               }),
                                               textAlignment: option('CUSTOM', {
@@ -2130,7 +2130,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                                       as: 'MULTILINE',
                                                     },
                                                   }),
-                                                  type: font('Font', {
+                                                  type: font('Text style', {
                                                     value: ['Title5'],
                                                   }),
                                                   outerSpacing: sizes(
@@ -2255,7 +2255,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                                           value: false,
                                                         },
                                                       ),
-                                                      type: font('Font', {
+                                                      type: font('Text style', {
                                                         value: ['Body1'],
                                                       }),
                                                       textColor: color(
@@ -2503,7 +2503,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                                       as: 'MULTILINE',
                                                     },
                                                   }),
-                                                  type: font('Font', {
+                                                  type: font('Text style', {
                                                     value: ['Title5'],
                                                   }),
                                                   outerSpacing: sizes(
@@ -2628,7 +2628,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                                           value: false,
                                                         },
                                                       ),
-                                                      type: font('Font', {
+                                                      type: font('Text style', {
                                                         value: ['Body1'],
                                                       }),
                                                       textColor: color(
@@ -2810,7 +2810,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                                   as: 'MULTILINE',
                                                 },
                                               }),
-                                              type: font('Font', {
+                                              type: font('Text style', {
                                                 value: ['Title5'],
                                               }),
                                               outerSpacing: sizes(
@@ -2851,7 +2851,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                                   value: false,
                                                 },
                                               ),
-                                              type: font('Font', {
+                                              type: font('Text style', {
                                                 value: ['Body1'],
                                               }),
                                               textColor: color('Text color', {
@@ -2896,7 +2896,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                                     value: false,
                                                   },
                                                 ),
-                                                type: font('Font', {
+                                                type: font('Text style', {
                                                   value: ['Body1'],
                                                 }),
                                               },
@@ -3029,7 +3029,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                                           },
                                                         },
                                                       ),
-                                                      type: font('Font', {
+                                                      type: font('Text style', {
                                                         value: ['Title6'],
                                                       }),
                                                       textColor: color(
@@ -3123,7 +3123,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                                           value: false,
                                                         },
                                                       ),
-                                                      type: font('Font', {
+                                                      type: font('Text style', {
                                                         value: ['Body1'],
                                                       }),
                                                       textColor: color(
@@ -3389,7 +3389,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                                     value: false,
                                                   },
                                                 ),
-                                                type: font('Font', {
+                                                type: font('Text style', {
                                                   value: ['Body1'],
                                                 }),
                                                 textColor: color('Text color', {
@@ -3409,7 +3409,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                                     as: 'MULTILINE',
                                                   },
                                                 }),
-                                                type: font('Font', {
+                                                type: font('Text style', {
                                                   value: ['Title4'],
                                                 }),
                                                 outerSpacing: sizes(
@@ -3725,9 +3725,12 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                                             value: false,
                                                           },
                                                         ),
-                                                        type: font('Font', {
-                                                          value: ['Body1'],
-                                                        }),
+                                                        type: font(
+                                                          'Text style',
+                                                          {
+                                                            value: ['Body1'],
+                                                          },
+                                                        ),
                                                         textColor: color(
                                                           'Text color',
                                                           {
@@ -3937,9 +3940,12 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                                             value: false,
                                                           },
                                                         ),
-                                                        type: font('Font', {
-                                                          value: ['Body1'],
-                                                        }),
+                                                        type: font(
+                                                          'Text style',
+                                                          {
+                                                            value: ['Body1'],
+                                                          },
+                                                        ),
                                                         textColor: color(
                                                           'Text color',
                                                           {
@@ -4422,7 +4428,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                                     value: false,
                                                   },
                                                 ),
-                                                type: font('Font', {
+                                                type: font('Text style', {
                                                   value: ['Body1'],
                                                 }),
                                                 textColor: color('Text color', {
@@ -4529,7 +4535,7 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                 useInnerHtml: toggle('Display Rich Text', {
                                   value: false,
                                 }),
-                                type: font('Font', { value: ['Body1'] }),
+                                type: font('Text style', { value: ['Body1'] }),
                                 styles: toggle('Styles', { value: true }),
                                 textColor: color('Text color', {
                                   value: ThemeColor.MEDIUM,

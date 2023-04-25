@@ -17,7 +17,12 @@ export const categories = [
 ];
 
 export const tabOptions = {
-  label: variable('Tab label', { value: ['TAB'] }),
+  label: variable('Tab label', {
+    value: ['Tab'],
+    configuration: {
+      showOnDrop: true,
+    },
+  }),
   height: size('Height', {
     value: '',
     configuration: {
@@ -30,7 +35,12 @@ export const tabOptions = {
       as: 'UNIT',
     },
   }),
-  icon: icon('Icon', { value: 'None' }),
+  icon: icon('Icon', {
+    value: 'None',
+    configuration: {
+      showOnDrop: true,
+    },
+  }),
   iconAlignment: option('CUSTOM', {
     label: 'Icon Alignment',
     value: 'top',
@@ -44,6 +54,7 @@ export const tabOptions = {
         { name: 'Bottom', value: 'bottom' },
       ],
       condition: hideIf('icon', 'EQ', 'None'),
+      showOnDrop: true,
     },
   }),
   disabled: toggle('Disabled', { value: false }),

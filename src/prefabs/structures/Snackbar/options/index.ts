@@ -4,6 +4,7 @@ import {
   option,
   number,
   showIfTrue,
+  font,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -16,7 +17,7 @@ export const categories = [
 ];
 
 export const snackbarOptions = {
-  visible: toggle('Toggle visibility', {
+  visible: toggle('Visible in builder', {
     value: true,
     configuration: {
       as: 'VISIBILITY',
@@ -25,6 +26,7 @@ export const snackbarOptions = {
   content: variable('Content', {
     value: ['You can also drag an alert component here for example'],
   }),
+  font: font('Text style', { value: 'Body1' }),
   allowTextServerResponse: toggle('Allow to overwrite by the server response', {
     value: false,
   }),
@@ -73,6 +75,17 @@ export const snackbarOptions = {
     value: 6000,
     configuration: {
       condition: showIfTrue('autoHide'),
+    },
+  }),
+  runTimeVisibility: option('CUSTOM', {
+    label: 'Initial State (RUNTIME)',
+    value: 'false',
+    configuration: {
+      as: 'DROPDOWN',
+      allowedInput: [
+        { name: 'Visible', value: 'true' },
+        { name: 'Hidden', value: 'false' },
+      ],
     },
   }),
 

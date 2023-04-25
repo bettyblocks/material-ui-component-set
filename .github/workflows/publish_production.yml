@@ -16,6 +16,9 @@ jobs:
       - uses: actions/checkout@v2
         with:
           token: ${{ secrets.GH_TOKEN }}
+      - uses: actions/setup-node@v3
+        with: 
+          node-version: 16.11.1
       - name: Install packages
         run: yarn install
 
@@ -95,7 +98,11 @@ jobs:
           AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_HOLYGROW }}
           AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_HOLYGROW }}
         run: yarn upload
-
+      - name: upload NL6
+        env:
+          AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_NL6 }}
+          AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_NL6 }}
+        run: yarn upload
       - name: release notes
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

@@ -9,6 +9,6 @@ const attr = {
 };
 
 const options = { ...textOptions };
-options.type = font('Font', { value: ['Body1'] });
+options.type = font('Text style', { value: ['Body1'] });
 
 export default prefab('Text', attr, undefined, [Text({ options }, [])]);

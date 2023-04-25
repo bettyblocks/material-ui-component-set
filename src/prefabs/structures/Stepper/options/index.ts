@@ -10,6 +10,7 @@ import {
   addChild,
   reconfigure,
   icon,
+  font,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 import { Step } from '../../Step';
@@ -20,6 +21,7 @@ export const categories = [
     label: 'Styling',
     expanded: false,
     members: [
+      'font',
       'activeColor',
       'inactiveColor',
       'activeLabelColor',
@@ -97,6 +99,7 @@ export const stepperOptions = {
       condition: hideIf('type', 'EQ', 'mobile'),
     },
   }),
+  font: font('Step text style', { value: 'Body1' }),
   activeColor: color('Active color', { value: ThemeColor.PRIMARY }),
   activeLabelColor: color('Active Label color', {
     value: ThemeColor.BLACK,
