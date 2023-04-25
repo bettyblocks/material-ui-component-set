@@ -10,6 +10,7 @@
       actionModels,
       dense,
       disabled,
+      displayLogic,
       divider,
       icon,
       iconPosition,
@@ -27,6 +28,7 @@
       getIdProperty,
       Link,
       useAction,
+      useLogic,
       useProperty,
       useText,
       Icon,
@@ -44,6 +46,7 @@
     if (!isDev && hasLink) menuItemComponent = Link;
     if (!isDev && hasExternalLink) menuItemComponent = 'a';
     const primary = useText(primaryText);
+    const logic = useLogic(displayLogic);
 
     const camelToSnakeCase = (str) =>
       str[0].toLowerCase() +
@@ -89,7 +92,7 @@
       }
     }, [loading]);
 
-    return (
+    const menuItemCmp = (
       <MenuItem
         className={classes.root}
         component={menuItemComponent}
@@ -111,6 +114,11 @@
         {isLoading && <CircularProgress size={16} className={classes.loader} />}
       </MenuItem>
     );
+
+    if (!isDev && !logic) {
+      return <></>;
+    }
+    return menuItemCmp;
   })(),
   styles: (B) => (t) => {
     const { env, Styling } = B;
