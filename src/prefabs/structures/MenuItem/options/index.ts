@@ -101,9 +101,6 @@ export const menuItemOptions = {
   divider: toggle('Divider', { value: false }),
   displayLogic: displayLogic('Display logic', {
     value: {},
-    configuration: {
-      condition: showIf('type', 'EQ', 'multiRule'),
-    },
   }),
 
   ...advanced('Menu item'),
