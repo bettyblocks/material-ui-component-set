@@ -19,6 +19,7 @@ import {
   toggle,
   variable,
   wrapper,
+  InteractionType,
 } from '@betty-blocks/component-sdk';
 import {
   Box,
@@ -648,12 +649,96 @@ const children = [
 ];
 
 const questionTypes = [
-  { label: 'Text question', structure: textWidget },
-  { label: 'Number question', structure: numberWidget },
-  { label: 'Date question', structure: dateWidget },
-  { label: 'Checkbox question', structure: checkboxWidget },
-  { label: 'Dropdown question', structure: dropdownWidget },
-  { label: 'Multiline question', structure: multilineWidget },
+  {
+    label: 'Text question',
+    structure: textWidget,
+    interactions: [
+      {
+        name: 'Submit',
+        sourceEvent: 'onBlur',
+        ref: {
+          targetComponentId: '#textQuestionForm',
+          sourceComponentId: '#textInput',
+        },
+        type: InteractionType.Custom,
+      },
+    ],
+  },
+  {
+    label: 'Number question',
+    structure: numberWidget,
+    interactions: [
+      {
+        name: 'Submit',
+        sourceEvent: 'onBlur',
+        ref: {
+          targetComponentId: '#numberQuestionForm',
+          sourceComponentId: '#numberInput',
+        },
+        type: InteractionType.Custom,
+      },
+    ],
+  },
+  {
+    label: 'Date question',
+    structure: dateWidget,
+    interactions: [
+      {
+        name: 'Submit',
+        sourceEvent: 'onChange',
+        ref: {
+          targetComponentId: '#dateQuestionForm',
+          sourceComponentId: '#dateInput',
+        },
+        type: InteractionType.Custom,
+      },
+    ],
+  },
+  {
+    label: 'Checkbox question',
+    structure: checkboxWidget,
+    interactions: [
+      {
+        name: 'Submit',
+        sourceEvent: 'onChange',
+        ref: {
+          targetComponentId: '#checkboxQuestionForm',
+          sourceComponentId: '#checkboxInput',
+        },
+        type: InteractionType.Custom,
+      },
+    ],
+  },
+  {
+    label: 'Dropdown question',
+    structure: dropdownWidget,
+    interactions: [
+      {
+        name: 'Submit',
+        sourceEvent: 'onChange',
+        ref: {
+          targetComponentId: '#dropdownQuestionForm',
+          sourceComponentId: '#dropdownInput',
+        },
+        type: InteractionType.Custom,
+      },
+    ],
+  },
+  {
+    label: 'Multiline question',
+    structure: multilineWidget,
+    interactions: [
+      {
+        name: 'Submit',
+        sourceEvent: 'onBlur',
+        ref: {
+          targetComponentId: '#multilineQuestionForm',
+          sourceComponentId: '#textInput',
+        },
+        type: InteractionType.Custom,
+      },
+    ],
+  },
 ];
 
 const prefabStructure = [
