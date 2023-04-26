@@ -1156,10 +1156,7 @@ const beforeCreate = ({
             // eslint-disable-next-line no-useless-return
             return;
           }
-          if (!endpoint) {
-            throw new Error('There was no redirected page selected');
-          }
-          if (isEmptyEndpoint(endpoint)) {
+          if (!endpoint || isEmptyEndpoint(endpoint)) {
             setEndpointInvalid(true);
             // eslint-disable-next-line no-useless-return
             return;
