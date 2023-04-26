@@ -454,7 +454,7 @@ const beforeCreate = ({
         // this typing is wrong hence the ts ignore
         // @ts-ignore
         undefined,
-        null,
+        authProfile.properties,
         'login',
         authProfile,
       );
