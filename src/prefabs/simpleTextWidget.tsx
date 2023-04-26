@@ -1,13 +1,14 @@
 import {
-  prefab,
+  CreatePropertyKind,
   Icon,
   PrefabInteraction,
-  wrapper,
-  variable,
-  linked,
   component as makeComponent,
-  property,
+  linked,
   option,
+  prefab,
+  property,
+  variable,
+  wrapper,
 } from '@betty-blocks/component-sdk';
 import { options as formOptions } from './structures/ActionJSForm/options';
 import {
@@ -99,7 +100,7 @@ export default prefab('Simple text widget', attributes, undefined, [
                     ref: { id: '#property' },
                     configuration: {
                       createProperty: {
-                        type: 'STRING',
+                        type: CreatePropertyKind.STRING,
                       },
                     },
                   }),

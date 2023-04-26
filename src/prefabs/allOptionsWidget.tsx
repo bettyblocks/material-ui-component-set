@@ -1,4 +1,5 @@
 import {
+  CreatePropertyKind,
   Icon,
   PrefabInteraction,
   ThemeColor,
@@ -310,6 +311,14 @@ export default prefab('AllOptions widget', attributes, undefined, [
             property: property('Property', {
               value: '',
               ref: { id: '#property' },
+              configuration: {
+                createProperty: {
+                  type: CreatePropertyKind.OBJECT,
+                },
+                manageObjectValues: {
+                  value: [],
+                },
+              },
             }),
             size: size('size', {
               value: 'L',
