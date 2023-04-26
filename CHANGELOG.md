@@ -1,3 +1,22 @@
+## [2.128.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.128.0...v2.128.1) (2023-04-25)
+
+
+### Bug Fixes
+
+* always show rich text option on text component ([85f1e3e](https://github.com/bettyblocks/material-ui-component-set/commit/85f1e3e9af6f0988820b2a104d4e2a9fe25a534d))
+
+# [2.128.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.127.2...v2.128.0) (2023-04-25)
+
+
+### Bug Fixes
+
+* remove configuration from display logic in menuitem ([57bceb3](https://github.com/bettyblocks/material-ui-component-set/commit/57bceb3ac8ba7445c7a7a6b7d432ddcb397a67c8))
+
+
+### Features
+
+* add display logic to menu item component ([3759d39](https://github.com/bettyblocks/material-ui-component-set/commit/3759d3939abb779e1805621e513f5dc0c3da2544))
+
 ## [2.127.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.127.1...v2.127.2) (2023-04-21)
 
 
