@@ -3,7 +3,6 @@ import {
   ThemeColor,
   color,
   component,
-  font,
   linked,
   option,
   property,
@@ -12,15 +11,9 @@ import {
   toggle,
   variable,
   wrapper,
+  displayLogic,
 } from '@betty-blocks/component-sdk';
-import {
-  Box,
-  RadioInput,
-  Text,
-  boxOptions,
-  radioInputOptions,
-  textOptions,
-} from '../structures';
+import { Box, RadioInput, boxOptions, radioInputOptions } from '../structures';
 import { options as formOptions } from '../structures/ActionJSForm/options';
 
 export const radioWidget = [
@@ -34,14 +27,20 @@ export const radioWidget = [
           value: {
             ref: {
               componentId: '#radioInput',
-              optionId: '#questionProperty',
+              optionId: '#radioInputProperty',
             },
+          },
+          optionRef: {
+            id: '#radioInputPropertyRef',
           },
           configuration: {
             showOnDrop: true,
           },
-          optionRef: {
-            id: '#questionProperty',
+        }),
+        label: linked({
+          label: 'Label',
+          value: {
+            ref: { componentId: '#radioInput', optionId: '#radioInputLabel' },
           },
         }),
         required: linked({
@@ -49,7 +48,7 @@ export const radioWidget = [
           value: {
             ref: {
               componentId: '#radioInput',
-              optionId: '#questionRequired',
+              optionId: '#radioInputRequired',
             },
           },
         }),
@@ -59,6 +58,15 @@ export const radioWidget = [
             ref: {
               componentId: '#questionBox',
               optionId: '#questionBoxOuterSpacing',
+            },
+          },
+        }),
+        displayLogic: linked({
+          label: 'Display logic',
+          value: {
+            ref: {
+              componentId: '#questionBox',
+              optionId: '#questionBoxDisplayLogic',
             },
           },
         }),
@@ -96,13 +104,19 @@ export const radioWidget = [
                 id: '#questionBoxOuterSpacing',
               },
             }),
+            displayLogic: displayLogic('Display logic', {
+              value: {},
+              ref: {
+                id: '#questionBoxDisplayLogic',
+              },
+            }),
           },
         },
         [
           component(
             'Form',
             {
-              ref: { id: '#RadioWidgetForm' },
+              ref: { id: '#radioQuestionForm' },
               options: {
                 ...formOptions,
                 actionId: option('ACTION_JS', {
@@ -118,53 +132,6 @@ export const radioWidget = [
               },
             },
             [
-              Text(
-                {
-                  ref: {
-                    id: '#QuestionText',
-                  },
-                  options: {
-                    ...textOptions,
-                    content: variable('Content', {
-                      value: [''],
-                      configuration: {
-                        as: 'MULTILINE',
-                      },
-                      ref: {
-                        id: '#questionTitleContent',
-                      },
-                      optionRef: {
-                        sourceId: '#questionProperty',
-                        inherit: 'label',
-                      },
-                    }),
-                    type: font('Font', { value: ['Body1'] }),
-                    outerSpacing: sizes('Outer space', {
-                      value: ['0rem', '0rem', 'S', '0rem'],
-                    }),
-                    fontWeight: option('CUSTOM', {
-                      label: 'Font weight',
-                      value: '500',
-                      configuration: {
-                        as: 'DROPDOWN',
-                        dataType: 'string',
-                        allowedInput: [
-                          { name: '100', value: '100' },
-                          { name: '200', value: '200' },
-                          { name: '300', value: '300' },
-                          { name: '400', value: '400' },
-                          { name: '500', value: '500' },
-                          { name: '600', value: '600' },
-                          { name: '700', value: '700' },
-                          { name: '800', value: '800' },
-                          { name: '900', value: '900' },
-                        ],
-                      },
-                    }),
-                  },
-                },
-                [],
-              ),
               RadioInput(
                 {
                   ref: { id: '#radioInput' },
@@ -172,6 +139,9 @@ export const radioWidget = [
                     ...radioInputOptions,
                     property: property('Question', {
                       value: '',
+                      ref: {
+                        id: '#radioInputProperty',
+                      },
                       configuration: {
                         allowedKinds: ['OBJECT'],
                         createProperty: {
@@ -182,15 +152,21 @@ export const radioWidget = [
                           value: [],
                         },
                       },
-                      ref: {
-                        id: '#questionProperty',
-                      },
+                      showInAddChild: true,
                     }),
                     label: variable('Label', {
                       value: [''],
+                      ref: { id: '#radioInputLabel' },
+                      optionRef: {
+                        sourceId: '#radioInputPropertyRef',
+                        inherit: 'label',
+                      },
                       configuration: {
                         allowPropertyName: true,
                       },
+                    }),
+                    labelColor: color('Label color', {
+                      value: ThemeColor.BLACK,
                     }),
                     required: toggle('Required', {
                       ref: {

@@ -153,6 +153,9 @@ export const dropdownWidget = [
                         type: CreatePropertyKind.OBJECT,
                       },
                       disabled: true,
+                      manageObjectValues: {
+                        value: [],
+                      },
                     },
                     showInAddChild: true,
                   }),
