@@ -1,3 +1,10 @@
+# [2.129.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.128.1...v2.129.0) (2023-04-26)
+
+
+### Features
+
+* add material ui components to police zone ([64f3b9e](https://github.com/bettyblocks/material-ui-component-set/commit/64f3b9e5f1ba731b896870f90528db625b57fc39))
+
 ## [2.128.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.128.0...v2.128.1) (2023-04-25)
 
 
