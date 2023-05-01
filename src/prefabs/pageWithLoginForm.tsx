@@ -1017,6 +1017,7 @@ const beforeCreate = ({
 
   const isEmptyEndpoint = (value: Endpoint): boolean =>
     !value || Object.keys(value).length === 0 || value.id === '';
+
   function treeSearch(
     dirName: string,
     array: PrefabReference[],
@@ -1168,13 +1169,12 @@ const beforeCreate = ({
           const formObject = treeSearch('#formId', newPrefab.structure);
           if (!formObject) throw new Error('Form could not be found');
           formObject.id = componentId;
-          const loginActionProps = authProfile?.properties || null;
           const result = await prepareAction(
             componentId,
             // this typing is wrong hence the ts ignore
             // @ts-ignore
             undefined,
-            loginActionProps,
+            null,
             'login',
             authProfile,
             undefined,
@@ -1188,91 +1188,83 @@ const beforeCreate = ({
 
               const formBox = treeSearch('#formBoxRef', newPrefab.structure);
               if (!formBox) throw new Error('Box could not be found');
-              Object.values(result.variables).forEach(
-                ([prop, inputVariable]): void => {
-                  const { kind } = prop;
-                  // const vari = Object.values(result.variables).find((v) => {
-                  //   // this typing is also wrong probably hence the ts-ignore
-                  //   // @ts-ignore
-                  //   return v?.name === name;
-                  // });
+              authProfile.properties.forEach((prop) => {
+                const { kind, name } = prop;
+                const vari = Object.values(result.variables).find((v) => {
+                  // this typing is also wrong probably hence the ts-ignore
+                  // @ts-ignore
+                  return v?.name === name;
+                });
 
-                  const inputPrefabs = () => {
-                    const bettyInput = (
-                      prefabName: string,
-                    ): PrefabReference => {
-                      if (
-                        modelProp !== null &&
-                        inputVariable &&
-                        'options' in inputVariable
-                      ) {
-                        const inputPrefab = makeBettyInput(
-                          prefabName,
-                          modelProp,
-                          prop,
-                          inputVariable,
+                const inputPrefabs = () => {
+                  const bettyInput = (prefabName: string): PrefabReference => {
+                    if (modelProp !== null && vari && 'options' in vari) {
+                      const inputPrefab = makeBettyInput(
+                        prefabName,
+                        modelProp,
+                        prop,
+                        vari,
+                      );
+                      if (inputPrefab.type === 'COMPONENT') {
+                        setOption(
+                          inputPrefab,
+                          'hideLabel',
+                          (options: PrefabComponentOption) => ({
+                            ...options,
+                            value: true,
+                          }),
                         );
-                        if (inputPrefab.type === 'COMPONENT') {
-                          setOption(
-                            inputPrefab,
-                            'hideLabel',
-                            (options: PrefabComponentOption) => ({
-                              ...options,
-                              value: true,
-                            }),
-                          );
-                        }
-                        return inputPrefab;
                       }
-                      throw new Error('Could not return the prefab');
-                    };
-                    switch (kind) {
-                      case PropertyKind.EMAIL_ADDRESS:
-                        return inputStructure(
-                          prop.label,
-                          bettyInput(BettyPrefabs.EMAIL_ADDRESS),
-                        );
-                      case PropertyKind.PASSWORD:
-                        return inputStructure(
-                          prop.label,
-                          bettyInput(BettyPrefabs.PASSWORD),
-                        );
-                      default:
-                        return inputStructure(
-                          prop.label,
-                          bettyInput(BettyPrefabs.STRING),
-                        );
+                      return inputPrefab;
                     }
+                    throw new Error('Could not return the prefab');
                   };
-                  const formInputPrefabs = inputPrefabs();
-                  if (
-                    formInputPrefabs.type === 'COMPONENT' &&
-                    formInputPrefabs.descendants[1].type === 'COMPONENT'
-                  ) {
-                    setOption(
-                      formInputPrefabs.descendants[1],
-                      'margin',
-                      (options: PrefabComponentOption) => ({
-                        ...options,
-                        value: 'none',
-                      }),
-                    );
-                    setOption(
-                      formInputPrefabs.descendants[1],
-                      'required',
-                      (options: PrefabComponentOption) => ({
-                        ...options,
-                        value: true,
-                      }),
-                    );
+                  switch (kind) {
+                    case PropertyKind.EMAIL_ADDRESS:
+                      return inputStructure(
+                        prop.label,
+                        bettyInput(BettyPrefabs.EMAIL_ADDRESS),
+                      );
+                    case PropertyKind.PASSWORD:
+                      return inputStructure(
+                        prop.label,
+                        bettyInput(BettyPrefabs.PASSWORD),
+                      );
+                    default:
+                      return inputStructure(
+                        prop.label,
+                        bettyInput(BettyPrefabs.STRING),
+                      );
                   }
-                  formBox.descendants.push(formInputPrefabs);
-                  if (!kind) {
-                    // eslint-disable-next-line no-console
-                    console.warn('PropertyKind not found');
-                  }
-                },
-              );
+                };
+                const formInputPrefabs = inputPrefabs();
+                if (
+                  formInputPrefabs.type === 'COMPONENT' &&
+                  formInputPrefabs.descendants[1].type === 'COMPONENT'
+                ) {
+                  setOption(
+                    formInputPrefabs.descendants[1],
+                    'margin',
+                    (options: PrefabComponentOption) => ({
+                      ...options,
+                      value: 'none',
+                    }),
+                  );
+                  setOption(
+                    formInputPrefabs.descendants[1],
+                    'required',
+                    (options: PrefabComponentOption) => ({
+                      ...options,
+                      value: true,
+                    }),
+                  );
+                }
+                formBox.descendants.push(formInputPrefabs);
+                if (!kind) {
+                  // eslint-disable-next-line no-console
+                  console.warn('PropertyKind not found');
+                }
+              });
             }
             if (
               newPrefab.interactions &&

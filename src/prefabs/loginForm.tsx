@@ -6,7 +6,7 @@ import {
   prefab,
 } from '@betty-blocks/component-sdk';
 import { Form } from './structures/ActionJSForm';
-import { AuthenticationProfile, PermissionType } from './types/types';
+import { PermissionType } from './types/types';
 
 const beforeCreate = ({
   close,
@@ -37,7 +37,7 @@ const beforeCreate = ({
 
   const componentId = createUuid();
   const [authProfileId, setAuthProfileId] = React.useState('');
-  const [authProfile, setAuthProfile] = React.useState<AuthenticationProfile>();
+  const [authProfile, setAuthProfile] = React.useState(null);
   const [authProfileInvalid, setAuthProfileInvalid] = React.useState(false);
   const [endpoint, setEndpoint] = React.useState(null);
   const [endpointInvalid, setEndpointInvalid] = React.useState(false);
@@ -132,12 +132,10 @@ const beforeCreate = ({
 
           // eslint-disable-next-line no-param-reassign
           originalPrefab.structure[0].id = componentId;
-          const loginActionProps = authProfile?.properties || null;
-
           const result = await prepareAction(
             componentId,
             null,
-            loginActionProps,
+            null,
             'login',
             authProfile,
             undefined,
@@ -151,48 +149,50 @@ const beforeCreate = ({
           if (authProfile.properties[0].kind === 'PASSWORD') {
             authProfile.properties.reverse();
           }
-          Object.values(result.variables).forEach(
-            ([prop, inputVariable]): void => {
-              const { kind } = prop;
 
-              switch (kind) {
-                case PropertyKind.EMAIL_ADDRESS:
-                  structure.descendants.push(
-                    makeBettyInput(
-                      BettyPrefabs.EMAIL_ADDRESS,
-                      model,
-                      prop,
-                      inputVariable,
-                    ),
-                  );
-                  break;
-                case PropertyKind.PASSWORD:
-                  structure.descendants.push(
-                    makeBettyInput(
-                      BettyPrefabs.PASSWORD,
-                      model,
-                      prop,
-                      inputVariable,
-                    ),
-                  );
-                  break;
-                case PropertyKind.STRING:
-                  structure.descendants.push(
-                    makeBettyInput(
-                      BettyPrefabs.STRING,
-                      model,
-                      prop,
-                      inputVariable,
-                    ),
-                  );
-                  break;
-                default:
-                  break;
-              }
-              // eslint-disable-next-line no-console
-              return console.warn('PropertyKind not found');
-            },
-          );
+          authProfile.properties.forEach((property) => {
+            const { kind, name } = property;
+            const variable = result.variables.find(
+              (foundVariable) => foundVariable.name === name,
+            );
+
+            switch (kind) {
+              case PropertyKind.EMAIL_ADDRESS:
+                structure.descendants.push(
+                  makeBettyInput(
+                    BettyPrefabs.EMAIL_ADDRESS,
+                    model,
+                    property,
+                    variable,
+                  ),
+                );
+                break;
+              case PropertyKind.PASSWORD:
+                structure.descendants.push(
+                  makeBettyInput(
+                    BettyPrefabs.PASSWORD,
+                    model,
+                    property,
+                    variable,
+                  ),
+                );
+                break;
+              case PropertyKind.STRING:
+                structure.descendants.push(
+                  makeBettyInput(
+                    BettyPrefabs.STRING,
+                    model,
+                    property,
+                    variable,
+                  ),
+                );
+                break;
+              default:
+                break;
+            }
+            // eslint-disable-next-line no-console
+            return console.warn('PropertyKind not found');
+          });
 
           structure.descendants.push(
             cloneStructure(BettyPrefabs.SUBMIT_BUTTON),
