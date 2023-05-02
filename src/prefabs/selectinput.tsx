@@ -241,14 +241,6 @@ const beforeCreate = ({
             ...option,
             value: [variableName],
           }));
-          setOption(newPrefab.structure[0], 'property', (option) => ({
-            ...option,
-            value: {
-              id: propertyId,
-              type: 'PROPERTY',
-              componentId: selectedPrefab?.id,
-            },
-          }));
 
           if (propertyModelId && !isListProperty) {
             setOption(newPrefab.structure[0], 'model', (option) => ({
