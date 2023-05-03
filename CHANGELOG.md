@@ -1,3 +1,10 @@
+## [2.129.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.129.0...v2.129.1) (2023-05-03)
+
+
+### Bug Fixes
+
+* remove unnecessary SetOption call ([75fbd41](https://github.com/bettyblocks/material-ui-component-set/commit/75fbd41bc06bf858297d694d62a3a0c6d4e8cadd))
+
 # [2.129.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.128.1...v2.129.0) (2023-04-26)
 
 
