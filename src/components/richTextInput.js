@@ -898,7 +898,7 @@
     return (
       <div
         className={classes.root}
-        data-component={useText(dataComponentAttribute) || 'Text'}
+        data-component={useText(dataComponentAttribute) || 'RichTextEditor'}
       >
         {labelText && !hideLabel && (
           <FormHelperText
