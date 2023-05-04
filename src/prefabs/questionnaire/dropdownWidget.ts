@@ -164,10 +164,19 @@ export const dropdownWidget = [
                     ref: { id: '#dropdownInputLabel' },
                     optionRef: {
                       sourceId: '#dropdownInputPropertyRef',
-                      inherit: 'label',
+                      inherit: [
+                        { name: '$name', id: '$id', type: 'PROPERTY_LABEL' },
+                      ],
                     },
                     configuration: {
                       allowPropertyName: true,
+                    },
+                  }),
+                  value: variable('Value', {
+                    value: [''],
+                    optionRef: {
+                      sourceId: '#dropdownInputPropertyRef',
+                      inherit: [{ name: '$name', id: '$id', type: 'PROPERTY' }],
                     },
                   }),
                   floatLabel: toggle('Place label above input', {
