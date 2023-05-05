@@ -165,10 +165,21 @@ export const textWidget = [
                       ref: { id: '#textInputLabel' },
                       optionRef: {
                         sourceId: '#textInputPropertyRef',
-                        inherit: 'label',
+                        inherit: [
+                          { name: '$name', id: '$id', type: 'PROPERTY_LABEL' },
+                        ],
                       },
                       configuration: {
                         allowPropertyName: true,
+                      },
+                    }),
+                    value: variable('Value', {
+                      value: [''],
+                      optionRef: {
+                        sourceId: '#textInputPropertyRef',
+                        inherit: [
+                          { name: '$name', id: '$id', type: 'PROPERTY' },
+                        ],
                       },
                     }),
                     floatLabel: toggle('Place label above input', {

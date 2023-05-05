@@ -173,7 +173,9 @@ export const checkboxWidget = [
                       },
                       optionRef: {
                         sourceId: '#checkboxInputPropertyRef',
-                        inherit: 'label',
+                        inherit: [
+                          { name: '$name', id: '$id', type: 'PROPERTY_LABEL' },
+                        ],
                       },
                     }),
                     type: font('Font', { value: ['Body1'] }),
@@ -207,6 +209,15 @@ export const checkboxWidget = [
                         allowPropertyName: true,
                       },
                       showInAddChild: true,
+                    }),
+                    value: variable('Value', {
+                      value: [],
+                      optionRef: {
+                        sourceId: '#checkboxInputPropertyRef',
+                        inherit: [
+                          { name: '$name', id: '$id', type: 'PROPERTY' },
+                        ],
+                      },
                     }),
                     labelColor: color('Label color', {
                       value: ThemeColor.BLACK,
