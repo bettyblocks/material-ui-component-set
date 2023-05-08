@@ -1,3 +1,15 @@
+# [2.132.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.131.0...v2.132.0) (2023-05-08)
+
+
+### Bug Fixes
+
+* merge conflict ([7023cd7](https://github.com/bettyblocks/material-ui-component-set/commit/7023cd7c1bd355101eec4ccf2d29cb14bec0d581))
+
+
+### Features
+
+* use pnpm ([be30102](https://github.com/bettyblocks/material-ui-component-set/commit/be301029c660a307c77e56a621b06376cc0f18c2))
+
 # [2.131.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.130.0...v2.131.0) (2023-05-08)
 
 
