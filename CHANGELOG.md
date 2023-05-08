@@ -1,3 +1,10 @@
+# [2.130.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.129.1...v2.130.0) (2023-05-08)
+
+
+### Features
+
+* use env file for e2e tests ([e1a390b](https://github.com/bettyblocks/material-ui-component-set/commit/e1a390b2ed738d452eddc4a9e0b719ff28a57d62))
+
 ## [2.129.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.129.0...v2.129.1) (2023-05-03)
 
 
