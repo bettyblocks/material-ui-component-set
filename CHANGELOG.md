@@ -9,7 +9,6 @@
 ### Features
 
 * merge acceptance ([e3ef74c](https://github.com/bettyblocks/material-ui-component-set/commit/e3ef74c915629b196e48e78ed6e6682625e6b747))
-* use pnpm ([be30102](https://github.com/bettyblocks/material-ui-component-set/commit/be301029c660a307c77e56a621b06376cc0f18c2))
 
 # [2.130.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.129.1...v2.130.0) (2023-05-08)
 
