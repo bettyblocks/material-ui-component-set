@@ -3,7 +3,7 @@ name: End to end tests
 on:
   workflow_run:
     workflows: [Publish component set on production]
-    types: 
+    types:
       - completed
 
 jobs:
@@ -42,4 +42,4 @@ jobs:
 
       - name: Run tests
         working-directory: /home/runner/work/component-set-tests
-        run: npm run test
+        run: eval $(egrep -v '^#' ${{ steps.branch-name.outputs.ref_branch }}.env | xargs) npx playwright test --grep @stable --config=playwright.config.ts
