@@ -1,3 +1,15 @@
+# [2.131.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.130.0...v2.131.0) (2023-05-08)
+
+
+### Bug Fixes
+
+* use correct github env variable ([4ae2a64](https://github.com/bettyblocks/material-ui-component-set/commit/4ae2a64da0b54ce7913185b2dfbfc5f4d9f788ec))
+
+
+### Features
+
+* merge acceptance ([e3ef74c](https://github.com/bettyblocks/material-ui-component-set/commit/e3ef74c915629b196e48e78ed6e6682625e6b747))
+
 # [2.130.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.129.1...v2.130.0) (2023-05-08)
 
 
