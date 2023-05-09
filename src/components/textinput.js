@@ -254,6 +254,7 @@
             classes={{
               root: `${classes.label} ${floatLabel && classes.floatLabel}`,
             }}
+            data-shrink={floatLabel}
           >
             {labelText}
           </InputLabel>
@@ -414,7 +415,7 @@
           '& legend': {
             display: ({ options: { hideLabel } }) =>
               hideLabel ? ['none', '!important'] : null,
-            overflow: 'hidden',
+            overflow: 'show',
           },
           '& input, & textarea': {
             '&::placeholder': {
