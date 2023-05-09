@@ -3,6 +3,7 @@
 
 ### Bug Fixes
 
+* bump node version for e2e tests ([0b30a1a](https://github.com/bettyblocks/material-ui-component-set/commit/0b30a1aa2d64ba458c899513b5fa268efae12d09))
 * merge conflict ([7023cd7](https://github.com/bettyblocks/material-ui-component-set/commit/7023cd7c1bd355101eec4ccf2d29cb14bec0d581))
 
 
