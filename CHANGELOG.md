@@ -1,3 +1,12 @@
+## [2.132.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.132.0...v2.132.1) (2023-05-09)
+
+
+### Bug Fixes
+
+* bump node version for e2e tests ([0b30a1a](https://github.com/bettyblocks/material-ui-component-set/commit/0b30a1aa2d64ba458c899513b5fa268efae12d09))
+* bump version ([1c8de50](https://github.com/bettyblocks/material-ui-component-set/commit/1c8de50a0ebb92417f7760368ba80335dcd98b0c))
+* merge conflict ([237a2c4](https://github.com/bettyblocks/material-ui-component-set/commit/237a2c410b6e09649f941434d7427acac5c843fe))
+
 # [2.132.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.131.0...v2.132.0) (2023-05-08)
 
 
