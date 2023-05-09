@@ -91,7 +91,7 @@ export const styles = {
   }),
 
   placeholderColor: color('Placeholder color', {
-    value: ThemeColor.LIGHT,
+    value: ThemeColor.BLACK,
   }),
 
   helperColor: color('Helper color', {
