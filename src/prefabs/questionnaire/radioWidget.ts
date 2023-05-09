@@ -159,10 +159,21 @@ export const radioWidget = [
                       ref: { id: '#radioInputLabel' },
                       optionRef: {
                         sourceId: '#radioInputPropertyRef',
-                        inherit: 'label',
+                        inherit: [
+                          { name: '$name', id: '$id', type: 'PROPERTY_LABEL' },
+                        ],
                       },
                       configuration: {
                         allowPropertyName: true,
+                      },
+                    }),
+                    value: variable('Value', {
+                      value: [''],
+                      optionRef: {
+                        sourceId: '#radioInputPropertyRef',
+                        inherit: [
+                          { name: '$name', id: '$id', type: 'PROPERTY' },
+                        ],
                       },
                     }),
                     labelColor: color('Label color', {

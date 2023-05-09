@@ -173,10 +173,21 @@ export const dateWidget = [
                       ref: { id: '#dateInputLabel' },
                       optionRef: {
                         sourceId: '#dateInputPropertyRef',
-                        inherit: 'label',
+                        inherit: [
+                          { name: '$name', id: '$id', type: 'PROPERTY_LABEL' },
+                        ],
                       },
                       configuration: {
                         allowPropertyName: true,
+                      },
+                    }),
+                    value: variable('Value', {
+                      value: [''],
+                      optionRef: {
+                        sourceId: '#dateInputPropertyRef',
+                        inherit: [
+                          { name: '$name', id: '$id', type: 'PROPERTY' },
+                        ],
                       },
                     }),
                     floatLabel: toggle('Place label above input', {

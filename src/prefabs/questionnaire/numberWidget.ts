@@ -168,10 +168,21 @@ export const numberWidget = [
                       ref: { id: '#numberInputLabel' },
                       optionRef: {
                         sourceId: '#numberInputPropertyRef',
-                        inherit: 'label',
+                        inherit: [
+                          { name: '$name', id: '$id', type: 'PROPERTY_LABEL' },
+                        ],
                       },
                       configuration: {
                         allowPropertyName: true,
+                      },
+                    }),
+                    value: variable('Value', {
+                      value: [''],
+                      optionRef: {
+                        sourceId: '#numberInputPropertyRef',
+                        inherit: [
+                          { name: '$name', id: '$id', type: 'PROPERTY' },
+                        ],
                       },
                     }),
                     floatLabel: toggle('Place label above input', {
