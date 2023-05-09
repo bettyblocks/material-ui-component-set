@@ -37,12 +37,9 @@ jobs:
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
-      - name: Install pnpm
-        run: npm install -g pnpm@7.23.0
-
       - name: Install packages
         working-directory: /home/runner/work/component-set-tests
-        run: pnpm install --frozen-lockfile
+        run: yarn --frozen-lockfile --ignore-scripts
 
       - name: Install Playwright
         working-directory: /home/runner/work/component-set-tests
