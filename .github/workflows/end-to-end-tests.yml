@@ -39,7 +39,7 @@ jobs:
 
       - name: Install packages
         working-directory: /home/runner/work/component-set-tests
-        run: yarn --frozen-lockfile --ignore-scripts
+        run: yarn --frozen-lockfile --ignore-scripts --ignore-engines
 
       - name: Install Playwright
         working-directory: /home/runner/work/component-set-tests
