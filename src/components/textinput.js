@@ -254,7 +254,7 @@
             classes={{
               root: `${classes.label} ${floatLabel && classes.floatLabel}`,
             }}
-            data-shrink={floatLabel}
+            {...(floatLabel && { 'data-shrink': true })}
           >
             {labelText}
           </InputLabel>
