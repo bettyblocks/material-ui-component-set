@@ -415,7 +415,7 @@
           '& legend': {
             display: ({ options: { hideLabel } }) =>
               hideLabel ? ['none', '!important'] : null,
-            overflow: 'show',
+            overflow: 'hidden',
           },
           '& input, & textarea': {
             '&::placeholder': {
