@@ -1,3 +1,32 @@
+## [2.133.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.133.1...v2.133.2) (2023-05-10)
+
+
+### Bug Fixes
+
+* ignore engines (temp) ([37a5009](https://github.com/bettyblocks/material-ui-component-set/commit/37a50094f03a219a8724cbb44d8de7433e9349d9))
+
+## [2.133.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.133.0...v2.133.1) (2023-05-10)
+
+
+### Bug Fixes
+
+* cd into cloned repo ([9e30c1f](https://github.com/bettyblocks/material-ui-component-set/commit/9e30c1fec1bb5f561b47c52104d79836e5eb0dc2))
+* switch back to yarn ([f96e173](https://github.com/bettyblocks/material-ui-component-set/commit/f96e173bf1342eccdf5ed035feab6b3b23bf4410))
+
+# [2.133.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.132.0...v2.133.0) (2023-05-09)
+
+
+### Bug Fixes
+
+* bump node version for e2e tests ([0b30a1a](https://github.com/bettyblocks/material-ui-component-set/commit/0b30a1aa2d64ba458c899513b5fa268efae12d09))
+* bump version ([1c8de50](https://github.com/bettyblocks/material-ui-component-set/commit/1c8de50a0ebb92417f7760368ba80335dcd98b0c))
+* merge conflict ([237a2c4](https://github.com/bettyblocks/material-ui-component-set/commit/237a2c410b6e09649f941434d7427acac5c843fe))
+
+
+### Features
+
+* run e2e tests on edge and acceptance ([59082e8](https://github.com/bettyblocks/material-ui-component-set/commit/59082e882f140a7cdc0e3150637b8d11beff2c5a))
+
 # [2.132.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.131.0...v2.132.0) (2023-05-08)
 
 
