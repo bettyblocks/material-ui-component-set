@@ -7,6 +7,7 @@ import {
   option,
   variable,
   authenticationProfile,
+  toggle,
 } from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
 
@@ -19,7 +20,7 @@ export const categories = [
   {
     label: 'Advanced Options',
     expanded: false,
-    members: ['dataComponentAttribute', 'fetchPolicy'],
+    members: ['dataComponentAttribute', 'fetchPolicy', 'waitForRequest'],
   },
 ];
 
@@ -79,6 +80,9 @@ export const dataContainerOptions = {
     configuration: {
       condition: showIf('loadingType', 'EQ', 'default'),
     },
+  }),
+  waitForRequest: toggle('Wait with rendering children until data is present', {
+    value: false,
   }),
 
   ...advanced,
