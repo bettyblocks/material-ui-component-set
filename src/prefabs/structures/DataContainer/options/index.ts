@@ -81,7 +81,7 @@ export const dataContainerOptions = {
       condition: showIf('loadingType', 'EQ', 'default'),
     },
   }),
-  waitForRequest: toggle('Wait with rendering children until data is present', {
+  waitForRequest: toggle('Only render children when data is present', {
     value: false,
   }),
 

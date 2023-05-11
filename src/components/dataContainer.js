@@ -163,8 +163,6 @@
                   return <></>;
                 }
                 return children;
-
-                // waitForRequest ? (hasData ? children : '') : children;
               })()}
             </div>
           );
