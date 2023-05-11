@@ -26,6 +26,7 @@
           loadingType,
           loadingText,
           dataComponentAttribute,
+          waitForRequest,
         } = options;
 
         const isEmpty = children.length === 0;
@@ -149,9 +150,19 @@
           });
         });
 
-        const DataContainer = (
-          <div data-component={dataComponentAttributeText}>{children}</div>
-        );
+        function DataContainer(hasData) {
+          return (
+            <div data-component={dataComponentAttributeText}>
+              {(() => {
+                if (waitForRequest) {
+                  if (hasData) return children;
+                  return <></>;
+                }
+                return children;
+              })()}
+            </div>
+          );
+        }
 
         const Wrapper = (
           <div
@@ -177,20 +188,17 @@
               {({ error, loading, data, refetch }) => {
                 if (loading) {
                   B.triggerEvent('onUserLoad');
-                }
-                if (error) {
+                } else if (error) {
                   B.triggerEvent('onUserError', error);
-                }
-                if (data && data.id) {
+                } else if (data && data.id) {
                   B.triggerEvent('onUserSuccess', data);
-                } else {
+                } else if (!loading && !data) {
                   B.triggerEvent('onNoUserResults');
                 }
                 B.defineFunction('Refetch', () => {
                   refetch();
                 });
-
-                return DataContainer;
+                return DataContainer(!!data);
               }}
             </GetMe>
           );
@@ -202,7 +210,7 @@
               {({ loading, error, data, refetch }) => {
                 if (!loading && data && data.id) {
                   B.triggerEvent('onSuccess', data);
-                } else {
+                } else if (!loading && !data) {
                   B.triggerEvent('onNoResults');
                 }
 
@@ -249,7 +257,7 @@
                 if (!data && redirectWithoutResult) {
                   redirect();
                 }
-                return DataContainer;
+                return DataContainer(!!data);
               }}
             </GetOne>
           );
