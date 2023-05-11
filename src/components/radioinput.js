@@ -57,9 +57,11 @@
       modelId = contextModelId || model,
       kind,
       values = [],
+      allowedValues = [],
     } = modelProperty;
 
     const isListProperty = kind === 'list' || kind === 'LIST';
+    const isObjectProperty = kind === 'object' || kind === 'OBJECT';
 
     const isPropertyValueAnArray = Boolean(
       prefabValue.length && prefabValue.some((p) => p.type === 'PROPERTY'),
@@ -270,7 +272,16 @@
         return <span>{message}</span>;
       }
 
-      if (isDev && !isListProperty) return renderRadio('value', 'Placeholder');
+      console.log('modelProperty', modelProperty);
+      console.log('property', property);
+      if (isDev && !isListProperty && !isObjectProperty)
+        return renderRadio('value', 'Placeholder');
+
+      if (isObjectProperty) {
+        return allowedValues.map((item) =>
+          renderRadio(JSON.stringify(item), item[property.useKey]),
+        );
+      }
 
       if (isListProperty) {
         return values.map(({ value }) => renderRadio(value, value));

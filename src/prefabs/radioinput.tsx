@@ -113,7 +113,7 @@ const beforeCreate = ({
     }
   }
 
-  const unsupportedKinds = createBlacklist(['LIST', 'BELONGS_TO']);
+  const unsupportedKinds = createBlacklist(['LIST', 'BELONGS_TO', 'OBJECT']);
 
   const structure = originalPrefab.structure[0];
 
@@ -121,6 +121,7 @@ const beforeCreate = ({
     return <div>expected component prefab, found {structure.type}</div>;
 
   const handlePropertyChange = (propertyOrId): void => {
+    console.log(propertyOrId);
     setProperty(propertyOrId);
   };
 
@@ -273,6 +274,7 @@ const beforeCreate = ({
                     result.isRelational && !result.isMultiRelational
                       ? `{{ ${model?.name}.${name}.id }}`
                       : `{{ ${model?.name}.${name} }}`,
+                  ...(propertyPath.useKey && { useKey: propertyPath.useKey }),
                 },
               }),
             );
