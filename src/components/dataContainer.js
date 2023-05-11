@@ -192,11 +192,9 @@
               {({ error, loading, data, refetch }) => {
                 if (loading) {
                   B.triggerEvent('onUserLoad');
-                }
-                if (error) {
+                } else if (error) {
                   B.triggerEvent('onUserError', error);
-                }
-                if (data && data.id) {
+                } else if (data && data.id) {
                   B.triggerEvent('onUserSuccess', data);
                 } else if (!loading && !data) {
                   B.triggerEvent('onNoUserResults');
