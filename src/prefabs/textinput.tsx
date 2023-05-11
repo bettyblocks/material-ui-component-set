@@ -303,7 +303,7 @@ const attributes = {
 export default prefab('Text Field', attributes, beforeCreate, [
   TextInput({
     label: 'Text field',
-    inputLabel: 'Textfield',
+    inputLabel: 'Text field',
     type: 'text',
     dataComponentAttribute: 'TextInput',
   }),

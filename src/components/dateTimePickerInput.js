@@ -243,7 +243,11 @@
         }}
         ampm={!use24HourClock}
         keyboardIcon={
-          type === 'time' ? <Icon name="AccessTime" /> : <Icon name="Event" />
+          type === 'time' ? (
+            <Icon name="AccessTime" fontSize={size} />
+          ) : (
+            <Icon name="Event" fontSize={size} />
+          )
         }
         clearable={clearable}
       />
@@ -411,6 +415,7 @@
             style.getColor(textColor),
             '!important',
           ],
+          marginRight: '-12px',
         },
         '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
           {
