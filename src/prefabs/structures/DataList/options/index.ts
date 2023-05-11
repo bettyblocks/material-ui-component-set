@@ -8,8 +8,6 @@ import {
   showIf,
   sizes,
   variable,
-  toggle,
-  showIfTrue,
   modelAndRelation,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
@@ -64,13 +62,6 @@ export const dataListOptions = {
     value: '',
     configuration: {
       dependsOn: 'model',
-    },
-  }),
-  hideSearch: toggle('Hide built-in search field', {
-    value: '',
-    configuration: {
-      dependsOn: 'model',
-      condition: showIfTrue('hideSearch'),
     },
   }),
   pagination: option('CUSTOM', {
