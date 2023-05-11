@@ -187,8 +187,12 @@
       return (
         <GetOne modelId={model} rawFilter={where}>
           {({ loading, error, data }) => {
+            if (loading && showDataOnLoad) {
+              return <>{children}</>;
+            }
+
             if (loading) {
-              return <>{showDataOnLoad && children}</>;
+              return <></>;
             }
 
             if (error) {
