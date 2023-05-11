@@ -415,7 +415,7 @@
             style.getColor(textColor),
             '!important',
           ],
-          paddingRight: '0',
+          marginRight: '-12px',
         },
         '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
           {
