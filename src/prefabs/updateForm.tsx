@@ -47,6 +47,7 @@ const beforeCreate = ({
     'SUM',
     'TEXT_EXPRESSION',
     'ZIPCODE',
+    'OBJECT',
   ];
 
   const {

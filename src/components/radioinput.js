@@ -46,7 +46,7 @@
     const mounted = useRef(false);
     const getValue = (val) => (isNaN(Number(val)) ? val : Number(val));
     const labelText = useText(label);
-    const defaultValueText = useText(prefabValue);
+    let defaultValueText = useText(prefabValue);
     const helperTextResolved = useText(helperText);
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
@@ -68,10 +68,16 @@
     );
 
     let resolvedCurrentValue;
+    const objectValue = prefabValue.find((p) => p.type === 'PROPERTY');
     if (isListProperty) resolvedCurrentValue = useText(prefabValue);
-    else if (isPropertyValueAnArray)
+    else if (isPropertyValueAnArray && !isObjectProperty)
       resolvedCurrentValue = parseInt(useText(prefabValue), 10);
-    else resolvedCurrentValue = getValue(prefabValue);
+    else if (isObjectProperty && objectValue) {
+      objectValue.useKey = 'uuid';
+      const currentUuid = useText([objectValue]);
+      resolvedCurrentValue = JSON.stringify({ uuid: currentUuid });
+      defaultValueText = resolvedCurrentValue;
+    } else resolvedCurrentValue = getValue(prefabValue);
     const [currentValue, setCurrentValue] = useState(resolvedCurrentValue);
 
     B.defineFunction('Clear', () => setCurrentValue(''));
@@ -279,7 +285,7 @@
         return allowedValues.map((item) => {
           return renderRadio(
             JSON.stringify({ uuid: item.uuid }),
-            item[property.useKey],
+            item[labelProperty.useKey || 'uuid'],
           );
         });
       }
