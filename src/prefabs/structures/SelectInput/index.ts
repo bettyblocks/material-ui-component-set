@@ -1,6 +1,7 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options/index';
+import { updateOption } from '../../../utils';
 
 export const SelectInput = (
   config: Configuration,
@@ -38,6 +39,10 @@ export const SelectInput = (
       members: ['blanco', 'dataComponentAttribute'],
     },
   ];
+
+  if (config.inputLabel) {
+    options.label = updateOption(options.label, { value: [config.inputLabel] });
+  }
 
   return component(
     'SelectInput',
