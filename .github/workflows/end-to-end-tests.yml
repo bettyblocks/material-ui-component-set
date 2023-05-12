@@ -2,7 +2,12 @@ name: End to end tests
 
 on:
   workflow_run:
-    workflows: [Publish component set on production]
+    workflows:
+      [
+        'Publish component set on test environments',
+        'Publish component set on acceptance',
+        'Publish component set on production',
+      ]
     types:
       - completed
 
@@ -15,7 +20,7 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.16.0
+          node-version: 16.11.1
       - name: Install packages
         run: yarn install
 
@@ -27,17 +32,14 @@ jobs:
 
       - name: clone testing repo
         working-directory: /home/runner/work
-        run: git clone https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.betty.services/code/component-set-tests.git
+        run: git clone https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.betty.services/code/component-set-tests.git && cd component-set-tests
 
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
-      - name: Install pnpm
-        run: npm install -g pnpm@8.4.0
-
       - name: Install packages
         working-directory: /home/runner/work/component-set-tests
-        run: pnpm install
+        run: yarn --frozen-lockfile --ignore-scripts --ignore-engines
 
       - name: Install Playwright
         working-directory: /home/runner/work/component-set-tests

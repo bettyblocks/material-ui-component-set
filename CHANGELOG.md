@@ -1,4 +1,39 @@
-## [2.132.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.132.0...v2.132.1) (2023-05-09)
+## [2.134.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.134.0...v2.134.1) (2023-05-12)
+
+
+### Bug Fixes
+
+* remove hidesearch option from components ([80706f9](https://github.com/bettyblocks/material-ui-component-set/commit/80706f9b11d20ed3374488a5bb9d2ca612aa93fe))
+
+# [2.134.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.133.2...v2.134.0) (2023-05-12)
+
+
+### Bug Fixes
+
+* add option to add requests in order ([237473f](https://github.com/bettyblocks/material-ui-component-set/commit/237473f8b3088a83146ffc7ca1a1625f57ca9f6a))
+* option not working ([92cc08c](https://github.com/bettyblocks/material-ui-component-set/commit/92cc08cc7d22c3bfb20be0bb6f6258ba2de8cdff))
+
+
+### Features
+
+* add show on content on load to form ([487a91c](https://github.com/bettyblocks/material-ui-component-set/commit/487a91c09f7ddf645c125774cf80eda673f729a2))
+
+## [2.133.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.133.1...v2.133.2) (2023-05-10)
+
+
+### Bug Fixes
+
+* ignore engines (temp) ([37a5009](https://github.com/bettyblocks/material-ui-component-set/commit/37a50094f03a219a8724cbb44d8de7433e9349d9))
+
+## [2.133.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.133.0...v2.133.1) (2023-05-10)
+
+
+### Bug Fixes
+
+* cd into cloned repo ([9e30c1f](https://github.com/bettyblocks/material-ui-component-set/commit/9e30c1fec1bb5f561b47c52104d79836e5eb0dc2))
+* switch back to yarn ([f96e173](https://github.com/bettyblocks/material-ui-component-set/commit/f96e173bf1342eccdf5ed035feab6b3b23bf4410))
+
+# [2.133.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.132.0...v2.133.0) (2023-05-09)
 
 
 ### Bug Fixes
@@ -6,6 +41,11 @@
 * bump node version for e2e tests ([0b30a1a](https://github.com/bettyblocks/material-ui-component-set/commit/0b30a1aa2d64ba458c899513b5fa268efae12d09))
 * bump version ([1c8de50](https://github.com/bettyblocks/material-ui-component-set/commit/1c8de50a0ebb92417f7760368ba80335dcd98b0c))
 * merge conflict ([237a2c4](https://github.com/bettyblocks/material-ui-component-set/commit/237a2c410b6e09649f941434d7427acac5c843fe))
+
+
+### Features
+
+* run e2e tests on edge and acceptance ([59082e8](https://github.com/bettyblocks/material-ui-component-set/commit/59082e882f140a7cdc0e3150637b8d11beff2c5a))
 
 # [2.132.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.131.0...v2.132.0) (2023-05-08)
 

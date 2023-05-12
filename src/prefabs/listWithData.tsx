@@ -4,7 +4,6 @@ import {
   BeforeCreateArgs,
   prefab as makePrefab,
   option,
-  toggle,
   PrefabComponent,
 } from '@betty-blocks/component-sdk';
 import { DataList, List, ListItem, dataListOptions } from './structures';
@@ -137,12 +136,6 @@ export default makePrefab('List with data', attrs, beforeCreate, [
                   value: 'inline',
                 },
               ],
-            },
-          }),
-          hideSearch: toggle('Hide built-in search field', {
-            value: '',
-            configuration: {
-              dependsOn: 'model',
             },
           }),
         },
