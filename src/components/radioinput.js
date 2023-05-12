@@ -272,15 +272,16 @@
         return <span>{message}</span>;
       }
 
-      console.log('modelProperty', modelProperty);
-      console.log('property', property);
       if (isDev && !isListProperty && !isObjectProperty)
         return renderRadio('value', 'Placeholder');
 
       if (isObjectProperty) {
-        return allowedValues.map((item) =>
-          renderRadio(JSON.stringify(item), item[property.useKey]),
-        );
+        return allowedValues.map((item) => {
+          return renderRadio(
+            JSON.stringify({ uuid: item.uuid }),
+            item[property.useKey],
+          );
+        });
       }
 
       if (isListProperty) {
