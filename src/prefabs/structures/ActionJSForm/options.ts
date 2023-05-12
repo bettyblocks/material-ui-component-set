@@ -5,6 +5,15 @@ import {
   number,
   showIf,
 } from '@betty-blocks/component-sdk';
+import { advanced } from './advanced';
+
+export const categories = [
+  {
+    label: 'Advanced Options',
+    expanded: false,
+    members: ['showDataOnLoad'],
+  },
+];
 
 export const options = {
   recordVariable: option('ACTION_JS_VARIABLE', {
@@ -19,4 +28,6 @@ export const options = {
     value: '',
     configuration: { condition: showIf('currentRecord', 'EQ', 'never') },
   }),
+
+  ...advanced,
 };
