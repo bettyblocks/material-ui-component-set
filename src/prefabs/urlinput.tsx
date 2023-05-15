@@ -315,7 +315,7 @@ const attributes = {
 export default prefab('Url', attributes, beforeCreate, [
   TextInput({
     label: 'Url input',
-    inputLabel: 'url',
+    inputLabel: 'URL',
     type: 'url',
   }),
 ]);

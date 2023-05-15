@@ -8,6 +8,7 @@ import {
 } from '@betty-blocks/component-sdk';
 import { styles } from './styles';
 import { validation } from './validation';
+import { advanced } from '../../advanced';
 
 export const categories = [
   {
@@ -47,6 +48,11 @@ export const categories = [
       'errorColor',
     ],
   },
+  {
+    label: 'Advanced Options',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
 ];
 
 export const richTextOptions = {
@@ -84,4 +90,5 @@ export const richTextOptions = {
 
   ...validation,
   ...styles,
+  ...advanced('RichTextEditor'),
 };
