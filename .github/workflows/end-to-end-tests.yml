@@ -2,8 +2,13 @@ name: End to end tests
 
 on:
   workflow_run:
-    workflows: [Publish component set on production]
-    types: 
+    workflows:
+      [
+        'Publish component set on test environments',
+        'Publish component set on acceptance',
+        'Publish component set on production',
+      ]
+    types:
       - completed
 
 jobs:
@@ -27,14 +32,14 @@ jobs:
 
       - name: clone testing repo
         working-directory: /home/runner/work
-        run: git clone https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.betty.services/code/component-set-tests.git
+        run: git clone https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.betty.services/code/component-set-tests.git && cd component-set-tests
 
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Install packages
         working-directory: /home/runner/work/component-set-tests
-        run: npm install
+        run: yarn --frozen-lockfile --ignore-scripts --ignore-engines
 
       - name: Install Playwright
         working-directory: /home/runner/work/component-set-tests
@@ -42,4 +47,4 @@ jobs:
 
       - name: Run tests
         working-directory: /home/runner/work/component-set-tests
-        run: npm run test
+        run: eval $(egrep -v '^#' $GITHUB_REF_NAME.env | xargs) npx playwright test --config=playwright.config.ts
