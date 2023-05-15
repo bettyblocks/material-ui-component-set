@@ -53,6 +53,18 @@ export const dropdownWidget = [
             },
           },
         }),
+        optionLabel: linked({
+          label: 'Option label',
+          value: {
+            ref: {
+              componentId: '#dropdownInput',
+              optionId: '#dropdownInputLabelProperty',
+            },
+          },
+          configuration: {
+            showOnDrop: true,
+          },
+        }),
         required: linked({
           label: 'Required to answer',
           value: {
@@ -171,6 +183,14 @@ export const dropdownWidget = [
                     configuration: {
                       allowPropertyName: true,
                     },
+                  }),
+                  labelProperty: property('Label for options', {
+                    value: '',
+                    ref: { id: '#dropdownLabelProperty' },
+                    configuration: {
+                      allowedKinds: ['OBJECT'],
+                    },
+                    showInAddChild: true,
                   }),
                   value: variable('Value', {
                     value: [''],
