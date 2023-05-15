@@ -1,3 +1,10 @@
+# [2.136.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.135.0...v2.136.0) (2023-05-15)
+
+
+### Features
+
+* added data component attribute to rich text ([76ac0d4](https://github.com/bettyblocks/material-ui-component-set/commit/76ac0d4d4471c406f07706bcca83b77876f86f6c))
+
 # [2.135.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.134.1...v2.135.0) (2023-05-15)
 
 
