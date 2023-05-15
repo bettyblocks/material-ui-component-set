@@ -335,6 +335,6 @@ const attributes = {
 export default prefab('Select', attributes, beforeCreate, [
   SelectInput({
     label: 'Select',
-    inputLabel: 'Select',
+    inputLabel: 'Select option',
   }),
 ]);
