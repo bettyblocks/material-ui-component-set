@@ -1,9 +1,9 @@
 name: Publish bundle.js to edge
 
-on: 
+on:
   workflow_dispatch:
     workflows: ['Publish component set on test environments']
-    types: 
+    types:
       - completed
 
 jobs:
@@ -12,19 +12,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
-        with: 
+        with:
           node-version: 16.11.1
       - name: Install packages
         run: yarn
 
       - name: build
-      run: yarn build
+        run: yarn build
 
-    - name: bundle
-    run: yarn bundle
+      - name: bundle
+        run: yarn bundle
 
-    - name: upload
-    env:
-      AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_EDGE }}
-      AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_EDGE }}
-    run: yarn upload bundle
+      - name: upload
+        env:
+          AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_EDGE }}
+          AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_EDGE }}
+        run: yarn upload bundle
