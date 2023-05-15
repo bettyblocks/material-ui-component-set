@@ -1,3 +1,23 @@
+## [2.134.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.134.0...v2.134.1) (2023-05-12)
+
+
+### Bug Fixes
+
+* remove hidesearch option from components ([80706f9](https://github.com/bettyblocks/material-ui-component-set/commit/80706f9b11d20ed3374488a5bb9d2ca612aa93fe))
+
+# [2.134.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.133.2...v2.134.0) (2023-05-12)
+
+
+### Bug Fixes
+
+* add option to add requests in order ([237473f](https://github.com/bettyblocks/material-ui-component-set/commit/237473f8b3088a83146ffc7ca1a1625f57ca9f6a))
+* option not working ([92cc08c](https://github.com/bettyblocks/material-ui-component-set/commit/92cc08cc7d22c3bfb20be0bb6f6258ba2de8cdff))
+
+
+### Features
+
+* add show on content on load to form ([487a91c](https://github.com/bettyblocks/material-ui-component-set/commit/487a91c09f7ddf645c125774cf80eda673f729a2))
+
 ## [2.133.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.133.1...v2.133.2) (2023-05-10)
 
 
