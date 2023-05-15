@@ -1,3 +1,10 @@
+# [2.135.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.134.1...v2.135.0) (2023-05-15)
+
+
+### Features
+
+* aligned input field icons ([d898c6a](https://github.com/bettyblocks/material-ui-component-set/commit/d898c6a05d3912c2bedcb6b6407899c46caf58d1))
+
 ## [2.134.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.134.0...v2.134.1) (2023-05-12)
 
 
