@@ -57,6 +57,7 @@ import {
   multilineWidget,
   numberWidget,
   textWidget,
+  radioWidget,
 } from './questionnaire';
 
 const beforeCreate = ({
@@ -659,6 +660,21 @@ const questionTypes = [
         ref: {
           targetComponentId: '#textQuestionForm',
           sourceComponentId: '#textInput',
+        },
+        type: InteractionType.Custom,
+      },
+    ],
+  },
+  {
+    label: 'Multiple choice question',
+    structure: radioWidget,
+    interactions: [
+      {
+        name: 'Submit',
+        sourceEvent: 'onChange',
+        ref: {
+          targetComponentId: '#radioQuestionForm',
+          sourceComponentId: '#radioInput',
         },
         type: InteractionType.Custom,
       },

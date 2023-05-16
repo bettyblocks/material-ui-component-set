@@ -12,6 +12,8 @@ import {
   variable,
   wrapper,
   displayLogic,
+  buttongroup,
+  showIf,
 } from '@betty-blocks/component-sdk';
 import { Box, RadioInput, boxOptions, radioInputOptions } from '../structures';
 import { options as formOptions } from '../structures/ActionJSForm/options';
@@ -41,6 +43,18 @@ export const radioWidget = [
           label: 'Label',
           value: {
             ref: { componentId: '#radioInput', optionId: '#radioInputLabel' },
+          },
+        }),
+        optionLabel: linked({
+          label: 'Option label',
+          value: {
+            ref: {
+              componentId: '#radioInput',
+              optionId: '#radioInputLabelProperty',
+            },
+          },
+          configuration: {
+            showOnDrop: true,
           },
         }),
         required: linked({
@@ -167,6 +181,14 @@ export const radioWidget = [
                         allowPropertyName: true,
                       },
                     }),
+                    labelProperty: property('Label for options', {
+                      value: '',
+                      ref: { id: '#radioInputLabelProperty' },
+                      configuration: {
+                        allowedKinds: ['OBJECT'],
+                      },
+                      showInAddChild: true,
+                    }),
                     value: variable('Value', {
                       value: [''],
                       optionRef: {
@@ -184,6 +206,20 @@ export const radioWidget = [
                         id: '#questionRequired',
                       },
                     }),
+                    optionType: buttongroup(
+                      'Option type',
+                      [
+                        ['Model', 'model'],
+                        ['Property', 'property'],
+                        ['Variable', 'variable'],
+                      ],
+                      {
+                        value: 'property',
+                        configuration: {
+                          condition: showIf('optionType', 'EQ', 'never'),
+                        },
+                      },
+                    ),
                   },
                 },
                 [],
