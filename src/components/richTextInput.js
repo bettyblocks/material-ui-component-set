@@ -93,6 +93,7 @@
       actionVariableId: name,
       value: valueProp,
       placeholder,
+      dataComponentAttribute,
       disabled,
       helperText,
       label,
@@ -895,7 +896,10 @@
     }
 
     return (
-      <div className={classes.root}>
+      <div
+        className={classes.root}
+        data-component={useText(dataComponentAttribute) || 'RichTextEditor'}
+      >
         {labelText && !hideLabel && (
           <FormHelperText
             className={`${classes.label} ${floatLabel && classes.floatLabel}`}
