@@ -53,9 +53,9 @@ export const radioWidget = [
               optionId: '#radioInputLabelProperty',
             },
           },
-          configuration: {
-            showOnDrop: true,
-          },
+          // configuration: {
+          //   showOnDrop: true,
+          // },
         }),
         required: linked({
           label: 'Required to answer',
