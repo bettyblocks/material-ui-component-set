@@ -157,10 +157,10 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
-"@betty-blocks/cli@^25.75.0":
-  version "25.75.0"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.75.0.tgz#9ba6692253106bedfa878c7672886485920917e7"
-  integrity sha512-Ne84GYQYOT+xL5qH4I2gmBgei8fUCE000VmO0wPSvYpVgwcZZO1n7KuQXOi9Noaa9fyq27dS1r7Ju3DT4O5fbQ==
+"@betty-blocks/cli@^25.76.0":
+  version "25.76.0"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.76.0.tgz#97afb6c9275d3573e66d0d56592d2a316ffb8d27"
+  integrity sha512-IOUYs9nf0zxExet9WSUFFwGwWV6N4RL0RMkjOf/UiMtUQtNxnQgDGQe+LoEgTCLQKeCcyFIAVSQOMIfABQNCNQ==
   dependencies:
     "@azure/ms-rest-js" "^2.0.4"
     "@azure/storage-blob" "^10.3.0"
@@ -199,10 +199,10 @@
   optionalDependencies:
     isolated-vm "^4.0.0"
 
-"@betty-blocks/component-sdk@^1.70.0":
-  version "1.70.0"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.70.0.tgz#fe247610b7933d27dafebe26efeac93680867934"
-  integrity sha512-iylG1YKY0I7mHS4plurmrr8VIoBd/4YtAk5InKx5VlBNB5SELzcfuBietvdYAOjd2dNnAhzpYaA5ess75ocr2g==
+"@betty-blocks/component-sdk@^1.76.0":
+  version "1.76.0"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.76.0.tgz#4cc47dde489e5d87e13bfc912932013b6d812f7c"
+  integrity sha512-p3JaIgHrXS2LZqXGiXO2dMBrkP/cyH9HNnZniK6pz5E4VYTYIxhRxu5uuOBzwZn0SAgMN9oZW1gYTiecTmOYFw==
 
 "@colors/colors@1.5.0":
   version "1.5.0"
