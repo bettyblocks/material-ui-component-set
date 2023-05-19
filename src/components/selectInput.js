@@ -458,6 +458,9 @@
             '!important',
           ],
         },
+        '& .MuiSvgIcon-root': {
+          marginRight: '6px',
+        },
         '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
           {
             borderColor: ({ options: { borderColor } }) => [
