@@ -129,7 +129,6 @@ export const dataTableOptions = {
     value: ['Search on'],
     configuration: {
       dependsOn: 'model',
-      condition: hideIf('hideSearch', 'EQ', true),
     },
   }),
   hideTextOverflow: toggle('Hide text-overflow', {

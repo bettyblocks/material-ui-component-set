@@ -115,7 +115,7 @@ const beforeCreate = ({
 
   const structure = originalPrefab.structure[0];
 
-  const unsupportedKinds = createBlacklist(['LIST', 'BELONGS_TO']);
+  const unsupportedKinds = createBlacklist(['LIST', 'BELONGS_TO', 'OBJECT']);
 
   if (structure.type !== 'COMPONENT')
     return <div>expected component prefab, found {structure.type}</div>;
@@ -241,14 +241,6 @@ const beforeCreate = ({
             ...option,
             value: [variableName],
           }));
-          setOption(newPrefab.structure[0], 'property', (option) => ({
-            ...option,
-            value: {
-              id: propertyId,
-              type: 'PROPERTY',
-              componentId: selectedPrefab?.id,
-            },
-          }));
 
           if (propertyModelId && !isListProperty) {
             setOption(newPrefab.structure[0], 'model', (option) => ({
@@ -295,6 +287,26 @@ const beforeCreate = ({
                 },
               }),
             );
+            if (propertyKind === 'OBJECT') {
+              setOption(newPrefab.structure[0], 'labelProperty', (option) => ({
+                ...option,
+                value: {
+                  id:
+                    result.isRelational && !result.isMultiRelational
+                      ? [propertyId, modelProperty.id]
+                      : propertyId,
+                  type: 'PROPERTY',
+                  name:
+                    result.isRelational && !result.isMultiRelational
+                      ? `{{ ${model?.name}.${name}.id }}`
+                      : `{{ ${model?.name}.${name} }}`,
+                  ...(propertyPath.useKey && { useKey: propertyPath.useKey }),
+                },
+                configuration: {
+                  allowedKinds: ['OBJECT'],
+                },
+              }));
+            }
           }
           if (validate()) {
             if (
@@ -343,6 +355,6 @@ const attributes = {
 export default prefab('Select', attributes, beforeCreate, [
   SelectInput({
     label: 'Select',
-    inputLabel: 'Select',
+    inputLabel: 'Select option',
   }),
 ]);

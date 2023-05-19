@@ -46,7 +46,7 @@
     const mounted = useRef(false);
     const getValue = (val) => (isNaN(Number(val)) ? val : Number(val));
     const labelText = useText(label);
-    const defaultValueText = useText(prefabValue);
+    let defaultValueText = useText(prefabValue);
     const helperTextResolved = useText(helperText);
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
@@ -57,19 +57,27 @@
       modelId = contextModelId || model,
       kind,
       values = [],
+      allowedValues = [],
     } = modelProperty;
 
     const isListProperty = kind === 'list' || kind === 'LIST';
+    const isObjectProperty = kind === 'object' || kind === 'OBJECT';
 
     const isPropertyValueAnArray = Boolean(
       prefabValue.length && prefabValue.some((p) => p.type === 'PROPERTY'),
     );
 
     let resolvedCurrentValue;
+    const objectValue = prefabValue.find((p) => p.type === 'PROPERTY');
     if (isListProperty) resolvedCurrentValue = useText(prefabValue);
-    else if (isPropertyValueAnArray)
+    else if (isPropertyValueAnArray && !isObjectProperty)
       resolvedCurrentValue = parseInt(useText(prefabValue), 10);
-    else resolvedCurrentValue = getValue(prefabValue);
+    else if (isObjectProperty && objectValue) {
+      objectValue.useKey = 'uuid';
+      const currentUuid = useText([objectValue]);
+      resolvedCurrentValue = JSON.stringify({ uuid: currentUuid });
+      defaultValueText = resolvedCurrentValue;
+    } else resolvedCurrentValue = getValue(prefabValue);
     const [currentValue, setCurrentValue] = useState(resolvedCurrentValue);
 
     B.defineFunction('Clear', () => setCurrentValue(''));
@@ -270,7 +278,17 @@
         return <span>{message}</span>;
       }
 
-      if (isDev && !isListProperty) return renderRadio('value', 'Placeholder');
+      if (isDev && !isListProperty && !isObjectProperty)
+        return renderRadio('value', 'Placeholder');
+
+      if (isObjectProperty) {
+        return allowedValues.map((item) => {
+          return renderRadio(
+            JSON.stringify({ uuid: item.uuid }),
+            item[labelProperty.useKey || 'uuid'],
+          );
+        });
+      }
 
       if (isListProperty) {
         return values.map(({ value }) => renderRadio(value, value));
