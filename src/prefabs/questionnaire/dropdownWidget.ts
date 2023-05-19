@@ -61,9 +61,9 @@ export const dropdownWidget = [
               optionId: '#dropdownInputLabelProperty',
             },
           },
-          configuration: {
-            showOnDrop: true,
-          },
+          // configuration: {
+          //   showOnDrop: true,
+          // },
         }),
         required: linked({
           label: 'Required to answer',
@@ -186,7 +186,7 @@ export const dropdownWidget = [
                   }),
                   labelProperty: property('Label for options', {
                     value: '',
-                    ref: { id: '#dropdownLabelProperty' },
+                    ref: { id: '#dropdownInputLabelProperty' },
                     configuration: {
                       allowedKinds: ['OBJECT'],
                     },
