@@ -1,3 +1,11 @@
+## [2.136.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.136.0...v2.136.1) (2023-05-22)
+
+
+### Bug Fixes
+
+* placeholder now shows when being clicked on ([5e25240](https://github.com/bettyblocks/material-ui-component-set/commit/5e25240716b0aad82d0a98888efaa9a65b2d46ec))
+* placeholder on the questioannaire text input ([8ad2822](https://github.com/bettyblocks/material-ui-component-set/commit/8ad282257ff67df1aedea81910eaa848fbc6cc3e))
+
 # [2.136.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.135.0...v2.136.0) (2023-05-15)
 
 
