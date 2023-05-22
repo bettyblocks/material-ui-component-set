@@ -113,7 +113,7 @@ const beforeCreate = ({
     }
   }
 
-  const unsupportedKinds = createBlacklist(['LIST', 'BELONGS_TO']);
+  const unsupportedKinds = createBlacklist(['LIST', 'BELONGS_TO', 'OBJECT']);
 
   const structure = originalPrefab.structure[0];
 
@@ -273,9 +273,30 @@ const beforeCreate = ({
                     result.isRelational && !result.isMultiRelational
                       ? `{{ ${model?.name}.${name}.id }}`
                       : `{{ ${model?.name}.${name} }}`,
+                  ...(propertyPath.useKey && { useKey: propertyPath.useKey }),
                 },
               }),
             );
+            if (propertyKind === 'OBJECT') {
+              setOption(newPrefab.structure[0], 'labelProperty', (option) => ({
+                ...option,
+                value: {
+                  id:
+                    result.isRelational && !result.isMultiRelational
+                      ? [propertyId, modelProperty.id]
+                      : propertyId,
+                  type: 'PROPERTY',
+                  name:
+                    result.isRelational && !result.isMultiRelational
+                      ? `{{ ${model?.name}.${name}.id }}`
+                      : `{{ ${model?.name}.${name} }}`,
+                  ...(propertyPath.useKey && { useKey: propertyPath.useKey }),
+                },
+                configuration: {
+                  allowedKinds: ['OBJECT'],
+                },
+              }));
+            }
           }
           if (validate()) {
             if (

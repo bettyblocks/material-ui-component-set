@@ -62,6 +62,7 @@ const beforeCreate = ({
     'SUM',
     'TEXT_EXPRESSION',
     'ZIPCODE',
+    'OBJECT',
   ];
 
   const [modelId, setModelId] = React.useState('');
