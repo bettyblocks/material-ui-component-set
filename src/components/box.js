@@ -82,7 +82,7 @@
             : { opacity }
         }
       >
-        {isPristine ? emptyPlaceHolderText : children}
+        {isPristine ? useText(emptyPlaceHolderText) : children}
       </Box>
     );
 
