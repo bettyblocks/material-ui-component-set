@@ -53,7 +53,7 @@ export const categories = [
   {
     label: 'Advanced Options',
     expanded: false,
-    members: ['dataComponentAttribute'],
+    members: ['dataComponentAttribute', 'emptyPlaceHolderText'],
   },
 ];
 
@@ -259,6 +259,9 @@ export const boxOptions = {
     configuration: {
       as: 'UNIT',
     },
+  }),
+  emptyPlaceHolderText: variable('Empty placeholder text', {
+    value: ['Box'],
   }),
   ...advanced('Box'),
 };
