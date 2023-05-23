@@ -1,3 +1,26 @@
+# [2.137.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.136.1...v2.137.0) (2023-05-22)
+
+
+### Bug Fixes
+
+* disable object prop in form ([3a53f41](https://github.com/bettyblocks/material-ui-component-set/commit/3a53f41c899bbd5a39963dc4bad50c944977b088))
+* getProperty when value is string ([8e1cbe4](https://github.com/bettyblocks/material-ui-component-set/commit/8e1cbe40bbf41f78fcbe13d33f7642c97a1b7d76))
+* only send uuid with objectprop ([ff9665c](https://github.com/bettyblocks/material-ui-component-set/commit/ff9665c58d491a5184de03c9c951410c71b3be8a))
+
+
+### Features
+
+* add object property to checkbox ([38322c1](https://github.com/bettyblocks/material-ui-component-set/commit/38322c17015e98718ef0d9ef06f18c51c2cd878b))
+* set currentvalue as object prop ([567c343](https://github.com/bettyblocks/material-ui-component-set/commit/567c343922357724294362477e2017f65292daf3))
+
+## [2.136.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.136.0...v2.136.1) (2023-05-22)
+
+
+### Bug Fixes
+
+* placeholder now shows when being clicked on ([5e25240](https://github.com/bettyblocks/material-ui-component-set/commit/5e25240716b0aad82d0a98888efaa9a65b2d46ec))
+* placeholder on the questioannaire text input ([8ad2822](https://github.com/bettyblocks/material-ui-component-set/commit/8ad282257ff67df1aedea81910eaa848fbc6cc3e))
+
 # [2.136.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.135.0...v2.136.0) (2023-05-15)
 
 
