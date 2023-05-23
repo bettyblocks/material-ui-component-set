@@ -1,3 +1,10 @@
+# [2.138.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.137.0...v2.138.0) (2023-05-23)
+
+
+### Features
+
+* add empty placeholder text to box ([961487a](https://github.com/bettyblocks/material-ui-component-set/commit/961487a229d9e469294f8cff945993b5967ae68a))
+
 # [2.137.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.136.1...v2.137.0) (2023-05-22)
 
 
