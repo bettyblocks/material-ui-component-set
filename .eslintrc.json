@@ -69,6 +69,7 @@
     "setState": "readonly",
     "useCallback": "readonly",
     "useEffect": "readonly",
+    "useGlobalState": "readonly",
     "useLocation": "readonly",
     "useReducer": "readonly",
     "useRef": "readonly",
