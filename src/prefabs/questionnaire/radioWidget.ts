@@ -46,7 +46,7 @@ export const radioWidget = [
           },
         }),
         optionLabel: linked({
-          label: 'Option label',
+          label: 'Label for options',
           value: {
             ref: {
               componentId: '#radioInput',
