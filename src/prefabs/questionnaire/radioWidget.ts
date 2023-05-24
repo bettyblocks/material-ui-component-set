@@ -163,6 +163,8 @@ export const radioWidget = [
                         },
                         disabled: true,
                         manageObjectValues: {
+                          buttonLabel: 'Manage answer options',
+                          label: 'Manage answer options',
                           value: [],
                         },
                       },
