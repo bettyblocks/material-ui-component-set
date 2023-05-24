@@ -80,177 +80,183 @@ const children = [
 
 // eslint-disable-next-line import/no-default-export
 export default prefab('Side Menu', attrs, undefined, [
-  Box(
-    {
-      options: {
-        ...boxOptions,
-        stretch: toggle('Stretch (when in flex container)', {
-          value: true,
-        }),
-        innerSpacing: sizes('Inner space', {
-          value: ['0rem', '0rem', '0rem', '0rem'],
-        }),
-        backgroundColor: color('Background color', {
-          value: ThemeColor.PRIMARY,
-        }),
-      },
-    },
-    [
+  {
+    type: 'WRAPPER',
+    options: [],
+    descendants: [
       Box(
         {
           options: {
             ...boxOptions,
-            innerSpacing: sizes('Inner space', {
-              value: ['L', 'L', '0rem', 'L'],
+            stretch: toggle('Stretch (when in flex container)', {
+              value: true,
             }),
-          },
-        },
-        [
-          Media({
-            options: {
-              ...mediaOptions,
-              type: option('CUSTOM', {
-                label: 'Media type',
-                value: 'url',
-                configuration: {
-                  as: 'BUTTONGROUP',
-                  dataType: 'string',
-                  allowedInput: [
-                    { name: 'Image', value: 'img' },
-                    { name: 'Data/URL', value: 'url' },
-                    { name: 'Video', value: 'video' },
-                    { name: 'I-frame', value: 'iframe' },
-                  ],
-                },
-              }),
-              urlFileSource: variable('Source', {
-                value: [
-                  'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
-                ],
-                configuration: {
-                  placeholder: 'Starts with https:// or http://',
-                  as: 'MULTILINE',
-                  condition: showIf('type', 'EQ', 'url'),
-                },
-              }),
-            },
-          }),
-        ],
-      ),
-      Box(
-        {
-          options: {
-            ...boxOptions,
             innerSpacing: sizes('Inner space', {
               value: ['0rem', '0rem', '0rem', '0rem'],
             }),
+            backgroundColor: color('Background color', {
+              value: ThemeColor.PRIMARY,
+            }),
           },
         },
         [
-          List(
+          Box(
             {
               options: {
-                ...listOptions,
-                disablePadding: toggle('Disable padding', { value: true }),
-                addChild: addChild('Add Menu Item', {
-                  value: { children, addChildWizardType: 'ChildSelector' },
-                  ref: {
-                    id: '#addChild',
-                  },
+                ...boxOptions,
+                innerSpacing: sizes('Inner space', {
+                  value: ['L', 'L', '0rem', 'L'],
                 }),
               },
             },
             [
-              ListItem({
+              Media({
                 options: {
-                  ...listItemOptions,
-                  primaryText: variable('Primary text', {
-                    value: ['First list item'],
-                    configuration: {
-                      showOnDrop: true,
-                    },
-                  }),
-                  avatarOrIcon: option('CUSTOM', {
-                    label: 'Visual',
-                    value: 'icon',
+                  ...mediaOptions,
+                  type: option('CUSTOM', {
+                    label: 'Media type',
+                    value: 'url',
                     configuration: {
                       as: 'BUTTONGROUP',
                       dataType: 'string',
                       allowedInput: [
-                        { name: 'None', value: 'none' },
-                        { name: 'Icon', value: 'icon' },
-                        { name: 'Avatar', value: 'avatar' },
+                        { name: 'Image', value: 'img' },
+                        { name: 'Data/URL', value: 'url' },
+                        { name: 'Video', value: 'video' },
+                        { name: 'I-frame', value: 'iframe' },
                       ],
                     },
                   }),
-                  icon: icon('Icon', {
-                    value: 'Apartment',
+                  urlFileSource: variable('Source', {
+                    value: [
+                      'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
+                    ],
                     configuration: {
-                      condition: showIf('avatarOrIcon', 'EQ', 'icon'),
+                      placeholder: 'Starts with https:// or http://',
+                      as: 'MULTILINE',
+                      condition: showIf('type', 'EQ', 'url'),
                     },
-                  }),
-                  iconColor: color('Icon color', {
-                    value: ThemeColor.WHITE,
-                    configuration: {
-                      condition: showIf('avatarOrIcon', 'EQ', 'icon'),
-                    },
-                  }),
-                  selected: toggle('Selected', { value: true }),
-                  titleColor: color('Title color', {
-                    value: ThemeColor.WHITE,
-                  }),
-                  subtitleFont: font('Subtitle text style', {
-                    value: 'Body2',
-                  }),
-                },
-              }),
-              ListItem({
-                options: {
-                  ...listItemOptions,
-                  primaryText: variable('Primary text', {
-                    value: ['Second list item'],
-                    configuration: {
-                      showOnDrop: true,
-                    },
-                  }),
-                  avatarOrIcon: option('CUSTOM', {
-                    label: 'Visual',
-                    value: 'icon',
-                    configuration: {
-                      as: 'BUTTONGROUP',
-                      dataType: 'string',
-                      allowedInput: [
-                        { name: 'None', value: 'none' },
-                        { name: 'Icon', value: 'icon' },
-                        { name: 'Avatar', value: 'avatar' },
-                      ],
-                    },
-                  }),
-                  icon: icon('Icon', {
-                    value: 'Person',
-                    configuration: {
-                      condition: showIf('avatarOrIcon', 'EQ', 'icon'),
-                    },
-                  }),
-                  iconColor: color('Icon color', {
-                    value: ThemeColor.WHITE,
-                    configuration: {
-                      condition: showIf('avatarOrIcon', 'EQ', 'icon'),
-                    },
-                  }),
-                  selected: toggle('Selected', { value: false }),
-                  titleColor: color('Title color', {
-                    value: ThemeColor.WHITE,
-                  }),
-                  subtitleFont: font('Subtitle text style', {
-                    value: 'Body2',
                   }),
                 },
               }),
             ],
           ),
+          Box(
+            {
+              options: {
+                ...boxOptions,
+                innerSpacing: sizes('Inner space', {
+                  value: ['0rem', '0rem', '0rem', '0rem'],
+                }),
+              },
+            },
+            [
+              List(
+                {
+                  options: {
+                    ...listOptions,
+                    disablePadding: toggle('Disable padding', { value: true }),
+                    addChild: addChild('Add Menu Item', {
+                      value: { children, addChildWizardType: 'ChildSelector' },
+                      ref: {
+                        id: '#addChild',
+                      },
+                    }),
+                  },
+                },
+                [
+                  ListItem({
+                    options: {
+                      ...listItemOptions,
+                      primaryText: variable('Primary text', {
+                        value: ['First list item'],
+                        configuration: {
+                          showOnDrop: true,
+                        },
+                      }),
+                      avatarOrIcon: option('CUSTOM', {
+                        label: 'Visual',
+                        value: 'icon',
+                        configuration: {
+                          as: 'BUTTONGROUP',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'None', value: 'none' },
+                            { name: 'Icon', value: 'icon' },
+                            { name: 'Avatar', value: 'avatar' },
+                          ],
+                        },
+                      }),
+                      icon: icon('Icon', {
+                        value: 'Apartment',
+                        configuration: {
+                          condition: showIf('avatarOrIcon', 'EQ', 'icon'),
+                        },
+                      }),
+                      iconColor: color('Icon color', {
+                        value: ThemeColor.WHITE,
+                        configuration: {
+                          condition: showIf('avatarOrIcon', 'EQ', 'icon'),
+                        },
+                      }),
+                      selected: toggle('Selected', { value: true }),
+                      titleColor: color('Title color', {
+                        value: ThemeColor.WHITE,
+                      }),
+                      subtitleFont: font('Subtitle text style', {
+                        value: 'Body2',
+                      }),
+                    },
+                  }),
+                  ListItem({
+                    options: {
+                      ...listItemOptions,
+                      primaryText: variable('Primary text', {
+                        value: ['Second list item'],
+                        configuration: {
+                          showOnDrop: true,
+                        },
+                      }),
+                      avatarOrIcon: option('CUSTOM', {
+                        label: 'Visual',
+                        value: 'icon',
+                        configuration: {
+                          as: 'BUTTONGROUP',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'None', value: 'none' },
+                            { name: 'Icon', value: 'icon' },
+                            { name: 'Avatar', value: 'avatar' },
+                          ],
+                        },
+                      }),
+                      icon: icon('Icon', {
+                        value: 'Person',
+                        configuration: {
+                          condition: showIf('avatarOrIcon', 'EQ', 'icon'),
+                        },
+                      }),
+                      iconColor: color('Icon color', {
+                        value: ThemeColor.WHITE,
+                        configuration: {
+                          condition: showIf('avatarOrIcon', 'EQ', 'icon'),
+                        },
+                      }),
+                      selected: toggle('Selected', { value: false }),
+                      titleColor: color('Title color', {
+                        value: ThemeColor.WHITE,
+                      }),
+                      subtitleFont: font('Subtitle text style', {
+                        value: 'Body2',
+                      }),
+                    },
+                  }),
+                ],
+              ),
+            ],
+          ),
         ],
       ),
     ],
-  ),
+  },
 ]);
