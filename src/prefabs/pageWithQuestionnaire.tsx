@@ -639,6 +639,9 @@ const children = [
                 innerSpacing: sizes('Inner space', {
                   value: ['L', '0rem', '0rem', '0rem'],
                 }),
+                emptyPlaceHolderText: variable('Empty placeholder text', {
+                  value: ['Drop your questionnaire widgets here'],
+                }),
               },
             },
             [],
@@ -2024,6 +2027,16 @@ const prefabStructure = [
                                                                                     ref: {
                                                                                       id: '#AddQuestion',
                                                                                     },
+                                                                                  },
+                                                                                ),
+                                                                              emptyPlaceHolderText:
+                                                                                variable(
+                                                                                  'Empty placeholder text',
+                                                                                  {
+                                                                                    value:
+                                                                                      [
+                                                                                        'Drop your questionnaire widgets here',
+                                                                                      ],
                                                                                   },
                                                                                 ),
                                                                             },
