@@ -154,8 +154,6 @@
         '& > *': {
           pointerEvents: 'none',
         },
-      },
-      root: {
         display: 'inline-block',
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
