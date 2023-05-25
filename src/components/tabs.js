@@ -312,6 +312,7 @@
         minWidth: '10rem',
         position: 'relative',
         alignSelf: 'flex-start',
+        width: ({ options: { circleSideBarWidth } }) => circleSideBarWidth,
         '&::after': {
           content: '""',
           position: 'absolute',
