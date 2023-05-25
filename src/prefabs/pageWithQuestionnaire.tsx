@@ -362,14 +362,14 @@ const beforeCreate = ({
       );
       setOption(primaryTab, 'label', (opt: PrefabComponentOption) => ({
         ...opt,
-        value: [`${modelName}`],
+        value: [`${sectionTitle}`],
       }));
       setOption(titleText, 'content', (opt: PrefabComponentOption) => ({
         ...opt,
         value: [modelName],
         configuration: { as: 'MULTILINE' },
       }));
-      primaryTab.label = modelName;
+      primaryTab.label = sectionTitle;
 
       const schemaName = 'Questionnaire object';
       const jsonSchema = {
