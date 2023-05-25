@@ -1,3 +1,128 @@
+# [2.138.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.137.0...v2.138.0) (2023-05-23)
+
+
+### Features
+
+* add empty placeholder text to box ([961487a](https://github.com/bettyblocks/material-ui-component-set/commit/961487a229d9e469294f8cff945993b5967ae68a))
+
+# [2.137.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.136.1...v2.137.0) (2023-05-22)
+
+
+### Bug Fixes
+
+* disable object prop in form ([3a53f41](https://github.com/bettyblocks/material-ui-component-set/commit/3a53f41c899bbd5a39963dc4bad50c944977b088))
+* getProperty when value is string ([8e1cbe4](https://github.com/bettyblocks/material-ui-component-set/commit/8e1cbe40bbf41f78fcbe13d33f7642c97a1b7d76))
+* only send uuid with objectprop ([ff9665c](https://github.com/bettyblocks/material-ui-component-set/commit/ff9665c58d491a5184de03c9c951410c71b3be8a))
+
+
+### Features
+
+* add object property to checkbox ([38322c1](https://github.com/bettyblocks/material-ui-component-set/commit/38322c17015e98718ef0d9ef06f18c51c2cd878b))
+* set currentvalue as object prop ([567c343](https://github.com/bettyblocks/material-ui-component-set/commit/567c343922357724294362477e2017f65292daf3))
+
+## [2.136.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.136.0...v2.136.1) (2023-05-22)
+
+
+### Bug Fixes
+
+* placeholder now shows when being clicked on ([5e25240](https://github.com/bettyblocks/material-ui-component-set/commit/5e25240716b0aad82d0a98888efaa9a65b2d46ec))
+* placeholder on the questioannaire text input ([8ad2822](https://github.com/bettyblocks/material-ui-component-set/commit/8ad282257ff67df1aedea81910eaa848fbc6cc3e))
+
+# [2.136.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.135.0...v2.136.0) (2023-05-15)
+
+
+### Features
+
+* added data component attribute to rich text ([76ac0d4](https://github.com/bettyblocks/material-ui-component-set/commit/76ac0d4d4471c406f07706bcca83b77876f86f6c))
+
+# [2.135.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.134.1...v2.135.0) (2023-05-15)
+
+
+### Features
+
+* aligned input field icons ([d898c6a](https://github.com/bettyblocks/material-ui-component-set/commit/d898c6a05d3912c2bedcb6b6407899c46caf58d1))
+
+## [2.134.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.134.0...v2.134.1) (2023-05-12)
+
+
+### Bug Fixes
+
+* remove hidesearch option from components ([80706f9](https://github.com/bettyblocks/material-ui-component-set/commit/80706f9b11d20ed3374488a5bb9d2ca612aa93fe))
+
+# [2.134.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.133.2...v2.134.0) (2023-05-12)
+
+
+### Bug Fixes
+
+* add option to add requests in order ([237473f](https://github.com/bettyblocks/material-ui-component-set/commit/237473f8b3088a83146ffc7ca1a1625f57ca9f6a))
+* option not working ([92cc08c](https://github.com/bettyblocks/material-ui-component-set/commit/92cc08cc7d22c3bfb20be0bb6f6258ba2de8cdff))
+
+
+### Features
+
+* add show on content on load to form ([487a91c](https://github.com/bettyblocks/material-ui-component-set/commit/487a91c09f7ddf645c125774cf80eda673f729a2))
+
+## [2.133.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.133.1...v2.133.2) (2023-05-10)
+
+
+### Bug Fixes
+
+* ignore engines (temp) ([37a5009](https://github.com/bettyblocks/material-ui-component-set/commit/37a50094f03a219a8724cbb44d8de7433e9349d9))
+
+## [2.133.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.133.0...v2.133.1) (2023-05-10)
+
+
+### Bug Fixes
+
+* cd into cloned repo ([9e30c1f](https://github.com/bettyblocks/material-ui-component-set/commit/9e30c1fec1bb5f561b47c52104d79836e5eb0dc2))
+* switch back to yarn ([f96e173](https://github.com/bettyblocks/material-ui-component-set/commit/f96e173bf1342eccdf5ed035feab6b3b23bf4410))
+
+# [2.133.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.132.0...v2.133.0) (2023-05-09)
+
+
+### Bug Fixes
+
+* bump node version for e2e tests ([0b30a1a](https://github.com/bettyblocks/material-ui-component-set/commit/0b30a1aa2d64ba458c899513b5fa268efae12d09))
+* bump version ([1c8de50](https://github.com/bettyblocks/material-ui-component-set/commit/1c8de50a0ebb92417f7760368ba80335dcd98b0c))
+* merge conflict ([237a2c4](https://github.com/bettyblocks/material-ui-component-set/commit/237a2c410b6e09649f941434d7427acac5c843fe))
+
+
+### Features
+
+* run e2e tests on edge and acceptance ([59082e8](https://github.com/bettyblocks/material-ui-component-set/commit/59082e882f140a7cdc0e3150637b8d11beff2c5a))
+
+# [2.132.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.131.0...v2.132.0) (2023-05-08)
+
+
+### Bug Fixes
+
+* bump node version for e2e tests ([0b30a1a](https://github.com/bettyblocks/material-ui-component-set/commit/0b30a1aa2d64ba458c899513b5fa268efae12d09))
+* merge conflict ([7023cd7](https://github.com/bettyblocks/material-ui-component-set/commit/7023cd7c1bd355101eec4ccf2d29cb14bec0d581))
+
+
+### Features
+
+* use pnpm ([be30102](https://github.com/bettyblocks/material-ui-component-set/commit/be301029c660a307c77e56a621b06376cc0f18c2))
+
+# [2.131.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.130.0...v2.131.0) (2023-05-08)
+
+
+### Bug Fixes
+
+* use correct github env variable ([4ae2a64](https://github.com/bettyblocks/material-ui-component-set/commit/4ae2a64da0b54ce7913185b2dfbfc5f4d9f788ec))
+
+
+### Features
+
+* merge acceptance ([e3ef74c](https://github.com/bettyblocks/material-ui-component-set/commit/e3ef74c915629b196e48e78ed6e6682625e6b747))
+
+# [2.130.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.129.1...v2.130.0) (2023-05-08)
+
+
+### Features
+
+* use env file for e2e tests ([e1a390b](https://github.com/bettyblocks/material-ui-component-set/commit/e1a390b2ed738d452eddc4a9e0b719ff28a57d62))
+
 ## [2.129.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.129.0...v2.129.1) (2023-05-03)
 
 

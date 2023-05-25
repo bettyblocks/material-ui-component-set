@@ -10,6 +10,7 @@
       model,
       currentRecord,
       filter = {},
+      showDataOnLoad,
     } = options;
     const { Form, GetOne, useFilter, getIdProperty } = B;
     const formRef = React.createRef();
@@ -186,6 +187,10 @@
       return (
         <GetOne modelId={model} rawFilter={where}>
           {({ loading, error, data }) => {
+            if (loading && showDataOnLoad) {
+              return <>{children}</>;
+            }
+
             if (loading) {
               return <></>;
             }

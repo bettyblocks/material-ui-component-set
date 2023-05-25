@@ -38,9 +38,8 @@
     const mounted = useRef(false);
     const blancoText = useText(blanco);
     const modelProperty = getProperty(property || '') || {};
-    const [currentValue, setCurrentValue] = useState(useText(prefabValue));
     const labelText = useText(label);
-    const defaultValueText = useText(prefabValue);
+    let defaultValueText = useText(prefabValue);
     const helperTextResolved = useText(helperText);
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
@@ -51,8 +50,23 @@
       modelId = contextModelId || model,
       kind,
       values = [],
+      allowedValues = [],
     } = modelProperty;
 
+    const isObjectProperty = kind === 'object' || kind === 'OBJECT';
+
+    let resolvedCurrentValue;
+    const objectValue = prefabValue.find((p) => p.type === 'PROPERTY');
+    if (isObjectProperty && objectValue) {
+      objectValue.useKey = 'uuid';
+      const currentUuid = useText([objectValue]);
+      resolvedCurrentValue = JSON.stringify({ uuid: currentUuid });
+      defaultValueText = resolvedCurrentValue;
+    } else {
+      resolvedCurrentValue = useText(prefabValue);
+    }
+
+    const [currentValue, setCurrentValue] = useState(resolvedCurrentValue);
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
@@ -245,6 +259,18 @@
         ));
       }
 
+      if (isObjectProperty) {
+        return allowedValues.map((item) => {
+          const itemLabel = item[labelProperty.useKey || 'uuid'];
+          const stringifiedItem = JSON.stringify({ uuid: item.uuid });
+          return (
+            <MenuItem key={item.uuid} value={stringifiedItem}>
+              {itemLabel}
+            </MenuItem>
+          );
+        });
+      }
+
       if (!loading && !isDev) {
         let labelKey = 'id';
         if (labelProperty) {
@@ -431,6 +457,9 @@
             style.getColor(textColor),
             '!important',
           ],
+        },
+        '& .MuiSvgIcon-root': {
+          marginRight: '6px',
         },
         '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
           {
