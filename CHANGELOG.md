@@ -1,3 +1,10 @@
+## [2.138.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.138.0...v2.138.1) (2023-05-25)
+
+
+### Bug Fixes
+
+* fixed broken rating components homepage ([eaee6ef](https://github.com/bettyblocks/material-ui-component-set/commit/eaee6eff4081cd821deaa56e0118659111691fdf))
+
 # [2.138.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.137.0...v2.138.0) (2023-05-23)
 
 
