@@ -2,9 +2,6 @@ name: Publish bundle.js to edge
 
 on:
   workflow_dispatch:
-    workflows: ['Publish component set on test environments']
-    types:
-      - completed
 
 jobs:
   deploy:
