@@ -1,3 +1,10 @@
+## [2.139.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.139.0...v2.139.1) (2023-05-26)
+
+
+### Bug Fixes
+
+* update publish bundle ([5ceb166](https://github.com/bettyblocks/material-ui-component-set/commit/5ceb1667cb5f69fcf434d1fc1944ad9240e59b80))
+
 # [2.139.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.138.1...v2.139.0) (2023-05-26)
 
 
