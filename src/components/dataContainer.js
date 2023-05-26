@@ -121,6 +121,7 @@
             });
           }
         });
+        B.defineFunction('Refetch', () => {});
         useEffect(() => {
           B.defineFunction('Advanced filter', (value) => {
             setFilterV2(value.where);
@@ -148,10 +149,6 @@
           B.defineFunction('ResetFilter', () => {
             setInteractionFilter({});
           });
-
-          if (isDev) {
-            B.defineFunction('Refetch', () => {});
-          }
         }, []);
 
         function DataContainer(hasData) {
