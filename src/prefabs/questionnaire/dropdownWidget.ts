@@ -166,6 +166,7 @@ export const dropdownWidget = [
                       },
                       disabled: true,
                       manageObjectValues: {
+                        selectableObjectKey: false,
                         value: [],
                       },
                     },
