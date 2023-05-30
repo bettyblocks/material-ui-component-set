@@ -166,6 +166,9 @@ export const dropdownWidget = [
                       },
                       disabled: true,
                       manageObjectValues: {
+                        selectableObjectKey: false,
+                        buttonLabel: 'Manage answer options',
+                        label: 'Manage answer options',
                         value: [],
                       },
                     },
