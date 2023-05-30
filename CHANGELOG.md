@@ -1,3 +1,10 @@
+# [2.141.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.140.0...v2.141.0) (2023-05-30)
+
+
+### Features
+
+* add width option for circle sidebar ([fd4bf98](https://github.com/bettyblocks/material-ui-component-set/commit/fd4bf98080102a2ce534589c51b1d54dd4dadfdd))
+
 # [2.140.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.139.1...v2.140.0) (2023-05-30)
 
 
