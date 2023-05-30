@@ -121,6 +121,7 @@
             });
           }
         });
+        B.defineFunction('Refetch', () => {});
         useEffect(() => {
           B.defineFunction('Advanced filter', (value) => {
             setFilterV2(value.where);
