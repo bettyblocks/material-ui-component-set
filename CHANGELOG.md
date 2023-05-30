@@ -1,3 +1,10 @@
+# [2.140.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.139.1...v2.140.0) (2023-05-30)
+
+
+### Features
+
+* fix rating component outer spacing ([e71f502](https://github.com/bettyblocks/material-ui-component-set/commit/e71f5023926443a40837dc356da5d48e71f23470))
+
 ## [2.139.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.139.0...v2.139.1) (2023-05-26)
 
 
