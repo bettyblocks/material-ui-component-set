@@ -1,3 +1,30 @@
+## [2.139.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.139.0...v2.139.1) (2023-05-26)
+
+
+### Bug Fixes
+
+* update publish bundle ([5ceb166](https://github.com/bettyblocks/material-ui-component-set/commit/5ceb1667cb5f69fcf434d1fc1944ad9240e59b80))
+
+# [2.139.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.138.1...v2.139.0) (2023-05-26)
+
+
+### Bug Fixes
+
+* remove duplicate icons ([ba27e0d](https://github.com/bettyblocks/material-ui-component-set/commit/ba27e0df3480791d63a31e1443f352a9070c03f6))
+
+
+### Features
+
+* add new material-ui icons ([233e04c](https://github.com/bettyblocks/material-ui-component-set/commit/233e04cfac17e42660a6cfa1f86786652b5cef15))
+* new upload bundle command for github pipelines ([31c40bc](https://github.com/bettyblocks/material-ui-component-set/commit/31c40bc0b141936361d7e582a3b5ff1689008cdb))
+
+## [2.138.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.138.0...v2.138.1) (2023-05-25)
+
+
+### Bug Fixes
+
+* fixed broken rating components homepage ([eaee6ef](https://github.com/bettyblocks/material-ui-component-set/commit/eaee6eff4081cd821deaa56e0118659111691fdf))
+
 # [2.138.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.137.0...v2.138.0) (2023-05-23)
 
 

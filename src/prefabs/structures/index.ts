@@ -47,6 +47,7 @@ import { Paper } from './Paper';
 import { PriceInput } from './PriceInput';
 import { Progress } from './Progress';
 import { RadioInput } from './RadioInput';
+import { RatingInput } from './RatingInput';
 import { RichTextInput } from './RichTextInput';
 import { Row } from './Row';
 import { SelectInput } from './SelectInput';
@@ -111,6 +112,7 @@ import { paperOptions } from './Paper/options';
 import { options as priceInputOptions } from './PriceInput/options';
 import { progressOptions } from './Progress/options';
 import { options as radioInputOptions } from './RadioInput/options';
+import { ratingInputOptions } from './RatingInput/options';
 import { rowOptions } from './Row/options';
 import { richTextOptions } from './RichTextInput/options';
 import { options as selectInputOptions } from './SelectInput/options';
@@ -177,6 +179,7 @@ export {
   PriceInput,
   Progress,
   RadioInput,
+  RatingInput,
   RichTextInput,
   Row,
   SelectInput,
@@ -239,6 +242,7 @@ export {
   priceInputOptions,
   progressOptions,
   radioInputOptions,
+  ratingInputOptions,
   richTextOptions,
   rowOptions,
   selectInputOptions,
