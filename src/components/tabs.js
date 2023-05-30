@@ -302,7 +302,8 @@
         minWidth: '10rem',
       },
       circleTabRoot: {
-        padding: '6px 0 !important',
+        padding: '6px 10px 6px 0 !important',
+        maxWidth: 'none !important',
       },
       flexContainer: {
         width: '100%',
