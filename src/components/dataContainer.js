@@ -149,7 +149,7 @@
           B.defineFunction('ResetFilter', () => {
             setInteractionFilter({});
           });
-        }, []);
+        });
 
         function DataContainer(hasData) {
           return (
