@@ -5,7 +5,7 @@
   "license": "UNLICENSED",
   "private": false,
   "devDependencies": {
-    "@betty-blocks/cli": "^25.76.0",
+    "@betty-blocks/cli": "^25.78.0",
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-angular": "^16.0.0",
     "@semantic-release/changelog": "^6.0.1",
@@ -54,7 +54,7 @@
     "dist"
   ],
   "dependencies": {
-    "@betty-blocks/component-sdk": "^1.76.0",
+    "@betty-blocks/component-sdk": "^1.77.0",
     "@date-io/date-fns": "^1.3.13",
     "@material-ui/core": "^4.9.11",
     "@material-ui/icons": "^4.11.2",
