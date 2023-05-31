@@ -1,3 +1,10 @@
+## [2.141.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.141.0...v2.141.1) (2023-05-31)
+
+
+### Bug Fixes
+
+* remove isdev check around refetch ([e04c9a2](https://github.com/bettyblocks/material-ui-component-set/commit/e04c9a2f041a81c91e78fc2b7fc1cb54d4f66cc2))
+
 # [2.141.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.140.0...v2.141.0) (2023-05-30)
 
 
