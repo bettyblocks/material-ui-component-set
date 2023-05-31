@@ -7,7 +7,6 @@
     const {
       actionVariableId,
       allowClear,
-      blanco,
       clearLabel,
       dataComponentAttribute = ['Select'],
       disabled: initialIsDisabled,
@@ -38,9 +37,9 @@
     const [interactionFilter, setInteractionFilter] = useState({});
     const [disabled, setIsDisabled] = useState(initialIsDisabled);
     const mounted = useRef(false);
-    const blancoText = useText(blanco);
     const modelProperty = getProperty(property || '') || {};
     const labelText = useText(label);
+    const clearLabelText = useText(clearLabel);
     let defaultValueText = useText(prefabValue);
     const helperTextResolved = useText(helperText);
     const validationMessageText = useText(validationValueMissing);
@@ -254,41 +253,23 @@
 
     const renderOptions = () => {
       if (isListProperty) {
-        return [
-          allowClear ? (
-            <MenuItem key={null} value="" className={classes.clearLabel}>
-              {clearLabel}
-            </MenuItem>
-          ) : (
-            ''
-          ),
-          ...values.map(({ value }) => (
-            <MenuItem key={value} value={value}>
-              {value}
-            </MenuItem>
-          )),
-        ];
+        return values.map(({ value }) => (
+          <MenuItem key={value} value={value}>
+            {value}
+          </MenuItem>
+        ));
       }
 
       if (isObjectProperty) {
-        return [
-          allowClear ? (
-            <MenuItem key={null} value="" className={classes.clearLabel}>
-              {clearLabel}
+        allowedValues.map((item) => {
+          const itemLabel = item[labelProperty.useKey || 'uuid'];
+          const stringifiedItem = JSON.stringify({ uuid: item.uuid });
+          return (
+            <MenuItem key={item.uuid} value={stringifiedItem}>
+              {itemLabel}
             </MenuItem>
-          ) : (
-            ''
-          ),
-          ...allowedValues.map((item) => {
-            const itemLabel = item[labelProperty.useKey || 'uuid'];
-            const stringifiedItem = JSON.stringify({ uuid: item.uuid });
-            return (
-              <MenuItem key={item.uuid} value={stringifiedItem}>
-                {itemLabel}
-              </MenuItem>
-            );
-          }),
-        ];
+          );
+        });
       }
 
       if (!loading && !isDev) {
@@ -303,23 +284,14 @@
 
         const rows = data ? data.results : [];
 
-        return [
-          allowClear ? (
-            <MenuItem key={null} value="" className={classes.clearLabel}>
-              {clearLabel}
+        return rows.map((row) => {
+          const itemLabel = row[labelKey];
+          return (
+            <MenuItem key={row.id} value={row.id}>
+              {itemLabel}
             </MenuItem>
-          ) : (
-            ''
-          ),
-          ...rows.map((row) => {
-            const itemLabel = row[labelKey];
-            return (
-              <MenuItem key={row.id} value={row.id}>
-                {itemLabel}
-              </MenuItem>
-            );
-          }),
-        ];
+          );
+        });
       }
 
       if (!loading && !data) {
@@ -355,7 +327,11 @@
           margin={margin}
           helperText={helper}
         >
-          {blancoText && <MenuItem value="">{blancoText}</MenuItem>}
+          {allowClear && (
+            <MenuItem value="" className={classes.clearLabel}>
+              {clearLabelText}
+            </MenuItem>
+          )}
           {valid && renderOptions()}
         </TextField>
         <input
