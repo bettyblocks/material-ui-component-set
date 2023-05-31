@@ -1799,6 +1799,24 @@ const prefabStructure = [
                                                                         },
                                                                     },
                                                                   ),
+                                                                circleSideBarWidth:
+                                                                  size(
+                                                                    'Circle Sidebar Width',
+                                                                    {
+                                                                      value:
+                                                                        '200px',
+                                                                      configuration:
+                                                                        {
+                                                                          as: 'UNIT',
+                                                                          condition:
+                                                                            showIf(
+                                                                              'layout',
+                                                                              'EQ',
+                                                                              'circle',
+                                                                            ),
+                                                                        },
+                                                                    },
+                                                                  ),
                                                               },
                                                             },
                                                             [
