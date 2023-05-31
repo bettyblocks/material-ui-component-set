@@ -6,7 +6,9 @@
   jsx: (() => {
     const {
       actionVariableId,
+      allowClear,
       blanco,
+      clearLabel,
       dataComponentAttribute = ['Select'],
       disabled: initialIsDisabled,
       filter,
@@ -252,23 +254,41 @@
 
     const renderOptions = () => {
       if (isListProperty) {
-        return values.map(({ value: v }) => (
-          <MenuItem key={v} value={v}>
-            {v}
-          </MenuItem>
-        ));
+        return [
+          allowClear ? (
+            <MenuItem key={null} value="" className={classes.clearLabel}>
+              {clearLabel}
+            </MenuItem>
+          ) : (
+            ''
+          ),
+          ...values.map(({ value }) => (
+            <MenuItem key={value} value={value}>
+              {value}
+            </MenuItem>
+          )),
+        ];
       }
 
       if (isObjectProperty) {
-        return allowedValues.map((item) => {
-          const itemLabel = item[labelProperty.useKey || 'uuid'];
-          const stringifiedItem = JSON.stringify({ uuid: item.uuid });
-          return (
-            <MenuItem key={item.uuid} value={stringifiedItem}>
-              {itemLabel}
+        return [
+          allowClear ? (
+            <MenuItem key={null} value="" className={classes.clearLabel}>
+              {clearLabel}
             </MenuItem>
-          );
-        });
+          ) : (
+            ''
+          ),
+          ...allowedValues.map((item) => {
+            const itemLabel = item[labelProperty.useKey || 'uuid'];
+            const stringifiedItem = JSON.stringify({ uuid: item.uuid });
+            return (
+              <MenuItem key={item.uuid} value={stringifiedItem}>
+                {itemLabel}
+              </MenuItem>
+            );
+          }),
+        ];
       }
 
       if (!loading && !isDev) {
@@ -282,14 +302,24 @@
         }
 
         const rows = data ? data.results : [];
-        return rows.map((row) => {
-          const itemLabel = row[labelKey];
-          return (
-            <MenuItem key={row.id} value={row.id}>
-              {itemLabel}
+
+        return [
+          allowClear ? (
+            <MenuItem key={null} value="" className={classes.clearLabel}>
+              {clearLabel}
             </MenuItem>
-          );
-        });
+          ) : (
+            ''
+          ),
+          ...rows.map((row) => {
+            const itemLabel = row[labelKey];
+            return (
+              <MenuItem key={row.id} value={row.id}>
+                {itemLabel}
+              </MenuItem>
+            );
+          }),
+        ];
       }
 
       if (!loading && !data) {
@@ -524,6 +554,10 @@
                 },
             },
           },
+      },
+      clearLabel: {
+        fontStyle: 'italic',
+        borderBottom: '1px solid lightgray !important',
       },
     };
   },

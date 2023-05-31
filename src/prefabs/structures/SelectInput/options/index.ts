@@ -6,6 +6,7 @@ import {
   option,
   property,
   showIf,
+  toggle,
   variable,
 } from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
@@ -82,6 +83,12 @@ export const options = {
     ],
     { value: 'asc', configuration: { condition: hideIf('orderBy', 'EQ', '') } },
   ),
+
+  allowClear: toggle('Allow user to empty select'),
+  clearLabel: variable('Empty select label', {
+    value: ['Clear selection'],
+    configuration: { condition: showIf('allowClear', 'EQ', true) },
+  }),
 
   ...validation,
   ...styles,
