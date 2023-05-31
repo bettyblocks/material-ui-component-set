@@ -1,3 +1,37 @@
+# [2.141.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.140.0...v2.141.0) (2023-05-30)
+
+
+### Features
+
+* add width option for circle sidebar ([fd4bf98](https://github.com/bettyblocks/material-ui-component-set/commit/fd4bf98080102a2ce534589c51b1d54dd4dadfdd))
+
+# [2.140.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.139.1...v2.140.0) (2023-05-30)
+
+
+### Features
+
+* fix rating component outer spacing ([e71f502](https://github.com/bettyblocks/material-ui-component-set/commit/e71f5023926443a40837dc356da5d48e71f23470))
+
+## [2.139.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.139.0...v2.139.1) (2023-05-26)
+
+
+### Bug Fixes
+
+* update publish bundle ([5ceb166](https://github.com/bettyblocks/material-ui-component-set/commit/5ceb1667cb5f69fcf434d1fc1944ad9240e59b80))
+
+# [2.139.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.138.1...v2.139.0) (2023-05-26)
+
+
+### Bug Fixes
+
+* remove duplicate icons ([ba27e0d](https://github.com/bettyblocks/material-ui-component-set/commit/ba27e0df3480791d63a31e1443f352a9070c03f6))
+
+
+### Features
+
+* add new material-ui icons ([233e04c](https://github.com/bettyblocks/material-ui-component-set/commit/233e04cfac17e42660a6cfa1f86786652b5cef15))
+* new upload bundle command for github pipelines ([31c40bc](https://github.com/bettyblocks/material-ui-component-set/commit/31c40bc0b141936361d7e582a3b5ff1689008cdb))
+
 ## [2.138.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.138.0...v2.138.1) (2023-05-25)
 
 
