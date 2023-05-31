@@ -53,9 +53,6 @@ export const radioWidget = [
               optionId: '#radioInputLabelProperty',
             },
           },
-          // configuration: {
-          //   showOnDrop: true,
-          // },
         }),
         required: linked({
           label: 'Required to answer',
@@ -187,10 +184,17 @@ export const radioWidget = [
                     labelProperty: property('Label for options', {
                       value: '',
                       ref: { id: '#radioInputLabelProperty' },
+                      optionRef: {
+                        sourceId: '#radioInputPropertyRef',
+                        inherit: {
+                          id: '$id',
+                          type: 'PROPERTY',
+                          useKey: 'answer',
+                        },
+                      },
                       configuration: {
                         allowedKinds: ['OBJECT'],
                       },
-                      showInAddChild: true,
                     }),
                     value: variable('Value', {
                       value: [''],
