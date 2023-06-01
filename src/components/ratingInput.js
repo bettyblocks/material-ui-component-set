@@ -91,11 +91,13 @@
     }, [isDev, defaultValueText, helperTextResolved]);
 
     const RatingComponent = (
-      <FormGroup>
+      <FormGroup
+        className={[
+          classes.root,
+          labelText.length !== 0 && !hideLabel && classes.formGroup,
+        ]}
+      >
         <FormControl
-          classes={{
-            root: labelText.length !== 0 && !hideLabel && classes.formControl,
-          }}
           required={required}
           component="fieldset"
           error={errorState}
@@ -223,8 +225,8 @@
       validationInput: {
         display: 'none',
       },
-      formControl: {
-        marginTop: '15px !important',
+      formGroup: {
+        paddingTop: '15px !important',
       },
       label: {
         color: ({ options: { labelColor } }) => [
