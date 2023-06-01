@@ -190,10 +190,17 @@ export const dropdownWidget = [
                   labelProperty: property('Label for options', {
                     value: '',
                     ref: { id: '#dropdownInputLabelProperty' },
+                    optionRef: {
+                      sourceId: '#dropdownInputPropertyRef',
+                      inherit: {
+                        id: '$id',
+                        type: 'PROPERTY',
+                        useKey: 'answer',
+                      },
+                    },
                     configuration: {
                       allowedKinds: ['OBJECT'],
                     },
-                    showInAddChild: true,
                   }),
                   value: variable('Value', {
                     value: [''],
