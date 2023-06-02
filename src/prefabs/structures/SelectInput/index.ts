@@ -29,6 +29,7 @@ export const SelectInput = (
         'borderFocusColor',
         'labelColor',
         'textColor',
+        'placeholderColor',
         'helperColor',
         'errorColor',
       ],

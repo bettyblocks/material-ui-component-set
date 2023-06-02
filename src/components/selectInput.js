@@ -310,11 +310,14 @@
         <TextField
           id={actionVariableId}
           select={!disabled}
-          defaultValue={currentValue}
-          value={currentValue}
+          defaultValue={isDev ? placeholderLabelText : currentValue}
+          value={isDev ? placeholderLabelText : currentValue}
           size={size}
           classes={{
-            root: `${classes.formControl} ${floatLabel && classes.floatLabel}`,
+            root: `${classes.formControl} ${floatLabel && classes.floatLabel} ${
+              (isDev || currentValue === placeholderLabelText) &&
+              classes.placeholder
+            }`,
           }}
           variant={variant}
           fullWidth={fullWidth}
@@ -543,6 +546,14 @@
       clearLabel: {
         fontStyle: 'italic',
         borderBottom: '1px solid lightgray !important',
+      },
+      placeholder: {
+        '& .MuiInputBase-root': {
+          color: ({ options: { placeholderColor } }) => [
+            style.getColor(placeholderColor),
+            '!important',
+          ],
+        },
       },
     };
   },
