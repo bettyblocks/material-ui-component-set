@@ -1,3 +1,18 @@
+# [2.142.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.141.1...v2.142.0) (2023-06-01)
+
+
+### Bug Fixes
+
+* change upload bundle script ([b3508a9](https://github.com/bettyblocks/material-ui-component-set/commit/b3508a97c9c92b73530dd0eaaa129639c5654e16))
+* rename upload script command ([da2913c](https://github.com/bettyblocks/material-ui-component-set/commit/da2913c1f4d94d0b573a0aeed66b7d9fac87841d))
+
+
+### Features
+
+* update cli version ([8cce91a](https://github.com/bettyblocks/material-ui-component-set/commit/8cce91af81d6bf2bb25f3c72ac583497615b3711))
+* upgrade cli version ([1944e73](https://github.com/bettyblocks/material-ui-component-set/commit/1944e7340a5a7c83f572251ba680835a640d391f))
+* upgrade cli version ([6f98446](https://github.com/bettyblocks/material-ui-component-set/commit/6f98446fa5a009357b1f9207aab4ce279d75d543))
+
 ## [2.141.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.141.0...v2.141.1) (2023-05-31)
 
 
