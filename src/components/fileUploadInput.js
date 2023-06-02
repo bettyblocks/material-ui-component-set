@@ -58,9 +58,6 @@
     const [value, setValue] = useState(initialValue);
     const propertyId = getPropertyId(selectedProperty);
 
-    console.log('Value raw: ', valueRaw);
-    console.log('Initial value: ', initialValue);
-
     const [upload, { error, loading, data: fileReference }] =
       usePresignedUpload({ propertyId });
 
