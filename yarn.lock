@@ -157,10 +157,10 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
-"@betty-blocks/cli@^25.82.1":
-  version "25.82.1"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.82.1.tgz#ee5694a68073ec5838628a7d9941d4c30a6b3ec3"
-  integrity sha512-JsIMoRlOK05ryrQuH4YnPrP6Wlvi9MvSaMTmmJrV9u+8WzWg5QTToa1FPQM5p3JDWyjtfR4ofnRHEoU/s715Vg==
+"@betty-blocks/cli@^25.82.2":
+  version "25.82.2"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.82.2.tgz#e085bf2def7f35d258fb806ec82e2268e7351e11"
+  integrity sha512-8aHVeCTfLsSj/+CtFaBAnMtEUSPWquzQh1zysEl8Jvto4WZF/pL8TqI88XT45PGtLVk+vX27A4UtluHrVRrJnw==
   dependencies:
     "@azure/ms-rest-js" "^2.0.4"
     "@azure/storage-blob" "^10.3.0"
