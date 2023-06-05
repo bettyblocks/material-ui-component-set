@@ -181,7 +181,7 @@
     );
   })(),
   styles: (B) => (t) => {
-    const { mediaMinWidth, env, Styling } = B;
+    const { mediaMinWidth, mediaMaxWidth, env, Styling } = B;
     const style = new Styling(t);
     const isDev = env === 'dev';
     return {
@@ -260,14 +260,17 @@
       tabs: {
         '& .MuiTab-root': {
           fontFamily: ({ options: { font } }) => style.getFontFamily(font),
-          fontSize: ({ options: { font } }) => style.getFontSize(font),
-          [`@media ${mediaMinWidth(600)}`]: {
+          [`@media ${mediaMaxWidth(1280)}`]: {
+            fontSize: ({ options: { font } }) =>
+              style.getFontSize(font, 'Landscape'),
+          },
+          [`@media ${mediaMaxWidth(960)}`]: {
             fontSize: ({ options: { font } }) =>
               style.getFontSize(font, 'Portrait'),
           },
-          [`@media ${mediaMinWidth(960)}`]: {
+          [`@media ${mediaMaxWidth(600)}`]: {
             fontSize: ({ options: { font } }) =>
-              style.getFontSize(font, 'Landscape'),
+              style.getFontSize(font, 'Mobile'),
           },
           [`@media ${mediaMinWidth(1280)}`]: {
             fontSize: ({ options: { font } }) =>
