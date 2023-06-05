@@ -260,7 +260,7 @@
       tabs: {
         '& .MuiTab-root': {
           fontFamily: ({ options: { font } }) => style.getFontFamily(font),
-          fontSize: ({ options: { font } }) => 
+          fontSize: ({ options: { font } }) =>
             `var(--text-fontSize-${font.toString().toLowerCase()})`,
           [`@media ${mediaMinWidth(600)}`]: {
             fontSize: ({ options: { font } }) =>
