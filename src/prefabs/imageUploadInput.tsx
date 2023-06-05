@@ -226,17 +226,12 @@ const beforeCreate = ({
               },
             }),
           );
-          setOption(newPrefab.structure[0], 'value', (option) => ({
-            ...option,
-            value: [propertyPath.id[propertyPath.id.length - 1]],
-          }));
           if (validate()) {
             if (
               (selectedPrefab?.name === BettyPrefabs.UPDATE_FORM ||
-                ((selectedPrefab?.name === BettyPrefabs.CREATE_FORM ||
-                  selectedPrefab?.name === BettyPrefabs.FORM ||
-                  selectedPrefab?.name === BettyPrefabs.LOGIN_FORM) &&
-                  originalPrefab.name === BettyPrefabs.HIDDEN)) &&
+                selectedPrefab?.name === BettyPrefabs.CREATE_FORM ||
+                selectedPrefab?.name === BettyPrefabs.FORM ||
+                selectedPrefab?.name === BettyPrefabs.LOGIN_FORM) &&
               propertyId
             ) {
               const valueOptions = [
@@ -258,7 +253,11 @@ const beforeCreate = ({
                 value:
                   option.type === 'VARIABLE'
                     ? valueOptions
-                    : (propertyId as any),
+                    : ({
+                        id: propertyId,
+                        type: 'PROPERTY',
+                        useKey: 'url',
+                      } as any),
               }));
             }
           }
