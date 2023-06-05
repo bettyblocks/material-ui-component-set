@@ -29,6 +29,7 @@ export const SelectInput = (
         'borderFocusColor',
         'labelColor',
         'textColor',
+        'placeholderColor',
         'helperColor',
         'errorColor',
       ],
@@ -36,7 +37,7 @@ export const SelectInput = (
     {
       label: 'Advanced',
       expanded: false,
-      members: ['blanco', 'dataComponentAttribute'],
+      members: ['dataComponentAttribute'],
     },
   ];
 
