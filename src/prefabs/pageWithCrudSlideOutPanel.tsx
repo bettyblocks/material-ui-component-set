@@ -2684,6 +2684,7 @@ const beforeCreate = ({
     getPageAuthenticationProfileId,
     cloneStructure,
     setOption,
+    createBlacklist,
     createUuid,
     makeBettyInput,
     makeBettyUpdateInput,
@@ -2853,6 +2854,34 @@ const beforeCreate = ({
     },
   });
 
+  const disabledKinds = createBlacklist([
+    'AUTO_INCREMENT',
+    'BOOLEAN',
+    'DATE',
+    'DATE_TIME',
+    'DECIMAL',
+    'EMAIL',
+    'EMAIL_ADDRESS',
+    'ENUM',
+    'FLOAT',
+    'GOOGLE_DOCUMENT',
+    'HAS_ONE',
+    'IBAN',
+    'INTEGER',
+    'LIST',
+    'LOGIN_TOKEN',
+    'OBJECT',
+    'PASSWORD',
+    'PERIODIC_COUNT',
+    'PHONE_NUMBER',
+    'PRICE',
+    'SERIAL',
+    'STRING',
+    'TEXT',
+    'TIME',
+    'URL',
+  ]);
+
   const stepper = {
     setStep: (step: number) => {
       if (step === 1) {
@@ -2941,32 +2970,7 @@ const beforeCreate = ({
             <PropertiesSelector
               modelId={modelId}
               value={properties}
-              disabledKinds={[
-                'BELONGS_TO',
-                'HAS_AND_BELONGS_TO_MANY',
-                'HAS_MANY',
-                'MULTI_FILE',
-                'AUTO_INCREMENT',
-                'COUNT',
-                'MULTI_IMAGE',
-                'PDF',
-                'RICH_TEXT',
-                'SIGNED_PDF',
-                'SUM',
-                'BOOLEAN_EXPRESSION',
-                'DATE_EXPRESSION',
-                'DATE_TIME_EXPRESSION',
-                'DECIMAL_EXPRESSION',
-                'INTEGER_EXPRESSION',
-                'MINUTES_EXPRESSION',
-                'PRICE_EXPRESSION',
-                'STRING_EXPRESSION',
-                'TEXT_EXPRESSION',
-                'MINUTES',
-                'ZIPCODE',
-                'IMAGE',
-                'FILE',
-              ]}
+              disabledKinds={disabledKinds}
               onChange={(value: Properties[]) => {
                 setProperties(value);
                 setPropertiesValidation(false);

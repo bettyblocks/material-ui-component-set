@@ -341,6 +341,7 @@ const beforeCreate = ({
     useModelQuery,
     setOption,
     prepareAction,
+    createBlacklist,
     createUuid,
     BettyPrefabs,
     PropertyKind,
@@ -458,6 +459,75 @@ const beforeCreate = ({
     return undefined;
   }
 
+  const profilePictureDisabledKinds = createBlacklist([
+    'BELONGS_TO',
+    'GOOGLE_DOCUMENT',
+    'HAS_ONE',
+    'IMAGE',
+    'LOGIN_TOKEN',
+    'OBJECT',
+  ]);
+
+  const profileNameDisabledKinds = createBlacklist([
+    'BELONGS_TO',
+    'GOOGLE_DOCUMENT',
+    'HAS_ONE',
+    'LOGIN_TOKEN',
+    'OBJECT',
+    'STRING',
+    'STRING_EXPRESSION',
+    'TEXT',
+    'TEXT_EXPRESSION',
+  ]);
+
+  const profilePropertiesDisabledKinds = createBlacklist([
+    'AUTO_INCREMENT',
+    'BELONGS_TO',
+    'BOOLEAN',
+    'BOOLEAN_EXPRESSION',
+    'COUNT',
+    'DATE',
+    'DATE_EXPRESSION',
+    'DATE_TIME',
+    'DATE_TIME_EXPRESSION',
+    'DECIMAL',
+    'DECIMAL_EXPRESSION',
+    'EMAIL',
+    'EMAIL_ADDRESS',
+    'ENUM',
+    'FILE',
+    'FLOAT',
+    'GOOGLE_DOCUMENT',
+    'HAS_ONE',
+    'IBAN',
+    'IMAGE',
+    'INTEGER',
+    'INTEGER_EXPRESSION',
+    'LIST',
+    'LOGIN_TOKEN',
+    'MINUTES',
+    'MINUTES_EXPRESSION',
+    'MULTI_FILE',
+    'MULTI_IMAGE',
+    'OBJECT',
+    'PDF',
+    'PERIODIC_COUNT',
+    'PHONE_NUMBER',
+    'PRICE',
+    'PRICE_EXPRESSION',
+    'RICH_TEXT',
+    'SERIAL',
+    'SIGNED_PDF',
+    'STRING',
+    'STRING_EXPRESSION',
+    'SUM',
+    'TEXT',
+    'TEXT_EXPRESSION',
+    'TIME',
+    'URL',
+    'ZIPCODE',
+  ]);
+
   const stepper = {
     setStep: (step: number) => {
       if (step === 1) {
@@ -570,50 +640,7 @@ const beforeCreate = ({
               {hasProfilePictureProperty && (
                 <PropertySelector
                   modelId={modelId}
-                  disabledKinds={[
-                    'AUTO_INCREMENT',
-                    'BOOLEAN_EXPRESSION',
-                    'COUNT',
-                    'DATE',
-                    'DATE_EXPRESSION',
-                    'DATE_TIME',
-                    'DATE_TIME_EXPRESSION',
-                    'DECIMAL',
-                    'DECIMAL_EXPRESSION',
-                    'EMAIL',
-                    'EMAIL_ADDRESS',
-                    'ENUM',
-                    'FILE',
-                    'FLOAT',
-                    'HAS_AND_BELONGS_TO_MANY',
-                    'HAS_MANY',
-                    'IBAN',
-                    'INTEGER',
-                    'INTEGER_EXPRESSION',
-                    'LIST',
-                    'MINUTES',
-                    'MINUTES_EXPRESSION',
-                    'MULTI_FILE',
-                    'MULTI_IMAGE',
-                    'PASSWORD',
-                    'PDF',
-                    'PERIODIC_COUNT',
-                    'PHONE_NUMBER',
-                    'PRICE',
-                    'PRICE_EXPRESSION',
-                    'RICH_TEXT',
-                    'SERIAL',
-                    'SIGNED_PDF',
-                    'STRING',
-                    'STRING_EXPRESSION',
-                    'SUM',
-                    'TEXT',
-                    'TEXT_EXPRESSION',
-                    'TIME',
-                    'URL',
-                    'ZIPCODE',
-                    'BOOLEAN',
-                  ]}
+                  disabledKinds={profilePictureDisabledKinds}
                   onChange={(value: any) => {
                     setProfilePictureProperty(value);
                     setProfilePictureValidationMessage('');
@@ -650,47 +677,7 @@ const beforeCreate = ({
               {hasProfileNameProperty && (
                 <PropertySelector
                   modelId={modelId}
-                  disabledKinds={[
-                    'BOOLEAN',
-                    'AUTO_INCREMENT',
-                    'BOOLEAN_EXPRESSION',
-                    'COUNT',
-                    'DATE',
-                    'DATE_EXPRESSION',
-                    'DATE_TIME',
-                    'DATE_TIME_EXPRESSION',
-                    'DECIMAL',
-                    'DECIMAL_EXPRESSION',
-                    'EMAIL',
-                    'EMAIL_ADDRESS',
-                    'ENUM',
-                    'FILE',
-                    'FLOAT',
-                    'HAS_AND_BELONGS_TO_MANY',
-                    'HAS_MANY',
-                    'IBAN',
-                    'IMAGE',
-                    'INTEGER',
-                    'INTEGER_EXPRESSION',
-                    'LIST',
-                    'MINUTES',
-                    'MINUTES_EXPRESSION',
-                    'MULTI_FILE',
-                    'MULTI_IMAGE',
-                    'PASSWORD',
-                    'PDF',
-                    'PERIODIC_COUNT',
-                    'PHONE_NUMBER',
-                    'PRICE',
-                    'PRICE_EXPRESSION',
-                    'RICH_TEXT',
-                    'SERIAL',
-                    'SIGNED_PDF',
-                    'SUM',
-                    'TIME',
-                    'URL',
-                    'ZIPCODE',
-                  ]}
+                  disabledKinds={profileNameDisabledKinds}
                   onChange={(value: any) => {
                     setProfileNameProperty(value);
                     setProfileNameValidationMessage('');
@@ -717,11 +704,7 @@ const beforeCreate = ({
               modelId={modelId}
               value={profileProperties}
               disabledNames={['created_at', 'updated_at', 'id']}
-              disabledKinds={[
-                'PASSWORD',
-                'HAS_AND_BELONGS_TO_MANY',
-                'HAS_MANY',
-              ]}
+              disabledKinds={profilePropertiesDisabledKinds}
               onChange={(value: any) => {
                 setProfilePropertiesValidation(false);
                 setProfileProperties(value);
