@@ -1,0 +1,5 @@
+{
+  "watch": ["src"],
+  "ext": "js,ts,tsx",
+  "exec": "yarn build-fast && yarn start"
+}
