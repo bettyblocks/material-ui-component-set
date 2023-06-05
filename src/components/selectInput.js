@@ -265,7 +265,7 @@
       }
 
       if (isObjectProperty) {
-        allowedValues.map((item) => {
+        return allowedValues.map((item) => {
           const itemLabel = item[labelProperty.useKey || 'uuid'];
           const stringifiedItem = JSON.stringify({ uuid: item.uuid });
           return (
