@@ -1,3 +1,10 @@
+# [2.144.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.143.0...v2.144.0) (2023-06-06)
+
+
+### Features
+
+* add bundle deploy acc and prod ([8c3b326](https://github.com/bettyblocks/material-ui-component-set/commit/8c3b326168d4b4c62cc61c1af55ee2d925c9ffc1))
+
 # [2.143.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.142.1...v2.143.0) (2023-06-06)
 
 
