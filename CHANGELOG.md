@@ -1,3 +1,10 @@
+## [2.142.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.142.0...v2.142.1) (2023-06-06)
+
+
+### Bug Fixes
+
+* downsize icon in small chip component ([8e35481](https://github.com/bettyblocks/material-ui-component-set/commit/8e35481260c4859b2096dca597e5b5cbadfe76df))
+
 # [2.142.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.141.1...v2.142.0) (2023-06-01)
 
 
