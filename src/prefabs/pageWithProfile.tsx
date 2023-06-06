@@ -461,19 +461,13 @@ const beforeCreate = ({
 
   const profilePictureDisabledKinds = createBlacklist([
     'BELONGS_TO',
-    'GOOGLE_DOCUMENT',
     'HAS_ONE',
     'IMAGE',
-    'LOGIN_TOKEN',
-    'OBJECT',
   ]);
 
   const profileNameDisabledKinds = createBlacklist([
     'BELONGS_TO',
-    'GOOGLE_DOCUMENT',
     'HAS_ONE',
-    'LOGIN_TOKEN',
-    'OBJECT',
     'STRING',
     'STRING_EXPRESSION',
     'TEXT',
@@ -504,12 +498,10 @@ const beforeCreate = ({
     'INTEGER',
     'INTEGER_EXPRESSION',
     'LIST',
-    'LOGIN_TOKEN',
     'MINUTES',
     'MINUTES_EXPRESSION',
     'MULTI_FILE',
     'MULTI_IMAGE',
-    'OBJECT',
     'PDF',
     'PERIODIC_COUNT',
     'PHONE_NUMBER',

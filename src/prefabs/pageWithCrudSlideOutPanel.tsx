@@ -2869,8 +2869,6 @@ const beforeCreate = ({
     'IBAN',
     'INTEGER',
     'LIST',
-    'LOGIN_TOKEN',
-    'OBJECT',
     'PASSWORD',
     'PERIODIC_COUNT',
     'PHONE_NUMBER',

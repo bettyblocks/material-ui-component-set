@@ -1138,14 +1138,7 @@ const beforeCreate = ({
     return returnObject;
   };
 
-  const disabledKinds = createBlacklist([
-    'BELONGS_TO',
-    'BOOLEAN',
-    'GOOGLE_DOCUMENT',
-    'HAS_ONE',
-    'LOGIN_TOKEN',
-    'OBJECT',
-  ]);
+  const disabledKinds = createBlacklist(['BELONGS_TO', 'BOOLEAN', 'HAS_ONE']);
 
   const stepper = {
     setStep: (step: number) => {
