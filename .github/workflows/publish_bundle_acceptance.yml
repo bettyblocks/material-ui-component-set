@@ -1,4 +1,4 @@
-name: Publish bundle.js to production
+name: Publish bundle.js to acceptance
 
 on:
   workflow_dispatch:
