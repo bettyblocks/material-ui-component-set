@@ -1,3 +1,10 @@
+## [2.144.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.144.1...v2.144.2) (2023-06-06)
+
+
+### Bug Fixes
+
+* remove build step from bundle to edge ([71be1ed](https://github.com/bettyblocks/material-ui-component-set/commit/71be1ed4eb135c582d1216beb6c5718569b9c569))
+
 ## [2.144.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.144.0...v2.144.1) (2023-06-06)
 
 
