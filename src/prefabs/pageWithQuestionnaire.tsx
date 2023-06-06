@@ -666,6 +666,15 @@ const questionTypes = [
         },
         type: InteractionType.Custom,
       },
+      {
+        name: 'Refetch',
+        sourceEvent: 'onActionSuccess',
+        ref: {
+          targetComponentId: '#ParentDataContainer',
+          sourceComponentId: '#textQuestionForm',
+        },
+        type: InteractionType.Custom,
+      },
     ],
   },
   {
@@ -678,6 +687,15 @@ const questionTypes = [
         ref: {
           targetComponentId: '#radioQuestionForm',
           sourceComponentId: '#radioInput',
+        },
+        type: InteractionType.Custom,
+      },
+      {
+        name: 'Refetch',
+        sourceEvent: 'onActionSuccess',
+        ref: {
+          targetComponentId: '#ParentDataContainer',
+          sourceComponentId: '#radioQuestionForm',
         },
         type: InteractionType.Custom,
       },
@@ -696,6 +714,15 @@ const questionTypes = [
         },
         type: InteractionType.Custom,
       },
+      {
+        name: 'Refetch',
+        sourceEvent: 'onActionSuccess',
+        ref: {
+          targetComponentId: '#ParentDataContainer',
+          sourceComponentId: '#numberQuestionForm',
+        },
+        type: InteractionType.Custom,
+      },
     ],
   },
   {
@@ -708,6 +735,15 @@ const questionTypes = [
         ref: {
           targetComponentId: '#dateQuestionForm',
           sourceComponentId: '#dateInput',
+        },
+        type: InteractionType.Custom,
+      },
+      {
+        name: 'Refetch',
+        sourceEvent: 'onActionSuccess',
+        ref: {
+          targetComponentId: '#ParentDataContainer',
+          sourceComponentId: '#dateQuestionForm',
         },
         type: InteractionType.Custom,
       },
@@ -726,6 +762,15 @@ const questionTypes = [
         },
         type: InteractionType.Custom,
       },
+      {
+        name: 'Refetch',
+        sourceEvent: 'onActionSuccess',
+        ref: {
+          targetComponentId: '#ParentDataContainer',
+          sourceComponentId: '#checkboxQuestionForm',
+        },
+        type: InteractionType.Custom,
+      },
     ],
   },
   {
@@ -741,6 +786,15 @@ const questionTypes = [
         },
         type: InteractionType.Custom,
       },
+      {
+        name: 'Refetch',
+        sourceEvent: 'onActionSuccess',
+        ref: {
+          targetComponentId: '#ParentDataContainer',
+          sourceComponentId: '#dropdownQuestionForm',
+        },
+        type: InteractionType.Custom,
+      },
     ],
   },
   {
@@ -753,6 +807,15 @@ const questionTypes = [
         ref: {
           targetComponentId: '#multilineQuestionForm',
           sourceComponentId: '#textInput',
+        },
+        type: InteractionType.Custom,
+      },
+      {
+        name: 'Refetch',
+        sourceEvent: 'onActionSuccess',
+        ref: {
+          targetComponentId: '#ParentDataContainer',
+          sourceComponentId: '#multilineQuestionForm',
         },
         type: InteractionType.Custom,
       },
