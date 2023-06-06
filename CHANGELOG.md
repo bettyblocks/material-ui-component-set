@@ -1,3 +1,10 @@
+## [2.144.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.144.2...v2.144.3) (2023-06-06)
+
+
+### Bug Fixes
+
+* revert old icons to stay backward comptaible ([7dd2c2b](https://github.com/bettyblocks/material-ui-component-set/commit/7dd2c2b637b205bc687137c9bd6ace9a85aeb25f))
+
 ## [2.144.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.144.1...v2.144.2) (2023-06-06)
 
 
