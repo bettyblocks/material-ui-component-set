@@ -1,3 +1,18 @@
+# [2.143.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.142.1...v2.143.0) (2023-06-06)
+
+
+### Features
+
+* add placeholder to select component ([8b8e5fe](https://github.com/bettyblocks/material-ui-component-set/commit/8b8e5fe79c7b6f0218e76f7bddd352594ef10b9e))
+* added clear to select input ([55e1e56](https://github.com/bettyblocks/material-ui-component-set/commit/55e1e5652e82f18e8a4b34dde4274763eee7c62b))
+
+## [2.142.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.142.0...v2.142.1) (2023-06-06)
+
+
+### Bug Fixes
+
+* downsize icon in small chip component ([8e35481](https://github.com/bettyblocks/material-ui-component-set/commit/8e35481260c4859b2096dca597e5b5cbadfe76df))
+
 # [2.142.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.141.1...v2.142.0) (2023-06-01)
 
 
