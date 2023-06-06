@@ -1,3 +1,10 @@
+## [2.144.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.144.0...v2.144.1) (2023-06-06)
+
+
+### Bug Fixes
+
+* rename acceptance upload bundle workflow ([eca1d29](https://github.com/bettyblocks/material-ui-component-set/commit/eca1d2970611d07b85fa10b982370d037f686a08))
+
 # [2.144.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.143.0...v2.144.0) (2023-06-06)
 
 
