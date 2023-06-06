@@ -1,3 +1,130 @@
+# [2.142.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.141.1...v2.142.0) (2023-06-01)
+
+
+### Bug Fixes
+
+* change upload bundle script ([b3508a9](https://github.com/bettyblocks/material-ui-component-set/commit/b3508a97c9c92b73530dd0eaaa129639c5654e16))
+* rename upload script command ([da2913c](https://github.com/bettyblocks/material-ui-component-set/commit/da2913c1f4d94d0b573a0aeed66b7d9fac87841d))
+
+
+### Features
+
+* update cli version ([8cce91a](https://github.com/bettyblocks/material-ui-component-set/commit/8cce91af81d6bf2bb25f3c72ac583497615b3711))
+* upgrade cli version ([1944e73](https://github.com/bettyblocks/material-ui-component-set/commit/1944e7340a5a7c83f572251ba680835a640d391f))
+* upgrade cli version ([6f98446](https://github.com/bettyblocks/material-ui-component-set/commit/6f98446fa5a009357b1f9207aab4ce279d75d543))
+
+## [2.141.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.141.0...v2.141.1) (2023-05-31)
+
+
+### Bug Fixes
+
+* remove isdev check around refetch ([e04c9a2](https://github.com/bettyblocks/material-ui-component-set/commit/e04c9a2f041a81c91e78fc2b7fc1cb54d4f66cc2))
+
+# [2.141.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.140.0...v2.141.0) (2023-05-30)
+
+
+### Features
+
+* add width option for circle sidebar ([fd4bf98](https://github.com/bettyblocks/material-ui-component-set/commit/fd4bf98080102a2ce534589c51b1d54dd4dadfdd))
+
+# [2.140.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.139.1...v2.140.0) (2023-05-30)
+
+
+### Features
+
+* fix rating component outer spacing ([e71f502](https://github.com/bettyblocks/material-ui-component-set/commit/e71f5023926443a40837dc356da5d48e71f23470))
+
+## [2.139.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.139.0...v2.139.1) (2023-05-26)
+
+
+### Bug Fixes
+
+* update publish bundle ([5ceb166](https://github.com/bettyblocks/material-ui-component-set/commit/5ceb1667cb5f69fcf434d1fc1944ad9240e59b80))
+
+# [2.139.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.138.1...v2.139.0) (2023-05-26)
+
+
+### Bug Fixes
+
+* remove duplicate icons ([ba27e0d](https://github.com/bettyblocks/material-ui-component-set/commit/ba27e0df3480791d63a31e1443f352a9070c03f6))
+
+
+### Features
+
+* add new material-ui icons ([233e04c](https://github.com/bettyblocks/material-ui-component-set/commit/233e04cfac17e42660a6cfa1f86786652b5cef15))
+* new upload bundle command for github pipelines ([31c40bc](https://github.com/bettyblocks/material-ui-component-set/commit/31c40bc0b141936361d7e582a3b5ff1689008cdb))
+
+## [2.138.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.138.0...v2.138.1) (2023-05-25)
+
+
+### Bug Fixes
+
+* fixed broken rating components homepage ([eaee6ef](https://github.com/bettyblocks/material-ui-component-set/commit/eaee6eff4081cd821deaa56e0118659111691fdf))
+
+# [2.138.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.137.0...v2.138.0) (2023-05-23)
+
+
+### Features
+
+* add empty placeholder text to box ([961487a](https://github.com/bettyblocks/material-ui-component-set/commit/961487a229d9e469294f8cff945993b5967ae68a))
+
+# [2.137.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.136.1...v2.137.0) (2023-05-22)
+
+
+### Bug Fixes
+
+* disable object prop in form ([3a53f41](https://github.com/bettyblocks/material-ui-component-set/commit/3a53f41c899bbd5a39963dc4bad50c944977b088))
+* getProperty when value is string ([8e1cbe4](https://github.com/bettyblocks/material-ui-component-set/commit/8e1cbe40bbf41f78fcbe13d33f7642c97a1b7d76))
+* only send uuid with objectprop ([ff9665c](https://github.com/bettyblocks/material-ui-component-set/commit/ff9665c58d491a5184de03c9c951410c71b3be8a))
+
+
+### Features
+
+* add object property to checkbox ([38322c1](https://github.com/bettyblocks/material-ui-component-set/commit/38322c17015e98718ef0d9ef06f18c51c2cd878b))
+* set currentvalue as object prop ([567c343](https://github.com/bettyblocks/material-ui-component-set/commit/567c343922357724294362477e2017f65292daf3))
+
+## [2.136.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.136.0...v2.136.1) (2023-05-22)
+
+
+### Bug Fixes
+
+* placeholder now shows when being clicked on ([5e25240](https://github.com/bettyblocks/material-ui-component-set/commit/5e25240716b0aad82d0a98888efaa9a65b2d46ec))
+* placeholder on the questioannaire text input ([8ad2822](https://github.com/bettyblocks/material-ui-component-set/commit/8ad282257ff67df1aedea81910eaa848fbc6cc3e))
+
+# [2.136.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.135.0...v2.136.0) (2023-05-15)
+
+
+### Features
+
+* added data component attribute to rich text ([76ac0d4](https://github.com/bettyblocks/material-ui-component-set/commit/76ac0d4d4471c406f07706bcca83b77876f86f6c))
+
+# [2.135.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.134.1...v2.135.0) (2023-05-15)
+
+
+### Features
+
+* aligned input field icons ([d898c6a](https://github.com/bettyblocks/material-ui-component-set/commit/d898c6a05d3912c2bedcb6b6407899c46caf58d1))
+
+## [2.134.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.134.0...v2.134.1) (2023-05-12)
+
+
+### Bug Fixes
+
+* remove hidesearch option from components ([80706f9](https://github.com/bettyblocks/material-ui-component-set/commit/80706f9b11d20ed3374488a5bb9d2ca612aa93fe))
+
+# [2.134.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.133.2...v2.134.0) (2023-05-12)
+
+
+### Bug Fixes
+
+* add option to add requests in order ([237473f](https://github.com/bettyblocks/material-ui-component-set/commit/237473f8b3088a83146ffc7ca1a1625f57ca9f6a))
+* option not working ([92cc08c](https://github.com/bettyblocks/material-ui-component-set/commit/92cc08cc7d22c3bfb20be0bb6f6258ba2de8cdff))
+
+
+### Features
+
+* add show on content on load to form ([487a91c](https://github.com/bettyblocks/material-ui-component-set/commit/487a91c09f7ddf645c125774cf80eda673f729a2))
+
 ## [2.133.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.133.1...v2.133.2) (2023-05-10)
 
 

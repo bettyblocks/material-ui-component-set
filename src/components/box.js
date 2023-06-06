@@ -15,6 +15,7 @@
       displayLogic,
       transparent,
       valignment,
+      emptyPlaceHolderText,
     } = options;
     const isDev = env === 'dev';
     const hasBackgroundColor = backgroundColor !== 'Transparent';
@@ -81,7 +82,7 @@
             : { opacity }
         }
       >
-        {isPristine ? 'Box' : children}
+        {isPristine ? useText(emptyPlaceHolderText) : children}
       </Box>
     );
 

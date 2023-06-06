@@ -1,11 +1,11 @@
 {
   "name": "component-set",
-  "version": "2.133.2",
+  "version": "2.142.0",
   "main": "dist/templates.json",
   "license": "UNLICENSED",
   "private": false,
   "devDependencies": {
-    "@betty-blocks/cli": "^25.74.0",
+    "@betty-blocks/cli": "^25.80.0",
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-angular": "^16.0.0",
     "@semantic-release/changelog": "^6.0.1",
@@ -47,6 +47,7 @@
     "prettier:check": "yarn prettier:base --list-different \"src/**/*.js\"",
     "prettier:write": "yarn prettier:base --write \"src/**/*.js\"",
     "upload": "bb components publish -b material-ui-component-set",
+    "upload-bundle": "bb components publishbundle -b material-ui-component-set",
     "test": "echo \"Error: no test specified\" && exit 0",
     "bundle": "npx webpack --config webpack.config.js"
   },

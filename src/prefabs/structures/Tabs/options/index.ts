@@ -29,6 +29,7 @@ export const categories = [
       'font',
       'textColor',
       'indicatorColor',
+      'circleSideBarWidth',
       'circleWidth',
       'circleColor',
       'circleTextColor',
@@ -185,6 +186,13 @@ export const tabsOptions = {
     value: ThemeColor.WHITE,
     configuration: {
       condition: showIf('layout', 'EQ', 'default'),
+    },
+  }),
+  circleSideBarWidth: size('Circle Sidebar Width', {
+    value: '',
+    configuration: {
+      as: 'UNIT',
+      condition: showIf('layout', 'EQ', 'circle'),
     },
   }),
   circleWidth: size('Circle width', {
