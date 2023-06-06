@@ -625,6 +625,9 @@
     useEffect(() => {
       let triggerEventValue;
 
+      // this will stop an infinite rerender with interactions
+      if (!value) return;
+
       if (!isListProperty) {
         triggerEventValue = currentValue ? currentValue[valueProp.name] : '';
       } else if (isListProperty) {

@@ -342,7 +342,11 @@
         <FormHelperText>{helper}</FormHelperText>
         <input
           className={classes.validationInput}
-          onInvalid={validationHandler}
+          onInvalid={() => {
+            const hasError = required && !currentValue;
+            setAfterFirstInvalidation(hasError);
+            handleValidation();
+          }}
           type="text"
           tabIndex="-1"
           required={required}
