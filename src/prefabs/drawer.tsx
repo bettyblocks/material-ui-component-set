@@ -22,6 +22,7 @@ export default prefab('Drawer', attrs, undefined, [
           options: {
             ...listItemOptions,
             secondaryText: variable('Secondary text', {
+              ...listItemOptions.secondaryText('secondaryText'),
               value: ['Secondary text'],
             }),
           },

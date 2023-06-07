@@ -7,110 +7,25 @@ const attrs = {
   keywords: ['Layout', 'column', 'columns', '2'],
 };
 
-const defaultOptions = { ...columnOptions };
-defaultOptions.columnWidth = option('CUSTOM', {
-  label: 'Column width',
-  value: '6',
-  configuration: {
-    as: 'DROPDOWN',
-    dataType: 'string',
-    allowedInput: [
-      { name: 'Fit content', value: 'fitContent' },
-      { name: 'Flexible', value: 'flexible' },
-      { name: 'Hidden', value: 'hidden' },
-      { name: '1', value: '1' },
-      { name: '2', value: '2' },
-      { name: '3', value: '3' },
-      { name: '4', value: '4' },
-      { name: '5', value: '5' },
-      { name: '6', value: '6' },
-      { name: '7', value: '7' },
-      { name: '8', value: '8' },
-      { name: '9', value: '9' },
-      { name: '10', value: '10' },
-      { name: '11', value: '11' },
-      { name: '12', value: '12' },
-    ],
-  },
-});
-
-defaultOptions.columnWidthTabletLandscape = option('CUSTOM', {
-  label: 'Column width (tablet landscape)',
-  value: '6',
-  configuration: {
-    as: 'DROPDOWN',
-    dataType: 'string',
-    allowedInput: [
-      { name: 'Fit content', value: 'fitContent' },
-      { name: 'Flexible', value: 'flexible' },
-      { name: 'Hidden', value: 'hidden' },
-      { name: '1', value: '1' },
-      { name: '2', value: '2' },
-      { name: '3', value: '3' },
-      { name: '4', value: '4' },
-      { name: '5', value: '5' },
-      { name: '6', value: '6' },
-      { name: '7', value: '7' },
-      { name: '8', value: '8' },
-      { name: '9', value: '9' },
-      { name: '10', value: '10' },
-      { name: '11', value: '11' },
-      { name: '12', value: '12' },
-    ],
-  },
-});
-
-defaultOptions.columnWidthTabletPortrait = option('CUSTOM', {
-  label: 'Column width (tablet portrait)',
-  value: '12',
-  configuration: {
-    as: 'DROPDOWN',
-    dataType: 'string',
-    allowedInput: [
-      { name: 'Fit content', value: 'fitContent' },
-      { name: 'Flexible', value: 'flexible' },
-      { name: 'Hidden', value: 'hidden' },
-      { name: '1', value: '1' },
-      { name: '2', value: '2' },
-      { name: '3', value: '3' },
-      { name: '4', value: '4' },
-      { name: '5', value: '5' },
-      { name: '6', value: '6' },
-      { name: '7', value: '7' },
-      { name: '8', value: '8' },
-      { name: '9', value: '9' },
-      { name: '10', value: '10' },
-      { name: '11', value: '11' },
-      { name: '12', value: '12' },
-    ],
-  },
-});
-
-defaultOptions.columnWidthMobile = option('CUSTOM', {
-  label: 'Column width (mobile)',
-  value: '12',
-  configuration: {
-    as: 'DROPDOWN',
-    dataType: 'string',
-    allowedInput: [
-      { name: 'Fit content', value: 'fitContent' },
-      { name: 'Flexible', value: 'flexible' },
-      { name: 'Hidden', value: 'hidden' },
-      { name: '1', value: '1' },
-      { name: '2', value: '2' },
-      { name: '3', value: '3' },
-      { name: '4', value: '4' },
-      { name: '5', value: '5' },
-      { name: '6', value: '6' },
-      { name: '7', value: '7' },
-      { name: '8', value: '8' },
-      { name: '9', value: '9' },
-      { name: '10', value: '10' },
-      { name: '11', value: '11' },
-      { name: '12', value: '12' },
-    ],
-  },
-});
+const defaultOptions = {
+  ...columnOptions,
+  columnWidth: option('CUSTOM', {
+    ...columnOptions.columnWidth('columnWidth'),
+    value: '6',
+  }),
+  columnWidthTabletLandscape: option('CUSTOM', {
+    ...columnOptions.columnWidthTabletLandscape('columnWidthTabletLandscape'),
+    value: '6',
+  }),
+  columnWidthTabletPortrait: option('CUSTOM', {
+    ...columnOptions.columnWidthTabletPortrait('columnWidthTabletPortrait'),
+    value: '12',
+  }),
+  columnWidthMobile: option('CUSTOM', {
+    ...columnOptions.columnWidthMobile('columnWidthMobile'),
+    value: '12',
+  }),
+};
 
 export default prefab('2 Columns', attrs, undefined, [
   Row({}, [
