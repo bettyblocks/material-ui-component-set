@@ -6,7 +6,8 @@
   jsx: (() => {
     const {
       actionVariableId,
-      blanco,
+      allowClear,
+      clearLabel,
       dataComponentAttribute = ['Select'],
       disabled: initialIsDisabled,
       filter,
@@ -20,6 +21,7 @@
       order,
       floatLabel,
       orderBy,
+      placeholderLabel,
       property,
       required,
       size,
@@ -36,9 +38,10 @@
     const [interactionFilter, setInteractionFilter] = useState({});
     const [disabled, setIsDisabled] = useState(initialIsDisabled);
     const mounted = useRef(false);
-    const blancoText = useText(blanco);
     const modelProperty = getProperty(property || '') || {};
     const labelText = useText(label);
+    const clearLabelText = useText(clearLabel);
+    const placeholderLabelText = useText(placeholderLabel);
     let defaultValueText = useText(prefabValue);
     const helperTextResolved = useText(helperText);
     const validationMessageText = useText(validationValueMissing);
@@ -63,7 +66,7 @@
       resolvedCurrentValue = JSON.stringify({ uuid: currentUuid });
       defaultValueText = resolvedCurrentValue;
     } else {
-      resolvedCurrentValue = useText(prefabValue);
+      resolvedCurrentValue = defaultValueText || placeholderLabelText;
     }
 
     const [currentValue, setCurrentValue] = useState(resolvedCurrentValue);
@@ -209,7 +212,8 @@
     }, []);
 
     const handleValidation = () => {
-      const hasError = required && !currentValue;
+      const hasError =
+        required && (!currentValue || currentValue === placeholderLabelText);
       setErrorState(hasError);
       const message = hasError ? validationMessageText : helperTextResolved;
       setHelper(message);
@@ -228,7 +232,8 @@
     };
 
     const validationHandler = () => {
-      const hasError = required && !currentValue;
+      const hasError =
+        required && (!currentValue || currentValue === placeholderLabelText);
       setAfterFirstInvalidation(hasError);
       handleValidation();
     };
@@ -252,9 +257,9 @@
 
     const renderOptions = () => {
       if (isListProperty) {
-        return values.map(({ value: v }) => (
-          <MenuItem key={v} value={v}>
-            {v}
+        return values.map(({ value }) => (
+          <MenuItem key={value} value={value}>
+            {value}
           </MenuItem>
         ));
       }
@@ -282,6 +287,7 @@
         }
 
         const rows = data ? data.results : [];
+
         return rows.map((row) => {
           const itemLabel = row[labelKey];
           return (
@@ -304,11 +310,14 @@
         <TextField
           id={actionVariableId}
           select={!disabled}
-          defaultValue={currentValue}
-          value={currentValue}
+          defaultValue={isDev ? placeholderLabelText : currentValue}
+          value={isDev ? placeholderLabelText : currentValue}
           size={size}
           classes={{
-            root: `${classes.formControl} ${floatLabel && classes.floatLabel}`,
+            root: `${classes.formControl} ${floatLabel && classes.floatLabel} ${
+              (isDev || currentValue === placeholderLabelText) &&
+              classes.placeholder
+            }`,
           }}
           variant={variant}
           fullWidth={fullWidth}
@@ -325,7 +334,16 @@
           margin={margin}
           helperText={helper}
         >
-          {blancoText && <MenuItem value="">{blancoText}</MenuItem>}
+          {allowClear && (
+            <MenuItem value="" className={classes.clearLabel}>
+              {clearLabelText}
+            </MenuItem>
+          )}
+          {placeholderLabelText && !defaultValueText && (
+            <MenuItem value={placeholderLabelText} disabled>
+              {placeholderLabelText}
+            </MenuItem>
+          )}
           {valid && renderOptions()}
         </TextField>
         <input
@@ -335,7 +353,7 @@
           type="text"
           tabIndex="-1"
           required={required}
-          value={currentValue}
+          value={placeholderLabelText === currentValue ? '' : currentValue}
         />
       </>
     );
@@ -524,6 +542,18 @@
                 },
             },
           },
+      },
+      clearLabel: {
+        fontStyle: 'italic',
+        borderBottom: '1px solid lightgray !important',
+      },
+      placeholder: {
+        '& .MuiInputBase-root': {
+          color: ({ options: { placeholderColor } }) => [
+            style.getColor(placeholderColor),
+            '!important',
+          ],
+        },
       },
     };
   },
