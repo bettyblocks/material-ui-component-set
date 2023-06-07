@@ -241,7 +241,11 @@ const beforeCreate = ({
                 value:
                   option.type === 'VARIABLE'
                     ? valueOptions
-                    : (propertyId as any),
+                    : ({
+                        id: propertyId,
+                        type: 'PROPERTY',
+                        useKey: 'url',
+                      } as any),
               }));
             }
           }
