@@ -276,6 +276,7 @@ const beforeCreate = ({
     useModelQuery,
     setOption,
     cloneStructure,
+    createBlacklist,
   },
 }: BeforeCreateArgs) => {
   const [modelId, setModelId] = React.useState('');
@@ -322,6 +323,34 @@ const beforeCreate = ({
 
   const isEmpty = (value: Properties[]) =>
     !value || Object.keys(value).length === 0;
+
+  const disabledKinds = createBlacklist([
+    'BOOLEAN',
+    'DATE',
+    'DATE_TIME',
+    'DECIMAL',
+    'EMAIL_ADDRESS',
+    'ENUM',
+    'FILE',
+    'FLOAT',
+    'GOOGLE_DOCUMENT',
+    'HAS_ONE',
+    'IBAN',
+    'IMAGE',
+    'INTEGER',
+    'LIST',
+    'MINUTES',
+    'PASSWORD',
+    'PERIODIC_COUNT',
+    'PHONE_NUMBER',
+    'PRICE',
+    'SERIAL',
+    'STRING',
+    'TEXT',
+    'TIME',
+    'URL',
+    'ZIPCODE',
+  ]);
 
   return (
     <>
@@ -377,29 +406,7 @@ const beforeCreate = ({
             }}
             scopedModels={false}
             disabledNames={['created_at', 'updated_at', 'id']}
-            disabledKinds={[
-              'BELONGS_TO',
-              'HAS_AND_BELONGS_TO_MANY',
-              'HAS_MANY',
-              'MULTI_FILE',
-              'AUTO_INCREMENT',
-              'COUNT',
-              'EMAIL',
-              'MULTI_IMAGE',
-              'PDF',
-              'RICH_TEXT',
-              'SIGNED_PDF',
-              'SUM',
-              'BOOLEAN_EXPRESSION',
-              'DATE_EXPRESSION',
-              'DATE_TIME_EXPRESSION',
-              'DECIMAL_EXPRESSION',
-              'INTEGER_EXPRESSION',
-              'MINUTES_EXPRESSION',
-              'PRICE_EXPRESSION',
-              'STRING_EXPRESSION',
-              'TEXT_EXPRESSION',
-            ]}
+            disabledKinds={disabledKinds}
           />
         </Field>
       </Content>
