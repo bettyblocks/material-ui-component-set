@@ -678,7 +678,6 @@
               triggerEventValue = currentValue || '';
             }
 
-            console.log('onchange');
             B.triggerEvent(
               'onChange',
               triggerEventValue,
