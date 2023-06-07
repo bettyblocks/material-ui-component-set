@@ -1,3 +1,10 @@
+## [2.144.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.144.3...v2.144.4) (2023-06-07)
+
+
+### Bug Fixes
+
+* file upload now shows saved file ([f7e73cd](https://github.com/bettyblocks/material-ui-component-set/commit/f7e73cd8cbb47fc4669244d433056c2cb76b3e3d))
+
 ## [2.144.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.144.2...v2.144.3) (2023-06-06)
 
 
