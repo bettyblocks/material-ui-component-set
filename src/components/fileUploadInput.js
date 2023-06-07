@@ -32,23 +32,30 @@
     const [validationMessage, setValidationMessage] = React.useState('');
     const maxFileSizeMessage = useText(maxFileSizeMessageRaw);
     const acceptedValue = useText(accept) || 'image/*';
-    const initialValue = useProperty(!isDev && valueRaw);
-    const [value, setValue] = useState(initialValue);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const requiredText = required ? '*' : '';
 
     const getPropertyId = (property) => {
+      if (typeof property === 'string') {
+        return property;
+      }
       if (Array.isArray(property)) {
-        return property[0];
+        return property[property.length - 1];
       }
-
-      if (typeof property === 'object') {
-        return getPropertyId(property.id);
+      if (property.id) {
+        const { id } = property;
+        if (typeof id === 'string') {
+          return id;
+        }
+        if (Array.isArray(id)) {
+          return id;
+        }
       }
-
-      return property;
+      return '';
     };
 
+    const initialValue = useProperty(!isDev && getPropertyId(valueRaw));
+    const [value, setValue] = useState(initialValue);
     const propertyId = getPropertyId(selectedProperty);
 
     const [upload, { error, loading, data: fileReference }] =
