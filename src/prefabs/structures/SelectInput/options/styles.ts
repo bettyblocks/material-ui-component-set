@@ -66,6 +66,10 @@ export const styles = {
     value: ThemeColor.BLACK,
   }),
 
+  placeholderColor: color('Placeholder color', {
+    value: ThemeColor.LIGHT,
+  }),
+
   helperColor: color('Helper color', {
     value: ThemeColor.ACCENT_2,
   }),
