@@ -1,4 +1,10 @@
-import { option, size, sizes } from '@betty-blocks/component-sdk';
+import {
+  ThemeColor,
+  color,
+  option,
+  size,
+  sizes,
+} from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
 export const categories = [
@@ -35,6 +41,9 @@ export const mediaOptions = {
     configuration: {
       as: 'UNIT',
     },
+  }),
+  backgroundColor: color('Background color', {
+    value: ThemeColor.LIGHT,
   }),
   outerSpacing: sizes('Outer space', {
     value: ['0rem', '0rem', '0rem', '0rem'],

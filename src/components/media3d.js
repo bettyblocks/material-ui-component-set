@@ -3,13 +3,28 @@
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'VERTICAL',
+  dependencies: [
+    {
+      label: 'ReactThreeFiber',
+      package: 'npm:@react-three/fiber@8.1.0',
+      imports: ['Canvas'],
+    },
+    {
+      label: 'ReactThreeDrei',
+      package: 'npm:@react-three/drei@9.74.6',
+      imports: ['useGLTF', 'PresentationControls', 'Stage'],
+    },
+  ],
   jsx: (() => {
     const { env, usePublicFile } = B;
     const isDev = env === 'dev';
     const { modelFileSource } = options;
+    const {
+      ReactThreeFiber: { Canvas },
+      ReactThreeDrei: { useGLTF, PresentationControls, Stage },
+    } = dependencies;
 
-    const { url: modelSource = '', name: modelName = 'model' } =
-      usePublicFile(modelFileSource) || {};
+    const { url: modelSource = '' } = usePublicFile(modelFileSource) || {};
 
     function ModelPlaceholder() {
       return (
@@ -21,25 +36,28 @@
     }
 
     function ModelComponent() {
+      const { scene } = useGLTF(modelSource);
+
       return (
-        <div>
-          Hello 3D world!
-          <ul>
-            <li>{modelSource}</li>
-            <li>{modelName}</li>
-          </ul>
-        </div>
-        // <img
-        //   className={classes.canvas}
-        //   src={modelUrl}
-        //   alt="3d model"
-        //   data-component={useText(dataComponentAttribute) || 'Media'}
-        //   role="presentation"
-        //   onClick={(event) => {
-        //     event.stopPropagation();
-        //     B.triggerEvent('onClick', event);
-        //   }}
-        // />
+        <Canvas
+          dpr={[100, 2]}
+          shadows="basic"
+          style={{ height: options.height, width: options.width }}
+        >
+          {/* eslint-disable-next-line react/no-unknown-property */}
+          <color attach="background" args={[options.backgroundColor]} />
+          <PresentationControls
+            global
+            speed={0.4}
+            // polar={[0.1, Math.PI / 4]}
+            enabled
+          >
+            <Stage environment="studio" shadows={false}>
+              {/* eslint-disable-next-line react/no-unknown-property */}
+              <primitive scale={0.3} object={scene} />
+            </Stage>
+          </PresentationControls>
+        </Canvas>
       );
     }
 
@@ -78,10 +96,8 @@
         },
         width: ({ options: { width } }) => width,
         height: ({ options: { height } }) => height,
-      },
-      canvas: {
-        width: ({ options: { width } }) => width,
-        height: ({ options: { height } }) => height,
+        backgroundColor: ({ options: { backgroundColor } }) =>
+          style.getColor(backgroundColor),
       },
       outerSpacing: {
         width: ({ options: { width } }) => width,
