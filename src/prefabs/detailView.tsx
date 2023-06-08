@@ -7,7 +7,6 @@ import {
   sizes,
   color,
   ThemeColor,
-  showIf,
 } from '@betty-blocks/component-sdk';
 import { Box, boxOptions, DataContainer, Row, rowOptions } from './structures';
 
@@ -1498,13 +1497,12 @@ export default makePrefab('Detail view', attrs, beforeCreate, [
         options: {
           ...boxOptions,
           innerSpacing: sizes('Inner space', {
+            ...boxOptions.innerSpacing('innerSpacing'),
             value: ['0rem', '0rem', '0rem', '0rem'],
           }),
           backgroundColor: color('Background color', {
+            ...boxOptions.backgroundColor('backgroundColor'),
             value: ThemeColor.LIGHT,
-            configuration: {
-              condition: showIf('backgroundOptions', 'EQ', true),
-            },
           }),
         },
       },
@@ -1514,6 +1512,7 @@ export default makePrefab('Detail view', attrs, beforeCreate, [
             options: {
               ...rowOptions,
               backgroundColor: color('Background color', {
+                ...rowOptions.backgroundColor('backgroundColor'),
                 value: ThemeColor.ACCENT_1,
               }),
             },

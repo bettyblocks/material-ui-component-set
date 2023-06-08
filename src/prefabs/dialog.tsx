@@ -8,7 +8,6 @@ import {
   icon,
   PrefabInteraction,
   InteractionType,
-  hideIf,
 } from '@betty-blocks/component-sdk';
 import {
   Box,
@@ -69,19 +68,8 @@ export default prefab('Dialog', attr, undefined, [
           options: {
             ...rowOptions,
             maxRowWidth: option('CUSTOM', {
-              label: 'Width',
+              ...rowOptions.maxRowWidth('maxRowWidth'),
               value: 'Full',
-              configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'S', value: 'S' },
-                  { name: 'M', value: 'M' },
-                  { name: 'L', value: 'L' },
-                  { name: 'XL', value: 'XL' },
-                  { name: 'Full', value: 'Full' },
-                ],
-              },
             }),
           },
         },
@@ -91,104 +79,24 @@ export default prefab('Dialog', attr, undefined, [
               options: {
                 ...columnOptions,
                 columnWidth: option('CUSTOM', {
+                  ...columnOptions.columnWidth('columnWidth'),
                   value: 'flexible',
-                  label: 'Column width',
-                  configuration: {
-                    as: 'DROPDOWN',
-                    dataType: 'string',
-                    allowedInput: [
-                      { name: 'Fit content', value: 'fitContent' },
-                      { name: 'Flexible', value: 'flexible' },
-                      { name: 'Hidden', value: 'hidden' },
-                      { name: '1', value: '1' },
-                      { name: '2', value: '2' },
-                      { name: '3', value: '3' },
-                      { name: '4', value: '4' },
-                      { name: '5', value: '5' },
-                      { name: '6', value: '6' },
-                      { name: '7', value: '7' },
-                      { name: '8', value: '8' },
-                      { name: '9', value: '9' },
-                      { name: '10', value: '10' },
-                      { name: '11', value: '11' },
-                      { name: '12', value: '12' },
-                    ],
-                  },
                 }),
                 columnWidthTabletLandscape: option('CUSTOM', {
+                  ...columnOptions.columnWidthTabletLandscape(
+                    'columnWidthTabletLandscape',
+                  ),
                   value: 'flexible',
-                  label: 'Column width',
-                  configuration: {
-                    as: 'DROPDOWN',
-                    dataType: 'string',
-                    allowedInput: [
-                      { name: 'Fit content', value: 'fitContent' },
-                      { name: 'Flexible', value: 'flexible' },
-                      { name: 'Hidden', value: 'hidden' },
-                      { name: '1', value: '1' },
-                      { name: '2', value: '2' },
-                      { name: '3', value: '3' },
-                      { name: '4', value: '4' },
-                      { name: '5', value: '5' },
-                      { name: '6', value: '6' },
-                      { name: '7', value: '7' },
-                      { name: '8', value: '8' },
-                      { name: '9', value: '9' },
-                      { name: '10', value: '10' },
-                      { name: '11', value: '11' },
-                      { name: '12', value: '12' },
-                    ],
-                  },
                 }),
                 columnWidthTabletPortrait: option('CUSTOM', {
+                  ...columnOptions.columnWidthTabletPortrait(
+                    'columnWidthTabletPortrait',
+                  ),
                   value: 'flexible',
-                  label: 'Column width',
-                  configuration: {
-                    as: 'DROPDOWN',
-                    dataType: 'string',
-                    allowedInput: [
-                      { name: 'Fit content', value: 'fitContent' },
-                      { name: 'Flexible', value: 'flexible' },
-                      { name: 'Hidden', value: 'hidden' },
-                      { name: '1', value: '1' },
-                      { name: '2', value: '2' },
-                      { name: '3', value: '3' },
-                      { name: '4', value: '4' },
-                      { name: '5', value: '5' },
-                      { name: '6', value: '6' },
-                      { name: '7', value: '7' },
-                      { name: '8', value: '8' },
-                      { name: '9', value: '9' },
-                      { name: '10', value: '10' },
-                      { name: '11', value: '11' },
-                      { name: '12', value: '12' },
-                    ],
-                  },
                 }),
                 columnWidthMobile: option('CUSTOM', {
+                  ...columnOptions.columnWidthMobile('columnWidthMobile'),
                   value: 'flexible',
-                  label: 'Column width',
-                  configuration: {
-                    as: 'DROPDOWN',
-                    dataType: 'string',
-                    allowedInput: [
-                      { name: 'Fit content', value: 'fitContent' },
-                      { name: 'Flexible', value: 'flexible' },
-                      { name: 'Hidden', value: 'hidden' },
-                      { name: '1', value: '1' },
-                      { name: '2', value: '2' },
-                      { name: '3', value: '3' },
-                      { name: '4', value: '4' },
-                      { name: '5', value: '5' },
-                      { name: '6', value: '6' },
-                      { name: '7', value: '7' },
-                      { name: '8', value: '8' },
-                      { name: '9', value: '9' },
-                      { name: '10', value: '10' },
-                      { name: '11', value: '11' },
-                      { name: '12', value: '12' },
-                    ],
-                  },
                 }),
               },
             },
@@ -198,21 +106,11 @@ export default prefab('Dialog', attr, undefined, [
                   options: {
                     ...boxOptions,
                     alignment: option('CUSTOM', {
+                      ...boxOptions.alignment('alignment'),
                       value: 'space-between',
-                      label: 'Alignment',
-                      configuration: {
-                        as: 'BUTTONGROUP',
-                        dataType: 'string',
-                        allowedInput: [
-                          { name: 'None', value: 'none' },
-                          { name: 'Left', value: 'flex-start' },
-                          { name: 'Center', value: 'center' },
-                          { name: 'Right', value: 'flex-end' },
-                          { name: 'Justified', value: 'space-between' },
-                        ],
-                      },
                     }),
                     innerSpacing: sizes('Inner space', {
+                      ...boxOptions.innerSpacing('innerSpacing'),
                       value: ['M', 'M', '0rem', 'M'],
                     }),
                   },
@@ -223,12 +121,16 @@ export default prefab('Dialog', attr, undefined, [
                       options: {
                         ...textOptions,
                         content: variable('Content', {
+                          ...textOptions.content('content'),
                           value: ['Dialog'],
                           configuration: {
                             as: 'MULTILINE',
                           },
                         }),
-                        type: font('Type', { value: 'Title4' }),
+                        type: font('Type', {
+                          ...textOptions.type('type'),
+                          value: 'Title4',
+                        }),
                       },
                     },
                     [],
@@ -253,23 +155,17 @@ export default prefab('Dialog', attr, undefined, [
                       options: {
                         ...buttonOptions,
                         buttonText: variable('Button text', {
+                          ...buttonOptions.buttonText('buttonText'),
                           value: [''],
                         }),
                         size: option('CUSTOM', {
+                          ...buttonOptions.size('size'),
                           value: 'medium',
-                          label: 'Icon size',
-                          configuration: {
-                            as: 'BUTTONGROUP',
-                            dataType: 'string',
-                            allowedInput: [
-                              { name: 'Small', value: 'small' },
-                              { name: 'Medium', value: 'medium' },
-                              { name: 'Large', value: 'large' },
-                            ],
-                            condition: hideIf('icon', 'EQ', 'none'),
-                          },
                         }),
-                        icon: icon('Icon', { value: 'Close' }),
+                        icon: icon('Icon', {
+                          ...buttonOptions.icon('icon'),
+                          value: 'Close',
+                        }),
                       },
                     },
                     [],
@@ -282,12 +178,16 @@ export default prefab('Dialog', attr, undefined, [
                     options: {
                       ...textOptions,
                       content: variable('Content', {
+                        ...textOptions.content('content'),
                         value: [
                           'To start using the dialog, please drag or remove components to your liking.',
                         ],
                         configuration: { as: 'MULTILINE' },
                       }),
-                      type: font('Text style', { value: ['Body1'] }),
+                      type: font('Text style', {
+                        ...textOptions.type('type'),
+                        value: ['Body1'],
+                      }),
                     },
                   },
                   [],
@@ -323,9 +223,11 @@ export default prefab('Dialog', attr, undefined, [
                     options: {
                       ...buttonOptions,
                       buttonText: variable('Button text', {
+                        ...buttonOptions.buttonText('buttonText'),
                         value: ['Cancel'],
                       }),
                       outerSpacing: sizes('Outer space', {
+                        ...buttonOptions.outerSpacing('outerSpacing'),
                         value: ['0rem', 'M', '0rem', '0rem'],
                       }),
                     },
@@ -334,6 +236,7 @@ export default prefab('Dialog', attr, undefined, [
                     options: {
                       ...buttonOptions,
                       buttonText: variable('Button text', {
+                        ...buttonOptions.buttonText('buttonText'),
                         value: ['Submit'],
                       }),
                     },
