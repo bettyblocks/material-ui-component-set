@@ -61,12 +61,7 @@
       const { scene } = useGLTF(modelSource);
 
       return (
-        <Canvas
-          dpr={[100, 2]}
-          shadows="basic"
-          style={{ height: options.height, width: options.width }}
-          className={classes.canvas}
-        >
+        <Canvas dpr={[100, 2]} shadows="basic" className={classes.canvas}>
           <PresentationControls
             global
             speed={cameraSpeed}
@@ -108,15 +103,14 @@
         },
       },
       placeholder: {
-        width: ({ options: { width } }) => width,
-        height: ({ options: { height } }) => height,
-        maxWidth: ({ options: { width } }) => width,
-        maxHeight: ({ options: { height } }) => height,
+        width: '100%',
+        height: '100%',
         backgroundColor: ({ options: { backgroundColor } }) =>
           style.getColor(backgroundColor),
       },
       outerSpacing: {
         width: ({ options: { width } }) => width,
+        height: ({ options: { height } }) => height,
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
         marginRight: ({ options: { outerSpacing } }) =>
