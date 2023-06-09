@@ -18,7 +18,8 @@
   jsx: (() => {
     const { env, usePublicFile } = B;
     const isDev = env === 'dev';
-    const { modelFileSource } = options;
+    const { modelFileSource, environmentLighting, lockCamera, cameraSpeed } =
+      options;
     const {
       ReactThreeFiber: { Canvas },
       ReactThreeDrei: { useGLTF, PresentationControls, Stage },
@@ -68,13 +69,12 @@
         >
           <PresentationControls
             global
-            speed={0.4}
-            // polar={[0.1, Math.PI / 4]}
-            enabled
+            speed={cameraSpeed}
+            enabled={!lockCamera}
           >
-            <Stage environment="studio" shadows={false}>
+            <Stage environment={environmentLighting} shadows={false}>
               {/* eslint-disable-next-line react/no-unknown-property */}
-              <primitive scale={0.3} object={scene} />
+              <primitive object={scene} />
             </Stage>
           </PresentationControls>
         </Canvas>
