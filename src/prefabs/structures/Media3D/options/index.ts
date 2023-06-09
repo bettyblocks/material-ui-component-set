@@ -11,7 +11,7 @@ export const categories = [
   {
     label: 'Styling',
     expanded: false,
-    members: ['width', 'height'],
+    members: ['width', 'height', 'backgroundColor'],
   },
   {
     label: 'Spacing',

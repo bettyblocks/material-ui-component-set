@@ -28,9 +28,30 @@
 
     function ModelPlaceholder() {
       return (
-        <svg className={classes.placeholder}>
-          <rect x="19.5" y="8.5" rx="2" />
-          <path d="M61.1349945 29.020979v3.9160839H25v-2.5379375l6.5998225-4.9892478 5.6729048 4.2829541 13.346858-11.2981564L61.1349945 29.020979zm-22.5-10.270979c0 1.0416667-.3645833 1.9270833-1.09375 2.65625S35.9266612 22.5 34.8849945 22.5s-1.9270833-.3645833-2.65625-1.09375-1.09375-1.6145833-1.09375-2.65625.3645833-1.9270833 1.09375-2.65625S33.8433278 15 34.8849945 15s1.9270833.3645833 2.65625 1.09375 1.09375 1.6145833 1.09375 2.65625z" />
+        <svg
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          x="0px"
+          y="0px"
+          viewBox="0 0 200 200"
+          className={classes.placeholder}
+        >
+          <g transform="translate(50, 50)">
+            <g transform="scale(1) translate(10, 3.8)">
+              <path
+                fill="rgb(222,222,222)"
+                d="M40,46.2 0,23.1 40,0 80,23.1 z"
+              />
+              <path
+                fill="rgb(181,181,181)"
+                d="M0,23.1 40,46.2 40,92.4 0,69.3 z"
+              />
+              <path
+                fill="rgb(155,155,155)"
+                d="M40,46.2 80,23.1 80,69.3 40,92.4 z"
+              />
+            </g>
+          </g>
         </svg>
       );
     }
@@ -43,9 +64,8 @@
           dpr={[100, 2]}
           shadows="basic"
           style={{ height: options.height, width: options.width }}
+          className={classes.canvas}
         >
-          {/* eslint-disable-next-line react/no-unknown-property */}
-          <color attach="background" args={[options.backgroundColor]} />
           <PresentationControls
             global
             speed={0.4}
@@ -77,6 +97,10 @@
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
     return {
+      canvas: {
+        backgroundColor: ({ options: { backgroundColor } }) =>
+          style.getColor(backgroundColor),
+      },
       devWrapper: {
         display: 'flex',
         '& > *': {
@@ -84,18 +108,10 @@
         },
       },
       placeholder: {
-        maxHeight: '100%',
-        '& rect': {
-          stroke: '#AFB5C8',
-          fill: '#F7F8FA',
-          width: 47,
-          height: 30,
-        },
-        '& > path': {
-          fill: '#666D85',
-        },
         width: ({ options: { width } }) => width,
         height: ({ options: { height } }) => height,
+        maxWidth: ({ options: { width } }) => width,
+        maxHeight: ({ options: { height } }) => height,
         backgroundColor: ({ options: { backgroundColor } }) =>
           style.getColor(backgroundColor),
       },
