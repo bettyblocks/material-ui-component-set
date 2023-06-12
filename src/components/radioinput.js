@@ -69,15 +69,24 @@
 
     let resolvedCurrentValue;
     const objectValue = prefabValue.find((p) => p.type === 'PROPERTY');
-    if (isListProperty) resolvedCurrentValue = useText(prefabValue);
-    else if (isPropertyValueAnArray && !isObjectProperty)
-      resolvedCurrentValue = parseInt(useText(prefabValue), 10);
-    else if (isObjectProperty && objectValue) {
+
+    // set the value based on the selected property type (list, relational or object)
+    if (isListProperty) {
+      resolvedCurrentValue = defaultValueText;
+    } else if (isPropertyValueAnArray && !isObjectProperty) {
+      resolvedCurrentValue = parseInt(defaultValueText, 10) || '';
+    } else if (isObjectProperty && objectValue) {
       objectValue.useKey = 'uuid';
       const currentUuid = useText([objectValue]);
-      resolvedCurrentValue = JSON.stringify({ uuid: currentUuid });
-      defaultValueText = resolvedCurrentValue;
-    } else resolvedCurrentValue = getValue(prefabValue);
+      const currentFinalUuid = currentUuid === '' ? null : currentUuid;
+      defaultValueText = '';
+      if (currentFinalUuid) {
+        defaultValueText = JSON.stringify({ uuid: currentFinalUuid });
+      }
+      resolvedCurrentValue = defaultValueText;
+    } else {
+      resolvedCurrentValue = getValue(prefabValue);
+    }
     const [currentValue, setCurrentValue] = useState(resolvedCurrentValue);
 
     B.defineFunction('Clear', () => setCurrentValue(''));
