@@ -1,6 +1,6 @@
 {
   "name": "component-set",
-  "version": "2.142.0",
+  "version": "2.144.5",
   "main": "dist/templates.json",
   "license": "UNLICENSED",
   "private": false,
@@ -49,7 +49,7 @@
     "prettier:check": "yarn prettier:base --list-different \"src/**/*.js\"",
     "prettier:write": "yarn prettier:base --write \"src/**/*.js\"",
     "upload": "bb components publish -b material-ui-component-set",
-    "upload-bundle": "bb components publishbundle -b material-ui-component-set",
+    "upload-bundle": "bb components publish-bundle -b material-ui-component-set",
     "test": "echo \"Error: no test specified\" && exit 0",
     "bundle": "npx webpack --config webpack.config.js"
   },
