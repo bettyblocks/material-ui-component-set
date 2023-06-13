@@ -84,6 +84,9 @@
         defaultValueText = JSON.stringify({ uuid: currentFinalUuid });
       }
       resolvedCurrentValue = defaultValueText;
+    } else if (kind === undefined) {
+      // if kind is undefined, it is non property based
+      resolvedCurrentValue = '';
     } else {
       resolvedCurrentValue = getValue(prefabValue);
     }
