@@ -1,3 +1,60 @@
+# [2.145.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.144.5...v2.145.0) (2023-06-12)
+
+
+### Features
+
+* add dev:fast command ([6b539b4](https://github.com/bettyblocks/material-ui-component-set/commit/6b539b45e4896fbd31dc377e2e379a5340c45661))
+
+## [2.144.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.144.4...v2.144.5) (2023-06-07)
+
+
+### Bug Fixes
+
+* default selected date can't be parsed ([2d3792e](https://github.com/bettyblocks/material-ui-component-set/commit/2d3792e3f190cdc2fc759506a1d3065879da5ee6))
+
+## [2.144.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.144.3...v2.144.4) (2023-06-07)
+
+
+### Bug Fixes
+
+* file upload now shows saved file ([f7e73cd](https://github.com/bettyblocks/material-ui-component-set/commit/f7e73cd8cbb47fc4669244d433056c2cb76b3e3d))
+
+## [2.144.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.144.2...v2.144.3) (2023-06-06)
+
+
+### Bug Fixes
+
+* revert old icons to stay backward comptaible ([7dd2c2b](https://github.com/bettyblocks/material-ui-component-set/commit/7dd2c2b637b205bc687137c9bd6ace9a85aeb25f))
+
+## [2.144.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.144.1...v2.144.2) (2023-06-06)
+
+
+### Bug Fixes
+
+* remove build step from bundle to edge ([71be1ed](https://github.com/bettyblocks/material-ui-component-set/commit/71be1ed4eb135c582d1216beb6c5718569b9c569))
+
+## [2.144.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.144.0...v2.144.1) (2023-06-06)
+
+
+### Bug Fixes
+
+* rename acceptance upload bundle workflow ([eca1d29](https://github.com/bettyblocks/material-ui-component-set/commit/eca1d2970611d07b85fa10b982370d037f686a08))
+
+# [2.144.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.143.0...v2.144.0) (2023-06-06)
+
+
+### Features
+
+* add bundle deploy acc and prod ([8c3b326](https://github.com/bettyblocks/material-ui-component-set/commit/8c3b326168d4b4c62cc61c1af55ee2d925c9ffc1))
+
+# [2.143.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.142.1...v2.143.0) (2023-06-06)
+
+
+### Features
+
+* add placeholder to select component ([8b8e5fe](https://github.com/bettyblocks/material-ui-component-set/commit/8b8e5fe79c7b6f0218e76f7bddd352594ef10b9e))
+* added clear to select input ([55e1e56](https://github.com/bettyblocks/material-ui-component-set/commit/55e1e5652e82f18e8a4b34dde4274763eee7c62b))
+
 ## [2.142.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.142.0...v2.142.1) (2023-06-06)
 
 

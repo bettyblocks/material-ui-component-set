@@ -115,7 +115,7 @@
       if (parsedValue) {
         switch (type) {
           case 'date': {
-            setSelectedDate(DateFns.parse(parsedValue, dateFormat));
+            setSelectedDate(new Date(parsedValue));
             break;
           }
 
