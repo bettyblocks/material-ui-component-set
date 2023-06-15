@@ -1,3 +1,10 @@
+## [2.145.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.145.1...v2.145.2) (2023-06-15)
+
+
+### Bug Fixes
+
+* add close icon to bundle ([5bedfe6](https://github.com/bettyblocks/material-ui-component-set/commit/5bedfe66c0fd05561ebf9835b1429b9e22676d55))
+
 ## [2.145.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.145.0...v2.145.1) (2023-06-13)
 
 
