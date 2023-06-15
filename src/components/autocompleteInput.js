@@ -622,17 +622,6 @@
 
     const currentValue = getValue();
 
-    useEffect(() => {
-      let triggerEventValue;
-
-      if (!isListProperty) {
-        triggerEventValue = currentValue ? currentValue[valueProp.name] : '';
-      } else if (isListProperty) {
-        triggerEventValue = currentValue || '';
-      }
-      B.triggerEvent('onChange', triggerEventValue, changeContext.current);
-    }, [currentValue]);
-
     // In the first render we want to make sure to convert the default value
     if (!inputValue && currentValue) {
       setValue(currentValue);
@@ -688,7 +677,7 @@
             } else if (isListProperty) {
               triggerEventValue = currentValue || '';
             }
-
+            changeContext.current = { modelData: newValue };
             B.triggerEvent(
               'onChange',
               triggerEventValue,
