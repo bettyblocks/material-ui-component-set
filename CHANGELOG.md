@@ -1,3 +1,18 @@
+## [2.145.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.145.0...v2.145.1) (2023-06-13)
+
+
+### Bug Fixes
+
+* required setting working for relation and object ([e42c245](https://github.com/bettyblocks/material-ui-component-set/commit/e42c24592e5170ddb00c264bf1e5be4db6f253ac))
+* stop infinite rerender in autocomplete & fix required in radioinput ([9121f4f](https://github.com/bettyblocks/material-ui-component-set/commit/9121f4f2bd6562ece8493c6fe354d82885bef869))
+
+# [2.145.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.144.5...v2.145.0) (2023-06-12)
+
+
+### Features
+
+* add dev:fast command ([6b539b4](https://github.com/bettyblocks/material-ui-component-set/commit/6b539b45e4896fbd31dc377e2e379a5340c45661))
+
 ## [2.144.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.144.4...v2.144.5) (2023-06-07)
 
 
