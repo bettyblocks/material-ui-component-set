@@ -1,9 +1,14 @@
-## [2.145.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.145.1...v2.145.2) (2023-06-15)
+# [2.146.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.145.1...v2.146.0) (2023-06-16)
 
 
 ### Bug Fixes
 
 * add close icon to bundle ([5bedfe6](https://github.com/bettyblocks/material-ui-component-set/commit/5bedfe66c0fd05561ebf9835b1429b9e22676d55))
+
+
+### Features
+
+* add uwm zone to production ([a0e4d97](https://github.com/bettyblocks/material-ui-component-set/commit/a0e4d97a982e6ce1a5cd232993a4393db35eca97))
 
 ## [2.145.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.145.0...v2.145.1) (2023-06-13)
 
