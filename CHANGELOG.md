@@ -1,3 +1,23 @@
+# [2.146.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.145.1...v2.146.0) (2023-06-16)
+
+
+### Bug Fixes
+
+* add close icon to bundle ([5bedfe6](https://github.com/bettyblocks/material-ui-component-set/commit/5bedfe66c0fd05561ebf9835b1429b9e22676d55))
+
+
+### Features
+
+* add uwm zone to production ([a0e4d97](https://github.com/bettyblocks/material-ui-component-set/commit/a0e4d97a982e6ce1a5cd232993a4393db35eca97))
+
+## [2.145.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.145.0...v2.145.1) (2023-06-13)
+
+
+### Bug Fixes
+
+* required setting working for relation and object ([e42c245](https://github.com/bettyblocks/material-ui-component-set/commit/e42c24592e5170ddb00c264bf1e5be4db6f253ac))
+* stop infinite rerender in autocomplete & fix required in radioinput ([9121f4f](https://github.com/bettyblocks/material-ui-component-set/commit/9121f4f2bd6562ece8493c6fe354d82885bef869))
+
 # [2.145.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.144.5...v2.145.0) (2023-06-12)
 
 
