@@ -1,3 +1,10 @@
+## [2.146.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.0...v2.146.1) (2023-06-19)
+
+
+### Bug Fixes
+
+* send correct format setcurrentrecord ([2eddd49](https://github.com/bettyblocks/material-ui-component-set/commit/2eddd4994251e1848ad9b9db3bf47c325f9837b8))
+
 # [2.146.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.145.1...v2.146.0) (2023-06-16)
 
 
