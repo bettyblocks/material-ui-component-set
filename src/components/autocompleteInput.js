@@ -626,24 +626,22 @@
     useEffect(() => {
       let debounceCurrentValue;
 
-      if (!isListProperty) {
-        if (currentValue !== debouncedCurrentValue) {
-          debounceCurrentValue = setTimeout(() => {
-            setDebouncedCurrentValue(currentValue);
-          }, 250);
-        } else {
-          let triggerEventValue;
+      if (currentValue !== debouncedCurrentValue) {
+        debounceCurrentValue = setTimeout(() => {
+          setDebouncedCurrentValue(currentValue);
+        }, 250);
+      } else {
+        let triggerEventValue;
 
-          if (!isListProperty) {
-            triggerEventValue = debounceCurrentValue
-              ? debounceCurrentValue[valueProp.name]
-              : '';
-          } else if (isListProperty) {
-            triggerEventValue = debounceCurrentValue || '';
-          }
-          changeContext.current = { modelData: value };
-          B.triggerEvent('onChange', triggerEventValue, changeContext.current);
+        if (!isListProperty) {
+          triggerEventValue = debounceCurrentValue
+            ? debounceCurrentValue[valueProp.name]
+            : '';
+        } else {
+          triggerEventValue = debounceCurrentValue || '';
         }
+        changeContext.current = { modelData: value };
+        B.triggerEvent('onChange', triggerEventValue, changeContext.current);
       }
 
       return () => {
