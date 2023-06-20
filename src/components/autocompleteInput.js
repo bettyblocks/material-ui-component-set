@@ -90,6 +90,7 @@
     const initalValue = defaultValue.replace(/\n/g, '');
     const [value, setValue] = useState(initalValue);
     const [debouncedInputValue, setDebouncedInputValue] = useState();
+    const [debouncedCurrentValue, setDebouncedCurrentValue] = useState();
     const [interactionFilter, setInteractionFilter] = useState({});
     const defaultValueEvaluatedRef = useRef(false);
 
@@ -579,9 +580,9 @@
     /*
      * Convert `value` state into something the `value` prop of the `Autocomplete` component will accept with the right settings
      */
-    const getValue = () => {
+    const getValue = (testVAlue = value) => {
       if (isListProperty) {
-        return value;
+        return testVAlue;
       }
 
       if (currentOptions.length === 0) {
@@ -589,13 +590,13 @@
       }
 
       return currentOptions.find((option) => {
-        if (typeof value === 'string') {
+        if (typeof testVAlue === 'string') {
           return valuePropIsNumber
-            ? option[valueProp.name] === parseFloat(value, 10)
-            : option[valueProp.name] === value;
+            ? option[valueProp.name] === parseFloat(testVAlue, 10)
+            : option[valueProp.name] === testVAlue;
         }
 
-        return option[valueProp.name] === value[valueProp.name];
+        return option[valueProp.name] === testVAlue[valueProp.name];
       });
     };
 
@@ -621,6 +622,36 @@
      */
 
     const currentValue = getValue();
+
+    useEffect(() => {
+      let debounceCurrentValue;
+
+      if (!isListProperty) {
+        if (currentValue !== debouncedCurrentValue) {
+          debounceCurrentValue = setTimeout(() => {
+            setDebouncedCurrentValue(currentValue);
+          }, 250);
+        } else {
+          let triggerEventValue;
+
+          if (!isListProperty) {
+            triggerEventValue = debounceCurrentValue
+              ? debounceCurrentValue[valueProp.name]
+              : '';
+          } else if (isListProperty) {
+            triggerEventValue = debounceCurrentValue || '';
+          }
+          changeContext.current = { modelData: value };
+          B.triggerEvent('onChange', triggerEventValue, changeContext.current);
+        }
+      }
+
+      return () => {
+        if (!isListProperty) {
+          clearTimeout(debounceCurrentValue);
+        }
+      };
+    }, [currentValue]);
 
     // In the first render we want to make sure to convert the default value
     if (!inputValue && currentValue) {
@@ -668,20 +699,7 @@
           })}
           onChange={(_, newValue) => {
             setValue(newValue || '');
-
-            let triggerEventValue;
-
-            if (!isListProperty) {
-              triggerEventValue = newValue ? newValue[valueProp.name] : '';
-            } else if (isListProperty) {
-              triggerEventValue = newValue || '';
-            }
-            changeContext.current = { modelData: newValue };
-            B.triggerEvent(
-              'onChange',
-              triggerEventValue,
-              changeContext.current,
-            );
+            setDebouncedCurrentValue(newValue);
           }}
           onInputChange={(event, newValue) => {
             let validation = event ? event.target.validity : null;
@@ -715,7 +733,7 @@
                   type="hidden"
                   key={value[valueProp.name] ? 'hasValue' : 'isEmpty'}
                   name={nameAttribute || name}
-                  value={getHiddenValue(currentValue)}
+                  value={getHiddenValue(debouncedCurrentValue)}
                 />
               )}
               <TextField
