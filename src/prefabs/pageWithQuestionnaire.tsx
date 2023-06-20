@@ -522,6 +522,114 @@ const attributes = {
     'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/56b89343f4ef499393e162173777c9ec',
 };
 
+const questionTypes = [
+  {
+    label: 'Text question',
+    structure: textWidget,
+    interactions: [
+      {
+        name: 'Submit',
+        sourceEvent: 'onBlur',
+        ref: {
+          targetComponentId: '#textQuestionForm',
+          sourceComponentId: '#textInput',
+        },
+        type: InteractionType.Custom,
+      },
+    ],
+  },
+  {
+    label: 'Multiple choice question',
+    structure: radioWidget,
+    interactions: [
+      {
+        name: 'Submit',
+        sourceEvent: 'onChange',
+        ref: {
+          targetComponentId: '#radioQuestionForm',
+          sourceComponentId: '#radioInput',
+        },
+        type: InteractionType.Custom,
+      },
+    ],
+  },
+  {
+    label: 'Number question',
+    structure: numberWidget,
+    interactions: [
+      {
+        name: 'Submit',
+        sourceEvent: 'onBlur',
+        ref: {
+          targetComponentId: '#numberQuestionForm',
+          sourceComponentId: '#numberInput',
+        },
+        type: InteractionType.Custom,
+      },
+    ],
+  },
+  {
+    label: 'Date question',
+    structure: dateWidget,
+    interactions: [
+      {
+        name: 'Submit',
+        sourceEvent: 'onChange',
+        ref: {
+          targetComponentId: '#dateQuestionForm',
+          sourceComponentId: '#dateInput',
+        },
+        type: InteractionType.Custom,
+      },
+    ],
+  },
+  {
+    label: 'Checkbox question',
+    structure: checkboxWidget,
+    interactions: [
+      {
+        name: 'Submit',
+        sourceEvent: 'onChange',
+        ref: {
+          targetComponentId: '#checkboxQuestionForm',
+          sourceComponentId: '#checkboxInput',
+        },
+        type: InteractionType.Custom,
+      },
+    ],
+  },
+  {
+    label: 'Dropdown question',
+    structure: dropdownWidget,
+    interactions: [
+      {
+        name: 'Submit',
+        sourceEvent: 'onChange',
+        ref: {
+          targetComponentId: '#dropdownQuestionForm',
+          sourceComponentId: '#dropdownInput',
+        },
+        type: InteractionType.Custom,
+      },
+    ],
+  },
+  {
+    label: 'Multiline question',
+    structure: multilineWidget,
+    interactions: [
+      {
+        name: 'Submit',
+        sourceEvent: 'onBlur',
+        ref: {
+          targetComponentId: '#multilineQuestionForm',
+          sourceComponentId: '#textInput',
+        },
+        type: InteractionType.Custom,
+      },
+    ],
+  },
+];
+
 const children = [
   Tab(
     {
@@ -636,6 +744,12 @@ const children = [
               label: 'Question drop area',
               options: {
                 ...boxOptions,
+                addChild: addChild('Add Child', {
+                  value: {
+                    children: questionTypes,
+                    addChildWizardType: 'ChildSelector',
+                  },
+                }),
                 innerSpacing: sizes('Inner space', {
                   value: ['L', '0rem', '0rem', '0rem'],
                 }),
@@ -650,177 +764,6 @@ const children = [
       ),
     ],
   ),
-];
-
-const questionTypes = [
-  {
-    label: 'Text question',
-    structure: textWidget,
-    interactions: [
-      {
-        name: 'Submit',
-        sourceEvent: 'onBlur',
-        ref: {
-          targetComponentId: '#textQuestionForm',
-          sourceComponentId: '#textInput',
-        },
-        type: InteractionType.Custom,
-      },
-      {
-        name: 'Refetch',
-        sourceEvent: 'onActionSuccess',
-        ref: {
-          targetComponentId: '#ParentDataContainer',
-          sourceComponentId: '#textQuestionForm',
-        },
-        type: InteractionType.Custom,
-      },
-    ],
-  },
-  {
-    label: 'Multiple choice question',
-    structure: radioWidget,
-    interactions: [
-      {
-        name: 'Submit',
-        sourceEvent: 'onChange',
-        ref: {
-          targetComponentId: '#radioQuestionForm',
-          sourceComponentId: '#radioInput',
-        },
-        type: InteractionType.Custom,
-      },
-      {
-        name: 'Refetch',
-        sourceEvent: 'onActionSuccess',
-        ref: {
-          targetComponentId: '#ParentDataContainer',
-          sourceComponentId: '#radioQuestionForm',
-        },
-        type: InteractionType.Custom,
-      },
-    ],
-  },
-  {
-    label: 'Number question',
-    structure: numberWidget,
-    interactions: [
-      {
-        name: 'Submit',
-        sourceEvent: 'onBlur',
-        ref: {
-          targetComponentId: '#numberQuestionForm',
-          sourceComponentId: '#numberInput',
-        },
-        type: InteractionType.Custom,
-      },
-      {
-        name: 'Refetch',
-        sourceEvent: 'onActionSuccess',
-        ref: {
-          targetComponentId: '#ParentDataContainer',
-          sourceComponentId: '#numberQuestionForm',
-        },
-        type: InteractionType.Custom,
-      },
-    ],
-  },
-  {
-    label: 'Date question',
-    structure: dateWidget,
-    interactions: [
-      {
-        name: 'Submit',
-        sourceEvent: 'onChange',
-        ref: {
-          targetComponentId: '#dateQuestionForm',
-          sourceComponentId: '#dateInput',
-        },
-        type: InteractionType.Custom,
-      },
-      {
-        name: 'Refetch',
-        sourceEvent: 'onActionSuccess',
-        ref: {
-          targetComponentId: '#ParentDataContainer',
-          sourceComponentId: '#dateQuestionForm',
-        },
-        type: InteractionType.Custom,
-      },
-    ],
-  },
-  {
-    label: 'Checkbox question',
-    structure: checkboxWidget,
-    interactions: [
-      {
-        name: 'Submit',
-        sourceEvent: 'onChange',
-        ref: {
-          targetComponentId: '#checkboxQuestionForm',
-          sourceComponentId: '#checkboxInput',
-        },
-        type: InteractionType.Custom,
-      },
-      {
-        name: 'Refetch',
-        sourceEvent: 'onActionSuccess',
-        ref: {
-          targetComponentId: '#ParentDataContainer',
-          sourceComponentId: '#checkboxQuestionForm',
-        },
-        type: InteractionType.Custom,
-      },
-    ],
-  },
-  {
-    label: 'Dropdown question',
-    structure: dropdownWidget,
-    interactions: [
-      {
-        name: 'Submit',
-        sourceEvent: 'onChange',
-        ref: {
-          targetComponentId: '#dropdownQuestionForm',
-          sourceComponentId: '#dropdownInput',
-        },
-        type: InteractionType.Custom,
-      },
-      {
-        name: 'Refetch',
-        sourceEvent: 'onActionSuccess',
-        ref: {
-          targetComponentId: '#ParentDataContainer',
-          sourceComponentId: '#dropdownQuestionForm',
-        },
-        type: InteractionType.Custom,
-      },
-    ],
-  },
-  {
-    label: 'Multiline question',
-    structure: multilineWidget,
-    interactions: [
-      {
-        name: 'Submit',
-        sourceEvent: 'onBlur',
-        ref: {
-          targetComponentId: '#multilineQuestionForm',
-          sourceComponentId: '#textInput',
-        },
-        type: InteractionType.Custom,
-      },
-      {
-        name: 'Refetch',
-        sourceEvent: 'onActionSuccess',
-        ref: {
-          targetComponentId: '#ParentDataContainer',
-          sourceComponentId: '#multilineQuestionForm',
-        },
-        type: InteractionType.Custom,
-      },
-    ],
-  },
 ];
 
 const prefabStructure = [
@@ -879,6 +822,15 @@ const prefabStructure = [
             ref: {
               componentId: '#Tabs',
               optionId: '#TabsSelectedTab',
+            },
+          },
+        }),
+        questionnaireSectionsTitle: linked({
+          label: 'Questionnaire section title',
+          value: {
+            ref: {
+              componentId: '#Tab',
+              optionId: '#TabTitle',
             },
           },
         }),
