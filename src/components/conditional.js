@@ -26,8 +26,13 @@
     const logic = useLogic(displayLogic);
 
     const evalCondition = () => {
-      const leftAsNumber = parseFloat(leftValue);
-      const rightAsNumber = parseFloat(rightValue);
+      const [leftParsed, rightParsed] =
+        (typeof leftValue === 'string' || typeof leftValue === 'number') &&
+        (typeof rightValue === 'string' || typeof rightValue === 'number') &&
+        !isNaN(leftValue) &&
+        !isNaN(rightValue)
+          ? [parseFloat(leftValue), parseFloat(rightValue)]
+          : [leftValue.toString(), rightValue.toString()];
 
       if (!initVisibility && leftValue === '' && rightValue === '') {
         return false;
@@ -41,13 +46,13 @@
         case 'notcontains':
           return leftValue.indexOf(rightValue) < 0;
         case 'gt':
-          return leftAsNumber > rightAsNumber;
+          return leftParsed > rightParsed;
         case 'lt':
-          return leftAsNumber < rightAsNumber;
+          return leftParsed < rightParsed;
         case 'gteq':
-          return leftAsNumber >= rightAsNumber;
+          return leftParsed >= rightParsed;
         case 'lteq':
-          return leftAsNumber <= rightAsNumber;
+          return leftParsed <= rightParsed;
         default:
           return leftValue === rightValue;
       }
@@ -56,7 +61,7 @@
     const checkCondition = evalCondition();
 
     useEffect(() => {
-      setLeftValue(leftValue);
+      setLeftValue(leftText);
       setRightValue(rightText);
     }, [leftText, rightText, setLeftValue, setRightValue]);
 
