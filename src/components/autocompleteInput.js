@@ -672,11 +672,9 @@
             let triggerEventValue;
 
             if (!isListProperty) {
-              triggerEventValue = currentValue
-                ? currentValue[valueProp.name]
-                : '';
+              triggerEventValue = newValue ? newValue[valueProp.name] : '';
             } else if (isListProperty) {
-              triggerEventValue = currentValue || '';
+              triggerEventValue = newValue || '';
             }
             changeContext.current = { modelData: newValue };
             B.triggerEvent(
