@@ -90,6 +90,7 @@
     const initalValue = defaultValue.replace(/\n/g, '');
     const [value, setValue] = useState(initalValue);
     const [debouncedInputValue, setDebouncedInputValue] = useState();
+    const [debouncedCurrentValue, setDebouncedCurrentValue] = useState();
     const [interactionFilter, setInteractionFilter] = useState({});
     const defaultValueEvaluatedRef = useRef(false);
 
@@ -622,6 +623,22 @@
 
     const currentValue = getValue();
 
+    useEffect(() => {
+      if (currentValue !== debouncedCurrentValue) {
+        setTimeout(() => {
+          setDebouncedCurrentValue(currentValue);
+        }, 250);
+      } else {
+        let triggerEventValue = '';
+
+        if (value) {
+          triggerEventValue = !isListProperty ? value[valueProp.name] : value;
+        }
+        changeContext.current = { modelData: value };
+        B.triggerEvent('onChange', triggerEventValue, changeContext.current);
+      }
+    }, [currentValue]);
+
     // In the first render we want to make sure to convert the default value
     if (!inputValue && currentValue) {
       setValue(currentValue);
@@ -668,19 +685,7 @@
           })}
           onChange={(_, newValue) => {
             setValue(newValue || '');
-            let triggerEventValue;
-
-            if (!isListProperty) {
-              triggerEventValue = newValue ? newValue[valueProp.name] : '';
-            } else if (isListProperty) {
-              triggerEventValue = newValue || '';
-            }
-            changeContext.current = { modelData: newValue };
-            B.triggerEvent(
-              'onChange',
-              triggerEventValue,
-              changeContext.current,
-            );
+            setDebouncedCurrentValue(newValue);
           }}
           onInputChange={(event, newValue) => {
             let validation = event ? event.target.validity : null;
@@ -714,7 +719,7 @@
                   type="hidden"
                   key={value[valueProp.name] ? 'hasValue' : 'isEmpty'}
                   name={nameAttribute || name}
-                  value={getHiddenValue(currentValue)}
+                  value={getHiddenValue(debouncedCurrentValue)}
                 />
               )}
               <TextField
