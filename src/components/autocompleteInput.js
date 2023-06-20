@@ -624,31 +624,19 @@
     const currentValue = getValue();
 
     useEffect(() => {
-      let debounceCurrentValue;
-
       if (currentValue !== debouncedCurrentValue) {
-        debounceCurrentValue = setTimeout(() => {
+        setTimeout(() => {
           setDebouncedCurrentValue(currentValue);
         }, 250);
       } else {
-        let triggerEventValue;
+        let triggerEventValue = '';
 
-        if (!isListProperty) {
-          triggerEventValue = debounceCurrentValue
-            ? debounceCurrentValue[valueProp.name]
-            : '';
-        } else {
-          triggerEventValue = debounceCurrentValue || '';
+        if (value) {
+          triggerEventValue = !isListProperty ? value[valueProp.name] : value;
         }
         changeContext.current = { modelData: value };
         B.triggerEvent('onChange', triggerEventValue, changeContext.current);
       }
-
-      return () => {
-        if (!isListProperty) {
-          clearTimeout(debounceCurrentValue);
-        }
-      };
     }, [currentValue]);
 
     // In the first render we want to make sure to convert the default value
