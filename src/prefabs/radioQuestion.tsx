@@ -16,15 +16,6 @@ const interactions: PrefabInteraction[] = [
     },
     type: InteractionType.Custom,
   },
-  {
-    name: 'Refetch',
-    sourceEvent: 'onActionSuccess',
-    ref: {
-      targetComponentId: '#ParentDataContainer',
-      sourceComponentId: '#radioQuestionForm',
-    },
-    type: InteractionType.Custom,
-  },
 ];
 const attributes = {
   category: 'WIDGETS',
