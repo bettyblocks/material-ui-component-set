@@ -580,9 +580,9 @@
     /*
      * Convert `value` state into something the `value` prop of the `Autocomplete` component will accept with the right settings
      */
-    const getValue = (valueInput = value) => {
+    const getValue = () => {
       if (isListProperty) {
-        return valueInput;
+        return value;
       }
 
       if (currentOptions.length === 0) {
@@ -590,13 +590,13 @@
       }
 
       return currentOptions.find((option) => {
-        if (typeof valueInput === 'string') {
+        if (typeof value === 'string') {
           return valuePropIsNumber
-            ? option[valueProp.name] === parseFloat(valueInput, 10)
-            : option[valueProp.name] === valueInput;
+            ? option[valueProp.name] === parseFloat(value, 10)
+            : option[valueProp.name] === value;
         }
 
-        return option[valueProp.name] === valueInput[valueProp.name];
+        return option[valueProp.name] === value[valueProp.name];
       });
     };
 
