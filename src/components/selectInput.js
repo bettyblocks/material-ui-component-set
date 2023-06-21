@@ -275,8 +275,14 @@
         }, option);
       } else {
         const modelReference = B.getModel(referenceModelId || modelId);
-        if (modelReference.labelPropertyId)
-          optionLabel = B.getProperty(modelReference.labelPropertyId).name;
+        if (modelReference.labelPropertyId) {
+          const preDefinedLabelProperty = B.getProperty(
+            modelReference.labelPropertyId,
+          ).name;
+          optionLabel = option[preDefinedLabelProperty];
+        } else {
+          optionLabel = option.id;
+        }
       }
 
       return optionLabel === '' || optionLabel === null
