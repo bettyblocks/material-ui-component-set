@@ -268,10 +268,7 @@
         optionLabel = B.getProperty(labelProperty).name;
       } else if (labelPropertyPath.length > 1) {
         optionLabel = labelPropertyPath.reduce((acc, propertyId) => {
-          if (acc !== null) {
-            return acc[getProperty(propertyId).name];
-          }
-          return null;
+          return acc[getProperty(propertyId).name] || null;
         }, option);
       } else {
         const modelReference = B.getModel(referenceModelId || modelId);
