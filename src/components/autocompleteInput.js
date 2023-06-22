@@ -648,7 +648,9 @@
 
     const renderLabel = (option) => {
       let optionLabel = '';
-      if (labelPropertyPath.length > 0 && labelPropertyPath[0] !== '') {
+      const emptyPropertyPath =
+        labelPropertyPath.length > 0 && labelPropertyPath[0] !== '';
+      if (emptyPropertyPath) {
         optionLabel = labelPropertyPath.reduce((acc, propertyId) => {
           return acc[getProperty(propertyId).name] || null;
         }, option);
