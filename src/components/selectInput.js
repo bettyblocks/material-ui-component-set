@@ -268,6 +268,9 @@
         labelPropertyPath.length > 0 && labelPropertyPath[0] !== '';
       if (emptyPropertyPath) {
         optionLabel = labelPropertyPath.reduce((acc, propertyId) => {
+          if (!acc) {
+            return null;
+          }
           return acc[getProperty(propertyId).name] || null;
         }, option);
       } else {
