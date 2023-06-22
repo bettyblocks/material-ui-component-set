@@ -1,3 +1,11 @@
+## [2.146.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.1...v2.146.2) (2023-06-21)
+
+
+### Bug Fixes
+
+* add debouncer for currentValue ([4a0a9e3](https://github.com/bettyblocks/material-ui-component-set/commit/4a0a9e3c4518e67a7216eeb4b3f2bd17399a53ff))
+* autcomplete is using old value ([9c41f7e](https://github.com/bettyblocks/material-ui-component-set/commit/9c41f7e73af9381bead157d5f3ae92099b7a5217))
+
 ## [2.146.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.0...v2.146.1) (2023-06-19)
 
 
