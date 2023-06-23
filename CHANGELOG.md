@@ -1,3 +1,10 @@
+## [2.146.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.4...v2.146.5) (2023-06-23)
+
+
+### Bug Fixes
+
+* clear value trigger onchange autocomplete ([4fec7b4](https://github.com/bettyblocks/material-ui-component-set/commit/4fec7b4597b640b2f33d1e59f5469d1393c0ba5f))
+
 ## [2.146.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.3...v2.146.4) (2023-06-23)
 
 
