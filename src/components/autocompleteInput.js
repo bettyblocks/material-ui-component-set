@@ -663,16 +663,6 @@
       }
     }, [currentValue]);
 
-    // In the first render we want to make sure to convert the default value
-    if (!inputValue && currentValue) {
-      setValue(currentValue);
-      if (isListProperty) {
-        setInputValue(currentValue);
-      } else {
-        setInputValue(currentValue[searchProp.name].toString());
-      }
-    }
-
     const renderLabel = (option) => {
       let optionLabel = '';
       const emptyPropertyPath =
