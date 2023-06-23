@@ -1,3 +1,12 @@
+## [2.146.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.3...v2.146.4) (2023-06-23)
+
+
+### Bug Fixes
+
+* option label with relation data ([d9df8ae](https://github.com/bettyblocks/material-ui-component-set/commit/d9df8aec50d0bc75e6741a7530d5a7f1ea61871f))
+* remove duplicated code ([c04f4f0](https://github.com/bettyblocks/material-ui-component-set/commit/c04f4f0f993e1cd82878361e0b123f447f5823e6))
+* return fallback if acc is null ([8f01963](https://github.com/bettyblocks/material-ui-component-set/commit/8f01963529d184d5ff31638840e19f5bd60ce278))
+
 ## [2.146.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.2...v2.146.3) (2023-06-23)
 
 
