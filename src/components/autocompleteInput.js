@@ -613,15 +613,17 @@
         return null;
       }
 
-      return currentOptions.find((option) => {
-        if (typeof value === 'string') {
-          return valuePropIsNumber
-            ? option[valueProp.name] === parseFloat(value, 10)
-            : option[valueProp.name] === value;
-        }
+      return (
+        currentOptions.find((option) => {
+          if (typeof value === 'string') {
+            return valuePropIsNumber
+              ? option[valueProp.name] === parseFloat(value, 10)
+              : option[valueProp.name] === value;
+          }
 
-        return option[valueProp.name] === value[valueProp.name];
-      });
+          return option[valueProp.name] === value[valueProp.name];
+        }) || null
+      );
     };
 
     /*
