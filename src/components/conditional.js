@@ -17,6 +17,14 @@
     const isDev = env === 'dev';
     const isPristine = isDev && children.length === 0;
     const isSingleRule = type === 'singleRule';
+
+    const canBeNumber = (value) => {
+      return (
+        (typeof value === 'string' || typeof value === 'number') &&
+        !isNaN(value)
+      );
+    };
+
     const mounted = useRef(false);
     const leftText = useText(left);
     const rightText = useText(right);
@@ -27,10 +35,7 @@
 
     const evalCondition = () => {
       const [leftParsed, rightParsed] =
-        (typeof leftValue === 'string' || typeof leftValue === 'number') &&
-        (typeof rightValue === 'string' || typeof rightValue === 'number') &&
-        !isNaN(leftValue) &&
-        !isNaN(rightValue)
+        canBeNumber(leftValue) && canBeNumber(rightValue)
           ? [parseFloat(leftValue), parseFloat(rightValue)]
           : [leftValue.toString(), rightValue.toString()];
 
