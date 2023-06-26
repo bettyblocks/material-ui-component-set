@@ -8,7 +8,17 @@ const attr = {
   keywords: ['Content', 'text', 'type', 'typography', 'body', 'paragraph'],
 };
 
-const options = { ...textOptions };
-options.type = font('Text style', { value: ['Body1'] });
-
-export default prefab('Text', attr, undefined, [Text({ options }, [])]);
+export default prefab('Text', attr, undefined, [
+  Text(
+    {
+      options: {
+        ...textOptions,
+        type: font('Text style', {
+          ...textOptions.type('type'),
+          value: ['Body1'],
+        }),
+      },
+    },
+    [],
+  ),
+]);

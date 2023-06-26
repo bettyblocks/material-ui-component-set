@@ -117,26 +117,8 @@ export default makePrefab('List with data', attrs, beforeCreate, [
         options: {
           ...dataListOptions,
           type: option('CUSTOM', {
-            label: 'Type',
+            ...dataListOptions.type('type'),
             value: 'inline',
-            configuration: {
-              as: 'BUTTONGROUP',
-              dataType: 'string',
-              allowedInput: [
-                {
-                  name: 'List',
-                  value: 'list',
-                },
-                {
-                  name: 'Grid',
-                  value: 'grid',
-                },
-                {
-                  name: 'Inline',
-                  value: 'inline',
-                },
-              ],
-            },
           }),
         },
       },

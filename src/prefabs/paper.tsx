@@ -14,19 +14,8 @@ export default prefab('Paper', attr, undefined, [
         options: {
           ...rowOptions,
           maxRowWidth: option('CUSTOM', {
-            label: 'Width',
+            ...rowOptions.maxRowWidth('maxRowWidth'),
             value: 'Full',
-            configuration: {
-              as: 'BUTTONGROUP',
-              dataType: 'string',
-              allowedInput: [
-                { name: 'S', value: 'S' },
-                { name: 'M', value: 'M' },
-                { name: 'L', value: 'L' },
-                { name: 'XL', value: 'XL' },
-                { name: 'Full', value: 'Full' },
-              ],
-            },
           }),
         },
       },

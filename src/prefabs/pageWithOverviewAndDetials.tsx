@@ -1389,7 +1389,7 @@ const beforeCreate = ({
     Button,
     PartialSelector,
   },
-  helpers: { useModelQuery, setOption, cloneStructure },
+  helpers: { useModelQuery, setOption, cloneStructure, createBlacklist },
 }: BeforeCreateArgs) => {
   const [modelId, setModelId] = React.useState('');
   const [properties, setProperties] = React.useState<Properties[]>([]);
@@ -1448,6 +1448,45 @@ const beforeCreate = ({
     }
     return returnObject;
   };
+
+  const disabledKinds = createBlacklist([
+    'BELONGS_TO',
+    'BOOLEAN',
+    'BOOLEAN_EXPRESSION',
+    'DATE',
+    'DATE_EXPRESSION',
+    'DATE_TIME',
+    'DATE_TIME_EXPRESSION',
+    'DECIMAL',
+    'DECIMAL_EXPRESSION',
+    'EMAIL',
+    'EMAIL_ADDRESS',
+    'ENUM',
+    'FILE',
+    'FLOAT',
+    'GOOGLE_DOCUMENT',
+    'HAS_ONE',
+    'IBAN',
+    'IMAGE',
+    'INTEGER',
+    'INTEGER_EXPRESSION',
+    'LIST',
+    'MINUTES',
+    'MINUTES_EXPRESSION',
+    'PERIODIC_COUNT',
+    'PHONE_NUMBER',
+    'PRICE',
+    'PRICE_EXPRESSION',
+    'RICH_TEXT',
+    'SERIAL',
+    'STRING',
+    'STRING_EXPRESSION',
+    'TEXT',
+    'TEXT_EXPRESSION',
+    'TIME',
+    'URL',
+    'ZIPCODE',
+  ]);
 
   const stepper = {
     setStep: (step: number) => {
@@ -1535,17 +1574,7 @@ const beforeCreate = ({
               <PropertiesSelector
                 modelId={modelId}
                 value={properties}
-                disabledKinds={[
-                  'HAS_AND_BELONGS_TO_MANY',
-                  'HAS_MANY',
-                  'MULTI_FILE',
-                  'AUTO_INCREMENT',
-                  'COUNT',
-                  'MULTI_IMAGE',
-                  'PDF',
-                  'SIGNED_PDF',
-                  'SUM',
-                ]}
+                disabledKinds={disabledKinds}
                 onChange={(value: Properties[]) => {
                   setPropertiesValidation(!value.length);
                   setProperties(value);

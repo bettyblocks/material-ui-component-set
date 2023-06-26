@@ -1,10 +1,4 @@
-import {
-  font,
-  Icon,
-  prefab,
-  toggle,
-  variable,
-} from '@betty-blocks/component-sdk';
+import { font, Icon, prefab, variable } from '@betty-blocks/component-sdk';
 import {
   Card,
   CardActions,
@@ -32,7 +26,10 @@ export default prefab('Card', attr, undefined, [
         {
           options: {
             ...textOptions,
-            type: font('Text style', { value: ['Title5'] }),
+            type: font('Text style', {
+              ...textOptions.type('type'),
+              value: ['Title5'],
+            }),
           },
         },
         [],
@@ -41,9 +38,9 @@ export default prefab('Card', attr, undefined, [
         {
           options: {
             ...textOptions,
-            type: font('Text style', { value: ['Body2'] }),
-            useInnerHtml: toggle('Display Rich Text', {
-              value: false,
+            type: font('Text style', {
+              ...textOptions.type('type'),
+              value: ['Body2'],
             }),
           },
         },
@@ -56,6 +53,7 @@ export default prefab('Card', attr, undefined, [
           options: {
             ...openPageButtonOptions,
             buttonText: variable('Button text', {
+              ...openPageButtonOptions.buttonText('buttonText'),
               value: ['Button'],
             }),
           },
