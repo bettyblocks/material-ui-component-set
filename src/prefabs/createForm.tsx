@@ -23,33 +23,11 @@ const beforeCreate = ({
   save,
   helpers,
 }: any) => {
-  const disabledKinds = [
-    'AUTO_INCREMENT',
-    'BOOLEAN_EXPRESSION',
-    'COUNT',
-    'DATE_EXPRESSION',
-    'DATE_TIME_EXPRESSION',
-    'DECIMAL_EXPRESSION',
-    'INTEGER_EXPRESSION',
-    'LOGIN_TOKEN',
-    'MINUTES_EXPRESSION',
-    'MULTI_FILE',
-    'MULTI_IMAGE',
-    'PDF',
-    'PRICE_EXPRESSION',
-    'SERIAL',
-    'SIGNED_PDF',
-    'STRING_EXPRESSION',
-    'SUM',
-    'TEXT_EXPRESSION',
-    'ZIPCODE',
-    'OBJECT',
-  ];
-
   const {
     BettyPrefabs,
     PropertyKind,
     cloneStructure,
+    createBlacklist,
     createUuid,
     makeBettyInput,
     prepareAction,
@@ -58,6 +36,37 @@ const beforeCreate = ({
     setOption,
     useModelQuery,
   } = helpers;
+
+  const disabledKinds = createBlacklist([
+    'BELONGS_TO',
+    'BOOLEAN',
+    'DATE',
+    'DATE_TIME',
+    'DECIMAL',
+    'EMAIL',
+    'EMAIL_ADDRESS',
+    'ENUM',
+    'FILE',
+    'FLOAT',
+    'GOOGLE_DOCUMENT',
+    'HAS_AND_BELONGS_TO_MANY',
+    'HAS_MANY',
+    'HAS_ONE',
+    'IBAN',
+    'IMAGE',
+    'INTEGER',
+    'LIST',
+    'MINUTES',
+    'PASSWORD',
+    'PERIODIC_COUNT',
+    'PHONE_NUMBER',
+    'PRICE',
+    'RICH_TEXT',
+    'STRING',
+    'TEXT',
+    'TIME',
+    'URL',
+  ]);
 
   const [modelId, setModelId] = React.useState('');
   const [model, setModel] = React.useState(null);

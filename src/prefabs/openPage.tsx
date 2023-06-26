@@ -17,6 +17,7 @@ const beforeCreate = ({
   save,
   close,
   components: { EndpointSelector, Header, Content, Field, Footer, Text },
+  helpers: { setOption },
 }: BeforeCreateArgs) => {
   const [endpoint, setEndpoint] = React.useState<any>({
     id: '',
@@ -47,51 +48,19 @@ const beforeCreate = ({
       throw new Error(errorMessage);
     }
     if (isInternalEndpoint) {
-      structure.options[4] = {
+      setOption(structure, 'linkTo', (option) => ({
+        ...option,
         value: endpoint,
-        label: 'Page',
-        key: 'linkTo',
-        type: 'ENDPOINT',
-        configuration: {
-          condition: {
-            type: 'SHOW',
-            option: 'linkType',
-            comparator: 'EQ',
-            value: 'internal',
-          },
-        },
-      };
+      }));
     } else {
-      structure.options[2] = {
-        type: 'CUSTOM',
-        label: 'Link to',
-        key: 'linkType',
+      setOption(structure, 'linkType', (option) => ({
+        ...option,
         value: 'external',
-        configuration: {
-          as: 'BUTTONGROUP',
-          dataType: 'string',
-          allowedInput: [
-            { name: 'Internal page', value: 'internal' },
-            { name: 'External page', value: 'external' },
-          ],
-        },
-      };
-
-      structure.options[5] = {
+      }));
+      setOption(structure, 'linkToExternal', (option) => ({
+        ...option,
         value: [endpoint],
-        label: 'URL',
-        key: 'linkToExternal',
-        type: 'VARIABLE',
-        configuration: {
-          placeholder: 'Starts with https:// or http://',
-          condition: {
-            type: 'SHOW',
-            option: 'linkType',
-            comparator: 'EQ',
-            value: 'external',
-          },
-        },
-      };
+      }));
     }
     save(newPrefab);
   };
