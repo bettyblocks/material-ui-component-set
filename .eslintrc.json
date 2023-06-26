@@ -71,6 +71,7 @@
     "useEffect": "readonly",
     "usePageState": "readonly",
     "useLocation": "readonly",
+    "usePageState": "readonly",
     "useReducer": "readonly",
     "useRef": "readonly",
     "useRouter": "readonly",
