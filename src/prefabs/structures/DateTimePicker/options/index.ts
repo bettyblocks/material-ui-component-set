@@ -26,12 +26,16 @@ export const options = {
     configuration: {
       allowedKinds: ['DATE'],
       disabled: true,
+      allowFormatting: false,
       condition: hideIf('property', 'EQ', ''),
     },
   }),
 
   label: variable('Label', { value: [''] }),
-  value: variable('Value', { value: [''] }),
+  value: variable('Value', {
+    value: [''],
+    configuration: { allowFormatting: false },
+  }),
 
   type: text('Type', {
     value: 'datetime',
