@@ -14,6 +14,7 @@ export default prefab('Drawer Sidebar', attr, undefined, [
         options: {
           ...listItemOptions,
           secondaryText: variable('Secondary text', {
+            ...listItemOptions.secondaryText('secondaryText'),
             value: ['Secondary text'],
           }),
         },

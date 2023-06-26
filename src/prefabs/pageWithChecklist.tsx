@@ -1063,6 +1063,7 @@ const beforeCreate = ({
     getPageAuthenticationProfileId,
     setOption,
     makeBettyUpdateInput,
+    createBlacklist,
     createUuid,
     BettyPrefabs,
   },
@@ -1136,6 +1137,8 @@ const beforeCreate = ({
     }
     return returnObject;
   };
+
+  const disabledKinds = createBlacklist(['BELONGS_TO', 'BOOLEAN', 'HAS_ONE']);
 
   const stepper = {
     setStep: (step: number) => {
@@ -1273,50 +1276,7 @@ const beforeCreate = ({
                         </TextComp>
                       )
                     }
-                    disabledKinds={[
-                      'AUTO_INCREMENT',
-                      'BOOLEAN_EXPRESSION',
-                      'COUNT',
-                      'DATE',
-                      'DATE_EXPRESSION',
-                      'DATE_TIME',
-                      'DATE_TIME_EXPRESSION',
-                      'DECIMAL',
-                      'DECIMAL_EXPRESSION',
-                      'EMAIL',
-                      'EMAIL_ADDRESS',
-                      'ENUM',
-                      'FILE',
-                      'FLOAT',
-                      'HAS_AND_BELONGS_TO_MANY',
-                      'HAS_MANY',
-                      'IBAN',
-                      'IMAGE',
-                      'INTEGER',
-                      'INTEGER_EXPRESSION',
-                      'LIST',
-                      'MINUTES',
-                      'MINUTES_EXPRESSION',
-                      'MULTI_FILE',
-                      'MULTI_IMAGE',
-                      'PASSWORD',
-                      'PDF',
-                      'PERIODIC_COUNT',
-                      'PHONE_NUMBER',
-                      'PRICE',
-                      'PRICE_EXPRESSION',
-                      'RICH_TEXT',
-                      'SERIAL',
-                      'SIGNED_PDF',
-                      'STRING',
-                      'STRING_EXPRESSION',
-                      'SUM',
-                      'TEXT',
-                      'TEXT_EXPRESSION',
-                      'TIME',
-                      'URL',
-                      'ZIPCODE',
-                    ]}
+                    disabledKinds={disabledKinds}
                   />
                 </Field>
               </>

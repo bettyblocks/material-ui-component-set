@@ -255,6 +255,41 @@
       }
     }
 
+    const idOrPathLabel =
+      typeof labelProperty.id !== 'undefined'
+        ? labelProperty.id
+        : labelProperty;
+    const labelPropertyPath =
+      typeof idOrPathLabel === 'string' ? [idOrPathLabel] : idOrPathLabel;
+
+    const renderLabel = (option) => {
+      let optionLabel = '';
+      const emptyPropertyPath =
+        labelPropertyPath.length > 0 && labelPropertyPath[0] !== '';
+      if (emptyPropertyPath) {
+        optionLabel = labelPropertyPath.reduce((acc, propertyId) => {
+          if (!acc) {
+            return null;
+          }
+          return acc[getProperty(propertyId).name] || null;
+        }, option);
+      } else {
+        const modelReference = B.getModel(referenceModelId || modelId);
+        if (modelReference.labelPropertyId) {
+          const preDefinedLabelProperty = B.getProperty(
+            modelReference.labelPropertyId,
+          ).name;
+          optionLabel = option[preDefinedLabelProperty];
+        } else {
+          optionLabel = option.id;
+        }
+      }
+
+      return optionLabel === '' || optionLabel === null
+        ? '-- empty --'
+        : optionLabel.toString();
+    };
+
     const renderOptions = () => {
       if (isListProperty) {
         return values.map(({ value }) => (
@@ -277,22 +312,12 @@
       }
 
       if (!loading && !isDev) {
-        let labelKey = 'id';
-        if (labelProperty) {
-          labelKey = B.getProperty(labelProperty).name;
-        } else {
-          const modelReference = B.getModel(referenceModelId || modelId);
-          if (modelReference.labelPropertyId)
-            labelKey = B.getProperty(modelReference.labelPropertyId).name;
-        }
-
         const rows = data ? data.results : [];
 
         return rows.map((row) => {
-          const itemLabel = row[labelKey];
           return (
             <MenuItem key={row.id} value={row.id}>
-              {itemLabel}
+              {renderLabel(row)}
             </MenuItem>
           );
         });

@@ -12,7 +12,10 @@ export default prefab('Navigation Bar', attr, undefined, [
     OpenPageButton({
       options: {
         ...openPageButtonOptions,
-        buttonText: variable('Button text', { value: ['Menu 1'] }),
+        buttonText: variable('Button text', {
+          ...openPageButtonOptions.buttonText('buttonText'),
+          value: ['Menu 1'],
+        }),
       },
       style: {
         overwrite: {
@@ -25,7 +28,10 @@ export default prefab('Navigation Bar', attr, undefined, [
     OpenPageButton({
       options: {
         ...openPageButtonOptions,
-        buttonText: variable('Button text', { value: ['Menu 2'] }),
+        buttonText: variable('Button text', {
+          ...openPageButtonOptions.buttonText('buttonText'),
+          value: ['Menu 2'],
+        }),
       },
       style: {
         overwrite: {

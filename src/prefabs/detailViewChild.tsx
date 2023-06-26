@@ -13,6 +13,7 @@ export default prefab('Detail view child', attrs, undefined, [
       options: {
         ...columnOptions,
         backgroundColor: color('Background color', {
+          ...columnOptions.backgroundColor('backgroundColor'),
           value: ThemeColor.WHITE,
         }),
       },

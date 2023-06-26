@@ -3,7 +3,6 @@ import {
   Icon,
   variable,
   option,
-  showIf,
   icon,
 } from '@betty-blocks/component-sdk';
 import { List, ListItem, listItemOptions } from './structures';
@@ -16,28 +15,21 @@ const attr = {
 
 const customListItemOptions = (iconValue: string) => ({
   ...listItemOptions,
-  primaryText: variable('Primary text', { value: ['First List Item'] }),
+  primaryText: variable('Primary text', {
+    ...listItemOptions.primaryText('primaryText'),
+    value: ['First List Item'],
+  }),
   secondaryText: variable('Secondary text', {
+    ...listItemOptions.secondaryText('secondaryText'),
     value: ['Secondary text'],
   }),
   avatarOrIcon: option('CUSTOM', {
-    label: 'Visual',
+    ...listItemOptions.avatarOrIcon('avatarOrIcon'),
     value: 'icon',
-    configuration: {
-      as: 'BUTTONGROUP',
-      dataType: 'string',
-      allowedInput: [
-        { name: 'None', value: 'none' },
-        { name: 'Icon', value: 'icon' },
-        { name: 'Avatar', value: 'avatar' },
-      ],
-    },
   }),
   icon: icon('Icon', {
+    ...listItemOptions.icon('icon'),
     value: iconValue,
-    configuration: {
-      condition: showIf('avatarOrIcon', 'EQ', 'icon'),
-    },
   }),
 });
 

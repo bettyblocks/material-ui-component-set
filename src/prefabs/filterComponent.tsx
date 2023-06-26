@@ -174,6 +174,7 @@ export default prefab('Filter', attributes, beforeCreate, [
       options: {
         ...boxOptions,
         innerSpacing: sizes('Inner space', {
+          ...boxOptions.innerSpacing('innerSpacing'),
           value: ['0rem', '0rem', 'M', '0rem'],
         }),
       },
@@ -194,13 +195,12 @@ export default prefab('Filter', attributes, beforeCreate, [
                 ['Justified', 'space-between'],
               ],
               {
+                ...boxOptions.alignment('alignment'),
                 value: 'space-between',
-                configuration: {
-                  dataType: 'string',
-                },
               },
             ),
             innerSpacing: sizes('Inner space', {
+              ...boxOptions.innerSpacing('innerSpacing'),
               value: ['0rem', '0rem', '0rem', '0rem'],
             }),
           },
@@ -213,6 +213,7 @@ export default prefab('Filter', attributes, beforeCreate, [
               options: {
                 ...buttonOptions,
                 buttonText: variable('Button text', {
+                  ...buttonOptions.buttonText('buttonText'),
                   value: ['Add filter group'],
                 }),
               },
@@ -224,6 +225,7 @@ export default prefab('Filter', attributes, beforeCreate, [
               options: {
                 ...boxOptions,
                 innerSpacing: sizes('Inner space', {
+                  ...boxOptions.innerSpacing('innerSpacing'),
                   value: ['0rem', '0rem', '0rem', '0rem'],
                 }),
               },
@@ -237,9 +239,11 @@ export default prefab('Filter', attributes, beforeCreate, [
                   options: {
                     ...buttonOptions,
                     buttonText: variable('Button text', {
+                      ...buttonOptions.buttonText('buttonText'),
                       value: ['Clear filter'],
                     }),
                     outerSpacing: sizes('Outer space', {
+                      ...buttonOptions.outerSpacing('outerSpacing'),
                       value: ['0rem', 'M', '0rem', '0rem'],
                     }),
                   },
@@ -252,6 +256,7 @@ export default prefab('Filter', attributes, beforeCreate, [
                   options: {
                     ...buttonOptions,
                     buttonText: variable('Button text', {
+                      ...buttonOptions.buttonText('buttonText'),
                       value: ['Apply filter'],
                     }),
                   },
