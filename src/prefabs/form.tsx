@@ -4,9 +4,9 @@ import {
   Icon,
   InteractionType,
   PrefabInteraction,
+  ActionPermissions,
 } from '@betty-blocks/component-sdk';
 import { Form } from './structures/ActionJSForm';
-import { PermissionType } from './types/types';
 
 const beforeCreate = ({
   close,
@@ -71,7 +71,6 @@ const beforeCreate = ({
   const [properties, setProperties] = React.useState([]);
   const [modelBased, setmodelBased] = React.useState(true);
   const [actionName, setActionName] = React.useState('');
-  const permissions: PermissionType = 'inherit';
   const pageAuthenticationProfileId = getPageAuthenticationProfileId();
   const pageName = getPageName();
 
@@ -208,7 +207,7 @@ const beforeCreate = ({
             modelBased ? 'empty' : 'custom',
             null,
             actionName,
-            permissions,
+            ActionPermissions.INHERIT,
             pageAuthenticationProfileId,
             pageName,
           );

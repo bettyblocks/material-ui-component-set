@@ -27,6 +27,8 @@ import {
   filter,
   childSelector,
   buttongroup,
+  ActionPermissions,
+  ActionTemplates,
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
@@ -65,7 +67,6 @@ import {
   ModelProps,
   ModelQuery,
   Properties,
-  PermissionType,
 } from './types';
 
 const interactions: PrefabInteraction[] = [
@@ -404,8 +405,6 @@ const beforeCreate = ({
   const [stepNumber, setStepNumber] = React.useState(1);
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
-
-  const permissions: PermissionType = 'inherit';
 
   const enrichVarObj = (obj: any, authProp = false) => {
     const returnObj = obj;
@@ -833,10 +832,10 @@ const beforeCreate = ({
           passwordFormId,
           idProperty,
           [authPassword],
-          'update',
+          ActionTemplates.UPDATE,
           undefined,
           'Profile page - Update password',
-          permissions,
+          ActionPermissions.INHERIT,
           authProfileId,
         );
 
@@ -945,10 +944,10 @@ const beforeCreate = ({
           updateFormId,
           idProperty,
           properties,
-          'update',
+          ActionTemplates.UPDATE,
           undefined,
           'Profile page - Update details',
-          permissions,
+          ActionPermissions.INHERIT,
           authProfileId,
         );
         setOption(
@@ -1074,10 +1073,10 @@ const beforeCreate = ({
             imageUpdateFormId,
             idProperty,
             [...transformProp(profilePictureProperty)],
-            'update',
+            ActionTemplates.UPDATE,
             undefined,
             'Profile page - Update profile image',
-            permissions,
+            ActionPermissions.INHERIT,
             authProfileId,
           );
           Object.values(imageObjectResult.variables).forEach(
