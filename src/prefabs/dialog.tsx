@@ -123,9 +123,6 @@ export default prefab('Dialog', attr, undefined, [
                         content: variable('Content', {
                           ...textOptions.content('content'),
                           value: ['Dialog'],
-                          configuration: {
-                            as: 'MULTILINE',
-                          },
                         }),
                         type: font('Type', {
                           ...textOptions.type('type'),

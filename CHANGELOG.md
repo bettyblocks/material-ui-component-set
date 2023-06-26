@@ -1,3 +1,18 @@
+## [2.146.7](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.6...v2.146.7) (2023-06-26)
+
+
+### Bug Fixes
+
+* update component prefabs w/ spreading options ([335d4fa](https://github.com/bettyblocks/material-ui-component-set/commit/335d4fa0a37c8e8de3925c1a3e7f5301baa02025))
+
+## [2.146.6](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.5...v2.146.6) (2023-06-26)
+
+
+### Bug Fixes
+
+* allowed relations in update form ([93f4074](https://github.com/bettyblocks/material-ui-component-set/commit/93f4074e22e6ddb2a6d427fda67226c7bbb75e7d))
+* replaced hardcoded disabled kinds ([92410fe](https://github.com/bettyblocks/material-ui-component-set/commit/92410fe436fb61310955fe09d38750ab7d42e1c2))
+
 ## [2.146.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.4...v2.146.5) (2023-06-23)
 
 
