@@ -1,3 +1,10 @@
+## [2.146.7](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.6...v2.146.7) (2023-06-26)
+
+
+### Bug Fixes
+
+* update component prefabs w/ spreading options ([335d4fa](https://github.com/bettyblocks/material-ui-component-set/commit/335d4fa0a37c8e8de3925c1a3e7f5301baa02025))
+
 ## [2.146.6](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.5...v2.146.6) (2023-06-26)
 
 
