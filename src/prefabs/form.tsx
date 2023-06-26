@@ -49,6 +49,7 @@ const beforeCreate = ({
     'DATE_TIME',
     'DECIMAL',
     'EMAIL_ADDRESS',
+    'RICH_TEXT',
     'ENUM',
     'FILE',
     'FLOAT',
