@@ -1,3 +1,91 @@
+## [2.146.6](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.5...v2.146.6) (2023-06-26)
+
+
+### Bug Fixes
+
+* allowed relations in update form ([93f4074](https://github.com/bettyblocks/material-ui-component-set/commit/93f4074e22e6ddb2a6d427fda67226c7bbb75e7d))
+* replaced hardcoded disabled kinds ([92410fe](https://github.com/bettyblocks/material-ui-component-set/commit/92410fe436fb61310955fe09d38750ab7d42e1c2))
+
+## [2.146.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.4...v2.146.5) (2023-06-23)
+
+
+### Bug Fixes
+
+* clear value trigger onchange autocomplete ([4fec7b4](https://github.com/bettyblocks/material-ui-component-set/commit/4fec7b4597b640b2f33d1e59f5469d1393c0ba5f))
+
+## [2.146.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.3...v2.146.4) (2023-06-23)
+
+
+### Bug Fixes
+
+* option label with relation data ([d9df8ae](https://github.com/bettyblocks/material-ui-component-set/commit/d9df8aec50d0bc75e6741a7530d5a7f1ea61871f))
+* remove duplicated code ([c04f4f0](https://github.com/bettyblocks/material-ui-component-set/commit/c04f4f0f993e1cd82878361e0b123f447f5823e6))
+* return fallback if acc is null ([8f01963](https://github.com/bettyblocks/material-ui-component-set/commit/8f01963529d184d5ff31638840e19f5bd60ce278))
+
+## [2.146.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.2...v2.146.3) (2023-06-23)
+
+
+### Bug Fixes
+
+* option label relation in select ([90d18d5](https://github.com/bettyblocks/material-ui-component-set/commit/90d18d542b0fd21fbf4716a586137eb17538da29))
+* return fallback if acc is null ([8046c24](https://github.com/bettyblocks/material-ui-component-set/commit/8046c249600cce0cb6dc430088d38f262f2d627b))
+
+## [2.146.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.1...v2.146.2) (2023-06-21)
+
+
+### Bug Fixes
+
+* add debouncer for currentValue ([4a0a9e3](https://github.com/bettyblocks/material-ui-component-set/commit/4a0a9e3c4518e67a7216eeb4b3f2bd17399a53ff))
+* autcomplete is using old value ([9c41f7e](https://github.com/bettyblocks/material-ui-component-set/commit/9c41f7e73af9381bead157d5f3ae92099b7a5217))
+
+## [2.146.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.0...v2.146.1) (2023-06-19)
+
+
+### Bug Fixes
+
+* send correct format setcurrentrecord ([2eddd49](https://github.com/bettyblocks/material-ui-component-set/commit/2eddd4994251e1848ad9b9db3bf47c325f9837b8))
+
+# [2.146.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.145.1...v2.146.0) (2023-06-16)
+
+
+### Bug Fixes
+
+* add close icon to bundle ([5bedfe6](https://github.com/bettyblocks/material-ui-component-set/commit/5bedfe66c0fd05561ebf9835b1429b9e22676d55))
+
+
+### Features
+
+* add uwm zone to production ([a0e4d97](https://github.com/bettyblocks/material-ui-component-set/commit/a0e4d97a982e6ce1a5cd232993a4393db35eca97))
+
+## [2.145.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.145.0...v2.145.1) (2023-06-13)
+
+
+### Bug Fixes
+
+* required setting working for relation and object ([e42c245](https://github.com/bettyblocks/material-ui-component-set/commit/e42c24592e5170ddb00c264bf1e5be4db6f253ac))
+* stop infinite rerender in autocomplete & fix required in radioinput ([9121f4f](https://github.com/bettyblocks/material-ui-component-set/commit/9121f4f2bd6562ece8493c6fe354d82885bef869))
+
+# [2.145.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.144.5...v2.145.0) (2023-06-12)
+
+
+### Features
+
+* add dev:fast command ([6b539b4](https://github.com/bettyblocks/material-ui-component-set/commit/6b539b45e4896fbd31dc377e2e379a5340c45661))
+
+## [2.144.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.144.4...v2.144.5) (2023-06-07)
+
+
+### Bug Fixes
+
+* default selected date can't be parsed ([2d3792e](https://github.com/bettyblocks/material-ui-component-set/commit/2d3792e3f190cdc2fc759506a1d3065879da5ee6))
+
+## [2.144.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.144.3...v2.144.4) (2023-06-07)
+
+
+### Bug Fixes
+
+* file upload now shows saved file ([f7e73cd](https://github.com/bettyblocks/material-ui-component-set/commit/f7e73cd8cbb47fc4669244d433056c2cb76b3e3d))
+
 ## [2.144.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.144.2...v2.144.3) (2023-06-06)
 
 
