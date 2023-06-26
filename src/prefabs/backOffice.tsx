@@ -5342,6 +5342,7 @@ const beforeCreate = ({
     getPageAuthenticationProfileId,
     cloneStructure,
     setOption,
+    createBlacklist,
     createUuid,
     makeBettyInput,
     makeBettyUpdateInput,
@@ -5631,6 +5632,76 @@ const beforeCreate = ({
     },
   });
 
+  const searchPropDisabledKinds = createBlacklist([
+    'BOOLEAN',
+    'DECIMAL',
+    'EMAIL',
+    'EMAIL_ADDRESS',
+    'ENUM',
+    'FLOAT',
+    'HAS_ONE',
+    'IBAN',
+    'INTEGER',
+    'LIST',
+    'PERIODIC_COUNT',
+    'PHONE_NUMBER',
+    'PRICE',
+    'STRING',
+    'TEXT',
+    'URL',
+  ]);
+
+  const dataTablePropertiesDisabledKinds = createBlacklist([
+    'BELONGS_TO',
+    'BOOLEAN',
+    'DATE',
+    'DATE_TIME',
+    'DECIMAL',
+    'EMAIL',
+    'EMAIL_ADDRESS',
+    'ENUM',
+    'FILE',
+    'FLOAT',
+    'HAS_ONE',
+    'IBAN',
+    'IMAGE',
+    'INTEGER',
+    'LIST',
+    'PERIODIC_COUNT',
+    'PHONE_NUMBER',
+    'PRICE',
+    'SERIAL',
+    'STRING',
+    'TEXT',
+    'TIME',
+    'URL',
+  ]);
+
+  const formPropertiesDisabledKinds = createBlacklist([
+    'BOOLEAN',
+    'DATE',
+    'DATE_TIME',
+    'DECIMAL',
+    'EMAIL',
+    'EMAIL_ADDRESS',
+    'ENUM',
+    'FILE',
+    'FLOAT',
+    'HAS_ONE',
+    'IBAN',
+    'IMAGE',
+    'INTEGER',
+    'LIST',
+    'PERIODIC_COUNT',
+    'PHONE_NUMBER',
+    'PRICE',
+    'SERIAL',
+    'STRING',
+    'TEXT',
+    'TIME',
+    'URL',
+  ]);
+
   const stepper = {
     // eslint-disable-next-line consistent-return
     setStep: (step: number) => {
@@ -5720,37 +5791,7 @@ const beforeCreate = ({
                 }}
                 value={searchProp}
                 disabled={!modelId}
-                disabledKinds={[
-                  'DATE',
-                  'DATE_TIME',
-                  'TIME',
-                  'BELONGS_TO',
-                  'HAS_AND_BELONGS_TO_MANY',
-                  'HAS_MANY',
-                  'MULTI_FILE',
-                  'AUTO_INCREMENT',
-                  'COUNT',
-                  'MULTI_IMAGE',
-                  'PDF',
-                  'RICH_TEXT',
-                  'SIGNED_PDF',
-                  'SUM',
-                  'BOOLEAN_EXPRESSION',
-                  'DATE_EXPRESSION',
-                  'DATE_TIME_EXPRESSION',
-                  'DECIMAL_EXPRESSION',
-                  'INTEGER_EXPRESSION',
-                  'MINUTES_EXPRESSION',
-                  'PRICE_EXPRESSION',
-                  'STRING_EXPRESSION',
-                  'TEXT_EXPRESSION',
-                  'MINUTES',
-                  'ZIPCODE',
-                  'IMAGE',
-                  'FILE',
-                  'PASSWORD',
-                  'SERIAL',
-                ]}
+                disabledKinds={searchPropDisabledKinds}
                 showFormat={false}
               />
             </Field>
@@ -5780,29 +5821,7 @@ const beforeCreate = ({
               <PropertiesSelector
                 modelId={modelId}
                 value={dataTableProperties}
-                disabledKinds={[
-                  'HAS_AND_BELONGS_TO_MANY',
-                  'HAS_MANY',
-                  'MULTI_FILE',
-                  'AUTO_INCREMENT',
-                  'COUNT',
-                  'MULTI_IMAGE',
-                  'PDF',
-                  'RICH_TEXT',
-                  'SIGNED_PDF',
-                  'SUM',
-                  'BOOLEAN_EXPRESSION',
-                  'DATE_EXPRESSION',
-                  'DATE_TIME_EXPRESSION',
-                  'DECIMAL_EXPRESSION',
-                  'INTEGER_EXPRESSION',
-                  'MINUTES_EXPRESSION',
-                  'PRICE_EXPRESSION',
-                  'STRING_EXPRESSION',
-                  'TEXT_EXPRESSION',
-                  'MINUTES',
-                  'ZIPCODE',
-                ]}
+                disabledKinds={dataTablePropertiesDisabledKinds}
                 onChange={(value: Properties[]) => {
                   setDataTableProperties(value);
                   setDataTablePropertiesValidation(false);
@@ -5827,30 +5846,7 @@ const beforeCreate = ({
             <PropertiesSelector
               modelId={modelId}
               value={formProperties}
-              disabledKinds={[
-                'HAS_AND_BELONGS_TO_MANY',
-                'HAS_MANY',
-                'MULTI_FILE',
-                'AUTO_INCREMENT',
-                'COUNT',
-                'MULTI_IMAGE',
-                'PDF',
-                'RICH_TEXT',
-                'SIGNED_PDF',
-                'SUM',
-                'BOOLEAN_EXPRESSION',
-                'DATE_EXPRESSION',
-                'DATE_TIME_EXPRESSION',
-                'DECIMAL_EXPRESSION',
-                'INTEGER_EXPRESSION',
-                'MINUTES_EXPRESSION',
-                'PRICE_EXPRESSION',
-                'STRING_EXPRESSION',
-                'TEXT_EXPRESSION',
-                'MINUTES',
-                'ZIPCODE',
-                'BELONGS_TO',
-              ]}
+              disabledKinds={formPropertiesDisabledKinds}
               onChange={(value: Properties[]) => {
                 setFormProperties(value);
                 setFormPropertiesValidation(false);
