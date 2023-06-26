@@ -312,7 +312,10 @@ export default prefab('Switch', attr, beforeCreate, [
   CheckboxInput({
     options: {
       ...checkboxInputOptions,
-      label: variable('Label', { value: ['Switch'] }),
+      label: variable('Label', {
+        ...checkboxInputOptions.label('label'),
+        value: ['Switch'],
+      }),
       isSwitch: toggle('Is switch', {
         value: true,
         configuration: {
@@ -320,9 +323,11 @@ export default prefab('Switch', attr, beforeCreate, [
         },
       }),
       checkboxColor: color('Switch color', {
+        ...checkboxInputOptions.checkboxColor('checkboxColor'),
         value: ThemeColor.ACCENT_3,
       }),
       checkboxColorChecked: color('Switch color checked', {
+        ...checkboxInputOptions.checkboxColorChecked('checkboxColorChecked'),
         value: ThemeColor.PRIMARY,
       }),
     },

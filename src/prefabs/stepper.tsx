@@ -13,7 +13,10 @@ export default prefab('Stepper', attr, undefined, [
       {
         options: {
           ...stepOptions,
-          label: variable('Label', { value: ['Step 1'] }),
+          label: variable('Label', {
+            ...stepOptions.label('label'),
+            value: ['Step 1'],
+          }),
         },
       },
       [],
@@ -22,7 +25,10 @@ export default prefab('Stepper', attr, undefined, [
       {
         options: {
           ...stepOptions,
-          label: variable('Label', { value: ['Step 2'] }),
+          label: variable('Label', {
+            ...stepOptions.label('label'),
+            value: ['Step 2'],
+          }),
         },
       },
       [],

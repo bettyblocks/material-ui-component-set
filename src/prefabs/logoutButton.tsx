@@ -88,7 +88,10 @@ export default makePrefab('Logout button', attrs, beforeCreate, [
     },
     options: {
       ...buttonOptions,
-      buttonText: variable('Button text', { value: ['Logout'] }),
+      buttonText: variable('Button text', {
+        ...buttonOptions.buttonText('buttonText'),
+        value: ['Logout'],
+      }),
     },
   }),
 ]);

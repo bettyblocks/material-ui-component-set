@@ -17,7 +17,10 @@ export default prefab('Card Actions', attr, undefined, [
       {
         options: {
           ...openPageButtonOptions,
-          buttonText: variable('Button text', { value: ['Button'] }),
+          buttonText: variable('Button text', {
+            ...openPageButtonOptions.buttonText('buttonText'),
+            value: ['Button'],
+          }),
         },
       },
       [],
