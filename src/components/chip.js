@@ -107,6 +107,7 @@
             style.getColor(textColor),
             '!important',
           ],
+          height: ({ options: { size } }) => size === 'small' && '0.75em',
         },
         '& .MuiChip-label': {
           fontSize: ({ options: { font } }) => style.getFontSize(font),

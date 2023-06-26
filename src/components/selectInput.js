@@ -6,7 +6,8 @@
   jsx: (() => {
     const {
       actionVariableId,
-      blanco,
+      allowClear,
+      clearLabel,
       dataComponentAttribute = ['Select'],
       disabled: initialIsDisabled,
       filter,
@@ -20,6 +21,7 @@
       order,
       floatLabel,
       orderBy,
+      placeholderLabel,
       property,
       required,
       size,
@@ -36,9 +38,10 @@
     const [interactionFilter, setInteractionFilter] = useState({});
     const [disabled, setIsDisabled] = useState(initialIsDisabled);
     const mounted = useRef(false);
-    const blancoText = useText(blanco);
     const modelProperty = getProperty(property || '') || {};
     const labelText = useText(label);
+    const clearLabelText = useText(clearLabel);
+    const placeholderLabelText = useText(placeholderLabel);
     let defaultValueText = useText(prefabValue);
     const helperTextResolved = useText(helperText);
     const validationMessageText = useText(validationValueMissing);
@@ -63,7 +66,7 @@
       resolvedCurrentValue = JSON.stringify({ uuid: currentUuid });
       defaultValueText = resolvedCurrentValue;
     } else {
-      resolvedCurrentValue = useText(prefabValue);
+      resolvedCurrentValue = defaultValueText || placeholderLabelText;
     }
 
     const [currentValue, setCurrentValue] = useState(resolvedCurrentValue);
@@ -209,7 +212,8 @@
     }, []);
 
     const handleValidation = () => {
-      const hasError = required && !currentValue;
+      const hasError =
+        required && (!currentValue || currentValue === placeholderLabelText);
       setErrorState(hasError);
       const message = hasError ? validationMessageText : helperTextResolved;
       setHelper(message);
@@ -228,7 +232,8 @@
     };
 
     const validationHandler = () => {
-      const hasError = required && !currentValue;
+      const hasError =
+        required && (!currentValue || currentValue === placeholderLabelText);
       setAfterFirstInvalidation(hasError);
       handleValidation();
     };
@@ -250,11 +255,46 @@
       }
     }
 
+    const idOrPathLabel =
+      typeof labelProperty.id !== 'undefined'
+        ? labelProperty.id
+        : labelProperty;
+    const labelPropertyPath =
+      typeof idOrPathLabel === 'string' ? [idOrPathLabel] : idOrPathLabel;
+
+    const renderLabel = (option) => {
+      let optionLabel = '';
+      const emptyPropertyPath =
+        labelPropertyPath.length > 0 && labelPropertyPath[0] !== '';
+      if (emptyPropertyPath) {
+        optionLabel = labelPropertyPath.reduce((acc, propertyId) => {
+          if (!acc) {
+            return null;
+          }
+          return acc[getProperty(propertyId).name] || null;
+        }, option);
+      } else {
+        const modelReference = B.getModel(referenceModelId || modelId);
+        if (modelReference.labelPropertyId) {
+          const preDefinedLabelProperty = B.getProperty(
+            modelReference.labelPropertyId,
+          ).name;
+          optionLabel = option[preDefinedLabelProperty];
+        } else {
+          optionLabel = option.id;
+        }
+      }
+
+      return optionLabel === '' || optionLabel === null
+        ? '-- empty --'
+        : optionLabel.toString();
+    };
+
     const renderOptions = () => {
       if (isListProperty) {
-        return values.map(({ value: v }) => (
-          <MenuItem key={v} value={v}>
-            {v}
+        return values.map(({ value }) => (
+          <MenuItem key={value} value={value}>
+            {value}
           </MenuItem>
         ));
       }
@@ -272,21 +312,12 @@
       }
 
       if (!loading && !isDev) {
-        let labelKey = 'id';
-        if (labelProperty) {
-          labelKey = B.getProperty(labelProperty).name;
-        } else {
-          const modelReference = B.getModel(referenceModelId || modelId);
-          if (modelReference.labelPropertyId)
-            labelKey = B.getProperty(modelReference.labelPropertyId).name;
-        }
-
         const rows = data ? data.results : [];
+
         return rows.map((row) => {
-          const itemLabel = row[labelKey];
           return (
             <MenuItem key={row.id} value={row.id}>
-              {itemLabel}
+              {renderLabel(row)}
             </MenuItem>
           );
         });
@@ -304,11 +335,14 @@
         <TextField
           id={actionVariableId}
           select={!disabled}
-          defaultValue={currentValue}
-          value={currentValue}
+          defaultValue={isDev ? placeholderLabelText : currentValue}
+          value={isDev ? placeholderLabelText : currentValue}
           size={size}
           classes={{
-            root: `${classes.formControl} ${floatLabel && classes.floatLabel}`,
+            root: `${classes.formControl} ${floatLabel && classes.floatLabel} ${
+              (isDev || currentValue === placeholderLabelText) &&
+              classes.placeholder
+            }`,
           }}
           variant={variant}
           fullWidth={fullWidth}
@@ -325,7 +359,16 @@
           margin={margin}
           helperText={helper}
         >
-          {blancoText && <MenuItem value="">{blancoText}</MenuItem>}
+          {allowClear && (
+            <MenuItem value="" className={classes.clearLabel}>
+              {clearLabelText}
+            </MenuItem>
+          )}
+          {placeholderLabelText && !defaultValueText && (
+            <MenuItem value={placeholderLabelText} disabled>
+              {placeholderLabelText}
+            </MenuItem>
+          )}
           {valid && renderOptions()}
         </TextField>
         <input
@@ -335,7 +378,7 @@
           type="text"
           tabIndex="-1"
           required={required}
-          value={currentValue}
+          value={placeholderLabelText === currentValue ? '' : currentValue}
         />
       </>
     );
@@ -524,6 +567,18 @@
                 },
             },
           },
+      },
+      clearLabel: {
+        fontStyle: 'italic',
+        borderBottom: '1px solid lightgray !important',
+      },
+      placeholder: {
+        '& .MuiInputBase-root': {
+          color: ({ options: { placeholderColor } }) => [
+            style.getColor(placeholderColor),
+            '!important',
+          ],
+        },
       },
     };
   },
