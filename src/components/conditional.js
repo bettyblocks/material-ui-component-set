@@ -45,11 +45,11 @@
 
       switch (compare) {
         case 'neq':
-          return leftValue !== rightValue;
+          return leftParsed !== rightParsed;
         case 'contains':
-          return leftValue.indexOf(rightValue) > -1;
+          return leftParsed.indexOf(rightParsed) > -1;
         case 'notcontains':
-          return leftValue.indexOf(rightValue) < 0;
+          return leftParsed.indexOf(rightParsed) < 0;
         case 'gt':
           return leftParsed > rightParsed;
         case 'lt':
@@ -59,7 +59,7 @@
         case 'lteq':
           return leftParsed <= rightParsed;
         default:
-          return leftValue === rightValue;
+          return leftParsed === rightParsed;
       }
     };
 
