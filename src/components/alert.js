@@ -45,8 +45,8 @@
         return [obj];
       };
 
-      if (err.errors) {
-        const messages = readMessages(err.errors);
+      if (err.errors || err.graphQLErrors) {
+        const messages = readMessages(err.errors || err.graphQLErrors);
 
         const errorMessage =
           messages.length > 0
@@ -59,6 +59,10 @@
             err.errors[0].extensions &&
             (err.errors[0].extensions.error ||
               err.errors[0].extensions.statusCode)) ||
+          (err.graphQLErrors &&
+            err.graphQLErrors[0] &&
+            err.graphQLErrors[0].extensions &&
+            err.graphQLErrors[0].extensions.statusCode) ||
           err.message;
         return [errorTitle, errorMessage];
       }
