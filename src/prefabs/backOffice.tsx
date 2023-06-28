@@ -6775,7 +6775,6 @@ const beforeCreate = ({
       resolvedProperties.map((prop) =>
         detailColumn.descendants.push(makeDetail(prop)),
       );
-      console.log('detailColumn', detailColumn);
 
       // set edit form
       const updateForm = treeSearch('#updateForm', newPrefab.structure);
