@@ -48,6 +48,8 @@ import {
   DataTableColumn,
   dataTableColumnOptions,
   dataTableOptions,
+  DetailViewChild,
+  detailViewChildOptions,
   Dialog,
   dialogOptions,
   Drawer,
@@ -103,117 +105,129 @@ const children = [
 ];
 
 const detailChildren = [
-  Conditional(
+  wrapper(
     {
+      label: 'Detail view item',
       options: {
-        ...conditionalOptions,
-        left: variable('Conditional property', {
-          value: [],
-          showInAddChild: true,
+        property: linked({
+          label: 'Property',
+          value: {
+            ref: {
+              componentId: '#detailItem',
+              optionId: '#detailItemProperty',
+            },
+          },
+          showInReconfigure: true,
         }),
-        compare: option('CUSTOM', {
-          label: 'Compare',
-          value: 'neq',
-          configuration: {
-            as: 'DROPDOWN',
-            dataType: 'string',
-            allowedInput: [
-              {
-                name: 'Equals',
-                value: 'eq',
-              },
-              {
-                name: 'Not equal',
-                value: 'neq',
-              },
-              {
-                name: 'Contains',
-                value: 'contains',
-              },
-              {
-                name: 'Does not contain',
-                value: 'notcontains',
-              },
-              {
-                name: 'Greater than',
-                value: 'gt',
-              },
-              {
-                name: 'Less than',
-                value: 'lt',
-              },
-              {
-                name: 'Greater than or equal to',
-                value: 'gteq',
-              },
-              {
-                name: 'Less than or equal to',
-                value: 'lteq',
-              },
-            ],
+        valueContent: linked({
+          label: 'Label Text',
+          value: {
+            ref: {
+              componentId: '#detailItem',
+              optionId: '#detailItemLabel',
+            },
           },
         }),
       },
     },
     [
-      Box(
+      Conditional(
         {
           options: {
-            ...boxOptions,
-            outerSpacing: sizes('Outer space', {
-              value: ['M', '0rem', 'M', '0rem'],
+            ...conditionalOptions,
+            left: variable('Conditional property', {
+              value: [],
             }),
-            backgroundColor: color('Background color', {
-              value: ThemeColor.ACCENT_1,
-            }),
-            backgroundColorAlpha: option('NUMBER', {
-              label: 'Background color opacity',
-              value: 20,
+            compare: option('CUSTOM', {
+              label: 'Compare',
+              value: 'neq',
+              configuration: {
+                as: 'DROPDOWN',
+                dataType: 'string',
+                allowedInput: [
+                  {
+                    name: 'Equals',
+                    value: 'eq',
+                  },
+                  {
+                    name: 'Not equal',
+                    value: 'neq',
+                  },
+                  {
+                    name: 'Contains',
+                    value: 'contains',
+                  },
+                  {
+                    name: 'Does not contain',
+                    value: 'notcontains',
+                  },
+                  {
+                    name: 'Greater than',
+                    value: 'gt',
+                  },
+                  {
+                    name: 'Less than',
+                    value: 'lt',
+                  },
+                  {
+                    name: 'Greater than or equal to',
+                    value: 'gteq',
+                  },
+                  {
+                    name: 'Less than or equal to',
+                    value: 'lteq',
+                  },
+                ],
+              },
             }),
           },
         },
         [
-          Text({
-            options: {
-              ...textOptions,
-              content: variable('Label', {
-                value: [''],
-                configuration: { as: 'MULTILINE' },
-                showInAddChild: true,
-              }),
-              type: font('Text style', { value: ['Body1'] }),
-              fontWeight: option('CUSTOM', {
-                label: 'Font weight',
-                value: '500',
-                configuration: {
-                  as: 'DROPDOWN',
-                  dataType: 'string',
-                  allowedInput: [
-                    { name: '100', value: '100' },
-                    { name: '200', value: '200' },
-                    { name: '300', value: '300' },
-                    { name: '400', value: '400' },
-                    { name: '500', value: '500' },
-                    { name: '600', value: '600' },
-                    { name: '700', value: '700' },
-                    { name: '800', value: '800' },
-                    { name: '900', value: '900' },
-                  ],
+          Box(
+            {
+              options: {
+                ...boxOptions,
+                outerSpacing: sizes('Outer space', {
+                  value: ['0rem', '0rem', 'M', '0rem'],
+                }),
+                backgroundColor: color('Background color', {
+                  value: ThemeColor.ACCENT_1,
+                }),
+                backgroundColorAlpha: option('NUMBER', {
+                  label: 'Background color opacity',
+                  value: 20,
+                }),
+              },
+            },
+            [
+              DetailViewChild(
+                {
+                  ref: {
+                    id: '#detailItem',
+                  },
+                  options: {
+                    ...detailViewChildOptions,
+                    property: property('Property', {
+                      value: '',
+                      showInAddChild: true,
+                      ref: {
+                        id: '#detailItemProperty',
+                      },
+                    }),
+                    labelText: variable('Label Text', {
+                      ...detailViewChildOptions.labelText('labelText'),
+                      ref: { id: '#detailItemLabel' },
+                    }),
+                    fontWeight: option('CUSTOM', {
+                      ...detailViewChildOptions.fontWeight('fontWeight'),
+                      value: '500',
+                    }),
+                  },
                 },
-              }),
-            },
-          }),
-          Text({
-            options: {
-              ...textOptions,
-              type: font('Text style', { value: ['Body1'] }),
-              content: variable('Property', {
-                value: [],
-                configuration: { as: 'MULTILINE' },
-                showInAddChild: true,
-              }),
-            },
-          }),
+                [],
+              ),
+            ],
+          ),
         ],
       ),
     ],
@@ -224,7 +238,7 @@ const subViewChildren = [
   SubviewItem({
     options: {
       ...subviewItemOptions,
-      prop: property('Property', {
+      prop: property('Relation', {
         value: '',
         showInAddChild: true,
         showInReconfigure: true,
@@ -237,10 +251,6 @@ const subViewChildren = [
             'HAS_ONE',
           ],
         },
-      }),
-      content: variable('Label', {
-        value: [''],
-        showInReconfigure: true,
       }),
       linkTo: endpoint('Page', {
         value: '',
@@ -1958,11 +1968,28 @@ const drawerContainer = DrawerContainer(
                                                       },
                                                     },
                                                   ),
-                                                  addDetail: addChild(
-                                                    'Add Child',
+                                                  reconfigure: reconfigure(
+                                                    'Reconfigure detail view',
+                                                    {
+                                                      ref: {
+                                                        id: '#reconfigureDetail',
+                                                      },
+                                                      value: {
+                                                        children:
+                                                          detailChildren,
+                                                        reconfigureWizardType:
+                                                          'ChildrenSelector',
+                                                      },
+                                                    },
+                                                  ),
+                                                  addChild: addChild(
+                                                    'Add detail view',
                                                     {
                                                       ref: {
                                                         id: '#addDetailViewChild',
+                                                      },
+                                                      optionRef: {
+                                                        id: '#reconfigureDetailOption',
                                                       },
                                                       value: {
                                                         children:
@@ -2281,6 +2308,20 @@ const drawerContainer = DrawerContainer(
                                                     },
                                                     options: {
                                                       ...subviewOptions,
+                                                      reconfigure: reconfigure(
+                                                        'Reconfigure sub view',
+                                                        {
+                                                          ref: {
+                                                            id: '#reconfigureSubView',
+                                                          },
+                                                          value: {
+                                                            children:
+                                                              subViewChildren,
+                                                            reconfigureWizardType:
+                                                              'ChildrenSelector',
+                                                          },
+                                                        },
+                                                      ),
                                                       addChild: addChild(
                                                         'Add Subview Item',
                                                         {
@@ -5011,7 +5052,9 @@ const prefabStructure = [
             'detailsTabTitle',
             'updateTabTitle',
             'createTabTitle',
+            'reconfigureDetailViewChild',
             'addDetailChild',
+            'reconfigureSubView',
             'addSubViewChild',
           ],
           condition: {
@@ -5181,12 +5224,46 @@ const prefabStructure = [
             },
           },
         }),
+        reconfigureDetailViewChild: linked({
+          label: 'Reconfigure detail view',
+          value: {
+            ref: {
+              componentId: '#detailColumn',
+              optionId: '#reconfigureDetail',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'shownTab',
+              comparator: 'EQ',
+              value: 2,
+            },
+          },
+        }),
         addDetailChild: linked({
-          label: 'Add detail view child',
+          label: 'Add detail view',
           value: {
             ref: {
               componentId: '#detailColumn',
               optionId: '#addDetailViewChild',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'shownTab',
+              comparator: 'EQ',
+              value: 2,
+            },
+          },
+        }),
+        reconfigureSubView: linked({
+          label: 'Reconfigure sub view',
+          value: {
+            ref: {
+              componentId: '#subView',
+              optionId: '#reconfigureSubView',
             },
           },
           configuration: {
@@ -5348,6 +5425,8 @@ const beforeCreate = ({
     makeBettyUpdateInput,
     PropertyKind,
     BettyPrefabs,
+    linkOption,
+    createWrapper,
   } = helpers;
   const [modelId, setModelId] = React.useState('');
   const [model, setModel] = React.useState<ModelProps>();
@@ -5417,6 +5496,8 @@ const beforeCreate = ({
       );
       if (property) {
         returnObject.name = `{{ ${model.name}.${property.name} }}`;
+      } else {
+        returnObject.name = `{{ ${model.name}.${obj.label} }}`;
       }
     }
     return returnObject;
@@ -5424,6 +5505,33 @@ const beforeCreate = ({
 
   const makeDetail = (prop: any) => {
     const noEmptyValueConditional = cloneStructure('Conditional');
+    const detailWrapper = createWrapper(
+      {
+        label: 'Detail view item',
+        options: {
+          property: linkOption({
+            label: 'Property',
+            value: {
+              ref: {
+                componentId: `#detailItem${prop.id}`,
+                optionId: `#detailItemProperty${prop.id}`,
+              },
+            },
+            showInReconfigure: true,
+          }),
+          labelText: linkOption({
+            label: 'Label Text',
+            value: {
+              ref: {
+                componentId: `#detailItem${prop.id}`,
+                optionId: `#detailItemLabel${prop.id}`,
+              },
+            },
+          }),
+        },
+      },
+      [],
+    );
     if (noEmptyValueConditional.type === 'COMPONENT') {
       setOption(noEmptyValueConditional, 'left', (originalOption: any) => ({
         ...originalOption,
@@ -5465,17 +5573,47 @@ const beforeCreate = ({
           }),
         );
 
+        if (prop.kind !== 'IMAGE' && prop.kind !== 'FILE') {
+          const detailViewItemColumn = cloneStructure('Detail view child');
+          if (detailViewItemColumn.type === 'COMPONENT') {
+            const detailViewItem = detailViewItemColumn.descendants[0];
+            if (detailViewItem.type === 'COMPONENT') {
+              detailViewItem.ref = { id: `#detailItem${prop.id}` };
+              setOption(detailViewItem, 'property', (opt) => ({
+                ...opt,
+                value: enrichVarObj({ ...prop }),
+                ref: {
+                  id: `#detailItemProperty${prop.id}`,
+                },
+              }));
+              setOption(detailViewItem, 'fontWeight', (opt) => ({
+                ...opt,
+                value: '500',
+              }));
+              setOption(detailViewItem, 'labelText', (opt: any) => ({
+                ...opt,
+                ref: {
+                  id: `#detailItemLabel${prop.id}`,
+                },
+              }));
+            }
+            detailComponent.descendants = [detailViewItem];
+            noEmptyValueConditional.descendants = [detailComponent];
+            detailWrapper.descendants = [noEmptyValueConditional];
+            return detailWrapper;
+          }
+        }
+
         const labelText = cloneStructure('Text');
         if (labelText.type === 'COMPONENT') {
-          setOption(
-            labelText,
-            'content',
-            (originalOption: PrefabComponentOption) => ({
-              ...originalOption,
-              value: [`${[prop.label]}:`],
-              configuration: { as: 'MULTILINE' },
-            }),
-          );
+          const label = {
+            ...enrichVarObj({ ...prop }),
+            type: 'PROPERTY_LABEL',
+          };
+          setOption(labelText, 'content', (originalOption: any) => ({
+            ...originalOption,
+            value: [label, ':'],
+          }));
           setOption(
             labelText,
             'type',
@@ -6219,6 +6357,10 @@ const beforeCreate = ({
                     ...options,
                     value: 'Black',
                   }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
+                  }));
                 }
                 return input;
               case PropertyKind.INTEGER:
@@ -6238,6 +6380,10 @@ const beforeCreate = ({
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
                     value: 'Black',
+                  }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
                   }));
                 }
                 return input;
@@ -6259,6 +6405,10 @@ const beforeCreate = ({
                     ...options,
                     value: 'Black',
                   }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
+                  }));
                 }
                 return input;
               case PropertyKind.DECIMAL:
@@ -6278,6 +6428,10 @@ const beforeCreate = ({
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
                     value: 'Black',
+                  }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
                   }));
                 }
                 return input;
@@ -6299,6 +6453,10 @@ const beforeCreate = ({
                     ...options,
                     value: 'Black',
                   }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
+                  }));
                 }
                 return input;
               case PropertyKind.PRICE:
@@ -6318,6 +6476,10 @@ const beforeCreate = ({
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
                     value: 'Black',
+                  }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
                   }));
                 }
                 return input;
@@ -6339,6 +6501,10 @@ const beforeCreate = ({
                     ...options,
                     value: 'Black',
                   }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
+                  }));
                 }
                 return input;
               case PropertyKind.DATE:
@@ -6358,6 +6524,10 @@ const beforeCreate = ({
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
                     value: 'Black',
+                  }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
                   }));
                 }
                 return input;
@@ -6379,6 +6549,10 @@ const beforeCreate = ({
                     ...options,
                     value: 'Black',
                   }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
+                  }));
                 }
                 return input;
               case PropertyKind.TIME:
@@ -6398,6 +6572,10 @@ const beforeCreate = ({
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
                     value: 'Black',
+                  }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
                   }));
                 }
                 return input;
@@ -6432,7 +6610,12 @@ const beforeCreate = ({
                       },
                     };
                   }
+                  setOption(fileUpload, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
+                  }));
                 }
+
                 return inputStructure(fileUpload);
               case PropertyKind.IMAGE:
                 imageUpload = makeBettyInput(
@@ -6465,6 +6648,10 @@ const beforeCreate = ({
                       },
                     };
                   }
+                  setOption(imageUpload, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
+                  }));
                 }
                 return inputStructure(imageUpload);
               case PropertyKind.BOOLEAN:
@@ -6484,6 +6671,10 @@ const beforeCreate = ({
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
                     value: 'Black',
+                  }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
                   }));
                 }
                 return input;
@@ -6505,6 +6696,10 @@ const beforeCreate = ({
                     ...options,
                     value: 'Black',
                   }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
+                  }));
                 }
                 return input;
               default:
@@ -6524,6 +6719,10 @@ const beforeCreate = ({
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
                     value: 'Black',
+                  }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
                   }));
                 }
                 return input;
@@ -6576,6 +6775,7 @@ const beforeCreate = ({
       resolvedProperties.map((prop) =>
         detailColumn.descendants.push(makeDetail(prop)),
       );
+      console.log('detailColumn', detailColumn);
 
       // set edit form
       const updateForm = treeSearch('#updateForm', newPrefab.structure);
@@ -6646,6 +6846,10 @@ const beforeCreate = ({
                     ...options,
                     value: 'Black',
                   }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
+                  }));
                 }
                 return input;
               case PropertyKind.INTEGER:
@@ -6665,6 +6869,10 @@ const beforeCreate = ({
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
                     value: 'Black',
+                  }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
                   }));
                 }
                 return input;
@@ -6686,6 +6894,10 @@ const beforeCreate = ({
                     ...options,
                     value: 'Black',
                   }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
+                  }));
                 }
                 return input;
               case PropertyKind.DECIMAL:
@@ -6705,6 +6917,10 @@ const beforeCreate = ({
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
                     value: 'Black',
+                  }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
                   }));
                 }
                 return input;
@@ -6726,6 +6942,10 @@ const beforeCreate = ({
                     ...options,
                     value: 'Black',
                   }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
+                  }));
                 }
                 return input;
               case PropertyKind.PRICE:
@@ -6745,6 +6965,10 @@ const beforeCreate = ({
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
                     value: 'Black',
+                  }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
                   }));
                 }
                 return input;
@@ -6766,6 +6990,10 @@ const beforeCreate = ({
                     ...options,
                     value: 'Black',
                   }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
+                  }));
                 }
                 return input;
               case PropertyKind.DATE:
@@ -6785,6 +7013,10 @@ const beforeCreate = ({
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
                     value: 'Black',
+                  }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
                   }));
                 }
                 return input;
@@ -6806,6 +7038,10 @@ const beforeCreate = ({
                     ...options,
                     value: 'Black',
                   }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
+                  }));
                 }
                 return input;
               case PropertyKind.TIME:
@@ -6825,6 +7061,10 @@ const beforeCreate = ({
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
                     value: 'Black',
+                  }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
                   }));
                 }
                 return input;
@@ -6859,6 +7099,12 @@ const beforeCreate = ({
                         textTransform: 'none',
                       },
                     };
+                    setOption(fileUpload, 'label', (options: any) => ({
+                      ...options,
+                      value: [
+                        { ...enrichVarObj(prop), type: 'PROPERTY_LABEL' },
+                      ],
+                    }));
                   }
                 }
                 return inputStructure(fileUpload);
@@ -6893,6 +7139,12 @@ const beforeCreate = ({
                         textTransform: 'none',
                       },
                     };
+                    setOption(imageUpload, 'label', (options: any) => ({
+                      ...options,
+                      value: [
+                        { ...enrichVarObj(prop), type: 'PROPERTY_LABEL' },
+                      ],
+                    }));
                   }
                 }
                 return inputStructure(imageUpload);
@@ -6914,6 +7166,10 @@ const beforeCreate = ({
                     ...options,
                     value: 'Black',
                   }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
+                  }));
                 }
                 return input;
               case PropertyKind.LIST:
@@ -6934,6 +7190,10 @@ const beforeCreate = ({
                     ...options,
                     value: 'Black',
                   }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
+                  }));
                 }
                 return input;
               default:
@@ -6953,6 +7213,10 @@ const beforeCreate = ({
                   setOption(input, 'labelColor', (options) => ({
                     ...options,
                     value: 'Black',
+                  }));
+                  setOption(input, 'label', (options: any) => ({
+                    ...options,
+                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
                   }));
                 }
                 return input;
