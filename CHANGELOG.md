@@ -1,3 +1,13 @@
+# [2.147.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.9...v2.147.0) (2023-06-29)
+
+
+### Features
+
+* checkbox writes to state ([5435840](https://github.com/bettyblocks/material-ui-component-set/commit/54358404122a032930c366136256e1c3ae73625e))
+* rename useGlobalState to usePageState ([8038285](https://github.com/bettyblocks/material-ui-component-set/commit/8038285a4796ed0cb6f0adf9599c3c6516b86dfc))
+* **textField:** make currentValue work via useGlobalState hook ([b68c6cf](https://github.com/bettyblocks/material-ui-component-set/commit/b68c6cfb66c1fc8ba5f36461b79d721d18eb923e))
+* use the usePageState hook in the rating component so that its value is also written to state ([88e3429](https://github.com/bettyblocks/material-ui-component-set/commit/88e34296c3998db7ee59f5cfa1448b7b5a609c61))
+
 ## [2.146.9](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.8...v2.146.9) (2023-06-29)
 
 
