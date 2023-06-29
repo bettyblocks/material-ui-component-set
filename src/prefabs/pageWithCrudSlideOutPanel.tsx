@@ -30,6 +30,8 @@ import {
   number,
   reconfigure,
   property,
+  ActionTemplates,
+  ActionPermissions,
 } from '@betty-blocks/component-sdk';
 
 import { Property } from '@betty-blocks/component-sdk/build/prefabs/types/property';
@@ -74,7 +76,6 @@ import {
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
 import { IdPropertyProps, ModelProps, ModelQuery, Properties } from './types';
-import { PermissionType } from './types/types';
 
 const children = [
   DataTableColumn({
@@ -2708,7 +2709,6 @@ const beforeCreate = ({
   const [stepNumber, setStepNumber] = React.useState(1);
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
-  const permissions: PermissionType = 'private';
   const pageAuthenticationProfileId = getPageAuthenticationProfileId();
 
   const createFormId = createUuid();
@@ -3291,10 +3291,10 @@ const beforeCreate = ({
           createFormId,
           idProperty,
           filteredproperties,
-          'create',
+          ActionTemplates.CREATE,
           undefined,
           undefined,
-          permissions,
+          ActionPermissions.PRIVATE,
           pageAuthenticationProfileId,
         );
 
@@ -3517,10 +3517,10 @@ const beforeCreate = ({
           editFormId,
           idProperty,
           filteredproperties,
-          'update',
+          ActionTemplates.UPDATE,
           undefined,
           undefined,
-          permissions,
+          ActionPermissions.PRIVATE,
           pageAuthenticationProfileId,
         );
         setOption(editForm, 'actionId', (opts: PrefabComponentOption) => ({
@@ -3743,10 +3743,10 @@ const beforeCreate = ({
           deleteButtonId,
           idProperty,
           undefined,
-          'delete',
+          ActionTemplates.DELETE,
           undefined,
           undefined,
-          permissions,
+          ActionPermissions.PRIVATE,
           pageAuthenticationProfileId,
         );
 

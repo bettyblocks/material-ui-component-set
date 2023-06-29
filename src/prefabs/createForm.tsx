@@ -4,9 +4,10 @@ import {
   Icon,
   InteractionType,
   PrefabInteraction,
+  ActionPermissions,
+  ActionTemplates,
 } from '@betty-blocks/component-sdk';
 import { Form } from './structures/ActionJSForm';
-import { PermissionType } from './types/types';
 
 const beforeCreate = ({
   close,
@@ -72,7 +73,6 @@ const beforeCreate = ({
   const [model, setModel] = React.useState(null);
   const [idProperty, setIdProperty] = React.useState(null);
   const [properties, setProperties] = React.useState([]);
-  const permissions: PermissionType = 'inherit';
 
   const [validationMessage, setValidationMessage] = React.useState('');
   const componentId = createUuid();
@@ -141,10 +141,10 @@ const beforeCreate = ({
             componentId,
             idProperty,
             properties,
-            'create',
+            ActionTemplates.CREATE,
             undefined,
             undefined,
-            permissions,
+            ActionPermissions.PRIVATE,
             pageAuthenticationProfileId,
             pageName,
           );

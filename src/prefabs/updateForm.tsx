@@ -5,9 +5,10 @@ import {
   InteractionType,
   PrefabInteraction,
   BeforeCreateArgs,
+  ActionTemplates,
+  ActionPermissions,
 } from '@betty-blocks/component-sdk';
 import { Form } from './structures/ActionJSForm';
-import { PermissionType } from './types/types';
 
 const beforeCreate = ({
   close,
@@ -85,7 +86,6 @@ const beforeCreate = ({
   });
   const [buttonGroupValue, setButtonGroupValue] = React.useState('anotherPage');
 
-  const permissions: PermissionType = 'inherit';
   const [validationMessage, setValidationMessage] = React.useState('');
   const [anotherPageState, setAnotherPageState] = React.useState({
     modelId: '',
@@ -362,16 +362,19 @@ const beforeCreate = ({
             );
             return;
           }
+          if (!idProperty) {
+            throw new Error('idProperty is not set');
+          }
 
           structure.id = componentId;
           const result = await prepareAction(
             componentId,
             idProperty,
             properties,
-            'update',
+            ActionTemplates.UPDATE,
             undefined,
             undefined,
-            permissions,
+            ActionPermissions.INHERIT,
             pageAuthenticationProfileId,
             pageName,
           );

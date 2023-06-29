@@ -154,5 +154,3 @@ export declare enum AuthenticationProfileKind {
   customAuthentication = 'customAuthentication',
   usernamePassword = 'usernamePassword',
 }
-
-export type PermissionType = 'private' | 'public' | 'inherit';

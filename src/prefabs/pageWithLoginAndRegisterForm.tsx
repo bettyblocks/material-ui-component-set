@@ -24,6 +24,8 @@ import {
   toggle,
   PrefabComponentOption,
   icon,
+  ActionTemplates,
+  ActionPermissions,
 } from '@betty-blocks/component-sdk';
 import {
   Box as BoxPrefab,
@@ -451,19 +453,17 @@ const beforeCreate = ({
         componentId,
         idProperty,
         properties,
-        'create',
+        ActionTemplates.CREATE,
         undefined,
         undefined,
-        'public',
+        ActionPermissions.PUBLIC,
       );
 
       const resultAuth = await prepareAction(
         componentId,
-        // this typing is wrong hence the ts ignore
-        // @ts-ignore
         undefined,
-        null,
-        'login',
+        undefined,
+        ActionTemplates.LOGIN,
         authProfile,
       );
 
