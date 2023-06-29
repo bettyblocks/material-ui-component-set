@@ -8,6 +8,7 @@ import {
   ModelQuery,
   AuthenticationProfile,
   Endpoint,
+  PermissionType,
 } from './types';
 
 export {
@@ -20,4 +21,5 @@ export {
   ModelQuery,
   AuthenticationProfile,
   Endpoint,
+  PermissionType,
 };

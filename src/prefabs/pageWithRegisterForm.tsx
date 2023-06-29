@@ -24,8 +24,6 @@ import {
   linked,
   BeforeCreateArgs,
   PrefabComponent,
-  ActionTemplates,
-  ActionPermissions,
 } from '@betty-blocks/component-sdk';
 import {
   Box as BoxComponent,
@@ -50,6 +48,7 @@ import {
 import { options as formOptions } from './structures/ActionJSForm/options';
 import { Alert } from './structures/Alert/index';
 import { IdPropertyProps, ModelProps, ModelQuery, Properties } from './types';
+import { PermissionType } from './types/types';
 
 const interactions: PrefabInteraction[] = [
   {
@@ -287,7 +286,7 @@ const beforeCreate = ({
   const [properties, setProperties] = React.useState<Properties[]>([]);
   const [showPropertiesValidation, setShowPropertiesValidation] =
     React.useState(false);
-
+  const permissions: PermissionType = 'public';
   const componentId = createUuid();
 
   useModelQuery({
@@ -480,10 +479,10 @@ const beforeCreate = ({
               componentId,
               idProperty,
               properties,
-              ActionTemplates.CREATE,
+              'create',
               undefined,
               undefined,
-              ActionPermissions.PUBLIC,
+              permissions,
             );
             setOption(
               formPrefab,
