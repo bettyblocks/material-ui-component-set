@@ -69,6 +69,7 @@
     "setState": "readonly",
     "useCallback": "readonly",
     "useEffect": "readonly",
+    "usePageState": "readonly",
     "useLocation": "readonly",
     "usePageState": "readonly",
     "useReducer": "readonly",
