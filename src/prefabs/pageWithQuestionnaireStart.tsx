@@ -19,6 +19,8 @@ import {
   PrefabComponentOption,
   wrapper,
   linked,
+  ActionTemplates,
+  ActionPermissions,
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
@@ -262,10 +264,10 @@ const beforeCreate = ({
               createActionId,
               idProperty,
               properties,
-              'create',
+              ActionTemplates.CREATE,
               undefined,
               `Start Questionnaire - Create ${model.label}`,
-              'public',
+              ActionPermissions.PUBLIC,
             );
             setOption(
               createAction,
