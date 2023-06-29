@@ -1,10 +1,3 @@
-## [2.146.8](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.7...v2.146.8) (2023-06-26)
-
-
-### Bug Fixes
-
-* disable formatting for DatePicker and DateTimePicker ([94d926f](https://github.com/bettyblocks/material-ui-component-set/commit/94d926fda9ac05452ca7527cdd4dfe8a4db49ab8))
-
 ## [2.146.7](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.6...v2.146.7) (2023-06-26)
 
 
