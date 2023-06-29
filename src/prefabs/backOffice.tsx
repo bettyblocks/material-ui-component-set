@@ -5996,13 +5996,30 @@ const beforeCreate = ({
     },
     onSave: async () => {
       const newPrefab = { ...originalPrefab };
-      const inputStructure = (
+      const fileinputStructure = (
         inputPrefab: PrefabReference,
       ): PrefabReference => {
         if (inputPrefab.type === 'COMPONENT') {
           setOption(inputPrefab, 'floatLabel', (options) => ({
             ...options,
             value: true,
+          }));
+        }
+        return inputPrefab;
+      };
+      const inputStructure = (inputPrefab: PrefabReference, prop: any) => {
+        if (inputPrefab.type === 'COMPONENT') {
+          setOption(inputPrefab, 'floatLabel', (options) => ({
+            ...options,
+            value: true,
+          }));
+          setOption(inputPrefab, 'labelColor', (options) => ({
+            ...options,
+            value: 'Black',
+          }));
+          setOption(inputPrefab, 'label', (options: any) => ({
+            ...options,
+            value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
           }));
         }
         return inputPrefab;
@@ -6349,18 +6366,7 @@ const beforeCreate = ({
                   createAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               case PropertyKind.INTEGER:
@@ -6373,18 +6379,7 @@ const beforeCreate = ({
                   createAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               case PropertyKind.EMAIL_ADDRESS:
@@ -6397,18 +6392,7 @@ const beforeCreate = ({
                   createAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               case PropertyKind.DECIMAL:
@@ -6421,18 +6405,7 @@ const beforeCreate = ({
                   createAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               case PropertyKind.TEXT:
@@ -6445,18 +6418,7 @@ const beforeCreate = ({
                   createAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               case PropertyKind.PRICE:
@@ -6469,18 +6431,7 @@ const beforeCreate = ({
                   createAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               case PropertyKind.PASSWORD:
@@ -6493,18 +6444,7 @@ const beforeCreate = ({
                   createAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               case PropertyKind.DATE:
@@ -6517,18 +6457,7 @@ const beforeCreate = ({
                   createAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               case PropertyKind.DATE_TIME:
@@ -6541,18 +6470,7 @@ const beforeCreate = ({
                   createAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               case PropertyKind.TIME:
@@ -6565,18 +6483,7 @@ const beforeCreate = ({
                   createAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               case PropertyKind.FILE:
@@ -6616,7 +6523,7 @@ const beforeCreate = ({
                   }));
                 }
 
-                return inputStructure(fileUpload);
+                return fileinputStructure(fileUpload);
               case PropertyKind.IMAGE:
                 imageUpload = makeBettyInput(
                   BettyPrefabs.IMAGE,
@@ -6653,7 +6560,7 @@ const beforeCreate = ({
                     value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
                   }));
                 }
-                return inputStructure(imageUpload);
+                return fileinputStructure(imageUpload);
               case PropertyKind.BOOLEAN:
                 input = makeBettyInput(
                   BettyPrefabs.BOOLEAN,
@@ -6664,18 +6571,7 @@ const beforeCreate = ({
                   createAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               case PropertyKind.LIST:
@@ -6688,18 +6584,7 @@ const beforeCreate = ({
                   createAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               default:
@@ -6712,18 +6597,7 @@ const beforeCreate = ({
                   createAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
             }
@@ -6837,18 +6711,7 @@ const beforeCreate = ({
                   updateAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               case PropertyKind.INTEGER:
@@ -6861,18 +6724,7 @@ const beforeCreate = ({
                   updateAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               case PropertyKind.EMAIL_ADDRESS:
@@ -6885,18 +6737,7 @@ const beforeCreate = ({
                   updateAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               case PropertyKind.DECIMAL:
@@ -6909,18 +6750,7 @@ const beforeCreate = ({
                   updateAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               case PropertyKind.TEXT:
@@ -6933,18 +6763,7 @@ const beforeCreate = ({
                   updateAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               case PropertyKind.PRICE:
@@ -6957,18 +6776,7 @@ const beforeCreate = ({
                   updateAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               case PropertyKind.PASSWORD:
@@ -6981,18 +6789,7 @@ const beforeCreate = ({
                   updateAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               case PropertyKind.DATE:
@@ -7005,18 +6802,7 @@ const beforeCreate = ({
                   updateAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               case PropertyKind.DATE_TIME:
@@ -7029,18 +6815,7 @@ const beforeCreate = ({
                   updateAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               case PropertyKind.TIME:
@@ -7053,18 +6828,7 @@ const beforeCreate = ({
                   updateAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               case PropertyKind.FILE:
@@ -7106,7 +6870,7 @@ const beforeCreate = ({
                     }));
                   }
                 }
-                return inputStructure(fileUpload);
+                return fileinputStructure(fileUpload);
               case PropertyKind.IMAGE:
                 imageUpload = makeBettyUpdateInput(
                   BettyPrefabs.IMAGE,
@@ -7146,7 +6910,7 @@ const beforeCreate = ({
                     }));
                   }
                 }
-                return inputStructure(imageUpload);
+                return fileinputStructure(imageUpload);
               case PropertyKind.BOOLEAN:
                 input = makeBettyUpdateInput(
                   BettyPrefabs.BOOLEAN,
@@ -7157,18 +6921,7 @@ const beforeCreate = ({
                   updateAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               case PropertyKind.LIST:
@@ -7181,18 +6934,7 @@ const beforeCreate = ({
                   updateAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
               default:
@@ -7205,18 +6947,7 @@ const beforeCreate = ({
                   updateAction.relatedModelIds,
                 );
                 if (input.type === 'COMPONENT') {
-                  setOption(input, 'floatLabel', (options) => ({
-                    ...options,
-                    value: true,
-                  }));
-                  setOption(input, 'labelColor', (options) => ({
-                    ...options,
-                    value: 'Black',
-                  }));
-                  setOption(input, 'label', (options: any) => ({
-                    ...options,
-                    value: [{ ...enrichVarObj(prop), type: 'PROPERTY_LABEL' }],
-                  }));
+                  input = inputStructure(input, prop);
                 }
                 return input;
             }
