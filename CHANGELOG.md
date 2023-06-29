@@ -1,3 +1,10 @@
+## [2.146.9](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.8...v2.146.9) (2023-06-29)
+
+
+### Bug Fixes
+
+* action button shows proper message in alert ([1d5be4d](https://github.com/bettyblocks/material-ui-component-set/commit/1d5be4d465d91987317dc05b382efd3c12688d25))
+
 ## [2.146.8](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.7...v2.146.8) (2023-06-26)
 
 
