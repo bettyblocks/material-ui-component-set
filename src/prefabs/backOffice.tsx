@@ -31,8 +31,6 @@ import {
   property,
   addChild,
   endpoint,
-  ActionTemplates,
-  ActionPermissions,
 } from '@betty-blocks/component-sdk';
 
 import {
@@ -88,8 +86,14 @@ import {
   textOptions,
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
-import { Properties, IdPropertyProps, ModelProps, ModelQuery } from './types';
-import { PropertyStateProps } from './types/types';
+import {
+  Properties,
+  IdPropertyProps,
+  ModelProps,
+  ModelQuery,
+  PermissionType,
+  PropertyStateProps,
+} from './types';
 
 const children = [
   DataTableColumn({
@@ -5376,6 +5380,7 @@ const beforeCreate = ({
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
   const pageAuthenticationProfileId = getPageAuthenticationProfileId();
+  const permissions: PermissionType = 'private';
   const [searchProp, setSearchProp] = React.useState<PropertyStateProps>({
     id: '',
   });
@@ -6187,10 +6192,10 @@ const beforeCreate = ({
           // other properties not checked then add all belongs_to's otherwise spread empty array
           ...(!otherPropertiesInForms ? relationProperties : []),
         ],
-        ActionTemplates.CREATE,
+        'create',
         undefined,
         `Back office - Create ${data?.model.label}`,
-        ActionPermissions.PRIVATE,
+        permissions,
         pageAuthenticationProfileId,
       );
       Object.values(createAction.variables).forEach(
@@ -6590,10 +6595,10 @@ const beforeCreate = ({
           // other properties not checked then add all belongs_to's otherwise spread empty array
           ...(!otherPropertiesInForms ? relationProperties : []),
         ],
-        ActionTemplates.UPDATE,
+        'update',
         undefined,
         `Back office - Update ${data?.model.label}`,
-        ActionPermissions.PRIVATE,
+        permissions,
         pageAuthenticationProfileId,
       );
       setOption(updateForm, 'actionId', (opts: PrefabComponentOption) => ({
@@ -6977,10 +6982,10 @@ const beforeCreate = ({
         deleteButtonId,
         idProperty,
         undefined,
-        ActionTemplates.DELETE,
+        'delete',
         undefined,
         `Back office - Delete ${data?.model.label}`,
-        ActionPermissions.PRIVATE,
+        permissions,
         pageAuthenticationProfileId,
       );
       setOption(deleteForm, 'actionId', (opts: PrefabComponentOption) => ({

@@ -22,8 +22,6 @@ import {
   wrapper,
   linked,
   BeforeCreateArgs,
-  ActionTemplates,
-  ActionPermissions,
 } from '@betty-blocks/component-sdk';
 import { options as defaults } from './structures/ActionJSForm/options';
 import {
@@ -45,7 +43,7 @@ import {
   OpenPageButton,
   openPageButtonOptions,
 } from './structures';
-import { AuthenticationProfile, Endpoint } from './types';
+import { AuthenticationProfile, Endpoint, PermissionType } from './types';
 
 const interactions: PrefabInteraction[] = [
   {
@@ -1009,7 +1007,7 @@ const beforeCreate = ({
   const [authProfileId, setAuthProfileId] = React.useState('');
   const [authProfile, setAuthProfile] = React.useState<AuthenticationProfile>();
   const [authProfileInvalid, setAuthProfileInvalid] = React.useState(false);
-
+  const permissions: PermissionType = 'public';
   const [endpoint, setEndpoint] = React.useState<Endpoint>();
   const [endpointInvalid, setEndpointInvalid] = React.useState(false);
 
@@ -1173,10 +1171,10 @@ const beforeCreate = ({
             componentId,
             undefined,
             undefined,
-            ActionTemplates.LOGIN,
+            'login',
             authProfile,
             undefined,
-            ActionPermissions.PUBLIC,
+            permissions,
           );
           if (authProfile) {
             if (authProfile.properties) {

@@ -27,8 +27,6 @@ import {
   childSelector,
   reconfigure,
   property,
-  ActionPermissions,
-  ActionTemplates,
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
@@ -67,6 +65,7 @@ import {
   snackbarOptions,
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
+import { PermissionType } from './types';
 
 const interactions: PrefabInteraction[] = [];
 
@@ -140,6 +139,7 @@ const beforeCreate = ({
     skip: !modelId,
   });
 
+  const permissions: PermissionType = 'private';
   const pageAuthenticationProfileId = getPageAuthenticationProfileId();
 
   const enrichVarObj = (obj: any) => {
@@ -422,10 +422,10 @@ const beforeCreate = ({
         createTabForm.id,
         idProperty,
         formProperties,
-        ActionTemplates.CREATE,
+        'create',
         undefined,
         undefined,
-        ActionPermissions.PRIVATE,
+        permissions,
         pageAuthenticationProfileId,
       );
       Object.values(createResult.variables).forEach(
@@ -692,10 +692,10 @@ const beforeCreate = ({
         updateTabForm.id,
         idProperty,
         formProperties,
-        ActionTemplates.UPDATE,
+        'update',
         undefined,
         undefined,
-        ActionPermissions.PRIVATE,
+        permissions,
         pageAuthenticationProfileId,
       );
       Object.values(updateResult.variables).forEach(

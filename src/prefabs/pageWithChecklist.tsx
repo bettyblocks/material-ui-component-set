@@ -23,8 +23,6 @@ import {
   PrefabComponent,
   PrefabComponentOption,
   text,
-  ActionTemplates,
-  ActionPermissions,
 } from '@betty-blocks/component-sdk';
 
 import {
@@ -53,6 +51,7 @@ import {
   ModelProps,
   ModelQuery,
   PropertyStateProps,
+  PermissionType,
 } from './types';
 
 const interactions = [
@@ -1093,7 +1092,7 @@ const beforeCreate = ({
   const [footerPartialId, setFooterPartialId] = React.useState('');
   const formId = createUuid();
   const datalistId = createUuid();
-
+  const permissions: PermissionType = 'private';
   const pageAuthenticationProfileId = getPageAuthenticationProfileId();
 
   const { data } = useModelQuery({
@@ -1345,10 +1344,10 @@ const beforeCreate = ({
           formId,
           idProperty,
           [...transformProp(checkboxProperty)],
-          ActionTemplates.UPDATE,
+          'update',
           undefined,
           undefined,
-          ActionPermissions.PRIVATE,
+          permissions,
           pageAuthenticationProfileId,
         );
         setOption(editForm, 'actionId', (opts: PrefabComponentOption) => ({
