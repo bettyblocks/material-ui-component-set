@@ -53,17 +53,9 @@
             ? messages
             : err.networkError && err.networkError.message;
 
+        const error = err.errors ? err.errors[0] : err.graphQLErrors[0];
         const errorTitle =
-          (err.errors &&
-            err.errors[0] &&
-            err.errors[0].extensions &&
-            (err.errors[0].extensions.error ||
-              err.errors[0].extensions.statusCode)) ||
-          (err.graphQLErrors &&
-            err.graphQLErrors[0] &&
-            err.graphQLErrors[0].extensions &&
-            err.graphQLErrors[0].extensions.statusCode) ||
-          err.message;
+          error.extensions.error || error.extensions.statusCode || err.message;
         return [errorTitle, errorMessage];
       }
 
