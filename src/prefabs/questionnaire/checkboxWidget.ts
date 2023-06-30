@@ -44,6 +44,7 @@ export const checkboxWidget = [
           configuration: {
             showOnDrop: true,
           },
+          showInReconfigure: true,
         }),
         questionText: linked({
           label: 'Question text',

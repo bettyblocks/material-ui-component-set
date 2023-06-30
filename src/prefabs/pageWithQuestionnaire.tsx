@@ -634,6 +634,7 @@ const children = [
   Tab(
     {
       label: 'Section',
+      ref: { id: '#newSection' },
       options: {
         ...tabOptions,
         label: variable('Section title', {
@@ -744,10 +745,41 @@ const children = [
               label: 'Question drop area',
               options: {
                 ...boxOptions,
-                addChild: addChild('Add Child', {
+                addChild: addChild('Add question', {
                   value: {
                     children: questionTypes,
                     addChildWizardType: 'ChildSelector',
+                  },
+                  configuration: {
+                    pushToWrapper: {
+                      name: 'Questionnaire',
+                      condition: {
+                        type: 'SHOW',
+                        option: 'questionnaireSections',
+                        comparator: 'EQ_COMPONENT_ID',
+                        value: '#newSection',
+                      },
+                    },
+                  },
+                }),
+                reconfigure: reconfigure('Reconfigure questions', {
+                  value: {
+                    children: questionTypes,
+                    reconfigureWizardType: 'ChildrenSelector',
+                  },
+                  ref: {
+                    id: '#QuestionsReconfigure',
+                  },
+                  configuration: {
+                    pushToWrapper: {
+                      name: 'Questionnaire',
+                      condition: {
+                        type: 'SHOW',
+                        option: 'questionnaireSections',
+                        comparator: 'EQ_COMPONENT_ID',
+                        value: '#newSection',
+                      },
+                    },
                   },
                 }),
                 innerSpacing: sizes('Inner space', {
@@ -789,15 +821,6 @@ const prefabStructure = [
             },
           },
         }),
-        addQuestion: linked({
-          label: 'Add question',
-          value: {
-            ref: {
-              componentId: '#DropArea',
-              optionId: '#AddQuestion',
-            },
-          },
-        }),
         questionnaireTitle: linked({
           label: 'Questionnaire title',
           value: {
@@ -825,12 +848,37 @@ const prefabStructure = [
             },
           },
         }),
-        questionnaireSectionsTitle: linked({
-          label: 'Questionnaire section title',
+        addQuestion: linked({
+          label: 'Add question',
           value: {
             ref: {
-              componentId: '#Tab',
-              optionId: '#TabTitle',
+              componentId: '#DropArea',
+              optionId: '#AddQuestion',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'questionnaireSections',
+              comparator: 'EQ',
+              value: 1,
+            },
+          },
+        }),
+        reconfigureQuestion: linked({
+          label: 'Reconfigure questions',
+          value: {
+            ref: {
+              componentId: '#DropArea',
+              optionId: '#QuestionsReconfigure',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'questionnaireSections',
+              comparator: 'EQ',
+              value: 1,
             },
           },
         }),
@@ -2059,6 +2107,22 @@ const prefabStructure = [
                                                                                       },
                                                                                     ref: {
                                                                                       id: '#AddQuestion',
+                                                                                    },
+                                                                                  },
+                                                                                ),
+                                                                              reconfigure:
+                                                                                reconfigure(
+                                                                                  'Reconfigure questions',
+                                                                                  {
+                                                                                    value:
+                                                                                      {
+                                                                                        children:
+                                                                                          questionTypes,
+                                                                                        reconfigureWizardType:
+                                                                                          'ChildrenSelector',
+                                                                                      },
+                                                                                    ref: {
+                                                                                      id: '#QuestionsReconfigure',
                                                                                     },
                                                                                   },
                                                                                 ),

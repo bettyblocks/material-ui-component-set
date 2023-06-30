@@ -44,6 +44,7 @@ export const dateWidget = [
           configuration: {
             showOnDrop: true,
           },
+          showInReconfigure: true,
         }),
         label: linked({
           label: 'Label',

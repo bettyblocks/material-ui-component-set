@@ -38,6 +38,7 @@ export const radioWidget = [
           configuration: {
             showOnDrop: true,
           },
+          showInReconfigure: true,
         }),
         label: linked({
           label: 'Label',

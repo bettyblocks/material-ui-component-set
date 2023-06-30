@@ -43,6 +43,7 @@ export const dropdownWidget = [
           configuration: {
             showOnDrop: true,
           },
+          showInReconfigure: true,
         }),
         label: linked({
           label: 'Label',
