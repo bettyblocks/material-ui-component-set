@@ -1,3 +1,27 @@
+## [2.147.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.147.0...v2.147.1) (2023-06-30)
+
+
+### Bug Fixes
+
+* typo ([7da9d37](https://github.com/bettyblocks/material-ui-component-set/commit/7da9d371c7f1dc5f894281f694d9112f2ab3c91d))
+
+# [2.147.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.9...v2.147.0) (2023-06-29)
+
+
+### Features
+
+* checkbox writes to state ([5435840](https://github.com/bettyblocks/material-ui-component-set/commit/54358404122a032930c366136256e1c3ae73625e))
+* rename useGlobalState to usePageState ([8038285](https://github.com/bettyblocks/material-ui-component-set/commit/8038285a4796ed0cb6f0adf9599c3c6516b86dfc))
+* **textField:** make currentValue work via useGlobalState hook ([b68c6cf](https://github.com/bettyblocks/material-ui-component-set/commit/b68c6cfb66c1fc8ba5f36461b79d721d18eb923e))
+* use the usePageState hook in the rating component so that its value is also written to state ([88e3429](https://github.com/bettyblocks/material-ui-component-set/commit/88e34296c3998db7ee59f5cfa1448b7b5a609c61))
+
+## [2.146.9](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.8...v2.146.9) (2023-06-29)
+
+
+### Bug Fixes
+
+* action button shows proper message in alert ([1d5be4d](https://github.com/bettyblocks/material-ui-component-set/commit/1d5be4d465d91987317dc05b382efd3c12688d25))
+
 ## [2.146.8](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.7...v2.146.8) (2023-06-26)
 
 

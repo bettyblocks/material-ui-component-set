@@ -61,7 +61,7 @@
     const [errorState, setErrorState] = useState(error);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
-    const [currentValue, setCurrentValue] = useState(useText(value));
+    const [currentValue, setCurrentValue] = usePageState(useText(value));
     const parsedLabel = useText(label);
     const labelText = parsedLabel;
 

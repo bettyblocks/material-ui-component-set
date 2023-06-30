@@ -30,7 +30,7 @@
     const parsedLabel = useText(label);
     const labelText = parsedLabel;
     const resolvedValue = useText(value);
-    const [checked, setChecked] = useState(boolify(resolvedValue));
+    const [checked, setChecked] = usePageState(boolify(resolvedValue));
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const helperTextResolved = useText(helperText);
     const validationValueMissingText = useText(validationValueMissing);
