@@ -10,7 +10,10 @@ import { advanced } from './advanced';
 import { styles } from './styles';
 
 export const options = {
-  property: property('Property', { value: '' }),
+  property: property('Property', {
+    value: '',
+    configuration: { allowFormatting: true },
+  }),
   labelText: variable('Label Text', { value: [] }),
   type: font('Type', { value: 'Body1' }),
   textAlignment: option('CUSTOM', {
