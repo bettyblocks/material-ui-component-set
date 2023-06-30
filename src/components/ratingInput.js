@@ -31,7 +31,7 @@
 
     const labelText = useText(label);
 
-    const [currentValue, setCurrentValue] = useState(
+    const [currentValue, setCurrentValue] = usePageState(
       useText(defaultValue, { rawValue: true }),
     );
     const [isDisabled, setIsDisabled] = useState(disabled);

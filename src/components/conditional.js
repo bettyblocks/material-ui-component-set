@@ -17,6 +17,14 @@
     const isDev = env === 'dev';
     const isPristine = isDev && children.length === 0;
     const isSingleRule = type === 'singleRule';
+
+    const canBeNumber = (value) => {
+      return (
+        (typeof value === 'string' || typeof value === 'number') &&
+        !isNaN(value)
+      );
+    };
+
     const mounted = useRef(false);
     const leftText = useText(left);
     const rightText = useText(right);
@@ -26,8 +34,10 @@
     const logic = useLogic(displayLogic);
 
     const evalCondition = () => {
-      const leftAsNumber = parseFloat(leftValue);
-      const rightAsNumber = parseFloat(rightValue);
+      const [leftParsed, rightParsed] =
+        canBeNumber(leftValue) && canBeNumber(rightValue)
+          ? [parseFloat(leftValue), parseFloat(rightValue)]
+          : [leftValue.toString(), rightValue.toString()];
 
       if (!initVisibility && leftValue === '' && rightValue === '') {
         return false;
@@ -35,28 +45,28 @@
 
       switch (compare) {
         case 'neq':
-          return leftValue !== rightValue;
+          return leftParsed !== rightParsed;
         case 'contains':
-          return leftValue.indexOf(rightValue) > -1;
+          return leftParsed.indexOf(rightParsed) > -1;
         case 'notcontains':
-          return leftValue.indexOf(rightValue) < 0;
+          return leftParsed.indexOf(rightParsed) < 0;
         case 'gt':
-          return leftAsNumber > rightAsNumber;
+          return leftParsed > rightParsed;
         case 'lt':
-          return leftAsNumber < rightAsNumber;
+          return leftParsed < rightParsed;
         case 'gteq':
-          return leftAsNumber >= rightAsNumber;
+          return leftParsed >= rightParsed;
         case 'lteq':
-          return leftAsNumber <= rightAsNumber;
+          return leftParsed <= rightParsed;
         default:
-          return leftValue === rightValue;
+          return leftParsed === rightParsed;
       }
     };
 
     const checkCondition = evalCondition();
 
     useEffect(() => {
-      setLeftValue(leftValue);
+      setLeftValue(leftText);
       setRightValue(rightText);
     }, [leftText, rightText, setLeftValue, setRightValue]);
 
