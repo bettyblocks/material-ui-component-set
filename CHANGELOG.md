@@ -1,3 +1,81 @@
+## [2.147.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.147.0...v2.147.1) (2023-06-30)
+
+
+### Bug Fixes
+
+* typo ([7da9d37](https://github.com/bettyblocks/material-ui-component-set/commit/7da9d371c7f1dc5f894281f694d9112f2ab3c91d))
+
+# [2.147.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.9...v2.147.0) (2023-06-29)
+
+
+### Features
+
+* checkbox writes to state ([5435840](https://github.com/bettyblocks/material-ui-component-set/commit/54358404122a032930c366136256e1c3ae73625e))
+* rename useGlobalState to usePageState ([8038285](https://github.com/bettyblocks/material-ui-component-set/commit/8038285a4796ed0cb6f0adf9599c3c6516b86dfc))
+* **textField:** make currentValue work via useGlobalState hook ([b68c6cf](https://github.com/bettyblocks/material-ui-component-set/commit/b68c6cfb66c1fc8ba5f36461b79d721d18eb923e))
+* use the usePageState hook in the rating component so that its value is also written to state ([88e3429](https://github.com/bettyblocks/material-ui-component-set/commit/88e34296c3998db7ee59f5cfa1448b7b5a609c61))
+
+## [2.146.9](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.8...v2.146.9) (2023-06-29)
+
+
+### Bug Fixes
+
+* action button shows proper message in alert ([1d5be4d](https://github.com/bettyblocks/material-ui-component-set/commit/1d5be4d465d91987317dc05b382efd3c12688d25))
+
+## [2.146.8](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.7...v2.146.8) (2023-06-26)
+
+
+### Bug Fixes
+
+* disable formatting for DatePicker and DateTimePicker ([94d926f](https://github.com/bettyblocks/material-ui-component-set/commit/94d926fda9ac05452ca7527cdd4dfe8a4db49ab8))
+
+## [2.146.7](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.6...v2.146.7) (2023-06-26)
+
+
+### Bug Fixes
+
+* update component prefabs w/ spreading options ([335d4fa](https://github.com/bettyblocks/material-ui-component-set/commit/335d4fa0a37c8e8de3925c1a3e7f5301baa02025))
+
+## [2.146.6](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.5...v2.146.6) (2023-06-26)
+
+
+### Bug Fixes
+
+* allowed relations in update form ([93f4074](https://github.com/bettyblocks/material-ui-component-set/commit/93f4074e22e6ddb2a6d427fda67226c7bbb75e7d))
+* replaced hardcoded disabled kinds ([92410fe](https://github.com/bettyblocks/material-ui-component-set/commit/92410fe436fb61310955fe09d38750ab7d42e1c2))
+
+## [2.146.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.4...v2.146.5) (2023-06-23)
+
+
+### Bug Fixes
+
+* clear value trigger onchange autocomplete ([4fec7b4](https://github.com/bettyblocks/material-ui-component-set/commit/4fec7b4597b640b2f33d1e59f5469d1393c0ba5f))
+
+## [2.146.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.3...v2.146.4) (2023-06-23)
+
+
+### Bug Fixes
+
+* option label with relation data ([d9df8ae](https://github.com/bettyblocks/material-ui-component-set/commit/d9df8aec50d0bc75e6741a7530d5a7f1ea61871f))
+* remove duplicated code ([c04f4f0](https://github.com/bettyblocks/material-ui-component-set/commit/c04f4f0f993e1cd82878361e0b123f447f5823e6))
+* return fallback if acc is null ([8f01963](https://github.com/bettyblocks/material-ui-component-set/commit/8f01963529d184d5ff31638840e19f5bd60ce278))
+
+## [2.146.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.2...v2.146.3) (2023-06-23)
+
+
+### Bug Fixes
+
+* option label relation in select ([90d18d5](https://github.com/bettyblocks/material-ui-component-set/commit/90d18d542b0fd21fbf4716a586137eb17538da29))
+* return fallback if acc is null ([8046c24](https://github.com/bettyblocks/material-ui-component-set/commit/8046c249600cce0cb6dc430088d38f262f2d627b))
+
+## [2.146.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.1...v2.146.2) (2023-06-21)
+
+
+### Bug Fixes
+
+* add debouncer for currentValue ([4a0a9e3](https://github.com/bettyblocks/material-ui-component-set/commit/4a0a9e3c4518e67a7216eeb4b3f2bd17399a53ff))
+* autcomplete is using old value ([9c41f7e](https://github.com/bettyblocks/material-ui-component-set/commit/9c41f7e73af9381bead157d5f3ae92099b7a5217))
+
 ## [2.146.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.0...v2.146.1) (2023-06-19)
 
 

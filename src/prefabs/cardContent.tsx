@@ -1,4 +1,4 @@
-import { font, Icon, prefab, toggle } from '@betty-blocks/component-sdk';
+import { font, Icon, prefab } from '@betty-blocks/component-sdk';
 import { CardContent, Text, textOptions } from './structures';
 
 const attr = {
@@ -13,7 +13,10 @@ export default prefab('Card Content', attr, undefined, [
       {
         options: {
           ...textOptions,
-          type: font('Text style', { value: ['Title5'] }),
+          type: font('Text style', {
+            ...textOptions.type('type'),
+            value: ['Title5'],
+          }),
         },
       },
       [],
@@ -22,9 +25,9 @@ export default prefab('Card Content', attr, undefined, [
       {
         options: {
           ...textOptions,
-          type: font('Text style', { value: ['Body2'] }),
-          useInnerHtml: toggle('Display Rich Text', {
-            value: false,
+          type: font('Text style', {
+            ...textOptions.type('type'),
+            value: ['Body2'],
           }),
         },
       },

@@ -90,6 +90,7 @@
     const initalValue = defaultValue.replace(/\n/g, '');
     const [value, setValue] = useState(initalValue);
     const [debouncedInputValue, setDebouncedInputValue] = useState();
+    const [debouncedCurrentValue, setDebouncedCurrentValue] = useState();
     const [interactionFilter, setInteractionFilter] = useState({});
     const defaultValueEvaluatedRef = useRef(false);
 
@@ -276,10 +277,11 @@
     const optionFilter = useFilter(filterRaw || {});
 
     // We need to do this, because options.filter is not immutable
-    const filter = { ...optionFilter };
+    let filter = { ...optionFilter };
 
     const searchPropIsNumber = numberPropTypes.includes(searchProp.kind);
     const valuePropIsNumber = numberPropTypes.includes(valueProp.kind);
+    const labelPropIsNumber = numberPropTypes.includes(labelProperty.kind);
 
     /*
      * Build up group array for grouping options
@@ -298,6 +300,16 @@
         group = groupByPath.map((propertyId) => getProperty(propertyId).name);
       }
     }
+
+    /*
+     * Build up array for relational label
+     */
+    const idOrPathLabel =
+      typeof labelPropertyId.id !== 'undefined'
+        ? labelPropertyId.id
+        : labelPropertyId;
+    const labelPropertyPath =
+      typeof idOrPathLabel === 'string' ? [idOrPathLabel] : idOrPathLabel;
 
     /*
      * We extend the option filter with the value of the `value` state and the value of the `inputValue` state.
@@ -329,11 +341,24 @@
         },
       ];
     } else if (debouncedInputValue) {
-      filter[searchProp.name] = {
-        [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
-          ? parseFloat(debouncedInputValue, 10)
-          : debouncedInputValue,
-      };
+      if (labelPropertyPath.length > 1) {
+        const newFilter = {
+          [labelPropIsNumber ? 'eq' : 'matches']: labelPropIsNumber
+            ? parseFloat(debouncedInputValue, 10)
+            : debouncedInputValue,
+        };
+        const resolvedUuids = labelPropertyPath.map((u) => getProperty(u).name);
+        const resolvedFilter = resolvedUuids.reduceRight((acc, q) => {
+          return { [q]: acc };
+        }, newFilter);
+        filter = resolvedFilter;
+      } else {
+        filter[searchProp.name] = {
+          [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
+            ? parseFloat(debouncedInputValue, 10)
+            : debouncedInputValue,
+        };
+      }
     } else if (value !== '') {
       filter._or = [
         {
@@ -588,15 +613,17 @@
         return null;
       }
 
-      return currentOptions.find((option) => {
-        if (typeof value === 'string') {
-          return valuePropIsNumber
-            ? option[valueProp.name] === parseFloat(value, 10)
-            : option[valueProp.name] === value;
-        }
+      return (
+        currentOptions.find((option) => {
+          if (typeof value === 'string') {
+            return valuePropIsNumber
+              ? option[valueProp.name] === parseFloat(value, 10)
+              : option[valueProp.name] === value;
+          }
 
-        return option[valueProp.name] === value[valueProp.name];
-      });
+          return option[valueProp.name] === value[valueProp.name];
+        }) || null
+      );
     };
 
     /*
@@ -622,27 +649,60 @@
 
     const currentValue = getValue();
 
-    // In the first render we want to make sure to convert the default value
-    if (!inputValue && currentValue) {
-      setValue(currentValue);
-      if (isListProperty) {
-        setInputValue(currentValue);
+    useEffect(() => {
+      if (currentValue !== debouncedCurrentValue) {
+        setTimeout(() => {
+          setDebouncedCurrentValue(currentValue);
+        }, 250);
       } else {
-        setInputValue(currentValue[searchProp.name].toString());
+        let triggerEventValue = '';
+
+        if (value) {
+          triggerEventValue = !isListProperty ? value[valueProp.name] : value;
+        }
+        changeContext.current = { modelData: value };
+        B.triggerEvent('onChange', triggerEventValue, changeContext.current);
       }
-    }
+    }, [currentValue]);
 
     const renderLabel = (option) => {
       let optionLabel = '';
-
-      if (option && option[searchProp.name]) {
-        optionLabel = option[searchProp.name];
+      const emptyPropertyPath =
+        labelPropertyPath.length > 0 && labelPropertyPath[0] !== '';
+      if (emptyPropertyPath) {
+        optionLabel = labelPropertyPath.reduce((acc, propertyId) => {
+          if (!acc) {
+            return null;
+          }
+          return acc[getProperty(propertyId).name] || null;
+        }, option);
+      } else {
+        const modelReference = B.getModel(referenceModelId || modelId);
+        if (modelReference.labelPropertyId) {
+          const preDefinedLabelProperty = B.getProperty(
+            modelReference.labelPropertyId,
+          ).name;
+          optionLabel = option[preDefinedLabelProperty];
+        } else {
+          optionLabel = option.id;
+        }
       }
 
       return optionLabel === '' || optionLabel === null
         ? '-- empty --'
         : optionLabel.toString();
     };
+
+    // In the first render we want to make sure to convert the default value
+    if (!inputValue && currentValue) {
+      setValue(currentValue);
+      if (isListProperty) {
+        setInputValue(currentValue);
+      } else {
+        const newLabel = renderLabel(currentValue);
+        setInputValue(newLabel);
+      }
+    }
 
     const MuiAutocomplete = (
       <FormControl
@@ -668,22 +728,7 @@
           })}
           onChange={(_, newValue) => {
             setValue(newValue || '');
-
-            let triggerEventValue;
-
-            if (!isListProperty) {
-              triggerEventValue = currentValue
-                ? currentValue[valueProp.name]
-                : '';
-            } else if (isListProperty) {
-              triggerEventValue = currentValue || '';
-            }
-            changeContext.current = { modelData: newValue };
-            B.triggerEvent(
-              'onChange',
-              triggerEventValue,
-              changeContext.current,
-            );
+            setDebouncedCurrentValue(newValue);
           }}
           onInputChange={(event, newValue) => {
             let validation = event ? event.target.validity : null;
@@ -717,7 +762,7 @@
                   type="hidden"
                   key={value[valueProp.name] ? 'hasValue' : 'isEmpty'}
                   name={nameAttribute || name}
-                  value={getHiddenValue(currentValue)}
+                  value={getHiddenValue(debouncedCurrentValue)}
                 />
               )}
               <TextField

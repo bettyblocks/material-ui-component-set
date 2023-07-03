@@ -70,6 +70,7 @@
     "useCallback": "readonly",
     "useEffect": "readonly",
     "useLocation": "readonly",
+    "usePageState": "readonly",
     "useReducer": "readonly",
     "useRef": "readonly",
     "useRouter": "readonly",

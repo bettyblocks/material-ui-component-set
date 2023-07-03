@@ -20,7 +20,7 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
       - uses: actions/setup-node@v3
         with:
-          node-version: 16.11.1
+          node-version: 16.14.0
       - name: Install packages
         run: yarn install
 
