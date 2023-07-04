@@ -567,6 +567,10 @@
                 },
             },
           },
+        '& [aria-hidden="true"].MuiSelect-nativeInput': {
+          width: 0,
+          height: 0,
+        },
       },
       clearLabel: {
         fontStyle: 'italic',
