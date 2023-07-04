@@ -8,6 +8,7 @@ import { Box } from './Box';
 import { BreadcrumbItem } from './BreadcrumbItem';
 import { Breadcrumbs } from './Breadcrumbs';
 import { Button } from './Button';
+import { Calendar } from './Calendar';
 import { Card } from './Card';
 import { CardActions } from './CardActions';
 import { CardContent } from './CardContent';
@@ -138,6 +139,7 @@ export {
   BreadcrumbItem,
   Breadcrumbs,
   Button,
+  Calendar,
   Card,
   CardActions,
   CardContent,
