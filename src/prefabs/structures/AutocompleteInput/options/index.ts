@@ -28,7 +28,10 @@ export const options = {
       condition: hideIf('property', 'EQ', ''),
     },
   }),
-  label: variable('Label', { value: [] }),
+  label: variable('Label', {
+    value: [],
+    configuration: { allowFormatting: false, allowPropertyName: true },
+  }),
   value: variable('Value', { value: [] }),
   optionType: buttongroup(
     'Option type',
