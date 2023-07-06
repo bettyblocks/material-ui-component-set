@@ -1,3 +1,10 @@
+# [2.148.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.147.1...v2.148.0) (2023-07-03)
+
+
+### Features
+
+* make input value option work with state ([e66ca5f](https://github.com/bettyblocks/material-ui-component-set/commit/e66ca5f7bf0747b6bb9372c4f7a1ce128e0d753a))
+
 ## [2.147.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.147.0...v2.147.1) (2023-06-30)
 
 
