@@ -522,10 +522,119 @@ const attributes = {
     'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/56b89343f4ef499393e162173777c9ec',
 };
 
+const questionTypes = [
+  {
+    label: 'Text question',
+    structure: textWidget,
+    interactions: [
+      {
+        name: 'Submit',
+        sourceEvent: 'onBlur',
+        ref: {
+          targetComponentId: '#textQuestionForm',
+          sourceComponentId: '#textInput',
+        },
+        type: InteractionType.Custom,
+      },
+    ],
+  },
+  {
+    label: 'Multiple choice question',
+    structure: radioWidget,
+    interactions: [
+      {
+        name: 'Submit',
+        sourceEvent: 'onChange',
+        ref: {
+          targetComponentId: '#radioQuestionForm',
+          sourceComponentId: '#radioInput',
+        },
+        type: InteractionType.Custom,
+      },
+    ],
+  },
+  {
+    label: 'Number question',
+    structure: numberWidget,
+    interactions: [
+      {
+        name: 'Submit',
+        sourceEvent: 'onBlur',
+        ref: {
+          targetComponentId: '#numberQuestionForm',
+          sourceComponentId: '#numberInput',
+        },
+        type: InteractionType.Custom,
+      },
+    ],
+  },
+  {
+    label: 'Date question',
+    structure: dateWidget,
+    interactions: [
+      {
+        name: 'Submit',
+        sourceEvent: 'onChange',
+        ref: {
+          targetComponentId: '#dateQuestionForm',
+          sourceComponentId: '#dateInput',
+        },
+        type: InteractionType.Custom,
+      },
+    ],
+  },
+  {
+    label: 'Checkbox question',
+    structure: checkboxWidget,
+    interactions: [
+      {
+        name: 'Submit',
+        sourceEvent: 'onChange',
+        ref: {
+          targetComponentId: '#checkboxQuestionForm',
+          sourceComponentId: '#checkboxInput',
+        },
+        type: InteractionType.Custom,
+      },
+    ],
+  },
+  {
+    label: 'Dropdown question',
+    structure: dropdownWidget,
+    interactions: [
+      {
+        name: 'Submit',
+        sourceEvent: 'onChange',
+        ref: {
+          targetComponentId: '#dropdownQuestionForm',
+          sourceComponentId: '#dropdownInput',
+        },
+        type: InteractionType.Custom,
+      },
+    ],
+  },
+  {
+    label: 'Multiline question',
+    structure: multilineWidget,
+    interactions: [
+      {
+        name: 'Submit',
+        sourceEvent: 'onBlur',
+        ref: {
+          targetComponentId: '#multilineQuestionForm',
+          sourceComponentId: '#textInput',
+        },
+        type: InteractionType.Custom,
+      },
+    ],
+  },
+];
+
 const children = [
   Tab(
     {
       label: 'Section',
+      ref: { id: '#newSection' },
       options: {
         ...tabOptions,
         label: variable('Section title', {
@@ -636,6 +745,32 @@ const children = [
               label: 'Question drop area',
               options: {
                 ...boxOptions,
+                addChild: addChild('Add question', {
+                  value: {
+                    children: questionTypes,
+                    addChildWizardType: 'ChildSelector',
+                  },
+                  configuration: {
+                    pushToWrapper: {
+                      name: 'Questionnaire',
+                      condition: {
+                        type: 'SHOW',
+                        option: 'questionnaireSections',
+                        comparator: 'EQ_COMPONENT_ID',
+                        value: '#newSection',
+                      },
+                    },
+                  },
+                }),
+                reconfigure: reconfigure('Reconfigure questions', {
+                  value: {
+                    children: questionTypes,
+                    reconfigureWizardType: 'ChildrenSelector',
+                  },
+                  ref: {
+                    id: '#QuestionsReconfigure',
+                  },
+                }),
                 innerSpacing: sizes('Inner space', {
                   value: ['L', '0rem', '0rem', '0rem'],
                 }),
@@ -650,114 +785,6 @@ const children = [
       ),
     ],
   ),
-];
-
-const questionTypes = [
-  {
-    label: 'Text question',
-    structure: textWidget,
-    interactions: [
-      {
-        name: 'Submit',
-        sourceEvent: 'onBlur',
-        ref: {
-          targetComponentId: '#textQuestionForm',
-          sourceComponentId: '#textInput',
-        },
-        type: InteractionType.Custom,
-      },
-    ],
-  },
-  {
-    label: 'Multiple choice question',
-    structure: radioWidget,
-    interactions: [
-      {
-        name: 'Submit',
-        sourceEvent: 'onChange',
-        ref: {
-          targetComponentId: '#radioQuestionForm',
-          sourceComponentId: '#radioInput',
-        },
-        type: InteractionType.Custom,
-      },
-    ],
-  },
-  {
-    label: 'Number question',
-    structure: numberWidget,
-    interactions: [
-      {
-        name: 'Submit',
-        sourceEvent: 'onBlur',
-        ref: {
-          targetComponentId: '#numberQuestionForm',
-          sourceComponentId: '#numberInput',
-        },
-        type: InteractionType.Custom,
-      },
-    ],
-  },
-  {
-    label: 'Date question',
-    structure: dateWidget,
-    interactions: [
-      {
-        name: 'Submit',
-        sourceEvent: 'onChange',
-        ref: {
-          targetComponentId: '#dateQuestionForm',
-          sourceComponentId: '#dateInput',
-        },
-        type: InteractionType.Custom,
-      },
-    ],
-  },
-  {
-    label: 'Checkbox question',
-    structure: checkboxWidget,
-    interactions: [
-      {
-        name: 'Submit',
-        sourceEvent: 'onChange',
-        ref: {
-          targetComponentId: '#checkboxQuestionForm',
-          sourceComponentId: '#checkboxInput',
-        },
-        type: InteractionType.Custom,
-      },
-    ],
-  },
-  {
-    label: 'Dropdown question',
-    structure: dropdownWidget,
-    interactions: [
-      {
-        name: 'Submit',
-        sourceEvent: 'onChange',
-        ref: {
-          targetComponentId: '#dropdownQuestionForm',
-          sourceComponentId: '#dropdownInput',
-        },
-        type: InteractionType.Custom,
-      },
-    ],
-  },
-  {
-    label: 'Multiline question',
-    structure: multilineWidget,
-    interactions: [
-      {
-        name: 'Submit',
-        sourceEvent: 'onBlur',
-        ref: {
-          targetComponentId: '#multilineQuestionForm',
-          sourceComponentId: '#textInput',
-        },
-        type: InteractionType.Custom,
-      },
-    ],
-  },
 ];
 
 const prefabStructure = [
@@ -780,15 +807,6 @@ const prefabStructure = [
             ref: {
               componentId: '#Tabs',
               optionId: '#TabsAddChild',
-            },
-          },
-        }),
-        addQuestion: linked({
-          label: 'Add question',
-          value: {
-            ref: {
-              componentId: '#DropArea',
-              optionId: '#AddQuestion',
             },
           },
         }),
@@ -816,6 +834,23 @@ const prefabStructure = [
             ref: {
               componentId: '#Tabs',
               optionId: '#TabsSelectedTab',
+            },
+          },
+        }),
+        addQuestion: linked({
+          label: 'Add question',
+          value: {
+            ref: {
+              componentId: '#DropArea',
+              optionId: '#AddQuestion',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'questionnaireSections',
+              comparator: 'EQ',
+              value: 1,
             },
           },
         }),
@@ -2044,6 +2079,22 @@ const prefabStructure = [
                                                                                       },
                                                                                     ref: {
                                                                                       id: '#AddQuestion',
+                                                                                    },
+                                                                                  },
+                                                                                ),
+                                                                              reconfigure:
+                                                                                reconfigure(
+                                                                                  'Reconfigure questions',
+                                                                                  {
+                                                                                    value:
+                                                                                      {
+                                                                                        children:
+                                                                                          questionTypes,
+                                                                                        reconfigureWizardType:
+                                                                                          'ChildrenSelector',
+                                                                                      },
+                                                                                    ref: {
+                                                                                      id: '#QuestionsReconfigure',
                                                                                     },
                                                                                   },
                                                                                 ),

@@ -37,6 +37,7 @@ export const numberWidget = [
           configuration: {
             showOnDrop: true,
           },
+          showInReconfigure: true,
         }),
         label: linked({
           label: 'Label',
