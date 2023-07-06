@@ -770,17 +770,6 @@ const children = [
                   ref: {
                     id: '#QuestionsReconfigure',
                   },
-                  configuration: {
-                    pushToWrapper: {
-                      name: 'Questionnaire',
-                      condition: {
-                        type: 'SHOW',
-                        option: 'questionnaireSections',
-                        comparator: 'EQ_COMPONENT_ID',
-                        value: '#newSection',
-                      },
-                    },
-                  },
                 }),
                 innerSpacing: sizes('Inner space', {
                   value: ['L', '0rem', '0rem', '0rem'],
@@ -854,23 +843,6 @@ const prefabStructure = [
             ref: {
               componentId: '#DropArea',
               optionId: '#AddQuestion',
-            },
-          },
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'questionnaireSections',
-              comparator: 'EQ',
-              value: 1,
-            },
-          },
-        }),
-        reconfigureQuestion: linked({
-          label: 'Reconfigure questions',
-          value: {
-            ref: {
-              componentId: '#DropArea',
-              optionId: '#QuestionsReconfigure',
             },
           },
           configuration: {
