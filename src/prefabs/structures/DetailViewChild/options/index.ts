@@ -14,7 +14,10 @@ export const options = {
     value: '',
     configuration: { allowFormatting: true },
   }),
-  labelText: variable('Label Text', { value: [] }),
+  labelText: variable('Label Text', {
+    value: [],
+    configuration: { allowFormatting: false, allowPropertyName: true },
+  }),
   type: font('Type', { value: 'Body1' }),
   textAlignment: option('CUSTOM', {
     value: 'left',

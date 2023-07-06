@@ -12,7 +12,7 @@
     const isDev = env === 'dev';
     const isPristine = propertyIsEmpty && isDev;
 
-    const { name: propertyName } = getProperty(property) || {};
+    const { label: propertyLabel } = getProperty(property) || {};
     const Tag = {
       Title1: 'h1',
       Title2: 'h2',
@@ -25,10 +25,10 @@
     }[options.type || 'Body1'];
 
     const parsedContent = isDev
-      ? `{{ ${propertyName} }}`
+      ? `{{ ${propertyLabel} }}`
       : useText([{ ...property, type: 'PROPERTY_LABEL' }]);
     const customLabel = useText(labelText);
-    const propName = isDev ? `{{ ${propertyName} }}` : useText([property]);
+    const propName = isDev ? `{{ ${propertyLabel} }}` : useText([property]);
 
     const Content =
       children.length > 0 ? (

@@ -5501,7 +5501,7 @@ const beforeCreate = ({
         (prop: any) => prop.id === returnObject.id[0],
       );
       if (property) {
-        returnObject.name = `{{ ${model.name}.${property.name} }}`;
+        returnObject.name = `{{ ${model.name}.${property.label} }}`;
       } else {
         returnObject.name = `{{ ${model.name}.${obj.label} }}`;
       }
