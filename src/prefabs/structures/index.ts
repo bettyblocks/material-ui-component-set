@@ -15,6 +15,8 @@ import { CardHeader } from './CardHeader';
 import { CardMedia } from './CardMedia';
 import { Carousel } from './Carousel';
 import { CarouselImage } from './CarouselImage';
+import { CheckboxInput } from './CheckboxInput';
+import { CheckboxGroup } from './CheckboxGroup';
 import { Chip } from './Chip';
 import { Column } from './Column';
 import { Conditional } from './Conditional';
@@ -80,6 +82,8 @@ import { cardHeaderOptions } from './CardHeader/options';
 import { cardMediaOptions } from './CardMedia/options';
 import { carouselOptions } from './Carousel/options';
 import { carouselImageOptions } from './CarouselImage/options';
+import { checkboxInputOptions } from './CheckboxInput/options';
+import { checkboxGroupInputOptions } from './CheckboxGroup/options';
 import { chipOptions } from './Chip/options';
 import { columnOptions } from './Column/options';
 import { conditionalOptions } from './Conditional/options';
@@ -145,6 +149,8 @@ export {
   CardMedia,
   Carousel,
   CarouselImage,
+  CheckboxInput,
+  CheckboxGroup,
   Chip,
   Column,
   Conditional,
@@ -210,6 +216,8 @@ export {
   cardMediaOptions,
   carouselOptions,
   carouselImageOptions,
+  checkboxInputOptions,
+  checkboxGroupInputOptions,
   chipOptions,
   columnOptions,
   conditionalOptions,
