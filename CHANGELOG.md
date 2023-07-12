@@ -1,3 +1,24 @@
+## [2.148.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.148.0...v2.148.1) (2023-07-12)
+
+
+### Bug Fixes
+
+* move background image setting logic from styles to JSX to prevent invalid hooks usage ([b3c87f8](https://github.com/bettyblocks/material-ui-component-set/commit/b3c87f8847b39859615236495e926137c0a73a21))
+
+# [2.148.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.147.1...v2.148.0) (2023-07-03)
+
+
+### Features
+
+* make input value option work with state ([e66ca5f](https://github.com/bettyblocks/material-ui-component-set/commit/e66ca5f7bf0747b6bb9372c4f7a1ce128e0d753a))
+
+## [2.147.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.147.0...v2.147.1) (2023-06-30)
+
+
+### Bug Fixes
+
+* typo ([7da9d37](https://github.com/bettyblocks/material-ui-component-set/commit/7da9d371c7f1dc5f894281f694d9112f2ab3c91d))
+
 # [2.147.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.146.9...v2.147.0) (2023-06-29)
 
 
