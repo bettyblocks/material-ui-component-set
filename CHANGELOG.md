@@ -1,3 +1,10 @@
+## [2.148.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.148.0...v2.148.1) (2023-07-12)
+
+
+### Bug Fixes
+
+* move background image setting logic from styles to JSX to prevent invalid hooks usage ([b3c87f8](https://github.com/bettyblocks/material-ui-component-set/commit/b3c87f8847b39859615236495e926137c0a73a21))
+
 # [2.148.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.147.1...v2.148.0) (2023-07-03)
 
 
