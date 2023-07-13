@@ -5,6 +5,7 @@ import {
   CheckboxGroup,
   CheckboxInput,
   DateTimePicker,
+  FileUpload,
   MultiAutocomplete,
   RadioInput,
   SelectInput,
@@ -13,6 +14,7 @@ import {
   checkboxGroupInputOptions,
   checkboxInputOptions,
   dateTimePickerOptions,
+  fileUploadOptions,
   multiAutocompleteOptions,
   radioInputOptions,
   selectInputOptions,
@@ -48,5 +50,8 @@ export const children = [
   }),
   MultiAutocomplete({
     options: { ...multiAutocompleteOptions, ...defaultOptions },
+  }),
+  FileUpload({
+    options: { ...fileUploadOptions, ...defaultOptions },
   }),
 ];

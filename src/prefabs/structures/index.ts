@@ -33,6 +33,7 @@ import { Drawer } from './Drawer';
 import { DrawerBar } from './DrawerBar';
 import { DrawerContainer } from './DrawerContainer';
 import { ExpansionPanel } from './ExpansionPanel';
+import { FileUpload } from './FileUpload';
 import { FilterComponent } from './FilterComponent';
 import { Grid } from './Grid';
 import { Icon } from './Icon';
@@ -100,6 +101,7 @@ import { drawerOptions } from './Drawer/options';
 import { drawerBarOptions } from './DrawerBar/options';
 import { drawerContainerOptions } from './DrawerContainer/options';
 import { expansionPanelOptions } from './ExpansionPanel/options';
+import { fileUploadOptions } from './FileUpload/options';
 import { filterComponentOptions } from './FilterComponent/options';
 import { gridOptions } from './Grid/options';
 import { iconOptions } from './Icon/options';
@@ -167,6 +169,7 @@ export {
   DrawerBar,
   DrawerContainer,
   ExpansionPanel,
+  FileUpload,
   FilterComponent,
   FormErrorAlert,
   FormSuccessAlert,
@@ -234,6 +237,7 @@ export {
   drawerBarOptions,
   drawerContainerOptions,
   expansionPanelOptions,
+  fileUploadOptions,
   filterComponentOptions,
   gridOptions,
   iconOptions,
