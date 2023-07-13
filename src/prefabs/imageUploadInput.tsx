@@ -4,8 +4,17 @@ import {
   Icon,
   PrefabComponentOption,
   prefab,
+  showIfTrue,
+  size,
+  toggle,
+  variable,
 } from '@betty-blocks/component-sdk';
-import { FileUpload } from './structures/FileUpload';
+import {
+  Button,
+  FileUpload,
+  buttonOptions,
+  fileUploadOptions,
+} from './structures';
 
 const beforeCreate = ({
   close,
@@ -226,6 +235,12 @@ const beforeCreate = ({
               },
             }),
           );
+
+          setOption(newPrefab.structure[0], 'accept', (option) => ({
+            ...option,
+            value: ['image/*'],
+          }));
+
           if (validate()) {
             if (
               (selectedPrefab?.name === BettyPrefabs.UPDATE_FORM ||
@@ -282,6 +297,71 @@ const attr = {
   ],
 };
 
+const optionCategories = [
+  {
+    label: 'Validation',
+    expanded: false,
+    members: [
+      'required',
+      'hideDefaultError',
+      'accept',
+      'maxFileSize',
+      'maxFileSizeMessage',
+    ],
+  },
+  {
+    label: 'Styling',
+    expanded: false,
+    members: [
+      'hideLabel',
+      'labelColor',
+      'helperColor',
+      'errorColor',
+      'showImagePreview',
+      'imagePreviewWidth',
+      'imagePreviewHeight',
+    ],
+  },
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['nameAttribute', 'dataComponentAttribute', 'actionVariableId'],
+  },
+];
+
 export default prefab('Image Upload', attr, beforeCreate, [
-  FileUpload({ supportImages: true, label: 'Image Upload' }),
+  FileUpload(
+    {
+      label: 'Image Upload',
+      optionCategories,
+      options: {
+        ...fileUploadOptions,
+        showImagePreview: toggle('Show Image preview', { value: true }),
+        imagePreviewWidth: size('Image preview width', {
+          value: '200px',
+          configuration: {
+            as: 'UNIT',
+            condition: showIfTrue('showImagePreview'),
+          },
+        }),
+        imagePreviewHeight: size('Image preview height', {
+          value: '112px',
+          configuration: {
+            as: 'UNIT',
+            condition: showIfTrue('showImagePreview'),
+          },
+        }),
+      },
+    },
+    [
+      Button({
+        label: 'upload',
+        options: {
+          ...buttonOptions,
+          buttonText: variable('Button text', { value: ['Upload'] }),
+          fullWidth: toggle('Full width', { value: true }),
+        },
+      }),
+    ],
+  ),
 ]);
