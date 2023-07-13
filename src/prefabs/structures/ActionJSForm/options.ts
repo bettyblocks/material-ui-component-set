@@ -23,7 +23,7 @@ export const options = {
     value: '',
     configuration: { condition: showIf('recordVariable', 'EQ', 'never') },
   }),
-  reconfigure: reconfigure('Reconfigure form', {
+  reconfigure: reconfigure('Reconfigure', {
     value: {
       children,
       reconfigureWizardType: 'ChildrenSelector',
