@@ -1974,20 +1974,20 @@ const drawerContainer = DrawerContainer(
                                                       },
                                                     },
                                                   ),
-                                                  reconfigure: reconfigure(
-                                                    'Reconfigure detail view',
-                                                    {
-                                                      ref: {
-                                                        id: '#reconfigureDetail',
-                                                      },
-                                                      value: {
-                                                        children:
-                                                          detailChildren,
-                                                        reconfigureWizardType:
-                                                          'ChildrenSelector',
-                                                      },
-                                                    },
-                                                  ),
+                                                  // reconfigure: reconfigure(
+                                                  //   'Reconfigure detail view',
+                                                  //   {
+                                                  //     ref: {
+                                                  //       id: '#reconfigureDetail',
+                                                  //     },
+                                                  //     value: {
+                                                  //       children:
+                                                  //         detailChildren,
+                                                  //       reconfigureWizardType:
+                                                  //         'ChildrenSelector',
+                                                  //     },
+                                                  //   },
+                                                  // ),
                                                   addChild: addChild(
                                                     'Add detail view',
                                                     {
