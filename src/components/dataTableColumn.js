@@ -47,16 +47,16 @@
         );
     const bodyText = useText(content);
     const propContent = isDev ? (
-      `{{ ${propertyName} }}`
+      `{{ ${propertyLabel} }}`
     ) : (
       <>{!isBooleanProperty ? <Property id={property} /> : checkboxStatus}</>
     );
 
-    let tooltipText = isDev ? `{{ ${propertyName} }}` : useText([property]);
+    let tooltipText = isDev ? `{{ ${propertyLabel} }}` : useText([property]);
 
     let columnText = propertyName ? propContent : contentPlaceholder;
     if (type === 'ME_PROPERTY') {
-      columnText = isDev ? `{{ ${propertyName} }}` : useText([property]);
+      columnText = isDev ? `{{ ${propertyLabel} }}` : useText([property]);
     }
 
     if (bodyText) {

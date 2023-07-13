@@ -28,7 +28,10 @@ export const checkboxInputOptions = {
     },
   }),
 
-  label: variable('Label', { value: ['Checkbox'] }),
+  label: variable('Label', {
+    value: ['Checkbox'],
+    configuration: { allowFormatting: false, allowPropertyName: true },
+  }),
   value: variable('Value', { value: [] }),
   disabled: toggle('Disabled'),
   helperText: variable('Helper text'),
