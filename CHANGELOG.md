@@ -1,3 +1,11 @@
+# [2.150.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.149.0...v2.150.0) (2023-07-13)
+
+
+### Features
+
+* add dreconfigure to backoffice ([24f3a00](https://github.com/bettyblocks/material-ui-component-set/commit/24f3a00ea8d71b4aa5ca43b1d29b81ad0eb775c8))
+* add propertylabel option to inputs ([4fffb25](https://github.com/bettyblocks/material-ui-component-set/commit/4fffb255b11f8ce0b2905aac7b6d989a1a1e40a7))
+
 # [2.149.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.148.1...v2.149.0) (2023-07-12)
 
 
