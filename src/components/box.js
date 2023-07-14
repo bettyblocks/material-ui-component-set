@@ -9,7 +9,7 @@
     const {
       alignment,
       backgroundColor,
-      backgroundUrl,
+      backgroundUrl: backgroundURLInput,
       borderColor,
       dataComponentAttribute,
       displayLogic,
@@ -20,19 +20,23 @@
     const isDev = env === 'dev';
     const hasBackgroundColor = backgroundColor !== 'Transparent';
     const hasBorderColor = borderColor !== 'Transparent';
-    const hasBackgroundImage = useText(backgroundUrl) !== '';
+    const backgroundURL = useText(backgroundURLInput);
+    const [interactionBackground, setInteractionBackground] = useState('');
+    const backgroundImage = interactionBackground || backgroundURL || null;
     const isEmpty = isDev && children.length === 0;
     const isPristine =
-      isEmpty && !hasBackgroundColor && !hasBorderColor && !hasBackgroundImage;
+      isEmpty &&
+      !hasBackgroundColor &&
+      !hasBorderColor &&
+      backgroundImage === null;
     const isFlex = alignment !== 'none' || valignment !== 'none';
     const opac = transparent ? 0 : 1;
     const [opacity, setOpacity] = useState(opac);
-    const [interactionBackground, setInteractionBackground] = useState('');
     const logic = useLogic(displayLogic);
 
     useEffect(() => {
       B.defineFunction('setCustomBackgroundImage', (url) => {
-        setInteractionBackground(`url("${url}")`);
+        setInteractionBackground(url);
       });
 
       B.defineFunction('removeCustomBackgroundImage', () => {
@@ -73,14 +77,12 @@
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        style={
-          interactionBackground
-            ? {
-                backgroundImage: interactionBackground,
-                opacity,
-              }
-            : { opacity }
-        }
+        style={{
+          ...(backgroundImage !== null && {
+            backgroundImage: `url("${backgroundURL}")`,
+          }),
+          opacity,
+        }}
       >
         {isPristine ? useText(emptyPlaceHolderText) : children}
       </Box>
@@ -102,7 +104,7 @@
     return isDev ? <div className={classes.wrapper}>{BoxCmp}</div> : BoxCmp;
   })(),
   styles: (B) => (theme) => {
-    const { color: colorFunc, env, mediaMinWidth, Styling, useText } = B;
+    const { color: colorFunc, env, mediaMinWidth, Styling } = B;
     const style = new Styling(theme);
     const isDev = env === 'dev';
     const getColorAlpha = (col, val) => colorFunc.alpha(col, val);
@@ -227,11 +229,6 @@
                 style.getColor(backgroundColor),
                 backgroundColorAlpha / 100,
               ),
-        backgroundImage: ({ options: { backgroundUrl } }) => {
-          // eslint-disable-next-line react-hooks/rules-of-hooks
-          const image = useText(backgroundUrl);
-          return image && `url("${image}")`;
-        },
         backgroundSize: ({ options: { backgroundSize } }) => backgroundSize,
         backgroundPosition: ({ options: { backgroundPosition } }) =>
           backgroundPosition,

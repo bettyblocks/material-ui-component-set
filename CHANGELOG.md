@@ -1,3 +1,32 @@
+# [2.150.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.149.0...v2.150.0) (2023-07-13)
+
+
+### Features
+
+* add dreconfigure to backoffice ([24f3a00](https://github.com/bettyblocks/material-ui-component-set/commit/24f3a00ea8d71b4aa5ca43b1d29b81ad0eb775c8))
+* add propertylabel option to inputs ([4fffb25](https://github.com/bettyblocks/material-ui-component-set/commit/4fffb255b11f8ce0b2905aac7b6d989a1a1e40a7))
+
+# [2.149.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.148.1...v2.149.0) (2023-07-12)
+
+
+### Features
+
+* Store datetime in ISO-format ([261d27c](https://github.com/bettyblocks/material-ui-component-set/commit/261d27c3e8740077485348adca8c1e6f6b9606b1))
+
+## [2.148.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.148.0...v2.148.1) (2023-07-12)
+
+
+### Bug Fixes
+
+* move background image setting logic from styles to JSX to prevent invalid hooks usage ([b3c87f8](https://github.com/bettyblocks/material-ui-component-set/commit/b3c87f8847b39859615236495e926137c0a73a21))
+
+# [2.148.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.147.1...v2.148.0) (2023-07-03)
+
+
+### Features
+
+* make input value option work with state ([e66ca5f](https://github.com/bettyblocks/material-ui-component-set/commit/e66ca5f7bf0747b6bb9372c4f7a1ce128e0d753a))
+
 ## [2.147.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.147.0...v2.147.1) (2023-06-30)
 
 
