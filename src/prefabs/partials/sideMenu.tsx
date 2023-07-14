@@ -3,14 +3,19 @@ import {
   ThemeColor,
   addChild,
   color,
+  endpoint,
   font,
   icon,
+  linked,
   option,
   prefab,
+  reconfigure,
   showIf,
+  size,
   sizes,
   toggle,
   variable,
+  wrapper,
 } from '@betty-blocks/component-sdk';
 import {
   Box,
@@ -37,6 +42,7 @@ const children = [
       primaryText: variable('Menu item name', {
         value: ['New menu item'],
         showInAddChild: true,
+        showInReconfigure: true,
         configuration: {
           showOnDrop: true,
         },
@@ -67,6 +73,12 @@ const children = [
           condition: showIf('avatarOrIcon', 'EQ', 'icon'),
         },
       }),
+      linkTo: endpoint('Page', {
+        ...listItemOptions.linkTo('linkTo'),
+        showInAddChild: true,
+        showInReconfigure: true,
+        value: '',
+      }),
       selected: toggle('Selected', { value: false }),
       titleColor: color('Title color', {
         value: ThemeColor.WHITE,
@@ -80,10 +92,88 @@ const children = [
 
 // eslint-disable-next-line import/no-default-export
 export default prefab('Side Menu', attrs, undefined, [
-  {
-    type: 'WRAPPER',
-    options: [],
-    descendants: [
+  wrapper(
+    {
+      label: 'Side Menu',
+      options: {
+        reconfigure: linked({
+          label: 'Reconfigure menu',
+          value: {
+            ref: {
+              componentId: '#list',
+              optionId: '#reconfigure',
+            },
+          },
+        }),
+        addChild: linked({
+          label: 'Add Menu Item',
+          value: {
+            ref: {
+              componentId: '#list',
+              optionId: '#addChild',
+            },
+          },
+        }),
+        type: linked({
+          label: 'Type',
+          value: {
+            ref: {
+              componentId: '#media',
+              optionId: '#mediaType',
+            },
+          },
+        }),
+        urlFileSource: linked({
+          label: 'Source',
+          value: {
+            ref: {
+              componentId: '#media',
+              optionId: '#urlFileSource',
+            },
+          },
+          configuration: {
+            condition: showIf('type', 'EQ', 'url'),
+          },
+        }),
+        imageFileSource: linked({
+          label: 'Select image',
+          value: {
+            ref: {
+              componentId: '#media',
+              optionId: '#imageFileSource',
+            },
+          },
+          configuration: {
+            condition: showIf('type', 'EQ', 'img'),
+          },
+        }),
+        videoFileSource: linked({
+          label: 'Select video',
+          value: {
+            ref: {
+              componentId: '#media',
+              optionId: '#videoFileSource',
+            },
+          },
+          configuration: {
+            condition: showIf('type', 'EQ', 'video'),
+          },
+        }),
+        iframeSource: linked({
+          label: 'Source',
+          value: {
+            ref: {
+              componentId: '#media',
+              optionId: '#iframeSource',
+            },
+          },
+          configuration: {
+            condition: showIf('type', 'EQ', 'iframe'),
+          },
+        }),
+      },
+    },
+    [
       Box(
         {
           options: {
@@ -96,6 +186,10 @@ export default prefab('Side Menu', attrs, undefined, [
             }),
             backgroundColor: color('Background color', {
               value: ThemeColor.PRIMARY,
+            }),
+            height: size('Height', {
+              ...boxOptions.height('height'),
+              value: '100%',
             }),
           },
         },
@@ -111,31 +205,47 @@ export default prefab('Side Menu', attrs, undefined, [
             },
             [
               Media({
+                ref: {
+                  id: '#media',
+                },
                 options: {
                   ...mediaOptions,
                   type: option('CUSTOM', {
-                    label: 'Media type',
-                    value: 'url',
-                    configuration: {
-                      as: 'BUTTONGROUP',
-                      dataType: 'string',
-                      allowedInput: [
-                        { name: 'Image', value: 'img' },
-                        { name: 'Data/URL', value: 'url' },
-                        { name: 'Video', value: 'video' },
-                        { name: 'I-frame', value: 'iframe' },
-                      ],
+                    ...mediaOptions.type('type'),
+                    ref: {
+                      id: '#mediaType',
                     },
+                    value: 'url',
                   }),
                   urlFileSource: variable('Source', {
+                    ...mediaOptions.urlFileSource('urlFileSource'),
+                    ref: {
+                      id: '#urlFileSource',
+                    },
                     value: [
                       'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
                     ],
-                    configuration: {
-                      placeholder: 'Starts with https:// or http://',
-                      as: 'MULTILINE',
-                      condition: showIf('type', 'EQ', 'url'),
+                  }),
+                  imageFileSource: option('PUBLIC_FILE', {
+                    ...mediaOptions.imageFileSource('imageFileSource'),
+                    ref: {
+                      id: '#imageFileSource',
                     },
+                    value: '',
+                  }),
+                  videoFileSource: option('PUBLIC_FILE', {
+                    ...mediaOptions.videoFileSource('videoFileSource'),
+                    ref: {
+                      id: '#videoFileSource',
+                    },
+                    value: '',
+                  }),
+                  iframeSource: variable('Source', {
+                    ...mediaOptions.iframeSource('iframeSource'),
+                    ref: {
+                      id: '#iframeSource',
+                    },
+                    value: [],
                   }),
                 },
               }),
@@ -153,9 +263,21 @@ export default prefab('Side Menu', attrs, undefined, [
             [
               List(
                 {
+                  ref: {
+                    id: '#list',
+                  },
                   options: {
                     ...listOptions,
                     disablePadding: toggle('Disable padding', { value: true }),
+                    reconfigure: reconfigure('Reconfigure menu', {
+                      value: {
+                        children,
+                        reconfigureWizardType: 'ChildrenSelector',
+                      },
+                      ref: {
+                        id: '#reconfigure',
+                      },
+                    }),
                     addChild: addChild('Add Menu Item', {
                       value: { children, addChildWizardType: 'ChildSelector' },
                       ref: {
@@ -213,6 +335,7 @@ export default prefab('Side Menu', attrs, undefined, [
                       ...listItemOptions,
                       primaryText: variable('Primary text', {
                         value: ['Second list item'],
+                        showInReconfigure: true,
                         configuration: {
                           showOnDrop: true,
                         },
@@ -242,6 +365,11 @@ export default prefab('Side Menu', attrs, undefined, [
                           condition: showIf('avatarOrIcon', 'EQ', 'icon'),
                         },
                       }),
+                      linkTo: endpoint('Page', {
+                        ...listItemOptions.linkTo('linkTo'),
+                        value: '',
+                        showInReconfigure: true,
+                      }),
                       selected: toggle('Selected', { value: false }),
                       titleColor: color('Title color', {
                         value: ThemeColor.WHITE,
@@ -258,5 +386,5 @@ export default prefab('Side Menu', attrs, undefined, [
         ],
       ),
     ],
-  },
+  ),
 ]);
