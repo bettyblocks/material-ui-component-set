@@ -41,7 +41,7 @@
     const onActionSuccess = (response) => {
       const event = response.data.action.results;
 
-      B.triggerEvent('onActionSuccess', event);
+      B.triggerEvent('onActionSuccess', event, { modelData: event });
     };
 
     const onActionError = (error) => {
