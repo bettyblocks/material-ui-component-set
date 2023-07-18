@@ -1,3 +1,10 @@
+## [2.151.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.151.0...v2.151.1) (2023-07-18)
+
+
+### Bug Fixes
+
+* add modeldata to actionsuccess interaction ([c56d090](https://github.com/bettyblocks/material-ui-component-set/commit/c56d090be712305eddacc374de879fcd7dc7caa2))
+
 # [2.151.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.150.0...v2.151.0) (2023-07-17)
 
 
