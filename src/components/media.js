@@ -77,7 +77,7 @@
       (isUrlImg || isURLVideo) &&
       urlFileSource &&
       urlFileSource.findIndex((v) => v.name) !== -1;
-    const variableDev = env === 'dev' && imgUrl === '';
+    const variableDev = (isDev && isUrlImg) || !imgSource;
 
     const hasInteralLink =
       linkType === 'internal' && linkTo && linkTo.id !== '';
@@ -88,16 +88,6 @@
     const href = hasExternalLink ? linkToExternalText : undefined;
 
     function ImgPlaceholder() {
-      return (
-        <svg className={classes.placeholder} width={86} height={48}>
-          <title>{titleText}</title>
-          <rect x="19.5" y="8.5" rx="2" />
-          <path d="M61.1349945 29.020979v3.9160839H25v-2.5379375l6.5998225-4.9892478 5.6729048 4.2829541 13.346858-11.2981564L61.1349945 29.020979zm-22.5-10.270979c0 1.0416667-.3645833 1.9270833-1.09375 2.65625S35.9266612 22.5 34.8849945 22.5s-1.9270833-.3645833-2.65625-1.09375-1.09375-1.6145833-1.09375-2.65625.3645833-1.9270833 1.09375-2.65625S33.8433278 15 34.8849945 15s1.9270833.3645833 2.65625 1.09375 1.09375 1.6145833 1.09375 2.65625z" />
-        </svg>
-      );
-    }
-
-    function DataPlaceholder() {
       return (
         <svg className={classes.placeholder} width={86} height={48}>
           <title>{titleText}</title>
@@ -137,11 +127,10 @@
     function Placeholder() {
       switch (true) {
         case isImage:
+        case isData:
           return <ImgPlaceholder />;
         case isVideo:
           return <VideoPlaceholder />;
-        case isData:
-          return <DataPlaceholder />;
         default:
           return <IframePlaceholder />;
       }
