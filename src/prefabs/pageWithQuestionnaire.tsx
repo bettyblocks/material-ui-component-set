@@ -745,6 +745,15 @@ const children = [
               label: 'Question drop area',
               options: {
                 ...boxOptions,
+                reconfigure: reconfigure('Reconfigure questions', {
+                  value: {
+                    children: questionTypes,
+                    reconfigureWizardType: 'ChildrenSelector',
+                  },
+                  ref: {
+                    id: '#QuestionsReconfigure',
+                  },
+                }),
                 addChild: addChild('Add question', {
                   value: {
                     children: questionTypes,
@@ -760,15 +769,6 @@ const children = [
                         value: '#newSection',
                       },
                     },
-                  },
-                }),
-                reconfigure: reconfigure('Reconfigure questions', {
-                  value: {
-                    children: questionTypes,
-                    reconfigureWizardType: 'ChildrenSelector',
-                  },
-                  ref: {
-                    id: '#QuestionsReconfigure',
                   },
                 }),
                 innerSpacing: sizes('Inner space', {
