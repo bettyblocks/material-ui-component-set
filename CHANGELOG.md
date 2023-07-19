@@ -1,3 +1,17 @@
+# [2.152.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.151.1...v2.152.0) (2023-07-19)
+
+
+### Features
+
+* update sidemenu partial with wrapper ([f28a707](https://github.com/bettyblocks/material-ui-component-set/commit/f28a707c3f32febb0a5b17368d323e0a6afbe4f4))
+
+## [2.151.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.151.0...v2.151.1) (2023-07-18)
+
+
+### Bug Fixes
+
+* add modeldata to actionsuccess interaction ([c56d090](https://github.com/bettyblocks/material-ui-component-set/commit/c56d090be712305eddacc374de879fcd7dc7caa2))
+
 # [2.151.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.150.0...v2.151.0) (2023-07-17)
 
 
