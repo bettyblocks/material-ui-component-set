@@ -1,3 +1,10 @@
+# [2.153.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.152.0...v2.153.0) (2023-07-19)
+
+
+### Features
+
+* add new zone to publish production ([101c458](https://github.com/bettyblocks/material-ui-component-set/commit/101c45880d0a35cc6d46a6012cd425f046f3aaaa))
+
 # [2.152.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.151.1...v2.152.0) (2023-07-19)
 
 
