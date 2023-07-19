@@ -4,8 +4,10 @@ import {
   filter,
   number,
   showIf,
+  reconfigure,
 } from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
+import { children } from './children';
 
 export const categories = [
   {
@@ -20,6 +22,12 @@ export const options = {
     label: 'Record variable',
     value: '',
     configuration: { condition: showIf('recordVariable', 'EQ', 'never') },
+  }),
+  reconfigure: reconfigure('Reconfigure', {
+    value: {
+      children,
+      reconfigureWizardType: 'ChildrenSelector',
+    },
   }),
   actionId: option('ACTION_JS', { label: 'Action', value: '' }),
   model: model('Model'),

@@ -12,9 +12,7 @@
     const isDev = env === 'dev';
     const isPristine = propertyIsEmpty && isDev;
 
-    const { name: propertyName, label: propertyLabel } =
-      getProperty(property) || {};
-
+    const { label: propertyLabel } = getProperty(property) || {};
     const Tag = {
       Title1: 'h1',
       Title2: 'h2',
@@ -26,8 +24,11 @@
       Body2: 'p',
     }[options.type || 'Body1'];
 
-    const parsedContent = labelIsEmpty ? propertyLabel : useText(labelText);
-    const propName = isDev ? `{{ ${propertyName} }}` : useText([property]);
+    const parsedContent = isDev
+      ? `{{ ${propertyLabel} }}`
+      : useText([{ ...property, type: 'PROPERTY_LABEL' }]);
+    const customLabel = useText(labelText);
+    const propName = isDev ? `{{ ${propertyLabel} }}` : useText([property]);
 
     const Content =
       children.length > 0 ? (
@@ -51,7 +52,7 @@
           {isPristine && labelIsEmpty ? (
             <span className={classes.placeholder}>Select label: </span>
           ) : (
-            `${parsedContent}: `
+            `${labelIsEmpty ? parsedContent : customLabel}: `
           )}
         </Tag>
         {Content}
