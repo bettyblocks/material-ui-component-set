@@ -637,10 +637,16 @@ const children = [
       ref: { id: '#newSection' },
       options: {
         ...tabOptions,
-        label: variable('Section title', {
-          value: ['Section title'],
+        label: variable('Section label', {
+          value: ['Section label'],
           showInAddChild: true,
           showInReconfigure: true,
+        }),
+        width: size('Width', {
+          value: '100%',
+          configuration: {
+            as: 'UNIT',
+          },
         }),
       },
     },
@@ -792,24 +798,6 @@ const prefabStructure = [
     {
       label: 'Questionnaire',
       options: {
-        questionnaireReconfigure: linked({
-          label: 'Reconfigure sections',
-          value: {
-            ref: {
-              componentId: '#Tabs',
-              optionId: '#TabsReconfigure',
-            },
-          },
-        }),
-        questionnaireAddChild: linked({
-          label: 'Add section',
-          value: {
-            ref: {
-              componentId: '#Tabs',
-              optionId: '#TabsAddChild',
-            },
-          },
-        }),
         questionnaireTitle: linked({
           label: 'Questionnaire title',
           value: {
@@ -828,12 +816,98 @@ const prefabStructure = [
             },
           },
         }),
+        questionnaireReconfigure: linked({
+          label: 'Reconfigure sections',
+          value: {
+            ref: {
+              componentId: '#Tabs',
+              optionId: '#TabsReconfigure',
+            },
+          },
+        }),
+        questionnaireAddChild: linked({
+          label: 'Add section',
+          value: {
+            ref: {
+              componentId: '#Tabs',
+              optionId: '#TabsAddChild',
+            },
+          },
+        }),
         questionnaireSections: linked({
           label: 'Selected section',
           value: {
             ref: {
               componentId: '#Tabs',
               optionId: '#TabsSelectedTab',
+            },
+          },
+        }),
+        sectionLabel: linked({
+          label: 'Section Label',
+          value: {
+            ref: {
+              componentId: '#PrimaryTab',
+              optionId: '#PrimaryTabLabel',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'questionnaireSections',
+              comparator: 'EQ',
+              value: 1,
+            },
+          },
+        }),
+        sectionTitle: linked({
+          label: 'Section Title',
+          value: {
+            ref: {
+              componentId: '#sectionTitle',
+              optionId: '#sectionTitleContent',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'questionnaireSections',
+              comparator: 'EQ',
+              value: 1,
+            },
+          },
+        }),
+        sectionDescription: linked({
+          label: 'Section Description',
+          value: {
+            ref: {
+              componentId: '#sectionDescription',
+              optionId: '#sectionDescriptionContent',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'questionnaireSections',
+              comparator: 'EQ',
+              value: 1,
+            },
+          },
+        }),
+        reconfigureQuestion: linked({
+          label: 'Reconfigure questions',
+          value: {
+            ref: {
+              componentId: '#DropArea',
+              optionId: '#QuestionsReconfigure',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'questionnaireSections',
+              comparator: 'EQ',
+              value: 1,
             },
           },
         }),
@@ -1862,6 +1936,19 @@ const prefabStructure = [
                                                                   },
                                                                   options: {
                                                                     ...tabOptions,
+                                                                    label:
+                                                                      variable(
+                                                                        'Tab label',
+                                                                        {
+                                                                          value:
+                                                                            [
+                                                                              'Tab',
+                                                                            ],
+                                                                          ref: {
+                                                                            id: '#PrimaryTabLabel',
+                                                                          },
+                                                                        },
+                                                                      ),
                                                                     width: size(
                                                                       'Width',
                                                                       {
@@ -1929,6 +2016,9 @@ const prefabStructure = [
                                                                                       {
                                                                                         as: 'MULTILINE',
                                                                                       },
+                                                                                    ref: {
+                                                                                      id: '#sectionTitleContent',
+                                                                                    },
                                                                                   },
                                                                                 ),
                                                                               type: font(
@@ -2028,6 +2118,9 @@ const prefabStructure = [
                                                                                       {
                                                                                         as: 'MULTILINE',
                                                                                       },
+                                                                                    ref: {
+                                                                                      id: '#sectionDescriptionContent',
+                                                                                    },
                                                                                   },
                                                                                 ),
                                                                               type: font(
@@ -2066,22 +2159,6 @@ const prefabStructure = [
                                                                                       ],
                                                                                   },
                                                                                 ),
-                                                                              addChild:
-                                                                                addChild(
-                                                                                  'Add question',
-                                                                                  {
-                                                                                    value:
-                                                                                      {
-                                                                                        children:
-                                                                                          questionTypes,
-                                                                                        addChildWizardType:
-                                                                                          'ChildSelector',
-                                                                                      },
-                                                                                    ref: {
-                                                                                      id: '#AddQuestion',
-                                                                                    },
-                                                                                  },
-                                                                                ),
                                                                               reconfigure:
                                                                                 reconfigure(
                                                                                   'Reconfigure questions',
@@ -2095,6 +2172,22 @@ const prefabStructure = [
                                                                                       },
                                                                                     ref: {
                                                                                       id: '#QuestionsReconfigure',
+                                                                                    },
+                                                                                  },
+                                                                                ),
+                                                                              addChild:
+                                                                                addChild(
+                                                                                  'Add question',
+                                                                                  {
+                                                                                    value:
+                                                                                      {
+                                                                                        children:
+                                                                                          questionTypes,
+                                                                                        addChildWizardType:
+                                                                                          'ChildSelector',
+                                                                                      },
+                                                                                    ref: {
+                                                                                      id: '#AddQuestion',
                                                                                     },
                                                                                   },
                                                                                 ),
