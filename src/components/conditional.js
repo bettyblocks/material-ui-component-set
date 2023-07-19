@@ -20,6 +20,7 @@
 
     const canBeNumber = (value) => {
       return (
+        value !== '' &&
         (typeof value === 'string' || typeof value === 'number') &&
         !isNaN(value)
       );
@@ -34,14 +35,14 @@
     const logic = useLogic(displayLogic);
 
     const evalCondition = () => {
+      if (!initVisibility && leftValue === '' && rightValue === '') {
+        return false;
+      }
+
       const [leftParsed, rightParsed] =
         canBeNumber(leftValue) && canBeNumber(rightValue)
           ? [parseFloat(leftValue), parseFloat(rightValue)]
           : [leftValue.toString(), rightValue.toString()];
-
-      if (!initVisibility && leftValue === '' && rightValue === '') {
-        return false;
-      }
 
       switch (compare) {
         case 'neq':
