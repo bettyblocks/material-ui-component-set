@@ -1,13 +1,11 @@
 import {
   buttongroup,
   color,
-  showIfTrue,
-  size,
   ThemeColor,
   toggle,
 } from '@betty-blocks/component-sdk';
 
-export const styles = (supportImages?: boolean) => ({
+export const styles = {
   margin: buttongroup(
     'Margin',
     [
@@ -18,25 +16,6 @@ export const styles = (supportImages?: boolean) => ({
     { value: 'normal' },
   ),
   fullWidth: toggle('Full width', { value: true }),
-  ...(supportImages
-    ? {
-        showImagePreview: toggle('Show Image preview', { value: true }),
-        imagePreviewWidth: size('Image preview width', {
-          value: '200px',
-          configuration: {
-            as: 'UNIT',
-            condition: showIfTrue('showImagePreview'),
-          },
-        }),
-        imagePreviewHeight: size('Image preview height', {
-          value: '112px',
-          configuration: {
-            as: 'UNIT',
-            condition: showIfTrue('showImagePreview'),
-          },
-        }),
-      }
-    : {}),
 
   hideLabel: toggle('Hide label', {
     value: false,
@@ -50,4 +29,4 @@ export const styles = (supportImages?: boolean) => ({
   errorColor: color('Error color', {
     value: ThemeColor.DANGER,
   }),
-});
+};
