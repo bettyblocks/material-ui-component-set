@@ -5377,6 +5377,9 @@ const prefabStructure = [
               label: 'Backoffice - Side menu',
               options: {
                 ...drawerBarOptions,
+                themeBgColor: color('Theme background color', {
+                  value: ThemeColor.PRIMARY,
+                }),
                 innerSpacing: sizes('Inner space', {
                   value: ['0rem', '0rem', '0rem', '0rem'],
                 }),
