@@ -106,7 +106,7 @@ export default prefab('Side Menu', attrs, undefined, [
           },
         }),
         addChild: linked({
-          label: 'Add Menu Item',
+          label: 'Add menu Item',
           value: {
             ref: {
               componentId: '#list',
