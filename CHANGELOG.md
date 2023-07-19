@@ -1,3 +1,17 @@
+## [2.151.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.151.0...v2.151.1) (2023-07-18)
+
+
+### Bug Fixes
+
+* add modeldata to actionsuccess interaction ([c56d090](https://github.com/bettyblocks/material-ui-component-set/commit/c56d090be712305eddacc374de879fcd7dc7caa2))
+
+# [2.151.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.150.0...v2.151.0) (2023-07-17)
+
+
+### Features
+
+* add reconfigure to form prefab ([8604ec8](https://github.com/bettyblocks/material-ui-component-set/commit/8604ec8ae12bf15cff39288c6d473cebf795c9f8))
+
 # [2.150.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.149.0...v2.150.0) (2023-07-13)
 
 

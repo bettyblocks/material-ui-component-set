@@ -4,8 +4,10 @@ import {
   Icon,
   PrefabComponentOption,
   prefab,
+  toggle,
+  variable,
 } from '@betty-blocks/component-sdk';
-import { FileUpload } from './structures/FileUpload';
+import { Button, FileUpload, buttonOptions } from './structures';
 
 const beforeCreate = ({
   close,
@@ -263,5 +265,14 @@ const attr = {
 };
 
 export default prefab('File Upload', attr, beforeCreate, [
-  FileUpload({ label: 'File Upload' }),
+  FileUpload({ label: 'File Upload' }, [
+    Button({
+      label: 'upload',
+      options: {
+        ...buttonOptions,
+        buttonText: variable('Button text', { value: ['Upload'] }),
+        fullWidth: toggle('Full width', { value: true }),
+      },
+    }),
+  ]),
 ]);
