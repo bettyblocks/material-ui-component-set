@@ -161,7 +161,7 @@
 
     const clearFiles = (e) => {
       if (e && e.preventDefault) e.preventDefault();
-      setValue(null);
+      setValue('');
       setFileReference(null);
       setValidationMessage('');
     };
@@ -201,6 +201,8 @@
             className={classes.remove}
             onClick={() => {
               setValue('');
+              setFileReference(null);
+              setValidationMessage('');
               B.triggerEvent('onFileRemove');
             }}
           >
