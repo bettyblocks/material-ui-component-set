@@ -1,3 +1,18 @@
+## [2.153.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.153.1...v2.153.2) (2023-07-20)
+
+
+### Bug Fixes
+
+* move onChange trigger to onchange event ([b3a111a](https://github.com/bettyblocks/material-ui-component-set/commit/b3a111ad6372283641ceac777bfe6a42778bab41))
+
+## [2.153.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.153.0...v2.153.1) (2023-07-20)
+
+
+### Bug Fixes
+
+* bump ([f83599f](https://github.com/bettyblocks/material-ui-component-set/commit/f83599f3b5b19380e0d58695357919eac074e4bb))
+* wait untill the state is uptodate ([d751ca8](https://github.com/bettyblocks/material-ui-component-set/commit/d751ca80c8bccfa5aa2dba620a06d9e98240ed62))
+
 # [2.153.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.152.0...v2.153.0) (2023-07-19)
 
 
