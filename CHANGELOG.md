@@ -1,3 +1,24 @@
+## [2.155.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.155.0...v2.155.1) (2023-07-20)
+
+
+### Bug Fixes
+
+* preload data in design time or option is true ([cc65f72](https://github.com/bettyblocks/material-ui-component-set/commit/cc65f72b077673c66ca5f2295a1a420c2c310985))
+
+# [2.155.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.154.0...v2.155.0) (2023-07-20)
+
+
+### Features
+
+* add form reconfigure options to BO ([b40d167](https://github.com/bettyblocks/material-ui-component-set/commit/b40d1678f94ab7b83d67432b8a87ada9ae9f548f))
+
+# [2.154.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.153.2...v2.154.0) (2023-07-20)
+
+
+### Features
+
+* add new zones to upload bundle ([d398af3](https://github.com/bettyblocks/material-ui-component-set/commit/d398af3cf981810f06092a292792fce098818a00))
+
 ## [2.153.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.153.1...v2.153.2) (2023-07-20)
 
 
