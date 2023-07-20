@@ -15,6 +15,8 @@ import { CardHeader } from './CardHeader';
 import { CardMedia } from './CardMedia';
 import { Carousel } from './Carousel';
 import { CarouselImage } from './CarouselImage';
+import { CheckboxInput } from './CheckboxInput';
+import { CheckboxGroup } from './CheckboxGroup';
 import { Chip } from './Chip';
 import { Column } from './Column';
 import { Conditional } from './Conditional';
@@ -31,6 +33,7 @@ import { Drawer } from './Drawer';
 import { DrawerBar } from './DrawerBar';
 import { DrawerContainer } from './DrawerContainer';
 import { ExpansionPanel } from './ExpansionPanel';
+import { FileUpload } from './FileUpload';
 import { FilterComponent } from './FilterComponent';
 import { Grid } from './Grid';
 import { Icon } from './Icon';
@@ -80,6 +83,8 @@ import { cardHeaderOptions } from './CardHeader/options';
 import { cardMediaOptions } from './CardMedia/options';
 import { carouselOptions } from './Carousel/options';
 import { carouselImageOptions } from './CarouselImage/options';
+import { checkboxInputOptions } from './CheckboxInput/options';
+import { checkboxGroupInputOptions } from './CheckboxGroup/options';
 import { chipOptions } from './Chip/options';
 import { columnOptions } from './Column/options';
 import { conditionalOptions } from './Conditional/options';
@@ -96,6 +101,7 @@ import { drawerOptions } from './Drawer/options';
 import { drawerBarOptions } from './DrawerBar/options';
 import { drawerContainerOptions } from './DrawerContainer/options';
 import { expansionPanelOptions } from './ExpansionPanel/options';
+import { fileUploadOptions } from './FileUpload/options';
 import { filterComponentOptions } from './FilterComponent/options';
 import { gridOptions } from './Grid/options';
 import { iconOptions } from './Icon/options';
@@ -145,6 +151,8 @@ export {
   CardMedia,
   Carousel,
   CarouselImage,
+  CheckboxInput,
+  CheckboxGroup,
   Chip,
   Column,
   Conditional,
@@ -161,6 +169,7 @@ export {
   DrawerBar,
   DrawerContainer,
   ExpansionPanel,
+  FileUpload,
   FilterComponent,
   FormErrorAlert,
   FormSuccessAlert,
@@ -210,6 +219,8 @@ export {
   cardMediaOptions,
   carouselOptions,
   carouselImageOptions,
+  checkboxInputOptions,
+  checkboxGroupInputOptions,
   chipOptions,
   columnOptions,
   conditionalOptions,
@@ -226,6 +237,7 @@ export {
   drawerBarOptions,
   drawerContainerOptions,
   expansionPanelOptions,
+  fileUploadOptions,
   filterComponentOptions,
   gridOptions,
   iconOptions,
