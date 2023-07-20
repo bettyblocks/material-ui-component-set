@@ -92,15 +92,17 @@
     const changeHandler = (date) => {
       setSelectedDate(date);
 
-      if (type === 'date') {
-        B.triggerEvent('onChange', convertToDate(date));
-      } else if (!date || DateFns.isValid(date)) {
-        B.triggerEvent('onChange', date);
-        setErrorState(false);
-        setHelper('');
-      } else {
-        B.triggerEvent('onChange', '');
-      }
+      setTimeout(() => {
+        if (type === 'date') {
+          B.triggerEvent('onChange', convertToDate(date));
+        } else if (!date || DateFns.isValid(date)) {
+          B.triggerEvent('onChange', date);
+          setErrorState(false);
+          setHelper('');
+        } else {
+          B.triggerEvent('onChange', '');
+        }
+      }, 250);
     };
 
     const invalidHandler = (event) => {
@@ -171,7 +173,7 @@
         use24HourClock = use24HourClockDateTime;
 
         resultString = isValidDate(selectedDate)
-          ? DateFns.format(selectedDate, 'yyyy-MM-dd HH:mm:ss')
+          ? selectedDate.toISOString()
           : null;
         break;
       }

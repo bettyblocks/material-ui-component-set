@@ -1,3 +1,89 @@
+# [2.155.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.154.0...v2.155.0) (2023-07-20)
+
+
+### Features
+
+* add form reconfigure options to BO ([b40d167](https://github.com/bettyblocks/material-ui-component-set/commit/b40d1678f94ab7b83d67432b8a87ada9ae9f548f))
+
+# [2.154.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.153.2...v2.154.0) (2023-07-20)
+
+
+### Features
+
+* add new zones to upload bundle ([d398af3](https://github.com/bettyblocks/material-ui-component-set/commit/d398af3cf981810f06092a292792fce098818a00))
+
+## [2.153.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.153.1...v2.153.2) (2023-07-20)
+
+
+### Bug Fixes
+
+* move onChange trigger to onchange event ([b3a111a](https://github.com/bettyblocks/material-ui-component-set/commit/b3a111ad6372283641ceac777bfe6a42778bab41))
+
+## [2.153.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.153.0...v2.153.1) (2023-07-20)
+
+
+### Bug Fixes
+
+* bump ([f83599f](https://github.com/bettyblocks/material-ui-component-set/commit/f83599f3b5b19380e0d58695357919eac074e4bb))
+* wait untill the state is uptodate ([d751ca8](https://github.com/bettyblocks/material-ui-component-set/commit/d751ca80c8bccfa5aa2dba620a06d9e98240ed62))
+
+# [2.153.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.152.0...v2.153.0) (2023-07-19)
+
+
+### Features
+
+* add new zone to publish production ([101c458](https://github.com/bettyblocks/material-ui-component-set/commit/101c45880d0a35cc6d46a6012cd425f046f3aaaa))
+
+# [2.152.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.151.1...v2.152.0) (2023-07-19)
+
+
+### Features
+
+* update sidemenu partial with wrapper ([f28a707](https://github.com/bettyblocks/material-ui-component-set/commit/f28a707c3f32febb0a5b17368d323e0a6afbe4f4))
+
+## [2.151.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.151.0...v2.151.1) (2023-07-18)
+
+
+### Bug Fixes
+
+* add modeldata to actionsuccess interaction ([c56d090](https://github.com/bettyblocks/material-ui-component-set/commit/c56d090be712305eddacc374de879fcd7dc7caa2))
+
+# [2.151.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.150.0...v2.151.0) (2023-07-17)
+
+
+### Features
+
+* add reconfigure to form prefab ([8604ec8](https://github.com/bettyblocks/material-ui-component-set/commit/8604ec8ae12bf15cff39288c6d473cebf795c9f8))
+
+# [2.150.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.149.0...v2.150.0) (2023-07-13)
+
+
+### Features
+
+* add dreconfigure to backoffice ([24f3a00](https://github.com/bettyblocks/material-ui-component-set/commit/24f3a00ea8d71b4aa5ca43b1d29b81ad0eb775c8))
+* add propertylabel option to inputs ([4fffb25](https://github.com/bettyblocks/material-ui-component-set/commit/4fffb255b11f8ce0b2905aac7b6d989a1a1e40a7))
+
+# [2.149.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.148.1...v2.149.0) (2023-07-12)
+
+
+### Features
+
+* Store datetime in ISO-format ([261d27c](https://github.com/bettyblocks/material-ui-component-set/commit/261d27c3e8740077485348adca8c1e6f6b9606b1))
+
+## [2.148.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.148.0...v2.148.1) (2023-07-12)
+
+
+### Bug Fixes
+
+* move background image setting logic from styles to JSX to prevent invalid hooks usage ([b3c87f8](https://github.com/bettyblocks/material-ui-component-set/commit/b3c87f8847b39859615236495e926137c0a73a21))
+
+# [2.148.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.147.1...v2.148.0) (2023-07-03)
+
+
+### Features
+
+* make input value option work with state ([e66ca5f](https://github.com/bettyblocks/material-ui-component-set/commit/e66ca5f7bf0747b6bb9372c4f7a1ce128e0d753a))
+
 ## [2.147.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.147.0...v2.147.1) (2023-06-30)
 
 

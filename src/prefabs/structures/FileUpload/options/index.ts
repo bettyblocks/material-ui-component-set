@@ -8,25 +8,24 @@ import { validation } from './validation';
 import { styles } from './styles';
 import { advanced } from './advanced';
 
-export const options = (supportImages?: boolean) => {
-  const style = styles(supportImages);
+export const fileUploadOptions = {
+  property: property('Property', {
+    value: '',
+    configuration: {
+      allowedKinds: ['FILE'],
+      disabled: true,
+      condition: hideIf('property', 'EQ', ''),
+    },
+  }),
+  label: variable('Label', {
+    value: ['Select file(s)...'],
+    configuration: { allowFormatting: false, allowPropertyName: true },
+  }),
+  value: property('Value'),
+  disabled: toggle('Disabled', { value: false }),
+  helperText: variable('Helper text', { value: [] }),
 
-  return {
-    property: property('Property', {
-      value: '',
-      configuration: {
-        allowedKinds: ['FILE'],
-        disabled: true,
-        condition: hideIf('property', 'EQ', ''),
-      },
-    }),
-    label: variable('Label', { value: ['Select file(s)...'] }),
-    value: property('Value'),
-    disabled: toggle('Disabled', { value: false }),
-    helperText: variable('Helper text', { value: [] }),
-
-    ...validation,
-    ...style,
-    ...advanced,
-  };
+  ...validation,
+  ...styles,
+  ...advanced,
 };

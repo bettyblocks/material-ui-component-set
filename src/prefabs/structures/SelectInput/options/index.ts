@@ -31,7 +31,10 @@ export const options = {
     },
   }),
 
-  label: variable('Label', { value: ['Select'] }),
+  label: variable('Label', {
+    value: ['Select'],
+    configuration: { allowFormatting: false, allowPropertyName: true },
+  }),
   value: variable('Value', { value: [''] }),
 
   optionType: buttongroup(
