@@ -113,6 +113,11 @@ jobs:
           AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_UWM }}
           AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_UWM }}
         run: yarn upload
+      - name: upload pluryn
+        env:
+          AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_PLURYN }}
+          AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_PLURYN }}
+        run: yarn upload
       - name: release notes
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
