@@ -5765,11 +5765,7 @@ const beforeCreate = ({
     onCompleted: ({ model: dataModel }: ModelQuery) => {
       setModel(dataModel);
       setIdProperty(dataModel.properties.find(({ name }) => name === 'id'));
-      setModelProperties(
-        dataModel.properties.filter(
-          (prop: Properties) => prop.kind !== 'PASSWORD',
-        ),
-      );
+      setModelProperties(dataModel.properties);
     },
   });
 
