@@ -8,6 +8,8 @@ import {
   FileUpload,
   MultiAutocomplete,
   RadioInput,
+  RatingInput,
+  RichTextInput,
   SelectInput,
   TextInput,
   autocompleteInputOptions,
@@ -17,6 +19,8 @@ import {
   fileUploadOptions,
   multiAutocompleteOptions,
   radioInputOptions,
+  ratingInputOptions,
+  richTextOptions,
   selectInputOptions,
   textInputOptions,
 } from '..';
@@ -53,5 +57,11 @@ export const children = [
   }),
   FileUpload({
     options: { ...fileUploadOptions, ...defaultOptions },
+  }),
+  RatingInput({
+    options: { ...ratingInputOptions, ...defaultOptions },
+  }),
+  RichTextInput({
+    options: { ...richTextOptions, ...defaultOptions },
   }),
 ];

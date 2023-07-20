@@ -1,3 +1,46 @@
+# [2.154.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.153.2...v2.154.0) (2023-07-20)
+
+
+### Features
+
+* add new zones to upload bundle ([d398af3](https://github.com/bettyblocks/material-ui-component-set/commit/d398af3cf981810f06092a292792fce098818a00))
+
+## [2.153.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.153.1...v2.153.2) (2023-07-20)
+
+
+### Bug Fixes
+
+* move onChange trigger to onchange event ([b3a111a](https://github.com/bettyblocks/material-ui-component-set/commit/b3a111ad6372283641ceac777bfe6a42778bab41))
+
+## [2.153.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.153.0...v2.153.1) (2023-07-20)
+
+
+### Bug Fixes
+
+* bump ([f83599f](https://github.com/bettyblocks/material-ui-component-set/commit/f83599f3b5b19380e0d58695357919eac074e4bb))
+* wait untill the state is uptodate ([d751ca8](https://github.com/bettyblocks/material-ui-component-set/commit/d751ca80c8bccfa5aa2dba620a06d9e98240ed62))
+
+# [2.153.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.152.0...v2.153.0) (2023-07-19)
+
+
+### Features
+
+* add new zone to publish production ([101c458](https://github.com/bettyblocks/material-ui-component-set/commit/101c45880d0a35cc6d46a6012cd425f046f3aaaa))
+
+# [2.152.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.151.1...v2.152.0) (2023-07-19)
+
+
+### Features
+
+* update sidemenu partial with wrapper ([f28a707](https://github.com/bettyblocks/material-ui-component-set/commit/f28a707c3f32febb0a5b17368d323e0a6afbe4f4))
+
+## [2.151.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.151.0...v2.151.1) (2023-07-18)
+
+
+### Bug Fixes
+
+* add modeldata to actionsuccess interaction ([c56d090](https://github.com/bettyblocks/material-ui-component-set/commit/c56d090be712305eddacc374de879fcd7dc7caa2))
+
 # [2.151.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.150.0...v2.151.0) (2023-07-17)
 
 
