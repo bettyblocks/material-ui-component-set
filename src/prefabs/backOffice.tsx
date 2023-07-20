@@ -5837,11 +5837,7 @@ const beforeCreate = ({
     onCompleted: ({ model: dataModel }: ModelQuery) => {
       setModel(dataModel);
       setIdProperty(dataModel.properties.find(({ name }) => name === 'id'));
-      setModelProperties(
-        dataModel.properties.filter(
-          (prop: Properties) => prop.kind !== 'PASSWORD',
-        ),
-      );
+      setModelProperties(dataModel.properties);
     },
   });
 
@@ -6409,7 +6405,8 @@ const beforeCreate = ({
             prop.kind !== 'SUM' &&
             prop.kind !== 'COUNT' &&
             prop.kind !== 'AUTO_INCREMENT' &&
-            prop.kind !== 'EMAIL'
+            prop.kind !== 'EMAIL' &&
+            prop.kind !== 'ZIPCODE'
           );
         },
       );

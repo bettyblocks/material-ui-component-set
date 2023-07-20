@@ -1,3 +1,10 @@
+## [2.155.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.155.0...v2.155.1) (2023-07-20)
+
+
+### Bug Fixes
+
+* preload data in design time or option is true ([cc65f72](https://github.com/bettyblocks/material-ui-component-set/commit/cc65f72b077673c66ca5f2295a1a420c2c310985))
+
 # [2.155.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.154.0...v2.155.0) (2023-07-20)
 
 
