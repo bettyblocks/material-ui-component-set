@@ -1,3 +1,10 @@
+# [2.154.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.153.2...v2.154.0) (2023-07-20)
+
+
+### Features
+
+* add new zones to upload bundle ([d398af3](https://github.com/bettyblocks/material-ui-component-set/commit/d398af3cf981810f06092a292792fce098818a00))
+
 ## [2.153.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.153.1...v2.153.2) (2023-07-20)
 
 
