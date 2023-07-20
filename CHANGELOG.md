@@ -1,3 +1,10 @@
+## [2.155.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.155.1...v2.155.2) (2023-07-20)
+
+
+### Bug Fixes
+
+* remove filereference when clearing files ([3f0c774](https://github.com/bettyblocks/material-ui-component-set/commit/3f0c77483f7622c0de499230ae7db318b9569311))
+
 ## [2.155.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.155.0...v2.155.1) (2023-07-20)
 
 
