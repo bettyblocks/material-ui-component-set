@@ -125,10 +125,6 @@
 
     const [values, setValues] = useState(getValues());
 
-    useEffect(() => {
-      B.triggerEvent('onChange', values);
-    }, [values]);
-
     const orderBySanitized = orderBy.id === '' ? undefined : orderBy;
 
     const orderByArray = [orderBySanitized].flat();
@@ -298,6 +294,9 @@
         if (checked) return state.concat(value);
         return state.filter((v) => v !== value);
       });
+      setTimeout(() => {
+        B.triggerEvent('onChange', values);
+      }, 250);
     };
 
     const invalidHandler = (event) => {
