@@ -5831,11 +5831,7 @@ const beforeCreate = ({
     onCompleted: ({ model: dataModel }: ModelQuery) => {
       setModel(dataModel);
       setIdProperty(dataModel.properties.find(({ name }) => name === 'id'));
-      setModelProperties(
-        dataModel.properties.filter(
-          (prop: Properties) => prop.kind !== 'PASSWORD',
-        ),
-      );
+      setModelProperties(dataModel.properties);
     },
   });
 
@@ -6389,8 +6385,22 @@ const beforeCreate = ({
             prop.label !== 'Id' &&
             prop.kind !== 'PDF' &&
             prop.kind !== 'MULTI_FILE' &&
-            prop.kind !== 'PASSWORD' &&
-            prop.kind !== 'LOGIN_TOKEN'
+            prop.kind !== 'LOGIN_TOKEN' &&
+            prop.kind !== 'MULTI_IMAGE' &&
+            prop.kind !== 'BOOLEAN_EXPRESSION' &&
+            prop.kind !== 'DATE_EXPRESSION' &&
+            prop.kind !== 'DATE_TIME_EXPRESSION' &&
+            prop.kind !== 'INTEGER_EXPRESSION' &&
+            prop.kind !== 'DECIMAL_EXPRESSION' &&
+            prop.kind !== 'MINUTES_EXPRESSION' &&
+            prop.kind !== 'PRICE_EXPRESSION' &&
+            prop.kind !== 'STRING_EXPRESSION' &&
+            prop.kind !== 'TEXT_EXPRESSION' &&
+            prop.kind !== 'SUM' &&
+            prop.kind !== 'COUNT' &&
+            prop.kind !== 'AUTO_INCREMENT' &&
+            prop.kind !== 'EMAIL' &&
+            prop.kind !== 'ZIPCODE'
           );
         },
       );
