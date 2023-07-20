@@ -6337,7 +6337,8 @@ const beforeCreate = ({
             prop.kind !== 'SUM' &&
             prop.kind !== 'COUNT' &&
             prop.kind !== 'AUTO_INCREMENT' &&
-            prop.kind !== 'EMAIL'
+            prop.kind !== 'EMAIL' &&
+            prop.kind !== 'ZIPCODE'
           );
         },
       );
