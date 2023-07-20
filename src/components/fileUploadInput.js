@@ -59,8 +59,9 @@
     const [fileReference, setFileReference] = useState(null);
     const propertyId = getPropertyId(selectedProperty);
 
-    const [upload, { error, loading, data }] =
-      usePresignedUpload({ propertyId });
+    const [upload, { error, loading, data }] = usePresignedUpload({
+      propertyId,
+    });
 
     const firstRender = React.useRef(true);
 
@@ -95,7 +96,7 @@
       if (firstRender.current) return;
       if (!loading) {
         if (data) {
-          setFileReference(data)
+          setFileReference(data);
           B.triggerEvent('onSuccess', data);
         }
       }
@@ -154,7 +155,7 @@
 
       if (isValidFile) {
         upload(file.type, file);
-        setFileReference(data)
+        setFileReference(data);
       }
     };
 
