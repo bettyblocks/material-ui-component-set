@@ -1,3 +1,10 @@
+# [2.155.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.154.0...v2.155.0) (2023-07-20)
+
+
+### Features
+
+* add form reconfigure options to BO ([b40d167](https://github.com/bettyblocks/material-ui-component-set/commit/b40d1678f94ab7b83d67432b8a87ada9ae9f548f))
+
 # [2.154.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.153.2...v2.154.0) (2023-07-20)
 
 
