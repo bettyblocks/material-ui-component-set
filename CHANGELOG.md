@@ -1,3 +1,10 @@
+## [2.156.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.156.0...v2.156.1) (2023-07-21)
+
+
+### Bug Fixes
+
+* make checkbox default to false value to prevent unexpected behavior in conditionals ([3e79a4f](https://github.com/bettyblocks/material-ui-component-set/commit/3e79a4faa41e52d4b628701040f26ed9e6afacc2))
+
 # [2.156.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.155.3...v2.156.0) (2023-07-21)
 
 
