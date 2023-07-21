@@ -1,3 +1,54 @@
+## [2.155.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.155.2...v2.155.3) (2023-07-20)
+
+
+### Bug Fixes
+
+* add password prop to forms ([7912ea3](https://github.com/bettyblocks/material-ui-component-set/commit/7912ea389d2e3637bb42634859f3ccd729aab682))
+* extended filtering of props list on form create ([6f85c61](https://github.com/bettyblocks/material-ui-component-set/commit/6f85c614a226874b1a5519488353959b3bda66d3))
+
+## [2.155.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.155.1...v2.155.2) (2023-07-20)
+
+
+### Bug Fixes
+
+* remove filereference when clearing files ([3f0c774](https://github.com/bettyblocks/material-ui-component-set/commit/3f0c77483f7622c0de499230ae7db318b9569311))
+
+## [2.155.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.155.0...v2.155.1) (2023-07-20)
+
+
+### Bug Fixes
+
+* preload data in design time or option is true ([cc65f72](https://github.com/bettyblocks/material-ui-component-set/commit/cc65f72b077673c66ca5f2295a1a420c2c310985))
+
+# [2.155.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.154.0...v2.155.0) (2023-07-20)
+
+
+### Features
+
+* add form reconfigure options to BO ([b40d167](https://github.com/bettyblocks/material-ui-component-set/commit/b40d1678f94ab7b83d67432b8a87ada9ae9f548f))
+
+# [2.154.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.153.2...v2.154.0) (2023-07-20)
+
+
+### Features
+
+* add new zones to upload bundle ([d398af3](https://github.com/bettyblocks/material-ui-component-set/commit/d398af3cf981810f06092a292792fce098818a00))
+
+## [2.153.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.153.1...v2.153.2) (2023-07-20)
+
+
+### Bug Fixes
+
+* move onChange trigger to onchange event ([b3a111a](https://github.com/bettyblocks/material-ui-component-set/commit/b3a111ad6372283641ceac777bfe6a42778bab41))
+
+## [2.153.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.153.0...v2.153.1) (2023-07-20)
+
+
+### Bug Fixes
+
+* bump ([f83599f](https://github.com/bettyblocks/material-ui-component-set/commit/f83599f3b5b19380e0d58695357919eac074e4bb))
+* wait untill the state is uptodate ([d751ca8](https://github.com/bettyblocks/material-ui-component-set/commit/d751ca80c8bccfa5aa2dba620a06d9e98240ed62))
+
 # [2.153.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.152.0...v2.153.0) (2023-07-19)
 
 

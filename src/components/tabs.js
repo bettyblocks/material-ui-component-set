@@ -157,7 +157,7 @@
                 showAllTabs={showAllTabs}
                 setSelectedTab={setSelectedTab}
                 activeTabs={activeTabs}
-                preLoadTabs={preLoadTabs}
+                preLoadTabs={isDev || preLoadTabs}
               >
                 {React.cloneElement(child, { ...childOptions })}
               </Children>
