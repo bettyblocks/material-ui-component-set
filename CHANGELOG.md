@@ -1,3 +1,10 @@
+## [2.156.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.156.1...v2.156.2) (2023-07-21)
+
+
+### Bug Fixes
+
+* conditional can handle empty values ([727f50a](https://github.com/bettyblocks/material-ui-component-set/commit/727f50af30286818c0d769fcde98d24e83f047d5))
+
 ## [2.156.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.156.0...v2.156.1) (2023-07-21)
 
 
