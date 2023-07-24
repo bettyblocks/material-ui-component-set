@@ -1,3 +1,10 @@
+# [2.157.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.156.2...v2.157.0) (2023-07-24)
+
+
+### Features
+
+* add separator color option ([e777ba0](https://github.com/bettyblocks/material-ui-component-set/commit/e777ba05715e9f69662f0a0ece0b762771b0c009))
+
 ## [2.156.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.156.1...v2.156.2) (2023-07-21)
 
 
