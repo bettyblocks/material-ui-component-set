@@ -1,3 +1,46 @@
+# [2.157.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.156.2...v2.157.0) (2023-07-24)
+
+
+### Features
+
+* add separator color option ([e777ba0](https://github.com/bettyblocks/material-ui-component-set/commit/e777ba05715e9f69662f0a0ece0b762771b0c009))
+
+## [2.156.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.156.1...v2.156.2) (2023-07-21)
+
+
+### Bug Fixes
+
+* conditional can handle empty values ([727f50a](https://github.com/bettyblocks/material-ui-component-set/commit/727f50af30286818c0d769fcde98d24e83f047d5))
+
+## [2.156.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.156.0...v2.156.1) (2023-07-21)
+
+
+### Bug Fixes
+
+* make checkbox default to false value to prevent unexpected behavior in conditionals ([3e79a4f](https://github.com/bettyblocks/material-ui-component-set/commit/3e79a4faa41e52d4b628701040f26ed9e6afacc2))
+
+# [2.156.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.155.3...v2.156.0) (2023-07-21)
+
+
+### Features
+
+* remove betty-jwt cookie, when logging in via user/password ([0c0ad28](https://github.com/bettyblocks/material-ui-component-set/commit/0c0ad2884c8373d9566a03b8977d4e491cc6e500))
+
+## [2.155.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.155.2...v2.155.3) (2023-07-20)
+
+
+### Bug Fixes
+
+* add password prop to forms ([7912ea3](https://github.com/bettyblocks/material-ui-component-set/commit/7912ea389d2e3637bb42634859f3ccd729aab682))
+* extended filtering of props list on form create ([6f85c61](https://github.com/bettyblocks/material-ui-component-set/commit/6f85c614a226874b1a5519488353959b3bda66d3))
+
+## [2.155.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.155.1...v2.155.2) (2023-07-20)
+
+
+### Bug Fixes
+
+* remove filereference when clearing files ([3f0c774](https://github.com/bettyblocks/material-ui-component-set/commit/3f0c77483f7622c0de499230ae7db318b9569311))
+
 ## [2.155.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.155.0...v2.155.1) (2023-07-20)
 
 
