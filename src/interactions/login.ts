@@ -32,6 +32,10 @@ function login({
       document.cookie = `BBLocale=${decodedToken.locale};path=/`;
     }
 
+    const d = new Date(0);
+    const e = d.toUTCString();
+    document.cookie = `betty_jwt=none; expires=${e}; SameSite=Lax`;
+
     localStorage.setItem('TOKEN', jwtToken);
     localStorage.setItem('REFRESH_TOKEN', refreshToken);
     // eslint-disable-next-line no-restricted-globals
