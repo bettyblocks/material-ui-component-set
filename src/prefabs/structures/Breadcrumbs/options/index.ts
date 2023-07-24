@@ -1,13 +1,15 @@
 import {
-  hideIf,
-  option,
-  text,
-  showIf,
-  icon,
+  ThemeColor,
   addChild,
-  reconfigure,
-  variable,
+  color,
   endpoint,
+  hideIf,
+  icon,
+  option,
+  reconfigure,
+  showIf,
+  text,
+  variable,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 import { BreadcrumbItem } from '../../BreadcrumbItem';
@@ -137,6 +139,7 @@ export const breadcrumbsOptions = {
       condition: showIf('separatorType', 'EQ', 'icon'),
     },
   }),
+  separatorColor: color('Separator Color', { value: ThemeColor.BLACK }),
 
   ...advanced('Breadcrumbs'),
 };
