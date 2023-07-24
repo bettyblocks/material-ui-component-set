@@ -1,3 +1,10 @@
+## [2.157.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.157.0...v2.157.1) (2023-07-24)
+
+
+### Bug Fixes
+
+* pipelines ([94f4fe2](https://github.com/bettyblocks/material-ui-component-set/commit/94f4fe2d39b206691d26742813d4202dce6a5ec9))
+
 # [2.157.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.156.2...v2.157.0) (2023-07-24)
 
 
