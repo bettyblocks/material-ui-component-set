@@ -276,7 +276,11 @@ const beforeCreate = ({
                       : `{{ ${model?.name}.${name} }}`,
                 },
                 configuration: {
-                  allowedKinds: ['HAS_AND_BELONGS_TO_MANY', 'HAS_MANY', 'OBJECT'],
+                  allowedKinds: [
+                    'HAS_AND_BELONGS_TO_MANY',
+                    'HAS_MANY',
+                    'OBJECT',
+                  ],
                   allowRelations: true,
                   disabled: true,
                   condition: {
