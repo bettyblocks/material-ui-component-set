@@ -641,6 +641,17 @@ const children = [
           value: ['Section label'],
           showInAddChild: true,
           showInReconfigure: true,
+          configuration: {
+            pushToWrapper: {
+              name: 'Questionnaire',
+              condition: {
+                type: 'SHOW',
+                option: 'questionnaireSections',
+                comparator: 'EQ_COMPONENT_ID',
+                value: '#newSection',
+              },
+            },
+          },
         }),
         width: size('Width', {
           value: '100%',
@@ -672,6 +683,15 @@ const children = [
                   value: ['Section title'],
                   configuration: {
                     as: 'MULTILINE',
+                    pushToWrapper: {
+                      name: 'Questionnaire',
+                      condition: {
+                        type: 'SHOW',
+                        option: 'questionnaireSections',
+                        comparator: 'EQ_COMPONENT_ID',
+                        value: '#newSection',
+                      },
+                    },
                   },
                   showInAddChild: true,
                 }),
@@ -736,6 +756,15 @@ const children = [
                   value: [`Section description`],
                   configuration: {
                     as: 'MULTILINE',
+                    pushToWrapper: {
+                      name: 'Questionnaire',
+                      condition: {
+                        type: 'SHOW',
+                        option: 'questionnaireSections',
+                        comparator: 'EQ_COMPONENT_ID',
+                        value: '#newSection',
+                      },
+                    },
                   },
                   showInAddChild: true,
                 }),
@@ -758,6 +787,17 @@ const children = [
                   },
                   ref: {
                     id: '#QuestionsReconfigure',
+                  },
+                  configuration: {
+                    pushToWrapper: {
+                      name: 'Questionnaire',
+                      condition: {
+                        type: 'SHOW',
+                        option: 'questionnaireSections',
+                        comparator: 'EQ_COMPONENT_ID',
+                        value: '#newSection',
+                      },
+                    },
                   },
                 }),
                 addChild: addChild('Add question', {
