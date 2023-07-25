@@ -153,7 +153,7 @@ export const textWidget = [
                       value: '',
                       ref: { id: '#textInputProperty' },
                       configuration: {
-                        allowedKinds: ['TEXT', 'URL', 'IBAN', 'STRING'],
+                        allowedKinds: ['URL', 'IBAN', 'STRING'],
                         disabled: true,
                         createProperty: {
                           type: CreatePropertyKind.STRING,
