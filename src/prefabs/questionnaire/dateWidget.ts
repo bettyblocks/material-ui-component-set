@@ -166,6 +166,7 @@ export const dateWidget = [
                           type: CreatePropertyKind.DATE,
                         },
                         disabled: true,
+                        allowFormatting: false,
                       },
                       showInAddChild: true,
                     }),
