@@ -494,6 +494,9 @@
             pointerEvents: 'none',
             opacity: '0.7',
           },
+          '& .MuiSelect-nativeInput': {
+            width: '0px',
+          },
         },
         '& .MuiIconButton-root': {
           color: ({ options: { textColor } }) => [
