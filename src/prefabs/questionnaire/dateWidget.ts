@@ -153,6 +153,7 @@ export const dateWidget = [
               DateTimePicker(
                 {
                   ref: { id: '#dateInput' },
+                  label: 'Date picker',
                   options: {
                     ...dateTimePickerOptions,
                     property: property('Question', {
