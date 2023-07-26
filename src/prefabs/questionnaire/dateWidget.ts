@@ -153,6 +153,7 @@ export const dateWidget = [
               DateTimePicker(
                 {
                   ref: { id: '#dateInput' },
+                  label: 'Date picker',
                   options: {
                     ...dateTimePickerOptions,
                     property: property('Question', {
@@ -161,11 +162,12 @@ export const dateWidget = [
                         id: '#dateInputProperty',
                       },
                       configuration: {
-                        allowedKinds: ['DATE', 'DATE_TIME'],
+                        allowedKinds: ['DATE'],
                         createProperty: {
-                          type: CreatePropertyKind.DATE_TIME,
+                          type: CreatePropertyKind.DATE,
                         },
                         disabled: true,
+                        allowFormatting: false,
                       },
                       showInAddChild: true,
                     }),

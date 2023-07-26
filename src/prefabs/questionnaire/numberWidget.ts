@@ -161,6 +161,7 @@ export const numberWidget = [
                         },
                         allowedKinds: ['INTEGER', 'PRICE'],
                         disabled: true,
+                        allowFormatting: false,
                       },
                       showInAddChild: true,
                     }),
