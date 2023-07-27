@@ -259,6 +259,22 @@ const beforeCreate = ({
                 },
               },
             }));
+            setOption(newPrefab.structure[0], 'label', (option: any) => ({
+              ...option,
+              value: [
+                {
+                  id:
+                    result.isRelational && !result.isMultiRelational
+                      ? [propertyId, modelProperty.id]
+                      : propertyId,
+                  type: 'PROPERTY',
+                  name:
+                    result.isRelational && !result.isMultiRelational
+                      ? `{{ ${model?.name}.${name}.id }}`
+                      : `{{ ${model?.name}.${name} }}`,
+                },
+              ],
+            }));
           }
           if (validate()) {
             if (
