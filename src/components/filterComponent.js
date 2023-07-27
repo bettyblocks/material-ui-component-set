@@ -702,7 +702,7 @@
     });
 
     return isDev ? (
-      <div className={`${classes.root}`}>{renderTree(groups, true)}</div>
+      <div className={classes.root}>{renderTree(groups, true)}</div>
     ) : (
       <div className={classes.root}>{renderTree(groups)}</div>
     );

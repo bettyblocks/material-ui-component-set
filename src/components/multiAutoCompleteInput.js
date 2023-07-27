@@ -741,7 +741,9 @@
     const currentValue = getValue();
 
     useEffect(() => {
-      if (currentValue !== debouncedCurrentValue) {
+      if (
+        JSON.stringify(currentValue) !== JSON.stringify(debouncedCurrentValue)
+      ) {
         setTimeout(() => {
           setDebouncedCurrentValue(currentValue);
         }, 250);
@@ -759,7 +761,7 @@
         changeContext.current = { modelData: value };
         B.triggerEvent('onChange', triggerEventValue, changeContext.current);
       }
-    }, [currentValue]);
+    }, [value]);
 
     const renderLabel = (option) => {
       let optionLabel = '';
