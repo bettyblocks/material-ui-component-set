@@ -373,14 +373,14 @@ const beforeCreate = ({
 
       const schemaName = 'Questionnaire object';
       const jsonSchema = {
-        $id: 'https://bettyblocks.com/question.schema.json',
+        $id: 'https://bettyblocks.com/questionnaire.schema.json',
         $schema: 'https://json-schema.org/draft/2020-12/schema',
         description: 'Question description',
         title: 'Question',
         type: 'object',
         properties: {
           answer: { type: 'string' },
-          score: { type: 'integer' },
+          score: { type: 'number' },
         },
       };
 
