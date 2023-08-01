@@ -57,6 +57,7 @@
       showError,
       autoLoadOnScroll,
       autoLoadTakeAmount,
+      noResultsText,
       dataComponentAttribute,
       enableFirstLastPageNavigation,
     } = options;
@@ -88,6 +89,7 @@
     const [interactionFilter, setInteractionFilter] = useState({});
     const perPageLabel = useText(labelRowsPerPage);
     const numOfPagesLabel = useText(labelNumberOfPages);
+    const parsedNoResultsText = useText(noResultsText);
 
     const { label: searchPropertyLabel = '{property}', kind } =
       getProperty(searchProperty) || {};
@@ -579,6 +581,14 @@
             ))}
           </TableRow>
         ));
+      }
+
+      if (results.length === 0 && parsedNoResultsText) {
+        return (
+          <TableRow>
+            <TableCell>{parsedNoResultsText}</TableCell>
+          </TableRow>
+        );
       }
 
       return results.map((value) => (

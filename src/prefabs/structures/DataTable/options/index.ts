@@ -65,6 +65,11 @@ export const categories = [
     members: ['outerSpacing'],
   },
   {
+    label: 'Messages',
+    expanded: false,
+    members: ['showError', 'noResultsText'],
+  },
+  {
     label: 'Advanced Options',
     expanded: false,
     members: ['dataComponentAttribute'],
@@ -305,6 +310,9 @@ export const dataTableOptions = {
         { name: 'Interaction', value: 'interaction' },
       ],
     },
+  }),
+  noResultsText: variable('No results text', {
+    value: [''],
   }),
 
   ...advanced('DataTable'),
