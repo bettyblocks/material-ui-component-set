@@ -116,6 +116,7 @@ const beforeCreate = ({
   const unsupportedKinds = createBlacklist([
     'HAS_AND_BELONGS_TO_MANY',
     'HAS_MANY',
+    'OBJECT',
   ]);
 
   const structure = originalPrefab.structure[0];
@@ -275,7 +276,11 @@ const beforeCreate = ({
                       : `{{ ${model?.name}.${name} }}`,
                 },
                 configuration: {
-                  allowedKinds: ['HAS_AND_BELONGS_TO_MANY', 'HAS_MANY'],
+                  allowedKinds: [
+                    'HAS_AND_BELONGS_TO_MANY',
+                    'HAS_MANY',
+                    'OBJECT',
+                  ],
                   allowRelations: true,
                   disabled: true,
                   condition: {
