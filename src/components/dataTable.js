@@ -500,7 +500,7 @@
 
       if (results.length === 0 && parsedNoResultsText) {
         return (
-          <TableRow classes={{ root: classes.bodyRow }}>
+          <TableRow>
             <TableCell>{parsedNoResultsText}</TableCell>
           </TableRow>
         );
