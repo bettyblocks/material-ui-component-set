@@ -53,6 +53,7 @@
       showError,
       autoLoadOnScroll,
       autoLoadTakeAmount,
+      noResultsText,
       dataComponentAttribute,
     } = options;
     const repeaterRef = React.createRef();
@@ -83,6 +84,7 @@
     const [interactionFilter, setInteractionFilter] = useState({});
     const perPageLabel = useText(labelRowsPerPage);
     const numOfPagesLabel = useText(labelNumberOfPages);
+    const parsedNoResultsText = useText(noResultsText);
 
     const { label: searchPropertyLabel = '{property}', kind } =
       getProperty(searchProperty) || {};
@@ -494,6 +496,14 @@
             ))}
           </TableRow>
         ));
+      }
+
+      if (results.length === 0 && parsedNoResultsText) {
+        return (
+          <TableRow classes={{ root: classes.bodyRow }}>
+            <TableCell>{parsedNoResultsText}</TableCell>
+          </TableRow>
+        );
       }
 
       return results.map((value) => (

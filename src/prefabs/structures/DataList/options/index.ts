@@ -19,9 +19,14 @@ export const categories = [
     members: ['pagination', 'labelNumberOfPages', 'take', 'placeholderTake'],
   },
   {
+    label: 'Spacing',
+    expanded: false,
+    members: ['outerSpacing'],
+  },
+  {
     label: 'Messages',
     expanded: false,
-    members: ['showError', 'loadingType', 'loadingText'],
+    members: ['showError', 'loadingType', 'loadingText', 'noResultsText'],
   },
   {
     label: 'Advanced Options',
@@ -168,6 +173,9 @@ export const dataListOptions = {
         value: 'default',
       },
     },
+  }),
+  noResultsText: variable('No results text', {
+    value: [''],
   }),
 
   ...advanced('DataList'),
