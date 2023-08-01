@@ -234,6 +234,34 @@ const beforeCreate = ({
     save(originalPrefab);
   }
 
+  const inputStructure = (inputPrefab: any, prop: any) => {
+    if (inputPrefab.type === 'COMPONENT') {
+      setOption(inputPrefab, 'property', (options) => ({
+        ...options,
+        optionRef: {
+          id: `#PropertyInput${prop.id}`,
+        },
+      }));
+      setOption(inputPrefab, 'label', (options: any) => ({
+        ...options,
+        value: [''],
+        optionRef: {
+          sourceId: `#PropertyInput${prop.id}`,
+          inherit: [{ name: '$name', id: '$id', type: 'PROPERTY_LABEL' }],
+        },
+      }));
+      setOption(inputPrefab, 'floatLabel', (options: any) => ({
+        ...options,
+        value: true,
+      }));
+      setOption(inputPrefab, 'labelColor', (options: any) => ({
+        ...options,
+        value: 'Black',
+      }));
+    }
+    return inputPrefab;
+  };
+
   return (
     <>
       <Header onClose={close} title="Configure form" />
@@ -403,222 +431,243 @@ const beforeCreate = ({
           // possible helper: given property kind returns prefab name
           Object.values(result.variables).forEach(([property, variable]) => {
             const { kind } = property;
+            let input;
             switch (kind) {
               case PropertyKind.BELONGS_TO: {
-                structure.descendants.push(
-                  makeBettyUpdateInput(
-                    BettyPrefabs.AUTO_COMPLETE,
-                    model,
-                    property,
-                    variable,
-                    result.relatedIdProperties,
-                    result.relatedModelIds,
-                  ),
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.AUTO_COMPLETE,
+                  model,
+                  property,
+                  variable,
+                  result.relatedIdProperties,
+                  result.relatedModelIds,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
               }
               case PropertyKind.HAS_MANY:
-              case PropertyKind.HAS_AND_BELONGS_TO_MANY:
-                structure.descendants.push(
-                  makeBettyUpdateInput(
-                    BettyPrefabs.MULTI_AUTO_COMPLETE,
-                    model,
-                    property,
-                    variable,
-                    result.relatedIdProperties,
-                    result.relatedModelIds,
-                  ),
+              case PropertyKind.HAS_AND_BELONGS_TO_MANY: {
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.MULTI_AUTO_COMPLETE,
+                  model,
+                  property,
+                  variable,
+                  result.relatedIdProperties,
+                  result.relatedModelIds,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
-              case PropertyKind.DATE_TIME:
-                structure.descendants.push(
-                  makeBettyUpdateInput(
-                    BettyPrefabs.DATE_TIME,
-                    model,
-                    property,
-                    variable,
-                  ),
+              }
+              case PropertyKind.DATE_TIME: {
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.DATE_TIME,
+                  model,
+                  property,
+                  variable,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
-              case PropertyKind.DATE:
-                structure.descendants.push(
-                  makeBettyUpdateInput(
-                    BettyPrefabs.DATE,
-                    model,
-                    property,
-                    variable,
-                  ),
+              }
+              case PropertyKind.DATE: {
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.DATE,
+                  model,
+                  property,
+                  variable,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
-              case PropertyKind.TIME:
-                structure.descendants.push(
-                  makeBettyUpdateInput(
-                    BettyPrefabs.TIME,
-                    model,
-                    property,
-                    variable,
-                  ),
+              }
+              case PropertyKind.TIME: {
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.TIME,
+                  model,
+                  property,
+                  variable,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
-              case PropertyKind.DECIMAL:
-                structure.descendants.push(
-                  makeBettyUpdateInput(
-                    BettyPrefabs.DECIMAL,
-                    model,
-                    property,
-                    variable,
-                  ),
+              }
+              case PropertyKind.DECIMAL: {
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.DECIMAL,
+                  model,
+                  property,
+                  variable,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
-              case PropertyKind.EMAIL_ADDRESS:
-                structure.descendants.push(
-                  makeBettyUpdateInput(
-                    BettyPrefabs.EMAIL_ADDRESS,
-                    model,
-                    property,
-                    variable,
-                  ),
+              }
+              case PropertyKind.EMAIL_ADDRESS: {
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.EMAIL_ADDRESS,
+                  model,
+                  property,
+                  variable,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
-              case PropertyKind.FILE:
-                structure.descendants.push(
-                  makeBettyUpdateInput(
-                    BettyPrefabs.FILE,
-                    model,
-                    property,
-                    variable,
-                  ),
+              }
+              case PropertyKind.FILE: {
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.FILE,
+                  model,
+                  property,
+                  variable,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
-              case PropertyKind.IMAGE:
-                structure.descendants.push(
-                  makeBettyUpdateInput(
-                    BettyPrefabs.IMAGE,
-                    model,
-                    property,
-                    variable,
-                  ),
+              }
+              case PropertyKind.IMAGE: {
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.IMAGE,
+                  model,
+                  property,
+                  variable,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
-              case PropertyKind.IBAN:
-                structure.descendants.push(
-                  makeBettyUpdateInput(
-                    BettyPrefabs.IBAN,
-                    model,
-                    property,
-                    variable,
-                  ),
+              }
+              case PropertyKind.IBAN: {
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.IBAN,
+                  model,
+                  property,
+                  variable,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
-              case PropertyKind.LIST:
-                structure.descendants.push(
-                  makeBettyUpdateInput(
-                    BettyPrefabs.LIST,
-                    model,
-                    property,
-                    variable,
-                  ),
+              }
+              case PropertyKind.LIST: {
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.LIST,
+                  model,
+                  property,
+                  variable,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
-              case PropertyKind.PASSWORD:
-                structure.descendants.push(
-                  makeBettyInput(
-                    BettyPrefabs.PASSWORD,
-                    model,
-                    property,
-                    variable,
-                  ),
+              }
+              case PropertyKind.PASSWORD: {
+                input = makeBettyInput(
+                  BettyPrefabs.PASSWORD,
+                  model,
+                  property,
+                  variable,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
-              case PropertyKind.PHONE_NUMBER:
-                structure.descendants.push(
-                  makeBettyUpdateInput(
-                    BettyPrefabs.PHONE_NUMBER,
-                    model,
-                    property,
-                    variable,
-                  ),
+              }
+              case PropertyKind.PHONE_NUMBER: {
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.PHONE_NUMBER,
+                  model,
+                  property,
+                  variable,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
-              case PropertyKind.PRICE:
-                structure.descendants.push(
-                  makeBettyUpdateInput(
-                    BettyPrefabs.PRICE,
-                    model,
-                    property,
-                    variable,
-                  ),
+              }
+              case PropertyKind.PRICE: {
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.PRICE,
+                  model,
+                  property,
+                  variable,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
-              case PropertyKind.URL:
-                structure.descendants.push(
-                  makeBettyUpdateInput(
-                    BettyPrefabs.URL,
-                    model,
-                    property,
-                    variable,
-                  ),
+              }
+              case PropertyKind.URL: {
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.URL,
+                  model,
+                  property,
+                  variable,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
-              case PropertyKind.STRING:
-                structure.descendants.push(
-                  makeBettyUpdateInput(
-                    BettyPrefabs.STRING,
-                    model,
-                    property,
-                    variable,
-                  ),
+              }
+              case PropertyKind.STRING: {
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.STRING,
+                  model,
+                  property,
+                  variable,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
-              case PropertyKind.TEXT:
-                structure.descendants.push(
-                  makeBettyUpdateInput(
-                    BettyPrefabs.TEXT,
-                    model,
-                    property,
-                    variable,
-                  ),
+              }
+              case PropertyKind.TEXT: {
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.TEXT,
+                  model,
+                  property,
+                  variable,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
-              case PropertyKind.INTEGER:
-                structure.descendants.push(
-                  makeBettyUpdateInput(
-                    BettyPrefabs.INTEGER,
-                    model,
-                    property,
-                    variable,
-                  ),
+              }
+              case PropertyKind.INTEGER: {
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.INTEGER,
+                  model,
+                  property,
+                  variable,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
-              case PropertyKind.BOOLEAN:
-                structure.descendants.push(
-                  makeBettyUpdateInput(
-                    BettyPrefabs.BOOLEAN,
-                    model,
-                    property,
-                    variable,
-                  ),
+              }
+              case PropertyKind.BOOLEAN: {
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.BOOLEAN,
+                  model,
+                  property,
+                  variable,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
-              case PropertyKind.RICH_TEXT:
-                structure.descendants.push(
-                  makeBettyUpdateInput(
-                    BettyPrefabs.RICH_TEXT,
-                    model,
-                    property,
-                    variable,
-                  ),
+              }
+              case PropertyKind.RICH_TEXT: {
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.RICH_TEXT,
+                  model,
+                  property,
+                  variable,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
-              default:
-                structure.descendants.push(
-                  makeBettyUpdateInput(
-                    BettyPrefabs.STRING,
-                    model,
-                    property,
-                    variable,
-                  ),
+              }
+              default: {
+                input = makeBettyUpdateInput(
+                  BettyPrefabs.STRING,
+                  model,
+                  property,
+                  variable,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
+              }
             }
           });
 

@@ -636,7 +636,7 @@
       return (
         <li
           style={{ textAlign: align }}
-          className={`${classes.list}`}
+          className={classes.list}
           {...attributes}
         >
           {children}
