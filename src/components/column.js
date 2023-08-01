@@ -4,7 +4,7 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { visible, dataComponentAttribute } = options;
+    const { visible, dataComponentAttribute, overflow } = options;
     const { env, useText } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
@@ -26,6 +26,7 @@
         className={[
           classes.column,
           isVisible || isDev ? '' : classes.hide,
+          overflow && classes.overflow,
         ].join(' ')}
         data-component={useText(dataComponentAttribute) || 'Column'}
       >
@@ -125,7 +126,6 @@
         borderColor: 'transparent',
         borderStyle: 'none',
         borderRadius: 0,
-        overflow: isDev ? 'unset' : 'auto',
         boxSizing: 'border-box',
         [`@media ${mediaMinWidth(600)}`]: {
           display: ({
@@ -306,6 +306,9 @@
       },
       hide: {
         display: 'none !important',
+      },
+      overflow: {
+        overflow: isDev ? 'unset' : 'auto',
       },
     };
   },

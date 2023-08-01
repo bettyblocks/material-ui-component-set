@@ -37,7 +37,7 @@ export const categories = [
   {
     label: 'Advanced Options',
     expanded: false,
-    members: ['dataComponentAttribute'],
+    members: ['dataComponentAttribute', 'overflow'],
   },
 ];
 
@@ -188,6 +188,9 @@ export const columnOptions = {
   }),
   innerSpacing: sizes('Inner space', {
     value: ['M', 'M', 'M', 'M'],
+  }),
+  overflow: toggle('Overflow', {
+    value: true,
   }),
 
   ...advanced('Column'),
