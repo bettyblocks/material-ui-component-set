@@ -73,11 +73,11 @@
 
     const isEmpty = !isImage && !isVideo && !isData && !isIframe;
 
-    const variable =
+    const isVariable =
       (isUrlImg || isURLVideo) &&
       urlFileSource &&
       urlFileSource.findIndex((v) => v.name) !== -1;
-    const variableDev = (isDev && isUrlImg) || !imgSource;
+    const isVariableDev = (isDev && isUrlImg) || !imgSource;
 
     const hasInteralLink =
       linkType === 'internal' && linkTo && linkTo.id !== '';
@@ -141,7 +141,7 @@
         <img
           className={classes.media}
           src={imgUrl}
-          title={titleText || variable || imgName}
+          title={titleText || isVariable || imgName}
           alt={imgAlt || imgName}
           data-component={useText(dataComponentAttribute) || 'Media'}
           role="presentation"
@@ -157,10 +157,10 @@
       if (!isDev) return null;
 
       return (
-        <div className={[(isEmpty || variableDev) && classes.empty]}>
+        <div className={[(isEmpty || isVariableDev) && classes.empty]}>
           <div className={classes.placeholderWrapper}>
             <Placeholder />
-            {variable && <span>{imgUrl}</span>}
+            {isVariable && <span>{imgUrl}</span>}
           </div>
         </div>
       );
@@ -203,9 +203,9 @@
 
     let MediaComponent = PlaceholderComponent;
 
-    if (isImage && !variableDev && hasLink) {
+    if (isImage && !isVariableDev && hasLink) {
       MediaComponent = LinkComponent;
-    } else if (isImage && !variableDev) {
+    } else if (isImage && !isVariableDev) {
       MediaComponent = ImageComponent;
     } else if (isVideo) {
       MediaComponent = VideoComponent;
@@ -218,7 +218,7 @@
         className={[
           classes.outerSpacing,
           isDev ? classes.devWrapper : '',
-          !isEmpty && !variable ? classes.hasContent : '',
+          !isEmpty && !isVariable ? classes.hasContent : '',
         ].join(' ')}
       >
         <MediaComponent />
