@@ -50,7 +50,7 @@ export const styles = {
   hideLabel: toggle('Hide label'),
 
   labelColor: color('Label color', {
-    value: ThemeColor.ACCENT_3,
+    value: ThemeColor.BLACK,
   }),
 
   textColor: color('Text color', {
