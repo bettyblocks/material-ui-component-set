@@ -1,3 +1,20 @@
+# [2.158.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.157.0...v2.158.0) (2023-08-02)
+
+
+### Bug Fixes
+
+* add debounced current value ([da53a4b](https://github.com/bettyblocks/material-ui-component-set/commit/da53a4b6606634210848aa3710af0ad11410bd96))
+* add object prop type to allowedValues in multi autocomplete ([b6eeae5](https://github.com/bettyblocks/material-ui-component-set/commit/b6eeae538ea986286c039462b81078609b04c074))
+* check values on json stringify format ([96cd7d9](https://github.com/bettyblocks/material-ui-component-set/commit/96cd7d9c691f863121766df0d0dea13c45d3abd0))
+* no results message stretches to table width ([f6996ff](https://github.com/bettyblocks/material-ui-component-set/commit/f6996ff0a101585e808af4f21918bd756f4bfbf6))
+* pipelines ([94f4fe2](https://github.com/bettyblocks/material-ui-component-set/commit/94f4fe2d39b206691d26742813d4202dce6a5ec9))
+* set width of hidden input to 0px ([340901c](https://github.com/bettyblocks/material-ui-component-set/commit/340901c8b6b9b3dfa2536a578892d1d8fabdec3e))
+
+
+### Features
+
+* option to show text when no results fetched ([c38f87f](https://github.com/bettyblocks/material-ui-component-set/commit/c38f87fbd867e38e09e4f872def64cef914847b2))
+
 ## [2.157.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.157.0...v2.157.1) (2023-07-31)
 
 
