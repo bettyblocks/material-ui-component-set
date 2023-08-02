@@ -262,7 +262,7 @@ const beforeCreate = ({
             );
             setOption(
               newPrefab.structure[0],
-              'property',
+              'label',
               (originalOption: any) => ({
                 ...originalOption,
                 value: [

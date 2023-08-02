@@ -267,7 +267,7 @@ const beforeCreate = ({
                     result.isRelational && !result.isMultiRelational
                       ? [propertyId, modelProperty.id]
                       : propertyId,
-                  type: 'PROPERTY',
+                  type: 'PROPERTY_LABEL',
                   name:
                     result.isRelational && !result.isMultiRelational
                       ? `{{ ${model?.name}.${name}.id }}`

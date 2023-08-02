@@ -269,10 +269,7 @@ const beforeCreate = ({
                       ? [propertyId, modelProperty.id]
                       : propertyId,
                   type: 'PROPERTY',
-                  name:
-                    result.isRelational && !result.isMultiRelational
-                      ? `{{ ${model?.name}.${name}.id }}`
-                      : `{{ ${model?.name}.${name} }}`,
+                  name: `{{ ${model?.name}.${name} }}`,
                 },
                 configuration: {
                   allowedKinds: ['HAS_AND_BELONGS_TO_MANY', 'HAS_MANY'],
@@ -299,10 +296,7 @@ const beforeCreate = ({
                         ? [propertyId, modelProperty.id]
                         : propertyId,
                     type: 'PROPERTY_LABEL',
-                    name:
-                      result.isRelational && !result.isMultiRelational
-                        ? `{{ ${model?.name}.${name}.id }}`
-                        : `{{ ${model?.name}.${name} }}`,
+                    name: `{{ ${model?.name}.${name} }}`,
                   },
                 ],
               }),
