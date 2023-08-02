@@ -35,6 +35,7 @@
           pagination,
           loadingType,
           loadingText,
+          noResultsText,
           dataComponentAttribute,
         } = options;
 
@@ -43,6 +44,7 @@
         const { label: searchPropertyLabel } =
           getProperty(searchProperty) || {};
         const parsedLoadingText = useText(loadingText);
+        const parsedNoResultsText = useText(noResultsText);
         const dataComponentAttributeText = useText(dataComponentAttribute);
         const isEmpty = children.length === 0;
         const isDev = env === 'dev';
@@ -438,6 +440,10 @@
 
           const { results = [], totalCount } = data || {};
           const resultCount = results && results.length;
+
+          if (!resultCount) {
+            return <span>{parsedNoResultsText}</span>;
+          }
 
           return (
             <div data-component={dataComponentAttributeText || 'DataContainer'}>
