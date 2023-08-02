@@ -586,7 +586,9 @@
       if (results.length === 0 && parsedNoResultsText) {
         return (
           <TableRow>
-            <TableCell>{parsedNoResultsText}</TableCell>
+            <TableCell colSpan={children.length}>
+              {parsedNoResultsText}
+            </TableCell>
           </TableRow>
         );
       }
