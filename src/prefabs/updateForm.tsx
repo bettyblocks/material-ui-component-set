@@ -250,14 +250,6 @@ const beforeCreate = ({
           inherit: [{ name: '$name', id: '$id', type: 'PROPERTY_LABEL' }],
         },
       }));
-      setOption(inputPrefab, 'floatLabel', (options: any) => ({
-        ...options,
-        value: true,
-      }));
-      setOption(inputPrefab, 'labelColor', (options: any) => ({
-        ...options,
-        value: 'Black',
-      }));
     }
     return inputPrefab;
   };
