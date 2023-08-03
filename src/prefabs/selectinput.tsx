@@ -270,10 +270,7 @@ const beforeCreate = ({
                       ? [propertyId, modelProperty.id]
                       : propertyId,
                   type: 'PROPERTY',
-                  name:
-                    result.isRelational && !result.isMultiRelational
-                      ? `{{ ${model?.name}.${name}.id }}`
-                      : `{{ ${model?.name}.${name} }}`,
+                  name: `{{ ${model?.name}.${name} }}`,
                 },
                 configuration: {
                   allowedKinds: ['LIST', 'BELONGS_TO'],
@@ -299,10 +296,7 @@ const beforeCreate = ({
                         ? [propertyId, modelProperty.id]
                         : propertyId,
                     type: 'PROPERTY_LABEL',
-                    name:
-                      result.isRelational && !result.isMultiRelational
-                        ? `{{ ${model?.name}.${name}.id }}`
-                        : `{{ ${model?.name}.${name} }}`,
+                    name: `{{ ${model?.name}.${name} }}`,
                   },
                 ],
               }),
@@ -316,10 +310,7 @@ const beforeCreate = ({
                       ? [propertyId, modelProperty.id]
                       : propertyId,
                   type: 'PROPERTY',
-                  name:
-                    result.isRelational && !result.isMultiRelational
-                      ? `{{ ${model?.name}.${name}.id }}`
-                      : `{{ ${model?.name}.${name} }}`,
+                  name: `{{ ${model?.name}.${name} }}`,
                   ...(propertyPath.useKey && { useKey: propertyPath.useKey }),
                 },
                 configuration: {
@@ -343,10 +334,7 @@ const beforeCreate = ({
                       ? [propertyId, modelProperty.id]
                       : propertyId,
                   type: 'PROPERTY',
-                  name:
-                    result.isRelational && !result.isMultiRelational
-                      ? `{{ ${model?.name}.${name}.id }}`
-                      : `{{ ${model?.name}.${name} }}`,
+                  name: `{{ ${model?.name}.${name} }}`,
                 },
               ];
 
