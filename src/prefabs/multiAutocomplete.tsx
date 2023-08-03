@@ -37,7 +37,6 @@ const beforeCreate = ({
     createUuid,
     useModelQuery,
     createBlacklist,
-    useModelRelationQuery,
   } = helpers;
 
   const [propertyPath, setProperty] = React.useState<any>('');
@@ -97,19 +96,6 @@ const beforeCreate = ({
       name = propertyResponse.data.property.label;
       propertyKind = propertyResponse.data.property.kind;
       propertyModelId = propertyResponse.data.property.referenceModel?.id;
-    }
-  }
-
-  const modelRelationResponse = useModelRelationQuery(propertyModelId);
-
-  let relationalProperties;
-  let modelProperty;
-  if (!(modelRelationResponse.loading || modelRelationResponse.error)) {
-    if (modelRelationResponse.data) {
-      relationalProperties = modelRelationResponse.data.model.properties;
-      modelProperty = relationalProperties.find(
-        (property) => property.name === 'id',
-      );
     }
   }
 
@@ -264,10 +250,7 @@ const beforeCreate = ({
               (originalOption: PrefabComponentOption) => ({
                 ...originalOption,
                 value: {
-                  id:
-                    result.isRelational && !result.isMultiRelational
-                      ? [propertyId, modelProperty.id]
-                      : propertyId,
+                  id: propertyId,
                   type: 'PROPERTY',
                   name: `{{ ${model?.name}.${name} }}`,
                 },
@@ -291,10 +274,7 @@ const beforeCreate = ({
                 ...originalOption,
                 value: [
                   {
-                    id:
-                      result.isRelational && !result.isMultiRelational
-                        ? [propertyId, modelProperty.id]
-                        : propertyId,
+                    id: propertyId,
                     type: 'PROPERTY_LABEL',
                     name: `{{ ${model?.name}.${name} }}`,
                   },
@@ -312,10 +292,7 @@ const beforeCreate = ({
             ) {
               const valueOptions = [
                 {
-                  id:
-                    result.isRelational && !result.isMultiRelational
-                      ? [propertyId, modelProperty.id]
-                      : propertyId,
+                  id: propertyId,
                   type: 'PROPERTY',
                   name: `{{ ${model?.name}.${name} }}`,
                 },

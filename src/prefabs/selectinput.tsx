@@ -265,10 +265,7 @@ const beforeCreate = ({
               (originalOption: PrefabComponentOption) => ({
                 ...originalOption,
                 value: {
-                  id:
-                    result.isRelational && !result.isMultiRelational
-                      ? [propertyId, modelProperty.id]
-                      : propertyId,
+                  id: propertyId,
                   type: 'PROPERTY',
                   name: `{{ ${model?.name}.${name} }}`,
                 },
@@ -291,10 +288,7 @@ const beforeCreate = ({
                 ...originalOption,
                 value: [
                   {
-                    id:
-                      result.isRelational && !result.isMultiRelational
-                        ? [propertyId, modelProperty.id]
-                        : propertyId,
+                    id: propertyId,
                     type: 'PROPERTY_LABEL',
                     name: `{{ ${model?.name}.${name} }}`,
                   },
@@ -329,10 +323,7 @@ const beforeCreate = ({
             ) {
               const valueOptions = [
                 {
-                  id:
-                    result.isRelational && !result.isMultiRelational
-                      ? [propertyId, modelProperty.id]
-                      : propertyId,
+                  id: propertyId,
                   type: 'PROPERTY',
                   name: `{{ ${model?.name}.${name} }}`,
                 },
