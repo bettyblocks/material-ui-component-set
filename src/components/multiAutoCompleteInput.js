@@ -601,59 +601,6 @@
       setInteractionFilter({});
     });
 
-    /*
-     * Show a TextField in design time
-     */
-    if (isDev || !valid) {
-      let designTimeValue;
-
-      if (!valid) {
-        designTimeValue = message;
-      }
-
-      if (isDev) {
-        designTimeValue = '';
-      }
-
-      return (
-        <div className={classes.root}>
-          <TextField
-            InputProps={{
-              inputProps: {
-                tabIndex: isDev ? -1 : undefined,
-              },
-              endAdornment: <Icon name="ExpandMore" />,
-              ...(!designTimeValue && {
-                startAdornment: (
-                  <>
-                    <Chip label="Chip 1" onDelete={() => {}} />
-                    <Chip label="Chip 2" onDelete={() => {}} />
-                  </>
-                ),
-              }),
-            }}
-            classes={{
-              root: `${classes.formControl} ${
-                floatLabel && classes.floatLabel
-              }`,
-            }}
-            dataComponent={dataComponentAttribute}
-            disabled={disabled || !valid}
-            error={showError}
-            fullWidth={fullWidth}
-            helperText={helperText}
-            label={!hideLabel && label}
-            margin={margin}
-            placeholder={placeholder}
-            required={required}
-            size={size}
-            value={designTimeValue}
-            variant={variant}
-          />
-        </div>
-      );
-    }
-
     const getOptions = () => {
       if (optionType === 'property') {
         return modelProperty.values.map((propertyValue) => propertyValue.value);
@@ -900,6 +847,59 @@
         )}
       </FormControl>
     );
+
+    /*
+     * Show a TextField in design time
+     */
+    if (isDev || !valid) {
+      let designTimeValue;
+
+      if (!valid) {
+        designTimeValue = message;
+      }
+
+      if (isDev) {
+        designTimeValue = '';
+      }
+
+      return (
+        <div className={classes.root}>
+          <TextField
+            InputProps={{
+              inputProps: {
+                tabIndex: isDev ? -1 : undefined,
+              },
+              endAdornment: <Icon name="ExpandMore" />,
+              ...(!designTimeValue && {
+                startAdornment: (
+                  <>
+                    <Chip label="Chip 1" onDelete={() => {}} />
+                    <Chip label="Chip 2" onDelete={() => {}} />
+                  </>
+                ),
+              }),
+            }}
+            classes={{
+              root: `${classes.formControl} ${
+                floatLabel && classes.floatLabel
+              }`,
+            }}
+            dataComponent={dataComponentAttribute}
+            disabled={disabled || !valid}
+            error={showError}
+            fullWidth={fullWidth}
+            helperText={helperText}
+            label={!hideLabel && label}
+            margin={margin}
+            placeholder={placeholder}
+            required={required}
+            size={size}
+            value={designTimeValue}
+            variant={variant}
+          />
+        </div>
+      );
+    }
 
     if (optionType === 'model') {
       return (
