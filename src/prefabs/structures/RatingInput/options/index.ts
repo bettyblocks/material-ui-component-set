@@ -136,7 +136,7 @@ export const ratingInputOptions = {
     value: ThemeColor.DANGER,
   }),
   labelColor: color('Label color', {
-    value: ThemeColor.ACCENT_3,
+    value: ThemeColor.BLACK,
   }),
 
   ...advanced('RatingInput'),
