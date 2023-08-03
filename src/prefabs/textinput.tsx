@@ -1,10 +1,5 @@
 import * as React from 'react';
-import {
-  BeforeCreateArgs,
-  Icon,
-  prefab,
-  PrefabComponentOption,
-} from '@betty-blocks/component-sdk';
+import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
 import { TextInput } from './structures/TextInput';
 
 const beforeCreate = ({
@@ -131,8 +126,8 @@ const beforeCreate = ({
     (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
   );
   const actionVariableOption = actionVariableOptionType?.key || null;
-  const labelOptionKey = 'label';
   const nameOptionKey = 'actionVariableId';
+  const labelOptionKey = 'label';
 
   return (
     <>
@@ -237,22 +232,38 @@ const beforeCreate = ({
             value: result.variable.variableId,
           }));
           if (propertyBased) {
+            setOption(newPrefab.structure[0], 'property', (originalOption) => ({
+              ...originalOption,
+              value: {
+                id:
+                  result.isRelational && !result.isMultiRelational
+                    ? [propertyId, modelProperty.id]
+                    : propertyId,
+                type: 'PROPERTY',
+                name:
+                  result.isRelational && !result.isMultiRelational
+                    ? `{{ ${model?.name}.${name}.id }}`
+                    : `{{ ${model?.name}.${name} }}`,
+              },
+            }));
             setOption(
               newPrefab.structure[0],
-              'property',
-              (originalOption: PrefabComponentOption) => ({
+              'label',
+              (originalOption: any) => ({
                 ...originalOption,
-                value: {
-                  id:
-                    result.isRelational && !result.isMultiRelational
-                      ? [propertyId, modelProperty.id]
-                      : propertyId,
-                  type: 'PROPERTY',
-                  name:
-                    result.isRelational && !result.isMultiRelational
-                      ? `{{ ${model?.name}.${name}.id }}`
-                      : `{{ ${model?.name}.${name} }}`,
-                },
+                value: [
+                  {
+                    id:
+                      result.isRelational && !result.isMultiRelational
+                        ? [propertyId, modelProperty.id]
+                        : propertyId,
+                    type: 'PROPERTY_LABEL',
+                    name:
+                      result.isRelational && !result.isMultiRelational
+                        ? `{{ ${model?.name}.${name}.id }}`
+                        : `{{ ${model?.name}.${name} }}`,
+                  },
+                ],
               }),
             );
           }

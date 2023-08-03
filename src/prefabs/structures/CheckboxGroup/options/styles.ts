@@ -11,7 +11,7 @@ export const styles = {
     value: false,
   }),
   labelColor: color('Label color', {
-    value: ThemeColor.ACCENT_3,
+    value: ThemeColor.BLACK,
   }),
   textColor: color('Text color', {
     value: ThemeColor.BLACK,
