@@ -1,3 +1,20 @@
+# [2.159.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.158.0...v2.159.0) (2023-08-03)
+
+
+### Bug Fixes
+
+* dynamic labels for specific inputs ([8418850](https://github.com/bettyblocks/material-ui-component-set/commit/84188504bb28519f79e8788896864feb6b570e7d))
+* multiautocomplete handle errors correctly ([2d572ab](https://github.com/bettyblocks/material-ui-component-set/commit/2d572ab3fc0539ce6c74fb1385faa8c077e65fa9))
+* remove id from value and label name ([e16d4f7](https://github.com/bettyblocks/material-ui-component-set/commit/e16d4f7fa4ae3fd7aa2cc9364b4be4d7f306bf18))
+* send propId as string in autocomplete ([62ff924](https://github.com/bettyblocks/material-ui-component-set/commit/62ff924883b4b8ea039d8660a3763f9c7eb7abf2))
+* send propId as string in select and radiocomponent ([5514540](https://github.com/bettyblocks/material-ui-component-set/commit/551454067449b869a80b169943b153a2c6ba4756))
+
+
+### Features
+
+* add dynamic labels to form prefabs ([ac8fc99](https://github.com/bettyblocks/material-ui-component-set/commit/ac8fc99f410d553ae3ce9336a0166fa5585132ef))
+* form with dynamic labels and float label true ([2393ab3](https://github.com/bettyblocks/material-ui-component-set/commit/2393ab3a8f254b085192ea1ebdce89247d2dc975))
+
 # [2.158.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.157.0...v2.158.0) (2023-08-02)
 
 
