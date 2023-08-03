@@ -269,12 +269,27 @@ const beforeCreate = ({
                       ? [propertyId, modelProperty.id]
                       : propertyId,
                   type: 'PROPERTY',
-                  name:
-                    result.isRelational && !result.isMultiRelational
-                      ? `{{ ${model?.name}.${name}.id }}`
-                      : `{{ ${model?.name}.${name} }}`,
+                  name: `{{ ${model?.name}.${name} }}`,
                   ...(propertyPath.useKey && { useKey: propertyPath.useKey }),
                 },
+              }),
+            );
+            setOption(
+              newPrefab.structure[0],
+              'label',
+              (originalOption: any) => ({
+                ...originalOption,
+                value: [
+                  {
+                    id:
+                      result.isRelational && !result.isMultiRelational
+                        ? [propertyId, modelProperty.id]
+                        : propertyId,
+                    type: 'PROPERTY_LABEL',
+                    name: `{{ ${model?.name}.${name} }}`,
+                    ...(propertyPath.useKey && { useKey: propertyPath.useKey }),
+                  },
+                ],
               }),
             );
             if (propertyKind === 'OBJECT') {

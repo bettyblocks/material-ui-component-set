@@ -64,6 +64,26 @@ const beforeCreate = ({
     }));
   }
 
+  const inputStructure = (inputPrefab: any, prop: any) => {
+    if (inputPrefab.type === 'COMPONENT') {
+      setOption(inputPrefab, 'property', (options) => ({
+        ...options,
+        optionRef: {
+          id: `#PropertyInput${prop.id}`,
+        },
+      }));
+      setOption(inputPrefab, 'label', (options: any) => ({
+        ...options,
+        value: [''],
+        optionRef: {
+          sourceId: `#PropertyInput${prop.id}`,
+          inherit: [{ name: '$name', id: '$id', type: 'PROPERTY_LABEL' }],
+        },
+      }));
+    }
+    return inputPrefab;
+  };
+
   return (
     <>
       <Header onClose={close} title="Configure login form" />
@@ -150,41 +170,45 @@ const beforeCreate = ({
 
           authProfile.properties.forEach((property) => {
             const { kind, name } = property;
+            let input;
             const variable = result.variables.find(
               (foundVariable) => foundVariable.name === name,
             );
 
             switch (kind) {
-              case PropertyKind.EMAIL_ADDRESS:
-                structure.descendants.push(
-                  makeBettyInput(
-                    BettyPrefabs.EMAIL_ADDRESS,
-                    model,
-                    property,
-                    variable,
-                  ),
+              case PropertyKind.EMAIL_ADDRESS: {
+                input = makeBettyInput(
+                  BettyPrefabs.EMAIL_ADDRESS,
+                  model,
+                  property,
+                  variable,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
-              case PropertyKind.PASSWORD:
-                structure.descendants.push(
-                  makeBettyInput(
-                    BettyPrefabs.PASSWORD,
-                    model,
-                    property,
-                    variable,
-                  ),
+              }
+              case PropertyKind.PASSWORD: {
+                input = makeBettyInput(
+                  BettyPrefabs.PASSWORD,
+                  model,
+                  property,
+                  variable,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
-              case PropertyKind.STRING:
-                structure.descendants.push(
-                  makeBettyInput(
-                    BettyPrefabs.STRING,
-                    model,
-                    property,
-                    variable,
-                  ),
+              }
+              case PropertyKind.STRING: {
+                input = makeBettyInput(
+                  BettyPrefabs.STRING,
+                  model,
+                  property,
+                  variable,
                 );
+                input = inputStructure(input, property);
+                structure.descendants.push(input);
                 break;
+              }
               default:
                 break;
             }
