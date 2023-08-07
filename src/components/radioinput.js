@@ -319,7 +319,6 @@
 
       return <span>loading...</span>;
     };
-    console.log('versie 9');
 
     const RadioComp = (
       <MUIFormControl
