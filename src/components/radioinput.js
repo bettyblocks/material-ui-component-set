@@ -46,7 +46,7 @@
     const mounted = useRef(false);
     const getValue = (val) => (isNaN(Number(val)) ? val : Number(val));
     const labelText = useText(label);
-    let defaultValueText = useText(prefabValue);
+    const defaultValueText = useText(prefabValue);
     const helperTextResolved = useText(helperText);
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
@@ -63,27 +63,17 @@
     const isListProperty = kind === 'list' || kind === 'LIST';
     const isObjectProperty = kind === 'object' || kind === 'OBJECT';
 
-    const isPropertyValueAnArray = Boolean(
+    const isPropertyArray = Boolean(
       prefabValue.length && prefabValue.some((p) => p.type === 'PROPERTY'),
     );
 
     let resolvedCurrentValue;
-    const objectValue = prefabValue.find((p) => p.type === 'PROPERTY');
 
     // set the value based on the selected property type (list, relational or object)
-    if (isListProperty) {
+    if (isListProperty || isObjectProperty) {
       resolvedCurrentValue = defaultValueText;
-    } else if (isPropertyValueAnArray && !isObjectProperty) {
+    } else if (isPropertyArray && !isObjectProperty) {
       resolvedCurrentValue = parseInt(defaultValueText, 10) || '';
-    } else if (isObjectProperty && objectValue) {
-      objectValue.useKey = 'uuid';
-      const currentUuid = useText([objectValue]);
-      const currentFinalUuid = currentUuid === '' ? null : currentUuid;
-      defaultValueText = '';
-      if (currentFinalUuid) {
-        defaultValueText = JSON.stringify({ uuid: currentFinalUuid });
-      }
-      resolvedCurrentValue = defaultValueText;
     } else if (kind === undefined) {
       // if kind is undefined, it is non property based
       resolvedCurrentValue = '';
@@ -329,6 +319,7 @@
 
       return <span>loading...</span>;
     };
+    console.log('versie 9');
 
     const RadioComp = (
       <MUIFormControl
