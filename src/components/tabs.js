@@ -274,7 +274,7 @@
               style.getFontSize(font, 'Desktop'),
           },
         },
-        display: 'flex',
+        display: 'grid',
         height: ({ options: { height } }) => (isDev ? '100%' : height),
         width: ({ options: { width } }) => (isDev ? '100%' : width),
         flexDirection: ({ options: { alignment } }) => {
