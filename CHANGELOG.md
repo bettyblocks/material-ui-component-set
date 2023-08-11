@@ -1,3 +1,10 @@
+## [2.159.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.159.0...v2.159.1) (2023-08-11)
+
+
+### Bug Fixes
+
+* remove unnessary default value logic ([85f79ae](https://github.com/bettyblocks/material-ui-component-set/commit/85f79aecc31df9c7d1d64438b94dfc42ca51101c))
+
 # [2.159.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.158.0...v2.159.0) (2023-08-03)
 
 
