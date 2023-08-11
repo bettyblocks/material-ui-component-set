@@ -233,7 +233,9 @@
           style.getColor(labelColor),
           '!important',
         ],
-        transform: 'translate(0px, -14px) scale(0.75) !important',
+        transform: 'none !important',
+        position: 'static !important',
+        marginBottom: '4px',
         whiteSpace: 'nowrap',
       },
     };

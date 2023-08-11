@@ -26,7 +26,7 @@ export const styles = {
     { value: 'medium' },
   ),
   floatLabel: toggle('Place label above input', {
-    value: false,
+    value: true,
   }),
 
   fullWidth: toggle('Full width', { value: true }),
@@ -83,7 +83,7 @@ export const styles = {
   }),
 
   labelColor: color('Label color', {
-    value: ThemeColor.ACCENT_3,
+    value: ThemeColor.BLACK,
   }),
 
   textColor: color('Text color', {

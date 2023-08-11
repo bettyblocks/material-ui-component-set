@@ -256,6 +256,22 @@ const beforeCreate = ({
                 },
               },
             }));
+            setOption(newPrefab.structure[0], 'label', (option: any) => ({
+              ...option,
+              value: [
+                {
+                  id:
+                    result.isRelational && !result.isMultiRelational
+                      ? [propertyId, modelProperty.id]
+                      : propertyId,
+                  type: 'PROPERTY_LABEL',
+                  name:
+                    result.isRelational && !result.isMultiRelational
+                      ? `{{ ${model?.name}.${name}.id }}`
+                      : `{{ ${model?.name}.${name} }}`,
+                },
+              ],
+            }));
           }
           validate();
           save({ ...originalPrefab, structure: [newPrefab.structure[0]] });

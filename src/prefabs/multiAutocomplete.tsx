@@ -37,7 +37,6 @@ const beforeCreate = ({
     createUuid,
     useModelQuery,
     createBlacklist,
-    useModelRelationQuery,
   } = helpers;
 
   const [propertyPath, setProperty] = React.useState<any>('');
@@ -97,19 +96,6 @@ const beforeCreate = ({
       name = propertyResponse.data.property.label;
       propertyKind = propertyResponse.data.property.kind;
       propertyModelId = propertyResponse.data.property.referenceModel?.id;
-    }
-  }
-
-  const modelRelationResponse = useModelRelationQuery(propertyModelId);
-
-  let relationalProperties;
-  let modelProperty;
-  if (!(modelRelationResponse.loading || modelRelationResponse.error)) {
-    if (modelRelationResponse.data) {
-      relationalProperties = modelRelationResponse.data.model.properties;
-      modelProperty = relationalProperties.find(
-        (property) => property.name === 'id',
-      );
     }
   }
 
@@ -265,15 +251,9 @@ const beforeCreate = ({
               (originalOption: PrefabComponentOption) => ({
                 ...originalOption,
                 value: {
-                  id:
-                    result.isRelational && !result.isMultiRelational
-                      ? [propertyId, modelProperty.id]
-                      : propertyId,
+                  id: propertyId,
                   type: 'PROPERTY',
-                  name:
-                    result.isRelational && !result.isMultiRelational
-                      ? `{{ ${model?.name}.${name}.id }}`
-                      : `{{ ${model?.name}.${name} }}`,
+                  name: `{{ ${model?.name}.${name} }}`,
                 },
                 configuration: {
                   allowedKinds: [
@@ -292,6 +272,20 @@ const beforeCreate = ({
                 },
               }),
             );
+            setOption(
+              newPrefab.structure[0],
+              'label',
+              (originalOption: any) => ({
+                ...originalOption,
+                value: [
+                  {
+                    id: propertyId,
+                    type: 'PROPERTY_LABEL',
+                    name: `{{ ${model?.name}.${name} }}`,
+                  },
+                ],
+              }),
+            );
           }
           if (validate()) {
             if (
@@ -303,15 +297,9 @@ const beforeCreate = ({
             ) {
               const valueOptions = [
                 {
-                  id:
-                    result.isRelational && !result.isMultiRelational
-                      ? [propertyId, modelProperty.id]
-                      : propertyId,
+                  id: propertyId,
                   type: 'PROPERTY',
-                  name:
-                    result.isRelational && !result.isMultiRelational
-                      ? `{{ ${model?.name}.${name}.id }}`
-                      : `{{ ${model?.name}.${name} }}`,
+                  name: `{{ ${model?.name}.${name} }}`,
                 },
               ];
 

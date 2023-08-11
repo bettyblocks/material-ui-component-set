@@ -23,7 +23,7 @@ export const styles = {
     value: ['S', '0rem', 'S', '0rem'],
   }),
   floatLabel: toggle('Place label above input', {
-    value: false,
+    value: true,
   }),
 
   hideLabel: toggle('Hide label'),
@@ -61,7 +61,7 @@ export const styles = {
   }),
 
   labelColor: color('Label color', {
-    value: ThemeColor.ACCENT_3,
+    value: ThemeColor.BLACK,
   }),
 
   placeholderColor: color('Placeholder color', {
