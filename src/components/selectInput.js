@@ -42,7 +42,7 @@
     const labelText = useText(label);
     const clearLabelText = useText(clearLabel);
     const placeholderLabelText = useText(placeholderLabel);
-    let defaultValueText = useText(prefabValue);
+    const defaultValueText = useText(prefabValue);
     const helperTextResolved = useText(helperText);
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
@@ -57,17 +57,7 @@
     } = modelProperty;
 
     const isObjectProperty = kind === 'object' || kind === 'OBJECT';
-
-    let resolvedCurrentValue;
-    const objectValue = prefabValue.find((p) => p.type === 'PROPERTY');
-    if (isObjectProperty && objectValue) {
-      objectValue.useKey = 'uuid';
-      const currentUuid = useText([objectValue]);
-      resolvedCurrentValue = JSON.stringify({ uuid: currentUuid });
-      defaultValueText = resolvedCurrentValue;
-    } else {
-      resolvedCurrentValue = defaultValueText || placeholderLabelText;
-    }
+    const resolvedCurrentValue = defaultValueText || placeholderLabelText;
 
     const [currentValue, setCurrentValue] = useState(resolvedCurrentValue);
     B.defineFunction('Clear', () => setCurrentValue(''));
