@@ -1,3 +1,10 @@
+# [2.160.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.159.2...v2.160.0) (2023-08-15)
+
+
+### Features
+
+* add content direction option to box component ([bb93ab9](https://github.com/bettyblocks/material-ui-component-set/commit/bb93ab9bf71955a3da9021bc8a51b9eb84bbd482))
+
 ## [2.159.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.159.1...v2.159.2) (2023-08-11)
 
 
