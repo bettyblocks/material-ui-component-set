@@ -27,6 +27,7 @@ export const checkboxGroupInputOptions = {
       allowedKinds: ['BOOLEAN'],
       disabled: true,
       condition: hideIf('property', 'EQ', ''),
+      showOnDrop: true,
     },
   }),
   label: variable('Label', { value: ['CheckboxGroup'] }),
