@@ -16,7 +16,7 @@ export const categories = [
   {
     label: 'Alignment',
     expanded: true,
-    members: ['alignment', 'valignment', 'stretch'],
+    members: ['alignment', 'valignment', 'contentDirection', 'stretch'],
   },
   {
     label: 'Styling',
@@ -84,6 +84,19 @@ export const boxOptions = {
     ],
     {
       value: 'none',
+      configuration: {
+        dataType: 'string',
+      },
+    },
+  ),
+  contentDirection: buttongroup(
+    'Content direction',
+    [
+      ['Row', 'row'],
+      ['Column', 'column'],
+    ],
+    {
+      value: 'row',
       configuration: {
         dataType: 'string',
       },
