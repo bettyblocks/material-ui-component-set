@@ -11,6 +11,7 @@
       backgroundColor,
       backgroundUrl: backgroundURLInput,
       borderColor,
+      contentDirection,
       dataComponentAttribute,
       displayLogic,
       transparent,
@@ -47,7 +48,7 @@
     const boxOptions = {
       display: isFlex && 'flex',
       justifyContent: alignment !== 'none' && alignment,
-      flexDirection: isFlex && 'row',
+      flexDirection: isFlex && contentDirection,
       alignItems: valignment !== 'none' && valignment,
       'data-component': useText(dataComponentAttribute) || 'Box',
     };
