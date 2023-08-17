@@ -15,6 +15,7 @@ export const fileUploadOptions = {
       allowedKinds: ['FILE'],
       disabled: true,
       condition: hideIf('property', 'EQ', ''),
+      showOnDrop: true,
     },
   }),
   label: variable('Label', {

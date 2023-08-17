@@ -31,6 +31,7 @@ export const options = {
       allowedKinds: ['INTEGER', 'PRICE', 'PRICE_EXPRESSION'],
       disabled: true,
       condition: hideIf('property', 'EQ', ''),
+      showOnDrop: true,
     },
   }),
 
