@@ -66,6 +66,7 @@ export const richTextOptions = {
 
   property: property('Property', {
     value: '',
+    showInReconfigure: true,
     configuration: {
       allowedKinds: ['TEXT', 'URL', 'IBAN', 'STRING'],
       disabled: true,

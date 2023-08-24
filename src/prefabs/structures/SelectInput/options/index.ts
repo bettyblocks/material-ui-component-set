@@ -24,6 +24,7 @@ export const options = {
 
   property: property('Property', {
     value: '',
+    showInReconfigure: true,
     configuration: {
       allowedKinds: ['LIST', 'BELONGS_TO'],
       disabled: true,

@@ -50,6 +50,7 @@ export const ratingInputOptions = {
   }),
   property: property('Property', {
     value: '',
+    showInReconfigure: true,
     configuration: {
       allowedKinds: ['DECIMAL'],
       disabled: true,

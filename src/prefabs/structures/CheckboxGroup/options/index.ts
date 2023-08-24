@@ -23,6 +23,7 @@ export const checkboxGroupInputOptions = {
   }),
   property: property('Property', {
     value: '',
+    showInReconfigure: true,
     configuration: {
       allowedKinds: ['BOOLEAN'],
       disabled: true,

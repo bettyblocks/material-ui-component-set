@@ -11,6 +11,7 @@ import { advanced } from './advanced';
 export const fileUploadOptions = {
   property: property('Property', {
     value: '',
+    showInReconfigure: true,
     configuration: {
       allowedKinds: ['FILE'],
       disabled: true,
