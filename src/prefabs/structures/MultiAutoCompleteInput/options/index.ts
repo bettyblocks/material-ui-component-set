@@ -23,11 +23,13 @@ export const options = {
   }),
   property: property('Property', {
     value: '',
+    showInReconfigure: true,
     configuration: {
       allowedKinds: ['HAS_AND_BELONGS_TO_MANY', 'HAS_MANY'],
       allowRelations: true,
       disabled: true,
       condition: hideIf('property', 'EQ', ''),
+      showOnDrop: true,
     },
   }),
   label: variable('Label', {
