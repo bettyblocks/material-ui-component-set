@@ -93,7 +93,7 @@ export const textOptions = {
 
   fontWeight: option('CUSTOM', {
     label: 'Font weight',
-    value: '400',
+    value: '[Inherit]',
     configuration: {
       as: 'DROPDOWN',
       dataType: 'string',
