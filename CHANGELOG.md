@@ -1,3 +1,10 @@
+# [2.161.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.160.1...v2.161.0) (2023-08-28)
+
+
+### Features
+
+* add show on drop to form inputs ([1818304](https://github.com/bettyblocks/material-ui-component-set/commit/18183041658adda68129b2f85186ecd9d29c2eca))
+
 ## [2.160.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.160.0...v2.160.1) (2023-08-24)
 
 
