@@ -1,3 +1,17 @@
+## [2.160.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.160.0...v2.160.1) (2023-08-24)
+
+
+### Bug Fixes
+
+* added missing size and margin for checkbox ([bf4cfde](https://github.com/bettyblocks/material-ui-component-set/commit/bf4cfde7a835b3c6db43483d8a58b96fd20350f0))
+
+# [2.160.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.159.2...v2.160.0) (2023-08-15)
+
+
+### Features
+
+* add content direction option to box component ([bb93ab9](https://github.com/bettyblocks/material-ui-component-set/commit/bb93ab9bf71955a3da9021bc8a51b9eb84bbd482))
+
 ## [2.159.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.159.1...v2.159.2) (2023-08-11)
 
 
