@@ -1,4 +1,4 @@
-import { prefab, Icon, option } from '@betty-blocks/component-sdk';
+import { prefab, Icon } from '@betty-blocks/component-sdk';
 import { Text, textOptions } from './structures';
 
 const attr = {
@@ -25,10 +25,6 @@ export default prefab('Title', attr, undefined, [
     {
       options: {
         ...textOptions,
-        fontWeight: option('CUSTOM', {
-          ...textOptions.fontWeight('fontWeight'),
-          value: '300',
-        }),
       },
     },
     [],
