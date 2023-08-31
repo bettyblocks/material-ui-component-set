@@ -119,9 +119,21 @@
     );
     const labelText = useText(label);
     const [showDropdown, setShowDropdown] = useState(false);
+    const [multipleStyles, setMultipleStyles] = useState(false);
     const [activeStyleName, setActiveStyleName] = useState('Body 1');
     const placeholderText = useText(placeholder);
     const helperTextResolved = useText(helperText);
+
+    const KeyCode = {
+      Digit1: 49,
+      Digit2: 50,
+      Digit3: 51,
+      Digit4: 52,
+      Digit5: 53,
+      Digit6: 54,
+      Digit7: 55,
+      Digit8: 56,
+    };
 
     const isMarkActive = (editor, format) => {
       const marks = Editor.marks(editor);
@@ -381,7 +393,19 @@
       return <span {...attributes}>{children}</span>;
     }
 
+    const checkMultipleStyles = (value) => {
+      const diverseStyle = value.filter(({ type }) => type !== value[0].type);
+      return diverseStyle.length > 0;
+    };
+
     const onChangeHandler = (value) => {
+      if (value.length > 1) {
+        const hasMultipleStyles = checkMultipleStyles(value);
+        console.log('hasMultipleStyles:', hasMultipleStyles);
+        if (hasMultipleStyles) {
+          setMultipleStyles(true);
+        }
+      }
       setCurrentValue(value.map((row) => serialize(row)).join(''));
       B.triggerEvent('onChange', currentValue);
     };
@@ -527,35 +551,32 @@
 
       if (event.altKey) {
         switch (event.keyCode) {
-          case 49:
+          case KeyCode.Digit1:
             event.preventDefault();
             toggleBlock(editor, 'heading-one');
             break;
-          case 50:
+          case KeyCode.Digit2:
             event.preventDefault();
             toggleBlock(editor, 'heading-two');
             break;
-          case 51:
+          case KeyCode.Digit3:
             event.preventDefault();
             toggleBlock(editor, 'heading-three');
             break;
-          case 52:
+          case KeyCode.Digit4:
             event.preventDefault();
             toggleBlock(editor, 'heading-four');
             break;
-          case 53:
+          case KeyCode.Digit5:
             event.preventDefault();
             toggleBlock(editor, 'heading-five');
             break;
-          case 54:
+          case KeyCode.Digit6:
             event.preventDefault();
             toggleBlock(editor, 'heading-six');
             break;
-          case 55:
-            event.preventDefault();
-            toggleBlock(editor, 'paragraph');
-            break;
-          case 56:
+          case KeyCode.Digit7:
+          case KeyCode.Digit8:
             event.preventDefault();
             toggleBlock(editor, 'paragraph');
             break;
@@ -791,9 +812,6 @@
                 setAmountOfHeadersInSelection(Math.abs(anchor - focus) + 1);
               }
             }
-          } else {
-            setAmountOfHeadersInSelection(0);
-            setAmountOfHeadersInSelection(1);
           }
         }, 500);
       }
@@ -812,6 +830,8 @@
         isBlockActive(editor, format, 'type') &&
         activeStyleName !== '\u00A0'
       ) {
+        setActiveStyleName('\u00A0');
+      } else if (multipleStyles) {
         setActiveStyleName('\u00A0');
       }
       return (
@@ -1145,7 +1165,7 @@
       },
       dropdownButton: {
         display: 'inline-flex',
-        maxWitdh: '100%',
+        maxWidth: '100%',
         cursor: 'pointer',
         backgroundColor: 'transparent',
         padding: '4px',
