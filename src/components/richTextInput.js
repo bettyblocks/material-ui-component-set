@@ -401,7 +401,6 @@
     const onChangeHandler = (value) => {
       if (value.length > 1) {
         const hasMultipleStyles = checkMultipleStyles(value);
-        console.log('hasMultipleStyles:', hasMultipleStyles);
         if (hasMultipleStyles) {
           setMultipleStyles(true);
         }
