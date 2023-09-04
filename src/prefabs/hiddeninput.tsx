@@ -339,5 +339,5 @@ const options = {
 const hooks = {};
 
 export default prefab('Hidden', attributes, beforeCreate, [
-  component('Hidden Input', { options, ...hooks }, []),
+  component('Hidden Input', { label: 'Hidden input', options, ...hooks }, []),
 ]);

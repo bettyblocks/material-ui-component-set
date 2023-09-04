@@ -351,6 +351,7 @@ export default prefab('Switch', attr, beforeCreate, [
         value: ThemeColor.PRIMARY,
       }),
     },
-    label: 'Switch',
+    label: 'Switch input',
+    inputLabel: 'Switch',
   }),
 ]);

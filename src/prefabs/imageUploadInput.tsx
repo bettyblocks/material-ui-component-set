@@ -345,13 +345,17 @@ const optionCategories = [
   },
 ];
 
-export default prefab('Image Upload', attr, beforeCreate, [
+export default prefab('Image upload', attr, beforeCreate, [
   FileUpload(
     {
-      label: 'Image Upload',
+      label: 'Image upload',
       optionCategories,
       options: {
         ...fileUploadOptions,
+        label: variable('Label', {
+          value: ['Image upload'],
+          configuration: { allowFormatting: false, allowPropertyName: true },
+        }),
         showImagePreview: toggle('Show Image preview', { value: true }),
         imagePreviewWidth: size('Image preview width', {
           value: '200px',
@@ -371,7 +375,7 @@ export default prefab('Image Upload', attr, beforeCreate, [
     },
     [
       Button({
-        label: 'upload',
+        label: 'Upload button',
         options: {
           ...buttonOptions,
           buttonText: variable('Button text', { value: ['Upload'] }),

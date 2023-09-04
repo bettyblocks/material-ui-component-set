@@ -4,8 +4,10 @@ import {
   prefab,
   Icon,
   PrefabComponentOption,
+  variable,
 } from '@betty-blocks/component-sdk';
 import { CheckboxGroup } from './structures/CheckboxGroup';
+import { checkboxGroupInputOptions } from './structures';
 
 const beforeCreate = ({
   close,
@@ -331,6 +333,13 @@ const attributes = {
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Checkbox Group', attributes, beforeCreate, [
-  CheckboxGroup({ label: 'Checkbox Group' }),
+export default prefab('Checkbox group', attributes, beforeCreate, [
+  CheckboxGroup({
+    label: 'Checkbox group input',
+    inputLabel: 'Checkbox group',
+    options: {
+      ...checkboxGroupInputOptions,
+      label: variable('Label', { value: ['Checkbox group'] }),
+    },
+  }),
 ]);

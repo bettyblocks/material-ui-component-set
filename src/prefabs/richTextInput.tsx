@@ -311,9 +311,9 @@ const attributes = {
   keywords: ['Form', 'input', 'rich text', 'rich', 'text', 'editor'],
 };
 
-export default prefab('Rich Text Editor', attributes, beforeCreate, [
+export default prefab('Rich text editor', attributes, beforeCreate, [
   RichTextInput({
-    label: 'Rich text editor',
+    label: 'Rich text input',
     inputLabel: 'Rich text editor',
     type: 'text',
   }),

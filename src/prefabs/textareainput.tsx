@@ -324,10 +324,10 @@ const attributes = {
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Text Area', attributes, beforeCreate, [
+export default prefab('Text (multi line)', attributes, beforeCreate, [
   TextArea({
-    label: 'Multiline text field',
-    inputLabel: 'Text area',
+    label: 'Text (multi line) input',
+    inputLabel: 'Text (multi line)',
     type: 'text',
   }),
 ]);

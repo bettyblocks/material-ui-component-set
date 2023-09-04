@@ -325,10 +325,10 @@ const attributes = {
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Multi Autocomplete', attributes, beforeCreate, [
+export default prefab('Multi autocomplete', attributes, beforeCreate, [
   MultiAutocomplete({
-    label: 'Multi Autocomplete',
-    inputLabel: 'Multi Autocomplete',
+    label: 'Multi autocomplete input',
+    inputLabel: 'Multi autocomplete',
     type: 'text',
   }),
 ]);

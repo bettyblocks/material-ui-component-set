@@ -325,9 +325,9 @@ const attributes = {
   keywords: ['Form', 'input'],
 };
 
-export default makePrefab('Date Picker', attributes, beforeCreate, [
+export default makePrefab('Date', attributes, beforeCreate, [
   DateTimePicker({
-    label: 'Date picker',
+    label: 'Date input',
     inputLabel: 'Date',
     dataComponentAttribute: 'Date Input',
     inputType: 'date',

@@ -322,7 +322,7 @@ const attributes = {
 
 export default prefab('Decimal', attributes, beforeCreate, [
   TextInput({
-    label: 'Decimal field',
+    label: 'Decimal input',
     inputLabel: 'Decimal',
     type: 'decimal',
     pattern: '^\\d+(\\.\\d{1,2})?$',

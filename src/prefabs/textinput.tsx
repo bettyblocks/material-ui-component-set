@@ -311,10 +311,10 @@ const attributes = {
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Text Field', attributes, beforeCreate, [
+export default prefab('Text (single line)', attributes, beforeCreate, [
   TextInput({
-    label: 'Text field',
-    inputLabel: 'Text field',
+    label: 'Text (single line) input',
+    inputLabel: 'Text (single line)',
     type: 'text',
   }),
 ]);

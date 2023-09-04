@@ -344,6 +344,7 @@ const attributes = {
 
 export default prefab('Radio', attributes, beforeCreate, [
   RadioInput({
-    label: 'Radio',
+    label: 'Radio input',
+    inputLabel: 'Radio',
   }),
 ]);

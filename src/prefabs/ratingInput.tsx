@@ -1,7 +1,13 @@
 import * as React from 'react';
-import { prefab, Icon, BeforeCreateArgs } from '@betty-blocks/component-sdk';
+import {
+  prefab,
+  Icon,
+  BeforeCreateArgs,
+  variable,
+} from '@betty-blocks/component-sdk';
 
 import { RatingInput } from './structures/RatingInput';
+import { ratingInputOptions } from './structures';
 
 const beforeCreate = ({
   close,
@@ -320,4 +326,13 @@ const attributes = {
   keywords: ['FORM', 'INPUT', 'RATING'],
 };
 
-export default prefab('Rating', attributes, beforeCreate, [RatingInput({})]);
+export default prefab('Rating', attributes, beforeCreate, [
+  RatingInput({
+    label: 'Rating input',
+    inputLabel: 'Rating',
+    options: {
+      ...ratingInputOptions,
+      label: variable('Label', { value: ['Rating'] }),
+    },
+  }),
+]);
