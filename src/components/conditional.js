@@ -41,14 +41,14 @@
     }
 
     const evalCondition = () => {
+      if (!initVisibility && leftValue === '' && rightValue === '') {
+        return false;
+      }
+
       const [leftParsed, rightParsed] =
         canBeNumber(leftValue) && canBeNumber(rightValue)
           ? [parseFloat(leftValue), parseFloat(rightValue)]
           : [leftValue.toString(), rightValue.toString()];
-
-      if (!initVisibility && leftValue === '' && rightValue === '') {
-        return false;
-      }
 
       switch (compare) {
         case 'neq':
