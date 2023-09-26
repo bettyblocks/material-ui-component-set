@@ -20,7 +20,6 @@
 
     const canBeNumber = (value) => {
       return (
-        value !== '' &&
         (typeof value === 'string' || typeof value === 'number') &&
         !isNaN(value)
       );
@@ -34,15 +33,22 @@
     const [visible, setVisible] = useState();
     const logic = useLogic(displayLogic);
 
-    const evalCondition = () => {
-      if (!initVisibility && leftValue === '' && rightValue === '') {
-        return false;
-      }
+    function isEmpty(value) {
+      return (
+        value == null ||
+        (typeof value === 'string' && value.trim().length === 0)
+      );
+    }
 
+    const evalCondition = () => {
       const [leftParsed, rightParsed] =
         canBeNumber(leftValue) && canBeNumber(rightValue)
           ? [parseFloat(leftValue), parseFloat(rightValue)]
           : [leftValue.toString(), rightValue.toString()];
+
+      if (!initVisibility && leftValue === '' && rightValue === '') {
+        return false;
+      }
 
       switch (compare) {
         case 'neq':
@@ -59,6 +65,19 @@
           return leftParsed >= rightParsed;
         case 'lteq':
           return leftParsed <= rightParsed;
+        case 'arr': {
+          const leftArr = isEmpty(leftParsed)
+            ? leftParsed
+            : leftParsed.split(',');
+          const rightArr = isEmpty(rightParsed)
+            ? rightParsed
+            : rightParsed.split(',');
+          const result =
+            isEmpty(leftArr) || isEmpty(rightArr)
+              ? null
+              : leftArr.some((i) => rightArr.includes(i));
+          return result;
+        }
         default:
           return leftParsed === rightParsed;
       }
