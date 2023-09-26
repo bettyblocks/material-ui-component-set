@@ -65,7 +65,7 @@
           return leftParsed >= rightParsed;
         case 'lteq':
           return leftParsed <= rightParsed;
-        case 'arr': {
+        case 'in': {
           const leftArr = isEmpty(leftParsed)
             ? leftParsed
             : leftParsed.split(',');

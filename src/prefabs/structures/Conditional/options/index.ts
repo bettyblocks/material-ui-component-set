@@ -83,8 +83,8 @@ export const conditionalOptions = {
           value: 'lteq',
         },
         {
-          name: 'Array contains one or multiple values',
-          value: 'arr',
+          name: 'IN',
+          value: 'in',
         },
       ],
       condition: showIf('type', 'EQ', 'singleRule'),
