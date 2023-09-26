@@ -20,6 +20,7 @@
 
     const canBeNumber = (value) => {
       return (
+        value !== '' &&
         (typeof value === 'string' || typeof value === 'number') &&
         !isNaN(value)
       );
