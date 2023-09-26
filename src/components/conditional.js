@@ -66,17 +66,10 @@
         case 'lteq':
           return leftParsed <= rightParsed;
         case 'in': {
-          const leftArr = isEmpty(leftParsed)
-            ? leftParsed
-            : leftParsed.split(',');
-          const rightArr = isEmpty(rightParsed)
-            ? rightParsed
-            : rightParsed.split(',');
-          const result =
-            isEmpty(leftArr) || isEmpty(rightArr)
-              ? null
-              : leftArr.some((i) => rightArr.includes(i));
-          return result;
+          if (isEmpty(leftParsed) || isEmpty(rightParsed)) return false;
+          const leftArr = leftParsed.split(',') || leftParsed;
+          const rightArr = rightParsed.split(',') || rightParsed;
+          return leftArr.some((i) => rightArr.includes(i));
         }
         default:
           return leftParsed === rightParsed;
