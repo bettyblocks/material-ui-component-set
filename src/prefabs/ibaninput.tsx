@@ -341,5 +341,6 @@ export default prefab('IBAN', attributes, beforeCreate, [
     inputLabel: 'IBAN',
     type: 'text',
     pattern,
+    dataComponentAttribute: 'IbanInput',
   }),
 ]);

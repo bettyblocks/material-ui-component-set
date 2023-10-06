@@ -43,8 +43,7 @@ import {
   OpenPageButton,
   openPageButtonOptions,
 } from './structures';
-import { AuthenticationProfile, Endpoint } from './types';
-import { PermissionType } from './types/types';
+import { AuthenticationProfile, Endpoint, PermissionType } from './types';
 
 const interactions: PrefabInteraction[] = [
   {
@@ -1009,7 +1008,6 @@ const beforeCreate = ({
   const [authProfile, setAuthProfile] = React.useState<AuthenticationProfile>();
   const [authProfileInvalid, setAuthProfileInvalid] = React.useState(false);
   const permissions: PermissionType = 'public';
-
   const [endpoint, setEndpoint] = React.useState<Endpoint>();
   const [endpointInvalid, setEndpointInvalid] = React.useState(false);
 
@@ -1157,10 +1155,7 @@ const beforeCreate = ({
             // eslint-disable-next-line no-useless-return
             return;
           }
-          if (!endpoint) {
-            throw new Error('There was no redirected page selected');
-          }
-          if (isEmptyEndpoint(endpoint)) {
+          if (!endpoint || isEmptyEndpoint(endpoint)) {
             setEndpointInvalid(true);
             // eslint-disable-next-line no-useless-return
             return;
@@ -1174,10 +1169,8 @@ const beforeCreate = ({
           formObject.id = componentId;
           const result = await prepareAction(
             componentId,
-            // this typing is wrong hence the ts ignore
-            // @ts-ignore
             undefined,
-            null,
+            undefined,
             'login',
             authProfile,
             undefined,

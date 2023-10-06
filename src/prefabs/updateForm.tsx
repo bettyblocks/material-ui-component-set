@@ -7,7 +7,7 @@ import {
   BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
 import { Form } from './structures/ActionJSForm';
-import { PermissionType } from './types/types';
+import { PermissionType } from './types';
 
 const beforeCreate = ({
   close,
@@ -84,7 +84,6 @@ const beforeCreate = ({
     component: null,
   });
   const [buttonGroupValue, setButtonGroupValue] = React.useState('anotherPage');
-
   const permissions: PermissionType = 'inherit';
   const [validationMessage, setValidationMessage] = React.useState('');
   const [anotherPageState, setAnotherPageState] = React.useState({
@@ -381,6 +380,9 @@ const beforeCreate = ({
               `prefab type "${structure.type}" structure is not of type COMPONENT`,
             );
             return;
+          }
+          if (!idProperty) {
+            throw new Error('idProperty is not set');
           }
 
           structure.id = componentId;

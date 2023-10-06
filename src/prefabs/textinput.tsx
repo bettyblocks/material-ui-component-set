@@ -316,5 +316,6 @@ export default prefab('Text Field', attributes, beforeCreate, [
     label: 'Text field',
     inputLabel: 'Text field',
     type: 'text',
+    dataComponentAttribute: 'TextInput',
   }),
 ]);

@@ -89,8 +89,14 @@ import {
 } from './structures';
 import { options as formOptions } from './structures/ActionJSForm/options';
 import { children as formChildren } from './structures/ActionJSForm/children';
-import { Properties, IdPropertyProps, ModelProps, ModelQuery } from './types';
-import { PermissionType, PropertyStateProps } from './types/types';
+import {
+  Properties,
+  IdPropertyProps,
+  ModelProps,
+  ModelQuery,
+  PermissionType,
+  PropertyStateProps,
+} from './types';
 
 const children = [
   DataTableColumn({

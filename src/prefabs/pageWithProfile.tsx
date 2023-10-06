@@ -405,7 +405,6 @@ const beforeCreate = ({
   const [stepNumber, setStepNumber] = React.useState(1);
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
-
   const permissions: PermissionType = 'inherit';
 
   const enrichVarObj = (obj: any, authProp = false) => {

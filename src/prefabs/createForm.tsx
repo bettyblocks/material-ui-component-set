@@ -6,7 +6,7 @@ import {
   PrefabInteraction,
 } from '@betty-blocks/component-sdk';
 import { Form } from './structures/ActionJSForm';
-import { PermissionType } from './types/types';
+import { PermissionType } from './types';
 
 const beforeCreate = ({
   close,

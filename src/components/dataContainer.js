@@ -137,13 +137,13 @@
            * @returns {Void}
            */
           B.defineFunction('Filter', ({ event, property, interactionId }) => {
-            setInteractionFilter((s) => ({
-              ...s,
+            setInteractionFilter({
+              ...interactionFilter,
               [interactionId]: {
                 property,
                 value: event instanceof Date ? event.toISOString : event,
               },
-            }));
+            });
           });
 
           B.defineFunction('ResetFilter', () => {

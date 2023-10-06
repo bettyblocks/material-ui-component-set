@@ -47,8 +47,13 @@ import {
 } from './structures';
 import { options as formOptions } from './structures/ActionJSForm/options';
 import { Alert } from './structures/Alert/index';
-import { IdPropertyProps, ModelProps, ModelQuery, Properties } from './types';
-import { PermissionType } from './types/types';
+import {
+  IdPropertyProps,
+  ModelProps,
+  ModelQuery,
+  PermissionType,
+  Properties,
+} from './types';
 
 const interactions: PrefabInteraction[] = [
   {

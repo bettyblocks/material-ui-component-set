@@ -14,7 +14,7 @@ export const MultiAutocomplete = (
 
   const categories = [
     {
-      label: 'Validation Options',
+      label: 'Validations',
       expanded: false,
       members: [
         'required',
@@ -46,7 +46,7 @@ export const MultiAutocomplete = (
       ],
     },
     {
-      label: 'Advanced Options',
+      label: 'Advanced',
       expanded: false,
       members: ['errorType', 'nameAttribute', 'dataComponentAttribute'],
     },
