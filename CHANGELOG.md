@@ -1,3 +1,10 @@
+# [2.163.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.162.0...v2.163.0) (2023-10-04)
+
+
+### Features
+
+* fixed timeformat bug ([a331d05](https://github.com/bettyblocks/material-ui-component-set/commit/a331d05a5922dc4c6a9b7b0df2d35e1dcf41b2de))
+
 # [2.162.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.161.0...v2.162.0) (2023-08-28)
 
 
