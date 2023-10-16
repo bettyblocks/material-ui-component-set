@@ -10,7 +10,6 @@ import {
   buttongroup,
   dropdown,
   displayLogic,
-  showIf,
   hideIf,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
