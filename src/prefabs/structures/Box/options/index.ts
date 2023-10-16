@@ -2,6 +2,7 @@ import {
   sizes,
   size,
   color,
+  number,
   option,
   ThemeColor,
   toggle,
@@ -9,6 +10,7 @@ import {
   buttongroup,
   dropdown,
   displayLogic,
+  hideIf,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -26,7 +28,7 @@ export const categories = [
   {
     label: 'Positioning',
     expanded: false,
-    members: ['position', 'top', 'right', 'bottom', 'left'],
+    members: ['position', 'zIndex', 'top', 'right', 'bottom', 'left'],
   },
   {
     label: 'Background',
@@ -145,6 +147,13 @@ export const boxOptions = {
       },
     },
   ),
+  zIndex: number('Component order', {
+    value: '',
+    configuration: {
+      condition: hideIf('position', 'EQ', 'static'),
+      as: 'UNIT',
+    },
+  }),
   top: size('Top position', {
     value: '',
     configuration: {
