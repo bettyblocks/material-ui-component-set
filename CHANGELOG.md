@@ -1,3 +1,15 @@
+# [2.164.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.163.0...v2.164.0) (2023-10-16)
+
+
+### Bug Fixes
+
+* remove bench release step from release ci-cd ([69e887f](https://github.com/bettyblocks/material-ui-component-set/commit/69e887f8dfaa7b4bceb7aa3af6b2fa7c2c01336c))
+
+
+### Features
+
+* fix zindex for box component ([93499fc](https://github.com/bettyblocks/material-ui-component-set/commit/93499fcf688c4bc947926279139e021ffe6011ee))
+
 # [2.163.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.162.0...v2.163.0) (2023-10-04)
 
 
