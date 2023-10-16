@@ -11,6 +11,7 @@ import {
   dropdown,
   displayLogic,
   showIf,
+  hideIf,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -147,10 +148,10 @@ export const boxOptions = {
       },
     },
   ),
-  zIndex: number('Z-index', {
-    value: '0',
+  zIndex: number('Component order', {
+    value: '',
     configuration: {
-      condition: showIf('position', 'EQ', 'fixed'),
+      condition: hideIf('position', 'EQ', 'static'),
       as: 'UNIT',
     },
   }),
