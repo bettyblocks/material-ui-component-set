@@ -1,4 +1,4 @@
-# [2.164.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.163.0...v2.164.0) (2023-10-16)
+## [2.163.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.163.0...v2.163.1) (2023-10-13)
 
 
 ### Bug Fixes
