@@ -21,6 +21,9 @@
     const isDev = env === 'dev';
 
     function boolify(textValue) {
+      if (typeof textValue === 'boolean') {
+        return textValue;
+      }
       return ['on', 'true', 'yes'].includes(textValue.trim().toLowerCase());
     }
 
@@ -30,7 +33,8 @@
     const parsedLabel = useText(label);
     const labelText = parsedLabel;
     const resolvedValue = useText(value);
-    const [checked, setChecked] = usePageState(boolify(resolvedValue));
+    const [checkedState, setChecked] = usePageState(resolvedValue);
+    const checked = boolify(checkedState);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const helperTextResolved = useText(helperText);
     const validationValueMissingText = useText(validationValueMissing);
