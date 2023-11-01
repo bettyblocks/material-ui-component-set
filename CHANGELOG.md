@@ -1,3 +1,17 @@
+# [2.166.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.165.1...v2.166.0) (2023-11-01)
+
+
+### Features
+
+* add questionnaire page templates ([81925ad](https://github.com/bettyblocks/material-ui-component-set/commit/81925ad28c15c153aee7a2ba5f228fb263afff55))
+
+## [2.165.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.165.0...v2.165.1) (2023-11-01)
+
+
+### Bug Fixes
+
+* improve visibility of delete icon in chip ([3ecdb67](https://github.com/bettyblocks/material-ui-component-set/commit/3ecdb67c506e36f2d4a10460d5647bc0fc9e0635))
+
 # [2.165.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.164.0...v2.165.0) (2023-10-17)
 
 
