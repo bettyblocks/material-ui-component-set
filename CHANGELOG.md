@@ -1,3 +1,10 @@
+# [2.167.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.166.0...v2.167.0) (2023-11-02)
+
+
+### Features
+
+* navToOutputUrl by default in questionnaire start ([83d94ae](https://github.com/bettyblocks/material-ui-component-set/commit/83d94ae2c0468be96ed108129b20cc929e96cf0d))
+
 # [2.166.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.165.1...v2.166.0) (2023-11-01)
 
 
