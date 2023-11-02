@@ -19,6 +19,8 @@ import {
   PrefabComponentOption,
   wrapper,
   linked,
+  PrefabInteraction,
+  InteractionType,
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
@@ -49,6 +51,18 @@ import {
   ModelQuery,
 } from './types';
 
+const interactions: PrefabInteraction[] = [
+  {
+    type: InteractionType.Global,
+    name: 'navigateToOutputUrl',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      sourceComponentId: '#createAction',
+    },
+    parameters: [],
+  },
+];
+
 const attrs = {
   name: 'Questionnaire Startpage',
   icon: Icon.SubmitButtonIcon,
@@ -61,6 +75,7 @@ const attrs = {
   previewImage:
     'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/b520d74dff324c5f8e06b319d02c4c6e',
   category: 'FORMV2',
+  interactions,
 };
 
 const beforeCreate = ({
