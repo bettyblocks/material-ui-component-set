@@ -57,7 +57,10 @@
     } = modelProperty;
 
     const isObjectProperty = kind === 'object' || kind === 'OBJECT';
-    const resolvedCurrentValue = defaultValueText || placeholderLabelText;
+
+    const resolvedCurrentValue = isObjectProperty
+      ? JSON.stringify({ uuid: defaultValueText })
+      : defaultValueText || placeholderLabelText;
 
     const [currentValue, setCurrentValue] = useState(resolvedCurrentValue);
     B.defineFunction('Clear', () => setCurrentValue(''));
