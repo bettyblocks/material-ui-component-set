@@ -202,7 +202,11 @@ export const radioWidget = [
                       optionRef: {
                         sourceId: '#radioInputPropertyRef',
                         inherit: [
-                          { name: '$name', id: '$id', type: 'PROPERTY' },
+                          {
+                            id: '$id',
+                            type: 'PROPERTY',
+                            useKey: 'uuid',
+                          },
                         ],
                       },
                     }),
