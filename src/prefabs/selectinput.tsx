@@ -325,7 +325,7 @@ const beforeCreate = ({
                 {
                   id: propertyId,
                   type: 'PROPERTY',
-                  name: `{{ ${model?.name}.${name} }}`,
+                  useKey: 'uuid',
                 },
               ];
 
