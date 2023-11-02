@@ -1,3 +1,10 @@
+## [2.167.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.167.0...v2.167.1) (2023-11-02)
+
+
+### Bug Fixes
+
+* use uuid for object component as value ([6f6294e](https://github.com/bettyblocks/material-ui-component-set/commit/6f6294e916d2b48096e65777ceace8a199439a6b))
+
 # [2.167.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.166.0...v2.167.0) (2023-11-02)
 
 ### Bug Fixes
