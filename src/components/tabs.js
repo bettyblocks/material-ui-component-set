@@ -259,8 +259,17 @@
       },
       tabs: {
         '& .MuiTab-root': {
-          fontFamily: ({ options: { font } }) => style.getFontFamily(font),
-          fontSize: ({ options: { font } }) => style.getFontSize(font),
+          fontFamily: ({ options: { font } }) =>
+            `var(--text-fontFamily-${font.toString().toLowerCase()})`,
+          fontSize: ({ options: { font } }) =>
+            `var(--text-fontSize-${font.toString().toLowerCase()})`,
+          fontStyle: ({ options: { font } }) =>
+            `var(--text-fontStyle-${font.toString().toLowerCase()})`,
+          fontWeight: ({ options }) => {
+            return options.fontWeight === '[Inherit]'
+              ? style.getFontWeight(options.titleType)
+              : options.fontWeight;
+          },
           [`@media ${mediaMinWidth(600)}`]: {
             fontSize: ({ options: { font } }) =>
               style.getFontSize(font, 'Portrait'),

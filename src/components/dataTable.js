@@ -121,11 +121,11 @@
     const [variables, setVariables] = useState(
       orderPropertyPath
         ? {
-            sort: {
-              relation:
-                !isDev && createSortObject(orderPropertyPath, sortOrder),
-            },
-          }
+          sort: {
+            relation:
+              !isDev && createSortObject(orderPropertyPath, sortOrder),
+          },
+        }
         : {},
     );
 
@@ -250,12 +250,12 @@
 
     const searchFilter = searchProperty
       ? path.reduceRight(
-          (acc, property, index) =>
-            index === path.length - 1
-              ? { [property]: { [searchOperator]: searchTerm } }
-              : { [property]: acc },
-          {},
-        )
+        (acc, property, index) =>
+          index === path.length - 1
+            ? { [property]: { [searchOperator]: searchTerm } }
+            : { [property]: acc },
+        {},
+      )
       : {};
     const newFilter =
       searchProperty && searchTerm !== ''
@@ -392,7 +392,7 @@
               if (
                 ((Math.ceil((index + 1) / childrenLenght) * childrenLenght) /
                   childrenLenght) %
-                  2 ===
+                2 ===
                 0
               ) {
                 item.classList.add('striped');
@@ -773,10 +773,16 @@
       title: {
         color: ({ options: { titleType } }) => style.getFontColor(titleType),
         fontFamily: ({ options: { titleType } }) =>
-          style.getFontFamily(titleType),
-        fontSize: ({ options: { titleType } }) => style.getFontSize(titleType),
-        fontWeight: ({ options: { titleType } }) =>
-          style.getFontWeight(titleType),
+          `var(--text-fontFamily-${titleType.toString().toLowerCase()})`,
+        fontSize: ({ options: { titleType } }) =>
+          `var(--text-fontSize-${titleType.toString().toLowerCase()})`,
+        fontStyle: ({ options: { titleType } }) =>
+          `var(--text-fontStyle-${titleType.toString().toLowerCase()})`,
+        fontWeight: ({ options }) => {
+          return options.fontWeight === '[Inherit]'
+            ? style.getFontWeight(options.titleType)
+            : options.fontWeight;
+        },
         textTransform: ({ options: { titleType } }) =>
           style.getTextTransform(titleType),
         letterSpacing: ({ options: { titleType } }) =>

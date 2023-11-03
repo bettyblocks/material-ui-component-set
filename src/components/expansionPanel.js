@@ -120,7 +120,17 @@
     return {
       panelTitle: {
         '&.MuiTypography-root': {
-          fontWeight: ({ options: { titleFontWeight } }) => titleFontWeight,
+          fontFamily: ({ options: { titleType } }) =>
+            `var(--text-fontFamily-${titleType.toString().toLowerCase()})`,
+          fontSize: ({ options: { titleType } }) =>
+            `var(--text-fontSize-${titleType.toString().toLowerCase()})`,
+          fontStyle: ({ options: { titleType } }) =>
+            `var(--text-fontStyle-${titleType.toString().toLowerCase()})`,
+          fontWeight: ({ options }) => {
+            return options.fontWeight === '[Inherit]'
+              ? style.getFontWeight(options.titleType)
+              : options.fontWeight;
+          },
         },
         marginTop: ({ options: { titleSpacing } }) =>
           getSpacing(titleSpacing[0]),
@@ -132,10 +142,6 @@
           getSpacing(titleSpacing[3]),
         color: ({ options: { titleTextColor } }) =>
           style.getColor(titleTextColor),
-        fontFamily: ({ options: { titleType } }) =>
-          style.getFontFamily(titleType),
-        fontSize: ({ options: { titleType } }) => style.getFontSize(titleType),
-        fontWeight: ({ options: { titleFontWeight } }) => titleFontWeight,
         textTransform: ({ options: { titleType } }) =>
           style.getTextTransform(titleType),
         letterSpacing: ({ options: { titleType } }) =>

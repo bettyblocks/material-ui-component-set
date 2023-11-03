@@ -66,9 +66,17 @@
         paddingLeft: '0.5rem',
         paddingTop: '0.4375rem',
         paddingBottom: '0.5625rem',
-        fontFamily: style.getFontFamily('Body1'),
-        fontSize: '1rem',
-        fontWeight: style.getFontWeight('Body1'),
+        fontFamily: ({ options: { font } }) =>
+          `var(--text-fontFamily-${font.toString().toLowerCase()})`,
+        fontSize: ({ options: { font } }) =>
+          `var(--text-fontSize-${font.toString().toLowerCase()})`,
+        fontStyle: ({ options: { font } }) =>
+          `var(--text-fontStyle-${font.toString().toLowerCase()})`,
+        fontWeight: ({ options }) => {
+          return options.fontWeight === '[Inherit]'
+            ? style.getFontWeight(options.titleType)
+            : options.fontWeight;
+        },
         textTransform: style.getTextTransform('Body1'),
         letterSpacing: style.getLetterSpacing('Body1'),
         color: ({ options: { color } }) =>
