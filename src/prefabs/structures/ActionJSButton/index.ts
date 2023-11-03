@@ -1,9 +1,7 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
-import { createAction } from '../../hooks/createAction';
+
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
-
-const $afterCreate = [createAction];
 
 export const ActionJSButton = (
   config: Configuration,
@@ -36,7 +34,7 @@ export const ActionJSButton = (
 
   return component(
     'Action Button',
-    { options, $afterCreate, style, ref, label, optionCategories },
+    { options, style, ref, label, optionCategories },
     descendants,
   );
 };

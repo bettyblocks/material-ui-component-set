@@ -21,7 +21,7 @@ export const options = {
     label: 'Action',
     value: '',
     configuration: {
-      disabled: true,
+      disabled: false,
     },
   }),
 
