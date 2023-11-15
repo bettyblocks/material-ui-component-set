@@ -1055,6 +1055,13 @@
               style.getColor(backgroundColorChip),
               '!important',
             ],
+            '& .MuiSvgIcon-root': {
+              color: ({ options: { backgroundColorChip, textColorChip } }) =>
+                backgroundColorChip !== 'Light' && [
+                  style.getColor(textColorChip),
+                  '!important',
+                ],
+            },
           },
         },
         '& .MuiIconButton-root': {
