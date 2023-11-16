@@ -70,7 +70,9 @@
     let resolvedCurrentValue;
 
     // set the value based on the selected property type (list, relational or object)
-    if (isListProperty || isObjectProperty) {
+    if (isObjectProperty) {
+      resolvedCurrentValue = JSON.stringify({ uuid: defaultValueText });
+    } else if (isListProperty) {
       resolvedCurrentValue = defaultValueText;
     } else if (isPropertyArray && !isObjectProperty) {
       resolvedCurrentValue = parseInt(defaultValueText, 10) || '';

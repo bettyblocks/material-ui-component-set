@@ -139,7 +139,15 @@
           }
 
           case 'time': {
-            setSelectedDate(DateFns.parse(parsedValue, timeFormat));
+            if (parsedValue.length === timeFormat.length) {
+              setSelectedDate(DateFns.parse(parsedValue, timeFormat));
+            } else {
+              const parsedTime = DateFns.parse(
+                parsedValue.substr(0, timeFormat.length),
+                timeFormat,
+              );
+              setSelectedDate(parsedTime);
+            }
             break;
           }
 

@@ -1,3 +1,60 @@
+# [2.167.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.166.0...v2.167.0) (2023-11-02)
+
+
+### Bug Fixes
+
+* use uuid for object component as value ([6f6294e](https://github.com/bettyblocks/material-ui-component-set/commit/6f6294e916d2b48096e65777ceace8a199439a6b))
+
+
+### Features
+
+* navToOutputUrl by default in questionnaire start ([83d94ae](https://github.com/bettyblocks/material-ui-component-set/commit/83d94ae2c0468be96ed108129b20cc929e96cf0d))
+
+# [2.166.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.165.1...v2.166.0) (2023-11-01)
+
+
+### Features
+
+* add questionnaire page templates ([81925ad](https://github.com/bettyblocks/material-ui-component-set/commit/81925ad28c15c153aee7a2ba5f228fb263afff55))
+
+## [2.165.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.165.0...v2.165.1) (2023-11-01)
+
+
+### Bug Fixes
+
+* improve visibility of delete icon in chip ([3ecdb67](https://github.com/bettyblocks/material-ui-component-set/commit/3ecdb67c506e36f2d4a10460d5647bc0fc9e0635))
+
+# [2.165.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.164.0...v2.165.0) (2023-10-17)
+
+
+### Bug Fixes
+
+* existing var ([25b3a8d](https://github.com/bettyblocks/material-ui-component-set/commit/25b3a8d9cbe1831ab29c9e729449fcad2aeabc29))
+
+
+### Features
+
+* fix checkbox for state values ([5e9eced](https://github.com/bettyblocks/material-ui-component-set/commit/5e9eced617d3bd8d2301a59b84e86883a2ffd998))
+
+## [2.163.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.163.0...v2.163.1) (2023-10-13)
+
+
+### Bug Fixes
+
+* remove bench release step from release ci-cd ([69e887f](https://github.com/bettyblocks/material-ui-component-set/commit/69e887f8dfaa7b4bceb7aa3af6b2fa7c2c01336c))
+
+
+### Features
+
+* fix zindex for box component ([93499fc](https://github.com/bettyblocks/material-ui-component-set/commit/93499fcf688c4bc947926279139e021ffe6011ee))
+
+# [2.163.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.162.0...v2.163.0) (2023-10-04)
+
+
+### Features
+
+* fixed timeformat bug ([a331d05](https://github.com/bettyblocks/material-ui-component-set/commit/a331d05a5922dc4c6a9b7b0df2d35e1dcf41b2de))
+
 # [2.162.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.161.0...v2.162.0) (2023-08-28)
 
 

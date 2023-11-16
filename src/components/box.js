@@ -141,6 +141,12 @@
         minHeight: 0,
         position: ({ options: { position } }) =>
           (!isDev && position) || 'unset',
+        zIndex: ({ options: { zIndex, position } }) => {
+          if (zIndex === '') {
+            return 'auto';
+          }
+          return position !== 'static' ? zIndex : 'auto';
+        },
         top: ({ options: { top } }) => !isDev && top,
         right: ({ options: { right } }) => !isDev && right,
         bottom: ({ options: { bottom } }) => !isDev && bottom,
