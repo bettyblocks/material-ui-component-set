@@ -12,6 +12,7 @@
       runTimeVisibility,
       width,
       disableClick: disableBackdropClick,
+      preLoadChildren,
       dataComponentAttribute,
     } = options;
     const { Dialog } = window.MaterialUI.Core;
@@ -22,6 +23,7 @@
       ? isVisible
       : runTimeVisibility !== 'false';
     const [isOpen, setIsOpen] = useState(componentVisibility);
+    const [keepMounted, setKeepMounted] = useState(preLoadChildren);
 
     const closeDialog = () => setIsOpen(false);
     const openDialog = () => setIsOpen(true);
@@ -29,6 +31,10 @@
     useEffect(() => {
       setIsOpen(componentVisibility);
     }, [componentVisibility]);
+
+    useEffect(() => {
+      if (isOpen) setKeepMounted(true);
+    }, [isOpen]);
 
     useEffect(() => {
       B.defineFunction('Show', openDialog);
@@ -59,7 +65,7 @@
         fullWidth
         maxWidth={width}
         aria-labelledby="modal-dialog"
-        keepMounted
+        keepMounted={keepMounted}
         disableBackdropClick={disableBackdropClick}
         data-component={useText(dataComponentAttribute) || 'Dialog'}
       >
