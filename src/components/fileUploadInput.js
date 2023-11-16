@@ -56,10 +56,12 @@
 
     const initialValue = useProperty(!isDev && getPropertyId(valueRaw));
     const [value, setValue] = useState(initialValue);
+    const [fileReference, setFileReference] = useState(null);
     const propertyId = getPropertyId(selectedProperty);
 
-    const [upload, { error, loading, data: fileReference }] =
-      usePresignedUpload({ propertyId });
+    const [upload, { error, loading, data }] = usePresignedUpload({
+      propertyId,
+    });
 
     const firstRender = React.useRef(true);
 
@@ -93,11 +95,12 @@
     React.useEffect(() => {
       if (firstRender.current) return;
       if (!loading) {
-        if (fileReference) {
-          B.triggerEvent('onSuccess', fileReference);
+        if (data) {
+          setFileReference(data);
+          B.triggerEvent('onSuccess', data);
         }
       }
-    }, [loading, fileReference]);
+    }, [loading, data]);
 
     const formatBytes = (bytes) => {
       if (bytes === 0) return '0 Bytes';
@@ -152,12 +155,14 @@
 
       if (isValidFile) {
         upload(file.type, file);
+        setFileReference(data);
       }
     };
 
     const clearFiles = (e) => {
       if (e && e.preventDefault) e.preventDefault();
-      setValue(null);
+      setValue('');
+      setFileReference(null);
       setValidationMessage('');
     };
 
@@ -196,6 +201,8 @@
             className={classes.remove}
             onClick={() => {
               setValue('');
+              setFileReference(null);
+              setValidationMessage('');
               B.triggerEvent('onFileRemove');
             }}
           >

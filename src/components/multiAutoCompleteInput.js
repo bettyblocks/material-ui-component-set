@@ -233,6 +233,7 @@
      * Debounced user input to only send a request every 250ms
      */
     const [debouncedInputValue, setDebouncedInputValue] = useState();
+    const [debouncedCurrentValue, setDebouncedCurrentValue] = useState();
 
     /*
      * Keep state of interaction filters coming from other components
@@ -601,59 +602,6 @@
       setInteractionFilter({});
     });
 
-    /*
-     * Show a TextField in design time
-     */
-    if (isDev || !valid) {
-      let designTimeValue;
-
-      if (!valid) {
-        designTimeValue = message;
-      }
-
-      if (isDev) {
-        designTimeValue = '';
-      }
-
-      return (
-        <div className={classes.root}>
-          <TextField
-            InputProps={{
-              inputProps: {
-                tabIndex: isDev ? -1 : undefined,
-              },
-              endAdornment: <Icon name="ExpandMore" />,
-              ...(!designTimeValue && {
-                startAdornment: (
-                  <>
-                    <Chip label="Chip 1" onDelete={() => {}} />
-                    <Chip label="Chip 2" onDelete={() => {}} />
-                  </>
-                ),
-              }),
-            }}
-            classes={{
-              root: `${classes.formControl} ${
-                floatLabel && classes.floatLabel
-              }`,
-            }}
-            dataComponent={dataComponentAttribute}
-            disabled={disabled || !valid}
-            error={showError}
-            fullWidth={fullWidth}
-            helperText={helperText}
-            label={!hideLabel && label}
-            margin={margin}
-            placeholder={placeholder}
-            required={required}
-            size={size}
-            value={designTimeValue}
-            variant={variant}
-          />
-        </div>
-      );
-    }
-
     const getOptions = () => {
       if (optionType === 'property') {
         return modelProperty.values.map((propertyValue) => propertyValue.value);
@@ -739,6 +687,29 @@
 
     const currentValue = getValue();
 
+    useEffect(() => {
+      if (
+        JSON.stringify(currentValue) !== JSON.stringify(debouncedCurrentValue)
+      ) {
+        setTimeout(() => {
+          setDebouncedCurrentValue(currentValue);
+        }, 250);
+      } else {
+        let triggerEventValue;
+
+        if (optionType === 'model' || optionType === 'variable') {
+          setDebouncedInputValue('');
+          triggerEventValue =
+            value.length === 0 ? [] : value.map((x) => x[valueProp.name]);
+        } else if (optionType === 'property') {
+          triggerEventValue = value || '';
+        }
+
+        changeContext.current = { modelData: value };
+        B.triggerEvent('onChange', triggerEventValue, changeContext.current);
+      }
+    }, [value]);
+
     const renderLabel = (option) => {
       let optionLabel = '';
 
@@ -776,24 +747,7 @@
           })}
           onChange={(_, newValue) => {
             setValue(newValue || (multiple ? [] : ''));
-
-            let triggerEventValue;
-
-            if (optionType === 'model' || optionType === 'variable') {
-              setDebouncedInputValue('');
-              triggerEventValue =
-                newValue.length === 0
-                  ? []
-                  : newValue.map((x) => x[valueProp.name]);
-            } else if (optionType === 'property') {
-              triggerEventValue = newValue || '';
-            }
-
-            B.triggerEvent(
-              'onChange',
-              triggerEventValue,
-              changeContext.current,
-            );
+            setDebouncedCurrentValue(newValue);
           }}
           onInputChange={(event, newValue) => {
             let validation = event ? event.target.validity : null;
@@ -900,6 +854,59 @@
         )}
       </FormControl>
     );
+
+    /*
+     * Show a TextField in design time
+     */
+    if (isDev || !valid) {
+      let designTimeValue;
+
+      if (!valid) {
+        designTimeValue = message;
+      }
+
+      if (isDev) {
+        designTimeValue = '';
+      }
+
+      return (
+        <div className={classes.root}>
+          <TextField
+            InputProps={{
+              inputProps: {
+                tabIndex: isDev ? -1 : undefined,
+              },
+              endAdornment: <Icon name="ExpandMore" />,
+              ...(!designTimeValue && {
+                startAdornment: (
+                  <>
+                    <Chip label="Chip 1" onDelete={() => {}} />
+                    <Chip label="Chip 2" onDelete={() => {}} />
+                  </>
+                ),
+              }),
+            }}
+            classes={{
+              root: `${classes.formControl} ${
+                floatLabel && classes.floatLabel
+              }`,
+            }}
+            dataComponent={dataComponentAttribute}
+            disabled={disabled || !valid}
+            error={showError}
+            fullWidth={fullWidth}
+            helperText={helperText}
+            label={!hideLabel && label}
+            margin={margin}
+            placeholder={placeholder}
+            required={required}
+            size={size}
+            value={designTimeValue}
+            variant={variant}
+          />
+        </div>
+      );
+    }
 
     if (optionType === 'model') {
       return (
@@ -1029,8 +1036,8 @@
           },
           '& input': {
             '&::placeholder': {
-              color: ({ options: { placeholderColor } }) => [
-                style.getColor(placeholderColor),
+              color: ({ options: { placeHolderColor } }) => [
+                style.getColor(placeHolderColor),
                 '!important',
               ],
             },
@@ -1048,6 +1055,13 @@
               style.getColor(backgroundColorChip),
               '!important',
             ],
+            '& .MuiSvgIcon-root': {
+              color: ({ options: { backgroundColorChip, textColorChip } }) =>
+                backgroundColorChip !== 'Light' && [
+                  style.getColor(textColorChip),
+                  '!important',
+                ],
+            },
           },
         },
         '& .MuiIconButton-root': {

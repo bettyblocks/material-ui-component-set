@@ -1,4 +1,9 @@
-import { color, ThemeColor, toggle } from '@betty-blocks/component-sdk';
+import {
+  color,
+  ThemeColor,
+  toggle,
+  buttongroup,
+} from '@betty-blocks/component-sdk';
 
 export const styles = {
   checkboxColor: color('Checkbox color', {
@@ -11,7 +16,7 @@ export const styles = {
     value: false,
   }),
   labelColor: color('Label color', {
-    value: ThemeColor.ACCENT_3,
+    value: ThemeColor.BLACK,
   }),
   textColor: color('Text color', {
     value: ThemeColor.BLACK,
@@ -22,4 +27,21 @@ export const styles = {
   errorColor: color('Error color', {
     value: ThemeColor.DANGER,
   }),
+  margin: buttongroup(
+    'Margin',
+    [
+      ['None', 'none'],
+      ['Dense', 'dense'],
+      ['Normal', 'normal'],
+    ],
+    { value: 'normal' },
+  ),
+  size: buttongroup(
+    'Size',
+    [
+      ['Medium', 'medium'],
+      ['Small', 'small'],
+    ],
+    { value: 'medium' },
+  ),
 };

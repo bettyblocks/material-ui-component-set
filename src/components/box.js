@@ -11,6 +11,7 @@
       backgroundColor,
       backgroundUrl: backgroundURLInput,
       borderColor,
+      contentDirection,
       dataComponentAttribute,
       displayLogic,
       transparent,
@@ -47,7 +48,7 @@
     const boxOptions = {
       display: isFlex && 'flex',
       justifyContent: alignment !== 'none' && alignment,
-      flexDirection: isFlex && 'row',
+      flexDirection: isFlex && contentDirection,
       alignItems: valignment !== 'none' && valignment,
       'data-component': useText(dataComponentAttribute) || 'Box',
     };
@@ -140,6 +141,12 @@
         minHeight: 0,
         position: ({ options: { position } }) =>
           (!isDev && position) || 'unset',
+        zIndex: ({ options: { zIndex, position } }) => {
+          if (zIndex === '') {
+            return 'auto';
+          }
+          return position !== 'static' ? zIndex : 'auto';
+        },
         top: ({ options: { top } }) => !isDev && top,
         right: ({ options: { right } }) => !isDev && right,
         bottom: ({ options: { bottom } }) => !isDev && bottom,

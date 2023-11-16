@@ -265,15 +265,9 @@ const beforeCreate = ({
               (originalOption: PrefabComponentOption) => ({
                 ...originalOption,
                 value: {
-                  id:
-                    result.isRelational && !result.isMultiRelational
-                      ? [propertyId, modelProperty.id]
-                      : propertyId,
+                  id: propertyId,
                   type: 'PROPERTY',
-                  name:
-                    result.isRelational && !result.isMultiRelational
-                      ? `{{ ${model?.name}.${name}.id }}`
-                      : `{{ ${model?.name}.${name} }}`,
+                  name: `{{ ${model?.name}.${name} }}`,
                 },
                 configuration: {
                   allowedKinds: ['LIST', 'BELONGS_TO'],
@@ -287,6 +281,20 @@ const beforeCreate = ({
                 },
               }),
             );
+            setOption(
+              newPrefab.structure[0],
+              'label',
+              (originalOption: any) => ({
+                ...originalOption,
+                value: [
+                  {
+                    id: propertyId,
+                    type: 'PROPERTY_LABEL',
+                    name: `{{ ${model?.name}.${name} }}`,
+                  },
+                ],
+              }),
+            );
             if (propertyKind === 'OBJECT') {
               setOption(newPrefab.structure[0], 'labelProperty', (option) => ({
                 ...option,
@@ -296,10 +304,7 @@ const beforeCreate = ({
                       ? [propertyId, modelProperty.id]
                       : propertyId,
                   type: 'PROPERTY',
-                  name:
-                    result.isRelational && !result.isMultiRelational
-                      ? `{{ ${model?.name}.${name}.id }}`
-                      : `{{ ${model?.name}.${name} }}`,
+                  name: `{{ ${model?.name}.${name} }}`,
                   ...(propertyPath.useKey && { useKey: propertyPath.useKey }),
                 },
                 configuration: {
@@ -318,15 +323,9 @@ const beforeCreate = ({
             ) {
               const valueOptions = [
                 {
-                  id:
-                    result.isRelational && !result.isMultiRelational
-                      ? [propertyId, modelProperty.id]
-                      : propertyId,
+                  id: propertyId,
                   type: 'PROPERTY',
-                  name:
-                    result.isRelational && !result.isMultiRelational
-                      ? `{{ ${model?.name}.${name}.id }}`
-                      : `{{ ${model?.name}.${name} }}`,
+                  useKey: 'uuid',
                 },
               ];
 

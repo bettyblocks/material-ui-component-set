@@ -22,10 +22,12 @@ export const options = {
   }),
   property: property('Property', {
     value: '',
+    showInReconfigure: true,
     configuration: {
       allowedKinds: ['LIST', 'BELONGS_TO'],
       disabled: true,
       condition: hideIf('property', 'EQ', ''),
+      showOnDrop: true,
     },
   }),
   label: variable('Label', {

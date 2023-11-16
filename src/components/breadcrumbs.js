@@ -45,7 +45,11 @@
 
     const breadcrumbs =
       children.length > 0 ? (
-        <Breadcrumbs {...breadcrumbsOptions} aria-label="breadcrumb">
+        <Breadcrumbs
+          {...breadcrumbsOptions}
+          classes={{ separator: classes.separator }}
+          aria-label="breadcrumb"
+        >
           {children}
         </Breadcrumbs>
       ) : (
@@ -53,27 +57,35 @@
       );
     return isDev ? <div>{breadcrumbs}</div> : breadcrumbs;
   })(),
-  styles: () => () => ({
-    empty: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: '4rem',
-      height: '100%',
-      width: '100%',
-      fontSize: '0.75rem',
-      color: '#262A3A',
-      textTransform: 'uppercase',
-      boxSizing: 'border-box',
-    },
-    pristine: {
-      borderWidth: '0.0625rem',
-      borderColor: '#AFB5C8',
-      borderStyle: 'dashed',
-      backgroundColor: '#F0F1F5',
-      '&::after': {
-        content: '"Breadcrumbs"',
+  styles: (B) => (t) => {
+    const { Styling } = B;
+    const style = new Styling(t);
+    return {
+      empty: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '4rem',
+        height: '100%',
+        width: '100%',
+        fontSize: '0.75rem',
+        color: '#262A3A',
+        textTransform: 'uppercase',
+        boxSizing: 'border-box',
       },
-    },
-  }),
+      pristine: {
+        borderWidth: '0.0625rem',
+        borderColor: '#AFB5C8',
+        borderStyle: 'dashed',
+        backgroundColor: '#F0F1F5',
+        '&::after': {
+          content: '"Breadcrumbs"',
+        },
+      },
+      separator: {
+        color: ({ options: { separatorColor } }) =>
+          style.getColor(separatorColor),
+      },
+    };
+  },
 }))();

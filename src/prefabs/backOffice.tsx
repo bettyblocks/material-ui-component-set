@@ -87,7 +87,8 @@ import {
   textInputOptions,
   textOptions,
 } from './structures';
-import { options as defaults } from './structures/ActionJSForm/options';
+import { options as formOptions } from './structures/ActionJSForm/options';
+import { children as formChildren } from './structures/ActionJSForm/children';
 import { Properties, IdPropertyProps, ModelProps, ModelQuery } from './types';
 import { PermissionType, PropertyStateProps } from './types/types';
 
@@ -1257,7 +1258,22 @@ const drawerContainer = DrawerContainer(
                                       'Form',
                                       {
                                         label: 'Create Form',
-                                        options: defaults,
+                                        options: {
+                                          ...formOptions,
+                                          reconfigure: reconfigure(
+                                            'Reconfigure',
+                                            {
+                                              value: {
+                                                children: formChildren,
+                                                reconfigureWizardType:
+                                                  'ChildrenSelector',
+                                              },
+                                              ref: {
+                                                id: '#createFormReconfigure',
+                                              },
+                                            },
+                                          ),
+                                        },
                                         ref: { id: '#createForm' },
                                       },
                                       [
@@ -2673,7 +2689,22 @@ const drawerContainer = DrawerContainer(
                                       'Form',
                                       {
                                         label: 'Update Form',
-                                        options: defaults,
+                                        options: {
+                                          ...formOptions,
+                                          reconfigure: reconfigure(
+                                            'Reconfigure',
+                                            {
+                                              value: {
+                                                children: formChildren,
+                                                reconfigureWizardType:
+                                                  'ChildrenSelector',
+                                              },
+                                              ref: {
+                                                id: '#updateFormReconfigure',
+                                              },
+                                            },
+                                          ),
+                                        },
                                         ref: { id: '#updateForm' },
                                       },
                                       [
@@ -4785,7 +4816,7 @@ const drawerContainer = DrawerContainer(
                                                                       label:
                                                                         'Delete Form',
                                                                       options:
-                                                                        defaults,
+                                                                        formOptions,
                                                                       ref: {
                                                                         id: '#deleteForm',
                                                                       },
@@ -5056,6 +5087,8 @@ const prefabStructure = [
             'addDetailChild',
             'reconfigureSubView',
             'addSubViewChild',
+            'reconfigureCreateForm',
+            'reconfigureUpdateForm',
           ],
           condition: {
             type: 'SHOW',
@@ -5207,6 +5240,23 @@ const prefabStructure = [
             },
           },
         }),
+        reconfigureCreateForm: linked({
+          label: 'Reconfigure create form',
+          value: {
+            ref: {
+              componentId: '#createForm',
+              optionId: '#createFormReconfigure',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'shownTab',
+              comparator: 'EQ',
+              value: 1,
+            },
+          },
+        }),
         createFormAction: linked({
           label: 'Create action',
           value: {
@@ -5309,13 +5359,29 @@ const prefabStructure = [
             },
           },
         }),
-
         updateTabTitle: linked({
           label: 'Update tab title',
           value: {
             ref: {
               componentId: '#updateTabTitle',
               optionId: '#updateTabTitleContent',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'shownTab',
+              comparator: 'EQ',
+              value: 3,
+            },
+          },
+        }),
+        reconfigureUpdateForm: linked({
+          label: 'Reconfigure update form',
+          value: {
+            ref: {
+              componentId: '#updateForm',
+              optionId: '#updateFormReconfigure',
             },
           },
           configuration: {
@@ -5377,6 +5443,9 @@ const prefabStructure = [
               label: 'Backoffice - Side menu',
               options: {
                 ...drawerBarOptions,
+                themeBgColor: color('Theme background color', {
+                  value: ThemeColor.PRIMARY,
+                }),
                 innerSpacing: sizes('Inner space', {
                   value: ['0rem', '0rem', '0rem', '0rem'],
                 }),
@@ -5762,11 +5831,7 @@ const beforeCreate = ({
     onCompleted: ({ model: dataModel }: ModelQuery) => {
       setModel(dataModel);
       setIdProperty(dataModel.properties.find(({ name }) => name === 'id'));
-      setModelProperties(
-        dataModel.properties.filter(
-          (prop: Properties) => prop.kind !== 'PASSWORD',
-        ),
-      );
+      setModelProperties(dataModel.properties);
     },
   });
 
@@ -6320,8 +6385,22 @@ const beforeCreate = ({
             prop.label !== 'Id' &&
             prop.kind !== 'PDF' &&
             prop.kind !== 'MULTI_FILE' &&
-            prop.kind !== 'PASSWORD' &&
-            prop.kind !== 'LOGIN_TOKEN'
+            prop.kind !== 'LOGIN_TOKEN' &&
+            prop.kind !== 'MULTI_IMAGE' &&
+            prop.kind !== 'BOOLEAN_EXPRESSION' &&
+            prop.kind !== 'DATE_EXPRESSION' &&
+            prop.kind !== 'DATE_TIME_EXPRESSION' &&
+            prop.kind !== 'INTEGER_EXPRESSION' &&
+            prop.kind !== 'DECIMAL_EXPRESSION' &&
+            prop.kind !== 'MINUTES_EXPRESSION' &&
+            prop.kind !== 'PRICE_EXPRESSION' &&
+            prop.kind !== 'STRING_EXPRESSION' &&
+            prop.kind !== 'TEXT_EXPRESSION' &&
+            prop.kind !== 'SUM' &&
+            prop.kind !== 'COUNT' &&
+            prop.kind !== 'AUTO_INCREMENT' &&
+            prop.kind !== 'EMAIL' &&
+            prop.kind !== 'ZIPCODE'
           );
         },
       );

@@ -92,15 +92,17 @@
     const changeHandler = (date) => {
       setSelectedDate(date);
 
-      if (type === 'date') {
-        B.triggerEvent('onChange', convertToDate(date));
-      } else if (!date || DateFns.isValid(date)) {
-        B.triggerEvent('onChange', date);
-        setErrorState(false);
-        setHelper('');
-      } else {
-        B.triggerEvent('onChange', '');
-      }
+      setTimeout(() => {
+        if (type === 'date') {
+          B.triggerEvent('onChange', convertToDate(date));
+        } else if (!date || DateFns.isValid(date)) {
+          B.triggerEvent('onChange', date);
+          setErrorState(false);
+          setHelper('');
+        } else {
+          B.triggerEvent('onChange', '');
+        }
+      }, 250);
     };
 
     const invalidHandler = (event) => {
@@ -137,7 +139,15 @@
           }
 
           case 'time': {
-            setSelectedDate(DateFns.parse(parsedValue, timeFormat));
+            if (parsedValue.length === timeFormat.length) {
+              setSelectedDate(DateFns.parse(parsedValue, timeFormat));
+            } else {
+              const parsedTime = DateFns.parse(
+                parsedValue.substr(0, timeFormat.length),
+                timeFormat,
+              );
+              setSelectedDate(parsedTime);
+            }
             break;
           }
 

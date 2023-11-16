@@ -50,10 +50,12 @@ export const ratingInputOptions = {
   }),
   property: property('Property', {
     value: '',
+    showInReconfigure: true,
     configuration: {
       allowedKinds: ['DECIMAL'],
       disabled: true,
       condition: hideIf('property', 'EQ', ''),
+      showOnDrop: true,
     },
   }),
   hideLabel: toggle('Hide label'),
@@ -136,7 +138,7 @@ export const ratingInputOptions = {
     value: ThemeColor.DANGER,
   }),
   labelColor: color('Label color', {
-    value: ThemeColor.ACCENT_3,
+    value: ThemeColor.BLACK,
   }),
 
   ...advanced('RatingInput'),

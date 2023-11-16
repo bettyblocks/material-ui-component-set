@@ -21,10 +21,12 @@ export const checkboxInputOptions = {
   }),
   property: property('Property', {
     value: '',
+    showInReconfigure: true,
     configuration: {
       allowedKinds: ['BOOLEAN'],
       disabled: true,
       condition: hideIf('property', 'EQ', ''),
+      showOnDrop: true,
     },
   }),
 
@@ -32,7 +34,7 @@ export const checkboxInputOptions = {
     value: ['Checkbox'],
     configuration: { allowFormatting: false, allowPropertyName: true },
   }),
-  value: variable('Value', { value: [] }),
+  value: variable('Value', { value: ['false'] }),
   disabled: toggle('Disabled'),
   helperText: variable('Helper text'),
   type: text('Type', {
