@@ -44,7 +44,7 @@ export const TextInput = (
     {
       label: 'Advanced Options',
       expanded: false,
-      members: ['dataComponentAttribute'],
+      members: ['debounceDelay', 'dataComponentAttribute'],
     },
   ];
 

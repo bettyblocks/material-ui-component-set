@@ -37,6 +37,7 @@
       validationAboveMaximum = [''],
       value,
       hideLabel,
+      debounceDelay,
       dataComponentAttribute = ['TextField'],
       required,
     } = options;
@@ -64,6 +65,7 @@
     const [currentValue, setCurrentValue] = usePageState(useText(value));
     const parsedLabel = useText(label);
     const labelText = parsedLabel;
+    const debouncedOnChangeRef = useRef(null);
 
     const validPattern = pattern || null;
     const validMinlength = minLength || null;
@@ -140,6 +142,20 @@
       };
     };
 
+    const debounce =
+      (func, delay) =>
+      (...args) => {
+        clearTimeout(debounce.timeoutId);
+        debounce.timeoutId = setTimeout(() => func(...args), delay);
+      };
+    debounce.timeoutId = null;
+
+    if (!debouncedOnChangeRef.current) {
+      debouncedOnChangeRef.current = debounce((newValue) => {
+        B.triggerEvent('onChange', newValue);
+      }, debounceDelay);
+    }
+
     const changeHandler = (event) => {
       const { target } = event;
       let { validity: validation } = target;
@@ -156,7 +172,7 @@
       }
       const newValue = isNumberType ? numberValue : eventValue;
       setCurrentValue(newValue);
-      B.triggerEvent('onChange', newValue);
+      debouncedOnChangeRef.current(newValue);
     };
 
     const blurHandler = (event) => {
