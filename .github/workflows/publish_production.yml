@@ -17,7 +17,7 @@ jobs:
         with:
           token: ${{ secrets.GH_TOKEN }}
       - uses: actions/setup-node@v3
-        with: 
+        with:
           node-version: 16.14.0
       - name: Install packages
         run: yarn install
@@ -112,6 +112,11 @@ jobs:
         env:
           AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_PLURYN }}
           AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_PLURYN }}
+        run: yarn upload
+      - name: upload spc1
+        env:
+          AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_SPC1 }}
+          AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_SPC1 }}
         run: yarn upload
       - name: release notes
         env:
