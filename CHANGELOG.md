@@ -1,3 +1,19 @@
+# [2.168.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.167.1...v2.168.0) (2023-11-17)
+
+
+### Bug Fixes
+
+* checks empty value in contains ([06aee0b](https://github.com/bettyblocks/material-ui-component-set/commit/06aee0bd9107580ab38c397ececffb044eccae1c))
+* properly display error msg in table header ([5f2e7a7](https://github.com/bettyblocks/material-ui-component-set/commit/5f2e7a76302c42a63cecf5b73db21b6e9c5e6c86))
+* show placeholder img when using data/url var ([07a9d51](https://github.com/bettyblocks/material-ui-component-set/commit/07a9d51d4e5356e398d5793771cb17005f02e5eb))
+
+
+### Features
+
+* add debounceDelay option for onChange ([8fea131](https://github.com/bettyblocks/material-ui-component-set/commit/8fea131ce958978c365049dfe4e8e1be35175159))
+* allow to disable preload children in dialog ([ee85bbf](https://github.com/bettyblocks/material-ui-component-set/commit/ee85bbf1d6ca40620f44862da1843378626447e9))
+* introduce spc1 ([90e2be0](https://github.com/bettyblocks/material-ui-component-set/commit/90e2be0641a9c8649b1d2e2af776bda0ae24f277))
+
 ## [2.167.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.167.0...v2.167.1) (2023-11-02)
 
 
