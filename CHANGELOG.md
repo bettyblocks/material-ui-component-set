@@ -1,3 +1,10 @@
+# [2.169.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.168.0...v2.169.0) (2023-11-20)
+
+
+### Features
+
+* add disable option ([6a67f1c](https://github.com/bettyblocks/material-ui-component-set/commit/6a67f1cdc5c95800894d78d29c60f5cad3c096ed))
+
 # [2.168.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.167.1...v2.168.0) (2023-11-17)
 
 
