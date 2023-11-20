@@ -1,3 +1,10 @@
+## [2.169.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.169.0...v2.169.1) (2023-11-20)
+
+
+### Bug Fixes
+
+* add developerMode to backoffice ([96329ed](https://github.com/bettyblocks/material-ui-component-set/commit/96329ed707939de788f5e769547448a47f871aa4))
+
 # [2.169.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.168.0...v2.169.0) (2023-11-20)
 
 
