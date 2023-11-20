@@ -745,6 +745,7 @@ const attributes = {
   category: 'FORM',
   icon: Icon.UpdateFormIcon,
   type: 'page',
+  developerMode: 'basic',
   description:
     'This page contains a datatable and all you need to manage your records.',
   detail:
