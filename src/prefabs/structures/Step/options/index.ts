@@ -1,4 +1,4 @@
-import { variable, icon } from '@betty-blocks/component-sdk';
+import { toggle, variable, icon } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
 export const categories = [
@@ -22,6 +22,7 @@ export const stepOptions = {
       showOnDrop: true,
     },
   }),
+  disabled: toggle('Disabled', { value: false }),
 
   ...advanced('Step'),
 };
