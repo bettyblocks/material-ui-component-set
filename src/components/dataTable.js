@@ -469,15 +469,22 @@
     };
 
     const renderTableHead = () => {
-      if ((loading && !loadOnScroll) || error) {
+      if (loading && !loadOnScroll) {
         return Array.from(Array(children.length).keys()).map((colIdx) => (
           <TableCell key={colIdx}>
-            <div className={classes.skeleton}>
-              {error && displayError && error.message}
-            </div>
+            <div className={classes.skeleton} />
           </TableCell>
         ));
       }
+
+      if (error) {
+        return (
+          <TableCell colSpan={children.length}>
+            {error && displayError && error.message}
+          </TableCell>
+        );
+      }
+
       return (
         <Children headerOnly handleSort={handleSort} orderBy={orderBy}>
           {children}

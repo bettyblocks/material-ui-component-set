@@ -1,101 +1,123 @@
-# [2.167.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.166.0...v2.167.0) (2023-11-02)
+## [2.169.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.169.0...v2.169.1) (2023-11-20)
+
+
+### Bug Fixes
+
+* add developerMode to backoffice ([96329ed](https://github.com/bettyblocks/material-ui-component-set/commit/96329ed707939de788f5e769547448a47f871aa4))
+
+# [2.169.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.168.0...v2.169.0) (2023-11-20)
+
+
+### Features
+
+* add disable option ([6a67f1c](https://github.com/bettyblocks/material-ui-component-set/commit/6a67f1cdc5c95800894d78d29c60f5cad3c096ed))
+
+# [2.168.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.167.1...v2.168.0) (2023-11-17)
+
+
+### Bug Fixes
+
+* checks empty value in contains ([06aee0b](https://github.com/bettyblocks/material-ui-component-set/commit/06aee0bd9107580ab38c397ececffb044eccae1c))
+* properly display error msg in table header ([5f2e7a7](https://github.com/bettyblocks/material-ui-component-set/commit/5f2e7a76302c42a63cecf5b73db21b6e9c5e6c86))
+* show placeholder img when using data/url var ([07a9d51](https://github.com/bettyblocks/material-ui-component-set/commit/07a9d51d4e5356e398d5793771cb17005f02e5eb))
+
+
+### Features
+
+* add debounceDelay option for onChange ([8fea131](https://github.com/bettyblocks/material-ui-component-set/commit/8fea131ce958978c365049dfe4e8e1be35175159))
+* allow to disable preload children in dialog ([ee85bbf](https://github.com/bettyblocks/material-ui-component-set/commit/ee85bbf1d6ca40620f44862da1843378626447e9))
+* introduce spc1 ([90e2be0](https://github.com/bettyblocks/material-ui-component-set/commit/90e2be0641a9c8649b1d2e2af776bda0ae24f277))
+
+## [2.167.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.167.0...v2.167.1) (2023-11-02)
 
 
 ### Bug Fixes
 
 * use uuid for object component as value ([6f6294e](https://github.com/bettyblocks/material-ui-component-set/commit/6f6294e916d2b48096e65777ceace8a199439a6b))
 
+# [2.167.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.166.0...v2.167.0) (2023-11-02)
+
+### Bug Fixes
+
+- use uuid for object component as value ([6f6294e](https://github.com/bettyblocks/material-ui-component-set/commit/6f6294e916d2b48096e65777ceace8a199439a6b))
 
 ### Features
 
-* navToOutputUrl by default in questionnaire start ([83d94ae](https://github.com/bettyblocks/material-ui-component-set/commit/83d94ae2c0468be96ed108129b20cc929e96cf0d))
+- navToOutputUrl by default in questionnaire start ([83d94ae](https://github.com/bettyblocks/material-ui-component-set/commit/83d94ae2c0468be96ed108129b20cc929e96cf0d))
 
 # [2.166.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.165.1...v2.166.0) (2023-11-01)
 
-
 ### Features
 
-* add questionnaire page templates ([81925ad](https://github.com/bettyblocks/material-ui-component-set/commit/81925ad28c15c153aee7a2ba5f228fb263afff55))
+- add questionnaire page templates ([81925ad](https://github.com/bettyblocks/material-ui-component-set/commit/81925ad28c15c153aee7a2ba5f228fb263afff55))
 
 ## [2.165.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.165.0...v2.165.1) (2023-11-01)
 
-
 ### Bug Fixes
 
-* improve visibility of delete icon in chip ([3ecdb67](https://github.com/bettyblocks/material-ui-component-set/commit/3ecdb67c506e36f2d4a10460d5647bc0fc9e0635))
+- improve visibility of delete icon in chip ([3ecdb67](https://github.com/bettyblocks/material-ui-component-set/commit/3ecdb67c506e36f2d4a10460d5647bc0fc9e0635))
 
 # [2.165.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.164.0...v2.165.0) (2023-10-17)
 
-
 ### Bug Fixes
 
-* existing var ([25b3a8d](https://github.com/bettyblocks/material-ui-component-set/commit/25b3a8d9cbe1831ab29c9e729449fcad2aeabc29))
-
+- existing var ([25b3a8d](https://github.com/bettyblocks/material-ui-component-set/commit/25b3a8d9cbe1831ab29c9e729449fcad2aeabc29))
 
 ### Features
 
-* fix checkbox for state values ([5e9eced](https://github.com/bettyblocks/material-ui-component-set/commit/5e9eced617d3bd8d2301a59b84e86883a2ffd998))
+- fix checkbox for state values ([5e9eced](https://github.com/bettyblocks/material-ui-component-set/commit/5e9eced617d3bd8d2301a59b84e86883a2ffd998))
 
 ## [2.163.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.163.0...v2.163.1) (2023-10-13)
 
-
 ### Bug Fixes
 
-* remove bench release step from release ci-cd ([69e887f](https://github.com/bettyblocks/material-ui-component-set/commit/69e887f8dfaa7b4bceb7aa3af6b2fa7c2c01336c))
-
+- remove bench release step from release ci-cd ([69e887f](https://github.com/bettyblocks/material-ui-component-set/commit/69e887f8dfaa7b4bceb7aa3af6b2fa7c2c01336c))
 
 ### Features
 
-* fix zindex for box component ([93499fc](https://github.com/bettyblocks/material-ui-component-set/commit/93499fcf688c4bc947926279139e021ffe6011ee))
+- fix zindex for box component ([93499fc](https://github.com/bettyblocks/material-ui-component-set/commit/93499fcf688c4bc947926279139e021ffe6011ee))
 
 # [2.163.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.162.0...v2.163.0) (2023-10-04)
 
-
 ### Features
 
-* fixed timeformat bug ([a331d05](https://github.com/bettyblocks/material-ui-component-set/commit/a331d05a5922dc4c6a9b7b0df2d35e1dcf41b2de))
+- fixed timeformat bug ([a331d05](https://github.com/bettyblocks/material-ui-component-set/commit/a331d05a5922dc4c6a9b7b0df2d35e1dcf41b2de))
 
 # [2.162.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.161.0...v2.162.0) (2023-08-28)
 
-
 ### Features
 
-* inherit theme font style by default in text and title ([a20deef](https://github.com/bettyblocks/material-ui-component-set/commit/a20deefa562a415178b0f0639e4ece0553ccc0c8))
+- inherit theme font style by default in text and title ([a20deef](https://github.com/bettyblocks/material-ui-component-set/commit/a20deefa562a415178b0f0639e4ece0553ccc0c8))
 
 # [2.161.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.160.1...v2.161.0) (2023-08-28)
 
-
 ### Features
 
-* add show on drop to form inputs ([1818304](https://github.com/bettyblocks/material-ui-component-set/commit/18183041658adda68129b2f85186ecd9d29c2eca))
+- add show on drop to form inputs ([1818304](https://github.com/bettyblocks/material-ui-component-set/commit/18183041658adda68129b2f85186ecd9d29c2eca))
 
 ## [2.160.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.160.0...v2.160.1) (2023-08-24)
 
-
 ### Bug Fixes
 
-* added missing size and margin for checkbox ([bf4cfde](https://github.com/bettyblocks/material-ui-component-set/commit/bf4cfde7a835b3c6db43483d8a58b96fd20350f0))
+- added missing size and margin for checkbox ([bf4cfde](https://github.com/bettyblocks/material-ui-component-set/commit/bf4cfde7a835b3c6db43483d8a58b96fd20350f0))
 
 # [2.160.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.159.2...v2.160.0) (2023-08-15)
 
-
 ### Features
 
-* add content direction option to box component ([bb93ab9](https://github.com/bettyblocks/material-ui-component-set/commit/bb93ab9bf71955a3da9021bc8a51b9eb84bbd482))
+- add content direction option to box component ([bb93ab9](https://github.com/bettyblocks/material-ui-component-set/commit/bb93ab9bf71955a3da9021bc8a51b9eb84bbd482))
 
 ## [2.159.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.159.1...v2.159.2) (2023-08-11)
 
-
 ### Bug Fixes
 
-* change tabs display from hiding RHS treeview ([1c57d85](https://github.com/bettyblocks/material-ui-component-set/commit/1c57d8566e2b6d424dea0eecb52c589c7c5b484d))
+- change tabs display from hiding RHS treeview ([1c57d85](https://github.com/bettyblocks/material-ui-component-set/commit/1c57d8566e2b6d424dea0eecb52c589c7c5b484d))
 
 ## [2.159.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.159.0...v2.159.1) (2023-08-11)
 
-
 ### Bug Fixes
 
-* remove unnessary default value logic ([85f79ae](https://github.com/bettyblocks/material-ui-component-set/commit/85f79aecc31df9c7d1d64438b94dfc42ca51101c))
+- remove unnessary default value logic ([85f79ae](https://github.com/bettyblocks/material-ui-component-set/commit/85f79aecc31df9c7d1d64438b94dfc42ca51101c))
 
 # [2.159.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.158.0...v2.159.0) (2023-08-03)
 
