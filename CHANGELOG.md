@@ -1,3 +1,10 @@
+## [2.169.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.169.1...v2.169.2) (2023-11-23)
+
+
+### Bug Fixes
+
+* correctly display image from URL in runtime ([7540e71](https://github.com/bettyblocks/material-ui-component-set/commit/7540e71f932d8489a454e6dec1f002f21d098e27))
+
 ## [2.169.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.169.0...v2.169.1) (2023-11-20)
 
 
