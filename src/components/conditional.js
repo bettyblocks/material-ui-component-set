@@ -55,7 +55,9 @@
         case 'neq':
           return leftParsed !== rightParsed;
         case 'contains':
-          return leftParsed.indexOf(rightParsed) > -1;
+          return leftParsed !== '' && rightParsed !== ''
+            ? leftParsed.indexOf(rightParsed) > -1
+            : false;
         case 'notcontains':
           return leftParsed.indexOf(rightParsed) < 0;
         case 'gt':
