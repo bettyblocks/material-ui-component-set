@@ -56,10 +56,10 @@
           return leftParsed !== rightParsed;
         case 'contains':
           return leftParsed !== '' && rightParsed !== ''
-            ? leftParsed.indexOf(rightParsed) > -1
+            ? leftParsed.toString().indexOf(rightParsed.toString()) > -1
             : false;
         case 'notcontains':
-          return leftParsed.indexOf(rightParsed) < 0;
+          return leftParsed.toString().indexOf(rightParsed.toString()) < 0;
         case 'gt':
           return leftParsed > rightParsed;
         case 'lt':
