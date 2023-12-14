@@ -1,3 +1,10 @@
+## [2.169.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.169.2...v2.169.3) (2023-12-14)
+
+
+### Bug Fixes
+
+* conditional array value contains interaction ([517e206](https://github.com/bettyblocks/material-ui-component-set/commit/517e206a0b0ea9c7157b35e05b8615c7adb2fafb))
+
 ## [2.169.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.169.1...v2.169.2) (2023-11-23)
 
 
