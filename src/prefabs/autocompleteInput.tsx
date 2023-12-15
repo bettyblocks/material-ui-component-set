@@ -47,6 +47,7 @@ const beforeCreate = ({
   const [model, setModel] = React.useState<any>(null);
   const [propertyBased, setPropertyBased] = React.useState(!!modelId);
   const [prefabSaved, setPrefabSaved] = React.useState(false);
+  const [propertyModel, setPropertyModel] = React.useState(null);
 
   const [validationMessage, setValidationMessage] = React.useState('');
 
@@ -98,6 +99,14 @@ const beforeCreate = ({
       propertyModelId = propertyResponse.data.property.referenceModel?.id;
     }
   }
+
+  useModelQuery({
+    variables: { id: propertyModelId },
+    skip: !propertyModelId,
+    onCompleted: (result) => {
+      setPropertyModel(result.model);
+    },
+  });
 
   const unsupportedKinds = createBlacklist(['LIST', 'BELONGS_TO']);
 
@@ -289,11 +298,21 @@ const beforeCreate = ({
                 selectedPrefab?.name === BettyPrefabs.LOGIN_FORM) &&
               propertyId
             ) {
+              const idPropertyModel = propertyModel
+                ? propertyModel.properties.find(
+                    (property) => property.name === 'id',
+                  ).id
+                : null;
+
+              const idProperty = propertyModel
+                ? [propertyId, idPropertyModel]
+                : propertyId;
+
               const valueOptions = [
                 {
-                  id: propertyId,
+                  id: idProperty,
                   type: 'PROPERTY',
-                  name: `{{ ${model?.name}.${name} }}`,
+                  name: `{{ ${model?.name}.${name}.id }}`,
                 },
               ];
 
@@ -302,7 +321,7 @@ const beforeCreate = ({
                 value:
                   option.type === 'VARIABLE'
                     ? valueOptions
-                    : (propertyId as any),
+                    : (idProperty as any),
               }));
             }
           }
