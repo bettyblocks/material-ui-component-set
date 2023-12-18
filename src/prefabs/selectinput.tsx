@@ -103,11 +103,11 @@ const beforeCreate = ({
   const modelRelationResponse = useModelRelationQuery(propertyModelId);
 
   let relationalProperties;
-  let modelProperty;
+  let modelIdProperty;
   if (!(modelRelationResponse.loading || modelRelationResponse.error)) {
     if (modelRelationResponse.data) {
       relationalProperties = modelRelationResponse.data.model.properties;
-      modelProperty = relationalProperties.find(
+      modelIdProperty = relationalProperties.find(
         (property) => property.name === 'id',
       );
     }
@@ -301,7 +301,7 @@ const beforeCreate = ({
                 value: {
                   id:
                     result.isRelational && !result.isMultiRelational
-                      ? [propertyId, modelProperty.id]
+                      ? [propertyId, modelIdProperty.id]
                       : propertyId,
                   type: 'PROPERTY',
                   name: `{{ ${model?.name}.${name} }}`,
@@ -321,11 +321,19 @@ const beforeCreate = ({
                 selectedPrefab?.name === BettyPrefabs.LOGIN_FORM) &&
               propertyId
             ) {
+              const idProperty =
+                modelIdProperty && propertyKind !== 'OBJECT'
+                  ? [propertyId, modelIdProperty.id]
+                  : propertyId;
+
+              const useKey =
+                propertyKind === 'OBJECT' ? { useKey: 'uuid' } : null;
+
               const valueOptions = [
                 {
-                  id: propertyId,
+                  id: idProperty,
                   type: 'PROPERTY',
-                  useKey: propertyKind === 'OBJECT' ? 'uuid' : 'id',
+                  ...useKey,
                 },
               ];
 
@@ -334,7 +342,7 @@ const beforeCreate = ({
                 value:
                   option.type === 'VARIABLE'
                     ? valueOptions
-                    : (propertyId as any),
+                    : (idProperty as any),
               }));
             }
           }
