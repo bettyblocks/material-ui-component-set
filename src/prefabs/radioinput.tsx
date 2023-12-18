@@ -316,7 +316,7 @@ const beforeCreate = ({
                 {
                   id: propertyId,
                   type: 'PROPERTY',
-                  useKey: 'uuid',
+                  useKey: propertyKind === 'OBJECT' ? 'uuid' : 'id',
                 },
               ];
 
