@@ -1,3 +1,54 @@
+# [2.170.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.169.3...v2.170.0) (2023-12-15)
+
+
+### Features
+
+* add spc-DO-7492 ([c1bc9e1](https://github.com/bettyblocks/material-ui-component-set/commit/c1bc9e1bd95a0c41915f22d1304f09170ed5fac0))
+
+## [2.169.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.169.2...v2.169.3) (2023-12-14)
+
+
+### Bug Fixes
+
+* conditional array value contains interaction ([517e206](https://github.com/bettyblocks/material-ui-component-set/commit/517e206a0b0ea9c7157b35e05b8615c7adb2fafb))
+
+## [2.169.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.169.1...v2.169.2) (2023-11-23)
+
+
+### Bug Fixes
+
+* correctly display image from URL in runtime ([7540e71](https://github.com/bettyblocks/material-ui-component-set/commit/7540e71f932d8489a454e6dec1f002f21d098e27))
+
+## [2.169.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.169.0...v2.169.1) (2023-11-20)
+
+
+### Bug Fixes
+
+* add developerMode to backoffice ([96329ed](https://github.com/bettyblocks/material-ui-component-set/commit/96329ed707939de788f5e769547448a47f871aa4))
+
+# [2.169.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.168.0...v2.169.0) (2023-11-20)
+
+
+### Features
+
+* add disable option ([6a67f1c](https://github.com/bettyblocks/material-ui-component-set/commit/6a67f1cdc5c95800894d78d29c60f5cad3c096ed))
+
+# [2.168.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.167.1...v2.168.0) (2023-11-17)
+
+
+### Bug Fixes
+
+* checks empty value in contains ([06aee0b](https://github.com/bettyblocks/material-ui-component-set/commit/06aee0bd9107580ab38c397ececffb044eccae1c))
+* properly display error msg in table header ([5f2e7a7](https://github.com/bettyblocks/material-ui-component-set/commit/5f2e7a76302c42a63cecf5b73db21b6e9c5e6c86))
+* show placeholder img when using data/url var ([07a9d51](https://github.com/bettyblocks/material-ui-component-set/commit/07a9d51d4e5356e398d5793771cb17005f02e5eb))
+
+
+### Features
+
+* add debounceDelay option for onChange ([8fea131](https://github.com/bettyblocks/material-ui-component-set/commit/8fea131ce958978c365049dfe4e8e1be35175159))
+* allow to disable preload children in dialog ([ee85bbf](https://github.com/bettyblocks/material-ui-component-set/commit/ee85bbf1d6ca40620f44862da1843378626447e9))
+* introduce spc1 ([90e2be0](https://github.com/bettyblocks/material-ui-component-set/commit/90e2be0641a9c8649b1d2e2af776bda0ae24f277))
+
 ## [2.167.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.167.0...v2.167.1) (2023-11-02)
 
 
