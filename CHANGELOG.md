@@ -1,3 +1,10 @@
+## [2.170.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.170.0...v2.170.1) (2023-12-19)
+
+
+### Bug Fixes
+
+* use id of model property ([6dbe47e](https://github.com/bettyblocks/material-ui-component-set/commit/6dbe47e6ece7ab732b0c4dfd3998ce2db84014a5))
+
 # [2.170.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.169.3...v2.170.0) (2023-12-15)
 
 
