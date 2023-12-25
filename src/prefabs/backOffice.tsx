@@ -553,7 +553,7 @@ const interactions: PrefabInteraction[] = [
   {
     type: InteractionType.Custom,
     name: 'Enable',
-    sourceEvent: 'onActionSuccess',
+    sourceEvent: 'onActionDone',
     ref: {
       targetComponentId: '#createSubmitButton',
       sourceComponentId: '#createForm',
@@ -571,7 +571,7 @@ const interactions: PrefabInteraction[] = [
   {
     type: InteractionType.Custom,
     name: 'Enable',
-    sourceEvent: 'onActionSuccess',
+    sourceEvent: 'onActionDone',
     ref: {
       targetComponentId: '#editSubmitButton',
       sourceComponentId: '#updateForm',
