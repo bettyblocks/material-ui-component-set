@@ -126,10 +126,11 @@
     const isDev = env === 'dev';
     return {
       root: {
-        backgroundColor: ({ options: { backgroundColor } }) => [
-          style.getColor(backgroundColor),
-          '!important',
-        ],
+        backgroundColor: ({ options: { backgroundColor } }) =>
+          backgroundColor !== 'Transparent' && [
+            style.getColor(backgroundColor),
+            '!important',
+          ],
         color: ({ options: { disabled, textColor } }) => [
           !disabled ? style.getColor(textColor) : 'rgba(0, 0, 0, 0.26)',
           '!important',
