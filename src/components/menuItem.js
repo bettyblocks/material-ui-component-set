@@ -144,6 +144,7 @@
             iconPosition === 'start' ? '0.5rem' : '',
           marginLeft: ({ options: { iconPosition } }) =>
             iconPosition === 'end' ? '0.5rem' : '',
+          color: ({ options: { iconColor } }) => style.getColor(iconColor),
         },
         ...(isDev && {
           '&:hover': {
