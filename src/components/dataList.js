@@ -39,7 +39,6 @@
           dataComponentAttribute,
         } = options;
 
-        const [, setSelectedRecordId] = usePageState(useText(['']));
         const rowsPerPage = parseInt(take, 10) || 50;
         const { TextField, InputAdornment } = window.MaterialUI.Core;
         const { label: searchPropertyLabel } =
@@ -333,6 +332,10 @@
           };
         }, [search]);
 
+        B.defineFunction('setSelectedRecord', (value) => {
+          usePageState(useText(value));
+        });
+
         B.defineFunction('Advanced filter', (value) => {
           setPage(1);
           setFilterV2(value.where);
@@ -384,7 +387,6 @@
         }, [loading]);
 
         const handleClick = (event, context) => {
-          setSelectedRecordId(context.modelData.id);
           B.triggerEvent('OnItemClick', event, context);
         };
 

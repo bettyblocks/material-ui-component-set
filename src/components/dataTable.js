@@ -56,7 +56,7 @@
       noResultsText,
       dataComponentAttribute,
     } = options;
-    const [, setSelectedRecordId] = usePageState(useText(['']));
+
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
     const tableContainerRef = React.createRef();
@@ -172,6 +172,10 @@
 
       return value;
     };
+
+    B.defineFunction('setSelectedRecord', (value) => {
+      usePageState(useText(value));
+    });
 
     B.defineFunction('Advanced filter', (value) => {
       setPage(0);
@@ -462,7 +466,6 @@
 
     const handleRowClick = (endpoint, context) => {
       if (isDev) return;
-      setSelectedRecordId(context.modelData.id);
       B.triggerEvent('OnRowClick', endpoint, context);
 
       if (hasLink) {
