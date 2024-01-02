@@ -61,6 +61,7 @@
       dataComponentAttribute,
       enableFirstLastPageNavigation,
     } = options;
+    const [, setSelectedRecordId] = usePageState(useText(['']));
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
     const tableContainerRef = React.createRef();
@@ -490,6 +491,7 @@
 
     const handleRowClick = (endpoint, context) => {
       if (isDev) return;
+      setSelectedRecordId(context.modelData.id);
       B.triggerEvent('OnRowClick', endpoint, context);
 
       if (hasLink) {

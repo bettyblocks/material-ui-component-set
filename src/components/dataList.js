@@ -39,6 +39,7 @@
           dataComponentAttribute,
         } = options;
 
+        const [, setSelectedRecordId] = usePageState(useText(['']));
         const rowsPerPage = parseInt(take, 10) || 50;
         const { TextField, InputAdornment } = window.MaterialUI.Core;
         const { label: searchPropertyLabel } =
@@ -383,6 +384,7 @@
         }, [loading]);
 
         const handleClick = (event, context) => {
+          setSelectedRecordId(context.modelData.id);
           B.triggerEvent('OnItemClick', event, context);
         };
 
