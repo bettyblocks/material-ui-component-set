@@ -57,6 +57,7 @@
       dataComponentAttribute,
     } = options;
 
+    const [, setPageState] = usePageState(useText(['']));
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
     const tableContainerRef = React.createRef();
@@ -174,7 +175,7 @@
     };
 
     B.defineFunction('setSelectedRecord', (value) => {
-      usePageState(useText(value));
+      setPageState(useText([`${value.modelData.id}`]));
     });
 
     B.defineFunction('Advanced filter', (value) => {
@@ -467,6 +468,7 @@
     const handleRowClick = (endpoint, context) => {
       if (isDev) return;
       B.triggerEvent('OnRowClick', endpoint, context);
+      B.triggerEvent('OnCustomRowClick', context);
 
       if (hasLink) {
         history.push(endpoint);

@@ -17,6 +17,8 @@
           useText,
           Icon,
         } = B;
+
+        const [, setPageState] = usePageState(useText(['']));
         const [page, setPage] = useState(1);
         const [search, setSearch] = useState('');
         const [searchTerm, setSearchTerm] = useState('');
@@ -333,7 +335,7 @@
         }, [search]);
 
         B.defineFunction('setSelectedRecord', (value) => {
-          usePageState(useText(value));
+          setPageState(useText([`${value.modelData.id}`]));
         });
 
         B.defineFunction('Advanced filter', (value) => {
@@ -388,6 +390,7 @@
 
         const handleClick = (event, context) => {
           B.triggerEvent('OnItemClick', event, context);
+          B.triggerEvent('OnCustomItemClick', context);
         };
 
         const Looper = (results) =>
