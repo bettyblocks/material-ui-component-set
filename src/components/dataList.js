@@ -390,7 +390,6 @@
 
         const handleClick = (event, context) => {
           B.triggerEvent('OnItemClick', event, context);
-          B.triggerEvent('OnCustomItemClick', context);
         };
 
         const Looper = (results) =>

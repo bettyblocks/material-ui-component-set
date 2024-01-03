@@ -468,7 +468,6 @@
     const handleRowClick = (endpoint, context) => {
       if (isDev) return;
       B.triggerEvent('OnRowClick', endpoint, context);
-      B.triggerEvent('OnCustomRowClick', context);
 
       if (hasLink) {
         history.push(endpoint);
