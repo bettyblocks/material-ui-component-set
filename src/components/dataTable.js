@@ -61,7 +61,8 @@
       dataComponentAttribute,
       enableFirstLastPageNavigation,
     } = options;
-    const [, setSelectedRecordId] = usePageState(useText(['']));
+
+    const [, setPageState] = usePageState(useText(['']));
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
     const tableContainerRef = React.createRef();
@@ -178,6 +179,10 @@
 
       return value;
     };
+
+    B.defineFunction('setSelectedRecord', (value) => {
+      setPageState(useText([`${value.modelData.id}`]));
+    });
 
     B.defineFunction('Advanced filter', (value) => {
       setPage(0);
@@ -491,7 +496,6 @@
 
     const handleRowClick = (endpoint, context) => {
       if (isDev) return;
-      setSelectedRecordId(context.modelData.id);
       B.triggerEvent('OnRowClick', endpoint, context);
 
       if (hasLink) {
