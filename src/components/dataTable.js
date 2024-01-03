@@ -189,6 +189,7 @@
      */
     B.defineFunction('Filter', ({ event, property, interactionId }) => {
       if (!event) {
+        // eslint-disable-next-line no-console
         console.error(
           'Event is empty. Please use this function with valid input events.',
         );
@@ -466,7 +467,6 @@
 
     const handleRowClick = (endpoint, context) => {
       if (isDev) return;
-      console.log({ endpoint, context });
       B.triggerEvent('OnRowClick', endpoint, context);
 
       if (hasLink) {
