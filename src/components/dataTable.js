@@ -188,7 +188,12 @@
      * @returns {Void}
      */
     B.defineFunction('Filter', ({ event, property, interactionId }) => {
-      if (typeof event === 'undefined') return;
+      if (!event) {
+        console.error(
+          'Event is empty. Please use this function with valid input events.',
+        );
+        return;
+      }
       setInteractionFilter({
         ...interactionFilter,
         [interactionId]: {
@@ -461,6 +466,7 @@
 
     const handleRowClick = (endpoint, context) => {
       if (isDev) return;
+      console.log({ endpoint, context });
       B.triggerEvent('OnRowClick', endpoint, context);
 
       if (hasLink) {
