@@ -1,3 +1,25 @@
+## [2.171.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.171.0...v2.171.1) (2024-01-04)
+
+
+### Bug Fixes
+
+* prevent page crash when using filter interaction ([27cf12e](https://github.com/bettyblocks/material-ui-component-set/commit/27cf12e62c7cd36e9befba0eb3a5b2d6f3b01c84))
+* prevent users from choosing incompatible kinds ([325521d](https://github.com/bettyblocks/material-ui-component-set/commit/325521d41ec0898e0a42a62746167c4c9c505e5c))
+
+# [2.171.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.170.2...v2.171.0) (2023-12-28)
+
+
+### Features
+
+* add kind dropdown to hidden input ([a4c97c9](https://github.com/bettyblocks/material-ui-component-set/commit/a4c97c9c7853a3ede8bb362cee0de41dae76b3e1))
+
+## [2.170.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.170.1...v2.170.2) (2023-12-28)
+
+
+### Bug Fixes
+
+* set labelProperty if available ([5f71e66](https://github.com/bettyblocks/material-ui-component-set/commit/5f71e66aa0f57f9764e482cd0b03122e4a3c687b))
+
 ## [2.170.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.170.0...v2.170.1) (2023-12-19)
 
 
