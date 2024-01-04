@@ -57,6 +57,7 @@
     const isDev = env === 'dev';
     const isNumberType = type === 'number';
     const isPasswordType = type === 'password';
+    const isEmailType = type === 'email';
     const [isDisabled, setIsDisabled] = useState(disabled);
     const [showPassword, togglePassword] = useState(false);
     const [errorState, setErrorState] = useState(error);
@@ -161,7 +162,7 @@
       let { validity: validation } = target;
       const { value: eventValue } = target;
 
-      if (isNumberType || multiline) {
+      if (isNumberType || multiline || isEmailType) {
         validation = customPatternValidation(target);
       }
       const numberValue =
