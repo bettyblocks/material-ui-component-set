@@ -1,3 +1,10 @@
+# [2.172.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.171.1...v2.172.0) (2024-01-05)
+
+
+### Features
+
+* add CSS rule for icon font size ([f86c7c5](https://github.com/bettyblocks/material-ui-component-set/commit/f86c7c5383f3ffbd4ce94e9c974cad2372d6d9b7))
+
 ## [2.171.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.171.0...v2.171.1) (2024-01-04)
 
 
