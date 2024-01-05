@@ -68,6 +68,9 @@
         fontWeight: ({ options: { fontWeight } }) => fontWeight,
         '&.MuiAvatar-root': {
           fontSize: ({ options: { fontSize } }) => fontSize,
+          '& .MuiSvgIcon-root': {
+            fontSize: ({ options: { fontSize } }) => fontSize,
+          },
         },
       },
     };
