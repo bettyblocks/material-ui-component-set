@@ -335,7 +335,9 @@
         }, [search]);
 
         B.defineFunction('setSelectedRecord', (value) => {
-          setPageState(useText([`${value.modelData.id}`]));
+          const id =
+            (value.modelData && value.modelData.id) || value.selectedProperty;
+          setPageState(useText([`${id}`]));
         });
 
         B.defineFunction('Advanced filter', (value) => {
