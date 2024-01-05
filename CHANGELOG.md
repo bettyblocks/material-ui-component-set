@@ -1,3 +1,11 @@
+## [2.171.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.171.0...v2.171.1) (2024-01-04)
+
+
+### Bug Fixes
+
+* prevent page crash when using filter interaction ([27cf12e](https://github.com/bettyblocks/material-ui-component-set/commit/27cf12e62c7cd36e9befba0eb3a5b2d6f3b01c84))
+* prevent users from choosing incompatible kinds ([325521d](https://github.com/bettyblocks/material-ui-component-set/commit/325521d41ec0898e0a42a62746167c4c9c505e5c))
+
 # [2.171.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.170.2...v2.171.0) (2023-12-28)
 
 
