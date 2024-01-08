@@ -56,6 +56,8 @@
       noResultsText,
       dataComponentAttribute,
     } = options;
+
+    const [, setPageState] = usePageState(useText(['']));
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
     const tableContainerRef = React.createRef();
@@ -171,6 +173,12 @@
 
       return value;
     };
+
+    B.defineFunction('setSelectedRecord', (value) => {
+      const id =
+        (value.modelData && value.modelData.id) || value.selectedProperty;
+      setPageState(useText([`${id}`]));
+    });
 
     B.defineFunction('Advanced filter', (value) => {
       setPage(0);

@@ -1,3 +1,20 @@
+# [2.173.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.172.0...v2.173.0) (2024-01-05)
+
+
+### Features
+
+* add dataList and dataTable selectRecord component states ([882c32e](https://github.com/bettyblocks/material-ui-component-set/commit/882c32e86c3ce326ba1117ff77f4cdb5f2359ef5))
+* move the usePageState call in a new interaction setSelectedRecord ([9df46c9](https://github.com/bettyblocks/material-ui-component-set/commit/9df46c9c2ba5155a89a8ae68c389464ef37218a6))
+* setPageState to modelData id when setSelectedRecord is called(WIP) ([26e5ed4](https://github.com/bettyblocks/material-ui-component-set/commit/26e5ed47de0c6818f0ffc5f25b66eee951c93abf))
+* use value.selectedProperty when triggering from internal function ([c3ddf72](https://github.com/bettyblocks/material-ui-component-set/commit/c3ddf72a61ea55497627a8aecb38cecd06ad6ad5))
+
+# [2.172.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.171.1...v2.172.0) (2024-01-05)
+
+
+### Features
+
+* add CSS rule for icon font size ([f86c7c5](https://github.com/bettyblocks/material-ui-component-set/commit/f86c7c5383f3ffbd4ce94e9c974cad2372d6d9b7))
+
 ## [2.171.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.171.0...v2.171.1) (2024-01-04)
 
 
