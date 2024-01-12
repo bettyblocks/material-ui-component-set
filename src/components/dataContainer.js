@@ -241,7 +241,11 @@
                   );
                 }
 
-                if (loading && loadingType === 'showChildren') {
+                if (
+                  loading &&
+                  loadingType === 'showChildren' &&
+                  !waitForRequest
+                ) {
                   B.triggerEvent('onLoad', loading);
                   // key attribute forces a rerender after loading
                   return (
