@@ -123,6 +123,11 @@ jobs:
           AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_SPC1 }}
           AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_SPC1 }}
         run: yarn upload
+      - name: upload meditel
+        env:
+          AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_MEDITEL }}
+          AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_MEDITEL }}
+        run: yarn upload
       - name: release notes
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
