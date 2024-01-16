@@ -1,3 +1,10 @@
+## [2.173.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.173.0...v2.173.1) (2024-01-16)
+
+
+### Bug Fixes
+
+* make the wait for request option work together with the loading ([f1168fd](https://github.com/bettyblocks/material-ui-component-set/commit/f1168fde1563028f708d180f7bd1ff5b7891c7a0))
+
 # [2.173.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.172.0...v2.173.0) (2024-01-05)
 
 
