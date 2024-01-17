@@ -1,3 +1,17 @@
+# [2.174.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.173.1...v2.174.0) (2024-01-17)
+
+
+### Features
+
+* introduce meditel ([8143666](https://github.com/bettyblocks/material-ui-component-set/commit/81436668d2f1e57759e7932a0ef16b0088ce8c48))
+
+## [2.173.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.173.0...v2.173.1) (2024-01-16)
+
+
+### Bug Fixes
+
+* make the wait for request option work together with the loading ([f1168fd](https://github.com/bettyblocks/material-ui-component-set/commit/f1168fde1563028f708d180f7bd1ff5b7891c7a0))
+
 # [2.173.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.172.0...v2.173.0) (2024-01-05)
 
 
