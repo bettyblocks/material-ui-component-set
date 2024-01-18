@@ -18,4 +18,5 @@ export interface Configuration {
   optionCategories?: OptionCategory[];
   validationPattern?: string;
   pattern?: string;
+  value?: Record<string, any>;
 }

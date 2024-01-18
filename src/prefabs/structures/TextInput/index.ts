@@ -78,6 +78,10 @@ export const TextInput = (
     });
   }
 
+  if (config.value) {
+    options.value = updateOption(options.value, { ...config.value });
+  }
+
   return component(
     'TextInput',
     { label: config.label, options, ref, optionCategories: categories },
