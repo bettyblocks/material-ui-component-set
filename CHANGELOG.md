@@ -1,3 +1,17 @@
+# [2.175.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.174.1...v2.175.0) (2024-01-18)
+
+
+### Features
+
+* input shows value in dev mode ([2c376ea](https://github.com/bettyblocks/material-ui-component-set/commit/2c376eafd0e205d1b38558d22f7fff02c820cc4f))
+
+## [2.174.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.174.0...v2.174.1) (2024-01-17)
+
+
+### Bug Fixes
+
+* use the existing use24HourClockTime option for datetime picker ([a0970c0](https://github.com/bettyblocks/material-ui-component-set/commit/a0970c0332626fdc03a4f014d4ee42f9fd71053f))
+
 # [2.174.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.173.1...v2.174.0) (2024-01-17)
 
 
