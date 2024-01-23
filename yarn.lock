@@ -154,10 +154,10 @@
     "@babel/helper-validator-identifier" "^7.22.5"
     to-fast-properties "^2.0.0"
 
-"@betty-blocks/cli@^25.85.0":
-  version "25.85.1"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.85.1.tgz#1c866e73a6e2f5c031f0bedb3200275d002594f3"
-  integrity sha512-Id9ZCSmqmk3BUdLO3VVdR3jIWQ43Z3JpQfqoOyqhWzOC2AsZau16Dzv7QI0jWH0asJzd2w75m/Ti0Qi4inU2UQ==
+"@betty-blocks/cli@^25.90.0":
+  version "25.90.0"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.90.0.tgz#4634d2414876ff2bfc37e2f71b0c2ee64f011293"
+  integrity sha512-6On0hTcFtCS7v+XBG4nfGxy7QaNF+scRxXeeKOva3YFgShP8XDsAQK+4wLLS64lFcn41colsjlI5+8TKC6pLbg==
   dependencies:
     "@azure/ms-rest-js" "^2.0.4"
     "@azure/storage-blob" "^10.3.0"
@@ -5222,7 +5222,7 @@ node-releases@^2.0.12:
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-2.0.13.tgz#d5ed1627c23e3461e819b02e57b75e4899b1c81d"
   integrity sha512-uYr7J37ae/ORWdZeQ1xxMJe3NtdmqMC/JZK+geofDrkLUApKRHPd18/TxtBOJ4A0/+uUIliorNrfYV6s1b02eQ==
 
-nodemon@^2.0.15:
+nodemon@^2.0.22:
   version "2.0.22"
   resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-2.0.22.tgz#182c45c3a78da486f673d6c1702e00728daf5258"
   integrity sha512-B8YqaKMmyuCO7BowF1Z1/mkPqLk6cs/l63Ojtd6otKjMx47Dq1utxfRxcavH1I7VSaL8n5BUaoutadnsX3AAVQ==

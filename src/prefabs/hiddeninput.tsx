@@ -13,6 +13,7 @@ const beforeCreate = ({
   close,
   components: {
     Content,
+    Dropdown,
     Field,
     Footer,
     Header,
@@ -31,6 +32,7 @@ const beforeCreate = ({
   const {
     BettyPrefabs,
     prepareInput,
+    PropertyKind,
     useModelIdSelector,
     useActionIdSelector,
     usePrefabSelector,
@@ -52,6 +54,13 @@ const beforeCreate = ({
   const [prefabSaved, setPrefabSaved] = React.useState(false);
 
   const [validationMessage, setValidationMessage] = React.useState('');
+  const [propertyData, setPropertyData] = React.useState<any>({
+    name: undefined,
+    propertyModelId: '',
+    propertyKind: PropertyKind.TEXT,
+  });
+
+  const { name, propertyModelId, propertyKind } = propertyData;
 
   const modelRequest = useModelQuery({
     variables: { id: modelId },
@@ -71,9 +80,6 @@ const beforeCreate = ({
     return true;
   };
 
-  let name: string | undefined;
-  let propertyKind;
-  let propertyModelId;
   const componentId = createUuid();
 
   function isProperty(path: string) {
@@ -94,13 +100,17 @@ const beforeCreate = ({
 
   const propertyResponse = usePropertyQuery(propertyId);
 
-  if (!(propertyResponse.loading || propertyResponse.error)) {
-    if (propertyResponse.data) {
-      name = propertyResponse.data.property.label;
-      propertyKind = propertyResponse.data.property.kind;
-      propertyModelId = propertyResponse.data.property.referenceModel?.id;
+  React.useEffect(() => {
+    if (!(propertyResponse.loading || propertyResponse.error)) {
+      if (propertyResponse.data) {
+        setPropertyData({
+          name: propertyResponse.data.property.label,
+          propertyKind: propertyResponse.data.property.kind,
+          propertyModelId: propertyResponse.data.property.referenceModel?.id,
+        });
+      }
     }
-  }
+  }, [propertyId, propertyResponse]);
 
   const modelRelationResponse = useModelRelationQuery(propertyModelId);
 
@@ -153,7 +163,18 @@ const beforeCreate = ({
       <Content>
         {modelId && (
           <Field label="Property based input">
-            <FormField onClick={(): void => setPropertyBased(!propertyBased)}>
+            <FormField
+              onClick={(): void => {
+                setVariableInput(null);
+                setPropertyBased(!propertyBased);
+                setProperty('');
+                setPropertyData({
+                  name: undefined,
+                  propertyKind: PropertyKind.TEXT,
+                  propertyModelId: '',
+                });
+              }}
+            >
               <Toggle
                 color="purple"
                 checked={propertyBased}
@@ -183,27 +204,45 @@ const beforeCreate = ({
             />
           </Field>
         ) : (
-          <Field>
-            <Label>
-              Action input variable
-              <CircleQuestion
-                color="grey500"
-                size="medium"
-                data-tip="You can use this action input variable in the action itself."
-                data-for="variable-tooltip"
+          <>
+            <Field>
+              <Label>
+                Action input variable
+                <CircleQuestion
+                  color="grey500"
+                  size="medium"
+                  data-tip="You can use this action input variable in the action itself."
+                  data-for="variable-tooltip"
+                />
+              </Label>
+              <BBTooltip
+                id="variable-tooltip"
+                place="top"
+                type="dark"
+                effect="solid"
               />
-            </Label>
-            <BBTooltip
-              id="variable-tooltip"
-              place="top"
-              type="dark"
-              effect="solid"
-            />
-            <Text
-              onChange={(e): void => setVariableInput(e.target.value)}
-              color="orange"
-            />
-          </Field>
+              <Text
+                onChange={(e): void => setVariableInput(e.target.value)}
+                color="orange"
+              />
+            </Field>
+            <Field>
+              <Label>Kind</Label>
+              <Dropdown
+                onChange={(e) =>
+                  setPropertyData({
+                    name,
+                    propertyKind: e.target.value,
+                    propertyModelId,
+                  })
+                }
+              >
+                <option value={PropertyKind.TEXT}>Text</option>
+                <option value={PropertyKind.INTEGER}>Number</option>
+                <option value={PropertyKind.BOOLEAN}>Checkbox</option>
+              </Dropdown>
+            </Field>
+          </>
         )}
       </Content>
       <Footer

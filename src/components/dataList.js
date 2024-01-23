@@ -17,6 +17,8 @@
           useText,
           Icon,
         } = B;
+
+        const [, setPageState] = usePageState(useText(['']));
         const [page, setPage] = useState(1);
         const [search, setSearch] = useState('');
         const [searchTerm, setSearchTerm] = useState('');
@@ -332,6 +334,12 @@
           };
         }, [search]);
 
+        B.defineFunction('setSelectedRecord', (value) => {
+          const id =
+            (value.modelData && value.modelData.id) || value.selectedProperty;
+          setPageState(useText([`${id}`]));
+        });
+
         B.defineFunction('Advanced filter', (value) => {
           setPage(1);
           setFilterV2(value.where);
@@ -351,6 +359,13 @@
            * @returns {Void}
            */
           B.defineFunction('Filter', ({ event, property, interactionId }) => {
+            if (!event) {
+              // eslint-disable-next-line no-console
+              console.error(
+                'Event is empty. Please use this function with valid input events.',
+              );
+              return;
+            }
             setInteractionFilter((s) => ({
               ...s,
               [interactionId]: {
