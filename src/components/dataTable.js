@@ -56,6 +56,8 @@
       noResultsText,
       dataComponentAttribute,
     } = options;
+
+    const [, setPageState] = usePageState(useText(['']));
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
     const tableContainerRef = React.createRef();
@@ -172,6 +174,12 @@
       return value;
     };
 
+    B.defineFunction('setSelectedRecord', (value) => {
+      const id =
+        (value.modelData && value.modelData.id) || value.selectedProperty;
+      setPageState(useText([`${id}`]));
+    });
+
     B.defineFunction('Advanced filter', (value) => {
       setPage(0);
       setFilterV2(value.where);
@@ -188,7 +196,13 @@
      * @returns {Void}
      */
     B.defineFunction('Filter', ({ event, property, interactionId }) => {
-      if (typeof event === 'undefined') return;
+      if (!event) {
+        // eslint-disable-next-line no-console
+        console.error(
+          'Event is empty. Please use this function with valid input events.',
+        );
+        return;
+      }
       setInteractionFilter({
         ...interactionFilter,
         [interactionId]: {

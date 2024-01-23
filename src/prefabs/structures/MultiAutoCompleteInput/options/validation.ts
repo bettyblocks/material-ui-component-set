@@ -35,6 +35,7 @@ export const validation = {
   disabled: toggle('Disabled', { value: false }),
   placeholder: variable('Placeholder'),
   helperText: variable('Helper text'),
+  noOptionsText: variable('No options text', { value: ['No options'] }),
   type: text('Type', {
     value: '',
     configuration: { condition: showIf('type', 'EQ', 'never') },

@@ -8,7 +8,7 @@
     const isDev = B.env === 'dev';
 
     if (isDev) {
-      return <div className={classes.dev}>Hidden input</div>;
+      return <div className={classes.dev}>Hidden input {B.useText(value)}</div>;
     }
 
     function Input() {

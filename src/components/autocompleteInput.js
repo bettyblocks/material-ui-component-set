@@ -38,6 +38,7 @@
       minvalue,
       model,
       nameAttribute: nameAttributeRaw,
+      noOptionsText: noOptionsTextRaw,
       groupBy,
       order,
       orderBy,
@@ -76,6 +77,7 @@
     const displayError = errorType === 'built-in';
     const placeholder = useText(placeholderRaw);
     const helperText = useText(helperTextRaw);
+    const noOptionsText = useText(noOptionsTextRaw);
     const nameAttribute = useText(nameAttributeRaw);
     const changeContext = useRef(null);
     const [disabled, setIsDisabled] = useState(initialDisabled);
@@ -755,6 +757,7 @@
             setInputValue('');
           }}
           options={currentOptionsGrouped || currentOptions}
+          noOptionsText={noOptionsText}
           renderInput={(params) => (
             <>
               {!isListProperty && (
