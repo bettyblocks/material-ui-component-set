@@ -1,3 +1,10 @@
+# [2.177.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.176.0...v2.177.0) (2024-01-23)
+
+
+### Features
+
+* add "no options text" variable option to autocompletes ([d72f68c](https://github.com/bettyblocks/material-ui-component-set/commit/d72f68c6c92af5fb84ae49db02584b958ce5e1ce))
+
 # [2.176.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.175.0...v2.176.0) (2024-01-23)
 
 
