@@ -1,3 +1,11 @@
+## [2.177.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.177.0...v2.177.1) (2024-01-23)
+
+
+### Bug Fixes
+
+* allow to resubmit create or update form BO ([89886dd](https://github.com/bettyblocks/material-ui-component-set/commit/89886dd3e3203e19afce64e771951fc053af0cba))
+* replace onActionDone trigger by onActionSuccess and onActionError ([0e9cc91](https://github.com/bettyblocks/material-ui-component-set/commit/0e9cc914c7384439bc2c21510918e349a6f57cc7))
+
 # [2.177.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.176.0...v2.177.0) (2024-01-23)
 
 
