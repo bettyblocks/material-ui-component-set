@@ -289,11 +289,11 @@
 
         const data = hasResults ? relationData : queryData;
         const loading = hasResults ? false : queryLoading;
-
         const hasResult = data && data.results && data.results.length > 0;
+
         if (hasResult) {
           B.triggerEvent('onSuccess', data.results);
-        } else {
+        } else if (!hasResult && hasResult !== undefined) {
           B.triggerEvent('onNoResults');
         }
 
