@@ -104,9 +104,11 @@ const beforeCreate = ({
 
   let relationalProperties;
   let modelProperty;
+  let labelPropertyId: string | undefined;
   if (!(modelRelationResponse.loading || modelRelationResponse.error)) {
     if (modelRelationResponse.data) {
       relationalProperties = modelRelationResponse.data.model.properties;
+      labelPropertyId = modelRelationResponse.data.model.labelBy;
       modelProperty = relationalProperties.find(
         (property) => property.name === 'id',
       );
@@ -289,6 +291,21 @@ const beforeCreate = ({
                 ],
               }),
             );
+            if (labelPropertyId) {
+              setOption(
+                newPrefab.structure[0],
+                'labelProperty',
+                (originalOption: any) => {
+                  return {
+                    ...originalOption,
+                    value: {
+                      id: labelPropertyId,
+                      type: 'PROPERTY',
+                    },
+                  };
+                },
+              );
+            }
           }
           if (validate()) {
             if (

@@ -31,21 +31,21 @@
     const { url: videoSource = '#', name: videoName = 'video' } =
       usePublicFile(videoFileSource) || {};
 
-    const isUrlImg = type === 'url' && urlSourceType === 'image';
-    const isURLVideo = type === 'url' && urlSourceType === 'video';
+    const isImgUrl = type === 'url' && urlSourceType === 'image';
+    const isVideoUrl = type === 'url' && urlSourceType === 'video';
     const isDataUrl = type === 'data' && propertyFileSource && propValue;
-    const isImage = type === 'img' || isUrlImg || isDataUrl;
-    const isVideo = type === 'video' || isURLVideo;
+    const isImage = type === 'img' || isImgUrl || isDataUrl;
+    const isVideo = type === 'video' || isVideoUrl;
     const isData = type === 'data' || isDataUrl;
     const isIframe = type === 'iframe' && iframeUrl;
     const urlFileSourceText = useText(urlFileSource);
-    const videoUrl = isURLVideo ? urlFileSourceText : videoSource;
+    const videoUrl = isVideoUrl ? urlFileSourceText : videoSource;
 
     function getImgUrl() {
       switch (true) {
         case isDataUrl && propValue !== {}:
           return propValue[propertyFileSource.useKey];
-        case isUrlImg:
+        case isImgUrl:
           return urlFileSourceText;
         case type === 'img':
           return imgSource;
@@ -74,10 +74,10 @@
     const isEmpty = !isImage && !isVideo && !isData && !isIframe;
 
     const isVariable =
-      (isUrlImg || isURLVideo) &&
+      (isImgUrl || isVideoUrl) &&
       urlFileSource &&
       urlFileSource.findIndex((v) => v.name) !== -1;
-    const isVariableDev = (isDev && isUrlImg) || !imgSource;
+    const isVariableDev = isDev && (isImgUrl || !imgSource);
 
     const hasInteralLink =
       linkType === 'internal' && linkTo && linkTo.id !== '';

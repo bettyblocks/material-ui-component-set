@@ -31,6 +31,7 @@ const beforeCreate = ({
     prepareInput,
     useModelIdSelector,
     useActionIdSelector,
+    useModelRelationQuery,
     usePrefabSelector,
     usePropertyQuery,
     setOption,
@@ -99,6 +100,18 @@ const beforeCreate = ({
     }
   }
 
+  const modelRelationResponse = useModelRelationQuery(propertyModelId);
+
+  let relationalProperties;
+  let modelIdProperty;
+  if (!(modelRelationResponse.loading || modelRelationResponse.error)) {
+    if (modelRelationResponse.data) {
+      relationalProperties = modelRelationResponse.data.model.properties;
+      modelIdProperty = relationalProperties.find(
+        (property) => property.name === 'id',
+      );
+    }
+  }
   const unsupportedKinds = createBlacklist(['LIST', 'BELONGS_TO']);
 
   const structure = originalPrefab.structure[0];
@@ -289,11 +302,15 @@ const beforeCreate = ({
                 selectedPrefab?.name === BettyPrefabs.LOGIN_FORM) &&
               propertyId
             ) {
+              const idProperty = modelIdProperty
+                ? [propertyId, modelIdProperty.id]
+                : propertyId;
+
               const valueOptions = [
                 {
-                  id: propertyId,
+                  id: idProperty,
                   type: 'PROPERTY',
-                  name: `{{ ${model?.name}.${name} }}`,
+                  name: `{{ ${model?.name}.${name}.Id }}`,
                 },
               ];
 
@@ -302,7 +319,7 @@ const beforeCreate = ({
                 value:
                   option.type === 'VARIABLE'
                     ? valueOptions
-                    : (propertyId as any),
+                    : (idProperty as any),
               }));
             }
           }

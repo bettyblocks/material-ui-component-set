@@ -1,3 +1,98 @@
+# [2.175.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.174.1...v2.175.0) (2024-01-18)
+
+
+### Features
+
+* input shows value in dev mode ([2c376ea](https://github.com/bettyblocks/material-ui-component-set/commit/2c376eafd0e205d1b38558d22f7fff02c820cc4f))
+
+## [2.174.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.174.0...v2.174.1) (2024-01-17)
+
+
+### Bug Fixes
+
+* use the existing use24HourClockTime option for datetime picker ([a0970c0](https://github.com/bettyblocks/material-ui-component-set/commit/a0970c0332626fdc03a4f014d4ee42f9fd71053f))
+
+# [2.174.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.173.1...v2.174.0) (2024-01-17)
+
+
+### Features
+
+* introduce meditel ([8143666](https://github.com/bettyblocks/material-ui-component-set/commit/81436668d2f1e57759e7932a0ef16b0088ce8c48))
+
+## [2.173.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.173.0...v2.173.1) (2024-01-16)
+
+
+### Bug Fixes
+
+* make the wait for request option work together with the loading ([f1168fd](https://github.com/bettyblocks/material-ui-component-set/commit/f1168fde1563028f708d180f7bd1ff5b7891c7a0))
+
+# [2.173.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.172.0...v2.173.0) (2024-01-05)
+
+
+### Features
+
+* add dataList and dataTable selectRecord component states ([882c32e](https://github.com/bettyblocks/material-ui-component-set/commit/882c32e86c3ce326ba1117ff77f4cdb5f2359ef5))
+* move the usePageState call in a new interaction setSelectedRecord ([9df46c9](https://github.com/bettyblocks/material-ui-component-set/commit/9df46c9c2ba5155a89a8ae68c389464ef37218a6))
+* setPageState to modelData id when setSelectedRecord is called(WIP) ([26e5ed4](https://github.com/bettyblocks/material-ui-component-set/commit/26e5ed47de0c6818f0ffc5f25b66eee951c93abf))
+* use value.selectedProperty when triggering from internal function ([c3ddf72](https://github.com/bettyblocks/material-ui-component-set/commit/c3ddf72a61ea55497627a8aecb38cecd06ad6ad5))
+
+# [2.172.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.171.1...v2.172.0) (2024-01-05)
+
+
+### Features
+
+* add CSS rule for icon font size ([f86c7c5](https://github.com/bettyblocks/material-ui-component-set/commit/f86c7c5383f3ffbd4ce94e9c974cad2372d6d9b7))
+
+## [2.171.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.171.0...v2.171.1) (2024-01-04)
+
+
+### Bug Fixes
+
+* prevent page crash when using filter interaction ([27cf12e](https://github.com/bettyblocks/material-ui-component-set/commit/27cf12e62c7cd36e9befba0eb3a5b2d6f3b01c84))
+* prevent users from choosing incompatible kinds ([325521d](https://github.com/bettyblocks/material-ui-component-set/commit/325521d41ec0898e0a42a62746167c4c9c505e5c))
+
+# [2.171.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.170.2...v2.171.0) (2023-12-28)
+
+
+### Features
+
+* add kind dropdown to hidden input ([a4c97c9](https://github.com/bettyblocks/material-ui-component-set/commit/a4c97c9c7853a3ede8bb362cee0de41dae76b3e1))
+
+## [2.170.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.170.1...v2.170.2) (2023-12-28)
+
+
+### Bug Fixes
+
+* set labelProperty if available ([5f71e66](https://github.com/bettyblocks/material-ui-component-set/commit/5f71e66aa0f57f9764e482cd0b03122e4a3c687b))
+
+## [2.170.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.170.0...v2.170.1) (2023-12-19)
+
+
+### Bug Fixes
+
+* use id of model property ([6dbe47e](https://github.com/bettyblocks/material-ui-component-set/commit/6dbe47e6ece7ab732b0c4dfd3998ce2db84014a5))
+
+# [2.170.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.169.3...v2.170.0) (2023-12-15)
+
+
+### Features
+
+* add spc-DO-7492 ([c1bc9e1](https://github.com/bettyblocks/material-ui-component-set/commit/c1bc9e1bd95a0c41915f22d1304f09170ed5fac0))
+
+## [2.169.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.169.2...v2.169.3) (2023-12-14)
+
+
+### Bug Fixes
+
+* conditional array value contains interaction ([517e206](https://github.com/bettyblocks/material-ui-component-set/commit/517e206a0b0ea9c7157b35e05b8615c7adb2fafb))
+
+## [2.169.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.169.1...v2.169.2) (2023-11-23)
+
+
+### Bug Fixes
+
+* correctly display image from URL in runtime ([7540e71](https://github.com/bettyblocks/material-ui-component-set/commit/7540e71f932d8489a454e6dec1f002f21d098e27))
+
 ## [2.169.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.169.0...v2.169.1) (2023-11-20)
 
 
