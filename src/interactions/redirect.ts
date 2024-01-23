@@ -15,7 +15,7 @@ function redirect({
   event,
   redirectTo,
 }: {
-  event: Event;
+  event: unknown;
   redirectTo: Page;
 }): void {
   let { url } = redirectTo;
