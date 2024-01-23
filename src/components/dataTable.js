@@ -175,8 +175,7 @@
     };
 
     B.defineFunction('setSelectedRecord', (value) => {
-      const id =
-        (value.modelData && value.modelData.id) || value.selectedProperty;
+      const id = value.modelData && value.modelData.id;
       setPageState(useText([`${id}`]));
     });
 
