@@ -5,7 +5,7 @@ interface History {
   push(url: string): string;
 }
 
-function navigateToOutputUrl({ event }: { event: Event }): void {
+function navigateToOutputUrl({ event }: { event: unknown }): void {
   if (typeof event !== 'string') {
     // eslint-disable-next-line no-console
     console.warn('Event passed to navigateToOutputUrl is not a string');

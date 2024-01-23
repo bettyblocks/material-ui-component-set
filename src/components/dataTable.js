@@ -475,7 +475,7 @@
 
     const handleRowClick = (endpoint, context) => {
       if (isDev) return;
-      B.triggerEvent('OnRowClick', endpoint, context);
+      B.triggerEvent('OnRowClick', context);
 
       if (hasLink) {
         history.push(endpoint);

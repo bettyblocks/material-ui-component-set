@@ -397,8 +397,8 @@
           }
         }, [loading]);
 
-        const handleClick = (event, context) => {
-          B.triggerEvent('OnItemClick', event, context);
+        const handleClick = (context) => {
+          B.triggerEvent('OnItemClick', context);
         };
 
         const Looper = (results) =>
@@ -409,7 +409,7 @@
                   <div
                     role="none"
                     className={isInline ? classes.inline : undefined}
-                    onClick={(event) => handleClick(event, context)}
+                    onClick={() => handleClick(context)}
                   >
                     {children}
                   </div>

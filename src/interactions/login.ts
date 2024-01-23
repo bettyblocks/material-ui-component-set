@@ -5,7 +5,7 @@ interface History {
   push(url: string): string;
 }
 
-interface Event {
+interface JWTData {
   isValid: boolean;
   jwtToken: string;
   refreshToken: string;
@@ -20,7 +20,7 @@ function login({
   event,
   redirectTo,
 }: {
-  event: Event;
+  event: JWTData;
   redirectTo: Page;
 }): void {
   const { isValid, jwtToken, refreshToken } = event;
