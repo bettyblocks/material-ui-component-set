@@ -1,3 +1,16 @@
+# [2.176.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.175.0...v2.176.0) (2024-01-23)
+
+
+### Bug Fixes
+
+* no button click feedback in design time ([e90eea6](https://github.com/bettyblocks/material-ui-component-set/commit/e90eea61752cb077ee56d3a95d425fb5ff2e270e))
+* only use background color when explicitly set ([02fe000](https://github.com/bettyblocks/material-ui-component-set/commit/02fe0008e5867276fa80226304d162036bcba330))
+
+
+### Features
+
+* add icon color option to menu item ([ea0a9b9](https://github.com/bettyblocks/material-ui-component-set/commit/ea0a9b9e10ed031673c6f8091d8b80b3119657dc))
+
 # [2.175.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.174.1...v2.175.0) (2024-01-18)
 
 
