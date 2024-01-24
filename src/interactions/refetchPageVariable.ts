@@ -3,17 +3,19 @@
 interface PageVariableId {
   id: string;
 }
-
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function refetchPageVariable({
   event,
-  pageVariableId
+  pageVariableId,
 }: {
-  event: Event,
-  pageVariableId: PageVariableId
+  event: Event;
+  pageVariableId: PageVariableId;
 }): void {
   // @ts-ignore
-  const promise = window.dispatcher(window.pageEmptyApi.endpoints[`get${pageVariableId}`].initiate());
+  const promise = window.dispatcher(
+    // @ts-ignore
+    window.pageEmptyApi.endpoints[`get${pageVariableId}`].initiate(),
+  );
   const { refetch } = promise;
 
   refetch();
