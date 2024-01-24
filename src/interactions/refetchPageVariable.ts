@@ -3,8 +3,8 @@
 interface PageVariableId {
   id: string;
 }
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function refetchPageVariable({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   event,
   pageVariableId,
 }: {
