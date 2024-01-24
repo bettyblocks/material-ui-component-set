@@ -344,8 +344,8 @@ export default prefab('Number', attributes, beforeCreate, [
       value: [''],
       configuration: {
         allowedKinds: ALLOWED_KINDS,
-        allowedSplitButtonKinds: ALLOWED_KINDS,
-        allowedClickThroughKinds: ['BELONG_TO', 'OBJECT'],
+        allowedSplitButtonKinds: [],
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
       },
     },
   }),
