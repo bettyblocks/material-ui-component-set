@@ -1,3 +1,10 @@
+## [2.177.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.177.1...v2.177.2) (2024-01-24)
+
+
+### Bug Fixes
+
+* fix onNoResult and onSuccess interaction datalist ([8880d77](https://github.com/bettyblocks/material-ui-component-set/commit/8880d776c0775aeba83abd046f4d18bd9b33d440))
+
 ## [2.177.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.177.0...v2.177.1) (2024-01-23)
 
 
