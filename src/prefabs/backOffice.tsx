@@ -3855,7 +3855,11 @@ const drawerContainer = DrawerContainer(
                                                                     label:
                                                                       'Text field Beta',
                                                                     inputLabel:
-                                                                      'Searchfield',
+                                                                      {
+                                                                        value: [
+                                                                          'Searchfield',
+                                                                        ],
+                                                                      },
                                                                     type: 'text',
                                                                     ref: {
                                                                       id: '#searchField',

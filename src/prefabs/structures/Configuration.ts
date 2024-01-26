@@ -8,7 +8,7 @@ export interface Configuration {
   options?: Record<string, OptionProducer>;
   adornmentIcon?: string;
   label?: string;
-  inputLabel?: string;
+  inputLabel?: Record<string, any>;
   type?: HTMLInputElement['type'];
   style?: PrefabComponentStyle;
   ref?: { id: string };

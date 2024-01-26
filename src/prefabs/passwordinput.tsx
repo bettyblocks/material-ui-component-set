@@ -290,7 +290,7 @@ const attributes = {
 export default prefab('Password', attributes, beforeCreate, [
   TextInput({
     label: 'Password field',
-    inputLabel: 'Password',
+    inputLabel: { value: ['Password'] },
     type: 'password',
     adornmentIcon: 'VisibilityOff',
   }),
