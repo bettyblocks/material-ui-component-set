@@ -314,7 +314,7 @@ const attributes = {
 export default prefab('Rich Text Editor', attributes, beforeCreate, [
   RichTextInput({
     label: 'Rich text editor',
-    inputLabel: 'Rich text editor',
+    inputLabel: { value: ['Rich text editor'] },
     type: 'text',
   }),
 ]);

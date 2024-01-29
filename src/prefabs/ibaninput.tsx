@@ -338,7 +338,7 @@ const pattern =
 export default prefab('IBAN', attributes, beforeCreate, [
   TextInput({
     label: 'IBAN input',
-    inputLabel: 'IBAN',
+    inputLabel: { value: ['IBAN'] },
     type: 'text',
     pattern,
     dataComponentAttribute: 'IbanInput',

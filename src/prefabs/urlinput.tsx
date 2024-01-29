@@ -335,7 +335,7 @@ const attributes = {
 export default prefab('Url', attributes, beforeCreate, [
   TextInput({
     label: 'Url input',
-    inputLabel: 'URL',
+    inputLabel: { value: ['URL'] },
     type: 'url',
     dataComponentAttribute: 'UrlInput',
   }),

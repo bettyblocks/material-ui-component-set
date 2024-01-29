@@ -59,7 +59,7 @@ export const TextInput = (
   }
 
   if (config.inputLabel) {
-    options.label = updateOption(options.label, { value: [config.inputLabel] });
+    options.label = updateOption(options.label, { ...config.inputLabel });
   }
 
   if (config.pattern) {
@@ -85,6 +85,10 @@ export const TextInput = (
         value: [config.dataComponentAttribute],
       },
     );
+  }
+
+  if (config.value) {
+    options.value = updateOption(options.value, { ...config.value });
   }
 
   return component(
