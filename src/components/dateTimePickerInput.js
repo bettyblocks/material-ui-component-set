@@ -121,7 +121,9 @@
             if (isValidDate(formattedDate)) {
               setSelectedDate(formattedDate);
             } else {
-              setSelectedDate(new Date(parsedValue.replace(/-/g, '/')));
+              // convert to slashes because it conflicts with the MUI DateTimeCmp
+              const parsedValueWithSlashes = parsedValue.replace(/-/g, '/');
+              setSelectedDate(new Date(parsedValueWithSlashes));
             }
             break;
           }
