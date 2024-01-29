@@ -440,14 +440,14 @@
       },
       gridDevImage: {
         extend: 'devImage',
-
         margin: 0,
         borderRadius: '0.3125rem 0.3125rem 0 0',
         width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
         height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
       },
       deleteIcon: {
-        color: `${t.colors.light}!important`,
+        color: ({ options: { deleteIconColor } }) =>
+          style.getColor(deleteIconColor),
       },
       uploadingImage: {
         border: 'none',
