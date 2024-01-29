@@ -117,7 +117,12 @@
         switch (type) {
           case 'date': {
             const formattedDate = DateFns.parse(parsedValue, dateFormat);
-            setSelectedDate(formattedDate);
+
+            if (isValidDate(formattedDate)) {
+              setSelectedDate(formattedDate);
+            } else {
+              setSelectedDate(new Date(parsedValue.replace(/-/g, '/')));
+            }
             break;
           }
 
