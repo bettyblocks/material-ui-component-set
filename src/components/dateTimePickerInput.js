@@ -27,7 +27,6 @@
       disableToolbar,
       disablePastDates,
       hideLabel,
-      use24HourClockDateTime,
       use24HourClockTime,
       label,
       locale,
@@ -178,7 +177,7 @@
       case 'datetime': {
         DateTimeComponent = KeyboardDateTimePicker;
         format = datetimeFormat || 'dd/MM/yyyy HH:mm:ss';
-        use24HourClock = use24HourClockDateTime;
+        use24HourClock = use24HourClockTime;
 
         resultString = isValidDate(selectedDate)
           ? selectedDate.toISOString()

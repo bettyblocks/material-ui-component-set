@@ -1,3 +1,66 @@
+## [2.177.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.177.1...v2.177.2) (2024-01-24)
+
+
+### Bug Fixes
+
+* fix onNoResult and onSuccess interaction datalist ([8880d77](https://github.com/bettyblocks/material-ui-component-set/commit/8880d776c0775aeba83abd046f4d18bd9b33d440))
+
+## [2.177.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.177.0...v2.177.1) (2024-01-23)
+
+
+### Bug Fixes
+
+* allow to resubmit create or update form BO ([89886dd](https://github.com/bettyblocks/material-ui-component-set/commit/89886dd3e3203e19afce64e771951fc053af0cba))
+* replace onActionDone trigger by onActionSuccess and onActionError ([0e9cc91](https://github.com/bettyblocks/material-ui-component-set/commit/0e9cc914c7384439bc2c21510918e349a6f57cc7))
+
+# [2.177.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.176.0...v2.177.0) (2024-01-23)
+
+
+### Features
+
+* add "no options text" variable option to autocompletes ([d72f68c](https://github.com/bettyblocks/material-ui-component-set/commit/d72f68c6c92af5fb84ae49db02584b958ce5e1ce))
+
+# [2.176.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.175.0...v2.176.0) (2024-01-23)
+
+
+### Bug Fixes
+
+* no button click feedback in design time ([e90eea6](https://github.com/bettyblocks/material-ui-component-set/commit/e90eea61752cb077ee56d3a95d425fb5ff2e270e))
+* only use background color when explicitly set ([02fe000](https://github.com/bettyblocks/material-ui-component-set/commit/02fe0008e5867276fa80226304d162036bcba330))
+
+
+### Features
+
+* add icon color option to menu item ([ea0a9b9](https://github.com/bettyblocks/material-ui-component-set/commit/ea0a9b9e10ed031673c6f8091d8b80b3119657dc))
+
+# [2.175.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.174.1...v2.175.0) (2024-01-18)
+
+
+### Features
+
+* input shows value in dev mode ([2c376ea](https://github.com/bettyblocks/material-ui-component-set/commit/2c376eafd0e205d1b38558d22f7fff02c820cc4f))
+
+## [2.174.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.174.0...v2.174.1) (2024-01-17)
+
+
+### Bug Fixes
+
+* use the existing use24HourClockTime option for datetime picker ([a0970c0](https://github.com/bettyblocks/material-ui-component-set/commit/a0970c0332626fdc03a4f014d4ee42f9fd71053f))
+
+# [2.174.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.173.1...v2.174.0) (2024-01-17)
+
+
+### Features
+
+* introduce meditel ([8143666](https://github.com/bettyblocks/material-ui-component-set/commit/81436668d2f1e57759e7932a0ef16b0088ce8c48))
+
+## [2.173.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.173.0...v2.173.1) (2024-01-16)
+
+
+### Bug Fixes
+
+* make the wait for request option work together with the loading ([f1168fd](https://github.com/bettyblocks/material-ui-component-set/commit/f1168fde1563028f708d180f7bd1ff5b7891c7a0))
+
 # [2.173.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.172.0...v2.173.0) (2024-01-05)
 
 
