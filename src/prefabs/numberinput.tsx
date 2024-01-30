@@ -2,8 +2,8 @@ import * as React from 'react';
 import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
 import { TextInput } from './structures/TextInput';
 
-const ALLOWED_KINDS = ['DECIMAL', 'FLOAT', 'INTEGER', 'PRICE', 'MINUTES'];
-const ALLOWED_CLICKTHROUGH_KINDS = ['OBJECT', 'BELONGS_TO'];
+const ALLOWED_KINDS = ['DECIMAL', 'FLOAT', 'INTEGER', 'MINUTES', 'PRICE'];
+const ALLOWED_CLICKTHROUGH_KINDS = ['BELONGS_TO', 'OBJECT'];
 
 const beforeCreate = ({
   close,
