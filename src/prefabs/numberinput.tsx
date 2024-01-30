@@ -2,7 +2,7 @@ import * as React from 'react';
 import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
 import { TextInput } from './structures/TextInput';
 
-const ALLOWED_KINDS = ['DECIMAL', 'FLOAT', 'INTEGER', 'PRICE', 'MINUTES'];
+const ALLOWED_KINDS = ['DECIMAL', 'FLOAT', 'INTEGER', 'MINUTES', 'PRICE'];
 const ALLOWED_CLICKTHROUGH_KINDS = ['BELONGS_TO', 'OBJECT'];
 
 const beforeCreate = ({
@@ -342,6 +342,7 @@ export default prefab('Number', attributes, beforeCreate, [
         allowPropertyName: false,
         allowedClickThroughKinds: ALLOWED_CLICKTHROUGH_KINDS,
         allowedKinds: ALLOWED_KINDS,
+        allowedSplitButtonKinds: ALLOWED_KINDS,
       },
     },
   }),
