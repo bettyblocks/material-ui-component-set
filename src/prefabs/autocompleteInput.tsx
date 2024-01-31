@@ -340,6 +340,11 @@ export default prefab('Autocomplete', attributes, beforeCreate, [
   AutocompleteInput({
     label: 'Autocomplete',
     inputLabel: { value: ['Autocomplete'] },
+    value: {
+      configuration: {
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+      },
+    },
     type: 'text',
   }),
 ]);

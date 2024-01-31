@@ -336,6 +336,13 @@ export default prefab('Url', attributes, beforeCreate, [
   TextInput({
     label: 'Url input',
     inputLabel: { value: ['URL'] },
+    value: {
+      configuration: {
+        allowedKinds: ['URL'],
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedSplitButtonKinds: [],
+      },
+    },
     type: 'url',
   }),
 ]);

@@ -334,6 +334,14 @@ export default prefab('Price', attributes, beforeCreate, [
   PriceInput({
     label: 'Price field',
     inputLabel: { value: ['Price'] },
+    value: {
+      value: [''],
+      configuration: {
+        allowedKinds: ['INTEGER', 'DECIMAL', 'PRICE'],
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedSplitButtonKinds: [],
+      },
+    },
     type: 'decimal',
     pattern,
   }),

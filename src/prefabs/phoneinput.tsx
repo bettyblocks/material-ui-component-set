@@ -338,6 +338,14 @@ export default prefab('Phone', attributes, beforeCreate, [
   TextInput({
     label: 'Phone field',
     inputLabel: { value: ['Phone number'] },
+    value: {
+      value: [''],
+      configuration: {
+        allowedKinds: ['PHONE_NUMBER'],
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedSplitButtonKinds: [],
+      },
+    },
     type: 'tel',
   }),
 ]);

@@ -291,6 +291,13 @@ export default prefab('Password', attributes, beforeCreate, [
   TextInput({
     label: 'Password field',
     inputLabel: { value: ['Password'] },
+    value: {
+      configuration: {
+        allowedClickThroughKinds: ['BELONGS_TO'],
+        allowedKinds: ['PASSWORD'],
+        allowedSplitButtonKinds: [],
+      },
+    },
     type: 'password',
     adornmentIcon: 'VisibilityOff',
   }),

@@ -329,6 +329,14 @@ export default makePrefab('Date Picker', attributes, beforeCreate, [
   DateTimePicker({
     label: 'Date picker',
     inputLabel: { value: ['Date'] },
+    value: {
+      value: [''],
+      configuration: {
+        allowedKinds: ['DATE'],
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedSplitButtonKinds: ['DATE'],
+      },
+    },
     dataComponentAttribute: 'Date Input',
     inputType: 'date',
   }),

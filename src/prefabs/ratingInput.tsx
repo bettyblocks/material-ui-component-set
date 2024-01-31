@@ -320,4 +320,21 @@ const attributes = {
   keywords: ['FORM', 'INPUT', 'RATING'],
 };
 
-export default prefab('Rating', attributes, beforeCreate, [RatingInput({})]);
+export default prefab('Rating', attributes, beforeCreate, [
+  RatingInput({
+    value: {
+      value: [''],
+      configuration: {
+        allowedKinds: ['DECIMAL'],
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedSplitButtonKinds: [
+          'DECIMAL',
+          'FLOAT',
+          'INTEGER',
+          'MINUTES',
+          'PRICE',
+        ],
+      },
+    },
+  }),
+]);

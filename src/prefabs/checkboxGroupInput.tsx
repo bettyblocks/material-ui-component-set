@@ -349,5 +349,15 @@ const attributes = {
 };
 
 export default prefab('Checkbox Group', attributes, beforeCreate, [
-  CheckboxGroup({ label: 'Checkbox Group' }),
+  CheckboxGroup({
+    label: 'Checkbox Group',
+    value: {
+      value: [],
+      configuration: {
+        allowRelations: true,
+        allowedClickThroughKinds: ['HAS_MANY', 'HAS_AND_BELONGS_TO_MANY'],
+        allowedSplitButtonKinds: [],
+      },
+    },
+  }),
 ]);

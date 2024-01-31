@@ -339,6 +339,14 @@ export default prefab('IBAN', attributes, beforeCreate, [
   TextInput({
     label: 'IBAN input',
     inputLabel: { value: ['IBAN'] },
+    value: {
+      value: [''],
+      configuration: {
+        allowedKinds: ['IBAN'],
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedSplitButtonKinds: [],
+      },
+    },
     type: 'text',
     pattern,
   }),

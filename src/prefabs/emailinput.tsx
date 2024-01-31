@@ -339,6 +339,13 @@ export default prefab('Email', attributes, beforeCreate, [
   TextInput({
     label: 'Email field',
     inputLabel: { value: ['Email'] },
+    value: {
+      configuration: {
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedKinds: ['EMAIL_ADDRESS'],
+        allowedSplitButtonKinds: [],
+      },
+    },
     type: 'email',
     pattern,
     adornmentIcon: 'Email',
