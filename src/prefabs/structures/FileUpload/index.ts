@@ -1,4 +1,5 @@
 import { PrefabReference, component } from '@betty-blocks/component-sdk';
+
 import { fileUploadOptions } from './options';
 import { Configuration } from '../Configuration';
 

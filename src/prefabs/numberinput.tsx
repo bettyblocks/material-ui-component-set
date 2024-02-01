@@ -329,9 +329,11 @@ export default prefab('Number', attributes, beforeCreate, [
     inputLabel: {
       value: ['Number'],
       configuration: {
-        allowFormatting: false,
+        allowedKinds: [],
         allowedClickThroughKinds: ALLOWED_CLICKTHROUGH_KINDS,
         allowedSplitButtonKinds: ALLOWED_KINDS,
+        allowFormatting: false,
+        allowPropertyName: true,
       },
     },
     type: 'number',
