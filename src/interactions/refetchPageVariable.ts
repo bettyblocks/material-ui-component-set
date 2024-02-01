@@ -11,5 +11,11 @@ function refetchPageVariable({
   event: Event;
   pageVariableId: PageVariableId;
 }): void {
-  (<any>window).refetchPageVariableQuery(pageVariableId);
+  const functionName = `refetchPageVariableById${pageVariableId}`;
+
+  if (typeof (<any>window)[functionName] === 'function') {
+    (<any>window)[functionName]();
+  } else {
+    console.error(`Function ${functionName} not found.`);
+  }
 }
