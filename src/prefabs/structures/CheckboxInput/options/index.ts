@@ -36,12 +36,6 @@ export const checkboxInputOptions = {
   }),
   value: variable('Value', {
     value: ['false'],
-    configuration: {
-      allowPropertyName: false,
-      allowedClickThroughKinds: ['BELONGS_TO'],
-      allowedKinds: ['BOOLEAN'],
-      allowedSplitButtonKinds: [],
-    },
   }),
   disabled: toggle('Disabled'),
   helperText: variable('Helper text'),

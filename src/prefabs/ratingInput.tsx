@@ -322,18 +322,21 @@ const attributes = {
 
 export default prefab('Rating', attributes, beforeCreate, [
   RatingInput({
+    inputLabel: {
+      configuration: {
+        allowPropertyName: true,
+        allowFormatting: false,
+        allowedKinds: [],
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedSplitButtonKinds: ['DECIMAL'],
+      },
+    },
     value: {
       value: [''],
       configuration: {
         allowedKinds: ['DECIMAL'],
         allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
-        allowedSplitButtonKinds: [
-          'DECIMAL',
-          'FLOAT',
-          'INTEGER',
-          'MINUTES',
-          'PRICE',
-        ],
+        allowedSplitButtonKinds: ['DECIMAL'],
       },
     },
   }),

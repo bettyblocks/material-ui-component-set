@@ -355,7 +355,6 @@ export default prefab('Checkbox Group', attributes, beforeCreate, [
       value: [],
       configuration: {
         allowRelations: true,
-        allowedClickThroughKinds: ['HAS_MANY', 'HAS_AND_BELONGS_TO_MANY'],
         allowedSplitButtonKinds: [],
       },
     },
