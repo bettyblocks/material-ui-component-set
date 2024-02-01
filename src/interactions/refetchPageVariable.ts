@@ -15,7 +15,5 @@ function refetchPageVariable({
 
   if (typeof (<any>window)[functionName] === 'function') {
     (<any>window)[functionName]();
-  } else {
-    console.error(`Function ${functionName} not found.`);
   }
 }
