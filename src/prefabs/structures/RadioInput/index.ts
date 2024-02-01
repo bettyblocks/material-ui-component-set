@@ -1,4 +1,6 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
+
+import { updateOption } from '../../../utils';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
 
@@ -36,6 +38,10 @@ export const RadioInput = (
       members: ['dataComponentAttribute'],
     },
   ];
+
+  if (config.value) {
+    options.value = updateOption(options.value, { ...config.value });
+  }
 
   return component(
     'RadioInput',

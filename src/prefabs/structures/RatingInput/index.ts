@@ -19,6 +19,10 @@ export const RatingInput = (
     ? { ...config.optionCategories }
     : defaultCategories;
 
+  if (config.inputLabel) {
+    options.label = updateOption(options.label, { ...config.inputLabel });
+  }
+
   if (config.value) {
     options.value = updateOption(options.value, { ...config.value });
   }

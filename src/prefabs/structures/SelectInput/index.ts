@@ -45,6 +45,10 @@ export const SelectInput = (
     options.label = updateOption(options.label, { ...config.inputLabel });
   }
 
+  if (config.value) {
+    options.value = updateOption(options.value, { ...config.value });
+  }
+
   return component(
     'SelectInput',
     { options, style, ref, label, optionCategories: categories },

@@ -338,9 +338,18 @@ const pattern =
 export default prefab('IBAN', attributes, beforeCreate, [
   TextInput({
     label: 'IBAN input',
-    inputLabel: { value: ['IBAN'] },
+    inputLabel: {
+      value: ['IBAN'],
+      configuration: {
+        allowPropertyName: true,
+        allowFormatting: false,
+        allowedKinds: [],
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedSplitButtonKinds: ['IBAN'],
+      },
+    },
     value: {
-      value: [''],
+      value: ['false'],
       configuration: {
         allowedKinds: ['IBAN'],
         allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],

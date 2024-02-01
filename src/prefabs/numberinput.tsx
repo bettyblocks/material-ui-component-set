@@ -2,9 +2,6 @@ import * as React from 'react';
 import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
 import { TextInput } from './structures/TextInput';
 
-const ALLOWED_KINDS = ['DECIMAL', 'FLOAT', 'INTEGER', 'MINUTES', 'PRICE'];
-const ALLOWED_CLICKTHROUGH_KINDS = ['BELONGS_TO', 'OBJECT'];
-
 const beforeCreate = ({
   close,
   components: {
@@ -329,11 +326,11 @@ export default prefab('Number', attributes, beforeCreate, [
     inputLabel: {
       value: ['Number'],
       configuration: {
-        allowedKinds: [],
-        allowedClickThroughKinds: ALLOWED_CLICKTHROUGH_KINDS,
-        allowedSplitButtonKinds: ALLOWED_KINDS,
-        allowFormatting: false,
         allowPropertyName: true,
+        allowFormatting: false,
+        allowedKinds: [],
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedSplitButtonKinds: ['INTEGER', 'MINUTES'],
       },
     },
     type: 'number',
@@ -341,9 +338,9 @@ export default prefab('Number', attributes, beforeCreate, [
     value: {
       configuration: {
         allowPropertyName: false,
-        allowedClickThroughKinds: ALLOWED_CLICKTHROUGH_KINDS,
-        allowedKinds: ALLOWED_KINDS,
-        allowedSplitButtonKinds: ALLOWED_KINDS,
+        allowedKinds: ['INTEGER', 'MINUTES'],
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedSplitButtonKinds: ['INTEGER', 'MINUTES'],
       },
     },
   }),

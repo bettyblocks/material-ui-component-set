@@ -1,4 +1,6 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
+
+import { updateOption } from '../../../utils';
 import { Configuration } from '../Configuration';
 import { checkboxInputOptions } from './options/index';
 
@@ -34,6 +36,14 @@ export const CheckboxInput = (
       members: ['dataComponentAttribute'],
     },
   ];
+
+  if (config.inputLabel) {
+    options.label = updateOption(options.label, { ...config.inputLabel });
+  }
+
+  if (config.value) {
+    options.value = updateOption(options.value, { ...config.value });
+  }
 
   return component(
     'CheckboxInput',
