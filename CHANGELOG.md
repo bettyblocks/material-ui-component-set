@@ -1,3 +1,12 @@
+## [2.177.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.177.2...v2.177.3) (2024-02-01)
+
+
+### Bug Fixes
+
+* make delete icon color configurable through component option ([eb2256c](https://github.com/bettyblocks/material-ui-component-set/commit/eb2256ccc09ef3d440e1e280abbcfa712c3e62f6))
+* show correct date in picker input ([001fa20](https://github.com/bettyblocks/material-ui-component-set/commit/001fa20aeb9c021e3888df5abb03b8998629be51))
+* show correct date on load ([4616897](https://github.com/bettyblocks/material-ui-component-set/commit/461689760105ad813dd267e7010ba167b9a8c0f5))
+
 ## [2.177.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.177.1...v2.177.2) (2024-01-24)
 
 
