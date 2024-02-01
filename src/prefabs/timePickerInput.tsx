@@ -335,7 +335,15 @@ const attributes = {
 export default makePrefab('Time Picker', attributes, beforeCreate, [
   DateTimePicker({
     label: 'Time picker',
-    inputLabel: 'Time',
+    inputLabel: { value: ['Time'] },
+    value: {
+      value: [''],
+      configuration: {
+        allowedKinds: ['TIME'],
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedSplitButtonKinds: ['TIME'],
+      },
+    },
     dataComponentAttribute: 'Time Input',
     inputType: 'time',
   }),

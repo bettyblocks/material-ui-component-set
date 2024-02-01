@@ -85,7 +85,7 @@
             const {
               label = stepLabelData[`label${index}`] || [`Step ${index + 1}`],
               icon = stepLabelData[`icon${index}`] || 'None',
-              disabled = stepLabelData[`disabled${index}`] || 'None',
+              disabled = stepLabelData[`disabled${index}`] || false,
             } = childOptions;
             const isActive = index === activeStep || allSteps;
             const labelText = useText(label);

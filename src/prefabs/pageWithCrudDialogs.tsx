@@ -65,7 +65,7 @@ import {
   snackbarOptions,
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
-import { PermissionType } from './types/types';
+import { PermissionType } from './types';
 
 const interactions: PrefabInteraction[] = [];
 

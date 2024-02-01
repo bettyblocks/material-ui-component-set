@@ -21,7 +21,6 @@ export const categories = [
   {
     label: 'Styling',
     expanded: false,
-
     members: [
       'height',
       'width',

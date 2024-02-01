@@ -327,7 +327,8 @@ const attributes = {
 export default prefab('Text Area', attributes, beforeCreate, [
   TextArea({
     label: 'Multiline text field',
-    inputLabel: 'Text area',
+    inputLabel: { value: ['Text area'] },
     type: 'text',
+    dataComponentAttribute: 'TextAreaInput',
   }),
 ]);

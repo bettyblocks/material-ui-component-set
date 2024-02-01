@@ -1,4 +1,5 @@
 import { PrefabReference, component } from '@betty-blocks/component-sdk';
+
 import { fileUploadOptions } from './options';
 import { Configuration } from '../Configuration';
 
@@ -17,7 +18,13 @@ const defaultCategories = [
   {
     label: 'Styling',
     expanded: false,
-    members: ['hideLabel', 'labelColor', 'helperColor', 'errorColor'],
+    members: [
+      'hideLabel',
+      'labelColor',
+      'helperColor',
+      'deleteIconColor',
+      'errorColor',
+    ],
   },
   {
     label: 'Advanced settings',

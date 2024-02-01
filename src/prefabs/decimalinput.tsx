@@ -323,8 +323,17 @@ const attributes = {
 export default prefab('Decimal', attributes, beforeCreate, [
   TextInput({
     label: 'Decimal field',
-    inputLabel: 'Decimal',
+    inputLabel: { value: ['Decimal'] },
+    value: {
+      configuration: {
+        allowPropertyName: false,
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedKinds: ['DECIMAL'],
+        allowedSplitButtonKinds: ['DECIMAL'],
+      },
+    },
     type: 'decimal',
     pattern: '^\\d+(\\.\\d{1,2})?$',
+    dataComponentAttribute: 'DecimalInput',
   }),
 ]);

@@ -13,7 +13,7 @@ export const RadioInput = (
 
   const categories = [
     {
-      label: 'Validation Options',
+      label: 'Validations',
       expanded: false,
       members: ['required', 'validationValueMissing'],
     },
@@ -31,7 +31,7 @@ export const RadioInput = (
       ],
     },
     {
-      label: 'Advanced Options',
+      label: 'Advanced',
       expanded: false,
       members: ['dataComponentAttribute'],
     },

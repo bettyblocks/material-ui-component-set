@@ -14,7 +14,7 @@ export const SelectInput = (
 
   const categories = [
     {
-      label: 'Validation Options',
+      label: 'Validations',
       expanded: false,
       members: ['required', 'validationValueMissing'],
     },
@@ -35,14 +35,14 @@ export const SelectInput = (
       ],
     },
     {
-      label: 'Advanced Options',
+      label: 'Advanced',
       expanded: false,
       members: ['dataComponentAttribute'],
     },
   ];
 
   if (config.inputLabel) {
-    options.label = updateOption(options.label, { value: [config.inputLabel] });
+    options.label = updateOption(options.label, { ...config.inputLabel });
   }
 
   return component(
