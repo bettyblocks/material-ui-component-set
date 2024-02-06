@@ -266,7 +266,7 @@
                   );
                 }
 
-                if (!data && redirectWithoutResult) {
+                if (!data && redirectWithoutResult && !loading) {
                   redirect();
                 }
                 return DataContainer(!!data);
