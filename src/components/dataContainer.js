@@ -93,10 +93,10 @@
               if (isLast) {
                 return Array.isArray(value)
                   ? {
-                      _or: value.map((el) => ({
-                        [field]: { [property.operator]: el },
-                      })),
-                    }
+                    _or: value.map((el) => ({
+                      [field]: { [property.operator]: el },
+                    })),
+                  }
                   : { [field]: { [property.operator]: value } };
               }
 
@@ -121,7 +121,7 @@
             });
           }
         });
-        B.defineFunction('Refetch', () => {});
+        B.defineFunction('Refetch', () => { });
         useEffect(() => {
           B.defineFunction('Advanced filter', (value) => {
             setFilterV2(value.where);
@@ -266,7 +266,7 @@
                   );
                 }
 
-                if (!data && redirectWithoutResult) {
+                if (!data && redirectWithoutResult && !loading) {
                   redirect();
                 }
                 return DataContainer(!!data);
