@@ -1,6 +1,6 @@
 /* eslint @typescript-eslint/no-unused-vars: ["error", { "varsIgnorePattern": "setLanguage" }] */
 
-function setLanguage({ event }: { event: unknown }): void {
+function setLanguage({ event }: { event: Event }): void {
   if (typeof event !== 'string') {
     return;
   }
