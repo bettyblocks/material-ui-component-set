@@ -175,8 +175,7 @@
     };
 
     B.defineFunction('setSelectedRecord', (value) => {
-      const id =
-        (value.modelData && value.modelData.id) || value.selectedProperty;
+      const id = value.modelData && value.modelData.id;
       setPageState(useText([`${id}`]));
     });
 
@@ -475,7 +474,7 @@
 
     const handleRowClick = (endpoint, context) => {
       if (isDev) return;
-      B.triggerEvent('OnRowClick', endpoint, context);
+      B.triggerEvent('OnRowClick', context);
 
       if (hasLink) {
         history.push(endpoint);
