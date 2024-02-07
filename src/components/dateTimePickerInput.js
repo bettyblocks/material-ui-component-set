@@ -116,7 +116,15 @@
       if (parsedValue) {
         switch (type) {
           case 'date': {
-            setSelectedDate(new Date(parsedValue));
+            const formattedDate = DateFns.parse(parsedValue, dateFormat);
+
+            if (isValidDate(formattedDate)) {
+              setSelectedDate(formattedDate);
+            } else {
+              // convert to slashes because it conflicts with the MUI DateTimeCmp
+              const parsedValueWithSlashes = parsedValue.replace(/-/g, '/');
+              setSelectedDate(new Date(parsedValueWithSlashes));
+            }
             break;
           }
 

@@ -245,6 +245,9 @@
           fullWidth ? 'block' : 'inline-block',
         width: ({ options: { fullWidth } }) => fullWidth && '100%',
         minHeight: '1rem',
+        '& button': {
+          pointerEvents: 'none',
+        },
       },
       button: {
         color: ({ options: { background, disabled, textColor, variant } }) => [

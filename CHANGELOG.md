@@ -1,3 +1,63 @@
+# [2.178.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.177.2...v2.178.0) (2024-02-06)
+
+
+### Bug Fixes
+
+* make delete icon color configurable through component option ([eb2256c](https://github.com/bettyblocks/material-ui-component-set/commit/eb2256ccc09ef3d440e1e280abbcfa712c3e62f6))
+* show correct date in picker input ([001fa20](https://github.com/bettyblocks/material-ui-component-set/commit/001fa20aeb9c021e3888df5abb03b8998629be51))
+* show correct date on load ([4616897](https://github.com/bettyblocks/material-ui-component-set/commit/461689760105ad813dd267e7010ba167b9a8c0f5))
+
+
+### Features
+
+* only redirect after load fix ([64d1d5c](https://github.com/bettyblocks/material-ui-component-set/commit/64d1d5c6aec097d2e360bb3e9d05d7986245ccdf))
+* retrigger pipelines ([5c5b82e](https://github.com/bettyblocks/material-ui-component-set/commit/5c5b82e2a68cd0c8f748a99a5d06679a14097a46))
+* trigger pipelines ([5283fc7](https://github.com/bettyblocks/material-ui-component-set/commit/5283fc752246fd4a6ac6abe49192347631357815))
+
+## [2.177.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.177.2...v2.177.3) (2024-02-01)
+
+
+### Bug Fixes
+
+* make delete icon color configurable through component option ([eb2256c](https://github.com/bettyblocks/material-ui-component-set/commit/eb2256ccc09ef3d440e1e280abbcfa712c3e62f6))
+* show correct date in picker input ([001fa20](https://github.com/bettyblocks/material-ui-component-set/commit/001fa20aeb9c021e3888df5abb03b8998629be51))
+* show correct date on load ([4616897](https://github.com/bettyblocks/material-ui-component-set/commit/461689760105ad813dd267e7010ba167b9a8c0f5))
+
+## [2.177.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.177.1...v2.177.2) (2024-01-24)
+
+
+### Bug Fixes
+
+* fix onNoResult and onSuccess interaction datalist ([8880d77](https://github.com/bettyblocks/material-ui-component-set/commit/8880d776c0775aeba83abd046f4d18bd9b33d440))
+
+## [2.177.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.177.0...v2.177.1) (2024-01-23)
+
+
+### Bug Fixes
+
+* allow to resubmit create or update form BO ([89886dd](https://github.com/bettyblocks/material-ui-component-set/commit/89886dd3e3203e19afce64e771951fc053af0cba))
+* replace onActionDone trigger by onActionSuccess and onActionError ([0e9cc91](https://github.com/bettyblocks/material-ui-component-set/commit/0e9cc914c7384439bc2c21510918e349a6f57cc7))
+
+# [2.177.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.176.0...v2.177.0) (2024-01-23)
+
+
+### Features
+
+* add "no options text" variable option to autocompletes ([d72f68c](https://github.com/bettyblocks/material-ui-component-set/commit/d72f68c6c92af5fb84ae49db02584b958ce5e1ce))
+
+# [2.176.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.175.0...v2.176.0) (2024-01-23)
+
+
+### Bug Fixes
+
+* no button click feedback in design time ([e90eea6](https://github.com/bettyblocks/material-ui-component-set/commit/e90eea61752cb077ee56d3a95d425fb5ff2e270e))
+* only use background color when explicitly set ([02fe000](https://github.com/bettyblocks/material-ui-component-set/commit/02fe0008e5867276fa80226304d162036bcba330))
+
+
+### Features
+
+* add icon color option to menu item ([ea0a9b9](https://github.com/bettyblocks/material-ui-component-set/commit/ea0a9b9e10ed031673c6f8091d8b80b3119657dc))
+
 # [2.175.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.174.1...v2.175.0) (2024-01-18)
 
 
