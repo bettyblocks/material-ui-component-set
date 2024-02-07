@@ -3,7 +3,7 @@
 function setCurrentRecord({
   argument,
 }: {
-  event: unknown;
+  event: Event;
   argument: number;
 }): number {
   return argument;
