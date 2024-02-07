@@ -1,3 +1,16 @@
+# [2.179.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.178.0...v2.179.0) (2024-02-07)
+
+
+### Bug Fixes
+
+* make the set selected record work by passing the context from ([9bea0b8](https://github.com/bettyblocks/material-ui-component-set/commit/9bea0b8b9d7b250d32bfd38769d9a0ab1f253e36))
+
+
+### Features
+
+* remove fallback of value-selectedProperty as it is no longer used ([8e0c10e](https://github.com/bettyblocks/material-ui-component-set/commit/8e0c10eabf922539af24fbf5f18b6afbaf011c66))
+* update cli so we can use the unknown type ([9fb3f14](https://github.com/bettyblocks/material-ui-component-set/commit/9fb3f144d42e6e5b482205d3e0018f5eb2d88be6))
+
 # [2.178.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.177.2...v2.178.0) (2024-02-06)
 
 
