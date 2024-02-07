@@ -1,3 +1,10 @@
+## [2.179.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.179.0...v2.179.1) (2024-02-07)
+
+
+### Bug Fixes
+
+* allow filtering when event is empty string ([a49a227](https://github.com/bettyblocks/material-ui-component-set/commit/a49a2276b5539dae788280608fc73f23b3e9b823))
+
 # [2.179.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.178.0...v2.179.0) (2024-02-07)
 
 
