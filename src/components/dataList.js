@@ -335,7 +335,7 @@
         }, [search]);
 
         B.defineFunction('setSelectedRecord', (value) => {
-          const id = value.modelData && value.modelData.id;
+          const id = value.context.modelData && value.context.modelData.id;
           setPageState(useText([`${id}`]));
         });
 
@@ -396,8 +396,8 @@
           }
         }, [loading]);
 
-        const handleClick = (context) => {
-          B.triggerEvent('OnItemClick', context);
+        const handleClick = (event, context) => {
+          B.triggerEvent('OnItemClick', { ...event, context }, context);
         };
 
         const Looper = (results) =>
@@ -408,7 +408,7 @@
                   <div
                     role="none"
                     className={isInline ? classes.inline : undefined}
-                    onClick={() => handleClick(context)}
+                    onClick={(event) => handleClick(event, context)}
                   >
                     {children}
                   </div>
