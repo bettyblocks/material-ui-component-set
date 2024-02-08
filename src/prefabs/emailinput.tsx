@@ -338,9 +338,27 @@ const pattern = '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.][a-z]{2,4}$';
 export default prefab('Email', attributes, beforeCreate, [
   TextInput({
     label: 'Email field',
-    inputLabel: 'Email',
+    inputLabel: {
+      value: ['Email'],
+      configuration: {
+        allowPropertyName: true,
+        allowFormatting: false,
+        allowedKinds: [],
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedSplitButtonKinds: ['EMAIL_ADDRESS'],
+      },
+    },
+    value: {
+      value: [''],
+      configuration: {
+        allowedKinds: ['EMAIL_ADDRESS'],
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedSplitButtonKinds: [],
+      },
+    },
     type: 'email',
     pattern,
     adornmentIcon: 'Email',
+    dataComponentAttribute: 'EmailInput',
   }),
 ]);

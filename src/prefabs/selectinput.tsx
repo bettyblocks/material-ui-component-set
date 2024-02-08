@@ -362,6 +362,21 @@ const attributes = {
 export default prefab('Select', attributes, beforeCreate, [
   SelectInput({
     label: 'Select',
-    inputLabel: 'Select option',
+    inputLabel: {
+      value: ['Select option'],
+      configuration: {
+        allowPropertyName: true,
+        allowFormatting: false,
+        allowedKinds: [],
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+      },
+    },
+    value: {
+      value: [''],
+      configuration: {
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedSplitButtonKinds: [],
+      },
+    },
   }),
 ]);

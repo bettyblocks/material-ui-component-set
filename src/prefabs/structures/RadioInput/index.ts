@@ -1,4 +1,6 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
+
+import { updateOption } from '../../../utils';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
 
@@ -13,7 +15,7 @@ export const RadioInput = (
 
   const categories = [
     {
-      label: 'Validation Options',
+      label: 'Validations',
       expanded: false,
       members: ['required', 'validationValueMissing'],
     },
@@ -31,11 +33,15 @@ export const RadioInput = (
       ],
     },
     {
-      label: 'Advanced Options',
+      label: 'Advanced',
       expanded: false,
       members: ['dataComponentAttribute'],
     },
   ];
+
+  if (config.value) {
+    options.value = updateOption(options.value, { ...config.value });
+  }
 
   return component(
     'RadioInput',

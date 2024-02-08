@@ -314,7 +314,23 @@ const attributes = {
 export default prefab('Rich Text Editor', attributes, beforeCreate, [
   RichTextInput({
     label: 'Rich text editor',
-    inputLabel: 'Rich text editor',
+    inputLabel: {
+      value: ['Rich text editor'],
+      configuration: {
+        allowPropertyName: true,
+        allowFormatting: false,
+        allowedKinds: [],
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedSplitButtonKinds: ['RICH_TEXT'],
+      },
+    },
+    value: {
+      configuration: {
+        allowedKinds: ['RICH_TEXT'],
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedSplitButtonKinds: [],
+      },
+    },
     type: 'text',
   }),
 ]);

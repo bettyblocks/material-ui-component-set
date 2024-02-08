@@ -314,7 +314,25 @@ const attributes = {
 export default prefab('Text Field', attributes, beforeCreate, [
   TextInput({
     label: 'Text field',
-    inputLabel: 'Text field',
+    inputLabel: {
+      value: ['Text field'],
+      configuration: {
+        allowPropertyName: true,
+        allowFormatting: false,
+        allowedKinds: [],
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedSplitButtonKinds: ['STRING'],
+      },
+    },
+    value: {
+      value: [''],
+      configuration: {
+        allowedKinds: ['STRING'],
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedSplitButtonKinds: [],
+      },
+    },
     type: 'text',
+    dataComponentAttribute: 'TextInput',
   }),
 ]);

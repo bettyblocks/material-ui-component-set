@@ -28,7 +28,10 @@
       Toolbar,
       TextField,
       InputAdornment,
+      IconButton,
     } = window.MaterialUI.Core;
+    const { FirstPage, LastPage, KeyboardArrowLeft, KeyboardArrowRight } =
+      window.MaterialUI.Icons;
     const isDev = env === 'dev';
     const {
       take,
@@ -39,6 +42,7 @@
       searchProperty,
       orderProperty,
       sortOrder,
+      hideRowsPerPage,
       labelRowsPerPage,
       labelNumberOfPages,
       labelSearchOn,
@@ -55,6 +59,7 @@
       autoLoadTakeAmount,
       noResultsText,
       dataComponentAttribute,
+      enableFirstLastPageNavigation,
     } = options;
 
     const [, setPageState] = usePageState(useText(['']));
@@ -100,6 +105,7 @@
       field: orderPropertyPath,
       order: orderProperty ? sortOrder : null,
     });
+    const [prevOrderBy, setPrevOrderBy] = React.useState(orderBy);
     const [results, setResults] = useState([]);
     const [totalCount, setTotalCount] = useState(0);
     const [previousSearchTerm, setPreviousSearchTerm] = useState('');
@@ -175,7 +181,7 @@
     };
 
     B.defineFunction('setSelectedRecord', (value) => {
-      const id = value.modelData && value.modelData.id;
+      const id = value.context.modelData && value.context.modelData.id;
       setPageState(useText([`${id}`]));
     });
 
@@ -195,7 +201,7 @@
      * @returns {Void}
      */
     B.defineFunction('Filter', ({ event, property, interactionId }) => {
-      if (!event) {
+      if (event === undefined || event === null) {
         // eslint-disable-next-line no-console
         console.error(
           'Event is empty. Please use this function with valid input events.',
@@ -221,6 +227,13 @@
       setInteractionSearchTerm('');
       setInteractionSearchProperty('');
       setPage(0);
+    });
+
+    B.defineFunction('setRowsPerPage', (val) => {
+      if (!isNaN(val)) {
+        setRowsPerPage(parseInt(val, 10));
+        setPage(0);
+      }
     });
 
     let interactionFilters = {};
@@ -278,6 +291,12 @@
     const completeFilter = deepMerge(newFilter, interactionFilters, filterv2);
 
     const where = useFilter(completeFilter);
+
+    useEffect(() => {
+      if (loadOnScroll) {
+        setSkip(0);
+      }
+    }, [orderBy]);
 
     // TODO: move model to skip
     const {
@@ -343,7 +362,11 @@
           ) {
             setResults(data.results);
           } else {
-            setResults((prev) => [...prev, ...data.results]);
+            setResults(
+              prevOrderBy === orderBy && skip > 0
+                ? (prev) => [...prev, ...data.results]
+                : data.results,
+            );
           }
           fetchingNextSet.current = false;
           setNewSearch(false);
@@ -370,6 +393,11 @@
         setSkip(0);
       }, 0);
     }
+
+    B.defineFunction('ResetOrdering', () => {
+      setOrderBy({ field: null, order: null });
+      setVariables(null);
+    });
 
     B.defineFunction('Refetch', () => {
       if (pagination === 'never') {
@@ -459,6 +487,7 @@
 
     const handleSort = (field, newOrder) => {
       if (isDev) return;
+      setPrevOrderBy(orderBy);
       setOrderBy({ field, order: newOrder });
       setVariables({
         sort: {
@@ -474,7 +503,7 @@
 
     const handleRowClick = (endpoint, context) => {
       if (isDev) return;
-      B.triggerEvent('OnRowClick', context);
+      B.triggerEvent('OnRowClick', { ...endpoint, context }, context);
 
       if (hasLink) {
         history.push(endpoint);
@@ -504,6 +533,62 @@
         </Children>
       );
     };
+
+    function TablePaginationActions() {
+      const handleFirstPageButtonClick = () => {
+        setPage(0);
+      };
+
+      const handleBackButtonClick = () => {
+        setPage(page - 1);
+      };
+
+      const handleNextButtonClick = () => {
+        setPage(page + 1);
+      };
+
+      const handleLastPageButtonClick = () => {
+        const pageNumber = Math.max(0, Math.ceil(totalCount / rowsPerPage) - 1);
+        setPage(pageNumber);
+      };
+
+      return (
+        <div className={classes.paginationActions}>
+          {enableFirstLastPageNavigation && (
+            <IconButton
+              onClick={handleFirstPageButtonClick}
+              disabled={page === 0}
+              aria-label="first page"
+            >
+              <FirstPage />
+            </IconButton>
+          )}
+          <IconButton
+            onClick={handleBackButtonClick}
+            disabled={page === 0}
+            aria-label="previous page"
+          >
+            <KeyboardArrowLeft />
+          </IconButton>
+          <IconButton
+            onClick={handleNextButtonClick}
+            disabled={page >= Math.ceil(totalCount / rowsPerPage) - 1}
+            aria-label="next page"
+          >
+            <KeyboardArrowRight />
+          </IconButton>
+          {enableFirstLastPageNavigation && (
+            <IconButton
+              onClick={handleLastPageButtonClick}
+              disabled={page >= Math.ceil(totalCount / rowsPerPage) - 1}
+              aria-label="last page"
+            >
+              <LastPage />
+            </IconButton>
+          )}
+        </div>
+      );
+    }
 
     const tableContentModel = () => {
       if ((loading && !loadOnScroll) || error) {
@@ -594,6 +679,7 @@
             const { scrollTop, clientHeight, scrollHeight } = e.target;
             const offset = scrollHeight / 5;
             const hitBottom = scrollTop + clientHeight >= scrollHeight - offset;
+            if (prevOrderBy !== orderBy) setPrevOrderBy(orderBy);
             if (hitBottom && !fetchingNextSet.current) {
               fetchNextSet();
             }
@@ -736,7 +822,7 @@
             <TablePagination
               ref={paginationRef}
               classes={{ root: classes.pagination }}
-              rowsPerPageOptions={[5, 10, 25, 50, 100]}
+              rowsPerPageOptions={hideRowsPerPage ? [] : [5, 10, 25, 50, 100]}
               labelRowsPerPage={perPageLabel}
               labelDisplayedRows={({ from, to, count }) =>
                 `${from}-${to} ${numOfPagesLabel} ${count}`
@@ -747,6 +833,7 @@
               page={page}
               onChangePage={handleChangePage}
               onChangeRowsPerPage={handleChangeRowsPerPage}
+              ActionsComponent={() => TablePaginationActions()}
             />
           )}
         </Paper>
@@ -872,6 +959,10 @@
           style.getColor(background),
           '!important',
         ],
+      },
+      paginationActions: {
+        flexShrink: 0,
+        marginLeft: '20px',
       },
       autoRepeat: {
         opacity: 0.5,

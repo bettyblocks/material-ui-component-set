@@ -1,3 +1,22 @@
+# [2.180.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.179.1...v2.180.0) (2024-02-07)
+
+
+### Bug Fixes
+
+* remove setSelectedRecord fallback ([bcd8706](https://github.com/bettyblocks/material-ui-component-set/commit/bcd87066741ee34092bbd5b3ea0bb59030a54764))
+
+
+### Features
+
+* only pass context on item and row click ([d613494](https://github.com/bettyblocks/material-ui-component-set/commit/d613494b6cfaabbb60430cba64f110e839bc9e20))
+
+## [2.179.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.179.0...v2.179.1) (2024-02-07)
+
+
+### Bug Fixes
+
+* allow filtering when event is empty string ([a49a227](https://github.com/bettyblocks/material-ui-component-set/commit/a49a2276b5539dae788280608fc73f23b3e9b823))
+
 # [2.179.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.178.0...v2.179.0) (2024-02-07)
 
 

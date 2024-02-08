@@ -6,7 +6,7 @@ import {
   prefab,
 } from '@betty-blocks/component-sdk';
 import { Form } from './structures/ActionJSForm';
-import { PermissionType } from './types/types';
+import { PermissionType } from './types';
 
 const beforeCreate = ({
   close,
@@ -42,9 +42,7 @@ const beforeCreate = ({
   const [endpoint, setEndpoint] = React.useState(null);
   const [endpointInvalid, setEndpointInvalid] = React.useState(false);
   const [model, setModel] = React.useState(null);
-
   const permissions: PermissionType = 'public';
-
   const isEmptyEndpoint = (value): boolean =>
     !value || Object.keys(value).length === 0 || value.id === '';
 

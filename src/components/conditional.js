@@ -34,6 +34,13 @@
     const [visible, setVisible] = useState();
     const logic = useLogic(displayLogic);
 
+    function isEmpty(value) {
+      return (
+        value == null ||
+        (typeof value === 'string' && value.trim().length === 0)
+      );
+    }
+
     const evalCondition = () => {
       if (!initVisibility && leftValue === '' && rightValue === '') {
         return false;
@@ -61,6 +68,12 @@
           return leftParsed >= rightParsed;
         case 'lteq':
           return leftParsed <= rightParsed;
+        case 'in': {
+          if (isEmpty(leftParsed) || isEmpty(rightParsed)) return false;
+          const leftArr = leftParsed.split(',') || leftParsed;
+          const rightArr = rightParsed.split(',') || rightParsed;
+          return leftArr.some((i) => rightArr.includes(i));
+        }
         default:
           return leftParsed === rightParsed;
       }

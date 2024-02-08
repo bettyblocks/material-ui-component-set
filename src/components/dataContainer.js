@@ -137,20 +137,20 @@
            * @returns {Void}
            */
           B.defineFunction('Filter', ({ event, property, interactionId }) => {
-            if (!event) {
+            if (event === undefined || event === null) {
               // eslint-disable-next-line no-console
               console.error(
                 'Event is empty. Please use this function with valid input events.',
               );
               return;
             }
-            setInteractionFilter((s) => ({
-              ...s,
+            setInteractionFilter({
+              ...interactionFilter,
               [interactionId]: {
                 property,
                 value: event instanceof Date ? event.toISOString : event,
               },
-            }));
+            });
           });
 
           B.defineFunction('ResetFilter', () => {

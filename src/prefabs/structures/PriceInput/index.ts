@@ -9,9 +9,20 @@ export const PriceInput = (
   descendants: PrefabReference[] = [],
 ) => {
   const label = config.label ? config.label : undefined;
+
   options.adornmentPosition = updateOption(options.adornmentPosition, {
     value: 'start',
   });
+  options.dataComponentAttribute = updateOption(
+    options.dataComponentAttribute,
+    {
+      value: ['PriceInput'],
+    },
+  );
+
+  if (config.value) {
+    options.value = updateOption(options.value, { ...config.value });
+  }
 
   return TextInput({ ...config, options, label }, descendants);
 };

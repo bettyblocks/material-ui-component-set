@@ -13,4 +13,3 @@ function refetchPageVariable({
 }): void {
   (<any>window).refetchPageVariable(pageVariableId);
 }
-

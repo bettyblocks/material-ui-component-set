@@ -12,7 +12,7 @@ export const TextInput = (
 
   const categories = [
     {
-      label: 'Validation Options',
+      label: 'Validations',
       expanded: false,
       members: [
         'required',
@@ -42,9 +42,9 @@ export const TextInput = (
       ],
     },
     {
-      label: 'Advanced Options',
+      label: 'Advanced',
       expanded: false,
-      members: ['debounceDelay', 'dataComponentAttribute'],
+      members: ['dataComponentAttribute', 'searchParam', 'debounceDelay'],
     },
   ];
 
@@ -59,7 +59,7 @@ export const TextInput = (
   }
 
   if (config.inputLabel) {
-    options.label = updateOption(options.label, { value: [config.inputLabel] });
+    options.label = updateOption(options.label, { ...config.inputLabel });
   }
 
   if (config.pattern) {
@@ -76,6 +76,19 @@ export const TextInput = (
     options.adornmentIcon = updateOption(options.adornmentIcon, {
       value: config.adornmentIcon,
     });
+  }
+
+  if (config.dataComponentAttribute) {
+    options.dataComponentAttribute = updateOption(
+      options.dataComponentAttribute,
+      {
+        value: [config.dataComponentAttribute],
+      },
+    );
+  }
+
+  if (config.value) {
+    options.value = updateOption(options.value, { ...config.value });
   }
 
   return component(

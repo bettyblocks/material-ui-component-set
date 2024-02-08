@@ -51,8 +51,8 @@ import {
   ModelProps,
   ModelQuery,
   PropertyStateProps,
+  PermissionType,
 } from './types';
-import { PermissionType } from './types/types';
 
 const interactions = [
   {
@@ -1093,7 +1093,6 @@ const beforeCreate = ({
   const formId = createUuid();
   const datalistId = createUuid();
   const permissions: PermissionType = 'private';
-
   const pageAuthenticationProfileId = getPageAuthenticationProfileId();
 
   const { data } = useModelQuery({

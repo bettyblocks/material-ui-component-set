@@ -10,7 +10,7 @@ interface Page {
   url: string;
 }
 
-function logout({ redirectTo }: { event: unknown; redirectTo: Page }): void {
+function logout({ redirectTo }: { event: Event; redirectTo: Page }): void {
   const { url } = redirectTo;
   localStorage.removeItem('TOKEN');
   localStorage.removeItem('REFRESH_TOKEN');

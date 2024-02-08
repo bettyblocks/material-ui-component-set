@@ -1,4 +1,6 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
+
+import { updateOption } from '../../../utils';
 import { Configuration } from '../Configuration';
 import {
   ratingInputOptions as defaultOptions,
@@ -17,6 +19,13 @@ export const RatingInput = (
     ? { ...config.optionCategories }
     : defaultCategories;
 
+  if (config.inputLabel) {
+    options.label = updateOption(options.label, { ...config.inputLabel });
+  }
+
+  if (config.value) {
+    options.value = updateOption(options.value, { ...config.value });
+  }
   return component(
     'Rating',
     { options, ref, style, label, optionCategories },

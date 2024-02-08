@@ -323,8 +323,26 @@ const attributes = {
 export default prefab('Number', attributes, beforeCreate, [
   TextInput({
     label: 'Number field',
-    inputLabel: 'Number',
+    inputLabel: {
+      value: ['Number'],
+      configuration: {
+        allowPropertyName: true,
+        allowFormatting: false,
+        allowedKinds: [],
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedSplitButtonKinds: ['INTEGER', 'MINUTES'],
+      },
+    },
     type: 'number',
     pattern: '^[0-9]*$',
+    dataComponentAttribute: 'NumberInput',
+    value: {
+      configuration: {
+        allowPropertyName: false,
+        allowedKinds: ['INTEGER', 'MINUTES'],
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedSplitButtonKinds: ['INTEGER', 'MINUTES'],
+      },
+    },
   }),
 ]);

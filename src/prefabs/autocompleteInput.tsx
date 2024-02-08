@@ -339,7 +339,21 @@ const attributes = {
 export default prefab('Autocomplete', attributes, beforeCreate, [
   AutocompleteInput({
     label: 'Autocomplete',
-    inputLabel: 'Autocomplete',
+    inputLabel: {
+      value: ['Autocomplete'],
+      configuration: {
+        allowPropertyName: true,
+        allowFormatting: false,
+        allowedKinds: [],
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+      },
+    },
+    value: {
+      configuration: {
+        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
+        allowedSplitButtonKinds: [],
+      },
+    },
     type: 'text',
   }),
 ]);
