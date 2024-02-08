@@ -11,9 +11,6 @@ function refetchPageVariable({
   event: Event;
   pageVariableId: PageVariableId;
 }): void {
-  const functionName = `refetchPageVariableById${pageVariableId}`;
-
-  if (typeof (<any>window)[functionName] === 'function') {
-    (<any>window)[functionName]();
-  }
+  (<any>window).refetchPageVariable(pageVariableId);
 }
+
