@@ -332,6 +332,7 @@ const optionCategories = [
       'hideLabel',
       'labelColor',
       'helperColor',
+      'deleteIconColor',
       'errorColor',
       'showImagePreview',
       'imagePreviewWidth',

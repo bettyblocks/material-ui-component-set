@@ -335,8 +335,7 @@
         }, [search]);
 
         B.defineFunction('setSelectedRecord', (value) => {
-          const id =
-            (value.modelData && value.modelData.id) || value.selectedProperty;
+          const id = value.context.modelData && value.context.modelData.id;
           setPageState(useText([`${id}`]));
         });
 
@@ -359,7 +358,7 @@
            * @returns {Void}
            */
           B.defineFunction('Filter', ({ event, property, interactionId }) => {
-            if (!event) {
+            if (event === undefined || event === null) {
               // eslint-disable-next-line no-console
               console.error(
                 'Event is empty. Please use this function with valid input events.',
@@ -398,7 +397,7 @@
         }, [loading]);
 
         const handleClick = (event, context) => {
-          B.triggerEvent('OnItemClick', event, context);
+          B.triggerEvent('OnItemClick', { ...event, context }, context);
         };
 
         const Looper = (results) =>

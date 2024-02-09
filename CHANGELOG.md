@@ -1,8 +1,71 @@
-## [2.177.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.177.2...v2.177.3) (2024-01-31)
+# [2.181.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.180.1...v2.181.0) (2024-02-09)
+
+
+### Features
+
+* added refetch interaction ([fd82a9f](https://github.com/bettyblocks/material-ui-component-set/commit/fd82a9f650d207767efc42ab1d413208b34ec39a))
+
+## [2.180.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.180.0...v2.180.1) (2024-02-08)
 
 
 ### Bug Fixes
 
+* add context to event ([862a711](https://github.com/bettyblocks/material-ui-component-set/commit/862a711e430c07bfb8089729996b3cb2b2cffdd7))
+
+# [2.180.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.179.1...v2.180.0) (2024-02-07)
+
+
+### Bug Fixes
+
+* remove setSelectedRecord fallback ([bcd8706](https://github.com/bettyblocks/material-ui-component-set/commit/bcd87066741ee34092bbd5b3ea0bb59030a54764))
+
+
+### Features
+
+* only pass context on item and row click ([d613494](https://github.com/bettyblocks/material-ui-component-set/commit/d613494b6cfaabbb60430cba64f110e839bc9e20))
+
+## [2.179.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.179.0...v2.179.1) (2024-02-07)
+
+
+### Bug Fixes
+
+* allow filtering when event is empty string ([a49a227](https://github.com/bettyblocks/material-ui-component-set/commit/a49a2276b5539dae788280608fc73f23b3e9b823))
+
+# [2.179.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.178.0...v2.179.0) (2024-02-07)
+
+
+### Bug Fixes
+
+* make the set selected record work by passing the context from ([9bea0b8](https://github.com/bettyblocks/material-ui-component-set/commit/9bea0b8b9d7b250d32bfd38769d9a0ab1f253e36))
+
+
+### Features
+
+* remove fallback of value-selectedProperty as it is no longer used ([8e0c10e](https://github.com/bettyblocks/material-ui-component-set/commit/8e0c10eabf922539af24fbf5f18b6afbaf011c66))
+* update cli so we can use the unknown type ([9fb3f14](https://github.com/bettyblocks/material-ui-component-set/commit/9fb3f144d42e6e5b482205d3e0018f5eb2d88be6))
+
+# [2.178.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.177.2...v2.178.0) (2024-02-06)
+
+
+### Bug Fixes
+
+* make delete icon color configurable through component option ([eb2256c](https://github.com/bettyblocks/material-ui-component-set/commit/eb2256ccc09ef3d440e1e280abbcfa712c3e62f6))
+* show correct date in picker input ([001fa20](https://github.com/bettyblocks/material-ui-component-set/commit/001fa20aeb9c021e3888df5abb03b8998629be51))
+* show correct date on load ([4616897](https://github.com/bettyblocks/material-ui-component-set/commit/461689760105ad813dd267e7010ba167b9a8c0f5))
+
+
+### Features
+
+* only redirect after load fix ([64d1d5c](https://github.com/bettyblocks/material-ui-component-set/commit/64d1d5c6aec097d2e360bb3e9d05d7986245ccdf))
+* retrigger pipelines ([5c5b82e](https://github.com/bettyblocks/material-ui-component-set/commit/5c5b82e2a68cd0c8f748a99a5d06679a14097a46))
+* trigger pipelines ([5283fc7](https://github.com/bettyblocks/material-ui-component-set/commit/5283fc752246fd4a6ac6abe49192347631357815))
+
+## [2.177.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.177.2...v2.177.3) (2024-02-01)
+
+
+### Bug Fixes
+
+* make delete icon color configurable through component option ([eb2256c](https://github.com/bettyblocks/material-ui-component-set/commit/eb2256ccc09ef3d440e1e280abbcfa712c3e62f6))
 * show correct date in picker input ([001fa20](https://github.com/bettyblocks/material-ui-component-set/commit/001fa20aeb9c021e3888df5abb03b8998629be51))
 * show correct date on load ([4616897](https://github.com/bettyblocks/material-ui-component-set/commit/461689760105ad813dd267e7010ba167b9a8c0f5))
 

@@ -17,7 +17,13 @@ const defaultCategories = [
   {
     label: 'Styling',
     expanded: false,
-    members: ['hideLabel', 'labelColor', 'helperColor', 'errorColor'],
+    members: [
+      'hideLabel',
+      'labelColor',
+      'helperColor',
+      'deleteIconColor',
+      'errorColor',
+    ],
   },
   {
     label: 'Advanced settings',
