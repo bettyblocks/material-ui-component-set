@@ -342,6 +342,7 @@ export default makePrefab('Date Picker', attributes, beforeCreate, [
       value: [''],
       configuration: {
         allowedKinds: ['DATE'],
+        allowFormatting: false,
         allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
         allowedSplitButtonKinds: ['DATE'],
       },

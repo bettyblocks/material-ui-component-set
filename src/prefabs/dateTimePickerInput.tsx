@@ -349,6 +349,7 @@ export default makePrefab('Date Time Picker', attributes, beforeCreate, [
       value: [''],
       configuration: {
         allowedKinds: ['DATE_TIME'],
+        allowFormatting: false,
         allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
         allowedSplitButtonKinds: ['DATE_TIME'],
       },
