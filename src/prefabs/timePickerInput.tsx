@@ -349,6 +349,7 @@ export default makePrefab('Time Picker', attributes, beforeCreate, [
       value: [''],
       configuration: {
         allowedKinds: ['TIME'],
+        allowFormatting: false,
         allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
         allowedSplitButtonKinds: ['TIME'],
       },
