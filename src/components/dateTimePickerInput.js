@@ -216,8 +216,6 @@
       }
     };
 
-    console.log({ selectedDate });
-
     const DateTimeCmp = (
       <DateTimeComponent
         error={errorState}
