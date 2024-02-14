@@ -322,25 +322,5 @@ const attributes = {
 };
 
 export default prefab('Checkbox', attributes, beforeCreate, [
-  CheckboxInput({
-    label: 'Checkbox input',
-    inputLabel: {
-      value: [''],
-      configuration: {
-        allowPropertyName: true,
-        allowFormatting: false,
-        allowedKinds: [],
-        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
-        allowedSplitButtonKinds: ['BOOLEAN'],
-      },
-    },
-    value: {
-      value: ['false'],
-      configuration: {
-        allowedKinds: ['BOOLEAN'],
-        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
-        allowedSplitButtonKinds: [],
-      },
-    },
-  }),
+  CheckboxInput({ label: 'Checkbox input' }),
 ]);
