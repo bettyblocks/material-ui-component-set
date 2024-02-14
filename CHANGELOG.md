@@ -1,3 +1,10 @@
+# [2.181.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.180.1...v2.181.0) (2024-02-09)
+
+
+### Features
+
+* added refetch interaction ([fd82a9f](https://github.com/bettyblocks/material-ui-component-set/commit/fd82a9f650d207767efc42ab1d413208b34ec39a))
+
 ## [2.180.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.180.0...v2.180.1) (2024-02-08)
 
 
