@@ -134,8 +134,6 @@
               datetimeFormat,
             );
 
-            if (!parsedValue) return;
-
             if (isValidDate(formatDefaultParse)) {
               setSelectedDate(formatDefaultParse);
             } else {
@@ -160,6 +158,8 @@
 
           default:
         }
+      } else {
+        setSelectedDate(null);
       }
     }, [parsedValue]);
 
