@@ -325,23 +325,8 @@ export default prefab('Number', attributes, beforeCreate, [
     label: 'Number field',
     inputLabel: {
       value: ['Number'],
-      configuration: {
-        allowPropertyName: true,
-        allowFormatting: false,
-        allowedKinds: [],
-        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
-        allowedSplitButtonKinds: ['INTEGER', 'MINUTES'],
-      },
     },
     type: 'number',
     pattern: '^[0-9]*$',
-    value: {
-      configuration: {
-        allowPropertyName: false,
-        allowedKinds: ['INTEGER', 'MINUTES'],
-        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
-        allowedSplitButtonKinds: ['INTEGER', 'MINUTES'],
-      },
-    },
   }),
 ]);

@@ -333,24 +333,7 @@ const pattern = '[0-9]+(\\.[0-9][0-9]?)?';
 export default prefab('Price', attributes, beforeCreate, [
   PriceInput({
     label: 'Price field',
-    inputLabel: {
-      value: ['Price'],
-      configuration: {
-        allowPropertyName: true,
-        allowFormatting: false,
-        allowedKinds: [],
-        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
-        allowedSplitButtonKinds: ['PRICE'],
-      },
-    },
-    value: {
-      value: [''],
-      configuration: {
-        allowedKinds: ['PRICE'],
-        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
-        allowedSplitButtonKinds: ['PRICE'],
-      },
-    },
+    inputLabel: { value: ['Price'] },
     type: 'decimal',
     pattern,
   }),

@@ -1,6 +1,4 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
-
-import { updateOption } from '../../../utils';
 import { Configuration } from '../Configuration';
 import { checkboxGroupInputOptions } from './options/index';
 
@@ -38,10 +36,6 @@ export const CheckboxGroup = (
       members: ['dataComponentAttribute'],
     },
   ];
-
-  if (config.value) {
-    options.value = updateOption(options.value, { ...config.value });
-  }
 
   return component(
     'CheckboxGroup',

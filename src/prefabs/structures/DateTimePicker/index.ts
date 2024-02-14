@@ -82,12 +82,6 @@ export const DateTimePicker = (
         ...config.inputLabel,
       });
     }
-
-    if (config.value) {
-      options.value = updateOption(options.value, {
-        ...config.value,
-      });
-    }
   }
 
   if (config.dataComponentAttribute) {

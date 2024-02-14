@@ -290,24 +290,7 @@ const attributes = {
 export default prefab('Password', attributes, beforeCreate, [
   TextInput({
     label: 'Password field',
-    inputLabel: {
-      value: ['Password'],
-      configuration: {
-        allowPropertyName: true,
-        allowFormatting: false,
-        allowedKinds: [],
-        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
-        allowedSplitButtonKinds: ['PASSWORD'],
-      },
-    },
-    value: {
-      value: [''],
-      configuration: {
-        allowedKinds: ['PASSWORD'],
-        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
-        allowedSplitButtonKinds: [],
-      },
-    },
+    inputLabel: { value: ['Password'] },
     type: 'password',
     adornmentIcon: 'VisibilityOff',
   }),

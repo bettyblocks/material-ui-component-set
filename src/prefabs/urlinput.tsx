@@ -335,23 +335,7 @@ const attributes = {
 export default prefab('Url', attributes, beforeCreate, [
   TextInput({
     label: 'Url input',
-    inputLabel: {
-      value: ['URL'],
-      configuration: {
-        allowPropertyName: true,
-        allowFormatting: false,
-        allowedKinds: [],
-        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
-        allowedSplitButtonKinds: ['URL'],
-      },
-    },
-    value: {
-      configuration: {
-        allowedKinds: ['URL'],
-        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
-        allowedSplitButtonKinds: [],
-      },
-    },
+    inputLabel: { value: ['URL'] },
     type: 'url',
   }),
 ]);
