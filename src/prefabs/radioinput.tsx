@@ -4,7 +4,6 @@ import {
   Icon,
   PrefabComponentOption,
   prefab,
-  variable,
 } from '@betty-blocks/component-sdk';
 import { RadioInput } from './structures/RadioInput';
 
@@ -353,12 +352,5 @@ const attributes = {
 export default prefab('Radio', attributes, beforeCreate, [
   RadioInput({
     label: 'Radio',
-    value: variable('Value', {
-      value: [''],
-      configuration: {
-        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
-        allowedSplitButtonKinds: [],
-      },
-    }),
   }),
 ]);

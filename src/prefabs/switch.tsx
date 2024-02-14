@@ -335,21 +335,6 @@ export default prefab('Switch', attr, beforeCreate, [
       label: variable('Label', {
         ...checkboxInputOptions.label('label'),
         value: ['Switch'],
-        configuration: {
-          allowPropertyName: true,
-          allowFormatting: false,
-          allowedKinds: [],
-          allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
-          allowedSplitButtonKinds: ['BOOLEAN'],
-        },
-      }),
-      value: variable('Value', {
-        value: ['false'],
-        configuration: {
-          allowedKinds: ['BOOLEAN'],
-          allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
-          allowedSplitButtonKinds: [],
-        },
       }),
       isSwitch: toggle('Is switch', {
         value: true,

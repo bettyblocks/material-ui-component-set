@@ -327,24 +327,7 @@ const attributes = {
 export default prefab('Text Area', attributes, beforeCreate, [
   TextArea({
     label: 'Multiline text field',
-    inputLabel: {
-      value: ['Text area'],
-      configuration: {
-        allowPropertyName: true,
-        allowFormatting: false,
-        allowedKinds: [],
-        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
-        allowedSplitButtonKinds: ['TEXT'],
-      },
-    },
-    value: {
-      value: [''],
-      configuration: {
-        allowedKinds: ['TEXT'],
-        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
-        allowedSplitButtonKinds: [],
-      },
-    },
+    inputLabel: { value: ['Text area'] },
     type: 'text',
     dataComponentAttribute: 'TextAreaInput',
   }),

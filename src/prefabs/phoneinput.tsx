@@ -337,24 +337,7 @@ const attributes = {
 export default prefab('Phone', attributes, beforeCreate, [
   TextInput({
     label: 'Phone field',
-    inputLabel: {
-      value: ['Phone number'],
-      configuration: {
-        allowPropertyName: true,
-        allowFormatting: false,
-        allowedKinds: [],
-        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
-        allowedSplitButtonKinds: ['PHONE_NUMBER'],
-      },
-    },
-    value: {
-      value: [''],
-      configuration: {
-        allowedKinds: ['PHONE_NUMBER'],
-        allowedClickThroughKinds: ['BELONGS_TO', 'OBJECT'],
-        allowedSplitButtonKinds: [],
-      },
-    },
+    inputLabel: { value: ['Phone number'] },
     type: 'tel',
     dataComponentAttribute: 'PhoneInput',
   }),
