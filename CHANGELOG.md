@@ -1,3 +1,10 @@
+## [2.181.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.181.0...v2.181.1) (2024-02-14)
+
+
+### Bug Fixes
+
+* set date input to null when there is no value ([3368de6](https://github.com/bettyblocks/material-ui-component-set/commit/3368de65f6ae30487d19008c04950be79e58cd8d))
+
 # [2.181.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.180.1...v2.181.0) (2024-02-09)
 
 
