@@ -175,7 +175,11 @@
     }
 
     const CardMediaComponent = (
-      <CardMedia className={includeStyling()} title={titleText} component={MediaComponent} />
+      <CardMedia
+        className={includeStyling()}
+        title={titleText}
+        component={MediaComponent}
+      />
     );
 
     return isDev ? (

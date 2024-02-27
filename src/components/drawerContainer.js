@@ -20,15 +20,17 @@
     return (
       <div className={classes.outerSpacing}>
         <div
-          className={includeStyling([
-            classes.root,
-            isEmpty ? classes.empty : '',
-            isPristine ? classes.pristine : '',
-            showDrawer && breakpoint === 'xs' ? classes.rootShiftxs : '',
-            showDrawer && breakpoint === 'sm' ? classes.rootShiftsm : '',
-            showDrawer && breakpoint === 'md' ? classes.rootShiftmd : '',
-            showDrawer && breakpoint === 'lg' ? classes.rootShiftlg : '',
-          ].join(' '))}
+          className={includeStyling(
+            [
+              classes.root,
+              isEmpty ? classes.empty : '',
+              isPristine ? classes.pristine : '',
+              showDrawer && breakpoint === 'xs' ? classes.rootShiftxs : '',
+              showDrawer && breakpoint === 'sm' ? classes.rootShiftsm : '',
+              showDrawer && breakpoint === 'md' ? classes.rootShiftmd : '',
+              showDrawer && breakpoint === 'lg' ? classes.rootShiftlg : '',
+            ].join(' '),
+          )}
           data-component={useText(dataComponentAttribute) || 'DrawerContainer'}
         >
           {isPristine ? 'Page content' : children}

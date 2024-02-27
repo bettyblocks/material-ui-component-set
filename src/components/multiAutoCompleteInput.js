@@ -876,7 +876,7 @@
       return (
         <div className={classes.root}>
           <TextField
-          className={includeStyling()}
+            className={includeStyling()}
             InputProps={{
               inputProps: {
                 tabIndex: isDev ? -1 : undefined,

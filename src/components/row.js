@@ -14,11 +14,13 @@
 
         return (
           <section
-            className={includeStyling([
-              classes.row,
-              isEmpty ? classes.empty : '',
-              isPristine ? classes.pristine : '',
-            ].join(' '))}
+            className={includeStyling(
+              [
+                classes.row,
+                isEmpty ? classes.empty : '',
+                isPristine ? classes.pristine : '',
+              ].join(' '),
+            )}
             data-component={useText(dataComponentAttribute) || 'Row'}
           >
             {isPristine ? 'Row' : children}
