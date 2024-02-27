@@ -37,11 +37,11 @@
 
     return (
       <div
-        className={[
+        className={includeStyling([
           classes.root,
           isEmpty ? classes.empty : '',
           isPristine ? classes.pristine : '',
-        ].join(' ')}
+        ].join(' '))}
         data-component={useText(dataComponentAttribute) || 'Drawer'}
       >
         {isPristine ? (

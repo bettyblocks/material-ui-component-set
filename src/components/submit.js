@@ -9,7 +9,7 @@
     function Input() {
       return (
         <div>
-          <input className={classes.submit} type="submit" value={label} />
+          <input className={includeStyling(classes.submit)} type="submit" value={label} />
         </div>
       );
     }

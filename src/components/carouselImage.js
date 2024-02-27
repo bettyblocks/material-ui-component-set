@@ -52,7 +52,7 @@
           </div>
         </div>
       ) : (
-        <div className={classes.root} style={{ height: parentHeight }}>
+        <div className={includeStyling(classes.root)} style={{ height: parentHeight }}>
           <img
             src={imgUrl}
             alt={publicFileName}

@@ -23,10 +23,9 @@
 
     const ColumnComponent = (
       <div
-        className={[
-          classes.column,
-          isVisible || isDev ? '' : classes.hide,
-        ].join(' ')}
+        className={includeStyling(
+          [classes.column, isVisible || isDev ? '' : classes.hide].join(' '),
+        )}
         data-component={useText(dataComponentAttribute) || 'Column'}
       >
         {(() =>

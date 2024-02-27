@@ -67,13 +67,15 @@
 
     const BoxCmp = (
       <Box
-        className={[
-          classes.root,
-          isEmpty ? classes.empty : '',
-          isPristine ? classes.pristine : '',
-          !isPristine ? classes.background : '',
-          !isPristine ? classes.border : '',
-        ].join(' ')}
+        className={includeStyling(
+          [
+            classes.root,
+            isEmpty ? classes.empty : '',
+            isPristine ? classes.pristine : '',
+            !isPristine ? classes.background : '',
+            !isPristine ? classes.border : '',
+          ].join(' '),
+        )}
         {...boxOptions}
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}

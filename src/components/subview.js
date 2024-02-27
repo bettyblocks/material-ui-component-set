@@ -31,7 +31,7 @@
         disablePadding
         dense={dense}
         data-component={dataComponentAttributeValue}
-        className={!isPristine && children.length > 0 ? classes.border : ''}
+        className={includeStyling(!isPristine && children.length > 0 ? classes.border : '')}
       >
         {renderData()}
       </List>

@@ -15,11 +15,11 @@
       <Container
         disableGutters={disableGutters}
         maxWidth={hasMaxWidth && maxWidth}
-        className={[
+        className={includeStyling([
           classes.root,
           isEmpty ? classes.empty : '',
           isPristine ? classes.pristine : '',
-        ].join(' ')}
+        ].join(' '))}
         data-component={useText(dataComponentAttribute) || 'Container'}
       >
         {isPristine ? 'Container' : children}

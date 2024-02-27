@@ -14,7 +14,7 @@
       isEmpty && isDev ? <div className={classes.empty}>Step</div> : children;
 
     const StepCmp = (
-      <div data-component={useText(dataComponentAttribute) || 'Step'}>
+      <div className={includeStyling()} data-component={useText(dataComponentAttribute) || 'Step'}>
         {active ? StepContent : null}
       </div>
     );

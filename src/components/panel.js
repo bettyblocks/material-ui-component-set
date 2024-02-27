@@ -11,7 +11,7 @@
 
     return (
       <div
-        className={classes.panel}
+        className={includeStyling(classes.panel)}
         data-component={useText(options.dataComponentAttribute) || 'Panel'}
       >
         {options.panelTitle && (

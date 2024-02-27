@@ -34,6 +34,7 @@
         classes={{ root: classes.root }}
         disablePadding={disablePadding}
         dense={dense}
+        className={includeStyling()}
         data-component={dataComponentAttributeValue}
       >
         {renderData()}

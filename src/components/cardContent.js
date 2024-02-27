@@ -22,6 +22,7 @@
     const CardContentComponent = (
       <CardContent
         data-component={useText(dataComponentAttribute) || 'CardContent'}
+        className={includeStyling()}
       >
         {isEmpty ? PlaceHolder : children}
       </CardContent>

@@ -21,7 +21,7 @@
 
     const CardActionsComponent = (
       <CardActions
-        classes={{ root: classes.root }}
+        classes={{ root: includeStyling(classes.root) }}
         disableSpacing={disableSpacing}
         data-component={useText(dataComponentAttribute) || 'CardActions'}
       >
