@@ -108,7 +108,7 @@
             </InputLabel>
           )}
           <Rating
-            className={classes.ratingIcon}
+            className={includeStyling(classes.ratingIcon)}
             value={currentValue}
             precision={precision}
             size={size === 'custom' ? customSize : size}

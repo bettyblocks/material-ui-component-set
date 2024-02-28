@@ -45,7 +45,7 @@
     if (hasLink || hasExternalLink) {
       linkedContent = (
         <Link
-          className={classes.link}
+          className={includeStyling(classes.link)}
           href={hasExternalLink ? linkToExternalText : undefined}
           target={linkTarget}
           rel={linkTarget === '_blank' ? 'noopener' : ''}
@@ -65,7 +65,7 @@
     if (isDev && !(hasLink || hasExternalLink)) {
       linkedContent = (
         <Tag
-          className={classes.content}
+          className={includeStyling(classes.content)}
           data-component={useText(dataComponentAttribute) || 'Text'}
           dangerouslySetInnerHTML={{ __html: linkedContent }}
         />
@@ -73,7 +73,7 @@
     } else {
       linkedContent = (
         <Tag
-          className={classes.content}
+          className={includeStyling(classes.content)}
           data-component={useText(dataComponentAttribute) || 'Text'}
         >
           {linkedContent}
@@ -83,7 +83,7 @@
 
     return useInnerHtml && !isDev ? (
       <Tag
-        className={classes.content}
+        className={includeStyling(classes.content)}
         dangerouslySetInnerHTML={{ __html: parsedContent }}
         data-component={useText(dataComponentAttribute) || 'Text'}
       />

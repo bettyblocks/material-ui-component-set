@@ -321,6 +321,7 @@
             min: validMinvalue,
             max: validMaxvalue,
             tabIndex: isDev ? -1 : undefined,
+            className: includeStyling(),
           }}
           data-component={dataComponentAttributeValue}
         />

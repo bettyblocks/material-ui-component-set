@@ -25,10 +25,12 @@
         avatar={avatarSource && AvatarComponent}
         title={avatarTitle}
         subheader={avatarSubheader}
-        className={[
-          isEmpty ? classes.empty : '',
-          isPristine ? classes.pristine : '',
-        ].join(' ')}
+        className={includeStyling(
+          [
+            isEmpty ? classes.empty : '',
+            isPristine ? classes.pristine : '',
+          ].join(' '),
+        )}
         data-component={useText(dataComponentAttribute) || 'CardHeader'}
       />
     );

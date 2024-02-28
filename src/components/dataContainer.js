@@ -160,7 +160,10 @@
 
         function DataContainer(hasData) {
           return (
-            <div data-component={dataComponentAttributeText}>
+            <div
+              className={includeStyling()}
+              data-component={dataComponentAttributeText}
+            >
               {(() => {
                 if (waitForRequest) {
                   if (hasData) return children;
@@ -174,10 +177,12 @@
 
         const Wrapper = (
           <div
-            className={[
-              isEmpty ? classes.empty : '',
-              isPristine ? classes.pristine : '',
-            ].join(' ')}
+            className={includeStyling(
+              [
+                isEmpty ? classes.empty : '',
+                isPristine ? classes.pristine : '',
+              ].join(' '),
+            )}
             data-component={useText(dataComponentAttribute) || 'DataContainer'}
           >
             {isPristine

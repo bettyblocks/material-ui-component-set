@@ -63,6 +63,7 @@
     const ProgressCmp = (
       <Progress
         classes={classNames}
+        className={includeStyling()}
         variant={variant}
         value={normalise(currentValue)}
         valueBuffer={currentValueBuffer}

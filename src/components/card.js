@@ -32,7 +32,7 @@
         variant={variant}
         square={square}
         elevation={elevation}
-        classes={{ root: classes.root }}
+        classes={{ root: includeStyling(classes.root) }}
         data-component={useText(dataComponentAttribute) || 'Card'}
       >
         {isEmpty ? PlaceHolder : children}

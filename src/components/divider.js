@@ -10,7 +10,7 @@
       <div className={classes.root}>
         <div className={env === 'dev' ? classes.clickSpace : ''}>
           <hr
-            className={classes.divider}
+            className={includeStyling(classes.divider)}
             data-component={useText(dataComponentAttribute) || 'Divider'}
           />
         </div>

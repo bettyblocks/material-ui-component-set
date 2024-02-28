@@ -38,7 +38,9 @@
       <span onClick={() => B.defineFunction('Click')}>
         <Icon
           name={icon}
-          className={`${classes.root} ${!badgePresent && classes.outerSpace}`}
+          className={includeStyling(
+            `${classes.root} ${!badgePresent && classes.outerSpace}`,
+          )}
           data-component={useText(dataComponentAttribute) || 'DataTableColumn'}
         />
       </span>
@@ -56,7 +58,9 @@
       >
         <Icon
           name={icon}
-          className={`${classes.root} ${!badgePresent && classes.outerSpace}`}
+          className={includeStyling(
+            `${classes.root} ${!badgePresent && classes.outerSpace}`,
+          )}
           data-component={useText(dataComponentAttribute) || 'DataTableColumn'}
         />
       </Link>
