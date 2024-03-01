@@ -147,6 +147,7 @@
     return visible ? (
       <TableCell
         classes={{ root: classes.root }}
+        className={includeStyling()}
         align={horizontalAlignment}
         onClick={() => handleRowClick && handleRowClick(myEndpoint, context)}
         data-component={useText(dataComponentAttribute) || 'DataTableColumn'}

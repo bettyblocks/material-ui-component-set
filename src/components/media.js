@@ -139,7 +139,7 @@
     function ImageComponent() {
       return (
         <img
-          className={classes.media}
+          className={includeStyling(classes.media)}
           src={imgUrl}
           title={titleText || isVariable || imgName}
           alt={imgAlt || imgName}
@@ -172,6 +172,7 @@
           href={href}
           component={hasInteralLink ? B.Link : undefined}
           endpoint={hasInteralLink ? linkTo : undefined}
+          className={includeStyling()}
         >
           {ImageComponent()}
         </Link>
@@ -181,7 +182,7 @@
     function VideoComponent() {
       return (
         <video
-          className={classes.media}
+          className={includeStyling(classes.media)}
           src={videoUrl}
           title={titleText || videoName}
           controls
@@ -193,7 +194,7 @@
     function IframeComponent() {
       return (
         <iframe
-          className={classes.media}
+          className={includeStyling(classes.media)}
           title={titleText}
           src={iframeUrl}
           data-component={useText(dataComponentAttribute) || 'Media'}

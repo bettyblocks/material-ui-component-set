@@ -140,7 +140,7 @@
 
     const TabGroup = (
       <div
-        className={classes.tabs}
+        className={includeStyling(classes.tabs)}
         data-component={useText(dataComponentAttribute) || 'Tabs'}
       >
         {!hideTabs && TabsHeader}

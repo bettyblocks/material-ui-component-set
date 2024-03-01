@@ -21,7 +21,7 @@
 
     return (
       <ListSubheader
-        className={classes.root}
+        className={includeStyling(classes.root)}
         inset={inset}
         data-component={useText(dataComponentAttribute) || 'ListHeader'}
       >

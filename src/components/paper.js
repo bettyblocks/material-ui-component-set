@@ -26,6 +26,7 @@
         elevation={variant === 'flat' ? 0 : elevation}
         square={square}
         data-component={useText(dataComponentAttribute) || 'Paper'}
+        className={includeStyling()}
       >
         {isEmpty ? PlaceHolder : children}
       </Paper>

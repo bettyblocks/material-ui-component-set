@@ -44,7 +44,7 @@
     const breadcrumbItem = hasEndpoint ? (
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
       <Link
-        className={[classes.content, classes.link].join(' ')}
+        className={includeStyling([classes.content, classes.link].join(' '))}
         endpoint={endpoint}
         data-component={useText(dataComponentAttribute) || 'BreadcrumbItem'}
       >
@@ -52,7 +52,7 @@
       </Link>
     ) : (
       <span
-        className={classes.content}
+        className={includeStyling(classes.content)}
         data-component={useText(dataComponentAttribute) || 'BreadcrumbItem'}
       >
         {BreadcrumbChildren}

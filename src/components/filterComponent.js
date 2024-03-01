@@ -702,9 +702,11 @@
     });
 
     return isDev ? (
-      <div className={classes.root}>{renderTree(groups, true)}</div>
+      <div className={includeStyling(classes.root)}>
+        {renderTree(groups, true)}
+      </div>
     ) : (
-      <div className={classes.root}>{renderTree(groups)}</div>
+      <div className={includeStyling(classes.root)}>{renderTree(groups)}</div>
     );
   })(),
   styles: (B) => (theme) => {

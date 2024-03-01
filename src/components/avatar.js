@@ -38,7 +38,7 @@
         variant={variant}
         alt={isImage && altText}
         src={isImage && imgSrc}
-        className={classes.avatar}
+        className={includeStyling(classes.avatar)}
         style={styleOptions}
         data-component={useText(dataComponentAttribute) || 'Avatar'}
       >
