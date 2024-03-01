@@ -31,10 +31,12 @@
 
     const ChipComponent = (
       <Chip
-        className={[
-          classes.root,
-          variant === 'default' ? classes.chip : classes.outlined,
-        ].join(' ')}
+        className={includeStyling(
+          [
+            classes.root,
+            variant === 'default' ? classes.chip : classes.outlined,
+          ].join(' '),
+        )}
         label={useText(label)}
         disabled={disabled}
         variant={variant}

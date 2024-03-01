@@ -98,7 +98,7 @@
     const ShowChilderen = <>{dataShown || isDev ? children : ''}</>;
 
     const ExpansionPanelComponent = (
-      <ExpansionPanel {...panelOptions}>
+      <ExpansionPanel {...panelOptions} className={includeStyling()}>
         <ExpansionPanelSummary {...panelSummaryOptions}>
           <Typography variant={Variant} className={classes.panelTitle}>
             {useText(title)}

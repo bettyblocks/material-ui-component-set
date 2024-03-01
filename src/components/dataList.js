@@ -63,7 +63,10 @@
         const [interactionFilter, setInteractionFilter] = useState({});
 
         const builderLayout = () => (
-          <div data-component={dataComponentAttributeText || 'DataList'}>
+          <div
+            className={includeStyling()}
+            data-component={dataComponentAttributeText || 'DataList'}
+          >
             {searchProperty &&
               searchProperty.type &&
               searchProperty.id !== '' && (
@@ -433,7 +436,11 @@
           if (loading && loadingType === 'showChildren') {
             B.triggerEvent('onLoad', loading);
             return (
-              <ModelProvider value={prevData} id={model}>
+              <ModelProvider
+                className={includeStyling()}
+                value={prevData}
+                id={model}
+              >
                 {children}
               </ModelProvider>
             );

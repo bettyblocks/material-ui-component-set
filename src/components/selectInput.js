@@ -330,6 +330,7 @@
           select={!disabled}
           defaultValue={isDev ? placeholderLabelText : currentValue}
           value={isDev ? placeholderLabelText : currentValue}
+          className={includeStyling()}
           size={size}
           classes={{
             root: `${classes.formControl} ${floatLabel && classes.floatLabel} ${

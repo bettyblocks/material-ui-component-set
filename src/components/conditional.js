@@ -119,7 +119,9 @@
 
     return (
       <div
-        className={children.length === 0 ? classes.empty : undefined}
+        className={includeStyling(
+          children.length === 0 ? classes.empty : undefined,
+        )}
         data-component={useText(dataComponentAttribute) || 'Conditional'}
       >
         {isPristine ? 'Conditional' : children}

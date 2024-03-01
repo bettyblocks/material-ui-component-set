@@ -235,6 +235,7 @@
         InputProps={{
           inputProps: {
             tabIndex: isDev ? -1 : undefined,
+            className: includeStyling(),
           },
         }}
         KeyboardButtonProps={{

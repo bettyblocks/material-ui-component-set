@@ -1,3 +1,10 @@
+# [2.182.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.181.1...v2.182.0) (2024-03-01)
+
+
+### Features
+
+* add unified styling to component set ([2c8ae56](https://github.com/bettyblocks/material-ui-component-set/commit/2c8ae5689c72f8a48cbcb985d5a19fa060da6d6d))
+
 ## [2.181.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.181.0...v2.181.1) (2024-02-14)
 
 

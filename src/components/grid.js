@@ -121,7 +121,9 @@
     }
 
     const GridComp = !model ? (
-      <Grid {...gridOptions}>{children}</Grid>
+      <Grid className={includeStyling()} {...gridOptions}>
+        {children}
+      </Grid>
     ) : (
       <GetAll modelId={model} filter={filter}>
         {({ loading, error, data }) => {
@@ -147,7 +149,7 @@
           }
 
           return (
-            <Grid {...gridOptions}>
+            <Grid className={includeStyling()} {...gridOptions}>
               {results.map((item) => (
                 <ModelProvider key={item.id} value={item} id={model}>
                   <InteractionScope>{children}</InteractionScope>
@@ -173,7 +175,7 @@
         className={[classes.wrapper, isEmpty ? classes.empty : ''].join(' ')}
         data-type={`grid-${type}`}
       >
-        <Grid ref={gridRef} {...gridOptions}>
+        <Grid ref={gridRef} className={includeStyling()} {...gridOptions}>
           {children}
         </Grid>
       </div>

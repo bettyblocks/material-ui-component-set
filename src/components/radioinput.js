@@ -334,6 +334,7 @@
         {!hideLabel && <FormLabel component="legend">{labelText}</FormLabel>}
         <RadioGroup
           row={row}
+          className={includeStyling()}
           value={currentValue}
           name={name}
           onChange={handleChange}
