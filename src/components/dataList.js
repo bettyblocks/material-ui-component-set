@@ -125,7 +125,10 @@
                 listRef.current.children[0].outerHTML,
               );
             }
-            listRef.current.children.forEach((child, index) => {
+
+            const children = Array.from(listRef.current.children);
+
+            children.forEach((child, index) => {
               if (index > 0) {
                 const elem = child;
                 elem.style.opacity = 0.4;
