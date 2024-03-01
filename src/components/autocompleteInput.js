@@ -712,6 +712,7 @@
         classes={{
           root: `${classes.formControl} ${floatLabel && classes.floatLabel}`,
         }}
+        className={includeStyling()}
         variant={variant}
         size={size}
         fullWidth={fullWidth}
@@ -839,7 +840,7 @@
       }
 
       return (
-        <div className={classes.root}>
+        <div className={includeStyling(classes.root)}>
           <TextField
             InputProps={{
               inputProps: {

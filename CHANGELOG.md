@@ -1,3 +1,17 @@
+## [2.182.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.182.0...v2.182.1) (2024-03-01)
+
+
+### Bug Fixes
+
+* convert htmlcollection to array before foreach method is used ([5f579b6](https://github.com/bettyblocks/material-ui-component-set/commit/5f579b645b9df1c6b2d97d75bf991efdfb30482a))
+
+# [2.182.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.181.1...v2.182.0) (2024-03-01)
+
+
+### Features
+
+* add unified styling to component set ([2c8ae56](https://github.com/bettyblocks/material-ui-component-set/commit/2c8ae5689c72f8a48cbcb985d5a19fa060da6d6d))
+
 ## [2.181.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.181.0...v2.181.1) (2024-02-14)
 
 

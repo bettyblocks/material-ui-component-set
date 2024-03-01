@@ -117,8 +117,8 @@
       'data-component': dataComponentAttributeValue,
     };
 
-    const Checkbox = <MUICheckbox {...props} />;
-    const SwitchComponent = <Switch {...props} />;
+    const Checkbox = <MUICheckbox className={includeStyling()} {...props} />;
+    const SwitchComponent = <Switch className={includeStyling()} {...props} />;
 
     const ControlLabel = (
       <>

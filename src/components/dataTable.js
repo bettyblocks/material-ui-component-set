@@ -681,7 +681,7 @@
 
     return (
       <div
-        className={classes.root}
+        className={includeStyling(classes.root)}
         data-component={useText(dataComponentAttribute) || 'DataTable'}
       >
         <Paper

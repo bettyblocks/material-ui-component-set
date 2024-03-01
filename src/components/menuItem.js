@@ -94,7 +94,7 @@
 
     const menuItemCmp = (
       <MenuItem
-        className={classes.root}
+        className={includeStyling(classes.root)}
         component={menuItemComponent}
         dense={dense}
         disabled={!isDev && (disabled || isLoading)}

@@ -52,6 +52,7 @@
         aria-labelledby="tabs"
         classes={{ root: classes.root }}
         data-component={useText(dataComponentAttribute) || 'Tab'}
+        className={includeStyling()}
       >
         {children.length > 0 &&
         (activeTabs.indexOf(index) !== -1 || showAllTabs || preLoadTabs) ? (

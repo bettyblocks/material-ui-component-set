@@ -63,7 +63,10 @@
         const [interactionFilter, setInteractionFilter] = useState({});
 
         const builderLayout = () => (
-          <div data-component={dataComponentAttributeText || 'DataList'}>
+          <div
+            className={includeStyling()}
+            data-component={dataComponentAttributeText || 'DataList'}
+          >
             {searchProperty &&
               searchProperty.type &&
               searchProperty.id !== '' && (
@@ -122,7 +125,10 @@
                 listRef.current.children[0].outerHTML,
               );
             }
-            listRef.current.children.forEach((child, index) => {
+
+            const children = Array.from(listRef.current.children);
+
+            children.forEach((child, index) => {
               if (index > 0) {
                 const elem = child;
                 elem.style.opacity = 0.4;
@@ -430,7 +436,11 @@
           if (loading && loadingType === 'showChildren') {
             B.triggerEvent('onLoad', loading);
             return (
-              <ModelProvider value={prevData} id={model}>
+              <ModelProvider
+                className={includeStyling()}
+                value={prevData}
+                id={model}
+              >
                 {children}
               </ModelProvider>
             );

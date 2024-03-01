@@ -294,6 +294,7 @@
           disabled={disabled}
           required={required}
           margin={margin}
+          className={includeStyling()}
         >
           <Label className={classes.label}>
             {hideLabel ? '' : `${labelText} ${requiredText}`}
