@@ -357,6 +357,7 @@
       <FormControl
         classes={{ root: classes.formControl }}
         margin={margin}
+        className={includeStyling()}
         component="fieldset"
         required={required}
         error={afterFirstInvalidation && hasError}

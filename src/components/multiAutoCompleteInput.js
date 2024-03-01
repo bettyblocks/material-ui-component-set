@@ -737,6 +737,7 @@
       >
         <Autocomplete
           disableCloseOnSelect={!closeOnSelect}
+          className={includeStyling()}
           disabled={disabled}
           {...((optionType === 'model' || optionType === 'variable') && {
             getOptionLabel: renderLabel,
@@ -875,6 +876,7 @@
       return (
         <div className={classes.root}>
           <TextField
+            className={includeStyling()}
             InputProps={{
               inputProps: {
                 tabIndex: isDev ? -1 : undefined,
