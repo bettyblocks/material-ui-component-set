@@ -1,3 +1,11 @@
+## [2.182.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.182.1...v2.182.2) (2024-03-04)
+
+
+### Bug Fixes
+
+* combine filters instead of overwriting current filter ([33401db](https://github.com/bettyblocks/material-ui-component-set/commit/33401dba714f0ba3d24dfddea404b447710b9e5d))
+* trigger pipelines ([0fab5ee](https://github.com/bettyblocks/material-ui-component-set/commit/0fab5eebf6e330ebd85718b1a23ce10212ae8cb3))
+
 ## [2.182.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.182.0...v2.182.1) (2024-03-01)
 
 
