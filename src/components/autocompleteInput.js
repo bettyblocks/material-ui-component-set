@@ -343,6 +343,7 @@
         },
       ];
     } else if (debouncedInputValue) {
+      // if a relation is selected for label option
       if (labelPropertyPath.length > 1) {
         const newFilter = {
           [labelPropIsNumber ? 'eq' : 'matches']: labelPropIsNumber
@@ -353,7 +354,7 @@
         const resolvedFilter = resolvedUuids.reduceRight((acc, q) => {
           return { [q]: acc };
         }, newFilter);
-        filter = resolvedFilter;
+        filter = { ...filter, ...resolvedFilter };
       } else {
         filter[searchProp.name] = {
           [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
