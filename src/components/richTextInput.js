@@ -113,15 +113,19 @@
       floatLabel,
     } = options;
     const isDev = env === 'dev';
-
-    const [currentValue, setCurrentValue] = useState(
-      useText(valueProp, { rawValue: true }),
-    );
+    const optionValue = useText(valueProp, { rawValue: true });
+    const [currentValue, setCurrentValue] = useState(optionValue);
+    const [valueKey, setValueKey] = useState(0);
     const labelText = useText(label);
     const [showDropdown, setShowDropdown] = useState(false);
     const [activeStyleName, setActiveStyleName] = useState('Body 1');
     const placeholderText = useText(placeholder);
     const helperTextResolved = useText(helperText);
+
+    useEffect(() => {
+      setCurrentValue(optionValue);
+      setValueKey(valueKey + 1);
+    }, [optionValue]);
 
     const isMarkActive = (editor, format) => {
       const marks = Editor.marks(editor);
@@ -909,6 +913,7 @@
         )}
         <div className={classes.editorWrapper}>
           <Slate
+            key={valueKey}
             editor={editor}
             value={fragment}
             onChange={(value) => {
