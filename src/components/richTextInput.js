@@ -123,7 +123,6 @@
     const placeholderText = useText(placeholder);
     const helperTextResolved = useText(helperText);
 
-
     useEffect(() => {
       setCurrentValue(optionValue);
       setValueKey(valueKey + 1);
