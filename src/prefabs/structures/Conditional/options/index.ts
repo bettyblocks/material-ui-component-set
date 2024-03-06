@@ -82,6 +82,10 @@ export const conditionalOptions = {
           name: 'Less than or equal to',
           value: 'lteq',
         },
+        {
+          name: 'IN',
+          value: 'in',
+        },
       ],
       condition: showIf('type', 'EQ', 'singleRule'),
     },

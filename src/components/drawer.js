@@ -5,6 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { Children, env, useText } = B;
+    const { useMediaQuery, useTheme } = window.MaterialUI.Core;
     const isEmpty = children.length === 0;
     const isPristine = isEmpty && env === 'dev';
     const {
@@ -20,11 +21,11 @@
 
     const isTemporary = drawerType === 'temporary';
     const anchor = isTemporary ? temporaryAnchor : persistentAnchor;
-
-    // Because custom boolean option returns false as a string, do an additonal check
-    const componentVisibility =
-      env === 'dev' ? visibility : runTimeVisibility !== 'false';
-
+    const aboveBreakpoint = useMediaQuery(
+      useTheme().breakpoints.up(breakpoint),
+    );
+    const showInRunTime = aboveBreakpoint && runTimeVisibility;
+    const componentVisibility = env === 'dev' ? visibility : showInRunTime;
     const [isOpen, setIsOpen] = useState(componentVisibility);
 
     const closeDrawer = () => setIsOpen(false);

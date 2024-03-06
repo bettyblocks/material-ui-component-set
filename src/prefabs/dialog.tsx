@@ -9,7 +9,6 @@ import {
   PrefabInteraction,
   InteractionType,
 } from '@betty-blocks/component-sdk';
-
 import {
   Box,
   Column,

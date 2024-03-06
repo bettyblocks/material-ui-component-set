@@ -39,16 +39,7 @@
     const linkToExternalText =
       (linkToExternal && useText(linkToExternal)) || '';
     let linkedContent = parsedContent;
-    if (isDev && !isPristine) {
-      linkedContent = '';
-      content.forEach((value) => {
-        if (typeof value === 'string' || value instanceof String) {
-          linkedContent += value;
-        } else {
-          linkedContent += `<span class="${classes.nowrap}" >${value.name}</span>`;
-        }
-      });
-    } else if (isDev) {
+    if (isPristine) {
       linkedContent = `<span class=${classes.placeholder}>Empty content</span>`;
     }
     if (hasLink || hasExternalLink) {

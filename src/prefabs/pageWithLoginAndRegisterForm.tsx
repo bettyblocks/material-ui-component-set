@@ -459,10 +459,8 @@ const beforeCreate = ({
 
       const resultAuth = await prepareAction(
         componentId,
-        // this typing is wrong hence the ts ignore
-        // @ts-ignore
         undefined,
-        null,
+        undefined,
         'login',
         authProfile,
       );

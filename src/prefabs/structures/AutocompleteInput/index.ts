@@ -14,7 +14,7 @@ export const AutocompleteInput = (
 
   const categories = [
     {
-      label: 'Validation Options',
+      label: 'Validations',
       expanded: false,
       members: ['required', 'validationValueMissing'],
     },
@@ -37,7 +37,7 @@ export const AutocompleteInput = (
       ],
     },
     {
-      label: 'Advanced Options',
+      label: 'Advanced',
       expanded: false,
       members: ['errorType', 'nameAttribute', 'dataComponentAttribute'],
     },
@@ -48,7 +48,7 @@ export const AutocompleteInput = (
   }
 
   if (config.inputLabel) {
-    options.label = updateOption(options.label, { value: [config.inputLabel] });
+    options.label = updateOption(options.label, { ...config.inputLabel });
   }
 
   if (config.adornmentIcon) {
