@@ -82,7 +82,6 @@
     } else if (isPageVariableProperty) {
       resolvedCurrentValue = getValue(defaultValueText);
     } else if (kind === undefined) {
-      console.log('d');
       // if kind is undefined, it is non property based
       resolvedCurrentValue = '';
     } else {
