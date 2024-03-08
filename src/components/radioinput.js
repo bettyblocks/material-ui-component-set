@@ -62,6 +62,9 @@
 
     const isListProperty = kind === 'list' || kind === 'LIST';
     const isObjectProperty = kind === 'object' || kind === 'OBJECT';
+    const isPageVariableProperty = prefabValue.find(
+      (item) => item.type === 'PAGE_VARIABLE_MODEL_PROPERTY',
+    );
 
     const isPropertyArray = Boolean(
       prefabValue.length && prefabValue.some((p) => p.type === 'PROPERTY'),
@@ -76,6 +79,8 @@
       resolvedCurrentValue = defaultValueText;
     } else if (isPropertyArray && !isObjectProperty) {
       resolvedCurrentValue = parseInt(defaultValueText, 10) || '';
+    } else if (isPageVariableProperty) {
+      resolvedCurrentValue = getValue(defaultValueText);
     } else if (kind === undefined) {
       // if kind is undefined, it is non property based
       resolvedCurrentValue = '';
@@ -83,6 +88,10 @@
       resolvedCurrentValue = getValue(prefabValue);
     }
     const [currentValue, setCurrentValue] = useState(resolvedCurrentValue);
+
+    useEffect(() => {
+      setCurrentValue(resolvedCurrentValue);
+    }, [defaultValueText]);
 
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
