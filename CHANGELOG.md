@@ -1,3 +1,10 @@
+# [2.184.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.183.0...v2.184.0) (2024-03-08)
+
+
+### Features
+
+* added richtext support for pagevariables ([81702c7](https://github.com/bettyblocks/material-ui-component-set/commit/81702c7bed107d9975e0fd4c6159c17996f08399))
+
 # [2.183.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.182.2...v2.183.0) (2024-03-08)
 
 
