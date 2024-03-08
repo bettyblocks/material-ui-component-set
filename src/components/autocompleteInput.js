@@ -142,6 +142,10 @@
         (hasDefaultLabelProperty && defaultLabelProperty) ||
         idProperty;
 
+    useEffect(() => {
+      setValue(defaultValue.replace(/\n/g, ''));
+    }, [defaultValue]);
+
     /*
      * This component only works with relational or list properties.
      * the value of a list property is the list item itself.
