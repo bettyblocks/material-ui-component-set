@@ -143,7 +143,16 @@
         idProperty;
 
     useEffect(() => {
-      setValue(defaultValue.replace(/\n/g, ''));
+      if (defaultValue) {
+        defaultValueEvaluatedRef.current = false;
+        setValue(initalValue);
+        setInputValue('');
+      } else {
+        defaultValueEvaluatedRef.current = true;
+        setValue('');
+        setInputValue('');
+        setDebouncedInputValue('');
+      }
     }, [defaultValue]);
 
     /*
