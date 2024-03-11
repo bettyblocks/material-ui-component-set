@@ -1,3 +1,10 @@
+# [2.185.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.184.0...v2.185.0) (2024-03-11)
+
+
+### Features
+
+* enabled resetting value of autocomplete ([576a75b](https://github.com/bettyblocks/material-ui-component-set/commit/576a75b81b87fe55491297b111570da3344b7643))
+
 # [2.184.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.183.0...v2.184.0) (2024-03-08)
 
 
