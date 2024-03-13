@@ -136,19 +136,27 @@
 
     const valueProperty = isListProperty ? modelProperty : idProperty;
     const defaultValue = useText(valueRaw, { rawValue: true });
+    const isPageVariableValue = valueRaw[0] && valueRaw[0].path;
     const getValues = () => {
       const value = defaultValue.replace(/\n/g, '');
       try {
         const parsed = JSON.parse(value);
         if (
           Array.isArray(parsed) &&
+          parsed.length &&
           parsed.every((item) => typeof item === 'object' && 'id' in item)
         ) {
           return parsed.map((obj) => String(obj.id));
         }
+        if (!parsed.length) {
+          if (isPageVariableValue) {
+            return [''];
+          }
+          return [];
+        }
       } catch (error) {
         if (value.trim() === '') {
-          if (valueRaw[0] && 'path' in valueRaw[0]) {
+          if (isPageVariableValue) {
             return [''];
           }
           return [];
@@ -161,7 +169,6 @@
       return value;
     };
     const initialValue = getValues();
-
     const validationMessage = (validityObject) => {
       if (!validityObject) {
         return '';
