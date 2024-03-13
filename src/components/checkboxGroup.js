@@ -117,6 +117,22 @@
       // split the string and trim spaces
       if (Array.isArray(value)) return value;
 
+      // check wether our value is an object array.
+      try {
+        const parsed = JSON.parse(value);
+        if (
+          Array.isArray(parsed) &&
+          parsed.every((item) => typeof item === 'object' && 'id' in item)
+        ) {
+          return parsed.map((obj) => String(obj.id));
+        }
+      } catch (error) {
+        return value
+          .split(',')
+          .filter((part) => part !== '')
+          .map((str) => str.trim());
+      }
+
       return value
         .split(',')
         .filter((part) => part !== '')
@@ -124,6 +140,10 @@
     };
 
     const [values, setValues] = useState(getValues());
+
+    useEffect(() => {
+      setValues(getValues());
+    }, [defaultValueText]);
 
     const orderBySanitized = orderBy.id === '' ? undefined : orderBy;
 
