@@ -136,16 +136,39 @@
 
     const valueProperty = isListProperty ? modelProperty : idProperty;
     const defaultValue = useText(valueRaw, { rawValue: true });
-    let initialValue = defaultValue.replace(/\n/g, '');
-
-    if (defaultValue.trim() === '') {
-      initialValue = [];
-    } else {
-      initialValue = defaultValue
-        .trim()
-        .split(',')
-        .map((x) => x.trim());
-    }
+    const isPageVariableValue = valueRaw[0] && valueRaw[0].path;
+    const getValues = () => {
+      const value = defaultValue.replace(/\n/g, '');
+      try {
+        const parsed = JSON.parse(value);
+        if (
+          Array.isArray(parsed) &&
+          parsed.length &&
+          parsed.every((item) => typeof item === 'object' && 'id' in item)
+        ) {
+          return parsed.map((obj) => String(obj.id));
+        }
+        if (!parsed.length) {
+          if (isPageVariableValue) {
+            return [''];
+          }
+          return [];
+        }
+      } catch (error) {
+        if (value.trim() === '') {
+          if (isPageVariableValue) {
+            return [''];
+          }
+          return [];
+        }
+        return value
+          .trim()
+          .split(',')
+          .map((x) => x.trim());
+      }
+      return value;
+    };
+    const initialValue = getValues();
     const validationMessage = (validityObject) => {
       if (!validityObject) {
         return '';
@@ -210,7 +233,6 @@
      *
      */
     const [value, setValue] = useState(initialValue);
-
     useEffect(() => {
       if (isDev && typeof value === 'string') {
         if (value.trim() === '') {
@@ -225,7 +247,9 @@
         }
       }
     }, [multiple]);
-
+    useEffect(() => {
+      setValue(initialValue);
+    }, [defaultValue]);
     /*
      * User input in the autocomplete. In case of freeSolo this is the same as `value`
      */
@@ -301,8 +325,9 @@
 
     // check if the value option has a relation with an id key
     const relationPropertyId = valueRaw[0] && valueRaw[0].id;
-    const relationProperty = getProperty(relationPropertyId || '');
-
+    const relationProperty = relationPropertyId
+      ? getProperty(relationPropertyId || '')
+      : getProperty('');
     // check if the value option has a relational property
     if (relationProperty && relationProperty.inverseAssociationId) {
       const parentProperty = getIdProperty(relationProperty.modelId);

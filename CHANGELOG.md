@@ -1,3 +1,22 @@
+# [2.184.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.183.0...v2.184.0) (2024-03-08)
+
+
+### Features
+
+* added richtext support for pagevariables ([81702c7](https://github.com/bettyblocks/material-ui-component-set/commit/81702c7bed107d9975e0fd4c6159c17996f08399))
+
+# [2.183.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.182.2...v2.183.0) (2024-03-08)
+
+
+### Bug Fixes
+
+* remove console ([91dd925](https://github.com/bettyblocks/material-ui-component-set/commit/91dd925faa0cd93a1c367f7a5491799739ce22c5))
+
+
+### Features
+
+* added pagevariable belongsto support for radio, select and autocomplete components ([3658315](https://github.com/bettyblocks/material-ui-component-set/commit/365831587307934ebeef96e0ff19e53f56e1c23b))
+
 ## [2.182.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.182.1...v2.182.2) (2024-03-04)
 
 
