@@ -639,19 +639,21 @@
           return [];
         }
         const nonFetchedOptions = [];
-        value.forEach((x) => {
+        value.forEach((optionValue) => {
           if (
             !results.some((result) => {
-              if (typeof x === 'string') {
+              if (typeof optionValue === 'string') {
                 return valuePropIsNumber
-                  ? result[valueProp.name] === parseInt(x, 10)
-                  : result[valueProp.name] === x;
+                  ? result[valueProp.name] === parseInt(optionValue, 10)
+                  : result[valueProp.name] === optionValue;
               }
 
-              return result[valueProp.name] === x[valueProp.name];
+              return result[valueProp.name] === optionValue[valueProp.name];
             })
           ) {
-            nonFetchedOptions.push(x);
+            if (optionValue) {
+              nonFetchedOptions.push(optionValue);
+            }
           }
         });
 
