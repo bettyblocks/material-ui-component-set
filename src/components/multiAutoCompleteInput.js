@@ -651,7 +651,9 @@
               return result[valueProp.name] === x[valueProp.name];
             })
           ) {
-            nonFetchedOptions.push(x);
+            if (x) {
+              nonFetchedOptions.push(x);
+            }
           }
         });
 
