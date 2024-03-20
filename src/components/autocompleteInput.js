@@ -142,6 +142,19 @@
         (hasDefaultLabelProperty && defaultLabelProperty) ||
         idProperty;
 
+    useEffect(() => {
+      if (defaultValue) {
+        defaultValueEvaluatedRef.current = false;
+        setValue(initalValue);
+        setInputValue('');
+      } else {
+        defaultValueEvaluatedRef.current = true;
+        setValue('');
+        setInputValue('');
+        setDebouncedInputValue('');
+      }
+    }, [defaultValue]);
+
     /*
      * This component only works with relational or list properties.
      * the value of a list property is the list item itself.
