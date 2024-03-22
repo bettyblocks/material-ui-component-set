@@ -67,6 +67,7 @@
     const parsedLabel = useText(label);
     const labelText = parsedLabel;
     const debouncedOnChangeRef = useRef(null);
+    const { current: id } = useRef(`${B.componentId}_${Math.random()}`);
 
     const validPattern = pattern || null;
     const validMinlength = minLength || null;
@@ -268,6 +269,7 @@
       >
         {labelText && !hideLabel && (
           <InputLabel
+            htmlFor={id}
             classes={{
               root: `${classes.label} ${floatLabel && classes.floatLabel}`,
             }}
@@ -277,6 +279,7 @@
           </InputLabel>
         )}
         <InputCmp
+          id={id}
           name={name}
           value={currentValue}
           type={showPassword ? 'text' : inputType}
