@@ -18,6 +18,7 @@
       InteractionScope,
       ModelProvider,
       env,
+      generateUUID,
       getIdProperty,
       getModel,
       getProperty,
@@ -88,6 +89,7 @@
     const [helper, setHelper] = useState(useText(helperTextRaw));
     const [errorState, setErrorState] = useState(false);
     const changeContext = useRef(null);
+    const { current: uuid } = useRef(generateUUID());
     const dataComponentAttribute =
       useText(dataComponentAttributeRaw) || 'AutoComplete';
 
@@ -763,6 +765,7 @@
         error={errorState}
       >
         <Autocomplete
+          id={uuid}
           disableCloseOnSelect={!closeOnSelect}
           className={includeStyling()}
           disabled={disabled}
