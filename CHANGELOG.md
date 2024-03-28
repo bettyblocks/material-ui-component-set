@@ -1,3 +1,23 @@
+# [2.186.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.185.0...v2.186.0) (2024-03-19)
+
+
+### Bug Fixes
+
+* no value fix for habtm ([67063ae](https://github.com/bettyblocks/material-ui-component-set/commit/67063ae14f3624b6fb1225dbfc4434b14f4bc2ab))
+* prevent empty values beeing pushed ([5f21d53](https://github.com/bettyblocks/material-ui-component-set/commit/5f21d53e6637f0958e662f23e238bcef35a205db))
+
+
+### Features
+
+* added pagvar hasmany support ([7b05fca](https://github.com/bettyblocks/material-ui-component-set/commit/7b05fcaaccbb17afe816f7f672b136d3fa61e8dd))
+
+# [2.185.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.184.0...v2.185.0) (2024-03-11)
+
+
+### Features
+
+* enabled resetting value of autocomplete ([576a75b](https://github.com/bettyblocks/material-ui-component-set/commit/576a75b81b87fe55491297b111570da3344b7643))
+
 # [2.184.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.183.0...v2.184.0) (2024-03-08)
 
 
