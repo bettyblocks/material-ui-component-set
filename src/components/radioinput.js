@@ -26,7 +26,14 @@
       validationValueMissing = [''],
       value: prefabValue,
     } = options;
-    const { env, getProperty, useText, useAllQuery, useRelation } = B;
+    const {
+      env,
+      generateUUID,
+      getProperty,
+      useAllQuery,
+      useRelation,
+      useText,
+    } = B;
     const {
       FormControl: MUIFormControl,
       FormControlLabel: MUIFormControlLabel,
@@ -276,15 +283,21 @@
     }
 
     // renders the radio component
-    const renderRadio = (optionValue, optionLabel) => (
-      <MUIFormControlLabel
-        disabled={disabled}
-        value={optionValue}
-        control={<Radio tabIndex={isDev ? -1 : undefined} size={size} />}
-        label={optionLabel}
-        labelPlacement={labelPosition}
-      />
-    );
+    const renderRadio = (optionValue, optionLabel) => {
+      const uuid = generateUUID();
+      return (
+        <MUIFormControlLabel
+          for={uuid}
+          disabled={disabled}
+          value={optionValue}
+          control={
+            <Radio id={uuid} tabIndex={isDev ? -1 : undefined} size={size} />
+          }
+          label={optionLabel}
+          labelPlacement={labelPosition}
+        />
+      );
+    };
 
     const renderRadios = () => {
       if (!valid) {
