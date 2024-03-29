@@ -24,6 +24,9 @@
       if (typeof textValue === 'boolean') {
         return textValue;
       }
+      if (typeof textValue === 'undefined') {
+        return undefined;
+      }
       return ['on', 'true', 'yes'].includes(textValue.trim().toLowerCase());
     }
 
