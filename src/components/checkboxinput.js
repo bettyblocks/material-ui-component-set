@@ -24,7 +24,7 @@
       if (typeof textValue === 'boolean') {
         return textValue;
       }
-      return ['on', 'true', 'yes'].includes(textValue?.trim().toLowerCase());
+      return ['on', 'true', 'yes'].includes(textValue.trim().toLowerCase());
     }
 
     const [errorState, setErrorState] = useState(false);
