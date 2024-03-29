@@ -17,7 +17,7 @@
       isSwitch,
       dataComponentAttribute = ['Checkbox'],
     } = options;
-    const { env, useText } = B;
+    const { env, generateUUID, useText } = B;
     const isDev = env === 'dev';
 
     function boolify(textValue) {
@@ -30,6 +30,7 @@
     const [errorState, setErrorState] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
     const mounted = useRef(false);
+    const { current: labelControlRef } = useRef(generateUUID());
     const parsedLabel = useText(label);
     const labelText = parsedLabel;
     const resolvedValue = useText(value);
@@ -105,6 +106,7 @@
     }, [isDev, helperTextResolved, resolvedValue]);
 
     const props = {
+      id: labelControlRef,
       checked,
       required,
       onInvalid: invalidHandler,
@@ -143,6 +145,7 @@
           classes={{ root: classes.formControl }}
         >
           <FormControlLabel
+            htmlFor={labelControlRef}
             control={isSwitch ? SwitchComponent : Checkbox}
             label={ControlLabel}
             labelPlacement={position}

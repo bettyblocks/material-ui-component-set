@@ -53,7 +53,7 @@
       IconButton,
     } = window.MaterialUI.Core;
 
-    const { env, useText, Icon } = B;
+    const { env, useText, Icon, generateUUID } = B;
     const isDev = env === 'dev';
     const isNumberType = type === 'number';
     const isPasswordType = type === 'password';
@@ -67,6 +67,8 @@
     const parsedLabel = useText(label);
     const labelText = parsedLabel;
     const debouncedOnChangeRef = useRef(null);
+
+    const { current: labelControlRef } = useRef(generateUUID());
 
     const validPattern = pattern || null;
     const validMinlength = minLength || null;
@@ -269,6 +271,7 @@
       >
         {labelText && !hideLabel && (
           <InputLabel
+            htmlFor={labelControlRef}
             classes={{
               root: `${classes.label} ${floatLabel && classes.floatLabel}`,
             }}
@@ -278,6 +281,7 @@
           </InputLabel>
         )}
         <InputCmp
+          id={labelControlRef}
           name={name}
           value={currentValue}
           type={showPassword ? 'text' : inputType}
