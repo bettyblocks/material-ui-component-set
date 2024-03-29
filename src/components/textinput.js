@@ -68,7 +68,7 @@
     const labelText = parsedLabel;
     const debouncedOnChangeRef = useRef(null);
 
-    const { current: uuid } = useRef(generateUUID());
+    const { current: labelControlRef } = useRef(generateUUID());
 
     const validPattern = pattern || null;
     const validMinlength = minLength || null;
@@ -270,7 +270,7 @@
       >
         {labelText && !hideLabel && (
           <InputLabel
-            htmlFor={uuid}
+            htmlFor={labelControlRef}
             classes={{
               root: `${classes.label} ${floatLabel && classes.floatLabel}`,
             }}
@@ -280,7 +280,7 @@
           </InputLabel>
         )}
         <InputCmp
-          id={uuid}
+          id={labelControlRef}
           name={name}
           value={currentValue}
           type={showPassword ? 'text' : inputType}

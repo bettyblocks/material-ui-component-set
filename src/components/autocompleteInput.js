@@ -96,7 +96,7 @@
     const [debouncedCurrentValue, setDebouncedCurrentValue] = useState();
     const [interactionFilter, setInteractionFilter] = useState({});
     const defaultValueEvaluatedRef = useRef(false);
-    const { current: uuid } = useRef(generateUUID());
+    const { current: labelControlRef } = useRef(generateUUID());
 
     const isNumberType = type === 'number';
 
@@ -735,7 +735,7 @@
         error={errorState}
       >
         <Autocomplete
-          id={uuid}
+          id={labelControlRef}
           disableCloseOnSelect={!closeOnSelect}
           disabled={disabled}
           {...(!isListProperty && {

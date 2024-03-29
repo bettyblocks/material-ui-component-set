@@ -30,7 +30,7 @@
     const [errorState, setErrorState] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
     const mounted = useRef(false);
-    const { current: uuid } = useRef(generateUUID());
+    const { current: labelControlRef } = useRef(generateUUID());
     const parsedLabel = useText(label);
     const labelText = parsedLabel;
     const resolvedValue = useText(value);
@@ -106,7 +106,7 @@
     }, [isDev, helperTextResolved, resolvedValue]);
 
     const props = {
-      id: uuid,
+      id: labelControlRef,
       checked,
       required,
       onInvalid: invalidHandler,
@@ -145,7 +145,7 @@
           classes={{ root: classes.formControl }}
         >
           <FormControlLabel
-            htmlFor={uuid}
+            htmlFor={labelControlRef}
             control={isSwitch ? SwitchComponent : Checkbox}
             label={ControlLabel}
             labelPlacement={position}

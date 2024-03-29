@@ -45,7 +45,7 @@
     const [interactionFilter, setInteractionFilter] = useState({});
     const [disabled, setIsDisabled] = useState(initialIsDisabled);
     const mounted = useRef(false);
-    const { current: uuid } = useRef(generateUUID());
+    const { current: labelControlRef } = useRef(generateUUID());
     const modelProperty = getProperty(property || '') || {};
     const labelText = useText(label);
     const clearLabelText = useText(clearLabel);
@@ -340,7 +340,7 @@
       <>
         <TextField
           id={actionVariableId}
-          InputLabelProps={{ htmlFor: uuid }}
+          InputLabelProps={{ htmlFor: labelControlRef }}
           select={!disabled}
           defaultValue={isDev ? placeholderLabelText : currentValue}
           value={isDev ? placeholderLabelText : currentValue}
@@ -357,7 +357,7 @@
           onChange={handleChange}
           onBlur={validationHandler}
           inputProps={{
-            id: uuid,
+            id: labelControlRef,
             tabIndex: isDev ? -1 : 0,
             'data-component': dataComponentAttributeValue,
           }}

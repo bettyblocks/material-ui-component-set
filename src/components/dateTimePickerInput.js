@@ -54,7 +54,7 @@
     const placeholderText = useText(placeholder);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const clearable = true;
-    const { current: uuid } = useRef(generateUUID());
+    const { current: labelControlRef } = useRef(generateUUID());
 
     const localeMap = {
       nl: nlLocale,
@@ -219,7 +219,7 @@
 
     const DateTimeCmp = (
       <DateTimeComponent
-        id={uuid}
+        id={labelControlRef}
         error={errorState}
         value={selectedDate}
         size={size}

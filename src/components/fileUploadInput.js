@@ -41,7 +41,7 @@
     const acceptedValue = useText(accept) || 'image/*';
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const requiredText = required ? '*' : '';
-    const { current: uuid } = useRef(generateUUID());
+    const { current: labelControlRef } = useRef(generateUUID());
 
     const getPropertyId = (property) => {
       if (typeof property === 'string') {
@@ -187,7 +187,7 @@
         >
           {children}
           <input
-            id={uuid}
+            id={labelControlRef}
             accept={acceptedValue}
             className={classes.input}
             type="file"
@@ -305,7 +305,7 @@
           margin={margin}
           className={includeStyling()}
         >
-          <Label htmlFor={uuid} className={classes.label}>
+          <Label htmlFor={labelControlRef} className={classes.label}>
             {hideLabel ? '' : `${labelText} ${requiredText}`}
             <UploadComponent />
           </Label>

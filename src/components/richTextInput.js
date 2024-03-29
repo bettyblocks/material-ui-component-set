@@ -122,7 +122,7 @@
     const [activeStyleName, setActiveStyleName] = useState('Body 1');
     const placeholderText = useText(placeholder);
     const helperTextResolved = useText(helperText);
-    const { current: uuid } = useRef(generateUUID());
+    const { current: labelControlRef } = useRef(generateUUID());
 
     useEffect(() => {
       setCurrentValue(optionValue);
@@ -926,7 +926,7 @@
       >
         {labelText && !hideLabel && (
           <InputLabel
-            htmlFor={uuid}
+            htmlFor={labelControlRef}
             className={`${classes.label} ${floatLabel && classes.floatLabel}`}
           >
             {labelText}
@@ -1015,7 +1015,12 @@
               }}
             />
           </Slate>
-          <input id={uuid} type="hidden" name={name} value={currentValue} />
+          <input
+            id={labelControlRef}
+            type="hidden"
+            name={name}
+            value={currentValue}
+          />
         </div>
         {helperTextResolved && (
           <FormHelperText classes={{ root: classes.helper }}>

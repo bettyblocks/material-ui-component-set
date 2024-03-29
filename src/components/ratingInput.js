@@ -30,7 +30,7 @@
     } = options;
 
     const labelText = useText(label);
-    const { current: uuid } = useRef(generateUUID());
+    const { current: labelControlRef } = useRef(generateUUID());
 
     const [currentValue, setCurrentValue] = usePageState(
       useText(defaultValue, { rawValue: true }),
@@ -104,7 +104,7 @@
           error={errorState}
         >
           {labelText && !hideLabel && (
-            <InputLabel for={uuid} classes={{ root: classes.label }}>
+            <InputLabel for={labelControlRef} classes={{ root: classes.label }}>
               {labelText}
             </InputLabel>
           )}
@@ -128,7 +128,7 @@
             </FormHelperText>
           )}
           <input
-            id={uuid}
+            id={labelControlRef}
             className={classes.validationInput}
             onInvalid={validationHandler}
             type="text"

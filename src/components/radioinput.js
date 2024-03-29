@@ -284,14 +284,18 @@
 
     // renders the radio component
     const renderRadio = (optionValue, optionLabel) => {
-      const uuid = generateUUID();
+      const labelControlRef = generateUUID();
       return (
         <MUIFormControlLabel
-          for={uuid}
+          for={labelControlRef}
           disabled={disabled}
           value={optionValue}
           control={
-            <Radio id={uuid} tabIndex={isDev ? -1 : undefined} size={size} />
+            <Radio
+              id={labelControlRef}
+              tabIndex={isDev ? -1 : undefined}
+              size={size}
+            />
           }
           label={optionLabel}
           labelPlacement={labelPosition}
