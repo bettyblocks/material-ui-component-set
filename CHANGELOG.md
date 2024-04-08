@@ -1,10 +1,3 @@
-# [2.187.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.186.0...v2.187.0) (2024-04-03)
-
-
-### Features
-
-* add for and id attributes to textfield ([0ce2cc1](https://github.com/bettyblocks/material-ui-component-set/commit/0ce2cc1a35a5ecb265e9088dd3518915c53f2bb6))
-
 # [2.186.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.185.0...v2.186.0) (2024-03-19)
 
 

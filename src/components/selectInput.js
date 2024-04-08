@@ -29,14 +29,7 @@
       value: prefabValue,
       variant,
     } = options;
-    const {
-      env,
-      generateUUID,
-      getProperty,
-      useAllQuery,
-      useRelation,
-      useText,
-    } = B;
+    const { env, getProperty, useText, useAllQuery, useRelation } = B;
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const [errorState, setErrorState] = useState(false);
@@ -45,7 +38,6 @@
     const [interactionFilter, setInteractionFilter] = useState({});
     const [disabled, setIsDisabled] = useState(initialIsDisabled);
     const mounted = useRef(false);
-    const { current: labelControlRef } = useRef(generateUUID());
     const modelProperty = getProperty(property || '') || {};
     const labelText = useText(label);
     const clearLabelText = useText(clearLabel);
@@ -340,7 +332,6 @@
       <>
         <TextField
           id={actionVariableId}
-          InputLabelProps={{ htmlFor: labelControlRef }}
           select={!disabled}
           defaultValue={isDev ? placeholderLabelText : currentValue}
           value={isDev ? placeholderLabelText : currentValue}
@@ -357,7 +348,6 @@
           onChange={handleChange}
           onBlur={validationHandler}
           inputProps={{
-            id: labelControlRef,
             tabIndex: isDev ? -1 : 0,
             'data-component': dataComponentAttributeValue,
           }}

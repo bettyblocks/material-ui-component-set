@@ -31,7 +31,6 @@
 
     const {
       env,
-      generateUUID,
       getIdProperty,
       getModel,
       getProperty,
@@ -330,18 +329,15 @@
     const hasError = errorState || !isValid;
 
     const renderCheckbox = (checkboxLabel, checkboxValue) => {
-      const labelControlRef = generateUUID();
       return (
         <FormControlLabel
           control={
             <MUICheckbox
-              id={labelControlRef}
               required={required && !isValid}
               tabIndex={isDev ? -1 : undefined}
               size={size}
             />
           }
-          htmlFor={labelControlRef}
           label={checkboxLabel}
           labelPlacement={position}
           checked={values.includes(checkboxValue)}
