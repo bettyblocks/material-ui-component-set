@@ -4,14 +4,7 @@
   allowedTypes: ['CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const {
-      Icon,
-      env,
-      generateUUID,
-      usePresignedUpload,
-      useProperty,
-      useText,
-    } = B;
+    const { env, useText, Icon, usePresignedUpload, useProperty } = B;
     const { FormControl, FormHelperText, Typography, IconButton } =
       window.MaterialUI.Core;
     const {
@@ -41,7 +34,6 @@
     const acceptedValue = useText(accept) || 'image/*';
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const requiredText = required ? '*' : '';
-    const { current: labelControlRef } = useRef(generateUUID());
 
     const getPropertyId = (property) => {
       if (typeof property === 'string') {
@@ -187,7 +179,6 @@
         >
           {children}
           <input
-            id={labelControlRef}
             accept={acceptedValue}
             className={classes.input}
             type="file"
@@ -305,7 +296,7 @@
           margin={margin}
           className={includeStyling()}
         >
-          <Label htmlFor={labelControlRef} className={classes.label}>
+          <Label className={classes.label}>
             {hideLabel ? '' : `${labelText} ${requiredText}`}
             <UploadComponent />
           </Label>

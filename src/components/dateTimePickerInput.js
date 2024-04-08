@@ -33,7 +33,7 @@
       dataComponentAttribute = ['DateTimePicker'],
       floatLabel,
     } = options;
-    const { env, useText, Icon, generateUUID } = B;
+    const { env, useText, Icon } = B;
     const {
       MuiPickersUtilsProvider,
       KeyboardTimePicker,
@@ -54,7 +54,6 @@
     const placeholderText = useText(placeholder);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const clearable = true;
-    const { current: labelControlRef } = useRef(generateUUID());
 
     const localeMap = {
       nl: nlLocale,
@@ -219,7 +218,6 @@
 
     const DateTimeCmp = (
       <DateTimeComponent
-        id={labelControlRef}
         error={errorState}
         value={selectedDate}
         size={size}

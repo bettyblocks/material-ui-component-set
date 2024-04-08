@@ -87,8 +87,8 @@
       FirstPage,
     };
     const allIcons = { ...Icons, ...extraIcons };
-    const { FormHelperText, InputLabel, SvgIcon } = window.MaterialUI.Core;
-    const { generateUUID, useText, env } = B;
+    const { FormHelperText, SvgIcon } = window.MaterialUI.Core;
+    const { useText, env } = B;
     const {
       actionVariableId: name,
       value: valueProp,
@@ -122,7 +122,6 @@
     const [activeStyleName, setActiveStyleName] = useState('Body 1');
     const placeholderText = useText(placeholder);
     const helperTextResolved = useText(helperText);
-    const { current: labelControlRef } = useRef(generateUUID());
 
     useEffect(() => {
       setCurrentValue(optionValue);
@@ -925,12 +924,11 @@
         data-component={useText(dataComponentAttribute) || 'RichTextEditor'}
       >
         {labelText && !hideLabel && (
-          <InputLabel
-            htmlFor={labelControlRef}
+          <FormHelperText
             className={`${classes.label} ${floatLabel && classes.floatLabel}`}
           >
             {labelText}
-          </InputLabel>
+          </FormHelperText>
         )}
         <div className={classes.editorWrapper}>
           <Slate
@@ -1015,12 +1013,7 @@
               }}
             />
           </Slate>
-          <input
-            id={labelControlRef}
-            type="hidden"
-            name={name}
-            value={currentValue}
-          />
+          <input type="hidden" name={name} value={currentValue} />
         </div>
         {helperTextResolved && (
           <FormHelperText classes={{ root: classes.helper }}>

@@ -12,7 +12,6 @@
       InteractionScope,
       ModelProvider,
       env,
-      generateUUID,
       getIdProperty,
       getModel,
       getProperty,
@@ -96,7 +95,6 @@
     const [debouncedCurrentValue, setDebouncedCurrentValue] = useState();
     const [interactionFilter, setInteractionFilter] = useState({});
     const defaultValueEvaluatedRef = useRef(false);
-    const { current: labelControlRef } = useRef(generateUUID());
 
     const isNumberType = type === 'number';
 
@@ -735,7 +733,6 @@
         error={errorState}
       >
         <Autocomplete
-          id={labelControlRef}
           disableCloseOnSelect={!closeOnSelect}
           disabled={disabled}
           {...(!isListProperty && {
