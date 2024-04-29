@@ -751,20 +751,14 @@
               validation = customPatternValidation(event.target);
             }
             handleValidation(validation);
-            if (
-              event &&
-              (event.type === 'change' || event.type === 'keydown')
-            ) {
-              setInputValue(newValue);
-
-              // Start TECHSUP-9010
-              // useEffect hook is not triggered when user clears the input field
-              if (!newValue) {
-                setDebouncedInputValue('');
-              }
-              // End TECHSUP-9010
-            } else if (event && event.type === 'click') {
-              setInputValue(newValue);
+            setInputValue(newValue || '');
+            // START TECHSUP-9010
+            if (!newValue) {
+              setDebouncedInputValue('');
+            }
+            // EXP: useEffect not triggered when newValue is empty
+            // END TECHSUP-9010
+            if (event && event.type === 'click' && newValue) {
               setDebouncedInputValue(newValue);
             }
           }}
