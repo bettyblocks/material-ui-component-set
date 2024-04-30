@@ -752,12 +752,9 @@
             }
             handleValidation(validation);
             setInputValue(newValue || '');
-            // START TECHSUP-9010
             if (!newValue) {
               setDebouncedInputValue('');
             }
-            // EXP: useEffect not triggered when newValue is empty
-            // END TECHSUP-9010
             if (event && event.type === 'click' && newValue) {
               setDebouncedInputValue(newValue);
             }
