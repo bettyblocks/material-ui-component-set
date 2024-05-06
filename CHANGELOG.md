@@ -1,3 +1,10 @@
+## [2.187.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.187.1...v2.187.2) (2024-05-06)
+
+
+### Bug Fixes
+
+* prevent infinite reload in setlanguage interaction ([10fc4a1](https://github.com/bettyblocks/material-ui-component-set/commit/10fc4a1e2f163202d3435c166e7bddafca59bf6a))
+
 ## [2.187.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.187.0...v2.187.1) (2024-05-01)
 
 
