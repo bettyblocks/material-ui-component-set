@@ -5623,7 +5623,12 @@ const beforeCreate = ({
     if (noEmptyValueConditional.type === 'COMPONENT') {
       setOption(noEmptyValueConditional, 'left', (originalOption: any) => ({
         ...originalOption,
-        value: [enrichVarObj({ ...prop })],
+        value: [
+          {
+            ...enrichVarObj({ ...prop }),
+            useKey: (prop.kind === 'IMAGE' || prop.kind === 'FILE') && 'url',
+          },
+        ],
       }));
       setOption(
         noEmptyValueConditional,

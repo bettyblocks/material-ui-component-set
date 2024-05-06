@@ -1,3 +1,10 @@
+## [2.187.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.187.0...v2.187.1) (2024-05-01)
+
+
+### Bug Fixes
+
+* added url for file/image properties in conditional ([1ac3591](https://github.com/bettyblocks/material-ui-component-set/commit/1ac35917aea58739834fb6c926eb43c81fae39e7))
+
 # [2.187.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.186.0...v2.187.0) (2024-04-03)
 
 
