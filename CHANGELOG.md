@@ -1,3 +1,11 @@
+## [2.187.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.187.2...v2.187.3) (2024-05-14)
+
+
+### Bug Fixes
+
+* comments removed ([953e815](https://github.com/bettyblocks/material-ui-component-set/commit/953e81556d0451821cceefba1a1362a3e9a7f576))
+* implementation of TECHSUP-9010 ([a445760](https://github.com/bettyblocks/material-ui-component-set/commit/a445760909c07cce563214b98646e8887ccc1381))
+
 ## [2.187.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.187.1...v2.187.2) (2024-05-06)
 
 
