@@ -97,7 +97,6 @@
     const [interactionFilter, setInteractionFilter] = useState({});
     const defaultValueEvaluatedRef = useRef(false);
     const { current: labelControlRef } = useRef(generateUUID());
-
     const isNumberType = type === 'number';
 
     const validPattern = pattern || null;
@@ -132,7 +131,6 @@
     const [inputValue, setInputValue] = useState(
       isListProperty ? defaultValue : '',
     );
-
     const hasLabelProperty = !!(labelProperty && labelProperty.id);
     const hasDefaultLabelProperty = !!(
       defaultLabelProperty && defaultLabelProperty.id
@@ -275,7 +273,6 @@
 
     useEffect(() => {
       let debounceInput;
-
       if (!isListProperty) {
         if (inputValue !== debouncedInputValue) {
           debounceInput = setTimeout(() => {
@@ -599,7 +596,6 @@
         ) {
           return value !== '' ? [value, ...results] : [...results];
         }
-
         return results;
       }
 
@@ -721,7 +717,6 @@
         setInputValue(newLabel);
       }
     }
-
     const MuiAutocomplete = (
       <FormControl
         classes={{
@@ -756,13 +751,11 @@
               validation = customPatternValidation(event.target);
             }
             handleValidation(validation);
-            if (
-              event &&
-              (event.type === 'change' || event.type === 'keydown')
-            ) {
-              setInputValue(newValue);
-            } else if (event && event.type === 'click') {
-              setInputValue(newValue);
+            setInputValue(newValue || '');
+            if (!newValue) {
+              setDebouncedInputValue('');
+            }
+            if (event && event.type === 'click' && newValue) {
               setDebouncedInputValue(newValue);
             }
           }}
