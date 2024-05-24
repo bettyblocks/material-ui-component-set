@@ -22,7 +22,7 @@ export const DateTimePicker = (
     {
       label: 'Validation Options',
       expanded: false,
-      members: ['required', 'validationValueMissing'],
+      members: ['required', 'validationValueMissing', 'minValue', 'maxValue'],
     },
     {
       label: 'Styling',

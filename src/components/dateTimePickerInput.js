@@ -22,6 +22,8 @@
       size,
       fullWidth,
       required,
+      minValue,
+      maxValue,
       margin,
       helperText = [''],
       disableToolbar,
@@ -52,6 +54,8 @@
     const [helper, setHelper] = useState(helperTextResolved);
     const valueMissingMessage = useText(validationValueMissing);
     const placeholderText = useText(placeholder);
+    const minValueText = useText(minValue);
+    const maxValueText = useText(maxValue);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const clearable = true;
     const { current: labelControlRef } = useRef(generateUUID());
@@ -172,11 +176,16 @@
     let format;
     let resultString;
     let use24HourClock = true;
+    const validation = {};
 
     switch (type) {
       case 'date': {
         DateTimeComponent = KeyboardDatePicker;
         format = dateFormat || 'dd/MM/yyyy';
+        if (minValueText)
+          validation.minDate = DateFns.parse(minValueText, dateFormat);
+        if (maxValueText)
+          validation.maxDate = DateFns.parse(maxValueText, dateFormat);
 
         resultString = isValidDate(selectedDate)
           ? DateFns.format(selectedDate, 'yyyy-MM-dd')
@@ -252,6 +261,7 @@
         disablePast={disablePastDates}
         autoOk={closeOnSelect}
         format={format}
+        {...validation}
         data-component={dataComponentAttributeValue}
         PopoverProps={{
           classes: {
