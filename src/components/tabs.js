@@ -48,7 +48,6 @@
     }, [isDev, currentTab]);
 
     useEffect(() => {
-      // Manually trigger updateIndicator() to show active tab on page load (TECHSUP-8534)
       setTimeout(() => {
         tabsRef.current.updateIndicator();
       }, 100);
