@@ -1,3 +1,10 @@
+## [2.187.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.187.3...v2.187.4) (2024-06-19)
+
+
+### Bug Fixes
+
+* trigger onSuccess event after file reference is successfully stored ([b3a877d](https://github.com/bettyblocks/material-ui-component-set/commit/b3a877d07a3e2d348b1e7017352826dd17080750))
+
 ## [2.187.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.187.2...v2.187.3) (2024-05-14)
 
 
