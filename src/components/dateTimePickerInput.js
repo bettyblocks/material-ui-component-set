@@ -24,6 +24,9 @@
       required,
       minValue,
       maxValue,
+      validationBeforeMinValue,
+      validationAfterMaxValue,
+      validationInvalidValue,
       margin,
       helperText = [''],
       disableToolbar,
@@ -56,6 +59,9 @@
     const placeholderText = useText(placeholder);
     const minValueText = useText(minValue);
     const maxValueText = useText(maxValue);
+    const beforeMinValueMessage = useText(validationBeforeMinValue);
+    const afterMaxValueMessage = useText(validationAfterMaxValue);
+    const invalidValueMessage = useText(validationInvalidValue);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const clearable = true;
     const { current: labelControlRef } = useRef(generateUUID());
@@ -84,6 +90,15 @@
       if (validityObject.valueMissing && valueMissingMessage) {
         return valueMissingMessage;
       }
+      if (validityObject.invalidValue) {
+        return invalidValueMessage;
+      }
+      if (validityObject.beforeMinValue) {
+        return beforeMinValueMessage;
+      }
+      if (validityObject.afterMaxValue) {
+        return afterMaxValueMessage;
+      }
       return '';
     };
 
@@ -102,19 +117,33 @@
         } else if (!date || DateFns.isValid(date)) {
           B.triggerEvent('onChange', date);
           setErrorState(false);
-          setHelper('');
+          setHelper(helperTextResolved);
         } else {
           B.triggerEvent('onChange', '');
         }
       }, 250);
     };
 
+    // invalidHandler is called on form submission with invalid value
     const invalidHandler = (event) => {
       event.preventDefault();
       const {
         target: { validity },
       } = event;
       handleValidation(validity);
+    };
+
+    // errorHandler is called every time the input value changes
+    const errorHandler = (message) => {
+      if (message) {
+        const validation = {
+          valid: !message,
+          invalidValue: message.includes('Invalid'),
+          beforeMinValue: message.includes('minimal date'),
+          afterMaxValue: message.includes('maximal date'),
+        };
+        handleValidation(validation);
+      }
     };
 
     useEffect(() => {
@@ -176,16 +205,15 @@
     let format;
     let resultString;
     let use24HourClock = true;
-    const validation = {};
+    let minDate;
+    let maxDate;
 
     switch (type) {
       case 'date': {
         DateTimeComponent = KeyboardDatePicker;
         format = dateFormat || 'dd/MM/yyyy';
-        if (minValueText)
-          validation.minDate = DateFns.parse(minValueText, dateFormat);
-        if (maxValueText)
-          validation.maxDate = DateFns.parse(maxValueText, dateFormat);
+        if (minValueText) minDate = DateFns.parse(minValueText, dateFormat);
+        if (maxValueText) maxDate = DateFns.parse(maxValueText, dateFormat);
 
         resultString = isValidDate(selectedDate)
           ? DateFns.format(selectedDate, 'yyyy-MM-dd')
@@ -219,10 +247,7 @@
       if (!selectedDate) return;
       if (selectedDate && DateFns.isValid(selectedDate)) {
         setErrorState(false);
-        setHelper('');
-      } else {
-        setErrorState(true);
-        setHelper('invalid input');
+        setHelper(helperTextResolved);
       }
     };
 
@@ -243,6 +268,7 @@
         onChange={changeHandler}
         inputVariant={inputvariant}
         onInvalid={invalidHandler}
+        onError={errorHandler}
         InputProps={{
           inputProps: {
             tabIndex: isDev ? -1 : undefined,
@@ -261,7 +287,8 @@
         disablePast={disablePastDates}
         autoOk={closeOnSelect}
         format={format}
-        {...validation}
+        minDate={minDate}
+        maxDate={maxDate}
         data-component={dataComponentAttributeValue}
         PopoverProps={{
           classes: {

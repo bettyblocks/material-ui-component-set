@@ -22,7 +22,15 @@ export const DateTimePicker = (
     {
       label: 'Validations',
       expanded: false,
-      members: ['required', 'validationValueMissing', 'minValue', 'maxValue'],
+      members: [
+        'required',
+        'validationValueMissing',
+        'validationInvalidValue',
+        'minValue',
+        'validationBeforeMinValue',
+        'maxValue',
+        'validationAfterMaxValue',
+      ],
     },
     {
       label: 'Styling',
