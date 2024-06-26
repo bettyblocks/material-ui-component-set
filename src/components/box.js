@@ -4,11 +4,13 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, useText, useLogic } = B;
+    const { env, useText, useLogic, usePublicFile } = B;
     const { Box } = window.MaterialUI.Core;
     const {
       alignment,
       backgroundColor,
+      backgroundType,
+      backgroundImage: backgroundImageInput,
       backgroundUrl: backgroundURLInput,
       borderColor,
       contentDirection,
@@ -21,27 +23,31 @@
     const isDev = env === 'dev';
     const hasBackgroundColor = backgroundColor !== 'Transparent';
     const hasBorderColor = borderColor !== 'Transparent';
+    const { url: backgroundImageURL = '' } =
+      usePublicFile(backgroundImageInput) || {};
     const backgroundURL = useText(backgroundURLInput);
-    const [interactionBackground, setInteractionBackground] = useState('');
-    const backgroundImage = interactionBackground || backgroundURL || null;
+    const background =
+      backgroundType === 'img' ? backgroundImageURL : backgroundURL;
+    const [backgroundImage, setBackgroundImage] = useState(background);
     const isEmpty = isDev && children.length === 0;
     const isPristine =
-      isEmpty &&
-      !hasBackgroundColor &&
-      !hasBorderColor &&
-      backgroundImage === null;
+      isEmpty && !hasBackgroundColor && !hasBorderColor && !backgroundImage;
     const isFlex = alignment !== 'none' || valignment !== 'none';
     const opac = transparent ? 0 : 1;
     const [opacity, setOpacity] = useState(opac);
     const logic = useLogic(displayLogic);
 
     useEffect(() => {
+      setBackgroundImage(background);
+    }, [background]);
+
+    useEffect(() => {
       B.defineFunction('setCustomBackgroundImage', (url) => {
-        setInteractionBackground(url);
+        setBackgroundImage(url);
       });
 
       B.defineFunction('removeCustomBackgroundImage', () => {
-        setInteractionBackground('');
+        setBackgroundImage('');
       });
     }, []);
 
@@ -82,7 +88,7 @@
         onMouseLeave={handleMouseLeave}
         style={{
           ...(backgroundImage !== null && {
-            backgroundImage: `url("${backgroundURL}")`,
+            backgroundImage: `url("${backgroundImage}")`,
           }),
           opacity,
         }}

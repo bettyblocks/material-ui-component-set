@@ -11,6 +11,7 @@ import {
   dropdown,
   displayLogic,
   hideIf,
+  showIf,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -36,6 +37,8 @@ export const categories = [
     members: [
       'backgroundColor',
       'backgroundColorAlpha',
+      'backgroundType',
+      'backgroundImage',
       'backgroundUrl',
       'backgroundSize',
       'backgroundPosition',
@@ -186,8 +189,32 @@ export const boxOptions = {
     label: 'Background color opacity',
     value: 100,
   }),
+  backgroundType: option('CUSTOM', {
+    label: 'Background type',
+    value: 'img',
+    configuration: {
+      as: 'BUTTONGROUP',
+      dataType: 'string',
+      allowedInput: [
+        { name: 'Image', value: 'img' },
+        { name: 'Data/URL', value: 'url' },
+      ],
+    },
+  }),
+  backgroundImage: option('PUBLIC_FILE', {
+    label: 'Background image',
+    value: '',
+    configuration: {
+      mediaType: 'IMAGE',
+      allowedExtensions: ['image/*'],
+      condition: showIf('backgroundType', 'EQ', 'img'),
+    },
+  }),
   backgroundUrl: variable('Background url', {
     value: [''],
+    configuration: {
+      condition: showIf('backgroundType', 'EQ', 'url'),
+    },
   }),
   backgroundSize: buttongroup(
     'Background size',
