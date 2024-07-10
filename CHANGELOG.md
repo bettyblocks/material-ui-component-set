@@ -1,3 +1,10 @@
+## [2.187.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.187.4...v2.187.5) (2024-07-10)
+
+
+### Bug Fixes
+
+* manually trigger updateIndicator to show active tab on page load ([6c8d4ba](https://github.com/bettyblocks/material-ui-component-set/commit/6c8d4bad87f283cab18db70e27da7b2927fe2b60))
+
 ## [2.187.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.187.3...v2.187.4) (2024-06-19)
 
 
