@@ -212,8 +212,27 @@
       case 'date': {
         DateTimeComponent = KeyboardDatePicker;
         format = dateFormat || 'dd/MM/yyyy';
-        if (minValueText) minDate = DateFns.parse(minValueText, dateFormat);
-        if (maxValueText) maxDate = DateFns.parse(maxValueText, dateFormat);
+
+        if (minValueText && DateFns.isValid(minValueText)) {
+          const formattedMinValue = DateFns.parse(minValueText, dateFormat);
+          if (isValidDate(formattedMinValue)) {
+            minDate = formattedMinValue;
+          } else {
+            // convert to slashes because it conflicts with the MUI DateTimeCmp
+            const parsedMinValueWithSlashes = minValueText.replace(/-/g, '/');
+            minDate = new Date(parsedMinValueWithSlashes);
+          }
+        }
+        if (maxValueText && DateFns.isValid(maxValueText)) {
+          const formattedMaxValue = DateFns.parse(maxValueText, dateFormat);
+          if (isValidDate(formattedMaxValue)) {
+            maxDate = formattedMaxValue;
+          } else {
+            // convert to slashes because it conflicts with the MUI DateTimeCmp
+            const parsedMaxValueWithSlashes = maxValueText.replace(/-/g, '/');
+            maxDate = new Date(parsedMaxValueWithSlashes);
+          }
+        }
 
         resultString = isValidDate(selectedDate)
           ? DateFns.format(selectedDate, 'yyyy-MM-dd')
