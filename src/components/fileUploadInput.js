@@ -36,7 +36,7 @@
     const isDev = env === 'dev';
     const helper = useText(helperText);
     const labelText = useText(label);
-    const [validationMessage, setValidationMessage] = React.useState('');
+    const [validationMessage, setValidationMessage] = useState('');
     const maxFileSizeMessage = useText(maxFileSizeMessageRaw);
     const acceptedValue = useText(accept) || 'image/*';
     const dataComponentAttributeValue = useText(dataComponentAttribute);
@@ -71,20 +71,19 @@
       propertyId,
     });
 
-    const firstRender = React.useRef(true);
-
-    const inputRef = React.useRef();
+    const firstRender = useRef(true);
+    const inputRef = useRef();
 
     const errorHelpers = hideDefaultError ? '' : error && error.message;
 
     const helperValue =
       errorHelpers || (!hideDefaultError ? validationMessage : '') || helper;
 
-    React.useEffect(() => {
+    useEffect(() => {
       firstRender.current = false;
     }, []);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (firstRender.current) return;
       if (error) {
         if (Array.isArray(error) && error.length === 0) {
@@ -95,20 +94,25 @@
       }
     }, [error]);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (firstRender.current) return;
       B.triggerEvent('onLoad', loading);
     }, [loading]);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (firstRender.current) return;
       if (!loading) {
         if (data) {
           setFileReference(data);
-          B.triggerEvent('onSuccess', data);
         }
       }
     }, [loading, data]);
+
+    useEffect(() => {
+      if (fileReference) {
+        B.triggerEvent('onSuccess', fileReference);
+      }
+    }, [fileReference]);
 
     const formatBytes = (bytes) => {
       if (bytes === 0) return '0 Bytes';
