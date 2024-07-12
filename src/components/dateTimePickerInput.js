@@ -87,6 +87,22 @@
       return '';
     };
 
+    const convertToValidDate = (date) => {
+      const formattedValue = DateFns.parse(date, dateFormat);
+      const valueIsValid =
+        DateFns.isValid(formattedValue) || DateFns.isValid(date);
+
+      if (date && valueIsValid) {
+        if (isValidDate(formattedValue)) {
+          return formattedValue;
+        }
+        // convert to slashes because it conflicts with the MUI DateTimeCmp
+        const parsedValueWithSlashes = date.replace(/-/g, '/');
+        return new Date(parsedValueWithSlashes);
+      }
+      return undefined;
+    };
+
     const validationMessage = (validityObject) => {
       if (validityObject.valueMissing && valueMissingMessage) {
         return valueMissingMessage;
@@ -211,33 +227,8 @@
         DateTimeComponent = KeyboardDatePicker;
         format = dateFormat || 'dd/MM/yyyy';
 
-        const formattedMinValue = DateFns.parse(minValueText, dateFormat);
-        const minValueIsValid =
-          DateFns.isValid(formattedMinValue) || DateFns.isValid(minValueText);
-
-        if (minValueText && minValueIsValid) {
-          if (isValidDate(formattedMinValue)) {
-            minDate = formattedMinValue;
-          } else {
-            // convert to slashes because it conflicts with the MUI DateTimeCmp
-            const parsedMinValueWithSlashes = minValueText.replace(/-/g, '/');
-            minDate = new Date(parsedMinValueWithSlashes);
-          }
-        }
-
-        const formattedMaxValue = DateFns.parse(maxValueText, dateFormat);
-        const maxValueIsValid =
-          DateFns.isValid(formattedMaxValue) || DateFns.isValid(maxValueText);
-
-        if (maxValueText && maxValueIsValid) {
-          if (isValidDate(formattedMaxValue)) {
-            maxDate = formattedMaxValue;
-          } else {
-            // convert to slashes because it conflicts with the MUI DateTimeCmp
-            const parsedMaxValueWithSlashes = maxValueText.replace(/-/g, '/');
-            maxDate = new Date(parsedMaxValueWithSlashes);
-          }
-        }
+        minDate = convertToValidDate(minValueText);
+        maxDate = convertToValidDate(maxValueText);
 
         resultString = isValidDate(selectedDate)
           ? DateFns.format(selectedDate, 'yyyy-MM-dd')
