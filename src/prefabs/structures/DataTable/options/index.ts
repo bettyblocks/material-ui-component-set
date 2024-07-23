@@ -11,6 +11,7 @@ import {
   number,
   size,
   color,
+  text,
   ThemeColor,
   endpoint,
   sizes,
@@ -23,6 +24,11 @@ import { DataTableColumn } from '../../DataTableColumn';
 import { dataTableColumnOptions } from '../../DataTableColumn/options';
 
 export const categories = [
+  {
+    label: 'Custom query',
+    expanded: false,
+    members: ['customQuery'],
+  },
   {
     label: 'Search',
     expanded: false,
@@ -314,6 +320,6 @@ export const dataTableOptions = {
   noResultsText: variable('No results text', {
     value: [''],
   }),
-
+  customQuery: text('Custom query', { configuration: { as: 'MULTILINE' } }),
   ...advanced('DataTable'),
 };

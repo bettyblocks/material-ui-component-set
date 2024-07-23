@@ -10,9 +10,7 @@
       getProperty,
       InteractionScope,
       ModelProvider,
-      useAllQuery,
       useFilter,
-      useRelation,
       useText,
       Icon,
     } = B;
@@ -55,8 +53,12 @@
       autoLoadTakeAmount,
       noResultsText,
       dataComponentAttribute,
+      customQuery,
     } = options;
 
+    const [customData, setcustomData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
     const [, setPageState] = usePageState(useText(['']));
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
@@ -279,49 +281,54 @@
 
     const where = useFilter(completeFilter);
 
-    // TODO: move model to skip
-    const {
-      loading: queryLoading,
-      error,
-      data: queryData,
-      refetch,
-    } = useAllQuery(
-      model,
-      {
-        rawFilter: where,
-        variables,
-        skip: loadOnScroll ? skip : page * rowsPerPage,
-        take: loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage,
-        onCompleted(res) {
-          const hasResult = res && res.results && res.results.length > 0;
-          if (hasResult) {
-            B.triggerEvent('onSuccess', res.results);
-          } else {
-            B.triggerEvent('onNoResults');
-          }
-        },
-        onError(err) {
-          if (!displayError) {
-            B.triggerEvent('onError', err);
-          }
-        },
-      },
-      !model,
-    );
+    const refetch = () => null;
 
-    const { hasResults, data: relationData } = useRelation(
-      model,
-      {},
-      typeof model === 'string' || !model,
-    );
-    const data = hasResults ? relationData : queryData;
-    const loading = hasResults ? false : queryLoading;
+    async function getData() {
+      const runtimeURL = `${window.artifact.apiUrl}/${window.artifact.applicationId}`;
+
+      const customResponse = await fetch(runtimeURL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          rawFilter: where,
+          variables,
+          skip: loadOnScroll ? skip : page * rowsPerPage,
+          take: loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage,
+          onCompleted(res) {
+            const hasResult = res && res.results && res.results.length > 0;
+            if (hasResult) {
+              B.triggerEvent('onSuccess', res.results);
+            } else {
+              B.triggerEvent('onNoResults');
+            }
+          },
+          onError(err) {
+            setError(true);
+            if (!displayError) {
+              B.triggerEvent('onError', err);
+            }
+          },
+          query: customQuery,
+        }),
+      });
+      const parsedCustomResponse = await customResponse.json();
+      const key = Object.keys(parsedCustomResponse.data)[0];
+
+      setcustomData(parsedCustomResponse.data[key]);
+      setLoading(false);
+    }
+
+    useEffect(async () => {
+      await getData();
+    }, []);
 
     useEffect(() => {
-      if (!isDev && data) {
+      if (!isDev && customData) {
         if (pagination !== 'never') {
-          setResults(data.results);
-          setTotalCount(data.totalCount);
+          setResults(customData.results);
+          setTotalCount(customData.totalCount);
           return;
         }
         if (
@@ -341,17 +348,22 @@
             (!autoLoadOnScroll && skipAppend.current) ||
             (pagination === 'never' && !autoLoadOnScroll)
           ) {
-            setResults(data.results);
+            setResults(customData.results);
           } else {
-            setResults((prev) => [...prev, ...data.results]);
+            setResults((prev) => [...prev, ...customData.results]);
           }
           fetchingNextSet.current = false;
           setNewSearch(false);
         }
         skipAppend.current = false;
-        setTotalCount(data.totalCount);
+        setTotalCount(customData.totalCount);
       }
-    }, [data, searchTerm, interactionSearchTerm, interactionSearchProperty]);
+    }, [
+      customData,
+      searchTerm,
+      interactionSearchTerm,
+      interactionSearchProperty,
+    ]);
 
     useEffect(() => {
       const handler = setTimeout(() => {
@@ -605,7 +617,7 @@
 
     useEffect(() => {
       if (pagination === 'never') {
-        const dataResults = data && data.results;
+        const dataResults = customData && customData.results;
         const needsCacheFix =
           results.length === 0 && dataResults && dataResults.length > 0;
 
@@ -637,13 +649,13 @@
     }, [pagination]);
 
     useEffect(() => {
-      if (!isDev && data) {
+      if (!isDev && customData) {
         switch (pagination) {
           case 'never':
             setShowPagination(false);
             break;
           case 'whenNeeded':
-            if (rowsPerPage >= data.totalCount) {
+            if (rowsPerPage >= customData.totalCount) {
               setShowPagination(false);
             } else {
               setShowPagination(true);
@@ -655,7 +667,7 @@
             break;
         }
       }
-    }, [data, rowsPerPage]);
+    }, [customData, rowsPerPage]);
 
     const isRelation = !isDev && typeof model !== 'string';
 
