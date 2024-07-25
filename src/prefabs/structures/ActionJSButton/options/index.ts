@@ -20,9 +20,6 @@ export const options = {
   actionId: option('ACTION_JS', {
     label: 'Action',
     value: '',
-    configuration: {
-      disabled: true,
-    },
   }),
 
   property: property('Pass value to action'),
