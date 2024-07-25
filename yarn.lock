@@ -155,10 +155,10 @@
     "@babel/helper-validator-identifier" "^7.22.20"
     to-fast-properties "^2.0.0"
 
-"@betty-blocks/cli@^25.93.0":
-  version "25.93.0"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.93.0.tgz#c09fa087713c36d0da838a5795911dd6d38cda43"
-  integrity sha512-MYHL0G5SrarZSzIqJnJyK/+i4UvOxf76aJWz+40mRY5kPV0yQ1xZX9FSfc8BAZOIWGWZEn1APjQ0l5beNde87w==
+"@betty-blocks/cli@^25.95.1":
+  version "25.95.1"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.95.1.tgz#cd1a3315b0ba5de871605213b2ee37455b656475"
+  integrity sha512-uwmbQq3jiOFwbD1hfnlIF12FU5dgJCJSAeIgtPZhVkg7Jo2kSed9FvYZthW+4eFymaz8V/BxkapwuCE0161Agg==
   dependencies:
     "@azure/ms-rest-js" "^2.0.4"
     "@azure/storage-blob" "^10.3.0"
@@ -7009,7 +7009,7 @@ strip-ansi@^4.0.0:
 
 strip-ansi@^6.0.0, strip-ansi@^6.0.1:
   version "6.0.1"
-  resolved "https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.1.tgz"
+  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
   dependencies:
     ansi-regex "^5.0.1"

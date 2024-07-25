@@ -1,3 +1,10 @@
+## [2.187.6](https://github.com/bettyblocks/material-ui-component-set/compare/v2.187.5...v2.187.6) (2024-07-24)
+
+
+### Bug Fixes
+
+* make the subtitle weight look at the subtitle weight option instead of the title weight ([90880df](https://github.com/bettyblocks/material-ui-component-set/commit/90880dfc866802ca9a74c7ef8e59f28420a6a026))
+
 ## [2.187.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.187.4...v2.187.5) (2024-07-10)
 
 
