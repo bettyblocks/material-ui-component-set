@@ -284,12 +284,14 @@
     const refetch = () => null;
 
     async function getData() {
+      const token = localStorage.getItem('TOKEN');
       const runtimeURL = `${window.artifact.apiUrl}/${window.artifact.applicationId}`;
 
       const customResponse = await fetch(runtimeURL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           rawFilter: where,
@@ -320,9 +322,11 @@
       setLoading(false);
     }
 
-    useEffect(async () => {
-      await getData();
-    }, []);
+    B.useOneQuery(model, {
+      async onCompleted() {
+        await getData();
+      },
+    });
 
     useEffect(() => {
       if (!isDev && customData) {
