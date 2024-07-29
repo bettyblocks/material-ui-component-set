@@ -322,11 +322,13 @@
       setLoading(false);
     }
 
-    B.useOneQuery(model, {
-      async onCompleted() {
-        await getData();
-      },
-    });
+    if (!isDev) {
+      B.useOneQuery(model, {
+        async onCompleted() {
+          await getData();
+        },
+      });
+    }
 
     useEffect(() => {
       if (!isDev && customData) {
