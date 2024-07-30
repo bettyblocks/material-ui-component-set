@@ -33,6 +33,7 @@
       placeholderTake,
       size,
       model,
+      dummyModel,
       filter,
       searchProperty,
       orderProperty,
@@ -323,7 +324,7 @@
     }
 
     if (!isDev) {
-      B.useOneQuery(model, {
+      B.useOneQuery(dummyModel, {
         async onCompleted() {
           await getData();
         },

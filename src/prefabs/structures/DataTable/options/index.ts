@@ -27,7 +27,7 @@ export const categories = [
   {
     label: 'Custom query',
     expanded: false,
-    members: ['customQuery'],
+    members: ['dummyModel', 'customQuery'],
   },
   {
     label: 'Search',
@@ -321,5 +321,6 @@ export const dataTableOptions = {
     value: [''],
   }),
   customQuery: text('Custom query', { configuration: { as: 'MULTILINE' } }),
+  dummyModel: modelAndRelation('Dummy Model', { value: '' }),
   ...advanced('DataTable'),
 };
