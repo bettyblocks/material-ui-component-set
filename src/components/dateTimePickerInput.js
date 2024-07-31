@@ -53,6 +53,7 @@
     const [isDisabled, setIsDisabled] = useState(disabled);
     const [selectedDate, setSelectedDate] = useState(parsedValue || null);
     const [errorState, setErrorState] = useState(error);
+    const [afterFirstValidation, setAfterFirstValidation] = useState(false);
     const helperTextResolved = useText(helperText);
     const [helper, setHelper] = useState(helperTextResolved);
     const valueMissingMessage = useText(validationValueMissing);
@@ -86,6 +87,22 @@
       return '';
     };
 
+    const convertToValidDate = (date) => {
+      const formattedValue = DateFns.parse(date, dateFormat);
+      const valueIsValid =
+        DateFns.isValid(formattedValue) || DateFns.isValid(date);
+
+      if (date && valueIsValid) {
+        if (isValidDate(formattedValue)) {
+          return formattedValue;
+        }
+        // convert to slashes because it conflicts with the MUI DateTimeCmp
+        const parsedValueWithSlashes = date.replace(/-/g, '/');
+        return new Date(parsedValueWithSlashes);
+      }
+      return undefined;
+    };
+
     const validationMessage = (validityObject) => {
       if (validityObject.valueMissing && valueMissingMessage) {
         return valueMissingMessage;
@@ -116,8 +133,6 @@
           B.triggerEvent('onChange', convertToDate(date));
         } else if (!date || DateFns.isValid(date)) {
           B.triggerEvent('onChange', date);
-          setErrorState(false);
-          setHelper(helperTextResolved);
         } else {
           B.triggerEvent('onChange', '');
         }
@@ -133,17 +148,16 @@
       handleValidation(validity);
     };
 
-    // errorHandler is called every time the input value changes
+    // errorHandler is called on render and every time the value changes
     const errorHandler = (message) => {
-      if (message) {
-        const validation = {
-          valid: !message,
-          invalidValue: message.includes('Invalid'),
-          beforeMinValue: message.includes('minimal date'),
-          afterMaxValue: message.includes('maximal date'),
-        };
-        handleValidation(validation);
-      }
+      const validation = {
+        valid: !message && (selectedDate || !required || !afterFirstValidation),
+        valueMissing: !selectedDate && required && afterFirstValidation,
+        invalidValue: message.includes('Invalid'),
+        beforeMinValue: message.includes('minimal date'),
+        afterMaxValue: message.includes('maximal date'),
+      };
+      handleValidation(validation);
     };
 
     useEffect(() => {
@@ -212,8 +226,9 @@
       case 'date': {
         DateTimeComponent = KeyboardDatePicker;
         format = dateFormat || 'dd/MM/yyyy';
-        if (minValueText) minDate = DateFns.parse(minValueText, dateFormat);
-        if (maxValueText) maxDate = DateFns.parse(maxValueText, dateFormat);
+
+        minDate = convertToValidDate(minValueText);
+        maxDate = convertToValidDate(maxValueText);
 
         resultString = isValidDate(selectedDate)
           ? DateFns.format(selectedDate, 'yyyy-MM-dd')
@@ -243,12 +258,13 @@
       default:
     }
 
-    const onBlurHandler = () => {
-      if (!selectedDate) return;
-      if (selectedDate && DateFns.isValid(selectedDate)) {
-        setErrorState(false);
-        setHelper(helperTextResolved);
-      }
+    const onBlurHandler = (event) => {
+      const {
+        target: { validity },
+      } = event;
+
+      handleValidation(validity);
+      setAfterFirstValidation(true);
     };
 
     const DateTimeCmp = (
