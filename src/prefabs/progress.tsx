@@ -4,7 +4,7 @@ import { Progress } from './structures/Progress';
 const attr = {
   icon: Icon.ProgressBarIcon,
   category: 'CONTENT',
-  keywords: ['Content', 'progress', 'bar', 'progressbar'],
+  keywords: ['Content', 'progress', 'bar', 'progressbar', 'loader', 'loading'],
 };
 
 export default prefab('Progress Bar', attr, undefined, [Progress({}, [])]);
