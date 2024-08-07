@@ -27,7 +27,7 @@
     "import/prefer-default-export": "off",
     "prettier/prettier": [
       "error",
-      { "singleQuote": true, "trailingComma": "all" }
+      { "singleQuote": true, "trailingComma": "all", "endOfLine": "auto" }
     ]
   },
   "overrides": [

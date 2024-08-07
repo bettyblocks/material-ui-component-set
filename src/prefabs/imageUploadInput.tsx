@@ -311,7 +311,7 @@ const attr = {
     'upload',
     'fileupload',
     'media',
-    'picture'
+    'picture',
   ],
 };
 
