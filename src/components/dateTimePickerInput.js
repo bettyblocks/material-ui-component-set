@@ -289,6 +289,8 @@
           inputProps: {
             tabIndex: isDev ? -1 : undefined,
             className: includeStyling(),
+            // this prevents the form from submitting when in error state
+            ...(errorState && { pattern: '^a' }),
           },
         }}
         KeyboardButtonProps={{
