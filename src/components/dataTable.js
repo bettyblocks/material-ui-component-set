@@ -282,7 +282,7 @@
 
     const where = useFilter(completeFilter);
 
-    const refetch = () => null;
+    // const refetch = () => null;
 
     async function getData() {
       const token = localStorage.getItem('TOKEN');
@@ -295,8 +295,7 @@
           authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          rawFilter: where,
-          variables,
+          variables: { ...variables, where },
           skip: loadOnScroll ? skip : page * rowsPerPage,
           take: loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage,
           onCompleted(res) {
@@ -322,6 +321,10 @@
       setcustomData(parsedCustomResponse.data[key]);
       setLoading(false);
     }
+
+    useEffect(() => {
+      getData();
+    }, [interactionFilter]);
 
     if (!isDev) {
       B.useOneQuery(dummyModel, {
@@ -395,10 +398,10 @@
         clearResults();
         skipAppend.current = true;
         setTimeout(() => {
-          refetch();
+          getData();
         }, 0);
       } else {
-        refetch();
+        getData();
       }
     });
 
