@@ -282,8 +282,6 @@
 
     const where = useFilter(completeFilter);
 
-    // const refetch = () => null;
-
     async function getData() {
       const token = localStorage.getItem('TOKEN');
       const runtimeURL = `${window.artifact.apiUrl}/${window.artifact.applicationId}`;
@@ -295,9 +293,12 @@
           authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          variables: { ...variables, where },
-          skip: loadOnScroll ? skip : page * rowsPerPage,
-          take: loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage,
+          variables: {
+            ...variables,
+            where,
+            skip: loadOnScroll ? skip : page * rowsPerPage,
+            take: loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage,
+          },
           onCompleted(res) {
             const hasResult = res && res.results && res.results.length > 0;
             if (hasResult) {
@@ -324,7 +325,7 @@
 
     useEffect(() => {
       getData();
-    }, [interactionFilter]);
+    }, [interactionFilter, page]);
 
     if (!isDev) {
       B.useOneQuery(dummyModel, {
