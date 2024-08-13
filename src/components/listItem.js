@@ -145,7 +145,7 @@
             fontSize: ({ options: { subtitleFont } }) =>
               style.getFontSize(subtitleFont, 'Desktop'),
           },
-          fontWeight: ({ options: { titleWeight } }) => titleWeight,
+          fontWeight: ({ options: { subtitleWeight } }) => subtitleWeight,
           color: ({ options: { subtitleColor } }) =>
             style.getColor(subtitleColor),
         },

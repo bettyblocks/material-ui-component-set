@@ -1,3 +1,24 @@
+## [2.187.6](https://github.com/bettyblocks/material-ui-component-set/compare/v2.187.5...v2.187.6) (2024-07-24)
+
+
+### Bug Fixes
+
+* make the subtitle weight look at the subtitle weight option instead of the title weight ([90880df](https://github.com/bettyblocks/material-ui-component-set/commit/90880dfc866802ca9a74c7ef8e59f28420a6a026))
+
+## [2.187.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.187.4...v2.187.5) (2024-07-10)
+
+
+### Bug Fixes
+
+* manually trigger updateIndicator to show active tab on page load ([6c8d4ba](https://github.com/bettyblocks/material-ui-component-set/commit/6c8d4bad87f283cab18db70e27da7b2927fe2b60))
+
+## [2.187.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.187.3...v2.187.4) (2024-06-19)
+
+
+### Bug Fixes
+
+* trigger onSuccess event after file reference is successfully stored ([b3a877d](https://github.com/bettyblocks/material-ui-component-set/commit/b3a877d07a3e2d348b1e7017352826dd17080750))
+
 ## [2.187.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.187.2...v2.187.3) (2024-05-14)
 
 
