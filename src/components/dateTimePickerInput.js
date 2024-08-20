@@ -22,6 +22,11 @@
       size,
       fullWidth,
       required,
+      minValue,
+      maxValue,
+      validationBeforeMinValue,
+      validationAfterMaxValue,
+      validationInvalidValue,
       margin,
       helperText = [''],
       disableToolbar,
@@ -48,10 +53,16 @@
     const [isDisabled, setIsDisabled] = useState(disabled);
     const [selectedDate, setSelectedDate] = useState(parsedValue || null);
     const [errorState, setErrorState] = useState(error);
+    const [afterFirstValidation, setAfterFirstValidation] = useState(false);
     const helperTextResolved = useText(helperText);
     const [helper, setHelper] = useState(helperTextResolved);
     const valueMissingMessage = useText(validationValueMissing);
     const placeholderText = useText(placeholder);
+    const minValueText = useText(minValue);
+    const maxValueText = useText(maxValue);
+    const beforeMinValueMessage = useText(validationBeforeMinValue);
+    const afterMaxValueMessage = useText(validationAfterMaxValue);
+    const invalidValueMessage = useText(validationInvalidValue);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const clearable = true;
     const { current: labelControlRef } = useRef(generateUUID());
@@ -76,9 +87,34 @@
       return '';
     };
 
+    const convertToValidDate = (date) => {
+      const formattedValue = DateFns.parse(date, dateFormat);
+      const valueIsValid =
+        DateFns.isValid(formattedValue) || DateFns.isValid(date);
+
+      if (date && valueIsValid) {
+        if (isValidDate(formattedValue)) {
+          return formattedValue;
+        }
+        // convert to slashes because it conflicts with the MUI DateTimeCmp
+        const parsedValueWithSlashes = date.replace(/-/g, '/');
+        return new Date(parsedValueWithSlashes);
+      }
+      return undefined;
+    };
+
     const validationMessage = (validityObject) => {
       if (validityObject.valueMissing && valueMissingMessage) {
         return valueMissingMessage;
+      }
+      if (validityObject.invalidValue) {
+        return invalidValueMessage;
+      }
+      if (validityObject.beforeMinValue) {
+        return beforeMinValueMessage;
+      }
+      if (validityObject.afterMaxValue) {
+        return afterMaxValueMessage;
       }
       return '';
     };
@@ -97,20 +133,31 @@
           B.triggerEvent('onChange', convertToDate(date));
         } else if (!date || DateFns.isValid(date)) {
           B.triggerEvent('onChange', date);
-          setErrorState(false);
-          setHelper('');
         } else {
           B.triggerEvent('onChange', '');
         }
       }, 250);
     };
 
+    // invalidHandler is called on form submission with invalid value
     const invalidHandler = (event) => {
       event.preventDefault();
       const {
         target: { validity },
       } = event;
       handleValidation(validity);
+    };
+
+    // errorHandler is called on render and every time the value changes
+    const errorHandler = (message) => {
+      const validation = {
+        valid: !message && (selectedDate || !required || !afterFirstValidation),
+        valueMissing: !selectedDate && required && afterFirstValidation,
+        invalidValue: message.includes('Invalid'),
+        beforeMinValue: message.includes('minimal date'),
+        afterMaxValue: message.includes('maximal date'),
+      };
+      handleValidation(validation);
     };
 
     useEffect(() => {
@@ -172,11 +219,16 @@
     let format;
     let resultString;
     let use24HourClock = true;
+    let minDate;
+    let maxDate;
 
     switch (type) {
       case 'date': {
         DateTimeComponent = KeyboardDatePicker;
         format = dateFormat || 'dd/MM/yyyy';
+
+        minDate = convertToValidDate(minValueText);
+        maxDate = convertToValidDate(maxValueText);
 
         resultString = isValidDate(selectedDate)
           ? DateFns.format(selectedDate, 'yyyy-MM-dd')
@@ -206,15 +258,13 @@
       default:
     }
 
-    const onBlurHandler = () => {
-      if (!selectedDate) return;
-      if (selectedDate && DateFns.isValid(selectedDate)) {
-        setErrorState(false);
-        setHelper('');
-      } else {
-        setErrorState(true);
-        setHelper('invalid input');
-      }
+    const onBlurHandler = (event) => {
+      const {
+        target: { validity },
+      } = event;
+
+      handleValidation(validity);
+      setAfterFirstValidation(true);
     };
 
     const DateTimeCmp = (
@@ -234,10 +284,13 @@
         onChange={changeHandler}
         inputVariant={inputvariant}
         onInvalid={invalidHandler}
+        onError={errorHandler}
         InputProps={{
           inputProps: {
             tabIndex: isDev ? -1 : undefined,
             className: includeStyling(),
+            // this prevents the form from submitting when in error state
+            ...(errorState && { pattern: '^a' }),
           },
         }}
         KeyboardButtonProps={{
@@ -252,6 +305,8 @@
         disablePast={disablePastDates}
         autoOk={closeOnSelect}
         format={format}
+        minDate={minDate}
+        maxDate={maxDate}
         data-component={dataComponentAttributeValue}
         PopoverProps={{
           classes: {
