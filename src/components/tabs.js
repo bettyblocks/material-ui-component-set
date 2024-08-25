@@ -24,6 +24,7 @@
     const orientation =
       alignment === 'top' || alignment === 'bottom' ? 'horizontal' : 'vertical';
     const isDev = env === 'dev';
+    const tabsRef = useRef();
     const currentTab = isDev ? selectedDesignTabIndex : defaultValue;
     const [value, setValue] = useState(parseInt(currentTab - 1, 10) || 0);
     const [tabData, setTabData] = useState({});
@@ -46,6 +47,12 @@
       }
     }, [isDev, currentTab]);
 
+    useEffect(() => {
+      setTimeout(() => {
+        tabsRef.current.updateIndicator();
+      }, 100);
+    }, []);
+
     B.defineFunction('Next tab', () => {
       if (value + 1 >= children.length) return;
       setValue(value + 1);
@@ -58,6 +65,7 @@
 
     const TabsHeader = (
       <Tabs
+        action={tabsRef}
         aria-label="tabs"
         onChange={handleChange}
         value={value}
