@@ -7,6 +7,7 @@
     const {
       actionVariableId: name,
       autoComplete,
+      autoFocus,
       disabled,
       error,
       label,
@@ -67,6 +68,7 @@
     const parsedLabel = useText(label);
     const labelText = parsedLabel;
     const debouncedOnChangeRef = useRef(null);
+    const inputRef = useRef();
 
     const { current: labelControlRef } = useRef(generateUUID());
 
@@ -204,10 +206,16 @@
       handleValidation(validity);
     };
 
+    const focusHandler = () =>
+      setTimeout(() => {
+        inputRef.current.focus();
+      }, 50);
+
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
     B.defineFunction('Reset', () => setCurrentValue(useText(value)));
+    B.defineFunction('Focus', () => focusHandler());
 
     const handleClickShowPassword = () => {
       togglePassword(!showPassword);
@@ -281,11 +289,13 @@
         )}
         <InputCmp
           id={labelControlRef}
+          inputRef={inputRef}
           name={name}
           value={currentValue}
           type={showPassword ? 'text' : inputType}
           multiline={multiline}
           autoComplete={autoComplete ? 'on' : 'off'}
+          autoFocus={!isDev && autoFocus}
           rows={rows}
           label={labelText}
           placeholder={placeholderText}
