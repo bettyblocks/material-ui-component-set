@@ -1,3 +1,10 @@
+# [2.189.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.188.0...v2.189.0) (2024-08-26)
+
+
+### Features
+
+* add public file option for background image and fix interactions ([0efef40](https://github.com/bettyblocks/material-ui-component-set/commit/0efef40c9660c90cd20670b90d88b7873ced5913))
+
 # [2.188.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.187.6...v2.188.0) (2024-08-15)
 
 
