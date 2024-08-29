@@ -1,3 +1,24 @@
+# [2.189.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.188.0...v2.189.0) (2024-08-26)
+
+
+### Features
+
+* add public file option for background image and fix interactions ([0efef40](https://github.com/bettyblocks/material-ui-component-set/commit/0efef40c9660c90cd20670b90d88b7873ced5913))
+
+# [2.188.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.187.6...v2.188.0) (2024-08-15)
+
+
+### Bug Fixes
+
+* handle validation on change of input value ([24492aa](https://github.com/bettyblocks/material-ui-component-set/commit/24492aa4bea0abaf77f30d097d6066d447f674e4))
+* only set min/max if value is valid date and accept other formats ([dd3c7f5](https://github.com/bettyblocks/material-ui-component-set/commit/dd3c7f5c9b1202ee29dd271f8d9b967900b5437f))
+
+
+### Features
+
+* add min and max date validation options to date picker component ([310f2db](https://github.com/bettyblocks/material-ui-component-set/commit/310f2db7fd970b60bd926116e5c1ee45af8b99ad))
+* configurable error messages for min and max date and invalid value ([0d6dbef](https://github.com/bettyblocks/material-ui-component-set/commit/0d6dbefde68dadd669802fb3d2ffd8b8131effa5))
+
 ## [2.187.6](https://github.com/bettyblocks/material-ui-component-set/compare/v2.187.5...v2.187.6) (2024-07-24)
 
 
