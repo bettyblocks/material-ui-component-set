@@ -352,7 +352,11 @@
         ],
       };
     }
-    if (relationProperty && !relationProperty.inverseAssociationId) {
+    if (
+      relationProperty &&
+      !relationProperty.inverseAssociationId &&
+      defaultValue !== ''
+    ) {
       const parentProperty = getIdProperty(relationProperty.modelId);
       const parentIdProperty = parentProperty ? parentProperty.id : '';
       parentIdValue = B.useProperty(parentIdProperty);
