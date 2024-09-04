@@ -150,6 +150,9 @@
         ) {
           return parsed.map((obj) => String(obj.id));
         }
+        if (typeof parsed === 'number') {
+          return [parsed];
+        }
         if (!parsed.length) {
           if (isPageVariableValue) {
             return [''];
@@ -355,7 +358,7 @@
     if (
       relationProperty &&
       !relationProperty.inverseAssociationId &&
-      defaultValue !== ''
+      value === ''
     ) {
       const parentProperty = getIdProperty(relationProperty.modelId);
       const parentIdProperty = parentProperty ? parentProperty.id : '';
