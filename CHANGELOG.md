@@ -1,3 +1,10 @@
+## [2.190.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.0...v2.190.1) (2024-09-04)
+
+
+### Bug Fixes
+
+* move the no results text so that the search is still visible ([ca61974](https://github.com/bettyblocks/material-ui-component-set/commit/ca61974c7a305b23becae8d3bc43dbd3b205ec9c))
+
 # [2.190.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.189.0...v2.190.0) (2024-09-04)
 
 
