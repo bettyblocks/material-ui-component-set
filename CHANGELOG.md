@@ -1,3 +1,10 @@
+# [2.190.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.189.0...v2.190.0) (2024-09-04)
+
+
+### Features
+
+* add build steps and type error note ([099d37e](https://github.com/bettyblocks/material-ui-component-set/commit/099d37e90c66dd91b0b244a49aec21950d72da43))
+
 # [2.189.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.188.0...v2.189.0) (2024-08-26)
 
 
