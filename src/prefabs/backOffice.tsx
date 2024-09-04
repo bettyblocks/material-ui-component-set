@@ -144,6 +144,10 @@ const detailChildren = [
             ...conditionalOptions,
             left: variable('Conditional property', {
               value: [],
+              optionRef: {
+                sourceId: '#detailItemPropertyRef',
+                inherit: [{ name: '$name', id: '$id', type: 'PROPERTY' }],
+              },
             }),
             compare: option('CUSTOM', {
               label: 'Compare',
@@ -219,6 +223,9 @@ const detailChildren = [
                       showInAddChild: true,
                       ref: {
                         id: '#detailItemProperty',
+                      },
+                      optionRef: {
+                        id: '#detailItemPropertyRef',
                       },
                     }),
                     labelText: variable('Label Text', {
