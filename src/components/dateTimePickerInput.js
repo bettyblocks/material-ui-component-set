@@ -51,7 +51,9 @@
     const isDev = env === 'dev';
     const parsedValue = useText(value);
     const [isDisabled, setIsDisabled] = useState(disabled);
-    const [selectedDate, setSelectedDate] = useState(parsedValue || null);
+    const [selectedDate, setSelectedDate] = useState(
+      (parsedValue && parsedValue !== 'undefined') || null,
+    );
     const [errorState, setErrorState] = useState(error);
     const [afterFirstValidation, setAfterFirstValidation] = useState(false);
     const helperTextResolved = useText(helperText);
