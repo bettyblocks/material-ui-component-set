@@ -1,3 +1,10 @@
+## [2.190.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.1...v2.190.2) (2024-09-09)
+
+
+### Bug Fixes
+
+* add property value check in backoffice detailChildren conditional ([fd6abb5](https://github.com/bettyblocks/material-ui-component-set/commit/fd6abb5a95fcfdc57ccd630a155ecd884f7cad4a))
+
 ## [2.190.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.0...v2.190.1) (2024-09-04)
 
 
