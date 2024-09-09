@@ -331,7 +331,7 @@ const attributes = {
 export default makePrefab('Month Picker', attributes, beforeCreate, [
   DateTimePicker({
     label: 'Month picker',
-    inputLabel: { value: ['Month'] },
+    inputLabel: 'Month',
     dataComponentAttribute: 'Month Input',
     inputType: 'month',
   }),
