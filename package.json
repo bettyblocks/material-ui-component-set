@@ -5,7 +5,7 @@
   "license": "UNLICENSED",
   "private": false,
   "devDependencies": {
-    "@betty-blocks/cli": "^25.96.0",
+    "@betty-blocks/cli": "^25.98.0",
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-angular": "^16.0.0",
     "@semantic-release/changelog": "^6.0.1",
