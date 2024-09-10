@@ -1,3 +1,10 @@
+## [2.190.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.3...v2.190.4) (2024-09-10)
+
+
+### Bug Fixes
+
+* remove all instances of betty-jwt cookie ([1e32845](https://github.com/bettyblocks/material-ui-component-set/commit/1e32845d37c65ea233da82fa7b4fd6335a47bd34))
+
 ## [2.190.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.2...v2.190.3) (2024-09-10)
 
 
