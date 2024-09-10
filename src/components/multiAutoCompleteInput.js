@@ -142,18 +142,18 @@
     const getValues = () => {
       const value = defaultValue.replace(/\n/g, '');
       try {
-        const parsed = JSON.parse(value);
+        const parsedValue = JSON.parse(value);
         if (
-          Array.isArray(parsed) &&
-          parsed.length &&
-          parsed.every((item) => typeof item === 'object' && 'id' in item)
+          Array.isArray(parsedValue) &&
+          parsedValue.length &&
+          parsedValue.every((item) => typeof item === 'object' && 'id' in item)
         ) {
-          return parsed.map((obj) => String(obj.id));
+          return parsedValue.map((obj) => String(obj.id));
         }
-        if (typeof parsed === 'number') {
-          return [parsed];
+        if (typeof parsedValue === 'number') {
+          return [parsedValue];
         }
-        if (!parsed.length) {
+        if (!parsedValue.length) {
           if (isPageVariableValue) {
             return [''];
           }
