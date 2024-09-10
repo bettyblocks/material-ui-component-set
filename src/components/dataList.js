@@ -465,10 +465,6 @@
           const { results = [], totalCount } = data || {};
           const resultCount = results && results.length;
 
-          if (!resultCount) {
-            return <span>{parsedNoResultsText}</span>;
-          }
-
           return (
             <div data-component={dataComponentAttributeText || 'DataContainer'}>
               {searchProperty &&
@@ -485,6 +481,7 @@
                   </div>
                 )}
 
+              {!resultCount && <span>{parsedNoResultsText}</span>}
               {!isGrid ? (
                 Looper(results)
               ) : (
