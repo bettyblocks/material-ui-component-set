@@ -1,3 +1,32 @@
+## [2.190.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.2...v2.190.3) (2024-09-10)
+
+
+### Bug Fixes
+
+* make default values work with stringified ids again ([5851dcc](https://github.com/bettyblocks/material-ui-component-set/commit/5851dccfe5fdd70a51fd0b783a84ad0818d61db4))
+* only fill the valuesFilter if the defaultValue is not empty ([4ba58d1](https://github.com/bettyblocks/material-ui-component-set/commit/4ba58d178e5d8042900bfa4bdb5264f362c29438))
+
+## [2.190.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.1...v2.190.2) (2024-09-09)
+
+
+### Bug Fixes
+
+* add property value check in backoffice detailChildren conditional ([fd6abb5](https://github.com/bettyblocks/material-ui-component-set/commit/fd6abb5a95fcfdc57ccd630a155ecd884f7cad4a))
+
+## [2.190.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.0...v2.190.1) (2024-09-04)
+
+
+### Bug Fixes
+
+* move the no results text so that the search is still visible ([ca61974](https://github.com/bettyblocks/material-ui-component-set/commit/ca61974c7a305b23becae8d3bc43dbd3b205ec9c))
+
+# [2.190.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.189.0...v2.190.0) (2024-09-04)
+
+
+### Features
+
+* add build steps and type error note ([099d37e](https://github.com/bettyblocks/material-ui-component-set/commit/099d37e90c66dd91b0b244a49aec21950d72da43))
+
 # [2.189.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.188.0...v2.189.0) (2024-08-26)
 
 
