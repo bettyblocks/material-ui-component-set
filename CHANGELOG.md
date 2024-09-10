@@ -1,3 +1,11 @@
+## [2.190.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.2...v2.190.3) (2024-09-10)
+
+
+### Bug Fixes
+
+* make default values work with stringified ids again ([5851dcc](https://github.com/bettyblocks/material-ui-component-set/commit/5851dccfe5fdd70a51fd0b783a84ad0818d61db4))
+* only fill the valuesFilter if the defaultValue is not empty ([4ba58d1](https://github.com/bettyblocks/material-ui-component-set/commit/4ba58d178e5d8042900bfa4bdb5264f362c29438))
+
 ## [2.190.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.1...v2.190.2) (2024-09-09)
 
 
