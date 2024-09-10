@@ -52,7 +52,7 @@
     const parsedValue = useText(value);
     const [isDisabled, setIsDisabled] = useState(disabled);
     const [selectedDate, setSelectedDate] = useState(
-      (parsedValue && parsedValue !== 'undefined') || null,
+      (parsedValue && parsedValue !== 'undefined' && !isDev) || null,
     );
     const [errorState, setErrorState] = useState(error);
     const [afterFirstValidation, setAfterFirstValidation] = useState(false);
