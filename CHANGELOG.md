@@ -1,3 +1,18 @@
+## [2.190.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.3...v2.190.4) (2024-09-10)
+
+
+### Bug Fixes
+
+* remove all instances of betty-jwt cookie ([1e32845](https://github.com/bettyblocks/material-ui-component-set/commit/1e32845d37c65ea233da82fa7b4fd6335a47bd34))
+
+## [2.190.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.2...v2.190.3) (2024-09-10)
+
+
+### Bug Fixes
+
+* make default values work with stringified ids again ([5851dcc](https://github.com/bettyblocks/material-ui-component-set/commit/5851dccfe5fdd70a51fd0b783a84ad0818d61db4))
+* only fill the valuesFilter if the defaultValue is not empty ([4ba58d1](https://github.com/bettyblocks/material-ui-component-set/commit/4ba58d178e5d8042900bfa4bdb5264f362c29438))
+
 ## [2.190.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.1...v2.190.2) (2024-09-09)
 
 

@@ -34,7 +34,7 @@ function login({
 
     const d = new Date(0);
     const e = d.toUTCString();
-    document.cookie = `betty_jwt=none; expires=${e}; SameSite=Lax`;
+    document.cookie = `betty_jwt=none; expires=${e}; SameSite=Lax; path=/`;
 
     localStorage.setItem('TOKEN', jwtToken);
     localStorage.setItem('REFRESH_TOKEN', refreshToken);
