@@ -291,7 +291,7 @@
     const optionFilter = useFilter(filterRaw || {});
 
     // We need to do this, because options.filter is not immutable
-    let filter = { ...optionFilter };
+    let filter = JSON.parse(JSON.stringify(optionFilter));
 
     const searchPropIsNumber = numberPropTypes.includes(searchProp.kind);
     const valuePropIsNumber = numberPropTypes.includes(valueProp.kind);
