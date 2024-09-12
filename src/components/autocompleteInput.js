@@ -338,24 +338,23 @@
         : debouncedInputValue) ===
         (typeof value === 'string' ? value : value[searchProp.name])
     ) {
-      filter._or = [
-        {
-          [searchProp.name]: {
-            [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
-              ? parseFloat(debouncedInputValue, 10)
-              : debouncedInputValue,
+      /* when you have a default value the filter will be extended with this value,
+       * so that it always returns the record with that value and the records of the current filter
+       */
+      filter = {
+        _or: [
+          { ...filter },
+          {
+            [searchProp.name]: {
+              [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
+                ? parseFloat(debouncedInputValue, 10)
+                : debouncedInputValue,
+            },
           },
-        },
-        {
-          [valueProp.name]: {
-            neq: valuePropIsNumber
-              ? parseFloat(value[valueProp.name], 10)
-              : value[valueProp.name],
-          },
-        },
-      ];
+        ],
+      };
     } else if (debouncedInputValue) {
-      // if a relation is selected for label option
+      // if a relational property is selected for the label option
       if (labelPropertyPath.length > 1) {
         const newFilter = {
           [labelPropIsNumber ? 'eq' : 'matches']: labelPropIsNumber
@@ -368,6 +367,7 @@
         }, newFilter);
         filter = { ...filter, ...resolvedFilter };
       } else {
+        // when searching and no default value
         filter[searchProp.name] = {
           [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
             ? parseFloat(debouncedInputValue, 10)
@@ -375,6 +375,7 @@
         };
       }
     } else if (value !== '') {
+      // extend filter with default value after it is fetched
       filter._or = [
         {
           [valueProp.name]: {
