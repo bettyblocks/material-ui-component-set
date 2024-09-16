@@ -49,11 +49,14 @@
     const { nlLocale, enLocale } = window.MaterialUI.DateLocales;
     const DateFns = new DateFnsUtils();
     const isDev = env === 'dev';
-    const parsedValue = useText(value);
     const [isDisabled, setIsDisabled] = useState(disabled);
-    const [selectedDate, setSelectedDate] = useState(
-      (parsedValue && parsedValue !== 'undefined' && !isDev) || null,
-    );
+    const parsedValue = useText(value);
+
+    // When loading a pageVariable value, parsedValue returns 'undefined'
+    const initialParsedValue =
+      parsedValue && parsedValue !== 'undefined' && !isDev ? parsedValue : null;
+    const [selectedDate, setSelectedDate] = useState(initialParsedValue);
+
     const [errorState, setErrorState] = useState(error);
     const [afterFirstValidation, setAfterFirstValidation] = useState(false);
     const helperTextResolved = useText(helperText);
@@ -167,13 +170,14 @@
         switch (type) {
           case 'date': {
             const formattedDate = DateFns.parse(parsedValue, dateFormat);
-
             if (isValidDate(formattedDate)) {
               setSelectedDate(formattedDate);
             } else {
               // convert to slashes because it conflicts with the MUI DateTimeCmp
               const parsedValueWithSlashes = parsedValue.replace(/-/g, '/');
-              setSelectedDate(new Date(parsedValueWithSlashes));
+              const newDate = new Date(parsedValueWithSlashes);
+              const newSelectedDate = isValidDate(newDate) ? newDate : null;
+              setSelectedDate(newSelectedDate);
             }
             break;
           }
