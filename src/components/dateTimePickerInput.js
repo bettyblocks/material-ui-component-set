@@ -52,7 +52,7 @@
     const [isDisabled, setIsDisabled] = useState(disabled);
     const parsedValue = useText(value);
 
-    // When loading a pageVariable value, parsedValue returns 'undefined'
+    // When loading a pageVariable value, parsedValue returns 'undefined' - PAGE-4734
     const initialParsedValue =
       parsedValue && parsedValue !== 'undefined' && !isDev ? parsedValue : null;
     const [selectedDate, setSelectedDate] = useState(initialParsedValue);
