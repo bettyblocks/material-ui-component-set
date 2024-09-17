@@ -49,14 +49,9 @@
     const { nlLocale, enLocale } = window.MaterialUI.DateLocales;
     const DateFns = new DateFnsUtils();
     const isDev = env === 'dev';
-    const [isDisabled, setIsDisabled] = useState(disabled);
     const parsedValue = useText(value);
-
-    // When loading a pageVariable value, parsedValue returns 'undefined' - PAGE-4734
-    const initialParsedValue =
-      parsedValue && parsedValue !== 'undefined' && !isDev ? parsedValue : null;
-    const [selectedDate, setSelectedDate] = useState(initialParsedValue);
-
+    const [isDisabled, setIsDisabled] = useState(disabled);
+    const [selectedDate, setSelectedDate] = useState(parsedValue || null);
     const [errorState, setErrorState] = useState(error);
     const [afterFirstValidation, setAfterFirstValidation] = useState(false);
     const helperTextResolved = useText(helperText);
