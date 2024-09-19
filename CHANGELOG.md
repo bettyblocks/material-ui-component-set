@@ -1,3 +1,11 @@
+## [2.190.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.4...v2.190.5) (2024-09-12)
+
+
+### Bug Fixes
+
+* correctly show label above input with page vars ([3287fa3](https://github.com/bettyblocks/material-ui-component-set/commit/3287fa39deb5905a5c0b5703d0c67b972d5a2284))
+* wrong value in designtime ([6cad46c](https://github.com/bettyblocks/material-ui-component-set/commit/6cad46cf050aeabfd991d49b906313439e4faa08))
+
 ## [2.190.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.3...v2.190.4) (2024-09-10)
 
 
