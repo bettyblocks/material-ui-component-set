@@ -63,7 +63,8 @@
     const [errorState, setErrorState] = useState(error);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
-    const [currentValue, setCurrentValue] = usePageState(useText(value));
+    const optionValue = useText(value);
+    const [currentValue, setCurrentValue] = usePageState(optionValue);
     const parsedLabel = useText(label);
     const labelText = parsedLabel;
     const debouncedOnChangeRef = useRef(null);
@@ -86,6 +87,10 @@
     const placeholderText = useText(placeholder);
     const helperTextResolved = useText(helperText);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
+
+    useEffect(() => {
+      setCurrentValue(optionValue);
+    }, [optionValue]);
 
     const validationMessage = (validityObject) => {
       if (validityObject.customError && patternMismatchMessage) {
