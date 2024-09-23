@@ -209,7 +209,7 @@
     const focusHandler = () =>
       setTimeout(() => {
         inputRef.current.focus();
-      }, 50);
+      }, 0);
 
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
