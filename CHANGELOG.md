@@ -1,3 +1,10 @@
+## [2.191.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.191.1...v2.191.2) (2024-09-25)
+
+
+### Bug Fixes
+
+* rerender components when initial value changes ([f4bfdde](https://github.com/bettyblocks/material-ui-component-set/commit/f4bfddecdeb9a24cc15159ff09a96ce720c08dd0))
+
 ## [2.191.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.191.0...v2.191.1) (2024-09-25)
 
 
