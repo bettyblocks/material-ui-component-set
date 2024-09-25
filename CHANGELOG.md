@@ -1,3 +1,10 @@
+## [2.191.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.191.0...v2.191.1) (2024-09-25)
+
+
+### Bug Fixes
+
+* add extra checks for invalid dates ([c3c5593](https://github.com/bettyblocks/material-ui-component-set/commit/c3c55936c694982b2489cfcc4908758ae0db7565))
+
 # [2.191.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.5...v2.191.0) (2024-09-24)
 
 
