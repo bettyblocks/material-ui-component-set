@@ -132,3 +132,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npx semantic-release
+      - name: upload sanofi
+        env:
+          AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_SANOFI }}
+          AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_SANOFI }}
+        run: yarn upload
+      - name: release notes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: npx semantic-release

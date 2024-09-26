@@ -43,6 +43,10 @@
     const helperTextResolved = useText(helperText);
     const validationValueMissingText = useText(validationValueMissing);
 
+    useEffect(() => {
+      setChecked(boolify(resolvedValue));
+    }, [resolvedValue]);
+
     const {
       Checkbox: MUICheckbox,
       Switch,

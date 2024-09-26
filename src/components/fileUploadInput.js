@@ -80,6 +80,10 @@
       errorHelpers || (!hideDefaultError ? validationMessage : '') || helper;
 
     useEffect(() => {
+      setValue(initialValue);
+    }, [initialValue]);
+
+    useEffect(() => {
       firstRender.current = false;
     }, []);
 
