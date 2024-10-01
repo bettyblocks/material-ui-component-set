@@ -974,6 +974,18 @@ export default makePrefab(
                                   },
                                 },
                               ),
+                              backgroundType: option('CUSTOM', {
+                                label: 'Background type',
+                                value: 'url',
+                                configuration: {
+                                  as: 'BUTTONGROUP',
+                                  dataType: 'string',
+                                  allowedInput: [
+                                    { name: 'Image', value: 'img' },
+                                    { name: 'Data/URL', value: 'url' },
+                                  ],
+                                },
+                              }),
                               backgroundUrl: variable('Background url', {
                                 value: [
                                   'https://assets.bettyblocks.com/7730f33d3a624ec6b5383b5dc26c79d6_assets/files/login-background.jpeg',

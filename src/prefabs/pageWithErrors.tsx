@@ -316,6 +316,14 @@ const beforeCreate = ({
       );
       setOption(
         backgroundBox,
+        'backgroundType',
+        (opt: PrefabComponentOption) => ({
+          ...opt,
+          value: 'url',
+        }),
+      );
+      setOption(
+        backgroundBox,
         'backgroundUrl',
         (opt: PrefabComponentOption) => ({
           ...opt,

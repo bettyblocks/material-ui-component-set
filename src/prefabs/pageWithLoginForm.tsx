@@ -293,6 +293,18 @@ const prefabStructure: PrefabComponent[] = [
                           backgroundOptions: toggle('Show background options', {
                             value: true,
                           }),
+                          backgroundType: option('CUSTOM', {
+                            label: 'Background type',
+                            value: 'url',
+                            configuration: {
+                              as: 'BUTTONGROUP',
+                              dataType: 'string',
+                              allowedInput: [
+                                { name: 'Image', value: 'img' },
+                                { name: 'Data/URL', value: 'url' },
+                              ],
+                            },
+                          }),
                           backgroundUrl: variable('Background url', {
                             value: [
                               'https://assets.bettyblocks.com/1e9019bb1c5c4af2ba799c2ee1761af0_assets/files/login-background',
