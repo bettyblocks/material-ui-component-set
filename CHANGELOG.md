@@ -1,3 +1,24 @@
+## [2.191.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.191.1...v2.191.2) (2024-09-25)
+
+
+### Bug Fixes
+
+* rerender components when initial value changes ([f4bfdde](https://github.com/bettyblocks/material-ui-component-set/commit/f4bfddecdeb9a24cc15159ff09a96ce720c08dd0))
+
+## [2.191.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.191.0...v2.191.1) (2024-09-25)
+
+
+### Bug Fixes
+
+* add extra checks for invalid dates ([c3c5593](https://github.com/bettyblocks/material-ui-component-set/commit/c3c55936c694982b2489cfcc4908758ae0db7565))
+
+# [2.191.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.5...v2.191.0) (2024-09-24)
+
+
+### Features
+
+* introduce deployment for sanofi ([225dd5b](https://github.com/bettyblocks/material-ui-component-set/commit/225dd5b1a8031d97b5153b6ca639a2ec65c8e2fb))
+
 ## [2.190.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.4...v2.190.5) (2024-09-12)
 
 
