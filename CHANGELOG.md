@@ -1,3 +1,10 @@
+# [2.192.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.191.2...v2.192.0) (2024-10-01)
+
+
+### Features
+
+* added widget and update box position ([36cf8fe](https://github.com/bettyblocks/material-ui-component-set/commit/36cf8fe5eae281f755820a16b582d3d051bf1fe5))
+
 ## [2.191.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.191.1...v2.191.2) (2024-09-25)
 
 
