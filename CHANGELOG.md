@@ -1,3 +1,82 @@
+# [2.192.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.191.2...v2.192.0) (2024-10-01)
+
+
+### Features
+
+* added widget and update box position ([36cf8fe](https://github.com/bettyblocks/material-ui-component-set/commit/36cf8fe5eae281f755820a16b582d3d051bf1fe5))
+
+## [2.191.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.191.1...v2.191.2) (2024-09-25)
+
+
+### Bug Fixes
+
+* rerender components when initial value changes ([f4bfdde](https://github.com/bettyblocks/material-ui-component-set/commit/f4bfddecdeb9a24cc15159ff09a96ce720c08dd0))
+
+## [2.191.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.191.0...v2.191.1) (2024-09-25)
+
+
+### Bug Fixes
+
+* add extra checks for invalid dates ([c3c5593](https://github.com/bettyblocks/material-ui-component-set/commit/c3c55936c694982b2489cfcc4908758ae0db7565))
+
+# [2.191.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.5...v2.191.0) (2024-09-24)
+
+
+### Features
+
+* introduce deployment for sanofi ([225dd5b](https://github.com/bettyblocks/material-ui-component-set/commit/225dd5b1a8031d97b5153b6ca639a2ec65c8e2fb))
+
+## [2.190.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.4...v2.190.5) (2024-09-12)
+
+
+### Bug Fixes
+
+* correctly show label above input with page vars ([3287fa3](https://github.com/bettyblocks/material-ui-component-set/commit/3287fa39deb5905a5c0b5703d0c67b972d5a2284))
+* wrong value in designtime ([6cad46c](https://github.com/bettyblocks/material-ui-component-set/commit/6cad46cf050aeabfd991d49b906313439e4faa08))
+
+## [2.190.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.3...v2.190.4) (2024-09-10)
+
+
+### Bug Fixes
+
+* remove all instances of betty-jwt cookie ([1e32845](https://github.com/bettyblocks/material-ui-component-set/commit/1e32845d37c65ea233da82fa7b4fd6335a47bd34))
+
+## [2.190.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.2...v2.190.3) (2024-09-10)
+
+
+### Bug Fixes
+
+* make default values work with stringified ids again ([5851dcc](https://github.com/bettyblocks/material-ui-component-set/commit/5851dccfe5fdd70a51fd0b783a84ad0818d61db4))
+* only fill the valuesFilter if the defaultValue is not empty ([4ba58d1](https://github.com/bettyblocks/material-ui-component-set/commit/4ba58d178e5d8042900bfa4bdb5264f362c29438))
+
+## [2.190.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.1...v2.190.2) (2024-09-09)
+
+
+### Bug Fixes
+
+* add property value check in backoffice detailChildren conditional ([fd6abb5](https://github.com/bettyblocks/material-ui-component-set/commit/fd6abb5a95fcfdc57ccd630a155ecd884f7cad4a))
+
+## [2.190.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.190.0...v2.190.1) (2024-09-04)
+
+
+### Bug Fixes
+
+* move the no results text so that the search is still visible ([ca61974](https://github.com/bettyblocks/material-ui-component-set/commit/ca61974c7a305b23becae8d3bc43dbd3b205ec9c))
+
+# [2.190.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.189.0...v2.190.0) (2024-09-04)
+
+
+### Features
+
+* add build steps and type error note ([099d37e](https://github.com/bettyblocks/material-ui-component-set/commit/099d37e90c66dd91b0b244a49aec21950d72da43))
+
+# [2.189.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.188.0...v2.189.0) (2024-08-26)
+
+
+### Features
+
+* add public file option for background image and fix interactions ([0efef40](https://github.com/bettyblocks/material-ui-component-set/commit/0efef40c9660c90cd20670b90d88b7873ced5913))
+
 # [2.188.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.187.6...v2.188.0) (2024-08-15)
 
 
