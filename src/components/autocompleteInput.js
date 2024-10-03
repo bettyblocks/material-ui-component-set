@@ -90,12 +90,11 @@
     const required = defaultRequired;
     const label = useText(labelRaw);
     const defaultValue = useText(valueRaw, { rawValue: true });
-    const initalValue = defaultValue.replace(/\n/g, '');
-    const [value, setValue] = useState(initalValue);
+    const initialValue = defaultValue.replace(/\n/g, '');
+    const [value, setValue] = useState(initialValue);
     const [debouncedInputValue, setDebouncedInputValue] = useState();
     const [debouncedCurrentValue, setDebouncedCurrentValue] = useState();
     const [interactionFilter, setInteractionFilter] = useState({});
-    const defaultValueEvaluatedRef = useRef(false);
     const { current: labelControlRef } = useRef(generateUUID());
     const isNumberType = type === 'number';
 
@@ -144,11 +143,9 @@
 
     useEffect(() => {
       if (defaultValue) {
-        defaultValueEvaluatedRef.current = false;
-        setValue(initalValue);
+        setValue(initialValue);
         setInputValue('');
       } else {
-        defaultValueEvaluatedRef.current = true;
         setValue('');
         setInputValue('');
         setDebouncedInputValue('');
@@ -331,68 +328,73 @@
      * Those values always need to be returned in the results of the request
      */
     /* eslint-disable no-underscore-dangle */
-    if (
-      debouncedInputValue &&
-      (searchPropIsNumber
-        ? parseFloat(debouncedInputValue, 10)
-        : debouncedInputValue) ===
-        (typeof value === 'string' ? value : value[searchProp.name])
-    ) {
-      /* when you have a default value the filter will be extended with this value,
-       * so that it always returns the record with that value and the records of the current filter
-       */
+
+    const numberDebouncedInputValue = parseFloat(debouncedInputValue, 10);
+
+    const parsedDebouncedValue = searchPropIsNumber
+      ? numberDebouncedInputValue
+      : debouncedInputValue;
+
+    const currentSearchValue =
+      typeof value === 'string' ? value : value[searchProp.name];
+
+    const remainingRecordsFilter = {
+      [searchProp.name]: {
+        [searchPropIsNumber ? 'neq' : 'doesNotMatch']: currentSearchValue,
+      },
+    };
+
+    // When no filter, load records which do not match the default value
+    const currentFilter =
+      Object.keys(filter).length > 0 || value === ''
+        ? filter
+        : remainingRecordsFilter;
+
+    // After searching or setting a default value
+    if (debouncedInputValue) {
+      if (labelPropertyPath.length > 1) {
+        // Handle relational properties in label for options option
+        const newFilter = {
+          [labelPropIsNumber ? 'eq' : 'matches']: labelPropIsNumber
+            ? numberDebouncedInputValue
+            : debouncedInputValue,
+        };
+        const resolvedUuids = labelPropertyPath.map((u) => getProperty(u).name);
+        const resolvedFilter = resolvedUuids.reduceRight(
+          (acc, q) => ({ [q]: acc }),
+          newFilter,
+        );
+
+        filter = { ...resolvedFilter, ...filter };
+      } else {
+        // Use searchProp and debouncedValue to create new filter
+        const newSearchValue = parsedDebouncedValue !== currentSearchValue;
+        const operator = newSearchValue ? '_and' : '_or';
+        filter = {
+          [operator]: [
+            {
+              [searchProp.name]: {
+                [searchPropIsNumber ? 'eq' : 'matches']: parsedDebouncedValue,
+              },
+            },
+            { ...currentFilter },
+          ],
+        };
+      }
+    } else if (value !== '') {
+      // Use default value in filter to show it on render
       filter = {
         _or: [
-          { ...filter },
           {
-            [searchProp.name]: {
-              [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
-                ? parseFloat(debouncedInputValue, 10)
-                : debouncedInputValue,
+            [valueProp.name]: {
+              [valuePropIsNumber ? 'eq' : 'matches']:
+                typeof value === 'string' ? value : value[valueProp.name],
             },
           },
         ],
       };
-    } else if (debouncedInputValue) {
-      // if a relational property is selected for the label option
-      if (labelPropertyPath.length > 1) {
-        const newFilter = {
-          [labelPropIsNumber ? 'eq' : 'matches']: labelPropIsNumber
-            ? parseFloat(debouncedInputValue, 10)
-            : debouncedInputValue,
-        };
-        const resolvedUuids = labelPropertyPath.map((u) => getProperty(u).name);
-        const resolvedFilter = resolvedUuids.reduceRight((acc, q) => {
-          return { [q]: acc };
-        }, newFilter);
-        filter = { ...filter, ...resolvedFilter };
-      } else {
-        // when searching and no default value
-        filter[searchProp.name] = {
-          [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
-            ? parseFloat(debouncedInputValue, 10)
-            : debouncedInputValue,
-        };
-      }
-    } else if (value !== '') {
-      // extend filter with default value after it is fetched
-      filter._or = [
-        {
-          [valueProp.name]: {
-            [valuePropIsNumber ? 'eq' : 'matches']:
-              typeof value === 'string' ? value : value[valueProp.name],
-          },
-        },
-      ];
-
-      if (defaultValueEvaluatedRef.current) {
-        filter._or.push({
-          [valueProp.name]: {
-            neq: typeof value === 'string' ? value : value[valueProp.name],
-          },
-        });
-      }
     }
+
     /* eslint-enable no-underscore-dangle */
 
     /*
@@ -514,28 +516,13 @@
       message = 'Something went wrong while loading.';
     }
 
-    // If the default value is a value that lives outside the take range of the query we should fetch the values before we continue.
-    if (!isDev && !defaultValueEvaluatedRef.current && value && results) {
-      setValue((prev) => {
-        return (
-          results.find(
-            (result) =>
-              result[valueProp.name] &&
-              prev[valueProp.name] === result[valueProp.name],
-          ) || ''
-        );
-      });
-
-      defaultValueEvaluatedRef.current = true;
-    }
-
     B.defineFunction('Clear', () => {
       setValue('');
       setInputValue('');
       setDebouncedInputValue('');
     });
 
-    B.defineFunction('Reset', () => setValue(initalValue));
+    B.defineFunction('Reset', () => setValue(initialValue));
 
     B.defineFunction('Refetch', () => refetch());
 
