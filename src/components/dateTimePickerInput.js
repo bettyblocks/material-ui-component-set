@@ -39,9 +39,6 @@
       floatLabel,
     } = options;
 
-    const META_API_DATE_FORMAT = 'yyyy-MM-dd';
-    const META_API_TIME_FORMAT = 'HH:mm:ss';
-
     const { env, useText, Icon, generateUUID } = B;
     const {
       MuiPickersUtilsProvider,
@@ -75,7 +72,10 @@
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
 
-    function setFormat(typeFormat) {
+    const META_API_DATE_FORMAT = 'yyyy-MM-dd';
+    const META_API_TIME_FORMAT = 'HH:mm:ss';
+
+    function getFormat(typeFormat) {
       const defaultFormat = {
         date: 'dd/MM/yyyy',
         time: 'HH:mm:ss',
@@ -91,30 +91,37 @@
 
     // useEffect for 'valueText', trigger on first componentRender (and data-loaded)
     useEffect(() => {
+      let parsedValue = null;
+
       if (valueText) {
-        let parsedValue = '';
+        let parsedDate = '';
 
         switch (typeComponent) {
-          case 'date': {
-            const parsedDate = DateFns.parse(valueText, META_API_DATE_FORMAT);
-            parsedValue = isValidDate(parsedDate) ? parsedDate : null;
+          case 'datetime': {
+            parsedDate = new Date(valueText);
             break;
           }
-          case 'datetime': {
-            parsedValue = new Date(valueText);
+          case 'date': {
+            parsedDate = DateFns.parse(valueText, META_API_DATE_FORMAT);
             break;
           }
           case 'time': {
-            parsedValue = DateFns.parse(valueText, META_API_TIME_FORMAT);
+            parsedDate = DateFns.parse(valueText, META_API_TIME_FORMAT);
             break;
           }
-          default:
         }
 
-        setSelectedDate(parsedValue);
-      } else {
-        setSelectedDate(null);
+        if (isValidDate(parsedDate)) {
+          parsedValue = parsedDate;
+        } else {
+          parsedDate = DateFns.parse(valueText, getFormat(typeComponent));
+          if (isValidDate(parsedDate)) {
+            parsedValue = parsedDate;
+          }
+        }
       }
+
+      setSelectedDate(parsedValue);
     }, [valueText]);
 
     function onChangeHandler(internalDate) {
@@ -242,7 +249,7 @@
         disablePast={disablePastDates}
         minDate={convertToValidDate(useText(minValue))}
         maxDate={convertToValidDate(useText(maxValue))}
-        format={setFormat(typeComponent)}
+        format={getFormat(typeComponent)}
         fullWidth={fullWidth}
         size={size}
         margin={margin}
