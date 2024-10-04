@@ -1,3 +1,10 @@
+# [2.192.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.191.2...v2.192.0) (2024-09-26)
+
+
+### Features
+
+* introduce sanofi and remove double entry for spc1 ([e5d6f80](https://github.com/bettyblocks/material-ui-component-set/commit/e5d6f8060c7ad1f4b497f800eafd2bcc717a89ca))
+
 ## [2.191.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.191.1...v2.191.2) (2024-09-25)
 
 
