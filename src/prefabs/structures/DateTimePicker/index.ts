@@ -7,7 +7,6 @@ export enum DateInputTypes {
   DATE_TIME = 'datetime',
   DATE = 'date',
   TIME = 'time',
-  MONTH = 'month',
 }
 
 export const DateTimePicker = (
@@ -68,9 +67,6 @@ export const DateTimePicker = (
         break;
       case DateInputTypes.TIME:
         format = 'HH:mm:ss';
-        break;
-      case DateInputTypes.MONTH:
-        format = 'MMMM';
         break;
       default:
         format = '';

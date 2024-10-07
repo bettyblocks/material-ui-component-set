@@ -74,13 +74,7 @@ export const options = {
       condition: showIf('type', 'EQ', 'datetime'),
     },
   }),
-  monthFormat: text('Format', {
-    value: 'MMMM',
-    configuration: {
-      placeholder: 'MMMM',
-      condition: showIf('type', 'EQ', 'month'),
-    },
-  }),
+
   locale: buttongroup(
     'Locale',
     [
