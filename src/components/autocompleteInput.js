@@ -333,12 +333,12 @@
     const numberDebouncedInputValue = parseFloat(debouncedInputValue, 10);
 
     // There is an empty string as fallback, because empty label is not a valid value to search on
-    const textDebouncedValue =
+    const textDebouncedInputValue =
       debouncedInputValue === EMPTY_LABEL ? '' : debouncedInputValue;
 
     const parsedDebouncedValue = searchPropIsNumber
       ? numberDebouncedInputValue
-      : textDebouncedValue;
+      : textDebouncedInputValue;
 
     const currentSearchValue =
       typeof value === 'string' ? value : value[searchProp.name];
@@ -362,7 +362,7 @@
         const newFilter = {
           [labelPropIsNumber ? 'eq' : 'matches']: labelPropIsNumber
             ? numberDebouncedInputValue
-            : textDebouncedValue,
+            : textDebouncedInputValue,
         };
         const resolvedUuids = labelPropertyPath.map((u) => getProperty(u).name);
         const resolvedFilter = resolvedUuids.reduceRight(
