@@ -362,7 +362,7 @@
         const newFilter = {
           [labelPropIsNumber ? 'eq' : 'matches']: labelPropIsNumber
             ? numberDebouncedInputValue
-            : debouncedInputValue,
+            : textDebouncedValue,
         };
         const resolvedUuids = labelPropertyPath.map((u) => getProperty(u).name);
         const resolvedFilter = resolvedUuids.reduceRight(
