@@ -83,17 +83,11 @@
     const META_API_TIME_FORMAT = 'HH:mm:ss';
 
     function getFormat(typeFormat) {
-      const defaultFormat = {
-        date: 'dd/MM/yyyy',
-        time: 'HH:mm:ss',
-        datetime: 'dd/MM/yyyy HH:mm:ss',
-      };
-      const optionFormat = {
-        date: dateFormat,
-        time: timeFormat,
-        datetime: datetimeFormat,
-      };
-      return optionFormat[typeFormat] || defaultFormat[typeFormat];
+      return {
+        date: dateFormat || 'dd/MM/yyyy',
+        time: timeFormat || 'HH:mm:ss',
+        datetime: datetimeFormat || 'dd/MM/yyyy HH:mm:ss',
+      }[typeFormat];
     }
 
     function isValidDate(date) {
