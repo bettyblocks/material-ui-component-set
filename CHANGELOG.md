@@ -1,3 +1,44 @@
+# [2.193.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.192.0...v2.193.0) (2024-10-04)
+
+
+### Bug Fixes
+
+* **PAGE-4710:** Background image of box are now shown ([aa0a6a8](https://github.com/bettyblocks/material-ui-component-set/commit/aa0a6a8b22ced1e6585635901a0da80ceda2bbec))
+
+
+### Features
+
+* add option and interaction to set auto focus on input ([c56ef82](https://github.com/bettyblocks/material-ui-component-set/commit/c56ef82d5341cd4192f00bd18fcf9a451252bb21))
+* added widget and update box position ([36cf8fe](https://github.com/bettyblocks/material-ui-component-set/commit/36cf8fe5eae281f755820a16b582d3d051bf1fe5))
+
+# [2.192.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.191.2...v2.192.0) (2024-10-03)
+
+### Bug Fixes
+
+* **PAGE-4710:** Background image of box are now shown ([aa0a6a8](https://github.com/bettyblocks/material-ui-component-set/commit/aa0a6a8b22ced1e6585635901a0da80ceda2bbec))
+
+
+### Features
+
+* introduce sanofi and remove double entry for spc1 ([e5d6f80](https://github.com/bettyblocks/material-ui-component-set/commit/e5d6f8060c7ad1f4b497f800eafd2bcc717a89ca))
+* add option and interaction to set auto focus on input ([c56ef82](https://github.com/bettyblocks/material-ui-component-set/commit/c56ef82d5341cd4192f00bd18fcf9a451252bb21))
+* added widget and update box position ([36cf8fe](https://github.com/bettyblocks/material-ui-component-set/commit/36cf8fe5eae281f755820a16b582d3d051bf1fe5))
+
+# [2.192.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.191.2...v2.192.0) (2024-10-03)
+
+
+### Features
+
+* add option and interaction to set auto focus on input ([c56ef82](https://github.com/bettyblocks/material-ui-component-set/commit/c56ef82d5341cd4192f00bd18fcf9a451252bb21))
+* added widget and update box position ([36cf8fe](https://github.com/bettyblocks/material-ui-component-set/commit/36cf8fe5eae281f755820a16b582d3d051bf1fe5))
+
+# [2.192.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.191.2...v2.192.0) (2024-10-01)
+
+
+### Features
+
+* added widget and update box position ([36cf8fe](https://github.com/bettyblocks/material-ui-component-set/commit/36cf8fe5eae281f755820a16b582d3d051bf1fe5))
+
 ## [2.191.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.191.1...v2.191.2) (2024-09-25)
 
 
