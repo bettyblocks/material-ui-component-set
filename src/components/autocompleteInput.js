@@ -97,6 +97,7 @@
     const [interactionFilter, setInteractionFilter] = useState({});
     const { current: labelControlRef } = useRef(generateUUID());
     const isNumberType = type === 'number';
+    const EMPTY_LABEL = '-- empty --';
 
     const validPattern = pattern || null;
     const validMinlength = minlength || null;
@@ -331,9 +332,13 @@
 
     const numberDebouncedInputValue = parseFloat(debouncedInputValue, 10);
 
+    // There is an empty string as fallback, because empty label is not a valid value to search on
+    const textDebouncedInputValue =
+      debouncedInputValue === EMPTY_LABEL ? '' : debouncedInputValue;
+
     const parsedDebouncedValue = searchPropIsNumber
       ? numberDebouncedInputValue
-      : debouncedInputValue;
+      : textDebouncedInputValue;
 
     const currentSearchValue =
       typeof value === 'string' ? value : value[searchProp.name];
@@ -357,7 +362,7 @@
         const newFilter = {
           [labelPropIsNumber ? 'eq' : 'matches']: labelPropIsNumber
             ? numberDebouncedInputValue
-            : debouncedInputValue,
+            : textDebouncedInputValue,
         };
         const resolvedUuids = labelPropertyPath.map((u) => getProperty(u).name);
         const resolvedFilter = resolvedUuids.reduceRight(
@@ -691,7 +696,7 @@
       }
 
       return optionLabel === '' || optionLabel === null
-        ? '-- empty --'
+        ? EMPTY_LABEL
         : optionLabel.toString();
     };
 
