@@ -1,3 +1,10 @@
+## [2.193.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.193.0...v2.193.1) (2024-10-07)
+
+
+### Bug Fixes
+
+* **PAGE-4710:** Remove unused zone from publish prod files. ([05e1bbf](https://github.com/bettyblocks/material-ui-component-set/commit/05e1bbfe41028b96f0960f51e61c5f8c860bc23e))
+
 # [2.193.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.192.0...v2.193.0) (2024-10-04)
 
 
