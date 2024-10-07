@@ -662,6 +662,18 @@ export default makePrefab('User, account register only', attrs, beforeCreate, [
                               as: 'UNIT',
                             },
                           }),
+                          backgroundType: option('CUSTOM', {
+                            label: 'Background type',
+                            value: 'url',
+                            configuration: {
+                              as: 'BUTTONGROUP',
+                              dataType: 'string',
+                              allowedInput: [
+                                { name: 'Image', value: 'img' },
+                                { name: 'Data/URL', value: 'url' },
+                              ],
+                            },
+                          }),
                           backgroundOptions: toggle('Show background options', {
                             value: true,
                           }),

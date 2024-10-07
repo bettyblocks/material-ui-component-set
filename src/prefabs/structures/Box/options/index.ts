@@ -144,7 +144,7 @@ export const boxOptions = {
       ['Sticky', 'sticky'],
     ],
     {
-      value: 'static',
+      value: 'relative',
       configuration: {
         dataType: 'string',
       },
