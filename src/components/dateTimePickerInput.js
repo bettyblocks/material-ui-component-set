@@ -19,7 +19,6 @@
       dateFormat,
       timeFormat,
       datetimeFormat,
-      monthFormat,
       size,
       fullWidth,
       required,
@@ -206,19 +205,6 @@
             break;
           }
 
-          case 'month': {
-            const formattedDate = DateFns.parse(parsedValue, monthFormat);
-
-            if (isValidDate(formattedDate)) {
-              setSelectedDate(formattedDate);
-            } else {
-              // convert to slashes because it conflicts with the MUI DateTimeCmp
-              const parsedValueWithSlashes = parsedValue.replace(/-/g, '/');
-              setSelectedDate(new Date(parsedValueWithSlashes));
-            }
-            break;
-          }
-
           default:
         }
       } else {
@@ -236,13 +222,11 @@
     let use24HourClock = true;
     let minDate;
     let maxDate;
-    let views;
 
     switch (type) {
       case 'date': {
         DateTimeComponent = KeyboardDatePicker;
         format = dateFormat || 'dd/MM/yyyy';
-        views = ['year', 'date'];
 
         minDate = convertToValidDate(minValueText);
         maxDate = convertToValidDate(maxValueText);
@@ -256,7 +240,6 @@
         DateTimeComponent = KeyboardDateTimePicker;
         format = datetimeFormat || 'dd/MM/yyyy HH:mm:ss';
         use24HourClock = use24HourClockTime;
-        views = ['year', 'date', 'hours', 'minutes'];
 
         resultString = isValidDate(selectedDate)
           ? selectedDate.toISOString()
@@ -267,20 +250,9 @@
         DateTimeComponent = KeyboardTimePicker;
         format = timeFormat || 'HH:mm:ss';
         use24HourClock = use24HourClockTime;
-        views = ['hours', 'minutes'];
 
         resultString = isValidDate(selectedDate)
           ? DateFns.format(selectedDate, 'HH:mm:ss')
-          : null;
-        break;
-      }
-      case 'month': {
-        DateTimeComponent = KeyboardDatePicker;
-        format = monthFormat || 'MMMM';
-        views = ['month'];
-
-        resultString = isValidDate(selectedDate)
-          ? DateFns.format(selectedDate, 'yyyy-MM')
           : null;
         break;
       }
@@ -328,7 +300,6 @@
         required={required}
         disabled={isDisabled}
         label={!hideLabel && labelText}
-        views={views}
         margin={margin}
         helperText={helper}
         disableToolbar={disableToolbar}
