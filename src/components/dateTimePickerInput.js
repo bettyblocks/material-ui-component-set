@@ -58,13 +58,20 @@
     const isDev = env === 'dev';
 
     const valueText = useText(value);
+    const optionHelperText = useText(helperText);
+
+    const validationValueMissingText = useText(validationValueMissing);
+    const validationInvalidValueText = useText(validationInvalidValue);
+    const validationBeforeMinValueText = useText(validationBeforeMinValue);
+    const validationAfterMaxValueText = useText(validationAfterMaxValue);
+
     const dataComponentAttributeValue = useText(dataComponentAttribute);
 
     const { current: labelControlRef } = useRef(generateUUID());
 
     const [selectedDate, setSelectedDate] = useState(valueText);
     const [errorState, setErrorState] = useState(error);
-    const [currentHelperText, setHelper] = useState(useText(helperText));
+    const [currentHelperText, setHelper] = useState(optionHelperText);
     const [isDisabled, setIsDisabled] = useState(disabled);
     const [isFirstValidation, setIsFirstValidation] = useState(true);
 
@@ -89,6 +96,10 @@
       return optionFormat[typeFormat] || defaultFormat[typeFormat];
     }
 
+    function isValidDate(date) {
+      return date instanceof Date && !isNaN(date);
+    }
+
     // useEffect for 'valueText', trigger on first componentRender (and data-loaded)
     useEffect(() => {
       let parsedValue = null;
@@ -109,6 +120,11 @@
             parsedDate = DateFns.parse(valueText, META_API_TIME_FORMAT);
             break;
           }
+          default: {
+            throw new Error(
+              `DateTimePickerInput: unknown type: '${typeComponent}'`,
+            );
+          }
         }
 
         if (isValidDate(parsedDate)) {
@@ -124,17 +140,38 @@
       setSelectedDate(parsedValue);
     }, [valueText]);
 
-    function onChangeHandler(internalDate) {
+    function validationMessage(validityObject) {
+      if (validityObject.valueMissing) {
+        return validationValueMissingText;
+      }
+      if (validityObject.invalidValue) {
+        return validationInvalidValueText;
+      }
+      if (validityObject.beforeMinValue) {
+        return validationBeforeMinValueText;
+      }
+      if (validityObject.afterMaxValue) {
+        return validationAfterMaxValueText;
+      }
+      return '';
+    }
+
+    function setValidationMessage(validation) {
+      setErrorState(!validation.valid);
+      setHelper(validationMessage(validation) || optionHelperText);
+    }
+
+    const onChangeHandler = (internalDate) => {
       setSelectedDate(internalDate);
       setIsFirstValidation(false);
 
       setTimeout(() => {
         B.triggerEvent('onChange', internalDate);
       }, 250);
-    }
+    };
 
     // onInvalidHandler is called on form submit with invalid value
-    function onInvalidHandler(event) {
+    const onInvalidHandler = (event) => {
       event.preventDefault();
       const {
         target: { validity },
@@ -142,18 +179,18 @@
 
       setValidationMessage(validity);
       setIsFirstValidation(false);
-    }
+    };
 
-    function onBlurHandler(event) {
+    const onBlurHandler = (event) => {
       const {
         target: { validity },
       } = event;
 
       setValidationMessage(validity);
-    }
+    };
 
     // onErrorHandler is called on render and every time the value changes
-    function onErrorHandler(internalComponentMessage) {
+    const onErrorHandler = (internalComponentMessage) => {
       const validation = {
         valid:
           !internalComponentMessage &&
@@ -165,28 +202,7 @@
       };
 
       setValidationMessage(validation);
-    }
-
-    function setValidationMessage(validation) {
-      setErrorState(!validation.valid);
-      setHelper(validationMessage(validation) || useText(helperText));
-    }
-
-    function validationMessage(validityObject) {
-      if (validityObject.valueMissing) {
-        return useText(validationValueMissing);
-      }
-      if (validityObject.invalidValue) {
-        return useText(validationInvalidValue);
-      }
-      if (validityObject.beforeMinValue) {
-        return useText(validationBeforeMinValue);
-      }
-      if (validityObject.afterMaxValue) {
-        return useText(validationAfterMaxValue);
-      }
-      return '';
-    }
+    };
 
     function convertToValidDate(dateText) {
       if (DateFns.isValid(dateText)) {
@@ -199,10 +215,6 @@
         return new Date(parsedValueWithSlashes);
       }
       return '';
-    }
-
-    function isValidDate(date) {
-      return date instanceof Date && !isNaN(date);
     }
 
     let DateTimeComponent;
