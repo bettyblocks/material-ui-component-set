@@ -1,3 +1,12 @@
+## [2.193.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.193.0...v2.193.1) (2024-10-08)
+
+
+### Bug Fixes
+
+* datepicker can interpret default meta-data data ([c56ecb3](https://github.com/bettyblocks/material-ui-component-set/commit/c56ecb39c78bf70050d2647cd3c6c0f71f8f0f1e))
+* **PAGE-4710:** Remove unused zone from publish prod files. ([05e1bbf](https://github.com/bettyblocks/material-ui-component-set/commit/05e1bbfe41028b96f0960f51e61c5f8c860bc23e))
+* parse min- and maxDate correctly ([4baa79e](https://github.com/bettyblocks/material-ui-component-set/commit/4baa79e6a2a64de49253f08d4193674c6025cd58))
+
 # [2.193.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.192.0...v2.193.0) (2024-10-04)
 
 
