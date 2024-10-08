@@ -79,8 +79,8 @@
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
 
-    const META_API_DATE_FORMAT = 'yyyy-MM-dd';
-    const META_API_TIME_FORMAT = 'HH:mm:ss';
+    const DATA_API_DATE_FORMAT = 'yyyy-MM-dd';
+    const DATA_API_TIME_FORMAT = 'HH:mm:ss';
 
     function getFormat(typeFormat) {
       return {
@@ -107,11 +107,11 @@
             break;
           }
           case 'date': {
-            parsedDate = DateFns.parse(valueText, META_API_DATE_FORMAT);
+            parsedDate = DateFns.parse(valueText, DATA_API_DATE_FORMAT);
             break;
           }
           case 'time': {
-            parsedDate = DateFns.parse(valueText, META_API_TIME_FORMAT);
+            parsedDate = DateFns.parse(valueText, DATA_API_TIME_FORMAT);
             break;
           }
           default: {
