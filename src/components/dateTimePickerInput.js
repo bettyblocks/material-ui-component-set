@@ -15,7 +15,7 @@
       variant,
       validationValueMissing,
       inputvariant,
-      type,
+      type: typeComponent,
       dateFormat,
       timeFormat,
       datetimeFormat,
@@ -28,16 +28,17 @@
       validationAfterMaxValue,
       validationInvalidValue,
       margin,
-      helperText = [''],
+      helperText,
       disableToolbar,
       disablePastDates,
       hideLabel,
-      use24HourClockTime,
+      use24HourClockTime: is24HourClockTime,
       label,
       locale,
       dataComponentAttribute = ['DateTimePicker'],
       floatLabel,
     } = options;
+
     const { env, useText, Icon, generateUUID } = B;
     const {
       MuiPickersUtilsProvider,
@@ -45,213 +46,192 @@
       KeyboardDatePicker,
       KeyboardDateTimePicker,
     } = window.MaterialUI.Pickers;
-    const { DateFnsUtils } = window.MaterialUI;
     const { nlLocale, enLocale } = window.MaterialUI.DateLocales;
+    const { DateFnsUtils } = window.MaterialUI;
     const DateFns = new DateFnsUtils();
-    const isDev = env === 'dev';
-    const parsedValue = useText(value);
-    const [isDisabled, setIsDisabled] = useState(disabled);
-    const [selectedDate, setSelectedDate] = useState(parsedValue || null);
-    const [errorState, setErrorState] = useState(error);
-    const [afterFirstValidation, setAfterFirstValidation] = useState(false);
-    const helperTextResolved = useText(helperText);
-    const [helper, setHelper] = useState(helperTextResolved);
-    const valueMissingMessage = useText(validationValueMissing);
-    const placeholderText = useText(placeholder);
-    const minValueText = useText(minValue);
-    const maxValueText = useText(maxValue);
-    const beforeMinValueMessage = useText(validationBeforeMinValue);
-    const afterMaxValueMessage = useText(validationAfterMaxValue);
-    const invalidValueMessage = useText(validationInvalidValue);
-    const dataComponentAttributeValue = useText(dataComponentAttribute);
-    const clearable = true;
-    const { current: labelControlRef } = useRef(generateUUID());
 
     const localeMap = {
       nl: nlLocale,
       en: enLocale,
     };
 
-    const parsedLabel = useText(label);
-    const labelText = parsedLabel;
-    const isValidDate = (date) => date instanceof Date && !isNaN(date);
+    const isDev = env === 'dev';
 
-    const convertToDate = (date) => {
-      if (isValidDate(date)) {
-        const dateString = `${date.getFullYear()}-${String(
-          date.getMonth() + 1,
-        ).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+    const valueText = useText(value);
+    const optionHelperText = useText(helperText);
 
-        return dateString;
-      }
-      return '';
-    };
+    const validationValueMissingText = useText(validationValueMissing);
+    const validationInvalidValueText = useText(validationInvalidValue);
+    const validationBeforeMinValueText = useText(validationBeforeMinValue);
+    const validationAfterMaxValueText = useText(validationAfterMaxValue);
 
-    const convertToValidDate = (date) => {
-      const formattedValue = DateFns.parse(date, dateFormat);
-      const valueIsValid =
-        DateFns.isValid(formattedValue) || DateFns.isValid(date);
+    const dataComponentAttributeValue = useText(dataComponentAttribute);
 
-      if (date && valueIsValid) {
-        if (isValidDate(formattedValue)) {
-          return formattedValue;
-        }
-        // convert to slashes because it conflicts with the MUI DateTimeCmp
-        const parsedValueWithSlashes = date.replace(/-/g, '/');
-        return new Date(parsedValueWithSlashes);
-      }
-      return undefined;
-    };
+    const { current: labelControlRef } = useRef(generateUUID());
 
-    const validationMessage = (validityObject) => {
-      if (validityObject.valueMissing && valueMissingMessage) {
-        return valueMissingMessage;
-      }
-      if (validityObject.invalidValue) {
-        return invalidValueMessage;
-      }
-      if (validityObject.beforeMinValue) {
-        return beforeMinValueMessage;
-      }
-      if (validityObject.afterMaxValue) {
-        return afterMaxValueMessage;
-      }
-      return '';
-    };
-
-    const handleValidation = (validation) => {
-      setErrorState(!validation.valid);
-      const message = validationMessage(validation) || helperTextResolved;
-      setHelper(message);
-    };
-
-    const changeHandler = (date) => {
-      setSelectedDate(date);
-
-      setTimeout(() => {
-        if (type === 'date') {
-          B.triggerEvent('onChange', convertToDate(date));
-        } else if (!date || DateFns.isValid(date)) {
-          B.triggerEvent('onChange', date);
-        } else {
-          B.triggerEvent('onChange', '');
-        }
-      }, 250);
-    };
-
-    // invalidHandler is called on form submission with invalid value
-    const invalidHandler = (event) => {
-      event.preventDefault();
-      const {
-        target: { validity },
-      } = event;
-      handleValidation(validity);
-    };
-
-    // errorHandler is called on render and every time the value changes
-    const errorHandler = (message) => {
-      const validation = {
-        valid: !message && (selectedDate || !required || !afterFirstValidation),
-        valueMissing: !selectedDate && required && afterFirstValidation,
-        invalidValue: message.includes('Invalid'),
-        beforeMinValue: message.includes('minimal date'),
-        afterMaxValue: message.includes('maximal date'),
-      };
-      handleValidation(validation);
-    };
-
-    useEffect(() => {
-      if (parsedValue) {
-        switch (type) {
-          case 'date': {
-            const formattedDate = DateFns.parse(parsedValue, dateFormat);
-            if (isValidDate(formattedDate)) {
-              setSelectedDate(formattedDate);
-            } else {
-              // convert to slashes because it conflicts with the MUI DateTimeCmp
-              const parsedValueWithSlashes = parsedValue.replace(/-/g, '/');
-              const newDate = new Date(parsedValueWithSlashes);
-              const newSelectedDate = isValidDate(newDate) ? newDate : null;
-              setSelectedDate(newSelectedDate);
-            }
-            break;
-          }
-
-          case 'datetime': {
-            const formatDefaultParse = DateFns.parse(
-              parsedValue,
-              datetimeFormat,
-            );
-
-            if (isValidDate(formatDefaultParse)) {
-              setSelectedDate(formatDefaultParse);
-            } else {
-              setSelectedDate(new Date(parsedValue));
-            }
-
-            break;
-          }
-
-          case 'time': {
-            if (parsedValue.length === timeFormat.length) {
-              setSelectedDate(DateFns.parse(parsedValue, timeFormat));
-            } else {
-              const parsedTime = DateFns.parse(
-                parsedValue.substr(0, timeFormat.length),
-                timeFormat,
-              );
-              setSelectedDate(parsedTime);
-            }
-            break;
-          }
-
-          default:
-        }
-      } else {
-        setSelectedDate(null);
-      }
-    }, [parsedValue]);
+    const [selectedDate, setSelectedDate] = useState(valueText);
+    const [errorState, setErrorState] = useState(error);
+    const [currentHelperText, setHelper] = useState(optionHelperText);
+    const [isDisabled, setIsDisabled] = useState(disabled);
+    const [isFirstValidation, setIsFirstValidation] = useState(true);
 
     B.defineFunction('Clear', () => setSelectedDate(null));
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
 
-    let DateTimeComponent;
-    let format;
-    let resultString;
-    let use24HourClock = true;
-    let minDate;
-    let maxDate;
+    const DATA_API_DATE_FORMAT = 'yyyy-MM-dd';
+    const DATA_API_TIME_FORMAT = 'HH:mm:ss';
 
-    switch (type) {
+    function getFormat(typeFormat) {
+      return {
+        date: dateFormat || 'dd/MM/yyyy',
+        time: timeFormat || 'HH:mm:ss',
+        datetime: datetimeFormat || 'dd/MM/yyyy HH:mm:ss',
+      }[typeFormat];
+    }
+
+    function isValidDate(date) {
+      return date instanceof Date && !isNaN(date);
+    }
+
+    // useEffect for 'valueText', trigger on first componentRender (and data-loaded)
+    useEffect(() => {
+      let parsedValue = null;
+
+      if (valueText) {
+        let parsedDate = '';
+
+        switch (typeComponent) {
+          case 'datetime': {
+            parsedDate = new Date(valueText);
+            break;
+          }
+          case 'date': {
+            parsedDate = DateFns.parse(valueText, DATA_API_DATE_FORMAT);
+            break;
+          }
+          case 'time': {
+            parsedDate = DateFns.parse(valueText, DATA_API_TIME_FORMAT);
+            break;
+          }
+          default: {
+            throw new Error(
+              `DateTimePickerInput: unknown type: '${typeComponent}'`,
+            );
+          }
+        }
+
+        if (isValidDate(parsedDate)) {
+          parsedValue = parsedDate;
+        } else {
+          parsedDate = DateFns.parse(valueText, getFormat(typeComponent));
+          if (isValidDate(parsedDate)) {
+            parsedValue = parsedDate;
+          }
+        }
+      }
+
+      setSelectedDate(parsedValue);
+    }, [valueText]);
+
+    function validationMessage(validityObject) {
+      if (validityObject.valueMissing) {
+        return validationValueMissingText;
+      }
+      if (validityObject.invalidValue) {
+        return validationInvalidValueText;
+      }
+      if (validityObject.beforeMinValue) {
+        return validationBeforeMinValueText;
+      }
+      if (validityObject.afterMaxValue) {
+        return validationAfterMaxValueText;
+      }
+      return '';
+    }
+
+    function setValidationMessage(validation) {
+      setErrorState(!validation.valid);
+      setHelper(validationMessage(validation) || optionHelperText);
+    }
+
+    const onChangeHandler = (internalDate) => {
+      setSelectedDate(internalDate);
+      setIsFirstValidation(false);
+
+      setTimeout(() => {
+        B.triggerEvent('onChange', internalDate);
+      }, 250);
+    };
+
+    // onInvalidHandler is called on form submit with invalid value
+    const onInvalidHandler = (event) => {
+      event.preventDefault();
+      const {
+        target: { validity },
+      } = event;
+
+      setValidationMessage(validity);
+      setIsFirstValidation(false);
+    };
+
+    const onBlurHandler = (event) => {
+      const {
+        target: { validity },
+      } = event;
+
+      setValidationMessage(validity);
+    };
+
+    // onErrorHandler is called on render and every time the value changes
+    const onErrorHandler = (internalComponentMessage) => {
+      const validation = {
+        valid:
+          !internalComponentMessage &&
+          (isFirstValidation || selectedDate || !required),
+        valueMissing: !isFirstValidation && !selectedDate && required,
+        invalidValue: internalComponentMessage.includes('Invalid'),
+        beforeMinValue: internalComponentMessage.includes('minimal date'),
+        afterMaxValue: internalComponentMessage.includes('maximal date'),
+      };
+
+      setValidationMessage(validation);
+    };
+
+    function convertToValidDate(dateText) {
+      if (dateText) {
+        const parsedValue = DateFns.parse(dateText, getFormat(typeComponent));
+        if (isValidDate(parsedValue)) {
+          return parsedValue;
+        }
+        // convert to slashes because it conflicts with the MUI DateTimeCmp
+        const parsedValueWithSlashes = dateText.replace(/-/g, '/');
+        return new Date(parsedValueWithSlashes);
+      }
+      return undefined;
+    }
+
+    let DateTimeComponent;
+    let resultValue;
+    switch (typeComponent) {
       case 'date': {
         DateTimeComponent = KeyboardDatePicker;
-        format = dateFormat || 'dd/MM/yyyy';
-
-        minDate = convertToValidDate(minValueText);
-        maxDate = convertToValidDate(maxValueText);
-
-        resultString = isValidDate(selectedDate)
+        resultValue = isValidDate(selectedDate)
           ? DateFns.format(selectedDate, 'yyyy-MM-dd')
           : null;
         break;
       }
       case 'datetime': {
         DateTimeComponent = KeyboardDateTimePicker;
-        format = datetimeFormat || 'dd/MM/yyyy HH:mm:ss';
-        use24HourClock = use24HourClockTime;
-
-        resultString = isValidDate(selectedDate)
+        resultValue = isValidDate(selectedDate)
           ? selectedDate.toISOString()
           : null;
+
         break;
       }
       case 'time': {
         DateTimeComponent = KeyboardTimePicker;
-        format = timeFormat || 'HH:mm:ss';
-        use24HourClock = use24HourClockTime;
-
-        resultString = isValidDate(selectedDate)
+        resultValue = isValidDate(selectedDate)
           ? DateFns.format(selectedDate, 'HH:mm:ss')
           : null;
         break;
@@ -259,56 +239,54 @@
       default:
     }
 
-    const onBlurHandler = (event) => {
-      const {
-        target: { validity },
-      } = event;
-
-      handleValidation(validity);
-      setAfterFirstValidation(true);
-    };
-
     const DateTimeCmp = (
       <DateTimeComponent
         id={labelControlRef}
-        error={errorState}
-        value={selectedDate}
-        size={size}
-        onBlur={onBlurHandler}
-        autoComplete={autoComplete ? 'on' : 'off'}
         classes={{
           root: `${classes.formControl} ${floatLabel && classes.floatLabel}`,
         }}
-        variant={variant}
-        placeholder={placeholderText}
+        value={selectedDate}
+        autoComplete={autoComplete ? 'on' : 'off'}
+        placeholder={useText(placeholder)}
+        label={!hideLabel && useText(label)}
+        error={errorState}
+        helperText={currentHelperText}
+        disableToolbar={disableToolbar}
+        disablePast={disablePastDates}
+        minDate={convertToValidDate(useText(minValue))}
+        maxDate={convertToValidDate(useText(maxValue))}
+        format={getFormat(typeComponent)}
         fullWidth={fullWidth}
-        onChange={changeHandler}
+        size={size}
+        margin={margin}
+        data-component={dataComponentAttributeValue}
+        ampm={!is24HourClockTime}
+        keyboardIcon={
+          typeComponent === 'time' ? (
+            <Icon name="AccessTime" fontSize={size} />
+          ) : (
+            <Icon name="Event" fontSize={size} />
+          )
+        }
+        required={required}
+        clearable="true"
+        disabled={isDisabled}
+        autoOk={closeOnSelect}
+        variant={variant}
         inputVariant={inputvariant}
-        onInvalid={invalidHandler}
-        onError={errorHandler}
         InputProps={{
           inputProps: {
             tabIndex: isDev ? -1 : undefined,
             className: includeStyling(),
             // this prevents the form from submitting when in error state
-            ...(errorState && { pattern: '^a' }),
+            ...(errorState && {
+              pattern: '^a',
+            }),
           },
         }}
         KeyboardButtonProps={{
           tabIndex: isDev ? -1 : undefined,
         }}
-        required={required}
-        disabled={isDisabled}
-        label={!hideLabel && labelText}
-        margin={margin}
-        helperText={helper}
-        disableToolbar={disableToolbar}
-        disablePast={disablePastDates}
-        autoOk={closeOnSelect}
-        format={format}
-        minDate={minDate}
-        maxDate={maxDate}
-        data-component={dataComponentAttributeValue}
         PopoverProps={{
           classes: {
             root: classes.popover,
@@ -317,34 +295,33 @@
         DialogProps={{
           className: classes.dialog,
         }}
-        ampm={!use24HourClock}
-        keyboardIcon={
-          type === 'time' ? (
-            <Icon name="AccessTime" fontSize={size} />
-          ) : (
-            <Icon name="Event" fontSize={size} />
-          )
-        }
-        clearable={clearable}
+        onBlur={onBlurHandler}
+        onChange={onChangeHandler}
+        onInvalid={onInvalidHandler}
+        onError={onErrorHandler}
       />
     );
 
-    return isDev ? (
-      <div className={classes.root}>
-        <MuiPickersUtilsProvider
-          utils={DateFnsUtils}
-          locale={localeMap[locale]}
-        >
-          {variant === 'static' ? (
-            <div className={classes.static}>{DateTimeCmp}</div>
-          ) : (
-            DateTimeCmp
-          )}
-        </MuiPickersUtilsProvider>
-      </div>
-    ) : (
+    if (isDev) {
+      return (
+        <div className={classes.root}>
+          <MuiPickersUtilsProvider
+            utils={DateFnsUtils}
+            locale={localeMap[locale]}
+          >
+            {variant === 'static' ? (
+              <div className={classes.static}>{DateTimeCmp}</div>
+            ) : (
+              DateTimeCmp
+            )}
+          </MuiPickersUtilsProvider>
+        </div>
+      );
+    }
+
+    return (
       <MuiPickersUtilsProvider utils={DateFnsUtils} locale={localeMap[locale]}>
-        <input type="hidden" name={name} value={resultString} />
+        <input type="hidden" name={name} value={resultValue} />
         {variant === 'static' ? (
           <div className={classes.static}>{DateTimeCmp}</div>
         ) : (
