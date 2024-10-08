@@ -199,8 +199,8 @@
     };
 
     function convertToValidDate(dateText) {
-      if (DateFns.isValid(dateText)) {
-        const parsedValue = DateFns.parse(dateText, dateFormat);
+      if (dateText) {
+        const parsedValue = DateFns.parse(dateText, getFormat(typeComponent));
         if (isValidDate(parsedValue)) {
           return parsedValue;
         }
@@ -208,7 +208,7 @@
         const parsedValueWithSlashes = dateText.replace(/-/g, '/');
         return new Date(parsedValueWithSlashes);
       }
-      return '';
+      return undefined;
     }
 
     let DateTimeComponent;
