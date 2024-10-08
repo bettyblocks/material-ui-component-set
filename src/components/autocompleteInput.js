@@ -340,8 +340,15 @@
       ? numberDebouncedInputValue
       : textDebouncedInputValue;
 
-    const currentSearchValue =
+    const searchPropertyValue =
       typeof value === 'string' ? value : value[searchProp.name];
+
+    // When you select a property with a null value, use empty string as fallback to prevent doesNotMatch: null
+    const currentSearchValue =
+      (searchPropertyValue === null || searchPropertyValue === undefined) &&
+      !searchPropIsNumber
+        ? ''
+        : searchPropertyValue;
 
     const remainingRecordsFilter = {
       [searchProp.name]: {
@@ -358,19 +365,21 @@
     // After searching or setting a default value
     if (debouncedInputValue) {
       if (labelPropertyPath.length > 1) {
+        const parsedLabelValue = labelPropIsNumber
+          ? numberDebouncedInputValue
+          : textDebouncedInputValue;
         // Handle relational properties in label for options option
         const newFilter = {
-          [labelPropIsNumber ? 'eq' : 'matches']: labelPropIsNumber
-            ? numberDebouncedInputValue
-            : textDebouncedInputValue,
+          [labelPropIsNumber ? 'eq' : 'matches']: parsedLabelValue,
         };
+
         const resolvedUuids = labelPropertyPath.map((u) => getProperty(u).name);
         const resolvedFilter = resolvedUuids.reduceRight(
           (acc, q) => ({ [q]: acc }),
           newFilter,
         );
 
-        filter = { ...resolvedFilter, ...filter };
+        filter = { _and: [{ ...resolvedFilter }, { ...filter }] };
       } else {
         // Use searchProp and debouncedValue to create new filter
         const newSearchValue = parsedDebouncedValue !== currentSearchValue;
