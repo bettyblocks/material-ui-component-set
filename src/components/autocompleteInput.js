@@ -349,11 +349,11 @@
         typeof value === 'string' ? value : valueFromProperyNames;
 
       // When you select a property with a null value, use an empty string as fallback to prevent doesNotMatch: null
+      const isEmptySearchValue =
+        searchPropertyValue === null || searchPropertyValue === undefined;
+
       const currentSearchValue =
-        (searchPropertyValue === null || searchPropertyValue === undefined) &&
-        !searchPropIsNumber
-          ? ''
-          : searchPropertyValue;
+        isEmptySearchValue && !searchPropIsNumber ? '' : searchPropertyValue;
 
       // Create the opposite filter of the current value to fetch other records
       const remainingRecordsFilter = {
