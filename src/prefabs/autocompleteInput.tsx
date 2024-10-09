@@ -336,7 +336,7 @@ const attributes = {
   keywords: ['Form', 'input'],
 };
 
-export default prefab('AutocompleteInput', attributes, beforeCreate, [
+export default prefab('Autocomplete', attributes, beforeCreate, [
   AutocompleteInput({
     label: 'Autocomplete',
     inputLabel: { value: ['Autocomplete'] },

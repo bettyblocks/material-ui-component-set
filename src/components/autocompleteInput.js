@@ -112,11 +112,12 @@
     const belowMinimumMessage = useText(validationBelowMinimum);
     const helperTextResolved = useText(helperTextRaw);
     const modelProperty = getProperty(property || '') || {};
-    const labelProperty = getProperty(labelPropertyId) || {};
     const { modelId: propertyModelId, referenceModelId } = modelProperty;
     const { contextModelId } = model;
     const modelId =
       contextModelId || referenceModelId || propertyModelId || model || '';
+    const idProperty = getIdProperty(modelId) || {};
+    const labelProperty = getProperty(labelPropertyId) || idProperty;
     const propertyModel = getModel(modelId);
     const defaultLabelProperty =
       getProperty(
@@ -124,7 +125,7 @@
           ? propertyModel.labelPropertyId
           : '',
       ) || {};
-    const idProperty = getIdProperty(modelId) || {};
+
     const isListProperty =
       modelProperty.kind === 'LIST' || modelProperty.kind === 'list';
 
@@ -316,12 +317,9 @@
     /*
      * Build up array for relational label
      */
-    const idOrPathLabel =
-      typeof labelPropertyId.id !== 'undefined'
-        ? labelPropertyId.id
-        : labelPropertyId;
-    const labelPropertyPath =
-      typeof idOrPathLabel === 'string' ? [idOrPathLabel] : idOrPathLabel;
+    const labelPropertyPath = labelPropertyId.id
+      ? labelPropertyId.id
+      : [labelProperty.id];
 
     /*
      * We extend the option filter with the value of the `value` state and the value of the `inputValue` state.
@@ -330,62 +328,67 @@
      */
     /* eslint-disable no-underscore-dangle */
 
-    const numberDebouncedInputValue = parseFloat(debouncedInputValue, 10);
-
-    // There is an empty string as fallback, because empty label is not a valid value to search on
-    const textDebouncedInputValue =
-      debouncedInputValue === EMPTY_LABEL ? '' : debouncedInputValue;
-
-    const parsedDebouncedValue = searchPropIsNumber
-      ? numberDebouncedInputValue
-      : textDebouncedInputValue;
-
-    const currentSearchValue =
-      typeof value === 'string' ? value : value[searchProp.name];
-
-    const remainingRecordsFilter = {
-      [searchProp.name]: {
-        [searchPropIsNumber ? 'neq' : 'doesNotMatch']: currentSearchValue,
-      },
-    };
-
-    // When no filter, load records which do not match the default value
-    const currentFilter =
-      Object.keys(filter).length > 0 || value === ''
-        ? filter
-        : remainingRecordsFilter;
-
     // After searching or setting a default value
     if (debouncedInputValue) {
-      if (labelPropertyPath.length > 1) {
-        // Handle relational properties in label for options option
-        const newFilter = {
+      // ["relational_property_name", "property_name"]
+      const propertyNames = labelPropertyPath.map((u) => getProperty(u).name);
+
+      // get nested value like this:
+      // value["relational_property_name"]["property_name"]
+      const valueFromProperyNames = propertyNames.reduce(
+        (acc, propertyName) => acc && acc[propertyName],
+        value,
+      );
+
+      const numberDebouncedInputValue = parseFloat(debouncedInputValue, 10);
+      const parsedDebouncedValue = searchPropIsNumber
+        ? numberDebouncedInputValue
+        : debouncedInputValue;
+
+      const searchPropertyValue =
+        typeof value === 'string' ? value : valueFromProperyNames;
+
+      // When you select a property with a null value, use an empty string as fallback to prevent doesNotMatch: null
+      const isEmptySearchValue =
+        searchPropertyValue === null || searchPropertyValue === undefined;
+
+      const currentSearchValue =
+        isEmptySearchValue && !searchPropIsNumber ? '' : searchPropertyValue;
+
+      // Create the opposite filter of the current value to fetch other records
+      const remainingRecordsFilter = {
+        [valueProp.name]: {
+          [valuePropIsNumber ? 'neq' : 'doesNotMatch']:
+            typeof value === 'string' ? value : value[valueProp.name],
+        },
+      };
+
+      // When no keys in filter, use remaining records filter to fetch other records
+      const currentFilter =
+        Object.keys(filter).length > 0 || value === ''
+          ? filter
+          : remainingRecordsFilter;
+
+      // Create filter with property name(s) as key(s)
+      const inputFilter = propertyNames.reduceRight(
+        (acc, propertyName) => ({ [propertyName]: acc }),
+        {
           [labelPropIsNumber ? 'eq' : 'matches']: labelPropIsNumber
             ? numberDebouncedInputValue
-            : textDebouncedInputValue,
-        };
-        const resolvedUuids = labelPropertyPath.map((u) => getProperty(u).name);
-        const resolvedFilter = resolvedUuids.reduceRight(
-          (acc, q) => ({ [q]: acc }),
-          newFilter,
-        );
+            : debouncedInputValue,
+        },
+      );
 
-        filter = { ...resolvedFilter, ...filter };
-      } else {
-        // Use searchProp and debouncedValue to create new filter
-        const newSearchValue = parsedDebouncedValue !== currentSearchValue;
-        const operator = newSearchValue ? '_and' : '_or';
-        filter = {
-          [operator]: [
-            {
-              [searchProp.name]: {
-                [searchPropIsNumber ? 'eq' : 'matches']: parsedDebouncedValue,
-              },
-            },
-            { ...currentFilter },
-          ],
-        };
-      }
+      // When searching, the search value is different from the value
+      const newSearchValue = parsedDebouncedValue !== currentSearchValue;
+      const operator = newSearchValue ? '_and' : '_or';
+
+      filter = {
+        [operator]:
+          debouncedInputValue === EMPTY_LABEL
+            ? [currentFilter]
+            : [inputFilter, currentFilter],
+      };
     } else if (value !== '') {
       // Use default value in filter to show it on render
       filter = {
