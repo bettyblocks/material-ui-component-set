@@ -69,7 +69,7 @@
 
     const { current: labelControlRef } = useRef(generateUUID());
 
-    const [selectedDate, setSelectedDate] = useState(valueText);
+    const [selectedDate, setSelectedDate] = useState(valueText || null);
     const [errorState, setErrorState] = useState(error);
     const [currentHelperText, setHelper] = useState(optionHelperText);
     const [isDisabled, setIsDisabled] = useState(disabled);
@@ -239,16 +239,11 @@
       default:
     }
 
-    // Force label above the field, when the a value is present
-    const finalFloatLabel = floatLabel || resultValue !== null;
-
     const DateTimeCmp = (
       <DateTimeComponent
         id={labelControlRef}
         classes={{
-          root: `${classes.formControl} ${
-            finalFloatLabel && classes.floatLabel
-          }`,
+          root: `${classes.formControl} ${floatLabel && classes.floatLabel}`,
         }}
         value={selectedDate}
         autoComplete={autoComplete ? 'on' : 'off'}
