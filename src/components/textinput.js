@@ -7,6 +7,7 @@
     const {
       actionVariableId: name,
       autoComplete,
+      autoFocus,
       disabled,
       error,
       label,
@@ -63,10 +64,12 @@
     const [errorState, setErrorState] = useState(error);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
-    const [currentValue, setCurrentValue] = usePageState(useText(value));
+    const optionValue = useText(value);
+    const [currentValue, setCurrentValue] = usePageState(optionValue);
     const parsedLabel = useText(label);
     const labelText = parsedLabel;
     const debouncedOnChangeRef = useRef(null);
+    const inputRef = useRef();
 
     const { current: labelControlRef } = useRef(generateUUID());
 
@@ -86,6 +89,10 @@
     const placeholderText = useText(placeholder);
     const helperTextResolved = useText(helperText);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
+
+    useEffect(() => {
+      setCurrentValue(optionValue);
+    }, [optionValue]);
 
     const validationMessage = (validityObject) => {
       if (validityObject.customError && patternMismatchMessage) {
@@ -204,10 +211,16 @@
       handleValidation(validity);
     };
 
+    const focusHandler = () =>
+      setTimeout(() => {
+        inputRef.current.focus();
+      }, 0);
+
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
     B.defineFunction('Reset', () => setCurrentValue(useText(value)));
+    B.defineFunction('Focus', () => focusHandler());
 
     const handleClickShowPassword = () => {
       togglePassword(!showPassword);
@@ -281,11 +294,13 @@
         )}
         <InputCmp
           id={labelControlRef}
+          inputRef={inputRef}
           name={name}
           value={currentValue}
           type={showPassword ? 'text' : inputType}
           multiline={multiline}
           autoComplete={autoComplete ? 'on' : 'off'}
+          autoFocus={!isDev && autoFocus}
           rows={rows}
           label={labelText}
           placeholder={placeholderText}

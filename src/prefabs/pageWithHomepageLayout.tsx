@@ -659,6 +659,18 @@ export default makePrefab('Homepage, inspirational', attrs, beforeCreate, [
                             'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/Homepage_banner_gradient',
                           ],
                         }),
+                        backgroundType: option('CUSTOM', {
+                          label: 'Background type',
+                          value: 'url',
+                          configuration: {
+                            as: 'BUTTONGROUP',
+                            dataType: 'string',
+                            allowedInput: [
+                              { name: 'Image', value: 'img' },
+                              { name: 'Data/URL', value: 'url' },
+                            ],
+                          },
+                        }),
                       },
                     },
                     [
