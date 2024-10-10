@@ -239,11 +239,16 @@
       default:
     }
 
+    // Force label above the field, when the a value is present
+    const finalFloatLabel = floatLabel || resultValue !== null;
+
     const DateTimeCmp = (
       <DateTimeComponent
         id={labelControlRef}
         classes={{
-          root: `${classes.formControl} ${floatLabel && classes.floatLabel}`,
+          root: `${classes.formControl} ${
+            finalFloatLabel && classes.floatLabel
+          }`,
         }}
         value={selectedDate}
         autoComplete={autoComplete ? 'on' : 'off'}
