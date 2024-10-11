@@ -1,9 +1,65 @@
-# [2.192.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.191.2...v2.192.0) (2024-09-26)
+## [2.193.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.193.0...v2.193.1) (2024-10-10)
+
+
+### Bug Fixes
+
+* add default value to current filter and show remaining records ([2a51f91](https://github.com/bettyblocks/material-ui-component-set/commit/2a51f919d97cc3c189b7259d3a6d9deda4b833bc))
+* datepicker can interpret default meta-data data ([c56ecb3](https://github.com/bettyblocks/material-ui-component-set/commit/c56ecb39c78bf70050d2647cd3c6c0f71f8f0f1e))
+* deepcopy optionFilter in autocomplete ([b777209](https://github.com/bettyblocks/material-ui-component-set/commit/b777209a4b011df97391741d2476ee82f7b99323))
+* fixed filter in the autocomplete ([a6c71d3](https://github.com/bettyblocks/material-ui-component-set/commit/a6c71d313b0516e08a701c61920e6f359f15a160))
+* **PAGE-4710:** Remove unused zone from publish prod files. ([05e1bbf](https://github.com/bettyblocks/material-ui-component-set/commit/05e1bbfe41028b96f0960f51e61c5f8c860bc23e))
+* parse min- and maxDate correctly ([4baa79e](https://github.com/bettyblocks/material-ui-component-set/commit/4baa79e6a2a64de49253f08d4193674c6025cd58))
+* use empty string as fallback ([0a2d6a9](https://github.com/bettyblocks/material-ui-component-set/commit/0a2d6a9c22d855ee65c3f91913c9a78ac099ba33))
+
+## [2.193.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.193.0...v2.193.1) (2024-10-08)
+
+
+### Bug Fixes
+
+* datepicker can interpret default meta-data data ([c56ecb3](https://github.com/bettyblocks/material-ui-component-set/commit/c56ecb39c78bf70050d2647cd3c6c0f71f8f0f1e))
+* **PAGE-4710:** Remove unused zone from publish prod files. ([05e1bbf](https://github.com/bettyblocks/material-ui-component-set/commit/05e1bbfe41028b96f0960f51e61c5f8c860bc23e))
+* parse min- and maxDate correctly ([4baa79e](https://github.com/bettyblocks/material-ui-component-set/commit/4baa79e6a2a64de49253f08d4193674c6025cd58))
+
+# [2.193.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.192.0...v2.193.0) (2024-10-04)
+
+
+### Bug Fixes
+
+* **PAGE-4710:** Background image of box are now shown ([aa0a6a8](https://github.com/bettyblocks/material-ui-component-set/commit/aa0a6a8b22ced1e6585635901a0da80ceda2bbec))
+
+
+### Features
+
+* add option and interaction to set auto focus on input ([c56ef82](https://github.com/bettyblocks/material-ui-component-set/commit/c56ef82d5341cd4192f00bd18fcf9a451252bb21))
+* added widget and update box position ([36cf8fe](https://github.com/bettyblocks/material-ui-component-set/commit/36cf8fe5eae281f755820a16b582d3d051bf1fe5))
+
+# [2.192.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.191.2...v2.192.0) (2024-10-03)
+
+### Bug Fixes
+
+* **PAGE-4710:** Background image of box are now shown ([aa0a6a8](https://github.com/bettyblocks/material-ui-component-set/commit/aa0a6a8b22ced1e6585635901a0da80ceda2bbec))
 
 
 ### Features
 
 * introduce sanofi and remove double entry for spc1 ([e5d6f80](https://github.com/bettyblocks/material-ui-component-set/commit/e5d6f8060c7ad1f4b497f800eafd2bcc717a89ca))
+* add option and interaction to set auto focus on input ([c56ef82](https://github.com/bettyblocks/material-ui-component-set/commit/c56ef82d5341cd4192f00bd18fcf9a451252bb21))
+* added widget and update box position ([36cf8fe](https://github.com/bettyblocks/material-ui-component-set/commit/36cf8fe5eae281f755820a16b582d3d051bf1fe5))
+
+# [2.192.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.191.2...v2.192.0) (2024-10-03)
+
+
+### Features
+
+* add option and interaction to set auto focus on input ([c56ef82](https://github.com/bettyblocks/material-ui-component-set/commit/c56ef82d5341cd4192f00bd18fcf9a451252bb21))
+* added widget and update box position ([36cf8fe](https://github.com/bettyblocks/material-ui-component-set/commit/36cf8fe5eae281f755820a16b582d3d051bf1fe5))
+
+# [2.192.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.191.2...v2.192.0) (2024-10-01)
+
+
+### Features
+
+* added widget and update box position ([36cf8fe](https://github.com/bettyblocks/material-ui-component-set/commit/36cf8fe5eae281f755820a16b582d3d051bf1fe5))
 
 ## [2.191.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.191.1...v2.191.2) (2024-09-25)
 
