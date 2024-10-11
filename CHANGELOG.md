@@ -1,3 +1,10 @@
+## [2.193.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.193.2...v2.193.3) (2024-10-11)
+
+
+### Bug Fixes
+
+* force pipeline ([323ed59](https://github.com/bettyblocks/material-ui-component-set/commit/323ed5999820be6aca7c1b3c66787f74ee51ef83))
+
 ## [2.193.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.193.1...v2.193.2) (2024-10-11)
 
 
