@@ -90,14 +90,14 @@
     const required = defaultRequired;
     const label = useText(labelRaw);
     const defaultValue = useText(valueRaw, { rawValue: true });
-    const initalValue = defaultValue.replace(/\n/g, '');
-    const [value, setValue] = useState(initalValue);
+    const initialValue = defaultValue.replace(/\n/g, '');
+    const [value, setValue] = useState(initialValue);
     const [debouncedInputValue, setDebouncedInputValue] = useState();
     const [debouncedCurrentValue, setDebouncedCurrentValue] = useState();
     const [interactionFilter, setInteractionFilter] = useState({});
-    const defaultValueEvaluatedRef = useRef(false);
     const { current: labelControlRef } = useRef(generateUUID());
     const isNumberType = type === 'number';
+    const EMPTY_LABEL = '-- empty --';
 
     const validPattern = pattern || null;
     const validMinlength = minlength || null;
@@ -112,11 +112,12 @@
     const belowMinimumMessage = useText(validationBelowMinimum);
     const helperTextResolved = useText(helperTextRaw);
     const modelProperty = getProperty(property || '') || {};
-    const labelProperty = getProperty(labelPropertyId) || {};
     const { modelId: propertyModelId, referenceModelId } = modelProperty;
     const { contextModelId } = model;
     const modelId =
       contextModelId || referenceModelId || propertyModelId || model || '';
+    const idProperty = getIdProperty(modelId) || {};
+    const labelProperty = getProperty(labelPropertyId) || idProperty;
     const propertyModel = getModel(modelId);
     const defaultLabelProperty =
       getProperty(
@@ -124,7 +125,7 @@
           ? propertyModel.labelPropertyId
           : '',
       ) || {};
-    const idProperty = getIdProperty(modelId) || {};
+
     const isListProperty =
       modelProperty.kind === 'LIST' || modelProperty.kind === 'list';
 
@@ -144,11 +145,9 @@
 
     useEffect(() => {
       if (defaultValue) {
-        defaultValueEvaluatedRef.current = false;
-        setValue(initalValue);
+        setValue(initialValue);
         setInputValue('');
       } else {
-        defaultValueEvaluatedRef.current = true;
         setValue('');
         setInputValue('');
         setDebouncedInputValue('');
@@ -291,7 +290,7 @@
     const optionFilter = useFilter(filterRaw || {});
 
     // We need to do this, because options.filter is not immutable
-    let filter = { ...optionFilter };
+    let filter = JSON.parse(JSON.stringify(optionFilter));
 
     const searchPropIsNumber = numberPropTypes.includes(searchProp.kind);
     const valuePropIsNumber = numberPropTypes.includes(valueProp.kind);
@@ -318,12 +317,9 @@
     /*
      * Build up array for relational label
      */
-    const idOrPathLabel =
-      typeof labelPropertyId.id !== 'undefined'
-        ? labelPropertyId.id
-        : labelPropertyId;
-    const labelPropertyPath =
-      typeof idOrPathLabel === 'string' ? [idOrPathLabel] : idOrPathLabel;
+    const labelPropertyPath = labelPropertyId.id
+      ? labelPropertyId.id
+      : [labelProperty.id];
 
     /*
      * We extend the option filter with the value of the `value` state and the value of the `inputValue` state.
@@ -331,67 +327,82 @@
      * Those values always need to be returned in the results of the request
      */
     /* eslint-disable no-underscore-dangle */
-    if (
-      debouncedInputValue &&
-      (searchPropIsNumber
-        ? parseFloat(debouncedInputValue, 10)
-        : debouncedInputValue) ===
-        (typeof value === 'string' ? value : value[searchProp.name])
-    ) {
-      filter._or = [
-        {
-          [searchProp.name]: {
-            [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
-              ? parseFloat(debouncedInputValue, 10)
-              : debouncedInputValue,
-          },
-        },
-        {
-          [valueProp.name]: {
-            neq: valuePropIsNumber
-              ? parseFloat(value[valueProp.name], 10)
-              : value[valueProp.name],
-          },
-        },
-      ];
-    } else if (debouncedInputValue) {
-      // if a relation is selected for label option
-      if (labelPropertyPath.length > 1) {
-        const newFilter = {
-          [labelPropIsNumber ? 'eq' : 'matches']: labelPropIsNumber
-            ? parseFloat(debouncedInputValue, 10)
-            : debouncedInputValue,
-        };
-        const resolvedUuids = labelPropertyPath.map((u) => getProperty(u).name);
-        const resolvedFilter = resolvedUuids.reduceRight((acc, q) => {
-          return { [q]: acc };
-        }, newFilter);
-        filter = { ...filter, ...resolvedFilter };
-      } else {
-        filter[searchProp.name] = {
-          [searchPropIsNumber ? 'eq' : 'matches']: searchPropIsNumber
-            ? parseFloat(debouncedInputValue, 10)
-            : debouncedInputValue,
-        };
-      }
-    } else if (value !== '') {
-      filter._or = [
-        {
-          [valueProp.name]: {
-            [valuePropIsNumber ? 'eq' : 'matches']:
-              typeof value === 'string' ? value : value[valueProp.name],
-          },
-        },
-      ];
 
-      if (defaultValueEvaluatedRef.current) {
-        filter._or.push({
-          [valueProp.name]: {
-            neq: typeof value === 'string' ? value : value[valueProp.name],
+    // After searching or setting a default value
+    if (debouncedInputValue) {
+      // ["relational_property_name", "property_name"]
+      const propertyNames = labelPropertyPath.map((u) => getProperty(u).name);
+
+      // get nested value like this:
+      // value["relational_property_name"]["property_name"]
+      const valueFromProperyNames = propertyNames.reduce(
+        (acc, propertyName) => acc && acc[propertyName],
+        value,
+      );
+
+      const numberDebouncedInputValue = parseFloat(debouncedInputValue, 10);
+      const parsedDebouncedValue = searchPropIsNumber
+        ? numberDebouncedInputValue
+        : debouncedInputValue;
+
+      const searchPropertyValue =
+        typeof value === 'string' ? value : valueFromProperyNames;
+
+      // When you select a property with a null value, use an empty string as fallback to prevent doesNotMatch: null
+      const isEmptySearchValue =
+        searchPropertyValue === null || searchPropertyValue === undefined;
+
+      const currentSearchValue =
+        isEmptySearchValue && !searchPropIsNumber ? '' : searchPropertyValue;
+
+      // Create the opposite filter of the current value to fetch other records
+      const remainingRecordsFilter = {
+        [valueProp.name]: {
+          [valuePropIsNumber ? 'neq' : 'doesNotMatch']:
+            typeof value === 'string' ? value : value[valueProp.name],
+        },
+      };
+
+      // When no keys in filter, use remaining records filter to fetch other records
+      const currentFilter =
+        Object.keys(filter).length > 0 || value === ''
+          ? filter
+          : remainingRecordsFilter;
+
+      // Create filter with property name(s) as key(s)
+      const inputFilter = propertyNames.reduceRight(
+        (acc, propertyName) => ({ [propertyName]: acc }),
+        {
+          [labelPropIsNumber ? 'eq' : 'matches']: labelPropIsNumber
+            ? numberDebouncedInputValue
+            : debouncedInputValue,
+        },
+      );
+
+      // When searching, the search value is different from the value
+      const newSearchValue = parsedDebouncedValue !== currentSearchValue;
+      const operator = newSearchValue ? '_and' : '_or';
+
+      filter = {
+        [operator]:
+          debouncedInputValue === EMPTY_LABEL
+            ? [currentFilter]
+            : [inputFilter, currentFilter],
+      };
+    } else if (value !== '') {
+      // Use default value in filter to show it on render
+      filter = {
+        _or: [
+          {
+            [valueProp.name]: {
+              [valuePropIsNumber ? 'eq' : 'matches']:
+                typeof value === 'string' ? value : value[valueProp.name],
+            },
           },
-        });
-      }
+        ],
+      };
     }
+
     /* eslint-enable no-underscore-dangle */
 
     /*
@@ -513,28 +524,13 @@
       message = 'Something went wrong while loading.';
     }
 
-    // If the default value is a value that lives outside the take range of the query we should fetch the values before we continue.
-    if (!isDev && !defaultValueEvaluatedRef.current && value && results) {
-      setValue((prev) => {
-        return (
-          results.find(
-            (result) =>
-              result[valueProp.name] &&
-              prev[valueProp.name] === result[valueProp.name],
-          ) || ''
-        );
-      });
-
-      defaultValueEvaluatedRef.current = true;
-    }
-
     B.defineFunction('Clear', () => {
       setValue('');
       setInputValue('');
       setDebouncedInputValue('');
     });
 
-    B.defineFunction('Reset', () => setValue(initalValue));
+    B.defineFunction('Reset', () => setValue(initialValue));
 
     B.defineFunction('Refetch', () => refetch());
 
@@ -703,7 +699,7 @@
       }
 
       return optionLabel === '' || optionLabel === null
-        ? '-- empty --'
+        ? EMPTY_LABEL
         : optionLabel.toString();
     };
 
