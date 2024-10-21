@@ -90,10 +90,6 @@
     const helperTextResolved = useText(helperText);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
 
-    useEffect(() => {
-      setCurrentValue(optionValue);
-    }, [optionValue]);
-
     const validationMessage = (validityObject) => {
       if (validityObject.customError && patternMismatchMessage) {
         return patternMismatchMessage;
