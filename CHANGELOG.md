@@ -1,3 +1,15 @@
+# [2.194.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.193.2...v2.194.0) (2024-10-22)
+
+
+### Bug Fixes
+
+* force pipeline ([323ed59](https://github.com/bettyblocks/material-ui-component-set/commit/323ed5999820be6aca7c1b3c66787f74ee51ef83))
+
+
+### Features
+
+* changed column overflow in designtime ([356fa42](https://github.com/bettyblocks/material-ui-component-set/commit/356fa4215b7f7ba232197d7ea73e2c91be746f9c))
+
 ## [2.193.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.193.1...v2.193.2) (2024-10-11)
 
 
