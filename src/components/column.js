@@ -46,8 +46,7 @@
     return ColumnComponent;
   })(),
   styles: (B) => (theme) => {
-    const { env, mediaMinWidth, Styling } = B;
-    const isDev = env === 'dev';
+    const { mediaMinWidth, Styling } = B;
     const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
