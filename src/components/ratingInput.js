@@ -43,7 +43,6 @@
 
     const value = useText(defaultValue, { rawValue: true });
     useEffect(() => {
-      setCurrentValue(value);
       B.defineFunction('Clear', () => setCurrentValue(''));
       B.defineFunction('Enable', () => setIsDisabled(false));
       B.defineFunction('Disable', () => setIsDisabled(true));
