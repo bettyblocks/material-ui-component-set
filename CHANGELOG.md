@@ -1,3 +1,10 @@
+# [2.195.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.194.0...v2.195.0) (2024-10-24)
+
+
+### Features
+
+* **clear:** added option to clear richTextInput ([50806e0](https://github.com/bettyblocks/material-ui-component-set/commit/50806e061339d2061c213c9e9818d3dc3d0dae6f))
+
 # [2.194.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.193.2...v2.194.0) (2024-10-22)
 
 
