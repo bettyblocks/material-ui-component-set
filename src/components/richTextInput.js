@@ -425,6 +425,19 @@
     );
     const fragment = deserialize(parsed.body);
 
+    B.defineFunction('Clear', () => {
+      editor.children.forEach(() => {
+        Transforms.delete(editor, { at: [0] });
+      });
+
+      editor.children = [
+        {
+          type: 'p',
+          children: [{ text: '' }],
+        },
+      ];
+    });
+
     if (isDev) {
       useEffect(() => {
         Transforms.delete(editor, {
