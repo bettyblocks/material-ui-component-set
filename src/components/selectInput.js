@@ -70,7 +70,7 @@
       ? JSON.stringify({ uuid: defaultValueText })
       : defaultValueText || placeholderLabelText;
 
-    const [currentValue, setCurrentValue] = useState(resolvedCurrentValue);
+    const [currentValue, setCurrentValue] = usePageState(resolvedCurrentValue);
 
     useEffect(() => {
       setCurrentValue(resolvedCurrentValue);
