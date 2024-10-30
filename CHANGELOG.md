@@ -1,3 +1,17 @@
+## [2.195.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.195.0...v2.195.1) (2024-10-28)
+
+
+### Bug Fixes
+
+* rely on use-page-state to get the current value ([5e717f5](https://github.com/bettyblocks/material-ui-component-set/commit/5e717f5e07853e40b6b0c7b1e0596b7f27c8f79d))
+
+# [2.195.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.194.0...v2.195.0) (2024-10-24)
+
+
+### Features
+
+* **clear:** added option to clear richTextInput ([50806e0](https://github.com/bettyblocks/material-ui-component-set/commit/50806e061339d2061c213c9e9818d3dc3d0dae6f))
+
 # [2.194.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.193.2...v2.194.0) (2024-10-22)
 
 
