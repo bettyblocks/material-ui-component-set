@@ -180,14 +180,6 @@ const beforeCreate = ({
           setOption(newPrefab.structure[0], actionVariableOption, (option) => ({
             ...option,
             value: variableName,
-            configuration: {
-              condition: {
-                type: 'SHOW',
-                option: 'property',
-                comparator: 'EQ',
-                value: '',
-              },
-            },
           }));
           setOption(newPrefab.structure[0], labelOptionKey, (option) => ({
             ...option,

@@ -17,9 +17,6 @@ export const options = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
-    configuration: {
-      condition: showIf('property', 'EQ', ''),
-    },
   }),
 
   property: property('Property', {

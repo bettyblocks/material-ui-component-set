@@ -2,7 +2,6 @@ import {
   hideIf,
   option,
   property,
-  showIf,
   toggle,
   variable,
 } from '@betty-blocks/component-sdk';
@@ -59,9 +58,6 @@ export const richTextOptions = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
-    configuration: {
-      condition: showIf('property', 'EQ', ''),
-    },
   }),
 
   property: property('Property', {
