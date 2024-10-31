@@ -305,7 +305,7 @@ const attributes = {
 
 export default prefab('Text Field', attributes, beforeCreate, [
   TextInput({
-    label: 'Text field 1',
+    label: 'Text field',
     inputLabel: 'Text field',
     type: 'text',
   }),
