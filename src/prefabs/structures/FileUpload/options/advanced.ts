@@ -1,4 +1,4 @@
-import { variable, showIf, option } from '@betty-blocks/component-sdk';
+import { variable, option } from '@betty-blocks/component-sdk';
 
 export const advanced = {
   nameAttribute: variable('name attribute', {
@@ -10,8 +10,5 @@ export const advanced = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Name',
     value: '',
-    configuration: {
-      condition: showIf('property', 'EQ', ''),
-    },
   }),
 };

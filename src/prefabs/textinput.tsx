@@ -213,14 +213,6 @@ const beforeCreate = ({
           setOption(newPrefab.structure[0], actionVariableOption, (option) => ({
             ...option,
             value: variableName,
-            configuration: {
-              condition: {
-                type: 'SHOW',
-                option: 'property',
-                comparator: 'EQ',
-                value: '',
-              },
-            },
           }));
           setOption(newPrefab.structure[0], labelOptionKey, (option) => ({
             ...option,
@@ -313,7 +305,7 @@ const attributes = {
 
 export default prefab('Text Field', attributes, beforeCreate, [
   TextInput({
-    label: 'Text field',
+    label: 'Text field 1',
     inputLabel: 'Text field',
     type: 'text',
   }),
