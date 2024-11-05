@@ -7,6 +7,7 @@ import {
   icon,
   option,
   property,
+  showIf,
   size,
   sizes,
   toggle,
@@ -43,6 +44,9 @@ export const ratingInputOptions = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
+    configuration: {
+      condition: showIf('property', 'EQ', ''),
+    },
   }),
   property: property('Property', {
     value: '',
