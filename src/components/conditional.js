@@ -133,7 +133,7 @@
     return (
       <div
         className={includeStyling(
-          children.length === 0 ? classes.empty : undefined,
+          children.length === 0 && isDev ? classes.empty : undefined,
         )}
         data-component={useText(dataComponentAttribute) || 'Conditional'}
       >
