@@ -872,6 +872,10 @@
           style.getColor(background),
           '!important',
         ],
+        '& .MuiTypography-body2, & .MuiTablePagination-select': {
+          fontFamily: ({ options: { paginationType } }) =>
+            style.getFontFamily(paginationType),
+        },
       },
       autoRepeat: {
         opacity: 0.5,
