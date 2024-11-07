@@ -1,3 +1,17 @@
+## [2.196.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.196.0...v2.196.1) (2024-11-06)
+
+
+### Bug Fixes
+
+* only apply empty styling in dev mode ([69b66a8](https://github.com/bettyblocks/material-ui-component-set/commit/69b66a82ab0af102361449113d580936d4c5e8ec))
+
+# [2.196.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.195.1...v2.196.0) (2024-11-06)
+
+
+### Features
+
+* write current value of select to page state ([462f15e](https://github.com/bettyblocks/material-ui-component-set/commit/462f15ebb89c22caab5dca5381ab1150ce38d17b))
+
 ## [2.195.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.195.0...v2.195.1) (2024-10-28)
 
 
