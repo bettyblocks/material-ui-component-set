@@ -42,6 +42,7 @@ export const categories = [
       'labelRowsPerPage',
       'take',
       'placeholderTake',
+      'paginationType',
     ],
   },
   {
@@ -140,7 +141,7 @@ export const dataTableOptions = {
     value: true,
   }),
   title: variable('Title', { value: [''] }),
-  titleType: font('Title type', {
+  titleType: font('Title text style', {
     value: 'Title4',
   }),
   pagination: option('CUSTOM', {
@@ -198,7 +199,10 @@ export const dataTableOptions = {
       condition: hideIf('autoLoadOnScroll', 'EQ', true),
     },
   }),
-  placeholderTake: number('Placeholder rows', { value: '5' }),
+  placeholderTake: number('Placeholder rows', { value: '10' }),
+  paginationType: font('Pagination text style', {
+    value: 'Body2',
+  }),
   labelRowsPerPage: variable('Rows per page text', {
     value: ['Rows per page'],
     configuration: {
