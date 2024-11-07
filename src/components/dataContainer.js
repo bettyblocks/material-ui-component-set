@@ -211,6 +211,9 @@
                 B.defineFunction('Refetch', () => {
                   refetch();
                 });
+                if (!data && redirectWithoutResult && !loading) {
+                  redirect();
+                }
                 return DataContainer(!!data);
               }}
             </GetMe>
