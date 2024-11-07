@@ -1,3 +1,10 @@
+## [2.196.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.196.1...v2.196.2) (2024-11-07)
+
+
+### Bug Fixes
+
+* make redirect when no result option work with auth profile ([c6c708c](https://github.com/bettyblocks/material-ui-component-set/commit/c6c708c1faee26656476b9a144616bcdd25c735e))
+
 ## [2.196.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.196.0...v2.196.1) (2024-11-06)
 
 
