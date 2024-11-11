@@ -85,8 +85,6 @@ export const options = {
   ),
 
   use24HourClockTime: toggle('Use 24-hour format', { value: true }),
-  disablePastDates: toggle('Disable past dates', { value: false }),
-  disableFutureDates: toggle('Disable future dates', { value: false }),
   closeOnSelect: toggle('Close picker after select', { value: true }),
 
   ...validation,

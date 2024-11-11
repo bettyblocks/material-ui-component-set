@@ -31,6 +31,7 @@
       helperText,
       disableToolbar,
       disablePastDates,
+      disableFutureDates,
       hideLabel,
       use24HourClockTime: is24HourClockTime,
       label,
@@ -253,6 +254,7 @@
         helperText={currentHelperText}
         disableToolbar={disableToolbar}
         disablePast={disablePastDates}
+        disableFuture={disableFutureDates}
         minDate={convertToValidDate(useText(minValue))}
         maxDate={convertToValidDate(useText(maxValue))}
         format={getFormat(typeComponent)}

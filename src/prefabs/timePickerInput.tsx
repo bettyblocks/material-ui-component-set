@@ -5,7 +5,7 @@ import {
   PrefabComponentOption,
   prefab as makePrefab,
 } from '@betty-blocks/component-sdk';
-import { DateTimePicker } from './structures/DateTimePicker';
+import { TimePicker } from './structures/TimePicker';
 
 const beforeCreate = ({
   close,
@@ -333,7 +333,7 @@ const attributes = {
 };
 
 export default makePrefab('Time Picker', attributes, beforeCreate, [
-  DateTimePicker({
+  TimePicker({
     label: 'Time picker',
     inputLabel: 'Time',
     dataComponentAttribute: 'Time Input',
