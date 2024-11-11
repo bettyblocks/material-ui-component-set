@@ -36,6 +36,32 @@
     };
 
     const formatError = (err) => {
+      const readMessages = (obj) => {
+        if (Array.isArray(obj)) {
+          return obj.flatMap((e) => readMessages(e));
+        }
+
+        if (obj.message) {
+          return readMessages(obj.message);
+        }
+
+        if (obj.errors) {
+          return readMessages(obj.errors);
+        }
+
+        return [obj];
+      };
+
+      if (err.errors || err.graphQLErrors) {
+        const messages = readMessages(err.errors || err.graphQLErrors);
+
+        const errorMessage =
+          messages.length > 0
+            ? messages
+            : err.networkError && err.networkError.message;
+        return errorMessage;
+      }
+
       const errorMessage =
         (err.graphQLErrors &&
           err.graphQLErrors[0] &&
