@@ -99,7 +99,7 @@ export const dataListOptions = {
   placeholderTake: number('Placeholder rows', {
     value: '',
   }),
-  paginationType: font('Pagination text style', {
+  paginationType: font('Font family from text style', {
     value: 'Body2',
   }),
   labelNumberOfPages: variable(`Pagination label (x 'of' y)`, {
