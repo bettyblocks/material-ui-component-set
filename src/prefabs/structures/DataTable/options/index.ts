@@ -200,7 +200,7 @@ export const dataTableOptions = {
     },
   }),
   placeholderTake: number('Placeholder rows', { value: '10' }),
-  paginationType: font('Pagination text style', {
+  paginationType: font('Font family from text style', {
     value: 'Body2',
   }),
   labelRowsPerPage: variable('Rows per page text', {
