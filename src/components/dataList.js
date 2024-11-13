@@ -674,6 +674,8 @@
         alignItems: 'center',
         justifyContent: 'flex-end',
         padding: ['0.75rem', 0],
+        fontFamily: ({ options: { paginationType } }) =>
+          style.getFontFamily(paginationType),
       },
       placeholder: {
         opacity: '0.4',
