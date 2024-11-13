@@ -1,4 +1,5 @@
 import {
+  buttongroup,
   hideIf,
   option,
   property,
@@ -17,6 +18,21 @@ export const options = {
       condition: showIf('property', 'EQ', ''),
     },
   }),
+
+  propertyBased: buttongroup(
+    'Type',
+    [
+      ['Property based', 'true'],
+      ['Non property based', 'false'],
+    ],
+    {
+      value: 'true',
+      configuration: {
+        showOnDrop: true,
+        condition: showIf('propertyBased', 'EQ', ''),
+      },
+    },
+  ),
 
   property: property('Property', {
     value: '',
