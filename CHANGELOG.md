@@ -1,3 +1,10 @@
+# [2.197.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.196.2...v2.197.0) (2024-11-13)
+
+
+### Features
+
+* add font styling in datatable pagination ([4d5c6fa](https://github.com/bettyblocks/material-ui-component-set/commit/4d5c6fa62fc0a7de0f4a37a182c25328f03350b9))
+
 ## [2.196.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.196.1...v2.196.2) (2024-11-07)
 
 
