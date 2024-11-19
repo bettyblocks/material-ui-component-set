@@ -1,3 +1,11 @@
+## [2.197.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.197.0...v2.197.1) (2024-11-19)
+
+
+### Bug Fixes
+
+* add property in prepareInput helper in richTextInput ([4f985ca](https://github.com/bettyblocks/material-ui-component-set/commit/4f985ca028af976d9beb0bf9b91745f2aa1e3e4c))
+* add property in prepareInput helper in textInput ([f30e1c9](https://github.com/bettyblocks/material-ui-component-set/commit/f30e1c9d6b30181872a0044e2553e1b21cb2f272))
+
 # [2.197.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.196.2...v2.197.0) (2024-11-13)
 
 
