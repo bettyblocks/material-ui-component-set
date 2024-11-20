@@ -204,6 +204,7 @@ const beforeCreate = ({
             variableName,
             kind,
             propertyKind,
+            propertyResponse?.data?.property,
           );
 
           const newPrefab = { ...originalPrefab };
