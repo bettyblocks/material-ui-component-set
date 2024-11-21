@@ -1,5 +1,6 @@
 import {
   buttongroup,
+  CreateActionInputVariableKind,
   filter,
   hideIf,
   modelAndRelation,
@@ -14,11 +15,29 @@ import { validation } from './validation';
 import { styles } from './styles';
 
 export const options = {
+  propertyBased: buttongroup(
+    'Type',
+    [
+      ['Property based', 'true'],
+      ['Non property based', 'false'],
+    ],
+    {
+      value: 'true',
+      configuration: {
+        showOnDrop: true,
+      },
+    },
+  ),
+
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
     configuration: {
-      condition: showIf('property', 'EQ', ''),
+      condition: showIf('propertyBased', 'EQ', 'false'),
+      createActionInputVariable: {
+        type: CreateActionInputVariableKind.TEXT,
+      },
+      showOnDrop: true,
     },
   }),
 
@@ -27,8 +46,9 @@ export const options = {
     showInReconfigure: true,
     configuration: {
       allowedKinds: ['LIST', 'BELONGS_TO'],
+      allowRelations: true,
       disabled: true,
-      condition: hideIf('property', 'EQ', ''),
+      condition: showIf('propertyBased', 'EQ', 'true'),
       showOnDrop: true,
     },
   }),
