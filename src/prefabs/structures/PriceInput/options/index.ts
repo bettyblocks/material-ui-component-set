@@ -1,6 +1,6 @@
 import {
   buttongroup,
-  hideIf,
+  CreateActionInputVariableKind,
   option,
   property,
   showIf,
@@ -18,14 +18,6 @@ const styles = { ...defaultStyles };
 delete (<PartialBy<typeof styles, 'adornmentIcon'>>styles).adornmentIcon;
 
 export const options = {
-  actionVariableId: option('ACTION_JS_VARIABLE', {
-    label: 'Action input variable',
-    value: '',
-    configuration: {
-      condition: showIf('property', 'EQ', ''),
-    },
-  }),
-
   propertyBased: buttongroup(
     'Type',
     [
@@ -36,17 +28,28 @@ export const options = {
       value: 'true',
       configuration: {
         showOnDrop: true,
-        condition: showIf('propertyBased', 'EQ', ''),
       },
     },
   ),
+
+  actionVariableId: option('ACTION_JS_VARIABLE', {
+    label: 'Action input variable',
+    value: '',
+    configuration: {
+      condition: showIf('propertyBased', 'EQ', 'false'),
+      showOnDrop: true,
+      createActionInputVariable: {
+        type: CreateActionInputVariableKind.NUMBER,
+      },
+    },
+  }),
 
   property: property('Property', {
     value: '',
     configuration: {
       allowedKinds: ['INTEGER', 'PRICE', 'PRICE_EXPRESSION'],
       disabled: true,
-      condition: hideIf('property', 'EQ', ''),
+      condition: showIf('propertyBased', 'EQ', 'true'),
       showOnDrop: true,
     },
   }),
