@@ -384,7 +384,6 @@
           ],
         },
         '&.Mui-disabled': {
-          pointerEvents: 'none',
           opacity: '0.7',
         },
       },
@@ -460,7 +459,6 @@
             },
           },
           '&.Mui-disabled': {
-            pointerEvents: 'none',
             opacity: '0.7',
           },
         },
