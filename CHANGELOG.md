@@ -1,3 +1,10 @@
+# [2.198.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.197.1...v2.198.0) (2024-11-28)
+
+
+### Features
+
+* make text area still scrollable when disabled ([7bafa7f](https://github.com/bettyblocks/material-ui-component-set/commit/7bafa7f435ca9de92d4e200a13ca2034ed7f97c9))
+
 ## [2.197.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.197.0...v2.197.1) (2024-11-19)
 
 
