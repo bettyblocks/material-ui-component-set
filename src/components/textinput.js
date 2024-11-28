@@ -383,7 +383,6 @@
           ],
         },
         '&.Mui-disabled': {
-          pointerEvents: 'none',
           opacity: '0.7',
         },
       },
@@ -427,8 +426,12 @@
           '&:hover': {
             '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
               {
-                borderColor: ({ options: { borderHoverColor } }) => [
-                  style.getColor(borderHoverColor),
+                borderColor: ({
+                  options: { borderHoverColor, borderColor, disabled },
+                }) => [
+                  disabled
+                    ? style.getColor(borderColor)
+                    : style.getColor(borderHoverColor),
                   '!important',
                 ],
               },
@@ -459,7 +462,6 @@
             },
           },
           '&.Mui-disabled': {
-            pointerEvents: 'none',
             opacity: '0.7',
           },
         },
