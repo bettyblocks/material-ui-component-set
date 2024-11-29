@@ -1,3 +1,10 @@
+## [2.198.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.198.0...v2.198.1) (2024-11-29)
+
+
+### Bug Fixes
+
+* wrap select in a formfield component ([4d253fd](https://github.com/bettyblocks/material-ui-component-set/commit/4d253fd8b177efdecee636fb352c440090bb6189))
+
 # [2.198.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.197.1...v2.198.0) (2024-11-28)
 
 
