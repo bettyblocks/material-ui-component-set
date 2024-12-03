@@ -35,7 +35,7 @@ export const options = {
     configuration: {
       condition: showIf('propertyBased', 'EQ', 'false'),
       createActionInputVariable: {
-        type: CreateActionInputVariableKind.TEXT,
+        type: CreateActionInputVariableKind.NUMBER,
       },
       showOnDrop: true,
     },
