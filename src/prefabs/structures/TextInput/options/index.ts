@@ -14,8 +14,8 @@ export const options = {
   propertyBased: buttongroup(
     'Type',
     [
-      ['Property based', 'true'],
-      ['Non property based', 'false'],
+      ['Property-based', 'true'],
+      ['Non-property-based', 'false'],
     ],
     {
       value: 'true',
