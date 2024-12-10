@@ -70,11 +70,6 @@
 
     const handleClick = () => {
       B.triggerEvent('OnClick');
-      if (hasLink) {
-        B.navigateTo(linkTo);
-      } else if (hasExternalLink) {
-        window.open(linkToExternal, linkTarget);
-      }
     };
 
     const handleMouseEnter = (event) => {
@@ -85,7 +80,33 @@
       B.triggerEvent('OnMouseLeave', event);
     };
 
-    const BoxCmp =
+    const BoxCmp = (
+      <Box
+        className={includeStyling(
+          [
+            classes.root,
+            isEmpty ? classes.empty : '',
+            isPristine ? classes.pristine : '',
+            !isPristine ? classes.background : '',
+            !isPristine ? classes.border : '',
+          ].join(' '),
+        )}
+        {...boxOptions}
+        onClick={handleClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          ...(backgroundImage !== null && {
+            backgroundImage: `url("${backgroundImage}")`,
+          }),
+          opacity,
+        }}
+      >
+        {isPristine ? useText(emptyPlaceHolderText) : children}
+      </Box>
+    );
+
+    const Component =
       hasLink || hasExternalLink ? (
         <Link
           href={hasExternalLink ? linkToExternalText : undefined}
@@ -94,54 +115,10 @@
           component={hasLink ? BLink : undefined}
           endpoint={hasLink ? linkTo : undefined}
         >
-          <Box
-            className={includeStyling(
-              [
-                classes.root,
-                isEmpty ? classes.empty : '',
-                isPristine ? classes.pristine : '',
-                !isPristine ? classes.background : '',
-                !isPristine ? classes.border : '',
-              ].join(' '),
-            )}
-            {...boxOptions}
-            onClick={handleClick}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            style={{
-              ...(backgroundImage !== null && {
-                backgroundImage: `url("${backgroundImage}")`,
-              }),
-              opacity,
-            }}
-          >
-            {isPristine ? useText(emptyPlaceHolderText) : children}
-          </Box>
+          {BoxCmp}
         </Link>
       ) : (
-        <Box
-          className={includeStyling(
-            [
-              classes.root,
-              isEmpty ? classes.empty : '',
-              isPristine ? classes.pristine : '',
-              !isPristine ? classes.background : '',
-              !isPristine ? classes.border : '',
-            ].join(' '),
-          )}
-          {...boxOptions}
-          onClick={handleClick}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          style={{
-            ...(backgroundImage !== null && {
-              backgroundImage: `url("${backgroundImage}")`,
-            }),
-            opacity,
-          }}
-        >
-          {isPristine ? useText(emptyPlaceHolderText) : children}
-        </Box>
+        BoxCmp
       );
 
     useEffect(() => {
@@ -157,7 +134,11 @@
     if (!isDev && !logic) {
       return <></>;
     }
-    return isDev ? <div className={classes.wrapper}>{BoxCmp}</div> : BoxCmp;
+    return isDev ? (
+      <div className={classes.wrapper}>{Component}</div>
+    ) : (
+      Component
+    );
   })(),
   styles: (B) => (theme) => {
     const { color: colorFunc, env, mediaMinWidth, Styling } = B;

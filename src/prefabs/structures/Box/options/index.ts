@@ -57,7 +57,7 @@ export const categories = [
     members: ['displayLogic'],
   },
   {
-    label: 'Link',
+    label: 'Link To',
     expanded: false,
     members: ['linkType', 'linkTarget', 'linkTo', 'linkToExternal'],
   },
