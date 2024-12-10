@@ -4,8 +4,8 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, useText, useLogic, usePublicFile } = B;
-    const { Box } = window.MaterialUI.Core;
+    const { env, useText, useLogic, usePublicFile, Link: BLink } = B;
+    const { Box, Link } = window.MaterialUI.Core;
     const {
       alignment,
       backgroundColor,
@@ -19,6 +19,10 @@
       transparent,
       valignment,
       emptyPlaceHolderText,
+      linkType,
+      linkTo,
+      linkToExternal,
+      linkTarget,
     } = options;
     const isDev = env === 'dev';
     const hasBackgroundColor = backgroundColor !== 'Transparent';
@@ -36,6 +40,11 @@
     const opac = transparent ? 0 : 1;
     const [opacity, setOpacity] = useState(opac);
     const logic = useLogic(displayLogic);
+    const hasLink = linkType === 'internal' && linkTo && linkTo.id !== '';
+    const hasExternalLink =
+      linkType === 'external' && linkToExternal && linkToExternal.id !== '';
+    const linkToExternalText =
+      (linkToExternal && useText(linkToExternal)) || '';
 
     useEffect(() => {
       setBackgroundImage(background);
@@ -61,6 +70,11 @@
 
     const handleClick = () => {
       B.triggerEvent('OnClick');
+      if (hasLink) {
+        B.navigateTo(linkTo);
+      } else if (hasExternalLink) {
+        window.open(linkToExternal, linkTarget);
+      }
     };
 
     const handleMouseEnter = (event) => {
@@ -71,31 +85,64 @@
       B.triggerEvent('OnMouseLeave', event);
     };
 
-    const BoxCmp = (
-      <Box
-        className={includeStyling(
-          [
-            classes.root,
-            isEmpty ? classes.empty : '',
-            isPristine ? classes.pristine : '',
-            !isPristine ? classes.background : '',
-            !isPristine ? classes.border : '',
-          ].join(' '),
-        )}
-        {...boxOptions}
-        onClick={handleClick}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        style={{
-          ...(backgroundImage !== null && {
-            backgroundImage: `url("${backgroundImage}")`,
-          }),
-          opacity,
-        }}
-      >
-        {isPristine ? useText(emptyPlaceHolderText) : children}
-      </Box>
-    );
+    const BoxCmp =
+      hasLink || hasExternalLink ? (
+        <Link
+          href={hasExternalLink ? linkToExternalText : undefined}
+          target={linkTarget}
+          rel={linkTarget === '_blank' ? 'noopener' : ''}
+          component={hasLink ? BLink : undefined}
+          endpoint={hasLink ? linkTo : undefined}
+        >
+          <Box
+            className={includeStyling(
+              [
+                classes.root,
+                isEmpty ? classes.empty : '',
+                isPristine ? classes.pristine : '',
+                !isPristine ? classes.background : '',
+                !isPristine ? classes.border : '',
+              ].join(' '),
+            )}
+            {...boxOptions}
+            onClick={handleClick}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            style={{
+              ...(backgroundImage !== null && {
+                backgroundImage: `url("${backgroundImage}")`,
+              }),
+              opacity,
+            }}
+          >
+            {isPristine ? useText(emptyPlaceHolderText) : children}
+          </Box>
+        </Link>
+      ) : (
+        <Box
+          className={includeStyling(
+            [
+              classes.root,
+              isEmpty ? classes.empty : '',
+              isPristine ? classes.pristine : '',
+              !isPristine ? classes.background : '',
+              !isPristine ? classes.border : '',
+            ].join(' '),
+          )}
+          {...boxOptions}
+          onClick={handleClick}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          style={{
+            ...(backgroundImage !== null && {
+              backgroundImage: `url("${backgroundImage}")`,
+            }),
+            opacity,
+          }}
+        >
+          {isPristine ? useText(emptyPlaceHolderText) : children}
+        </Box>
+      );
 
     useEffect(() => {
       if (isDev) {

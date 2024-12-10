@@ -12,6 +12,7 @@ import {
   displayLogic,
   hideIf,
   showIf,
+  endpoint,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -54,6 +55,11 @@ export const categories = [
     label: 'Logic Option',
     expanded: false,
     members: ['displayLogic'],
+  },
+  {
+    label: 'Link',
+    expanded: false,
+    members: ['linkType', 'linkTarget', 'linkTo', 'linkToExternal'],
   },
   {
     label: 'Advanced Options',
@@ -307,6 +313,43 @@ export const boxOptions = {
     value: '',
     configuration: {
       as: 'UNIT',
+    },
+  }),
+  linkType: option('CUSTOM', {
+    label: 'Link to',
+    value: 'internal',
+    configuration: {
+      as: 'BUTTONGROUP',
+      dataType: 'string',
+      allowedInput: [
+        { name: 'Internal page', value: 'internal' },
+        { name: 'External page', value: 'external' },
+      ],
+    },
+  }),
+  linkTarget: option('CUSTOM', {
+    value: '_self',
+    label: 'Open in',
+    configuration: {
+      as: 'BUTTONGROUP',
+      dataType: 'string',
+      allowedInput: [
+        { name: 'Current Tab', value: '_self' },
+        { name: 'New Tab', value: '_blank' },
+      ],
+    },
+  }),
+  linkTo: endpoint('Page', {
+    value: '',
+    configuration: {
+      condition: showIf('linkType', 'EQ', 'internal'),
+    },
+  }),
+  linkToExternal: variable('URL', {
+    value: [''],
+    configuration: {
+      placeholder: 'Starts with https:// or http://',
+      condition: showIf('linkType', 'EQ', 'external'),
     },
   }),
   emptyPlaceHolderText: variable('Empty placeholder text', {
