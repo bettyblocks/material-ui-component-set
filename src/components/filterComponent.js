@@ -160,7 +160,7 @@
         kinds: [...dateKinds, ...dateTimeKinds],
       },
       {
-        operator: 'gteg',
+        operator: 'gteq',
         label: 'Is after or at',
         kinds: [...dateKinds, ...dateTimeKinds],
       },
