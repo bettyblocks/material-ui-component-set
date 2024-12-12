@@ -205,8 +205,8 @@
             if (error) {
               return <span>Something went wrong: {error.message}</span>;
             }
-            const { id } = data;
 
+            const id = data ? data.id : null;
             return <FormComponent record={id} />;
           }}
         </GetOne>
