@@ -1,3 +1,16 @@
+# [2.199.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.198.2...v2.199.0) (2024-12-12)
+
+
+### Bug Fixes
+
+* do not let the page crash when data is undefined ([c3294cf](https://github.com/bettyblocks/material-ui-component-set/commit/c3294cf7dbdfb6c7761c9d1833791809abf9a112))
+* use tenerary statement since optional chaining is not suported ([2e7f214](https://github.com/bettyblocks/material-ui-component-set/commit/2e7f2145548993d87772453fcbdf8995b19565bb))
+
+
+### Features
+
+* added link options to box component ([6deb20f](https://github.com/bettyblocks/material-ui-component-set/commit/6deb20f97d6835399ce63195e8ed51a11d2d6f93))
+
 ## [2.198.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.198.1...v2.198.2) (2024-12-11)
 
 ### Bug Fixes
