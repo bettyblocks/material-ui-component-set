@@ -19,6 +19,7 @@ export const options = {
     ],
     {
       value: 'true',
+      showInAddChild: true,
       configuration: {
         showOnDrop: true,
       },
@@ -28,6 +29,7 @@ export const options = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
+    showInAddChild: true,
     configuration: {
       condition: showIf('propertyBased', 'EQ', 'false'),
       createActionInputVariable: {
@@ -40,6 +42,7 @@ export const options = {
   property: property('Property', {
     value: '',
     showInReconfigure: true,
+    showInAddChild: true,
     configuration: {
       allowedKinds: ['TEXT', 'URL', 'IBAN', 'STRING'],
       disabled: true,
@@ -54,8 +57,9 @@ export const options = {
   label: variable('Label', {
     value: [''],
     configuration: { allowFormatting: false, allowPropertyName: true },
+    showInAddChild: true,
   }),
-  value: variable('Value', { value: [''] }),
+  value: variable('Value', { value: [''], showInAddChild: true }),
 
   ...validation,
   ...styles,
