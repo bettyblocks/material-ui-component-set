@@ -1,3 +1,11 @@
+## [2.199.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.199.0...v2.199.1) (2024-12-16)
+
+
+### Bug Fixes
+
+* bump cli version ([df3fd78](https://github.com/bettyblocks/material-ui-component-set/commit/df3fd78aea14af22691a160619269288f2f178b3))
+* bump sdk version ([08d6fab](https://github.com/bettyblocks/material-ui-component-set/commit/08d6fab3f9590e4ed289d7aaeb8facf7cb821ceb))
+
 # [2.199.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.198.2...v2.199.0) (2024-12-12)
 
 
