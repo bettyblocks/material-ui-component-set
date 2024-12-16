@@ -45,6 +45,9 @@ export const options = {
       disabled: true,
       condition: showIf('propertyBased', 'EQ', 'true'),
       showOnDrop: true,
+      createActionInputVariable: {
+        type: CreateActionInputVariableKind.TEXT,
+      },
     },
   }),
 
