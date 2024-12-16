@@ -1,3 +1,10 @@
+## [2.198.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.198.1...v2.198.2) (2024-12-11)
+
+
+### Bug Fixes
+
+* use correct operator ([1d9a90c](https://github.com/bettyblocks/material-ui-component-set/commit/1d9a90c3ae65731e26ad15f6a32b2bf8eb22eaed))
+
 ## [2.198.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.198.0...v2.198.1) (2024-11-29)
 
 
