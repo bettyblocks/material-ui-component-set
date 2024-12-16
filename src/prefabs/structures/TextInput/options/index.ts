@@ -1,6 +1,7 @@
 import {
   hideIf,
   option,
+  optionTemplateOptions,
   property,
   showIf,
   variable,
@@ -38,4 +39,21 @@ export const options = {
   ...validation,
   ...styles,
   ...advanced,
+};
+
+export const optionTemplates = {
+  addChild: {
+    options: optionTemplateOptions({
+      property: property('Property', {
+        value: '',
+        showInReconfigure: true,
+        configuration: {
+          allowedKinds: ['TEXT', 'URL', 'IBAN', 'STRING'],
+          disabled: true,
+          condition: hideIf('property', 'EQ', ''),
+          showOnDrop: true,
+        },
+      }),
+    }),
+  },
 };

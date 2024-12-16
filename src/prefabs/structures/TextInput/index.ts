@@ -1,13 +1,19 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
 import { Configuration } from '../Configuration';
-import { options as defaults } from './options/index';
+import {
+  options as defaults,
+  optionTemplates as optionTemplatesdefault,
+} from './options/index';
 
 export const TextInput = (
   config: Configuration,
   children: PrefabReference[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
+  const optionTemplates = {
+    ...(config.optionTemplates || optionTemplatesdefault),
+  };
   const ref = config.ref ? { ...config.ref } : undefined;
 
   const categories = [
@@ -80,7 +86,13 @@ export const TextInput = (
 
   return component(
     'TextInput',
-    { label: config.label, options, ref, optionCategories: categories },
+    {
+      label: config.label,
+      options,
+      optionTemplates,
+      ref,
+      optionCategories: categories,
+    },
     children,
   );
 };
