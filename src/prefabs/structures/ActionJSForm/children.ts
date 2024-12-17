@@ -29,6 +29,13 @@ import {
   textInputOptions,
 } from '..';
 
+export const inputTypes = [
+  TextInput({ label: 'Text field', options: { ...textInputOptions } }),
+  SelectInput({ label: 'Select', options: { ...selectInputOptions } }),
+  PriceInput({ label: 'Price', options: { ...priceInputOptions } }),
+  TextArea({ label: 'Textarea', options: { ...textAreaOptions } }),
+];
+
 const defaultOptions = {
   property: property('Property', {
     value: '',
@@ -40,57 +47,22 @@ const defaultOptions = {
   }),
 };
 
-export const inputTypes = [
-  {
-    label: 'Text (single line)',
-    structure: [TextInput({ options: { ...textInputOptions } })],
-  },
-  {
-    label: 'Select',
-    structure: [SelectInput({ options: { ...selectInputOptions } })],
-  },
-  {
-    label: 'Price',
-    structure: [PriceInput({ options: { ...priceInputOptions } })],
-  },
-  {
-    label: 'TextArea',
-    structure: [TextArea({ options: { ...textAreaOptions } })],
-  },
-];
-
 export const children = [
-  TextInput({
-    options: { ...textInputOptions, ...defaultOptions },
-  }),
-  SelectInput({
-    options: { ...selectInputOptions, ...defaultOptions },
-  }),
-  CheckboxInput({
-    options: { ...checkboxInputOptions, ...defaultOptions },
-  }),
+  TextInput({ options: { ...textInputOptions, ...defaultOptions } }),
+  SelectInput({ options: { ...selectInputOptions, ...defaultOptions } }),
+  CheckboxInput({ options: { ...checkboxInputOptions, ...defaultOptions } }),
   AutocompleteInput({
     options: { ...autocompleteInputOptions, ...defaultOptions },
   }),
-  DateTimePicker({
-    options: { ...dateTimePickerOptions, ...defaultOptions },
-  }),
+  DateTimePicker({ options: { ...dateTimePickerOptions, ...defaultOptions } }),
   CheckboxGroup({
     options: { ...checkboxGroupInputOptions, ...defaultOptions },
   }),
-  RadioInput({
-    options: { ...radioInputOptions, ...defaultOptions },
-  }),
+  RadioInput({ options: { ...radioInputOptions, ...defaultOptions } }),
   MultiAutocomplete({
     options: { ...multiAutocompleteOptions, ...defaultOptions },
   }),
-  FileUpload({
-    options: { ...fileUploadOptions, ...defaultOptions },
-  }),
-  RatingInput({
-    options: { ...ratingInputOptions, ...defaultOptions },
-  }),
-  RichTextInput({
-    options: { ...richTextOptions, ...defaultOptions },
-  }),
+  FileUpload({ options: { ...fileUploadOptions, ...defaultOptions } }),
+  RatingInput({ options: { ...ratingInputOptions, ...defaultOptions } }),
+  RichTextInput({ options: { ...richTextOptions, ...defaultOptions } }),
 ];

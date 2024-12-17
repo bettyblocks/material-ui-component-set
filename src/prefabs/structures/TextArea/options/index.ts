@@ -56,8 +56,8 @@ export const options = {
     },
   }),
 
-  label: variable('Label', { value: [''], showInAddChild: true }),
-  value: variable('Value', { value: [''], showInAddChild: true }),
+  label: variable('Label', { value: [''] }),
+  value: variable('Value', { value: [''] }),
 
   ...validation,
 

@@ -57,9 +57,8 @@ export const options = {
   label: variable('Label', {
     value: [''],
     configuration: { allowFormatting: false, allowPropertyName: true },
-    showInAddChild: true,
   }),
-  value: variable('Value', { value: [''], showInAddChild: true }),
+  value: variable('Value', { value: [''] }),
 
   ...validation,
   ...styles,

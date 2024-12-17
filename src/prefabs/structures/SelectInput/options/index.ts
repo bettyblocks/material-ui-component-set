@@ -62,9 +62,8 @@ export const options = {
   label: variable('Label', {
     value: ['Select'],
     configuration: { allowFormatting: false, allowPropertyName: true },
-    showInAddChild: true,
   }),
-  value: variable('Value', { value: [''], showInAddChild: true }),
+  value: variable('Value', { value: [''] }),
 
   optionType: buttongroup(
     'Option type',
@@ -82,7 +81,6 @@ export const options = {
   ),
   model: modelAndRelation('Model', {
     value: '',
-    showInAddChild: true,
     configuration: {
       condition: showIf('optionType', 'EQ', 'variable'),
     },
