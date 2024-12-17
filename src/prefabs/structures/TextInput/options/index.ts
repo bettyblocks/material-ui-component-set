@@ -14,11 +14,12 @@ export const options = {
   propertyBased: buttongroup(
     'Type',
     [
-      ['Property based', 'true'],
-      ['Non property based', 'false'],
+      ['Property-based', 'true'],
+      ['Non-property-based', 'false'],
     ],
     {
       value: 'true',
+      showInAddChild: true,
       configuration: {
         showOnDrop: true,
       },
@@ -28,6 +29,7 @@ export const options = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
+    showInAddChild: true,
     configuration: {
       condition: showIf('propertyBased', 'EQ', 'false'),
       createActionInputVariable: {
@@ -40,11 +42,15 @@ export const options = {
   property: property('Property', {
     value: '',
     showInReconfigure: true,
+    showInAddChild: true,
     configuration: {
       allowedKinds: ['TEXT', 'URL', 'IBAN', 'STRING'],
       disabled: true,
       condition: showIf('propertyBased', 'EQ', 'true'),
       showOnDrop: true,
+      createActionInputVariable: {
+        type: CreateActionInputVariableKind.TEXT,
+      },
     },
   }),
 
