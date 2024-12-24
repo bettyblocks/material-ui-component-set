@@ -1,4 +1,5 @@
 import {
+  buttongroup,
   hideIf,
   option,
   optionTemplateOptions,
@@ -44,16 +45,87 @@ export const options = {
 export const optionTemplates = {
   addChild: {
     options: optionTemplateOptions({
+      propertyBased: buttongroup(
+        'Type',
+        [
+          ['Property-based', 'true'],
+          ['Non-property-based', 'false'],
+        ],
+        {
+          value: 'true',
+          showInAddChild: true,
+          configuration: {
+            showOnDrop: true,
+          },
+        },
+      ),
+      actionVariableId: option('ACTION_JS_VARIABLE', {
+        label: 'Action input variable',
+        value: '',
+        showInAddChild: true,
+        configuration: {
+          condition: showIf('propertyBased', 'EQ', 'false'),
+          showOnDrop: true,
+        },
+      }),
+
       property: property('Property', {
         value: '',
         showInReconfigure: true,
+        showInAddChild: true,
         configuration: {
           allowedKinds: ['TEXT', 'URL', 'IBAN', 'STRING'],
           disabled: true,
-          condition: hideIf('property', 'EQ', ''),
+          condition: showIf('propertyBased', 'EQ', 'true'),
           showOnDrop: true,
         },
       }),
     }),
+    // optionActions: {
+    //   propertyBased: {
+    //     onchange: [
+    //       {
+    //         action: 'clearPropertyOption',
+    //         target: 'propterty',
+    //         condition: ['propertyBased', 'EQ', 'false'],
+    //       },
+    //       {
+    //         action: 'clearActionVariableOption',
+    //         target: 'actionVariableId',
+    //         condition: ['propertyBased', 'EQ', 'true'],
+    //       },
+    //     ],
+    //   },
+    //   actionVariableId: {
+    //     onCreate: [
+    //       {
+    //         action: 'createAndSetActionInputVariable',
+    //         target: 'actionVariableId',
+    //       },
+    //     ],
+    //   },
+    //   property: {
+    //     onchange: [
+    //       {
+    //         action: 'setVariableOptionWithPropertyLabel',
+    //         target: 'label',
+    //       },
+    //       {
+    //         action: 'setVariableOptionWithPropertyValue',
+    //         target: 'value',
+    //       },
+    //       {
+    //         action: 'createAndSetActionInputVariable',
+    //         target: 'actionVariableId',
+    //       },
+    //     ],
+    //     onCreate: [
+    //       {
+    //         action: 'createAndSetPropertyValue',
+    //         target: 'property',
+    //       },
+    //     ],
+    //   },
+    // },
   },
 };
