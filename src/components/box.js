@@ -4,8 +4,8 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, useText, useLogic, usePublicFile } = B;
-    const { Box } = window.MaterialUI.Core;
+    const { env, useText, useLogic, usePublicFile, Link: BLink } = B;
+    const { Box, Link } = window.MaterialUI.Core;
     const {
       alignment,
       backgroundColor,
@@ -19,6 +19,10 @@
       transparent,
       valignment,
       emptyPlaceHolderText,
+      linkType,
+      linkTo,
+      linkToExternal,
+      linkTarget,
     } = options;
     const isDev = env === 'dev';
     const hasBackgroundColor = backgroundColor !== 'Transparent';
@@ -36,6 +40,11 @@
     const opac = transparent ? 0 : 1;
     const [opacity, setOpacity] = useState(opac);
     const logic = useLogic(displayLogic);
+    const hasLink = linkType === 'internal' && linkTo && linkTo.id !== '';
+    const hasExternalLink =
+      linkType === 'external' && linkToExternal && linkToExternal.id !== '';
+    const linkToExternalText =
+      (linkToExternal && useText(linkToExternal)) || '';
 
     useEffect(() => {
       setBackgroundImage(background);
@@ -97,6 +106,21 @@
       </Box>
     );
 
+    const Component =
+      hasLink || hasExternalLink ? (
+        <Link
+          href={hasExternalLink ? linkToExternalText : undefined}
+          target={linkTarget}
+          rel={linkTarget === '_blank' ? 'noopener' : ''}
+          component={hasLink ? BLink : undefined}
+          endpoint={hasLink ? linkTo : undefined}
+        >
+          {BoxCmp}
+        </Link>
+      ) : (
+        BoxCmp
+      );
+
     useEffect(() => {
       if (isDev) {
         setOpacity(transparent ? 0 : 1);
@@ -110,7 +134,11 @@
     if (!isDev && !logic) {
       return <></>;
     }
-    return isDev ? <div className={classes.wrapper}>{BoxCmp}</div> : BoxCmp;
+    return isDev ? (
+      <div className={classes.wrapper}>{Component}</div>
+    ) : (
+      Component
+    );
   })(),
   styles: (B) => (theme) => {
     const { color: colorFunc, env, mediaMinWidth, Styling } = B;
