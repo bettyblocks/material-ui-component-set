@@ -84,15 +84,18 @@ export const optionTemplates = {
     // optionActions: {
     //   propertyBased: {
     //     onchange: [
+    //       // optionAction('clearPropertyOption', 'propterty', { condition: runIf('propertyBased', 'EQ', 'false') })
     //       {
     //         action: 'clearPropertyOption',
     //         target: 'propterty',
-    //         condition: ['propertyBased', 'EQ', 'false'],
+    //         // condition: ['propertyBased', 'EQ', 'false'],
+    //         condition: { key: 'propertyBased', comparator: 'EQ', value: 'false'}
     //       },
     //       {
     //         action: 'clearActionVariableOption',
     //         target: 'actionVariableId',
-    //         condition: ['propertyBased', 'EQ', 'true'],
+    //         // condition: ['propertyBased', 'EQ', 'true'],
+    //         condition: { key: 'propertyBased', comparator: 'EQ', value: 'true'}
     //       },
     //     ],
     //   },
@@ -106,6 +109,7 @@ export const optionTemplates = {
     //   },
     //   property: {
     //     onchange: [
+    //       // optionAction('setVariableOptionWithPropertyLabel', 'label')
     //       {
     //         action: 'setVariableOptionWithPropertyLabel',
     //         target: 'label',
