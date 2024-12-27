@@ -81,55 +81,57 @@ export const optionTemplates = {
         },
       }),
     }),
-    // optionActions: {
-    //   propertyBased: {
-    //     onchange: [
-    //       // optionAction('clearPropertyOption', 'propterty', { condition: runIf('propertyBased', 'EQ', 'false') })
-    //       {
-    //         action: 'clearPropertyOption',
-    //         target: 'propterty',
-    //         // condition: ['propertyBased', 'EQ', 'false'],
-    //         condition: { key: 'propertyBased', comparator: 'EQ', value: 'false'}
-    //       },
-    //       {
-    //         action: 'clearActionVariableOption',
-    //         target: 'actionVariableId',
-    //         // condition: ['propertyBased', 'EQ', 'true'],
-    //         condition: { key: 'propertyBased', comparator: 'EQ', value: 'true'}
-    //       },
-    //     ],
-    //   },
-    //   actionVariableId: {
-    //     onCreate: [
-    //       {
-    //         action: 'createAndSetActionInputVariable',
-    //         target: 'actionVariableId',
-    //       },
-    //     ],
-    //   },
-    //   property: {
-    //     onchange: [
-    //       // optionAction('setVariableOptionWithPropertyLabel', 'label')
-    //       {
-    //         action: 'setVariableOptionWithPropertyLabel',
-    //         target: 'label',
-    //       },
-    //       {
-    //         action: 'setVariableOptionWithPropertyValue',
-    //         target: 'value',
-    //       },
-    //       {
-    //         action: 'createAndSetActionInputVariable',
-    //         target: 'actionVariableId',
-    //       },
-    //     ],
-    //     onCreate: [
-    //       {
-    //         action: 'createAndSetPropertyValue',
-    //         target: 'property',
-    //       },
-    //     ],
-    //   },
-    // },
+    optionActions: {
+      // propertyBased: {
+      //     onchange: [
+      //       // optionAction('clearPropertyOption', 'propterty', { condition: runIf('propertyBased', 'EQ', 'false') })
+      //       {
+      //         action: 'clearPropertyOption',
+      //         target: 'propterty',
+      //         // condition: ['propertyBased', 'EQ', 'false'],
+      //         condition: { key: 'propertyBased', comparator: 'EQ', value: 'false'}
+      //       },
+      //       {
+      //         action: 'clearActionVariableOption',
+      //         target: 'actionVariableId',
+      //         // condition: ['propertyBased', 'EQ', 'true'],
+      //         condition: { key: 'propertyBased', comparator: 'EQ', value: 'true'}
+      //       },
+      //     ],
+      //   },
+      actionVariableId: {
+        onChange: [
+          {
+            action: 'setVariableOptionWithInputVariableName',
+            target: 'label',
+          },
+        ],
+        onCreate: [
+          {
+            action: 'createAndSetActionInputVariableOption',
+            target: 'actionVariableId',
+          },
+        ],
+      },
+      property: {
+        onChange: [
+          // optionAction('setVariableOptionWithPropertyLabel', 'label') // make a sdk helper?
+          {
+            action: 'setVariableOptionWithPropertyLabel',
+            target: 'label',
+          },
+          {
+            action: 'setVariableOptionWithPropertyValue',
+            target: 'value',
+          },
+        ],
+        onCreate: [
+          {
+            action: 'createAndSetPropertyOption',
+            target: 'property',
+          },
+        ],
+      },
+    },
   },
 };
