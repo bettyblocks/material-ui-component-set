@@ -1,3 +1,10 @@
+# [2.200.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.199.1...v2.200.0) (2024-12-30)
+
+
+### Features
+
+* add icon, icon position and icon color options to expansion panel ([8f4db94](https://github.com/bettyblocks/material-ui-component-set/commit/8f4db94025f194ba38d037b6a088978e12ea81ea))
+
 ## [2.199.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.199.0...v2.199.1) (2024-12-16)
 
 
