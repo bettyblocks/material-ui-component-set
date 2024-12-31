@@ -20,20 +20,18 @@ import {
   dateTimePickerOptions,
   fileUploadOptions,
   multiAutocompleteOptions,
-  priceInputOptions,
   radioInputOptions,
   ratingInputOptions,
   richTextOptions,
   selectInputOptions,
-  textAreaOptions,
   textInputOptions,
 } from '..';
 
 export const inputTypes = [
-  TextInput({ label: 'Text field', options: { ...textInputOptions } }),
-  SelectInput({ label: 'Select', options: { ...selectInputOptions } }),
-  PriceInput({ label: 'Price', options: { ...priceInputOptions } }),
-  TextArea({ label: 'Textarea', options: { ...textAreaOptions } }),
+  TextInput({ label: 'Text field' }),
+  SelectInput({ label: 'Select' }),
+  PriceInput({ label: 'Price' }),
+  TextArea({ label: 'Textarea' }),
 ];
 
 const defaultOptions = {

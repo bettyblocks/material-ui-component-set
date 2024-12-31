@@ -2,6 +2,7 @@ import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options/index';
 import { updateOption } from '../../../utils';
+import { addChildOptions } from './options/addChild';
 
 export const SelectInput = (
   config: Configuration,
@@ -47,7 +48,18 @@ export const SelectInput = (
 
   return component(
     'SelectInput',
-    { options, style, ref, label, optionCategories: categories },
+    {
+      options,
+      style,
+      ref,
+      label,
+      optionCategories: categories,
+      optionTemplates: {
+        addChild: {
+          options: addChildOptions,
+        },
+      },
+    },
     children,
   );
 };

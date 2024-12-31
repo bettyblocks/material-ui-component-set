@@ -1,6 +1,5 @@
 import {
-  buttongroup,
-  CreateActionInputVariableKind,
+  hideIf,
   option,
   property,
   showIf,
@@ -11,46 +10,20 @@ import { styles } from './styles';
 import { validation } from './validation';
 
 export const options = {
-  propertyBased: buttongroup(
-    'Type',
-    [
-      ['Property-based', 'true'],
-      ['Non-property-based', 'false'],
-    ],
-    {
-      value: 'true',
-      showInAddChild: true,
-      configuration: {
-        showOnDrop: true,
-      },
-    },
-  ),
-
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
-    showInAddChild: true,
     configuration: {
-      condition: showIf('propertyBased', 'EQ', 'false'),
-      createActionInputVariable: {
-        type: CreateActionInputVariableKind.TEXT,
-      },
-      showOnDrop: true,
+      condition: showIf('property', 'EQ', ''),
     },
   }),
 
   property: property('Property', {
     value: '',
-    showInReconfigure: true,
-    showInAddChild: true,
     configuration: {
       allowedKinds: ['TEXT', 'URL', 'IBAN', 'STRING'],
       disabled: true,
-      condition: showIf('propertyBased', 'EQ', 'true'),
-      showOnDrop: true,
-      createActionInputVariable: {
-        type: CreateActionInputVariableKind.TEXT,
-      },
+      condition: hideIf('property', 'EQ', ''),
     },
   }),
 
