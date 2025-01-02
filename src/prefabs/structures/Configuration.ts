@@ -1,11 +1,13 @@
 import {
   OptionCategory,
   OptionProducer,
+  OptionTemplates,
   PrefabComponentStyle,
 } from '@betty-blocks/component-sdk';
 
 export interface Configuration {
   options?: Record<string, OptionProducer>;
+  optionTemplates?: OptionTemplates;
   adornmentIcon?: string;
   label?: string;
   inputLabel?: Record<string, any>;

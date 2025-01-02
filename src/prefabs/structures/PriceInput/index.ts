@@ -3,6 +3,7 @@ import { updateOption } from '../../../utils';
 import { TextInput } from '../TextInput';
 import { options } from './options';
 import { Configuration } from '../Configuration';
+import { addChildOptions } from './options/addChild';
 
 export const PriceInput = (
   config: Configuration,
@@ -19,5 +20,17 @@ export const PriceInput = (
     },
   );
 
-  return TextInput({ ...config, options, label }, descendants);
+  return TextInput(
+    {
+      ...config,
+      options,
+      label,
+      optionTemplates: {
+        addChild: {
+          options: addChildOptions,
+        },
+      },
+    },
+    descendants,
+  );
 };
