@@ -30,10 +30,8 @@ export const addChildOptions = optionTemplateOptions({
 
   property: property('Property', {
     value: '',
-    showInReconfigure: true,
     configuration: {
       allowedKinds: ['TEXT', 'URL', 'IBAN', 'STRING'],
-      disabled: true,
       condition: showIf('propertyBased', 'EQ', 'true'),
       createActionInputVariable: {
         type: CreateActionInputVariableKind.TEXT,
