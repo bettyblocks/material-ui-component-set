@@ -21,6 +21,8 @@
       square,
       variant,
       elevation,
+      icon,
+      iconPosition,
       dataComponentAttribute,
       preLoadData,
     } = options;
@@ -92,7 +94,10 @@
 
     const panelSummaryOptions = {
       onClick,
-      expandIcon: <Icon name="ExpandMore" />,
+      expandIcon: <Icon name={icon} />,
+      IconButtonProps: {
+        edge: iconPosition,
+      },
     };
 
     const ShowChilderen = <>{dataShown || isDev ? children : ''}</>;
@@ -226,6 +231,13 @@
             getSpacing(outerSpacing[2], 'Desktop'),
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Desktop'),
+        },
+        '& .MuiExpansionPanelSummary-root': {
+          flexDirection: ({ options: { iconPosition } }) =>
+            iconPosition === 'start' && 'row-reverse',
+        },
+        '& .MuiExpansionPanelSummary-expandIcon': {
+          color: ({ options: { iconColor } }) => style.getColor(iconColor),
         },
       },
       empty: {
