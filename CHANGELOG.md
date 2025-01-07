@@ -1,3 +1,10 @@
+# [2.201.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.200.0...v2.201.0) (2025-01-07)
+
+
+### Features
+
+* remove underline in box with linkto ([f059fda](https://github.com/bettyblocks/material-ui-component-set/commit/f059fdae8570560b52763d52176aa5cfca1aae7f))
+
 # [2.200.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.199.1...v2.200.0) (2024-12-30)
 
 
