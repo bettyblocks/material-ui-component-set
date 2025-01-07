@@ -1,4 +1,7 @@
-import { PrefabReference } from '@betty-blocks/component-sdk';
+import {
+  optionActionSetVariable,
+  PrefabReference,
+} from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
 import { TextInput } from '../TextInput';
 import { options } from './options';
@@ -22,6 +25,20 @@ export const PriceInput = (
       optionTemplates: {
         addChild: {
           options: addChildOptions,
+          optionActions: {
+            property: {
+              onChange: [
+                optionActionSetVariable('value', 'propertyValue'),
+                optionActionSetVariable('label', 'propertyLabel'),
+              ],
+            },
+            actionVariableId: {
+              onChange: [
+                optionActionSetVariable('value', 'propertyValue'),
+                optionActionSetVariable('label', 'propertyLabel'),
+              ],
+            },
+          },
         },
       },
     },

@@ -1,4 +1,8 @@
-import { component, PrefabReference } from '@betty-blocks/component-sdk';
+import {
+  component,
+  optionActionSetVariable,
+  PrefabReference,
+} from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options/index';
@@ -93,6 +97,20 @@ export const TextInput = (
       optionTemplates: {
         addChild: {
           options: addChildOptions,
+          optionActions: {
+            property: {
+              onChange: [
+                optionActionSetVariable('value', 'propertyValue'),
+                optionActionSetVariable('label', 'propertyLabel'),
+              ],
+            },
+            actionVariableId: {
+              onChange: [
+                optionActionSetVariable('value', 'propertyValue'),
+                optionActionSetVariable('label', 'propertyLabel'),
+              ],
+            },
+          },
         },
       },
     },
