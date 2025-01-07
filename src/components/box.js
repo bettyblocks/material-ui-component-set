@@ -114,6 +114,7 @@
           rel={linkTarget === '_blank' ? 'noopener' : ''}
           component={hasLink ? BLink : undefined}
           endpoint={hasLink ? linkTo : undefined}
+          className={classes.link}
         >
           {BoxCmp}
         </Link>
@@ -302,6 +303,13 @@
         borderColor: '#AFB5C8',
         borderStyle: 'dashed',
         backgroundColor: '#F0F1F5',
+      },
+      link: {
+        textDecoration: 'none',
+        color: 'inherit',
+        '&:hover': {
+          textDecoration: 'none !important',
+        },
       },
     };
   },
