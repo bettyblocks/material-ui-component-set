@@ -24,9 +24,11 @@ export const RichTextInput = (
     options.label = updateOption(options.label, { value: [config.inputLabel] });
   }
 
+  const label = config.label ? config.label : 'Rich text editor';
+
   return component(
     'RichTextInput',
-    { label: config.label, options, ref, $afterDelete, optionCategories },
+    { label, options, ref, $afterDelete, optionCategories },
     children,
   );
 };

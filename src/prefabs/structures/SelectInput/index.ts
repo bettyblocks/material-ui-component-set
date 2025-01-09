@@ -15,7 +15,7 @@ export const SelectInput = (
   const options = { ...(config.options || defaults) };
   const style = { ...config.style };
   const ref = config.ref ? { ...config.ref } : undefined;
-  const label = config.label ? config.label : undefined;
+  const label = config.label ? config.label : 'Select';
 
   const categories = [
     {

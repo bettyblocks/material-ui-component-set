@@ -28,10 +28,10 @@ import {
 } from '..';
 
 export const inputTypes = [
-  TextInput({ label: 'Text field' }),
-  SelectInput({ label: 'Select' }),
-  PriceInput({ label: 'Price' }),
-  TextArea({ label: 'Textarea' }),
+  TextInput({}),
+  SelectInput({}),
+  PriceInput({}),
+  TextArea({}),
 ];
 
 const defaultOptions = {

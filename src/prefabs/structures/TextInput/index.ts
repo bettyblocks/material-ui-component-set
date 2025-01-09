@@ -14,7 +14,8 @@ export const TextInput = (
 ) => {
   const options = { ...(config.options || defaults) };
   const addChildOptions = [
-    ...(config.optionTemplates?.addChild?.options || defaultAddChildOptions),
+    ...(config.optionTemplates?.addChild?.options ||
+      defaultAddChildOptions(config.inputType || 'text')),
   ];
 
   const ref = config.ref ? { ...config.ref } : undefined;
@@ -57,6 +58,8 @@ export const TextInput = (
     },
   ];
 
+  const label = config.label ? config.label : 'Text field';
+
   if (config.type) {
     options.type = updateOption(options.type, { value: config.type });
   }
@@ -90,7 +93,7 @@ export const TextInput = (
   return component(
     'TextInput',
     {
-      label: config.label,
+      label,
       options,
       ref,
       optionCategories: categories,
