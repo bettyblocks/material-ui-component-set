@@ -436,7 +436,7 @@
           )}
           {isBooleanType && !isSpecialType && (
             <Checkbox
-              checked={row.rightValue === '' ? false : row.rightValue}
+              checked={row.rightValue}
               classes={{ checked: classes.checkBox }}
               onChange={(e) => {
                 setGroups(
