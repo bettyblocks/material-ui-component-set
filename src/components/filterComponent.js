@@ -363,6 +363,10 @@
         if (isNumberType) return 'number';
         return 'text';
       };
+
+      if (isBooleanType && row.rightValue === '') {
+        setGroups(updateRowProperty(row.rowId, groups, 'rightValue', false));
+      }
       const isTextType =
         !isSpecialType && !isBooleanType && !isDateTimeType && !isDateType;
       return (
