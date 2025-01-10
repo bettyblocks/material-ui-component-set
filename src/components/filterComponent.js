@@ -363,6 +363,10 @@
         if (isNumberType) return 'number';
         return 'text';
       };
+
+      if (isBooleanType && row.rightValue === '') {
+        setGroups(updateRowProperty(row.rowId, groups, 'rightValue', false));
+      }
       const isTextType =
         !isSpecialType && !isBooleanType && !isDateTimeType && !isDateType;
       return (
@@ -432,7 +436,7 @@
           )}
           {isBooleanType && !isSpecialType && (
             <Checkbox
-              checked={row.rightValue}
+              checked={row.rightValue === '' ? false : row.rightValue}
               classes={{ checked: classes.checkBox }}
               onChange={(e) => {
                 setGroups(
