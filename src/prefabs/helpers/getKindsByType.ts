@@ -12,7 +12,12 @@ export type InputType =
   | 'text'
   | 'time'
   | 'url'
-  | 'price';
+  | 'file'
+  | 'price'
+  | 'checkbox'
+  | 'checkboxGroup'
+  | 'image'
+  | 'hidden';
 
 const inputTypeToKinds = {
   date: ['DATE'],
@@ -27,9 +32,22 @@ const inputTypeToKinds = {
   time: ['TIME'],
   url: ['URL'],
   price: ['INTEGER', 'PRICE', 'PRICE_EXPRESSION'],
+  checkbox: ['BOOLEAN'],
+  checkboxGroup: ['HAS_AND_BELONGS_TO_MANY', 'HAS_MANY', 'LIST'],
+  file: ['FILE'],
+  image: ['IMAGE'],
+  hidden: [
+    'BOOLEAN',
+    'DECIMAL',
+    'INTEGER',
+    'PRICE',
+    'SERIAL',
+    'STRING',
+    'TEXT',
+  ],
 };
 
-const { TEXT, NUMBER } = CreateActionInputVariableKind;
+const { TEXT, NUMBER, CHECKBOX, ARRAY } = CreateActionInputVariableKind;
 const inputTypeToActionInputVariableKind = {
   date: TEXT,
   datetime: TEXT,
@@ -43,6 +61,11 @@ const inputTypeToActionInputVariableKind = {
   time: TEXT,
   url: TEXT,
   price: NUMBER,
+  checkbox: CHECKBOX,
+  checkboxGroup: ARRAY,
+  file: TEXT,
+  image: TEXT,
+  hidden: TEXT,
 };
 
 export const getKindsByType = (type: InputType) => {
