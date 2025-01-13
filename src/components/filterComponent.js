@@ -198,8 +198,6 @@
     const filterProps = (properties, id) => {
       return Object.values(properties).filter((prop) => {
         return (
-          // Always add the id
-          (prop.modelId === id && prop.name === 'id') ||
           // Add all properties besides the forbidden
           (prop.modelId === id &&
             !forbiddenKinds.includes(prop.kind) &&
