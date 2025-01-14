@@ -1,10 +1,7 @@
 import { PrefabReference, component } from '@betty-blocks/component-sdk';
 import { fileUploadOptions } from './options';
 import { Configuration } from '../Configuration';
-import {
-  addChildOptions,
-  addChildEvents as optionActions,
-} from './options/addChild';
+import { addChildOptions, optionActions } from './options/addChild';
 
 const defaultCategories = [
   {

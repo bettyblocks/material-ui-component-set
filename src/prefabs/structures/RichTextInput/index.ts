@@ -3,6 +3,7 @@ import { updateOption } from '../../../utils';
 import { deleteActionVariable } from '../../hooks/deleteActionVariable';
 import { Configuration } from '../Configuration';
 import { richTextOptions, categories as defaultCategories } from './options';
+import { addChildOptions, optionActions } from '../TextInput/options/addChild';
 
 const $afterDelete = [deleteActionVariable];
 
@@ -28,7 +29,19 @@ export const RichTextInput = (
 
   return component(
     'RichTextInput',
-    { label, options, ref, $afterDelete, optionCategories },
+    {
+      label,
+      options,
+      ref,
+      $afterDelete,
+      optionCategories,
+      optionTemplates: {
+        addChild: {
+          options: addChildOptions('richText'),
+          optionActions,
+        },
+      },
+    },
     children,
   );
 };

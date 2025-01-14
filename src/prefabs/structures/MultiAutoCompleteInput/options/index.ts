@@ -29,7 +29,6 @@ export const options = {
       allowRelations: true,
       disabled: true,
       condition: hideIf('property', 'EQ', ''),
-      showOnDrop: true,
     },
   }),
   label: variable('Label', {

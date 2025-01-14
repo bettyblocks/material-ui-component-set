@@ -1,41 +1,38 @@
 import { CreateActionInputVariableKind } from '@betty-blocks/component-sdk';
 
 export type InputType =
+  | 'autocomplete'
+  | 'checkbox'
+  | 'checkboxGroup'
   | 'date'
   | 'datetime'
   | 'decimal'
   | 'email'
+  | 'file'
+  | 'hidden'
   | 'iban'
+  | 'image'
+  | 'multiAutocomplete'
   | 'number'
   | 'password'
   | 'phone'
+  | 'price'
+  | 'radio'
+  | 'richText'
+  | 'select'
   | 'text'
   | 'time'
-  | 'url'
-  | 'file'
-  | 'price'
-  | 'checkbox'
-  | 'checkboxGroup'
-  | 'image'
-  | 'hidden';
+  | 'url';
 
-const inputTypeToKinds = {
+const inputTypeToAllowedKinds = {
+  autocomplete: ['LIST', 'BELONGS_TO'],
+  checkbox: ['BOOLEAN'],
+  checkboxGroup: ['HAS_AND_BELONGS_TO_MANY', 'HAS_MANY', 'LIST'],
   date: ['DATE'],
   datetime: ['DATE_TIME'],
   decimal: ['DECIMAL'],
   email: ['EMAIL_ADDRESS'],
-  iban: ['IBAN'],
-  number: ['INTEGER', 'PRICE'],
-  password: ['PASSWORD'],
-  phone: ['PHONE_NUMBER'],
-  text: ['TEXT', 'URL', 'IBAN', 'STRING'],
-  time: ['TIME'],
-  url: ['URL'],
-  price: ['INTEGER', 'PRICE', 'PRICE_EXPRESSION'],
-  checkbox: ['BOOLEAN'],
-  checkboxGroup: ['HAS_AND_BELONGS_TO_MANY', 'HAS_MANY', 'LIST'],
   file: ['FILE'],
-  image: ['IMAGE'],
   hidden: [
     'BOOLEAN',
     'DECIMAL',
@@ -45,31 +42,50 @@ const inputTypeToKinds = {
     'STRING',
     'TEXT',
   ],
+  iban: ['IBAN'],
+  image: ['IMAGE'],
+  multiAutocomplete: ['HAS_AND_BELONGS_TO_MANY', 'HAS_MANY', 'OBJECT'],
+  number: ['INTEGER', 'PRICE'],
+  password: ['PASSWORD'],
+  phone: ['PHONE_NUMBER'],
+  price: ['INTEGER', 'PRICE', 'PRICE_EXPRESSION'],
+  radio: ['LIST', 'BELONGS_TO', 'OBJECT'],
+  richText: ['RICH_TEXT'],
+  select: ['LIST', 'BELONGS_TO'],
+  text: ['TEXT', 'URL', 'IBAN', 'STRING'],
+  time: ['TIME'],
+  url: ['URL'],
 };
 
 const { TEXT, NUMBER, CHECKBOX, ARRAY } = CreateActionInputVariableKind;
 const inputTypeToActionInputVariableKind = {
+  autocomplete: NUMBER,
+  checkbox: CHECKBOX,
+  checkboxGroup: ARRAY,
   date: TEXT,
   datetime: TEXT,
   decimal: NUMBER,
   email: TEXT,
+  file: TEXT,
+  hidden: TEXT,
   iban: TEXT,
+  image: TEXT,
+  multiAutocomplete: ARRAY,
   number: NUMBER,
   password: TEXT,
   phone: TEXT,
+  price: NUMBER,
+  radio: NUMBER,
+  richText: TEXT,
+  select: NUMBER,
   text: TEXT,
   time: TEXT,
   url: TEXT,
-  price: NUMBER,
-  checkbox: CHECKBOX,
-  checkboxGroup: ARRAY,
-  file: TEXT,
-  image: TEXT,
-  hidden: TEXT,
 };
 
 export const getKindsByType = (type: InputType) => {
-  const allowedKinds = inputTypeToKinds[type] || inputTypeToKinds.text;
+  const allowedKinds =
+    inputTypeToAllowedKinds[type] || inputTypeToAllowedKinds.text;
 
   const actionInputVariableKind =
     inputTypeToActionInputVariableKind[type] ||

@@ -1,12 +1,8 @@
-import {
-  component,
-  optionActionSetVariable,
-  PrefabReference,
-} from '@betty-blocks/component-sdk';
+import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options/index';
 import { updateOption } from '../../../utils';
-import { addChildOptions } from './options/addChild';
+import { addChildOptions, optionActions } from './options/addChild';
 
 export const SelectInput = (
   config: Configuration,
@@ -60,21 +56,8 @@ export const SelectInput = (
       optionCategories: categories,
       optionTemplates: {
         addChild: {
-          options: addChildOptions,
-          optionActions: {
-            property: {
-              onChange: [
-                optionActionSetVariable('value', 'propertyValue'),
-                optionActionSetVariable('label', 'propertyLabel'),
-              ],
-            },
-            actionVariableId: {
-              onChange: [
-                optionActionSetVariable('value', 'propertyValue'),
-                optionActionSetVariable('label', 'propertyLabel'),
-              ],
-            },
-          },
+          options: addChildOptions('select'),
+          optionActions,
         },
       },
     },

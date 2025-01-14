@@ -3,8 +3,8 @@ import { Configuration } from '../Configuration';
 import { checkboxGroupInputOptions } from './options/index';
 import {
   addChildOptions,
-  addChildEvents as optionActions,
-} from '../TextInput/options/addChild';
+  optionActions,
+} from '../SelectInput/options/addChild';
 
 export const CheckboxGroup = (
   config: Configuration,

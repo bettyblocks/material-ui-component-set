@@ -29,7 +29,6 @@ export const options = {
       disabled: true,
       allowFormatting: false,
       condition: hideIf('property', 'EQ', ''),
-      showOnDrop: true,
     },
   }),
 

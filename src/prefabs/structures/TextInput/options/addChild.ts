@@ -45,7 +45,7 @@ export const addChildOptions = (type: InputType) => {
   });
 };
 
-export const addChildEvents = {
+export const optionActions = {
   property: {
     onChange: [
       optionActionSetVariable('value', 'propertyValue'),

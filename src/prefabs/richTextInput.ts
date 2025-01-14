@@ -10,7 +10,7 @@ const attributes = {
 export default prefab('Rich Text Editor', attributes, undefined, [
   RichTextInput({
     inputLabel: 'Rich text editor',
-    inputType: 'text',
+    inputType: 'richText',
     type: 'text',
   }),
 ]);

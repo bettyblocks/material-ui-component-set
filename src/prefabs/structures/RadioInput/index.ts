@@ -1,6 +1,10 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
+import {
+  addChildOptions,
+  optionActions,
+} from '../SelectInput/options/addChild';
 
 export const RadioInput = (
   config: Configuration,
@@ -39,7 +43,16 @@ export const RadioInput = (
 
   return component(
     'RadioInput',
-    { options, style, ref, label, optionCategories: categories },
+    {
+      options,
+      style,
+      ref,
+      label,
+      optionCategories: categories,
+      optionTemplates: {
+        addChild: { options: addChildOptions('radio'), optionActions },
+      },
+    },
     children,
   );
 };

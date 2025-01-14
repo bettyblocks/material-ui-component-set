@@ -2,10 +2,7 @@ import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
-import {
-  addChildOptions,
-  addChildEvents as optionActions,
-} from '../TextInput/options/addChild';
+import { addChildOptions, optionActions } from '../TextInput/options/addChild';
 
 export enum DateInputTypes {
   DATE_TIME = 'datetime',

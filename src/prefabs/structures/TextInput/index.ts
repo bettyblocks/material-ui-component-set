@@ -4,7 +4,7 @@ import { Configuration } from '../Configuration';
 import { options as defaults } from './options/index';
 import {
   addChildOptions as defaultAddChildOptions,
-  addChildEvents as optionActions,
+  optionActions,
 } from './options/addChild';
 
 export const TextInput = (
