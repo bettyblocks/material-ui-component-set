@@ -1,3 +1,10 @@
+## [2.201.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.201.0...v2.201.1) (2025-01-14)
+
+
+### Bug Fixes
+
+* set default right value for boolean type to false ([5f8eeb3](https://github.com/bettyblocks/material-ui-component-set/commit/5f8eeb3e65f86286df8f3ef59f05761610f72abe))
+
 # [2.201.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.200.0...v2.201.0) (2025-01-07)
 
 
