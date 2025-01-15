@@ -7,6 +7,7 @@ import {
   optionTemplateOptions,
   option,
   optionActionSetVariable,
+  CreateActionInputVariableKind,
 } from '@betty-blocks/component-sdk';
 
 const attributes = {
@@ -25,8 +26,13 @@ const options = {
 
 const addChildOptions = optionTemplateOptions({
   actionVariableId: option('ACTION_JS_VARIABLE', {
-    label: 'Action input variable',
+    label: 'Action input variable (number)',
     value: '',
+    configuration: {
+      createActionInputVariable: {
+        type: CreateActionInputVariableKind.NUMBER,
+      },
+    },
   }),
 });
 

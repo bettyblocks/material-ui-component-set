@@ -18,6 +18,7 @@ export type InputType =
   | 'phone'
   | 'price'
   | 'radio'
+  | 'rating'
   | 'richText'
   | 'select'
   | 'text'
@@ -50,6 +51,7 @@ const inputTypeToAllowedKinds = {
   phone: ['PHONE_NUMBER'],
   price: ['INTEGER', 'PRICE', 'PRICE_EXPRESSION'],
   radio: ['LIST', 'BELONGS_TO', 'OBJECT'],
+  rating: ['DECIMAL'],
   richText: ['RICH_TEXT'],
   select: ['LIST', 'BELONGS_TO'],
   text: ['TEXT', 'URL', 'IBAN', 'STRING'],
@@ -76,6 +78,7 @@ const inputTypeToActionInputVariableKind = {
   phone: TEXT,
   price: NUMBER,
   radio: NUMBER,
+  rating: NUMBER,
   richText: TEXT,
   select: NUMBER,
   text: TEXT,
