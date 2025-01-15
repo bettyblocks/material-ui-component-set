@@ -26,7 +26,6 @@ export const checkboxInputOptions = {
       allowedKinds: ['BOOLEAN'],
       disabled: true,
       condition: hideIf('property', 'EQ', ''),
-      showOnDrop: true,
     },
   }),
 

@@ -10,7 +10,7 @@ export const TextArea = (
   children: PrefabComponent[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
-  const label = config.label ? config.label : undefined;
+  const label = config.label ? config.label : 'Text Area';
 
   if (config.inputLabel) {
     options.label = updateOption(options.label, { ...config.inputLabel });

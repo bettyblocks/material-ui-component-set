@@ -4,6 +4,7 @@ import {
   OptionTemplates,
   PrefabComponentStyle,
 } from '@betty-blocks/component-sdk';
+import { InputType } from '../helpers/getKindsByType';
 
 export interface Configuration {
   options?: Record<string, OptionProducer>;
@@ -14,7 +15,7 @@ export interface Configuration {
   type?: HTMLInputElement['type'];
   style?: PrefabComponentStyle;
   ref?: { id: string };
-  inputType?: string;
+  inputType?: InputType;
   placeholder?: string;
   dataComponentAttribute?: string;
   optionCategories?: OptionCategory[];

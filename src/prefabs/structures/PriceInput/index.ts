@@ -1,15 +1,18 @@
-import { PrefabReference } from '@betty-blocks/component-sdk';
+import {
+  optionActionSetVariable,
+  PrefabReference,
+} from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
 import { TextInput } from '../TextInput';
 import { options } from './options';
 import { Configuration } from '../Configuration';
-import { addChildOptions } from './options/addChild';
+import { addChildOptions } from '../TextInput/options/addChild';
 
 export const PriceInput = (
   config: Configuration,
   descendants: PrefabReference[] = [],
 ) => {
-  const label = config.label ? config.label : undefined;
+  const label = config.label ? config.label : 'Price field';
   options.adornmentPosition = updateOption(options.adornmentPosition, {
     value: 'start',
   });
@@ -27,7 +30,21 @@ export const PriceInput = (
       label,
       optionTemplates: {
         addChild: {
-          options: addChildOptions,
+          options: addChildOptions('price'),
+          optionActions: {
+            property: {
+              onChange: [
+                optionActionSetVariable('value', 'propertyValue'),
+                optionActionSetVariable('label', 'propertyLabel'),
+              ],
+            },
+            actionVariableId: {
+              onChange: [
+                optionActionSetVariable('value', 'propertyValue'),
+                optionActionSetVariable('label', 'propertyLabel'),
+              ],
+            },
+          },
         },
       },
     },

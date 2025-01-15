@@ -11,6 +11,7 @@ export default prefab('Text Field', attributes, undefined, [
   TextInput({
     label: 'Text field',
     inputLabel: { value: ['Text field'] },
+    inputType: 'text',
     type: 'text',
     dataComponentAttribute: 'TextInput',
   }),

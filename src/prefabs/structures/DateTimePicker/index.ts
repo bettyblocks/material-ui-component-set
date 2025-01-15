@@ -2,6 +2,7 @@ import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
+import { addChildOptions, optionActions } from '../TextInput/options/addChild';
 
 export enum DateInputTypes {
   DATE_TIME = 'datetime',
@@ -103,7 +104,19 @@ export const DateTimePicker = (
 
   return component(
     'DateTimePickerInput',
-    { options, style, ref, label, optionCategories: categories },
+    {
+      options,
+      style,
+      ref,
+      label,
+      optionCategories: categories,
+      optionTemplates: {
+        addChild: {
+          options: addChildOptions(config.inputType || 'date'),
+          optionActions,
+        },
+      },
+    },
     descendants,
   );
 };
