@@ -69,7 +69,7 @@ const inputTypeToActionInputVariableKind = {
   decimal: NUMBER,
   email: TEXT,
   file: TEXT,
-  hidden: TEXT,
+  hidden: NUMBER,
   iban: TEXT,
   image: TEXT,
   multiAutocomplete: ARRAY,

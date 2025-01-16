@@ -1,14 +1,17 @@
 import {
   prefab,
   component,
-  option as optionFunction,
   variable,
   Icon,
   optionTemplateOptions,
   option,
   optionActionSetVariable,
-  CreateActionInputVariableKind,
+  showIf,
+  property,
+  hideIf,
+  buttongroup,
 } from '@betty-blocks/component-sdk';
+import { getKindsByType } from './helpers/getKindsByType';
 
 const attributes = {
   category: 'FORM',
@@ -16,27 +19,65 @@ const attributes = {
   keywords: ['Form', 'input', 'hidden'],
 };
 
+const { allowedKinds, actionInputVariableKind } = getKindsByType('hidden');
+
 const options = {
-  actionVariableId: optionFunction('ACTION_JS_VARIABLE', {
+  actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
+    configuration: {
+      condition: showIf('property', 'EQ', ''),
+    },
   }),
+  property: property('Property', {
+    value: '',
+    configuration: {
+      allowedKinds,
+      disabled: true,
+      condition: hideIf('property', 'EQ', ''),
+    },
+  }),
+
   value: variable('Value'),
 };
 
 const addChildOptions = optionTemplateOptions({
-  actionVariableId: option('ACTION_JS_VARIABLE', {
-    label: 'Action input variable (number)',
+  propertyBased: buttongroup(
+    'Type',
+    [
+      ['Property-based', 'true'],
+      ['Non-property-based', 'false'],
+    ],
+    { value: 'true' },
+  ),
+
+  property: property('Property', {
     value: '',
     configuration: {
+      allowedKinds,
+      condition: showIf('propertyBased', 'EQ', 'true'),
       createActionInputVariable: {
-        type: CreateActionInputVariableKind.NUMBER,
+        type: actionInputVariableKind,
+      },
+    },
+  }),
+
+  actionVariableId: option('ACTION_JS_VARIABLE', {
+    label: 'Action input variable',
+    value: '',
+    configuration: {
+      condition: showIf('propertyBased', 'EQ', 'false'),
+      createActionInputVariable: {
+        type: actionInputVariableKind,
       },
     },
   }),
 });
 
 const optionActions = {
+  property: {
+    onChange: [optionActionSetVariable('value', 'propertyValue')],
+  },
   actionVariableId: {
     onChange: [optionActionSetVariable('value', 'propertyValue')],
   },
