@@ -26,7 +26,6 @@ import {
 } from '..';
 
 import {
-  _switch,
   autocompleteInput,
   checkboxGroupInput,
   checkboxinput,
@@ -47,6 +46,7 @@ import {
   ratingInput,
   richTextInput,
   selectinput,
+  switchInput,
   textareainput,
   textinput,
   timePickerInput,
@@ -54,7 +54,6 @@ import {
 } from '../..';
 
 export const inputTypes = [
-  _switch,
   autocompleteInput,
   checkboxGroupInput,
   checkboxinput,
@@ -75,6 +74,7 @@ export const inputTypes = [
   ratingInput,
   richTextInput,
   selectinput,
+  switchInput,
   textareainput,
   textinput,
   timePickerInput,
