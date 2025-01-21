@@ -5,7 +5,7 @@ import {
   Icon,
   optionTemplateOptions,
   option,
-  optionActionSetVariable,
+  setVariableOption,
   showIf,
   property,
   hideIf,
@@ -74,13 +74,11 @@ const addChildOptions = optionTemplateOptions({
   }),
 });
 
-const optionActions = {
-  property: {
-    onChange: [optionActionSetVariable('value', 'propertyValue')],
-  },
-  actionVariableId: {
-    onChange: [optionActionSetVariable('value', 'propertyValue')],
-  },
+const optionEvents = {
+  onChange: {
+    property:  [setVariableOption({target: 'value', format: 'propertyValue'})],
+    actionVariableId: [setVariableOption({target: 'value', format: 'propertyValue'})],
+  }
 };
 
 const hooks = {};
@@ -94,7 +92,7 @@ export default prefab('Hidden', attributes, undefined, [
       optionTemplates: {
         addChild: {
           options: addChildOptions,
-          optionActions,
+          optionEvents,
         },
       },
     },

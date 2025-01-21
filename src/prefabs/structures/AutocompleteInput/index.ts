@@ -2,10 +2,7 @@ import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options/index';
-import {
-  addChildOptions,
-  optionActions,
-} from '../SelectInput/options/addChild';
+import { addChildOptions, optionEvents } from '../SelectInput/options/addChild';
 
 export const AutocompleteInput = (
   config: Configuration,
@@ -72,7 +69,7 @@ export const AutocompleteInput = (
       optionTemplates: {
         addChild: {
           options: addChildOptions('autocomplete'),
-          optionActions,
+          optionEvents,
         },
       },
     },

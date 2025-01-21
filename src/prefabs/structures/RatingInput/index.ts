@@ -4,7 +4,7 @@ import {
   ratingInputOptions as defaultOptions,
   categories as defaultCategories,
 } from './options';
-import { addChildOptions, optionActions } from '../TextInput/options/addChild';
+import { addChildOptions, optionEvents } from '../TextInput/options/addChild';
 
 export const RatingInput = (
   config: Configuration,
@@ -29,7 +29,7 @@ export const RatingInput = (
       optionTemplates: {
         addChild: {
           options: addChildOptions('rating'),
-          optionActions,
+          optionEvents,
         },
       },
     },

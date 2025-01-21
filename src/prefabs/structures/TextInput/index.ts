@@ -4,7 +4,7 @@ import { Configuration } from '../Configuration';
 import { options as defaults } from './options/index';
 import {
   addChildOptions as defaultAddChildOptions,
-  optionActions,
+  optionEvents,
 } from './options/addChild';
 
 export const TextInput = (
@@ -99,7 +99,7 @@ export const TextInput = (
       optionTemplates: {
         addChild: {
           options: addChildOptions,
-          optionActions,
+          optionEvents,
         },
       },
     },
