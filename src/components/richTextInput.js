@@ -415,10 +415,7 @@
     };
 
     const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
-    const editor = React.useMemo(
-      () => withHistory(withReact(createEditor())),
-      [],
-    );
+    const [editor] = useState(() => withReact(withHistory(createEditor())));
     const parsed = new DOMParser().parseFromString(
       useText(valueProp),
       'text/html',
@@ -437,21 +434,6 @@
         },
       ];
     });
-
-    if (isDev) {
-      useEffect(() => {
-        Transforms.delete(editor, {
-          at: {
-            anchor: Editor.start(editor, []),
-            focus: Editor.end(editor, []),
-          },
-        });
-        Transforms.insertNodes(editor, deserialize(parsed.body));
-        Transforms.delete(editor, {
-          at: Editor.start(editor, [0]),
-        });
-      }, [valueProp]);
-    }
 
     const handleListdepth = (listKind, key, event) => {
       const isList = isBlockActive(editor, listKind, 'type');
