@@ -66,6 +66,7 @@ const addChildOptions = optionTemplateOptions({
     label: 'Action input variable',
     value: '',
     configuration: {
+      allowedKinds,
       condition: showIf('propertyBased', 'EQ', 'false'),
       createActionInputVariable: {
         type: actionInputVariableKind,

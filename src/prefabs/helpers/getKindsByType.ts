@@ -28,7 +28,7 @@ export type InputType =
 const inputTypeToAllowedKinds = {
   autocomplete: ['LIST', 'BELONGS_TO'],
   checkbox: ['BOOLEAN'],
-  checkboxGroup: ['HAS_AND_BELONGS_TO_MANY', 'HAS_MANY', 'LIST'],
+  checkboxGroup: ['HAS_AND_BELONGS_TO_MANY', 'HAS_MANY'],
   date: ['DATE'],
   datetime: ['DATE_TIME'],
   decimal: ['DECIMAL'],
