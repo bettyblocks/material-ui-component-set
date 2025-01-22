@@ -1,9 +1,9 @@
 import {
   buttongroup,
   option,
-  optionActionSetVariable,
   optionTemplateOptions,
   property,
+  setVariableOption,
   showIf,
 } from '@betty-blocks/component-sdk';
 import { getKindsByType, InputType } from '../../../helpers/getKindsByType';
@@ -48,17 +48,15 @@ export const addChildOptions = (type: InputType) => {
   });
 };
 
-export const optionActions = {
-  property: {
-    onChange: [
-      optionActionSetVariable('value', 'propertyValue'),
-      optionActionSetVariable('label', 'propertyLabel'),
+export const optionEvents = {
+  onChange: {
+    property: [
+      setVariableOption({ target: 'value', format: 'propertyValue' }),
+      setVariableOption({ target: 'label', format: 'propertyLabel' }),
     ],
-  },
-  actionVariableId: {
-    onChange: [
-      optionActionSetVariable('value', 'propertyValue'),
-      optionActionSetVariable('label', 'propertyLabel'),
+    actionVariableId: [
+      setVariableOption({ target: 'value', format: 'propertyValue' }),
+      setVariableOption({ target: 'label', format: 'propertyLabel' }),
     ],
   },
 };

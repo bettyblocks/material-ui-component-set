@@ -1,10 +1,7 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { Configuration } from '../Configuration';
 import { checkboxGroupInputOptions } from './options/index';
-import {
-  addChildOptions,
-  optionActions,
-} from '../SelectInput/options/addChild';
+import { addChildOptions, optionEvents } from '../SelectInput/options/addChild';
 
 export const CheckboxGroup = (
   config: Configuration,
@@ -52,7 +49,7 @@ export const CheckboxGroup = (
       optionTemplates: {
         addChild: {
           options: addChildOptions('checkboxGroup'),
-          optionActions,
+          optionEvents,
         },
       },
     },

@@ -26,6 +26,7 @@ export const options = {
     showInReconfigure: true,
     configuration: {
       allowedKinds: ['DATE'],
+      disabledNames: ['updated_at', 'created_at'],
       disabled: true,
       allowFormatting: false,
       condition: hideIf('property', 'EQ', ''),
