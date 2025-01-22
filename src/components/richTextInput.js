@@ -113,8 +113,6 @@
       floatLabel,
     } = options;
     const isDev = env === 'dev';
-    const optionValue = useText(valueProp);
-    const [currentValue, setCurrentValue] = useState(optionValue);
     const [valueKey, setValueKey] = useState(0);
     const labelText = useText(label);
     const [showDropdown, setShowDropdown] = useState(false);
@@ -123,6 +121,18 @@
     const placeholderText = useText(placeholder);
     const helperTextResolved = useText(helperText);
     const { current: labelControlRef } = useRef(generateUUID());
+
+    const sanitizeHTML = (rawString) => {
+      // Replace all the whitespace between tags with nothing. Replacement is done when there is ONLY whitespace
+      return useText(rawString)
+        .toString()
+        .trimLeft()
+        .trimRight()
+        .replace(/>\s+</g, '><');
+    };
+
+    const optionValue = sanitizeHTML(valueProp);
+    const [currentValue, setCurrentValue] = useState(optionValue);
 
     useEffect(() => {
       setCurrentValue(optionValue);
@@ -331,7 +341,7 @@
       }
 
       const { nodeName } = el;
-      let nodeAttributes = { ...markAttributes };
+      const nodeAttributes = { ...markAttributes };
       let parent = el;
 
       if (
@@ -348,7 +358,7 @@
         nodeAttributes = { ...nodeAttributes, ...TEXT_TAGS[nodeName](el) };
       }
 
-      const children = Array.from(parent.childNodes)
+      let children = Array.from(parent.childNodes)
         .map((node) => deserialize(node, nodeAttributes))
         .flat();
 
@@ -365,6 +375,11 @@
         const attrs = ELEMENT_TAGS[nodeName](el);
         return jsx('element', attrs, children);
       }
+
+      // if (!Element.isElementList(children)) {
+      //   const attrs = ELEMENT_TAGS.P(el);
+      //   children = jsx('element', attrs, children);
+      // }
 
       return children;
     };
@@ -416,10 +431,7 @@
 
     const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
     const [editor] = useState(() => withReact(withHistory(createEditor())));
-    const parsed = new DOMParser().parseFromString(
-      useText(valueProp),
-      'text/html',
-    );
+    const parsed = new DOMParser().parseFromString(optionValue, 'text/html');
     const fragment = deserialize(parsed.body);
 
     B.defineFunction('Clear', () => {
