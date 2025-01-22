@@ -113,8 +113,6 @@
       floatLabel,
     } = options;
     const isDev = env === 'dev';
-    const optionValue = useText(valueProp);
-    const [currentValue, setCurrentValue] = useState(optionValue);
     const [valueKey, setValueKey] = useState(0);
     const labelText = useText(label);
     const [showDropdown, setShowDropdown] = useState(false);
@@ -123,6 +121,14 @@
     const placeholderText = useText(placeholder);
     const helperTextResolved = useText(helperText);
     const { current: labelControlRef } = useRef(generateUUID());
+
+    const sanitizeHTML = (rawString) => {
+      // Replace all the whitespace between tags with nothing. Replacement is done when there is ONLY whitespace
+      return rawString.toString().trim().replace(/>\s+</g, '><');
+    };
+
+    const optionValue = sanitizeHTML(useText(valueProp));
+    const [currentValue, setCurrentValue] = useState(optionValue);
 
     useEffect(() => {
       setCurrentValue(optionValue);
@@ -348,9 +354,9 @@
         nodeAttributes = { ...nodeAttributes, ...TEXT_TAGS[nodeName](el) };
       }
 
-      const children = Array.from(parent.childNodes)
-        .map((node) => deserialize(node, nodeAttributes))
-        .flat();
+      const children = Array.from(parent.childNodes).flatMap((node) =>
+        deserialize(node, nodeAttributes),
+      );
 
       if (children.length === 0) {
         children.push(jsx('text', nodeAttributes, ''));
@@ -416,10 +422,7 @@
 
     const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
     const [editor] = useState(() => withReact(withHistory(createEditor())));
-    const parsed = new DOMParser().parseFromString(
-      useText(valueProp),
-      'text/html',
-    );
+    const parsed = new DOMParser().parseFromString(optionValue, 'text/html');
     const fragment = deserialize(parsed.body);
 
     B.defineFunction('Clear', () => {
