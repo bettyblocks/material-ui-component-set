@@ -124,11 +124,7 @@
 
     const sanitizeHTML = (rawString) => {
       // Replace all the whitespace between tags with nothing. Replacement is done when there is ONLY whitespace
-      return rawString
-        .toString()
-        .trimLeft()
-        .trimRight()
-        .replace(/>\s+</g, '><');
+      return rawString.toString().trim().replace(/>\s+</g, '><');
     };
 
     const optionValue = sanitizeHTML(useText(valueProp));
@@ -358,9 +354,9 @@
         nodeAttributes = { ...nodeAttributes, ...TEXT_TAGS[nodeName](el) };
       }
 
-      const children = Array.from(parent.childNodes)
-        .map((node) => deserialize(node, nodeAttributes))
-        .flat();
+      const children = Array.from(parent.childNodes).flatMap((node) =>
+        deserialize(node, nodeAttributes),
+      );
 
       if (children.length === 0) {
         children.push(jsx('text', nodeAttributes, ''));
@@ -375,11 +371,6 @@
         const attrs = ELEMENT_TAGS[nodeName](el);
         return jsx('element', attrs, children);
       }
-
-      // if (!Element.isElementList(children)) {
-      //   const attrs = ELEMENT_TAGS.P(el);
-      //   children = jsx('element', attrs, children);
-      // }
 
       return children;
     };
