@@ -77,9 +77,11 @@ const addChildOptions = optionTemplateOptions({
 
 const optionEvents = {
   onChange: {
-    property:  [setVariableOption({target: 'value', format: 'propertyValue'})],
-    actionVariableId: [setVariableOption({target: 'value', format: 'propertyValue'})],
-  }
+    property: [setVariableOption({ target: 'value', format: 'propertyValue' })],
+    actionVariableId: [
+      setVariableOption({ target: 'value', format: 'propertyValue' }),
+    ],
+  },
 };
 
 const hooks = {};
