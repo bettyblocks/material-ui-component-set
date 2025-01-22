@@ -124,14 +124,14 @@
 
     const sanitizeHTML = (rawString) => {
       // Replace all the whitespace between tags with nothing. Replacement is done when there is ONLY whitespace
-      return useText(rawString)
+      return rawString
         .toString()
         .trimLeft()
         .trimRight()
         .replace(/>\s+</g, '><');
     };
 
-    const optionValue = sanitizeHTML(valueProp);
+    const optionValue = sanitizeHTML(useText(valueProp));
     const [currentValue, setCurrentValue] = useState(optionValue);
 
     useEffect(() => {
@@ -341,7 +341,7 @@
       }
 
       const { nodeName } = el;
-      const nodeAttributes = { ...markAttributes };
+      let nodeAttributes = { ...markAttributes };
       let parent = el;
 
       if (
@@ -358,7 +358,7 @@
         nodeAttributes = { ...nodeAttributes, ...TEXT_TAGS[nodeName](el) };
       }
 
-      let children = Array.from(parent.childNodes)
+      const children = Array.from(parent.childNodes)
         .map((node) => deserialize(node, nodeAttributes))
         .flat();
 
