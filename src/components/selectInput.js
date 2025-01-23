@@ -50,7 +50,7 @@
     const labelText = useText(label);
     const clearLabelText = useText(clearLabel);
     const placeholderLabelText = useText(placeholderLabel);
-    const defaultValueText = useText(prefabValue);
+    const defaultValueText = Number(useText(prefabValue));
     const helperTextResolved = useText(helperText);
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
