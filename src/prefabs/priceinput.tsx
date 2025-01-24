@@ -6,7 +6,7 @@ import {
   PrefabComponentOption,
 } from '@betty-blocks/component-sdk';
 
-import { DecimalInput } from './structures/DecimalInput';
+import { PriceInput } from './structures/PriceInput';
 
 const beforeCreate = ({
   close,
@@ -329,7 +329,7 @@ const attributes = {
 };
 
 export default prefab('Price', attributes, beforeCreate, [
-  DecimalInput({
+  PriceInput({
     label: 'Price field',
     inputLabel: 'Price',
     type: 'decimal',
