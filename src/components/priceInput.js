@@ -148,8 +148,7 @@
       });
 
       inputRef.current.addEventListener('autoNumeric:rawValueModified', () => {
-        const rawValue = autoNumericInstance.getNumericString();
-        setRawValue(rawValue);
+        setRawValue(autoNumericInstance.getNumericString());
         debouncedOnChangeRef.current(rawValue);
       });
 
@@ -168,41 +167,41 @@
 
     if (!debouncedOnChangeRef.current) {
       debouncedOnChangeRef.current = debounce((newValue) => {
-        const rawValue =
+        const unformattedValue =
           AutoNumeric.getAutoNumericElement(newValue).getNumericString();
-        B.triggerEvent('onChange', rawValue);
+        B.triggerEvent('onChange', unformattedValue);
       }, debounceDelay);
     }
 
     const changeHandler = (event) => {
       const { target } = event;
-      let { validity: validation } = target;
+      const { validity: validation } = target;
 
       if (afterFirstInvalidation) {
         handleValidation(validation);
       }
 
       const autoNumericInstance = AutoNumeric.getAutoNumericElement(target);
-      const rawValue = autoNumericInstance.getNumericString();
+      const unformattedValue = autoNumericInstance.getNumericString();
       const formattedValue = autoNumericInstance.getFormatted();
-      setRawValue(rawValue);
+      setRawValue(unformattedValue);
       setCurrentValue(formattedValue);
-      debouncedOnChangeRef.current(rawValue);
+      debouncedOnChangeRef.current(unformattedValue);
     };
 
     const blurHandler = (event) => {
       const { target } = event;
-      let { validity: validation } = target;
+      const { validity: validation } = target;
 
       setAfterFirstInvalidation(!validation.valid);
       handleValidation(validation);
 
       const autoNumericInstance = AutoNumeric.getAutoNumericElement(target);
-      const rawValue = autoNumericInstance.getNumericString();
+      const unformattedValue = autoNumericInstance.getNumericString();
       const formattedValue = autoNumericInstance.getFormatted();
-      setRawValue(rawValue);
+      setRawValue(unformattedValue);
       setCurrentValue(formattedValue);
-      B.triggerEvent('onBlur', rawValue);
+      B.triggerEvent('onBlur', unformattedValue);
     };
 
     const invalidHandler = (event) => {

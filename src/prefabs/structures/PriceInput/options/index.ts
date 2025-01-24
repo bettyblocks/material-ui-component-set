@@ -9,7 +9,7 @@ import {
   variable,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../TextInput/options/advanced';
-import { styles as defaultStyles } from '../../PriceInput/options/styles';
+import { styles as defaultStyles } from './styles';
 import { validation } from './validation';
 
 const styles = { ...defaultStyles };

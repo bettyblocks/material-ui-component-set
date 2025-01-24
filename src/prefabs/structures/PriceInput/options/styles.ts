@@ -1,8 +1,7 @@
 import {
+  ThemeColor,
   buttongroup,
   color,
-  icon,
-  ThemeColor,
   toggle,
 } from '@betty-blocks/component-sdk';
 
