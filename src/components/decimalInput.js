@@ -1,5 +1,5 @@
 (() => ({
-  name: 'PriceInput',
+  name: 'DecimalInput',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',

@@ -3,15 +3,11 @@ import { updateOption } from '../../../utils';
 import { options } from './options';
 import { Configuration } from '../Configuration';
 
-export const PriceInput = (
+export const DecimalInput = (
   config: Configuration,
   children: PrefabReference[] = [],
 ) => {
   const label = config.label ? config.label : undefined;
-  options.adornmentPosition = updateOption(options.adornmentPosition, {
-    value: 'start',
-  });
-
   const style = { ...config.style };
   const ref = config.ref ? { ...config.ref } : undefined;
 
@@ -52,7 +48,7 @@ export const PriceInput = (
   ];
 
   return component(
-    'PriceInput',
+    'DecimalInput',
     { options, style, ref, label, optionCategories: categories },
     children,
   );

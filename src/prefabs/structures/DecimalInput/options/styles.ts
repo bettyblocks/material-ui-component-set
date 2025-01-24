@@ -3,6 +3,7 @@ import {
   buttongroup,
   color,
   toggle,
+  variable,
 } from '@betty-blocks/component-sdk';
 
 export const styles = {
@@ -38,6 +39,29 @@ export const styles = {
       ['Filled', 'filled'],
     ],
     { value: 'outlined' },
+  ),
+
+  adornment: variable('Icon', {
+    value: ['€'],
+  }),
+
+  adornmentPosition: buttongroup(
+    'Icon position',
+    [
+      ['Start', 'start'],
+      ['End', 'end'],
+    ],
+    {
+      value: 'end',
+      configuration: {
+        condition: {
+          type: 'HIDE',
+          option: 'adornmentIcon',
+          comparator: 'EQ',
+          value: '',
+        },
+      },
+    },
   ),
 
   hideLabel: toggle('Hide label'),

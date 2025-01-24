@@ -51,29 +51,6 @@ export const options = {
     value: '2',
   }),
 
-  adornment: variable('Currency', {
-    value: ['€'],
-  }),
-
-  adornmentPosition: buttongroup(
-    'Currency position',
-    [
-      ['Start', 'start'],
-      ['End', 'end'],
-    ],
-    {
-      value: 'end',
-      configuration: {
-        condition: {
-          type: 'HIDE',
-          option: 'adornmentIcon',
-          comparator: 'EQ',
-          value: '',
-        },
-      },
-    },
-  ),
-
   showGroupSeparator: toggle('Show group (thousands) separator', {
     value: true,
   }),
