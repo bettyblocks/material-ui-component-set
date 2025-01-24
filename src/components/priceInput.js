@@ -66,6 +66,9 @@
       IconButton,
     } = window.MaterialUI.Core;
 
+    const SEPARATOR_COMMA = ',';
+    const SEPARATOR_DOT = '.';
+
     const { env, useText, Icon, generateUUID } = B;
     const isDev = env === 'dev';
     const [isDisabled, setIsDisabled] = useState(disabled);
@@ -128,26 +131,26 @@
       setHelper(message);
     };
 
+    const getSeparator = () => {
+      if (separator === SEPARATOR_COMMA) {
+        return SEPARATOR_DOT;
+      }
+      return SEPARATOR_COMMA;
+    };
+
     useEffect(() => {
-      const getSeparator = () => {
-        if (separator === ',') {
-          return '.';
-        }
-        return ',';
-      };
       const autoNumericInstance = new AutoNumeric(inputRef.current, {
         decimalPlaces: decimalScale,
         decimalCharacter: separator,
         digitGroupSeparator: showGroupSeparator ? getSeparator() : '',
         watchExternalChanges: true, // Enable real-time updates
-        formatOnPageLoad: true, // Format initial value
+        formatOnPageLoad: true,
       });
 
-      // Add event listener for AutoNumeric's internal changes
-      inputRef.current.addEventListener('autoNumeric:rawValueModified', (e) => {
-        const newValue = instance.getNumericString();
-        setCurrentValue(newValue);
-        debouncedOnChangeRef.current(newValue);
+      inputRef.current.addEventListener('autoNumeric:rawValueModified', () => {
+        const rawValue = autoNumericInstance.getNumericString();
+        setRawValue(rawValue);
+        debouncedOnChangeRef.current(rawValue);
       });
 
       return () => {
@@ -165,23 +168,26 @@
 
     if (!debouncedOnChangeRef.current) {
       debouncedOnChangeRef.current = debounce((newValue) => {
-        const formattedValue =
+        const rawValue =
           AutoNumeric.getAutoNumericElement(newValue).getNumericString();
-        B.triggerEvent('onChange', formattedValue);
+        B.triggerEvent('onChange', rawValue);
       }, debounceDelay);
     }
 
     const changeHandler = (event) => {
       const { target } = event;
       let { validity: validation } = target;
-      const { value: eventValue } = target;
 
       if (afterFirstInvalidation) {
         handleValidation(validation);
       }
 
-      setCurrentValue(eventValue);
-      debouncedOnChangeRef.current(eventValue);
+      const autoNumericInstance = AutoNumeric.getAutoNumericElement(target);
+      const rawValue = autoNumericInstance.getNumericString();
+      const formattedValue = autoNumericInstance.getFormatted();
+      setRawValue(rawValue);
+      setCurrentValue(formattedValue);
+      debouncedOnChangeRef.current(rawValue);
     };
 
     const blurHandler = (event) => {
@@ -190,10 +196,13 @@
 
       setAfterFirstInvalidation(!validation.valid);
       handleValidation(validation);
-      const formattedValue =
-        AutoNumeric.getAutoNumericElement(target).getNumericString();
+
+      const autoNumericInstance = AutoNumeric.getAutoNumericElement(target);
+      const rawValue = autoNumericInstance.getNumericString();
+      const formattedValue = autoNumericInstance.getFormatted();
+      setRawValue(rawValue);
       setCurrentValue(formattedValue);
-      B.triggerEvent('onBlur', formattedValue);
+      B.triggerEvent('onBlur', rawValue);
     };
 
     const invalidHandler = (event) => {
@@ -213,10 +222,16 @@
         inputRef.current.focus();
       }, 0);
 
-    B.defineFunction('Clear', () => setCurrentValue(''));
+    B.defineFunction('Clear', () => {
+      setCurrentValue('');
+      setRawValue('');
+    });
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
-    B.defineFunction('Reset', () => setCurrentValue(useText(value)));
+    B.defineFunction('Reset', () => {
+      setCurrentValue(useText(value));
+      setRawValue(useText(value));
+    });
     B.defineFunction('Focus', () => focusHandler());
 
     let InputCmp = Input;
@@ -278,7 +293,6 @@
         <InputCmp
           id={labelControlRef}
           inputRef={inputRef}
-          name={name}
           value={currentValue}
           type={inputType}
           multiline={multiline}
@@ -332,10 +346,15 @@
       </FormControl>
     );
 
-    return isDev ? (
-      <div className={classes.root}>{PriceFieldCmp}</div>
-    ) : (
-      PriceFieldCmp
+    if (isDev) {
+      return <div className={classes.root}>{PriceFieldCmp}</div>;
+    }
+
+    return (
+      <div>
+        <input type="hidden" name={name} value={rawValue} />
+        {PriceFieldCmp}
+      </div>
     );
   })(),
   styles: (B) => (t) => {
