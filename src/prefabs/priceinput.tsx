@@ -328,13 +328,10 @@ const attributes = {
   keywords: ['Form', 'input'],
 };
 
-const pattern = '[0-9]+(\\.[0-9][0-9]?)?';
-
 export default prefab('Price', attributes, beforeCreate, [
   PriceInput({
     label: 'Price field',
     inputLabel: 'Price',
     type: 'decimal',
-    pattern,
   }),
 ]);

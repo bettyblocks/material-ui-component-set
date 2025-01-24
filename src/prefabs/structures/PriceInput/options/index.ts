@@ -1,20 +1,18 @@
 import {
+  buttongroup,
   hideIf,
+  number,
   option,
   property,
   showIf,
-  text,
+  toggle,
   variable,
 } from '@betty-blocks/component-sdk';
-import { PartialBy } from '../../../../utils';
 import { advanced } from '../../TextInput/options/advanced';
-import { styles as defaultStyles } from '../../TextInput/options/styles';
-import { validation } from '../../TextInput/options/validation';
+import { styles as defaultStyles } from '../../PriceInput/options/styles';
+import { validation } from './validation';
 
 const styles = { ...defaultStyles };
-
-// TODO: make a typed function to omit keys from an object
-delete (<PartialBy<typeof styles, 'adornmentIcon'>>styles).adornmentIcon;
 
 export const options = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
@@ -38,12 +36,49 @@ export const options = {
   label: variable('Label', { value: [''] }),
   value: variable('Value', { value: [''] }),
 
-  ...validation,
+  separator: buttongroup(
+    'Decimal separator',
+    [
+      ['Comma (1.234,56)', ','],
+      ['Point (1,234.56)', '.'],
+    ],
+    {
+      value: ',',
+    },
+  ),
 
-  adornment: text('Currency', {
-    value: '€',
+  decimalScale: number('Scale', {
+    value: '2',
   }),
 
+  adornment: variable('Currency', {
+    value: ['€'],
+  }),
+
+  adornmentPosition: buttongroup(
+    'Currency position',
+    [
+      ['Start', 'start'],
+      ['End', 'end'],
+    ],
+    {
+      value: 'end',
+      configuration: {
+        condition: {
+          type: 'HIDE',
+          option: 'adornmentIcon',
+          comparator: 'EQ',
+          value: '',
+        },
+      },
+    },
+  ),
+
+  showGroupSeparator: toggle('Show group (thousands) separator', {
+    value: true,
+  }),
+
+  ...validation,
   ...styles,
   ...advanced,
 };
