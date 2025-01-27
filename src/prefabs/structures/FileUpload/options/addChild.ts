@@ -3,10 +3,14 @@ import {
   property,
   setVariableOption,
 } from '@betty-blocks/component-sdk';
-import { getKindsByType, InputType } from '../../../helpers/getKindsByType';
+import {
+  getAllowedKindsByType,
+  InputType,
+} from '../../../helpers/getAllowedKindsByType';
 
 export const addChildOptions = (type: InputType) => {
-  const { actionInputVariableKind, allowedInputKinds } = getKindsByType(type);
+  const { actionInputVariableKind, allowedInputKinds } =
+    getAllowedKindsByType(type);
 
   return optionTemplateOptions({
     property: property('Property', {

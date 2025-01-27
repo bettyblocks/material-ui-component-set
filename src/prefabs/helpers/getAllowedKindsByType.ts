@@ -112,7 +112,7 @@ const inputTypeToActionInputVariableKind = {
   url: TEXT,
 };
 
-export const getKindsByType = (type: InputType) => {
+export const getAllowedKindsByType = (type: InputType) => {
   const allowedKinds =
     inputTypeToAllowedKinds[type] || inputTypeToAllowedKinds.text;
 

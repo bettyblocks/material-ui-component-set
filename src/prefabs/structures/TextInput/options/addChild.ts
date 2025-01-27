@@ -6,11 +6,14 @@ import {
   setVariableOption,
   showIf,
 } from '@betty-blocks/component-sdk';
-import { getKindsByType, InputType } from '../../../helpers/getKindsByType';
+import {
+  getAllowedKindsByType,
+  InputType,
+} from '../../../helpers/getAllowedKindsByType';
 
 export const addChildOptions = (type: InputType) => {
   const { actionInputVariableKind, allowedKinds, allowedInputKinds } =
-    getKindsByType(type);
+    getAllowedKindsByType(type);
 
   return optionTemplateOptions({
     propertyBased: buttongroup(

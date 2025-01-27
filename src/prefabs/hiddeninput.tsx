@@ -11,7 +11,7 @@ import {
   hideIf,
   buttongroup,
 } from '@betty-blocks/component-sdk';
-import { getKindsByType } from './helpers/getKindsByType';
+import { getAllowedKindsByType } from './helpers/getAllowedKindsByType';
 
 const attributes = {
   category: 'FORM',
@@ -19,7 +19,8 @@ const attributes = {
   keywords: ['Form', 'input', 'hidden'],
 };
 
-const { allowedKinds, actionInputVariableKind } = getKindsByType('hidden');
+const { allowedKinds, actionInputVariableKind } =
+  getAllowedKindsByType('hidden');
 
 const options = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
