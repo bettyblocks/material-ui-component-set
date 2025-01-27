@@ -39,7 +39,6 @@
       maxLength,
       minvalue,
       maxvalue,
-      validationTypeMismatch = [''],
       validationValueMissing = [''],
       validationTooLong = [''],
       validationTooShort = [''],
@@ -48,7 +47,7 @@
       value,
       hideLabel,
       debounceDelay,
-      dataComponentAttribute = ['TextField'],
+      dataComponentAttribute = ['DecimalField'],
       required,
       separator,
       showGroupSeparator,
@@ -90,7 +89,6 @@
     const validMinvalue = minvalue || null;
     const validMaxvalue = maxvalue || null;
 
-    const typeMismatchMessage = useText(validationTypeMismatch);
     const valueMissingMessage = useText(validationValueMissing);
     const tooLongMessage = useText(validationTooLong);
     const tooShortMessage = useText(validationTooShort);
@@ -103,9 +101,6 @@
     const validationMessage = (validityObject) => {
       if (validityObject.valid) {
         return '';
-      }
-      if (validityObject.typeMismatch && typeMismatchMessage) {
-        return typeMismatchMessage;
       }
       if (validityObject.valueMissing && valueMissingMessage) {
         return valueMissingMessage;
@@ -233,18 +228,18 @@
     });
     B.defineFunction('Focus', () => focusHandler());
 
-    let InputCmp = Input;
+    let InputComponent = Input;
     if (variant === 'outlined') {
-      InputCmp = OutlinedInput;
+      InputComponent = OutlinedInput;
     } else if (variant === 'filled') {
-      InputCmp = FilledInput;
+      InputComponent = FilledInput;
     }
 
     const inputIcon = adornmentIcon;
     const hasIcon = inputIcon && inputIcon !== 'None';
     const hasAdornment = hasIcon || adornment;
 
-    const IconCmp = hasIcon && <Icon name={inputIcon} fontSize={size} />;
+    const IconComponent = hasIcon && <Icon name={inputIcon} fontSize={size} />;
 
     const iconButtonOptions = {
       edge: adornmentPosition,
@@ -263,7 +258,7 @@
       inputType = 'text';
     }
 
-    const PriceFieldCmp = (
+    const DecimalFieldComponent = (
       <FormControl
         classes={{
           root: `${classes.formControl} ${
@@ -289,7 +284,7 @@
             {labelText}
           </InputLabel>
         )}
-        <InputCmp
+        <InputComponent
           id={labelControlRef}
           inputRef={inputRef}
           value={currentValue}
@@ -308,7 +303,9 @@
             adornmentPosition === 'start' && (
               <InputAdornment position={adornmentPosition}>
                 {hasIcon ? (
-                  <IconButton {...iconButtonOptions}>{IconCmp}</IconButton>
+                  <IconButton {...iconButtonOptions}>
+                    {IconComponent}
+                  </IconButton>
                 ) : (
                   adornment
                 )}
@@ -320,7 +317,9 @@
             adornmentPosition === 'end' && (
               <InputAdornment position={adornmentPosition}>
                 {hasIcon ? (
-                  <IconButton {...iconButtonOptions}>{IconCmp}</IconButton>
+                  <IconButton {...iconButtonOptions}>
+                    {IconComponent}
+                  </IconButton>
                 ) : (
                   adornment
                 )}
@@ -346,13 +345,13 @@
     );
 
     if (isDev) {
-      return <div className={classes.root}>{PriceFieldCmp}</div>;
+      return <div className={classes.root}>{DecimalFieldComponent}</div>;
     }
 
     return (
       <div>
         <input type="hidden" name={name} value={rawValue} />
-        {PriceFieldCmp}
+        {DecimalFieldComponent}
       </div>
     );
   })(),
