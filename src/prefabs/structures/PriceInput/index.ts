@@ -22,10 +22,10 @@ export const PriceInput = (
       members: [
         'required',
         'validationValueMissing',
-        'minLength',
-        'validationTooShort',
-        'maxLength',
-        'validationTooLong',
+        'minValue',
+        'validationTooLow',
+        'maxValue',
+        'validationTooHigh',
       ],
     },
     {

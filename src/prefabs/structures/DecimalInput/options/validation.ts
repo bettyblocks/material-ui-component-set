@@ -16,14 +16,14 @@ export const validation = {
     },
   }),
 
-  minLength: number('Min length'),
-  validationTooShort: variable('Value too short message', {
-    value: ['This value is too short'],
+  minValue: number('Min value'),
+  validationTooLow: variable('Value too low message', {
+    value: ['This value is too low'],
   }),
 
-  maxLength: number('Max length'),
-  validationTooLong: variable('Value too long message', {
-    value: ['This value is too long'],
+  maxValue: number('Max value'),
+  validationTooHigh: variable('Value too high message', {
+    value: ['This value is too high'],
   }),
 
   autoComplete: toggle('Autocomplete', { value: false }),

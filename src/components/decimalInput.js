@@ -6,7 +6,7 @@
   dependencies: [
     {
       label: 'autoNumeric',
-      package: 'npm:autonumeric@4.5.4',
+      package: 'npm:autonumeric@4.10.6',
       imports: ['AutoNumeric'],
     },
   ],
@@ -35,15 +35,11 @@
       adornment,
       adornmentIcon,
       adornmentPosition,
-      minLength,
-      maxLength,
-      minvalue,
-      maxvalue,
+      minValue,
+      maxValue,
       validationValueMissing = [''],
-      validationTooLong = [''],
-      validationTooShort = [''],
-      validationBelowMinimum = [''],
-      validationAboveMaximum = [''],
+      validationTooLow = [''],
+      validationTooHigh = [''],
       value,
       hideLabel,
       debounceDelay,
@@ -72,57 +68,45 @@
     const isDev = env === 'dev';
     const [isDisabled, setIsDisabled] = useState(disabled);
     const [errorState, setErrorState] = useState(error);
-    const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
     const optionValue = useText(value);
     const [currentValue, setCurrentValue] = useState(optionValue);
     const [rawValue, setRawValue] = useState(optionValue);
-    const parsedLabel = useText(label);
-    const labelText = parsedLabel;
+    const labelText = useText(label);
     const debouncedOnChangeRef = useRef(null);
     const inputRef = useRef();
 
     const { current: labelControlRef } = useRef(generateUUID());
 
-    const validMinlength = minLength || null;
-    const validMaxlength = maxLength || null;
-    const validMinvalue = minvalue || null;
-    const validMaxvalue = maxvalue || null;
+    const validMinvalue = minValue || null;
+    const validMaxvalue = maxValue || null;
 
     const valueMissingMessage = useText(validationValueMissing);
-    const tooLongMessage = useText(validationTooLong);
-    const tooShortMessage = useText(validationTooShort);
-    const belowMinimumMessage = useText(validationBelowMinimum);
-    const aboveMaximumMessage = useText(validationAboveMaximum);
+    const belowMinimumMessage = useText(validationTooLow);
+    const aboveMaximumMessage = useText(validationTooHigh);
     const placeholderText = useText(placeholder);
     const helperTextResolved = useText(helperText);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
 
-    const validationMessage = (validityObject) => {
-      if (validityObject.valid) {
-        return '';
-      }
-      if (validityObject.valueMissing && valueMissingMessage) {
+    const validationMessage = () => {
+      if (required && rawValue === '' && valueMissingMessage) {
+        setErrorState(true);
         return valueMissingMessage;
       }
-      if (validityObject.tooLong && tooLongMessage) {
-        return tooLongMessage;
-      }
-      if (validityObject.tooShort && tooShortMessage) {
-        return tooShortMessage;
-      }
-      if (validityObject.rangeUnderflow && belowMinimumMessage) {
+      if (rawValue && rawValue < validMinvalue && belowMinimumMessage) {
+        setErrorState(true);
         return belowMinimumMessage;
       }
-      if (validityObject.rangeOverflow && aboveMaximumMessage) {
+      if (rawValue && rawValue > validMaxvalue && aboveMaximumMessage) {
+        setErrorState(true);
         return aboveMaximumMessage;
       }
-      return '';
+      setErrorState(false);
+      return helperTextResolved;
     };
 
-    const handleValidation = (validation) => {
-      setErrorState(!validation.valid);
-      const message = validationMessage(validation) || helperTextResolved;
+    const handleValidation = () => {
+      const message = validationMessage() || helperTextResolved;
       setHelper(message);
     };
 
@@ -140,6 +124,10 @@
         digitGroupSeparator: showGroupSeparator ? getSeparator() : '',
         watchExternalChanges: true, // Enable real-time updates
         formatOnPageLoad: true,
+        minimumValue: validMinvalue || '-10000000000000',
+        maximumValue: validMaxvalue || '10000000000000',
+        overrideMinMaxLimits: 'ignore',
+        onInvalidPaste: 'ignore',
       });
 
       inputRef.current.addEventListener('autoNumeric:rawValueModified', () => {
@@ -170,15 +158,13 @@
 
     const changeHandler = (event) => {
       const { target } = event;
-      const { validity: validation } = target;
 
-      if (afterFirstInvalidation) {
-        handleValidation(validation);
-      }
+      handleValidation();
 
       const autoNumericInstance = AutoNumeric.getAutoNumericElement(target);
       const unformattedValue = autoNumericInstance.getNumericString();
       const formattedValue = autoNumericInstance.getFormatted();
+
       setRawValue(unformattedValue);
       setCurrentValue(formattedValue);
       debouncedOnChangeRef.current(unformattedValue);
@@ -186,14 +172,13 @@
 
     const blurHandler = (event) => {
       const { target } = event;
-      const { validity: validation } = target;
 
-      setAfterFirstInvalidation(!validation.valid);
-      handleValidation(validation);
+      handleValidation();
 
       const autoNumericInstance = AutoNumeric.getAutoNumericElement(target);
       const unformattedValue = autoNumericInstance.getNumericString();
       const formattedValue = autoNumericInstance.getFormatted();
+
       setRawValue(unformattedValue);
       setCurrentValue(formattedValue);
       B.triggerEvent('onBlur', unformattedValue);
@@ -201,14 +186,7 @@
 
     const invalidHandler = (event) => {
       event.preventDefault();
-      const {
-        target: {
-          validity,
-          validity: { valid: isValid },
-        },
-      } = event;
-      setAfterFirstInvalidation(!isValid);
-      handleValidation(validity);
+      handleValidation();
     };
 
     const focusHandler = () =>
@@ -327,10 +305,6 @@
             )
           }
           inputProps={{
-            minLength: validMinlength,
-            maxLength: validMaxlength,
-            min: validMinvalue,
-            max: validMaxvalue,
             tabIndex: isDev ? -1 : undefined,
             className: includeStyling(),
           }}
@@ -350,7 +324,15 @@
 
     return (
       <div>
-        <input type="hidden" name={name} value={rawValue} />
+        <input
+          type="number"
+          name={name}
+          value={rawValue}
+          min={validMinvalue}
+          max={validMaxvalue}
+          required={required}
+          style={{ display: 'none' }}
+        />
         {DecimalFieldComponent}
       </div>
     );

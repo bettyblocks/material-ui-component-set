@@ -17,10 +17,10 @@ export const DecimalInput = (
       members: [
         'required',
         'validationValueMissing',
-        'minLength',
-        'validationTooShort',
-        'maxLength',
-        'validationTooLong',
+        'minValue',
+        'validationTooLow',
+        'maxValue',
+        'validationTooHigh',
       ],
     },
     {
