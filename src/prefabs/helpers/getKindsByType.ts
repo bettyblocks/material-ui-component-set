@@ -31,7 +31,7 @@ const inputTypeToAllowedKinds = {
   checkboxGroup: ['HAS_AND_BELONGS_TO_MANY', 'HAS_MANY'],
   date: ['DATE'],
   datetime: ['DATE_TIME'],
-  decimal: ['DECIMAL'],
+  decimal: ['DECIMAL', 'NUMBER'],
   email: ['EMAIL_ADDRESS'],
   file: ['FILE'],
   hidden: [
@@ -59,7 +59,33 @@ const inputTypeToAllowedKinds = {
   url: ['URL'],
 };
 
-const { TEXT, NUMBER, CHECKBOX, ARRAY } = CreateActionInputVariableKind;
+const { TEXT, NUMBER, CHECKBOX, ARRAY, OBJECT } = CreateActionInputVariableKind;
+const allowedActionInputVariableKinds = {
+  autocomplete: [TEXT, NUMBER],
+  checkbox: [CHECKBOX],
+  checkboxGroup: [ARRAY],
+  date: [TEXT],
+  datetime: [TEXT],
+  decimal: [NUMBER],
+  email: [TEXT],
+  file: [TEXT],
+  hidden: [CHECKBOX, NUMBER, TEXT],
+  iban: [TEXT],
+  image: [TEXT],
+  multiAutocomplete: [ARRAY],
+  number: [NUMBER],
+  password: [TEXT],
+  phone: [TEXT],
+  price: [NUMBER],
+  radio: [TEXT, NUMBER, OBJECT],
+  rating: [NUMBER],
+  richText: [TEXT],
+  select: [TEXT, NUMBER],
+  text: [TEXT],
+  time: [TEXT],
+  url: [TEXT],
+};
+
 const inputTypeToActionInputVariableKind = {
   autocomplete: NUMBER,
   checkbox: CHECKBOX,
@@ -94,5 +120,6 @@ export const getKindsByType = (type: InputType) => {
     inputTypeToActionInputVariableKind[type] ||
     inputTypeToActionInputVariableKind.text;
 
-  return { allowedKinds, actionInputVariableKind };
+  const allowedInputKinds = allowedActionInputVariableKinds[type] || undefined;
+  return { allowedKinds, actionInputVariableKind, allowedInputKinds };
 };

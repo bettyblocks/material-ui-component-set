@@ -9,7 +9,8 @@ import {
 import { getKindsByType, InputType } from '../../../helpers/getKindsByType';
 
 export const addChildOptions = (type: InputType) => {
-  const { allowedKinds, actionInputVariableKind } = getKindsByType(type);
+  const { allowedKinds, actionInputVariableKind, allowedInputKinds } =
+    getKindsByType(type);
 
   return optionTemplateOptions({
     propertyBased: buttongroup(
@@ -39,6 +40,9 @@ export const addChildOptions = (type: InputType) => {
       label: 'Action input variable',
       value: '',
       configuration: {
+        ...(allowedInputKinds
+          ? { allowedKinds: allowedInputKinds }
+          : undefined),
         condition: showIf('propertyBased', 'EQ', 'false'),
         createActionInputVariable: {
           type: actionInputVariableKind,

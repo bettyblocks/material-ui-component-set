@@ -6,13 +6,15 @@ import {
 import { getKindsByType, InputType } from '../../../helpers/getKindsByType';
 
 export const addChildOptions = (type: InputType) => {
-  const { actionInputVariableKind, allowedKinds } = getKindsByType(type);
+  const { actionInputVariableKind, allowedInputKinds } = getKindsByType(type);
 
   return optionTemplateOptions({
     property: property('Property', {
       value: '',
       configuration: {
-        allowedKinds,
+        ...(allowedInputKinds
+          ? { allowedKinds: allowedInputKinds }
+          : undefined),
         createActionInputVariable: {
           type: actionInputVariableKind,
         },
