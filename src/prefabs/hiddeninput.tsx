@@ -91,7 +91,7 @@ const optionEvents = {
       setActionJSInputVariableOption({ target: 'actionVariableId' }),
     ],
     actionVariableId: [
-      setVariableOption({ target: 'value', format: 'static' }),
+      setVariableOption({ target: 'label', format: 'static' }),
     ],
   },
 };
