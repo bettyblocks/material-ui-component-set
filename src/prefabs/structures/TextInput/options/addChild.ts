@@ -7,7 +7,6 @@ import {
   setOptionToDefaultValue,
   setVariableOption,
   showIf,
-  variable,
 } from '@betty-blocks/component-sdk';
 import {
   getAllowedKindsByType,

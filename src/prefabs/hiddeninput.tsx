@@ -86,12 +86,14 @@ const optionEvents = {
       setOptionToDefaultValue({ target: 'value' }),
       setOptionToDefaultValue({ target: 'label' }),
     ],
-    property:  [
-      setVariableOption({target: 'value', format: 'propertyValue'}),
+    property: [
+      setVariableOption({ target: 'value', format: 'propertyValue' }),
       setActionJSInputVariableOption({ target: 'actionVariableId' }),
     ],
-    actionVariableId: [setVariableOption({target: 'value', format: 'static'})],
-  }
+    actionVariableId: [
+      setVariableOption({ target: 'value', format: 'static' }),
+    ],
+  },
 };
 
 const hooks = {};
