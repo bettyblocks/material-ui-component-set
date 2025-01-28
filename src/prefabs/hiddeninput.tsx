@@ -79,13 +79,13 @@ const addChildOptions = optionTemplateOptions({
 });
 
 const optionEvents = {
-  propertyBased: [
-    setOptionToDefaultValue({ target: 'property' }),
-    setOptionToDefaultValue({ target: 'actionVariableId' }),
-    setOptionToDefaultValue({ target: 'value' }),
-    setOptionToDefaultValue({ target: 'label' }),
-  ],
   onChange: {
+    propertyBased: [
+      setOptionToDefaultValue({ target: 'property' }),
+      setOptionToDefaultValue({ target: 'actionVariableId' }),
+      setOptionToDefaultValue({ target: 'value' }),
+      setOptionToDefaultValue({ target: 'label' }),
+    ],
     property:  [
       setVariableOption({target: 'value', format: 'propertyValue'}),
       setActionJSInputVariableOption({ target: 'actionVariableId' }),
