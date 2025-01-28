@@ -3,13 +3,19 @@ import {
   option,
   optionTemplateOptions,
   property,
+  setActionJSInputVariableOption,
+  setOptionToDefaultValue,
   setVariableOption,
   showIf,
 } from '@betty-blocks/component-sdk';
-import { getKindsByType, InputType } from '../../../helpers/getKindsByType';
+import {
+  getAllowedKindsByType,
+  InputType,
+} from '../../../helpers/getAllowedKindsByType';
 
 export const addChildOptions = (type: InputType) => {
-  const { actionInputVariableKind, allowedKinds } = getKindsByType(type);
+  const { actionInputVariableKind, allowedKinds, allowedInputKinds } =
+    getAllowedKindsByType(type);
 
   return optionTemplateOptions({
     propertyBased: buttongroup(
@@ -20,7 +26,6 @@ export const addChildOptions = (type: InputType) => {
       ],
       { value: 'true' },
     ),
-
     property: property('Property', {
       value: '',
       configuration: {
@@ -37,7 +42,9 @@ export const addChildOptions = (type: InputType) => {
       label: 'Action input variable',
       value: '',
       configuration: {
-        allowedKinds,
+        ...(allowedInputKinds
+          ? { allowedKinds: allowedInputKinds }
+          : undefined),
         condition: showIf('propertyBased', 'EQ', 'false'),
         createActionInputVariable: {
           type: actionInputVariableKind,
@@ -49,13 +56,19 @@ export const addChildOptions = (type: InputType) => {
 
 export const optionEvents = {
   onChange: {
+    propertyBased: [
+      setOptionToDefaultValue({ target: 'property' }),
+      setOptionToDefaultValue({ target: 'actionVariableId' }),
+      setOptionToDefaultValue({ target: 'value' }),
+      setOptionToDefaultValue({ target: 'label' }),
+    ],
     property: [
       setVariableOption({ target: 'value', format: 'propertyValue' }),
       setVariableOption({ target: 'label', format: 'propertyLabel' }),
+      setActionJSInputVariableOption({ target: 'actionVariableId' }),
     ],
     actionVariableId: [
-      setVariableOption({ target: 'value', format: 'propertyValue' }),
-      setVariableOption({ target: 'label', format: 'propertyLabel' }),
+      setVariableOption({ target: 'label', format: 'static' }),
     ],
   },
 };

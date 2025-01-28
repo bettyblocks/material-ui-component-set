@@ -1,18 +1,26 @@
 import {
   optionTemplateOptions,
   property,
+  setActionJSInputVariableOption,
+  setPropertyOption,
   setVariableOption,
 } from '@betty-blocks/component-sdk';
-import { getKindsByType, InputType } from '../../../helpers/getKindsByType';
+import {
+  getAllowedKindsByType,
+  InputType,
+} from '../../../helpers/getAllowedKindsByType';
 
 export const addChildOptions = (type: InputType) => {
-  const { actionInputVariableKind, allowedKinds } = getKindsByType(type);
+  const { actionInputVariableKind, allowedInputKinds } =
+    getAllowedKindsByType(type);
 
   return optionTemplateOptions({
     property: property('Property', {
       value: '',
       configuration: {
-        allowedKinds,
+        ...(allowedInputKinds
+          ? { allowedKinds: allowedInputKinds }
+          : undefined),
         createActionInputVariable: {
           type: actionInputVariableKind,
         },
@@ -24,8 +32,9 @@ export const addChildOptions = (type: InputType) => {
 export const optionEvents = {
   onChange: {
     property: [
-      setVariableOption({ target: 'value', format: 'propertyValue' }),
+      setPropertyOption({ target: 'value' }),
       setVariableOption({ target: 'label', format: 'propertyLabel' }),
+      setActionJSInputVariableOption({ target: 'actionVariableId' }),
     ],
   },
 };

@@ -1,5 +1,6 @@
 import {
   PrefabReference,
+  setActionJSInputVariableOption,
   setVariableOption,
 } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
@@ -36,10 +37,10 @@ export const PriceInput = (
               property: [
                 setVariableOption({ target: 'value', format: 'propertyValue' }),
                 setVariableOption({ target: 'label', format: 'propertyLabel' }),
+                setActionJSInputVariableOption({ target: 'actionVariableId' }),
               ],
               actionVariableId: [
-                setVariableOption({ target: 'value', format: 'propertyValue' }),
-                setVariableOption({ target: 'label', format: 'propertyLabel' }),
+                setVariableOption({ target: 'label', format: 'static' }),
               ],
             },
           },
