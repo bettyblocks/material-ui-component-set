@@ -89,24 +89,22 @@
     const dataComponentAttributeValue = useText(dataComponentAttribute);
 
     const validationMessage = () => {
-      if (required && rawValue === '' && valueMissingMessage) {
-        setErrorState(true);
-        return valueMissingMessage;
+      let errorMessage = null;
+
+      if (required && rawValue === '') {
+        errorMessage = valueMissingMessage;
+      } else if (validMinvalue && rawValue < validMinvalue) {
+        errorMessage = belowMinimumMessage;
+      } else if (validMaxvalue && rawValue > validMaxvalue) {
+        errorMessage = aboveMaximumMessage;
       }
-      if (rawValue && rawValue < validMinvalue && belowMinimumMessage) {
-        setErrorState(true);
-        return belowMinimumMessage;
-      }
-      if (rawValue && rawValue > validMaxvalue && aboveMaximumMessage) {
-        setErrorState(true);
-        return aboveMaximumMessage;
-      }
-      setErrorState(false);
-      return helperTextResolved;
+
+      setErrorState(!!errorMessage);
+      return errorMessage || helperTextResolved;
     };
 
     const handleValidation = () => {
-      const message = validationMessage() || helperTextResolved;
+      const message = validationMessage();
       setHelper(message);
     };
 
@@ -124,8 +122,6 @@
         digitGroupSeparator: showGroupSeparator ? getSeparator() : '',
         watchExternalChanges: true, // Enable real-time updates
         formatOnPageLoad: true,
-        minimumValue: validMinvalue || '-10000000000000',
-        maximumValue: validMaxvalue || '10000000000000',
         overrideMinMaxLimits: 'ignore',
         onInvalidPaste: 'ignore',
       });
@@ -156,7 +152,7 @@
       }, debounceDelay);
     }
 
-    const changeHandler = (event) => {
+    const handleInputEvent = (event, isBlur = false) => {
       const { target } = event;
 
       handleValidation();
@@ -167,22 +163,16 @@
 
       setRawValue(unformattedValue);
       setCurrentValue(formattedValue);
-      debouncedOnChangeRef.current(unformattedValue);
+
+      if (isBlur) {
+        B.triggerEvent('onBlur', unformattedValue);
+      } else {
+        debouncedOnChangeRef.current(unformattedValue);
+      }
     };
 
-    const blurHandler = (event) => {
-      const { target } = event;
-
-      handleValidation();
-
-      const autoNumericInstance = AutoNumeric.getAutoNumericElement(target);
-      const unformattedValue = autoNumericInstance.getNumericString();
-      const formattedValue = autoNumericInstance.getFormatted();
-
-      setRawValue(unformattedValue);
-      setCurrentValue(formattedValue);
-      B.triggerEvent('onBlur', unformattedValue);
-    };
+    const changeHandler = (event) => handleInputEvent(event, false);
+    const blurHandler = (event) => handleInputEvent(event, true);
 
     const invalidHandler = (event) => {
       event.preventDefault();
