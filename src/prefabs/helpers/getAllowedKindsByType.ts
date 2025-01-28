@@ -31,7 +31,7 @@ const inputTypeToAllowedKinds = {
   checkboxGroup: ['HAS_AND_BELONGS_TO_MANY', 'HAS_MANY'],
   date: ['DATE'],
   datetime: ['DATE_TIME'],
-  decimal: ['DECIMAL', 'NUMBER'],
+  decimal: ['DECIMAL'],
   email: ['EMAIL_ADDRESS'],
   file: ['FILE'],
   hidden: [
@@ -51,7 +51,7 @@ const inputTypeToAllowedKinds = {
   phone: ['PHONE_NUMBER'],
   price: ['INTEGER', 'PRICE', 'PRICE_EXPRESSION'],
   radio: ['LIST', 'BELONGS_TO', 'OBJECT'],
-  rating: ['DECIMAL'],
+  rating: ['DECIMAL', 'NUMBER'],
   richText: ['RICH_TEXT'],
   select: ['LIST', 'BELONGS_TO'],
   text: ['TEXT', 'URL', 'IBAN', 'STRING'],
