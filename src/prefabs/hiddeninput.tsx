@@ -10,6 +10,8 @@ import {
   property,
   hideIf,
   buttongroup,
+  setOptionToDefaultValue,
+  setActionJSInputVariableOption,
 } from '@betty-blocks/component-sdk';
 import { getAllowedKindsByType } from './helpers/getAllowedKindsByType';
 
@@ -77,12 +79,19 @@ const addChildOptions = optionTemplateOptions({
 });
 
 const optionEvents = {
+  propertyBased: [
+    setOptionToDefaultValue({ target: 'property' }),
+    setOptionToDefaultValue({ target: 'actionVariableId' }),
+    setOptionToDefaultValue({ target: 'value' }),
+    setOptionToDefaultValue({ target: 'label' }),
+  ],
   onChange: {
-    property: [setVariableOption({ target: 'value', format: 'propertyValue' })],
-    actionVariableId: [
-      setVariableOption({ target: 'value', format: 'propertyValue' }),
+    property:  [
+      setVariableOption({target: 'value', format: 'propertyValue'}),
+      setActionJSInputVariableOption({ target: 'actionVariableId' }),
     ],
-  },
+    actionVariableId: [setVariableOption({target: 'value', format: 'static'})],
+  }
 };
 
 const hooks = {};

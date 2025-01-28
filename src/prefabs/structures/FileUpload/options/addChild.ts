@@ -1,6 +1,8 @@
 import {
   optionTemplateOptions,
   property,
+  setActionJSInputVariableOption,
+  setPropertyOption,
   setVariableOption,
 } from '@betty-blocks/component-sdk';
 import {
@@ -30,8 +32,9 @@ export const addChildOptions = (type: InputType) => {
 export const optionEvents = {
   onChange: {
     property: [
-      setVariableOption({ target: 'value', format: 'propertyValue' }),
+      setPropertyOption({ target: 'value' }),
       setVariableOption({ target: 'label', format: 'propertyLabel' }),
+      setActionJSInputVariableOption({ target: 'actionVariableId' }),
     ],
   },
 };
