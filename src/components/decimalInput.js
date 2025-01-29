@@ -120,21 +120,24 @@
         decimalPlaces: decimalScale,
         decimalCharacter: separator,
         digitGroupSeparator: showGroupSeparator ? getSeparator() : '',
-        watchExternalChanges: true, // Enable real-time updates
         formatOnPageLoad: true,
         overrideMinMaxLimits: 'ignore',
-        onInvalidPaste: 'ignore',
       });
+
+      autoNumericInstance.set(optionValue);
+      setRawValue(autoNumericInstance.getNumericString());
+      setCurrentValue(autoNumericInstance.getFormatted());
 
       inputRef.current.addEventListener('autoNumeric:rawValueModified', () => {
         setRawValue(autoNumericInstance.getNumericString());
+        setCurrentValue(autoNumericInstance.getFormatted());
         debouncedOnChangeRef.current(rawValue);
       });
 
       return () => {
         autoNumericInstance.remove();
       };
-    }, []);
+    }, [optionValue, decimalScale, separator, showGroupSeparator]);
 
     const debounce =
       (func, delay) =>
