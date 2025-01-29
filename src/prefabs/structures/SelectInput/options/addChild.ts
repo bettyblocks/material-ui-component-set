@@ -4,6 +4,7 @@ import {
   optionTemplateOptions,
   property,
   setActionJSInputVariableOption,
+  setModelOption,
   setOptionToDefaultValue,
   setVariableOption,
   showIf,
@@ -64,11 +65,13 @@ export const optionEvents = {
       setOptionToDefaultValue({ target: 'actionVariableId' }),
       setOptionToDefaultValue({ target: 'value' }),
       setOptionToDefaultValue({ target: 'label' }),
+      setOptionToDefaultValue({ target: 'model' }),
     ],
     property: [
       setVariableOption({ target: 'value', format: 'propertyValue' }),
       setVariableOption({ target: 'label', format: 'propertyLabel' }),
       setActionJSInputVariableOption({ target: 'actionVariableId' }),
+      setModelOption({ target: 'model' }),
     ],
     actionVariableId: [
       setVariableOption({ target: 'label', format: 'static' }),
