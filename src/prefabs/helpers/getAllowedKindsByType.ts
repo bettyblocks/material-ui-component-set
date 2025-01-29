@@ -59,9 +59,9 @@ const inputTypeToAllowedKinds = {
   url: ['URL'],
 };
 
-const { TEXT, NUMBER, CHECKBOX, ARRAY, OBJECT } = CreateActionInputVariableKind;
+const { TEXT, NUMBER, CHECKBOX, ARRAY } = CreateActionInputVariableKind;
 const allowedActionInputVariableKinds = {
-  autocomplete: [TEXT, NUMBER],
+  autocomplete: [NUMBER],
   checkbox: [CHECKBOX],
   checkboxGroup: [ARRAY],
   date: [TEXT],
@@ -77,10 +77,10 @@ const allowedActionInputVariableKinds = {
   password: [TEXT],
   phone: [TEXT],
   price: [NUMBER],
-  radio: [TEXT, NUMBER, OBJECT],
+  radio: [NUMBER],
   rating: [NUMBER],
   richText: [TEXT],
-  select: [TEXT, NUMBER],
+  select: [NUMBER],
   text: [TEXT],
   time: [TEXT],
   url: [TEXT],
