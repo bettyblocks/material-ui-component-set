@@ -11,7 +11,7 @@ import {
 } from '../../../helpers/getAllowedKindsByType';
 
 export const addChildOptions = (type: InputType) => {
-  const { actionInputVariableKind, allowedInputKinds } =
+  const { actionInputVariableKind, allowedInputKinds, allowedKinds } =
     getAllowedKindsByType(type);
 
   return optionTemplateOptions({
@@ -21,6 +21,7 @@ export const addChildOptions = (type: InputType) => {
         ...(allowedInputKinds
           ? { allowedKinds: allowedInputKinds }
           : undefined),
+        allowedKinds,
         createActionInputVariable: {
           type: actionInputVariableKind,
         },
