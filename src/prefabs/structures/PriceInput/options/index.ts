@@ -5,6 +5,7 @@ import {
   option,
   property,
   showIf,
+  text,
   toggle,
   variable,
 } from '@betty-blocks/component-sdk';
@@ -51,12 +52,12 @@ export const options = {
     value: '2',
   }),
 
-  showGroupSeparator: toggle('Show group (thousands) separator', {
-    value: true,
+  adornment: text('Currency', {
+    value: '€',
   }),
 
-  adornment: variable('Currency', {
-    value: ['€'],
+  showGroupSeparator: toggle('Show group (thousands) separator', {
+    value: true,
   }),
 
   adornmentPosition: buttongroup(
