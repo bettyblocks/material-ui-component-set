@@ -56,10 +56,6 @@ export const options = {
     value: '€',
   }),
 
-  showGroupSeparator: toggle('Show group (thousands) separator', {
-    value: true,
-  }),
-
   adornmentPosition: buttongroup(
     'Currency position',
     [
@@ -78,6 +74,10 @@ export const options = {
       },
     },
   ),
+
+  showGroupSeparator: toggle('Show group (thousands) separator', {
+    value: true,
+  }),
 
   ...validation,
   ...styles,
