@@ -1,19 +1,14 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
-import { updateOption } from '../../../utils';
 import { options } from './options';
 import { Configuration } from '../Configuration';
 
-export const PriceInput = (
+export const DecimalInput = (
   config: Configuration,
   children: PrefabReference[] = [],
 ) => {
   const label = config.label ? config.label : undefined;
   const style = { ...config.style };
   const ref = config.ref ? { ...config.ref } : undefined;
-
-  options.adornmentPosition = updateOption(options.adornmentPosition, {
-    value: 'start',
-  });
 
   const categories = [
     {
