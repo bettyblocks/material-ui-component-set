@@ -1,3 +1,16 @@
+# [2.202.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.201.0...v2.202.0) (2025-01-30)
+
+
+### Bug Fixes
+
+* set default right value for boolean type to false ([5f8eeb3](https://github.com/bettyblocks/material-ui-component-set/commit/5f8eeb3e65f86286df8f3ef59f05761610f72abe))
+* show value correctly in design time ([5340dfc](https://github.com/bettyblocks/material-ui-component-set/commit/5340dfcb8987f57d5a499e92aca2560609f82188))
+
+
+### Features
+
+* add initial price input with autonumeric ([e96ec36](https://github.com/bettyblocks/material-ui-component-set/commit/e96ec36f989009be5f0f6d95e11e24da27ee59d2))
+
 ## [2.201.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.201.0...v2.201.1) (2025-01-24)
 
 
