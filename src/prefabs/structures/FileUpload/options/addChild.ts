@@ -22,6 +22,7 @@ export const addChildOptions = (type: InputType) => {
           ? { allowedKinds: allowedInputKinds }
           : undefined),
         allowedKinds,
+        allowFormatting: false,
         createActionInputVariable: {
           type: actionInputVariableKind,
         },

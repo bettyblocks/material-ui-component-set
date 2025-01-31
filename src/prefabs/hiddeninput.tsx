@@ -36,6 +36,7 @@ const options = {
     value: '',
     configuration: {
       allowedKinds,
+      allowFormatting: false,
       disabled: true,
       condition: hideIf('property', 'EQ', ''),
     },
