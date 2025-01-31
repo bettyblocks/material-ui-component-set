@@ -5,7 +5,6 @@ import {
   option,
   property,
   showIf,
-  text,
   toggle,
   variable,
 } from '@betty-blocks/component-sdk';
