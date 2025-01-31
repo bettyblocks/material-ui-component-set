@@ -137,7 +137,7 @@
       return () => {
         autoNumericInstance.remove();
       };
-    }, [optionValue, decimalScale, separator, showGroupSeparator]);
+    }, [optionValue]);
 
     const debounce =
       (func, delay) =>
