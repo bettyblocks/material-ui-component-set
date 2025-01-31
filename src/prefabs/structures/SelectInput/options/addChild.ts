@@ -34,6 +34,7 @@ export const addChildOptions = (type: InputType) => {
       value: '',
       configuration: {
         allowedKinds,
+        allowFormatting: false,
         allowRelations: true,
         condition: showIf('propertyBased', 'EQ', 'true'),
         createActionInputVariable: {

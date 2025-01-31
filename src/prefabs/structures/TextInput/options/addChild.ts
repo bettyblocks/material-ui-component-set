@@ -30,6 +30,7 @@ export const addChildOptions = (type: InputType) => {
       value: '',
       configuration: {
         allowedKinds,
+        allowFormatting: false,
         disabledNames: ['updated_at', 'created_at'],
         condition: showIf('propertyBased', 'EQ', 'true'),
         createActionInputVariable: {
