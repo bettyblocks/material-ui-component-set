@@ -52,8 +52,8 @@ export const options = {
     value: '2',
   }),
 
-  adornment: text('Currency', {
-    value: '€',
+  adornment: variable('Currency', {
+    value: ['€'],
   }),
 
   adornmentPosition: buttongroup(

@@ -87,6 +87,7 @@
     const placeholderText = useText(placeholder);
     const helperTextResolved = useText(helperText);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
+    const adornmentValue = useText(adornment);
 
     const validationMessage = () => {
       let errorMessage = null;
@@ -278,7 +279,7 @@
                     {IconComponent}
                   </IconButton>
                 ) : (
-                  adornment
+                  adornmentValue
                 )}
               </InputAdornment>
             )
@@ -292,7 +293,7 @@
                     {IconComponent}
                   </IconButton>
                 ) : (
-                  adornment
+                  adornmentValue
                 )}
               </InputAdornment>
             )
