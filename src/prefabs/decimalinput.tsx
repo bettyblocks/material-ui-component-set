@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
-import { TextInput } from './structures/TextInput';
+import { DecimalInput } from './structures/DecimalInput';
 
 const beforeCreate = ({
   close,
@@ -321,10 +321,9 @@ const attributes = {
 };
 
 export default prefab('Decimal', attributes, beforeCreate, [
-  TextInput({
+  DecimalInput({
     label: 'Decimal field',
     inputLabel: 'Decimal',
     type: 'decimal',
-    pattern: '^\\d+(\\.\\d{1,2})?$',
   }),
 ]);

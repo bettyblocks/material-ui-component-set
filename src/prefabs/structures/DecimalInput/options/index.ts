@@ -10,7 +10,7 @@ import {
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../TextInput/options/advanced';
 import { styles as defaultStyles } from './styles';
-import { validation } from '../../DecimalInput/options/validation';
+import { validation } from './validation';
 
 const styles = { ...defaultStyles };
 
@@ -50,32 +50,6 @@ export const options = {
   decimalScale: number('Scale', {
     value: '2',
   }),
-
-  adornment: variable('Currency', {
-    value: ['€'],
-    configuration: {
-      allowedKinds: ['STRING'],
-    },
-  }),
-
-  adornmentPosition: buttongroup(
-    'Currency position',
-    [
-      ['Start', 'start'],
-      ['End', 'end'],
-    ],
-    {
-      value: 'end',
-      configuration: {
-        condition: {
-          type: 'HIDE',
-          option: 'adornmentIcon',
-          comparator: 'EQ',
-          value: '',
-        },
-      },
-    },
-  ),
 
   showGroupSeparator: toggle('Show group (thousands) separator', {
     value: true,
