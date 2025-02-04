@@ -5,7 +5,6 @@ import {
   option,
   property,
   showIf,
-  text,
   toggle,
   variable,
 } from '@betty-blocks/component-sdk';
@@ -52,8 +51,11 @@ export const options = {
     value: '2',
   }),
 
-  adornment: text('Currency', {
-    value: '€',
+  adornment: variable('Currency', {
+    value: ['€'],
+    configuration: {
+      allowedKinds: ['STRING'],
+    },
   }),
 
   adornmentPosition: buttongroup(
