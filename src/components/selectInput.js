@@ -37,7 +37,7 @@
       useRelation,
       useText,
     } = B;
-    const { TextField, MenuItem } = window.MaterialUI.Core;
+    const { TextField, MenuItem, FormControl } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
@@ -337,7 +337,7 @@
     };
 
     const SelectCmp = (
-      <>
+      <FormControl fullWidth={fullWidth}>
         <TextField
           id={actionVariableId}
           InputLabelProps={{ htmlFor: labelControlRef }}
@@ -353,7 +353,6 @@
             }`,
           }}
           variant={variant}
-          fullWidth={fullWidth}
           onChange={handleChange}
           onBlur={validationHandler}
           inputProps={{
@@ -389,7 +388,7 @@
           required={required}
           value={placeholderLabelText === currentValue ? '' : currentValue}
         />
-      </>
+      </FormControl>
     );
 
     return isDev ? <div className={classes.root}>{SelectCmp}</div> : SelectCmp;

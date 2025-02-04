@@ -113,8 +113,6 @@
       floatLabel,
     } = options;
     const isDev = env === 'dev';
-    const optionValue = useText(valueProp, { rawValue: true });
-    const [currentValue, setCurrentValue] = useState(optionValue);
     const [valueKey, setValueKey] = useState(0);
     const labelText = useText(label);
     const [showDropdown, setShowDropdown] = useState(false);
@@ -123,6 +121,14 @@
     const placeholderText = useText(placeholder);
     const helperTextResolved = useText(helperText);
     const { current: labelControlRef } = useRef(generateUUID());
+
+    const sanitizeHTML = (rawString) => {
+      // Replace all the whitespace between tags with nothing. Replacement is done when there is ONLY whitespace
+      return rawString.toString().trim().replace(/>\s+</g, '><');
+    };
+
+    const optionValue = sanitizeHTML(useText(valueProp));
+    const [currentValue, setCurrentValue] = useState(optionValue);
 
     useEffect(() => {
       setCurrentValue(optionValue);
@@ -303,7 +309,6 @@
       UL: (el) => ({ type: 'bulleted-list', align: el.getAttribute('align') }),
     };
 
-    // COMPAT: `B` is omitted here because Google Docs uses `<b>` in weird ways.
     const TEXT_TAGS = {
       CODE: () => ({ code: true }),
       DEL: () => ({ strikethrough: true }),
@@ -319,9 +324,10 @@
       typeof window !== 'undefined' &&
       /Mac|iPod|iPhone|iPad/.test(window.navigator.platform);
 
-    const deserialize = (el) => {
+    const deserialize = (el, markAttributes = {}) => {
       if (el.nodeType === 3) {
-        return el.textContent;
+        // Node is a TEXT;
+        return jsx('text', markAttributes, el.textContent);
       }
       if (el.nodeType !== 1) {
         return null;
@@ -331,6 +337,7 @@
       }
 
       const { nodeName } = el;
+      let nodeAttributes = { ...markAttributes };
       let parent = el;
 
       if (
@@ -341,29 +348,28 @@
         // eslint-disable-next-line prefer-destructuring
         parent = el.childNodes[0];
       }
-      let children = Array.from(parent.childNodes).map(deserialize).flat();
+
+      // define attributes for text markup
+      if (TEXT_TAGS[nodeName]) {
+        nodeAttributes = { ...nodeAttributes, ...TEXT_TAGS[nodeName](el) };
+      }
+
+      const children = Array.from(parent.childNodes).flatMap((node) =>
+        deserialize(node, nodeAttributes),
+      );
 
       if (children.length === 0) {
-        children = [{ text: '' }];
-      }
-
-      if (ELEMENT_TAGS[nodeName]) {
-        const attrs = ELEMENT_TAGS[nodeName](el);
-        return jsx('element', attrs, children);
-      }
-
-      if (TEXT_TAGS[nodeName]) {
-        const attrs = TEXT_TAGS[nodeName](el);
-        return children.map((child) => jsx('text', attrs, child));
-      }
-
-      if (!Element.isElementList(children)) {
-        const attrs = ELEMENT_TAGS.P(el);
-        children = jsx('element', attrs, children);
+        children.push(jsx('text', nodeAttributes, ''));
       }
 
       if (el.nodeName === 'BODY') {
         return jsx('fragment', {}, children);
+      }
+
+      // define attributes for text nodes
+      if (ELEMENT_TAGS[nodeName]) {
+        const attrs = ELEMENT_TAGS[nodeName](el);
+        return jsx('element', attrs, children);
       }
 
       return children;
@@ -415,14 +421,8 @@
     };
 
     const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
-    const editor = React.useMemo(
-      () => withHistory(withReact(createEditor())),
-      [],
-    );
-    const parsed = new DOMParser().parseFromString(
-      useText(valueProp),
-      'text/html',
-    );
+    const [editor] = useState(() => withReact(withHistory(createEditor())));
+    const parsed = new DOMParser().parseFromString(optionValue, 'text/html');
     const fragment = deserialize(parsed.body);
 
     B.defineFunction('Clear', () => {
@@ -437,21 +437,6 @@
         },
       ];
     });
-
-    if (isDev) {
-      useEffect(() => {
-        Transforms.delete(editor, {
-          at: {
-            anchor: Editor.start(editor, []),
-            focus: Editor.end(editor, []),
-          },
-        });
-        Transforms.insertNodes(editor, deserialize(parsed.body));
-        Transforms.delete(editor, {
-          at: Editor.start(editor, [0]),
-        });
-      }, [valueProp]);
-    }
 
     const handleListdepth = (listKind, key, event) => {
       const isList = isBlockActive(editor, listKind, 'type');

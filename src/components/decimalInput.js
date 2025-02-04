@@ -1,9 +1,20 @@
 (() => ({
-  name: 'TextInput',
+  name: 'DecimalInput',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
+  dependencies: [
+    {
+      label: 'autoNumeric',
+      package: 'npm:autonumeric@4.10.6',
+      imports: ['AutoNumeric'],
+    },
+  ],
   jsx: (() => {
+    const {
+      autoNumeric: { default: AutoNumeric },
+    } = dependencies;
+
     const {
       actionVariableId: name,
       autoComplete,
@@ -21,26 +32,22 @@
       floatLabel,
       margin,
       helperText = [''],
-      adornment,
+      adornment = [''],
       adornmentIcon,
       adornmentPosition,
-      pattern,
-      minLength,
-      maxLength,
-      minvalue,
-      maxvalue,
-      validationTypeMismatch = [''],
-      validationPatternMismatch = [''],
+      minValue,
+      maxValue,
       validationValueMissing = [''],
-      validationTooLong = [''],
-      validationTooShort = [''],
-      validationBelowMinimum = [''],
-      validationAboveMaximum = [''],
+      validationTooLow = [''],
+      validationTooHigh = [''],
       value,
       hideLabel,
       debounceDelay,
-      dataComponentAttribute = ['TextField'],
+      dataComponentAttribute = ['DecimalField'],
       required,
+      separator,
+      showGroupSeparator,
+      decimalScale,
     } = options;
 
     const {
@@ -54,99 +61,84 @@
       IconButton,
     } = window.MaterialUI.Core;
 
+    const SEPARATOR_COMMA = ',';
+    const SEPARATOR_DOT = '.';
+
     const { env, useText, Icon, generateUUID } = B;
     const isDev = env === 'dev';
-    const isNumberType = type === 'number';
-    const isPasswordType = type === 'password';
-    const isEmailType = type === 'email';
     const [isDisabled, setIsDisabled] = useState(disabled);
-    const [showPassword, togglePassword] = useState(false);
     const [errorState, setErrorState] = useState(error);
-    const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
     const optionValue = useText(value);
-    const [currentValue, setCurrentValue] = usePageState(optionValue);
-    const parsedLabel = useText(label);
-    const labelText = parsedLabel;
+    const [currentValue, setCurrentValue] = useState(optionValue);
+    const [rawValue, setRawValue] = useState(optionValue);
+    const labelText = useText(label);
     const debouncedOnChangeRef = useRef(null);
     const inputRef = useRef();
 
     const { current: labelControlRef } = useRef(generateUUID());
 
-    const validPattern = pattern || null;
-    const validMinlength = minLength || null;
-    const validMaxlength = maxLength || null;
-    const validMinvalue = minvalue || null;
-    const validMaxvalue = maxvalue || null;
+    const validMinvalue = minValue || null;
+    const validMaxvalue = maxValue || null;
 
-    const patternMismatchMessage = useText(validationPatternMismatch);
-    const typeMismatchMessage = useText(validationTypeMismatch);
     const valueMissingMessage = useText(validationValueMissing);
-    const tooLongMessage = useText(validationTooLong);
-    const tooShortMessage = useText(validationTooShort);
-    const belowMinimumMessage = useText(validationBelowMinimum);
-    const aboveMaximumMessage = useText(validationAboveMaximum);
+    const belowMinimumMessage = useText(validationTooLow);
+    const aboveMaximumMessage = useText(validationTooHigh);
     const placeholderText = useText(placeholder);
     const helperTextResolved = useText(helperText);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
+    const adornmentValue = useText(adornment);
 
-    const validationMessage = (validityObject) => {
-      if (validityObject.customError && patternMismatchMessage) {
-        return patternMismatchMessage;
+    const validationMessage = () => {
+      let errorMessage = null;
+
+      if (required && rawValue === '') {
+        errorMessage = valueMissingMessage;
+      } else if (validMinvalue && rawValue < validMinvalue) {
+        errorMessage = belowMinimumMessage;
+      } else if (validMaxvalue && rawValue > validMaxvalue) {
+        errorMessage = aboveMaximumMessage;
       }
-      if (validityObject.valid) {
-        return '';
-      }
-      if (validityObject.typeMismatch && typeMismatchMessage) {
-        return typeMismatchMessage;
-      }
-      if (validityObject.patternMismatch && patternMismatchMessage) {
-        return patternMismatchMessage;
-      }
-      if (validityObject.valueMissing && valueMissingMessage) {
-        return valueMissingMessage;
-      }
-      if (validityObject.tooLong && tooLongMessage) {
-        return tooLongMessage;
-      }
-      if (validityObject.tooShort && tooShortMessage) {
-        return tooShortMessage;
-      }
-      if (validityObject.rangeUnderflow && belowMinimumMessage) {
-        return belowMinimumMessage;
-      }
-      if (validityObject.rangeOverflow && aboveMaximumMessage) {
-        return aboveMaximumMessage;
-      }
-      return '';
+
+      setErrorState(!!errorMessage);
+      return errorMessage || helperTextResolved;
     };
 
-    const handleValidation = (validation) => {
-      setErrorState(!validation.valid);
-      const message = validationMessage(validation) || helperTextResolved;
+    const handleValidation = () => {
+      const message = validationMessage();
       setHelper(message);
     };
 
-    const onKeyDown = (event) => {
-      if (isNumberType && (event.key === '.' || event.key === ',')) {
-        event.preventDefault();
+    const getSeparator = () => {
+      if (separator === SEPARATOR_COMMA) {
+        return SEPARATOR_DOT;
       }
+      return SEPARATOR_COMMA;
     };
 
-    const customPatternValidation = (target) => {
-      const { value: eventValue, validity } = target;
-      if (!pattern) {
-        return validity;
-      }
-      const patternRegex = RegExp(`^${pattern}$`);
-      const isValid = patternRegex.test(eventValue);
-      target.setCustomValidity(isValid ? '' : 'Invalid field.');
-      return {
-        ...validity,
-        valid: isValid,
-        patternMismatch: !isValid,
+    useEffect(() => {
+      const autoNumericInstance = new AutoNumeric(inputRef.current, {
+        decimalPlaces: decimalScale,
+        decimalCharacter: separator,
+        digitGroupSeparator: showGroupSeparator ? getSeparator() : '',
+        formatOnPageLoad: true,
+        overrideMinMaxLimits: 'ignore',
+      });
+
+      autoNumericInstance.set(optionValue);
+      setRawValue(autoNumericInstance.getNumericString());
+      setCurrentValue(autoNumericInstance.getFormatted());
+
+      inputRef.current.addEventListener('autoNumeric:rawValueModified', () => {
+        setRawValue(autoNumericInstance.getNumericString());
+        setCurrentValue(autoNumericInstance.getFormatted());
+        debouncedOnChangeRef.current(rawValue);
+      });
+
+      return () => {
+        autoNumericInstance.remove();
       };
-    };
+    }, [optionValue]);
 
     const debounce =
       (func, delay) =>
@@ -158,53 +150,37 @@
 
     if (!debouncedOnChangeRef.current) {
       debouncedOnChangeRef.current = debounce((newValue) => {
-        B.triggerEvent('onChange', newValue);
+        const unformattedValue =
+          AutoNumeric.getAutoNumericElement(newValue).getNumericString();
+        B.triggerEvent('onChange', unformattedValue);
       }, debounceDelay);
     }
 
-    const changeHandler = (event) => {
+    const handleInputEvent = (event, isBlur = false) => {
       const { target } = event;
-      let { validity: validation } = target;
-      const { value: eventValue } = target;
 
-      if (isNumberType || multiline || isEmailType) {
-        validation = customPatternValidation(target);
-      }
-      const numberValue =
-        isNumberType && eventValue && parseInt(eventValue, 10);
+      handleValidation();
 
-      if (afterFirstInvalidation) {
-        handleValidation(validation);
+      const autoNumericInstance = AutoNumeric.getAutoNumericElement(target);
+      const unformattedValue = autoNumericInstance.getNumericString();
+      const formattedValue = autoNumericInstance.getFormatted();
+
+      setRawValue(unformattedValue);
+      setCurrentValue(formattedValue);
+
+      if (isBlur) {
+        B.triggerEvent('onBlur', unformattedValue);
+      } else {
+        debouncedOnChangeRef.current(unformattedValue);
       }
-      const newValue = isNumberType ? numberValue : eventValue;
-      setCurrentValue(newValue);
-      debouncedOnChangeRef.current(newValue);
     };
 
-    const blurHandler = (event) => {
-      const { target } = event;
-      let { validity: validation } = target;
-
-      if (isNumberType || multiline) {
-        validation = customPatternValidation(target);
-      }
-
-      setAfterFirstInvalidation(!validation.valid);
-      handleValidation(validation);
-      const { value: eventValue } = target;
-      B.triggerEvent('onBlur', eventValue);
-    };
+    const changeHandler = (event) => handleInputEvent(event, false);
+    const blurHandler = (event) => handleInputEvent(event, true);
 
     const invalidHandler = (event) => {
       event.preventDefault();
-      const {
-        target: {
-          validity,
-          validity: { valid: isValid },
-        },
-      } = event;
-      setAfterFirstInvalidation(!isValid);
-      handleValidation(validity);
+      handleValidation();
     };
 
     const focusHandler = () =>
@@ -212,43 +188,35 @@
         inputRef.current.focus();
       }, 0);
 
-    B.defineFunction('Clear', () => setCurrentValue(''));
+    B.defineFunction('Clear', () => {
+      setCurrentValue('');
+      setRawValue('');
+    });
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
-    B.defineFunction('Reset', () => setCurrentValue(useText(value)));
+    B.defineFunction('Reset', () => {
+      setCurrentValue(useText(value));
+      setRawValue(useText(value));
+    });
     B.defineFunction('Focus', () => focusHandler());
 
-    const handleClickShowPassword = () => {
-      togglePassword(!showPassword);
-    };
-
-    const handleMouseDownPassword = (event) => {
-      event.preventDefault();
-    };
-
-    let InputCmp = Input;
+    let InputComponent = Input;
     if (variant === 'outlined') {
-      InputCmp = OutlinedInput;
+      InputComponent = OutlinedInput;
     } else if (variant === 'filled') {
-      InputCmp = FilledInput;
+      InputComponent = FilledInput;
     }
 
-    const passwordIcon = showPassword ? 'Visibility' : 'VisibilityOff';
-    const inputIcon = isPasswordType ? passwordIcon : adornmentIcon;
+    const inputIcon = adornmentIcon;
     const hasIcon = inputIcon && inputIcon !== 'None';
     const hasAdornment = hasIcon || adornment;
 
-    const IconCmp = hasIcon && <Icon name={inputIcon} fontSize={size} />;
+    const IconComponent = hasIcon && <Icon name={inputIcon} fontSize={size} />;
 
     const iconButtonOptions = {
       edge: adornmentPosition,
       tabIndex: isDev ? -1 : undefined,
     };
-    if (isPasswordType) {
-      iconButtonOptions.ariaLabel = 'toggle password visibility';
-      iconButtonOptions.onClick = handleClickShowPassword;
-      iconButtonOptions.onMouseDown = handleMouseDownPassword;
-    }
 
     useEffect(() => {
       if (isDev) {
@@ -262,7 +230,7 @@
       inputType = 'text';
     }
 
-    const TextFieldCmp = (
+    const DecimalFieldComponent = (
       <FormControl
         classes={{
           root: `${classes.formControl} ${
@@ -288,19 +256,17 @@
             {labelText}
           </InputLabel>
         )}
-        <InputCmp
+        <InputComponent
           id={labelControlRef}
           inputRef={inputRef}
-          name={name}
           value={currentValue}
-          type={showPassword ? 'text' : inputType}
+          type={inputType}
           multiline={multiline}
           autoComplete={autoComplete ? 'on' : 'off'}
           autoFocus={!isDev && autoFocus}
           rows={rows}
           label={labelText}
           placeholder={placeholderText}
-          onKeyDown={onKeyDown}
           onChange={changeHandler}
           onBlur={blurHandler}
           onInvalid={invalidHandler}
@@ -309,9 +275,11 @@
             adornmentPosition === 'start' && (
               <InputAdornment position={adornmentPosition}>
                 {hasIcon ? (
-                  <IconButton {...iconButtonOptions}>{IconCmp}</IconButton>
+                  <IconButton {...iconButtonOptions}>
+                    {IconComponent}
+                  </IconButton>
                 ) : (
-                  adornment
+                  adornmentValue
                 )}
               </InputAdornment>
             )
@@ -321,19 +289,16 @@
             adornmentPosition === 'end' && (
               <InputAdornment position={adornmentPosition}>
                 {hasIcon ? (
-                  <IconButton {...iconButtonOptions}>{IconCmp}</IconButton>
+                  <IconButton {...iconButtonOptions}>
+                    {IconComponent}
+                  </IconButton>
                 ) : (
-                  adornment
+                  adornmentValue
                 )}
               </InputAdornment>
             )
           }
           inputProps={{
-            pattern: validPattern,
-            minLength: validMinlength,
-            maxLength: validMaxlength,
-            min: validMinvalue,
-            max: validMaxvalue,
             tabIndex: isDev ? -1 : undefined,
             className: includeStyling(),
           }}
@@ -347,10 +312,23 @@
       </FormControl>
     );
 
-    return isDev ? (
-      <div className={classes.root}>{TextFieldCmp}</div>
-    ) : (
-      TextFieldCmp
+    if (isDev) {
+      return <div className={classes.root}>{DecimalFieldComponent}</div>;
+    }
+
+    return (
+      <div>
+        <input
+          type="number"
+          name={name}
+          value={rawValue}
+          min={validMinvalue}
+          max={validMaxvalue}
+          required={required}
+          style={{ display: 'none' }}
+        />
+        {DecimalFieldComponent}
+      </div>
     );
   })(),
   styles: (B) => (t) => {
