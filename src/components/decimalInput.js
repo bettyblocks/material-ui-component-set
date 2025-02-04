@@ -32,7 +32,7 @@
       floatLabel,
       margin,
       helperText = [''],
-      adornment,
+      adornment = [''],
       adornmentIcon,
       adornmentPosition,
       minValue,
