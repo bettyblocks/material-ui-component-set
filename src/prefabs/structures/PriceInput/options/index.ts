@@ -53,6 +53,9 @@ export const options = {
 
   adornment: variable('Currency', {
     value: ['€'],
+    configuration: {
+      allowedKinds: ['STRING'],
+    },
   }),
 
   adornmentPosition: buttongroup(
