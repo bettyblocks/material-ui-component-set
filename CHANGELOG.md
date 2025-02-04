@@ -1,3 +1,10 @@
+# [2.203.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.202.0...v2.203.0) (2025-02-04)
+
+
+### Features
+
+* make currency option dynamic ([2bffdd8](https://github.com/bettyblocks/material-ui-component-set/commit/2bffdd88debec6bbe561b15cbcf485d4b77fe1aa))
+
 # [2.202.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.201.0...v2.202.0) (2025-01-30)
 
 
