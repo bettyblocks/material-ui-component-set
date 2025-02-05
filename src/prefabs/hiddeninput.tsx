@@ -59,6 +59,7 @@ const addChildOptions = optionTemplateOptions({
     value: '',
     configuration: {
       allowedKinds,
+      allowFormatting: false,
       condition: showIf('propertyBased', 'EQ', 'true'),
       createActionInputVariable: {
         type: actionInputVariableKind,
