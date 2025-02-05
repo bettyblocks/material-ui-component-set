@@ -35,6 +35,7 @@ export const checkboxInputOptions = {
   }),
   value: variable('Value', {
     value: ['false'],
+    configuration: { allowFormatting: false },
   }),
   disabled: toggle('Disabled'),
   helperText: variable('Helper text'),

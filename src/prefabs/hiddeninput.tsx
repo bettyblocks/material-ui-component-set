@@ -42,7 +42,11 @@ const options = {
     },
   }),
 
-  value: variable('Value'),
+  value: variable('Value', {
+    configuration: {
+      allowFormatting: false,
+    },
+  }),
 };
 
 const addChildOptions = optionTemplateOptions({
