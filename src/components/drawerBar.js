@@ -21,7 +21,7 @@
       breakpoint,
     } = parent;
     const { env, useText } = B;
-    const { dataComponentAttribute } = options;
+    const { dataComponentAttribute, disableEnforceFocus } = options;
 
     const isEmpty = children.length === 0;
     const isDev = env === 'dev';
@@ -45,6 +45,7 @@
         onClose={toggleDrawer}
         classes={{ paper: classes.paper }}
         ModalProps={{ keepMounted: true }}
+        disableEnforceFocus={disableEnforceFocus}
         data-component={useText(dataComponentAttribute) || 'DrawerBar'}
       >
         {children}
@@ -68,6 +69,7 @@
             open={isOpen}
             anchor={anchor}
             classes={{ paper: classes.paper }}
+            disableEnforceFocus={disableEnforceFocus}
             data-component={useText(dataComponentAttribute) || 'Drawer'}
           >
             {children}
