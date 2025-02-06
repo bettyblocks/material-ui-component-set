@@ -57,7 +57,6 @@ import {
   SubmitButton,
   submitButtonOptions,
   TextInput,
-  textInputOptions,
 } from './structures';
 import {
   AuthenticationProfile,
@@ -67,6 +66,7 @@ import {
   Properties,
   PermissionType,
 } from './types';
+import { optionsResolver as textInputOptionsResolver } from './structures/TextInput/options';
 
 const interactions: PrefabInteraction[] = [
   {
@@ -3822,7 +3822,9 @@ export default makePrefab('User, profile details', attrs, beforeCreate, [
                                                                     adornmentIcon:
                                                                       'VisibilityOff',
                                                                     options: {
-                                                                      ...textInputOptions,
+                                                                      ...textInputOptionsResolver(
+                                                                        'password',
+                                                                      ),
                                                                       hideLabel:
                                                                         toggle(
                                                                           'Hide label',
@@ -3959,7 +3961,9 @@ export default makePrefab('User, profile details', attrs, beforeCreate, [
                                                                     adornmentIcon:
                                                                       'VisibilityOff',
                                                                     options: {
-                                                                      ...textInputOptions,
+                                                                      ...textInputOptionsResolver(
+                                                                        'password',
+                                                                      ),
                                                                       hideLabel:
                                                                         toggle(
                                                                           'Hide label',

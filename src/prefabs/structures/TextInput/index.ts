@@ -1,7 +1,7 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
 import { Configuration } from '../Configuration';
-import { options as defaults } from './options/index';
+import { optionsResolver } from './options/index';
 import {
   addChildOptions as defaultAddChildOptions,
   optionEvents,
@@ -11,7 +11,9 @@ export const TextInput = (
   config: Configuration,
   children: PrefabReference[] = [],
 ) => {
-  const options = { ...(config.options || defaults) };
+  const options = {
+    ...(config.options || optionsResolver(config.inputType || 'text')),
+  };
   const addChildOptions = [
     ...(config.optionTemplates?.addChild?.options ||
       defaultAddChildOptions(config.inputType || 'text')),

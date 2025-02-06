@@ -14,6 +14,7 @@ import {
   variable,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
+import { getAllowedKindsByType } from '../../../helpers/getAllowedKindsByType';
 
 export const categories = [
   {
@@ -40,11 +41,14 @@ export const categories = [
   },
 ];
 
+const { allowedKinds, allowedInputKinds } = getAllowedKindsByType('rating');
+
 export const ratingInputOptions = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
     configuration: {
+      ...(allowedInputKinds ? { allowedKinds: allowedInputKinds } : undefined),
       condition: showIf('property', 'EQ', ''),
     },
   }),
@@ -52,7 +56,7 @@ export const ratingInputOptions = {
     value: '',
     showInReconfigure: true,
     configuration: {
-      allowedKinds: ['DECIMAL'],
+      allowedKinds,
       disabled: true,
       condition: hideIf('property', 'EQ', ''),
     },
