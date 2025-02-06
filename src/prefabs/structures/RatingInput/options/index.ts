@@ -62,7 +62,7 @@ export const ratingInputOptions = {
 
   label: variable('Label', {
     value: ['Select'],
-    configuration: { allowFormatting: false },
+    configuration: { allowFormatting: false, allowPropertyName: true },
   }),
   value: variable('Value', {
     value: [''],
