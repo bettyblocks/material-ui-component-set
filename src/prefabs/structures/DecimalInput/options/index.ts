@@ -35,7 +35,7 @@ export const options = {
 
   label: variable('Label', {
     value: [''],
-    configuration: { allowFormatting: false },
+    configuration: { allowFormatting: false, allowPropertyName: true },
   }),
   value: variable('Value', {
     value: [''],
