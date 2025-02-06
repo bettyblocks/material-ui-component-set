@@ -1,6 +1,7 @@
 import {
   hideIf,
   option,
+  OptionProducer,
   property,
   showIf,
   variable,
@@ -13,7 +14,9 @@ import {
   InputType,
 } from '../../../helpers/getAllowedKindsByType';
 
-export const optionsResolver = (type: InputType) => {
+export const optionsResolver = (
+  type: InputType,
+): Record<string, OptionProducer> => {
   const { allowedKinds, allowedInputKinds } = getAllowedKindsByType(type);
   return {
     actionVariableId: option('ACTION_JS_VARIABLE', {

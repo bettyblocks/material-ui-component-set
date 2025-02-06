@@ -1,6 +1,7 @@
 import {
   hideIf,
   option,
+  OptionProducer,
   property,
   showIf,
   toggle,
@@ -14,7 +15,9 @@ import {
   InputType,
 } from '../../../helpers/getAllowedKindsByType';
 
-export const fileUploadOptionsResolver = (type: InputType) => {
+export const fileUploadOptionsResolver = (
+  type: InputType,
+): Record<string, OptionProducer> => {
   const { allowedKinds, allowedInputKinds } = getAllowedKindsByType(type);
 
   return {
