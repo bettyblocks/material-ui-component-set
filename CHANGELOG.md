@@ -1,3 +1,11 @@
+## [2.203.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.203.0...v2.203.1) (2025-02-06)
+
+
+### Bug Fixes
+
+* disable formatting for componentoption value and label for inputcomponents ([605d584](https://github.com/bettyblocks/material-ui-component-set/commit/605d584d6010ba4a4e9d0a17e5267c542b43265b))
+* remove afterDeleteHook ([512bc1b](https://github.com/bettyblocks/material-ui-component-set/commit/512bc1b2af1ada4ba73ee03c4cdca38ad9d3559f))
+
 # [2.203.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.202.0...v2.203.0) (2025-02-04)
 
 
