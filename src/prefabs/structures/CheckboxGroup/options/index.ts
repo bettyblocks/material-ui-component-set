@@ -32,7 +32,7 @@ export const checkboxGroupInputOptions = {
   }),
   label: variable('Label', {
     value: ['CheckboxGroup'],
-    configuration: { allowFormatting: false },
+    configuration: { allowFormatting: false, allowPropertyName: true },
   }),
   value: variable('Value', {
     value: [],

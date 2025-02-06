@@ -32,7 +32,7 @@ export const options = {
 
   label: variable('Label', {
     value: ['Radio'],
-    configuration: { allowFormatting: false },
+    configuration: { allowFormatting: false, allowPropertyName: true },
   }),
   value: variable('Value', {
     value: [''],

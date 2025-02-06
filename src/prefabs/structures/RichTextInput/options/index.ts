@@ -74,7 +74,10 @@ export const richTextOptions = {
     },
   }),
 
-  label: variable('Label', { value: [''] }),
+  label: variable('Label', {
+    value: [''],
+    configuration: { allowFormatting: false, allowPropertyName: true },
+  }),
   value: variable('Value', {
     value: [''],
     configuration: { allowFormatting: false },
