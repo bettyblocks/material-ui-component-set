@@ -1,7 +1,7 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
 import { Configuration } from '../Configuration';
-import { options as defaults } from './options';
+import { optionsResolver } from './options';
 import { addChildOptions, optionEvents } from '../TextInput/options/addChild';
 
 export enum DateInputTypes {
@@ -15,7 +15,7 @@ export const DateTimePicker = (
   descendants: PrefabReference[] = [],
 ) => {
   const options = {
-    ...(config.options || defaults(config.inputType || 'date')),
+    ...(config.options || optionsResolver(config.inputType || 'date')),
   };
   const style = { ...config.style };
   const ref = config.ref ? { ...config.ref } : undefined;
