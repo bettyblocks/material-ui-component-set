@@ -75,6 +75,7 @@
     const labelText = useText(label);
     const debouncedOnChangeRef = useRef(null);
     const inputRef = useRef();
+    const autoNumericRef = useRef(null);
 
     const { current: labelControlRef } = useRef(generateUUID());
 
@@ -125,6 +126,7 @@
         overrideMinMaxLimits: 'ignore',
       });
 
+      autoNumericRef.current = autoNumericInstance;
       autoNumericInstance.set(optionValue);
       setRawValue(autoNumericInstance.getNumericString());
       setCurrentValue(autoNumericInstance.getFormatted());
@@ -149,29 +151,29 @@
     debounce.timeoutId = null;
 
     if (!debouncedOnChangeRef.current) {
-      debouncedOnChangeRef.current = debounce((newValue) => {
-        const unformattedValue =
-          AutoNumeric.getAutoNumericElement(newValue).getNumericString();
-        B.triggerEvent('onChange', unformattedValue);
+      debouncedOnChangeRef.current = debounce(() => {
+        if (inputRef.current) {
+          const unformattedValue = autoNumericRef.current.getNumericString();
+          B.triggerEvent('onChange', unformattedValue);
+        }
       }, debounceDelay);
     }
 
     const handleInputEvent = (event, isBlur = false) => {
-      const { target } = event;
-
       handleValidation();
 
-      const autoNumericInstance = AutoNumeric.getAutoNumericElement(target);
-      const unformattedValue = autoNumericInstance.getNumericString();
-      const formattedValue = autoNumericInstance.getFormatted();
+      if (autoNumericRef.current) {
+        const unformattedValue = autoNumericRef.current.getNumericString();
+        const formattedValue = autoNumericRef.current.getFormatted();
 
-      setRawValue(unformattedValue);
-      setCurrentValue(formattedValue);
+        setRawValue(unformattedValue);
+        setCurrentValue(formattedValue);
 
-      if (isBlur) {
-        B.triggerEvent('onBlur', unformattedValue);
-      } else {
-        debouncedOnChangeRef.current(unformattedValue);
+        if (isBlur) {
+          B.triggerEvent('onBlur', unformattedValue);
+        } else {
+          debouncedOnChangeRef.current(unformattedValue);
+        }
       }
     };
 
@@ -189,14 +191,20 @@
       }, 0);
 
     B.defineFunction('Clear', () => {
+      if (autoNumericRef.current) {
+        autoNumericRef.current.set('');
+      }
       setCurrentValue('');
       setRawValue('');
     });
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
     B.defineFunction('Reset', () => {
-      setCurrentValue(useText(value));
-      setRawValue(useText(value));
+      if (autoNumericRef.current) {
+        autoNumericRef.current.set(optionValue);
+      }
+      setCurrentValue(optionValue);
+      setRawValue(optionValue);
     });
     B.defineFunction('Focus', () => focusHandler());
 
