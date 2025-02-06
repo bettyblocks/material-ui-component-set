@@ -23,7 +23,7 @@ export const fileUploadOptions = {
     value: ['Select file(s)...'],
     configuration: { allowFormatting: false, allowPropertyName: true },
   }),
-  value: property('Value'),
+  value: property('Value', { configuration: { allowFormatting: false } }),
   disabled: toggle('Disabled', { value: false }),
   helperText: variable('Helper text', { value: [] }),
 

@@ -33,8 +33,14 @@ export const options = {
     },
   }),
 
-  label: variable('Label', { value: [''] }),
-  value: variable('Value', { value: [''] }),
+  label: variable('Label', {
+    value: [''],
+    configuration: { allowFormatting: false },
+  }),
+  value: variable('Value', {
+    value: [''],
+    configuration: { allowFormatting: false },
+  }),
 
   separator: buttongroup(
     'Decimal separator',
