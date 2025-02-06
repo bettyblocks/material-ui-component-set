@@ -13,7 +13,7 @@ import {
   InputType,
 } from '../../../helpers/getAllowedKindsByType';
 
-export const options = (type: InputType) => {
+export const optionsResolver = (type: InputType) => {
   const { allowedKinds, allowedInputKinds } = getAllowedKindsByType(type);
   return {
     actionVariableId: option('ACTION_JS_VARIABLE', {
@@ -50,3 +50,5 @@ export const options = (type: InputType) => {
     ...advanced,
   };
 };
+
+export const options = optionsResolver('text');

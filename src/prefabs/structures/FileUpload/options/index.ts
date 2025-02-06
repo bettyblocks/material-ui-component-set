@@ -14,7 +14,7 @@ import {
   InputType,
 } from '../../../helpers/getAllowedKindsByType';
 
-export const fileUploadOptions = (type: InputType) => {
+export const fileUploadOptionsResolver = (type: InputType) => {
   const { allowedKinds, allowedInputKinds } = getAllowedKindsByType(type);
 
   return {
@@ -50,3 +50,5 @@ export const fileUploadOptions = (type: InputType) => {
     }),
   };
 };
+
+export const fileUploadOptions = fileUploadOptionsResolver('file');

@@ -1,5 +1,5 @@
 import { PrefabReference, component } from '@betty-blocks/component-sdk';
-import { fileUploadOptions } from './options';
+import { fileUploadOptionsResolver } from './options';
 import { Configuration } from '../Configuration';
 import { addChildOptions, optionEvents } from './options/addChild';
 
@@ -38,7 +38,8 @@ export const FileUpload = (
   descendants: PrefabReference[] = [],
 ) => {
   const options = {
-    ...(config.options || fileUploadOptions(config.inputType || 'file')),
+    ...(config.options ||
+      fileUploadOptionsResolver(config.inputType || 'file')),
   };
   const categories = [...(config.optionCategories || defaultCategories)];
 
