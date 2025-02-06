@@ -60,8 +60,14 @@ export const ratingInputOptions = {
   }),
   hideLabel: toggle('Hide label'),
 
-  label: variable('Label', { value: ['Select'] }),
-  value: variable('Value', { value: [''] }),
+  label: variable('Label', {
+    value: ['Select'],
+    configuration: { allowFormatting: false, allowPropertyName: true },
+  }),
+  value: variable('Value', {
+    value: [''],
+    configuration: { allowFormatting: false },
+  }),
   required: toggle('Required'),
   validationValueMissing: variable('Validation error text', {
     value: ['This value is required'],

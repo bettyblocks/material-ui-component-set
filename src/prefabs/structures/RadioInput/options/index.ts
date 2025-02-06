@@ -31,8 +31,14 @@ export const options = {
     },
   }),
 
-  label: variable('Label', { value: ['Radio'] }),
-  value: variable('Value', { value: [''] }),
+  label: variable('Label', {
+    value: ['Radio'],
+    configuration: { allowFormatting: false, allowPropertyName: true },
+  }),
+  value: variable('Value', {
+    value: [''],
+    configuration: { allowFormatting: false },
+  }),
 
   optionType: buttongroup(
     'Option type',

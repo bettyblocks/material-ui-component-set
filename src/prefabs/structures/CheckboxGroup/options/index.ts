@@ -31,11 +31,15 @@ export const checkboxGroupInputOptions = {
       showOnDrop: true,
     },
   }),
-  label: variable('Label', { value: ['CheckboxGroup'] }),
+  label: variable('Label', {
+    value: ['CheckboxGroup'],
+    configuration: { allowFormatting: false, allowPropertyName: true },
+  }),
   value: variable('Value', {
     value: [],
     configuration: {
       allowRelations: true,
+      allowFormatting: false,
     },
   }),
   optionType: buttongroup(

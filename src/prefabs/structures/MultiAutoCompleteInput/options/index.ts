@@ -40,6 +40,7 @@ export const options = {
     value: [],
     configuration: {
       allowRelations: true,
+      allowFormatting: false,
     },
   }),
   optionType: buttongroup(
