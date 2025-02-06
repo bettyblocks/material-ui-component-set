@@ -41,7 +41,6 @@ const options = {
       condition: hideIf('property', 'EQ', ''),
     },
   }),
-
   value: variable('Value', {
     configuration: {
       allowFormatting: false,
