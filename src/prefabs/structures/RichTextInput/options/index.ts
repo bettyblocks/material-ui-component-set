@@ -75,7 +75,10 @@ export const richTextOptions = {
   }),
 
   label: variable('Label', { value: [''] }),
-  value: variable('Value', { value: [''] }),
+  value: variable('Value', {
+    value: [''],
+    configuration: { allowFormatting: false },
+  }),
   showBold: toggle('Bold', { value: true }),
   showItalic: toggle('Italic', { value: true }),
   showUnderlined: toggle('Underlined', { value: true }),

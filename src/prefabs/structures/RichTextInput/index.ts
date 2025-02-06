@@ -1,11 +1,8 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
-import { deleteActionVariable } from '../../hooks/deleteActionVariable';
 import { Configuration } from '../Configuration';
 import { richTextOptions, categories as defaultCategories } from './options';
 import { addChildOptions, optionEvents } from '../TextInput/options/addChild';
-
-const $afterDelete = [deleteActionVariable];
 
 export const RichTextInput = (
   config: Configuration,
@@ -33,7 +30,6 @@ export const RichTextInput = (
       label,
       options,
       ref,
-      $afterDelete,
       optionCategories,
       optionTemplates: {
         addChild: {

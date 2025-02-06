@@ -30,11 +30,15 @@ export const checkboxGroupInputOptions = {
       condition: hideIf('property', 'EQ', ''),
     },
   }),
-  label: variable('Label', { value: ['CheckboxGroup'] }),
+  label: variable('Label', {
+    value: ['CheckboxGroup'],
+    configuration: { allowFormatting: false },
+  }),
   value: variable('Value', {
     value: [],
     configuration: {
       allowRelations: true,
+      allowFormatting: false,
     },
   }),
   optionType: buttongroup(

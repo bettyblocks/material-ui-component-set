@@ -31,7 +31,10 @@ export const options = {
     value: [''],
     configuration: { allowFormatting: false, allowPropertyName: true },
   }),
-  value: variable('Value', { value: [''] }),
+  value: variable('Value', {
+    value: [''],
+    configuration: { allowFormatting: false },
+  }),
 
   ...validation,
   ...styles,
