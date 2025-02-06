@@ -11,12 +11,17 @@ import {
 import { advanced } from './advanced';
 import { styles } from './styles';
 import { validation } from './validation';
+import { getAllowedKindsByType } from '../../../helpers/getAllowedKindsByType';
+
+const { allowedKinds, allowedInputKinds } =
+  getAllowedKindsByType('autocomplete');
 
 export const options = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
     configuration: {
+      ...(allowedInputKinds ? { allowedKinds: allowedInputKinds } : undefined),
       condition: showIf('property', 'EQ', ''),
     },
   }),
@@ -24,7 +29,7 @@ export const options = {
     value: '',
     showInReconfigure: true,
     configuration: {
-      allowedKinds: ['LIST', 'BELONGS_TO'],
+      allowedKinds,
       disabled: true,
       condition: hideIf('property', 'EQ', ''),
     },

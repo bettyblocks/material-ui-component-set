@@ -11,7 +11,9 @@ export const TextInput = (
   config: Configuration,
   children: PrefabReference[] = [],
 ) => {
-  const options = { ...(config.options || defaults) };
+  const options = {
+    ...(config.options || defaults(config.inputType || 'text')),
+  };
   const addChildOptions = [
     ...(config.optionTemplates?.addChild?.options ||
       defaultAddChildOptions(config.inputType || 'text')),

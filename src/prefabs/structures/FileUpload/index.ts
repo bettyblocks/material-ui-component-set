@@ -37,7 +37,9 @@ export const FileUpload = (
   config: Configuration = {},
   descendants: PrefabReference[] = [],
 ) => {
-  const options = { ...(config.options || fileUploadOptions) };
+  const options = {
+    ...(config.options || fileUploadOptions(config.inputType || 'file')),
+  };
   const categories = [...(config.optionCategories || defaultCategories)];
 
   return component(
