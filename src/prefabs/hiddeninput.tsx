@@ -372,7 +372,11 @@ const options = {
     label: 'Action input variable',
     value: '',
   }),
-  value: variable('Value'),
+  value: variable('Value', {
+    configuration: {
+      allowFormatting: false,
+    },
+  }),
 };
 
 const hooks = {};
