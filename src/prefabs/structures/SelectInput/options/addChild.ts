@@ -7,6 +7,7 @@ import {
   setModelOption,
   setOptionToDefaultValue,
   setVariableOption,
+  setButtonGroupOption,
   showIf,
 } from '@betty-blocks/component-sdk';
 import {
@@ -73,6 +74,14 @@ export const optionEvents = {
       setVariableOption({ target: 'label', format: 'propertyLabel' }),
       setActionJSInputVariableOption({ target: 'actionVariableId' }),
       setModelOption({ target: 'model' }),
+      setButtonGroupOption({
+        target: 'optionType',
+        conditions: [
+          { condition: 'property_is_relation', result: 'model' },
+          { condition: 'property_is_property', result: 'property' },
+          { condition: 'value_is_empty', result: 'variable' },
+        ],
+      }),
     ],
     actionVariableId: [
       setVariableOption({ target: 'label', format: 'static' }),
