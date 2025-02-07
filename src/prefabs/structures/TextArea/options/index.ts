@@ -39,9 +39,14 @@ export const optionsResolver = (
       },
     }),
 
-    label: variable('Label', { value: [''] }),
-    value: variable('Value', { value: [''] }),
-
+    label: variable('Label', {
+      value: [''],
+      configuration: { allowFormatting: false, allowPropertyName: true },
+    }),
+    value: variable('Value', {
+      value: [''],
+      configuration: { allowFormatting: false },
+    }),
     ...validation,
 
     multiline: toggle('Multiline', { value: true }),
