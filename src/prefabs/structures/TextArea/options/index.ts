@@ -1,6 +1,7 @@
 import {
   hideIf,
   option,
+  OptionProducer,
   property,
   showIf,
   text,
@@ -10,41 +11,52 @@ import {
 import { advanced } from '../../TextInput/options/advanced';
 import { styles } from '../../TextInput/options/styles';
 import { validation } from '../../TextInput/options/validation';
+import {
+  getAllowedKindsByType,
+  InputType,
+} from '../../../helpers/getAllowedKindsByType';
 
-export const options = {
-  actionVariableId: option('ACTION_JS_VARIABLE', {
-    label: 'Action input variable',
-    value: '',
-    configuration: {
-      condition: showIf('property', 'EQ', ''),
-    },
-  }),
+export const optionsResolver = (
+  type: InputType,
+): Record<string, OptionProducer> => {
+  const { allowedKinds, allowedInputKinds } = getAllowedKindsByType(type);
+  return {
+    actionVariableId: option('ACTION_JS_VARIABLE', {
+      label: 'Action input variable',
+      value: '',
+      configuration: {
+        allowedKinds: allowedInputKinds,
+        condition: showIf('property', 'EQ', ''),
+      },
+    }),
 
-  property: property('Property', {
-    value: '',
-    configuration: {
-      allowedKinds: ['TEXT', 'URL', 'IBAN', 'STRING'],
-      disabled: true,
-      condition: hideIf('property', 'EQ', ''),
-    },
-  }),
+    property: property('Property', {
+      value: '',
+      configuration: {
+        allowedKinds,
+        disabled: true,
+        condition: hideIf('property', 'EQ', ''),
+      },
+    }),
 
-  label: variable('Label', {
-    value: [''],
-    configuration: { allowFormatting: false, allowPropertyName: true },
-  }),
-  value: variable('Value', {
-    value: [''],
-    configuration: { allowFormatting: false },
-  }),
+    label: variable('Label', {
+      value: [''],
+      configuration: { allowFormatting: false, allowPropertyName: true },
+    }),
+    value: variable('Value', {
+      value: [''],
+      configuration: { allowFormatting: false },
+    }),
+    ...validation,
 
-  ...validation,
+    multiline: toggle('Multiline', { value: true }),
+    rows: text('Rows', {
+      value: '4',
+    }),
 
-  multiline: toggle('Multiline', { value: true }),
-  rows: text('Rows', {
-    value: '4',
-  }),
-
-  ...styles,
-  ...advanced,
+    ...styles,
+    ...advanced,
+  };
 };
+
+export const options = optionsResolver('text');
