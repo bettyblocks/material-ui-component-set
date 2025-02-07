@@ -117,6 +117,10 @@
       return SEPARATOR_COMMA;
     };
 
+    const scaleToFraction = (scale) => {
+      return 1 / 10 ** scale;
+    };
+
     useEffect(() => {
       const autoNumericInstance = new AutoNumeric(inputRef.current, {
         decimalPlaces: decimalScale,
@@ -334,6 +338,7 @@
           max={validMaxvalue}
           required={required}
           style={{ display: 'none' }}
+          step={scaleToFraction(decimalScale)}
         />
         {DecimalFieldComponent}
       </div>
