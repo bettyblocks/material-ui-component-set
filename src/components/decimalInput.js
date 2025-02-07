@@ -181,6 +181,21 @@
       }
     };
 
+    const handlePaste = (event) => {
+      event.preventDefault();
+
+      const pastedText = event.clipboardData.getData('text');
+      if (!pastedText) {
+        return;
+      }
+
+      const cleanedValue = pastedText.replace(/[^0-9.,-]/g, '');
+
+      if (autoNumericRef.current) {
+        autoNumericRef.current.set(cleanedValue);
+      }
+    };
+
     const changeHandler = (event) => handleInputEvent(event, false);
     const blurHandler = (event) => handleInputEvent(event, true);
 
@@ -207,8 +222,11 @@
       if (autoNumericRef.current) {
         autoNumericRef.current.set(optionValue);
       }
-      setCurrentValue(optionValue);
-      setRawValue(optionValue);
+      const unformattedValue = autoNumericRef.current.getNumericString();
+      const formattedValue = autoNumericRef.current.getFormatted();
+
+      setRawValue(unformattedValue);
+      setCurrentValue(formattedValue);
     });
     B.defineFunction('Focus', () => focusHandler());
 
@@ -282,6 +300,7 @@
           onChange={changeHandler}
           onBlur={blurHandler}
           onInvalid={invalidHandler}
+          onPaste={handlePaste}
           startAdornment={
             hasAdornment &&
             adornmentPosition === 'start' && (
