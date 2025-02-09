@@ -65,6 +65,7 @@ import { Tabs } from './Tabs';
 import { Text } from './Text';
 import { TextArea } from './TextArea';
 import { TextInput } from './TextInput';
+import { TimePicker } from './TimePicker';
 
 // Import all prefab options here
 import { options as actionJSButtonOptions } from './ActionJSButton/options';
@@ -133,6 +134,7 @@ import { tabsOptions } from './Tabs/options';
 import { textOptions } from './Text/options';
 import { options as textAreaOptions } from './TextArea/options';
 import { options as textInputOptions } from './TextInput/options';
+import { options as timePickerOptions } from './TimePicker/options';
 
 export {
   ActionJSButton,
@@ -203,6 +205,7 @@ export {
   Text,
   TextArea,
   TextInput,
+  TimePicker,
   actionJSButtonOptions,
   alertOptions,
   appBarOptions,
@@ -269,4 +272,5 @@ export {
   textOptions,
   textAreaOptions,
   textInputOptions,
+  timePickerOptions,
 };
