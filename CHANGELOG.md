@@ -1,3 +1,10 @@
+## [2.203.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.203.2...v2.203.3) (2025-02-10)
+
+
+### Bug Fixes
+
+* clear the decimal input after triggering a clear interaction ([a72bb45](https://github.com/bettyblocks/material-ui-component-set/commit/a72bb455d40004087f93008db2bf80c122c39a7b))
+
 ## [2.203.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.203.1...v2.203.2) (2025-02-06)
 
 
