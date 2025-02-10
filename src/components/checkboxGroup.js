@@ -368,7 +368,6 @@
       }
       if (!loading && results) {
         return results.map((item) => {
-          console.log({ labelProperty });
           return renderCheckbox(
             item[labelProperty.name] || item.id,
             `${item.id}`,
