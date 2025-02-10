@@ -1,3 +1,11 @@
+## [2.203.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.203.1...v2.203.2) (2025-02-06)
+
+
+### Bug Fixes
+
+* disable formatting for value and ensure property name is selectable for label ([85a321b](https://github.com/bettyblocks/material-ui-component-set/commit/85a321b0b42dc25d88187531e75562978eef01fc))
+* ensure property names can be selected ([bd7f37b](https://github.com/bettyblocks/material-ui-component-set/commit/bd7f37b316ff35b67a824522408440b8c5720107))
+
 ## [2.203.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.203.0...v2.203.1) (2025-02-06)
 
 
