@@ -357,12 +357,22 @@
       if (isListProperty) {
         return listValues.map(({ value: v }) => renderCheckbox(v, v));
       }
-      if (isDev) return renderCheckbox('Placeholder', false);
-      if (loading) return <span>Loading...</span>;
-      if (err && displayError) return <span>{err.message}</span>;
+      if (isDev) {
+        return renderCheckbox('Placeholder', false);
+      }
+      if (loading) {
+        return <span>Loading...</span>;
+      }
+      if (err && displayError) {
+        return <span>{err.message}</span>;
+      }
       if (!loading && results) {
         return results.map((item) => {
-          return renderCheckbox(item[labelProperty.name], `${item.id}`);
+          console.log({ labelProperty });
+          return renderCheckbox(
+            item[labelProperty.name] || item.id,
+            `${item.id}`,
+          );
         });
       }
       return <span>No results</span>;
