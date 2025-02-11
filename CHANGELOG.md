@@ -1,3 +1,11 @@
+## [2.203.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.203.3...v2.203.4) (2025-02-11)
+
+
+### Bug Fixes
+
+* fallback to id as default label ([b569ebf](https://github.com/bettyblocks/material-ui-component-set/commit/b569ebf7d3d549ae38d6e0a05f2e82f048faaebf))
+* remove ca3 zone ([8587796](https://github.com/bettyblocks/material-ui-component-set/commit/8587796e679aedde79ce4e0fb7f1a3be49c170a3))
+
 ## [2.203.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.203.2...v2.203.3) (2025-02-10)
 
 
