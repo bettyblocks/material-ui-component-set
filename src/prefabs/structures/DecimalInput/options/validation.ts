@@ -16,12 +16,16 @@ export const validation = {
     },
   }),
 
-  minValue: number('Min value'),
+  minValue: number('Min value', {
+    value: -1000000000,
+  }),
   validationTooLow: variable('Value too low message', {
     value: ['This value is too low'],
   }),
 
-  maxValue: number('Max value'),
+  maxValue: number('Max value', {
+    value: 1000000000,
+  }),
   validationTooHigh: variable('Value too high message', {
     value: ['This value is too high'],
   }),
