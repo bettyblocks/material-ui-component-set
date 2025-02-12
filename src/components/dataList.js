@@ -345,6 +345,10 @@
           setPageState(useText([`${id}`]));
         });
 
+        B.defineFunction('Clear', () => {
+          setPageState(useText(['']));
+        });
+
         B.defineFunction('Advanced filter', (value) => {
           setPage(1);
           setFilterV2(value.where);
