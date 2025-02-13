@@ -2,6 +2,7 @@ import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options/index';
+import { addChildOptions, optionEvents } from '../SelectInput/options/addChild';
 
 export const AutocompleteInput = (
   config: Configuration,
@@ -59,7 +60,19 @@ export const AutocompleteInput = (
 
   return component(
     'AutocompleteInput',
-    { options, style, ref, label, optionCategories: categories },
+    {
+      options,
+      style,
+      ref,
+      label,
+      optionCategories: categories,
+      optionTemplates: {
+        addChild: {
+          options: addChildOptions('autocomplete'),
+          optionEvents,
+        },
+      },
+    },
     descendants,
   );
 };

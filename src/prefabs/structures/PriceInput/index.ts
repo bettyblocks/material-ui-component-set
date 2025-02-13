@@ -1,13 +1,15 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
+
 import { updateOption } from '../../../utils';
 import { options } from './options';
 import { Configuration } from '../Configuration';
+import { addChildOptions, optionEvents } from '../TextInput/options/addChild';
 
 export const PriceInput = (
   config: Configuration,
   children: PrefabReference[] = [],
 ) => {
-  const label = config.label ? config.label : undefined;
+  const label = config.label ? config.label : 'Price field';
   const style = { ...config.style };
   const ref = config.ref ? { ...config.ref } : undefined;
 
@@ -53,7 +55,19 @@ export const PriceInput = (
 
   return component(
     'DecimalInput',
-    { options, style, ref, label, optionCategories: categories },
+    {
+      options,
+      style,
+      ref,
+      label,
+      optionCategories: categories,
+      optionTemplates: {
+        addChild: {
+          options: addChildOptions('price'),
+          optionEvents,
+        },
+      },
+    },
     children,
   );
 };

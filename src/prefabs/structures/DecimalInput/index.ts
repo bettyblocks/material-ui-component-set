@@ -1,6 +1,7 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { options } from './options';
 import { Configuration } from '../Configuration';
+import { addChildOptions, optionEvents } from '../TextInput/options/addChild';
 
 export const DecimalInput = (
   config: Configuration,
@@ -48,7 +49,19 @@ export const DecimalInput = (
 
   return component(
     'DecimalInput',
-    { options, style, ref, label, optionCategories: categories },
+    {
+      options,
+      style,
+      ref,
+      label,
+      optionCategories: categories,
+      optionTemplates: {
+        addChild: {
+          options: addChildOptions('decimal'),
+          optionEvents,
+        },
+      },
+    },
     children,
   );
 };

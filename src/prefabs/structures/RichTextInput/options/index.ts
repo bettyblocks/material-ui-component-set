@@ -9,6 +9,7 @@ import {
 import { styles } from './styles';
 import { validation } from './validation';
 import { advanced } from '../../advanced';
+import { getAllowedKindsByType } from '../../../helpers/getAllowedKindsByType';
 
 export const categories = [
   {
@@ -55,11 +56,14 @@ export const categories = [
   },
 ];
 
+const { allowedKinds, allowedInputKinds } = getAllowedKindsByType('richText');
+
 export const richTextOptions = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
     configuration: {
+      ...(allowedInputKinds ? { allowedKinds: allowedInputKinds } : undefined),
       condition: showIf('property', 'EQ', ''),
     },
   }),
@@ -68,10 +72,9 @@ export const richTextOptions = {
     value: '',
     showInReconfigure: true,
     configuration: {
-      allowedKinds: ['TEXT', 'URL', 'IBAN', 'STRING'],
+      allowedKinds,
       disabled: true,
       condition: hideIf('property', 'EQ', ''),
-      showOnDrop: true,
     },
   }),
 

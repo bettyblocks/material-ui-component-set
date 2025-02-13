@@ -10,12 +10,16 @@ import {
 import { advanced } from '../../advanced';
 import { styles } from './styles';
 import { validation } from './validation';
+import { getAllowedKindsByType } from '../../../helpers/getAllowedKindsByType';
+
+const { allowedKinds, allowedInputKinds } = getAllowedKindsByType('checkbox');
 
 export const checkboxInputOptions = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
     configuration: {
+      ...(allowedInputKinds ? { allowedKinds: allowedInputKinds } : undefined),
       condition: showIf('property', 'EQ', ''),
     },
   }),
@@ -23,10 +27,9 @@ export const checkboxInputOptions = {
     value: '',
     showInReconfigure: true,
     configuration: {
-      allowedKinds: ['BOOLEAN'],
+      allowedKinds,
       disabled: true,
       condition: hideIf('property', 'EQ', ''),
-      showOnDrop: true,
     },
   }),
 
