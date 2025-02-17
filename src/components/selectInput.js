@@ -45,12 +45,13 @@
     const [interactionFilter, setInteractionFilter] = useState({});
     const [disabled, setIsDisabled] = useState(initialIsDisabled);
     const mounted = useRef(false);
+    const getValue = (val) => (isNaN(Number(val)) ? val : Number(val));
     const { current: labelControlRef } = useRef(generateUUID());
     const modelProperty = getProperty(property || '') || {};
     const labelText = useText(label);
     const clearLabelText = useText(clearLabel);
     const placeholderLabelText = useText(placeholderLabel);
-    const defaultValueText = Number(useText(prefabValue));
+    const defaultValue = getValue(useText(prefabValue));
     const helperTextResolved = useText(helperText);
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
@@ -67,14 +68,14 @@
     const isObjectProperty = kind === 'object' || kind === 'OBJECT';
 
     const resolvedCurrentValue = isObjectProperty
-      ? JSON.stringify({ uuid: defaultValueText })
-      : defaultValueText || placeholderLabelText;
+      ? JSON.stringify({ uuid: defaultValue })
+      : defaultValue || placeholderLabelText;
 
     const [currentValue, setCurrentValue] = usePageState(resolvedCurrentValue);
 
     useEffect(() => {
       setCurrentValue(resolvedCurrentValue);
-    }, [defaultValueText]);
+    }, [defaultValue]);
 
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
@@ -201,7 +202,7 @@
     }, []);
 
     useEffect(() => {
-      B.defineFunction('Reset', () => setCurrentValue(defaultValueText));
+      B.defineFunction('Reset', () => setCurrentValue(defaultValue));
     }, []);
 
     useEffect(() => {
@@ -246,9 +247,9 @@
 
     useEffect(() => {
       if (isDev) {
-        setCurrentValue(defaultValueText);
+        setCurrentValue(defaultValue);
       }
-    }, [isDev, defaultValueText]);
+    }, [isDev, defaultValue]);
 
     let valid = true;
     let message = '';
@@ -372,7 +373,7 @@
               {clearLabelText}
             </MenuItem>
           )}
-          {placeholderLabelText && !defaultValueText && (
+          {placeholderLabelText && !defaultValue && (
             <MenuItem value={placeholderLabelText} disabled>
               {placeholderLabelText}
             </MenuItem>
