@@ -11,7 +11,7 @@ const attributes = {
 export default prefab('Price', attributes, undefined, [
   PriceInput({
     label: 'Price field',
-    inputLabel: { value: ['Price'] },
+    inputLabel: 'Price',
     type: 'decimal',
   }),
 ]);

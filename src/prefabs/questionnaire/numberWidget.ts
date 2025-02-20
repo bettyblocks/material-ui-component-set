@@ -146,7 +146,7 @@ export const numberWidget = [
               TextInput(
                 {
                   label: 'Number field',
-                  inputLabel: { value: ['Number'] },
+                  inputLabel: 'Number',
                   type: 'number',
                   pattern: '^[0-9]*$',
                   ref: { id: '#numberInput' },

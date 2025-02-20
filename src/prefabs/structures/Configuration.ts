@@ -11,7 +11,7 @@ export interface Configuration {
   optionTemplates?: OptionTemplates;
   adornmentIcon?: string;
   label?: string;
-  inputLabel?: Record<string, any>;
+  inputLabel?: string;
   type?: HTMLInputElement['type'];
   style?: PrefabComponentStyle;
   ref?: { id: string };

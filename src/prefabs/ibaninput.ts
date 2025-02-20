@@ -13,7 +13,7 @@ const pattern =
 export default prefab('IBAN', attributes, undefined, [
   TextInput({
     label: 'IBAN input',
-    inputLabel: { value: ['IBAN'] },
+    inputLabel: 'IBAN',
     type: 'text',
     inputType: 'iban',
     pattern,

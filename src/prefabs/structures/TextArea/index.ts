@@ -13,7 +13,7 @@ export const TextArea = (
   const label = config.label ? config.label : 'Text Area';
 
   if (config.inputLabel) {
-    options.label = updateOption(options.label, { ...config.inputLabel });
+    options.label = updateOption(options.label, { value: [config.inputLabel] });
   }
 
   if (config.value) {

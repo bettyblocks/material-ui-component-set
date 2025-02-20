@@ -11,7 +11,7 @@ const attributes = {
 export default prefab('Phone', attributes, undefined, [
   TextInput({
     label: 'Phone field',
-    inputLabel: { value: ['Phone number'] },
+    inputLabel: 'Phone number',
     inputType: 'phone',
     type: 'tel',
   }),

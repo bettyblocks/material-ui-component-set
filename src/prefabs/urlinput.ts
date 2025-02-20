@@ -11,7 +11,7 @@ const attributes = {
 export default prefab('Url', attributes, undefined, [
   TextInput({
     label: 'Url input',
-    inputLabel: { value: ['URL'] },
+    inputLabel: 'URL',
     inputType: 'url',
     type: 'url',
   }),

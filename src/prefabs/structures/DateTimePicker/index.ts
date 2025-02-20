@@ -90,7 +90,7 @@ export const DateTimePicker = (
 
     if (config.inputLabel) {
       options.label = updateOption(options.label, {
-        ...config.inputLabel,
+        value: [config.inputLabel],
       });
     }
   }

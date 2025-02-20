@@ -49,7 +49,7 @@ export const AutocompleteInput = (
   }
 
   if (config.inputLabel) {
-    options.label = updateOption(options.label, { ...config.inputLabel });
+    options.label = updateOption(options.label, { value: [config.inputLabel] });
   }
 
   if (config.adornmentIcon) {

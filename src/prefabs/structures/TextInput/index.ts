@@ -72,7 +72,7 @@ export const TextInput = (
   }
 
   if (config.inputLabel) {
-    options.label = updateOption(options.label, { ...config.inputLabel });
+    options.label = updateOption(options.label, { value: [config.inputLabel] });
   }
 
   if (config.pattern) {

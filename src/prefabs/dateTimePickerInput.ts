@@ -10,7 +10,7 @@ const attributes = {
 export default makePrefab('Date Time Picker', attributes, undefined, [
   DateTimePicker({
     label: 'Datetime picker',
-    inputLabel: { value: ['Date and time'] },
+    inputLabel: 'Date and time',
     dataComponentAttribute: 'DateTime Input',
     inputType: 'datetime',
   }),

@@ -3813,11 +3813,7 @@ export default makePrefab('User, profile details', attrs, beforeCreate, [
                                                                     label:
                                                                       'Password field',
                                                                     inputLabel:
-                                                                      {
-                                                                        value: [
-                                                                          'Current password',
-                                                                        ],
-                                                                      },
+                                                                      'Current password',
                                                                     type: 'password',
                                                                     adornmentIcon:
                                                                       'VisibilityOff',
@@ -3952,11 +3948,7 @@ export default makePrefab('User, profile details', attrs, beforeCreate, [
                                                                     label:
                                                                       'Password field',
                                                                     inputLabel:
-                                                                      {
-                                                                        value: [
-                                                                          'Confirm password',
-                                                                        ],
-                                                                      },
+                                                                      'Confirm password',
                                                                     type: 'password',
                                                                     adornmentIcon:
                                                                       'VisibilityOff',

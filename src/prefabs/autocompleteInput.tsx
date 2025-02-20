@@ -10,7 +10,7 @@ const attributes = {
 export default prefab('Autocomplete', attributes, undefined, [
   AutocompleteInput({
     label: 'Autocomplete',
-    inputLabel: { value: ['Autocomplete'] },
+    inputLabel: 'Autocomplete',
     type: 'text',
   }),
 ]);

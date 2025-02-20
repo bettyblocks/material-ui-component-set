@@ -10,7 +10,7 @@ const attributes = {
 export default prefab('Decimal', attributes, undefined, [
   DecimalInput({
     label: 'Decimal field',
-    inputLabel: { value: ['Decimal'] },
+    inputLabel: 'Decimal',
     type: 'decimal',
     inputType: 'decimal',
   }),
