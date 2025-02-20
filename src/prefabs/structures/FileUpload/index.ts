@@ -2,6 +2,7 @@ import { PrefabReference, component } from '@betty-blocks/component-sdk';
 import { fileUploadOptionsResolver } from './options';
 import { Configuration } from '../Configuration';
 import { addChildOptions, optionEvents } from './options/addChild';
+import { updateOption } from '../../../utils';
 
 const defaultCategories = [
   {
@@ -42,6 +43,10 @@ export const FileUpload = (
       fileUploadOptionsResolver(config.inputType || 'file')),
   };
   const categories = [...(config.optionCategories || defaultCategories)];
+
+  if (config.inputLabel) {
+    options.label = updateOption(options.label, { value: [config.inputLabel] });
+  }
 
   return component(
     'FileUploadInput',

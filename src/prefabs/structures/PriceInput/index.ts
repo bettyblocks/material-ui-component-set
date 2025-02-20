@@ -17,6 +17,10 @@ export const PriceInput = (
     value: 'start',
   });
 
+  if (config.inputLabel) {
+    options.label = updateOption(options.label, { value: [config.inputLabel] });
+  }
+
   const categories = [
     {
       label: 'Validation Options',

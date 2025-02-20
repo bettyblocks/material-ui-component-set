@@ -65,6 +65,7 @@ export default prefab('Image Upload', attr, undefined, [
     {
       inputType: 'image',
       label: 'Image Upload',
+      inputLabel: 'Select image(s)...',
       optionCategories,
       options: {
         ...fileUploadOptions,

@@ -2,6 +2,7 @@ import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { options } from './options';
 import { Configuration } from '../Configuration';
 import { addChildOptions, optionEvents } from '../TextInput/options/addChild';
+import { updateOption } from '../../../utils';
 
 export const DecimalInput = (
   config: Configuration,
@@ -10,6 +11,10 @@ export const DecimalInput = (
   const label = config.label ? config.label : undefined;
   const style = { ...config.style };
   const ref = config.ref ? { ...config.ref } : undefined;
+
+  if (config.inputLabel) {
+    options.label = updateOption(options.label, { value: [config.inputLabel] });
+  }
 
   const categories = [
     {
