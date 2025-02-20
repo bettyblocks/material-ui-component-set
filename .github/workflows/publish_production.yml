@@ -127,6 +127,11 @@ jobs:
           AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_SANOFI }}
           AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_SANOFI }}
         run: yarn upload
+      - name: upload rva
+        env:
+          AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_RVA }}
+          AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_RVA }}
+        run: yarn upload
       - name: release notes
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
