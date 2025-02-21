@@ -1,3 +1,16 @@
+# [2.204.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.203.4...v2.204.0) (2025-02-19)
+
+
+### Bug Fixes
+
+* fallback to id as default label ([b569ebf](https://github.com/bettyblocks/material-ui-component-set/commit/b569ebf7d3d549ae38d6e0a05f2e82f048faaebf))
+* show minutes and seconds rhs with date time property ([74f7064](https://github.com/bettyblocks/material-ui-component-set/commit/74f70645616ff37b495e96c0734f7019055acdae))
+
+
+### Features
+
+* add clear selected record interaction to the data list and datatable components ([54fda46](https://github.com/bettyblocks/material-ui-component-set/commit/54fda46de5abde9bab70c21b932018ab133430d5))
+
 ## [2.203.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.203.3...v2.203.4) (2025-02-11)
 
 

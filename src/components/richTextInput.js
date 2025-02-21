@@ -354,12 +354,22 @@
         nodeAttributes = { ...nodeAttributes, ...TEXT_TAGS[nodeName](el) };
       }
 
-      const children = Array.from(parent.childNodes).flatMap((node) =>
+      let children = Array.from(parent.childNodes).flatMap((node) =>
         deserialize(node, nodeAttributes),
       );
 
       if (children.length === 0) {
-        children.push(jsx('text', nodeAttributes, ''));
+        children = jsx('text', nodeAttributes, '');
+      }
+
+      if (nodeName === 'LI') {
+        const attrs = ELEMENT_TAGS.LI(el);
+        return jsx('element', attrs, children);
+      }
+
+      if (!Element.isElementList(children)) {
+        const attrs = ELEMENT_TAGS.P(el);
+        children = jsx('element', attrs, children);
       }
 
       if (el.nodeName === 'BODY') {
