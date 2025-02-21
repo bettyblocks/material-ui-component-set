@@ -362,6 +362,11 @@
         children = jsx('text', nodeAttributes, '');
       }
 
+      if (nodeName === 'LI') {
+        const attrs = ELEMENT_TAGS.LI(el);
+        return jsx('element', attrs, children);
+      }
+
       if (!Element.isElementList(children)) {
         const attrs = ELEMENT_TAGS.P(el);
         children = jsx('element', attrs, children);
