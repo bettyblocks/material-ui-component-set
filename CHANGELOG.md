@@ -1,3 +1,10 @@
+# [2.205.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.204.0...v2.205.0) (2025-02-20)
+
+
+### Features
+
+* add rva ([d613e59](https://github.com/bettyblocks/material-ui-component-set/commit/d613e591c4d1824f6589317383db0894ff6dbfc2))
+
 # [2.204.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.203.4...v2.204.0) (2025-02-19)
 
 

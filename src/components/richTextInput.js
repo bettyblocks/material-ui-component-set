@@ -367,12 +367,8 @@
         return jsx('element', attrs, children);
       }
 
-      if (!Element.isElementList(children)) {
-        const attrs = ELEMENT_TAGS.P(el);
-        children = jsx('element', attrs, children);
-      }
-
       if (el.nodeName === 'BODY') {
+        children = jsx('element', nodeAttributes, children);
         return jsx('fragment', {}, children);
       }
 
