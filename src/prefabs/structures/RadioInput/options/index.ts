@@ -11,12 +11,16 @@ import {
 import { advanced } from './advanced';
 import { validation } from './validation';
 import { styles } from './styles';
+import { getAllowedKindsByType } from '../../../helpers/getAllowedKindsByType';
+
+const { allowedKinds, allowedInputKinds } = getAllowedKindsByType('radio');
 
 export const options = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
     configuration: {
+      ...(allowedInputKinds ? { allowedKinds: allowedInputKinds } : undefined),
       condition: showIf('property', 'EQ', ''),
     },
   }),
@@ -24,10 +28,9 @@ export const options = {
     value: '',
     showInReconfigure: true,
     configuration: {
-      allowedKinds: ['LIST', 'BELONGS_TO'],
+      allowedKinds,
       disabled: true,
       condition: hideIf('property', 'EQ', ''),
-      showOnDrop: true,
     },
   }),
 
