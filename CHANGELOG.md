@@ -1,3 +1,39 @@
+# [2.205.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.204.0...v2.205.0) (2025-02-20)
+
+
+### Features
+
+* add rva ([d613e59](https://github.com/bettyblocks/material-ui-component-set/commit/d613e591c4d1824f6589317383db0894ff6dbfc2))
+
+# [2.204.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.203.4...v2.204.0) (2025-02-19)
+
+
+### Bug Fixes
+
+* fallback to id as default label ([b569ebf](https://github.com/bettyblocks/material-ui-component-set/commit/b569ebf7d3d549ae38d6e0a05f2e82f048faaebf))
+* show minutes and seconds rhs with date time property ([74f7064](https://github.com/bettyblocks/material-ui-component-set/commit/74f70645616ff37b495e96c0734f7019055acdae))
+
+
+### Features
+
+* add clear selected record interaction to the data list and datatable components ([54fda46](https://github.com/bettyblocks/material-ui-component-set/commit/54fda46de5abde9bab70c21b932018ab133430d5))
+
+## [2.203.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.203.3...v2.203.4) (2025-02-11)
+
+
+### Bug Fixes
+
+* fallback to id as default label ([b569ebf](https://github.com/bettyblocks/material-ui-component-set/commit/b569ebf7d3d549ae38d6e0a05f2e82f048faaebf))
+* remove ca3 zone ([8587796](https://github.com/bettyblocks/material-ui-component-set/commit/8587796e679aedde79ce4e0fb7f1a3be49c170a3))
+* show minutes and seconds rhs with date time property ([74f7064](https://github.com/bettyblocks/material-ui-component-set/commit/74f70645616ff37b495e96c0734f7019055acdae))
+
+## [2.203.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.203.2...v2.203.3) (2025-02-10)
+
+
+### Bug Fixes
+
+* clear the decimal input after triggering a clear interaction ([a72bb45](https://github.com/bettyblocks/material-ui-component-set/commit/a72bb455d40004087f93008db2bf80c122c39a7b))
+
 ## [2.203.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.203.1...v2.203.2) (2025-02-06)
 
 

@@ -24,11 +24,6 @@ jobs:
           AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_AWS }}
           AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_AWS }}
         run: yarn upload-bundle
-      - name: upload ca3
-        env:
-          AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_CA3 }}
-          AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_CA3 }}
-        run: yarn upload-bundle
       - name: upload cc2
         env:
           AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_CC2 }}
@@ -118,4 +113,9 @@ jobs:
         env:
           AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_SANOFI }}
           AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_SANOFI }}
+        run: yarn upload-bundle
+      - name: upload rva
+        env:
+          AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_RVA }}
+          AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_RVA }}
         run: yarn upload-bundle
