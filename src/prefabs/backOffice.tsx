@@ -88,7 +88,10 @@ import {
   textOptions,
 } from './structures';
 import { options as formOptions } from './structures/ActionJSForm/options';
-import { children as formChildren } from './structures/ActionJSForm/children';
+import {
+  children as formChildren,
+  inputTypes,
+} from './structures/ActionJSForm/children';
 import { Properties, IdPropertyProps, ModelProps, ModelQuery } from './types';
 import { PermissionType, PropertyStateProps } from './types/types';
 
@@ -1299,6 +1302,16 @@ const drawerContainer = DrawerContainer(
                                               },
                                             },
                                           ),
+                                          addChild: addChild('Add input', {
+                                            value: {
+                                              children: inputTypes,
+                                              addChildWizardType:
+                                                'ChildSelector',
+                                            },
+                                            ref: {
+                                              id: '#createFormAddChild',
+                                            },
+                                          }),
                                         },
                                         ref: { id: '#createForm' },
                                       },
@@ -2730,6 +2743,16 @@ const drawerContainer = DrawerContainer(
                                               },
                                             },
                                           ),
+                                          addChild: addChild('AddChild', {
+                                            value: {
+                                              children: inputTypes,
+                                              addChildWizardType:
+                                                'ChildSelector',
+                                            },
+                                            ref: {
+                                              id: '#updateFormAddChild',
+                                            },
+                                          }),
                                         },
                                         ref: { id: '#updateForm' },
                                       },
@@ -5114,7 +5137,9 @@ const prefabStructure = [
             'reconfigureSubView',
             'addSubViewChild',
             'reconfigureCreateForm',
+            'addChildCreateForm',
             'reconfigureUpdateForm',
+            'addChildUpdateForm',
           ],
           condition: {
             type: 'SHOW',
@@ -5283,6 +5308,23 @@ const prefabStructure = [
             },
           },
         }),
+        addChildCreateForm: linked({
+          label: 'Add input create form',
+          value: {
+            ref: {
+              componentId: '#createForm',
+              optionId: '#createFormAddChild',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'shownTab',
+              comparator: 'EQ',
+              value: 1,
+            },
+          },
+        }),
         createFormAction: linked({
           label: 'Create action',
           value: {
@@ -5408,6 +5450,23 @@ const prefabStructure = [
             ref: {
               componentId: '#updateForm',
               optionId: '#updateFormReconfigure',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'shownTab',
+              comparator: 'EQ',
+              value: 3,
+            },
+          },
+        }),
+        addChildUpdateForm: linked({
+          label: 'Add input update form',
+          value: {
+            ref: {
+              componentId: '#updateForm',
+              optionId: '#updateFormAddChild',
             },
           },
           configuration: {
