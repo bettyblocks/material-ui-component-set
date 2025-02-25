@@ -1,3 +1,12 @@
+## [2.206.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.206.0...v2.206.1) (2025-02-25)
+
+
+### Bug Fixes
+
+* add an element in the body element to prevent not being able to type by default ([6fb73f3](https://github.com/bettyblocks/material-ui-component-set/commit/6fb73f3e8d758d498866d3d8733a348bfd55b9b0))
+* formatting of li elements to not contain paragraph tags ([5bf2c98](https://github.com/bettyblocks/material-ui-component-set/commit/5bf2c98e5caa29b02c9088580eea3af0d4a10e4c))
+* re-add code that was removed in commit d31fe55d4004 to re-enable ([8d30c8b](https://github.com/bettyblocks/material-ui-component-set/commit/8d30c8b40f40cdd531a24e70ca00fb9778b9171a))
+
 # [2.206.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.205.0...v2.206.0) (2025-02-24)
 
 
