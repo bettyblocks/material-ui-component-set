@@ -13,6 +13,7 @@
       width,
       disableClick: disableBackdropClick,
       preLoadChildren,
+      disableEnforceFocus,
       dataComponentAttribute,
     } = options;
     const { Dialog } = window.MaterialUI.Core;
@@ -67,6 +68,7 @@
         aria-labelledby="modal-dialog"
         keepMounted={keepMounted}
         disableBackdropClick={disableBackdropClick}
+        disableEnforceFocus={disableEnforceFocus}
         data-component={useText(dataComponentAttribute) || 'Dialog'}
       >
         {children}

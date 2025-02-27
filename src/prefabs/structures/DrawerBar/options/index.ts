@@ -1,11 +1,11 @@
-import { color, ThemeColor, sizes } from '@betty-blocks/component-sdk';
+import { color, ThemeColor, sizes, toggle } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
 export const categories = [
   {
     label: 'Advanced Options',
     expanded: false,
-    members: ['dataComponentAttribute'],
+    members: ['dataComponentAttribute', 'disableEnforceFocus'],
   },
 ];
 
@@ -16,6 +16,9 @@ export const drawerBarOptions = {
   }),
   innerSpacing: sizes('Inner space', {
     value: ['M', 'M', 'M', 'M'],
+  }),
+  disableEnforceFocus: toggle('Disable enforce focus', {
+    value: false,
   }),
 
   ...advanced('Drawer Sidebar'),
