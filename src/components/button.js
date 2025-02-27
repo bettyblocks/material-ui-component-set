@@ -381,6 +381,12 @@
         border: 'none',
         background: 'transparent',
         padding: 0,
+        width: ({ options: { fullWidth, outerSpacing } }) =>
+          !fullWidth
+            ? 'auto'
+            : `calc(100% - ${getSpacing(outerSpacing[1])} - ${getSpacing(
+                outerSpacing[3],
+              )})`,
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
         marginRight: ({ options: { outerSpacing } }) =>
