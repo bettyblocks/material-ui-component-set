@@ -1,3 +1,40 @@
+## [2.206.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.206.0...v2.206.1) (2025-02-25)
+
+
+### Bug Fixes
+
+* add an element in the body element to prevent not being able to type by default ([6fb73f3](https://github.com/bettyblocks/material-ui-component-set/commit/6fb73f3e8d758d498866d3d8733a348bfd55b9b0))
+* formatting of li elements to not contain paragraph tags ([5bf2c98](https://github.com/bettyblocks/material-ui-component-set/commit/5bf2c98e5caa29b02c9088580eea3af0d4a10e4c))
+* re-add code that was removed in commit d31fe55d4004 to re-enable ([8d30c8b](https://github.com/bettyblocks/material-ui-component-set/commit/8d30c8b40f40cdd531a24e70ca00fb9778b9171a))
+
+# [2.206.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.205.0...v2.206.0) (2025-02-24)
+
+
+### Bug Fixes
+
+* adapt optionEvents introducing side-effects for static label values and genration of actionInputVariables ([e4ec918](https://github.com/bettyblocks/material-ui-component-set/commit/e4ec9185382480551db3493189bcde352007d3e9))
+* add default labels to decimal and price input ([575a04e](https://github.com/bettyblocks/material-ui-component-set/commit/575a04e91d83ee0ba917a606f7b3882df49e2f25))
+* add optionActions ([58cea7b](https://github.com/bettyblocks/material-ui-component-set/commit/58cea7bd5a7b07588c2f6230e98953b08806c3d9))
+* add specific mapping for allowed action input variables ([c25d948](https://github.com/bettyblocks/material-ui-component-set/commit/c25d948f88df98bfe2759403dd2d3c36a2346133))
+* align allowed kinds for both addChild and sidebar options ([68eaa51](https://github.com/bettyblocks/material-ui-component-set/commit/68eaa51ec4f4c10eae637e30e362856e44956642))
+* better naming for iban pattern ([d6c044a](https://github.com/bettyblocks/material-ui-component-set/commit/d6c044a483435b8aec8a431b195c692b6d2df766))
+* change action variable input type to number ([4f86ae3](https://github.com/bettyblocks/material-ui-component-set/commit/4f86ae37233d42c8ee36d2d7f74cec51ebdb07b8))
+* disable formatting for inputs ([233c4e5](https://github.com/bettyblocks/material-ui-component-set/commit/233c4e5cf77f3308b537bd54200458f4b1223d7f))
+* disable formatting on the hidden input ([748d6a0](https://github.com/bettyblocks/material-ui-component-set/commit/748d6a0a2cbfd5be38bdb669fb7e931db2c5f125))
+* keep the original options and extend with a optionsResolver ([fec3d30](https://github.com/bettyblocks/material-ui-component-set/commit/fec3d30a45da3a04a65d7669b31ac1c5557e48c5))
+* rename optionActions to optionEvents and change the structure to a more logical setup ([dd2c3f6](https://github.com/bettyblocks/material-ui-component-set/commit/dd2c3f6555f58501ad6230f53798cc37da4bf826))
+* set model id for select component when a property is selected ([4bf95a3](https://github.com/bettyblocks/material-ui-component-set/commit/4bf95a37a40de4a5ba46c6323c2640cf5a1122b2))
+
+
+### Features
+
+* add addChild option templates ([13397f4](https://github.com/bettyblocks/material-ui-component-set/commit/13397f4b7f99defb8b436ddcabaac97dd44fa977))
+* add all input types to form component addChild ([5c1781d](https://github.com/bettyblocks/material-ui-component-set/commit/5c1781d8213680fce27626372826646d2daf7e1a))
+* add allowedkinds and disabledNames to textInput addchild ([a593f5f](https://github.com/bettyblocks/material-ui-component-set/commit/a593f5f9c2f07e0f7986365a9320be25edc87ed6))
+* add optionType option event to select option events ([7864ccf](https://github.com/bettyblocks/material-ui-component-set/commit/7864ccfde9cf5dde59478a13ac001995b9ab1c5d))
+* add property based option to show onDrop ([605fd6d](https://github.com/bettyblocks/material-ui-component-set/commit/605fd6dd2793f44c82460e0843e0b97c624fd037))
+* create actioninput variable when saving property via addchild ([cd6d67e](https://github.com/bettyblocks/material-ui-component-set/commit/cd6d67e9f842464826d2e3acae48dc2a3255daa8))
+
 # [2.205.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.204.0...v2.205.0) (2025-02-20)
 
 
