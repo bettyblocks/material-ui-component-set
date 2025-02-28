@@ -1,3 +1,10 @@
+## [2.208.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.208.0...v2.208.1) (2025-02-28)
+
+
+### Bug Fixes
+
+* parse default value of select to number value ([930b544](https://github.com/bettyblocks/material-ui-component-set/commit/930b5448ce733401dc411c1505fb05efd9a2468a))
+
 # [2.208.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.207.2...v2.208.0) (2025-02-28)
 
 
