@@ -1,26 +1,28 @@
 import {
+  buttongroup,
   hideIf,
+  number,
   option,
   property,
   showIf,
-  text,
+  toggle,
   variable,
 } from '@betty-blocks/component-sdk';
-import { PartialBy } from '../../../../utils';
 import { advanced } from '../../TextInput/options/advanced';
-import { styles as defaultStyles } from '../../TextInput/options/styles';
-import { validation } from '../../TextInput/options/validation';
+import { styles as defaultStyles } from './styles';
+import { validation } from '../../DecimalInput/options/validation';
+import { getAllowedKindsByType } from '../../../helpers/getAllowedKindsByType';
 
 const styles = { ...defaultStyles };
 
-// TODO: make a typed function to omit keys from an object
-delete (<PartialBy<typeof styles, 'adornmentIcon'>>styles).adornmentIcon;
+const { allowedKinds, allowedInputKinds } = getAllowedKindsByType('price');
 
 export const options = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
     configuration: {
+      ...(allowedInputKinds ? { allowedKinds: allowedInputKinds } : undefined),
       condition: showIf('property', 'EQ', ''),
     },
   }),
@@ -28,22 +30,67 @@ export const options = {
   property: property('Property', {
     value: '',
     configuration: {
-      allowedKinds: ['INTEGER', 'PRICE', 'PRICE_EXPRESSION'],
+      allowedKinds,
       disabled: true,
       condition: hideIf('property', 'EQ', ''),
-      showOnDrop: true,
     },
   }),
 
-  label: variable('Label', { value: [''] }),
-  value: variable('Value', { value: [''] }),
-
-  ...validation,
-
-  adornment: text('Currency', {
-    value: '€',
+  label: variable('Label', {
+    value: [''],
+    configuration: { allowFormatting: false, allowPropertyName: true },
+  }),
+  value: variable('Value', {
+    value: [''],
+    configuration: { allowFormatting: false },
   }),
 
+  separator: buttongroup(
+    'Decimal separator',
+    [
+      ['Comma (1.234,56)', ','],
+      ['Point (1,234.56)', '.'],
+    ],
+    {
+      value: ',',
+    },
+  ),
+
+  decimalScale: number('Scale', {
+    value: '2',
+  }),
+
+  adornment: variable('Currency', {
+    value: ['€'],
+    configuration: {
+      allowedKinds: ['STRING'],
+    },
+  }),
+
+  adornmentPosition: buttongroup(
+    'Currency position',
+    [
+      ['Start', 'start'],
+      ['End', 'end'],
+    ],
+    {
+      value: 'end',
+      configuration: {
+        condition: {
+          type: 'HIDE',
+          option: 'adornmentIcon',
+          comparator: 'EQ',
+          value: '',
+        },
+      },
+    },
+  ),
+
+  showGroupSeparator: toggle('Show group (thousands) separator', {
+    value: true,
+  }),
+
+  ...validation,
   ...styles,
   ...advanced,
 };

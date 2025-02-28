@@ -4,18 +4,29 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { actionVariableId: name, value } = options;
-    const isDev = B.env === 'dev';
+    const { actionVariableId: name, value: valueRaw } = options;
+    const { env, useText } = B;
+    const isDev = env === 'dev';
+    const valueText = useText(valueRaw);
+    const [value, setValue] = useState(valueText);
+
+    useEffect(() => {
+      B.defineFunction('setValue', (val) => setValue(val));
+    }, []);
+
+    useEffect(() => {
+      setValue(valueText);
+    }, [valueText]);
 
     if (isDev) {
-      return <div className={classes.dev}>Hidden input {B.useText(value)}</div>;
+      return <div className={classes.dev}>Hidden input {value}</div>;
     }
 
     function Input() {
       return (
         <input
           className={[isDev ? classes.dev : ''].join(' ')}
-          defaultValue={B.useText(value)}
+          defaultValue={value}
           id={name}
           name={name}
           type="hidden"

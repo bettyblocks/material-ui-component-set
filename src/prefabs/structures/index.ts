@@ -47,7 +47,7 @@ import { MultiAutocomplete } from './MultiAutoCompleteInput';
 import { OpenPageButton } from './OpenPage';
 import { Panel } from './Panel';
 import { Paper } from './Paper';
-import { PriceInput } from './PriceInput';
+import { DecimalInput } from './DecimalInput';
 import { Progress } from './Progress';
 import { RadioInput } from './RadioInput';
 import { RatingInput } from './RatingInput';
@@ -115,7 +115,7 @@ import { options as multiAutocompleteOptions } from './MultiAutoCompleteInput/op
 import { openPageButtonOptions } from './OpenPage/options';
 import { panelOptions } from './Panel/options';
 import { paperOptions } from './Paper/options';
-import { options as priceInputOptions } from './PriceInput/options';
+import { options as decimalInputOptions } from './DecimalInput/options';
 import { progressOptions } from './Progress/options';
 import { options as radioInputOptions } from './RadioInput/options';
 import { ratingInputOptions } from './RatingInput/options';
@@ -185,7 +185,7 @@ export {
   OpenPageButton,
   Panel,
   Paper,
-  PriceInput,
+  DecimalInput,
   Progress,
   RadioInput,
   RatingInput,
@@ -251,7 +251,7 @@ export {
   openPageButtonOptions,
   panelOptions,
   paperOptions,
-  priceInputOptions,
+  decimalInputOptions,
   progressOptions,
   radioInputOptions,
   ratingInputOptions,
