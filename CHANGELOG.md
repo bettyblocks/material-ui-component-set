@@ -1,3 +1,10 @@
+# [2.207.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.206.1...v2.207.0) (2025-02-28)
+
+
+### Features
+
+* add border radius and lighter background color styling options ([8b3178d](https://github.com/bettyblocks/material-ui-component-set/commit/8b3178d69077c005e0653543cb18e1c9a9b08452))
+
 ## [2.206.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.206.0...v2.206.1) (2025-02-25)
 
 
