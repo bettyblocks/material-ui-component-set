@@ -1,3 +1,10 @@
+## [2.207.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.207.1...v2.207.2) (2025-02-28)
+
+
+### Bug Fixes
+
+* add option to disable enfore focus to enable TinyMCE functionality ([9fddc1b](https://github.com/bettyblocks/material-ui-component-set/commit/9fddc1bff86084749259a21efc631348a4ab36ea))
+
 ## [2.207.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.207.0...v2.207.1) (2025-02-28)
 
 
