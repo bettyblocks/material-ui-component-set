@@ -10,7 +10,7 @@
     const [value, setValue] = useState(useText(valueRaw));
 
     useEffect(() => {
-      B.defineFunction('Set value', (val) => setValue(val));
+      B.defineFunction('setValue', (val) => setValue(val));
     }, []);
 
     if (isDev) {
