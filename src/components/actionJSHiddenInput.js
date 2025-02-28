@@ -7,11 +7,16 @@
     const { actionVariableId: name, value: valueRaw } = options;
     const { env, useText } = B;
     const isDev = env === 'dev';
-    const [value, setValue] = useState(useText(valueRaw));
+    const valueText = useText(valueRaw);
+    const [value, setValue] = useState(valueText);
 
     useEffect(() => {
       B.defineFunction('setValue', (val) => setValue(val));
     }, []);
+
+    useEffect(() => {
+      setValue(valueText);
+    }, [valueText]);
 
     if (isDev) {
       return <div className={classes.dev}>Hidden input {value}</div>;
