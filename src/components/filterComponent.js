@@ -502,7 +502,7 @@
                 value={row.rightValue === '' ? null : row.rightValue}
                 variant="inline"
                 inputVariant="outlined"
-                format="MM/dd/yyyy"
+                format="MM/dd/yyyy HH:mm:ss"
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
                 }}
