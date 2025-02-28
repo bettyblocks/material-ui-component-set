@@ -1,3 +1,15 @@
+# [2.208.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.207.2...v2.208.0) (2025-02-28)
+
+
+### Bug Fixes
+
+* set value again when value in page state changes ([cda9cba](https://github.com/bettyblocks/material-ui-component-set/commit/cda9cbafb3023d29d9d6d690c70e94f5c54fc614))
+
+
+### Features
+
+* add function to set hidden input value via an interaction ([a79db75](https://github.com/bettyblocks/material-ui-component-set/commit/a79db7520142e4d7b1720e5cbc451fb946be5995))
+
 ## [2.207.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.207.1...v2.207.2) (2025-02-28)
 
 
