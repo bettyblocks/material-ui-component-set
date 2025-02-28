@@ -66,7 +66,7 @@
         className={includeStyling()}
         variant={variant}
         value={normalise(currentValue)}
-        valueBuffer={currentValueBuffer}
+        valueBuffer={normalise(currentValueBuffer)}
         thickness={useText(thickness)}
         size={useText(size)}
         data-component={useText(dataComponentAttribute) || 'Progress'}
@@ -82,11 +82,10 @@
     );
   })(),
   styles: (B) => (t) => {
-    const { color: colorFunc, mediaMinWidth, Styling } = B;
+    const { mediaMinWidth, Styling } = B;
     const style = new Styling(t);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
-    const getLighterColor = (col, val) => colorFunc.lighten(col, val);
     return {
       wrapper: {
         display: ({ options: { type } }) =>
@@ -107,25 +106,24 @@
         ],
       },
       lighterBackgroundColor: {
-        backgroundColor: ({ options: { color } }) => [
-          getLighterColor(style.getColor(color), 0.7),
+        backgroundColor: ({ options: { lighterBackgroundColor } }) => [
+          style.getColor(lighterBackgroundColor),
           '!important',
         ],
       },
       lighterDashedColor: {
-        backgroundImage: ({ options: { color } }) => [
-          `radial-gradient(${getLighterColor(
-            style.getColor(color),
-            0.7,
-          )} 0%, ${getLighterColor(
-            style.getColor(color),
-            0.7,
+        backgroundImage: ({ options: { lighterBackgroundColor } }) => [
+          `radial-gradient(${style.getColor(
+            lighterBackgroundColor,
+          )} 0%, ${style.getColor(
+            lighterBackgroundColor,
           )} 16%, transparent 42%)`,
           '!important',
         ],
       },
       root: {
         width: ({ options: { type } }) => type !== 'circular' && '100%',
+        borderRadius: ({ options: { borderRadius } }) => borderRadius,
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
         marginRight: ({ options: { outerSpacing } }) =>
