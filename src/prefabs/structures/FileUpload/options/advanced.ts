@@ -1,4 +1,4 @@
-import { variable, showIf, option } from '@betty-blocks/component-sdk';
+import { variable } from '@betty-blocks/component-sdk';
 
 export const advanced = {
   nameAttribute: variable('name attribute', {
@@ -6,12 +6,5 @@ export const advanced = {
   }),
   dataComponentAttribute: variable('Test attribute', {
     value: ['FileUpload'],
-  }),
-  actionVariableId: option('ACTION_JS_VARIABLE', {
-    label: 'Name',
-    value: '',
-    configuration: {
-      condition: showIf('property', 'EQ', ''),
-    },
   }),
 };

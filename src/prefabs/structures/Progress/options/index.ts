@@ -7,6 +7,7 @@ import {
   variable,
   text,
   sizes,
+  size,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -14,7 +15,13 @@ export const categories = [
   {
     label: 'Styling',
     expanded: false,
-    members: ['color', 'thickness', 'size'],
+    members: [
+      'color',
+      'lighterBackgroundColor',
+      'thickness',
+      'size',
+      'borderRadius',
+    ],
   },
   {
     label: 'Spacing',
@@ -78,6 +85,19 @@ export const progressOptions = {
     },
   }),
   color: color('Color', { value: ThemeColor.PRIMARY }),
+  lighterBackgroundColor: color('Lighter background color', {
+    value: ThemeColor.LIGHT,
+    configuration: {
+      condition: showIf('type', 'EQ', 'linear'),
+    },
+  }),
+  borderRadius: size('Border radius', {
+    value: '',
+    configuration: {
+      as: 'UNIT',
+      condition: showIf('type', 'EQ', 'linear'),
+    },
+  }),
   thickness: variable('Thickness', {
     value: ['3.6'],
     configuration: {
