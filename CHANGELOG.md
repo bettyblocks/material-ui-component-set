@@ -1,3 +1,10 @@
+## [2.207.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.207.0...v2.207.1) (2025-02-28)
+
+
+### Bug Fixes
+
+* apply full width to submit and action buttons on smaller devices ([c8a04ca](https://github.com/bettyblocks/material-ui-component-set/commit/c8a04ca0aa1a5231f2c1275cddadfe6538120b4f))
+
 # [2.207.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.206.1...v2.207.0) (2025-02-28)
 
 
