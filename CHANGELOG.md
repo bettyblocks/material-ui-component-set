@@ -1,3 +1,50 @@
+# [2.209.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.208.1...v2.209.0) (2025-03-03)
+
+
+### Features
+
+* write selected date to page state ([a1f111d](https://github.com/bettyblocks/material-ui-component-set/commit/a1f111d2511abdb19ca2414f652383acff8cc60a))
+
+## [2.208.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.208.0...v2.208.1) (2025-02-28)
+
+
+### Bug Fixes
+
+* parse default value of select to number value ([930b544](https://github.com/bettyblocks/material-ui-component-set/commit/930b5448ce733401dc411c1505fb05efd9a2468a))
+
+# [2.208.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.207.2...v2.208.0) (2025-02-28)
+
+
+### Bug Fixes
+
+* set value again when value in page state changes ([cda9cba](https://github.com/bettyblocks/material-ui-component-set/commit/cda9cbafb3023d29d9d6d690c70e94f5c54fc614))
+
+
+### Features
+
+* add function to set hidden input value via an interaction ([a79db75](https://github.com/bettyblocks/material-ui-component-set/commit/a79db7520142e4d7b1720e5cbc451fb946be5995))
+
+## [2.207.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.207.1...v2.207.2) (2025-02-28)
+
+
+### Bug Fixes
+
+* add option to disable enfore focus to enable TinyMCE functionality ([9fddc1b](https://github.com/bettyblocks/material-ui-component-set/commit/9fddc1bff86084749259a21efc631348a4ab36ea))
+
+## [2.207.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.207.0...v2.207.1) (2025-02-28)
+
+
+### Bug Fixes
+
+* apply full width to submit and action buttons on smaller devices ([c8a04ca](https://github.com/bettyblocks/material-ui-component-set/commit/c8a04ca0aa1a5231f2c1275cddadfe6538120b4f))
+
+# [2.207.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.206.1...v2.207.0) (2025-02-28)
+
+
+### Features
+
+* add border radius and lighter background color styling options ([8b3178d](https://github.com/bettyblocks/material-ui-component-set/commit/8b3178d69077c005e0653543cb18e1c9a9b08452))
+
 ## [2.206.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.206.0...v2.206.1) (2025-02-25)
 
 

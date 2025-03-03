@@ -69,7 +69,7 @@
 
     const { current: labelControlRef } = useRef(generateUUID());
 
-    const [selectedDate, setSelectedDate] = useState(valueText || null);
+    const [selectedDate, setSelectedDate] = usePageState(valueText || null);
     const [errorState, setErrorState] = useState(error);
     const [currentHelperText, setHelper] = useState(optionHelperText);
     const [isDisabled, setIsDisabled] = useState(disabled);
