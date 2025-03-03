@@ -1,3 +1,10 @@
+# [2.209.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.208.1...v2.209.0) (2025-03-03)
+
+
+### Features
+
+* write selected date to page state ([a1f111d](https://github.com/bettyblocks/material-ui-component-set/commit/a1f111d2511abdb19ca2414f652383acff8cc60a))
+
 ## [2.208.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.208.0...v2.208.1) (2025-02-28)
 
 
