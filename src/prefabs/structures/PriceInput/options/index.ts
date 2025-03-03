@@ -11,14 +11,18 @@ import {
 import { advanced } from '../../TextInput/options/advanced';
 import { styles as defaultStyles } from './styles';
 import { validation } from '../../DecimalInput/options/validation';
+import { getAllowedKindsByType } from '../../../helpers/getAllowedKindsByType';
 
 const styles = { ...defaultStyles };
+
+const { allowedKinds, allowedInputKinds } = getAllowedKindsByType('price');
 
 export const options = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
     configuration: {
+      ...(allowedInputKinds ? { allowedKinds: allowedInputKinds } : undefined),
       condition: showIf('property', 'EQ', ''),
     },
   }),
@@ -26,16 +30,15 @@ export const options = {
   property: property('Property', {
     value: '',
     configuration: {
-      allowedKinds: ['INTEGER', 'PRICE', 'PRICE_EXPRESSION'],
+      allowedKinds,
       disabled: true,
       condition: hideIf('property', 'EQ', ''),
-      showOnDrop: true,
     },
   }),
 
   label: variable('Label', {
     value: [''],
-    configuration: { allowFormatting: false },
+    configuration: { allowFormatting: false, allowPropertyName: true },
   }),
   value: variable('Value', {
     value: [''],

@@ -5,9 +5,10 @@ import {
   number,
   showIf,
   reconfigure,
+  addChild,
 } from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
-import { children } from './children';
+import { children, inputTypes } from './children';
 
 export const categories = [
   {
@@ -27,6 +28,12 @@ export const options = {
     value: {
       children,
       reconfigureWizardType: 'ChildrenSelector',
+    },
+  }),
+  addChild: addChild('Add form input', {
+    value: {
+      children: inputTypes,
+      addChildWizardType: 'ChildSelector',
     },
   }),
   actionId: option('ACTION_JS', { label: 'Action', value: '' }),
