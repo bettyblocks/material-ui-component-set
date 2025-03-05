@@ -320,13 +320,13 @@
                   outerSpacing[3],
                 )})`,
           marginTop: ({ options: { outerSpacing } }) =>
-            '' && getSpacing(outerSpacing[0]),
+            getSpacing(outerSpacing[0]),
           marginRight: ({ options: { outerSpacing } }) =>
-            '' && getSpacing(outerSpacing[1]),
+            getSpacing(outerSpacing[1]),
           marginBottom: ({ options: { outerSpacing } }) =>
-            '' && getSpacing(outerSpacing[2]),
+            getSpacing(outerSpacing[2]),
           marginLeft: ({ options: { outerSpacing } }) =>
-            '' && getSpacing(outerSpacing[3]),
+            getSpacing(outerSpacing[3]),
           [`@media ${mediaMinWidth(600)}`]: {
             width: ({ options: { fullWidth, outerSpacing } }) => {
               if (!fullWidth) return 'auto';
