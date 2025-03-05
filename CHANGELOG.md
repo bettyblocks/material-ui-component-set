@@ -1,3 +1,10 @@
+## [2.209.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.1...v2.209.2) (2025-03-05)
+
+
+### Bug Fixes
+
+* show static url image in design time ([dde3c92](https://github.com/bettyblocks/material-ui-component-set/commit/dde3c9224ee62e20c8c379a980c6730a5cb41eed))
+
 ## [2.209.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.0...v2.209.1) (2025-03-05)
 
 
