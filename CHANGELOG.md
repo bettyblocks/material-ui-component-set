@@ -1,3 +1,10 @@
+## [2.209.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.2...v2.209.3) (2025-03-05)
+
+
+### Bug Fixes
+
+* add full width in hidden input ([786dfea](https://github.com/bettyblocks/material-ui-component-set/commit/786dfea5b65e19ca5f882fec36a321811f01b74b))
+
 ## [2.209.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.1...v2.209.2) (2025-03-05)
 
 
