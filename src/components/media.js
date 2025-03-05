@@ -203,10 +203,12 @@
     }
 
     let MediaComponent = PlaceholderComponent;
+    const isDevImage = isDev && isImage && imgUrl !== '' && !isVariable;
+    const isRuntimeImage = !isDev && isImage && imgUrl !== '';
 
     if (isImage && !isVariableDev && hasLink) {
       MediaComponent = LinkComponent;
-    } else if (isImage && !isVariableDev) {
+    } else if (isDevImage || isRuntimeImage) {
       MediaComponent = ImageComponent;
     } else if (isVideo) {
       MediaComponent = VideoComponent;
