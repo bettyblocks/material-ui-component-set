@@ -1,3 +1,10 @@
+## [2.209.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.0...v2.209.1) (2025-03-05)
+
+
+### Bug Fixes
+
+* apply outer spacing to button on smaller devices ([76c553f](https://github.com/bettyblocks/material-ui-component-set/commit/76c553f41b682a0fea28c730e28469d1071677a4))
+
 # [2.209.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.208.1...v2.209.0) (2025-03-03)
 
 
