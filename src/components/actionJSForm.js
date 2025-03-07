@@ -182,7 +182,10 @@
           <FormComponent />
         </div>
       ) : (
-        <div className={`${classes.empty} ${classes.pristine}`}>Form</div>
+        <div className={`${classes.empty} ${classes.pristine}`}>
+          <FormComponent />
+          Form
+        </div>
       );
     }
 
