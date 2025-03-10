@@ -1,3 +1,10 @@
+## [2.209.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.3...v2.209.4) (2025-03-10)
+
+
+### Bug Fixes
+
+* form not crashing with no children ([fa2632f](https://github.com/bettyblocks/material-ui-component-set/commit/fa2632f8679ee5d6279941fbf34926129d81b805))
+
 ## [2.209.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.2...v2.209.3) (2025-03-05)
 
 
