@@ -348,7 +348,7 @@
     }
 
     return (
-      <div>
+      <FormControl fullWidth={fullWidth}>
         <input
           type="number"
           name={name}
@@ -360,7 +360,7 @@
           step={scaleToFraction(decimalScale)}
         />
         {DecimalFieldComponent}
-      </div>
+      </FormControl>
     );
   })(),
   styles: (B) => (t) => {
