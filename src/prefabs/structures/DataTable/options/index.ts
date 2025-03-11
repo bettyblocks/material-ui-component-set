@@ -85,6 +85,9 @@ const children = [
         value: '',
         showInAddChild: true,
         showInReconfigure: true,
+        configuration: {
+          allowFormatting: true,
+        },
       }),
     },
   }),
