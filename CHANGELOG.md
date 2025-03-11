@@ -1,3 +1,10 @@
+## [2.209.8](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.7...v2.209.8) (2025-03-11)
+
+
+### Bug Fixes
+
+* reset error state in email input when empty ([d000139](https://github.com/bettyblocks/material-ui-component-set/commit/d000139215ecee004222142106c8604a5ad08a74))
+
 ## [2.209.7](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.6...v2.209.7) (2025-03-11)
 
 
