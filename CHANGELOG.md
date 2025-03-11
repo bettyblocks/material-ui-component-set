@@ -1,3 +1,17 @@
+## [2.209.6](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.5...v2.209.6) (2025-03-11)
+
+
+### Bug Fixes
+
+* fix checkbox crashing in runtime with uncheck/check ([0f2ddea](https://github.com/bettyblocks/material-ui-component-set/commit/0f2ddea8a7a2a4f6bafe910f876b761fac0f45c7))
+
+## [2.209.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.4...v2.209.5) (2025-03-11)
+
+
+### Bug Fixes
+
+* allow format overwrite in data table column ([9760c0f](https://github.com/bettyblocks/material-ui-component-set/commit/9760c0fa8de6f84610b57ffbf6c8e633fa460171))
+
 ## [2.209.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.3...v2.209.4) (2025-03-10)
 
 
