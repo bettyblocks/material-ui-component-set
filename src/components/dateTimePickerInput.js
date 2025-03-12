@@ -75,7 +75,10 @@
     const [isDisabled, setIsDisabled] = useState(disabled);
     const [isFirstValidation, setIsFirstValidation] = useState(true);
 
-    B.defineFunction('Clear', () => setSelectedDate(null));
+    B.defineFunction('Clear', () => {
+      setIsFirstValidation(true);
+      setSelectedDate(null);
+    });
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
 
