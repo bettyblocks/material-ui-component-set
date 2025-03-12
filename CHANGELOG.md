@@ -1,3 +1,10 @@
+## [2.209.9](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.8...v2.209.9) (2025-03-12)
+
+
+### Bug Fixes
+
+* check if tabsref current exists before calling the update indicator ([4e00c97](https://github.com/bettyblocks/material-ui-component-set/commit/4e00c97fa9dd6ca5449130cad680b7286cf223d0))
+
 ## [2.209.8](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.7...v2.209.8) (2025-03-11)
 
 
