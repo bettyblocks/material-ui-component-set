@@ -135,9 +135,16 @@
 
     const customPatternValidation = (target) => {
       const { value: eventValue, validity } = target;
+
       if (!pattern) {
         return validity;
       }
+
+      if (eventValue === '') {
+        target.setCustomValidity('');
+        return { ...validity, valid: true, patternMismatch: false };
+      }
+
       const patternRegex = RegExp(`^${pattern}$`);
       const isValid = patternRegex.test(eventValue);
       target.setCustomValidity(isValid ? '' : 'Invalid field.');
@@ -185,7 +192,7 @@
       const { target } = event;
       let { validity: validation } = target;
 
-      if (isNumberType || multiline) {
+      if (isNumberType || multiline || isEmailType) {
         validation = customPatternValidation(target);
       }
 

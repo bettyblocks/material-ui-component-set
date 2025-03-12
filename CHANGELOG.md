@@ -1,3 +1,24 @@
+## [2.209.9](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.8...v2.209.9) (2025-03-12)
+
+
+### Bug Fixes
+
+* check if tabsref current exists before calling the update indicator ([4e00c97](https://github.com/bettyblocks/material-ui-component-set/commit/4e00c97fa9dd6ca5449130cad680b7286cf223d0))
+
+## [2.209.8](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.7...v2.209.8) (2025-03-11)
+
+
+### Bug Fixes
+
+* reset error state in email input when empty ([d000139](https://github.com/bettyblocks/material-ui-component-set/commit/d000139215ecee004222142106c8604a5ad08a74))
+
+## [2.209.7](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.6...v2.209.7) (2025-03-11)
+
+
+### Bug Fixes
+
+* reset isFirstValidation to initial state after clearing ([cba6671](https://github.com/bettyblocks/material-ui-component-set/commit/cba66713d86c192381209341cfc4d77aa8806420))
+
 ## [2.209.6](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.5...v2.209.6) (2025-03-11)
 
 
