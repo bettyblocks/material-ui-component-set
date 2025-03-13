@@ -94,7 +94,7 @@
     } else {
       resolvedCurrentValue = getValue(prefabValue);
     }
-    const [currentValue, setCurrentValue] = useState(resolvedCurrentValue);
+    const [currentValue, setCurrentValue] = usePageState(resolvedCurrentValue);
 
     useEffect(() => {
       setCurrentValue(resolvedCurrentValue);
