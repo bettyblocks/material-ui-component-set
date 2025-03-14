@@ -1,3 +1,10 @@
+## [2.209.10](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.9...v2.209.10) (2025-03-13)
+
+
+### Bug Fixes
+
+* fullwidth is not correctly set ([094a347](https://github.com/bettyblocks/material-ui-component-set/commit/094a3472ac3a48901e0efa7675450373a55c5882))
+
 ## [2.209.9](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.8...v2.209.9) (2025-03-12)
 
 
