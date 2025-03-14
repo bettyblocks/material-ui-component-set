@@ -49,7 +49,9 @@
 
     useEffect(() => {
       setTimeout(() => {
-        tabsRef.current.updateIndicator();
+        if (tabsRef.current) {
+          tabsRef.current.updateIndicator();
+        }
       }, 100);
     }, []);
 

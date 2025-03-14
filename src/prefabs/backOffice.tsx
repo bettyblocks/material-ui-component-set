@@ -5612,6 +5612,20 @@ const beforeCreate = ({
     id: '',
   });
 
+  const inheritFormatKinds = [
+    'DATE',
+    'DATE_EXPRESSION',
+    'DATE_TIME',
+    'DATE_TIME_EXPRESSION',
+    'DECIMAL',
+    'DECIMAL_EXPRESSION',
+    'INTEGER',
+    'INTEGER_EXPRESSION',
+    'PRICE',
+    'PRICE_EXPRESSION',
+    'TIME',
+  ];
+
   const createFormId = createUuid();
   const updateFormId = createUuid();
   const deleteButtonId = createUuid();
@@ -5740,7 +5754,12 @@ const beforeCreate = ({
               detailViewItem.ref = { id: `#detailItem${prop.id}` };
               setOption(detailViewItem, 'property', (opt) => ({
                 ...opt,
-                value: enrichVarObj({ ...prop }),
+                value: {
+                  ...enrichVarObj({ ...prop }),
+                  ...(prop.kind && inheritFormatKinds.includes(prop.kind)
+                    ? { format: 'INHERIT' }
+                    : {}),
+                },
                 ref: {
                   id: `#detailItemProperty${prop.id}`,
                 },
@@ -6266,19 +6285,6 @@ const beforeCreate = ({
         value: modelId,
       }));
 
-      const inheritFormatKinds = [
-        'DATE',
-        'DATE_EXPRESSION',
-        'DATE_TIME',
-        'DATE_TIME_EXPRESSION',
-        'DECIMAL',
-        'DECIMAL_EXPRESSION',
-        'INTEGER',
-        'INTEGER_EXPRESSION',
-        'PRICE',
-        'PRICE_EXPRESSION',
-        'TIME',
-      ];
       // eslint-disable-next-line @typescript-eslint/no-shadow
       dataTableProperties.forEach((property) => {
         let newProperty = property;

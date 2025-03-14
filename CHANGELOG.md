@@ -1,3 +1,52 @@
+## [2.209.10](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.9...v2.209.10) (2025-03-13)
+
+
+### Bug Fixes
+
+* fullwidth is not correctly set ([094a347](https://github.com/bettyblocks/material-ui-component-set/commit/094a3472ac3a48901e0efa7675450373a55c5882))
+
+## [2.209.9](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.8...v2.209.9) (2025-03-12)
+
+
+### Bug Fixes
+
+* check if tabsref current exists before calling the update indicator ([4e00c97](https://github.com/bettyblocks/material-ui-component-set/commit/4e00c97fa9dd6ca5449130cad680b7286cf223d0))
+
+## [2.209.8](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.7...v2.209.8) (2025-03-11)
+
+
+### Bug Fixes
+
+* reset error state in email input when empty ([d000139](https://github.com/bettyblocks/material-ui-component-set/commit/d000139215ecee004222142106c8604a5ad08a74))
+
+## [2.209.7](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.6...v2.209.7) (2025-03-11)
+
+
+### Bug Fixes
+
+* reset isFirstValidation to initial state after clearing ([cba6671](https://github.com/bettyblocks/material-ui-component-set/commit/cba66713d86c192381209341cfc4d77aa8806420))
+
+## [2.209.6](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.5...v2.209.6) (2025-03-11)
+
+
+### Bug Fixes
+
+* fix checkbox crashing in runtime with uncheck/check ([0f2ddea](https://github.com/bettyblocks/material-ui-component-set/commit/0f2ddea8a7a2a4f6bafe910f876b761fac0f45c7))
+
+## [2.209.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.4...v2.209.5) (2025-03-11)
+
+
+### Bug Fixes
+
+* allow format overwrite in data table column ([9760c0f](https://github.com/bettyblocks/material-ui-component-set/commit/9760c0fa8de6f84610b57ffbf6c8e633fa460171))
+
+## [2.209.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.3...v2.209.4) (2025-03-10)
+
+
+### Bug Fixes
+
+* form not crashing with no children ([fa2632f](https://github.com/bettyblocks/material-ui-component-set/commit/fa2632f8679ee5d6279941fbf34926129d81b805))
+
 ## [2.209.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.209.2...v2.209.3) (2025-03-05)
 
 

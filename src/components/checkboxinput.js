@@ -24,10 +24,13 @@
       if (typeof textValue === 'boolean') {
         return textValue;
       }
-      if (typeof textValue === 'undefined') {
+      if (textValue === undefined || textValue === null) {
         return undefined;
       }
-      return ['on', 'true', 'yes'].includes(textValue.trim().toLowerCase());
+      if (typeof textValue === 'string') {
+        return ['on', 'true', 'yes'].includes(textValue.trim().toLowerCase());
+      }
+      return false;
     }
 
     const [errorState, setErrorState] = useState(false);
@@ -54,7 +57,7 @@
 
     B.defineFunction('Uncheck', () => setChecked(false));
     B.defineFunction('Check', () => setChecked(true));
-    B.defineFunction('Check/Uncheck', () => setChecked((prev) => !prev));
+    B.defineFunction('Check/Uncheck', () => setChecked(!checked));
 
     const handleValidation = (isValid) => {
       setErrorState(!isValid);
