@@ -142,7 +142,7 @@
 
     const [values, setValues] = useState(getValues());
 
-    const isValid = required ? values.join() !== '' : true;
+    const isValid = required && values.join('') !== '';
     const hasError = errorState || !isValid;
 
     useEffect(() => {
