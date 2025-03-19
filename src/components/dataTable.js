@@ -283,6 +283,15 @@
 
     const where = useFilter(completeFilter);
 
+    const onCompleted = (res) => {
+      const hasResult = res && res.results && res.results.length > 0;
+      if (hasResult) {
+        B.triggerEvent('onSuccess', res.results);
+      } else {
+        B.triggerEvent('onNoResults');
+      }
+    };
+
     // TODO: move model to skip
     const {
       loading: queryLoading,
@@ -296,14 +305,7 @@
         variables,
         skip: loadOnScroll ? skip : page * rowsPerPage,
         take: loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage,
-        onCompleted(res) {
-          const hasResult = res && res.results && res.results.length > 0;
-          if (hasResult) {
-            B.triggerEvent('onSuccess', res.results);
-          } else {
-            B.triggerEvent('onNoResults');
-          }
-        },
+        onCompleted,
         onError(err) {
           if (!displayError) {
             B.triggerEvent('onError', err);
@@ -315,7 +317,7 @@
 
     const { hasResults, data: relationData } = useRelation(
       model,
-      {},
+      { onCompleted },
       typeof model === 'string' || !model,
     );
     const data = hasResults ? relationData : queryData;
@@ -380,10 +382,10 @@
         clearResults();
         skipAppend.current = true;
         setTimeout(() => {
-          refetch();
+          refetch({ onCompleted });
         }, 0);
       } else {
-        refetch();
+        refetch({ onCompleted });
       }
     });
 
