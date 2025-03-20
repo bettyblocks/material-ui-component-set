@@ -362,8 +362,20 @@
           setFilterV2({});
         });
 
+        const refetchCallback = (refetchData) => {
+          const refetchResults =
+            refetchData &&
+            refetchData.data &&
+            Object.values(refetchData.data)[0] &&
+            Object.values(refetchData.data)[0].results;
+
+          if (refetchResults) {
+            onCompleted(refetchResults);
+          }
+        };
+
         useEffect(() => {
-          B.defineFunction('Refetch', () => refetch({ onCompleted }));
+          B.defineFunction('Refetch', () => refetch().then(refetchCallback));
 
           /**
            * @name Filter
