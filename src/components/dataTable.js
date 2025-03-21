@@ -377,15 +377,27 @@
       }, 0);
     }
 
+    const refetchCallback = (refetchData) => {
+      const refetchResults =
+        refetchData &&
+        refetchData.data &&
+        Object.values(refetchData.data)[0] &&
+        Object.values(refetchData.data)[0].results;
+
+      if (refetchResults) {
+        onCompleted(refetchResults);
+      }
+    };
+
     B.defineFunction('Refetch', () => {
       if (pagination === 'never') {
         clearResults();
         skipAppend.current = true;
         setTimeout(() => {
-          refetch({ onCompleted });
+          refetch().then(refetchCallback);
         }, 0);
       } else {
-        refetch({ onCompleted });
+        refetch().then(refetchCallback);
       }
     });
 
