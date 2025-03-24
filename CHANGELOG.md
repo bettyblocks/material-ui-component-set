@@ -1,3 +1,10 @@
+# [2.211.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.210.1...v2.211.0) (2025-03-24)
+
+
+### Features
+
+* introduce chiesi cloud ([e160853](https://github.com/bettyblocks/material-ui-component-set/commit/e1608535b4b52972324f328c229b3d015a287267))
+
 ## [2.210.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.210.0...v2.210.1) (2025-03-17)
 
 
