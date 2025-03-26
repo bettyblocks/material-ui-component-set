@@ -1,3 +1,10 @@
+# [2.212.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.211.0...v2.212.0) (2025-03-26)
+
+
+### Features
+
+* updated datatable and datalist and box option values ([3343ae2](https://github.com/bettyblocks/material-ui-component-set/commit/3343ae244883ec4ac83a994ae49a15d4f40f01ed))
+
 # [2.211.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.210.1...v2.211.0) (2025-03-24)
 
 
