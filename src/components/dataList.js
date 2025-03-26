@@ -366,8 +366,7 @@
           const refetchResults =
             refetchData &&
             refetchData.data &&
-            Object.values(refetchData.data)[0] &&
-            Object.values(refetchData.data)[0].results;
+            Object.values(refetchData.data)[0];
 
           if (refetchResults) {
             onCompleted(refetchResults);
