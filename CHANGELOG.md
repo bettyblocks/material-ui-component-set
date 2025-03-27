@@ -1,3 +1,10 @@
+## [2.212.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.0...v2.212.1) (2025-03-27)
+
+
+### Bug Fixes
+
+* remove double label check, use model label property fallback ([d592854](https://github.com/bettyblocks/material-ui-component-set/commit/d592854d97451c52b862551362e87275b2c59185))
+
 # [2.212.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.211.0...v2.212.0) (2025-03-26)
 
 
