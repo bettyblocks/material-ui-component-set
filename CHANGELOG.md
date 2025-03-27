@@ -1,3 +1,10 @@
+## [2.212.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.1...v2.212.2) (2025-03-27)
+
+
+### Bug Fixes
+
+* trigger onchange event on values change instead of using a timeout ([17e7ed5](https://github.com/bettyblocks/material-ui-component-set/commit/17e7ed5e7f5ca0bcd5e27d1091530e19ef746cd1))
+
 ## [2.212.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.0...v2.212.1) (2025-03-27)
 
 
