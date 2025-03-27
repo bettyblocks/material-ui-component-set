@@ -138,7 +138,7 @@ export const boxOptions = {
     value: ['0rem', '0rem', '0rem', '0rem'],
   }),
   innerSpacing: sizes('Inner space', {
-    value: ['M', 'M', 'M', 'M'],
+    value: ['0rem', '0rem', '0rem', '0rem'],
   }),
   position: buttongroup(
     'Position',
