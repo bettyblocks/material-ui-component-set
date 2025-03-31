@@ -1,3 +1,45 @@
+## [2.212.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.3...v2.212.4) (2025-03-31)
+
+
+### Bug Fixes
+
+* use element with inline styling for tooltip button ([f2ae284](https://github.com/bettyblocks/material-ui-component-set/commit/f2ae2840e56c2da9a0ba43008c845432ba244bfc))
+
+## [2.212.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.2...v2.212.3) (2025-03-31)
+
+
+### Bug Fixes
+
+* trigger oncompleted on refetch ([5d1fa85](https://github.com/bettyblocks/material-ui-component-set/commit/5d1fa8543af5fd01ccc2f77a9a9b3a46729ec37d))
+
+## [2.212.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.1...v2.212.2) (2025-03-27)
+
+
+### Bug Fixes
+
+* trigger onchange event on values change instead of using a timeout ([17e7ed5](https://github.com/bettyblocks/material-ui-component-set/commit/17e7ed5e7f5ca0bcd5e27d1091530e19ef746cd1))
+
+## [2.212.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.0...v2.212.1) (2025-03-27)
+
+
+### Bug Fixes
+
+* remove double label check, use model label property fallback ([d592854](https://github.com/bettyblocks/material-ui-component-set/commit/d592854d97451c52b862551362e87275b2c59185))
+
+# [2.212.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.211.0...v2.212.0) (2025-03-26)
+
+
+### Features
+
+* updated datatable and datalist and box option values ([3343ae2](https://github.com/bettyblocks/material-ui-component-set/commit/3343ae244883ec4ac83a994ae49a15d4f40f01ed))
+
+# [2.211.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.210.1...v2.211.0) (2025-03-24)
+
+
+### Features
+
+* introduce chiesi cloud ([e160853](https://github.com/bettyblocks/material-ui-component-set/commit/e1608535b4b52972324f328c229b3d015a287267))
+
 ## [2.210.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.210.0...v2.210.1) (2025-03-17)
 
 
