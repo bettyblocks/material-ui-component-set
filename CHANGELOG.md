@@ -1,3 +1,10 @@
+## [2.212.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.3...v2.212.4) (2025-03-31)
+
+
+### Bug Fixes
+
+* use element with inline styling for tooltip button ([f2ae284](https://github.com/bettyblocks/material-ui-component-set/commit/f2ae2840e56c2da9a0ba43008c845432ba244bfc))
+
 ## [2.212.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.2...v2.212.3) (2025-03-31)
 
 
