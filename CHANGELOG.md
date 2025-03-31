@@ -1,3 +1,10 @@
+## [2.212.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.4...v2.212.5) (2025-03-31)
+
+
+### Bug Fixes
+
+* use error message for autocomplete instead of hardcoded text ([00aa3fa](https://github.com/bettyblocks/material-ui-component-set/commit/00aa3fa84d47986e37d789bc6dab7b0370d2717a))
+
 ## [2.212.4](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.3...v2.212.4) (2025-03-31)
 
 
