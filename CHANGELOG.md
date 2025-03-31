@@ -1,3 +1,10 @@
+## [2.212.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.2...v2.212.3) (2025-03-31)
+
+
+### Bug Fixes
+
+* trigger oncompleted on refetch ([5d1fa85](https://github.com/bettyblocks/material-ui-component-set/commit/5d1fa8543af5fd01ccc2f77a9a9b3a46729ec37d))
+
 ## [2.212.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.1...v2.212.2) (2025-03-27)
 
 
