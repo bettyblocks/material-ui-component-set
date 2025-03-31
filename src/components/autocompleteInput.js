@@ -117,14 +117,11 @@
     const modelId =
       contextModelId || referenceModelId || propertyModelId || model || '';
     const idProperty = getIdProperty(modelId) || {};
-    const labelProperty = getProperty(labelPropertyId) || idProperty;
     const propertyModel = getModel(modelId);
-    const defaultLabelProperty =
-      getProperty(
-        propertyModel && propertyModel.labelPropertyId
-          ? propertyModel.labelPropertyId
-          : '',
-      ) || {};
+    const modelLabelPropertyId =
+      (propertyModel && propertyModel.labelPropertyId) || '';
+    const labelProperty =
+      getProperty(labelPropertyId || modelLabelPropertyId) || idProperty;
 
     const isListProperty =
       modelProperty.kind === 'LIST' || modelProperty.kind === 'list';
@@ -132,16 +129,8 @@
     const [inputValue, setInputValue] = useState(
       isListProperty ? defaultValue : '',
     );
-    const hasLabelProperty = !!(labelProperty && labelProperty.id);
-    const hasDefaultLabelProperty = !!(
-      defaultLabelProperty && defaultLabelProperty.id
-    );
 
-    const searchProperty = isListProperty
-      ? modelProperty
-      : (hasLabelProperty && labelProperty) ||
-        (hasDefaultLabelProperty && defaultLabelProperty) ||
-        idProperty;
+    const searchProperty = isListProperty ? modelProperty : labelProperty;
 
     useEffect(() => {
       if (defaultValue) {
@@ -521,7 +510,7 @@
 
     if (error && displayError) {
       valid = false;
-      message = 'Something went wrong while loading.';
+      message = error.message;
     }
 
     B.defineFunction('Clear', () => {

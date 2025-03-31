@@ -97,7 +97,7 @@ export const dataListOptions = {
     },
   }),
   placeholderTake: number('Placeholder rows', {
-    value: '',
+    value: '3',
   }),
   paginationType: font('Font family from text style', {
     value: 'Body2',
