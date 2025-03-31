@@ -510,7 +510,7 @@
 
     if (error && displayError) {
       valid = false;
-      message = 'Something went wrong while loading.';
+      message = error.message;
     }
 
     B.defineFunction('Clear', () => {
