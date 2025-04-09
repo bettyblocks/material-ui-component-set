@@ -48,7 +48,7 @@ export const optionsResolver = (
       configuration: { allowFormatting: false },
     }),
 
-    ...validation,
+    ...validation(type),
     ...styles,
     ...advanced,
   };

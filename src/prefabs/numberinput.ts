@@ -13,6 +13,5 @@ export default prefab('Number', attributes, undefined, [
     inputLabel: 'Number',
     inputType: 'number',
     type: 'number',
-    pattern: '^[0-9]*$',
   }),
 ]);

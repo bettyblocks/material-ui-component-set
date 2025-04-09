@@ -21,6 +21,22 @@ export const TextInput = (
 
   const ref = config.ref ? { ...config.ref } : undefined;
 
+  const textValidations = [
+    'minLength',
+    'validationTooShort',
+    'maxLength',
+    'validationTooLong',
+  ];
+  const numberValidations = [
+    'minValue',
+    'validationBelowMinimum',
+    'maxValue',
+    'validationAboveMaximum',
+  ];
+
+  const typeValidations =
+    config.inputType === 'number' ? numberValidations : textValidations;
+
   const categories = [
     {
       label: 'Validation Options',
@@ -30,10 +46,7 @@ export const TextInput = (
         'validationValueMissing',
         'pattern',
         'validationPatternMismatch',
-        'minLength',
-        'validationTooShort',
-        'maxLength',
-        'validationTooLong',
+        ...typeValidations,
       ],
     },
     {
