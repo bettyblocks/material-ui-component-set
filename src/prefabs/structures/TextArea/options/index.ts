@@ -47,7 +47,7 @@ export const optionsResolver = (
       value: [''],
       configuration: { allowFormatting: false },
     }),
-    ...validation,
+    ...validation(type),
 
     multiline: toggle('Multiline', { value: true }),
     rows: text('Rows', {

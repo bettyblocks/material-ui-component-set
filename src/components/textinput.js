@@ -27,8 +27,8 @@
       pattern,
       minLength,
       maxLength,
-      minvalue,
-      maxvalue,
+      minValue,
+      maxValue,
       validationTypeMismatch = [''],
       validationPatternMismatch = [''],
       validationValueMissing = [''],
@@ -76,9 +76,8 @@
     const validPattern = pattern || null;
     const validMinlength = minLength || null;
     const validMaxlength = maxLength || null;
-    const validMinvalue = minvalue || null;
-    const validMaxvalue = maxvalue || null;
-
+    const validMinvalue = minValue || null;
+    const validMaxvalue = maxValue || null;
     const patternMismatchMessage = useText(validationPatternMismatch);
     const typeMismatchMessage = useText(validationTypeMismatch);
     const valueMissingMessage = useText(validationValueMissing);
