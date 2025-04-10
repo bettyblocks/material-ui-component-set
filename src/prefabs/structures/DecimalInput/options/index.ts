@@ -53,15 +53,21 @@ export const options = {
     ],
     {
       value: ',',
+      configuration: {
+        condition: hideIf('decimalScale', 'EQ', 0),
+      },
     },
   ),
 
   decimalScale: number('Scale', {
-    value: '2',
+    value: 2,
   }),
 
   showGroupSeparator: toggle('Show group (thousands) separator', {
     value: true,
+    configuration: {
+      condition: hideIf('decimalScale', 'EQ', 0),
+    },
   }),
 
   ...validation,
