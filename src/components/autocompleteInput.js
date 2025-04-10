@@ -731,6 +731,11 @@
             setDebouncedCurrentValue(newValue);
           }}
           onInputChange={(event, newValue) => {
+            if (!event) {
+              // state updates cause this event to equal null
+              // nothing should happen then, to prevent a rerender cycle
+              return;
+            }
             let validation = event ? event.target.validity : null;
             if (isNumberType) {
               validation = customPatternValidation(event.target);
