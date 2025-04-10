@@ -24,9 +24,7 @@
       Body2: 'p',
     }[options.type || 'Body1'];
 
-    const parsedContent = isDev
-      ? `{{ ${propertyLabel} }}`
-      : useText([{ ...property, type: 'PROPERTY_LABEL' }]);
+    const parsedLabel = isDev ? `{{ ${propertyLabel} }}` : propertyLabel;
     const customLabel = useText(labelText);
     const propName = isDev ? `{{ ${propertyLabel} }}` : useText([property]);
 
@@ -52,7 +50,7 @@
           {isPristine && labelIsEmpty ? (
             <span className={classes.placeholder}>Select label: </span>
           ) : (
-            `${labelIsEmpty ? parsedContent : customLabel}: `
+            `${labelIsEmpty ? parsedLabel : customLabel}: `
           )}
         </Tag>
         {Content}
@@ -93,10 +91,6 @@
             : getPath(['theme', 'typography', type, 'color'], style),
         fontFamily: ({ options: { type } }) => style.getFontFamily(type),
         fontSize: ({ options: { type } }) => style.getFontSize(type),
-        // fontWeight: ({ options: { fontWeight, type, styles } }) =>
-        //   styles
-        //     ? fontWeight
-        //     : getPath(['theme', 'typography', type, 'fontWeight'], style),
         textTransform: ({ options: { type } }) => style.getTextTransform(type),
         letterSpacing: ({ options: { type } }) => style.getLetterSpacing(type),
         [`@media ${mediaMinWidth(600)}`]: {
