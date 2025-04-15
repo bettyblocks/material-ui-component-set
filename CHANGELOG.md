@@ -1,3 +1,10 @@
+## [2.212.6](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.5...v2.212.6) (2025-04-15)
+
+
+### Bug Fixes
+
+* use display flex for tabs so left side tabs don't push content down ([d5f4ffd](https://github.com/bettyblocks/material-ui-component-set/commit/d5f4ffda54c4fb772c45d71f40b25422eaf9194e))
+
 ## [2.212.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.4...v2.212.5) (2025-03-31)
 
 
