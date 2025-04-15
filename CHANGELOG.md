@@ -1,3 +1,10 @@
+## [2.212.7](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.6...v2.212.7) (2025-04-15)
+
+
+### Bug Fixes
+
+* use existing property label for detailViewChild ([77bbe93](https://github.com/bettyblocks/material-ui-component-set/commit/77bbe931471d1007aea0428a04cada137ec705e6))
+
 ## [2.212.6](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.5...v2.212.6) (2025-04-15)
 
 
