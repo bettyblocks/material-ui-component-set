@@ -1,3 +1,10 @@
+## [2.212.8](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.7...v2.212.8) (2025-04-16)
+
+
+### Bug Fixes
+
+* prevent cyclic render loop by catching the event on state updates ([28c803b](https://github.com/bettyblocks/material-ui-component-set/commit/28c803bcdcea9e315928632519fe48747ccdc0a7))
+
 ## [2.212.7](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.6...v2.212.7) (2025-04-15)
 
 
