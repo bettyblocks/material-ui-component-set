@@ -1,5 +1,5 @@
 import { Icon, prefab } from '@betty-blocks/component-sdk';
-import { TextInput } from './structures/TextInput';
+import { DecimalInput } from './structures';
 
 const attributes = {
   category: 'FORM',
@@ -8,11 +8,10 @@ const attributes = {
 };
 
 export default prefab('Number', attributes, undefined, [
-  TextInput({
+  DecimalInput({
     label: 'Number field',
     inputLabel: 'Number',
     inputType: 'number',
     type: 'number',
-    pattern: '^[0-9]*$',
   }),
 ]);

@@ -1,7 +1,10 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { options } from './options';
 import { Configuration } from '../Configuration';
-import { addChildOptions, optionEvents } from '../TextInput/options/addChild';
+import {
+  addChildOptions as defaultAddChildOptions,
+  optionEvents,
+} from '../TextInput/options/addChild';
 import { updateOption } from '../../../utils';
 
 export const DecimalInput = (
@@ -15,6 +18,22 @@ export const DecimalInput = (
   if (config.inputLabel) {
     options.label = updateOption(options.label, { value: [config.inputLabel] });
   }
+
+  if (config.type === 'number') {
+    options.decimalScale = updateOption(options.decimalScale, {
+      label: 'Decimal scale',
+      value: 0,
+    });
+
+    options.showGroupSeparator = updateOption(options.showGroupSeparator, {
+      value: false,
+    });
+  }
+
+  const addChildOptions = [
+    ...(config.optionTemplates?.addChild?.options ||
+      defaultAddChildOptions(config.inputType || 'decimal')),
+  ];
 
   const categories = [
     {
@@ -62,7 +81,7 @@ export const DecimalInput = (
       optionCategories: categories,
       optionTemplates: {
         addChild: {
-          options: addChildOptions('decimal'),
+          options: addChildOptions,
           optionEvents,
         },
       },
