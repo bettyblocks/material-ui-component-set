@@ -1,3 +1,10 @@
+## [2.212.9](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.8...v2.212.9) (2025-04-17)
+
+
+### Bug Fixes
+
+* a number components min and max values should be validated when set ([92d3ce1](https://github.com/bettyblocks/material-ui-component-set/commit/92d3ce1de2b01b0d978dda213e676f56289c4c04))
+
 ## [2.212.8](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.7...v2.212.8) (2025-04-16)
 
 
