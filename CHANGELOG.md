@@ -1,3 +1,24 @@
+## [2.212.8](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.7...v2.212.8) (2025-04-16)
+
+
+### Bug Fixes
+
+* prevent cyclic render loop by catching the event on state updates ([28c803b](https://github.com/bettyblocks/material-ui-component-set/commit/28c803bcdcea9e315928632519fe48747ccdc0a7))
+
+## [2.212.7](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.6...v2.212.7) (2025-04-15)
+
+
+### Bug Fixes
+
+* use existing property label for detailViewChild ([77bbe93](https://github.com/bettyblocks/material-ui-component-set/commit/77bbe931471d1007aea0428a04cada137ec705e6))
+
+## [2.212.6](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.5...v2.212.6) (2025-04-15)
+
+
+### Bug Fixes
+
+* use display flex for tabs so left side tabs don't push content down ([d5f4ffd](https://github.com/bettyblocks/material-ui-component-set/commit/d5f4ffda54c4fb772c45d71f40b25422eaf9194e))
+
 ## [2.212.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.4...v2.212.5) (2025-03-31)
 
 
