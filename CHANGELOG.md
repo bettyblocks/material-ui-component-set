@@ -1,3 +1,24 @@
+## [2.212.10](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.9...v2.212.10) (2025-04-22)
+
+
+### Bug Fixes
+
+* start with zone 19 ([3fcf8f8](https://github.com/bettyblocks/material-ui-component-set/commit/3fcf8f8089b36f944cb847e73b11cbccf5ddf37e))
+
+## [2.212.9](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.8...v2.212.9) (2025-04-17)
+
+
+### Bug Fixes
+
+* a number components min and max values should be validated when set ([92d3ce1](https://github.com/bettyblocks/material-ui-component-set/commit/92d3ce1de2b01b0d978dda213e676f56289c4c04))
+
+## [2.212.8](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.7...v2.212.8) (2025-04-16)
+
+
+### Bug Fixes
+
+* prevent cyclic render loop by catching the event on state updates ([28c803b](https://github.com/bettyblocks/material-ui-component-set/commit/28c803bcdcea9e315928632519fe48747ccdc0a7))
+
 ## [2.212.7](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.6...v2.212.7) (2025-04-15)
 
 

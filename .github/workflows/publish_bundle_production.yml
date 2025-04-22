@@ -119,8 +119,8 @@ jobs:
           AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_RVA }}
           AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_RVA }}
         run: yarn upload-bundle
-      - name: upload chiesi
+      - name: upload zone 19
         env:
-          AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_CHIESI }}
-          AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_CHIESI }}
+          AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_19 }}
+          AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_19 }}
         run: yarn upload-bundle
