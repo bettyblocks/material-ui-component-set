@@ -1,3 +1,10 @@
+## [2.212.10](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.9...v2.212.10) (2025-04-22)
+
+
+### Bug Fixes
+
+* start with zone 19 ([3fcf8f8](https://github.com/bettyblocks/material-ui-component-set/commit/3fcf8f8089b36f944cb847e73b11cbccf5ddf37e))
+
 ## [2.212.9](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.8...v2.212.9) (2025-04-17)
 
 
