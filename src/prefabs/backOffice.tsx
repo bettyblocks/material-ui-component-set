@@ -95,6 +95,12 @@ import {
 import { Properties, IdPropertyProps, ModelProps, ModelQuery } from './types';
 import { PermissionType, PropertyStateProps } from './types/types';
 
+const extendedBoxOptions = {
+  ...boxOptions,
+  innerSpacing: sizes('Inner space', {
+    value: ['M', 'M', 'M', 'M'],
+  }),
+};
 const children = [
   DataTableColumn({
     options: {
@@ -194,7 +200,7 @@ const detailChildren = [
           Box(
             {
               options: {
-                ...boxOptions,
+                ...extendedBoxOptions,
                 outerSpacing: sizes('Outer space', {
                   value: ['0rem', '0rem', 'M', '0rem'],
                 }),
@@ -788,7 +794,7 @@ const sideMenu = Box(
   {
     ref: { id: '#sideMenuPartial' },
     options: {
-      ...boxOptions,
+      ...extendedBoxOptions,
       stretch: toggle('Stretch (when in flex container)', {
         value: true,
       }),
@@ -804,7 +810,7 @@ const sideMenu = Box(
     Box(
       {
         options: {
-          ...boxOptions,
+          ...extendedBoxOptions,
           stretch: toggle('Stretch (when in flex container)', {
             value: true,
           }),
@@ -817,7 +823,7 @@ const sideMenu = Box(
         Box(
           {
             options: {
-              ...boxOptions,
+              ...extendedBoxOptions,
               innerSpacing: sizes('Inner space', {
                 value: ['L', 'L', '0rem', 'L'],
               }),
@@ -861,7 +867,7 @@ const sideMenu = Box(
         Box(
           {
             options: {
-              ...boxOptions,
+              ...extendedBoxOptions,
               stretch: toggle('Stretch (when in flex container)', {
                 value: true,
               }),
@@ -1041,7 +1047,7 @@ const drawerContainer = DrawerContainer(
             Box(
               {
                 options: {
-                  ...boxOptions,
+                  ...extendedBoxOptions,
                   height: size('Height', {
                     value: '100%',
                     configuration: {
@@ -1144,7 +1150,7 @@ const drawerContainer = DrawerContainer(
                                 Box(
                                   {
                                     options: {
-                                      ...boxOptions,
+                                      ...extendedBoxOptions,
                                       alignment: buttongroup(
                                         'Alignment',
                                         [
@@ -1272,7 +1278,7 @@ const drawerContainer = DrawerContainer(
                                 Box(
                                   {
                                     options: {
-                                      ...boxOptions,
+                                      ...extendedBoxOptions,
                                       stretch: toggle(
                                         'Stretch (when in flex container)',
                                         {
@@ -1328,7 +1334,7 @@ const drawerContainer = DrawerContainer(
                                 Box(
                                   {
                                     options: {
-                                      ...boxOptions,
+                                      ...extendedBoxOptions,
                                       alignment: buttongroup(
                                         'Alignment',
                                         [
@@ -1512,7 +1518,7 @@ const drawerContainer = DrawerContainer(
                                 Box(
                                   {
                                     options: {
-                                      ...boxOptions,
+                                      ...extendedBoxOptions,
                                       alignment: buttongroup(
                                         'Alignment',
                                         [
@@ -1640,7 +1646,7 @@ const drawerContainer = DrawerContainer(
                                 Box(
                                   {
                                     options: {
-                                      ...boxOptions,
+                                      ...extendedBoxOptions,
                                       stretch: toggle(
                                         'Stretch (when in flex container)',
                                         {
@@ -2406,7 +2412,7 @@ const drawerContainer = DrawerContainer(
                                 Box(
                                   {
                                     options: {
-                                      ...boxOptions,
+                                      ...extendedBoxOptions,
                                       alignment: buttongroup(
                                         'Alignment',
                                         [
@@ -2586,7 +2592,7 @@ const drawerContainer = DrawerContainer(
                                 Box(
                                   {
                                     options: {
-                                      ...boxOptions,
+                                      ...extendedBoxOptions,
                                       alignment: buttongroup(
                                         'Alignment',
                                         [
@@ -2714,7 +2720,7 @@ const drawerContainer = DrawerContainer(
                                 Box(
                                   {
                                     options: {
-                                      ...boxOptions,
+                                      ...extendedBoxOptions,
                                       stretch: toggle(
                                         'Stretch (when in flex container)',
                                         {
@@ -2767,7 +2773,7 @@ const drawerContainer = DrawerContainer(
                                 Box(
                                   {
                                     options: {
-                                      ...boxOptions,
+                                      ...extendedBoxOptions,
                                       alignment: buttongroup(
                                         'Alignment',
                                         [
@@ -2983,7 +2989,7 @@ const drawerContainer = DrawerContainer(
                             Box(
                               {
                                 options: {
-                                  ...boxOptions,
+                                  ...extendedBoxOptions,
                                   stretch: toggle(
                                     'Stretch (when in flex container)',
                                     {
@@ -3224,7 +3230,7 @@ const drawerContainer = DrawerContainer(
                                         Box(
                                           {
                                             options: {
-                                              ...boxOptions,
+                                              ...extendedBoxOptions,
                                               innerSpacing: sizes(
                                                 'Inner space',
                                                 {
@@ -3300,7 +3306,7 @@ const drawerContainer = DrawerContainer(
                                                     Box(
                                                       {
                                                         options: {
-                                                          ...boxOptions,
+                                                          ...extendedBoxOptions,
                                                           alignment:
                                                             buttongroup(
                                                               'Alignment',
@@ -3384,7 +3390,7 @@ const drawerContainer = DrawerContainer(
                                                         Box(
                                                           {
                                                             options: {
-                                                              ...boxOptions,
+                                                              ...extendedBoxOptions,
                                                               innerSpacing:
                                                                 sizes(
                                                                   'Inner space',
@@ -3787,7 +3793,7 @@ const drawerContainer = DrawerContainer(
                                                     Box(
                                                       {
                                                         options: {
-                                                          ...boxOptions,
+                                                          ...extendedBoxOptions,
                                                           innerSpacing: sizes(
                                                             'Inner space',
                                                             {
@@ -3839,7 +3845,7 @@ const drawerContainer = DrawerContainer(
                                                             Box(
                                                               {
                                                                 options: {
-                                                                  ...boxOptions,
+                                                                  ...extendedBoxOptions,
                                                                   innerSpacing:
                                                                     sizes(
                                                                       'Inner space',
@@ -3988,7 +3994,7 @@ const drawerContainer = DrawerContainer(
                                                                 Box(
                                                                   {
                                                                     options: {
-                                                                      ...boxOptions,
+                                                                      ...extendedBoxOptions,
                                                                       innerSpacing:
                                                                         sizes(
                                                                           'Inner space',
@@ -4192,7 +4198,7 @@ const drawerContainer = DrawerContainer(
                                                             Box(
                                                               {
                                                                 options: {
-                                                                  ...boxOptions,
+                                                                  ...extendedBoxOptions,
                                                                   innerSpacing:
                                                                     sizes(
                                                                       'Inner space',
@@ -4273,7 +4279,7 @@ const drawerContainer = DrawerContainer(
                                                                 Box(
                                                                   {
                                                                     options: {
-                                                                      ...boxOptions,
+                                                                      ...extendedBoxOptions,
                                                                       alignment:
                                                                         buttongroup(
                                                                           'Alignment',
@@ -4359,7 +4365,7 @@ const drawerContainer = DrawerContainer(
                                                                       {
                                                                         options:
                                                                           {
-                                                                            ...boxOptions,
+                                                                            ...extendedBoxOptions,
                                                                             innerSpacing:
                                                                               sizes(
                                                                                 'Inner space',
@@ -4521,7 +4527,7 @@ const drawerContainer = DrawerContainer(
                                                               Box(
                                                                 {
                                                                   options: {
-                                                                    ...boxOptions,
+                                                                    ...extendedBoxOptions,
                                                                     alignment:
                                                                       buttongroup(
                                                                         'Alignment',
@@ -4734,7 +4740,7 @@ const drawerContainer = DrawerContainer(
                                                               Box(
                                                                 {
                                                                   options: {
-                                                                    ...boxOptions,
+                                                                    ...extendedBoxOptions,
                                                                     alignment:
                                                                       buttongroup(
                                                                         'Alignment',
@@ -5045,7 +5051,7 @@ const drawerContainer = DrawerContainer(
                             Box(
                               {
                                 options: {
-                                  ...boxOptions,
+                                  ...extendedBoxOptions,
                                   width: size('Width', {
                                     value: '100%',
                                     configuration: {
