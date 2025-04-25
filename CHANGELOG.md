@@ -1,3 +1,45 @@
+## [2.212.11](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.10...v2.212.11) (2025-04-25)
+
+
+### Bug Fixes
+
+* anonymize private zones ([7b01117](https://github.com/bettyblocks/material-ui-component-set/commit/7b01117f36c92406321a486dc9517b119f45baf8))
+
+## [2.212.10](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.9...v2.212.10) (2025-04-22)
+
+
+### Bug Fixes
+
+* start with zone 19 ([3fcf8f8](https://github.com/bettyblocks/material-ui-component-set/commit/3fcf8f8089b36f944cb847e73b11cbccf5ddf37e))
+
+## [2.212.9](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.8...v2.212.9) (2025-04-17)
+
+
+### Bug Fixes
+
+* a number components min and max values should be validated when set ([92d3ce1](https://github.com/bettyblocks/material-ui-component-set/commit/92d3ce1de2b01b0d978dda213e676f56289c4c04))
+
+## [2.212.8](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.7...v2.212.8) (2025-04-16)
+
+
+### Bug Fixes
+
+* prevent cyclic render loop by catching the event on state updates ([28c803b](https://github.com/bettyblocks/material-ui-component-set/commit/28c803bcdcea9e315928632519fe48747ccdc0a7))
+
+## [2.212.7](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.6...v2.212.7) (2025-04-15)
+
+
+### Bug Fixes
+
+* use existing property label for detailViewChild ([77bbe93](https://github.com/bettyblocks/material-ui-component-set/commit/77bbe931471d1007aea0428a04cada137ec705e6))
+
+## [2.212.6](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.5...v2.212.6) (2025-04-15)
+
+
+### Bug Fixes
+
+* use display flex for tabs so left side tabs don't push content down ([d5f4ffd](https://github.com/bettyblocks/material-ui-component-set/commit/d5f4ffda54c4fb772c45d71f40b25422eaf9194e))
+
 ## [2.212.5](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.4...v2.212.5) (2025-03-31)
 
 
