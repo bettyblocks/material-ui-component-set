@@ -24,7 +24,7 @@
       icon,
       iconPosition,
       dataComponentAttribute,
-      preLoadData,
+      preloadData,
     } = options;
     const Variant = {
       Title1: 'h1',
@@ -38,17 +38,26 @@
     }[options.titleType || 'Body1'];
 
     const [expanded, setExpanded] = useState(defaultExpanded);
-    const [dataShown, setDataShown] = useState(defaultExpanded || preLoadData);
+    const [dataShown, setDataShown] = useState(defaultExpanded || preloadData);
 
     const closePanel = () => setExpanded(false);
-    const openPanel = () => setExpanded(true);
-    const togglePanel = () => setExpanded((s) => !s);
+    const openPanel = () => {
+      setDataShown(true);
+      setExpanded(true);
+    };
+    const togglePanel = () => {
+      setDataShown(true);
+      setExpanded((s) => !s);
+    };
 
     B.defineFunction('Expand', openPanel);
     B.defineFunction('Collapse', closePanel);
     B.defineFunction('Expand/Collapse', togglePanel);
     B.defineFunction('Set Expansion Panel', (value) => {
-      if (typeof value === 'boolean') setExpanded(value);
+      if (typeof value === 'boolean') {
+        setDataShown(true);
+        setExpanded(value);
+      }
     });
 
     useEffect(() => {
@@ -68,7 +77,6 @@
 
     const onClick = () => {
       if (isDev) return;
-      setDataShown(true);
       togglePanel();
     };
 

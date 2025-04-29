@@ -1,3 +1,24 @@
+## [2.212.13](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.12...v2.212.13) (2025-04-29)
+
+
+### Bug Fixes
+
+* always show data when expansion panel expands via interactions ([4779a0e](https://github.com/bettyblocks/material-ui-component-set/commit/4779a0ec50155e13bd558f5af9b9e70fa0871c04))
+
+## [2.212.12](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.11...v2.212.12) (2025-04-25)
+
+
+### Bug Fixes
+
+* added box spacing to bo ([e396795](https://github.com/bettyblocks/material-ui-component-set/commit/e3967951a8ab90a64266efa8163885730186d0e7))
+
+## [2.212.11](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.10...v2.212.11) (2025-04-25)
+
+
+### Bug Fixes
+
+* anonymize private zones ([7b01117](https://github.com/bettyblocks/material-ui-component-set/commit/7b01117f36c92406321a486dc9517b119f45baf8))
+
 ## [2.212.10](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.9...v2.212.10) (2025-04-22)
 
 
