@@ -1,3 +1,10 @@
+## [2.212.13](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.12...v2.212.13) (2025-04-29)
+
+
+### Bug Fixes
+
+* always show data when expansion panel expands via interactions ([4779a0e](https://github.com/bettyblocks/material-ui-component-set/commit/4779a0ec50155e13bd558f5af9b9e70fa0871c04))
+
 ## [2.212.12](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.11...v2.212.12) (2025-04-25)
 
 
