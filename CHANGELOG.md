@@ -1,3 +1,10 @@
+## [2.212.14](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.13...v2.212.14) (2025-04-30)
+
+
+### Bug Fixes
+
+* dont clear the value in autocomplete while rerendering ([4e1aa2a](https://github.com/bettyblocks/material-ui-component-set/commit/4e1aa2aa9a21dfb9a21561d2d2ab21c3049b3fa1))
+
 ## [2.212.13](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.12...v2.212.13) (2025-04-29)
 
 
