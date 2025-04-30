@@ -649,6 +649,11 @@
     const currentValue = getValue();
 
     useEffect(() => {
+      if (currentValue === null) {
+        // state updates cause currentValue to equal null
+        // nothing should happen then, to prevent a unwanted reset of the value
+        return;
+      }
       if (currentValue !== debouncedCurrentValue) {
         setTimeout(() => {
           setDebouncedCurrentValue(currentValue);
