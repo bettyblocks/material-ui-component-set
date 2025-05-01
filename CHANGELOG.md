@@ -1,3 +1,17 @@
+## [2.212.14](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.13...v2.212.14) (2025-04-30)
+
+
+### Bug Fixes
+
+* dont clear the value in autocomplete while rerendering ([4e1aa2a](https://github.com/bettyblocks/material-ui-component-set/commit/4e1aa2aa9a21dfb9a21561d2d2ab21c3049b3fa1))
+
+## [2.212.13](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.12...v2.212.13) (2025-04-29)
+
+
+### Bug Fixes
+
+* always show data when expansion panel expands via interactions ([4779a0e](https://github.com/bettyblocks/material-ui-component-set/commit/4779a0ec50155e13bd558f5af9b9e70fa0871c04))
+
 ## [2.212.12](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.11...v2.212.12) (2025-04-25)
 
 
