@@ -71,7 +71,7 @@
     const [helper, setHelper] = useState(useText(helperText));
     const optionValue = useText(value);
     const [currentValue, setCurrentValue] = useState(optionValue);
-    const [rawValue, setRawValue] = useState(optionValue);
+    const [rawValue, setRawValue] = usePageState(optionValue);
     const labelText = useText(label);
     const debouncedOnChangeRef = useRef(null);
     const inputRef = useRef();

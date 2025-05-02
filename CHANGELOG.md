@@ -1,3 +1,17 @@
+## [2.212.15](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.14...v2.212.15) (2025-05-02)
+
+
+### Bug Fixes
+
+* usePageState for decimal based inputs ([8f3ea89](https://github.com/bettyblocks/material-ui-component-set/commit/8f3ea896910b3e3eb24ceee8fdcd7025194db2f9))
+
+## [2.212.14](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.13...v2.212.14) (2025-04-30)
+
+
+### Bug Fixes
+
+* dont clear the value in autocomplete while rerendering ([4e1aa2a](https://github.com/bettyblocks/material-ui-component-set/commit/4e1aa2aa9a21dfb9a21561d2d2ab21c3049b3fa1))
+
 ## [2.212.13](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.12...v2.212.13) (2025-04-29)
 
 
