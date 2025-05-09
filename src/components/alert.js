@@ -15,6 +15,7 @@
       bodyText,
       allowTextServerResponse,
       allowTitleServerResponse,
+      useInnerHtml,
       dataComponentAttribute,
     } = options;
     const title = useText(titleText);
@@ -23,6 +24,7 @@
     const [open, setOpen] = useState(visible);
     const [titleFromServer, setTitleFromServer] = useState('');
     const [textFromServer, setTextFromServer] = useState('');
+    const alertBody = (allowTextServerResponse && textFromServer) || body;
 
     useEffect(() => {
       setOpen(visible);
@@ -125,7 +127,15 @@
               : title}
           </AlertTitle>
         )}
-        {textFromServer && allowTextServerResponse ? textFromServer : body}
+        {useInnerHtml ? (
+          <div
+            className={classes.htmlContent}
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{ __html: alertBody }}
+          />
+        ) : (
+          alertBody
+        )}
       </Alert>
     );
     return isDev ? (
@@ -207,6 +217,11 @@
             fontSize: ({ options: { font } }) =>
               style.getFontSize(font, 'Desktop'),
           },
+        },
+      },
+      htmlContent: {
+        '& *': {
+          color: ({ options: { textColor } }) => style.getColor(textColor),
         },
       },
       hide: {
