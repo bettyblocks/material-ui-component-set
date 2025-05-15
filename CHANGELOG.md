@@ -1,3 +1,10 @@
+## [2.212.16](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.15...v2.212.16) (2025-05-14)
+
+
+### Bug Fixes
+
+* add debouncedCurrentValue to the condition which prevents unwanted clearing ([d553ce9](https://github.com/bettyblocks/material-ui-component-set/commit/d553ce92069ee6b8bb3708ca6f98fb0b17895d24))
+
 ## [2.212.15](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.14...v2.212.15) (2025-05-02)
 
 
