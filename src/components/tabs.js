@@ -14,6 +14,7 @@
       scrollButtons,
       alignment,
       showAllTabs,
+      enableAnchorUrl,
       hideTabs,
       dataComponentAttribute,
       preLoadTabs,
@@ -45,7 +46,40 @@
       if (isDev) {
         setValue(parseInt(currentTab - 1, 10));
       }
-    }, [isDev, currentTab]);
+    }, [isDev]);
+
+    useEffect(() => {
+      if (!isDev && enableAnchorUrl && !value) {
+        const currentHash = window.location.hash.slice(1);
+        const tabHashKeyPairs = Object.entries(tabData).map(
+          ([tabKey, tabHash]) => [tabHash, tabKey],
+        );
+        const matchedPair = tabHashKeyPairs.find(
+          ([tabHash]) => tabHash === currentHash,
+        );
+
+        if (matchedPair) {
+          const foundKey = matchedPair[1];
+          const tabIndex = Number(
+            (foundKey.match(/\d+(\.\d+)?/g) || []).join(''),
+          );
+
+          if (!tabData[`disabled${tabIndex}`]) {
+            setSelectedTab(tabIndex);
+          }
+        }
+      }
+    }, [tabData]);
+
+    useEffect(() => {
+      if (!isDev && enableAnchorUrl) {
+        const anchorName = tabData[`label${value}`] || `tab${value}`;
+
+        if (anchorName !== 'tab0') {
+          window.location.hash = encodeURIComponent(anchorName);
+        }
+      }
+    }, [value]);
 
     useEffect(() => {
       setTimeout(() => {
