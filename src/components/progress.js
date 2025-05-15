@@ -12,6 +12,7 @@
       type,
       linearVariant,
       circularVariant,
+      hideDevAnimation,
       value,
       valueBuffer,
       minValue,
@@ -22,6 +23,7 @@
     } = options;
 
     const [open, setOpen] = useState(visible);
+    let actualVariant;
 
     useEffect(() => {
       setOpen(visible);
@@ -60,11 +62,17 @@
       classNames.colorPrimary = classes.normalColor;
     }
 
+    if (isDev && hideDevAnimation) {
+      actualVariant = type === 'linear' ? 'determinate' : 'static';
+    } else {
+      actualVariant = variant;
+    }
+
     const ProgressCmp = (
       <Progress
         classes={classNames}
         className={includeStyling()}
-        variant={variant}
+        variant={actualVariant}
         value={normalise(currentValue)}
         valueBuffer={normalise(currentValueBuffer)}
         thickness={useText(thickness)}

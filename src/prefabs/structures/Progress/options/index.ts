@@ -70,6 +70,12 @@ export const progressOptions = {
       condition: showIf('type', 'EQ', 'linear'),
     },
   }),
+  hideDevAnimation: toggle('Hide pagebuilder animation', {
+    value: false,
+    configuration: {
+      condition: showIf('type', 'EQ', 'linear'),
+    },
+  }),
   circularVariant: option('CUSTOM', {
     value: 'static',
     label: 'Variant',
