@@ -103,6 +103,7 @@ export const tabsOptions = {
     },
   }),
   showAllTabs: toggle('Show all tabs', { value: false }),
+  enableAnchorUrl: toggle('Enable anchor url', { value: false }),
   height: size('Height', {
     value: '',
     configuration: {
