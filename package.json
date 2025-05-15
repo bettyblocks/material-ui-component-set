@@ -43,7 +43,7 @@
     "build-fast": "bb components build --fast",
     "dev": "nodemon",
     "dev:fast": "nodemon --config nodemonfast.json",
-    "lint": "eslint --ext .js,.ts,.tsx ./src",
+    "lint": "NODE_OPTIONS=--max-old-space-size=8196 eslint --ext .js,.ts,.tsx ./src",
     "lint:ci": "yarn lint --max-warnings 0",
     "prettier:base": "prettier --single-quote",
     "prettier:check": "yarn prettier:base --list-different \"src/**/*.js\"",
