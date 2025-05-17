@@ -50,6 +50,18 @@ export const menuItemOptions = {
       ],
     },
   }),
+  linkTarget: option('CUSTOM', {
+    value: '_self',
+    label: 'Open in',
+    configuration: {
+      as: 'BUTTONGROUP',
+      dataType: 'string',
+      allowedInput: [
+        { name: 'Current tab', value: '_self' },
+        { name: 'New tab', value: '_blank' },
+      ],
+    },
+  }),
   linkTo: endpoint('Page', {
     value: '',
     configuration: {
@@ -61,19 +73,6 @@ export const menuItemOptions = {
     configuration: {
       placeholder: 'Starts with https:// or http://',
       condition: showIf('linkType', 'EQ', 'external'),
-    },
-  }),
-  openLinkToExternal: option('CUSTOM', {
-    value: '_self',
-    label: 'Open in',
-    configuration: {
-      condition: showIf('linkType', 'EQ', 'external'),
-      as: 'BUTTONGROUP',
-      dataType: 'string',
-      allowedInput: [
-        { name: 'Current Tab', value: '_self' },
-        { name: 'New Tab', value: '_blank' },
-      ],
     },
   }),
   icon: icon('Icon', {
