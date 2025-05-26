@@ -47,6 +47,13 @@ import {
   buttonOptions,
 } from './structures';
 
+const extendedBoxOptions = {
+  ...boxOptions,
+  innerSpacing: sizes('Inner space', {
+    value: ['M', 'M', 'M', 'M'],
+  }),
+};
+
 const attrs = {
   icon: Icon.DataTable,
   type: 'page',
@@ -332,7 +339,7 @@ const outlinedBox = (header: PrefabReference, content: PrefabReference) => {
   return BoxPrefab(
     {
       options: {
-        ...boxOptions,
+        ...extendedBoxOptions,
         height: size('Height', {
           value: '100%',
           configuration: {
@@ -429,7 +436,7 @@ const linearProgressBox = (
   return BoxPrefab(
     {
       options: {
-        ...boxOptions,
+        ...extendedBoxOptions,
         innerSpacing: sizes('Inner space', {
           value: ['0rem', '0rem', '0rem', '0rem'],
         }),
@@ -439,7 +446,7 @@ const linearProgressBox = (
       BoxPrefab(
         {
           options: {
-            ...boxOptions,
+            ...extendedBoxOptions,
             alignment: buttongroup(
               'Alignment',
               [
@@ -555,7 +562,7 @@ const statisticsBox = (
   return BoxPrefab(
     {
       options: {
-        ...boxOptions,
+        ...extendedBoxOptions,
         alignment: buttongroup(
           'Alignment',
           [
@@ -844,7 +851,7 @@ export default makePrefab('Dashboard, inspirational', attrs, beforeCreate, [
                       ref: { id: '#topMenu' },
 
                       options: {
-                        ...boxOptions,
+                        ...extendedBoxOptions,
                         innerSpacing: sizes('Inner space', {
                           value: ['0rem', '0rem', '0rem', '0rem'],
                         }),
@@ -864,7 +871,7 @@ export default makePrefab('Dashboard, inspirational', attrs, beforeCreate, [
                           BoxPrefab(
                             {
                               options: {
-                                ...boxOptions,
+                                ...extendedBoxOptions,
                                 innerSpacing: sizes('Inner space', {
                                   value: ['0rem', '0rem', '0rem', '0rem'],
                                 }),
@@ -1023,7 +1030,7 @@ export default makePrefab('Dashboard, inspirational', attrs, beforeCreate, [
                   BoxPrefab(
                     {
                       options: {
-                        ...boxOptions,
+                        ...extendedBoxOptions,
                         stretch: toggle('Stretch (when in flex container)', {
                           value: true,
                         }),
@@ -1257,7 +1264,7 @@ export default makePrefab('Dashboard, inspirational', attrs, beforeCreate, [
                                     BoxPrefab(
                                       {
                                         options: {
-                                          ...boxOptions,
+                                          ...extendedBoxOptions,
                                           innerSpacing: sizes('Inner space', {
                                             value: ['M', 'L', 'M', 'L'],
                                           }),
@@ -1379,7 +1386,7 @@ export default makePrefab('Dashboard, inspirational', attrs, beforeCreate, [
                                       BoxPrefab(
                                         {
                                           options: {
-                                            ...boxOptions,
+                                            ...extendedBoxOptions,
                                             alignment: buttongroup(
                                               'Alignment',
                                               [
@@ -1491,7 +1498,7 @@ export default makePrefab('Dashboard, inspirational', attrs, beforeCreate, [
                                             BoxPrefab(
                                               {
                                                 options: {
-                                                  ...boxOptions,
+                                                  ...extendedBoxOptions,
                                                   alignment: buttongroup(
                                                     'Alignment',
                                                     [
@@ -1743,7 +1750,7 @@ export default makePrefab('Dashboard, inspirational', attrs, beforeCreate, [
                                     BoxPrefab(
                                       {
                                         options: {
-                                          ...boxOptions,
+                                          ...extendedBoxOptions,
                                           innerSpacing: sizes('Inner space', {
                                             value: ['M', 'L', 'M', 'L'],
                                           }),
@@ -1865,7 +1872,7 @@ export default makePrefab('Dashboard, inspirational', attrs, beforeCreate, [
                                       BoxPrefab(
                                         {
                                           options: {
-                                            ...boxOptions,
+                                            ...extendedBoxOptions,
                                             alignment: buttongroup(
                                               'Alignment',
                                               [
@@ -2161,7 +2168,7 @@ export default makePrefab('Dashboard, inspirational', attrs, beforeCreate, [
                                             BoxPrefab(
                                               {
                                                 options: {
-                                                  ...boxOptions,
+                                                  ...extendedBoxOptions,
                                                   alignment: buttongroup(
                                                     'Alignment',
                                                     [
@@ -2534,7 +2541,7 @@ export default makePrefab('Dashboard, inspirational', attrs, beforeCreate, [
                                             BoxPrefab(
                                               {
                                                 options: {
-                                                  ...boxOptions,
+                                                  ...extendedBoxOptions,
                                                   alignment: buttongroup(
                                                     'Alignment',
                                                     [
@@ -2793,7 +2800,7 @@ export default makePrefab('Dashboard, inspirational', attrs, beforeCreate, [
                                     BoxPrefab(
                                       {
                                         options: {
-                                          ...boxOptions,
+                                          ...extendedBoxOptions,
                                           innerSpacing: sizes('Inner space', {
                                             value: ['M', 'L', 'M', 'L'],
                                           }),
@@ -2870,7 +2877,7 @@ export default makePrefab('Dashboard, inspirational', attrs, beforeCreate, [
                                     BoxPrefab(
                                       {
                                         options: {
-                                          ...boxOptions,
+                                          ...extendedBoxOptions,
                                           innerSpacing: sizes('Inner space', {
                                             value: ['S', 'S', 'S', 'S'],
                                           }),
@@ -2907,7 +2914,7 @@ export default makePrefab('Dashboard, inspirational', attrs, beforeCreate, [
                                         BoxPrefab(
                                           {
                                             options: {
-                                              ...boxOptions,
+                                              ...extendedBoxOptions,
                                               valignment: buttongroup(
                                                 'Vertical alignment',
                                                 [
@@ -3001,7 +3008,7 @@ export default makePrefab('Dashboard, inspirational', attrs, beforeCreate, [
                                             BoxPrefab(
                                               {
                                                 options: {
-                                                  ...boxOptions,
+                                                  ...extendedBoxOptions,
                                                   innerSpacing: sizes(
                                                     'Inner space',
                                                     {
@@ -3158,7 +3165,7 @@ export default makePrefab('Dashboard, inspirational', attrs, beforeCreate, [
                                 BoxPrefab(
                                   {
                                     options: {
-                                      ...boxOptions,
+                                      ...extendedBoxOptions,
                                       height: size('Height', {
                                         value: '100%',
                                         configuration: {
@@ -3546,7 +3553,7 @@ export default makePrefab('Dashboard, inspirational', attrs, beforeCreate, [
                                           BoxPrefab(
                                             {
                                               options: {
-                                                ...boxOptions,
+                                                ...extendedBoxOptions,
                                                 alignment: buttongroup(
                                                   'Alignment',
                                                   [
@@ -3583,7 +3590,7 @@ export default makePrefab('Dashboard, inspirational', attrs, beforeCreate, [
                                               BoxPrefab(
                                                 {
                                                   options: {
-                                                    ...boxOptions,
+                                                    ...extendedBoxOptions,
                                                     alignment: buttongroup(
                                                       'Alignment',
                                                       [
@@ -3798,7 +3805,7 @@ export default makePrefab('Dashboard, inspirational', attrs, beforeCreate, [
                                               BoxPrefab(
                                                 {
                                                   options: {
-                                                    ...boxOptions,
+                                                    ...extendedBoxOptions,
                                                     alignment: buttongroup(
                                                       'Alignment',
                                                       [
@@ -4488,7 +4495,7 @@ export default makePrefab('Dashboard, inspirational', attrs, beforeCreate, [
                     {
                       ref: { id: '#footer' },
                       options: {
-                        ...boxOptions,
+                        ...extendedBoxOptions,
                         width: size('Width', {
                           value: '100%',
                           configuration: {
@@ -4504,7 +4511,7 @@ export default makePrefab('Dashboard, inspirational', attrs, beforeCreate, [
                       BoxPrefab(
                         {
                           options: {
-                            ...boxOptions,
+                            ...extendedBoxOptions,
                             innerSpacing: sizes('Inner space', {
                               value: ['L', 'L', 'L', 'L'],
                             }),

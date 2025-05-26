@@ -25,6 +25,13 @@ import {
   Button,
 } from './structures';
 
+const extendedBoxOptions = {
+  ...boxOptions,
+  innerSpacing: sizes('Inner space', {
+    value: ['M', 'M', 'M', 'M'],
+  }),
+};
+
 const interactions: PrefabInteraction[] = [
   {
     name: 'Hide',
@@ -105,13 +112,13 @@ export default prefab('Dialog', attr, undefined, [
               Box(
                 {
                   options: {
-                    ...boxOptions,
+                    ...extendedBoxOptions,
                     alignment: option('CUSTOM', {
-                      ...boxOptions.alignment('alignment'),
+                      ...extendedBoxOptions.alignment('alignment'),
                       value: 'space-between',
                     }),
                     innerSpacing: sizes('Inner space', {
-                      ...boxOptions.innerSpacing('innerSpacing'),
+                      ...extendedBoxOptions.innerSpacing('innerSpacing'),
                       value: ['M', 'M', '0rem', 'M'],
                     }),
                   },
@@ -170,31 +177,38 @@ export default prefab('Dialog', attr, undefined, [
                   ),
                 ],
               ),
-              Box({}, [
-                Text(
-                  {
-                    options: {
-                      ...textOptions,
-                      content: variable('Content', {
-                        ...textOptions.content('content'),
-                        value: [
-                          'To start using the dialog, please drag or remove components to your liking.',
-                        ],
-                        configuration: { as: 'MULTILINE' },
-                      }),
-                      type: font('Text style', {
-                        ...textOptions.type('type'),
-                        value: ['Body1'],
-                      }),
-                    },
-                  },
-                  [],
-                ),
-              ]),
               Box(
                 {
                   options: {
-                    ...boxOptions,
+                    ...extendedBoxOptions,
+                  },
+                },
+                [
+                  Text(
+                    {
+                      options: {
+                        ...textOptions,
+                        content: variable('Content', {
+                          ...textOptions.content('content'),
+                          value: [
+                            'To start using the dialog, please drag or remove components to your liking.',
+                          ],
+                          configuration: { as: 'MULTILINE' },
+                        }),
+                        type: font('Text style', {
+                          ...textOptions.type('type'),
+                          value: ['Body1'],
+                        }),
+                      },
+                    },
+                    [],
+                  ),
+                ],
+              ),
+              Box(
+                {
+                  options: {
+                    ...extendedBoxOptions,
                     alignment: option('CUSTOM', {
                       value: 'flex-end',
                       label: 'Alignment',
