@@ -649,8 +649,8 @@
     const currentValue = getValue();
 
     useEffect(() => {
-      if (currentValue === null) {
-        // state updates cause currentValue to equal null
+      if (currentValue === null && !debouncedCurrentValue) {
+        // state updates cause currentValue to equal null and debouncedCurrentValue is empty
         // nothing should happen then, to prevent a unwanted reset of the value
         return;
       }
