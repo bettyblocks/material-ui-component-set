@@ -2809,6 +2809,9 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                           ref: {
                                                             id: '#createTabContentBox',
                                                           },
+                                                          options: {
+                                                            ...extendedBoxOptions,
+                                                          },
                                                         },
                                                         [
                                                           component(
@@ -3157,6 +3160,9 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                         {
                                                           ref: {
                                                             id: '#updateTabContentBox',
+                                                          },
+                                                          options: {
+                                                            ...extendedBoxOptions,
                                                           },
                                                         },
                                                         [
