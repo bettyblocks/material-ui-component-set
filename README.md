@@ -20,6 +20,16 @@ Now you can get started with the component set in your application. Use the foll
 
 https://github.com/bettyblocks/cli/wiki/Usage#start-the-development-server
 
+## Building and running locally
+
+To build & run the component set locally:
+
+- Run `yarn` to install the dependencies
+- Run `yarn build` to build the component set
+- Run `yarn start` to serve the component set on port `5002`
+
+> Note: If you encounter node type errors when running `yarn build`, try re-cloning the repo to see if the issue persists.
+
 ## Our workflow
 
 1.  Let your us know what you are working on by creating a JIRA ticket via our Techsupport department.
@@ -32,7 +42,7 @@ https://github.com/bettyblocks/cli/wiki/Usage#start-the-development-server
     $ git checkout -b feat/a-summary-of-your-ticket-{STORY-ID}
     ```
 
-3.  Work on your feature.
+3.  Work on your feature. 
 
 4.  When you're confident about your work, submit a pull request to `edge` and assign it to one of the reviewers. You can comment on your techsupport ticket in Jira **"In review"** and provide the link to the pull request.
 

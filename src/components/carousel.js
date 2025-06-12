@@ -223,7 +223,7 @@
 
       return (
         <div
-          className={`${classes.container} ${classes.wrapper}`}
+          className={includeStyling(`${classes.container} ${classes.wrapper}`)}
           data-component={useText(dataComponentAttribute) || 'Carousel'}
         >
           {React.Children.map(children, (child, index) => (

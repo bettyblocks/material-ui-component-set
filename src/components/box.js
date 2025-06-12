@@ -4,11 +4,13 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, useText, useLogic } = B;
-    const { Box } = window.MaterialUI.Core;
+    const { env, useText, useLogic, usePublicFile, Link: BLink } = B;
+    const { Box, Link } = window.MaterialUI.Core;
     const {
       alignment,
       backgroundColor,
+      backgroundType,
+      backgroundImage: backgroundImageInput,
       backgroundUrl: backgroundURLInput,
       borderColor,
       contentDirection,
@@ -17,31 +19,44 @@
       transparent,
       valignment,
       emptyPlaceHolderText,
+      linkType,
+      linkTo,
+      linkToExternal,
+      linkTarget,
     } = options;
     const isDev = env === 'dev';
     const hasBackgroundColor = backgroundColor !== 'Transparent';
     const hasBorderColor = borderColor !== 'Transparent';
+    const { url: backgroundImageURL = '' } =
+      usePublicFile(backgroundImageInput) || {};
     const backgroundURL = useText(backgroundURLInput);
-    const [interactionBackground, setInteractionBackground] = useState('');
-    const backgroundImage = interactionBackground || backgroundURL || null;
+    const background =
+      backgroundType === 'img' ? backgroundImageURL : backgroundURL;
+    const [backgroundImage, setBackgroundImage] = useState(background);
     const isEmpty = isDev && children.length === 0;
     const isPristine =
-      isEmpty &&
-      !hasBackgroundColor &&
-      !hasBorderColor &&
-      backgroundImage === null;
+      isEmpty && !hasBackgroundColor && !hasBorderColor && !backgroundImage;
     const isFlex = alignment !== 'none' || valignment !== 'none';
     const opac = transparent ? 0 : 1;
     const [opacity, setOpacity] = useState(opac);
     const logic = useLogic(displayLogic);
+    const hasLink = linkType === 'internal' && linkTo && linkTo.id !== '';
+    const hasExternalLink =
+      linkType === 'external' && linkToExternal && linkToExternal.id !== '';
+    const linkToExternalText =
+      (linkToExternal && useText(linkToExternal)) || '';
+
+    useEffect(() => {
+      setBackgroundImage(background);
+    }, [background]);
 
     useEffect(() => {
       B.defineFunction('setCustomBackgroundImage', (url) => {
-        setInteractionBackground(url);
+        setBackgroundImage(url);
       });
 
       B.defineFunction('removeCustomBackgroundImage', () => {
-        setInteractionBackground('');
+        setBackgroundImage('');
       });
     }, []);
 
@@ -67,20 +82,22 @@
 
     const BoxCmp = (
       <Box
-        className={[
-          classes.root,
-          isEmpty ? classes.empty : '',
-          isPristine ? classes.pristine : '',
-          !isPristine ? classes.background : '',
-          !isPristine ? classes.border : '',
-        ].join(' ')}
+        className={includeStyling(
+          [
+            classes.root,
+            isEmpty ? classes.empty : '',
+            isPristine ? classes.pristine : '',
+            !isPristine ? classes.background : '',
+            !isPristine ? classes.border : '',
+          ].join(' '),
+        )}
         {...boxOptions}
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={{
           ...(backgroundImage !== null && {
-            backgroundImage: `url("${backgroundURL}")`,
+            backgroundImage: `url("${backgroundImage}")`,
           }),
           opacity,
         }}
@@ -88,6 +105,22 @@
         {isPristine ? useText(emptyPlaceHolderText) : children}
       </Box>
     );
+
+    const Component =
+      hasLink || hasExternalLink ? (
+        <Link
+          href={hasExternalLink ? linkToExternalText : undefined}
+          target={linkTarget}
+          rel={linkTarget === '_blank' ? 'noopener' : ''}
+          component={hasLink ? BLink : undefined}
+          endpoint={hasLink ? linkTo : undefined}
+          className={classes.link}
+        >
+          {BoxCmp}
+        </Link>
+      ) : (
+        BoxCmp
+      );
 
     useEffect(() => {
       if (isDev) {
@@ -102,7 +135,11 @@
     if (!isDev && !logic) {
       return <></>;
     }
-    return isDev ? <div className={classes.wrapper}>{BoxCmp}</div> : BoxCmp;
+    return isDev ? (
+      <div className={classes.wrapper}>{Component}</div>
+    ) : (
+      Component
+    );
   })(),
   styles: (B) => (theme) => {
     const { color: colorFunc, env, mediaMinWidth, Styling } = B;
@@ -266,6 +303,13 @@
         borderColor: '#AFB5C8',
         borderStyle: 'dashed',
         backgroundColor: '#F0F1F5',
+      },
+      link: {
+        textDecoration: 'none',
+        color: 'inherit',
+        '&:hover': {
+          textDecoration: 'none !important',
+        },
       },
     };
   },

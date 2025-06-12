@@ -10,6 +10,9 @@ export const advanced = {
       condition: hideIf('runTimeVisibility', 'EQ', 'true'),
     },
   }),
+  disableEnforceFocus: toggle('Disable enforce focus', {
+    value: false,
+  }),
   dataComponentAttribute: variable('Test attribute', {
     value: ['Dialog'],
   }),

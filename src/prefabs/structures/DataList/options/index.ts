@@ -9,6 +9,7 @@ import {
   sizes,
   variable,
   modelAndRelation,
+  font,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -16,7 +17,13 @@ export const categories = [
   {
     label: 'Pagination',
     expanded: false,
-    members: ['pagination', 'labelNumberOfPages', 'take', 'placeholderTake'],
+    members: [
+      'pagination',
+      'labelNumberOfPages',
+      'take',
+      'placeholderTake',
+      'paginationType',
+    ],
   },
   {
     label: 'Spacing',
@@ -90,7 +97,10 @@ export const dataListOptions = {
     },
   }),
   placeholderTake: number('Placeholder rows', {
-    value: '',
+    value: '3',
+  }),
+  paginationType: font('Font family from text style', {
+    value: 'Body2',
   }),
   labelNumberOfPages: variable(`Pagination label (x 'of' y)`, {
     value: ['of'],

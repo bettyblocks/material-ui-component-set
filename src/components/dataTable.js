@@ -56,6 +56,8 @@
       noResultsText,
       dataComponentAttribute,
     } = options;
+
+    const [, setPageState] = usePageState(useText(['']));
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
     const tableContainerRef = React.createRef();
@@ -172,6 +174,15 @@
       return value;
     };
 
+    B.defineFunction('setSelectedRecord', (value) => {
+      const id = value.context.modelData && value.context.modelData.id;
+      setPageState(useText([`${id}`]));
+    });
+
+    B.defineFunction('Clear', () => {
+      setPageState(useText(['']));
+    });
+
     B.defineFunction('Advanced filter', (value) => {
       setPage(0);
       setFilterV2(value.where);
@@ -188,7 +199,13 @@
      * @returns {Void}
      */
     B.defineFunction('Filter', ({ event, property, interactionId }) => {
-      if (typeof event === 'undefined') return;
+      if (event === undefined || event === null) {
+        // eslint-disable-next-line no-console
+        console.error(
+          'Event is empty. Please use this function with valid input events.',
+        );
+        return;
+      }
       setInteractionFilter({
         ...interactionFilter,
         [interactionId]: {
@@ -266,6 +283,15 @@
 
     const where = useFilter(completeFilter);
 
+    const onCompleted = (res) => {
+      const hasResult = res && res.results && res.results.length > 0;
+      if (hasResult) {
+        B.triggerEvent('onSuccess', res.results);
+      } else {
+        B.triggerEvent('onNoResults');
+      }
+    };
+
     // TODO: move model to skip
     const {
       loading: queryLoading,
@@ -279,14 +305,7 @@
         variables,
         skip: loadOnScroll ? skip : page * rowsPerPage,
         take: loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage,
-        onCompleted(res) {
-          const hasResult = res && res.results && res.results.length > 0;
-          if (hasResult) {
-            B.triggerEvent('onSuccess', res.results);
-          } else {
-            B.triggerEvent('onNoResults');
-          }
-        },
+        onCompleted,
         onError(err) {
           if (!displayError) {
             B.triggerEvent('onError', err);
@@ -298,7 +317,7 @@
 
     const { hasResults, data: relationData } = useRelation(
       model,
-      {},
+      { onCompleted },
       typeof model === 'string' || !model,
     );
     const data = hasResults ? relationData : queryData;
@@ -358,15 +377,24 @@
       }, 0);
     }
 
+    const refetchCallback = (refetchData) => {
+      const refetchResults =
+        refetchData && refetchData.data && Object.values(refetchData.data)[0];
+
+      if (refetchResults) {
+        onCompleted(refetchResults);
+      }
+    };
+
     B.defineFunction('Refetch', () => {
       if (pagination === 'never') {
         clearResults();
         skipAppend.current = true;
         setTimeout(() => {
-          refetch();
+          refetch().then(refetchCallback);
         }, 0);
       } else {
-        refetch();
+        refetch().then(refetchCallback);
       }
     });
 
@@ -461,7 +489,7 @@
 
     const handleRowClick = (endpoint, context) => {
       if (isDev) return;
-      B.triggerEvent('OnRowClick', endpoint, context);
+      B.triggerEvent('OnRowClick', { ...endpoint, context }, context);
 
       if (hasLink) {
         history.push(endpoint);
@@ -668,7 +696,7 @@
 
     return (
       <div
-        className={classes.root}
+        className={includeStyling(classes.root)}
         data-component={useText(dataComponentAttribute) || 'DataTable'}
       >
         <Paper
@@ -859,6 +887,10 @@
           style.getColor(background),
           '!important',
         ],
+        '& .MuiTypography-body2, & .MuiTablePagination-select': {
+          fontFamily: ({ options: { paginationType } }) =>
+            style.getFontFamily(paginationType),
+        },
       },
       autoRepeat: {
         opacity: 0.5,

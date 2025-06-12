@@ -21,7 +21,7 @@ export const categories = [
   {
     label: 'Styling',
     expanded: false,
-    members: ['backgroundColor', 'textColor', 'dense', 'divider'],
+    members: ['backgroundColor', 'iconColor', 'textColor', 'dense', 'divider'],
   },
   {
     label: 'Advanced Options',
@@ -94,6 +94,10 @@ export const menuItemOptions = {
         { name: 'End', value: 'end' },
       ],
     },
+  }),
+  iconColor: color('Icon color', {
+    value: ThemeColor.PRIMARY,
+    configuration: { condition: hideIf('icon', 'EQ', 'none') },
   }),
   textColor: color('Text color', { value: ThemeColor.PRIMARY }),
   disabled: toggle('Disabled', { value: false }),

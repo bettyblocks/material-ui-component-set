@@ -78,7 +78,7 @@
         disableGutters={disableGutters}
         divider={divider}
         selected={selected}
-        className={classes.root}
+        className={includeStyling(classes.root)}
         dense={dense}
         data-component={dataComponentAttributeValue}
       >
@@ -145,7 +145,7 @@
             fontSize: ({ options: { subtitleFont } }) =>
               style.getFontSize(subtitleFont, 'Desktop'),
           },
-          fontWeight: ({ options: { titleWeight } }) => titleWeight,
+          fontWeight: ({ options: { subtitleWeight } }) => subtitleWeight,
           color: ({ options: { subtitleColor } }) =>
             style.getColor(subtitleColor),
         },

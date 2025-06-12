@@ -73,7 +73,7 @@
         disableGutters={disableGutters}
         divider={divider}
         selected={selected}
-        className={classes.root}
+        className={includeStyling(classes.root)}
         dense={dense}
         data-component={dataComponentAttributeValue}
       >

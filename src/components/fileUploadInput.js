@@ -4,7 +4,14 @@
   allowedTypes: ['CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, useText, Icon, usePresignedUpload, useProperty } = B;
+    const {
+      Icon,
+      env,
+      generateUUID,
+      usePresignedUpload,
+      useProperty,
+      useText,
+    } = B;
     const { FormControl, FormHelperText, Typography, IconButton } =
       window.MaterialUI.Core;
     const {
@@ -29,11 +36,12 @@
     const isDev = env === 'dev';
     const helper = useText(helperText);
     const labelText = useText(label);
-    const [validationMessage, setValidationMessage] = React.useState('');
+    const [validationMessage, setValidationMessage] = useState('');
     const maxFileSizeMessage = useText(maxFileSizeMessageRaw);
     const acceptedValue = useText(accept) || 'image/*';
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const requiredText = required ? '*' : '';
+    const { current: labelControlRef } = useRef(generateUUID());
 
     const getPropertyId = (property) => {
       if (typeof property === 'string') {
@@ -63,20 +71,23 @@
       propertyId,
     });
 
-    const firstRender = React.useRef(true);
-
-    const inputRef = React.useRef();
+    const firstRender = useRef(true);
+    const inputRef = useRef();
 
     const errorHelpers = hideDefaultError ? '' : error && error.message;
 
     const helperValue =
       errorHelpers || (!hideDefaultError ? validationMessage : '') || helper;
 
-    React.useEffect(() => {
+    useEffect(() => {
+      setValue(initialValue);
+    }, [initialValue]);
+
+    useEffect(() => {
       firstRender.current = false;
     }, []);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (firstRender.current) return;
       if (error) {
         if (Array.isArray(error) && error.length === 0) {
@@ -87,20 +98,25 @@
       }
     }, [error]);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (firstRender.current) return;
       B.triggerEvent('onLoad', loading);
     }, [loading]);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (firstRender.current) return;
       if (!loading) {
         if (data) {
           setFileReference(data);
-          B.triggerEvent('onSuccess', data);
         }
       }
     }, [loading, data]);
+
+    useEffect(() => {
+      if (fileReference) {
+        B.triggerEvent('onSuccess', fileReference);
+      }
+    }, [fileReference]);
 
     const formatBytes = (bytes) => {
       if (bytes === 0) return '0 Bytes';
@@ -179,6 +195,7 @@
         >
           {children}
           <input
+            id={labelControlRef}
             accept={acceptedValue}
             className={classes.input}
             type="file"
@@ -294,8 +311,9 @@
           disabled={disabled}
           required={required}
           margin={margin}
+          className={includeStyling()}
         >
-          <Label className={classes.label}>
+          <Label htmlFor={labelControlRef} className={classes.label}>
             {hideLabel ? '' : `${labelText} ${requiredText}`}
             <UploadComponent />
           </Label>
@@ -440,14 +458,14 @@
       },
       gridDevImage: {
         extend: 'devImage',
-
         margin: 0,
         borderRadius: '0.3125rem 0.3125rem 0 0',
         width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
         height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
       },
       deleteIcon: {
-        color: `${t.colors.light}!important`,
+        color: ({ options: { deleteIconColor } }) =>
+          style.getColor(deleteIconColor),
       },
       uploadingImage: {
         border: 'none',

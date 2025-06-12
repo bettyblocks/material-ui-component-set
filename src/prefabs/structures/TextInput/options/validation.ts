@@ -35,6 +35,7 @@ export const validation = {
   }),
 
   autoComplete: toggle('Autocomplete', { value: false }),
+  autoFocus: toggle('Autofocus', { value: false }),
   disabled: toggle('Disabled'),
   placeholder: variable('Placeholder'),
   helperText: variable('Helper text'),

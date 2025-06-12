@@ -38,7 +38,7 @@
         variant={variant}
         alt={isImage && altText}
         src={isImage && imgSrc}
-        className={classes.avatar}
+        className={includeStyling(classes.avatar)}
         style={styleOptions}
         data-component={useText(dataComponentAttribute) || 'Avatar'}
       >
@@ -68,6 +68,9 @@
         fontWeight: ({ options: { fontWeight } }) => fontWeight,
         '&.MuiAvatar-root': {
           fontSize: ({ options: { fontSize } }) => fontSize,
+          '& .MuiSvgIcon-root': {
+            fontSize: ({ options: { fontSize } }) => fontSize,
+          },
         },
       },
     };

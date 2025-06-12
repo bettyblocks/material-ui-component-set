@@ -34,6 +34,7 @@ export const dataTableColumnOptions = {
     value: '',
     configuration: {
       showOnDrop: true,
+      allowFormatting: true,
     },
   }),
   sortable: toggle('Sortable', { value: false }),

@@ -4,6 +4,9 @@ import {
   option,
   showIf,
   sizes,
+  icon,
+  color,
+  ThemeColor,
 } from '@betty-blocks/component-sdk';
 import { styles } from './styles';
 import { advanced } from '../../advanced';
@@ -73,6 +76,20 @@ export const expansionPanelOptions = {
       condition: showIf('variant', 'EQ', 'elevation'),
     },
   }),
+  icon: icon('Icon', { value: 'ExpandMore' }),
+  iconPosition: option('CUSTOM', {
+    label: 'Icon position',
+    value: 'end',
+    configuration: {
+      as: 'BUTTONGROUP',
+      dataType: 'string',
+      allowedInput: [
+        { name: 'Start', value: 'start' },
+        { name: 'End', value: 'end' },
+      ],
+    },
+  }),
+  iconColor: color('Icon color', { value: ThemeColor.DARK }),
   ...styles,
 
   outerSpacing: sizes('Outer space', {

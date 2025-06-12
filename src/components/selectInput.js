@@ -29,8 +29,15 @@
       value: prefabValue,
       variant,
     } = options;
-    const { env, getProperty, useText, useAllQuery, useRelation } = B;
-    const { TextField, MenuItem } = window.MaterialUI.Core;
+    const {
+      env,
+      generateUUID,
+      getProperty,
+      useAllQuery,
+      useRelation,
+      useText,
+    } = B;
+    const { TextField, MenuItem, FormControl } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
@@ -38,11 +45,13 @@
     const [interactionFilter, setInteractionFilter] = useState({});
     const [disabled, setIsDisabled] = useState(initialIsDisabled);
     const mounted = useRef(false);
+    const getValue = (val) => (isNaN(Number(val)) ? val : Number(val));
+    const { current: labelControlRef } = useRef(generateUUID());
     const modelProperty = getProperty(property || '') || {};
     const labelText = useText(label);
     const clearLabelText = useText(clearLabel);
     const placeholderLabelText = useText(placeholderLabel);
-    const defaultValueText = useText(prefabValue);
+    const defaultValue = getValue(useText(prefabValue));
     const helperTextResolved = useText(helperText);
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
@@ -59,10 +68,15 @@
     const isObjectProperty = kind === 'object' || kind === 'OBJECT';
 
     const resolvedCurrentValue = isObjectProperty
-      ? JSON.stringify({ uuid: defaultValueText })
-      : defaultValueText || placeholderLabelText;
+      ? JSON.stringify({ uuid: defaultValue })
+      : defaultValue || placeholderLabelText;
 
-    const [currentValue, setCurrentValue] = useState(resolvedCurrentValue);
+    const [currentValue, setCurrentValue] = usePageState(resolvedCurrentValue);
+
+    useEffect(() => {
+      setCurrentValue(resolvedCurrentValue);
+    }, [defaultValue]);
+
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
@@ -188,7 +202,7 @@
     }, []);
 
     useEffect(() => {
-      B.defineFunction('Reset', () => setCurrentValue(defaultValueText));
+      B.defineFunction('Reset', () => setCurrentValue(defaultValue));
     }, []);
 
     useEffect(() => {
@@ -233,9 +247,9 @@
 
     useEffect(() => {
       if (isDev) {
-        setCurrentValue(defaultValueText);
+        setCurrentValue(defaultValue);
       }
-    }, [isDev, defaultValueText]);
+    }, [isDev, defaultValue]);
 
     let valid = true;
     let message = '';
@@ -324,12 +338,14 @@
     };
 
     const SelectCmp = (
-      <>
+      <FormControl fullWidth={fullWidth}>
         <TextField
           id={actionVariableId}
+          InputLabelProps={{ htmlFor: labelControlRef }}
           select={!disabled}
           defaultValue={isDev ? placeholderLabelText : currentValue}
           value={isDev ? placeholderLabelText : currentValue}
+          className={includeStyling()}
           size={size}
           classes={{
             root: `${classes.formControl} ${floatLabel && classes.floatLabel} ${
@@ -338,10 +354,10 @@
             }`,
           }}
           variant={variant}
-          fullWidth={fullWidth}
           onChange={handleChange}
           onBlur={validationHandler}
           inputProps={{
+            id: labelControlRef,
             tabIndex: isDev ? -1 : 0,
             'data-component': dataComponentAttributeValue,
           }}
@@ -357,7 +373,7 @@
               {clearLabelText}
             </MenuItem>
           )}
-          {placeholderLabelText && !defaultValueText && (
+          {placeholderLabelText && !defaultValue && (
             <MenuItem value={placeholderLabelText} disabled>
               {placeholderLabelText}
             </MenuItem>
@@ -373,7 +389,7 @@
           required={required}
           value={placeholderLabelText === currentValue ? '' : currentValue}
         />
-      </>
+      </FormControl>
     );
 
     return isDev ? <div className={classes.root}>{SelectCmp}</div> : SelectCmp;

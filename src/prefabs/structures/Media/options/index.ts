@@ -140,7 +140,7 @@ export const mediaOptions = {
     },
   }),
   outerSpacing: sizes('Outer space', {
-    value: ['0rem', '0rem', 'M', '0rem'],
+    value: ['0rem', '0rem', '0rem', '0rem'],
   }),
 
   ...advanced('Media'),

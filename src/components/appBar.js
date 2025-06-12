@@ -73,6 +73,7 @@
       <AppBar
         position={isDev ? 'static' : position}
         classes={{ root: classes.root }}
+        className={includeStyling()}
         variant={appBarVariant}
         square={square}
         elevation={appBarVariant === 'flat' ? 0 : elevation}

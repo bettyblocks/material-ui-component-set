@@ -1,10 +1,8 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
-import { deleteActionVariable } from '../../hooks/deleteActionVariable';
 import { Configuration } from '../Configuration';
 import { richTextOptions, categories as defaultCategories } from './options';
-
-const $afterDelete = [deleteActionVariable];
+import { addChildOptions, optionEvents } from '../TextInput/options/addChild';
 
 export const RichTextInput = (
   config: Configuration,
@@ -24,9 +22,22 @@ export const RichTextInput = (
     options.label = updateOption(options.label, { value: [config.inputLabel] });
   }
 
+  const label = config.label ? config.label : 'Rich text editor';
+
   return component(
     'RichTextInput',
-    { label: config.label, options, ref, $afterDelete, optionCategories },
+    {
+      label,
+      options,
+      ref,
+      optionCategories,
+      optionTemplates: {
+        addChild: {
+          options: addChildOptions('richText'),
+          optionEvents,
+        },
+      },
+    },
     children,
   );
 };

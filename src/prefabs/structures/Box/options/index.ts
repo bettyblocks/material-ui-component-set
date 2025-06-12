@@ -11,6 +11,8 @@ import {
   dropdown,
   displayLogic,
   hideIf,
+  showIf,
+  endpoint,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -36,6 +38,8 @@ export const categories = [
     members: [
       'backgroundColor',
       'backgroundColorAlpha',
+      'backgroundType',
+      'backgroundImage',
       'backgroundUrl',
       'backgroundSize',
       'backgroundPosition',
@@ -51,6 +55,11 @@ export const categories = [
     label: 'Logic Option',
     expanded: false,
     members: ['displayLogic'],
+  },
+  {
+    label: 'Link To',
+    expanded: false,
+    members: ['linkType', 'linkTarget', 'linkTo', 'linkToExternal'],
   },
   {
     label: 'Advanced Options',
@@ -129,7 +138,7 @@ export const boxOptions = {
     value: ['0rem', '0rem', '0rem', '0rem'],
   }),
   innerSpacing: sizes('Inner space', {
-    value: ['M', 'M', 'M', 'M'],
+    value: ['0rem', '0rem', '0rem', '0rem'],
   }),
   position: buttongroup(
     'Position',
@@ -141,7 +150,7 @@ export const boxOptions = {
       ['Sticky', 'sticky'],
     ],
     {
-      value: 'static',
+      value: 'relative',
       configuration: {
         dataType: 'string',
       },
@@ -186,8 +195,32 @@ export const boxOptions = {
     label: 'Background color opacity',
     value: 100,
   }),
+  backgroundType: option('CUSTOM', {
+    label: 'Background type',
+    value: 'img',
+    configuration: {
+      as: 'BUTTONGROUP',
+      dataType: 'string',
+      allowedInput: [
+        { name: 'Image', value: 'img' },
+        { name: 'Data/URL', value: 'url' },
+      ],
+    },
+  }),
+  backgroundImage: option('PUBLIC_FILE', {
+    label: 'Background image',
+    value: '',
+    configuration: {
+      mediaType: 'IMAGE',
+      allowedExtensions: ['image/*'],
+      condition: showIf('backgroundType', 'EQ', 'img'),
+    },
+  }),
   backgroundUrl: variable('Background url', {
     value: [''],
+    configuration: {
+      condition: showIf('backgroundType', 'EQ', 'url'),
+    },
   }),
   backgroundSize: buttongroup(
     'Background size',
@@ -280,6 +313,43 @@ export const boxOptions = {
     value: '',
     configuration: {
       as: 'UNIT',
+    },
+  }),
+  linkType: option('CUSTOM', {
+    label: 'Link to',
+    value: 'internal',
+    configuration: {
+      as: 'BUTTONGROUP',
+      dataType: 'string',
+      allowedInput: [
+        { name: 'Internal page', value: 'internal' },
+        { name: 'External page', value: 'external' },
+      ],
+    },
+  }),
+  linkTarget: option('CUSTOM', {
+    value: '_self',
+    label: 'Open in',
+    configuration: {
+      as: 'BUTTONGROUP',
+      dataType: 'string',
+      allowedInput: [
+        { name: 'Current Tab', value: '_self' },
+        { name: 'New Tab', value: '_blank' },
+      ],
+    },
+  }),
+  linkTo: endpoint('Page', {
+    value: '',
+    configuration: {
+      condition: showIf('linkType', 'EQ', 'internal'),
+    },
+  }),
+  linkToExternal: variable('URL', {
+    value: [''],
+    configuration: {
+      placeholder: 'Starts with https:// or http://',
+      condition: showIf('linkType', 'EQ', 'external'),
     },
   }),
   emptyPlaceHolderText: variable('Empty placeholder text', {

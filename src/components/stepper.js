@@ -78,6 +78,7 @@
           orientation={type}
           classes={{ root: classes.root }}
           data-component={useText(dataComponentAttribute) || 'Stepper'}
+          className={includeStyling()}
         >
           {React.Children.map(children, (child, index) => {
             const { options: childOptions = {} } = child.props || {};
@@ -201,6 +202,7 @@
           position="static"
           variant="text"
           activeStep={activeStep}
+          className={includeStyling()}
           classes={{ root: classes.mobileRoot }}
           nextButton={
             <Button

@@ -24,6 +24,7 @@
     const orientation =
       alignment === 'top' || alignment === 'bottom' ? 'horizontal' : 'vertical';
     const isDev = env === 'dev';
+    const tabsRef = useRef();
     const currentTab = isDev ? selectedDesignTabIndex : defaultValue;
     const [value, setValue] = useState(parseInt(currentTab - 1, 10) || 0);
     const [tabData, setTabData] = useState({});
@@ -46,6 +47,14 @@
       }
     }, [isDev, currentTab]);
 
+    useEffect(() => {
+      setTimeout(() => {
+        if (tabsRef.current) {
+          tabsRef.current.updateIndicator();
+        }
+      }, 100);
+    }, []);
+
     B.defineFunction('Next tab', () => {
       if (value + 1 >= children.length) return;
       setValue(value + 1);
@@ -58,6 +67,7 @@
 
     const TabsHeader = (
       <Tabs
+        action={tabsRef}
         aria-label="tabs"
         onChange={handleChange}
         value={value}
@@ -140,7 +150,7 @@
 
     const TabGroup = (
       <div
-        className={classes.tabs}
+        className={includeStyling(classes.tabs)}
         data-component={useText(dataComponentAttribute) || 'Tabs'}
       >
         {!hideTabs && TabsHeader}
@@ -274,7 +284,7 @@
               style.getFontSize(font, 'Desktop'),
           },
         },
-        display: 'grid',
+        display: 'flex',
         height: ({ options: { height } }) => (isDev ? '100%' : height),
         width: ({ options: { width } }) => (isDev ? '100%' : width),
         flexDirection: ({ options: { alignment } }) => {
