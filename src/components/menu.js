@@ -345,7 +345,7 @@
           '!important',
         ],
         ...(isDev && {
-          position: 'absolute',
+          position: 'relative',
           pointerEvents: ['unset', '!important'],
           zIndex: 9,
         }),
