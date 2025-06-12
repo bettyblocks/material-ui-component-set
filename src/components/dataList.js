@@ -585,6 +585,7 @@
                     className={classes.button}
                     type="button"
                     onClick={() => setPage((v) => v - 1)}
+                    aria-label="Previous page"
                   >
                     <span
                       className={[classes.arrow, 'zmdi zmdi-chevron-left'].join(
@@ -607,6 +608,7 @@
                     className={classes.button}
                     type="button"
                     onClick={() => setPage((v) => v + 1)}
+                    aria-label="Next page"
                   >
                     <span
                       className={[
