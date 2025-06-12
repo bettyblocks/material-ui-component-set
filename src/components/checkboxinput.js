@@ -17,19 +17,26 @@
       isSwitch,
       dataComponentAttribute = ['Checkbox'],
     } = options;
-    const { env, useText } = B;
+    const { env, generateUUID, useText } = B;
     const isDev = env === 'dev';
 
     function boolify(textValue) {
       if (typeof textValue === 'boolean') {
         return textValue;
       }
-      return ['on', 'true', 'yes'].includes(textValue.trim().toLowerCase());
+      if (textValue === undefined || textValue === null) {
+        return undefined;
+      }
+      if (typeof textValue === 'string') {
+        return ['on', 'true', 'yes'].includes(textValue.trim().toLowerCase());
+      }
+      return false;
     }
 
     const [errorState, setErrorState] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
     const mounted = useRef(false);
+    const { current: labelControlRef } = useRef(generateUUID());
     const parsedLabel = useText(label);
     const labelText = parsedLabel;
     const resolvedValue = useText(value);
@@ -50,7 +57,7 @@
 
     B.defineFunction('Uncheck', () => setChecked(false));
     B.defineFunction('Check', () => setChecked(true));
-    B.defineFunction('Check/Uncheck', () => setChecked((prev) => !prev));
+    B.defineFunction('Check/Uncheck', () => setChecked(!checked));
 
     const handleValidation = (isValid) => {
       setErrorState(!isValid);
@@ -105,6 +112,7 @@
     }, [isDev, helperTextResolved, resolvedValue]);
 
     const props = {
+      id: labelControlRef,
       checked,
       required,
       onInvalid: invalidHandler,
@@ -117,8 +125,8 @@
       'data-component': dataComponentAttributeValue,
     };
 
-    const Checkbox = <MUICheckbox {...props} />;
-    const SwitchComponent = <Switch {...props} />;
+    const Checkbox = <MUICheckbox className={includeStyling()} {...props} />;
+    const SwitchComponent = <Switch className={includeStyling()} {...props} />;
 
     const ControlLabel = (
       <>
@@ -143,6 +151,7 @@
           classes={{ root: classes.formControl }}
         >
           <FormControlLabel
+            htmlFor={labelControlRef}
             control={isSwitch ? SwitchComponent : Checkbox}
             label={ControlLabel}
             labelPlacement={position}

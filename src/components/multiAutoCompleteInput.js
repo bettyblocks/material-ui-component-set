@@ -18,6 +18,7 @@
       InteractionScope,
       ModelProvider,
       env,
+      generateUUID,
       getIdProperty,
       getModel,
       getProperty,
@@ -44,6 +45,7 @@
       minvalue,
       model,
       nameAttribute: nameAttributeRaw,
+      noOptionsText: noOptionsTextRaw,
       groupBy,
       optionType,
       order,
@@ -82,10 +84,12 @@
     const displayError = errorType === 'built-in';
     const placeholder = useText(placeholderRaw);
     const helperText = useText(helperTextRaw);
+    const noOptionsText = useText(noOptionsTextRaw);
     const nameAttribute = useText(nameAttributeRaw);
     const [helper, setHelper] = useState(useText(helperTextRaw));
     const [errorState, setErrorState] = useState(false);
     const changeContext = useRef(null);
+    const { current: labelControlRef } = useRef(generateUUID());
     const dataComponentAttribute =
       useText(dataComponentAttributeRaw) || 'AutoComplete';
 
@@ -134,16 +138,42 @@
 
     const valueProperty = isListProperty ? modelProperty : idProperty;
     const defaultValue = useText(valueRaw, { rawValue: true });
-    let initialValue = defaultValue.replace(/\n/g, '');
-
-    if (defaultValue.trim() === '') {
-      initialValue = [];
-    } else {
-      initialValue = defaultValue
-        .trim()
-        .split(',')
-        .map((x) => x.trim());
-    }
+    const isPageVariableValue = valueRaw[0] && valueRaw[0].path;
+    const getValues = () => {
+      const value = defaultValue.replace(/\n/g, '');
+      try {
+        const parsedValue = JSON.parse(value);
+        if (
+          Array.isArray(parsedValue) &&
+          parsedValue.length &&
+          parsedValue.every((item) => typeof item === 'object' && 'id' in item)
+        ) {
+          return parsedValue.map((obj) => String(obj.id));
+        }
+        if (typeof parsedValue === 'number') {
+          return [parsedValue];
+        }
+        if (!parsedValue.length) {
+          if (isPageVariableValue) {
+            return [''];
+          }
+          return [];
+        }
+      } catch (error) {
+        if (value.trim() === '') {
+          if (isPageVariableValue) {
+            return [''];
+          }
+          return [];
+        }
+        return value
+          .trim()
+          .split(',')
+          .map((x) => x.trim());
+      }
+      return value;
+    };
+    const initialValue = getValues();
     const validationMessage = (validityObject) => {
       if (!validityObject) {
         return '';
@@ -208,7 +238,6 @@
      *
      */
     const [value, setValue] = useState(initialValue);
-
     useEffect(() => {
       if (isDev && typeof value === 'string') {
         if (value.trim() === '') {
@@ -223,7 +252,9 @@
         }
       }
     }, [multiple]);
-
+    useEffect(() => {
+      setValue(initialValue);
+    }, [defaultValue]);
     /*
      * User input in the autocomplete. In case of freeSolo this is the same as `value`
      */
@@ -299,8 +330,9 @@
 
     // check if the value option has a relation with an id key
     const relationPropertyId = valueRaw[0] && valueRaw[0].id;
-    const relationProperty = getProperty(relationPropertyId || '');
-
+    const relationProperty = relationPropertyId
+      ? getProperty(relationPropertyId || '')
+      : getProperty('');
     // check if the value option has a relational property
     if (relationProperty && relationProperty.inverseAssociationId) {
       const parentProperty = getIdProperty(relationProperty.modelId);
@@ -323,7 +355,11 @@
         ],
       };
     }
-    if (relationProperty && !relationProperty.inverseAssociationId) {
+    if (
+      relationProperty &&
+      !relationProperty.inverseAssociationId &&
+      value === ''
+    ) {
       const parentProperty = getIdProperty(relationProperty.modelId);
       const parentIdProperty = parentProperty ? parentProperty.id : '';
       parentIdValue = B.useProperty(parentIdProperty);
@@ -612,19 +648,21 @@
           return [];
         }
         const nonFetchedOptions = [];
-        value.forEach((x) => {
+        value.forEach((optionValue) => {
           if (
             !results.some((result) => {
-              if (typeof x === 'string') {
+              if (typeof optionValue === 'string') {
                 return valuePropIsNumber
-                  ? result[valueProp.name] === parseInt(x, 10)
-                  : result[valueProp.name] === x;
+                  ? result[valueProp.name] === parseInt(optionValue, 10)
+                  : result[valueProp.name] === optionValue;
               }
 
-              return result[valueProp.name] === x[valueProp.name];
+              return result[valueProp.name] === optionValue[valueProp.name];
             })
           ) {
-            nonFetchedOptions.push(x);
+            if (optionValue) {
+              nonFetchedOptions.push(optionValue);
+            }
           }
         });
 
@@ -734,7 +772,9 @@
         error={errorState}
       >
         <Autocomplete
+          id={labelControlRef}
           disableCloseOnSelect={!closeOnSelect}
+          className={includeStyling()}
           disabled={disabled}
           {...((optionType === 'model' || optionType === 'variable') && {
             getOptionLabel: renderLabel,
@@ -775,6 +815,7 @@
             setInputValue('');
           }}
           options={currentOptionsGrouped || currentOptions}
+          noOptionsText={noOptionsText}
           renderInput={(params) => (
             <>
               {(optionType === 'model' || optionType === 'variable') && (
@@ -872,6 +913,7 @@
       return (
         <div className={classes.root}>
           <TextField
+            className={includeStyling()}
             InputProps={{
               inputProps: {
                 tabIndex: isDev ? -1 : undefined,

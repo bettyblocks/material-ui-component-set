@@ -48,9 +48,11 @@
         case 'neq':
           return leftParsed !== rightParsed;
         case 'contains':
-          return leftParsed.indexOf(rightParsed) > -1;
+          return leftParsed !== '' && rightParsed !== ''
+            ? leftParsed.toString().indexOf(rightParsed.toString()) > -1
+            : false;
         case 'notcontains':
-          return leftParsed.indexOf(rightParsed) < 0;
+          return leftParsed.toString().indexOf(rightParsed.toString()) < 0;
         case 'gt':
           return leftParsed > rightParsed;
         case 'lt':
@@ -117,7 +119,9 @@
 
     return (
       <div
-        className={children.length === 0 ? classes.empty : undefined}
+        className={includeStyling(
+          children.length === 0 && isDev ? classes.empty : undefined,
+        )}
         data-component={useText(dataComponentAttribute) || 'Conditional'}
       >
         {isPristine ? 'Conditional' : children}

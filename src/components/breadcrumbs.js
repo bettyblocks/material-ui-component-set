@@ -48,6 +48,7 @@
         <Breadcrumbs
           {...breadcrumbsOptions}
           classes={{ separator: classes.separator }}
+          className={includeStyling()}
           aria-label="breadcrumb"
         >
           {children}

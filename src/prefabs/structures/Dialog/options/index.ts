@@ -5,7 +5,12 @@ export const categories = [
   {
     label: 'Advanced Options',
     expanded: false,
-    members: ['dataComponentAttribute', 'invisible'],
+    members: [
+      'dataComponentAttribute',
+      'preLoadChildren',
+      'disableEnforceFocus',
+      'invisible',
+    ],
   },
 ];
 

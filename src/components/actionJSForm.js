@@ -32,12 +32,6 @@
 
     const selectedFilter = getFilter();
 
-    if (isDev && children.length === 0) {
-      return (
-        <div className={[classes.empty, classes.pristine].join(' ')}>Form</div>
-      );
-    }
-
     const onActionSuccess = (response) => {
       const event = response.data.action.results;
 
@@ -93,6 +87,13 @@
      * @returns {Void}
      */
     B.defineFunction('Filter', ({ event, property, interactionId }) => {
+      if (event === undefined || event === null) {
+        // eslint-disable-next-line no-console
+        console.error(
+          'Event is empty. Please use this function with valid input events.',
+        );
+        return;
+      }
       setInteractionFilter((s) => ({
         ...s,
         [interactionId]: {
@@ -176,9 +177,14 @@
     }
 
     if (isDev) {
-      return (
+      return React.Children.count(children) > 0 ? (
         <div>
           <FormComponent />
+        </div>
+      ) : (
+        <div className={`${classes.empty} ${classes.pristine}`}>
+          <FormComponent />
+          Form
         </div>
       );
     }
@@ -198,8 +204,8 @@
             if (error) {
               return <span>Something went wrong: {error.message}</span>;
             }
-            const { id } = data;
 
+            const id = data ? data.id : null;
             return <FormComponent record={id} />;
           }}
         </GetOne>

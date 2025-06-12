@@ -21,8 +21,10 @@
       square,
       variant,
       elevation,
+      icon,
+      iconPosition,
       dataComponentAttribute,
-      preLoadData,
+      preloadData,
     } = options;
     const Variant = {
       Title1: 'h1',
@@ -36,17 +38,26 @@
     }[options.titleType || 'Body1'];
 
     const [expanded, setExpanded] = useState(defaultExpanded);
-    const [dataShown, setDataShown] = useState(defaultExpanded || preLoadData);
+    const [dataShown, setDataShown] = useState(defaultExpanded || preloadData);
 
     const closePanel = () => setExpanded(false);
-    const openPanel = () => setExpanded(true);
-    const togglePanel = () => setExpanded((s) => !s);
+    const openPanel = () => {
+      setDataShown(true);
+      setExpanded(true);
+    };
+    const togglePanel = () => {
+      setDataShown(true);
+      setExpanded((s) => !s);
+    };
 
     B.defineFunction('Expand', openPanel);
     B.defineFunction('Collapse', closePanel);
     B.defineFunction('Expand/Collapse', togglePanel);
     B.defineFunction('Set Expansion Panel', (value) => {
-      if (typeof value === 'boolean') setExpanded(value);
+      if (typeof value === 'boolean') {
+        setDataShown(true);
+        setExpanded(value);
+      }
     });
 
     useEffect(() => {
@@ -66,7 +77,6 @@
 
     const onClick = () => {
       if (isDev) return;
-      setDataShown(true);
       togglePanel();
     };
 
@@ -92,13 +102,16 @@
 
     const panelSummaryOptions = {
       onClick,
-      expandIcon: <Icon name="ExpandMore" />,
+      expandIcon: <Icon name={icon} />,
+      IconButtonProps: {
+        edge: iconPosition,
+      },
     };
 
     const ShowChilderen = <>{dataShown || isDev ? children : ''}</>;
 
     const ExpansionPanelComponent = (
-      <ExpansionPanel {...panelOptions}>
+      <ExpansionPanel {...panelOptions} className={includeStyling()}>
         <ExpansionPanelSummary {...panelSummaryOptions}>
           <Typography variant={Variant} className={classes.panelTitle}>
             {useText(title)}
@@ -226,6 +239,13 @@
             getSpacing(outerSpacing[2], 'Desktop'),
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Desktop'),
+        },
+        '& .MuiExpansionPanelSummary-root': {
+          flexDirection: ({ options: { iconPosition } }) =>
+            iconPosition === 'start' && 'row-reverse',
+        },
+        '& .MuiExpansionPanelSummary-expandIcon': {
+          color: ({ options: { iconColor } }) => style.getColor(iconColor),
         },
       },
       empty: {

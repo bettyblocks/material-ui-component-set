@@ -160,7 +160,7 @@
         kinds: [...dateKinds, ...dateTimeKinds],
       },
       {
-        operator: 'gteg',
+        operator: 'gteq',
         label: 'Is after or at',
         kinds: [...dateKinds, ...dateTimeKinds],
       },
@@ -198,8 +198,6 @@
     const filterProps = (properties, id) => {
       return Object.values(properties).filter((prop) => {
         return (
-          // Always add the id
-          (prop.modelId === id && prop.name === 'id') ||
           // Add all properties besides the forbidden
           (prop.modelId === id &&
             !forbiddenKinds.includes(prop.kind) &&
@@ -363,6 +361,10 @@
         if (isNumberType) return 'number';
         return 'text';
       };
+
+      if (isBooleanType && row.rightValue === '') {
+        setGroups(updateRowProperty(row.rowId, groups, 'rightValue', false));
+      }
       const isTextType =
         !isSpecialType && !isBooleanType && !isDateTimeType && !isDateType;
       return (
@@ -500,7 +502,7 @@
                 value={row.rightValue === '' ? null : row.rightValue}
                 variant="inline"
                 inputVariant="outlined"
-                format="MM/dd/yyyy"
+                format="MM/dd/yyyy HH:mm:ss"
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
                 }}
@@ -702,9 +704,11 @@
     });
 
     return isDev ? (
-      <div className={classes.root}>{renderTree(groups, true)}</div>
+      <div className={includeStyling(classes.root)}>
+        {renderTree(groups, true)}
+      </div>
     ) : (
-      <div className={classes.root}>{renderTree(groups)}</div>
+      <div className={includeStyling(classes.root)}>{renderTree(groups)}</div>
     );
   })(),
   styles: (B) => (theme) => {

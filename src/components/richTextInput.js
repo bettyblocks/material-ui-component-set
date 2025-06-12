@@ -87,8 +87,8 @@
       FirstPage,
     };
     const allIcons = { ...Icons, ...extraIcons };
-    const { FormHelperText, SvgIcon } = window.MaterialUI.Core;
-    const { useText, env } = B;
+    const { FormHelperText, InputLabel, SvgIcon } = window.MaterialUI.Core;
+    const { generateUUID, useText, env } = B;
     const {
       actionVariableId: name,
       value: valueProp,
@@ -113,15 +113,38 @@
       floatLabel,
     } = options;
     const isDev = env === 'dev';
-
-    const [currentValue, setCurrentValue] = useState(
-      useText(valueProp, { rawValue: true }),
-    );
+    const [valueKey, setValueKey] = useState(0);
     const labelText = useText(label);
     const [showDropdown, setShowDropdown] = useState(false);
+    const [multipleStyles, setMultipleStyles] = useState(false);
     const [activeStyleName, setActiveStyleName] = useState('Body 1');
     const placeholderText = useText(placeholder);
     const helperTextResolved = useText(helperText);
+    const { current: labelControlRef } = useRef(generateUUID());
+
+    const sanitizeHTML = (rawString) => {
+      // Replace all the whitespace between tags with nothing. Replacement is done when there is ONLY whitespace
+      return rawString.toString().trim().replace(/>\s+</g, '><');
+    };
+
+    const optionValue = sanitizeHTML(useText(valueProp));
+    const [currentValue, setCurrentValue] = useState(optionValue);
+
+    useEffect(() => {
+      setCurrentValue(optionValue);
+      setValueKey(valueKey + 1);
+    }, [optionValue]);
+
+    const KeyCode = {
+      Digit1: 49,
+      Digit2: 50,
+      Digit3: 51,
+      Digit4: 52,
+      Digit5: 53,
+      Digit6: 54,
+      Digit7: 55,
+      Digit8: 56,
+    };
 
     const isMarkActive = (editor, format) => {
       const marks = Editor.marks(editor);
@@ -286,7 +309,6 @@
       UL: (el) => ({ type: 'bulleted-list', align: el.getAttribute('align') }),
     };
 
-    // COMPAT: `B` is omitted here because Google Docs uses `<b>` in weird ways.
     const TEXT_TAGS = {
       CODE: () => ({ code: true }),
       DEL: () => ({ strikethrough: true }),
@@ -302,9 +324,10 @@
       typeof window !== 'undefined' &&
       /Mac|iPod|iPhone|iPad/.test(window.navigator.platform);
 
-    const deserialize = (el) => {
+    const deserialize = (el, markAttributes = {}) => {
       if (el.nodeType === 3) {
-        return el.textContent;
+        // Node is a TEXT;
+        return jsx('text', markAttributes, el.textContent);
       }
       if (el.nodeType !== 1) {
         return null;
@@ -314,6 +337,7 @@
       }
 
       const { nodeName } = el;
+      let nodeAttributes = { ...markAttributes };
       let parent = el;
 
       if (
@@ -324,29 +348,34 @@
         // eslint-disable-next-line prefer-destructuring
         parent = el.childNodes[0];
       }
-      let children = Array.from(parent.childNodes).map(deserialize).flat();
 
-      if (children.length === 0) {
-        children = [{ text: '' }];
+      // define attributes for text markup
+      if (TEXT_TAGS[nodeName]) {
+        nodeAttributes = { ...nodeAttributes, ...TEXT_TAGS[nodeName](el) };
       }
 
-      if (ELEMENT_TAGS[nodeName]) {
-        const attrs = ELEMENT_TAGS[nodeName](el);
+      let children = Array.from(parent.childNodes).flatMap((node) =>
+        deserialize(node, nodeAttributes),
+      );
+
+      if (children.length === 0) {
+        children = jsx('text', nodeAttributes, '');
+      }
+
+      if (nodeName === 'LI') {
+        const attrs = ELEMENT_TAGS.LI(el);
         return jsx('element', attrs, children);
       }
 
-      if (TEXT_TAGS[nodeName]) {
-        const attrs = TEXT_TAGS[nodeName](el);
-        return children.map((child) => jsx('text', attrs, child));
-      }
-
-      if (!Element.isElementList(children)) {
-        const attrs = ELEMENT_TAGS.P(el);
-        children = jsx('element', attrs, children);
-      }
-
       if (el.nodeName === 'BODY') {
+        children = jsx('element', nodeAttributes, children);
         return jsx('fragment', {}, children);
+      }
+
+      // define attributes for text nodes
+      if (ELEMENT_TAGS[nodeName]) {
+        const attrs = ELEMENT_TAGS[nodeName](el);
+        return jsx('element', attrs, children);
       }
 
       return children;
@@ -381,36 +410,39 @@
       return <span {...attributes}>{children}</span>;
     }
 
+    const checkMultipleStyles = (value) => {
+      const diverseStyle = value.filter(({ type }) => type !== value[0].type);
+      return diverseStyle.length > 0;
+    };
+
     const onChangeHandler = (value) => {
+      if (value.length > 1) {
+        const hasMultipleStyles = checkMultipleStyles(value);
+        if (hasMultipleStyles) {
+          setMultipleStyles(true);
+        }
+      }
       setCurrentValue(value.map((row) => serialize(row)).join(''));
       B.triggerEvent('onChange', currentValue);
     };
 
     const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
-    const editor = React.useMemo(
-      () => withHistory(withReact(createEditor())),
-      [],
-    );
-    const parsed = new DOMParser().parseFromString(
-      useText(valueProp),
-      'text/html',
-    );
+    const [editor] = useState(() => withReact(withHistory(createEditor())));
+    const parsed = new DOMParser().parseFromString(optionValue, 'text/html');
     const fragment = deserialize(parsed.body);
 
-    if (isDev) {
-      useEffect(() => {
-        Transforms.delete(editor, {
-          at: {
-            anchor: Editor.start(editor, []),
-            focus: Editor.end(editor, []),
-          },
-        });
-        Transforms.insertNodes(editor, deserialize(parsed.body));
-        Transforms.delete(editor, {
-          at: Editor.start(editor, [0]),
-        });
-      }, [valueProp]);
-    }
+    B.defineFunction('Clear', () => {
+      editor.children.forEach(() => {
+        Transforms.delete(editor, { at: [0] });
+      });
+
+      editor.children = [
+        {
+          type: 'p',
+          children: [{ text: '' }],
+        },
+      ];
+    });
 
     const handleListdepth = (listKind, key, event) => {
       const isList = isBlockActive(editor, listKind, 'type');
@@ -527,35 +559,32 @@
 
       if (event.altKey) {
         switch (event.keyCode) {
-          case 49:
+          case KeyCode.Digit1:
             event.preventDefault();
             toggleBlock(editor, 'heading-one');
             break;
-          case 50:
+          case KeyCode.Digit2:
             event.preventDefault();
             toggleBlock(editor, 'heading-two');
             break;
-          case 51:
+          case KeyCode.Digit3:
             event.preventDefault();
             toggleBlock(editor, 'heading-three');
             break;
-          case 52:
+          case KeyCode.Digit4:
             event.preventDefault();
             toggleBlock(editor, 'heading-four');
             break;
-          case 53:
+          case KeyCode.Digit5:
             event.preventDefault();
             toggleBlock(editor, 'heading-five');
             break;
-          case 54:
+          case KeyCode.Digit6:
             event.preventDefault();
             toggleBlock(editor, 'heading-six');
             break;
-          case 55:
-            event.preventDefault();
-            toggleBlock(editor, 'paragraph');
-            break;
-          case 56:
+          case KeyCode.Digit7:
+          case KeyCode.Digit8:
             event.preventDefault();
             toggleBlock(editor, 'paragraph');
             break;
@@ -791,9 +820,6 @@
                 setAmountOfHeadersInSelection(Math.abs(anchor - focus) + 1);
               }
             }
-          } else {
-            setAmountOfHeadersInSelection(0);
-            setAmountOfHeadersInSelection(1);
           }
         }, 500);
       }
@@ -812,6 +838,8 @@
         isBlockActive(editor, format, 'type') &&
         activeStyleName !== '\u00A0'
       ) {
+        setActiveStyleName('\u00A0');
+      } else if (multipleStyles) {
         setActiveStyleName('\u00A0');
       }
       return (
@@ -897,18 +925,20 @@
 
     return (
       <div
-        className={classes.root}
+        className={includeStyling(classes.root)}
         data-component={useText(dataComponentAttribute) || 'RichTextEditor'}
       >
         {labelText && !hideLabel && (
-          <FormHelperText
+          <InputLabel
+            htmlFor={labelControlRef}
             className={`${classes.label} ${floatLabel && classes.floatLabel}`}
           >
             {labelText}
-          </FormHelperText>
+          </InputLabel>
         )}
         <div className={classes.editorWrapper}>
           <Slate
+            key={valueKey}
             editor={editor}
             value={fragment}
             onChange={(value) => {
@@ -989,7 +1019,12 @@
               }}
             />
           </Slate>
-          <input type="hidden" name={name} value={currentValue} />
+          <input
+            id={labelControlRef}
+            type="hidden"
+            name={name}
+            value={currentValue}
+          />
         </div>
         {helperTextResolved && (
           <FormHelperText classes={{ root: classes.helper }}>
@@ -1145,7 +1180,7 @@
       },
       dropdownButton: {
         display: 'inline-flex',
-        maxWitdh: '100%',
+        maxWidth: '100%',
         cursor: 'pointer',
         backgroundColor: 'transparent',
         padding: '4px',

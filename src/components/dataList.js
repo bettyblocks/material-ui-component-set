@@ -17,6 +17,8 @@
           useText,
           Icon,
         } = B;
+
+        const [, setPageState] = usePageState(useText(['']));
         const [page, setPage] = useState(1);
         const [search, setSearch] = useState('');
         const [searchTerm, setSearchTerm] = useState('');
@@ -61,7 +63,10 @@
         const [interactionFilter, setInteractionFilter] = useState({});
 
         const builderLayout = () => (
-          <div data-component={dataComponentAttributeText || 'DataList'}>
+          <div
+            className={includeStyling()}
+            data-component={dataComponentAttributeText || 'DataList'}
+          >
             {searchProperty &&
               searchProperty.type &&
               searchProperty.id !== '' && (
@@ -120,7 +125,10 @@
                 listRef.current.children[0].outerHTML,
               );
             }
-            listRef.current.children.forEach((child, index) => {
+
+            const children = Array.from(listRef.current.children);
+
+            children.forEach((child, index) => {
               if (index > 0) {
                 const elem = child;
                 elem.style.opacity = 0.4;
@@ -256,6 +264,15 @@
         );
         const where = useFilter(completeFilter);
 
+        const onCompleted = (res) => {
+          const hasResult = res && res.results && res.results.length > 0;
+          if (hasResult) {
+            B.triggerEvent('onSuccess', res.results);
+          } else {
+            B.triggerEvent('onNoResults');
+          }
+        };
+
         const {
           loading: queryLoading,
           error,
@@ -270,6 +287,7 @@
             variables: {
               ...(orderByPath ? { sort: { relation: sort } } : {}),
             },
+            onCompleted,
             onError(resp) {
               if (!displayError) {
                 B.triggerEvent('onError', resp);
@@ -281,19 +299,12 @@
 
         const { hasResults, data: relationData } = useRelation(
           model,
-          {},
+          { onCompleted },
           typeof model === 'string' || !model,
         );
 
         const data = hasResults ? relationData : queryData;
         const loading = hasResults ? false : queryLoading;
-
-        const hasResult = data && data.results && data.results.length > 0;
-        if (hasResult) {
-          B.triggerEvent('onSuccess', data.results);
-        } else {
-          B.triggerEvent('onNoResults');
-        }
 
         useEffect(() => {
           if (isDev) {
@@ -332,6 +343,15 @@
           };
         }, [search]);
 
+        B.defineFunction('setSelectedRecord', (value) => {
+          const id = value.context.modelData && value.context.modelData.id;
+          setPageState(useText([`${id}`]));
+        });
+
+        B.defineFunction('Clear', () => {
+          setPageState(useText(['']));
+        });
+
         B.defineFunction('Advanced filter', (value) => {
           setPage(1);
           setFilterV2(value.where);
@@ -342,8 +362,19 @@
           setFilterV2({});
         });
 
+        const refetchCallback = (refetchData) => {
+          const refetchResults =
+            refetchData &&
+            refetchData.data &&
+            Object.values(refetchData.data)[0];
+
+          if (refetchResults) {
+            onCompleted(refetchResults);
+          }
+        };
+
         useEffect(() => {
-          B.defineFunction('Refetch', () => refetch());
+          B.defineFunction('Refetch', () => refetch().then(refetchCallback));
 
           /**
            * @name Filter
@@ -351,6 +382,13 @@
            * @returns {Void}
            */
           B.defineFunction('Filter', ({ event, property, interactionId }) => {
+            if (event === undefined || event === null) {
+              // eslint-disable-next-line no-console
+              console.error(
+                'Event is empty. Please use this function with valid input events.',
+              );
+              return;
+            }
             setInteractionFilter((s) => ({
               ...s,
               [interactionId]: {
@@ -383,7 +421,7 @@
         }, [loading]);
 
         const handleClick = (event, context) => {
-          B.triggerEvent('OnItemClick', event, context);
+          B.triggerEvent('OnItemClick', { ...event, context }, context);
         };
 
         const Looper = (results) =>
@@ -416,7 +454,11 @@
           if (loading && loadingType === 'showChildren') {
             B.triggerEvent('onLoad', loading);
             return (
-              <ModelProvider value={prevData} id={model}>
+              <ModelProvider
+                className={includeStyling()}
+                value={prevData}
+                id={model}
+              >
                 {children}
               </ModelProvider>
             );
@@ -441,10 +483,6 @@
           const { results = [], totalCount } = data || {};
           const resultCount = results && results.length;
 
-          if (!resultCount) {
-            return <span>{parsedNoResultsText}</span>;
-          }
-
           return (
             <div data-component={dataComponentAttributeText || 'DataContainer'}>
               {searchProperty &&
@@ -461,6 +499,7 @@
                   </div>
                 )}
 
+              {!resultCount && <span>{parsedNoResultsText}</span>}
               {!isGrid ? (
                 Looper(results)
               ) : (
@@ -653,6 +692,8 @@
         alignItems: 'center',
         justifyContent: 'flex-end',
         padding: ['0.75rem', 0],
+        fontFamily: ({ options: { paginationType } }) =>
+          style.getFontFamily(paginationType),
       },
       placeholder: {
         opacity: '0.4',

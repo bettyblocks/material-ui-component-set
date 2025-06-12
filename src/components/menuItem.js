@@ -94,7 +94,7 @@
 
     const menuItemCmp = (
       <MenuItem
-        className={classes.root}
+        className={includeStyling(classes.root)}
         component={menuItemComponent}
         dense={dense}
         disabled={!isDev && (disabled || isLoading)}
@@ -126,10 +126,11 @@
     const isDev = env === 'dev';
     return {
       root: {
-        backgroundColor: ({ options: { backgroundColor } }) => [
-          style.getColor(backgroundColor),
-          '!important',
-        ],
+        backgroundColor: ({ options: { backgroundColor } }) =>
+          backgroundColor !== 'Transparent' && [
+            style.getColor(backgroundColor),
+            '!important',
+          ],
         color: ({ options: { disabled, textColor } }) => [
           !disabled ? style.getColor(textColor) : 'rgba(0, 0, 0, 0.26)',
           '!important',
@@ -143,6 +144,7 @@
             iconPosition === 'start' ? '0.5rem' : '',
           marginLeft: ({ options: { iconPosition } }) =>
             iconPosition === 'end' ? '0.5rem' : '',
+          color: ({ options: { iconColor } }) => style.getColor(iconColor),
         },
         ...(isDev && {
           '&:hover': {

@@ -7,6 +7,7 @@
     const {
       actionVariableId: name,
       autoComplete,
+      autoFocus,
       disabled,
       error,
       label,
@@ -37,6 +38,7 @@
       validationAboveMaximum = [''],
       value,
       hideLabel,
+      debounceDelay,
       dataComponentAttribute = ['TextField'],
       required,
     } = options;
@@ -52,18 +54,24 @@
       IconButton,
     } = window.MaterialUI.Core;
 
-    const { env, useText, Icon } = B;
+    const { env, useText, Icon, generateUUID } = B;
     const isDev = env === 'dev';
     const isNumberType = type === 'number';
     const isPasswordType = type === 'password';
+    const isEmailType = type === 'email';
     const [isDisabled, setIsDisabled] = useState(disabled);
     const [showPassword, togglePassword] = useState(false);
     const [errorState, setErrorState] = useState(error);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
-    const [currentValue, setCurrentValue] = usePageState(useText(value));
+    const optionValue = useText(value);
+    const [currentValue, setCurrentValue] = usePageState(optionValue);
     const parsedLabel = useText(label);
     const labelText = parsedLabel;
+    const debouncedOnChangeRef = useRef(null);
+    const inputRef = useRef();
+
+    const { current: labelControlRef } = useRef(generateUUID());
 
     const validPattern = pattern || null;
     const validMinlength = minLength || null;
@@ -127,9 +135,16 @@
 
     const customPatternValidation = (target) => {
       const { value: eventValue, validity } = target;
+
       if (!pattern) {
         return validity;
       }
+
+      if (eventValue === '') {
+        target.setCustomValidity('');
+        return { ...validity, valid: true, patternMismatch: false };
+      }
+
       const patternRegex = RegExp(`^${pattern}$`);
       const isValid = patternRegex.test(eventValue);
       target.setCustomValidity(isValid ? '' : 'Invalid field.');
@@ -140,12 +155,26 @@
       };
     };
 
+    const debounce =
+      (func, delay) =>
+      (...args) => {
+        clearTimeout(debounce.timeoutId);
+        debounce.timeoutId = setTimeout(() => func(...args), delay);
+      };
+    debounce.timeoutId = null;
+
+    if (!debouncedOnChangeRef.current) {
+      debouncedOnChangeRef.current = debounce((newValue) => {
+        B.triggerEvent('onChange', newValue);
+      }, debounceDelay);
+    }
+
     const changeHandler = (event) => {
       const { target } = event;
       let { validity: validation } = target;
       const { value: eventValue } = target;
 
-      if (isNumberType || multiline) {
+      if (isNumberType || multiline || isEmailType) {
         validation = customPatternValidation(target);
       }
       const numberValue =
@@ -156,14 +185,14 @@
       }
       const newValue = isNumberType ? numberValue : eventValue;
       setCurrentValue(newValue);
-      B.triggerEvent('onChange', newValue);
+      debouncedOnChangeRef.current(newValue);
     };
 
     const blurHandler = (event) => {
       const { target } = event;
       let { validity: validation } = target;
 
-      if (isNumberType || multiline) {
+      if (isNumberType || multiline || isEmailType) {
         validation = customPatternValidation(target);
       }
 
@@ -185,10 +214,16 @@
       handleValidation(validity);
     };
 
+    const focusHandler = () =>
+      setTimeout(() => {
+        inputRef.current.focus();
+      }, 0);
+
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
     B.defineFunction('Reset', () => setCurrentValue(useText(value)));
+    B.defineFunction('Focus', () => focusHandler());
 
     const handleClickShowPassword = () => {
       togglePassword(!showPassword);
@@ -251,6 +286,7 @@
       >
         {labelText && !hideLabel && (
           <InputLabel
+            htmlFor={labelControlRef}
             classes={{
               root: `${classes.label} ${floatLabel && classes.floatLabel}`,
             }}
@@ -260,11 +296,14 @@
           </InputLabel>
         )}
         <InputCmp
+          id={labelControlRef}
+          inputRef={inputRef}
           name={name}
           value={currentValue}
           type={showPassword ? 'text' : inputType}
           multiline={multiline}
           autoComplete={autoComplete ? 'on' : 'off'}
+          autoFocus={!isDev && autoFocus}
           rows={rows}
           label={labelText}
           placeholder={placeholderText}
@@ -303,6 +342,7 @@
             min: validMinvalue,
             max: validMaxvalue,
             tabIndex: isDev ? -1 : undefined,
+            className: includeStyling(),
           }}
           data-component={dataComponentAttributeValue}
         />
@@ -350,7 +390,6 @@
           ],
         },
         '&.Mui-disabled': {
-          pointerEvents: 'none',
           opacity: '0.7',
         },
       },
@@ -394,8 +433,12 @@
           '&:hover': {
             '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
               {
-                borderColor: ({ options: { borderHoverColor } }) => [
-                  style.getColor(borderHoverColor),
+                borderColor: ({
+                  options: { borderHoverColor, borderColor, disabled },
+                }) => [
+                  disabled
+                    ? style.getColor(borderColor)
+                    : style.getColor(borderHoverColor),
                   '!important',
                 ],
               },
@@ -426,7 +469,6 @@
             },
           },
           '&.Mui-disabled': {
-            pointerEvents: 'none',
             opacity: '0.7',
           },
         },

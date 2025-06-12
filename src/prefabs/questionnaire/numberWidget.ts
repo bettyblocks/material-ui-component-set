@@ -15,7 +15,7 @@ import {
   wrapper,
 } from '@betty-blocks/component-sdk';
 import { options as formOptions } from '../structures/ActionJSForm/options';
-import { Box, TextInput, boxOptions, textInputOptions } from '../structures';
+import { Box, DecimalInput, boxOptions, textInputOptions } from '../structures';
 
 export const numberWidget = [
   wrapper(
@@ -143,12 +143,12 @@ export const numberWidget = [
               },
             },
             [
-              TextInput(
+              DecimalInput(
                 {
                   label: 'Number field',
                   inputLabel: 'Number',
                   type: 'number',
-                  pattern: '^[0-9]*$',
+                  inputType: 'number',
                   ref: { id: '#numberInput' },
                   options: {
                     ...textInputOptions,

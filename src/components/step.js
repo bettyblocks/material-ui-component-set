@@ -7,14 +7,17 @@
     const { env, useText } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
-    const { label, icon, dataComponentAttribute } = options || {};
+    const { label, icon, disabled, dataComponentAttribute } = options || {};
     const { setStepLabelData, active, isFirstRender } = parent;
 
     const StepContent =
       isEmpty && isDev ? <div className={classes.empty}>Step</div> : children;
 
     const StepCmp = (
-      <div data-component={useText(dataComponentAttribute) || 'Step'}>
+      <div
+        className={includeStyling()}
+        data-component={useText(dataComponentAttribute) || 'Step'}
+      >
         {active ? StepContent : null}
       </div>
     );
@@ -33,9 +36,10 @@
           ...prev,
           [`label${index}`]: label,
           [`icon${index}`]: icon,
+          [`disabled${index}`]: disabled,
         }));
       }
-    }, [setStepLabelData, index, label, icon]);
+    }, [setStepLabelData, index, label, icon, disabled]);
 
     return isDev ? <div className={classes.wrapper}>{StepCmp}</div> : StepCmp;
   })(),

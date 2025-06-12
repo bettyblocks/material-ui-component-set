@@ -7,7 +7,7 @@
     const { FormControl, FormHelperText, InputLabel, FormGroup } =
       window.MaterialUI.Core;
     const { Rating } = window.MaterialUI.Lab;
-    const { env, useText, Icon } = B;
+    const { env, generateUUID, useText, Icon } = B;
     const isDev = env === 'dev';
 
     const {
@@ -30,6 +30,7 @@
     } = options;
 
     const labelText = useText(label);
+    const { current: labelControlRef } = useRef(generateUUID());
 
     const [currentValue, setCurrentValue] = usePageState(
       useText(defaultValue, { rawValue: true }),
@@ -42,7 +43,6 @@
 
     const value = useText(defaultValue, { rawValue: true });
     useEffect(() => {
-      setCurrentValue(value);
       B.defineFunction('Clear', () => setCurrentValue(''));
       B.defineFunction('Enable', () => setIsDisabled(false));
       B.defineFunction('Disable', () => setIsDisabled(true));
@@ -103,12 +103,12 @@
           error={errorState}
         >
           {labelText && !hideLabel && (
-            <InputLabel classes={{ root: classes.label }}>
+            <InputLabel for={labelControlRef} classes={{ root: classes.label }}>
               {labelText}
             </InputLabel>
           )}
           <Rating
-            className={classes.ratingIcon}
+            className={includeStyling(classes.ratingIcon)}
             value={currentValue}
             precision={precision}
             size={size === 'custom' ? customSize : size}
@@ -127,6 +127,7 @@
             </FormHelperText>
           )}
           <input
+            id={labelControlRef}
             className={classes.validationInput}
             onInvalid={validationHandler}
             type="text"

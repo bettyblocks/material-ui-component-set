@@ -31,6 +31,7 @@
 
     const {
       env,
+      generateUUID,
       getIdProperty,
       getModel,
       getProperty,
@@ -117,6 +118,22 @@
       // split the string and trim spaces
       if (Array.isArray(value)) return value;
 
+      // check wether our value is an object array.
+      try {
+        const parsed = JSON.parse(value);
+        if (
+          Array.isArray(parsed) &&
+          parsed.every((item) => typeof item === 'object' && 'id' in item)
+        ) {
+          return parsed.map((obj) => String(obj.id));
+        }
+      } catch (error) {
+        return value
+          .split(',')
+          .filter((part) => part !== '')
+          .map((str) => str.trim());
+      }
+
       return value
         .split(',')
         .filter((part) => part !== '')
@@ -124,6 +141,33 @@
     };
 
     const [values, setValues] = useState(getValues());
+
+    const isValid = required && values.join('') !== '';
+    const hasError = errorState || !isValid;
+
+    useEffect(() => {
+      setValues(getValues());
+    }, [defaultValueText]);
+
+    useEffect(() => {
+      if (isDev) {
+        setValues(getValues());
+        setHelper(helperTextResolved);
+      }
+    }, [isDev, defaultValueText, helperTextResolved]);
+
+    useEffect(() => {
+      B.triggerEvent('onChange', values);
+    }, [values]);
+
+    useEffect(() => {
+      if (afterFirstInvalidation) {
+        const message = hasError
+          ? validationValueMissingText
+          : helperTextResolved;
+        setHelper(message);
+      }
+    }, [errorState, values, required, afterFirstInvalidation]);
 
     const orderBySanitized = orderBy.id === '' ? undefined : orderBy;
 
@@ -271,13 +315,6 @@
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
 
-    useEffect(() => {
-      if (isDev) {
-        setValues(getValues());
-        setHelper(helperTextResolved);
-      }
-    }, [isDev, defaultValueText, helperTextResolved]);
-
     const {
       Checkbox: MUICheckbox,
       FormControlLabel,
@@ -294,9 +331,6 @@
         if (checked) return state.concat(value);
         return state.filter((v) => v !== value);
       });
-      setTimeout(() => {
-        B.triggerEvent('onChange', values);
-      }, 250);
     };
 
     const invalidHandler = (event) => {
@@ -305,19 +339,19 @@
       setErrorState(true);
     };
 
-    const isValid = required ? values.join() !== '' : true;
-    const hasError = errorState || !isValid;
-
     const renderCheckbox = (checkboxLabel, checkboxValue) => {
+      const labelControlRef = generateUUID();
       return (
         <FormControlLabel
           control={
             <MUICheckbox
+              id={labelControlRef}
               required={required && !isValid}
               tabIndex={isDev ? -1 : undefined}
               size={size}
             />
           }
+          htmlFor={labelControlRef}
           label={checkboxLabel}
           labelPlacement={position}
           checked={values.includes(checkboxValue)}
@@ -333,30 +367,31 @@
       if (isListProperty) {
         return listValues.map(({ value: v }) => renderCheckbox(v, v));
       }
-      if (isDev) return renderCheckbox('Placeholder', false);
-      if (loading) return <span>Loading...</span>;
-      if (err && displayError) return <span>{err.message}</span>;
+      if (isDev) {
+        return renderCheckbox('Placeholder', false);
+      }
+      if (loading) {
+        return <span>Loading...</span>;
+      }
+      if (err && displayError) {
+        return <span>{err.message}</span>;
+      }
       if (!loading && results) {
         return results.map((item) => {
-          return renderCheckbox(item[labelProperty.name], `${item.id}`);
+          return renderCheckbox(
+            item[labelProperty.name] || item.id,
+            `${item.id}`,
+          );
         });
       }
       return <span>No results</span>;
     };
 
-    useEffect(() => {
-      if (afterFirstInvalidation) {
-        const message = hasError
-          ? validationValueMissingText
-          : helperTextResolved;
-        setHelper(message);
-      }
-    }, [errorState, values, required, afterFirstInvalidation]);
-
     const Control = (
       <FormControl
         classes={{ root: classes.formControl }}
         margin={margin}
+        className={includeStyling()}
         component="fieldset"
         required={required}
         error={afterFirstInvalidation && hasError}

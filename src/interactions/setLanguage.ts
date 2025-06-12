@@ -9,7 +9,12 @@ function setLanguage({ event }: { event: Event }): void {
   const BBLocaleIndex = currentCookies.indexOf(`BBLocale=${locale}`);
   const hasCookie = BBLocaleIndex > -1;
   if (!hasCookie) {
-    document.cookie = `BBLocale=${locale};path=/`;
+    // check if app is used in an iFrame
+    if (window.location !== window.parent.location) {
+      document.cookie = `BBLocale=${locale};path=/;SameSite=None;Secure`;
+    } else {
+      document.cookie = `BBLocale=${locale};path=/`;
+    }
     window.location.reload();
   }
 }

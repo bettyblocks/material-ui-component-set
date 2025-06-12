@@ -1,13 +1,24 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
 import { Configuration } from '../Configuration';
-import { options as defaults } from './options/index';
+import { optionsResolver } from './options/index';
+import {
+  addChildOptions as defaultAddChildOptions,
+  optionEvents,
+} from './options/addChild';
 
 export const TextInput = (
   config: Configuration,
   children: PrefabReference[] = [],
 ) => {
-  const options = { ...(config.options || defaults) };
+  const options = {
+    ...(config.options || optionsResolver(config.inputType || 'text')),
+  };
+  const addChildOptions = [
+    ...(config.optionTemplates?.addChild?.options ||
+      defaultAddChildOptions(config.inputType || 'text')),
+  ];
+
   const ref = config.ref ? { ...config.ref } : undefined;
 
   const categories = [
@@ -44,9 +55,11 @@ export const TextInput = (
     {
       label: 'Advanced Options',
       expanded: false,
-      members: ['dataComponentAttribute'],
+      members: ['debounceDelay', 'dataComponentAttribute'],
     },
   ];
+
+  const label = config.label ? config.label : 'Text field';
 
   if (config.type) {
     options.type = updateOption(options.type, { value: config.type });
@@ -80,7 +93,18 @@ export const TextInput = (
 
   return component(
     'TextInput',
-    { label: config.label, options, ref, optionCategories: categories },
+    {
+      label,
+      options,
+      ref,
+      optionCategories: categories,
+      optionTemplates: {
+        addChild: {
+          options: addChildOptions,
+          optionEvents,
+        },
+      },
+    },
     children,
   );
 };

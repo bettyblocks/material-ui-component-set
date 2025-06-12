@@ -137,6 +137,13 @@
            * @returns {Void}
            */
           B.defineFunction('Filter', ({ event, property, interactionId }) => {
+            if (event === undefined || event === null) {
+              // eslint-disable-next-line no-console
+              console.error(
+                'Event is empty. Please use this function with valid input events.',
+              );
+              return;
+            }
             setInteractionFilter((s) => ({
               ...s,
               [interactionId]: {
@@ -153,7 +160,10 @@
 
         function DataContainer(hasData) {
           return (
-            <div data-component={dataComponentAttributeText}>
+            <div
+              className={includeStyling()}
+              data-component={dataComponentAttributeText}
+            >
               {(() => {
                 if (waitForRequest) {
                   if (hasData) return children;
@@ -167,10 +177,12 @@
 
         const Wrapper = (
           <div
-            className={[
-              isEmpty ? classes.empty : '',
-              isPristine ? classes.pristine : '',
-            ].join(' ')}
+            className={includeStyling(
+              [
+                isEmpty ? classes.empty : '',
+                isPristine ? classes.pristine : '',
+              ].join(' '),
+            )}
             data-component={useText(dataComponentAttribute) || 'DataContainer'}
           >
             {isPristine
@@ -199,6 +211,9 @@
                 B.defineFunction('Refetch', () => {
                   refetch();
                 });
+                if (!data && redirectWithoutResult && !loading) {
+                  redirect();
+                }
                 return DataContainer(!!data);
               }}
             </GetMe>
@@ -234,7 +249,11 @@
                   );
                 }
 
-                if (loading && loadingType === 'showChildren') {
+                if (
+                  loading &&
+                  loadingType === 'showChildren' &&
+                  !waitForRequest
+                ) {
                   B.triggerEvent('onLoad', loading);
                   // key attribute forces a rerender after loading
                   return (
@@ -255,7 +274,7 @@
                   );
                 }
 
-                if (!data && redirectWithoutResult) {
+                if (!data && redirectWithoutResult && !loading) {
                   redirect();
                 }
                 return DataContainer(!!data);

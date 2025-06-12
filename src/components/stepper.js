@@ -78,6 +78,7 @@
           orientation={type}
           classes={{ root: classes.root }}
           data-component={useText(dataComponentAttribute) || 'Stepper'}
+          className={includeStyling()}
         >
           {React.Children.map(children, (child, index) => {
             const { options: childOptions = {} } = child.props || {};
@@ -85,6 +86,7 @@
             const {
               label = stepLabelData[`label${index}`] || [`Step ${index + 1}`],
               icon = stepLabelData[`icon${index}`] || 'None',
+              disabled = stepLabelData[`disabled${index}`] || 'None',
             } = childOptions;
             const isActive = index === activeStep || allSteps;
             const labelText = useText(label);
@@ -132,6 +134,7 @@
                   <StepButton
                     classes={{ root: classes.stepButton }}
                     onClick={handleStep(index)}
+                    disabled={disabled}
                   >
                     <StepLabel
                       classes={{ root: classes.stepLabel }}
@@ -199,6 +202,7 @@
           position="static"
           variant="text"
           activeStep={activeStep}
+          className={includeStyling()}
           classes={{ root: classes.mobileRoot }}
           nextButton={
             <Button

@@ -26,6 +26,9 @@ export const styles = {
   helperColor: color('Helper color', {
     value: ThemeColor.ACCENT_2,
   }),
+  deleteIconColor: color('Delete icon color', {
+    value: ThemeColor.LIGHT,
+  }),
   errorColor: color('Error color', {
     value: ThemeColor.DANGER,
   }),

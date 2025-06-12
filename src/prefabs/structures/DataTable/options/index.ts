@@ -42,6 +42,7 @@ export const categories = [
       'labelRowsPerPage',
       'take',
       'placeholderTake',
+      'paginationType',
     ],
   },
   {
@@ -84,6 +85,9 @@ const children = [
         value: '',
         showInAddChild: true,
         showInReconfigure: true,
+        configuration: {
+          allowFormatting: true,
+        },
       }),
     },
   }),
@@ -140,7 +144,7 @@ export const dataTableOptions = {
     value: true,
   }),
   title: variable('Title', { value: [''] }),
-  titleType: font('Title type', {
+  titleType: font('Title text style', {
     value: 'Title4',
   }),
   pagination: option('CUSTOM', {
@@ -198,7 +202,10 @@ export const dataTableOptions = {
       condition: hideIf('autoLoadOnScroll', 'EQ', true),
     },
   }),
-  placeholderTake: number('Placeholder rows', { value: '10' }),
+  placeholderTake: number('Placeholder rows', { value: '3' }),
+  paginationType: font('Font family from text style', {
+    value: 'Body2',
+  }),
   labelRowsPerPage: variable('Rows per page text', {
     value: ['Rows per page'],
     configuration: {
@@ -244,7 +251,7 @@ export const dataTableOptions = {
   }),
   variant: option('CUSTOM', {
     label: 'Variant',
-    value: 'elevation',
+    value: 'outlined',
     configuration: {
       as: 'BUTTONGROUP',
       dataType: 'string',

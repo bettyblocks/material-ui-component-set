@@ -23,10 +23,9 @@
 
     const ColumnComponent = (
       <div
-        className={[
-          classes.column,
-          isVisible || isDev ? '' : classes.hide,
-        ].join(' ')}
+        className={includeStyling(
+          [classes.column, isVisible || isDev ? '' : classes.hide].join(' '),
+        )}
         data-component={useText(dataComponentAttribute) || 'Column'}
       >
         {(() =>
@@ -47,8 +46,7 @@
     return ColumnComponent;
   })(),
   styles: (B) => (theme) => {
-    const { env, mediaMinWidth, Styling } = B;
-    const isDev = env === 'dev';
+    const { mediaMinWidth, Styling } = B;
     const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
@@ -125,7 +123,7 @@
         borderColor: 'transparent',
         borderStyle: 'none',
         borderRadius: 0,
-        overflow: isDev ? 'unset' : 'auto',
+        overflow: 'auto',
         boxSizing: 'border-box',
         [`@media ${mediaMinWidth(600)}`]: {
           display: ({

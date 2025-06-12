@@ -12,12 +12,17 @@ import {
 import { advanced } from './advanced';
 import { styles } from './styles';
 import { validation } from './validation';
+import { getAllowedKindsByType } from '../../../helpers/getAllowedKindsByType';
+
+const { allowedKinds, allowedInputKinds } =
+  getAllowedKindsByType('multiAutocomplete');
 
 export const options = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
     label: 'Action input variable',
     value: '',
     configuration: {
+      ...(allowedInputKinds ? { allowedKinds: allowedInputKinds } : undefined),
       condition: showIf('property', 'EQ', ''),
     },
   }),
@@ -25,11 +30,10 @@ export const options = {
     value: '',
     showInReconfigure: true,
     configuration: {
-      allowedKinds: ['HAS_AND_BELONGS_TO_MANY', 'HAS_MANY'],
+      allowedKinds,
       allowRelations: true,
       disabled: true,
       condition: hideIf('property', 'EQ', ''),
-      showOnDrop: true,
     },
   }),
   label: variable('Label', {
@@ -40,6 +44,7 @@ export const options = {
     value: [],
     configuration: {
       allowRelations: true,
+      allowFormatting: false,
     },
   }),
   optionType: buttongroup(
@@ -87,6 +92,28 @@ export const options = {
   labelProperty: property('Label for options', {
     value: '',
     configuration: {
+      allowedKinds: [
+        'BELONGS_TO',
+        'DECIMAL',
+        'DECIMAL_EXPRESSION',
+        'EMAIL',
+        'EMAIL_ADDRESS',
+        'IBAN',
+        'INTEGER',
+        'INTEGER_EXPRESSION',
+        'MINUTES',
+        'MINUTES_EXPRESSION',
+        'PHONE_NUMBER',
+        'PRICE',
+        'PRICE_EXPRESSION',
+        'SERIAL',
+        'STRING',
+        'STRING_EXPRESSION',
+        'TEXT',
+        'TEXT_EXPRESSION',
+        'URL',
+        'ZIPCODE',
+      ],
       condition: hideIf('optionType', 'EQ', 'property'),
     },
   }),

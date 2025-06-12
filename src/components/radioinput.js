@@ -26,7 +26,14 @@
       validationValueMissing = [''],
       value: prefabValue,
     } = options;
-    const { env, getProperty, useText, useAllQuery, useRelation } = B;
+    const {
+      env,
+      generateUUID,
+      getProperty,
+      useAllQuery,
+      useRelation,
+      useText,
+    } = B;
     const {
       FormControl: MUIFormControl,
       FormControlLabel: MUIFormControlLabel,
@@ -62,6 +69,9 @@
 
     const isListProperty = kind === 'list' || kind === 'LIST';
     const isObjectProperty = kind === 'object' || kind === 'OBJECT';
+    const isPageVariableProperty = prefabValue.find(
+      (item) => item.type === 'PAGE_VARIABLE_MODEL_PROPERTY',
+    );
 
     const isPropertyArray = Boolean(
       prefabValue.length && prefabValue.some((p) => p.type === 'PROPERTY'),
@@ -76,13 +86,19 @@
       resolvedCurrentValue = defaultValueText;
     } else if (isPropertyArray && !isObjectProperty) {
       resolvedCurrentValue = parseInt(defaultValueText, 10) || '';
+    } else if (isPageVariableProperty) {
+      resolvedCurrentValue = getValue(defaultValueText);
     } else if (kind === undefined) {
       // if kind is undefined, it is non property based
       resolvedCurrentValue = '';
     } else {
       resolvedCurrentValue = getValue(prefabValue);
     }
-    const [currentValue, setCurrentValue] = useState(resolvedCurrentValue);
+    const [currentValue, setCurrentValue] = usePageState(resolvedCurrentValue);
+
+    useEffect(() => {
+      setCurrentValue(resolvedCurrentValue);
+    }, [defaultValueText]);
 
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
@@ -267,15 +283,25 @@
     }
 
     // renders the radio component
-    const renderRadio = (optionValue, optionLabel) => (
-      <MUIFormControlLabel
-        disabled={disabled}
-        value={optionValue}
-        control={<Radio tabIndex={isDev ? -1 : undefined} size={size} />}
-        label={optionLabel}
-        labelPlacement={labelPosition}
-      />
-    );
+    const renderRadio = (optionValue, optionLabel) => {
+      const labelControlRef = generateUUID();
+      return (
+        <MUIFormControlLabel
+          for={labelControlRef}
+          disabled={disabled}
+          value={optionValue}
+          control={
+            <Radio
+              id={labelControlRef}
+              tabIndex={isDev ? -1 : undefined}
+              size={size}
+            />
+          }
+          label={optionLabel}
+          labelPlacement={labelPosition}
+        />
+      );
+    };
 
     const renderRadios = () => {
       if (!valid) {
@@ -334,6 +360,7 @@
         {!hideLabel && <FormLabel component="legend">{labelText}</FormLabel>}
         <RadioGroup
           row={row}
+          className={includeStyling()}
           value={currentValue}
           name={name}
           onChange={handleChange}
