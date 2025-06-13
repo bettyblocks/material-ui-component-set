@@ -7,7 +7,6 @@ import {
   showIf,
   toggle,
   ThemeColor,
-  color,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -87,8 +86,21 @@ export const textOptions = {
       condition: showIf('linkType', 'EQ', 'external'),
     },
   }),
-  textColor: color('Text color', {
-    value: ThemeColor.BLACK,
+
+  textColor: option('CUSTOM', {
+    label: 'Text color',
+    value: ThemeColor.INHERIT,
+    configuration: {
+      as: 'DROPDOWN',
+      dataType: 'string',
+      allowedInput: Object.values(ThemeColor).map((color) => ({
+        name:
+          color === ThemeColor.INHERIT
+            ? '[Theme text style inheritance]'
+            : color,
+        value: color,
+      })),
+    },
   }),
 
   fontWeight: option('CUSTOM', {
@@ -98,7 +110,7 @@ export const textOptions = {
       as: 'DROPDOWN',
       dataType: 'string',
       allowedInput: [
-        { name: '[Theme Weight]', value: '[Inherit]' },
+        { name: '[Theme text style inheritance]', value: '[Inherit]' },
         { name: '100', value: '100' },
         { name: '200', value: '200' },
         { name: '300', value: '300' },
