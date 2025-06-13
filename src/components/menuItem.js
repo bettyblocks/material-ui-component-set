@@ -17,7 +17,7 @@
       linkTo,
       linkToExternal,
       linkType,
-      openLinkToExternal,
+      linkTarget,
       primaryText,
       dataComponentAttribute,
     } = options;
@@ -101,7 +101,7 @@
         divider={divider}
         href={hasExternalLink ? linkToExternalVariable : undefined}
         endpoint={hasLink ? linkTo : undefined}
-        target={hasExternalLink ? openLinkToExternal : undefined}
+        target={linkTarget}
         onClick={(e) => {
           if (onClick) onClick(e);
           actionCallback();
