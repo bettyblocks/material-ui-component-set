@@ -1,3 +1,10 @@
+# [2.214.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.213.0...v2.214.0) (2025-06-16)
+
+
+### Features
+
+* option to add update form without configuration ([a4b7d8a](https://github.com/bettyblocks/material-ui-component-set/commit/a4b7d8a47e286993ad680144d992c784fc7d2f98))
+
 # [2.213.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.16...v2.213.0) (2025-06-16)
 
 
