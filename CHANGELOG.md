@@ -1,3 +1,10 @@
+# [2.213.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.16...v2.213.0) (2025-06-16)
+
+
+### Features
+
+* add option to open internal page link in a new tab ([80b471c](https://github.com/bettyblocks/material-ui-component-set/commit/80b471cb0a820ee7fb40abe27e97d6997713a841))
+
 ## [2.212.16](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.15...v2.212.16) (2025-05-14)
 
 
