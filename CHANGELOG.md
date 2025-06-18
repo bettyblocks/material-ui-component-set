@@ -1,3 +1,15 @@
+# [2.215.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.214.1...v2.215.0) (2025-06-18)
+
+
+### Bug Fixes
+
+* revert position to relative in design time ([d09f041](https://github.com/bettyblocks/material-ui-component-set/commit/d09f0418719edfe949220760cdc532bbdda8398a))
+
+
+### Features
+
+* allow BODY_COMPONENT and CONTAINER_COMPONENT types as children ([b495e53](https://github.com/bettyblocks/material-ui-component-set/commit/b495e538812831d58c84bedc04c1bb978276e264))
+
 ## [2.214.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.214.0...v2.214.1) (2025-06-18)
 
 
