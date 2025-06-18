@@ -265,7 +265,9 @@ const beforeCreate = ({
               {buttonGroupValue === 'anotherPage' &&
                 'Link from another page to this page, and pass the ID property of the model.'}
               {buttonGroupValue === 'thisPage' &&
-                'A component on this page is passing the data to this DataContainer.'}
+                'A component on this page is passing the data to this Form.'}
+              {buttonGroupValue === 'other' &&
+                'Add without additional configuration.'}
             </Text>
           }
         >
@@ -286,9 +288,15 @@ const beforeCreate = ({
               value="thisPage"
               name="dataSourceSelect"
             />
+            <ButtonGroupButton
+              label="Other"
+              value="other"
+              name="dataSourceSelect"
+            />
           </ButtonGroup>
         </Field>
-        {buttonGroupValue === 'anotherPage' && (
+        {(buttonGroupValue === 'anotherPage' ||
+          buttonGroupValue === 'other') && (
           <Field
             label="Model"
             error={
@@ -674,6 +682,9 @@ const beforeCreate = ({
               break;
             case 'thisPage':
               saveThisPage();
+              break;
+            case 'other':
+              save({ ...originalPrefab });
               break;
             default:
               break;
