@@ -1,3 +1,10 @@
+## [2.214.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.214.0...v2.214.1) (2025-06-18)
+
+
+### Bug Fixes
+
+* replace text color option with dropdown to allow input override ([c89283d](https://github.com/bettyblocks/material-ui-component-set/commit/c89283da49fb2ab3d20b0452cb5238141c22144d))
+
 # [2.214.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.213.0...v2.214.0) (2025-06-16)
 
 
