@@ -4,7 +4,7 @@
   allowedTypes: ['CONTENT_COMPONENT', 'CONTAINER_COMPONENT'],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { env, getProperty, Property, useEndpoint, useText } = B;
+    const { env, getProperty, Property, useEndpoint, useText, useLogic } = B;
     const { TableCell, TableSortLabel } = window.MaterialUI.Core;
     const {
       horizontalAlignment,
@@ -12,6 +12,7 @@
       property,
       content,
       sortable,
+      displayLogic,
       dataComponentAttribute,
     } = options;
     const { headerOnly, handleSort, orderBy, linkTo, handleRowClick, context } =
@@ -27,6 +28,7 @@
     const isEmpty = children.length === 0;
     const contentPlaceholder = isDev && isEmpty ? 'Select property' : '\u00A0';
     const isBooleanProperty = kind === 'boolean' || kind === 'BOOLEAN';
+    const logic = useLogic(displayLogic);
 
     let myEndpoint = null;
     if (linkTo && linkTo.id !== '') {
@@ -144,6 +146,11 @@
         </div>
       );
     }
+
+    if (!logic) {
+      return <></>;
+    }
+
     return visible ? (
       <TableCell
         classes={{ root: classes.root }}

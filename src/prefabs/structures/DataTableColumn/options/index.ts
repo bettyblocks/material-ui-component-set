@@ -7,6 +7,7 @@ import {
   size,
   color,
   ThemeColor,
+  displayLogic,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -47,6 +48,9 @@ export const dataTableColumnOptions = {
     },
   }),
   bodyType: font('Body type', { value: 'Body1' }),
+  displayLogic: displayLogic('Display logic', {
+    value: {},
+  }),
   horizontalAlignment: option('CUSTOM', {
     label: 'Column Alignment',
     value: 'left',
