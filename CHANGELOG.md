@@ -1,3 +1,36 @@
+# [2.215.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.214.1...v2.215.0) (2025-06-18)
+
+
+### Bug Fixes
+
+* revert position to relative in design time ([d09f041](https://github.com/bettyblocks/material-ui-component-set/commit/d09f0418719edfe949220760cdc532bbdda8398a))
+
+
+### Features
+
+* allow BODY_COMPONENT and CONTAINER_COMPONENT types as children ([b495e53](https://github.com/bettyblocks/material-ui-component-set/commit/b495e538812831d58c84bedc04c1bb978276e264))
+
+## [2.214.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.214.0...v2.214.1) (2025-06-18)
+
+
+### Bug Fixes
+
+* replace text color option with dropdown to allow input override ([c89283d](https://github.com/bettyblocks/material-ui-component-set/commit/c89283da49fb2ab3d20b0452cb5238141c22144d))
+
+# [2.214.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.213.0...v2.214.0) (2025-06-16)
+
+
+### Features
+
+* option to add update form without configuration ([a4b7d8a](https://github.com/bettyblocks/material-ui-component-set/commit/a4b7d8a47e286993ad680144d992c784fc7d2f98))
+
+# [2.213.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.16...v2.213.0) (2025-06-16)
+
+
+### Features
+
+* add option to open internal page link in a new tab ([80b471c](https://github.com/bettyblocks/material-ui-component-set/commit/80b471cb0a820ee7fb40abe27e97d6997713a841))
+
 ## [2.212.16](https://github.com/bettyblocks/material-ui-component-set/compare/v2.212.15...v2.212.16) (2025-05-14)
 
 
