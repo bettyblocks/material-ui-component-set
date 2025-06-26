@@ -5,10 +5,16 @@ import {
   option,
   hideIf,
   toggle,
+  displayLogic,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
 export const categories = [
+  {
+    label: 'Display logic',
+    expanded: false,
+    members: ['displayLogic'],
+  },
   {
     label: 'Advanced Options',
     expanded: false,
@@ -59,6 +65,9 @@ export const tabOptions = {
   }),
   disabled: toggle('Disabled', { value: false }),
   disabledRipple: toggle('Disable ripple', { value: false }),
+  displayLogic: displayLogic('Display logic', {
+    value: {},
+  }),
 
   ...advanced('Tab'),
 };

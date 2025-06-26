@@ -5,7 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { Tabs, Tab } = window.MaterialUI.Core;
-    const { Children, env, useText, Icon } = B;
+    const { Children, env, useText, Icon, useLogic } = B;
     const {
       defaultValue,
       selectedDesignTabIndex,
@@ -29,6 +29,19 @@
     const [value, setValue] = useState(parseInt(currentTab - 1, 10) || 0);
     const [tabData, setTabData] = useState({});
     const [activeTabs, setActiveTabs] = useState([value]);
+
+    const visibleChildren = React.Children.toArray(children).filter((child) => {
+      if (isDev) return true;
+
+      const { options: childOptions = {} } = child.props || {};
+      const { displayLogic } = childOptions;
+
+      if (!displayLogic) return true;
+
+      const logic = useLogic(displayLogic);
+      return logic;
+    });
+
     const handleChange = (_, newValue) => {
       setValue(newValue);
       if (!activeTabs.includes(newValue)) {
@@ -56,7 +69,7 @@
     }, []);
 
     B.defineFunction('Next tab', () => {
-      if (value + 1 >= children.length) return;
+      if (value + 1 >= visibleChildren.length) return;
       setValue(value + 1);
     });
 
@@ -81,7 +94,7 @@
           indicator: classes.indicator,
         }}
       >
-        {React.Children.map(children, (child, index) => {
+        {React.Children.map(visibleChildren, (child, index) => {
           const { options = {} } = child.props;
           const {
             label = tabData[`label${index}`] || [`Tab`],
@@ -155,7 +168,7 @@
       >
         {!hideTabs && TabsHeader}
         {React.Children.map(
-          children,
+          visibleChildren,
           (child, index) => {
             const { options: childOptions = {} } = child.props || {};
             return (
