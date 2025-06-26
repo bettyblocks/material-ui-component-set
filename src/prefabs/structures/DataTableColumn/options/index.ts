@@ -18,6 +18,11 @@ export const categories = [
     members: ['horizontalAlignment', 'width', 'background', 'borderColor'],
   },
   {
+    label: 'Display logic',
+    expanded: false,
+    members: ['displayLogic'],
+  },
+  {
     label: 'Advanced Options',
     expanded: false,
     members: ['dataComponentAttribute'],
@@ -48,9 +53,6 @@ export const dataTableColumnOptions = {
     },
   }),
   bodyType: font('Body type', { value: 'Body1' }),
-  displayLogic: displayLogic('Display logic', {
-    value: {},
-  }),
   horizontalAlignment: option('CUSTOM', {
     label: 'Column Alignment',
     value: 'left',
@@ -72,6 +74,9 @@ export const dataTableColumnOptions = {
   }),
   background: color('Background', { value: ThemeColor.TRANSPARENT }),
   borderColor: color('Border color', { value: ThemeColor.LIGHT }),
+  displayLogic: displayLogic('Display logic', {
+    value: {},
+  }),
 
   ...advanced('DataTableColumn'),
 };
