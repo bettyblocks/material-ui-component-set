@@ -1,3 +1,10 @@
+## [2.215.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.215.0...v2.215.1) (2025-06-25)
+
+
+### Bug Fixes
+
+* remove text field from non model based forms ([5f14075](https://github.com/bettyblocks/material-ui-component-set/commit/5f140757a246db014a7d7ff95904f52f75628019))
+
 # [2.215.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.214.1...v2.215.0) (2025-06-18)
 
 
