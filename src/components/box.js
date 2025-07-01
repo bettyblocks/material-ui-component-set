@@ -265,14 +265,8 @@
       },
       background: {
         backgroundColor: ({
-          options: { backgroundColor, backgroundColorAlpha },
-        }) =>
-          backgroundColor === 'Transparent'
-            ? style.getColor(backgroundColor)
-            : getColorAlpha(
-                style.getColor(backgroundColor),
-                backgroundColorAlpha / 100,
-              ),
+          options: { backgroundColor },
+        }) => style.getColor(backgroundColor),
         backgroundSize: ({ options: { backgroundSize } }) => backgroundSize,
         backgroundPosition: ({ options: { backgroundPosition } }) =>
           backgroundPosition,
@@ -290,13 +284,15 @@
         borderRadius: ({ options: { borderRadius } }) => borderRadius,
       },
       empty: {
-        display: ['flex', '!important'],
-        justifyContent: ['center', '!important'],
+        display: 'flex',
         alignItems: 'center',
-        height: ['2.5rem', '!important'],
+        justifyContent: 'center',
+        height: '100%',
+        width: '100%',
         fontSize: '0.75rem',
         color: '#262A3A',
         textTransform: 'uppercase',
+        boxSizing: 'border-box',
       },
       pristine: {
         borderWidth: '0.0625rem',
