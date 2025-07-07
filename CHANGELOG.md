@@ -1,3 +1,10 @@
+# [2.216.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.215.1...v2.216.0) (2025-07-03)
+
+
+### Features
+
+* trigger interactions on enter key press for better accessibility ([343de09](https://github.com/bettyblocks/material-ui-component-set/commit/343de094e7f6f26e4b79ad674b44d02c3a7a4d6c))
+
 ## [2.215.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.215.0...v2.215.1) (2025-06-25)
 
 
