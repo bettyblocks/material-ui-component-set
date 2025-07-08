@@ -287,7 +287,6 @@
         justifyContent: 'center',
         height: '100%',
         minHeight: ({ options: { height } }) => (height ? 0 : '4rem'),
-        width: '100%',
         fontSize: '0.75rem',
         color: '#262A3A',
         textTransform: 'uppercase',
