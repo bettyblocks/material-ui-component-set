@@ -152,13 +152,17 @@ const beforeCreate = ({
       modelOption.value = anotherPageState.modelId;
 
       filterOption.value = {
-        [idProperty.id]: {
-          eq: {
-            ref: { id: '#idVariable' },
-            name: variableName,
-            type: 'VARIABLE',
+        _and: [
+          {
+            [idProperty.id]: {
+              eq: {
+                ref: { id: '#idVariable' },
+                name: variableName,
+                type: 'VARIABLE',
+              },
+            },
           },
-        },
+        ],
       };
       save(newPrefab);
     }
