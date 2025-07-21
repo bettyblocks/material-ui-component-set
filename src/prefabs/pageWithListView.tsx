@@ -815,14 +815,7 @@ export default makePrefab('Overview, list view', attrs, beforeCreate, [
                           value: ['0rem', '0rem', '0rem', '0rem'],
                         }),
                         backgroundColor: color('Background color', {
-                          value: ThemeColor.LIGHT,
-                          configuration: {
-                            condition: showIf('backgroundOptions', 'EQ', true),
-                          },
-                        }),
-                        backgroundColorAlpha: option('NUMBER', {
-                          label: 'Background color opacity',
-                          value: 20,
+                          value: '#cccccc33',
                           configuration: {
                             condition: showIf('backgroundOptions', 'EQ', true),
                           },
@@ -2407,14 +2400,7 @@ export default makePrefab('Overview, list view', attrs, beforeCreate, [
                           value: ['0rem', '0rem', '0rem', '0rem'],
                         }),
                         backgroundColor: color('Background color', {
-                          value: ThemeColor.LIGHT,
-                          configuration: {
-                            condition: showIf('backgroundOptions', 'EQ', true),
-                          },
-                        }),
-                        backgroundColorAlpha: option('NUMBER', {
-                          label: 'Background color opacity',
-                          value: 20,
+                          value: '#cccccc33',
                           configuration: {
                             condition: showIf('backgroundOptions', 'EQ', true),
                           },

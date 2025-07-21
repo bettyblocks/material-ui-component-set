@@ -84,10 +84,6 @@ export const filterComponentOptions = {
   backgroundColor: color('Background color', {
     value: ThemeColor.TRANSPARENT,
   }),
-  backgroundColorAlpha: option('NUMBER', {
-    label: 'Background color opacity',
-    value: 100,
-  }),
   propertyWhiteList: text('Property Whitelist', {}),
   ...advanced,
 };
