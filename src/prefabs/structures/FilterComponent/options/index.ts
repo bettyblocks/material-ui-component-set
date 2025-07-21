@@ -2,7 +2,6 @@ import {
   sizes,
   size,
   color,
-  option,
   ThemeColor,
   model,
   text,
