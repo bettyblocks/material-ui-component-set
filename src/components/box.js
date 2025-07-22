@@ -142,10 +142,9 @@
     );
   })(),
   styles: (B) => (theme) => {
-    const { color: colorFunc, env, mediaMinWidth, Styling } = B;
+    const { env, mediaMinWidth, Styling } = B;
     const style = new Styling(theme);
     const isDev = env === 'dev';
-    const getColorAlpha = (col, val) => colorFunc.alpha(col, val);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
 
@@ -264,15 +263,7 @@
         },
       },
       background: {
-        backgroundColor: ({
-          options: { backgroundColor, backgroundColorAlpha },
-        }) =>
-          backgroundColor === 'Transparent'
-            ? style.getColor(backgroundColor)
-            : getColorAlpha(
-                style.getColor(backgroundColor),
-                backgroundColorAlpha / 100,
-              ),
+        backgroundColor: ({ options: { backgroundColor } }) => backgroundColor,
         backgroundSize: ({ options: { backgroundSize } }) => backgroundSize,
         backgroundPosition: ({ options: { backgroundPosition } }) =>
           backgroundPosition,
