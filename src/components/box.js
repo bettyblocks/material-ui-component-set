@@ -263,7 +263,8 @@
         },
       },
       background: {
-        backgroundColor: ({ options: { backgroundColor } }) => backgroundColor,
+        backgroundColor: ({ options: { backgroundColor } }) =>
+          style.getColor(backgroundColor),
         backgroundSize: ({ options: { backgroundSize } }) => backgroundSize,
         backgroundPosition: ({ options: { backgroundPosition } }) =>
           backgroundPosition,
