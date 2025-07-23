@@ -555,11 +555,7 @@ const drawerContainer = DrawerContainer(
                             value: ['0rem', '0rem', '0rem', '0rem'],
                           }),
                           backgroundColor: color('Background color', {
-                            value: ThemeColor.LIGHT,
-                          }),
-                          backgroundColorAlpha: option('NUMBER', {
-                            label: 'Background color opacity',
-                            value: 20,
+                            value: '#cccccc33',
                           }),
                         },
                       },
@@ -1437,11 +1433,7 @@ const drawerContainer = DrawerContainer(
                             value: ['0rem', '0rem', '0rem', '0rem'],
                           }),
                           backgroundColor: color('Background color', {
-                            value: ThemeColor.LIGHT,
-                          }),
-                          backgroundColorAlpha: option('NUMBER', {
-                            label: 'Background color opacity',
-                            value: 20,
+                            value: '#cccccc33',
                           }),
                         },
                       },
@@ -1770,11 +1762,7 @@ const drawerBar = DrawerBar(
                                 },
                               ),
                               backgroundColor: color('Background color', {
-                                value: ThemeColor.LIGHT,
-                              }),
-                              backgroundColorAlpha: option('NUMBER', {
-                                label: 'Background color opacity',
-                                value: 20,
+                                value: '#cccccc33',
                               }),
                             },
                           },
@@ -2069,11 +2057,7 @@ const drawerBar = DrawerBar(
                                 },
                               ),
                               backgroundColor: color('Background color', {
-                                value: ThemeColor.LIGHT,
-                              }),
-                              backgroundColorAlpha: option('NUMBER', {
-                                label: 'Background color opacity',
-                                value: 20,
+                                value: '#cccccc33',
                               }),
                             },
                           },
@@ -2371,11 +2355,7 @@ const drawerBar = DrawerBar(
                                 },
                               ),
                               backgroundColor: color('Background color', {
-                                value: ThemeColor.LIGHT,
-                              }),
-                              backgroundColorAlpha: option('NUMBER', {
-                                label: 'Background color opacity',
-                                value: 20,
+                                value: '#cccccc33',
                               }),
                             },
                           },
@@ -2785,15 +2765,7 @@ const beforeCreate = ({
         'backgroundColor',
         (opt: PrefabComponentOption) => ({
           ...opt,
-          value: 'Accent1',
-        }),
-      );
-      setOption(
-        detailComponent,
-        'backgroundColorAlpha',
-        (opt: PrefabComponentOption) => ({
-          ...opt,
-          value: '20',
+          value: '#d8d8d833',
         }),
       );
 

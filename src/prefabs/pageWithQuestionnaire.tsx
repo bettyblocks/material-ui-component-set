@@ -1013,11 +1013,7 @@ const prefabStructure = [
                       value: true,
                     }),
                     backgroundColor: color('Background color', {
-                      value: ThemeColor.BLACK,
-                    }),
-                    backgroundColorAlpha: option('NUMBER', {
-                      label: 'Background color opacity',
-                      value: 60,
+                      value: '#00000099',
                     }),
                   },
                 },
@@ -1269,15 +1265,7 @@ const prefabStructure = [
                                                 backgroundColor: color(
                                                   'Background color',
                                                   {
-                                                    value: ThemeColor.PRIMARY,
-                                                  },
-                                                ),
-                                                backgroundColorAlpha: option(
-                                                  'NUMBER',
-                                                  {
-                                                    label:
-                                                      'Background color opacity',
-                                                    value: 10,
+                                                    value: '#3f51b51a',
                                                   },
                                                 ),
                                               },

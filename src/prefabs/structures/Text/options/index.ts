@@ -1,4 +1,5 @@
 import {
+  color,
   font,
   option,
   sizes,
@@ -87,19 +88,10 @@ export const textOptions = {
     },
   }),
 
-  textColor: option('CUSTOM', {
-    label: 'Text color',
+  textColor: color('Background color', {
     value: ThemeColor.INHERIT,
     configuration: {
-      as: 'DROPDOWN',
-      dataType: 'string',
-      allowedInput: Object.values(ThemeColor).map((color) => ({
-        name:
-          color === ThemeColor.INHERIT
-            ? '[Theme text style inheritance]'
-            : color,
-        value: color,
-      })),
+      hasThemeInherit: true,
     },
   }),
 
