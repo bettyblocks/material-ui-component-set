@@ -88,7 +88,7 @@ export const textOptions = {
     },
   }),
 
-  textColor: color('Background color', {
+  textColor: color('Text color', {
     value: ThemeColor.INHERIT,
     configuration: {
       hasThemeInherit: true,
