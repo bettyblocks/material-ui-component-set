@@ -134,7 +134,10 @@ import { textOptions } from './Text/options';
 import { options as textAreaOptions } from './TextArea/options';
 import { options as textInputOptions } from './TextInput/options';
 
+import { Yield } from './Yield';
+
 export {
+  Yield,
   ActionJSButton,
   Alert,
   AppBar,

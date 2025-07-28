@@ -1,7 +1,12 @@
 (() => ({
   name: 'Box',
   type: 'CONTAINER_COMPONENT',
-  allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
+  allowedTypes: [
+    'BODY_COMPONENT',
+    'CONTAINER_COMPONENT',
+    'CONTENT_COMPONENT',
+    'YIELD_COMPONENT',
+  ],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { env, useText, useLogic, usePublicFile, Link: BLink } = B;
