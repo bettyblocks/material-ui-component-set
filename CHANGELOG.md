@@ -1,3 +1,15 @@
+# [2.217.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.216.1...v2.217.0) (2025-07-28)
+
+
+### Bug Fixes
+
+* bump autocomplete take from 20 to 50 ([890318d](https://github.com/bettyblocks/material-ui-component-set/commit/890318d87e48aedcf4a1846e12ab7451ce8e2c66))
+
+
+### Features
+
+* remove zone 7 upload from release pipeline ([02dcc41](https://github.com/bettyblocks/material-ui-component-set/commit/02dcc41c2b8c8e8f68e1d4e96f994640a3e0655d))
+
 ## [2.216.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.216.0...v2.216.1) (2025-07-10)
 
 
