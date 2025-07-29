@@ -170,31 +170,46 @@ export default prefab('Dialog', attr, undefined, [
                   ),
                 ],
               ),
-              Box({}, [
-                Text(
-                  {
-                    options: {
-                      ...textOptions,
-                      content: variable('Content', {
-                        ...textOptions.content('content'),
-                        value: [
-                          'To start using the dialog, please drag or remove components to your liking.',
-                        ],
-                        configuration: { as: 'MULTILINE' },
-                      }),
-                      type: font('Text style', {
-                        ...textOptions.type('type'),
-                        value: ['Body1'],
-                      }),
-                    },
-                  },
-                  [],
-                ),
-              ]),
               Box(
                 {
                   options: {
                     ...boxOptions,
+                    innerSpacing: sizes('Inner space', {
+                      ...boxOptions.innerSpacing('innerSpacing'),
+                      value: ['M', 'M', 'M', 'M'],
+                    }),
+                  },
+                },
+                [
+                  Text(
+                    {
+                      options: {
+                        ...textOptions,
+                        content: variable('Content', {
+                          ...textOptions.content('content'),
+                          value: [
+                            'To start using the dialog, please drag or remove components to your liking.',
+                          ],
+                          configuration: { as: 'MULTILINE' },
+                        }),
+                        type: font('Text style', {
+                          ...textOptions.type('type'),
+                          value: ['Body1'],
+                        }),
+                      },
+                    },
+                    [],
+                  ),
+                ],
+              ),
+              Box(
+                {
+                  options: {
+                    ...boxOptions,
+                    innerSpacing: sizes('Inner space', {
+                      ...boxOptions.innerSpacing('innerSpacing'),
+                      value: ['M', 'M', 'M', 'M'],
+                    }),
                     alignment: option('CUSTOM', {
                       value: 'flex-end',
                       label: 'Alignment',
