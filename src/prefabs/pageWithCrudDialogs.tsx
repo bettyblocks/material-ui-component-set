@@ -1087,15 +1087,7 @@ const beforeCreate = ({
           'backgroundColor',
           (options: PrefabComponentOption) => ({
             ...options,
-            value: 'light',
-          }),
-        );
-        setOption(
-          boxStructure,
-          'backgroundColorAlpha',
-          (options: PrefabComponentOption) => ({
-            ...options,
-            value: 20,
+            value: '#cccccc33',
           }),
         );
 
@@ -2042,18 +2034,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                               value: ['0rem', '0rem', '0rem', '0rem'],
                             }),
                             backgroundColor: color('Background color', {
-                              value: ThemeColor.LIGHT,
-                              configuration: {
-                                condition: showIf(
-                                  'backgroundOptions',
-                                  'EQ',
-                                  true,
-                                ),
-                              },
-                            }),
-                            backgroundColorAlpha: option('NUMBER', {
-                              label: 'Background color opacity',
-                              value: 20,
+                              value: '#cccccc33',
                               configuration: {
                                 condition: showIf(
                                   'backgroundOptions',
@@ -4315,18 +4296,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                               value: ['0rem', '0rem', '0rem', '0rem'],
                             }),
                             backgroundColor: color('Background color', {
-                              value: ThemeColor.LIGHT,
-                              configuration: {
-                                condition: showIf(
-                                  'backgroundOptions',
-                                  'EQ',
-                                  true,
-                                ),
-                              },
-                            }),
-                            backgroundColorAlpha: option('NUMBER', {
-                              label: 'Background color opacity',
-                              value: 20,
+                              value: '#cccccc33',
                               configuration: {
                                 condition: showIf(
                                   'backgroundOptions',
