@@ -469,7 +469,7 @@
     } = useAllQuery(
       modelId,
       {
-        take: 20,
+        take: 50,
         rawFilter: mergeFilters(filter, resolvedExternalFiltersObject),
         variables: {
           sort,

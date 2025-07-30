@@ -37,7 +37,6 @@ export const categories = [
     expanded: false,
     members: [
       'backgroundColor',
-      'backgroundColorAlpha',
       'backgroundType',
       'backgroundImage',
       'backgroundUrl',
@@ -190,10 +189,6 @@ export const boxOptions = {
 
   backgroundColor: color('Background color', {
     value: ThemeColor.TRANSPARENT,
-  }),
-  backgroundColorAlpha: option('NUMBER', {
-    label: 'Background color opacity',
-    value: 100,
   }),
   backgroundType: option('CUSTOM', {
     label: 'Background type',

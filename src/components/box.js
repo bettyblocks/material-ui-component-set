@@ -282,13 +282,15 @@
         borderRadius: ({ options: { borderRadius } }) => borderRadius,
       },
       empty: {
-        display: ['flex', '!important'],
-        justifyContent: ['center', '!important'],
+        display: 'flex',
         alignItems: 'center',
-        height: ['2.5rem', '!important'],
+        justifyContent: 'center',
+        height: '100%',
+        minHeight: ({ options: { height } }) => (height ? 0 : '4rem'),
         fontSize: '0.75rem',
         color: '#262A3A',
         textTransform: 'uppercase',
+        boxSizing: 'border-box',
       },
       pristine: {
         borderWidth: '0.0625rem',
