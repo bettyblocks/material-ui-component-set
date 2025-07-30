@@ -142,10 +142,9 @@
     );
   })(),
   styles: (B) => (theme) => {
-    const { color: colorFunc, env, mediaMinWidth, Styling } = B;
+    const { env, mediaMinWidth, Styling } = B;
     const style = new Styling(theme);
     const isDev = env === 'dev';
-    const getColorAlpha = (col, val) => colorFunc.alpha(col, val);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
 
@@ -264,15 +263,8 @@
         },
       },
       background: {
-        backgroundColor: ({
-          options: { backgroundColor, backgroundColorAlpha },
-        }) =>
-          backgroundColor === 'Transparent'
-            ? style.getColor(backgroundColor)
-            : getColorAlpha(
-                style.getColor(backgroundColor),
-                backgroundColorAlpha / 100,
-              ),
+        backgroundColor: ({ options: { backgroundColor } }) =>
+          style.getColor(backgroundColor),
         backgroundSize: ({ options: { backgroundSize } }) => backgroundSize,
         backgroundPosition: ({ options: { backgroundPosition } }) =>
           backgroundPosition,
@@ -290,13 +282,15 @@
         borderRadius: ({ options: { borderRadius } }) => borderRadius,
       },
       empty: {
-        display: ['flex', '!important'],
-        justifyContent: ['center', '!important'],
+        display: 'flex',
         alignItems: 'center',
-        height: ['2.5rem', '!important'],
+        justifyContent: 'center',
+        height: '100%',
+        minHeight: ({ options: { height } }) => (height ? 0 : '4rem'),
         fontSize: '0.75rem',
         color: '#262A3A',
         textTransform: 'uppercase',
+        boxSizing: 'border-box',
       },
       pristine: {
         borderWidth: '0.0625rem',
