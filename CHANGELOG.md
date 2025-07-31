@@ -1,3 +1,15 @@
+# [2.218.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.217.0...v2.218.0) (2025-07-31)
+
+
+### Bug Fixes
+
+* removed the background alpha ([f815368](https://github.com/bettyblocks/material-ui-component-set/commit/f815368e13693fa83e3e5de07299202d25ac1f05))
+
+
+### Features
+
+* removed the background opacity for the box since it has been replaced by the colorpicker ([450359a](https://github.com/bettyblocks/material-ui-component-set/commit/450359af77b8d8768d43f661b5c3d7a0f9b623a8))
+
 # [2.217.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.216.1...v2.217.0) (2025-07-30)
 
 
