@@ -173,7 +173,7 @@ export default prefab('Dialog', attr, undefined, [
               Box(
                 {
                   options: {
-                    ...boxOptions,
+                    ...,
                     innerSpacing: sizes('Inner space', {
                       ...boxOptions.innerSpacing('innerSpacing'),
                       value: ['M', 'M', 'M', 'M'],

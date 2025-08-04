@@ -78,6 +78,13 @@ const children = [
   }),
 ];
 
+const extendedBoxOptions = {
+  ...boxOptions,
+  innerSpacing: sizes('Inner space', {
+    value: ['M', 'M', 'M', 'M'],
+  }),
+};
+
 const attrs = {
   name: 'CRUD with dialogs',
   icon: Icon.DataTable,
@@ -1087,15 +1094,7 @@ const beforeCreate = ({
           'backgroundColor',
           (options: PrefabComponentOption) => ({
             ...options,
-            value: 'light',
-          }),
-        );
-        setOption(
-          boxStructure,
-          'backgroundColorAlpha',
-          (options: PrefabComponentOption) => ({
-            ...options,
-            value: 20,
+            value: '#cccccc33',
           }),
         );
 
@@ -1850,7 +1849,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                         {
                           ref: { id: '#Header' },
                           options: {
-                            ...boxOptions,
+                            ...extendedBoxOptions,
                             innerSpacing: sizes('Inner space', {
                               value: ['0rem', '0rem', '0rem', '0rem'],
                             }),
@@ -1871,7 +1870,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                 {
                                   ref: { id: '#headerPartial' },
                                   options: {
-                                    ...boxOptions,
+                                    ...extendedBoxOptions,
                                     innerSpacing: sizes('Inner space', {
                                       value: ['0rem', '0rem', '0rem', '0rem'],
                                     }),
@@ -2025,7 +2024,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                       prefabBox(
                         {
                           options: {
-                            ...boxOptions,
+                            ...extendedBoxOptions,
                             stretch: toggle(
                               'Stretch (when in flex container)',
                               {
@@ -2042,18 +2041,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                               value: ['0rem', '0rem', '0rem', '0rem'],
                             }),
                             backgroundColor: color('Background color', {
-                              value: ThemeColor.LIGHT,
-                              configuration: {
-                                condition: showIf(
-                                  'backgroundOptions',
-                                  'EQ',
-                                  true,
-                                ),
-                              },
-                            }),
-                            backgroundColorAlpha: option('NUMBER', {
-                              label: 'Background color opacity',
-                              value: 20,
+                              value: '#cccccc33',
                               configuration: {
                                 condition: showIf(
                                   'backgroundOptions',
@@ -2191,7 +2179,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                 prefabBox(
                                   {
                                     options: {
-                                      ...boxOptions,
+                                      ...extendedBoxOptions,
                                       alignment: buttongroup(
                                         'Alignment',
                                         [
@@ -2346,7 +2334,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                               id: '#dataTableColumnButtonBox',
                                             },
                                             options: {
-                                              ...boxOptions,
+                                              ...extendedBoxOptions,
                                               alignment: buttongroup(
                                                 'Alignment',
                                                 [
@@ -2625,7 +2613,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                       prefabBox(
                                                         {
                                                           options: {
-                                                            ...boxOptions,
+                                                            ...extendedBoxOptions,
                                                             alignment:
                                                               buttongroup(
                                                                 'Alignment',
@@ -2802,6 +2790,9 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                           ref: {
                                                             id: '#createTabContentBox',
                                                           },
+                                                          options: {
+                                                            ...extendedBoxOptions,
+                                                          },
                                                         },
                                                         [
                                                           component(
@@ -2825,7 +2816,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                       prefabBox(
                                                         {
                                                           options: {
-                                                            ...boxOptions,
+                                                            ...extendedBoxOptions,
                                                             alignment:
                                                               buttongroup(
                                                                 'Alignment',
@@ -2973,7 +2964,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                       prefabBox(
                                                         {
                                                           options: {
-                                                            ...boxOptions,
+                                                            ...extendedBoxOptions,
                                                             alignment:
                                                               buttongroup(
                                                                 'Alignment',
@@ -3151,6 +3142,9 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                           ref: {
                                                             id: '#updateTabContentBox',
                                                           },
+                                                          options: {
+                                                            ...extendedBoxOptions,
+                                                          },
                                                         },
                                                         [
                                                           component(
@@ -3174,7 +3168,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                       prefabBox(
                                                         {
                                                           options: {
-                                                            ...boxOptions,
+                                                            ...extendedBoxOptions,
                                                             alignment:
                                                               buttongroup(
                                                                 'Alignment',
@@ -3245,7 +3239,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                           prefabBox(
                                                             {
                                                               options: {
-                                                                ...boxOptions,
+                                                                ...extendedBoxOptions,
                                                                 innerSpacing:
                                                                   sizes(
                                                                     'Inner space',
@@ -3407,7 +3401,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                       prefabBox(
                                                         {
                                                           options: {
-                                                            ...boxOptions,
+                                                            ...extendedBoxOptions,
                                                             alignment:
                                                               buttongroup(
                                                                 'Alignment',
@@ -3586,7 +3580,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                             id: '#detailsTabContentBox',
                                                           },
                                                           options: {
-                                                            ...boxOptions,
+                                                            ...extendedBoxOptions,
                                                             innerSpacing: sizes(
                                                               'Inner space',
                                                               {
@@ -3605,7 +3599,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                       prefabBox(
                                                         {
                                                           options: {
-                                                            ...boxOptions,
+                                                            ...extendedBoxOptions,
                                                             alignment:
                                                               buttongroup(
                                                                 'Alignment',
@@ -3676,7 +3670,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                           prefabBox(
                                                             {
                                                               options: {
-                                                                ...boxOptions,
+                                                                ...extendedBoxOptions,
                                                                 innerSpacing:
                                                                   sizes(
                                                                     'Inner space',
@@ -3842,7 +3836,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                       prefabBox(
                                                         {
                                                           options: {
-                                                            ...boxOptions,
+                                                            ...extendedBoxOptions,
                                                             alignment:
                                                               buttongroup(
                                                                 'Alignment',
@@ -4020,7 +4014,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                             id: '#deleteTabContentBox',
                                                           },
                                                           options: {
-                                                            ...boxOptions,
+                                                            ...extendedBoxOptions,
                                                             innerSpacing: sizes(
                                                               'Inner space',
                                                               {
@@ -4039,7 +4033,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                       prefabBox(
                                                         {
                                                           options: {
-                                                            ...boxOptions,
+                                                            ...extendedBoxOptions,
                                                             alignment:
                                                               buttongroup(
                                                                 'Alignment',
@@ -4304,7 +4298,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                         {
                           ref: { id: '#Footer' },
                           options: {
-                            ...boxOptions,
+                            ...extendedBoxOptions,
                             width: size('Width', {
                               value: '100%',
                               configuration: {
@@ -4315,18 +4309,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                               value: ['0rem', '0rem', '0rem', '0rem'],
                             }),
                             backgroundColor: color('Background color', {
-                              value: ThemeColor.LIGHT,
-                              configuration: {
-                                condition: showIf(
-                                  'backgroundOptions',
-                                  'EQ',
-                                  true,
-                                ),
-                              },
-                            }),
-                            backgroundColorAlpha: option('NUMBER', {
-                              label: 'Background color opacity',
-                              value: 20,
+                              value: '#cccccc33',
                               configuration: {
                                 condition: showIf(
                                   'backgroundOptions',
@@ -4341,7 +4324,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                           prefabBox(
                             {
                               options: {
-                                ...boxOptions,
+                                ...extendedBoxOptions,
                                 innerSpacing: sizes('Inner space', {
                                   value: ['L', 'L', 'L', 'L'],
                                 }),
