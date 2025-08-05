@@ -47,6 +47,7 @@ export const TextInput = (
         'borderFocusColor',
         'labelColor',
         'textColor',
+        'iconColor',
         'placeholderColor',
         'helperColor',
         'errorColor',
