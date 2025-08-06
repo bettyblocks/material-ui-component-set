@@ -40,6 +40,7 @@
     } = options;
 
     const { env, useText, Icon, generateUUID } = B;
+    const { useEffect, useState, useRef } = React;
     const {
       MuiPickersUtilsProvider,
       KeyboardTimePicker,
@@ -74,6 +75,10 @@
     const [currentHelperText, setHelper] = useState(optionHelperText);
     const [isDisabled, setIsDisabled] = useState(disabled);
     const [isFirstValidation, setIsFirstValidation] = useState(true);
+
+    useEffect(() => {
+      setHelper(optionHelperText);
+    }, [optionHelperText]);
 
     B.defineFunction('Clear', () => {
       setIsFirstValidation(true);
@@ -277,6 +282,7 @@
         autoOk={closeOnSelect}
         variant={variant}
         inputVariant={inputvariant}
+        InputLabelProps={{ shrink: true }}
         InputProps={{
           inputProps: {
             tabIndex: isDev ? -1 : undefined,

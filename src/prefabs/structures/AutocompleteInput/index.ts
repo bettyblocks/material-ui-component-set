@@ -32,7 +32,7 @@ export const AutocompleteInput = (
         'labelColor',
         'textColor',
         'textColorChip',
-        'placeHolderColor',
+        'placeholderColor',
         'helperColor',
         'errorColor',
       ],

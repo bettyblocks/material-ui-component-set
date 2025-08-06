@@ -813,6 +813,7 @@
                   name: nameAttribute || name,
                 })}
                 placeholder={placeholder}
+                InputLabelProps={{ shrink: true }}
                 required={required && !value}
                 size={size}
                 variant={variant}
@@ -865,6 +866,7 @@
             label={!hideLabel && label}
             margin={margin}
             placeholder={placeholder}
+            InputLabelProps={{ shrink: true }}
             required={required && !value}
             size={size}
             value={designTimeValue}

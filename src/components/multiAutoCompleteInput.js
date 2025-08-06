@@ -1078,8 +1078,8 @@
           },
           '& input': {
             '&::placeholder': {
-              color: ({ options: { placeHolderColor } }) => [
-                style.getColor(placeHolderColor),
+              color: ({ options: { placeholderColor } }) => [
+                style.getColor(placeholderColor),
                 '!important',
               ],
             },

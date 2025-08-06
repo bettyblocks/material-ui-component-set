@@ -26,6 +26,7 @@
       validationValueMissing = [''],
       value: prefabValue,
     } = options;
+
     const {
       env,
       generateUUID,
@@ -34,6 +35,7 @@
       useRelation,
       useText,
     } = B;
+
     const {
       FormControl: MUIFormControl,
       FormControlLabel: MUIFormControlLabel,
@@ -42,14 +44,11 @@
       Radio,
       RadioGroup,
     } = window.MaterialUI.Core;
+
+    const { useEffect, useState, useRef } = React;
     const isDev = env === 'dev';
     const modelProperty = getProperty(property || '') || {};
 
-    const [errorState, setErrorState] = useState(false);
-    const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
-    const [helper, setHelper] = useState(useText(helperText));
-    const [interactionFilter, setInteractionFilter] = useState({});
-    const [disabled, setIsDisabled] = useState(initialIsDisabled);
     const mounted = useRef(false);
     const getValue = (val) => (isNaN(Number(val)) ? val : Number(val));
     const labelText = useText(label);
@@ -58,6 +57,12 @@
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const { contextModelId } = model;
+
+    const [errorState, setErrorState] = useState(false);
+    const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
+    const [helper, setHelper] = useState(helperTextResolved);
+    const [interactionFilter, setInteractionFilter] = useState({});
+    const [disabled, setIsDisabled] = useState(initialIsDisabled);
 
     const {
       referenceModelId,
@@ -99,6 +104,10 @@
     useEffect(() => {
       setCurrentValue(resolvedCurrentValue);
     }, [defaultValueText]);
+
+    useEffect(() => {
+      setHelper(helperTextResolved);
+    }, [helperTextResolved]);
 
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
