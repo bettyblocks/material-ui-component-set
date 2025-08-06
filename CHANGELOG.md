@@ -1,3 +1,10 @@
+## [2.218.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.218.0...v2.218.1) (2025-08-06)
+
+
+### Bug Fixes
+
+* added innerspacing to the boxes in the dialog ([a20e414](https://github.com/bettyblocks/material-ui-component-set/commit/a20e4149adf569610bdc3a136cc702fae5b32c3f))
+
 # [2.218.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.217.0...v2.218.0) (2025-08-05)
 
 
