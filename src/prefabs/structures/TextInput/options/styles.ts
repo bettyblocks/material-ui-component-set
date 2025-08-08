@@ -90,6 +90,10 @@ export const styles = {
     value: ThemeColor.BLACK,
   }),
 
+  iconColor: color('Icon color', {
+    value: ThemeColor.BLACK,
+  }),
+
   placeholderColor: color('Placeholder color', {
     value: ThemeColor.LIGHT,
   }),
