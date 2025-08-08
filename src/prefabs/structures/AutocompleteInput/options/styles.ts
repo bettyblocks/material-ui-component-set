@@ -76,7 +76,7 @@ export const styles = {
     value: ThemeColor.ACCENT_3,
   }),
 
-  placeHolderColor: color('Placeholder color', {
+  placeholderColor: color('Placeholder color', {
     value: ThemeColor.LIGHT,
   }),
 

@@ -41,7 +41,7 @@ export const MultiAutocomplete = (
         'textColor',
         'textColorChip',
         'checkboxColor',
-        'placeHolderColor',
+        'placeholderColor',
         'helperColor',
         'errorColor',
       ],
