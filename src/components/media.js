@@ -21,6 +21,8 @@
       linkToExternal,
       linkType,
       dataComponentAttribute,
+      width,
+      height,
     } = options;
 
     const titleText = useText(title);
@@ -142,6 +144,8 @@
           className={includeStyling(classes.media)}
           src={imgUrl}
           title={titleText || isVariable || imgName}
+          height={!height || /^\d+$/.test(height.trim()) ? '500px' : height}
+          width={!width || /^\d+$/.test(width.trim()) ? '100%' : width}
           alt={imgAlt || imgName}
           data-component={useText(dataComponentAttribute) || 'Media'}
           role="presentation"
@@ -222,6 +226,7 @@
           classes.outerSpacing,
           isDev ? classes.devWrapper : '',
           !isEmpty && !isVariable ? classes.hasContent : '',
+          includeStyling(classes.root),
         ].join(' ')}
       >
         <MediaComponent />
@@ -235,58 +240,56 @@
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
     return {
       devWrapper: {
-        display: 'flex',
         '& > *': {
           pointerEvents: 'none',
         },
       },
-      hasContent: {
-        width: 'fit-content',
-        height: 'fit-content',
+      root: {
+        width: ({ options: { width } }) =>
+          !width || /^\d+$/.test(width.trim()) ? '100%' : width,
+        height: ({ options: { height } }) =>
+          !height || /^\d+$/.test(height.trim()) ? '500px' : height,
+        maxHeight: '100%',
+        maxWidth: '100%',
       },
       empty: {
-        position: 'relative',
-        width: ({ options: { width } }) => width || '100%',
-        height: ({ options: { height } }) => height || 'inherit',
-        backgroundColor: '#F0F1F5',
-        border: '0.0625rem dashed #AFB5C8',
-        paddingBottom: ({ options: { height } }) =>
-          (!height || height === '100%') && '62.5%',
-      },
-      placeholderWrapper: {
-        position: 'absolute',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
+        backgroundColor: '#F0F1F5',
+        border: '0.0625rem dashed #AFB5C8',
+        height: '100%',
+        width: '100%',
+      },
+      placeholderWrapper: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
         fontSize: '0.75rem',
         color: '#262A3A',
         textTransform: 'uppercase',
       },
       placeholder: {
         maxHeight: '100%',
-
         '& rect': {
           stroke: '#AFB5C8',
           fill: '#F7F8FA',
           width: 47,
           height: 30,
         },
-
         '& > path': {
           fill: '#666D85',
         },
       },
       media: {
-        width: ({ options: { width } }) => width,
-        height: ({ options: { height } }) => height,
+        width: ({ options: { width } }) =>
+          !width || /^\d+$/.test(width.trim()) ? '100%' : width,
+        height: ({ options: { height } }) =>
+          !height || /^\d+$/.test(height.trim()) ? '500px' : height,
       },
       outerSpacing: {
-        width: ({ options: { width } }) => width,
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
         marginRight: ({ options: { outerSpacing } }) =>
