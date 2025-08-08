@@ -1,3 +1,10 @@
+# [2.219.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.218.1...v2.219.0) (2025-08-08)
+
+
+### Features
+
+* introduce zone number 20 ([9434e44](https://github.com/bettyblocks/material-ui-component-set/commit/9434e44de56b14eb3f44c7b321cd42134f40f795))
+
 ## [2.218.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.218.0...v2.218.1) (2025-08-06)
 
 
