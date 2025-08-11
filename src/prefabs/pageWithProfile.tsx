@@ -57,7 +57,6 @@ import {
   SubmitButton,
   submitButtonOptions,
   TextInput,
-  textInputOptions,
 } from './structures';
 import {
   AuthenticationProfile,
@@ -67,6 +66,7 @@ import {
   Properties,
   PermissionType,
 } from './types';
+import { optionsResolver as textInputOptionsResolver } from './structures/TextInput/options';
 
 const interactions: PrefabInteraction[] = [
   {
@@ -1775,14 +1775,7 @@ export default makePrefab('User, profile details', attrs, beforeCreate, [
                           value: ['0rem', '0rem', '0rem', '0rem'],
                         }),
                         backgroundColor: color('Background color', {
-                          value: ThemeColor.LIGHT,
-                          configuration: {
-                            condition: showIf('backgroundOptions', 'EQ', true),
-                          },
-                        }),
-                        backgroundColorAlpha: option('NUMBER', {
-                          label: 'Background color opacity',
-                          value: 20,
+                          value: '#cccccc33',
                           configuration: {
                             condition: showIf('backgroundOptions', 'EQ', true),
                           },
@@ -3819,7 +3812,9 @@ export default makePrefab('User, profile details', attrs, beforeCreate, [
                                                                     adornmentIcon:
                                                                       'VisibilityOff',
                                                                     options: {
-                                                                      ...textInputOptions,
+                                                                      ...textInputOptionsResolver(
+                                                                        'password',
+                                                                      ),
                                                                       hideLabel:
                                                                         toggle(
                                                                           'Hide label',
@@ -3952,7 +3947,9 @@ export default makePrefab('User, profile details', attrs, beforeCreate, [
                                                                     adornmentIcon:
                                                                       'VisibilityOff',
                                                                     options: {
-                                                                      ...textInputOptions,
+                                                                      ...textInputOptionsResolver(
+                                                                        'password',
+                                                                      ),
                                                                       hideLabel:
                                                                         toggle(
                                                                           'Hide label',
@@ -4210,14 +4207,7 @@ export default makePrefab('User, profile details', attrs, beforeCreate, [
                           value: ['0rem', '0rem', '0rem', '0rem'],
                         }),
                         backgroundColor: color('Background color', {
-                          value: ThemeColor.LIGHT,
-                          configuration: {
-                            condition: showIf('backgroundOptions', 'EQ', true),
-                          },
-                        }),
-                        backgroundColorAlpha: option('NUMBER', {
-                          label: 'Background color opacity',
-                          value: 20,
+                          value: '#cccccc33',
                           configuration: {
                             condition: showIf('backgroundOptions', 'EQ', true),
                           },

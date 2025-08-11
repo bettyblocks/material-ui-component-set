@@ -117,14 +117,11 @@
     const modelId =
       contextModelId || referenceModelId || propertyModelId || model || '';
     const idProperty = getIdProperty(modelId) || {};
-    const labelProperty = getProperty(labelPropertyId) || idProperty;
     const propertyModel = getModel(modelId);
-    const defaultLabelProperty =
-      getProperty(
-        propertyModel && propertyModel.labelPropertyId
-          ? propertyModel.labelPropertyId
-          : '',
-      ) || {};
+    const modelLabelPropertyId =
+      (propertyModel && propertyModel.labelPropertyId) || '';
+    const labelProperty =
+      getProperty(labelPropertyId || modelLabelPropertyId) || idProperty;
 
     const isListProperty =
       modelProperty.kind === 'LIST' || modelProperty.kind === 'list';
@@ -132,16 +129,8 @@
     const [inputValue, setInputValue] = useState(
       isListProperty ? defaultValue : '',
     );
-    const hasLabelProperty = !!(labelProperty && labelProperty.id);
-    const hasDefaultLabelProperty = !!(
-      defaultLabelProperty && defaultLabelProperty.id
-    );
 
-    const searchProperty = isListProperty
-      ? modelProperty
-      : (hasLabelProperty && labelProperty) ||
-        (hasDefaultLabelProperty && defaultLabelProperty) ||
-        idProperty;
+    const searchProperty = isListProperty ? modelProperty : labelProperty;
 
     useEffect(() => {
       if (defaultValue) {
@@ -480,7 +469,7 @@
     } = useAllQuery(
       modelId,
       {
-        take: 20,
+        take: 50,
         rawFilter: mergeFilters(filter, resolvedExternalFiltersObject),
         variables: {
           sort,
@@ -521,7 +510,7 @@
 
     if (error && displayError) {
       valid = false;
-      message = 'Something went wrong while loading.';
+      message = error.message;
     }
 
     B.defineFunction('Clear', () => {
@@ -660,6 +649,11 @@
     const currentValue = getValue();
 
     useEffect(() => {
+      if (currentValue === null && !debouncedCurrentValue) {
+        // state updates cause currentValue to equal null and debouncedCurrentValue is empty
+        // nothing should happen then, to prevent a unwanted reset of the value
+        return;
+      }
       if (currentValue !== debouncedCurrentValue) {
         setTimeout(() => {
           setDebouncedCurrentValue(currentValue);
@@ -742,6 +736,11 @@
             setDebouncedCurrentValue(newValue);
           }}
           onInputChange={(event, newValue) => {
+            if (!event) {
+              // state updates cause this event to equal null
+              // nothing should happen then, to prevent a rerender cycle
+              return;
+            }
             let validation = event ? event.target.validity : null;
             if (isNumberType) {
               validation = customPatternValidation(event.target);

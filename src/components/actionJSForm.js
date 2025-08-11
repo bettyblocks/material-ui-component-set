@@ -32,12 +32,6 @@
 
     const selectedFilter = getFilter();
 
-    if (isDev && children.length === 0) {
-      return (
-        <div className={[classes.empty, classes.pristine].join(' ')}>Form</div>
-      );
-    }
-
     const onActionSuccess = (response) => {
       const event = response.data.action.results;
 
@@ -183,9 +177,14 @@
     }
 
     if (isDev) {
-      return (
+      return React.Children.count(children) > 0 ? (
         <div>
           <FormComponent />
+        </div>
+      ) : (
+        <div className={`${classes.empty} ${classes.pristine}`}>
+          <FormComponent />
+          Form
         </div>
       );
     }

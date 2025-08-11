@@ -264,6 +264,15 @@
         );
         const where = useFilter(completeFilter);
 
+        const onCompleted = (res) => {
+          const hasResult = res && res.results && res.results.length > 0;
+          if (hasResult) {
+            B.triggerEvent('onSuccess', res.results);
+          } else {
+            B.triggerEvent('onNoResults');
+          }
+        };
+
         const {
           loading: queryLoading,
           error,
@@ -278,6 +287,7 @@
             variables: {
               ...(orderByPath ? { sort: { relation: sort } } : {}),
             },
+            onCompleted,
             onError(resp) {
               if (!displayError) {
                 B.triggerEvent('onError', resp);
@@ -289,19 +299,12 @@
 
         const { hasResults, data: relationData } = useRelation(
           model,
-          {},
+          { onCompleted },
           typeof model === 'string' || !model,
         );
 
         const data = hasResults ? relationData : queryData;
         const loading = hasResults ? false : queryLoading;
-        const hasResult = data && data.results && data.results.length > 0;
-
-        if (hasResult) {
-          B.triggerEvent('onSuccess', data.results);
-        } else if (!hasResult && hasResult !== undefined) {
-          B.triggerEvent('onNoResults');
-        }
 
         useEffect(() => {
           if (isDev) {
@@ -345,6 +348,10 @@
           setPageState(useText([`${id}`]));
         });
 
+        B.defineFunction('Clear', () => {
+          setPageState(useText(['']));
+        });
+
         B.defineFunction('Advanced filter', (value) => {
           setPage(1);
           setFilterV2(value.where);
@@ -355,8 +362,19 @@
           setFilterV2({});
         });
 
+        const refetchCallback = (refetchData) => {
+          const refetchResults =
+            refetchData &&
+            refetchData.data &&
+            Object.values(refetchData.data)[0];
+
+          if (refetchResults) {
+            onCompleted(refetchResults);
+          }
+        };
+
         useEffect(() => {
-          B.defineFunction('Refetch', () => refetch());
+          B.defineFunction('Refetch', () => refetch().then(refetchCallback));
 
           /**
            * @name Filter

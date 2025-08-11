@@ -142,9 +142,32 @@
 
     const [values, setValues] = useState(getValues());
 
+    const isValid = required && values.join('') !== '';
+    const hasError = errorState || !isValid;
+
     useEffect(() => {
       setValues(getValues());
     }, [defaultValueText]);
+
+    useEffect(() => {
+      if (isDev) {
+        setValues(getValues());
+        setHelper(helperTextResolved);
+      }
+    }, [isDev, defaultValueText, helperTextResolved]);
+
+    useEffect(() => {
+      B.triggerEvent('onChange', values);
+    }, [values]);
+
+    useEffect(() => {
+      if (afterFirstInvalidation) {
+        const message = hasError
+          ? validationValueMissingText
+          : helperTextResolved;
+        setHelper(message);
+      }
+    }, [errorState, values, required, afterFirstInvalidation]);
 
     const orderBySanitized = orderBy.id === '' ? undefined : orderBy;
 
@@ -292,13 +315,6 @@
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
 
-    useEffect(() => {
-      if (isDev) {
-        setValues(getValues());
-        setHelper(helperTextResolved);
-      }
-    }, [isDev, defaultValueText, helperTextResolved]);
-
     const {
       Checkbox: MUICheckbox,
       FormControlLabel,
@@ -315,9 +331,6 @@
         if (checked) return state.concat(value);
         return state.filter((v) => v !== value);
       });
-      setTimeout(() => {
-        B.triggerEvent('onChange', values);
-      }, 250);
     };
 
     const invalidHandler = (event) => {
@@ -325,9 +338,6 @@
       setAfterFirstInvalidation(true);
       setErrorState(true);
     };
-
-    const isValid = required ? values.join() !== '' : true;
-    const hasError = errorState || !isValid;
 
     const renderCheckbox = (checkboxLabel, checkboxValue) => {
       const labelControlRef = generateUUID();
@@ -357,25 +367,25 @@
       if (isListProperty) {
         return listValues.map(({ value: v }) => renderCheckbox(v, v));
       }
-      if (isDev) return renderCheckbox('Placeholder', false);
-      if (loading) return <span>Loading...</span>;
-      if (err && displayError) return <span>{err.message}</span>;
+      if (isDev) {
+        return renderCheckbox('Placeholder', false);
+      }
+      if (loading) {
+        return <span>Loading...</span>;
+      }
+      if (err && displayError) {
+        return <span>{err.message}</span>;
+      }
       if (!loading && results) {
         return results.map((item) => {
-          return renderCheckbox(item[labelProperty.name], `${item.id}`);
+          return renderCheckbox(
+            item[labelProperty.name] || item.id,
+            `${item.id}`,
+          );
         });
       }
       return <span>No results</span>;
     };
-
-    useEffect(() => {
-      if (afterFirstInvalidation) {
-        const message = hasError
-          ? validationValueMissingText
-          : helperTextResolved;
-        setHelper(message);
-      }
-    }, [errorState, values, required, afterFirstInvalidation]);
 
     const Control = (
       <FormControl

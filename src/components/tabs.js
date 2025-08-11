@@ -49,7 +49,9 @@
 
     useEffect(() => {
       setTimeout(() => {
-        tabsRef.current.updateIndicator();
+        if (tabsRef.current) {
+          tabsRef.current.updateIndicator();
+        }
       }, 100);
     }, []);
 
@@ -282,7 +284,7 @@
               style.getFontSize(font, 'Desktop'),
           },
         },
-        display: 'grid',
+        display: 'flex',
         height: ({ options: { height } }) => (isDev ? '100%' : height),
         width: ({ options: { width } }) => (isDev ? '100%' : width),
         flexDirection: ({ options: { alignment } }) => {

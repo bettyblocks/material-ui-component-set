@@ -1121,11 +1121,7 @@ export default makePrefab('Homepage, inspirational', attrs, beforeCreate, [
                       options: {
                         ...boxOptions,
                         backgroundColor: color('Background color', {
-                          value: ThemeColor.LIGHT,
-                        }),
-                        backgroundColorAlpha: option('NUMBER', {
-                          label: 'Background color opacity',
-                          value: 20,
+                          value: '#cccccc33',
                         }),
                         innerSpacing: sizes('Inner space', {
                           value: ['0rem', '0rem', '0rem', '0rem'],
@@ -3443,14 +3439,10 @@ export default makePrefab('Homepage, inspirational', attrs, beforeCreate, [
                           value: true,
                         }),
                         backgroundColor: color('Background color', {
-                          value: ThemeColor.LIGHT,
+                          value: '#cccccc33',
                           configuration: {
                             condition: showIf('backgroundOptions', 'EQ', true),
                           },
-                        }),
-                        backgroundColorAlpha: option('NUMBER', {
-                          label: 'Background color opacity',
-                          value: 20,
                         }),
                       },
                     },
@@ -6490,11 +6482,7 @@ export default makePrefab('Homepage, inspirational', attrs, beforeCreate, [
                           options: {
                             ...boxOptions,
                             backgroundColor: color('Background color', {
-                              value: ThemeColor.BLACK,
-                            }),
-                            backgroundColorAlpha: option('NUMBER', {
-                              label: 'Background color opacity',
-                              value: 20,
+                              value: '#00000033',
                             }),
                             width: size('Width', {
                               value: '100%',

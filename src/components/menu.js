@@ -1,7 +1,7 @@
 (() => ({
   name: 'Menu',
   type: 'CONTENT_COMPONENT',
-  allowedTypes: ['MENU_ITEM'],
+  allowedTypes: ['MENU_ITEM', 'BODY_COMPONENT', 'CONTAINER_COMPONENT'],
   orientation: 'VERTICAL',
   jsx: (() => {
     const {
@@ -271,6 +271,7 @@
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
         '&.MuiButton-root, &.MuiIconButton-root': {
+          textTransform: 'none',
           [`@media ${mediaMinWidth(600)}`]: {
             width: ({ options: { fullWidth, outerSpacing } }) => {
               if (!fullWidth) return 'auto';

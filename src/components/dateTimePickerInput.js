@@ -69,13 +69,16 @@
 
     const { current: labelControlRef } = useRef(generateUUID());
 
-    const [selectedDate, setSelectedDate] = useState(valueText || null);
+    const [selectedDate, setSelectedDate] = usePageState(valueText || null);
     const [errorState, setErrorState] = useState(error);
     const [currentHelperText, setHelper] = useState(optionHelperText);
     const [isDisabled, setIsDisabled] = useState(disabled);
     const [isFirstValidation, setIsFirstValidation] = useState(true);
 
-    B.defineFunction('Clear', () => setSelectedDate(null));
+    B.defineFunction('Clear', () => {
+      setIsFirstValidation(true);
+      setSelectedDate(null);
+    });
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
 

@@ -85,6 +85,9 @@ const children = [
         value: '',
         showInAddChild: true,
         showInReconfigure: true,
+        configuration: {
+          allowFormatting: true,
+        },
       }),
     },
   }),
@@ -199,7 +202,7 @@ export const dataTableOptions = {
       condition: hideIf('autoLoadOnScroll', 'EQ', true),
     },
   }),
-  placeholderTake: number('Placeholder rows', { value: '10' }),
+  placeholderTake: number('Placeholder rows', { value: '3' }),
   paginationType: font('Font family from text style', {
     value: 'Body2',
   }),
@@ -248,7 +251,7 @@ export const dataTableOptions = {
   }),
   variant: option('CUSTOM', {
     label: 'Variant',
-    value: 'elevation',
+    value: 'outlined',
     configuration: {
       as: 'BUTTONGROUP',
       dataType: 'string',

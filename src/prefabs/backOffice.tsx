@@ -88,10 +88,19 @@ import {
   textOptions,
 } from './structures';
 import { options as formOptions } from './structures/ActionJSForm/options';
-import { children as formChildren } from './structures/ActionJSForm/children';
+import {
+  children as formChildren,
+  inputTypes,
+} from './structures/ActionJSForm/children';
 import { Properties, IdPropertyProps, ModelProps, ModelQuery } from './types';
 import { PermissionType, PropertyStateProps } from './types/types';
 
+const extendedBoxOptions = {
+  ...boxOptions,
+  innerSpacing: sizes('Inner space', {
+    value: ['M', 'M', 'M', 'M'],
+  }),
+};
 const children = [
   DataTableColumn({
     options: {
@@ -191,16 +200,12 @@ const detailChildren = [
           Box(
             {
               options: {
-                ...boxOptions,
+                ...extendedBoxOptions,
                 outerSpacing: sizes('Outer space', {
                   value: ['0rem', '0rem', 'M', '0rem'],
                 }),
                 backgroundColor: color('Background color', {
-                  value: ThemeColor.ACCENT_1,
-                }),
-                backgroundColorAlpha: option('NUMBER', {
-                  label: 'Background color opacity',
-                  value: 20,
+                  value: '#d8d8d833',
                 }),
               },
             },
@@ -785,7 +790,7 @@ const sideMenu = Box(
   {
     ref: { id: '#sideMenuPartial' },
     options: {
-      ...boxOptions,
+      ...extendedBoxOptions,
       stretch: toggle('Stretch (when in flex container)', {
         value: true,
       }),
@@ -801,7 +806,7 @@ const sideMenu = Box(
     Box(
       {
         options: {
-          ...boxOptions,
+          ...extendedBoxOptions,
           stretch: toggle('Stretch (when in flex container)', {
             value: true,
           }),
@@ -814,7 +819,7 @@ const sideMenu = Box(
         Box(
           {
             options: {
-              ...boxOptions,
+              ...extendedBoxOptions,
               innerSpacing: sizes('Inner space', {
                 value: ['L', 'L', '0rem', 'L'],
               }),
@@ -858,7 +863,7 @@ const sideMenu = Box(
         Box(
           {
             options: {
-              ...boxOptions,
+              ...extendedBoxOptions,
               stretch: toggle('Stretch (when in flex container)', {
                 value: true,
               }),
@@ -1038,7 +1043,7 @@ const drawerContainer = DrawerContainer(
             Box(
               {
                 options: {
-                  ...boxOptions,
+                  ...extendedBoxOptions,
                   height: size('Height', {
                     value: '100%',
                     configuration: {
@@ -1141,7 +1146,7 @@ const drawerContainer = DrawerContainer(
                                 Box(
                                   {
                                     options: {
-                                      ...boxOptions,
+                                      ...extendedBoxOptions,
                                       alignment: buttongroup(
                                         'Alignment',
                                         [
@@ -1269,7 +1274,7 @@ const drawerContainer = DrawerContainer(
                                 Box(
                                   {
                                     options: {
-                                      ...boxOptions,
+                                      ...extendedBoxOptions,
                                       stretch: toggle(
                                         'Stretch (when in flex container)',
                                         {
@@ -1299,6 +1304,16 @@ const drawerContainer = DrawerContainer(
                                               },
                                             },
                                           ),
+                                          addChild: addChild('Add input', {
+                                            value: {
+                                              children: inputTypes,
+                                              addChildWizardType:
+                                                'ChildSelector',
+                                            },
+                                            ref: {
+                                              id: '#createFormAddChild',
+                                            },
+                                          }),
                                         },
                                         ref: { id: '#createForm' },
                                       },
@@ -1315,7 +1330,7 @@ const drawerContainer = DrawerContainer(
                                 Box(
                                   {
                                     options: {
-                                      ...boxOptions,
+                                      ...extendedBoxOptions,
                                       alignment: buttongroup(
                                         'Alignment',
                                         [
@@ -1335,13 +1350,9 @@ const drawerContainer = DrawerContainer(
                                       backgroundColor: color(
                                         'Background color',
                                         {
-                                          value: ThemeColor.LIGHT,
+                                          value: '#cccccc33',
                                         },
                                       ),
-                                      backgroundColorAlpha: option('NUMBER', {
-                                        label: 'Background color opacity',
-                                        value: 20,
-                                      }),
                                     },
                                   },
                                   [
@@ -1499,7 +1510,7 @@ const drawerContainer = DrawerContainer(
                                 Box(
                                   {
                                     options: {
-                                      ...boxOptions,
+                                      ...extendedBoxOptions,
                                       alignment: buttongroup(
                                         'Alignment',
                                         [
@@ -1627,7 +1638,7 @@ const drawerContainer = DrawerContainer(
                                 Box(
                                   {
                                     options: {
-                                      ...boxOptions,
+                                      ...extendedBoxOptions,
                                       stretch: toggle(
                                         'Stretch (when in flex container)',
                                         {
@@ -2393,7 +2404,7 @@ const drawerContainer = DrawerContainer(
                                 Box(
                                   {
                                     options: {
-                                      ...boxOptions,
+                                      ...extendedBoxOptions,
                                       alignment: buttongroup(
                                         'Alignment',
                                         [
@@ -2413,13 +2424,9 @@ const drawerContainer = DrawerContainer(
                                       backgroundColor: color(
                                         'Background color',
                                         {
-                                          value: ThemeColor.LIGHT,
+                                          value: '#cccccc33',
                                         },
                                       ),
-                                      backgroundColorAlpha: option('NUMBER', {
-                                        label: 'Background color opacity',
-                                        value: 20,
-                                      }),
                                     },
                                   },
                                   [
@@ -2573,7 +2580,7 @@ const drawerContainer = DrawerContainer(
                                 Box(
                                   {
                                     options: {
-                                      ...boxOptions,
+                                      ...extendedBoxOptions,
                                       alignment: buttongroup(
                                         'Alignment',
                                         [
@@ -2701,7 +2708,7 @@ const drawerContainer = DrawerContainer(
                                 Box(
                                   {
                                     options: {
-                                      ...boxOptions,
+                                      ...extendedBoxOptions,
                                       stretch: toggle(
                                         'Stretch (when in flex container)',
                                         {
@@ -2730,6 +2737,16 @@ const drawerContainer = DrawerContainer(
                                               },
                                             },
                                           ),
+                                          addChild: addChild('AddChild', {
+                                            value: {
+                                              children: inputTypes,
+                                              addChildWizardType:
+                                                'ChildSelector',
+                                            },
+                                            ref: {
+                                              id: '#updateFormAddChild',
+                                            },
+                                          }),
                                         },
                                         ref: { id: '#updateForm' },
                                       },
@@ -2744,7 +2761,7 @@ const drawerContainer = DrawerContainer(
                                 Box(
                                   {
                                     options: {
-                                      ...boxOptions,
+                                      ...extendedBoxOptions,
                                       alignment: buttongroup(
                                         'Alignment',
                                         [
@@ -2764,13 +2781,9 @@ const drawerContainer = DrawerContainer(
                                       backgroundColor: color(
                                         'Background color',
                                         {
-                                          value: ThemeColor.LIGHT,
+                                          value: '#cccccc33',
                                         },
                                       ),
-                                      backgroundColorAlpha: option('NUMBER', {
-                                        label: 'Background color opacity',
-                                        value: 20,
-                                      }),
                                     },
                                   },
                                   [
@@ -2960,7 +2973,7 @@ const drawerContainer = DrawerContainer(
                             Box(
                               {
                                 options: {
-                                  ...boxOptions,
+                                  ...extendedBoxOptions,
                                   stretch: toggle(
                                     'Stretch (when in flex container)',
                                     {
@@ -2971,11 +2984,7 @@ const drawerContainer = DrawerContainer(
                                     value: ['0rem', '0rem', '0rem', '0rem'],
                                   }),
                                   backgroundColor: color('Background color', {
-                                    value: ThemeColor.LIGHT,
-                                  }),
-                                  backgroundColorAlpha: option('NUMBER', {
-                                    label: 'Background color opacity',
-                                    value: 20,
+                                    value: '#cccccc33',
                                   }),
                                 },
                               },
@@ -3201,7 +3210,7 @@ const drawerContainer = DrawerContainer(
                                         Box(
                                           {
                                             options: {
-                                              ...boxOptions,
+                                              ...extendedBoxOptions,
                                               innerSpacing: sizes(
                                                 'Inner space',
                                                 {
@@ -3277,7 +3286,7 @@ const drawerContainer = DrawerContainer(
                                                     Box(
                                                       {
                                                         options: {
-                                                          ...boxOptions,
+                                                          ...extendedBoxOptions,
                                                           alignment:
                                                             buttongroup(
                                                               'Alignment',
@@ -3361,7 +3370,7 @@ const drawerContainer = DrawerContainer(
                                                         Box(
                                                           {
                                                             options: {
-                                                              ...boxOptions,
+                                                              ...extendedBoxOptions,
                                                               innerSpacing:
                                                                 sizes(
                                                                   'Inner space',
@@ -3764,7 +3773,7 @@ const drawerContainer = DrawerContainer(
                                                     Box(
                                                       {
                                                         options: {
-                                                          ...boxOptions,
+                                                          ...extendedBoxOptions,
                                                           innerSpacing: sizes(
                                                             'Inner space',
                                                             {
@@ -3816,7 +3825,7 @@ const drawerContainer = DrawerContainer(
                                                             Box(
                                                               {
                                                                 options: {
-                                                                  ...boxOptions,
+                                                                  ...extendedBoxOptions,
                                                                   innerSpacing:
                                                                     sizes(
                                                                       'Inner space',
@@ -3965,7 +3974,7 @@ const drawerContainer = DrawerContainer(
                                                                 Box(
                                                                   {
                                                                     options: {
-                                                                      ...boxOptions,
+                                                                      ...extendedBoxOptions,
                                                                       innerSpacing:
                                                                         sizes(
                                                                           'Inner space',
@@ -4169,7 +4178,7 @@ const drawerContainer = DrawerContainer(
                                                             Box(
                                                               {
                                                                 options: {
-                                                                  ...boxOptions,
+                                                                  ...extendedBoxOptions,
                                                                   innerSpacing:
                                                                     sizes(
                                                                       'Inner space',
@@ -4250,7 +4259,7 @@ const drawerContainer = DrawerContainer(
                                                                 Box(
                                                                   {
                                                                     options: {
-                                                                      ...boxOptions,
+                                                                      ...extendedBoxOptions,
                                                                       alignment:
                                                                         buttongroup(
                                                                           'Alignment',
@@ -4336,7 +4345,7 @@ const drawerContainer = DrawerContainer(
                                                                       {
                                                                         options:
                                                                           {
-                                                                            ...boxOptions,
+                                                                            ...extendedBoxOptions,
                                                                             innerSpacing:
                                                                               sizes(
                                                                                 'Inner space',
@@ -4498,7 +4507,7 @@ const drawerContainer = DrawerContainer(
                                                               Box(
                                                                 {
                                                                   options: {
-                                                                    ...boxOptions,
+                                                                    ...extendedBoxOptions,
                                                                     alignment:
                                                                       buttongroup(
                                                                         'Alignment',
@@ -4711,7 +4720,7 @@ const drawerContainer = DrawerContainer(
                                                               Box(
                                                                 {
                                                                   options: {
-                                                                    ...boxOptions,
+                                                                    ...extendedBoxOptions,
                                                                     alignment:
                                                                       buttongroup(
                                                                         'Alignment',
@@ -5022,7 +5031,7 @@ const drawerContainer = DrawerContainer(
                             Box(
                               {
                                 options: {
-                                  ...boxOptions,
+                                  ...extendedBoxOptions,
                                   width: size('Width', {
                                     value: '100%',
                                     configuration: {
@@ -5033,11 +5042,7 @@ const drawerContainer = DrawerContainer(
                                     value: ['0rem', '0rem', '0rem', '0rem'],
                                   }),
                                   backgroundColor: color('Background color', {
-                                    value: ThemeColor.LIGHT,
-                                  }),
-                                  backgroundColorAlpha: option('NUMBER', {
-                                    label: 'Background color opacity',
-                                    value: 20,
+                                    value: '#cccccc33',
                                   }),
                                 },
                                 ref: { id: '#footer' },
@@ -5114,7 +5119,9 @@ const prefabStructure = [
             'reconfigureSubView',
             'addSubViewChild',
             'reconfigureCreateForm',
+            'addChildCreateForm',
             'reconfigureUpdateForm',
+            'addChildUpdateForm',
           ],
           condition: {
             type: 'SHOW',
@@ -5283,6 +5290,23 @@ const prefabStructure = [
             },
           },
         }),
+        addChildCreateForm: linked({
+          label: 'Add input create form',
+          value: {
+            ref: {
+              componentId: '#createForm',
+              optionId: '#createFormAddChild',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'shownTab',
+              comparator: 'EQ',
+              value: 1,
+            },
+          },
+        }),
         createFormAction: linked({
           label: 'Create action',
           value: {
@@ -5408,6 +5432,23 @@ const prefabStructure = [
             ref: {
               componentId: '#updateForm',
               optionId: '#updateFormReconfigure',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'shownTab',
+              comparator: 'EQ',
+              value: 3,
+            },
+          },
+        }),
+        addChildUpdateForm: linked({
+          label: 'Add input update form',
+          value: {
+            ref: {
+              componentId: '#updateForm',
+              optionId: '#updateFormAddChild',
             },
           },
           configuration: {
@@ -5553,6 +5594,20 @@ const beforeCreate = ({
     id: '',
   });
 
+  const inheritFormatKinds = [
+    'DATE',
+    'DATE_EXPRESSION',
+    'DATE_TIME',
+    'DATE_TIME_EXPRESSION',
+    'DECIMAL',
+    'DECIMAL_EXPRESSION',
+    'INTEGER',
+    'INTEGER_EXPRESSION',
+    'PRICE',
+    'PRICE_EXPRESSION',
+    'TIME',
+  ];
+
   const createFormId = createUuid();
   const updateFormId = createUuid();
   const deleteButtonId = createUuid();
@@ -5661,15 +5716,7 @@ const beforeCreate = ({
           'backgroundColor',
           (opt: PrefabComponentOption) => ({
             ...opt,
-            value: 'Accent1',
-          }),
-        );
-        setOption(
-          detailComponent,
-          'backgroundColorAlpha',
-          (opt: PrefabComponentOption) => ({
-            ...opt,
-            value: '20',
+            value: 'd8d8d833',
           }),
         );
 
@@ -5681,7 +5728,12 @@ const beforeCreate = ({
               detailViewItem.ref = { id: `#detailItem${prop.id}` };
               setOption(detailViewItem, 'property', (opt) => ({
                 ...opt,
-                value: enrichVarObj({ ...prop }),
+                value: {
+                  ...enrichVarObj({ ...prop }),
+                  ...(prop.kind && inheritFormatKinds.includes(prop.kind)
+                    ? { format: 'INHERIT' }
+                    : {}),
+                },
                 ref: {
                   id: `#detailItemProperty${prop.id}`,
                 },
@@ -6207,19 +6259,6 @@ const beforeCreate = ({
         value: modelId,
       }));
 
-      const inheritFormatKinds = [
-        'DATE',
-        'DATE_EXPRESSION',
-        'DATE_TIME',
-        'DATE_TIME_EXPRESSION',
-        'DECIMAL',
-        'DECIMAL_EXPRESSION',
-        'INTEGER',
-        'INTEGER_EXPRESSION',
-        'PRICE',
-        'PRICE_EXPRESSION',
-        'TIME',
-      ];
       // eslint-disable-next-line @typescript-eslint/no-shadow
       dataTableProperties.forEach((property) => {
         let newProperty = property;

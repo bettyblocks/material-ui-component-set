@@ -5,7 +5,7 @@
   orientation: 'VERTICAL',
   styleType: 'BUTTON',
   jsx: (() => {
-    const { CircularProgress, Tooltip, Link } = window.MaterialUI.Core;
+    const { CircularProgress, Tooltip } = window.MaterialUI.Core;
     const {
       disabled,
       size,
@@ -145,36 +145,6 @@
       'data-component': useText(dataComponentAttribute) || 'Button',
     };
 
-    const targetProps = {
-      target: linkTarget,
-      rel: linkTarget === '_blank' ? 'noopener' : '',
-      'data-component': useText(dataComponentAttribute) || 'Button',
-    };
-
-    const anchorProps = {
-      ...targetProps,
-      href: getExternalHref({
-        disabled,
-        linkToExternal,
-        linkToExternalVariable,
-      }),
-      tabIndex: isDev ? -1 : undefined,
-      type: isDev ? 'button' : type,
-      endpoint:
-        linkType === 'internal' && linkTo && linkTo.id ? linkTo : undefined,
-      onClick: (event) => {
-        event.stopPropagation();
-        actionCallback();
-      },
-    };
-
-    const linkProps = {
-      ...targetProps,
-      href: getInternalHref({ linkTo, linkToInternalVariable, disabled }),
-      component: hasInteralLink ? B.Link : undefined,
-      endpoint: hasInteralLink ? linkTo : undefined,
-    };
-
     const ButtonContent = (
       <div
         className={[classes.root, disabled ? classes.disabled : ''].join(' ')}
@@ -213,28 +183,29 @@
       e.stopPropagation();
     };
 
-    const LinkComponent =
-      linkType === 'internal' ? (
-        <Link
-          className={classes.linkComponent}
-          {...linkProps}
-          underline="none"
-          onClick={handleClick}
-        >
-          {ButtonContent}
-        </Link>
-      ) : (
-        <a
-          className={classes.linkComponent}
-          {...anchorProps}
-          onClick={handleClick}
-          onKeyUp={handleClick}
-          role="button"
-          tabIndex="0"
-        >
-          {ButtonContent}
-        </a>
-      );
+    const href = hasInteralLink
+      ? getInternalHref({ linkTo, linkToInternalVariable, disabled })
+      : getExternalHref({
+          disabled,
+          linkToExternal,
+          linkToExternalVariable,
+        });
+
+    const LinkComponent = (
+      <a
+        className={classes.linkComponent}
+        data-component={useText(dataComponentAttribute) || 'Button'}
+        href={href}
+        onClick={handleClick}
+        onKeyUp={handleClick}
+        rel={linkTarget === '_blank' ? 'noopener' : ''}
+        role="button"
+        tabIndex="0"
+        target={linkTarget}
+      >
+        {ButtonContent}
+      </a>
+    );
 
     const ButtonElement = (
       <button type="button" className={classes.button} {...buttonProps}>
@@ -274,7 +245,7 @@
       return Button;
     }
 
-    return <div className={classes.wrapper}>{Button}</div>;
+    return <span className={classes.wrapper}>{Button}</span>;
   })(),
   styles: (B) => (t) => {
     const { mediaMinWidth, Styling } = B;
@@ -364,6 +335,12 @@
         border: 'none',
         background: 'transparent',
         padding: 0,
+        width: ({ options: { fullWidth, outerSpacing } }) =>
+          !fullWidth
+            ? 'auto'
+            : `calc(100% - ${getSpacing(outerSpacing[1])} - ${getSpacing(
+                outerSpacing[3],
+              )})`,
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
         marginRight: ({ options: { outerSpacing } }) =>
