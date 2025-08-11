@@ -20,14 +20,6 @@
 * add option to allow vertical resize of the text area ([80cfa04](https://github.com/bettyblocks/material-ui-component-set/commit/80cfa04ede37f087bbe40dedda64049357bb64e9))
 * add useInnerHtml checkbox option and dynamically show HTML content ([4328bba](https://github.com/bettyblocks/material-ui-component-set/commit/4328bbad6c50ceb2736e63242069b0b16e106135))
 
-# [2.219.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.218.1...v2.219.0) (2025-08-11)
-
-
-### Features
-
-* add display logic option to DataTableColumn component ([e4e99ec](https://github.com/bettyblocks/material-ui-component-set/commit/e4e99ec51542641fbc559acb8025327174f26f4c))
-* add option to allow vertical resize of the text area ([80cfa04](https://github.com/bettyblocks/material-ui-component-set/commit/80cfa04ede37f087bbe40dedda64049357bb64e9))
-
 # [2.218.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.218.0...v2.218.1) (2025-08-08)
 
 
