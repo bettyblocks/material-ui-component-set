@@ -1,3 +1,10 @@
+## [2.219.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.219.1...v2.219.2) (2025-08-11)
+
+
+### Bug Fixes
+
+* trigger semantic-release on tag push ([af4494a](https://github.com/bettyblocks/material-ui-component-set/commit/af4494aaff1319c99784f5f7d24a917f4eacc380))
+
 # [2.219.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.218.0...v2.219.0) (2025-08-11)
 
 
