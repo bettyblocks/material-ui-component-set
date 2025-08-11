@@ -1,3 +1,18 @@
+# [2.219.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.218.0...v2.219.0) (2025-08-11)
+
+
+### Bug Fixes
+
+* added innerspacing to the boxes in the dialog ([a20e414](https://github.com/bettyblocks/material-ui-component-set/commit/a20e4149adf569610bdc3a136cc702fae5b32c3f))
+* **changelog:** correct duplicate 2.219.0 entry and add missing 2.218.1 ([3348dbd](https://github.com/bettyblocks/material-ui-component-set/commit/3348dbdcfdd17ab976d9e9f227d49734e8db31cb))
+
+
+### Features
+
+* add display logic option to DataTableColumn component ([e4e99ec](https://github.com/bettyblocks/material-ui-component-set/commit/e4e99ec51542641fbc559acb8025327174f26f4c))
+* add option to allow vertical resize of the text area ([80cfa04](https://github.com/bettyblocks/material-ui-component-set/commit/80cfa04ede37f087bbe40dedda64049357bb64e9))
+* add useInnerHtml checkbox option and dynamically show HTML content ([4328bba](https://github.com/bettyblocks/material-ui-component-set/commit/4328bbad6c50ceb2736e63242069b0b16e106135))
+
 # [2.219.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.218.1...v2.219.0) (2025-08-11)
 
 
