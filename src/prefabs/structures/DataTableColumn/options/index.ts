@@ -7,6 +7,7 @@ import {
   size,
   color,
   ThemeColor,
+  displayLogic,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -15,6 +16,11 @@ export const categories = [
     label: 'Styling',
     expanded: false,
     members: ['horizontalAlignment', 'width', 'background', 'borderColor'],
+  },
+  {
+    label: 'Display logic',
+    expanded: false,
+    members: ['displayLogic'],
   },
   {
     label: 'Advanced Options',
@@ -68,6 +74,9 @@ export const dataTableColumnOptions = {
   }),
   background: color('Background', { value: ThemeColor.TRANSPARENT }),
   borderColor: color('Border color', { value: ThemeColor.LIGHT }),
+  displayLogic: displayLogic('Display logic', {
+    value: {},
+  }),
 
   ...advanced('DataTableColumn'),
 };
