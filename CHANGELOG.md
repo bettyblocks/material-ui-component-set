@@ -1,3 +1,51 @@
+# [2.218.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.217.0...v2.218.0) (2025-08-05)
+
+
+### Bug Fixes
+
+* added innerspacing to the boxes in the dialog ([a20e414](https://github.com/bettyblocks/material-ui-component-set/commit/a20e4149adf569610bdc3a136cc702fae5b32c3f))
+* removed the background alpha ([f815368](https://github.com/bettyblocks/material-ui-component-set/commit/f815368e13693fa83e3e5de07299202d25ac1f05))
+
+
+### Features
+
+* removed the background opacity for the box since it has been replaced by the colorpicker ([450359a](https://github.com/bettyblocks/material-ui-component-set/commit/450359af77b8d8768d43f661b5c3d7a0f9b623a8))
+
+# [2.217.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.216.1...v2.217.0) (2025-07-30)
+
+
+### Bug Fixes
+
+* bump autocomplete take from 20 to 50 ([890318d](https://github.com/bettyblocks/material-ui-component-set/commit/890318d87e48aedcf4a1846e12ab7451ce8e2c66))
+* removed the background alpha ([f815368](https://github.com/bettyblocks/material-ui-component-set/commit/f815368e13693fa83e3e5de07299202d25ac1f05))
+
+
+### Features
+
+* remove zone 7 upload from release pipeline ([02dcc41](https://github.com/bettyblocks/material-ui-component-set/commit/02dcc41c2b8c8e8f68e1d4e96f994640a3e0655d))
+* removed the background opacity for the box since it has been replaced by the colorpicker ([450359a](https://github.com/bettyblocks/material-ui-component-set/commit/450359af77b8d8768d43f661b5c3d7a0f9b623a8))
+
+## [2.216.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.216.0...v2.216.1) (2025-07-10)
+
+
+### Bug Fixes
+
+*  change default filter value format to match filter save ([61a8bc5](https://github.com/bettyblocks/material-ui-component-set/commit/61a8bc5ac386d7fdaf768594c19ddca93cf656b0))
+
+# [2.216.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.215.1...v2.216.0) (2025-07-03)
+
+
+### Features
+
+* trigger interactions on enter key press for better accessibility ([343de09](https://github.com/bettyblocks/material-ui-component-set/commit/343de094e7f6f26e4b79ad674b44d02c3a7a4d6c))
+
+## [2.215.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.215.0...v2.215.1) (2025-06-25)
+
+
+### Bug Fixes
+
+* remove text field from non model based forms ([5f14075](https://github.com/bettyblocks/material-ui-component-set/commit/5f140757a246db014a7d7ff95904f52f75628019))
+
 # [2.215.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.214.1...v2.215.0) (2025-06-18)
 
 
