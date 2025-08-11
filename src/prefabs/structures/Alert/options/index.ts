@@ -22,6 +22,7 @@ export const categories = [
       'iconColor',
       'background',
       'borderColor',
+      'useInnerHtml',
     ],
   },
   {
@@ -76,6 +77,9 @@ export const alertOptions = {
   }),
   borderColor: color('Border color', {
     value: ThemeColor.TRANSPARENT,
+  }),
+  useInnerHtml: toggle('Display Rich Text', {
+    value: false,
   }),
   icon: icon('Icon', {
     value: 'None',
