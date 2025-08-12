@@ -1,3 +1,10 @@
+# [2.220.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.219.2...v2.220.0) (2025-08-12)
+
+
+### Features
+
+* trigger onClick interaction for submit and action button ([d304b20](https://github.com/bettyblocks/material-ui-component-set/commit/d304b20ba48693792310c7d5d92405ba8cda378a))
+
 ## [2.219.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.219.1...v2.219.2) (2025-08-11)
 
 
