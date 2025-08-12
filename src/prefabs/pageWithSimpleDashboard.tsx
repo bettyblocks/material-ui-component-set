@@ -1002,11 +1002,7 @@ export default makePrefab('Dashboard, clean and simple', attrs, beforeCreate, [
                       options: {
                         ...boxOptions,
                         backgroundColor: color('Background color', {
-                          value: ThemeColor.LIGHT,
-                        }),
-                        backgroundColorAlpha: option('NUMBER', {
-                          label: 'Background color opacity',
-                          value: 20,
+                          value: '#cccccc33',
                         }),
                         innerSpacing: sizes('Inner space', {
                           value: ['0rem', '0rem', '0rem', '0rem'],
@@ -2289,15 +2285,9 @@ export default makePrefab('Dashboard, clean and simple', attrs, beforeCreate, [
                                                               'Background color',
                                                               {
                                                                 value:
-                                                                  ThemeColor.PRIMARY,
+                                                                  '#3f51b540',
                                                               },
                                                             ),
-                                                          backgroundColorAlpha:
-                                                            option('NUMBER', {
-                                                              label:
-                                                                'Background color opacity',
-                                                              value: 25,
-                                                            }),
                                                         },
                                                       },
                                                       [
@@ -2917,15 +2907,9 @@ export default makePrefab('Dashboard, clean and simple', attrs, beforeCreate, [
                                                               'Background color',
                                                               {
                                                                 value:
-                                                                  ThemeColor.SUCCESS,
+                                                                  '#8bc34a40',
                                                               },
                                                             ),
-                                                          backgroundColorAlpha:
-                                                            option('NUMBER', {
-                                                              label:
-                                                                'Background color opacity',
-                                                              value: 25,
-                                                            }),
                                                         },
                                                       },
                                                       [
@@ -3544,15 +3528,9 @@ export default makePrefab('Dashboard, clean and simple', attrs, beforeCreate, [
                                                               'Background color',
                                                               {
                                                                 value:
-                                                                  ThemeColor.WARNING,
+                                                                  '#ff980040',
                                                               },
                                                             ),
-                                                          backgroundColorAlpha:
-                                                            option('NUMBER', {
-                                                              label:
-                                                                'Background color opacity',
-                                                              value: 25,
-                                                            }),
                                                         },
                                                       },
                                                       [
@@ -4174,15 +4152,9 @@ export default makePrefab('Dashboard, clean and simple', attrs, beforeCreate, [
                                                               'Background color',
                                                               {
                                                                 value:
-                                                                  ThemeColor.DANGER,
+                                                                  '#f4433640',
                                                               },
                                                             ),
-                                                          backgroundColorAlpha:
-                                                            option('NUMBER', {
-                                                              label:
-                                                                'Background color opacity',
-                                                              value: 25,
-                                                            }),
                                                         },
                                                       },
                                                       [
@@ -4993,11 +4965,7 @@ export default makePrefab('Dashboard, clean and simple', attrs, beforeCreate, [
                       options: {
                         ...boxOptions,
                         backgroundColor: color('Background color', {
-                          value: ThemeColor.LIGHT,
-                        }),
-                        backgroundColorAlpha: option('NUMBER', {
-                          label: 'Background color opacity',
-                          value: 20,
+                          value: '#cccccc33',
                         }),
                         innerSpacing: sizes('Inner space', {
                           value: ['0rem', '0rem', '0rem', '0rem'],
