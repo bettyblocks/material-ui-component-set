@@ -473,6 +473,8 @@
                 '!important',
               ],
             },
+            resize: ({ options: { multiline, resizable } }) =>
+              multiline && resizable ? 'vertical' : 'none',
           },
           '&.Mui-disabled': {
             opacity: '0.7',

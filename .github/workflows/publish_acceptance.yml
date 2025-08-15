@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - acceptance
+    tags:
+      - 'v*'
     paths-ignore:
       - 'CHANGELOG.md'
       - 'package.json'
@@ -16,7 +18,7 @@ jobs:
         with:
           token: ${{ secrets.GH_TOKEN }}
       - uses: actions/setup-node@v3
-        with: 
+        with:
           node-version: 16.14.0
       - name: Install packages
         run: yarn install
