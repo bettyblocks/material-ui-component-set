@@ -1,3 +1,16 @@
+# [2.221.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.220.2...v2.221.0) (2025-08-15)
+
+
+### Bug Fixes
+
+* changed ternary to allow for different icons ([2017f88](https://github.com/bettyblocks/material-ui-component-set/commit/2017f885736fef69cf2ee97d5bc5862a011d69d7))
+* switched eye to match ux/ui ([e24e7d9](https://github.com/bettyblocks/material-ui-component-set/commit/e24e7d9f143681004e1b57336c0b69c8a521d3f0))
+
+
+### Features
+
+* added ability to individually color the icon in inputs ([1e6e91b](https://github.com/bettyblocks/material-ui-component-set/commit/1e6e91bee0f2eefbb77226264f1709b8b9805162))
+
 ## [2.220.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.220.1...v2.220.2) (2025-08-15)
 
 
