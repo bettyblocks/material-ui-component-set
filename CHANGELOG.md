@@ -1,3 +1,52 @@
+# [2.220.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.219.2...v2.220.0) (2025-08-12)
+
+
+### Features
+
+* trigger onClick interaction for submit and action button ([d304b20](https://github.com/bettyblocks/material-ui-component-set/commit/d304b20ba48693792310c7d5d92405ba8cda378a))
+
+## [2.219.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.219.1...v2.219.2) (2025-08-11)
+
+
+### Bug Fixes
+
+* trigger semantic-release on tag push ([af4494a](https://github.com/bettyblocks/material-ui-component-set/commit/af4494aaff1319c99784f5f7d24a917f4eacc380))
+
+# [2.219.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.218.0...v2.219.0) (2025-08-11)
+
+
+### Bug Fixes
+
+* added innerspacing to the boxes in the dialog ([a20e414](https://github.com/bettyblocks/material-ui-component-set/commit/a20e4149adf569610bdc3a136cc702fae5b32c3f))
+* **changelog:** correct duplicate 2.219.0 entry and add missing 2.218.1 ([3348dbd](https://github.com/bettyblocks/material-ui-component-set/commit/3348dbdcfdd17ab976d9e9f227d49734e8db31cb))
+
+
+### Features
+
+* add display logic option to DataTableColumn component ([e4e99ec](https://github.com/bettyblocks/material-ui-component-set/commit/e4e99ec51542641fbc559acb8025327174f26f4c))
+* add option to allow vertical resize of the text area ([80cfa04](https://github.com/bettyblocks/material-ui-component-set/commit/80cfa04ede37f087bbe40dedda64049357bb64e9))
+* add useInnerHtml checkbox option and dynamically show HTML content ([4328bba](https://github.com/bettyblocks/material-ui-component-set/commit/4328bbad6c50ceb2736e63242069b0b16e106135))
+
+# [2.218.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.218.0...v2.218.1) (2025-08-08)
+
+
+### Bug Fixes
+
+* added innerspacing to the boxes in the dialog ([a20e414](https://github.com/bettyblocks/material-ui-component-set/commit/a20e4149adf569610bdc3a136cc702fae5b32c3f))
+
+# [2.218.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.217.0...v2.218.0) (2025-08-05)
+
+
+### Bug Fixes
+
+* added innerspacing to the boxes in the dialog ([a20e414](https://github.com/bettyblocks/material-ui-component-set/commit/a20e4149adf569610bdc3a136cc702fae5b32c3f))
+* removed the background alpha ([f815368](https://github.com/bettyblocks/material-ui-component-set/commit/f815368e13693fa83e3e5de07299202d25ac1f05))
+
+
+### Features
+
+* removed the background opacity for the box since it has been replaced by the colorpicker ([450359a](https://github.com/bettyblocks/material-ui-component-set/commit/450359af77b8d8768d43f661b5c3d7a0f9b623a8))
+
 # [2.217.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.216.1...v2.217.0) (2025-07-30)
 
 
