@@ -712,8 +712,7 @@
     );
   })(),
   styles: (B) => (theme) => {
-    const { env, Styling, mediaMinWidth } = B;
-    const isDev = env === 'dev';
+    const { Styling, mediaMinWidth } = B;
     const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
@@ -758,8 +757,6 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Desktop'),
         },
-        width: ({ options: { width } }) => !isDev && width,
-        height: ({ options: { height } }) => (isDev ? '100%' : height),
         minHeight: 0,
       },
       textFieldHighlight: {
@@ -832,6 +829,8 @@
           style.getColor(backgroundColor),
           '!important',
         ],
+        width: ({ options: { width } }) => width,
+        height: ({ options: { height } }) => height,
       },
       filterInput: {
         width: '33%',
