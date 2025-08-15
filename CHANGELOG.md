@@ -1,3 +1,10 @@
+## [2.220.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.220.1...v2.220.2) (2025-08-15)
+
+
+### Bug Fixes
+
+* allow height and width to be used again ([561c75f](https://github.com/bettyblocks/material-ui-component-set/commit/561c75fdff4ae3ee5d5b58b2e94d47edf810bf44))
+
 ## [2.220.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.220.0...v2.220.1) (2025-08-15)
 
 
