@@ -1,3 +1,10 @@
+## [2.220.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.220.0...v2.220.1) (2025-08-15)
+
+
+### Bug Fixes
+
+* arrow-up-down and scroll events ([d35e2cc](https://github.com/bettyblocks/material-ui-component-set/commit/d35e2cc556687bfe636e72448d7a69dca8b9645a))
+
 # [2.220.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.219.2...v2.220.0) (2025-08-12)
 
 
