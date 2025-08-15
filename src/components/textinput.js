@@ -240,8 +240,14 @@
       InputCmp = FilledInput;
     }
 
-    const passwordIcon = showPassword ? 'Visibility' : 'VisibilityOff';
-    const inputIcon = isPasswordType ? passwordIcon : adornmentIcon;
+    let inputIcon;
+    if (type === 'password') {
+      const passwordIcon = showPassword ? 'VisibilityOff' : 'Visibility';
+      inputIcon = adornmentIcon === 'Visibility' ? passwordIcon : adornmentIcon;
+    } else {
+      inputIcon = adornmentIcon;
+    }
+
     const hasIcon = inputIcon && inputIcon !== 'None';
     const hasAdornment = hasIcon || adornment;
 
@@ -475,8 +481,8 @@
           },
         },
         '& .MuiIconButton-root': {
-          color: ({ options: { textColor } }) => [
-            style.getColor(textColor),
+          color: ({ options: { iconColor } }) => [
+            style.getColor(iconColor),
             '!important',
           ],
         },

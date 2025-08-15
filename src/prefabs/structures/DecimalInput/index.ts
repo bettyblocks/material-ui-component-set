@@ -19,7 +19,11 @@ export const DecimalInput = (
     options.label = updateOption(options.label, { value: [config.inputLabel] });
   }
 
-  if (config.type === 'number') {
+  if (config.type) {
+    options.type = updateOption(options.type, { value: config.type });
+  }
+
+  if (config.inputType === 'number') {
     options.decimalScale = updateOption(options.decimalScale, {
       label: 'Decimal scale',
       value: 0,
