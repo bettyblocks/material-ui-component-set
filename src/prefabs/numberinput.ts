@@ -12,6 +12,6 @@ export default prefab('Number', attributes, undefined, [
     label: 'Number field',
     inputLabel: 'Number',
     inputType: 'number',
-    type: 'number',
+    type: 'decimal',
   }),
 ]);
