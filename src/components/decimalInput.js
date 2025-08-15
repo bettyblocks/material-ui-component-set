@@ -66,13 +66,23 @@
 
     const { env, useText, Icon, generateUUID } = B;
     const isDev = env === 'dev';
+
+    const optionValue = useText(value);
+    const valueMissingMessage = useText(validationValueMissing);
+    const belowMinimumMessage = useText(validationTooLow);
+    const aboveMaximumMessage = useText(validationTooHigh);
+    const placeholderText = useText(placeholder);
+    const helperTextResolved = useText(helperText);
+    const dataComponentAttributeValue = useText(dataComponentAttribute);
+    const adornmentValue = useText(adornment);
+    const labelText = useText(label);
+
     const [isDisabled, setIsDisabled] = useState(disabled);
     const [errorState, setErrorState] = useState(error);
-    const [helper, setHelper] = useState(useText(helperText));
-    const optionValue = useText(value);
+    const [helper, setHelper] = useState(helperTextResolved);
     const [currentValue, setCurrentValue] = useState(optionValue);
     const [rawValue, setRawValue] = usePageState(optionValue);
-    const labelText = useText(label);
+
     const debouncedOnChangeRef = useRef(null);
     const inputRef = useRef();
     const autoNumericRef = useRef(null);
@@ -81,14 +91,6 @@
 
     const validMinvalue = minValue || null;
     const validMaxvalue = maxValue || null;
-
-    const valueMissingMessage = useText(validationValueMissing);
-    const belowMinimumMessage = useText(validationTooLow);
-    const aboveMaximumMessage = useText(validationTooHigh);
-    const placeholderText = useText(placeholder);
-    const helperTextResolved = useText(helperText);
-    const dataComponentAttributeValue = useText(dataComponentAttribute);
-    const adornmentValue = useText(adornment);
 
     const validationMessage = () => {
       let errorMessage = null;
@@ -163,7 +165,15 @@
       }, debounceDelay);
     }
 
-    const handleInputEvent = (event, isBlur = false) => {
+    const handleWheel = () => {
+      setCurrentValue(rawValue);
+    };
+
+    const handleKeyDown = () => {
+      setCurrentValue(rawValue);
+    };
+
+    const handleInputEvent = (_event, isBlur = false) => {
       handleValidation();
 
       if (autoNumericRef.current) {
@@ -250,10 +260,9 @@
 
     useEffect(() => {
       if (isDev) {
-        setCurrentValue(useText(value));
         setHelper(helperTextResolved);
       }
-    }, [isDev, helperTextResolved, value]);
+    }, [helperTextResolved]);
 
     let inputType = type;
     if (type === 'number' && isDev) {
@@ -301,6 +310,8 @@
           onBlur={blurHandler}
           onInvalid={invalidHandler}
           onPaste={handlePaste}
+          onWheel={handleWheel}
+          onKeyDown={handleKeyDown}
           startAdornment={
             hasAdornment &&
             adornmentPosition === 'start' && (
