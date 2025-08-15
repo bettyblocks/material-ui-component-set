@@ -1,3 +1,10 @@
+## [2.221.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.221.0...v2.221.1) (2025-08-15)
+
+
+### Bug Fixes
+
+* correctly reflect helper text value in design time ([b6bf422](https://github.com/bettyblocks/material-ui-component-set/commit/b6bf42202e7a9a2ce9dab7cb231d885bf6e099cc))
+
 # [2.221.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.220.2...v2.221.0) (2025-08-15)
 
 
