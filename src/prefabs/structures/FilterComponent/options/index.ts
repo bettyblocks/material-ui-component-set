@@ -8,46 +8,6 @@ import {
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../advanced';
 
-// export const categories = [
-//   {
-//     label: 'Alignment',
-//     expanded: true,
-//     members: ['alignment', 'valignment', 'stretch'],
-//   },
-//   {
-//     label: 'Styling',
-//     expanded: false,
-//     members: ['innerSpacing', 'outerSpacing', 'transparent', 'height', 'width'],
-//   },
-//   {
-//     label: 'Positioning',
-//     expanded: false,
-//     members: ['position', 'top', 'right', 'bottom', 'left'],
-//   },
-//   {
-//     label: 'Background',
-//     expanded: false,
-//     members: [
-//       'backgroundColor',
-//       'backgroundColorAlpha',
-//       'backgroundUrl',
-//       'backgroundSize',
-//       'backgroundPosition',
-//       'backgroundRepeat',
-//       'backgroundAttachment',
-//       'borderColor',
-//       'borderWidth',
-//       'borderStyle',
-//       'borderRadius',
-//     ],
-//   },
-//   {
-//     label: 'Advanced Options',
-//     expanded: false,
-//     members: ['dataComponentAttribute'],
-//   },
-// ];
-
 export const filterComponentOptions = {
   modelId: model('Model'),
   height: size('Height', {
