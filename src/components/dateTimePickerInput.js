@@ -58,7 +58,7 @@
     const isDev = env === 'dev';
 
     const valueText = useText(value);
-    const optionHelperText = useText(helperText);
+    const helperTextResolved = useText(helperText);
 
     const validationValueMissingText = useText(validationValueMissing);
     const validationInvalidValueText = useText(validationInvalidValue);
@@ -71,9 +71,13 @@
 
     const [selectedDate, setSelectedDate] = usePageState(valueText || null);
     const [errorState, setErrorState] = useState(error);
-    const [currentHelperText, setHelper] = useState(optionHelperText);
+    const [helper, setHelper] = useState(helperTextResolved);
     const [isDisabled, setIsDisabled] = useState(disabled);
     const [isFirstValidation, setIsFirstValidation] = useState(true);
+
+    useEffect(() => {
+      setHelper(helperTextResolved);
+    }, [helperTextResolved]);
 
     B.defineFunction('Clear', () => {
       setIsFirstValidation(true);
@@ -155,7 +159,7 @@
 
     function setValidationMessage(validation) {
       setErrorState(!validation.valid);
-      setHelper(validationMessage(validation) || optionHelperText);
+      setHelper(validationMessage(validation) || helperTextResolved);
     }
 
     const onChangeHandler = (internalDate) => {
@@ -253,7 +257,7 @@
         placeholder={useText(placeholder)}
         label={!hideLabel && useText(label)}
         error={errorState}
-        helperText={currentHelperText}
+        helperText={helper}
         disableToolbar={disableToolbar}
         disablePast={disablePastDates}
         minDate={convertToValidDate(useText(minValue))}
@@ -277,6 +281,7 @@
         autoOk={closeOnSelect}
         variant={variant}
         inputVariant={inputvariant}
+        InputLabelProps={{ shrink: true }}
         InputProps={{
           inputProps: {
             tabIndex: isDev ? -1 : undefined,

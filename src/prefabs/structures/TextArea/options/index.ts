@@ -50,6 +50,7 @@ export const optionsResolver = (
     ...validation,
 
     multiline: toggle('Multiline', { value: true }),
+    resizable: toggle('Resizable height', { value: false }),
     rows: text('Rows', {
       value: '4',
     }),
