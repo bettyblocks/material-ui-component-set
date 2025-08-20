@@ -162,12 +162,34 @@
       setHelper(validationMessage(validation) || helperTextResolved);
     }
 
+    function formatDateForOutput(date, type) {
+      if (!isValidDate(date)) {
+        return null;
+      }
+
+      switch (type) {
+        case 'date': {
+          return DateFns.format(date, 'yyyy-MM-dd');
+        }
+        case 'datetime': {
+          return date.toISOString();
+        }
+        case 'time': {
+          return DateFns.format(date, 'HH:mm:ss');
+        }
+        default:
+          return null;
+      }
+    }
+
     const onChangeHandler = (internalDate) => {
       setSelectedDate(internalDate);
       setIsFirstValidation(false);
 
+      const formattedValue = formatDateForOutput(internalDate, typeComponent);
+
       setTimeout(() => {
-        B.triggerEvent('onChange', internalDate);
+        B.triggerEvent('onChange', formattedValue);
       }, 250);
     };
 
@@ -219,31 +241,24 @@
     }
 
     let DateTimeComponent;
-    let resultValue;
     switch (typeComponent) {
       case 'date': {
         DateTimeComponent = KeyboardDatePicker;
-        resultValue = isValidDate(selectedDate)
-          ? DateFns.format(selectedDate, 'yyyy-MM-dd')
-          : null;
         break;
       }
       case 'datetime': {
         DateTimeComponent = KeyboardDateTimePicker;
-        resultValue = isValidDate(selectedDate)
-          ? selectedDate.toISOString()
-          : null;
-
         break;
       }
       case 'time': {
         DateTimeComponent = KeyboardTimePicker;
-        resultValue = isValidDate(selectedDate)
-          ? DateFns.format(selectedDate, 'HH:mm:ss')
-          : null;
         break;
       }
-      default:
+      default: {
+        throw new Error(
+          `DateTimePickerInput: unknown type: '${typeComponent}'`,
+        );
+      }
     }
 
     const DateTimeCmp = (
@@ -329,7 +344,11 @@
 
     return (
       <MuiPickersUtilsProvider utils={DateFnsUtils} locale={localeMap[locale]}>
-        <input type="hidden" name={name} value={resultValue} />
+        <input
+          type="hidden"
+          name={name}
+          value={formatDateForOutput(selectedDate, typeComponent)}
+        />
         {variant === 'static' ? (
           <div className={classes.static}>{DateTimeCmp}</div>
         ) : (
