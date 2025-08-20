@@ -1,3 +1,44 @@
+# [2.222.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.221.1...v2.222.0) (2025-08-18)
+
+
+### Features
+
+* introduce zone number 20 ([9434e44](https://github.com/bettyblocks/material-ui-component-set/commit/9434e44de56b14eb3f44c7b321cd42134f40f795))
+
+## [2.221.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.221.0...v2.221.1) (2025-08-15)
+
+
+### Bug Fixes
+
+* correctly reflect helper text value in design time ([b6bf422](https://github.com/bettyblocks/material-ui-component-set/commit/b6bf42202e7a9a2ce9dab7cb231d885bf6e099cc))
+
+# [2.221.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.220.2...v2.221.0) (2025-08-15)
+
+
+### Bug Fixes
+
+* changed ternary to allow for different icons ([2017f88](https://github.com/bettyblocks/material-ui-component-set/commit/2017f885736fef69cf2ee97d5bc5862a011d69d7))
+* switched eye to match ux/ui ([e24e7d9](https://github.com/bettyblocks/material-ui-component-set/commit/e24e7d9f143681004e1b57336c0b69c8a521d3f0))
+
+
+### Features
+
+* added ability to individually color the icon in inputs ([1e6e91b](https://github.com/bettyblocks/material-ui-component-set/commit/1e6e91bee0f2eefbb77226264f1709b8b9805162))
+
+## [2.220.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.220.1...v2.220.2) (2025-08-15)
+
+
+### Bug Fixes
+
+* allow height and width to be used again ([561c75f](https://github.com/bettyblocks/material-ui-component-set/commit/561c75fdff4ae3ee5d5b58b2e94d47edf810bf44))
+
+## [2.220.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.220.0...v2.220.1) (2025-08-15)
+
+
+### Bug Fixes
+
+* arrow-up-down and scroll events ([d35e2cc](https://github.com/bettyblocks/material-ui-component-set/commit/d35e2cc556687bfe636e72448d7a69dca8b9645a))
+
 # [2.220.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.219.2...v2.220.0) (2025-08-12)
 
 
@@ -13,6 +54,11 @@
 * trigger semantic-release on tag push ([af4494a](https://github.com/bettyblocks/material-ui-component-set/commit/af4494aaff1319c99784f5f7d24a917f4eacc380))
 
 # [2.219.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.218.0...v2.219.0) (2025-08-11)
+
+
+### Features
+
+* introduce zone number 20 ([9434e44](https://github.com/bettyblocks/material-ui-component-set/commit/9434e44de56b14eb3f44c7b321cd42134f40f795))
 
 
 ### Bug Fixes
