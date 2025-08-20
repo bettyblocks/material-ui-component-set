@@ -240,26 +240,24 @@
       return undefined;
     }
 
-    let DateTimeComponent;
-    switch (typeComponent) {
-      case 'date': {
-        DateTimeComponent = KeyboardDatePicker;
-        break;
-      }
-      case 'datetime': {
-        DateTimeComponent = KeyboardDateTimePicker;
-        break;
-      }
-      case 'time': {
-        DateTimeComponent = KeyboardTimePicker;
-        break;
-      }
-      default: {
-        throw new Error(
-          `DateTimePickerInput: unknown type: '${typeComponent}'`,
-        );
+    function getDateTimeComponent(type) {
+      switch (type) {
+        case 'date': {
+          return KeyboardDatePicker;
+        }
+        case 'datetime': {
+          return KeyboardDateTimePicker;
+        }
+        case 'time': {
+          return KeyboardTimePicker;
+        }
+        default: {
+          return null;
+        }
       }
     }
+
+    const DateTimeComponent = getDateTimeComponent(typeComponent);
 
     const DateTimeCmp = (
       <DateTimeComponent
