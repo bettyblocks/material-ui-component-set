@@ -1,3 +1,10 @@
+## [2.222.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.222.0...v2.222.1) (2025-08-21)
+
+
+### Bug Fixes
+
+* reset dimensions for media component and restricted overflow ([b41c6b4](https://github.com/bettyblocks/material-ui-component-set/commit/b41c6b46790ac6046f77782ce016365d7092ff36))
+
 # [2.222.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.221.1...v2.222.0) (2025-08-18)
 
 
