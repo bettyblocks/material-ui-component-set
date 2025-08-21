@@ -38,7 +38,11 @@
 
       if (!displayLogic) return true;
 
-      const logic = useLogic(displayLogic);
+      // Override the component ID to evaluate display logic in the context of the tab child component
+      // instead of the tabs component, since tabs uses React.Children loops instead of {children}
+      const logic = useLogic(displayLogic, {
+        overrideComponentId: child.props.uuid,
+      });
       return logic;
     });
 
