@@ -1,3 +1,98 @@
+# [2.222.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.221.1...v2.222.0) (2025-08-18)
+
+
+### Features
+
+* introduce zone number 20 ([9434e44](https://github.com/bettyblocks/material-ui-component-set/commit/9434e44de56b14eb3f44c7b321cd42134f40f795))
+
+## [2.221.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.221.0...v2.221.1) (2025-08-15)
+
+
+### Bug Fixes
+
+* correctly reflect helper text value in design time ([b6bf422](https://github.com/bettyblocks/material-ui-component-set/commit/b6bf42202e7a9a2ce9dab7cb231d885bf6e099cc))
+
+# [2.221.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.220.2...v2.221.0) (2025-08-15)
+
+
+### Bug Fixes
+
+* changed ternary to allow for different icons ([2017f88](https://github.com/bettyblocks/material-ui-component-set/commit/2017f885736fef69cf2ee97d5bc5862a011d69d7))
+* switched eye to match ux/ui ([e24e7d9](https://github.com/bettyblocks/material-ui-component-set/commit/e24e7d9f143681004e1b57336c0b69c8a521d3f0))
+
+
+### Features
+
+* added ability to individually color the icon in inputs ([1e6e91b](https://github.com/bettyblocks/material-ui-component-set/commit/1e6e91bee0f2eefbb77226264f1709b8b9805162))
+
+## [2.220.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.220.1...v2.220.2) (2025-08-15)
+
+
+### Bug Fixes
+
+* allow height and width to be used again ([561c75f](https://github.com/bettyblocks/material-ui-component-set/commit/561c75fdff4ae3ee5d5b58b2e94d47edf810bf44))
+
+## [2.220.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.220.0...v2.220.1) (2025-08-15)
+
+
+### Bug Fixes
+
+* arrow-up-down and scroll events ([d35e2cc](https://github.com/bettyblocks/material-ui-component-set/commit/d35e2cc556687bfe636e72448d7a69dca8b9645a))
+
+# [2.220.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.219.2...v2.220.0) (2025-08-12)
+
+
+### Features
+
+* trigger onClick interaction for submit and action button ([d304b20](https://github.com/bettyblocks/material-ui-component-set/commit/d304b20ba48693792310c7d5d92405ba8cda378a))
+
+## [2.219.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.219.1...v2.219.2) (2025-08-11)
+
+
+### Bug Fixes
+
+* trigger semantic-release on tag push ([af4494a](https://github.com/bettyblocks/material-ui-component-set/commit/af4494aaff1319c99784f5f7d24a917f4eacc380))
+
+# [2.219.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.218.0...v2.219.0) (2025-08-11)
+
+
+### Features
+
+* introduce zone number 20 ([9434e44](https://github.com/bettyblocks/material-ui-component-set/commit/9434e44de56b14eb3f44c7b321cd42134f40f795))
+
+
+### Bug Fixes
+
+* added innerspacing to the boxes in the dialog ([a20e414](https://github.com/bettyblocks/material-ui-component-set/commit/a20e4149adf569610bdc3a136cc702fae5b32c3f))
+* **changelog:** correct duplicate 2.219.0 entry and add missing 2.218.1 ([3348dbd](https://github.com/bettyblocks/material-ui-component-set/commit/3348dbdcfdd17ab976d9e9f227d49734e8db31cb))
+
+
+### Features
+
+* add display logic option to DataTableColumn component ([e4e99ec](https://github.com/bettyblocks/material-ui-component-set/commit/e4e99ec51542641fbc559acb8025327174f26f4c))
+* add option to allow vertical resize of the text area ([80cfa04](https://github.com/bettyblocks/material-ui-component-set/commit/80cfa04ede37f087bbe40dedda64049357bb64e9))
+* add useInnerHtml checkbox option and dynamically show HTML content ([4328bba](https://github.com/bettyblocks/material-ui-component-set/commit/4328bbad6c50ceb2736e63242069b0b16e106135))
+
+# [2.218.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.218.0...v2.218.1) (2025-08-08)
+
+
+### Bug Fixes
+
+* added innerspacing to the boxes in the dialog ([a20e414](https://github.com/bettyblocks/material-ui-component-set/commit/a20e4149adf569610bdc3a136cc702fae5b32c3f))
+
+# [2.218.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.217.0...v2.218.0) (2025-08-05)
+
+
+### Bug Fixes
+
+* added innerspacing to the boxes in the dialog ([a20e414](https://github.com/bettyblocks/material-ui-component-set/commit/a20e4149adf569610bdc3a136cc702fae5b32c3f))
+* removed the background alpha ([f815368](https://github.com/bettyblocks/material-ui-component-set/commit/f815368e13693fa83e3e5de07299202d25ac1f05))
+
+
+### Features
+
+* removed the background opacity for the box since it has been replaced by the colorpicker ([450359a](https://github.com/bettyblocks/material-ui-component-set/commit/450359af77b8d8768d43f661b5c3d7a0f9b623a8))
+
 # [2.217.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.216.1...v2.217.0) (2025-07-30)
 
 

@@ -13,6 +13,6 @@ export default prefab('Password', attributes, undefined, [
     inputLabel: 'Password',
     type: 'password',
     inputType: 'password',
-    adornmentIcon: 'VisibilityOff',
+    adornmentIcon: 'Visibility',
   }),
 ]);
