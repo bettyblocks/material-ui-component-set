@@ -1,3 +1,10 @@
+## [2.222.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.222.1...v2.222.2) (2025-08-21)
+
+
+### Bug Fixes
+
+* format internal date value for onChange event ([c683e2b](https://github.com/bettyblocks/material-ui-component-set/commit/c683e2b3d751afa3641410da072c1dcae05df356))
+
 ## [2.222.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.222.0...v2.222.1) (2025-08-21)
 
 
