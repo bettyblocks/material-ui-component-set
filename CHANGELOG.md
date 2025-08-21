@@ -1,3 +1,15 @@
+# [2.223.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.222.2...v2.223.0) (2025-08-21)
+
+
+### Bug Fixes
+
+* override component ID to evaluate display logic in context of tab ([b0a1be3](https://github.com/bettyblocks/material-ui-component-set/commit/b0a1be33d4926e44efd5813dc170dc2f372d123a))
+
+
+### Features
+
+* add display logic option to Tab component ([e8e88ae](https://github.com/bettyblocks/material-ui-component-set/commit/e8e88aec5a211178a71fb344410566c12da04c1c))
+
 ## [2.222.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.222.1...v2.222.2) (2025-08-21)
 
 
