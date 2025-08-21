@@ -134,7 +134,7 @@ export const mediaOptions = {
     },
   }),
   height: size('Height', {
-    value: '',
+    value: '500px',
     configuration: {
       as: 'UNIT',
     },
