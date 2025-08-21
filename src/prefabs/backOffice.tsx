@@ -205,11 +205,7 @@ const detailChildren = [
                   value: ['0rem', '0rem', 'M', '0rem'],
                 }),
                 backgroundColor: color('Background color', {
-                  value: ThemeColor.ACCENT_1,
-                }),
-                backgroundColorAlpha: option('NUMBER', {
-                  label: 'Background color opacity',
-                  value: 20,
+                  value: '#d8d8d833',
                 }),
               },
             },
@@ -1354,13 +1350,9 @@ const drawerContainer = DrawerContainer(
                                       backgroundColor: color(
                                         'Background color',
                                         {
-                                          value: ThemeColor.LIGHT,
+                                          value: '#cccccc33',
                                         },
                                       ),
-                                      backgroundColorAlpha: option('NUMBER', {
-                                        label: 'Background color opacity',
-                                        value: 20,
-                                      }),
                                     },
                                   },
                                   [
@@ -2432,13 +2424,9 @@ const drawerContainer = DrawerContainer(
                                       backgroundColor: color(
                                         'Background color',
                                         {
-                                          value: ThemeColor.LIGHT,
+                                          value: '#cccccc33',
                                         },
                                       ),
-                                      backgroundColorAlpha: option('NUMBER', {
-                                        label: 'Background color opacity',
-                                        value: 20,
-                                      }),
                                     },
                                   },
                                   [
@@ -2793,13 +2781,9 @@ const drawerContainer = DrawerContainer(
                                       backgroundColor: color(
                                         'Background color',
                                         {
-                                          value: ThemeColor.LIGHT,
+                                          value: '#cccccc33',
                                         },
                                       ),
-                                      backgroundColorAlpha: option('NUMBER', {
-                                        label: 'Background color opacity',
-                                        value: 20,
-                                      }),
                                     },
                                   },
                                   [
@@ -3000,11 +2984,7 @@ const drawerContainer = DrawerContainer(
                                     value: ['0rem', '0rem', '0rem', '0rem'],
                                   }),
                                   backgroundColor: color('Background color', {
-                                    value: ThemeColor.LIGHT,
-                                  }),
-                                  backgroundColorAlpha: option('NUMBER', {
-                                    label: 'Background color opacity',
-                                    value: 20,
+                                    value: '#cccccc33',
                                   }),
                                 },
                               },
@@ -5062,11 +5042,7 @@ const drawerContainer = DrawerContainer(
                                     value: ['0rem', '0rem', '0rem', '0rem'],
                                   }),
                                   backgroundColor: color('Background color', {
-                                    value: ThemeColor.LIGHT,
-                                  }),
-                                  backgroundColorAlpha: option('NUMBER', {
-                                    label: 'Background color opacity',
-                                    value: 20,
+                                    value: '#cccccc33',
                                   }),
                                 },
                                 ref: { id: '#footer' },
@@ -5740,15 +5716,7 @@ const beforeCreate = ({
           'backgroundColor',
           (opt: PrefabComponentOption) => ({
             ...opt,
-            value: 'Accent1',
-          }),
-        );
-        setOption(
-          detailComponent,
-          'backgroundColorAlpha',
-          (opt: PrefabComponentOption) => ({
-            ...opt,
-            value: '20',
+            value: 'd8d8d833',
           }),
         );
 

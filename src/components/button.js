@@ -148,6 +148,7 @@
       tabIndex: isDev ? -1 : undefined,
       onClick: (event) => {
         event.stopPropagation();
+        B.triggerEvent('onClick');
         actionCallback();
       },
       role: 'button',
@@ -192,6 +193,14 @@
 
     const handleClick = (e) => {
       e.stopPropagation();
+      B.triggerEvent('onClick');
+    };
+
+    const handleKeyUp = (e) => {
+      if (e.key === 'Enter') {
+        e.stopPropagation();
+        B.triggerEvent('onClick');
+      }
     };
 
     const href = hasInteralLink
@@ -208,7 +217,7 @@
         data-component={useText(dataComponentAttribute) || 'Button'}
         href={href}
         onClick={handleClick}
-        onKeyUp={handleClick}
+        onKeyUp={handleKeyUp}
         rel={linkTarget === '_blank' ? 'noopener' : ''}
         role="button"
         tabIndex="0"
