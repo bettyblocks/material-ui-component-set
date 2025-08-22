@@ -224,7 +224,9 @@ const beforeCreate = ({
 
           const newPrefab = { ...originalPrefab };
 
-          newPrefab.interactions[0].parameters = [
+          newPrefab.interactions.find(
+            ({ name }: { name: string }) => name === 'login',
+          ).parameters = [
             {
               parameter: 'redirectTo',
               pageId: endpoint.pageId,
