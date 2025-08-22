@@ -671,9 +671,11 @@ const beforeCreate = ({
             }
           });
 
-          structure.descendants.push(
-            cloneStructure(BettyPrefabs.SUBMIT_BUTTON),
-          );
+          const submitButton = cloneStructure(BettyPrefabs.SUBMIT_BUTTON);
+          if (submitButton.type === 'COMPONENT') {
+            submitButton.ref = { id: '#submitButtonId' };
+          }
+          structure.descendants.push(submitButton);
 
           setValidationMessage('');
           switch (buttonGroupValue) {
@@ -696,6 +698,24 @@ const beforeCreate = ({
 };
 
 const interactions: PrefabInteraction[] = [
+  {
+    type: InteractionType.Custom,
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#submitButtonId',
+      sourceComponentId: '#formId',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionDone',
+    ref: {
+      targetComponentId: '#submitButtonId',
+      sourceComponentId: '#formId',
+    },
+  },
   {
     type: InteractionType.Custom,
     name: 'Show',
