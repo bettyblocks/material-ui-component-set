@@ -20,8 +20,7 @@
     return {
       root: {
         display: 'flex',
-        'flex-direction': 'column',
-        height: '100%',
+        flexDirection: 'column',
         backgroundColor: '#ffffff',
         fontFamily: 'Roboto, sans-serif',
         textRendering: 'optimizeLegibility',
@@ -32,7 +31,6 @@
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '100%',
         fontSize: 12,
         color: '#666d85',
         textTransform: 'uppercase',
