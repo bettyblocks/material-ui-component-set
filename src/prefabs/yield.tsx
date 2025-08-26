@@ -7,4 +7,4 @@ const attributes = {
   keywords: ['Layout', 'box'],
 };
 
-export default prefab('Yield', attributes, undefined, [Yield({})]);
+export default prefab('Content area', attributes, undefined, [Yield({})]);

@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Yield',
+  name: 'Content area',
   type: 'YIELD_COMPONENT',
   allowedTypes: [],
   orientation: 'VERTICAL',
@@ -12,9 +12,7 @@
             : [classes.root, classes.empty].join(' ')
         }
       >
-        {children.length
-          ? children
-          : 'This is where the content of the page appears.'}
+        {children.length ? children : 'CONTENT AREA'}
       </div>
     );
   })(),
