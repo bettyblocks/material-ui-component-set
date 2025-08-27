@@ -6,11 +6,11 @@
   jsx: (() => {
     return (
       <div
-        className={
+        className={includeStyling(
           children.length
             ? classes.root
-            : [classes.root, classes.empty].join(' ')
-        }
+            : [classes.root, classes.empty].join(' '),
+        )}
       >
         {children.length ? children : 'CONTENT AREA'}
       </div>
@@ -21,6 +21,9 @@
       root: {
         display: 'flex',
         flexDirection: 'column',
+        flex: '1 1 auto',
+        height: '100%',
+        width: '100%',
         backgroundColor: '#ffffff',
         fontFamily: 'Roboto, sans-serif',
         textRendering: 'optimizeLegibility',
@@ -28,7 +31,6 @@
         '-moz-osx-font-smoothing': 'grayscale',
       },
       empty: {
-        display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         fontSize: 12,
