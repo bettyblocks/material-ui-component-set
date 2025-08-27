@@ -1,3 +1,41 @@
+# [2.224.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.223.0...v2.224.0) (2025-08-27)
+
+
+### Bug Fixes
+
+* correctly search for login interaction to set redirect page ([5af0038](https://github.com/bettyblocks/material-ui-component-set/commit/5af003880026d9e450b0f2e5a7b48d9777ec8133))
+
+
+### Features
+
+* add loading state interactions to submit button in form prefabs ([64c8bfd](https://github.com/bettyblocks/material-ui-component-set/commit/64c8bfda0766331a6d464374772b6de33f6b2974))
+
+# [2.223.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.222.2...v2.223.0) (2025-08-21)
+
+
+### Bug Fixes
+
+* override component ID to evaluate display logic in context of tab ([b0a1be3](https://github.com/bettyblocks/material-ui-component-set/commit/b0a1be33d4926e44efd5813dc170dc2f372d123a))
+
+
+### Features
+
+* add display logic option to Tab component ([e8e88ae](https://github.com/bettyblocks/material-ui-component-set/commit/e8e88aec5a211178a71fb344410566c12da04c1c))
+
+## [2.222.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.222.1...v2.222.2) (2025-08-21)
+
+
+### Bug Fixes
+
+* format internal date value for onChange event ([c683e2b](https://github.com/bettyblocks/material-ui-component-set/commit/c683e2b3d751afa3641410da072c1dcae05df356))
+
+## [2.222.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.222.0...v2.222.1) (2025-08-21)
+
+
+### Bug Fixes
+
+* reset dimensions for media component and restricted overflow ([b41c6b4](https://github.com/bettyblocks/material-ui-component-set/commit/b41c6b46790ac6046f77782ce016365d7092ff36))
+
 # [2.222.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.221.1...v2.222.0) (2025-08-18)
 
 
