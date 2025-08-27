@@ -1,3 +1,15 @@
+# [2.224.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.223.0...v2.224.0) (2025-08-27)
+
+
+### Bug Fixes
+
+* correctly search for login interaction to set redirect page ([5af0038](https://github.com/bettyblocks/material-ui-component-set/commit/5af003880026d9e450b0f2e5a7b48d9777ec8133))
+
+
+### Features
+
+* add loading state interactions to submit button in form prefabs ([64c8bfd](https://github.com/bettyblocks/material-ui-component-set/commit/64c8bfda0766331a6d464374772b6de33f6b2974))
+
 # [2.223.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.222.2...v2.223.0) (2025-08-21)
 
 
