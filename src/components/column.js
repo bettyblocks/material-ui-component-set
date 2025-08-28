@@ -53,20 +53,11 @@
 
     return {
       column: {
-        display: ({
-          options: {
-            columnWidthMobile,
-            horizontalAlignment,
-            verticalAlignment,
-          },
-        }) => {
+        display: ({ options: { columnWidthMobile } }) => {
           if (columnWidthMobile === 'hidden') {
             return 'none';
           }
-          return horizontalAlignment === 'inherit' &&
-            verticalAlignment === 'inherit'
-            ? 'block'
-            : 'flex';
+          return 'flex';
         },
         flexDirection: 'column',
         justifyContent: ({ options: { verticalAlignment } }) =>
@@ -126,20 +117,11 @@
         overflow: 'auto',
         boxSizing: 'border-box',
         [`@media ${mediaMinWidth(600)}`]: {
-          display: ({
-            options: {
-              columnWidthTabletPortrait,
-              horizontalAlignment,
-              verticalAlignment,
-            },
-          }) => {
+          display: ({ options: { columnWidthTabletPortrait } }) => {
             if (columnWidthTabletPortrait === 'hidden') {
               return 'none';
             }
-            return horizontalAlignment === 'inherit' &&
-              verticalAlignment === 'inherit'
-              ? 'block'
-              : 'flex';
+            return 'flex';
           },
           flexGrow: ({ options: { columnWidthTabletPortrait } }) =>
             columnWidthTabletPortrait === 'flexible' ? 1 : 0,
@@ -183,20 +165,11 @@
             getSpacing(innerSpacing[3], 'Portrait'),
         },
         [`@media ${mediaMinWidth(960)}`]: {
-          display: ({
-            options: {
-              columnWidthTabletLandscape,
-              horizontalAlignment,
-              verticalAlignment,
-            },
-          }) => {
+          display: ({ options: { columnWidthTabletLandscape } }) => {
             if (columnWidthTabletLandscape === 'hidden') {
               return 'none';
             }
-            return horizontalAlignment === 'inherit' &&
-              verticalAlignment === 'inherit'
-              ? 'block'
-              : 'flex';
+            return 'flex';
           },
           flexGrow: ({ options: { columnWidthTabletLandscape } }) =>
             columnWidthTabletLandscape === 'flexible' ? 1 : 0,
@@ -239,16 +212,11 @@
             getSpacing(innerSpacing[3], 'Landscape'),
         },
         [`@media ${mediaMinWidth(1280)}`]: {
-          display: ({
-            options: { columnWidth, horizontalAlignment, verticalAlignment },
-          }) => {
+          display: ({ options: { columnWidth } }) => {
             if (columnWidth === 'hidden') {
               return 'none';
             }
-            return horizontalAlignment === 'inherit' &&
-              verticalAlignment === 'inherit'
-              ? 'block'
-              : 'flex';
+            return 'flex';
           },
           flexGrow: ({ options: { columnWidth } }) =>
             columnWidth === 'flexible' ? 1 : 0,
