@@ -1,3 +1,10 @@
+## [2.224.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.224.0...v2.224.1) (2025-09-02)
+
+
+### Bug Fixes
+
+* set inner spacing and background color of Box in detail view ([804ce8f](https://github.com/bettyblocks/material-ui-component-set/commit/804ce8fe23116f3a454bcdfa0f16912686d270b9))
+
 # [2.224.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.223.0...v2.224.0) (2025-08-27)
 
 
