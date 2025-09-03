@@ -1,3 +1,10 @@
+## [2.224.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.224.1...v2.224.2) (2025-09-03)
+
+
+### Bug Fixes
+
+* add event to click arguments on button ([abaabb5](https://github.com/bettyblocks/material-ui-component-set/commit/abaabb549fd04a7c16f27847f796d1bedbf32610))
+
 ## [2.224.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.224.0...v2.224.1) (2025-09-02)
 
 
