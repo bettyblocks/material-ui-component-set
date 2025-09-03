@@ -148,7 +148,7 @@
       tabIndex: isDev ? -1 : undefined,
       onClick: (event) => {
         event.stopPropagation();
-        B.triggerEvent('onClick');
+        B.triggerEvent('onClick', event);
         actionCallback();
       },
       role: 'button',
@@ -193,13 +193,13 @@
 
     const handleClick = (e) => {
       e.stopPropagation();
-      B.triggerEvent('onClick');
+      B.triggerEvent('onClick', e);
     };
 
     const handleKeyUp = (e) => {
       if (e.key === 'Enter') {
         e.stopPropagation();
-        B.triggerEvent('onClick');
+        B.triggerEvent('onClick', e);
       }
     };
 
