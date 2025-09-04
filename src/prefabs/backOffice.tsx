@@ -5705,6 +5705,14 @@ const beforeCreate = ({
       if (detailComponent.type === 'COMPONENT') {
         setOption(
           detailComponent,
+          'innerSpacing',
+          (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: ['M', 'M', 'M', 'M'],
+          }),
+        );
+        setOption(
+          detailComponent,
           'outerSpacing',
           (opt: PrefabComponentOption) => ({
             ...opt,
@@ -5716,7 +5724,7 @@ const beforeCreate = ({
           'backgroundColor',
           (opt: PrefabComponentOption) => ({
             ...opt,
-            value: 'd8d8d833',
+            value: '#d8d8d833',
           }),
         );
 
