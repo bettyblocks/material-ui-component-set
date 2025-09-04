@@ -1,3 +1,10 @@
+# [2.225.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.224.2...v2.225.0) (2025-09-04)
+
+
+### Features
+
+* remove zone number 8 ([c57b83c](https://github.com/bettyblocks/material-ui-component-set/commit/c57b83c74365dbe7614969783ce2292a397bbf78))
+
 ## [2.224.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.224.1...v2.224.2) (2025-09-03)
 
 
