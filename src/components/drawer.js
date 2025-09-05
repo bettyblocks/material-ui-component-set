@@ -4,6 +4,7 @@
   allowedTypes: ['DRAWER_SIDEBAR', 'DRAWER_CONTAINER'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
+    const { useMediaQuery, useTheme } = window.MaterialUI.Core;
     const { Children, env, useText } = B;
     const isEmpty = children.length === 0;
     const isPristine = isEmpty && env === 'dev';
@@ -20,10 +21,17 @@
 
     const isTemporary = drawerType === 'temporary';
     const anchor = isTemporary ? temporaryAnchor : persistentAnchor;
+    const belowBreakpoint = useMediaQuery(
+      useTheme().breakpoints.down(breakpoint),
+    );
 
     // Because custom boolean option returns false as a string, do an additonal check
     const componentVisibility =
-      env === 'dev' ? visibility : runTimeVisibility !== 'false';
+      env === 'dev'
+        ? visibility
+        : belowBreakpoint && breakpoint !== 'xs'
+        ? false
+        : runTimeVisibility !== 'false';
 
     const [isOpen, setIsOpen] = useState(componentVisibility);
 
