@@ -591,9 +591,7 @@
                     </span>
                   </button>
                 ) : (
-                  <span
-                    className={[classes.arrow, classes.arrowDisabled].join(' ')}
-                  >
+                  <span className={`${classes.arrow} ${classes.arrowDisabled}`}>
                     <Icon name="ChevronLeft" />
                   </span>
                 )}
@@ -609,9 +607,7 @@
                     </span>
                   </button>
                 ) : (
-                  <span
-                    className={[classes.arrow, classes.arrowDisabled].join(' ')}
-                  >
+                  <span className={`${classes.arrow} ${classes.arrowDisabled}`}>
                     <Icon name="ChevronRight" />
                   </span>
                 )}
