@@ -1,3 +1,24 @@
+# [2.225.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.224.2...v2.225.0) (2025-09-04)
+
+
+### Features
+
+* remove zone number 8 ([c57b83c](https://github.com/bettyblocks/material-ui-component-set/commit/c57b83c74365dbe7614969783ce2292a397bbf78))
+
+## [2.224.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.224.1...v2.224.2) (2025-09-03)
+
+
+### Bug Fixes
+
+* add event to click arguments on button ([abaabb5](https://github.com/bettyblocks/material-ui-component-set/commit/abaabb549fd04a7c16f27847f796d1bedbf32610))
+
+## [2.224.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.224.0...v2.224.1) (2025-09-02)
+
+
+### Bug Fixes
+
+* set inner spacing and background color of Box in detail view ([804ce8f](https://github.com/bettyblocks/material-ui-component-set/commit/804ce8fe23116f3a454bcdfa0f16912686d270b9))
+
 # [2.224.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.223.0...v2.224.0) (2025-08-27)
 
 

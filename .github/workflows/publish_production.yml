@@ -28,11 +28,6 @@ jobs:
       - name: bundle
         run: yarn bundle
 
-      - name: upload zone 8
-        env:
-          AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_8 }}
-          AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_8 }}
-        run: yarn upload
       - name: upload zone 1
         env:
           AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_1 }}
