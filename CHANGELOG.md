@@ -1,3 +1,10 @@
+# [2.226.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.225.0...v2.226.0) (2025-09-09)
+
+
+### Features
+
+* hide drawer sidebar when below breakpoint ([9d87ace](https://github.com/bettyblocks/material-ui-component-set/commit/9d87acea312483e049b832d7bfd6ef8a820799d0))
+
 # [2.225.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.224.2...v2.225.0) (2025-09-04)
 
 
