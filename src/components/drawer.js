@@ -24,14 +24,14 @@
     const belowBreakpoint = useMediaQuery(
       useTheme().breakpoints.down(breakpoint),
     );
+    const breakpointVisibility =
+      belowBreakpoint && breakpoint !== 'xs'
+        ? false
+        : runTimeVisibility !== 'false';
 
     // Because custom boolean option returns false as a string, do an additonal check
     const componentVisibility =
-      env === 'dev'
-        ? visibility
-        : belowBreakpoint && breakpoint !== 'xs'
-        ? false
-        : runTimeVisibility !== 'false';
+      env === 'dev' ? visibility : breakpointVisibility;
 
     const [isOpen, setIsOpen] = useState(componentVisibility);
 
