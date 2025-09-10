@@ -1,3 +1,10 @@
+## [2.226.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.226.0...v2.226.1) (2025-09-10)
+
+
+### Bug Fixes
+
+* icons in pagination datalist ([251e5f6](https://github.com/bettyblocks/material-ui-component-set/commit/251e5f65ee1253ea215e7a9ae8498668eb4b482c))
+
 # [2.226.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.225.0...v2.226.0) (2025-09-09)
 
 
