@@ -733,7 +733,6 @@
           })}
           onChange={(_, newValue) => {
             setValue(newValue || '');
-            setDebouncedCurrentValue(newValue);
           }}
           onInputChange={(event, newValue) => {
             if (!event) {
