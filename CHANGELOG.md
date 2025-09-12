@@ -1,3 +1,10 @@
+## [2.226.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.226.1...v2.226.2) (2025-09-12)
+
+
+### Bug Fixes
+
+* prevent scroll from affecting value of input ([ad35596](https://github.com/bettyblocks/material-ui-component-set/commit/ad35596dc9ec321398af091c783a4147015a181b))
+
 ## [2.226.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.226.0...v2.226.1) (2025-09-10)
 
 
