@@ -302,10 +302,7 @@
           onBlur={blurHandler}
           onInvalid={invalidHandler}
           onPaste={handlePaste}
-          onWheelCapture={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-          }}
+          onWheelCapture={(e) => e.stopPropagation()}
           startAdornment={
             hasAdornment &&
             adornmentPosition === 'start' && (
