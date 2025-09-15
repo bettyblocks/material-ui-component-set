@@ -165,14 +165,6 @@
       }, debounceDelay);
     }
 
-    const handleWheel = () => {
-      setCurrentValue(rawValue);
-    };
-
-    const handleKeyDown = () => {
-      setCurrentValue(rawValue);
-    };
-
     const handleInputEvent = (_event, isBlur = false) => {
       handleValidation();
 
@@ -310,8 +302,7 @@
           onBlur={blurHandler}
           onInvalid={invalidHandler}
           onPaste={handlePaste}
-          onWheel={handleWheel}
-          onKeyDown={handleKeyDown}
+          onWheelCapture={(e) => e.stopPropagation()}
           startAdornment={
             hasAdornment &&
             adornmentPosition === 'start' && (
