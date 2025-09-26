@@ -37,7 +37,7 @@ export const categories = [
   {
     label: 'Advanced Options',
     expanded: false,
-    members: ['dataComponentAttribute'],
+    members: ['renderWhenHidden', 'dataComponentAttribute'],
   },
 ];
 
@@ -189,6 +189,8 @@ export const columnOptions = {
   innerSpacing: sizes('Inner space', {
     value: ['M', 'M', 'M', 'M'],
   }),
-
+  renderWhenHidden: toggle('Render When Column is Hidden', {
+    value: true,
+  }),
   ...advanced('Column'),
 };
