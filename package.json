@@ -50,7 +50,7 @@
     "upload": "bb components publish -b material-ui-component-set",
     "upload-bundle": "bb components publish-bundle -b material-ui-component-set",
     "test": "echo \"Error: no test specified\" && exit 0",
-    "bundle": "npx webpack --config webpack.config.js",
+    "bundle": "bunx webpack --config webpack.config.js",
     "clean": "rm -rf dist/ && rm -rf node_modules/ && rm -rf tmp/"
   },
   "files": [

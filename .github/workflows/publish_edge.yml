@@ -10,20 +10,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v3
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: 20.19.5
+          bun-version: latest
       - name: Install packages
-        run: yarn install
+        run: bun install
 
       - name: build
-        run: yarn build
+        run: bun run build
 
       - name: bundle
-        run: yarn bundle
+        run: bun run bundle
 
       - name: upload
         env:
           AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_EDGE }}
           AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_EDGE }}
-        run: yarn upload
+        run: bun run upload
