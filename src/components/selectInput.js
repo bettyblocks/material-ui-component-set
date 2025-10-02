@@ -73,10 +73,6 @@
 
     const [currentValue, setCurrentValue] = usePageState(resolvedCurrentValue);
 
-    useEffect(() => {
-      setCurrentValue(resolvedCurrentValue);
-    }, [defaultValue]);
-
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
@@ -199,9 +195,6 @@
       B.defineFunction('ResetFilter', () => {
         setInteractionFilter({});
       });
-    }, []);
-
-    useEffect(() => {
       B.defineFunction('Reset', () => setCurrentValue(defaultValue));
     }, []);
 
@@ -248,8 +241,9 @@
     useEffect(() => {
       if (isDev) {
         setCurrentValue(defaultValue);
+        setHelper(helperTextResolved);
       }
-    }, [isDev, defaultValue]);
+    }, [isDev, defaultValue, helperTextResolved]);
 
     let valid = true;
     let message = '';

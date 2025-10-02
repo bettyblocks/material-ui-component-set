@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - acceptance
+    tags:
+      - 'v*'
     paths-ignore:
       - 'CHANGELOG.md'
       - 'package.json'

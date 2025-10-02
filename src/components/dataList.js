@@ -586,20 +586,14 @@
                     type="button"
                     onClick={() => setPage((v) => v - 1)}
                   >
-                    <span
-                      className={[classes.arrow, 'zmdi zmdi-chevron-left'].join(
-                        ' ',
-                      )}
-                    />
+                    <span className={classes.arrow}>
+                      <Icon name="ChevronLeft" />
+                    </span>
                   </button>
                 ) : (
-                  <span
-                    className={[
-                      classes.arrow,
-                      classes.arrowDisabled,
-                      'zmdi zmdi-chevron-left',
-                    ].join(' ')}
-                  />
+                  <span className={`${classes.arrow} ${classes.arrowDisabled}`}>
+                    <Icon name="ChevronLeft" />
+                  </span>
                 )}
                 {(typeof currentPage === 'undefined' ? 1 : currentPage) <
                 totalCount / rowsPerPage ? (
@@ -608,21 +602,14 @@
                     type="button"
                     onClick={() => setPage((v) => v + 1)}
                   >
-                    <span
-                      className={[
-                        classes.arrow,
-                        'zmdi zmdi-chevron-right',
-                      ].join(' ')}
-                    />
+                    <span className={classes.arrow}>
+                      <Icon name="ChevronRight" />
+                    </span>
                   </button>
                 ) : (
-                  <span
-                    className={[
-                      classes.arrow,
-                      classes.arrowDisabled,
-                      'zmdi zmdi-chevron-right',
-                    ].join(' ')}
-                  />
+                  <span className={`${classes.arrow} ${classes.arrowDisabled}`}>
+                    <Icon name="ChevronRight" />
+                  </span>
                 )}
               </div>
             </>
@@ -685,6 +672,9 @@
         cursor: 'pointer',
         '&:active': {
           outline: 'none',
+        },
+        '& $arrow svg': {
+          marginTop: '0.4375rem',
         },
       },
       footer: {

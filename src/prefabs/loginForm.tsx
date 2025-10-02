@@ -218,13 +218,15 @@ const beforeCreate = ({
             return console.warn('PropertyKind not found');
           });
 
-          structure.descendants.push(
-            cloneStructure(BettyPrefabs.SUBMIT_BUTTON),
-          );
+          const submitButton = cloneStructure(BettyPrefabs.SUBMIT_BUTTON);
+          submitButton.ref = { id: '#submitButtonId' };
+          structure.descendants.push(submitButton);
 
           const newPrefab = { ...originalPrefab };
 
-          newPrefab.interactions[0].parameters = [
+          newPrefab.interactions.find(
+            ({ name }: { name: string }) => name === 'login',
+          ).parameters = [
             {
               parameter: 'redirectTo',
               pageId: endpoint.pageId,
@@ -258,6 +260,24 @@ const beforeCreate = ({
 };
 
 const interactions: PrefabInteraction[] = [
+  {
+    type: InteractionType.Custom,
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#submitButtonId',
+      sourceComponentId: '#formId',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Toggle loading state',
+    sourceEvent: 'onActionDone',
+    ref: {
+      targetComponentId: '#submitButtonId',
+      sourceComponentId: '#formId',
+    },
+  },
   {
     type: InteractionType.Global,
     name: 'login',
