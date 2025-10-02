@@ -6,16 +6,16 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v3
-      with: 
-        node-version: 16.14.0
-    - name: Install packages
-      run: yarn install
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20.19.5
+      - name: Install packages
+        run: yarn install
 
-    - name: Lint
-      run: yarn lint:ci
-    - name: Build test
-      run: |
-        yarn bundle
-        yarn build
+      - name: Lint
+        run: yarn lint:ci
+      - name: Build test
+        run: |
+          yarn bundle
+          yarn build
