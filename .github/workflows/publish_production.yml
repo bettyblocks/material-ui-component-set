@@ -28,11 +28,6 @@ jobs:
       - name: bundle
         run: bun run bundle
 
-      - name: upload zone 8
-        env:
-          AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_8 }}
-          AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_8 }}
-        run: bun run upload
       - name: upload zone 1
         env:
           AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_1 }}
@@ -130,6 +125,15 @@ jobs:
         env:
           AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_19 }}
           AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_19 }}
+        run: bun run upload
+      - name: release notes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: bunx semantic-release
+      - name: upload zone 20
+        env:
+          AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_20 }}
+          AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_20 }}
         run: bun run upload
       - name: release notes
         env:
