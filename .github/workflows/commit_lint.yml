@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v3
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: 20.19.5
+          bun-version: latest
       - name: Install packages
-        run: yarn install
+        run: bun install
 
       - name: Commit linter
-        run: npx commitlint --from $(git rev-parse --short HEAD^1) --to $(git rev-parse --short HEAD^2)
+        run: bunx commitlint --from $(git rev-parse --short HEAD^1) --to $(git rev-parse --short HEAD^2)
