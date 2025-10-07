@@ -1218,7 +1218,7 @@ const beforeCreate = ({
                         prefabName,
                         modelProp,
                         prop,
-                        vari,
+                        vari as any,
                       );
                       if (inputPrefab.type === 'COMPONENT') {
                         setOption(

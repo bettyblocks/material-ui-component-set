@@ -10,7 +10,7 @@ This repository contains both the component set and the required Material-UI lib
 
 If the Material-UI dependency is not yet installed in your application do this, clone this repository and run:
 
-`$ yarn bundle`
+`$ bun run bundle`
 
 This generates a `bundle.js` file in the `dist` folder containing the Material-UI library. When it's finished, follow the next tutorial to upload this file to your bettyblocks application.
 
@@ -24,11 +24,11 @@ https://github.com/bettyblocks/cli/wiki/Usage#start-the-development-server
 
 To build & run the component set locally:
 
-- Run `yarn` to install the dependencies
-- Run `yarn build` to build the component set
-- Run `yarn start` to serve the component set on port `5002`
+- Run `bun i` to install the dependencies
+- Run `bun run build` to build the component set
+- Run `bun run start` to serve the component set on port `5002`
 
-> Note: If you encounter node type errors when running `yarn build`, try re-cloning the repo to see if the issue persists.
+> Note: If you encounter node type errors when running `bun build`, try re-cloning the repo to see if the issue persists.
 
 ## Our workflow
 
