@@ -1,3 +1,20 @@
+# [3.0.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.226.2...v3.0.0) (2025-10-07)
+
+
+### Bug Fixes
+
+* bump node types to fix build errors with bun ([8b6bc73](https://github.com/bettyblocks/material-ui-component-set/commit/8b6bc730f4265f681b60469055eeb8b66da29222))
+
+
+### Features
+
+* use bun as package manager ([0562e0e](https://github.com/bettyblocks/material-ui-component-set/commit/0562e0e739b28d8c3d5fab93869d41cb61127342))
+
+
+### BREAKING CHANGES
+
+* now requires bun instead of yarn
+
 ## [2.226.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.226.1...v2.226.2) (2025-09-12)
 
 
