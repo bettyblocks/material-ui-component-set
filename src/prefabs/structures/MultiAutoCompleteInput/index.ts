@@ -61,12 +61,6 @@ export const MultiAutocomplete = (
     options.label = updateOption(options.label, { value: [config.inputLabel] });
   }
 
-  if (config.adornmentIcon) {
-    options.adornmentIcon = updateOption(options.adornmentIcon, {
-      value: config.adornmentIcon,
-    });
-  }
-
   return component(
     'Multi Autocomplete',
     {

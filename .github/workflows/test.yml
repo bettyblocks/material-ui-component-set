@@ -6,16 +6,16 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v3
-      with: 
-        node-version: 16.14.0
-    - name: Install packages
-      run: yarn install
+      - uses: actions/checkout@v2
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install packages
+        run: bun install
 
-    - name: Lint
-      run: yarn lint:ci
-    - name: Build test
-      run: |
-        yarn bundle
-        yarn build
+      - name: Lint
+        run: bun run lint:ci
+      - name: Build test
+        run: |
+          bun run bundle
+          bun run build

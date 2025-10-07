@@ -52,12 +52,6 @@ export const AutocompleteInput = (
     options.label = updateOption(options.label, { value: [config.inputLabel] });
   }
 
-  if (config.adornmentIcon) {
-    options.adornmentIcon = updateOption(options.adornmentIcon, {
-      value: config.adornmentIcon,
-    });
-  }
-
   return component(
     'AutocompleteInput',
     {
