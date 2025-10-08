@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.0.0...v3.0.1) (2025-10-08)
+
+
+### Bug Fixes
+
+* prevent scroll in decimal input ([56e0ba9](https://github.com/bettyblocks/material-ui-component-set/commit/56e0ba98404ec2c213cd7de8dd2d48ddc0b3a83b))
+
 # [3.0.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.226.2...v3.0.0) (2025-10-07)
 
 

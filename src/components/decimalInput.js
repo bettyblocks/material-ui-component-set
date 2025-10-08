@@ -126,6 +126,7 @@
     useEffect(() => {
       const autoNumericInstance = new AutoNumeric(inputRef.current, {
         decimalPlaces: decimalScale,
+        modifyValueOnWheel: false,
         decimalCharacter: separator,
         digitGroupSeparator: showGroupSeparator ? getSeparator() : '',
         formatOnPageLoad: true,
@@ -302,7 +303,6 @@
           onBlur={blurHandler}
           onInvalid={invalidHandler}
           onPaste={handlePaste}
-          onWheelCapture={(e) => e.stopPropagation()}
           startAdornment={
             hasAdornment &&
             adornmentPosition === 'start' && (
