@@ -1,16 +1,15 @@
 {
   "name": "component-set",
-  "version": "2.226.2",
+  "version": "3.0.0",
   "main": "dist/templates.json",
   "license": "UNLICENSED",
   "private": false,
   "devDependencies": {
-    "@betty-blocks/cli": "^25.108.0",
+    "@betty-blocks/cli": "26.0.0",
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-angular": "^16.0.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
-    "@types/node": "^17.0.10",
     "@typescript-eslint/eslint-plugin": "^5.21.0",
     "@typescript-eslint/parser": "^5.21.0",
     "eslint": "^8.3.0",
@@ -31,7 +30,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint",
+      "pre-commit": "bun lint",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
@@ -44,14 +43,15 @@
     "dev": "nodemon",
     "dev:fast": "nodemon --config nodemonfast.json",
     "lint": "eslint --ext .js,.ts,.tsx ./src",
-    "lint:ci": "yarn lint --max-warnings 0",
+    "lint:ci": "bun lint --max-warnings 0",
     "prettier:base": "prettier --single-quote",
-    "prettier:check": "yarn prettier:base --list-different \"src/**/*.js\"",
-    "prettier:write": "yarn prettier:base --write \"src/**/*.js\"",
+    "prettier:check": "bun prettier:base --list-different \"src/**/*.js\"",
+    "prettier:write": "bun prettier:base --write \"src/**/*.js\"",
     "upload": "bb components publish -b material-ui-component-set",
     "upload-bundle": "bb components publish-bundle -b material-ui-component-set",
     "test": "echo \"Error: no test specified\" && exit 0",
-    "bundle": "npx webpack --config webpack.config.js"
+    "bundle": "bunx webpack --config webpack.config.js",
+    "clean": "rm -rf dist/ && rm -rf node_modules/ && rm -rf tmp/"
   },
   "files": [
     "dist"
@@ -71,5 +71,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/bettyblocks/material-ui-component-set.git"
+  },
+  "resolutions": {
+    "@types/react": "16.14.34"
   }
 }
