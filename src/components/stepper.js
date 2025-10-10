@@ -303,6 +303,7 @@
       },
       stepButton: {
         pointerEvents: isDev && 'none',
+        textAlign: 'left',
       },
       mobileRoot: {
         backgroundColor: ({ options: { backgroundColor } }) => [
