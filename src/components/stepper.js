@@ -303,7 +303,8 @@
       },
       stepButton: {
         pointerEvents: isDev && 'none',
-        textAlign: ({ options: { type } }) => type === 'vertical' && 'left',
+        textAlign: ({ options: { type } }) =>
+          type === 'vertical' ? 'left' : undefined,
       },
       mobileRoot: {
         backgroundColor: ({ options: { backgroundColor } }) => [
