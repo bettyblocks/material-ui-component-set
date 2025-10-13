@@ -1,3 +1,11 @@
+## [3.0.2](https://github.com/bettyblocks/material-ui-component-set/compare/v3.0.1...v3.0.2) (2025-10-13)
+
+
+### Bug Fixes
+
+* align step label to the left for vertical stepper ([e535d7a](https://github.com/bettyblocks/material-ui-component-set/commit/e535d7a30b3df25ac128961b3c1025957e68479b))
+* align step label to the left for vertical stepper ([e9edd76](https://github.com/bettyblocks/material-ui-component-set/commit/e9edd7690a0a06446eada9b465302ac327d62081))
+
 ## [3.0.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.0.0...v3.0.1) (2025-10-08)
 
 
