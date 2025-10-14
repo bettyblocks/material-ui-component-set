@@ -126,6 +126,7 @@
     useEffect(() => {
       const autoNumericInstance = new AutoNumeric(inputRef.current, {
         decimalPlaces: decimalScale,
+        modifyValueOnWheel: false,
         decimalCharacter: separator,
         digitGroupSeparator: showGroupSeparator ? getSeparator() : '',
         formatOnPageLoad: true,
@@ -164,14 +165,6 @@
         }
       }, debounceDelay);
     }
-
-    const handleWheel = () => {
-      setCurrentValue(rawValue);
-    };
-
-    const handleKeyDown = () => {
-      setCurrentValue(rawValue);
-    };
 
     const handleInputEvent = (_event, isBlur = false) => {
       handleValidation();
@@ -310,8 +303,6 @@
           onBlur={blurHandler}
           onInvalid={invalidHandler}
           onPaste={handlePaste}
-          onWheel={handleWheel}
-          onKeyDown={handleKeyDown}
           startAdornment={
             hasAdornment &&
             adornmentPosition === 'start' && (

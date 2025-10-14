@@ -1,3 +1,56 @@
+## [3.0.2](https://github.com/bettyblocks/material-ui-component-set/compare/v3.0.1...v3.0.2) (2025-10-13)
+
+
+### Bug Fixes
+
+* align step label to the left for vertical stepper ([e535d7a](https://github.com/bettyblocks/material-ui-component-set/commit/e535d7a30b3df25ac128961b3c1025957e68479b))
+* align step label to the left for vertical stepper ([e9edd76](https://github.com/bettyblocks/material-ui-component-set/commit/e9edd7690a0a06446eada9b465302ac327d62081))
+
+## [3.0.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.0.0...v3.0.1) (2025-10-08)
+
+
+### Bug Fixes
+
+* prevent scroll in decimal input ([56e0ba9](https://github.com/bettyblocks/material-ui-component-set/commit/56e0ba98404ec2c213cd7de8dd2d48ddc0b3a83b))
+
+# [3.0.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.226.2...v3.0.0) (2025-10-07)
+
+
+### Bug Fixes
+
+* bump node types to fix build errors with bun ([8b6bc73](https://github.com/bettyblocks/material-ui-component-set/commit/8b6bc730f4265f681b60469055eeb8b66da29222))
+
+
+### Features
+
+* use bun as package manager ([0562e0e](https://github.com/bettyblocks/material-ui-component-set/commit/0562e0e739b28d8c3d5fab93869d41cb61127342))
+
+
+### BREAKING CHANGES
+
+* now requires bun instead of yarn
+
+## [2.226.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.226.1...v2.226.2) (2025-09-12)
+
+
+### Bug Fixes
+
+* prevent scroll from affecting value of input ([ad35596](https://github.com/bettyblocks/material-ui-component-set/commit/ad35596dc9ec321398af091c783a4147015a181b))
+
+## [2.226.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.226.0...v2.226.1) (2025-09-10)
+
+
+### Bug Fixes
+
+* icons in pagination datalist ([251e5f6](https://github.com/bettyblocks/material-ui-component-set/commit/251e5f65ee1253ea215e7a9ae8498668eb4b482c))
+
+# [2.226.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.225.0...v2.226.0) (2025-09-09)
+
+
+### Features
+
+* hide drawer sidebar when below breakpoint ([9d87ace](https://github.com/bettyblocks/material-ui-component-set/commit/9d87acea312483e049b832d7bfd6ef8a820799d0))
+
 # [2.225.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.224.2...v2.225.0) (2025-09-04)
 
 

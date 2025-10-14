@@ -8,17 +8,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v3
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: 16.14.0
+          bun-version: latest
       - name: Install packages
-        run: yarn
+        run: bun install
 
       - name: bundle
-        run: yarn bundle
+        run: bun run bundle
 
       - name: upload
         env:
           AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_EDGE }}
           AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_EDGE }}
-        run: yarn upload-bundle
+        run: bun run upload-bundle
