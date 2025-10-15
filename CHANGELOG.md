@@ -1,3 +1,10 @@
+## [3.0.3](https://github.com/bettyblocks/material-ui-component-set/compare/v3.0.2...v3.0.3) (2025-10-15)
+
+
+### Bug Fixes
+
+* handle set rebounced value via useEffect. Prevents clear value reset on first change ([3c01eb1](https://github.com/bettyblocks/material-ui-component-set/commit/3c01eb18eb21c572eedcd0e6d9417c06af62617b))
+
 ## [3.0.2](https://github.com/bettyblocks/material-ui-component-set/compare/v3.0.1...v3.0.2) (2025-10-13)
 
 
