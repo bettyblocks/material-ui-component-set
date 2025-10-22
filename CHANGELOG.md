@@ -1,3 +1,10 @@
+## [3.0.4](https://github.com/bettyblocks/material-ui-component-set/compare/v3.0.3...v3.0.4) (2025-10-22)
+
+
+### Bug Fixes
+
+* rename Decimal to DecimalInput to fix component reload ([99d7f63](https://github.com/bettyblocks/material-ui-component-set/commit/99d7f63b16be02a7ab822546a8a807c964ff22df))
+
 ## [3.0.3](https://github.com/bettyblocks/material-ui-component-set/compare/v3.0.2...v3.0.3) (2025-10-15)
 
 
