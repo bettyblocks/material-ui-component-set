@@ -7,7 +7,7 @@ const attributes = {
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Decimal', attributes, undefined, [
+export default prefab('DecimalInput', attributes, undefined, [
   DecimalInput({
     label: 'Decimal field',
     inputLabel: 'Decimal',
