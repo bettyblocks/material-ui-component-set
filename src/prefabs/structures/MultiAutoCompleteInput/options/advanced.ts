@@ -1,4 +1,9 @@
-import { buttongroup, showIf, variable, option } from '@betty-blocks/component-sdk';
+import {
+  buttongroup,
+  showIf,
+  variable,
+  option,
+} from '@betty-blocks/component-sdk';
 
 export const advanced = {
   errorType: buttongroup(
