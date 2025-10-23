@@ -48,6 +48,7 @@
       property,
       required: defaultRequired,
       size,
+      take,
       type,
       validationBelowMinimum = [''],
       validationPatternMismatch = [''],
@@ -469,7 +470,7 @@
     } = useAllQuery(
       modelId,
       {
-        take: 50,
+        take,
         rawFilter: mergeFilters(filter, resolvedExternalFiltersObject),
         variables: {
           sort,
