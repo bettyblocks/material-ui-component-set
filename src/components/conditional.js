@@ -84,9 +84,7 @@
       } else {
         B.triggerEvent('isFalse', false);
       }
-      if (mounted.current) {
-        B.triggerEvent('onChange', visible);
-      }
+      B.triggerEvent('onChange', visible);
     }, [visible]);
 
     useEffect(() => {
