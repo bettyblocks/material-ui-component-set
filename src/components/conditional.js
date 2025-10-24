@@ -78,6 +78,7 @@
     }, [checkCondition]);
 
     useEffect(() => {
+      if (!mounted.current) return;
       if (visible) {
         B.triggerEvent('isTrue', true);
       } else {
