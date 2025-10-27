@@ -35,6 +35,8 @@
     const logic = useLogic(displayLogic);
 
     const evalCondition = () => {
+      if (!isSingleRule) return logic;
+
       if (!initVisibility && leftValue === '' && rightValue === '') {
         return false;
       }
