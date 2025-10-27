@@ -5,6 +5,13 @@
 
 * declare defined functions when conditional is mounted ([a6bd82a](https://github.com/bettyblocks/material-ui-component-set/commit/a6bd82a851b5ad15da14c9222886d7eeb38e5bf7))
 
+## [3.0.5](https://github.com/bettyblocks/material-ui-component-set/compare/v3.0.4...v3.0.5) (2025-10-27)
+
+
+### Bug Fixes
+
+* declare defined functions when conditional is mounted ([a6bd82a](https://github.com/bettyblocks/material-ui-component-set/commit/a6bd82a851b5ad15da14c9222886d7eeb38e5bf7))
+
 ## [3.0.4](https://github.com/bettyblocks/material-ui-component-set/compare/v3.0.3...v3.0.4) (2025-10-22)
 
 
