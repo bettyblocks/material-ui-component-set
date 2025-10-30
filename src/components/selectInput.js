@@ -25,6 +25,7 @@
       property,
       required,
       size,
+      take,
       validationValueMissing = [''],
       value: prefabValue,
       variant,
@@ -154,7 +155,7 @@
       referenceModelId || modelId,
       {
         filter: completeFilter,
-        take: 50,
+        take,
         variables: {
           ...(orderBy.id ? { sort: { relation: sort } } : {}),
         },

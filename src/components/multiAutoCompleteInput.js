@@ -57,6 +57,7 @@
       required,
       showError,
       size,
+      take,
       type,
       validationBelowMinimum = [''],
       validationPatternMismatch = [''],
@@ -396,7 +397,7 @@
       // use contextModelId when selecting a relation in the model option
       contextModelId || model,
       {
-        take: 50,
+        take,
         rawFilter: mergeFilters(valueFilter, initialValueFilter),
         variables: {},
         onCompleted(res) {
@@ -557,7 +558,7 @@
     } = useAllQuery(
       property ? modelProperty.referenceModelId : modelId,
       {
-        take: 50,
+        take,
         rawFilter: mergeFilters(optionFilter, resolvedExternalFiltersObject),
         variables: {
           sort,

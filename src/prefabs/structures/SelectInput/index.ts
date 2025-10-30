@@ -38,7 +38,7 @@ export const SelectInput = (
     {
       label: 'Advanced Options',
       expanded: false,
-      members: ['dataComponentAttribute'],
+      members: ['take', 'dataComponentAttribute'],
     },
   ];
 
