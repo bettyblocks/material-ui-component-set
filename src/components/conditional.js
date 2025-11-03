@@ -96,19 +96,23 @@
       };
     }, []);
 
-    B.defineFunction('Hide', () => setVisible(false));
-    B.defineFunction('Show', () => setVisible(true));
-    B.defineFunction('Show/Hide', () => setVisible((s) => !s));
-    B.defineFunction('Set Visibility', (value) => {
-      if (typeof value === 'boolean') setVisible(value);
-    });
-
     const getValue = (evt) => {
       const value = (evt && evt.target && evt.target.value) || evt;
       return `${value}`;
     };
-    B.defineFunction('Set Left Value', (evt) => setLeftValue(getValue(evt)));
-    B.defineFunction('Set Right Value', (evt) => setRightValue(getValue(evt)));
+
+    useEffect(() => {
+      B.defineFunction('Hide', () => setVisible(false));
+      B.defineFunction('Show', () => setVisible(true));
+      B.defineFunction('Show/Hide', () => setVisible((s) => !s));
+      B.defineFunction('Set Visibility', (value) => {
+        if (typeof value === 'boolean') setVisible(value);
+      });
+      B.defineFunction('Set Left Value', (evt) => setLeftValue(getValue(evt)));
+      B.defineFunction('Set Right Value', (evt) =>
+        setRightValue(getValue(evt)),
+      );
+    }, []);
 
     if (isSingleRule && !isDev && !visible) {
       return <></>;

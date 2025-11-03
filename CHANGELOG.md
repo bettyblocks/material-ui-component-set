@@ -1,3 +1,29 @@
+# [3.1.0](https://github.com/bettyblocks/material-ui-component-set/compare/v3.0.4...v3.1.0) (2025-10-30)
+
+
+### Bug Fixes
+
+* declare defined functions when conditional is mounted ([a6bd82a](https://github.com/bettyblocks/material-ui-component-set/commit/a6bd82a851b5ad15da14c9222886d7eeb38e5bf7))
+
+
+### Features
+
+* configurable number of items to load in advanced options PFR-1066 ([4b8c991](https://github.com/bettyblocks/material-ui-component-set/commit/4b8c9916a83f9fb0b811e5702a79e5afe5f88f1f))
+
+## [3.0.5](https://github.com/bettyblocks/material-ui-component-set/compare/v3.0.4...v3.0.5) (2025-10-27)
+
+
+### Bug Fixes
+
+* declare defined functions when conditional is mounted ([a6bd82a](https://github.com/bettyblocks/material-ui-component-set/commit/a6bd82a851b5ad15da14c9222886d7eeb38e5bf7))
+
+## [3.0.4](https://github.com/bettyblocks/material-ui-component-set/compare/v3.0.3...v3.0.4) (2025-10-22)
+
+
+### Bug Fixes
+
+* rename Decimal to DecimalInput to fix component reload ([99d7f63](https://github.com/bettyblocks/material-ui-component-set/commit/99d7f63b16be02a7ab822546a8a807c964ff22df))
+
 ## [3.0.3](https://github.com/bettyblocks/material-ui-component-set/compare/v3.0.2...v3.0.3) (2025-10-15)
 
 

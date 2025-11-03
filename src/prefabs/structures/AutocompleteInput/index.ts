@@ -40,7 +40,7 @@ export const AutocompleteInput = (
     {
       label: 'Advanced Options',
       expanded: false,
-      members: ['errorType', 'nameAttribute', 'dataComponentAttribute'],
+      members: ['errorType', 'nameAttribute', 'take', 'dataComponentAttribute'],
     },
   ];
 
