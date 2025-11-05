@@ -82,7 +82,7 @@ export const dataContainerOptions = {
     },
   }),
   waitForRequest: toggle('Only render children when data is present', {
-    value: false,
+    value: true,
   }),
 
   ...advanced,
