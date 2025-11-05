@@ -35,6 +35,8 @@
     const logic = useLogic(displayLogic);
 
     const evalCondition = () => {
+      if (!isSingleRule) return logic;
+
       if (!initVisibility && leftValue === '' && rightValue === '') {
         return false;
       }
@@ -78,14 +80,13 @@
     }, [checkCondition]);
 
     useEffect(() => {
+      if (!mounted.current) return;
       if (visible) {
         B.triggerEvent('isTrue', true);
       } else {
         B.triggerEvent('isFalse', false);
       }
-      if (mounted.current) {
-        B.triggerEvent('onChange', visible);
-      }
+      B.triggerEvent('onChange', visible);
     }, [visible]);
 
     useEffect(() => {
