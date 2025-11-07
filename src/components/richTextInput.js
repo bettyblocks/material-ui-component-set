@@ -539,7 +539,8 @@
             type: 'paragraph',
           });
         }
-        return;
+          event.preventDefault();
+          editor.insertText('\n\n');
       }
 
       if (event.key === 'Tab') {
