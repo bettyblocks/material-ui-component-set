@@ -539,9 +539,8 @@
             type: 'paragraph',
           });
         }
-        event.preventDefault();
-        editor.insertText('\n\n');
-      }
+        return;
+      }ß
 
       if (event.key === 'Tab') {
         event.preventDefault();
