@@ -1,3 +1,10 @@
+## [3.1.2](https://github.com/bettyblocks/material-ui-component-set/compare/v3.1.1...v3.1.2) (2025-11-12)
+
+
+### Bug Fixes
+
+* add jenv to release flow ([ea33c6a](https://github.com/bettyblocks/material-ui-component-set/commit/ea33c6aa41088d9e641886ce3b93a1265c7d6640))
+
 ## [3.1.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.1.0...v3.1.1) (2025-11-03)
 
 
