@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/bettyblocks/material-ui-component-set/compare/v3.1.2...v3.2.0) (2025-11-13)
+
+
+### Features
+
+* set option to true for render children ([fc3a5e9](https://github.com/bettyblocks/material-ui-component-set/commit/fc3a5e9a185551000f790810e1b3a28ff3aac4a5))
+
 ## [3.1.2](https://github.com/bettyblocks/material-ui-component-set/compare/v3.1.1...v3.1.2) (2025-11-12)
 
 
