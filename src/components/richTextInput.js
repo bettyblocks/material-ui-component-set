@@ -116,8 +116,6 @@
     const [valueKey, setValueKey] = useState(0);
     const labelText = useText(label);
     const [showDropdown, setShowDropdown] = useState(false);
-    const [multipleStyles, setMultipleStyles] = useState(false);
-    const [activeStyleName, setActiveStyleName] = useState('Body 1');
     const placeholderText = useText(placeholder);
     const helperTextResolved = useText(helperText);
     const { current: labelControlRef } = useRef(generateUUID());
@@ -243,6 +241,7 @@
     const serialize = (node) => {
       if (Text.isText(node)) {
         let string = node.text;
+        string = string.replace(/\n/g, '<br>');
         if (node.bold) {
           string = `<b>${string}</b>`;
         }
@@ -368,7 +367,27 @@
       }
 
       if (el.nodeName === 'BODY') {
-        children = jsx('element', nodeAttributes, children);
+        const childrenArray = Array.isArray(children) ? children : [children];
+        const paragraphAttrs = ELEMENT_TAGS.P(el);
+
+        // Handle empty BODY
+        if (childrenArray.length === 0) {
+          children = [jsx('element', paragraphAttrs, [jsx('text', {}, '')])];
+          return jsx('fragment', {}, children);
+        }
+
+        // Wrap any text nodes in paragraphs, keep block elements as is
+        const hasTextNodes = childrenArray.some((child) => Text.isText(child));
+        if (hasTextNodes) {
+          children = childrenArray.map((child) =>
+            Text.isText(child)
+              ? jsx('element', paragraphAttrs, [child])
+              : child,
+          );
+        } else {
+          children = childrenArray;
+        }
+
         return jsx('fragment', {}, children);
       }
 
@@ -410,24 +429,27 @@
       return <span {...attributes}>{children}</span>;
     }
 
-    const checkMultipleStyles = (value) => {
-      const diverseStyle = value.filter(({ type }) => type !== value[0].type);
-      return diverseStyle.length > 0;
-    };
-
-    const onChangeHandler = (value) => {
-      if (value.length > 1) {
-        const hasMultipleStyles = checkMultipleStyles(value);
-        if (hasMultipleStyles) {
-          setMultipleStyles(true);
-        }
+    const isEmptyNode = (node) => {
+      if (Text.isText(node)) {
+        return !node.text || node.text.trim() === '';
       }
-      setCurrentValue(value.map((row) => serialize(row)).join(''));
-      B.triggerEvent('onChange', currentValue);
+      if (Element.isElement(node) && node.children) {
+        return node.children.every((child) => isEmptyNode(child));
+      }
+      return true;
     };
 
     const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
     const [editor] = useState(() => withReact(withHistory(createEditor())));
+
+    const onChangeHandler = (value) => {
+      const serializedValue = value.map((row) => serialize(row)).join('');
+      const isEmpty = !value || value.every((node) => isEmptyNode(node));
+      const newCurrentValue = isEmpty ? '' : serializedValue;
+      setCurrentValue(newCurrentValue);
+
+      B.triggerEvent('onChange', newCurrentValue);
+    };
     const parsed = new DOMParser().parseFromString(optionValue, 'text/html');
     const fragment = deserialize(parsed.body);
 
@@ -533,6 +555,12 @@
           event.preventDefault();
           editor.insertText('\n');
         } else if (isBlockActive(editor, 'code')) {
+          event.preventDefault();
+          Transforms.insertNodes(editor, {
+            children: [{ text: '' }],
+            type: 'paragraph',
+          });
+        } else {
           event.preventDefault();
           Transforms.insertNodes(editor, {
             children: [{ text: '' }],
@@ -799,16 +827,18 @@
       useState(1);
     let selectionTimeout;
 
+    const TEXT_FORMATS = [
+      { format: 'paragraph', text: 'Body 1', tag: 'p' },
+      { format: 'heading-one', text: 'Title 1', tag: 'h1' },
+      { format: 'heading-two', text: 'Title 2', tag: 'h2' },
+      { format: 'heading-three', text: 'Title 3', tag: 'h3' },
+      { format: 'heading-four', text: 'Title 4', tag: 'h4' },
+      { format: 'heading-five', text: 'Title 5', tag: 'h5' },
+      { format: 'heading-six', text: 'Title 6', tag: 'h6' },
+    ];
+
     document.onselectionchange = () => {
-      const whitelistedTypes = [
-        'heading-one',
-        'heading-two',
-        'heading-three',
-        'heading-four',
-        'heading-five',
-        'heading-six',
-        'paragraph',
-      ];
+      const whitelistedTypes = TEXT_FORMATS.map((f) => f.format);
       if (document.getSelection()) {
         clearTimeout(selectionTimeout);
         selectionTimeout = setTimeout(() => {
@@ -826,33 +856,17 @@
     };
 
     function DropdownItem({ format, text, tag }) {
+      const ownEditor = useSlate();
       const Tag = tag;
-      if (
-        amountOfHeadersInSelection === 1 &&
-        isBlockActive(editor, format, 'type')
-      ) {
-        if (activeStyleName !== text) {
-          setActiveStyleName(text);
-        }
-      } else if (
-        isBlockActive(editor, format, 'type') &&
-        activeStyleName !== '\u00A0'
-      ) {
-        setActiveStyleName('\u00A0');
-      } else if (multipleStyles) {
-        setActiveStyleName('\u00A0');
-      }
+      const isActive =
+        isBlockActive(ownEditor, format, 'type') &&
+        amountOfHeadersInSelection === 1;
       return (
         <li
-          className={`${classes.dropdownItem} ${
-            isBlockActive(editor, format, 'type') &&
-            amountOfHeadersInSelection === 1
-              ? 'active'
-              : ''
-          }`}
+          className={`${classes.dropdownItem} ${isActive ? 'active' : ''}`}
           onMouseDown={(event) => {
             event.preventDefault();
-            toggleBlock(editor, format);
+            toggleBlock(ownEditor, format);
             setShowDropdown(false);
           }}
           aria-hidden="true"
@@ -867,19 +881,84 @@
     function Dropdown() {
       return (
         <ul className={`${classes.dropdown} ${showDropdown ? 'show' : ''}`}>
-          <DropdownItem format="paragraph" text="Body 1" tag="p" />
-          <DropdownItem format="heading-one" text="Title 1" tag="h1" />
-          <DropdownItem format="heading-two" text="Title 2" tag="h2" />
-          <DropdownItem format="heading-three" text="Title 3" tag="h3" />
-          <DropdownItem format="heading-four" text="Title 4" tag="h4" />
-          <DropdownItem format="heading-five" text="Title 5" tag="h5" />
-          <DropdownItem format="heading-six" text="Title 6" tag="h6" />
+          {TEXT_FORMATS.map(({ format, text, tag }) => (
+            <DropdownItem key={format} format={format} text={text} tag={tag} />
+          ))}
         </ul>
       );
     }
 
     function TextStyleSelector() {
+      const ownEditor = useSlate();
       const styleSelectorRef = useRef();
+
+      // Default to paragraph style
+      let activeStyleName = 'Body 1';
+
+      // Only proceed if there's a selection in the editor
+      if (ownEditor.selection) {
+        // Find all HTML tags (<p>, <h1>, <h2>, etc.) in the current selection
+        const selectionRange = Editor.unhangRange(
+          ownEditor,
+          ownEditor.selection,
+        );
+        // Editor.nodes() returns an array of [node, path] pairs for all matching nodes
+        const tagNodesInSelection = Array.from(
+          Editor.nodes(ownEditor, {
+            at: selectionRange,
+            match: (node) => {
+              // Match only HTML block tags (<p>, <h1>, etc.), not text nodes or the editor itself
+              return (
+                !Editor.isEditor(node) &&
+                Element.isElement(node) &&
+                Editor.isBlock(ownEditor, node)
+              );
+            },
+          }),
+        );
+
+        // If we found any HTML tags in the selection
+        if (tagNodesInSelection.length > 0) {
+          // Extract tag types from selection (e.g., "paragraph", "heading-one")
+          const tagTypesInSelection = tagNodesInSelection.map(
+            ([node]) => node.type,
+          );
+
+          // Check if selection contains multiple different HTML tags
+          // (e.g., user selected text that includes both "paragraph" and "heading-one")
+          const firstTagType = tagTypesInSelection[0];
+          const hasDifferentTagTypes = tagTypesInSelection.some(
+            (tagType) => tagType !== firstTagType,
+          );
+          const hasMultipleTagTypesInSelection =
+            tagTypesInSelection.length > 1 && hasDifferentTagTypes;
+
+          // Get the HTML tag at the cursor position (where the selection starts)
+          // tagNodesInSelection[0] is a [node, path] pair, so we get the node (first element)
+          const firstTagNodePair = tagNodesInSelection[0];
+          const tagNodeAtCursor = firstTagNodePair[0];
+
+          // Find the matching format configuration in TEXT_FORMATS
+          // This gives us the display name (e.g., "Body 1" for paragraph, "Title 1" for heading-one)
+          const matchingFormat = TEXT_FORMATS.find(
+            ({ format }) => tagNodeAtCursor.type === format,
+          );
+
+          if (matchingFormat) {
+            activeStyleName = matchingFormat.text;
+          }
+
+          // Show "Multiple formats" to indicate multiple text formats in the selection
+          // (e.g. "Body 1" and "Title 1")
+          if (
+            hasMultipleTagTypesInSelection &&
+            amountOfHeadersInSelection !== 1
+          ) {
+            activeStyleName = 'Multiple formats';
+          }
+        }
+      }
+
       useEffect(() => {
         const handler = (event) => {
           if (
@@ -1163,7 +1242,7 @@
         position: 'absolute',
         left: 'auto',
         zIndex: 9999,
-        minWidth: '8rem',
+        minWidth: '10rem',
         padding: '0.5rem 0',
         listStyle: 'none',
         backgroundColor: '#fff',
