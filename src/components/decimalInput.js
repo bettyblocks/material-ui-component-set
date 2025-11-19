@@ -134,20 +134,14 @@
       });
 
       autoNumericRef.current = autoNumericInstance;
-      autoNumericInstance.set(optionValue);
+      autoNumericInstance.set(rawValue || optionValue);
       setRawValue(autoNumericInstance.getNumericString());
       setCurrentValue(autoNumericInstance.getFormatted());
-
-      inputRef.current.addEventListener('autoNumeric:rawValueModified', () => {
-        setRawValue(autoNumericInstance.getNumericString());
-        setCurrentValue(autoNumericInstance.getFormatted());
-        debouncedOnChangeRef.current(rawValue);
-      });
 
       return () => {
         autoNumericInstance.remove();
       };
-    }, [optionValue]);
+    }, []);
 
     const debounce =
       (func, delay) =>
