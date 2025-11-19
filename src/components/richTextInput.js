@@ -116,8 +116,6 @@
     const [valueKey, setValueKey] = useState(0);
     const labelText = useText(label);
     const [showDropdown, setShowDropdown] = useState(false);
-    const [multipleStyles, setMultipleStyles] = useState(false);
-    const [activeStyleName, setActiveStyleName] = useState('Body 1');
     const placeholderText = useText(placeholder);
     const helperTextResolved = useText(helperText);
     const { current: labelControlRef } = useRef(generateUUID());
@@ -369,7 +367,27 @@
       }
 
       if (el.nodeName === 'BODY') {
-        children = jsx('element', nodeAttributes, children);
+        const childrenArray = Array.isArray(children) ? children : [children];
+        const paragraphAttrs = ELEMENT_TAGS.P(el);
+
+        // Handle empty BODY
+        if (childrenArray.length === 0) {
+          children = [jsx('element', paragraphAttrs, [jsx('text', {}, '')])];
+          return jsx('fragment', {}, children);
+        }
+
+        // Wrap any text nodes in paragraphs, keep block elements as is
+        const hasTextNodes = childrenArray.some((child) => Text.isText(child));
+        if (hasTextNodes) {
+          children = childrenArray.map((child) =>
+            Text.isText(child)
+              ? jsx('element', paragraphAttrs, [child])
+              : child,
+          );
+        } else {
+          children = childrenArray;
+        }
+
         return jsx('fragment', {}, children);
       }
 
@@ -411,11 +429,6 @@
       return <span {...attributes}>{children}</span>;
     }
 
-    const checkMultipleStyles = (value) => {
-      const diverseStyle = value.filter(({ type }) => type !== value[0].type);
-      return diverseStyle.length > 0;
-    };
-
     const isEmptyNode = (node) => {
       if (Text.isText(node)) {
         return !node.text || node.text.trim() === '';
@@ -426,14 +439,10 @@
       return true;
     };
 
-    const onChangeHandler = (value) => {
-      if (value.length > 1) {
-        const hasMultipleStyles = checkMultipleStyles(value);
-        if (hasMultipleStyles) {
-          setMultipleStyles(true);
-        }
-      }
+    const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
+    const [editor] = useState(() => withReact(withHistory(createEditor())));
 
+    const onChangeHandler = (value) => {
       const serializedValue = value.map((row) => serialize(row)).join('');
       const isEmpty = !value || value.every((node) => isEmptyNode(node));
       const newCurrentValue = isEmpty ? '' : serializedValue;
@@ -441,20 +450,8 @@
 
       B.triggerEvent('onChange', newCurrentValue);
     };
-
-    const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
-    const [editor] = useState(() => withReact(withHistory(createEditor())));
     const parsed = new DOMParser().parseFromString(optionValue, 'text/html');
-    const isEmpty = !optionValue || optionValue.trim() === '';
-
-    const fragment = isEmpty
-      ? [
-          {
-            type: 'paragraph',
-            children: [{ text: '' }],
-          },
-        ]
-      : deserialize(parsed.body);
+    const fragment = deserialize(parsed.body);
 
     B.defineFunction('Clear', () => {
       editor.children.forEach(() => {
@@ -830,16 +827,18 @@
       useState(1);
     let selectionTimeout;
 
+    const TEXT_FORMATS = [
+      { format: 'paragraph', text: 'Body 1', tag: 'p' },
+      { format: 'heading-one', text: 'Title 1', tag: 'h1' },
+      { format: 'heading-two', text: 'Title 2', tag: 'h2' },
+      { format: 'heading-three', text: 'Title 3', tag: 'h3' },
+      { format: 'heading-four', text: 'Title 4', tag: 'h4' },
+      { format: 'heading-five', text: 'Title 5', tag: 'h5' },
+      { format: 'heading-six', text: 'Title 6', tag: 'h6' },
+    ];
+
     document.onselectionchange = () => {
-      const whitelistedTypes = [
-        'heading-one',
-        'heading-two',
-        'heading-three',
-        'heading-four',
-        'heading-five',
-        'heading-six',
-        'paragraph',
-      ];
+      const whitelistedTypes = TEXT_FORMATS.map((f) => f.format);
       if (document.getSelection()) {
         clearTimeout(selectionTimeout);
         selectionTimeout = setTimeout(() => {
@@ -857,33 +856,17 @@
     };
 
     function DropdownItem({ format, text, tag }) {
+      const ownEditor = useSlate();
       const Tag = tag;
-      if (
-        amountOfHeadersInSelection === 1 &&
-        isBlockActive(editor, format, 'type')
-      ) {
-        if (activeStyleName !== text) {
-          setActiveStyleName(text);
-        }
-      } else if (
-        isBlockActive(editor, format, 'type') &&
-        activeStyleName !== '\u00A0'
-      ) {
-        setActiveStyleName('\u00A0');
-      } else if (multipleStyles) {
-        setActiveStyleName('\u00A0');
-      }
+      const isActive =
+        isBlockActive(ownEditor, format, 'type') &&
+        amountOfHeadersInSelection === 1;
       return (
         <li
-          className={`${classes.dropdownItem} ${
-            isBlockActive(editor, format, 'type') &&
-            amountOfHeadersInSelection === 1
-              ? 'active'
-              : ''
-          }`}
+          className={`${classes.dropdownItem} ${isActive ? 'active' : ''}`}
           onMouseDown={(event) => {
             event.preventDefault();
-            toggleBlock(editor, format);
+            toggleBlock(ownEditor, format);
             setShowDropdown(false);
           }}
           aria-hidden="true"
@@ -898,19 +881,81 @@
     function Dropdown() {
       return (
         <ul className={`${classes.dropdown} ${showDropdown ? 'show' : ''}`}>
-          <DropdownItem format="paragraph" text="Body 1" tag="p" />
-          <DropdownItem format="heading-one" text="Title 1" tag="h1" />
-          <DropdownItem format="heading-two" text="Title 2" tag="h2" />
-          <DropdownItem format="heading-three" text="Title 3" tag="h3" />
-          <DropdownItem format="heading-four" text="Title 4" tag="h4" />
-          <DropdownItem format="heading-five" text="Title 5" tag="h5" />
-          <DropdownItem format="heading-six" text="Title 6" tag="h6" />
+          {TEXT_FORMATS.map(({ format, text, tag }) => (
+            <DropdownItem key={format} format={format} text={text} tag={tag} />
+          ))}
         </ul>
       );
     }
 
     function TextStyleSelector() {
+      const ownEditor = useSlate();
       const styleSelectorRef = useRef();
+
+      // Default to paragraph style
+      let activeStyleName = 'Body 1';
+
+      // Only proceed if there's a selection in the editor
+      if (ownEditor.selection) {
+        // Find all block elements (p, h1, etc.) in the current selection
+        const selectionRange = Editor.unhangRange(
+          ownEditor,
+          ownEditor.selection,
+        );
+        const blockNodesInSelection = Array.from(
+          Editor.nodes(ownEditor, {
+            at: selectionRange,
+            match: (node) => {
+              // Only match block elements (not text nodes or the editor itself)
+              return (
+                !Editor.isEditor(node) &&
+                Element.isElement(node) &&
+                Editor.isBlock(ownEditor, node)
+              );
+            },
+          }),
+        );
+
+        // If we found any blocks in the selection
+        if (blockNodesInSelection.length > 0) {
+          // Extract just the node types (paragraph, heading-one, etc.)
+          const blockTypesInSelection = blockNodesInSelection.map(
+            ([node]) => node.type,
+          );
+
+          // Check if selection has multiple different block types
+          const firstBlockType = blockTypesInSelection[0];
+          const hasDifferentBlockTypes = blockTypesInSelection.some(
+            (blockType) => blockType !== firstBlockType,
+          );
+          const hasMultipleStylesInSelection =
+            blockTypesInSelection.length > 1 && hasDifferentBlockTypes;
+
+          // Get the first block node (where the cursor/selection starts)
+          // This tells us what style is active at the cursor position
+          const firstBlockNodePair = blockNodesInSelection[0];
+          const blockNodeAtCursor = firstBlockNodePair[0]; // Extract the node from [node, path]
+
+          // Find the matching format configuration (Body 1, Title 1, etc.)
+          const matchingFormat = TEXT_FORMATS.find(
+            ({ format }) => blockNodeAtCursor.type === format,
+          );
+
+          if (matchingFormat) {
+            activeStyleName = matchingFormat.text;
+          }
+
+          // If selection has multiple different styles and we can't show a single style,
+          // show a non-breaking space to indicate mixed styles
+          if (
+            hasMultipleStylesInSelection &&
+            amountOfHeadersInSelection !== 1
+          ) {
+            activeStyleName = '\u00A0';
+          }
+        }
+      }
+
       useEffect(() => {
         const handler = (event) => {
           if (
