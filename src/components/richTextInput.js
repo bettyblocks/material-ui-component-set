@@ -243,6 +243,7 @@
     const serialize = (node) => {
       if (Text.isText(node)) {
         let string = node.text;
+        string = string.replace(/\n/g, '<br>');
         if (node.bold) {
           string = `<b>${string}</b>`;
         }
@@ -415,6 +416,16 @@
       return diverseStyle.length > 0;
     };
 
+    const isEmptyNode = (node) => {
+      if (Text.isText(node)) {
+        return !node.text || node.text.trim() === '';
+      }
+      if (Element.isElement(node) && node.children) {
+        return node.children.every((child) => isEmptyNode(child));
+      }
+      return true;
+    };
+
     const onChangeHandler = (value) => {
       if (value.length > 1) {
         const hasMultipleStyles = checkMultipleStyles(value);
@@ -422,14 +433,28 @@
           setMultipleStyles(true);
         }
       }
-      setCurrentValue(value.map((row) => serialize(row)).join(''));
-      B.triggerEvent('onChange', currentValue);
+
+      const serializedValue = value.map((row) => serialize(row)).join('');
+      const isEmpty = !value || value.every((node) => isEmptyNode(node));
+      const newCurrentValue = isEmpty ? '' : serializedValue;
+      setCurrentValue(newCurrentValue);
+
+      B.triggerEvent('onChange', newCurrentValue);
     };
 
     const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
     const [editor] = useState(() => withReact(withHistory(createEditor())));
     const parsed = new DOMParser().parseFromString(optionValue, 'text/html');
-    const fragment = deserialize(parsed.body);
+    const isEmpty = !optionValue || optionValue.trim() === '';
+
+    const fragment = isEmpty
+      ? [
+          {
+            type: 'paragraph',
+            children: [{ text: '' }],
+          },
+        ]
+      : deserialize(parsed.body);
 
     B.defineFunction('Clear', () => {
       editor.children.forEach(() => {
@@ -533,6 +558,12 @@
           event.preventDefault();
           editor.insertText('\n');
         } else if (isBlockActive(editor, 'code')) {
+          event.preventDefault();
+          Transforms.insertNodes(editor, {
+            children: [{ text: '' }],
+            type: 'paragraph',
+          });
+        } else {
           event.preventDefault();
           Transforms.insertNodes(editor, {
             children: [{ text: '' }],
