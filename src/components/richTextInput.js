@@ -897,16 +897,17 @@
 
       // Only proceed if there's a selection in the editor
       if (ownEditor.selection) {
-        // Find all block elements (p, h1, etc.) in the current selection
+        // Find all HTML tags (<p>, <h1>, <h2>, etc.) in the current selection
         const selectionRange = Editor.unhangRange(
           ownEditor,
           ownEditor.selection,
         );
-        const blockNodesInSelection = Array.from(
+        // Editor.nodes() returns an array of [node, path] pairs for all matching nodes
+        const tagNodesInSelection = Array.from(
           Editor.nodes(ownEditor, {
             at: selectionRange,
             match: (node) => {
-              // Only match block elements (not text nodes or the editor itself)
+              // Match only HTML block tags (<p>, <h1>, etc.), not text nodes or the editor itself
               return (
                 !Editor.isEditor(node) &&
                 Element.isElement(node) &&
@@ -916,42 +917,44 @@
           }),
         );
 
-        // If we found any blocks in the selection
-        if (blockNodesInSelection.length > 0) {
-          // Extract just the node types (paragraph, heading-one, etc.)
-          const blockTypesInSelection = blockNodesInSelection.map(
+        // If we found any HTML tags in the selection
+        if (tagNodesInSelection.length > 0) {
+          // Extract tag types from selection (e.g., "paragraph", "heading-one")
+          const tagTypesInSelection = tagNodesInSelection.map(
             ([node]) => node.type,
           );
 
-          // Check if selection has multiple different block types
-          const firstBlockType = blockTypesInSelection[0];
-          const hasDifferentBlockTypes = blockTypesInSelection.some(
-            (blockType) => blockType !== firstBlockType,
+          // Check if selection contains multiple different HTML tags
+          // (e.g., user selected text that includes both "paragraph" and "heading-one")
+          const firstTagType = tagTypesInSelection[0];
+          const hasDifferentTagTypes = tagTypesInSelection.some(
+            (tagType) => tagType !== firstTagType,
           );
-          const hasMultipleStylesInSelection =
-            blockTypesInSelection.length > 1 && hasDifferentBlockTypes;
+          const hasMultipleTagTypesInSelection =
+            tagTypesInSelection.length > 1 && hasDifferentTagTypes;
 
-          // Get the first block node (where the cursor/selection starts)
-          // This tells us what style is active at the cursor position
-          const firstBlockNodePair = blockNodesInSelection[0];
-          const blockNodeAtCursor = firstBlockNodePair[0]; // Extract the node from [node, path]
+          // Get the HTML tag at the cursor position (where the selection starts)
+          // tagNodesInSelection[0] is a [node, path] pair, so we get the node (first element)
+          const firstTagNodePair = tagNodesInSelection[0];
+          const tagNodeAtCursor = firstTagNodePair[0];
 
-          // Find the matching format configuration (Body 1, Title 1, etc.)
+          // Find the matching format configuration in TEXT_FORMATS
+          // This gives us the display name (e.g., "Body 1" for paragraph, "Title 1" for heading-one)
           const matchingFormat = TEXT_FORMATS.find(
-            ({ format }) => blockNodeAtCursor.type === format,
+            ({ format }) => tagNodeAtCursor.type === format,
           );
 
           if (matchingFormat) {
             activeStyleName = matchingFormat.text;
           }
 
-          // If selection has multiple different styles and we can't show a single style,
-          // show a non-breaking space to indicate mixed styles
+          // Show "Multiple formats" to indicate multiple text formats in the selection
+          // (e.g. "Body 1" and "Title 1")
           if (
-            hasMultipleStylesInSelection &&
+            hasMultipleTagTypesInSelection &&
             amountOfHeadersInSelection !== 1
           ) {
-            activeStyleName = '\u00A0';
+            activeStyleName = 'Multiple formats';
           }
         }
       }
@@ -1239,7 +1242,7 @@
         position: 'absolute',
         left: 'auto',
         zIndex: 9999,
-        minWidth: '8rem',
+        minWidth: '10rem',
         padding: '0.5rem 0',
         listStyle: 'none',
         backgroundColor: '#fff',
