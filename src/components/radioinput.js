@@ -102,10 +102,6 @@
     const [currentValue, setCurrentValue] = usePageState(resolvedCurrentValue);
 
     useEffect(() => {
-      setCurrentValue(resolvedCurrentValue);
-    }, [defaultValueText]);
-
-    useEffect(() => {
       setHelper(helperTextResolved);
     }, [helperTextResolved]);
 
