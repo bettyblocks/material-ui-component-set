@@ -96,10 +96,6 @@
     }
     const [currentValue, setCurrentValue] = usePageState(resolvedCurrentValue);
 
-    useEffect(() => {
-      setCurrentValue(resolvedCurrentValue);
-    }, [defaultValueText]);
-
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
