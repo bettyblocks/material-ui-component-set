@@ -543,14 +543,14 @@
         );
       }
 
-      return results.map((value) => (
-        <ModelProvider key={value.id} value={value} id={model}>
+      return results.map((value, index) => (
+        <ModelProvider key={value.id ?? index} value={value} id={model}>
           <InteractionScope model={model}>
             {(context) => (
               <TableRow
                 key={value[0]}
                 classes={{ root: classes.bodyRow }}
-                data-id={value.id}
+                data-id={value.id ?? index}
               >
                 <Children
                   linkTo={linkTo}
