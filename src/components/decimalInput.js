@@ -134,7 +134,7 @@
       });
 
       autoNumericRef.current = autoNumericInstance;
-      autoNumericInstance.set(optionValue);
+      autoNumericInstance.set(rawValue || optionValue);
       setRawValue(autoNumericInstance.getNumericString());
       setCurrentValue(autoNumericInstance.getFormatted());
 
