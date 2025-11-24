@@ -1,3 +1,12 @@
+## [3.2.2](https://github.com/bettyblocks/material-ui-component-set/compare/v3.2.1...v3.2.2) (2025-11-24)
+
+
+### Bug Fixes
+
+* make sure scale gets filled in by using optionvalue in useeffect ([f585287](https://github.com/bettyblocks/material-ui-component-set/commit/f58528701eb7d35eb6b2ffddc3fd2c05922a8940))
+* prevent clearing radioinput on form rerender ([4d39225](https://github.com/bettyblocks/material-ui-component-set/commit/4d39225607d6d791ba5a806035a0c6844ac93c6f))
+* use rawValue to prevent clearing input on rerender ([1acbee5](https://github.com/bettyblocks/material-ui-component-set/commit/1acbee59b9fea601f76f15550c027aaf72f48f44))
+
 ## [3.2.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.2.0...v3.2.1) (2025-11-20)
 
 
