@@ -1,3 +1,11 @@
+## [3.2.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.2.0...v3.2.1) (2025-11-20)
+
+
+### Bug Fixes
+
+* handle empty and current selection ([06ff2fd](https://github.com/bettyblocks/material-ui-component-set/commit/06ff2fd753364df72fa7d046418cccc4987c9df9))
+* make sure the enter key adds a new p tag ([2254189](https://github.com/bettyblocks/material-ui-component-set/commit/22541895c8d53bb3d426b4c2a07c22ef6bb0d266))
+
 # [3.2.0](https://github.com/bettyblocks/material-ui-component-set/compare/v3.1.2...v3.2.0) (2025-11-13)
 
 
