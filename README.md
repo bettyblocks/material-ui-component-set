@@ -42,7 +42,7 @@ To build & run the component set locally:
     $ git checkout -b feat/a-summary-of-your-ticket-{STORY-ID}
     ```
 
-3.  Work on your feature. 
+3.  Work on your feature.
 
 4.  When you're confident about your work, submit a pull request to `edge` and assign it to one of the reviewers. You can comment on your techsupport ticket in Jira **"In review"** and provide the link to the pull request.
 
@@ -65,8 +65,8 @@ Further guidelines about git messages are available here: https://github.com/con
 
 Build component set and container:
 
-```earthly +docker```
+`earthly +docker`
 
 Now run the container:
 
-```docker run -p 5002:5002 -it component-set:latest```
+`docker run -p 5002:5002 -it component-set:latest`
