@@ -1,3 +1,12 @@
+## [3.2.3](https://github.com/bettyblocks/material-ui-component-set/compare/v3.2.2...v3.2.3) (2025-11-25)
+
+
+### Bug Fixes
+
+* bump new version ([0cc491b](https://github.com/bettyblocks/material-ui-component-set/commit/0cc491ba7a8d4d95c08a86e4f2416a518dd0aceb))
+* bump version ([eeaf433](https://github.com/bettyblocks/material-ui-component-set/commit/eeaf43317c374b8fe9ba0c6aa34bd94768e88e4d))
+* update readme ([efafb55](https://github.com/bettyblocks/material-ui-component-set/commit/efafb55a17fee3d03b807b686f5c31939a78a865))
+
 ## [3.2.2](https://github.com/bettyblocks/material-ui-component-set/compare/v3.2.1...v3.2.2) (2025-11-24)
 
 
