@@ -129,7 +129,7 @@
 
     const iconButtonProps = {
       ...generalProps,
-      classes: { root: classes.button },
+      classes: { root: includeStyling(classes.button) },
     };
 
     const buttonProps = {
@@ -141,7 +141,7 @@
         contained: classes.buttonContained,
         outlined: classes.buttonOutlined,
       },
-      className: !!buttonContent && classes.empty,
+      className: includeStyling(!!buttonContent && classes.empty),
       type: isDev ? 'button' : type,
     };
     const compProps = isIcon ? iconButtonProps : buttonProps;
