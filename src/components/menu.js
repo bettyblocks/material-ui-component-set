@@ -112,6 +112,10 @@
       }
 
       setAnchorEl(ref);
+
+      B.defineFunction('Hide', () => setIsOpen(false));
+      B.defineFunction('Show', () => setIsOpen(true));
+      B.defineFunction('Show/Hide', () => setIsOpen((s) => !s));
     }, []);
 
     useEffect(() => {
