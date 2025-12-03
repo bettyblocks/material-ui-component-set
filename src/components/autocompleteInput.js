@@ -359,19 +359,22 @@
           ? filter
           : remainingRecordsFilter;
 
+      // When searching, the search value is different from the value
+      const isSearch = parsedDebouncedValue !== currentSearchValue;
+      const operator = isSearch ? '_and' : '_or';
+      // Only use matches for when a user is searching and the labelProp is a string
+      // Use eq for an exact match to not add a fuzzy filter for the query
+      const predicate = isSearch && !labelPropIsNumber ? 'matches' : 'eq';
+
       // Create filter with property name(s) as key(s)
       const inputFilter = propertyNames.reduceRight(
         (acc, propertyName) => ({ [propertyName]: acc }),
         {
-          [labelPropIsNumber ? 'eq' : 'matches']: labelPropIsNumber
+          [predicate]: labelPropIsNumber
             ? numberDebouncedInputValue
             : debouncedInputValue,
         },
       );
-
-      // When searching, the search value is different from the value
-      const newSearchValue = parsedDebouncedValue !== currentSearchValue;
-      const operator = newSearchValue ? '_and' : '_or';
 
       filter = {
         [operator]:

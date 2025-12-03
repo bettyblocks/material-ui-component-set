@@ -838,7 +838,9 @@
     ];
 
     document.onselectionchange = () => {
-      const whitelistedTypes = TEXT_FORMATS.map((f) => f.format);
+      const whitelistedTypes = TEXT_FORMATS.map(
+        (textFormat) => textFormat.format,
+      );
       if (document.getSelection()) {
         clearTimeout(selectionTimeout);
         selectionTimeout = setTimeout(() => {

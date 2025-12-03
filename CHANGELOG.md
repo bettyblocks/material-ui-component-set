@@ -1,3 +1,29 @@
+## [3.2.3](https://github.com/bettyblocks/material-ui-component-set/compare/v3.2.2...v3.2.3) (2025-11-25)
+
+
+### Bug Fixes
+
+* bump new version ([0cc491b](https://github.com/bettyblocks/material-ui-component-set/commit/0cc491ba7a8d4d95c08a86e4f2416a518dd0aceb))
+* bump version ([eeaf433](https://github.com/bettyblocks/material-ui-component-set/commit/eeaf43317c374b8fe9ba0c6aa34bd94768e88e4d))
+* update readme ([efafb55](https://github.com/bettyblocks/material-ui-component-set/commit/efafb55a17fee3d03b807b686f5c31939a78a865))
+
+## [3.2.2](https://github.com/bettyblocks/material-ui-component-set/compare/v3.2.1...v3.2.2) (2025-11-24)
+
+
+### Bug Fixes
+
+* make sure scale gets filled in by using optionvalue in useeffect ([f585287](https://github.com/bettyblocks/material-ui-component-set/commit/f58528701eb7d35eb6b2ffddc3fd2c05922a8940))
+* prevent clearing radioinput on form rerender ([4d39225](https://github.com/bettyblocks/material-ui-component-set/commit/4d39225607d6d791ba5a806035a0c6844ac93c6f))
+* use rawValue to prevent clearing input on rerender ([1acbee5](https://github.com/bettyblocks/material-ui-component-set/commit/1acbee59b9fea601f76f15550c027aaf72f48f44))
+
+## [3.2.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.2.0...v3.2.1) (2025-11-20)
+
+
+### Bug Fixes
+
+* handle empty and current selection ([06ff2fd](https://github.com/bettyblocks/material-ui-component-set/commit/06ff2fd753364df72fa7d046418cccc4987c9df9))
+* make sure the enter key adds a new p tag ([2254189](https://github.com/bettyblocks/material-ui-component-set/commit/22541895c8d53bb3d426b4c2a07c22ef6bb0d266))
+
 # [3.2.0](https://github.com/bettyblocks/material-ui-component-set/compare/v3.1.2...v3.2.0) (2025-11-13)
 
 
