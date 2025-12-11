@@ -82,6 +82,7 @@
     const noOptionsText = useText(noOptionsTextRaw);
     const nameAttribute = useText(nameAttributeRaw);
     const changeContext = useRef(null);
+    const didMountRef = useRef(false);
     const [disabled, setIsDisabled] = useState(initialDisabled);
     const [helper, setHelper] = useState(useText(helperTextRaw));
     const [errorState, setErrorState] = useState(false);
@@ -653,25 +654,35 @@
     const currentValue = getValue();
 
     useEffect(() => {
-      if (currentValue === null && !debouncedCurrentValue) {
-        // state updates cause currentValue to equal null and debouncedCurrentValue is empty
+      const handle = setTimeout(() => {
+        setDebouncedCurrentValue(currentValue);
+      }, 250);
+
+      return () => clearTimeout(handle);
+    }, [currentValue]);
+
+    useEffect(() => {
+      if (debouncedCurrentValue === undefined) {
+        // state updates cause debouncedCurrentValue to be undefined at first
         // nothing should happen then, to prevent a unwanted reset of the value
         return;
       }
-      if (currentValue !== debouncedCurrentValue) {
-        setTimeout(() => {
-          setDebouncedCurrentValue(currentValue);
-        }, 250);
-      } else {
-        let triggerEventValue = '';
 
-        if (value) {
-          triggerEventValue = !isListProperty ? value[valueProp.name] : value;
-        }
-        changeContext.current = { modelData: value };
-        B.triggerEvent('onChange', triggerEventValue, changeContext.current);
+      // Skip this change handling until after the first mount
+      if (!didMountRef.current) {
+        didMountRef.current = true;
+        return;
       }
-    }, [currentValue]);
+
+      let triggerEventValue = '';
+
+      if (value) {
+        triggerEventValue = !isListProperty ? value[valueProp.name] : value;
+      }
+
+      changeContext.current = { modelData: value };
+      B.triggerEvent('onChange', triggerEventValue, changeContext.current);
+    }, [debouncedCurrentValue]);
 
     const renderLabel = (option) => {
       let optionLabel = '';
