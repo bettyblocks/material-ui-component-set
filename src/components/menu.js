@@ -145,7 +145,7 @@
         contained: classes.buttonContained,
         outlined: classes.buttonOutlined,
       },
-      className: includeStyling(!!buttonContent && classes.empty),
+      className: includeStyling(buttonContent ? classes.empty : ''),
       type: isDev ? 'button' : type,
     };
     const compProps = isIcon ? iconButtonProps : buttonProps;
