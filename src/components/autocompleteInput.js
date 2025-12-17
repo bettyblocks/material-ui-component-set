@@ -82,7 +82,8 @@
     const noOptionsText = useText(noOptionsTextRaw);
     const nameAttribute = useText(nameAttributeRaw);
     const changeContext = useRef(null);
-    const didMountRef = useRef(false);
+    const didMountRef = useRef(false); // This is for checking if the component is mounted
+    const hasInteractedRef = useRef(false); // This is for checking whether the user interacted with the component
     const [disabled, setIsDisabled] = useState(initialDisabled);
     const [helper, setHelper] = useState(useText(helperTextRaw));
     const [errorState, setErrorState] = useState(false);
@@ -674,6 +675,15 @@
         return;
       }
 
+      // The change is caused by setting the default value instead of user interference
+      // This condition has to be placed after the mounted check, not earlier else
+      // using a default value will still cause extra event triggering
+      if (!hasInteractedRef.current) {
+        return;
+      }
+
+      // Now that we know the component has mounted and the default value is set
+      // Only a user event can trigger a change
       let triggerEventValue = '';
 
       if (value) {
@@ -747,6 +757,7 @@
             groupBy: (option) => getSortByGroupValue(option),
           })}
           onChange={(_, newValue) => {
+            hasInteractedRef.current = true;
             setValue(newValue || '');
           }}
           onInputChange={(event, newValue) => {
@@ -755,6 +766,7 @@
               // nothing should happen then, to prevent a rerender cycle
               return;
             }
+            hasInteractedRef.current = true;
             let validation = event ? event.target.validity : null;
             if (isNumberType) {
               validation = customPatternValidation(event.target);
