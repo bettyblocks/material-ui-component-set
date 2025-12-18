@@ -291,6 +291,13 @@
               id={labelControlRef}
               tabIndex={isDev ? -1 : undefined}
               size={size}
+              required={required}
+              onInvalid={(e) => {
+                e.preventDefault();
+                const hasError = required && !currentValue;
+                setAfterFirstInvalidation(hasError);
+                handleValidation();
+              }}
             />
           }
           label={optionLabel}
@@ -367,18 +374,6 @@
           {renderRadios()}
         </RadioGroup>
         <FormHelperText>{helper}</FormHelperText>
-        <input
-          className={classes.validationInput}
-          onInvalid={() => {
-            const hasError = required && !currentValue;
-            setAfterFirstInvalidation(hasError);
-            handleValidation();
-          }}
-          type="text"
-          tabIndex="-1"
-          required={required}
-          value={currentValue}
-        />
       </MUIFormControl>
     );
 
