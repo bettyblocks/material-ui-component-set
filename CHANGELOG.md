@@ -1,3 +1,11 @@
+# [3.3.0](https://github.com/bettyblocks/material-ui-component-set/compare/v3.2.5...v3.3.0) (2025-12-18)
+
+
+### Features
+
+* add interactions to control visibility of popover menu ([ad6e1f3](https://github.com/bettyblocks/material-ui-component-set/commit/ad6e1f3a3b1889e18d6077c79d94f25796523fb8))
+* enable styles tab on Menu component ([ec9e5bc](https://github.com/bettyblocks/material-ui-component-set/commit/ec9e5bc091f9d0275d905f6f91acb8bde58ac8a4))
+
 ## [3.2.5](https://github.com/bettyblocks/material-ui-component-set/compare/v3.2.4...v3.2.5) (2025-12-16)
 
 
