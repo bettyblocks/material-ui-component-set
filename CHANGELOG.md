@@ -1,3 +1,10 @@
+# [3.4.0](https://github.com/bettyblocks/material-ui-component-set/compare/v3.3.0...v3.4.0) (2025-12-18)
+
+
+### Features
+
+* add interaction to reset the order of the Data Table to the default ([5342b78](https://github.com/bettyblocks/material-ui-component-set/commit/5342b780f485f93b55f9b940a24695783ec1fa08))
+
 # [3.3.0](https://github.com/bettyblocks/material-ui-component-set/compare/v3.2.5...v3.3.0) (2025-12-18)
 
 
