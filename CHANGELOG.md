@@ -1,3 +1,10 @@
+## [3.4.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.4.0...v3.4.1) (2025-12-18)
+
+
+### Bug Fixes
+
+* use ref to determine user interaction ([99111ce](https://github.com/bettyblocks/material-ui-component-set/commit/99111ce930b054c0ac1ba87a73ee252c742b2ab5))
+
 # [3.4.0](https://github.com/bettyblocks/material-ui-component-set/compare/v3.3.0...v3.4.0) (2025-12-18)
 
 
