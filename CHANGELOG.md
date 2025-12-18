@@ -1,3 +1,18 @@
+## [3.2.5](https://github.com/bettyblocks/material-ui-component-set/compare/v3.2.4...v3.2.5) (2025-12-16)
+
+
+### Bug Fixes
+
+* split debouncecurrentvalue from currentvalue to trigger change ([3db226b](https://github.com/bettyblocks/material-ui-component-set/commit/3db226bd5e2515e09dbeffb0300875e8a2a8ee97))
+
+## [3.2.4](https://github.com/bettyblocks/material-ui-component-set/compare/v3.2.3...v3.2.4) (2025-12-04)
+
+
+### Bug Fixes
+
+* add eslint parseroptions ([de987cb](https://github.com/bettyblocks/material-ui-component-set/commit/de987cbaf3ea9fb25c70d4bb82e6d022f779287c))
+* use matches when searching but eq for an exact filtering ([16c9bcf](https://github.com/bettyblocks/material-ui-component-set/commit/16c9bcff127e11b9c8c1d6745007b3466c2a3e98))
+
 ## [3.2.3](https://github.com/bettyblocks/material-ui-component-set/compare/v3.2.2...v3.2.3) (2025-11-25)
 
 
