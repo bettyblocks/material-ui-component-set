@@ -475,11 +475,15 @@
     const handleSort = (field, newOrder) => {
       if (isDev) return;
       setOrderBy({ field, order: newOrder });
-      setVariables({
-        sort: {
-          relation: createSortObject(field, newOrder),
-        },
-      });
+      setVariables(
+        field
+          ? {
+              sort: {
+                relation: createSortObject(field, newOrder),
+              },
+            }
+          : {},
+      );
     };
 
     const handleSearch = (event) => {
@@ -583,6 +587,12 @@
         </TableRow>
       ));
     };
+
+    useEffect(() => {
+      B.defineFunction('Reset order', () => {
+        handleSort(orderPropertyPath, sortOrder);
+      });
+    }, []);
 
     useEffect(() => {
       if (loadOnScroll && !isDev) {
