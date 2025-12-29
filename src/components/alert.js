@@ -103,8 +103,8 @@
         classes={{
           root: classes.root,
         }}
-        className={open || isDev ? '' : classes.hide}
-        icon={icon !== 'None' ? <Icon name={icon} /> : null}
+        className={includeStyling(open || isDev ? '' : classes.hide)}
+        icon={icon !== 'None' ? <Icon name={icon} /> : false}
         action={
           collapsable ? (
             <IconButton
