@@ -17,6 +17,15 @@ export const styles = {
     { value: 'end' },
   ),
 
+  helperTextPosition: buttongroup(
+    'Helper text position',
+    [
+      ['Top', 'top'],
+      ['Bottom', 'bottom'],
+    ],
+    { value: 'bottom' },
+  ),
+
   row: toggle('Row', { value: true }),
   fullWidth: toggle('Full width', { value: true }),
 
