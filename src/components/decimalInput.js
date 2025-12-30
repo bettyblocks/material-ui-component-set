@@ -134,19 +134,34 @@
       });
 
       autoNumericRef.current = autoNumericInstance;
-      autoNumericInstance.set(rawValue || optionValue);
+      autoNumericInstance.set(optionValue);
       setRawValue(autoNumericInstance.getNumericString());
       setCurrentValue(autoNumericInstance.getFormatted());
 
       inputRef.current.addEventListener('autoNumeric:rawValueModified', () => {
-        setRawValue(autoNumericInstance.getNumericString());
+        const numericString = autoNumericInstance.getNumericString();
+        setRawValue(numericString);
         setCurrentValue(autoNumericInstance.getFormatted());
-        debouncedOnChangeRef.current(rawValue);
+        debouncedOnChangeRef.current(numericString);
       });
 
       return () => {
         autoNumericInstance.remove();
       };
+    }, []);
+
+    // Sync autoNumeric if optionValue changes (e.g. FORM -> setCurrentRecord)
+    // Only sync if new optionValue is different from the rawValue and is not empty
+    useEffect(() => {
+      if (
+        autoNumericRef.current &&
+        rawValue !== optionValue &&
+        optionValue !== ''
+      ) {
+        autoNumericRef.current.set(optionValue);
+        setRawValue(autoNumericRef.current.getNumericString());
+        setCurrentValue(autoNumericRef.current.getFormatted());
+      }
     }, [optionValue]);
 
     const debounce =
