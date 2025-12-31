@@ -23,6 +23,7 @@
       required,
       row,
       size,
+      helperTextPosition,
       validationValueMissing = [''],
       value: prefabValue,
     } = options;
@@ -291,6 +292,13 @@
               id={labelControlRef}
               tabIndex={isDev ? -1 : undefined}
               size={size}
+              required={required}
+              onInvalid={(e) => {
+                e.preventDefault();
+                const hasError = required && !currentValue;
+                setAfterFirstInvalidation(hasError);
+                handleValidation();
+              }}
             />
           }
           label={optionLabel}
@@ -353,7 +361,17 @@
         error={errorState}
         fullWidth={fullWidth}
       >
-        {!hideLabel && <FormLabel component="legend">{labelText}</FormLabel>}
+        {!hideLabel && (
+          <FormLabel
+            classes={{ asterisk: classes.asterisk }}
+            component="legend"
+          >
+            {labelText}
+          </FormLabel>
+        )}
+        {helperTextPosition === 'top' && (
+          <FormHelperText>{helper}</FormHelperText>
+        )}
         <RadioGroup
           row={row}
           className={includeStyling()}
@@ -366,19 +384,9 @@
         >
           {renderRadios()}
         </RadioGroup>
-        <FormHelperText>{helper}</FormHelperText>
-        <input
-          className={classes.validationInput}
-          onInvalid={() => {
-            const hasError = required && !currentValue;
-            setAfterFirstInvalidation(hasError);
-            handleValidation();
-          }}
-          type="text"
-          tabIndex="-1"
-          required={required}
-          value={currentValue}
-        />
+        {helperTextPosition === 'bottom' && (
+          <FormHelperText>{helper}</FormHelperText>
+        )}
       </MUIFormControl>
     );
 
@@ -404,6 +412,10 @@
         padding: 0,
         border: 'none',
         pointerEvents: 'none',
+      },
+      asterisk: {
+        display: ({ options: { hideAsterisk } }) =>
+          hideAsterisk ? 'none' : 'inline',
       },
       formControl: {
         '& > legend': {
