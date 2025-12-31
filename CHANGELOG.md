@@ -1,3 +1,10 @@
+## [3.4.2](https://github.com/bettyblocks/material-ui-component-set/compare/v3.4.1...v3.4.2) (2025-12-31)
+
+
+### Bug Fixes
+
+* sync autonumeric value on optionValue change ([dccd19a](https://github.com/bettyblocks/material-ui-component-set/commit/dccd19a0acafa5e7faedda64bcfa39644bc775b0))
+
 ## [3.4.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.4.0...v3.4.1) (2025-12-18)
 
 
