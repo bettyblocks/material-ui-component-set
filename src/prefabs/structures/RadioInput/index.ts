@@ -16,13 +16,14 @@ export const RadioInput = (
     {
       label: 'Validation Options',
       expanded: false,
-      members: ['required', 'validationValueMissing'],
+      members: ['required', 'hideAsterisk', 'validationValueMissing'],
     },
     {
       label: 'Styling',
       expanded: false,
       members: [
         'hideLabel',
+        'helperTextPosition',
         'radioColor',
         'radioColorChecked',
         'labelColor',

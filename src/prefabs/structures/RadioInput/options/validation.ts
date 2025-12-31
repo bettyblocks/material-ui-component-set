@@ -9,5 +9,6 @@ export const validation = {
     },
   }),
   disabled: toggle('Disabled'),
+  hideAsterisk: toggle('Hide asterisk for required fields'),
   helperText: variable('Helper text'),
 };
