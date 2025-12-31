@@ -1,3 +1,10 @@
+## [3.5.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.0...v3.5.1) (2025-12-31)
+
+
+### Bug Fixes
+
+* set icon prop to false to remove the icon and enable styles tab ([f410433](https://github.com/bettyblocks/material-ui-component-set/commit/f410433378754c3352fb5dfa7efc3eaaac595bf5))
+
 # [3.5.0](https://github.com/bettyblocks/material-ui-component-set/compare/v3.4.2...v3.5.0) (2025-12-31)
 
 
