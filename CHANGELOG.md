@@ -1,3 +1,29 @@
+## [3.5.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.0...v3.5.1) (2025-12-31)
+
+
+### Bug Fixes
+
+* set icon prop to false to remove the icon and enable styles tab ([f410433](https://github.com/bettyblocks/material-ui-component-set/commit/f410433378754c3352fb5dfa7efc3eaaac595bf5))
+
+# [3.5.0](https://github.com/bettyblocks/material-ui-component-set/compare/v3.4.2...v3.5.0) (2025-12-31)
+
+
+### Bug Fixes
+
+* do not use invisible text input for validation to fix wcag screenreader error ([c9534b6](https://github.com/bettyblocks/material-ui-component-set/commit/c9534b698215d38a2ccbf52ab6012f4a77587e9a))
+
+
+### Features
+
+* add option to hide asterisk for required radio buttons and option to put helper text on top after the label ([84e0664](https://github.com/bettyblocks/material-ui-component-set/commit/84e06642d14a02ecd9ce69f445a82ccbced5d5b1))
+
+## [3.4.2](https://github.com/bettyblocks/material-ui-component-set/compare/v3.4.1...v3.4.2) (2025-12-31)
+
+
+### Bug Fixes
+
+* sync autonumeric value on optionValue change ([dccd19a](https://github.com/bettyblocks/material-ui-component-set/commit/dccd19a0acafa5e7faedda64bcfa39644bc775b0))
+
 ## [3.4.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.4.0...v3.4.1) (2025-12-18)
 
 
