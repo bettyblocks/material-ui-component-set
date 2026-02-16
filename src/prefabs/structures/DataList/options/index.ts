@@ -10,6 +10,8 @@ import {
   variable,
   modelAndRelation,
   font,
+  color,
+  ThemeColor,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -23,6 +25,8 @@ export const categories = [
       'take',
       'placeholderTake',
       'paginationType',
+      'paginationAlignment',
+      'paginationColor',
     ],
   },
   {
@@ -101,6 +105,26 @@ export const dataListOptions = {
   }),
   paginationType: font('Font family from text style', {
     value: 'Body2',
+  }),
+  paginationAlignment: option('CUSTOM', {
+    label: 'Pagination alignment',
+    value: 'end',
+    configuration: {
+      as: 'BUTTONGROUP',
+      dataType: 'string',
+      condition: hideIf('pagination', 'EQ', 'never'),
+      allowedInput: [
+        { name: 'Left', value: 'left' },
+        { name: 'Center', value: 'center' },
+        { name: 'Right', value: 'right' },
+      ],
+    },
+  }),
+  paginationColor: color('Pagination color', {
+    value: ThemeColor.DARK,
+    configuration: {
+      condition: hideIf('pagination', 'EQ', 'never'),
+    },
   }),
   labelNumberOfPages: variable(`Pagination label (x 'of' y)`, {
     value: ['of'],

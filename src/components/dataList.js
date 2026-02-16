@@ -562,9 +562,15 @@
         function Pagination({ totalCount, resultCount, currentPage }) {
           const firstItem = currentPage ? (currentPage - 1) * rowsPerPage : 0;
 
-          useEffect(() => {
-            const totalPages = Math.ceil(totalCount / rowsPerPage);
+          const totalPages =
+            rowsPerPage > 0 ? Math.ceil(totalCount / rowsPerPage) : 0;
 
+          const isPrevDisabled = !currentPage || currentPage <= 1;
+
+          const isNextDisabled =
+            !currentPage || totalPages === 0 || currentPage >= totalPages;
+
+          useEffect(() => {
             if (currentPage > totalPages) {
               setPage(totalPages);
             }
@@ -572,47 +578,37 @@
 
           const totalText = env === 'dev' ? '[total]' : totalCount;
           return (
-            <>
-              <span>
+            <div className={classes.pagination}>
+              <button
+                className={classes.button}
+                type="button"
+                aria-label="Previous page"
+                onClick={() => setPage((v) => v - 1)}
+                disabled={isPrevDisabled}
+              >
+                <span className={classes.arrow}>
+                  <Icon name="ChevronLeft" />
+                </span>
+              </button>
+              <span className={classes.paginationLabel}>
                 {firstItem + 1}
                 {firstItem + 1 !== totalCount &&
                   ` - ${firstItem + resultCount}`}{' '}
                 {numOfPagesLabel} {totalText}
               </span>
-              <div className={classes.pagination}>
-                {typeof currentPage !== 'undefined' && currentPage > 1 ? (
-                  <button
-                    className={classes.button}
-                    type="button"
-                    onClick={() => setPage((v) => v - 1)}
-                  >
-                    <span className={classes.arrow}>
-                      <Icon name="ChevronLeft" />
-                    </span>
-                  </button>
-                ) : (
-                  <span className={`${classes.arrow} ${classes.arrowDisabled}`}>
-                    <Icon name="ChevronLeft" />
-                  </span>
-                )}
-                {(typeof currentPage === 'undefined' ? 1 : currentPage) <
-                totalCount / rowsPerPage ? (
-                  <button
-                    className={classes.button}
-                    type="button"
-                    onClick={() => setPage((v) => v + 1)}
-                  >
-                    <span className={classes.arrow}>
-                      <Icon name="ChevronRight" />
-                    </span>
-                  </button>
-                ) : (
-                  <span className={`${classes.arrow} ${classes.arrowDisabled}`}>
-                    <Icon name="ChevronRight" />
-                  </span>
-                )}
-              </div>
-            </>
+              Copy Copy
+              <button
+                className={classes.button}
+                type="button"
+                aria-label="Next page"
+                onClick={() => setPage((v) => v + 1)}
+                disabled={isNextDisabled}
+              >
+                <span className={classes.arrow}>
+                  <Icon name="ChevronRight" />
+                </span>
+              </button>
+            </div>
           );
         }
 
@@ -666,36 +662,80 @@
       button: {
         background: 'transparent',
         border: 'none',
-        display: 'inline-block',
-        padding: 0,
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        lineHeight: 0,
+        padding: '0.25rem',
         margin: 0,
         cursor: 'pointer',
+        color: 'inherit',
         '&:active': {
           outline: 'none',
         },
-        '& $arrow svg': {
-          marginTop: '0.4375rem',
+        '&:disabled': {
+          cursor: 'default',
+
+          opacity: 0.4,
         },
       },
       footer: {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: ['0.75rem', 0],
+        justifyContent: ({ options: { paginationAlignment } }) => {
+          switch (paginationAlignment) {
+            case 'left':
+              return 'flex-start';
+            case 'center':
+              return 'center';
+            case 'right':
+            default:
+              return 'flex-end';
+          }
+        },
+        color: ({ options: { paginationColor } }) => [
+          style.getColor(paginationColor),
+          '!important',
+        ],
+        fontWeight: ({ options: { paginationType } }) =>
+          style.getFontWeight(paginationType),
+        textTransform: ({ options: { paginationType } }) =>
+          style.getTextTransform(paginationType),
+        letterSpacing: ({ options: { paginationType } }) =>
+          style.getLetterSpacing(paginationType),
         fontFamily: ({ options: { paginationType } }) =>
           style.getFontFamily(paginationType),
+        fontSize: ({ options: { paginationType } }) =>
+          style.getFontSize(paginationType),
+        padding: ['0.75rem', 0],
       },
       placeholder: {
         opacity: '0.4',
       },
       pagination: {
-        marginLeft: '1rem',
+        display: 'inline-flex',
+        alignItems: 'center',
+        whiteSpace: 'nowrap',
+        color: 'inherit',
+      },
+      paginationCenter: {
+        color: 'inherit',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      paginationLabel: {
+        whiteSpace: 'nowrap',
+        color: 'inherit',
+        paddingRight: '0.5rem',
+        paddingLeft: '0.5rem',
       },
       arrow: {
-        padding: '1rem',
-        fontSize: '1.625rem',
-        color: '#000',
-        textDecoration: 'none',
+        color: 'inherit',
+        '& svg': { fill: 'currentColor' },
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       },
       arrowDisabled: { color: '#ccc' },
       skeleton: {
