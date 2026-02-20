@@ -39,6 +39,7 @@
           loadingText,
           noResultsText,
           dataComponentAttribute,
+          paginationAlignment,
         } = options;
 
         const rowsPerPage = parseInt(take, 10) || 50;
@@ -98,6 +99,7 @@
                   totalCount={0}
                   resultCount={rowsPerPage}
                   currentPage={1}
+                  alignment={paginationAlignment}
                 />
               </div>
             )}
@@ -512,6 +514,7 @@
                     totalCount={totalCount}
                     resultCount={resultCount}
                     currentPage={page}
+                    alignment={paginationAlignment}
                   />
                 </div>
               )}
@@ -559,7 +562,12 @@
           );
         }
 
-        function Pagination({ totalCount, resultCount, currentPage }) {
+        function Pagination({
+          totalCount,
+          resultCount,
+          currentPage,
+          alignment,
+        }) {
           const firstItem = currentPage ? (currentPage - 1) * rowsPerPage : 0;
 
           const totalPages =
@@ -571,14 +579,31 @@
             !currentPage || totalPages === 0 || currentPage >= totalPages;
 
           useEffect(() => {
+            // Clamp page when totalCount changes (e.g. after filtering/search)
+            if (!currentPage) return;
+
             if (currentPage > totalPages) {
               setPage(totalPages);
             }
-          }, [totalCount]);
+          }, [currentPage, totalPages, setPage]);
 
           const totalText = env === 'dev' ? '[total]' : totalCount;
+
+          const label = (
+            <span className={classes.paginationLabel}>
+              {firstItem + 1}
+              {firstItem + 1 !== totalCount &&
+                ` - ${firstItem + resultCount}`}{' '}
+              {numOfPagesLabel} {totalText}
+            </span>
+          );
+
+          const isCenter = alignment === 'center';
+
           return (
             <div className={classes.pagination}>
+              {!isCenter && label}
+
               <button
                 className={classes.button}
                 type="button"
@@ -590,13 +615,9 @@
                   <Icon name="ChevronLeft" />
                 </span>
               </button>
-              <span className={classes.paginationLabel}>
-                {firstItem + 1}
-                {firstItem + 1 !== totalCount &&
-                  ` - ${firstItem + resultCount}`}{' '}
-                {numOfPagesLabel} {totalText}
-              </span>
-              Copy Copy
+
+              {isCenter && label}
+
               <button
                 className={classes.button}
                 type="button"
