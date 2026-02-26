@@ -1,3 +1,17 @@
+## [3.5.3](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.2...v3.5.3) (2026-02-24)
+
+
+### Bug Fixes
+
+* remove zone 14 ([d26226f](https://github.com/bettyblocks/material-ui-component-set/commit/d26226f8502160ee25656e353f446efb10ffa525))
+
+## [3.5.2](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.1...v3.5.2) (2026-02-24)
+
+
+### Bug Fixes
+
+* filter autocomplete by value to prevent loading too much records ([8ee13ba](https://github.com/bettyblocks/material-ui-component-set/commit/8ee13ba0438bd5eeb411d7a0905d69f29f880f27))
+
 ## [3.5.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.0...v3.5.1) (2025-12-31)
 
 
