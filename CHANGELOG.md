@@ -1,3 +1,10 @@
+## [3.5.4](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.3...v3.5.4) (2026-02-26)
+
+
+### Bug Fixes
+
+* register callbacks only once on mount using useEffect ([be8b242](https://github.com/bettyblocks/material-ui-component-set/commit/be8b242520060f91923abb10afc674602c156e54))
+
 ## [3.5.3](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.2...v3.5.3) (2026-02-24)
 
 
