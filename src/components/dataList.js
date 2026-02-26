@@ -343,25 +343,6 @@
           };
         }, [search]);
 
-        B.defineFunction('setSelectedRecord', (value) => {
-          const id = value.context.modelData && value.context.modelData.id;
-          setPageState(useText([`${id}`]));
-        });
-
-        B.defineFunction('Clear', () => {
-          setPageState(useText(['']));
-        });
-
-        B.defineFunction('Advanced filter', (value) => {
-          setPage(1);
-          setFilterV2(value.where);
-        });
-
-        B.defineFunction('Clear advanced filter', () => {
-          setPage(1);
-          setFilterV2({});
-        });
-
         const refetchCallback = (refetchData) => {
           const refetchResults =
             refetchData &&
@@ -374,6 +355,25 @@
         };
 
         useEffect(() => {
+          B.defineFunction('setSelectedRecord', (value) => {
+            const id = value.context.modelData && value.context.modelData.id;
+            setPageState(useText([`${id}`]));
+          });
+
+          B.defineFunction('Clear', () => {
+            setPageState(useText(['']));
+          });
+
+          B.defineFunction('Advanced filter', (value) => {
+            setPage(1);
+            setFilterV2(value.where);
+          });
+
+          B.defineFunction('Clear advanced filter', () => {
+            setPage(1);
+            setFilterV2({});
+          });
+
           B.defineFunction('Refetch', () => refetch().then(refetchCallback));
 
           /**
