@@ -61,7 +61,7 @@ const attrs = {
   isPublicPage: false,
   description: 'This is a page with a static Homepage-layout.',
   detail:
-    'his page has a static homepage to spark your interest and show what things are possible with the pagebuilder.',
+    'This page has a static homepage to spark your interest and show what things are possible with the pagebuilder.',
   previewUrl: 'https://preview.betty.app/homepage',
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Homepage.jpg',
