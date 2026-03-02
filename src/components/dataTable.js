@@ -174,59 +174,6 @@
       return value;
     };
 
-    B.defineFunction('setSelectedRecord', (value) => {
-      const id = value.context.modelData && value.context.modelData.id;
-      setPageState(useText([`${id}`]));
-    });
-
-    B.defineFunction('Clear', () => {
-      setPageState(useText(['']));
-    });
-
-    B.defineFunction('Advanced filter', (value) => {
-      setPage(0);
-      setFilterV2(value.where);
-    });
-
-    B.defineFunction('Clear advanced filter', () => {
-      setPage(0);
-      setFilterV2({});
-    });
-
-    /**
-     * @name Filter
-     * @param {Property} property
-     * @returns {Void}
-     */
-    B.defineFunction('Filter', ({ event, property, interactionId }) => {
-      if (event === undefined || event === null) {
-        // eslint-disable-next-line no-console
-        console.error(
-          'Event is empty. Please use this function with valid input events.',
-        );
-        return;
-      }
-      setInteractionFilter({
-        ...interactionFilter,
-        [interactionId]: {
-          property,
-          value: event.target ? event.target.value : transformValue(event),
-        },
-      });
-      setInteractionSearchTerm(
-        event.target ? event.target.value : transformValue(event),
-      );
-      setInteractionSearchProperty(property ? property.id : '');
-      setPage(0);
-    });
-
-    B.defineFunction('ResetFilter', () => {
-      setInteractionFilter({});
-      setInteractionSearchTerm('');
-      setInteractionSearchProperty('');
-      setPage(0);
-    });
-
     let interactionFilters = {};
 
     const isEmptyValue = (value) =>
@@ -385,18 +332,6 @@
         onCompleted(refetchResults);
       }
     };
-
-    B.defineFunction('Refetch', () => {
-      if (pagination === 'never') {
-        clearResults();
-        skipAppend.current = true;
-        setTimeout(() => {
-          refetch().then(refetchCallback);
-        }, 0);
-      } else {
-        refetch().then(refetchCallback);
-      }
-    });
 
     useEffect(() => {
       if (!isDev) return;
@@ -589,6 +524,71 @@
     };
 
     useEffect(() => {
+      B.defineFunction('setSelectedRecord', (value) => {
+        const id = value.context.modelData && value.context.modelData.id;
+        setPageState(useText([`${id}`]));
+      });
+
+      B.defineFunction('Clear', () => {
+        setPageState(useText(['']));
+      });
+
+      B.defineFunction('Advanced filter', (value) => {
+        setPage(0);
+        setFilterV2(value.where);
+      });
+
+      B.defineFunction('Clear advanced filter', () => {
+        setPage(0);
+        setFilterV2({});
+      });
+
+      /**
+       * @name Filter
+       * @param {Property} property
+       * @returns {Void}
+       */
+      B.defineFunction('Filter', ({ event, property, interactionId }) => {
+        if (event === undefined || event === null) {
+          // eslint-disable-next-line no-console
+          console.error(
+            'Event is empty. Please use this function with valid input events.',
+          );
+          return;
+        }
+        setInteractionFilter({
+          ...interactionFilter,
+          [interactionId]: {
+            property,
+            value: event.target ? event.target.value : transformValue(event),
+          },
+        });
+        setInteractionSearchTerm(
+          event.target ? event.target.value : transformValue(event),
+        );
+        setInteractionSearchProperty(property ? property.id : '');
+        setPage(0);
+      });
+
+      B.defineFunction('ResetFilter', () => {
+        setInteractionFilter({});
+        setInteractionSearchTerm('');
+        setInteractionSearchProperty('');
+        setPage(0);
+      });
+
+      B.defineFunction('Refetch', () => {
+        if (pagination === 'never') {
+          clearResults();
+          skipAppend.current = true;
+          setTimeout(() => {
+            refetch().then(refetchCallback);
+          }, 0);
+        } else {
+          refetch().then(refetchCallback);
+        }
+      });
+
       B.defineFunction('Reset order', () => {
         handleSort(orderPropertyPath, sortOrder);
       });
