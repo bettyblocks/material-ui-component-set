@@ -40,7 +40,10 @@
           noResultsText,
           dataComponentAttribute,
           paginationAlignment,
+          paginationStyling,
         } = options;
+        const enablePaginationStyling = Boolean(paginationStyling);
+        // Using Boolean(...) also keeps old pages safe if the option is missing (undefined => false).
 
         const rowsPerPage = parseInt(take, 10) || 50;
         const { TextField, InputAdornment } = window.MaterialUI.Core;
@@ -562,47 +565,80 @@
           );
         }
 
-        function Pagination({
-          totalCount,
-          resultCount,
-          currentPage,
-          alignment,
-        }) {
+        function Pagination({ totalCount, resultCount, currentPage }) {
           const firstItem = currentPage ? (currentPage - 1) * rowsPerPage : 0;
 
           const totalPages =
             rowsPerPage > 0 ? Math.ceil(totalCount / rowsPerPage) : 0;
 
           const isPrevDisabled = !currentPage || currentPage <= 1;
-
           const isNextDisabled =
             !currentPage || totalPages === 0 || currentPage >= totalPages;
 
           useEffect(() => {
-            // Clamp page when totalCount changes (e.g. after filtering/search)
             if (!currentPage) return;
-
-            if (currentPage > totalPages) {
-              setPage(totalPages);
-            }
-          }, [currentPage, totalPages, setPage]);
+            if (currentPage > totalPages) setPage(totalPages);
+          }, [currentPage, totalPages]);
 
           const totalText = env === 'dev' ? '[total]' : totalCount;
 
           const label = (
-            <span className={classes.paginationLabel}>
+            <>
               {firstItem + 1}
               {firstItem + 1 !== totalCount &&
                 ` - ${firstItem + resultCount}`}{' '}
               {numOfPagesLabel} {totalText}
-            </span>
+            </>
           );
 
-          const isCenter = alignment === 'center';
+          // 1) Backwards-compatible rendering (unchecked)
+          if (!enablePaginationStyling) {
+            return (
+              <>
+                <span>{label}</span>
+                <div className={classes.pagination}>
+                  <button
+                    className={classes.button}
+                    type="button"
+                    onClick={() => setPage((v) => v - 1)}
+                    disabled={isPrevDisabled}
+                  >
+                    <span
+                      className={`${classes.arrow} ${
+                        isPrevDisabled ? classes.arrowDisabled : ''
+                      }`}
+                    >
+                      <Icon name="ChevronLeft" />
+                    </span>
+                  </button>
+
+                  <button
+                    className={classes.button}
+                    type="button"
+                    onClick={() => setPage((v) => v + 1)}
+                    disabled={isNextDisabled}
+                  >
+                    <span
+                      className={`${classes.arrow} ${
+                        isNextDisabled ? classes.arrowDisabled : ''
+                      }`}
+                    >
+                      <Icon name="ChevronRight" />
+                    </span>
+                  </button>
+                </div>
+              </>
+            );
+          }
+
+          // 2) New rendering (checked): only center changes order
+          const isCenter = paginationAlignment === 'center';
 
           return (
             <div className={classes.pagination}>
-              {!isCenter && label}
+              {!isCenter && (
+                <span className={classes.paginationLabel}>{label}</span>
+              )}
 
               <button
                 className={classes.button}
@@ -616,7 +652,9 @@
                 </span>
               </button>
 
-              {isCenter && label}
+              {isCenter && (
+                <span className={classes.paginationLabel}>{label}</span>
+              )}
 
               <button
                 className={classes.button}
@@ -680,64 +718,120 @@
         border: 'none',
         outline: 'none',
       },
-      button: {
-        background: 'transparent',
-        border: 'none',
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        lineHeight: 0,
-        padding: '0.25rem',
-        margin: 0,
-        cursor: 'pointer',
-        color: 'inherit',
-        '&:active': {
-          outline: 'none',
+      footer: ({
+        options: {
+          paginationStyling,
+          paginationAlignment,
+          paginationColor,
+          paginationType,
         },
-        '&:disabled': {
-          cursor: 'default',
+      }) => {
+        const enabled = Boolean(paginationStyling);
 
-          opacity: 0.4,
-        },
-      },
-      footer: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: ({ options: { paginationAlignment } }) => {
-          switch (paginationAlignment) {
-            case 'left':
-              return 'flex-start';
-            case 'center':
-              return 'center';
-            case 'right':
-            default:
-              return 'flex-end';
-          }
-        },
-        color: ({ options: { paginationColor } }) => [
-          style.getColor(paginationColor),
-          '!important',
-        ],
-        fontWeight: ({ options: { paginationType } }) =>
-          style.getFontWeight(paginationType),
-        textTransform: ({ options: { paginationType } }) =>
-          style.getTextTransform(paginationType),
-        letterSpacing: ({ options: { paginationType } }) =>
-          style.getLetterSpacing(paginationType),
-        fontFamily: ({ options: { paginationType } }) =>
-          style.getFontFamily(paginationType),
-        fontSize: ({ options: { paginationType } }) =>
-          style.getFontSize(paginationType),
-        padding: ['0.75rem', 0],
+        if (!enabled) {
+          // old/current behavior
+          return {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+            padding: ['0.75rem', 0],
+            fontFamily: style.getFontFamily(paginationType),
+          };
+        }
+
+        // New styling behavior (only when checkbox enabled)
+        return {
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: (() => {
+            switch (paginationAlignment) {
+              case 'left':
+                return 'flex-start';
+              case 'center':
+                return 'center';
+              case 'right':
+              default:
+                return 'flex-end';
+            }
+          })(),
+          color: [style.getColor(paginationColor), '!important'],
+          fontWeight: style.getFontWeight(paginationType),
+          textTransform: style.getTextTransform(paginationType),
+          letterSpacing: style.getLetterSpacing(paginationType),
+          fontFamily: style.getFontFamily(paginationType),
+          fontSize: style.getFontSize(paginationType),
+          padding: ['0.75rem', 0],
+        };
       },
       placeholder: {
         opacity: '0.4',
       },
-      pagination: {
-        display: 'inline-flex',
-        alignItems: 'center',
-        whiteSpace: 'nowrap',
-        color: 'inherit',
+      pagination: ({ options: { paginationStyling } }) => {
+        if (!paginationStyling) {
+          return { marginLeft: '1rem' }; // old
+        }
+        return {
+          display: 'inline-flex',
+          alignItems: 'center',
+          whiteSpace: 'nowrap',
+          color: 'inherit',
+        };
+      },
+      button: ({ options: { paginationStyling } }) => {
+        if (!paginationStyling) {
+          return {
+            background: 'transparent',
+            border: 'none',
+            display: 'inline-block',
+            padding: 0,
+            margin: 0,
+            cursor: 'pointer',
+            '&:active': { outline: 'none' },
+            '& $arrow svg': { marginTop: '0.4375rem' },
+          };
+        }
+
+        return {
+          background: 'transparent',
+          border: 'none',
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          lineHeight: 0,
+          padding: '0.25rem',
+          margin: 0,
+          cursor: 'pointer',
+          color: 'inherit',
+          '&:active': { outline: 'none' },
+          '&:disabled': { cursor: 'default', opacity: 0.4 },
+        };
+      },
+
+      arrow: ({ options: { paginationStyling } }) => {
+        if (!paginationStyling) {
+          return {
+            padding: '1rem',
+            fontSize: '1.625rem',
+            color: '#000',
+            textDecoration: 'none',
+          };
+        }
+
+        return {
+          color: 'inherit',
+          '& svg': { fill: 'currentColor' },
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        };
+      },
+
+      arrowDisabled: ({ options: { paginationStyling } }) => {
+        if (!paginationStyling) {
+          return { color: '#ccc' }; // old
+        }
+        // optional: keep as-is or omit if you rely on button :disabled opacity
+        return { color: '#ccc' };
       },
       paginationCenter: {
         color: 'inherit',
@@ -751,14 +845,6 @@
         paddingRight: '0.5rem',
         paddingLeft: '0.5rem',
       },
-      arrow: {
-        color: 'inherit',
-        '& svg': { fill: 'currentColor' },
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-      arrowDisabled: { color: '#ccc' },
       skeleton: {
         margin: '0.625rem 0',
         height: `calc(${style.getFont('Body1').Mobile} * 1.2)`,
