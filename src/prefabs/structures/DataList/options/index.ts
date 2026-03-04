@@ -22,10 +22,10 @@ export const categories = [
     expanded: false,
     members: [
       'pagination',
+      'labelNumberOfPages',
       'take',
       'placeholderTake',
       'paginationStyling',
-      'labelNumberOfPages',
       'paginationType',
       'paginationAlignment',
       'paginationColor',
@@ -141,7 +141,7 @@ export const dataListOptions = {
   labelNumberOfPages: variable(`Pagination label (x 'of' y)`, {
     value: ['of'],
     configuration: {
-      condition: showIf('paginationStyling', 'EQ', true),
+      condition: hideIf('pagination', 'EQ', 'never'),
     },
   }),
   type: option('CUSTOM', {
