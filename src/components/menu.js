@@ -123,7 +123,7 @@
         const { top, left } = getDevPlacement(buttonRef, paperRef, placement);
         setMenuPosition({ top, left });
       }
-    }, [children, icon, isMenuListVisible, placement, outerSpacing, variant]);
+    }, [icon, isMenuListVisible, placement, outerSpacing, variant]);
 
     const generalProps = {
       disabled,
