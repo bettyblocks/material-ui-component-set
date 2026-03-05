@@ -1,3 +1,10 @@
+## [3.5.5](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.4...v3.5.5) (2026-02-27)
+
+
+### Bug Fixes
+
+* correct typo ([8a97c06](https://github.com/bettyblocks/material-ui-component-set/commit/8a97c06fc77c80957eed6edc0b7d1f11063c58e5))
+
 ## [3.5.4](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.3...v3.5.4) (2026-02-26)
 
 
