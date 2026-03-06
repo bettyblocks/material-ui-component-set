@@ -1,3 +1,10 @@
+## [3.5.6](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.5...v3.5.6) (2026-03-05)
+
+
+### Bug Fixes
+
+* avoid infinite rendering of menu component ([d00a5f1](https://github.com/bettyblocks/material-ui-component-set/commit/d00a5f1d6fe970db1c8c1ef00841f52f7d78e07f))
+
 ## [3.5.5](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.4...v3.5.5) (2026-02-27)
 
 
