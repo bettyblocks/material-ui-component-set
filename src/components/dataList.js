@@ -43,7 +43,6 @@
           paginationStyling,
         } = options;
         const enablePaginationStyling = Boolean(paginationStyling);
-        // Using Boolean(...) also keeps old pages safe if the option is missing (undefined => false).
 
         const rowsPerPage = parseInt(take, 10) || 50;
         const { TextField, InputAdornment } = window.MaterialUI.Core;
@@ -591,7 +590,6 @@
             </>
           );
 
-          // 1) Backwards-compatible rendering (unchecked)
           if (!enablePaginationStyling) {
             return (
               <>
@@ -630,8 +628,6 @@
               </>
             );
           }
-
-          // 2) New rendering (checked): only center changes order
           const isCenter = paginationAlignment === 'center';
 
           return (
@@ -729,7 +725,6 @@
         const enabled = Boolean(paginationStyling);
 
         if (!enabled) {
-          // old/current behavior
           return {
             display: 'flex',
             alignItems: 'center',
@@ -738,8 +733,6 @@
             fontFamily: style.getFontFamily(paginationType),
           };
         }
-
-        // New styling behavior (only when checkbox enabled)
         return {
           display: 'flex',
           alignItems: 'center',
@@ -825,14 +818,7 @@
           justifyContent: 'center',
         };
       },
-
-      arrowDisabled: ({ options: { paginationStyling } }) => {
-        if (!paginationStyling) {
-          return { color: '#ccc' }; // old
-        }
-        // optional: keep as-is or omit if you rely on button :disabled opacity
-        return { color: '#ccc' };
-      },
+      arrowDisabled: { color: '#ccc !important' },
       paginationCenter: {
         color: 'inherit',
         display: 'flex',
