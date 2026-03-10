@@ -761,7 +761,7 @@
       },
       pagination: ({ options: { paginationStyling } }) => {
         if (!paginationStyling) {
-          return { marginLeft: '1rem' }; // old
+          return { marginLeft: '1rem' };
         }
         return {
           display: 'inline-flex',
