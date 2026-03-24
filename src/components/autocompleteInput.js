@@ -368,8 +368,25 @@
       // Use eq for an exact match to not add a fuzzy filter for the query
       const predicate = isSearch && !labelPropIsNumber ? 'matches' : 'eq';
 
-      // Create filter with property name(s) as key(s)
-      const inputFilter = propertyNames.reduceRight(
+      // When the user has selected a record, we need to ensure it appears
+      // in the results even if it falls beyond the max fetch size (take).
+
+      // Filter by the unique value property (id) rather than the
+      // label property (name) to avoid matching other records that
+      // share the same label but are different records.
+
+      const canFilterByValue =
+        !isSearch && !isListProperty && value && typeof value !== 'string';
+
+      const selectedValueFilter = {
+        [valueProp.name]: {
+          eq: value[valueProp.name],
+        },
+      };
+
+      // When the user is actively searching, build a filter from the
+      // label property path to match the search input.
+      const searchFilter = propertyNames.reduceRight(
         (acc, propertyName) => ({ [propertyName]: acc }),
         {
           [predicate]: labelPropIsNumber
@@ -377,6 +394,8 @@
             : debouncedInputValue,
         },
       );
+
+      const inputFilter = canFilterByValue ? selectedValueFilter : searchFilter;
 
       filter = {
         [operator]:

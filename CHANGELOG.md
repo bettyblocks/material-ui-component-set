@@ -1,3 +1,38 @@
+## [3.5.6](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.5...v3.5.6) (2026-03-05)
+
+
+### Bug Fixes
+
+* avoid infinite rendering of menu component ([d00a5f1](https://github.com/bettyblocks/material-ui-component-set/commit/d00a5f1d6fe970db1c8c1ef00841f52f7d78e07f))
+
+## [3.5.5](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.4...v3.5.5) (2026-02-27)
+
+
+### Bug Fixes
+
+* correct typo ([8a97c06](https://github.com/bettyblocks/material-ui-component-set/commit/8a97c06fc77c80957eed6edc0b7d1f11063c58e5))
+
+## [3.5.4](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.3...v3.5.4) (2026-02-26)
+
+
+### Bug Fixes
+
+* register callbacks only once on mount using useEffect ([be8b242](https://github.com/bettyblocks/material-ui-component-set/commit/be8b242520060f91923abb10afc674602c156e54))
+
+## [3.5.3](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.2...v3.5.3) (2026-02-24)
+
+
+### Bug Fixes
+
+* remove zone 14 ([d26226f](https://github.com/bettyblocks/material-ui-component-set/commit/d26226f8502160ee25656e353f446efb10ffa525))
+
+## [3.5.2](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.1...v3.5.2) (2026-02-24)
+
+
+### Bug Fixes
+
+* filter autocomplete by value to prevent loading too much records ([8ee13ba](https://github.com/bettyblocks/material-ui-component-set/commit/8ee13ba0438bd5eeb411d7a0905d69f29f880f27))
+
 ## [3.5.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.0...v3.5.1) (2025-12-31)
 
 
