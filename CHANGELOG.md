@@ -1,3 +1,10 @@
+# [3.6.0](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.6...v3.6.0) (2026-03-24)
+
+
+### Features
+
+* added alignment and color to datalist pagination (PFR-1133) ([34b815c](https://github.com/bettyblocks/material-ui-component-set/commit/34b815c3eb23a04f17461090af9a6f60f71321c6))
+
 ## [3.5.6](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.5...v3.5.6) (2026-03-05)
 
 
