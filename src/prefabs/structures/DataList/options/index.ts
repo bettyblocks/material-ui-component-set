@@ -10,6 +10,9 @@ import {
   variable,
   modelAndRelation,
   font,
+  color,
+  ThemeColor,
+  toggle,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -22,7 +25,10 @@ export const categories = [
       'labelNumberOfPages',
       'take',
       'placeholderTake',
+      'paginationStyling',
       'paginationType',
+      'paginationAlignment',
+      'paginationColor',
     ],
   },
   {
@@ -76,6 +82,13 @@ export const dataListOptions = {
       dependsOn: 'model',
     },
   }),
+  paginationStyling: toggle('Custom pagination styling', {
+    value: false,
+    configuration: {
+      dependsOn: 'model',
+      condition: hideIf('pagination', 'EQ', 'never'),
+    },
+  }),
   pagination: option('CUSTOM', {
     label: 'Pagination',
     value: 'never',
@@ -101,6 +114,29 @@ export const dataListOptions = {
   }),
   paginationType: font('Font family from text style', {
     value: 'Body2',
+    configuration: {
+      condition: showIf('paginationStyling', 'EQ', true),
+    },
+  }),
+  paginationAlignment: option('CUSTOM', {
+    label: 'Pagination alignment',
+    value: 'right',
+    configuration: {
+      as: 'BUTTONGROUP',
+      dataType: 'string',
+      condition: showIf('paginationStyling', 'EQ', true),
+      allowedInput: [
+        { name: 'Left', value: 'left' },
+        { name: 'Center', value: 'center' },
+        { name: 'Right', value: 'right' },
+      ],
+    },
+  }),
+  paginationColor: color('Pagination color', {
+    value: ThemeColor.DARK,
+    configuration: {
+      condition: showIf('paginationStyling', 'EQ', true),
+    },
   }),
   labelNumberOfPages: variable(`Pagination label (x 'of' y)`, {
     value: ['of'],

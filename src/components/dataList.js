@@ -39,7 +39,10 @@
           loadingText,
           noResultsText,
           dataComponentAttribute,
+          paginationAlignment,
+          paginationStyling,
         } = options;
+        const enablePaginationStyling = Boolean(paginationStyling);
 
         const rowsPerPage = parseInt(take, 10) || 50;
         const { TextField, InputAdornment } = window.MaterialUI.Core;
@@ -98,6 +101,7 @@
                   totalCount={0}
                   resultCount={rowsPerPage}
                   currentPage={1}
+                  alignment={paginationAlignment}
                 />
               </div>
             )}
@@ -512,6 +516,7 @@
                     totalCount={totalCount}
                     resultCount={resultCount}
                     currentPage={page}
+                    alignment={paginationAlignment}
                   />
                 </div>
               )}
@@ -562,57 +567,103 @@
         function Pagination({ totalCount, resultCount, currentPage }) {
           const firstItem = currentPage ? (currentPage - 1) * rowsPerPage : 0;
 
-          useEffect(() => {
-            const totalPages = Math.ceil(totalCount / rowsPerPage);
+          const totalPages =
+            rowsPerPage > 0 ? Math.ceil(totalCount / rowsPerPage) : 0;
 
-            if (currentPage > totalPages) {
-              setPage(totalPages);
-            }
-          }, [totalCount]);
+          const isPrevDisabled = !currentPage || currentPage <= 1;
+          const isNextDisabled =
+            !currentPage || totalPages === 0 || currentPage >= totalPages;
+
+          useEffect(() => {
+            if (!currentPage) return;
+            if (currentPage > totalPages) setPage(totalPages);
+          }, [currentPage, totalPages]);
 
           const totalText = env === 'dev' ? '[total]' : totalCount;
-          return (
+
+          const label = (
             <>
-              <span>
-                {firstItem + 1}
-                {firstItem + 1 !== totalCount &&
-                  ` - ${firstItem + resultCount}`}{' '}
-                {numOfPagesLabel} {totalText}
-              </span>
-              <div className={classes.pagination}>
-                {typeof currentPage !== 'undefined' && currentPage > 1 ? (
+              {firstItem + 1}
+              {firstItem + 1 !== totalCount &&
+                ` - ${firstItem + resultCount}`}{' '}
+              {numOfPagesLabel} {totalText}
+            </>
+          );
+
+          if (!enablePaginationStyling) {
+            return (
+              <>
+                <span>{label}</span>
+                <div className={classes.pagination}>
                   <button
                     className={classes.button}
                     type="button"
                     onClick={() => setPage((v) => v - 1)}
+                    disabled={isPrevDisabled}
                   >
-                    <span className={classes.arrow}>
+                    <span
+                      className={`${classes.arrow} ${
+                        isPrevDisabled ? classes.arrowDisabled : ''
+                      }`}
+                    >
                       <Icon name="ChevronLeft" />
                     </span>
                   </button>
-                ) : (
-                  <span className={`${classes.arrow} ${classes.arrowDisabled}`}>
-                    <Icon name="ChevronLeft" />
-                  </span>
-                )}
-                {(typeof currentPage === 'undefined' ? 1 : currentPage) <
-                totalCount / rowsPerPage ? (
+
                   <button
                     className={classes.button}
                     type="button"
                     onClick={() => setPage((v) => v + 1)}
+                    disabled={isNextDisabled}
                   >
-                    <span className={classes.arrow}>
+                    <span
+                      className={`${classes.arrow} ${
+                        isNextDisabled ? classes.arrowDisabled : ''
+                      }`}
+                    >
                       <Icon name="ChevronRight" />
                     </span>
                   </button>
-                ) : (
-                  <span className={`${classes.arrow} ${classes.arrowDisabled}`}>
-                    <Icon name="ChevronRight" />
-                  </span>
-                )}
-              </div>
-            </>
+                </div>
+              </>
+            );
+          }
+          const isCenter = paginationAlignment === 'center';
+
+          return (
+            <div className={classes.pagination}>
+              {!isCenter && (
+                <span className={classes.paginationLabel}>{label}</span>
+              )}
+
+              <button
+                className={classes.button}
+                type="button"
+                aria-label="Previous page"
+                onClick={() => setPage((v) => v - 1)}
+                disabled={isPrevDisabled}
+              >
+                <span className={classes.arrow}>
+                  <Icon name="ChevronLeft" />
+                </span>
+              </button>
+
+              {isCenter && (
+                <span className={classes.paginationLabel}>{label}</span>
+              )}
+
+              <button
+                className={classes.button}
+                type="button"
+                aria-label="Next page"
+                onClick={() => setPage((v) => v + 1)}
+                disabled={isNextDisabled}
+              >
+                <span className={classes.arrow}>
+                  <Icon name="ChevronRight" />
+                </span>
+              </button>
+            </div>
           );
         }
 
@@ -663,41 +714,123 @@
         border: 'none',
         outline: 'none',
       },
-      button: {
-        background: 'transparent',
-        border: 'none',
-        display: 'inline-block',
-        padding: 0,
-        margin: 0,
-        cursor: 'pointer',
-        '&:active': {
-          outline: 'none',
+      footer: ({
+        options: {
+          paginationStyling,
+          paginationAlignment,
+          paginationColor,
+          paginationType,
         },
-        '& $arrow svg': {
-          marginTop: '0.4375rem',
-        },
-      },
-      footer: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: ['0.75rem', 0],
-        fontFamily: ({ options: { paginationType } }) =>
-          style.getFontFamily(paginationType),
+      }) => {
+        const enabled = Boolean(paginationStyling);
+
+        if (!enabled) {
+          return {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+            padding: ['0.75rem', 0],
+            fontFamily: style.getFontFamily(paginationType),
+          };
+        }
+        return {
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: (() => {
+            switch (paginationAlignment) {
+              case 'left':
+                return 'flex-start';
+              case 'center':
+                return 'center';
+              case 'right':
+              default:
+                return 'flex-end';
+            }
+          })(),
+          color: [style.getColor(paginationColor), '!important'],
+          fontWeight: style.getFontWeight(paginationType),
+          textTransform: style.getTextTransform(paginationType),
+          letterSpacing: style.getLetterSpacing(paginationType),
+          fontFamily: style.getFontFamily(paginationType),
+          fontSize: style.getFontSize(paginationType),
+          padding: ['0.75rem', 0],
+        };
       },
       placeholder: {
         opacity: '0.4',
       },
-      pagination: {
-        marginLeft: '1rem',
+      pagination: ({ options: { paginationStyling } }) => {
+        if (!paginationStyling) {
+          return { marginLeft: '1rem' };
+        }
+        return {
+          display: 'inline-flex',
+          alignItems: 'center',
+          whiteSpace: 'nowrap',
+          color: 'inherit',
+        };
       },
-      arrow: {
-        padding: '1rem',
-        fontSize: '1.625rem',
-        color: '#000',
-        textDecoration: 'none',
+      button: ({ options: { paginationStyling } }) => {
+        if (!paginationStyling) {
+          return {
+            background: 'transparent',
+            border: 'none',
+            display: 'inline-block',
+            padding: 0,
+            margin: 0,
+            cursor: 'pointer',
+            '&:active': { outline: 'none' },
+            '& $arrow svg': { marginTop: '0.4375rem' },
+          };
+        }
+
+        return {
+          background: 'transparent',
+          border: 'none',
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          lineHeight: 0,
+          padding: '0.25rem',
+          margin: 0,
+          cursor: 'pointer',
+          color: 'inherit',
+          '&:active': { outline: 'none' },
+          '&:disabled': { cursor: 'default', opacity: 0.4 },
+        };
       },
-      arrowDisabled: { color: '#ccc' },
+
+      arrow: ({ options: { paginationStyling } }) => {
+        if (!paginationStyling) {
+          return {
+            padding: '1rem',
+            fontSize: '1.625rem',
+            color: '#000',
+            textDecoration: 'none',
+          };
+        }
+
+        return {
+          color: 'inherit',
+          '& svg': { fill: 'currentColor' },
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        };
+      },
+      arrowDisabled: { color: '#ccc !important' },
+      paginationCenter: {
+        color: 'inherit',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      paginationLabel: {
+        whiteSpace: 'nowrap',
+        color: 'inherit',
+        paddingRight: '0.5rem',
+        paddingLeft: '0.5rem',
+      },
       skeleton: {
         margin: '0.625rem 0',
         height: `calc(${style.getFont('Body1').Mobile} * 1.2)`,
