@@ -913,7 +913,6 @@
     }, []);
 
     const TextStyleSelector = useRef(function TextStyleSelector({
-      currentShowDropdown,
       currentAmountOfHeaders,
       currentRenderDropdown,
     }) {
@@ -1034,7 +1033,6 @@
             <div className={classes.toolbar}>
               <div className={classes.toolbarGroup}>
                 <TextStyleSelector
-                  currentShowDropdown={showDropdown}
                   currentAmountOfHeaders={amountOfHeadersInSelection}
                   currentRenderDropdown={renderDropdown}
                 />
