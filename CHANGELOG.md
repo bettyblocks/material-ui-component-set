@@ -1,3 +1,17 @@
+# [3.6.0](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.6...v3.6.0) (2026-03-24)
+
+
+### Features
+
+* added alignment and color to datalist pagination (PFR-1133) ([34b815c](https://github.com/bettyblocks/material-ui-component-set/commit/34b815c3eb23a04f17461090af9a6f60f71321c6))
+
+## [3.5.6](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.5...v3.5.6) (2026-03-05)
+
+
+### Bug Fixes
+
+* avoid infinite rendering of menu component ([d00a5f1](https://github.com/bettyblocks/material-ui-component-set/commit/d00a5f1d6fe970db1c8c1ef00841f52f7d78e07f))
+
 ## [3.5.5](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.4...v3.5.5) (2026-02-27)
 
 
