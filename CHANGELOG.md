@@ -1,3 +1,10 @@
+## [3.6.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.6.0...v3.6.1) (2026-03-30)
+
+
+### Bug Fixes
+
+* rendering and mousedown behavior in rich text component ([08e8e50](https://github.com/bettyblocks/material-ui-component-set/commit/08e8e50dd01648f1dfa1cc8266463725d8ed8e8a))
+
 # [3.6.0](https://github.com/bettyblocks/material-ui-component-set/compare/v3.5.6...v3.6.0) (2026-03-24)
 
 
