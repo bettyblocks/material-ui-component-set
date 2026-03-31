@@ -857,14 +857,14 @@
       }
     };
 
-    function DropdownItem({ format, text, tag }) {
-      const ownEditor = useSlate();
+    const renderDropdownItem = (ownEditor, { format, text, tag }) => {
       const Tag = tag;
       const isActive =
         isBlockActive(ownEditor, format, 'type') &&
         amountOfHeadersInSelection === 1;
       return (
         <li
+          key={format}
           className={`${classes.dropdownItem} ${isActive ? 'active' : ''}`}
           onMouseDown={(event) => {
             event.preventDefault();
@@ -878,21 +878,45 @@
           </div>
         </li>
       );
-    }
+    };
 
-    function Dropdown() {
+    const renderDropdown = (ownEditor) => {
       return (
         <ul className={`${classes.dropdown} ${showDropdown ? 'show' : ''}`}>
-          {TEXT_FORMATS.map(({ format, text, tag }) => (
-            <DropdownItem key={format} format={format} text={text} tag={tag} />
-          ))}
+          {TEXT_FORMATS.map((textFormat) =>
+            renderDropdownItem(ownEditor, textFormat),
+          )}
         </ul>
       );
-    }
+    };
 
-    function TextStyleSelector() {
+    const styleSelectorRef = useRef();
+    const showDropdownRef = useRef(showDropdown);
+    showDropdownRef.current = showDropdown;
+
+    useEffect(() => {
+      const handler = (event) => {
+        if (
+          showDropdownRef.current &&
+          styleSelectorRef.current &&
+          !styleSelectorRef.current.contains(event.target)
+        ) {
+          setShowDropdown(false);
+        }
+      };
+      document.addEventListener('mousedown', handler);
+      document.addEventListener('touchstart', handler);
+      return () => {
+        document.removeEventListener('mousedown', handler);
+        document.removeEventListener('touchstart', handler);
+      };
+    }, []);
+
+    const TextStyleSelector = useRef(function TextStyleSelector({
+      currentAmountOfHeaders,
+      currentRenderDropdown,
+    }) {
       const ownEditor = useSlate();
-      const styleSelectorRef = useRef();
 
       // Default to paragraph style
       let activeStyleName = 'Body 1';
@@ -952,33 +976,12 @@
 
           // Show "Multiple formats" to indicate multiple text formats in the selection
           // (e.g. "Body 1" and "Title 1")
-          if (
-            hasMultipleTagTypesInSelection &&
-            amountOfHeadersInSelection !== 1
-          ) {
+          if (hasMultipleTagTypesInSelection && currentAmountOfHeaders !== 1) {
             activeStyleName = 'Multiple formats';
           }
         }
       }
 
-      useEffect(() => {
-        const handler = (event) => {
-          if (
-            showDropdown &&
-            styleSelectorRef.current &&
-            !styleSelectorRef.current.contains(event.target)
-          ) {
-            setShowDropdown(false);
-          }
-        };
-        document.addEventListener('mousedown', handler);
-        document.addEventListener('touchstart', handler);
-        return () => {
-          // Cleanup the event listener
-          document.removeEventListener('mousedown', handler);
-          document.removeEventListener('touchstart', handler);
-        };
-      }, [showDropdown]);
       const ArrowDown = allIcons.KeyboardArrowDown;
       return (
         <div className={classes.toolbarDropdown} ref={styleSelectorRef}>
@@ -988,6 +991,7 @@
             aria-label="Text styles"
             onMouseDown={(event) => {
               event.preventDefault();
+              event.stopPropagation();
               setShowDropdown((prev) => !prev);
             }}
             className={classes.dropdownButton}
@@ -999,10 +1003,10 @@
             <ArrowDown className={classes.dropdownButtonIcon} />
             {/* </span> */}
           </button>
-          <Dropdown />
+          {currentRenderDropdown(ownEditor)}
         </div>
       );
-    }
+    }).current;
 
     return (
       <div
@@ -1028,7 +1032,10 @@
           >
             <div className={classes.toolbar}>
               <div className={classes.toolbarGroup}>
-                <TextStyleSelector />
+                <TextStyleSelector
+                  currentAmountOfHeaders={amountOfHeadersInSelection}
+                  currentRenderDropdown={renderDropdown}
+                />
                 <div className={classes.toolbarSubGroup}>
                   {showBold && <MarkButton format="bold" icon="FormatBold" />}
                   {showItalic && (
