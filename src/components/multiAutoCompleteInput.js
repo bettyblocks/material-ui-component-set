@@ -90,6 +90,8 @@
     const [helper, setHelper] = useState(useText(helperTextRaw));
     const [errorState, setErrorState] = useState(false);
     const changeContext = useRef(null);
+    const didMountRef = useRef(false);
+    const hasInteractedRef = useRef(false);
     const { current: labelControlRef } = useRef(generateUUID());
     const dataComponentAttribute =
       useText(dataComponentAttributeRaw) || 'AutoComplete';
@@ -725,29 +727,43 @@
      */
 
     const currentValue = getValue();
+    const currentValueString = JSON.stringify(currentValue);
 
     useEffect(() => {
-      if (
-        JSON.stringify(currentValue) !== JSON.stringify(debouncedCurrentValue)
-      ) {
-        setTimeout(() => {
-          setDebouncedCurrentValue(currentValue);
-        }, 250);
-      } else {
-        let triggerEventValue;
+      const handle = setTimeout(() => {
+        setDebouncedCurrentValue(currentValue);
+      }, 250);
 
-        if (optionType === 'model' || optionType === 'variable') {
-          setDebouncedInputValue('');
-          triggerEventValue =
-            value.length === 0 ? [] : value.map((x) => x[valueProp.name]);
-        } else if (optionType === 'property') {
-          triggerEventValue = value || '';
-        }
+      return () => clearTimeout(handle);
+    }, [currentValueString]);
 
-        changeContext.current = { modelData: value };
-        B.triggerEvent('onChange', triggerEventValue, changeContext.current);
+    useEffect(() => {
+      if (debouncedCurrentValue === undefined) {
+        return;
       }
-    }, [value]);
+
+      if (!didMountRef.current) {
+        didMountRef.current = true;
+        return;
+      }
+
+      if (!hasInteractedRef.current) {
+        return;
+      }
+
+      let triggerEventValue;
+
+      if (optionType === 'model' || optionType === 'variable') {
+        setDebouncedInputValue('');
+        triggerEventValue =
+          value.length === 0 ? [] : value.map((x) => x[valueProp.name]);
+      } else if (optionType === 'property') {
+        triggerEventValue = value || '';
+      }
+
+      changeContext.current = { modelData: value };
+      B.triggerEvent('onChange', triggerEventValue, changeContext.current);
+    }, [debouncedCurrentValue]);
 
     const renderLabel = (option) => {
       let optionLabel = '';
@@ -787,8 +803,8 @@
             groupBy: (option) => getSortByGroupValue(option),
           })}
           onChange={(_, newValue) => {
+            hasInteractedRef.current = true;
             setValue(newValue || (multiple ? [] : ''));
-            setDebouncedCurrentValue(newValue);
           }}
           onInputChange={(event, newValue) => {
             let validation = event ? event.target.validity : null;
