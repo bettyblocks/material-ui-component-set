@@ -14,6 +14,7 @@
         'Element',
         'Transforms',
         'Node',
+        'Range',
       ],
     },
     {
@@ -24,7 +25,7 @@
     {
       label: 'SlateReact',
       package: 'npm:slate-react@0.94.0',
-      imports: ['Editable', 'withReact', 'Slate', 'useSlate'],
+      imports: ['Editable', 'withReact', 'Slate', 'useSlate', 'ReactEditor'],
     },
     {
       label: 'SlateHyperscript',
@@ -47,13 +48,14 @@
         'FormatUnderlined',
         'StrikethroughS',
         'FirstPage',
+        'InsertLink',
       ],
     },
   ],
   jsx: (() => {
     const {
-      Slate: { createEditor, Editor, Text, Element, Transforms, Node },
-      SlateReact: { Editable, withReact, Slate, useSlate },
+      Slate: { createEditor, Editor, Text, Element, Transforms, Node, Range },
+      SlateReact: { Editable, withReact, Slate, useSlate, ReactEditor },
       SlateHistory: { withHistory },
       SlateHyperscript: { jsx },
       MuiExtraIcons: {
@@ -69,6 +71,7 @@
         FormatUnderlined,
         StrikethroughS,
         FirstPage,
+        InsertLink,
       },
     } = dependencies;
     const { Icons } = window.MaterialUI;
@@ -85,6 +88,7 @@
       FormatUnderlined,
       StrikethroughS,
       FirstPage,
+      InsertLink,
     };
     const allIcons = { ...Icons, ...extraIcons };
     const { FormHelperText, InputLabel, SvgIcon } = window.MaterialUI.Core;
@@ -106,6 +110,7 @@
       showCodeBlock,
       showNumberedList,
       showBulletedList,
+      showLink,
       showLeftAlign,
       showCenterAlign,
       showRightAlign,
@@ -120,6 +125,11 @@
     const [showDropdown, setShowDropdown] = useState(false);
     const [multipleStyles, setMultipleStyles] = useState(false);
     const [activeStyleName, setActiveStyleName] = useState('Body 1');
+    const [linkPopoverOpen, setLinkPopoverOpen] = useState(false);
+    const [linkUrlInput, setLinkUrlInput] = useState('');
+    const [linkNewTabInput, setLinkNewTabInput] = useState(false);
+    const savedSelectionRef = useRef(null);
+    const linkPathRef = useRef(null);
     const placeholderText = useText(placeholder);
     const helperTextResolved = useText(helperText);
     const { current: labelControlRef } = useRef(generateUUID());
@@ -128,6 +138,109 @@
       setCurrentValue(optionValue);
       setValueKey(valueKey + 1);
     }, [optionValue]);
+
+    const normalizeUrl = (input) => {
+      const trimmed = input.trim();
+      return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+    };
+
+    const isUrl = (string) => {
+      try {
+        const url = new URL(normalizeUrl(string));
+        return url.protocol === 'http:' || url.protocol === 'https:';
+      } catch (e) {
+        return false;
+      }
+    };
+
+    const isLinkActive = (editor) => {
+      const [link] = Array.from(
+        Editor.nodes(editor, {
+          match: (n) =>
+            !Editor.isEditor(n) && Element.isElement(n) && n.type === 'link',
+        }),
+      );
+      return !!link;
+    };
+
+    const unwrapLink = (editor) => {
+      Transforms.unwrapNodes(editor, {
+        match: (n) =>
+          !Editor.isEditor(n) && Element.isElement(n) && n.type === 'link',
+      });
+    };
+
+    const wrapLink = (editor, url, newTab = false) => {
+      if (isLinkActive(editor)) {
+        unwrapLink(editor);
+      }
+      const { selection } = editor;
+      const isCollapsed = selection && Range.isCollapsed(selection);
+      const normalizedUrl = normalizeUrl(url);
+      const link = {
+        type: 'link',
+        url: normalizedUrl,
+        newTab,
+        children: isCollapsed ? [{ text: normalizedUrl }] : [],
+      };
+      if (isCollapsed) {
+        Transforms.insertNodes(editor, link);
+      } else {
+        Transforms.wrapNodes(editor, link, { split: true });
+        Transforms.collapse(editor, { edge: 'end' });
+      }
+    };
+
+    const withLinks = (slateEditor) => {
+      const { isInline, insertData, insertText } = slateEditor;
+
+      // eslint-disable-next-line no-param-reassign
+      slateEditor.isInline = (element) =>
+        element.type === 'link' ? true : isInline(element);
+
+      // When a URL is pasted, wrap selected text in a link or insert a link node
+      // eslint-disable-next-line no-param-reassign
+      slateEditor.insertData = (data) => {
+        const text = data.getData('text/plain');
+        if (text && isUrl(text)) {
+          wrapLink(slateEditor, text);
+        } else {
+          insertData(data);
+        }
+      };
+
+      // When cursor is at the end of a link, move outside before inserting text
+      // eslint-disable-next-line no-param-reassign
+      slateEditor.insertText = (text) => {
+        const { selection } = slateEditor;
+        if (selection && Range.isCollapsed(selection)) {
+          const [linkEntry] = Array.from(
+            Editor.nodes(slateEditor, {
+              match: (n) =>
+                !Editor.isEditor(n) &&
+                Element.isElement(n) &&
+                n.type === 'link',
+            }),
+          );
+          if (linkEntry) {
+            const [, linkPath] = linkEntry;
+            const linkEnd = Editor.end(slateEditor, linkPath);
+            if (
+              selection.anchor.path.join() === linkEnd.path.join() &&
+              selection.anchor.offset === linkEnd.offset
+            ) {
+              const after = Editor.after(slateEditor, linkPath);
+              if (after) {
+                Transforms.select(slateEditor, after);
+              }
+            }
+          }
+        }
+        insertText(text);
+      };
+
+      return slateEditor;
+    };
 
     const KeyCode = {
       Digit1: 49,
@@ -281,13 +394,21 @@
           return `<li${align}>${children}</li>`;
         case 'code':
           return `<pre${align}><code>${children}</code></pre>`;
+        case 'link': {
+          const target = node.newTab ? ' target="_blank" rel="noreferrer"' : '';
+          return `<a href="${normalizeUrl(node.url)}"${target}>${children}</a>`;
+        }
         default:
           return children;
       }
     };
 
     const ELEMENT_TAGS = {
-      A: (el) => ({ type: 'link', url: el.getAttribute('href') }),
+      A: (el) => ({
+        type: 'link',
+        url: el.getAttribute('href'),
+        newTab: el.getAttribute('target') === '_blank',
+      }),
       BLOCKQUOTE: () => ({ type: 'quote' }),
       H1: (el) => ({ type: 'heading-one', align: el.getAttribute('align') }),
       H2: (el) => ({ type: 'heading-two', align: el.getAttribute('align') }),
@@ -416,9 +537,61 @@
 
     const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
     const editor = React.useMemo(
-      () => withHistory(withReact(createEditor())),
+      () => withLinks(withHistory(withReact(createEditor()))),
       [],
     );
+
+    const openLinkPopover = () => {
+      savedSelectionRef.current = editor.selection;
+      if (isLinkActive(editor)) {
+        const [linkEntry] = Array.from(
+          Editor.nodes(editor, {
+            match: (n) =>
+              !Editor.isEditor(n) && Element.isElement(n) && n.type === 'link',
+          }),
+        );
+        if (linkEntry) {
+          const [linkNode, linkPath] = linkEntry;
+          linkPathRef.current = linkPath;
+          setLinkUrlInput(linkNode.url || '');
+          setLinkNewTabInput(!!linkNode.newTab);
+        }
+      } else {
+        linkPathRef.current = null;
+        setLinkUrlInput('');
+        setLinkNewTabInput(false);
+      }
+      setLinkPopoverOpen((prev) => !prev);
+    };
+
+    const applyLink = () => {
+      if (savedSelectionRef.current) {
+        ReactEditor.focus(editor);
+        Transforms.select(editor, savedSelectionRef.current);
+      }
+      if (!linkUrlInput.trim()) {
+        if (isLinkActive(editor)) unwrapLink(editor);
+      } else if (linkPathRef.current) {
+        Transforms.setNodes(
+          editor,
+          { url: normalizeUrl(linkUrlInput), newTab: linkNewTabInput },
+          { at: linkPathRef.current },
+        );
+      } else {
+        wrapLink(editor, linkUrlInput, linkNewTabInput);
+      }
+      setLinkPopoverOpen(false);
+    };
+
+    const removeLink = () => {
+      if (savedSelectionRef.current) {
+        ReactEditor.focus(editor);
+        Transforms.select(editor, savedSelectionRef.current);
+      }
+      unwrapLink(editor);
+      setLinkPopoverOpen(false);
+    };
+
     const parsed = new DOMParser().parseFromString(
       useText(valueProp),
       'text/html',
@@ -629,6 +802,11 @@
           if (showUnderlined) toggleMark(editor, 'underline');
           break;
         }
+        case 'k': {
+          event.preventDefault();
+          if (showLink) openLinkPopover();
+          break;
+        }
         case 'Backspace': {
           event.preventDefault();
           break;
@@ -694,6 +872,20 @@
       );
     }
 
+    function LinkElement({ attributes, children, element }) {
+      return (
+        <a
+          {...attributes}
+          href={element.url}
+          target={element.newTab ? '_blank' : undefined}
+          rel={element.newTab ? 'noreferrer' : undefined}
+          className={classes.link}
+        >
+          {children}
+        </a>
+      );
+    }
+
     const renderElement = useCallback((props) => {
       switch (props.element.type) {
         case 'code':
@@ -716,6 +908,8 @@
           return HeadingElement(props, 'h5');
         case 'heading-six':
           return HeadingElement(props, 'h6');
+        case 'link':
+          return LinkElement(props);
         case 'paragraph':
         default:
           return DefaultElement(props);
@@ -783,6 +977,144 @@
           }}
           icon={icon}
         />
+      );
+    }
+
+    const linkI18n = {
+      en: {
+        openInNewTab: 'Open in new tab',
+        save: 'Save',
+        remove: 'Remove',
+      },
+      nl: {
+        openInNewTab: 'Openen in nieuw tabblad',
+        save: 'Opslaan',
+        remove: 'Verwijderen',
+      },
+      de: {
+        openInNewTab: 'In neuem Tab öffnen',
+        save: 'Speichern',
+        remove: 'Entfernen',
+      },
+      fr: {
+        openInNewTab: 'Ouvrir dans un nouvel onglet',
+        save: 'Enregistrer',
+        remove: 'Supprimer',
+      },
+      es: {
+        openInNewTab: 'Abrir en nueva pestaña',
+        save: 'Guardar',
+        remove: 'Eliminar',
+      },
+      pt: {
+        openInNewTab: 'Abrir em nova aba',
+        save: 'Guardar',
+        remove: 'Remover',
+      },
+    };
+    const linkT = (() => {
+      const langs = navigator.languages || [navigator.language || 'en'];
+      const match = langs.find(
+        (lang) => linkI18n[lang.split('-')[0].toLowerCase()],
+      );
+      return match ? linkI18n[match.split('-')[0].toLowerCase()] : linkI18n.en;
+    })();
+
+    function LinkControl() {
+      const ownEditor = useSlate();
+      const controlRef = useRef();
+      const urlInputRef = useRef();
+
+      useEffect(() => {
+        if (linkPopoverOpen && urlInputRef.current) {
+          urlInputRef.current.focus();
+        }
+      }, [linkPopoverOpen]);
+
+      useEffect(() => {
+        const handler = (event) => {
+          if (
+            linkPopoverOpen &&
+            controlRef.current &&
+            !controlRef.current.contains(event.target)
+          ) {
+            setLinkPopoverOpen(false);
+          }
+        };
+        document.addEventListener('mousedown', handler);
+        document.addEventListener('touchstart', handler);
+        return () => {
+          document.removeEventListener('mousedown', handler);
+          document.removeEventListener('touchstart', handler);
+        };
+      }, [linkPopoverOpen]);
+
+      return (
+        <div className={classes.linkControl} ref={controlRef}>
+          <Button
+            active={isLinkActive(ownEditor)}
+            icon="InsertLink"
+            onMouseDown={(event) => {
+              event.preventDefault();
+              openLinkPopover();
+            }}
+          />
+          {linkPopoverOpen && (
+            <div className={classes.linkPopover}>
+              <input
+                ref={urlInputRef}
+                className={classes.linkInput}
+                type="url"
+                value={linkUrlInput}
+                placeholder="https://example.com"
+                onChange={(e) => setLinkUrlInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    applyLink();
+                  }
+                  if (e.key === 'Escape') setLinkPopoverOpen(false);
+                }}
+              />
+              <label
+                className={classes.linkCheckboxLabel}
+                htmlFor="link-newtab-checkbox"
+              >
+                <input
+                  id="link-newtab-checkbox"
+                  type="checkbox"
+                  checked={linkNewTabInput}
+                  onChange={(e) => setLinkNewTabInput(e.target.checked)}
+                />
+                {linkT.openInNewTab}
+              </label>
+              <div className={classes.linkActions}>
+                <button
+                  type="button"
+                  className={classes.linkSaveButton}
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    applyLink();
+                  }}
+                >
+                  {linkT.save}
+                </button>
+                {linkPathRef.current && (
+                  <button
+                    type="button"
+                    className={classes.linkRemoveButton}
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      removeLink();
+                    }}
+                  >
+                    {linkT.remove}
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
       );
     }
 
@@ -975,6 +1307,11 @@
                     {showCodeBlock && (
                       <BlockButton format="code" icon="DeveloperMode" />
                     )}
+                  </div>
+                )}
+                {showLink && (
+                  <div className={classes.toolbarSubGroup}>
+                    <LinkControl />
                   </div>
                 )}
                 <div className={classes.toolbarSubGroup}>
@@ -1248,6 +1585,75 @@
       },
       list: {
         listStylePosition: 'inside',
+      },
+      link: {
+        color: ({ options: { buttonActiveColor } }) => [
+          style.getColor(buttonActiveColor),
+        ],
+        textDecoration: 'underline',
+        cursor: 'pointer',
+      },
+      linkControl: {
+        position: 'relative',
+      },
+      linkPopover: {
+        position: 'absolute',
+        top: 'calc(100% + 4px)',
+        left: 0,
+        zIndex: 9999,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '8px',
+        minWidth: '240px',
+        padding: '12px',
+        backgroundColor: '#fff',
+        borderRadius: '6px',
+        boxShadow:
+          'rgb(9 30 66 / 25%) 0px 4px 8px -2px, rgb(9 30 66 / 31%) 0px 0px 1px',
+      },
+      linkInput: {
+        width: '100%',
+        padding: '6px 8px',
+        fontSize: '0.875rem',
+        border: '1px solid #ccc',
+        borderRadius: '4px',
+        boxSizing: 'border-box',
+        outline: 'none',
+        '&:focus': {
+          borderColor: ({ options: { borderFocusColor } }) =>
+            style.getColor(borderFocusColor),
+        },
+      },
+      linkCheckboxLabel: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '6px',
+        fontSize: '0.875rem',
+        cursor: 'pointer',
+        userSelect: 'none',
+      },
+      linkActions: {
+        display: 'flex',
+        gap: '8px',
+      },
+      linkSaveButton: {
+        padding: '4px 14px',
+        fontSize: '0.875rem',
+        border: 'none',
+        borderRadius: '4px',
+        cursor: 'pointer',
+        backgroundColor: ({ options: { buttonActiveColor } }) =>
+          style.getColor(buttonActiveColor),
+        color: '#fff',
+      },
+      linkRemoveButton: {
+        padding: '4px 14px',
+        fontSize: '0.875rem',
+        border: '1px solid currentColor',
+        borderRadius: '4px',
+        cursor: 'pointer',
+        backgroundColor: 'transparent',
+        color: ({ options: { errorColor } }) => style.getColor(errorColor),
       },
     };
   },
