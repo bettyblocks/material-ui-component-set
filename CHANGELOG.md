@@ -1,3 +1,10 @@
+## [3.7.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.7.0...v3.7.1) (2026-05-04)
+
+
+### Bug Fixes
+
+* remove zone number nineteen ([e68364e](https://github.com/bettyblocks/material-ui-component-set/commit/e68364ea77e01bde6b8bc792c8d73c1c6452df55))
+
 # [3.7.0](https://github.com/bettyblocks/material-ui-component-set/compare/v3.6.2...v3.7.0) (2026-05-04)
 
 
