@@ -1,3 +1,10 @@
+# [3.7.0](https://github.com/bettyblocks/material-ui-component-set/compare/v3.6.2...v3.7.0) (2026-05-04)
+
+
+### Features
+
+* remove zone number three ([391a5a2](https://github.com/bettyblocks/material-ui-component-set/commit/391a5a2b953db6009d4fbf225b65fd6a5e0fa644))
+
 ## [3.6.2](https://github.com/bettyblocks/material-ui-component-set/compare/v3.6.1...v3.6.2) (2026-05-04)
 
 
