@@ -1,3 +1,24 @@
+## [3.7.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.7.0...v3.7.1) (2026-05-04)
+
+
+### Bug Fixes
+
+* remove zone number nineteen ([e68364e](https://github.com/bettyblocks/material-ui-component-set/commit/e68364ea77e01bde6b8bc792c8d73c1c6452df55))
+
+# [3.7.0](https://github.com/bettyblocks/material-ui-component-set/compare/v3.6.2...v3.7.0) (2026-05-04)
+
+
+### Features
+
+* remove zone number three ([391a5a2](https://github.com/bettyblocks/material-ui-component-set/commit/391a5a2b953db6009d4fbf225b65fd6a5e0fa644))
+
+## [3.6.2](https://github.com/bettyblocks/material-ui-component-set/compare/v3.6.1...v3.6.2) (2026-05-04)
+
+
+### Bug Fixes
+
+* select value after search ([aaef9fd](https://github.com/bettyblocks/material-ui-component-set/commit/aaef9fd73f746fa306e34a5c1dfb0a7f83b51fbf))
+
 ## [3.6.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.6.0...v3.6.1) (2026-03-30)
 
 
