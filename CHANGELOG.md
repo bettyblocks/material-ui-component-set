@@ -1,3 +1,10 @@
+## [3.6.2](https://github.com/bettyblocks/material-ui-component-set/compare/v3.6.1...v3.6.2) (2026-05-04)
+
+
+### Bug Fixes
+
+* select value after search ([aaef9fd](https://github.com/bettyblocks/material-ui-component-set/commit/aaef9fd73f746fa306e34a5c1dfb0a7f83b51fbf))
+
 ## [3.6.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.6.0...v3.6.1) (2026-03-30)
 
 
