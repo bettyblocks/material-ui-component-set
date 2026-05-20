@@ -55,10 +55,6 @@
       FormGroup,
     } = window.MaterialUI.Core;
 
-    B.defineFunction('Uncheck', () => setChecked(false));
-    B.defineFunction('Check', () => setChecked(true));
-    B.defineFunction('Check/Uncheck', () => setChecked(!checked));
-
     const handleValidation = (isValid) => {
       setErrorState(!isValid);
       const message = !isValid
@@ -84,7 +80,14 @@
       handleValidation(isValid);
     };
 
-    B.defineFunction('Reset', () => setChecked(boolify(resolvedValue)));
+    useEffect(() => {
+      B.defineFunction('Reset', () => setChecked(boolify(resolvedValue)));
+      B.defineFunction('Uncheck', () => setChecked(false));
+      B.defineFunction('Check', () => setChecked(true));
+      B.defineFunction('Check/Uncheck', () =>
+        setChecked((prev) => !boolify(prev)),
+      );
+    }, []);
 
     useEffect(() => {
       if (checked) {
