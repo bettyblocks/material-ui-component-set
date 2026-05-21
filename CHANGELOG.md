@@ -1,3 +1,10 @@
+## [3.7.2](https://github.com/bettyblocks/material-ui-component-set/compare/v3.7.1...v3.7.2) (2026-05-21)
+
+
+### Bug Fixes
+
+* place defined functions inside a useeffect in checkbox ([942625c](https://github.com/bettyblocks/material-ui-component-set/commit/942625c9292273dd27ce19089efc8eb57311aa0e))
+
 ## [3.7.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.7.0...v3.7.1) (2026-05-04)
 
 
