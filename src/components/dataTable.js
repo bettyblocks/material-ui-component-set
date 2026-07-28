@@ -556,13 +556,13 @@
           );
           return;
         }
-        setInteractionFilter({
-          ...interactionFilter,
+        setInteractionFilter((prev) => ({
+          ...prev,
           [interactionId]: {
             property,
             value: event.target ? event.target.value : transformValue(event),
           },
-        });
+        }));
         setInteractionSearchTerm(
           event.target ? event.target.value : transformValue(event),
         );
