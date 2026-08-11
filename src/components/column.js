@@ -4,12 +4,38 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { visible, dataComponentAttribute } = options;
+    const { useMediaQuery, useTheme } = window.MaterialUI.Core;
+    const { breakpoints } = useTheme();
+    const {
+      visible,
+      renderWhenHidden,
+      dataComponentAttribute,
+      columnWidth,
+      columnWidthTabletLandscape,
+      columnWidthTabletPortrait,
+      columnWidthMobile,
+    } = options;
     const { env, useText } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = isEmpty && isDev;
     const [isVisible, setIsVisible] = useState(true);
+
+    const isHiddenOnDesktop =
+      useMediaQuery(breakpoints.up(1280)) && columnWidth === 'hidden';
+    const isHiddenOnTabletLandscape =
+      useMediaQuery(breakpoints.between(960, 1280)) &&
+      columnWidthTabletLandscape === 'hidden';
+    const isHiddenOnTabletPortrait =
+      useMediaQuery(breakpoints.between(600, 960)) &&
+      columnWidthTabletPortrait === 'hidden';
+    const isHiddenOnMobile =
+      useMediaQuery(breakpoints.down(600)) && columnWidthMobile === 'hidden';
+    const isHiddenFromBreakpoint =
+      isHiddenOnDesktop ||
+      isHiddenOnTabletLandscape ||
+      isHiddenOnTabletPortrait ||
+      isHiddenOnMobile;
 
     useEffect(() => {
       setIsVisible(visible);
@@ -43,6 +69,10 @@
           ))()}
       </div>
     );
+
+    if (!isDev && (!isVisible || isHiddenFromBreakpoint) && !renderWhenHidden) {
+      return <></>;
+    }
     return ColumnComponent;
   })(),
   styles: (B) => (theme) => {
