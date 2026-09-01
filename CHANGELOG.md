@@ -1,3 +1,17 @@
+## [3.7.3](https://github.com/bettyblocks/material-ui-component-set/compare/v3.7.2...v3.7.3) (2026-07-28)
+
+
+### Bug Fixes
+
+* use the previous state of interaction filters in data table filter interaction ([263c6be](https://github.com/bettyblocks/material-ui-component-set/commit/263c6be11ff75db30de038cc03cc34d53d32ff61))
+
+## [3.7.2](https://github.com/bettyblocks/material-ui-component-set/compare/v3.7.1...v3.7.2) (2026-05-21)
+
+
+### Bug Fixes
+
+* place defined functions inside a useeffect in checkbox ([942625c](https://github.com/bettyblocks/material-ui-component-set/commit/942625c9292273dd27ce19089efc8eb57311aa0e))
+
 ## [3.7.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.7.0...v3.7.1) (2026-05-04)
 
 
