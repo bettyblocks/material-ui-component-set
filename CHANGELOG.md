@@ -1,3 +1,15 @@
+# [3.8.0](https://github.com/bettyblocks/material-ui-component-set/compare/v3.7.3...v3.8.0) (2026-09-01)
+
+
+### Bug Fixes
+
+* pin bun version in deploy step ([6fe2b0d](https://github.com/bettyblocks/material-ui-component-set/commit/6fe2b0dfb730c03f0578e0e07ee1587ed8089459))
+
+
+### Features
+
+* add link support to RichTextInput (PFR-1051) ([aabaded](https://github.com/bettyblocks/material-ui-component-set/commit/aabaded54eb9161bb1977c5a8806b04a6680adcf))
+
 ## [3.7.3](https://github.com/bettyblocks/material-ui-component-set/compare/v3.7.2...v3.7.3) (2026-07-28)
 
 
