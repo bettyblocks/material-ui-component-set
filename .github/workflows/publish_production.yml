@@ -18,7 +18,11 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
       - uses: oven-sh/setup-bun@v2
         with:
-          bun-version: latest
+          # Pinned: @betty-blocks/cli publishes via the legacy @azure/storage-blob v10
+          # SDK, whose polyfilled AbortSignal is rejected by Bun >= 1.4.0 fetch
+          # ("signal is not of type AbortSignal"). Unpin once the CLI moves to
+          # @azure/storage-blob v12.
+          bun-version: 1.3.14
       - name: Install packages
         run: bun install
 
