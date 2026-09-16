@@ -1034,8 +1034,8 @@
           },
           '& input': {
             '&::placeholder': {
-              color: ({ options: { placeholderColor } }) => [
-                style.getColor(placeholderColor),
+              color: ({ options: { placeHolderColor } }) => [
+                style.getColor(placeHolderColor),
                 '!important',
               ],
             },
