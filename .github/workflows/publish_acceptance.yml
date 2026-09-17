@@ -1,14 +1,12 @@
 name: Publish component set on acceptance
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - acceptance
     tags:
       - 'v*'
-    paths-ignore:
-      - 'CHANGELOG.md'
-      - 'package.json'
 
 jobs:
   deploy:
