@@ -1,3 +1,10 @@
+## [3.8.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.8.0...v3.8.1) (2026-09-17)
+
+
+### Bug Fixes
+
+* **autocomplete-input:** apply placeholder color option ([00e68e0](https://github.com/bettyblocks/material-ui-component-set/commit/00e68e05148b80c38b1fbae50430a90a09b3368a)), closes [#3927](https://github.com/bettyblocks/material-ui-component-set/issues/3927)
+
 # [3.8.0](https://github.com/bettyblocks/material-ui-component-set/compare/v3.7.3...v3.8.0) (2026-09-01)
 
 
