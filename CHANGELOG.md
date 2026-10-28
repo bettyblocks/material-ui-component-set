@@ -1,3 +1,10 @@
+## [3.8.3](https://github.com/bettyblocks/material-ui-component-set/compare/v3.8.2...v3.8.3) (2026-10-28)
+
+
+### Bug Fixes
+
+* keep data container hook count stable when setting the current record PAGE-6818 ([4897df4](https://github.com/bettyblocks/material-ui-component-set/commit/4897df4fc5068fc9bad4d90af4fd859ecbca8bb1))
+
 ## [3.8.2](https://github.com/bettyblocks/material-ui-component-set/compare/v3.8.1...v3.8.2) (2026-10-28)
 
 
