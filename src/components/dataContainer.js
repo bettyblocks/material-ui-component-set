@@ -40,18 +40,20 @@
         const [interactionFilter, setInteractionFilter] = useState({});
         const [filterv2, setFilterV2] = useState({});
 
-        const getFilter = React.useCallback(() => {
+        const resolvedConfiguredFilter = useFilter(filter);
+
+        const getSelectedFilter = () => {
           if (isDev || !currentRecord || !model) {
-            return filter;
+            return resolvedConfiguredFilter;
           }
           const idProperty = getIdProperty(model);
 
           return {
-            [idProperty.id]: { eq: currentRecord },
+            [idProperty.name]: { eq: currentRecord },
           };
-        }, [isDev, filter, currentRecord, model]);
+        };
 
-        const selectedFilter = getFilter();
+        const selectedFilter = getSelectedFilter();
         const history = isDev ? null : useHistory();
 
         const redirect = () => {
@@ -106,12 +108,10 @@
         interactionFilters =
           clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
 
-        const completeFilter = deepMerge(
-          selectedFilter,
-          interactionFilters,
-          filterv2,
+        const resolvedExtraFilters = useFilter(
+          deepMerge(interactionFilters, filterv2),
         );
-        const where = useFilter(completeFilter);
+        const where = deepMerge(selectedFilter, resolvedExtraFilters);
 
         B.defineFunction('setCurrentRecordFromSelect', (value) => {
           const id = Number(value);
