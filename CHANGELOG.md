@@ -1,3 +1,10 @@
+## [3.8.2](https://github.com/bettyblocks/material-ui-component-set/compare/v3.8.1...v3.8.2) (2026-10-28)
+
+
+### Bug Fixes
+
+* **filter:** allow seconds to be set on datetime filter values ([d1fde06](https://github.com/bettyblocks/material-ui-component-set/commit/d1fde066f3b9269221d36b3185834c26c27ed28b))
+
 ## [3.8.1](https://github.com/bettyblocks/material-ui-component-set/compare/v3.8.0...v3.8.1) (2026-09-17)
 
 
