@@ -469,11 +469,10 @@
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
                 }}
-                onKeyDown={(e) => {
-                  e.preventDefault();
-                }}
-                allowKeyboardControl={false}
                 onChange={(date) => {
+                  if (!(date instanceof Date) || Number.isNaN(date.getTime())) {
+                    return;
+                  }
                   const dateValue = date.toISOString().split('T')[0];
                   setGroups(
                     updateRowProperty(
@@ -503,14 +502,14 @@
                 variant="inline"
                 inputVariant="outlined"
                 format="MM/dd/yyyy HH:mm:ss"
+                views={['year', 'date', 'hours', 'minutes', 'seconds']}
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
                 }}
-                onKeyDown={(e) => {
-                  e.preventDefault();
-                }}
-                allowKeyboardControl={false}
                 onChange={(date) => {
+                  if (!(date instanceof Date) || Number.isNaN(date.getTime())) {
+                    return;
+                  }
                   setGroups(
                     updateRowProperty(
                       row.rowId,
