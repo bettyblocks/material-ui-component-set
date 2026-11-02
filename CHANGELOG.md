@@ -1,3 +1,10 @@
+## [3.8.4](https://github.com/bettyblocks/material-ui-component-set/compare/v3.8.3...v3.8.4) (2026-11-02)
+
+
+### Bug Fixes
+
+* remove zone 1 (cc2) from production publish ([1b10b80](https://github.com/bettyblocks/material-ui-component-set/commit/1b10b809e3c820de5d8094ec99dbd6c77e8a93a2))
+
 ## [3.8.3](https://github.com/bettyblocks/material-ui-component-set/compare/v3.8.2...v3.8.3) (2026-10-28)
 
 
