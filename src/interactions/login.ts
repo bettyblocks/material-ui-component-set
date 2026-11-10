@@ -27,7 +27,11 @@ function login({
   const { url } = redirectTo;
 
   if (isValid) {
-    const decodedToken = JSON.parse(window.atob(jwtToken.split('.')[1]));
+    const payload = jwtToken
+      .split('.')[1]
+      .replace(/-/g, '+')
+      .replace(/_/g, '/');
+    const decodedToken = JSON.parse(window.atob(payload));
     if (decodedToken && decodedToken.locale) {
       document.cookie = `BBLocale=${decodedToken.locale};path=/`;
     }
@@ -38,7 +42,41 @@ function login({
 
     localStorage.setItem('TOKEN', jwtToken);
     localStorage.setItem('REFRESH_TOKEN', refreshToken);
-    // eslint-disable-next-line no-restricted-globals
-    history.push(url);
+
+    const navigate = (redirectUrl?: string): void => {
+      if (redirectUrl) {
+        window.location.replace(redirectUrl);
+      } else {
+        // eslint-disable-next-line no-restricted-globals
+        history.push(url);
+      }
+    };
+
+    const oauthState = new URLSearchParams(window.location.search).get(
+      'oauth_state',
+    );
+
+    if (!oauthState) {
+      navigate();
+      return;
+    }
+
+    fetch(`/api/runtime/${decodedToken.app_uuid}`, {
+      body: JSON.stringify({
+        operationName: 'ToOAuthCode',
+        query:
+          'mutation ToOAuthCode($oauthState: String!) { toOAuthCode(oauthState: $oauthState) { redirectUrl } }',
+        variables: { oauthState },
+      }),
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+    })
+      .then((response) => (response.ok ? response.json() : null))
+      .then((body) => body?.data?.toOAuthCode?.redirectUrl)
+      .catch(() => undefined)
+      .then(navigate);
   }
 }
