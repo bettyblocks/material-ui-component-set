@@ -10,6 +10,11 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
+      # jsdoc (via @betty-blocks/cli) calls util.isRegExp, removed in Node 23;
+      # ubuntu-latest now ships Node 24.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
       - name: Install packages
         run: bun install
 
