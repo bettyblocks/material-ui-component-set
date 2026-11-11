@@ -1,3 +1,10 @@
+# [3.9.0](https://github.com/bettyblocks/material-ui-component-set/compare/v3.8.4...v3.9.0) (2026-11-11)
+
+
+### Features
+
+* **login:** hand the user back to the OAuth client after login ([67ac38e](https://github.com/bettyblocks/material-ui-component-set/commit/67ac38ea5caf4ea194797dd565c8dca3bb0b0dd2))
+
 ## [3.8.4](https://github.com/bettyblocks/material-ui-component-set/compare/v3.8.3...v3.8.4) (2026-11-02)
 
 
